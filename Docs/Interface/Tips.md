@@ -37,8 +37,8 @@ Tips Method: constructor {#Tips:constructor}
 
 ### Events:
  
- * hide: fires when the tip is shown
- * show: fires when the tip is being hidden
+ * show: fires when the tip is shown
+ * hide: fires when the tip is being hidden
 
 ### Example:
 
