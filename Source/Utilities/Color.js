@@ -130,7 +130,7 @@ String.implement({
 
 	rgbToHsb: function(){
 		var rgb = this.match(/\d{1,3}/g);
-		return (rgb) ? hsb.rgbToHsb() : null;
+		return (rgb) ? rgb.rgbToHsb() : null;
 	},
 	
 	hsbToRgb: function(){
