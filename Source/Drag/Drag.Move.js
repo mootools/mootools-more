@@ -10,7 +10,10 @@ Drag.Move = new Class({
 
 	Extends: Drag,
 
-	options: {
+	options: {/*
+		onEnter: $empty,
+		onLeave: $empty,
+		onDrop: $empty,*/
 		droppables: [],
 		container: false
 	},
@@ -25,12 +28,11 @@ Drag.Move = new Class({
 		var current = element.getStyle('position');
 		var position = (current != 'static') ? current : 'absolute';
 		if (element.getStyle('left') == 'auto' || element.getStyle('top') == 'auto') element.position(element.getPosition(element.offsetParent));
-		
 		element.setStyle('position', position);
 		
-		this.addEvent('start', function(){
-			this.checkDroppables();
-		}, true);
+		this.addEvent('start', this.checkDroppables, true);
+		
+		this.overed = null;
 	},
 
 	start: function(event){
@@ -61,12 +63,8 @@ Drag.Move = new Class({
 		var overed = this.droppables.filter(this.checkAgainst, this).getLast();
 		if (this.overed != overed){
 			if (this.overed) this.fireEvent('leave', [this.element, this.overed]);
-			if (overed){
-				this.overed = overed;
-				this.fireEvent('enter', [this.element, overed]);
-			} else {
-				this.overed = null;
-			}
+			if (overed) this.fireEvent('enter', [this.element, overed]);
+			this.overed = overed;
 		}
 	},
 
