@@ -94,7 +94,7 @@ Slider Event: tick {#Slider:tick}
 		},
 		onTick: function(pos){
 			this.element.setStyle('border-color', '#f00');
-			this.knob.setStyle(this.p, pos);
+			this.knob.setStyle(this.property, pos);
 		},
 		onComplete: function(){
 			this.element.tween('border').start('#000');
