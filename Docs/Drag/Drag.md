@@ -25,7 +25,7 @@ Drag Method: constructor {#Drag:constructor}
 * grid      - (*integer*: defaults to false) Distance in pixels for snap-to-grid dragging.
 * handle    - (*element*: defaults to the element passed in) The Element to act as the handle for the draggable element.
 * invert    - (*boolean*: defaults to false) Whether or not to invert the values reported on start and drag.
-* limit     - (*object*: defaults to false) An object with x and y properties used to limit the movement of the Element.
+* limit     - (*object*: defaults to false) An object with x and y dimensions used to limit the movement of the Element.
 * modifiers - (*object*: defaults to {'x': 'left', 'y': 'top'}) An object with x and y properties used to indicate the CSS modifiers (i.e. 'left').
 * snap      - (*integer*: defaults to 6) The distance to drag before the Element starts to respond to the drag.
 * style     - (*boolean*: defaults to true) Whether or not to set the modifier as a style property of the element.
