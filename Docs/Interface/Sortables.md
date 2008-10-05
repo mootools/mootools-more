@@ -10,7 +10,7 @@ Creates an interface for drag and drop sorting of a list or lists.
  * To enable sorting between lists, one or more lists or id's must be passed using an array or a selector. See Examples below.
 2. options - (*object*) See options and events below.
 
-#### Options:
+### Options:
 
 * constrain - (*boolean*: defaults to false) Whether or not to constrain the element being dragged to its parent element.
 * clone     - (*mixed*: defaults to false) Whether or not to display a copy of the actual element under the cursor while dragging. May also be used as a function which will return an element to be used as the clone.  The function will receive the mousedown event, the element, and the list as arguments.
@@ -21,28 +21,64 @@ Creates an interface for drag and drop sorting of a list or lists.
 
 ### Events:
 
-* start    - function executed when the item starts dragging
-* sort     - function executed when the item is inserted into a new place in one of the lists
-* complete - function executed when the item ends dragging
+#### start
+
+Fired when the item starts dragging.
+
+##### Signature:
+
+	onStart(element, clone)
+
+##### Arguments:
+
+1. element - (*element*) The Element being sorted.
+2. clone   - (*element*) The clone of the Element.
+
+#### sort
+
+Fired when the item is inserted into a new place in one of the lists.
+
+##### Signature:
+
+	onSort(element, clone)
+
+##### Arguments:
+
+1. element - (*element*) The Element being sorted.
+2. clone   - (*element*) The clone of the Element.
+
+#### complete
+
+Fired when the item ends dragging.
+
+##### Signature:
+
+	onComplete(element)
+
+##### Arguments:
+
+1. element - (*element*) The Element being sorted.
 
 ### Examples:
 
 	var mySortables = new Sortables('list-1', {
 		revert: { duration: 500, transition: 'elastic:out' }
 	});
-	//creates a new Sortable instance over the list with id 'list-1' with some extra options for the revert effect
+	//creates a new Sortable instance over the list with id 'list-1' with some
+	//extra options for the revert effect
 
 	var mySortables = new Sortables('#list-1, #list-2', {
 		constrain: true,
 		clone: false,
 		revert: true
 	});
-	//creates a new Sortable instance allowing the sorting of the lists with id's 'list-1' and 'list-2' with extra options
-	//since constrain was set to true, the items will not be able to be dragged from one list to the other
+	//creates a new Sortable instance allowing the sorting of the lists with
+	//ids 'list-1' and 'list-2' with extra options since constrain was set to
+	//true, the items will not be able to be dragged from one list to the other
 
 	var mySortables = new Sortables('#list-1, #list-2, #list-3');
-	//creates a new Sortable instance allowing sorting between the lists with id's 'list-1', 'list-2, and 'list-3'
-	(end)
+	//creates a new Sortable instance allowing sorting between the lists with
+	//ids 'list-1', 'list-2, and 'list-3'
 
 
 
