@@ -52,7 +52,7 @@ var Slider = new Class({
 		this.steps = this.options.steps || this.full;
 		this.stepSize = Math.abs(this.range) / this.steps;
 		this.stepWidth = this.stepSize * this.full / Math.abs(this.range) ;
-		
+
 		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
@@ -76,7 +76,7 @@ var Slider = new Class({
 	set: function(step){
 		if (!((this.range > 0) ^ (step < this.min))) step = this.min;
 		if (!((this.range > 0) ^ (step > this.max))) step = this.max;
-		
+
 		this.step = Math.round(step);
 		this.checkStep();
 		this.end();
@@ -88,13 +88,13 @@ var Slider = new Class({
 		var dir = this.range < 0 ? -1 : 1;
 		var position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
 		position = position.limit(-this.options.offset, this.full -this.options.offset);
-		
+
 		this.step = Math.round(this.min + dir * this.toStep(position));
 		this.checkStep();
 		this.end();
 		this.fireEvent('tick', position);
 	},
-	
+
 	scrolledElement: function(event){
 		var mode = (this.options.mode == 'horizontal') ? (event.wheel < 0) : (event.wheel > 0);
 		this.set(mode ? this.step - this.stepSize : this.step + this.stepSize);

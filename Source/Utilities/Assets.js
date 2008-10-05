@@ -14,26 +14,26 @@ var Asset = new Hash({
 			document: document,
 			check: $lambda(true)
 		}, properties);
-		
+
 		var script = new Element('script', {'src': source, 'type': 'text/javascript'});
-		
+
 		var load = properties.onload.bind(script), check = properties.check, doc = properties.document;
 		delete properties.onload; delete properties.check; delete properties.document;
-		
+
 		script.addEvents({
 			load: load,
 			readystatechange: function(){
 				if (['loaded', 'complete'].contains(this.readyState)) load();
 			}
 		}).setProperties(properties);
-		
-		
+
+
 		if (Browser.Engine.webkit419) var checker = (function(){
 			if (!$try(check)) return;
 			$clear(checker);
 			load();
 		}).periodical(50);
-		
+
 		return script.inject(doc.head);
 	},
 

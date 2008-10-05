@@ -11,16 +11,16 @@
 			"deps": ["None"],
 			"desc": "Effect to smoothly scroll any element, including the window."
 		},
-		
+
 		"Fx.Elements": {
 			"deps": ["None"],
 			"desc": "Effect to change any number of CSS properties of any number of Elements."
 		}
 
 	},
-	
+
 	"Drag": {
-		
+
 		"Drag": {
 			"deps": ["None"],
 			"desc": "The base Drag Class. Can be used to drag and resize Elements using mouse events."
@@ -30,16 +30,16 @@
 			"deps": ["Drag"],
 			"desc": "A Drag extension that provides support for the constraining of draggables to containers and droppables."
 		}
-		
+
 	},
-	
+
 	"Utilities": {
-		
+
 		"Hash.Cookie": {
 			"deps": ["None"],
 			"desc": "Class for creating, reading, and deleting browser Cookies in JSON format."
 		},
-		
+
 		"Color": {
 			"deps": ["None"],
 			"desc": "Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa."
@@ -49,21 +49,21 @@
 			"deps": ["None"],
 			"desc": "Class for monitoring collections of events."
 		},
-		
+
 		"Assets": {
 			"deps": ["None"],
 			"desc": "Provides methods to dynamically load JavaScript, CSS, and Image files into the document."
 		}
 
 	},
-	
+
 	"Interface": {
-		
+
 		"Sortables": {
 			"deps": ["Drag.Move"],
 			"desc": "Class for creating a drag and drop sorting interface for lists of items."
 		},
-		
+
 		"Tips": {
 			"deps": ["None"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
@@ -83,12 +83,12 @@
 			"deps": ["None"],
 			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
 		},
-		
+
 		"Accordion": {
 			"deps": ["Fx.Elements"],
 			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
 		}
-		
+
 	}
 
 }

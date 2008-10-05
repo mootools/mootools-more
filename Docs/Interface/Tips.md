@@ -97,15 +97,15 @@ Tips Method: attach {#Tips:attach}
 
 Attaches tooltips to elements. Useful to add more elements to a tips instance.
 
-###	Syntax:
+### Syntax:
 
 	myTips.attach(elements);
 
-###	Arguments:
+### Arguments:
 
 1. elements - (*mixed*) A collection of elements, a string Selector, or an Element to apply the tooltips to.
 
-###	Returns:
+### Returns:
 
 * (*object*) This Tips instance.
 
@@ -119,15 +119,15 @@ Tips Method: detach {#Tips:detach}
 
 Detaches tooltips from elements. Useful to remove elements from a tips instance.
 
-###	Syntax:
+### Syntax:
 
 	myTips.detach(elements);
 
-###	Arguments:
+### Arguments:
 
 1. elements - (*mixed*) A collection of elements, a string Selector, or an Element to apply the tooltips to.
 
-###	Returns:
+### Returns:
 
 * (*object*) This Tips instance.
 

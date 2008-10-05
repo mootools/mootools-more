@@ -24,14 +24,14 @@ Drag.Move = new Class({
 		this.container = $(this.options.container);
 		if (this.container && $type(this.container) != 'element') this.container = $(this.container.getDocument().body);
 		element = this.element;
-		
+
 		var current = element.getStyle('position');
 		var position = (current != 'static') ? current : 'absolute';
 		if (element.getStyle('left') == 'auto' || element.getStyle('top') == 'auto') element.position(element.getPosition(element.offsetParent));
 		element.setStyle('position', position);
-		
+
 		this.addEvent('start', this.checkDroppables, true);
-		
+
 		this.overed = null;
 	},
 

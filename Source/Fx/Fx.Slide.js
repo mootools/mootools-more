@@ -106,7 +106,7 @@ Element.Properties.slide = {
 		if (slide) slide.cancel();
 		return this.eliminate('slide').store('slide:options', $extend({link: 'cancel'}, options));
 	},
-	
+
 	get: function(options){
 		if (options || !this.retrieve('slide')){
 			if (options || !this.retrieve('slide:options')) this.set('slide', options);

@@ -27,7 +27,7 @@ var Sortables = new Class({
 		this.elements = [];
 		this.lists = [];
 		this.idle = true;
-		
+
 		this.addLists($$($(lists) || lists));
 		if (!this.options.clone) this.options.revert = false;
 		if (this.options.revert) this.effect = new Fx.Morph(null, $merge({duration: 250, link: 'cancel'}, this.options.revert));
@@ -117,7 +117,7 @@ var Sortables = new Class({
 		this.opacity = element.get('opacity');
 		this.list = element.getParent();
 		this.clone = this.getClone(event, element);
-		
+
 		this.drag = new Drag.Move(this.clone, {
 			snap: this.options.snap,
 			container: this.options.constrain && this.element.getParent(),
@@ -132,7 +132,7 @@ var Sortables = new Class({
 			onCancel: this.reset.bind(this),
 			onComplete: this.end.bind(this)
 		});
-		
+
 		this.clone.inject(this.element, 'before');
 		this.drag.start(event);
 	},
@@ -169,7 +169,7 @@ var Sortables = new Class({
 				return element.get('id');
 			}, this);
 		}, this);
-		
+
 		var index = params.index;
 		if (this.lists.length == 1) index = 0;
 		return $chk(index) && index >= 0 && index < this.lists.length ? serial[index] : serial;

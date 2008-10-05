@@ -36,9 +36,9 @@ var Drag = new Class({
 		this.handles = (htype == 'array' || htype == 'collection') ? $$(this.options.handle) : $(this.options.handle) || this.element;
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
-		
+
 		this.selection = (Browser.Engine.trident) ? 'selectstart' : 'mousedown';
-		
+
 		this.bound = {
 			start: this.start.bind(this),
 			check: this.check.bind(this),
@@ -136,7 +136,7 @@ var Drag = new Class({
 });
 
 Element.implement({
-	
+
 	makeResizable: function(options){
 		return new Drag(this, $merge({modifiers: {'x': 'width', 'y': 'height'}}, options));
 	}

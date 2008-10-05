@@ -52,7 +52,7 @@ Options:
 
 Fx.Scroll Method: set {#Fx-Scroll:set}
 --------------------------------------
-	
+
 Scrolls the specified Element to the x/y coordinates immediately.
 
 ### Syntax:

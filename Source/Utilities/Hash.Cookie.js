@@ -35,9 +35,9 @@ Hash.Cookie = new Class({
 });
 
 Hash.Cookie.implement((function(){
-	
+
 	var methods = {};
-	
+
 	Hash.each(Hash.prototype, function(method, name){
 		methods[name] = function(){
 			var value = method.apply(this.hash, arguments);
@@ -45,7 +45,7 @@ Hash.Cookie.implement((function(){
 			return value;
 		};
 	});
-	
+
 	return methods;
-	
+
 })());

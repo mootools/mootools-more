@@ -10,20 +10,20 @@ Assets Method: javascript {#Assets:javascript}
 
 Injects a script tag into the head section of the document, pointing to the src specified.
 
-###	Syntax:
+### Syntax:
 
 	var myScript = Asset.javascript(source[, properties]);
 
-###	Arguments:
+### Arguments:
 
 1. source     - (*string*) The location of the JavaScript file to load.
 2. properties - (*object*, optional) Additional attributes to be included into the script Element.
 
-###	Returns:
+### Returns:
 
 * (*element*) A new script Element.
 
-###	Examples:
+### Examples:
 
 	var myScript = new Asset.javascript('/scripts/myScript.js', {id: 'myScript'});
 
@@ -34,20 +34,20 @@ Assets Method: css {#Assets:css}
 
 Injects a css file in the page.
 
-###	Syntax:
+### Syntax:
 
 	var myCSS = new Asset.css(source[, properties]);
 
-###	Arguments:
+### Arguments:
 
 1. source     - (*string*) The path of the CSS file.
 2. properties - (*object*) Some additional attributes you might want to add to the link Element.
 
-###	Returns:
+### Returns:
 
 * (*element*) A new link Element.
 
-###	Examples:
+### Examples:
 
 	var myCSS = new Asset.css('/css/myStyle.css', {id: 'myStyle', title: 'myStyle'});
 
@@ -58,24 +58,24 @@ Assets Method: image {#Assets:image}
 
 Preloads an image and returns the img element.
 
-###	Syntax:
+### Syntax:
 
 	var myImage = new Asset.image(source[, properties]);
 
-###	Arguments:
+### Arguments:
 
 1. source     - (*string*) The path of the image file.
 2. properties - (*object*) Some additional attributes you might want to add to the img Element including the onload/onerror/onabout events.
 
-###	Returns:
+### Returns:
 
 * (*element*) A new HTML img Element.
 
-###	Examples:
+### Examples:
 
 	var myImage = new Asset.image('/images/myImage.png', {id: 'myImage', title: 'myImage', onload: myFunction});
 
-###	Notes:
+### Notes:
 
 - Does not inject the image into the page.
 - WARNING: DO NOT use addEvent for load/error/abort on the returned element, give them as onload/onerror/onabort in the properties argument.
@@ -87,11 +87,11 @@ Assets Method: images {#Assets:images}
 
 Preloads an array of images (as strings) and returns an array of img elements. does not inject them to the page.
 
-###	Syntax:
+### Syntax:
 
 	var myImages = new Asset.images(source[, options]);
 
-###	Arguments:
+### Arguments:
 
 1. sources - (*mixed*) An array or a string, of the paths of the image files.
 2. options - (*object*, optional) See below.

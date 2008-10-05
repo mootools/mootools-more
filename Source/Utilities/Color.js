@@ -7,7 +7,7 @@ License:
 */
 
 var Color = new Native({
-  
+
 	initialize: function(color, type){
 		if (arguments.length >= 3){
 			type = "rgb"; color = Array.slice(arguments, 0, 3);
@@ -132,7 +132,7 @@ String.implement({
 		var rgb = this.match(/\d{1,3}/g);
 		return (rgb) ? rgb.rgbToHsb() : null;
 	},
-	
+
 	hsbToRgb: function(){
 		var hsb = this.match(/\d{1,3}/g);
 		return (hsb) ? hsb.hsbToRgb() : null;

@@ -58,11 +58,11 @@ Scroller Method: start {#Scroller:start}
 
 **The scroller starts listening to mouse movements.**
 
-###	Syntax:
+### Syntax:
 
 	myScroller.start();
 
-###	Examples:
+### Examples:
 
 	var myScroller = new Scroller('myElement');
 	myScroller.start();
@@ -74,11 +74,11 @@ Scroller Method: stop {#Scroller:stop}
 
 **The scroller stops listening to mouse movements.**
 
-###	Syntax:
+### Syntax:
 
 	myScroller.start();
 
-###	Examples:
+### Examples:
 
 	var myElement = $('myElement');
 	var myScroller = new Scroller(myElement);

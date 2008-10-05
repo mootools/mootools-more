@@ -24,7 +24,7 @@ Drag.Move Method: constructor {#Drag-Move:constructor}
 ### Options:
 
 All the base Drag options, plus:
-	
+
 * container  - (*element*) If an Element is passed, drag will be limited to the passed Element's size and position.
 * droppables - (*array*) The Elements that the draggable can drop into. The class's drop, enter, and leave events will be fired in conjunction with interaction with one of these elements.
 
@@ -37,22 +37,22 @@ All the base Drag options, plus:
 ### Example:
 
 	var myDrag = new Drag.Move('draggable', {
-		
+
 		droppables: '.droppable',
-		
+
 		onDrop: function(element, droppable){
 			if (!droppable) console.log(element, ' dropped on nothing');
 			else console.log(element, 'dropped on', droppable);
 		},
-		
+
 		onEnter: function(element, droppable){
 			console.log(element, 'entered', droppable);
 		},
-		
+
 		onLeave: function(element, droppable){
 			console.log(element, 'left', droppable);
 		}
-		
+
 	});
 
 ### Notes:

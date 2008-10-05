@@ -37,20 +37,20 @@ Group Method: addEvent {#Group:addEvent}
 
 Adds an Event to the stack of Events of the Class instances.
 
-###	Syntax:
+### Syntax:
 
 	myGroup.addEvent(type, fn);
 
-###	Arguments:
+### Arguments:
 
 1. type - (*string*) The event name (e.g. 'complete') to add.
 2. fn   - (*function*) The callback function to execute when all instances fired this event.
 
-###	Returns:
+### Returns:
 
 * (*object*) This Group instance.
 
-###	Examples:
+### Examples:
 
 	var myElements = $('myForm').getElements('input, textarea, select');
 	myElements.addEvent('click', function(){
@@ -64,6 +64,6 @@ Adds an Event to the stack of Events of the Class instances.
 
 
 
-###	See Also:
+### See Also:
 
 [Element.addEvent]: /Element/Element.Event/#Element:addEvent

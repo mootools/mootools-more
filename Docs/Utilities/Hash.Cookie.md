@@ -60,15 +60,15 @@ Hash.Cookie Method: save {#Hash-Cookie:save}
 
 Saves the Hash to the cookie. If the hash is empty, removes the cookie.
 
-###	Syntax:
+### Syntax:
 
 	myHashCookie.save();
 
-###	Returns:
+### Returns:
 
 * (*boolean*) Returns false when the JSON string cookie is too long (4kb), otherwise true.
 
-###	Examples:
+### Examples:
 
 	var login = new Hash.Cookie('userstatus', {autoSave: false});
 
@@ -87,15 +87,15 @@ Hash.Cookie Method: load {#Hash-Cookie:load}
 
 Loads the cookie and assigns it to the Hash.
 
-###	Syntax:
+### Syntax:
 
 	myHashCookie.load();
 
-###	Returns:
+### Returns:
 
 * (*object*) This Hash.Cookie instance.
 
-###	Examples:
+### Examples:
 
 	var myHashCookie = new Hash.Cookie('myCookie');
 
@@ -104,7 +104,7 @@ Loads the cookie and assigns it to the Hash.
 		if(!myHashCookie.length) alert('Cookie Monster must of eaten it!');
 	}).periodical(5000);
 
-###	Notes:
+### Notes:
 
 - Useful when polling.
 

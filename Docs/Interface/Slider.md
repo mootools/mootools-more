@@ -108,15 +108,15 @@ Slider Method: set {#Slider:set}
 
 **The slider will move to the passed position.**
 
-###	Syntax:
+### Syntax:
 
 	mySlider.set(step);
 
-###	Arguments:
+### Arguments:
 
 1. step - (*number*) A number to position the Slider to.
 
-###	Returns:
+### Returns:
 
 * (*object*) This Slider instance.
 
@@ -130,6 +130,6 @@ Slider Method: set {#Slider:set}
 			this.set(this.step++);
 	}).periodical(1000, mySlider);
 
-###	Notes:
+### Notes:
 
 - Step will automatically be limited between 0 and the optional steps value.

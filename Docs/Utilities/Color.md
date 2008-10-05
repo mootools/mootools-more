@@ -49,20 +49,20 @@ Color Method: mix {#Color:mix}
 
 Mixes two or more colors with the Color.
 
-###	Syntax:
+### Syntax:
 
 	var myMix = myColor.mix(color[, color2[, color3[, ...][, alpha]);
 
-###	Arguments:
+### Arguments:
 
 1. color - (*mixed*) A single or many colors, in hex or rgb representation, to mix with this Color.
 2. alpha - (*number*, optional) If the last argument is a number, it will be treated as the amount of the color to mix.
 
-###	Returns:
+### Returns:
 
 * (*array*) A new Color instance.
 
-###	Examples:
+### Examples:
 
 	// mix black with white and purple, each time at 10% of the new color
 	var darkpurple = new Color('#000').mix('#fff', [255, 0, 255], 10);
@@ -76,15 +76,15 @@ Color Method: invert {#Color:Invert}
 
 Inverts the Color.
 
-###	Syntax:
+### Syntax:
 
 	var myInvert = myColor.invert();
 
-###	Returns:
+### Returns:
 
 * (*array*) A new Color instance.
 
-###	Examples:
+### Examples:
 
 	var white = new Color('#fff');
 	var black = white.invert();
@@ -96,19 +96,19 @@ Color Method: setHue {#Color:setHue}
 
 Modifies the hue of the Color, and returns a new one.
 
-###	Syntax:
+### Syntax:
 
 	var hue = myColor.setHue(value);
 
-###	Arguments:
+### Arguments:
 
 1. value - (*number*) The hue to set.
 
-###	Returns:
+### Returns:
 
 * (arrays) A new Color instance.
 
-###	Example:
+### Example:
 
 	var myColor = new Color('#f00');
 	var myElement = $('myElement');
@@ -124,11 +124,11 @@ Color Method: setSaturation {#Color:setSaturation}
 
 Changes the saturation of the Color, and returns a new one.
 
-###	Syntax:
+### Syntax:
 
 	var saturate = myColor.setSaturation(percent);
 
-###	Arguments:
+### Arguments:
 
 1. percent - (*number*) The percentage of the saturation to set.
 
@@ -136,7 +136,7 @@ Changes the saturation of the Color, and returns a new one.
 
 * (*array*) A new Color instance.
 
-###	Examples:
+### Examples:
 
 	var myColor = new Color('#f00');
 	$('myElement').addEvent('mouseenter', function(){
@@ -150,7 +150,7 @@ Color Method: setBrightness {#Color:setBrightness}
 
 Changes the brightness of the Color, and returns a new one.
 
-###	Syntax:
+### Syntax:
 
 	var brighten = myColor.setBrightness(percent);
 
@@ -158,11 +158,11 @@ Changes the brightness of the Color, and returns a new one.
 
 1. percent - (*number*) The percentage of the brightness to set.
 
-###	Returns:
+### Returns:
 
 * (*array*) A new Color instance.
 
-###	Examples:
+### Examples:
 
 	var myColor = new Color('#000');
 	$('myElement').addEvent('mouseenter', function(){
@@ -237,15 +237,15 @@ Array Method: rgbToHsb {#Array:rgbToHsb}
 
 Converts a RGB array to an HSB array.
 
-###	Syntax:
+### Syntax:
 
 	var myHSB = myRGBArray.rgbToHsb();
 
-###	Returns:
+### Returns:
 
 * (*array*) An array with HSB values.
 
-###	Example:
+### Example:
 
 	var myHSB = [255, 0, 0].rgbToHsb(); //Returns [0, 100, 100].
 
@@ -256,15 +256,15 @@ Array Method: hsbToRgb {#Array:hsbToRgb}
 
 Converts an HSB array to a RGB array.
 
-###	Syntax:
+### Syntax:
 
 	var myHSB = myRGBArray.hsbToRgb();
 
-###	Returns:
+### Returns:
 
 * (*array*) An array with RGB values.
 
-###	Examples:
+### Examples:
 
 	var myRGB = [0, 100, 100].hsbToRgb(); //myRGB = [255, 0, 0]
 

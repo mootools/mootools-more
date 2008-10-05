@@ -84,17 +84,17 @@ Accordion Method: addSection {#Accordion:addSection}
 
 Dynamically adds a new section into the Accordion at the specified position.
 
-###	Syntax:
+### Syntax:
 
 	myAccordion.addSection(toggler, element[, pos]);
 
-###	Arguments:
+### Arguments:
 
 1. toggler - (*element*) The Element that toggles the Accordion section open.
 2. element - (*element*) The Element that should stretch open when the toggler is clicked.
 3. pos     - (*integer*, optional) The index at which these objects are to be inserted within the Accordion (defaults to the end).
 
-###	Returns:
+### Returns:
 
 * (*object*) This Accordion instance.
 
@@ -111,11 +111,11 @@ Accordion Method: display {#Accordion:display}
 
 Shows a specific section and hides all others. Useful when triggering an accordion from outside.
 
-###	Syntax:
+### Syntax:
 
 	myAccordion.display(index);
 
-###	Arguments:
+### Arguments:
 
 1. index - (*mixed*) The index of the item to show, or the actual element to be displayed.
 
