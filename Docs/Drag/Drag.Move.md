@@ -30,7 +30,7 @@ All the base Drag options, plus:
 
 ### Events:
 
-* drop - Executed when the element drops. Passes as argument the element and the element dropped on. If dropped on nothing, the second argument is null.
+* drop  - Executed when the element drops. Passes as argument the element and the element dropped on. If dropped on nothing, the second argument is null.
 * leave - Executed when the element leaves one of the droppables.
 * enter - Executed when the element enters one of the droppables.
 
@@ -75,17 +75,13 @@ All the base Drag options, plus:
 Drag.Move Method: stop {#Drag-Move:stop}
 -------------------------------------------------
 
-Checks if the Element is above a droppable and fires the drop event. Else, fires the 'emptydrop' event that is attached to this Element. Lastly, calls the Drag Class stop method.
+Fires the 'drop' event and calls the Drag Class stop method.
 
 ### Syntax:
 
 	myMove.stop();
 
 ### Example:
-
-	var myElement = $('myElement').addEvent('emptydrop', function(){
-		alert('no drop occurred');
-	});
 
 	var myMove = new Drag.Move(myElement, {
 		onSnap: function(){ // due to MooTool's inheritance, all [Drag][]'s Events are also available.

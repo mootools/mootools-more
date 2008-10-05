@@ -36,7 +36,7 @@ Tips Method: constructor {#Tips:constructor}
 
 
 ### Events:
- 
+
  * show: fires when the tip is shown
  * hide: fires when the tip is being hidden
 
@@ -49,7 +49,8 @@ Tips Method: constructor {#Tips:constructor}
 #### JavaScript
 
 	var myTips = new Tips('.thisisatooltip');
-	
+
+
 
 Tips Event: show {#Tips:show}
 ---------------------------------
@@ -140,15 +141,15 @@ Tips HTML Structure {#Tips:HTML}
 
 	<div class="options.className"> //the className you pass in options will be assigned here.
 		<div class="tip-top"></div> //useful for styling
-		
+
 		<div class="tip">
-			
+
 			<div class="tip-title"></div>
-			
+
 			<div class="tip-text"></div>
-			
+
 		</div>
-		
+
 		<div class="tip-bottom"></div> //useful for styling
 	</div>
 
@@ -165,11 +166,11 @@ You can also assign tips titles and contents via [Element Storage](/Element/Elem
 	<a id="tip1" href="http://mootools.net" title="mootools homepage" class="thisisatooltip" />
 
 #### JavaScript
-	
+
 	$('tip1').store('tip:title', 'custom title for tip 1');
-	
+
 	$('tip1').store('tip:text', 'custom text for tip 1');
-	
+
 ### Note:
 
 If you use tips storage you can use elements and / or html as tips title and text.
