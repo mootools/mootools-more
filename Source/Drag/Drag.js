@@ -62,8 +62,8 @@ var Drag = new Class({
 
 	start: function(event){
 		if (this.options.preventDefault) event.preventDefault();
-		this.fireEvent('beforeStart', this.element);
 		this.mouse.start = event.page;
+		this.fireEvent('beforeStart', this.element);
 		var limit = this.options.limit;
 		this.limit = {'x': [], 'y': []};
 		for (var z in this.options.modifiers){
