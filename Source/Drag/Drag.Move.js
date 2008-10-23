@@ -15,7 +15,8 @@ Drag.Move = new Class({
 		onLeave: $empty,
 		onDrop: $empty,*/
 		droppables: [],
-		container: false
+		container: false,
+		precalculate: false
 	},
 
 	initialize: function(element, options){
@@ -50,11 +51,16 @@ Drag.Move = new Class({
 
 			this.options.limit = {x: x, y: y};
 		}
+		if (this.options.precalculate){
+			this.positions = this.droppables.map(function(el) {
+				return el.getCoordinates();
+			});
+		}
 		this.parent(event);
 	},
 
-	checkAgainst: function(el){
-		el = el.getCoordinates();
+	checkAgainst: function(el, i){
+		el = (this.positions) ? this.positions[i] : el.getCoordinates();
 		var now = this.mouse.now;
 		return (now.x > el.left && now.x < el.right && now.y < el.bottom && now.y > el.top);
 	},
