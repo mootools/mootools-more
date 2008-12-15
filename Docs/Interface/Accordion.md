@@ -30,7 +30,7 @@ The Accordion class creates a group of Elements that are toggled when their hand
 * height      - (*boolean*: defaults to true) If set to true, a height transition effect will take place when switching between displayed elements.
 * width       - (*boolean*: defaults to false) If set to true, a width transition will take place when switching between displayed elements.
 * opacity     - (*boolean*: defaults to true) If set to true, an opacity transition effect will take place when switching between displayed elements.
-* fixedHeight - (*boolean*: defaults to false) If set to false, displayed elements will have a fixed height.
+* fixedHeight - (*boolean*: defaults to false) If set to true, displayed elements will have a fixed height.
 * fixedWidth  - (*boolean*: defaults to false) If set to true, displayed elements will have a fixed width.
 * alwaysHide  - (*boolean*: defaults to false) If set to true, it will be possible to close all displayable elements. Otherwise, one will remain open at all time.
 * width       - (*boolean*: defaults to false) If set to true, it will add a width transition to the accordion. Warning: css mastery is required to make this work!
