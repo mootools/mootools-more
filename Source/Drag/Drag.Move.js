@@ -75,7 +75,7 @@ Drag.Move = new Class({
 
 	stop: function(event){
 		this.checkDroppables();
-		this.fireEvent('drop', [this.element, this.overed]);
+		this.fireEvent('drop', [this.element, this.overed, event]);
 		this.overed = null;
 		return this.parent(event);
 	}

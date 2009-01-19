@@ -130,7 +130,7 @@ var Drag = new Class({
 		this.document.removeEvent(this.selection, this.bound.eventStop);
 		this.document.removeEvent('mousemove', this.bound.drag);
 		this.document.removeEvent('mouseup', this.bound.stop);
-		if (event) this.fireEvent('complete', this.element);
+		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
 });

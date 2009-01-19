@@ -37,7 +37,7 @@ Drag Method: constructor {#Drag:constructor}
 * start       - Executed when the user starts to drag (on mousedown). Receives the dragged element as an argument.
 * snap        - Executed when the user has dragged past the snap option. Receives the dragged element as an argument.
 * drag        - Executed on every step of the drag. Receives the dragged element as an argument.
-* complete    - Executed when the user completes the drag. Receives the dragged element as an argument.
+* complete    - Executed when the user completes the drag. Receives the dragged element and the event as an argument.
 
 ### Examples:
 
