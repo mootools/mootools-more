@@ -17,7 +17,7 @@ Auto targets all the anchors in a page and display a smooth scrolling effect upo
 
 ### Arguments:
 
-1. options - (*object*, optional) In addition to all the <Fx.Scroll> options, SmoothScroll has links option incase you had a predefined links collection.
+1. options - (*object*, optional) In addition to all the [Fx.Scroll][] options, SmoothScroll has links option incase you had a predefined links collection.
 2. win     - (*object*, optional) The context of the SmoothScroll.
 
 #### Options:
@@ -41,4 +41,4 @@ Auto targets all the anchors in a page and display a smooth scrolling effect upo
 
 
 
-[Fx.Scroll]: /Fx/Fx.Scroll
+[Fx.Scroll]: /Plugins/Fx.Scroll
