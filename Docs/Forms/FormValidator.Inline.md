@@ -22,7 +22,9 @@ Evaluates an entire form against all the validators that are set up *displaying 
 
 ### Options
 
-* all the options defined for [FormValidator][]
+* all the options defined for [FormValidator][], plus
+* scrollToErrorsOnSubmit - (*boolean*) if *true* (the default), when the user submits the form the window (or overflown parent) will scroll up to that element so it is in view. Will use [Fx.Scroll][] if it's available, otherwise it will jump to the element.
+* scrollFxOptions - (*object*) options for [Fx.Scroll][] if it's available; used for scrolling to errors if *scrollToErrorsOnSubmit* is *true*.
 
 ### Events
 

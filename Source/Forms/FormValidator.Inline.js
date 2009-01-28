@@ -10,6 +10,15 @@ FormValidator.Inline = new Class({
 
 	Extends: FormValidator,
 
+	options: {
+		scrollToErrorsOnSubmit: true,
+		scrollFxOptions: {
+			offset: {
+				y: -20
+			}
+		}
+	},
+
 	initialize: function(){
 		this.parent.apply(this, arguments);
 		this.addEvent('onElementValidate', function(isValid, field, className, warn){
@@ -117,6 +126,35 @@ FormValidator.Inline = new Class({
 			};
 		} else {
 			$(props.msgPos).grab(advice);
+		}
+	},
+	
+	validate: function(field, force){
+		var result = this.parent(field, force);
+		if (this.options.scrollToErrorsOnSubmit && !result) {
+			var failed = $(this).getElement('.validation-failed');		
+			var par = $(this).getParent();
+			var isScrolled = function(p){
+				return p.getScrollSize().y != p.getSize().y
+			};
+			var scrolls;
+			while (par != document.body && !isScrolled(par)) {
+				par = par.getParent();
+			};
+			var fx = par.retrieve('fvScroller');
+			if (!fx && window.Fx) {
+				fx = new Fx.Scroll(par, {
+					transition: 'quad:out',
+					offset: {
+						y: -20
+					}
+				});
+				par.store('fvScroller', fx);
+			}
+			if (failed) {
+				if (fx) fx.toElement(failed);
+				else par.scrollTo(par.getScroll().x, failed.getPosition(par).y - 20);
+			}
 		}
 	}
 

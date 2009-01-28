@@ -87,12 +87,6 @@ var FormValidator = new Class({
 		evaluateFieldsOnChange: true,
 		serial: true,
 		stopOnFailure: true,
-		scrollToErrorsOnSubmit: true,
-		scrollFxOptions: {
-			offset: {
-				y: -20
-			}
-		},
 		warningPrefix: function(){
 			return FormValidator.resources[FormValidator.language].warningPrefix || 'Warning: ';
 		},
@@ -147,26 +141,6 @@ var FormValidator = new Class({
 		}, this).every(function(v){ return v;});
 		this.fireEvent('onFormValidate', [result, $(this), event]);
 		if (this.options.stopOnFailure && !result && event) event.preventDefault();
-		if (this.options.scrollToErrorsOnSubmit && !result) {
-			var par = $(this).getParent();
-			var isScrolled = function(p){
-				return p.getScrollSize().y != p.getSize().y
-			};
-			var scrolls;
-			while (par != document.body && !isScrolled(par)) {
-				par = par.getParent();
-			};
-			var fx = par.retrieve('fvScroller');
-			if (!fx && window.Fx) {
-				fx = new Fx.Scroll(par, this.options.scrollFxOptions);
-				par.store('fvScroller', fx);
-			}
-			var failed = $(this).getElement('.validation-failed');
-			if (failed) {
-				if (fx) fx.toElement(failed);
-				else par.scrollTo(par.getScroll().x, failed.getPosition(par).y - 20);
-			}
-		}
 		return result;
 	},
 
