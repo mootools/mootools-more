@@ -104,6 +104,37 @@
 		}
 
 	},
+
+	"Forms":{
+
+		"FormValidator":{
+			"deps":["Class.Extras", "Class.Binds", "ToElement", "Selectors", "Element.Event", "Element.Style", "JSON", "dbug", "Date", "Element.Forms"],
+			"optional":["Fx.Reveal"],
+			"desc":"A css-class based form validation system."
+		},
+
+		"FormValidator.Extras": {
+			"deps":["FormValidator"],
+			"desc":"Additional validators for FormValidator."
+		},
+
+		"OverText":{
+			"deps": ["Class.Extras", "Element.Event", "Element.Position", "Element.Shortcuts", "dbug"],
+			"desc": "Displays text over empty inputs until the user focuses the input or adds information."
+		},
+		
+		"PostEditor":{
+			"deps": ["Class.Extras", "Element.Style", "Element.Event"],
+			"desc": "A MooTools 1.2 compliant version of PostEditor for typing code into textareas."
+		},
+
+		"PostEditor.Snippets":{
+			"deps": ["PostEditor"],
+			"desc": "A default set of snippets for PostEditor."
+		}
+
+	},
+
 	"Fx": {
 
 		"Fx.Elements": {
