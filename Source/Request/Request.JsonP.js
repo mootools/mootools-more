@@ -94,7 +94,7 @@ Request.JsonP = new Class({
 	},
 	handleResults: function(data){
 		if (window.dbug) dbug.log('jsonp received: ', data);
-		this.fireEvent('onComplete', [data, this]);
+		this.fireEvent('complete', [data, this]);
 	}
 
 });

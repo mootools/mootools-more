@@ -95,7 +95,7 @@ var OverText = new Class({
 			try {
 				if (focus) el.fireEvent('focus').focus();
 			} catch(e){} //IE barfs if you call focus on hidden elements
-			this.fireEvent('onTextHide', [txt, el]);
+			this.fireEvent('textHide', [txt, el]);
 			el.store('ot_paused', true);
 		}
 		return this;
@@ -105,7 +105,7 @@ var OverText = new Class({
 		var txt = el.retrieve('OverTextDiv');
 		if (txt && !txt.isVisible()) {
 			txt.show();
-			this.fireEvent('onTextShow', [txt, el]);
+			this.fireEvent('textShow', [txt, el]);
 			el.store('ot_paused', false);
 		}
 		return this;

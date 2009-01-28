@@ -52,14 +52,14 @@ Fx.Reveal = new Class({
 							this.element.setStyles($merge({display: 'none', overflow: overflowBefore}, startStyles));
 							if (setToAuto) this.element.setStyle('height', 'auto');
 						}
-						this.fireEvent('onHide', this.element);
+						this.fireEvent('hide', this.element);
 						this.callChain();
 					}.bind(this));
 					this.start(zero);
 				} else {
 					this.callChain.delay(10, this);
-					this.fireEvent('onComplete', this.element);
-					this.fireEvent('onHide', this.element);
+					this.fireEvent('complete', this.element);
+					this.fireEvent('hide', this.element);
 				}
 			} else if (this.options.link == "chain") {
 				this.chain(this.dissolve.bind(this));
@@ -71,8 +71,8 @@ Fx.Reveal = new Class({
 			this.hiding = false;
 			this.element.hide();
 			this.callChain.delay(10, this);
-			this.fireEvent('onComplete', this.element);
-			this.fireEvent('onHide', this.element);
+			this.fireEvent('complete', this.element);
+			this.fireEvent('hide', this.element);
 		}
 		return this;
 	},
@@ -130,12 +130,12 @@ Fx.Reveal = new Class({
 						if (!this.hidden) this.showing = false;
 						this.element.setStyle('overflow', overflowBefore);
 						this.callChain();
-						this.fireEvent('onShow', this.element);
+						this.fireEvent('show', this.element);
 					}.bind(this));
 				} else {
 					this.callChain();
-					this.fireEvent('onComplete', this.element);
-					this.fireEvent('onShow', this.element);
+					this.fireEvent('complete', this.element);
+					this.fireEvent('show', this.element);
 				}
 			} else if (this.options.link == "chain") {
 				this.chain(this.reveal.bind(this));
@@ -151,8 +151,8 @@ Fx.Reveal = new Class({
 			});
 			this.showing = false;
 			this.callChain.delay(10, this);
-			this.fireEvent('onComplete', this.element);
-			this.fireEvent('onShow', this.element);
+			this.fireEvent('complete', this.element);
+			this.fireEvent('show', this.element);
 		}
 		return this;
 	},
