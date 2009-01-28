@@ -151,7 +151,8 @@ Evaluates an entire form against all the validators that are set up, firing even
 * ignoreHidden - (*boolean*) if *true* (the default), all fields that are not visible to the user (who are display:none or whose parents are display:none) are not validated.
 * warningPrefix - (*string*) prefix to be added to every warning; defaults to *"Warning: "*
 * errorPrefix - (*string*) prefix to be added to every error; defaults to *"Error: "*
-* scrollToErrorsOnSubmit - (*boolean*) if *true* (the default), when the user submits the form the window (or overflown parent) will scroll up to that element so it is in view.
+* scrollToErrorsOnSubmit - (*boolean*) if *true* (the default), when the user submits the form the window (or overflown parent) will scroll up to that element so it is in view. Will use [Fx.Scroll][] if it's available, otherwise it will jump to the element.
+* scrollFxOptions - (*object*) options for [Fx.Scroll][] if it's available; used for scrolling to errors if *scrollToErrorsOnSubmit* is *true*.
 
 ### Events
 

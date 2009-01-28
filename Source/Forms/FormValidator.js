@@ -88,6 +88,11 @@ var FormValidator = new Class({
 		serial: true,
 		stopOnFailure: true,
 		scrollToErrorsOnSubmit: true,
+		scrollFxOptions: {
+			offset: {
+				y: -20
+			}
+		},
 		warningPrefix: function(){
 			return FormValidator.resources[FormValidator.language].warningPrefix || 'Warning: ';
 		},
@@ -140,7 +145,7 @@ var FormValidator = new Class({
 		var result = this.getFields().map(function(field) { 
 			return this.validateField(field, true);
 		}, this).every(function(v){ return v;});
-		this.fireEvent('formValidate', [result, $(this), event]);
+		this.fireEvent('onFormValidate', [result, $(this), event]);
 		if (this.options.stopOnFailure && !result && event) event.preventDefault();
 		if (this.options.scrollToErrorsOnSubmit && !result) {
 			var par = $(this).getParent();
@@ -153,12 +158,7 @@ var FormValidator = new Class({
 			};
 			var fx = par.retrieve('fvScroller');
 			if (!fx && window.Fx) {
-				fx = new Fx.Scroll(par, {
-					transition: 'quad:out',
-					offset: {
-						y: -20
-					}
-				});
+				fx = new Fx.Scroll(par, this.options.scrollFxOptions);
 				par.store('fvScroller', fx);
 			}
 			var failed = $(this).getElement('.validation-failed');
@@ -191,10 +191,10 @@ var FormValidator = new Class({
 			if (validators && !field.hasClass('warnOnly')){
 				if (passed) {
 					field.addClass('validation-passed').removeClass('validation-failed');
-					this.fireEvent('elementPass', field);
+					this.fireEvent('onElementPass', field);
 				} else {
 					field.addClass('validation-failed').removeClass('validation-passed');
-					this.fireEvent('elementFail', [field, validatorsFailed]);
+					this.fireEvent('onElementFail', [field, validatorsFailed]);
 				}
 			}
 			if (!warned) {
@@ -221,7 +221,7 @@ var FormValidator = new Class({
 		if (field.hasClass('warnOnly')) warn = true;
 		var validator = this.getValidator(className);
 		var isValid = validator.test(field);
-		if (validator && this.isVisible(field)) this.fireEvent('elementValidate', [isValid, field, className, warn]);
+		if (validator && this.isVisible(field)) this.fireEvent('onElementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
 	},
