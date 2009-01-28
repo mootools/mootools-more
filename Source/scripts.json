@@ -99,7 +99,7 @@
 		},
 
 		"Element.Shortcuts": {
-			"deps": ["Element.Style", "dbug"],
+			"deps": ["Element.Style"],
 			"desc": "Extends the Element native object to include some shortcut methods."
 		}
 
@@ -108,7 +108,7 @@
 	"Forms":{
 
 		"FormValidator":{
-			"deps":["Class.Extras", "Class.Binds", "ToElement", "Selectors", "Element.Event", "Element.Style", "JSON", "dbug", "Date", "Element.Forms"],
+			"deps":["Class.Extras", "Class.Binds", "ToElement", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms"],
 			"optional":["Fx.Reveal"],
 			"desc":"A css-class based form validation system."
 		},
@@ -119,7 +119,7 @@
 		},
 
 		"OverText":{
-			"deps": ["Class.Extras", "Element.Event", "Element.Position", "Element.Shortcuts", "dbug"],
+			"deps": ["Class.Extras", "Element.Event", "Element.Position", "Element.Shortcuts"],
 			"desc": "Displays text over empty inputs until the user focuses the input or adds information."
 		},
 		
@@ -186,7 +186,7 @@
 
 	"Request":{
 		"Request.JsonP":{
-			"deps":["Browser", "Element", "Request", "dbug", "Class.Extras"],
+			"deps":["Browser", "Element", "Request", "Class.Extras"],
 			"desc":"Creates a Json request using a script tag include and handles the callbacks for you."
 		},
 		"Request.NoCache": {

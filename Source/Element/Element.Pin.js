@@ -23,9 +23,9 @@ window.addEvent('domready', function(){
 Element.implement({
 
 	pin: function(enable){
-		if (!Browser.loaded) dbug.log('cannot pin ' + this + ' natively because the dom is not ready');
+		if (!Browser.loaded && window.dbug) dbug.log('cannot pin ' + this + ' natively because the dom is not ready');
 		if (this.getStyle('display') == 'none') {
-			dbug.log('cannot pin ' + this + ' because it is hidden');
+			if (window.dbug) dbug.log('cannot pin ' + this + ' because it is hidden');
 			return;
 		}
 		if (enable!==false) {

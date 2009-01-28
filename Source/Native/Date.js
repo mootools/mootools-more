@@ -275,12 +275,7 @@ $extend(Date, {
 		for (var i = 0, j = Date.$parsePatterns.length; i < j; i++) {
 			var r = Date.$parsePatterns[i].re.exec(from);
 			if (r) {
-				try {
-					return Date.$parsePatterns[i].handler(r);
-				} catch(e) {
-					dbug.log('date parse error: ', e);
-					return null;
-				}
+				return Date.$parsePatterns[i].handler(r);
 			}
 		}
 		return new Date(Date.$nativeParse(from));

@@ -38,7 +38,7 @@ Request.JsonP = new Class({
 		}
 		if (!$chk(this.triesRemaining[requestIndex])) this.triesRemaining[requestIndex] = this.options.retries;
 		var remaining = this.triesRemaining[requestIndex]; //saving bytes
-		dbug.log('retrieving by json script method: %s', u.url);
+		if (window.dbug) dbug.log('retrieving by json script method: %s', u.url);
 		var dl = (Browser.Engine.trident)?50:0; //for some reason, IE needs a moment here...
 		(function(){
 			var script = new Element('script', {
@@ -58,7 +58,7 @@ Request.JsonP = new Class({
 				(function(){
 					this.triesRemaining[requestIndex] = remaining - 1;
 					if (script.getParent() && remaining) {
-						dbug.log('removing script (%o) and retrying: try: %s, remaining: %s', requestIndex, remaining);
+						if (window.dbug) dbug.log('removing script (%o) and retrying: try: %s, remaining: %s', requestIndex, remaining);
 						script.dispose();
 						this.request(url, requestIndex);
 					}
@@ -93,7 +93,7 @@ Request.JsonP = new Class({
 		return {url: jurl, index: index};
 	},
 	handleResults: function(data){
-		dbug.log('jsonp received: ', data);
+		if (window.dbug) dbug.log('jsonp received: ', data);
 		this.fireEvent('onComplete', [data, this]);
 	}
 
