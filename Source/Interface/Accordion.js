@@ -15,6 +15,7 @@ var Accordion = new Class({
 		onBackground: $empty,*/
 		display: 0,
 		show: false,
+		trigger: 'click',
 		height: true,
 		width: false,
 		opacity: true,
@@ -69,8 +70,7 @@ var Accordion = new Class({
 			toggler.inject(this.container);
 			element.inject(this.container);
 		}
-		var idx = this.togglers.indexOf(toggler);
-		toggler.addEvent('click', this.display.bind(this, idx));
+		toggler.addEvent(this.options.trigger, this.display.bind(this,this.togglers.indexOf(toggler)));
 		if (this.options.height) element.setStyles({'padding-top': 0, 'border-top': 'none', 'padding-bottom': 0, 'border-bottom': 'none'});
 		if (this.options.width) element.setStyles({'padding-left': 0, 'border-left': 'none', 'padding-right': 0, 'border-right': 'none'});
 		element.fullOpacity = 1;
