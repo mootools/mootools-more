@@ -8,4 +8,3 @@ MooTools Plugins and Enhancements Repository
 * Localization needs to be flushed out more clearly with a well thought out scheme.
 * Put author names in files (per Tom)
 * Rename Class.Extras/ to Class/ (per Tom)
-* Request.JsonP >> JSON.Request
