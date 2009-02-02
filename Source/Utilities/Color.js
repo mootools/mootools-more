@@ -2,8 +2,11 @@
 Script: Color.js
 	Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Color = new Native({

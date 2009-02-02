@@ -69,7 +69,7 @@ The test option is a function that will be passed the field being evaluated and 
 					' (you entered ' + element.value.length + ' characters).';
 			else return '';
 		}, 
-		test: function(element, props) {
+		test: function(element, props){
 			//if the value is >= than the minLength value, element passes test
 			return (element.value.length >= $pick(props.minLength, 0));
 			else return false;
@@ -84,7 +84,7 @@ The test option is a function that will be passed the field being evaluated and 
 					'(you entered ' + element.value.length + ' characters).';
 			else return '';
 		}, 
-		test: function(element, props) {
+		test: function(element, props){
 			//if the value is <= than the maxLength value, element passes test
 			return (element.value.length <= $pick(props.maxLength, 10000));
 		}
@@ -208,14 +208,14 @@ FormValidator comes with numerous built-in validators (see below), each of which
 
 	//this is what's in FormValidator by default:
 	FormValidator.resources = {
-		enUS: {
+		usENG: {
 			required:'This field is required.',
 			minLength:'Please enter at least {minLength} characters (you entered {length} characters).',
 			maxLength:'Please enter no more than {maxLength} characters (you entered {length} characters).',
 			//... and more
 		}
 	};
-	FormValidator.language = "enUS";
+	FormValidator.language = "usENG";
 	
 	//To localize it (pardon the french; if it's bad, blame babelfish):
 	FormValidator.resources.French = {

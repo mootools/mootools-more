@@ -2,8 +2,11 @@
 Script: FormValidator.Inline.js
 	Extends FormValidator to add inline messages.
 
-License:
-	MIT-style license
+	License:
+		MIT-style license.
+
+	Authors:
+		Aaron Newton
 */
 
 FormValidator.Inline = new Class({
@@ -23,7 +26,7 @@ FormValidator.Inline = new Class({
 		this.parent.apply(this, arguments);
 		this.addEvent('onElementValidate', function(isValid, field, className, warn){
 			var validator = this.getValidator(className);
-			if (!isValid && validator.getError(field)) {
+			if (!isValid && validator.getError(field)){
 				if (warn) field.addClass('warning');
 				else this.hideAdvice(className, field);
 			}
@@ -51,7 +54,7 @@ FormValidator.Inline = new Class({
 		return advice;
 	},
 
-	getFieldId : function(field) {
+	getFieldId : function(field){
 		return field.id ? field.id : field.id = "input_"+field.name;
 	},
 
@@ -69,7 +72,7 @@ FormValidator.Inline = new Class({
 
 	hideAdvice: function(className, field){
 		var advice = this.getAdvice(className, field);
-		if (advice && field.retrieve(this.getPropName(className))) {
+		if (advice && field.retrieve(this.getPropName(className))){
 			field.store(this.getPropName(className), false);
 			//if Fx.Reveal.js is present, transition the advice out
 			if (advice.dissolve) advice.dissolve();
@@ -81,16 +84,16 @@ FormValidator.Inline = new Class({
 		return 'advice'+className;
 	},
 
-	resetField: function(field) {
+	resetField: function(field){
 		field = $(field);
 		if (!field) return this;
 		this.parent(field);
-		field.className.split(" ").each(function(className) {
+		field.className.split(" ").each(function(className){
 			this.hideAdvice(className, field);
 		}, this);
 	},
 
-	getAllAdviceMessages: function(field, force) {
+	getAllAdviceMessages: function(field, force){
 		var advice = [];
 		if (field.hasClass('ignoreValidation') && !force) return advice;
 		var validators = field.className.split(" ").some(function(cn){
@@ -108,7 +111,7 @@ FormValidator.Inline = new Class({
 		return advice;
 	},
 
-	getAdvice: function(className, field) {
+	getAdvice: function(className, field){
 		return field.retrieve('advice-'+className);
 	},
 
@@ -116,8 +119,8 @@ FormValidator.Inline = new Class({
 		//Check for error position prop
 		var props = field.get('validatorProps');
 		//Build advice
-		if (!props.msgPos || !$(props.msgPos)) {
-			switch (field.type.toLowerCase()) {
+		if (!props.msgPos || !$(props.msgPos)){
+			switch (field.type.toLowerCase()){
 				case 'radio':
 					var p = field.getParent().adopt(advice);
 					break;
@@ -131,18 +134,18 @@ FormValidator.Inline = new Class({
 	
 	validate: function(field, force){
 		var result = this.parent(field, force);
-		if (this.options.scrollToErrorsOnSubmit && !result) {
+		if (this.options.scrollToErrorsOnSubmit && !result){
 			var failed = $(this).getElement('.validation-failed');		
 			var par = $(this).getParent();
 			var isScrolled = function(p){
 				return p.getScrollSize().y != p.getSize().y
 			};
 			var scrolls;
-			while (par != document.body && !isScrolled(par)) {
+			while (par != document.body && !isScrolled(par)){
 				par = par.getParent();
 			};
 			var fx = par.retrieve('fvScroller');
-			if (!fx && window.Fx) {
+			if (!fx && window.Fx){
 				fx = new Fx.Scroll(par, {
 					transition: 'quad:out',
 					offset: {
@@ -151,7 +154,7 @@ FormValidator.Inline = new Class({
 				});
 				par.store('fvScroller', fx);
 			}
-			if (failed) {
+			if (failed){
 				if (fx) fx.toElement(failed);
 				else par.scrollTo(par.getScroll().x, failed.getPosition(par).y - 20);
 			}

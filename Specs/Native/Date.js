@@ -263,16 +263,16 @@ describe('Date.format', {
 
 	'should format a Date instance as a string': function(){
 		var d = new Date('Thu Nov 20 1997 01:02:03');
-    value_of(d.format('%a')).should_be(Date.$days[4].substr(0,3));
+    value_of(d.format('%a')).should_be(Date.lang.days[4].substr(0,3));
     value_of(d.format('%a')).should_be('Thu');
     
-    value_of(d.format('%A')).should_be(Date.$days[4]);
+    value_of(d.format('%A')).should_be(Date.lang.days[4]);
     value_of(d.format('%A')).should_be('Thursday');
     
-    value_of(d.format('%b')).should_be(Date.$months[10].substr(0,3));
+    value_of(d.format('%b')).should_be(Date.lang.months[10].substr(0,3));
     value_of(d.format('%b')).should_be('Nov');
     
-    value_of(d.format('%B')).should_be(Date.$months[10]);
+    value_of(d.format('%B')).should_be(Date.lang.months[10]);
     value_of(d.format('%B')).should_be('November');
     
     //value_of(d.format('%c')).should_be('Thu Nov 20 1997 01:02:03 GMT+0000 (GMT Standard Time)');
@@ -333,7 +333,7 @@ describe('Date.parse', {
 	},
 
 	'should parse a string value into a date': function(){
-	  $H(Date.$cultures).each(function(v, k) {
+	  $H(Date.$cultures).each(function(v, k){
       Date.$culture = k;
 		  var d = new Date(2000, 11, 2, 0, 0, 0, 0);
       value_of(Date.parse(d.format('%x')).clearTime()).should_be(d);

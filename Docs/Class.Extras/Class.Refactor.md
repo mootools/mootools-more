@@ -33,7 +33,7 @@ MooTools is designed to be extended and as you can see in this repository, I mak
 
 
 	var Test = new Class({
-		log: function(msg) {
+		log: function(msg){
 			console.log(msg);
 		},
 		msgs: {
@@ -50,7 +50,7 @@ MooTools is designed to be extended and as you can see in this repository, I mak
 
 	var Test = new Class({
 		Extends: Test, //extends itself!
-		log: function(msg) {
+		log: function(msg){
 			this.parent(msg); //methods have reference to previous state via this.parent
 			console.log('altered version of Test just logged message');
 		},

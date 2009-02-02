@@ -1,4 +1,5 @@
 {
+
 	"Core":{
 
 		"dbug":{
@@ -7,6 +8,7 @@
 		}
 
 	},
+
 	"Class.Extras": {
 
 		"Class.Refactor": {
@@ -35,18 +37,25 @@
 		}
 
 	},
+
 	"Browser":{
 
 		"Browser.Extras": {
 			"deps": ["Browser", "String.Extras", "DomReady"],
 			"desc": "Extends the Window native class with numerous shortcuts."
+		},
+		
+		"IframeShim":{
+			"deps":["Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude", "Class.ToElement"],
+			"desc":"Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
 		}
 
 	},
+
 	"Native":{
 
 		"Date":{
-			"deps": ["Core", "String", "Number", "Hash", "Array"],
+			"deps": ["Core", "String", "Number", "Hash", "Array", "MooTools.Lang"],
 			"desc": "Extends the Date native object to include methods useful in managing dates."
 		},
 
@@ -66,6 +75,7 @@
 		}
 
 	},
+
 	"Element":{
 
 		"Element.Delegation": {
@@ -167,7 +177,6 @@
 			"desc": "Reorders a group of items with a transition."
 		}
 
-
 	},
 	
 	"Drag": {
@@ -255,6 +264,87 @@
 			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
 		}
 		
+	},
+
+	"Localization": {
+
+		"MooTools.Lang":{
+			"deps": ["Class.Extras"],
+			"desc": ["Enables classes to contain text that can be localized to specific languages."]
+		}
+
+		"Date.Dutch":{
+			"deps":["MooTools.Lang"],
+			"desc":"Date messages in Dutch (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"Date.Norwegian":{
+			"deps":["MooTools.Lang"],
+			"desc":"Date messages in Norwegian (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Arabic":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Arabic (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Catalan":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Catalan (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Chinese":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Chinese (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Dutch":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Dutch (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.French":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in French (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Italian":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Italian (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Norwegian":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Norwegian (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Portuguese":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Portuguese (feel free to send in your own translations).",
+			"exclude": true
+		},		
+
+		"FormValidator.Russian":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Russian (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Spanish":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in Spanish (feel free to send in your own translations).",
+			"exclude": true
+		},
+
 	}
 
 }

@@ -204,7 +204,7 @@ Compares two dates.
 
 * (*integer*) the difference in time at the specified resolution
 
-Date Method: get('timezone') {#Date:getTimezone}
+Date Method: get('timezone'){#Date:getTimezone}
 ------------------------------------------------
 
 Returns the time zone for the date. Example: "GMT".
@@ -217,7 +217,7 @@ Returns the time zone for the date. Example: "GMT".
 
 * (*string*) the time zone stamp ("GMT" for example);
 
-Date Method: get('gmtoffset') {#Date:getGMTOffset}
+Date Method: get('gmtoffset'){#Date:getGMTOffset}
 --------------------------------------------------
 
 Returns the offset to GMT *as a string*. Example: "-0800".
@@ -230,7 +230,7 @@ Returns the offset to GMT *as a string*. Example: "-0800".
 
 * (*string*) the GMT offset
 
-Date Method: get('week') {#Date:getWeek}
+Date Method: get('week'){#Date:getWeek}
 ----------------------------------------
 
 ### Syntax

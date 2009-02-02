@@ -12,16 +12,16 @@
 		Builder.includeType('core');
 
 		Builder.root = "../";
-		Builder.includeType('more');		
+		Builder.includeType('more');
 		
 		Builder.scripts.specs = {
-                'Class.Extras':['Class.Refactor', 'Class.Binds'],
-                'Native': ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras'],
-                'Browser': ['Browser.Extras'],
-                'Element': ['Element.Forms', 'Element.Measure']                 
-        };
-        
-		
+			'Class.Extras':['Class.Refactor', 'Class.Binds'],
+			'Localization':['MooTools.Lang', 'Date.Dutch'],
+			'Native': ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras'],
+			'Browser': ['Browser.Extras'],
+			'Element': ['Element.Forms', 'Element.Measure']
+		};
+
 		if (!Builder.includeRequest('specs')) Builder.includeType('specs');
 	</script>
 </head>

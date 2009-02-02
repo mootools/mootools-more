@@ -10,24 +10,24 @@ var dbug = {
 	timers: {},
 	firebug: false, 
 	enabled: false, 
-	log: function() {
+	log: function(){
 		dbug.logged.push(arguments);
 	},
-	nolog: function(msg) {
+	nolog: function(msg){
 		dbug.logged.push(arguments);
 	},
 	time: function(name){
 		dbug.timers[name] = new Date().getTime();
 	},
 	timeEnd: function(name){
-		if (dbug.timers[name]) {
+		if (dbug.timers[name]){
 			var end = new Date().getTime() - dbug.timers[name];
 			dbug.timers[name] = false;
 			dbug.log('%s: %s', name, end);
 		} else dbug.log('no such timer: %s', name);
 	},
-	enable: function(silent) { 
-		if(dbug.firebug) {
+	enable: function(silent){ 
+		if (dbug.firebug){
 			try {
 				dbug.enabled = true;
 				dbug.log = function(){
@@ -39,16 +39,16 @@ var dbug = {
 				dbug.timeEnd = function(){
 					console.timeEnd.apply(console, arguments);
 				};
-				if(!silent) dbug.log('enabling dbug');
+				if (!silent) dbug.log('enabling dbug');
 				for(var i=0;i<dbug.logged.length;i++){ dbug.log.apply(console, dbug.logged[i]); }
 				dbug.logged=[];
-			} catch(e) {
+			} catch(e){
 				dbug.enable.delay(400);
 			}
 		}
 	},
 	disable: function(){ 
-		if(dbug.firebug) dbug.enabled = false;
+		if (dbug.firebug) dbug.enabled = false;
 		dbug.log = dbug.nolog;
 		dbug.time = function(){};
 		dbug.timeEnd = function(){};
@@ -56,7 +56,7 @@ var dbug = {
 	cookie: function(set){
 		var value = document.cookie.match('(?:^|;)\\s*jsdebug=([^;]*)');
 		var debugCookie = value ? unescape(value[1]) : false;
-		if((!$defined(set) && debugCookie != 'true') || ($defined(set) && set)) {
+		if ((!$defined(set) && debugCookie != 'true') || ($defined(set) && set)){
 			dbug.enable();
 			dbug.log('setting debugging cookie');
 			var date = new Date();
@@ -74,7 +74,7 @@ var dbug = {
 	var fb = typeof console != "undefined";
 	var debugMethods = ['debug','info','warn','error','assert','dir','dirxml'];
 	var otherMethods = ['trace','group','groupEnd','profile','profileEnd','count'];
-	function set(methodList, defaultFunction) {
+	function set(methodList, defaultFunction){
 		for(var i = 0; i < methodList.length; i++){
 			dbug[methodList[i]] = (fb && console[methodList[i]])?console[methodList[i]]:defaultFunction;
 		}
@@ -86,13 +86,13 @@ if (typeof console != "undefined" && console.warn){
 	dbug.firebug = true;
 	var value = document.cookie.match('(?:^|;)\\s*jsdebug=([^;]*)');
 	var debugCookie = value ? unescape(value[1]) : false;
-	if(window.location.href.indexOf("jsdebug=true")>0 || debugCookie=='true') dbug.enable();
-	if(debugCookie=='true')dbug.log('debugging cookie enabled');
-	if(window.location.href.indexOf("jsdebugCookie=true")>0){
+	if (window.location.href.indexOf("jsdebug=true")>0 || debugCookie=='true') dbug.enable();
+	if (debugCookie=='true')dbug.log('debugging cookie enabled');
+	if (window.location.href.indexOf("jsdebugCookie=true")>0){
 		dbug.cookie();
-		if(!dbug.enabled)dbug.enable();
+		if (!dbug.enabled)dbug.enable();
 	}
-	if(window.location.href.indexOf("jsdebugCookie=false")>0)dbug.disableCookie();
+	if (window.location.href.indexOf("jsdebugCookie=false")>0)dbug.disableCookie();
 }
 
 
@@ -120,8 +120,8 @@ var IframeShim = new Class({
 	initialize: function (element, options){
 		this.setOptions(options);
 		//legacy
-		if(this.options.offset && this.options.offset.top) this.options.offset.y = this.options.offset.top;
-		if(this.options.offset && this.options.offset.left) this.options.offset.x = this.options.offset.left;
+		if (this.options.offset && this.options.offset.top) this.options.offset.y = this.options.offset.top;
+		if (this.options.offset && this.options.offset.left) this.options.offset.x = this.options.offset.left;
 		this.element = $(element);
 		this.makeShim();
 		return;
@@ -129,11 +129,11 @@ var IframeShim = new Class({
 	makeShim: function(){
 		this.shim = new Element('iframe');
 		this.id = this.options.name || new Date().getTime() + "_shim";
-		if(this.element.getStyle('z-Index').toInt()<1 || isNaN(this.element.getStyle('z-Index').toInt()))
+		if (this.element.getStyle('z-Index').toInt()<1 || isNaN(this.element.getStyle('z-Index').toInt()))
 			this.element.setStyle('z-Index',5);
 		var z = this.element.getStyle('z-Index')-1;
 		
-		if($chk(this.options.zindex) && 
+		if ($chk(this.options.zindex) && 
 			 this.element.getStyle('z-Index').toInt() > this.options.zindex)
 			 z = this.options.zindex;
 			
@@ -153,12 +153,12 @@ var IframeShim = new Class({
 
 		var inject = function(){
 			this.shim.inject(this.element, 'after');
-			if(this.options.display) this.show();
+			if (this.options.display) this.show();
 			else this.hide();
 			this.fireEvent('onInject');
 		};
-		if(this.options.browsers){
-			if(Browser.Engine.trident && !IframeShim.ready) {
+		if (this.options.browsers){
+			if (Browser.Engine.trident && !IframeShim.ready){
 				window.addEvent('load', inject.bind(this));
 			} else {
 				inject.run(null, this);
@@ -166,7 +166,7 @@ var IframeShim = new Class({
 		}
 	},
 	position: function(shim){
-		if(!this.options.browsers || !IframeShim.ready) return this;
+		if (!this.options.browsers || !IframeShim.ready) return this;
 		var before = this.element.getStyles('display', 'visibility', 'position');
 		this.element.setStyles({
 			display: 'block',
@@ -175,7 +175,7 @@ var IframeShim = new Class({
 		});
 		var size = this.element.getSize();
 		this.element.setStyles(before);
-		if($type(this.options.margin)){
+		if ($type(this.options.margin)){
 			size.x = size.x-(this.options.margin*2);
 			size.y = size.y-(this.options.margin*2);
 			this.options.offset.x += this.options.margin; 
@@ -191,16 +191,16 @@ var IframeShim = new Class({
 		return this;
 	},
 	hide: function(){
-		if(this.options.browsers) this.shim.setStyle('display','none');
+		if (this.options.browsers) this.shim.setStyle('display','none');
 		return this;
 	},
 	show: function(){
-		if(!this.options.browsers) return this;
+		if (!this.options.browsers) return this;
 		this.shim.setStyle('display','block');
 		return this.position();
 	},
 	dispose: function(){
-		if(this.options.browsers) this.shim.dispose();
+		if (this.options.browsers) this.shim.dispose();
 		return this;
 	}
 });
@@ -218,9 +218,9 @@ License:
 */
 
 Hash.implement({
-	getFromPath: function(notation) {
+	getFromPath: function(notation){
 		var source = this.getClean();
-		notation.replace(/\[([^\]]+)\]|\.([^.[]+)|[^[.]+/g, function(match) {
+		notation.replace(/\[([^\]]+)\]|\.([^.[]+)|[^[.]+/g, function(match){
 			if (!source) return;
 			var prop = arguments[2] || arguments[1] || arguments[0];
 			source = (prop in source) ? source[prop] : null;
@@ -245,23 +245,23 @@ License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
 String.implement({
-	stripTags: function() {
+	stripTags: function(){
 		return this.replace(/<\/?[^>]+>/gi, '');
 	},
-	parseQuery: function(encodeKeys, encodeValues) {
+	parseQuery: function(encodeKeys, encodeValues){
 		encodeKeys = $pick(encodeKeys, true);
 		encodeValues = $pick(encodeValues, true);
 		var vars = this.split(/[&;]/);
 		var rs = {};
-		if (vars.length) vars.each(function(val) {
+		if (vars.length) vars.each(function(val){
 			var keys = val.split('=');
-			if (keys.length && keys.length == 2) {
+			if (keys.length && keys.length == 2){
 				rs[(encodeKeys)?encodeURIComponent(keys[0]):keys[0]] = (encodeValues)?encodeURIComponent(keys[1]):keys[1];
 			}
 		});
 		return rs;
 	},
-	tidy: function() {
+	tidy: function(){
 		var txt = this.toString();
 		$each({
 			"[\xa0\u2002\u2003\u2009]": " ",
@@ -308,13 +308,13 @@ Element.implement({
 		return (function(){ this.setStyles(before); }).bind(this);
 	},
 	
-	getDimensions: function(options) {
+	getDimensions: function(options){
 		options = $merge({computeSize: false},options);
 		var dim = {};
 		function getSize(el, options){
 			return (options.computeSize)?el.getComputedSize(options):el.getSize();
 		};
-		if(this.getStyle('display') == 'none'){
+		if (this.getStyle('display') == 'none'){
 			var restore = this.expose();
 			dim = getSize(this, options); //works now, because the display isn't none
 			restore(); //put it back where it was
@@ -361,27 +361,27 @@ Element.implement({
 				size['computed'+edge.capitalize()] = 0;
 				getStyles.each(function(style,i){ //padding, border, etc.
 					//'padding-left'.test('left') size['totalWidth'] = size['width']+[padding-left]
-					if(style.test(edge)) {
+					if (style.test(edge)){
 						styles[style] = styles[style].toInt(); //styles['padding-left'] = 5;
-						if(isNaN(styles[style]))styles[style]=0;
+						if (isNaN(styles[style]))styles[style]=0;
 						size['total'+key.capitalize()] = size['total'+key.capitalize()]+styles[style];
 						size['computed'+edge.capitalize()] = size['computed'+edge.capitalize()]+styles[style];
 					}
 					//if width != width (so, padding-left, for instance), then subtract that from the total
-					if(style.test(edge) && key!=style && 
-						(style.test('border') || style.test('padding')) && !subtracted.contains(style)) {
+					if (style.test(edge) && key!=style && 
+						(style.test('border') || style.test('padding')) && !subtracted.contains(style)){
 						subtracted.push(style);
 						size['computed'+key.capitalize()] = size['computed'+key.capitalize()]-styles[style];
 					}
 				});
 			});
 		});
-		if($chk(size.width)) {
+		if ($chk(size.width)){
 			size.width = size.width+this.offsetWidth+size.computedWidth;
 			size.totalWidth = size.width + size.totalWidth;
 			delete size.computedWidth;
 		}
-		if($chk(size.height)) {
+		if ($chk(size.height)){
 			size.height = size.height+this.offsetHeight+size.computedHeight;
 			size.totalHeight = size.height + size.totalHeight;
 			delete size.computedHeight;
@@ -412,18 +412,18 @@ window.addEvent('domready', function(){
 
 Element.implement({
 	pin: function(enable){
-		if (this.getStyle('display') == 'none') {
+		if (this.getStyle('display') == 'none'){
 			dbug.log('cannot pin ' + this + ' because it is hidden');
 			return;
 		}
-		if(enable!==false) {
+		if (enable!==false){
 			var p = this.getPosition();
-			if(!this.get('pinned')) {
+			if (!this.get('pinned')){
 				var pos = {
 					top: (p.y - window.getScroll().y),
 					left: (p.x - window.getScroll().x)
 				};
-				if(Browser.supportsPositionFixed) {
+				if (Browser.supportsPositionFixed){
 					this.setStyle('position','fixed').setStyles(pos);
 				} else {
 					this.setStyles({
@@ -432,7 +432,7 @@ Element.implement({
 						left: p.x
 					});
 					window.addEvent('scroll', function(){
-						if(this.get('pinned')) {
+						if (this.get('pinned')){
 							var to = {
 								top: (pos.top.toInt() + window.getScroll().y),
 								left: (pos.left.toInt() + window.getScroll().x)
@@ -445,7 +445,7 @@ Element.implement({
 			}
 		} else {
 			var op;
-			if (!Browser.Engine.trident) {
+			if (!Browser.Engine.trident){
 				if (this.getParent().getComputedStyle('position') != 'static') op = this.getParent();
 				else op = this.getParent().getOffsetParent();
 			}
@@ -506,7 +506,7 @@ Element.implement({
 		 * http://mootools.lighthouseapp.com/projects/2706/tickets/333-element-getoffsetparent-inconsistency-between-ie-and-other-browsers */
 		var offsetParent = $(this.getOffsetParent());
 		putItBack();
-		if(offsetParent && offsetParent != this.getDocument().body) {
+		if (offsetParent && offsetParent != this.getDocument().body){
 			var putItBack = offsetParent.expose();
 			parentOffset = offsetParent.getPosition();
 			putItBack();
@@ -516,23 +516,23 @@ Element.implement({
 		}
 		//upperRight, bottomRight, centerRight, upperLeft, bottomLeft, centerLeft
 		//topRight, topLeft, centerTop, centerBottom, center
-		function fixValue(option) {
-			if($type(option) != "string") return option;
+		function fixValue(option){
+			if ($type(option) != "string") return option;
 			option = option.toLowerCase();
 			var val = {};
-			if(option.test('left')) val.x = 'left';
-			else if(option.test('right')) val.x = 'right';
+			if (option.test('left')) val.x = 'left';
+			else if (option.test('right')) val.x = 'right';
 			else val.x = 'center';
 
-			if(option.test('upper')||option.test('top')) val.y = 'top';
+			if (option.test('upper')||option.test('top')) val.y = 'top';
 			else if (option.test('bottom')) val.y = 'bottom';
 			else val.y = 'center';
 			return val;
 		};
 		options.edge = fixValue(options.edge);
 		options.position = fixValue(options.position);
-		if(!options.edge) {
-			if(options.position.x == 'center' && options.position.y == 'center') options.edge = {x:'center',y:'center'};
+		if (!options.edge){
+			if (options.position.x == 'center' && options.position.y == 'center') options.edge = {x:'center',y:'center'};
 			else options.edge = {x:'left',y:'top'};
 		}
 		
@@ -544,14 +544,14 @@ Element.implement({
 		if (top < 0) top = 0;
 		if (left < 0) left = 0;
 		var dim = this.getDimensions({computeSize: true, styles:['padding', 'border','margin']});
-		if (options.ignoreMargins) {
+		if (options.ignoreMargins){
 			options.offset.x = options.offset.x - dim['margin-left'];
 			options.offset.y = options.offset.y - dim['margin-top'];
 		}
 		var pos = {};
 		var prefY = options.offset.y.toInt();
 		var prefX = options.offset.x.toInt();
-		switch(options.position.x) {
+		switch(options.position.x){
 			case 'left':
 				pos.x = left + prefX;
 				break;
@@ -562,7 +562,7 @@ Element.implement({
 				pos.x = left + (((rel == document.body)?window.getSize().x:rel.offsetWidth)/2) + prefX;
 				break;
 		};
-		switch(options.position.y) {
+		switch(options.position.y){
 			case 'top':
 				pos.y = top + prefY;
 				break;
@@ -574,10 +574,10 @@ Element.implement({
 				break;
 		};
 		
-		if(options.edge){
+		if (options.edge){
 			var edgeOffset = {};
 			
-			switch(options.edge.x) {
+			switch(options.edge.x){
 				case 'left':
 					edgeOffset.x = 0;
 					break;
@@ -588,7 +588,7 @@ Element.implement({
 					edgeOffset.x = -(dim.x/2);
 					break;
 			};
-			switch(options.edge.y) {
+			switch(options.edge.y){
 				case 'top':
 					edgeOffset.y = 0;
 					break;
@@ -606,12 +606,12 @@ Element.implement({
 			left: ((pos.x >= 0 || parentPositioned)?pos.x:0).toInt(),
 			top: ((pos.y >= 0 || parentPositioned)?pos.y:0).toInt()
 		};
-		if(rel.getStyle('position') == "fixed"||options.relFixedPosition) {
+		if (rel.getStyle('position') == "fixed"||options.relFixedPosition){
 			pos.top = pos.top.toInt() + window.getScroll().y;
 			pos.left = pos.left.toInt() + window.getScroll().x;
 		}
 
-		if(options.returnPos) return pos;
+		if (options.returnPos) return pos;
 		else this.setStyles(pos);
 		return this;
 	}
@@ -627,13 +627,13 @@ License:
 */
 
 Element.implement({
-	isVisible: function() {
+	isVisible: function(){
 		return this.getStyle('display') != 'none';
 	},
-	toggle: function() {
+	toggle: function(){
 		return this[this.isVisible() ? 'hide' : 'show']();
 	},
-	hide: function() {
+	hide: function(){
 		var d;
 		try {
 			//IE fails here if the element is not in the dom
@@ -643,12 +643,12 @@ Element.implement({
 		this.setStyle('display','none');
 		return this;
 	},
-	show: function(display) {
+	show: function(display){
 		original = this.retrieve('originalDisplay')?this.retrieve('originalDisplay'):this.get('originalDisplay');
 		this.setStyle('display',(display || original || 'block'));
 		return this;
 	},
-	swapClass: function(remove, add) {
+	swapClass: function(remove, add){
 		return this.removeClass(remove).addClass(add);
 	},
 	//TODO
@@ -679,8 +679,8 @@ Fx.Reveal = new Class({
 	},
 	dissolve: function(){
 		try {
-			if(!this.hiding && !this.showing) {
-				if(this.element.getStyle('display') != 'none'){
+			if (!this.hiding && !this.showing){
+				if (this.element.getStyle('display') != 'none'){
 					this.hiding = true;
 					this.showing = false;
 					this.hidden = true;
@@ -700,9 +700,9 @@ Fx.Reveal = new Class({
 					//put the final fx method at the front of the chain
 					if (!this.$chain) this.$chain = [];
 					this.$chain.unshift(function(){
-						if(this.hidden) {
+						if (this.hidden){
 							this.hiding = false;
-							$each(startStyles, function(style, name) {
+							$each(startStyles, function(style, name){
 								startStyles[name] = style;
 							}, this);
 							this.element.setStyles($merge({display: 'none', overflow: overflowBefore}, startStyles));
@@ -718,7 +718,7 @@ Fx.Reveal = new Class({
 					this.fireEvent('onHide', this.element);
 				}
 			}
-		} catch(e) {
+		} catch(e){
 			this.hiding = false;
 			this.element.hide();
 			this.callChain.delay(10, this);
@@ -729,8 +729,8 @@ Fx.Reveal = new Class({
 	},
 	reveal: function(){
 		try {
-			if(!this.showing && !this.hiding) {
-				if(this.element.getStyle('display') == "none" || 
+			if (!this.showing && !this.hiding){
+				if (this.element.getStyle('display') == "none" || 
 					 this.element.getStyle('visiblity') == "hidden" || 
 					 this.element.getStyle('opacity')==0){
 					this.showing = true;
@@ -745,7 +745,7 @@ Fx.Reveal = new Class({
 					});
 					var setToAuto = this.element.style.height === ""||this.element.style.height=="auto";
 					//enable opacity effects
-					if(this.element.fxOpacityOk() && this.options.transitionOpacity) this.element.setStyle('opacity',0);
+					if (this.element.fxOpacityOk() && this.options.transitionOpacity) this.element.setStyle('opacity',0);
 					//create the styles for the opened/visible state
 					var startStyles = this.element.getComputedSize({
 						styles: this.options.styles,
@@ -753,13 +753,13 @@ Fx.Reveal = new Class({
 					});
 					//reset the styles back to hidden now
 					this.element.setStyles(before);
-					$each(startStyles, function(style, name) {
+					$each(startStyles, function(style, name){
 						startStyles[name] = style;
 					}, this);
 					//if we're overridding height/width
-					if($chk(this.options.heightOverride)) startStyles['height'] = this.options.heightOverride.toInt();
-					if($chk(this.options.widthOverride)) startStyles['width'] = this.options.widthOverride.toInt();
-					if(this.element.fxOpacityOk() && this.options.transitionOpacity) startStyles.opacity = 1;
+					if ($chk(this.options.heightOverride)) startStyles['height'] = this.options.heightOverride.toInt();
+					if ($chk(this.options.widthOverride)) startStyles['width'] = this.options.widthOverride.toInt();
+					if (this.element.fxOpacityOk() && this.options.transitionOpacity) startStyles.opacity = 1;
 					//create the zero state for the beginning of the transition
 					var zero = { 
 						height: 0,
@@ -773,11 +773,11 @@ Fx.Reveal = new Class({
 					this.start(startStyles);
 					if (!this.$chain) this.$chain = [];
 					this.$chain.unshift(function(){
-						if (!this.options.heightOverride && setToAuto) {
+						if (!this.options.heightOverride && setToAuto){
 							if (["vertical", "both"].contains(this.options.mode)) this.element.setStyle('height', 'auto');
 							if (["width", "both"].contains(this.options.mode)) this.element.setStyle('width', 'auto');
 						}
-						if(!this.hidden) this.showing = false;
+						if (!this.hidden) this.showing = false;
 						this.element.setStyle('overflow', overflowBefore);
 						this.callChain();
 						this.fireEvent('onShow', this.element);
@@ -788,7 +788,7 @@ Fx.Reveal = new Class({
 					this.fireEvent('onShow', this.element);
 				}
 			}
-		} catch(e) {
+		} catch(e){
 			this.element.setStyles({
 				display: 'block',
 				visiblity: 'visible',
@@ -803,14 +803,14 @@ Fx.Reveal = new Class({
 	},
 	toggle: function(){
 		try {
-			if(this.element.getStyle('display') == "none" || 
+			if (this.element.getStyle('display') == "none" || 
 				 this.element.getStyle('visiblity') == "hidden" || 
 				 this.element.getStyle('opacity')==0){
 				this.reveal();
 		 	} else {
 				this.dissolve();
 			}
-		} catch(e) { this.show(); }
+		} catch(e){ this.show(); }
 	 return this;
 	}
 });
@@ -850,7 +850,7 @@ Element.implement({
 });
 
 Element.implement({
-	nix: function() {
+	nix: function(){
 		var  params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
 		this.get('reveal', params.options).dissolve().chain(function(){
 			this[params.destroy?'destroy':'erase']();
@@ -870,10 +870,10 @@ License:
 */
 
 var StyleWriter = new Class({
-	createStyle: function(css, id) {
+	createStyle: function(css, id){
 		window.addEvent('domready', function(){
 			try {
-				if($(id) && id) return;
+				if ($(id) && id) return;
 				var style = new Element('style', {id: id||''}).inject($$('head')[0]);
 				if (Browser.Engine.trident) style.styleSheet.cssText = css;
 				else style.set('text', css);
@@ -930,22 +930,22 @@ var StickyWin = new Class({
 		
 		this.id = this.options.id || 'StickyWin_'+new Date().getTime();
 		this.makeWindow();
-		if(this.options.content) this.setContent(this.options.content);
-		if(this.options.timeout > 0) {
+		if (this.options.content) this.setContent(this.options.content);
+		if (this.options.timeout > 0){
 			this.addEvent('onDisplay', function(){
 				this.hide.delay(this.options.timeout, this)
 			}.bind(this));
 		}
-		if(this.options.showNow) this.show();
+		if (this.options.showNow) this.show();
 		//add css for clearfix
 		this.createStyle(this.css, 'StickyWinClearFix');
 	},
-	toElement: function() {
+	toElement: function(){
 		return this.win;
 	},
 	makeWindow: function(){
 		this.destroyOthers();
-		if(!$(this.id)) {
+		if (!$(this.id)){
 			this.win = new Element('div', {
 				id:		this.id
 			}).addClass(this.options.className).addClass('StickyWinInstance').addClass('SWclearfix').setStyles({
@@ -954,42 +954,42 @@ var StickyWin = new Class({
 				zIndex:this.options.zIndex
 			}).inject(this.options.inject.target, this.options.inject.where).store('StickyWin', this);			
 		} else this.win = $(this.id);
-		if(this.options.width && $type(this.options.width.toInt())=="number") this.win.setStyle('width', this.options.width.toInt());
-		if(this.options.height && $type(this.options.height.toInt())=="number") this.win.setStyle('height', this.options.height.toInt());
+		if (this.options.width && $type(this.options.width.toInt())=="number") this.win.setStyle('width', this.options.width.toInt());
+		if (this.options.height && $type(this.options.height.toInt())=="number") this.win.setStyle('height', this.options.height.toInt());
 		return this;
 	},
 	show: function(){
 		this.fireEvent('onDisplay');
 		this.showWin();
-		if(this.options.useIframeShim) this.showIframeShim();
+		if (this.options.useIframeShim) this.showIframeShim();
 		this.visible = true;
 		return this;
 	},
 	showWin: function(){
 		this.win.setStyle('display','block');
-		if(!this.positioned) this.position();
+		if (!this.positioned) this.position();
 	},
 	hide: function(suppressEvent){
-		if(!suppressEvent) this.fireEvent('onClose');
+		if (!suppressEvent) this.fireEvent('onClose');
 		this.hideWin();
-		if(this.options.useIframeShim) this.hideIframeShim();
+		if (this.options.useIframeShim) this.hideIframeShim();
 		this.visible = false;
 		return this;
 	},
 	hideWin: function(){
 		this.win.setStyle('display','none');
 	},
-	destroyOthers: function() {
-		if(!this.options.allowMultipleByClass || !this.options.allowMultiple) {
-			$$('div.StickyWinInstance').each(function(sw) {
-				if(!this.options.allowMultiple || (!this.options.allowMultipleByClass && sw.hasClass(this.options.className))) 
+	destroyOthers: function(){
+		if (!this.options.allowMultipleByClass || !this.options.allowMultiple){
+			$$('div.StickyWinInstance').each(function(sw){
+				if (!this.options.allowMultiple || (!this.options.allowMultipleByClass && sw.hasClass(this.options.className))) 
 					sw.dispose();
 			}, this);
 		}
 	},
-	setContent: function(html) {
-		if(this.win.getChildren().length>0) this.win.empty();
-		if($type(html) == "string") this.win.set('html', html);
+	setContent: function(html){
+		if (this.win.getChildren().length>0) this.win.empty();
+		if ($type(html) == "string") this.win.set('html', html);
 		else if ($(html)) this.win.adopt(html);
 		this.win.getElements('.'+this.options.closeClassName).each(function(el){
 			el.addEvent('click', this.hide.bind(this));
@@ -1007,11 +1007,11 @@ var StickyWin = new Class({
 			offset: this.options.offset,
 			edge: this.options.edge
 		});
-		if(this.shim) this.shim.position();
+		if (this.shim) this.shim.position();
 		return this;
 	},
-	pin: function(pin) {
-		if(!this.win.pin) {
+	pin: function(pin){
+		if (!this.win.pin){
 			dbug.log('you must include element.pin.js!');
 			return this;
 		}
@@ -1026,7 +1026,7 @@ var StickyWin = new Class({
 		return this.pin(!this.pinned);
 	},
 	makeIframeShim: function(){
-		if(!this.shim){
+		if (!this.shim){
 			var el = (this.options.iframeShimSelector)?this.win.getElement(this.options.iframeShimSelector):this.win;
 			this.shim = new IframeShim(el, {
 				display: false,
@@ -1035,18 +1035,18 @@ var StickyWin = new Class({
 		}
 	},
 	showIframeShim: function(){
-		if(this.options.useIframeShim) {
+		if (this.options.useIframeShim){
 			this.makeIframeShim();
 			this.shim.show();
 		}
 	},
 	hideIframeShim: function(){
-		if(this.shim) this.shim.hide();
+		if (this.shim) this.shim.hide();
 	},
 	destroy: function(){
 		if (this.win) this.win.dispose();
-		if(this.options.useIframeShim) this.shim.dispose();
-		if($('modalOverlay'))$('modalOverlay').dispose();
+		if (this.options.useIframeShim) this.shim.dispose();
+		if ($('modalOverlay'))$('modalOverlay').dispose();
 	}
 });
 
@@ -1088,28 +1088,28 @@ StickyWin.ui = function(caption, body, options){
 		onConfirm: $empty	*/
 	}, options);
 	//legacy support
-	if(options.confirmTxt) options.buttons.push({text: options.confirmTxt, onClick: options.onConfirm || $empty});
-	if(options.closeTxt) options.buttons.push({text: options.closeTxt, onClick: options.onClose || $empty});
+	if (options.confirmTxt) options.buttons.push({text: options.confirmTxt, onClick: options.onConfirm || $empty});
+	if (options.closeTxt) options.buttons.push({text: options.closeTxt, onClick: options.onClose || $empty});
 
 	new StyleWriter().createStyle(options.css.substitute({baseHref: options.baseHref}, /\\?\{%([^}]+)%\}/g), 'defaultStickyWinStyle');
 	caption = $pick(caption, '%caption%');
 	body = $pick(body, '%body%');
 	var container = new Element('div').setStyle('width', options.width).addClass('DefaultStickyWin');
-	if(options.cssClass) container.addClass(options.cssClass);
+	if (options.cssClass) container.addClass(options.cssClass);
 	//header
 	var h1Caption = new Element('h1').addClass('caption').setStyle('width', (options.width.toInt()-(options.cornerHandle?70:60)));
 
-	if($(caption)) h1Caption.adopt(caption);
+	if ($(caption)) h1Caption.adopt(caption);
 	else h1Caption.set('html', caption);
 	
 	var bodyDiv = new Element('div').addClass('body');
-	if($(body)) bodyDiv.adopt(body);
+	if ($(body)) bodyDiv.adopt(body);
 	else bodyDiv.set('html', body);
 	
 	var top_ur = new Element('div').addClass('top_ur').adopt(
 			new Element('div').addClass('closeButton').addClass('closeSticky')
 		).adopt(h1Caption);
-	if(options.cornerHandle) new Element('div').addClass('dragHandle').inject(top_ur, 'top');
+	if (options.cornerHandle) new Element('div').addClass('dragHandle').inject(top_ur, 'top');
 	else h1Caption.addClass('dragHandle');
 	container.adopt(
 		new Element('div').addClass('top').adopt(
@@ -1119,10 +1119,10 @@ StickyWin.ui = function(caption, body, options){
 	//body
 	container.adopt(new Element('div').addClass('middle').adopt(bodyDiv));
 	//close buttons
-	if(options.buttons.length > 0){
+	if (options.buttons.length > 0){
 		var closeButtons = new Element('div').addClass('closeButtons');
 		options.buttons.each(function(button){
-			if(button.properties && button.properties.className){
+			if (button.properties && button.properties.className){
 				button.properties['class'] = button.properties.className;
 				delete button.properties.className;
 			}
@@ -1203,7 +1203,7 @@ var Waiter = new Class({
 		this.target = $(target)||$(document.body);
 		this.setOptions(options);
 		this.waiterContainer = new Element('div', this.options.containerProps).inject(document.body);
-		if (this.options.msg) {
+		if (this.options.msg){
 			this.msgContainer = new Element('div', this.options.msgProps);
 			this.waiterContainer.adopt(this.msgContainer);
 			if (!$(this.options.msg)) this.msg = new Element('p').appendText(this.options.msg);
@@ -1215,13 +1215,13 @@ var Waiter = new Class({
 		this.waiterOverlay.set(this.options.layer);
 		try {
 			if (this.options.useIframeShim) this.shim = new IframeShim(this.waiterOverlay, this.options.iframeShimOptions);
-		} catch(e) {
+		} catch(e){
 			dbug.log("Waiter attempting to use IframeShim but failed; did you include IframeShim? Error: ", e);
 			this.options.useIframeShim = false;
 		}
 		this.waiterFx = this.waiterFx || new Fx.Elements($$(this.waiterContainer, this.waiterOverlay), this.options.fxOptions);
 	},
-	toggle: function(element, show) {
+	toggle: function(element, show){
 		//the element or the default
 		element = $(element) || $(this.active) || $(this.target);
 		if (!$(element)) return this;
@@ -1229,10 +1229,10 @@ var Waiter = new Class({
 		//if it's not active or show is explicit
 		//or show is not explicitly set to false
 		//start the effect
-		if((!this.active || show) && show !== false) this.start(element);
+		if ((!this.active || show) && show !== false) this.start(element);
 		//else if it's active and show isn't explicitly set to true
 		//stop the effect
-		else if(this.active && !show) this.stop();
+		else if (this.active && !show) this.stop();
 		return this;
 	},
 	reset: function(){
@@ -1244,13 +1244,13 @@ var Waiter = new Class({
 	start: function(element){
 		this.reset();
 		element = $(element) || $(this.target);
-		if (this.options.img) {
+		if (this.options.img){
 			this.waiterImg.set($merge(this.options.img, {
 				src: this.options.baseHref + this.options.img.src
 			}));
 		}
 		
-		var start = function() {
+		var start = function(){
 			var dim = element.getComputedSize();
 			this.active = element;
 			this.waiterOverlay.setStyles({
@@ -1280,7 +1280,7 @@ var Waiter = new Class({
 		return this;
 	},
 	stop: function(callback){
-		if (!this.active) {
+		if (!this.active){
 			if ($type(callback) == "function") callback.attempt();
 			return this;
 		}
@@ -1303,7 +1303,7 @@ var Waiter = new Class({
 	}
 });
 
-if (typeof Request != "undefined" && Request.HTML) {
+if (typeof Request != "undefined" && Request.HTML){
 	Request.HTML = new Class({
 		Extends: Request.HTML,
 		options: {
@@ -1314,12 +1314,12 @@ if (typeof Request != "undefined" && Request.HTML) {
 		initialize: function(options){
 			this._send = this.send;
 			this.send = function(options){
-				if(this.waiter) this.waiter.start().chain(this._send.bind(this, options));
+				if (this.waiter) this.waiter.start().chain(this._send.bind(this, options));
 				else this._send(options);
 				return this;
 			};
 			this.parent(options);
-			if (this.options.useWaiter && ($(this.options.update) || $(this.options.waiterTarget))) {
+			if (this.options.useWaiter && ($(this.options.update) || $(this.options.waiterTarget))){
 				this.waiter = new Waiter(this.options.waiterTarget || this.options.update, this.options.waiterOptions);
 				['onComplete', 'onException', 'onCancel'].each(function(event){
 					this.addEvent(event, this.waiter.stop.bind(this.waiter));
@@ -1329,22 +1329,22 @@ if (typeof Request != "undefined" && Request.HTML) {
 	});
 }
 
-function setCNETAssetBaseHref(baseHref) {
-	if (window.StickyWin && StickyWin.ui) {
+function setCNETAssetBaseHref(baseHref){
+	if (window.StickyWin && StickyWin.ui){
 		var CGFstickyWinHTML = StickyWin.ui.bind(window);
 		StickyWin.ui = function(caption, body, options){
 		    return CGFstickyWinHTML(caption, body, $merge({
 		        baseHref: baseHref + '/stickyWinHTML/'
 		    }, options));
 		};
-		if (StickyWin.alert) {
+		if (StickyWin.alert){
 			var CGFsimpleErrorPopup = StickyWin.alert.bind(window);
-			StickyWin.alert = function(msghdr, msg, base) {
+			StickyWin.alert = function(msghdr, msg, base){
 			    return CGFsimpleErrorPopup(msghdr, msg, base||baseHref + "/simple.error.popup");
 			};
 		}
 	}
-	if (window.TagMaker) {
+	if (window.TagMaker){
 		var store = {};
 		var props = ['image', 'anchor', 'cnetVideo'];
 		props.each(function(prop){
@@ -1359,7 +1359,7 @@ function setCNETAssetBaseHref(baseHref) {
 		$extend(TagMaker, store);
 	}
 	
-	if (window.ProductPicker) {
+	if (window.ProductPicker){
 		var store = {};
 		var props = ['picklets', 'add', 'addAllThese', 'getPicklet'];
 		props.each(function(prop){
@@ -1374,8 +1374,8 @@ function setCNETAssetBaseHref(baseHref) {
 		$extend(ProductPicker, store);
 	}
 	
-	if (window.Autocompleter) {
-		var AcCNET = function(orgClass) {
+	if (window.Autocompleter){
+		var AcCNET = function(orgClass){
 			return {
 				Extends: orgClass,
 				options: {
@@ -1384,16 +1384,16 @@ function setCNETAssetBaseHref(baseHref) {
 			};
 		};
 		Autocompleter.Base = new Class(AcCNET(Autocompleter.Base));
-		if (Autocompleter.Ajax) {
+		if (Autocompleter.Ajax){
 			["Base", "Xhtml", "Json"].each(function(c){
-				if(Autocompleter.Ajax[c]) Autocompleter.Ajax[c] = new Class(AcCNET(Autocompleter.Ajax[c]));
+				if (Autocompleter.Ajax[c]) Autocompleter.Ajax[c] = new Class(AcCNET(Autocompleter.Ajax[c]));
 			});
 		}
 		if (Autocompleter.Local) Autocompleter.Local = new Class(AcCNET(Autocompleter.Local));
 		if (Autocompleter.JsonP) Autocompleter.JsonP = new Class(AcCNET(Autocompleter.JsonP));
 	}
 	
-	if (window.Lightbox) {
+	if (window.Lightbox){
 		Lightbox = new Class({
 				Extends: Lightbox,
 		    options: {
@@ -1402,7 +1402,7 @@ function setCNETAssetBaseHref(baseHref) {
 		});
 	}
 	
-	if (window.Waiter) {
+	if (window.Waiter){
 		Waiter = new Class({
 			Extends: Waiter,
 			options: {

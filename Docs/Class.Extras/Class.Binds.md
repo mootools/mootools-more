@@ -14,7 +14,7 @@ See: [http://blog.kassens.net/binds-class-mutator][]
 
 	var MyClass = new Class({
 		Binds: ['say'],
-		initialize: function(element, message) {
+		initialize: function(element, message){
 			this.el = $(element);
 			this.message = message;
 		},

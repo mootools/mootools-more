@@ -2,15 +2,18 @@
 Script: Hash.Extras.js
 	Extends the Hash native object to include getFromPath which allows a path notation to child elements.
 
-License:
-	MIT-style license
+	License:
+		MIT-style license.
+
+	Authors:
+		Aaron Newton
 */
 
 Hash.implement({
 
-	getFromPath: function(notation) {
+	getFromPath: function(notation){
 		var source = this.getClean();
-		notation.replace(/\[([^\]]+)\]|\.([^.[]+)|[^[.]+/g, function(match) {
+		notation.replace(/\[([^\]]+)\]|\.([^.[]+)|[^[.]+/g, function(match){
 			if (!source) return;
 			var prop = arguments[2] || arguments[1] || arguments[0];
 			source = (prop in source) ? source[prop] : null;

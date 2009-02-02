@@ -2,8 +2,11 @@
 Script: Assets.js
 	Provides methods to dynamically load JavaScript, CSS, and Image files into the document.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Asset = new Hash({

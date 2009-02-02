@@ -5,6 +5,9 @@ Script: Fx.Sort.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 Fx.Sort = new Class({
 
@@ -39,7 +42,7 @@ Fx.Sort = new Class({
 		var current = this.elements.map(function(el, index){
 			var size = el.getComputedSize({styles:['border','padding','margin']});
 			var val;
-			if (vert) {
+			if (vert){
 				val =	{
 					top: top,
 					margin: size['margin-top'],
@@ -66,10 +69,10 @@ Fx.Sort = new Class({
 		//or cut it short
 		newOrder = newOrder.map(function(i){ return i.toInt() });
 		if (newOrder.length != this.elements.length){
-			this.currentOrder.each(function(index) {
+			this.currentOrder.each(function(index){
 				if (!newOrder.contains(index)) newOrder.push(index);
 			});
-			if (newOrder.length > this.elements.length) {
+			if (newOrder.length > this.elements.length){
 				newOrder.splice(this.elements.length-1, newOrder.length-this.elements.length);
 			}
 		}
@@ -80,7 +83,7 @@ Fx.Sort = new Class({
 		//calculate the new location of each item
 		newOrder.each(function(item, index){
 			var newPos = {};
-			if (vert) {
+			if (vert){
 					newPos.top = top - current[item].top - margin;
 					top += current[item].height;
 			} else {
@@ -107,7 +110,7 @@ Fx.Sort = new Class({
 		var rearranged = [];
 		this.elements.setStyle('opacity', 0);
 		//move each element and store the new default order
-		newOrder.each(function(index) {
+		newOrder.each(function(index){
 			rearranged.push(this.elements[index].inject(parent).setStyles({
 				top: 0,
 				left: 0
@@ -120,7 +123,7 @@ Fx.Sort = new Class({
 	},
 
 	getDefaultOrder: function(){
-		return this.elements.map(function(el, index) {
+		return this.elements.map(function(el, index){
 			return index;
 		})
 	},
@@ -143,8 +146,8 @@ Fx.Sort = new Class({
 		}));
 	},
 
-	swap: function(one, two) {
-		if ($type(one) == 'element') {
+	swap: function(one, two){
+		if ($type(one) == 'element'){
 			one = this.elements.indexOf(one);
 			two = this.elements.indexOf(two);
 		}

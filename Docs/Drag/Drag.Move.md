@@ -87,7 +87,7 @@ Fires the 'drop' event and calls the Drag Class stop method.
 		onSnap: function(){ // due to MooTool's inheritance, all [Drag][]'s Events are also available.
 			this.moved = this.moved || 0;
 			this.moved++;
-			if(this.moved > 1000){
+			if (this.moved > 1000){
 				alert("You've gone far enough.");
 				this.stop();
 			}

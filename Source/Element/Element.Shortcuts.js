@@ -5,19 +5,22 @@ Script: Element.Shortcuts.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 
 Element.implement({
 
-	isVisible: function() {
+	isVisible: function(){
 		return this.getStyle('display') != 'none';
 	},
 
-	toggle: function() {
+	toggle: function(){
 		return this[this.isVisible() ? 'hide' : 'show']();
 	},
 
-	hide: function() {
+	hide: function(){
 		var d;
 		try {
 			//IE fails here if the element is not in the dom
@@ -28,13 +31,13 @@ Element.implement({
 		return this;
 	},
 
-	show: function(display) {
+	show: function(display){
 		original = this.retrieve('originalDisplay')?this.retrieve('originalDisplay'):this.get('originalDisplay');
 		this.setStyle('display',(display || original || 'block'));
 		return this;
 	},
 
-	swapClass: function(remove, add) {
+	swapClass: function(remove, add){
 		return this.removeClass(remove).addClass(add);
 	},
 

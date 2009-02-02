@@ -33,7 +33,7 @@ IE has a bad habit of caching ajax request values. Including this script and set
 Want to have all your Requests default to this behavior? No problem:
 
 	(function(){ //don't polute the global namespace
-		var ref = function(cls) {
+		var ref = function(cls){
 		    return Class.refactor(cls, options: {
 		        noCache: true
 		    });

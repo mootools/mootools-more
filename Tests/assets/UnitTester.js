@@ -65,15 +65,15 @@ var UnitTester = new Class({
 			msg: 'Loading dependencies'
 		});
 		//when sources are loaded, inject the tree of tests into the nav
-		this.addEvent('onReady', function(target, sources) {
+		this.addEvent('onReady', function(target, sources){
 			if (sources == this.sources) this.mapTree()
 			else this.setupLoaderSelection();
 		}.bind(this));
 		//load each test and source
-		$each(this.sources, function(v, k) {
+		$each(this.sources, function(v, k){
 			this.loadSource(k, '/Source/scripts.json', this.data, this.sources);
 		}, this);
-		$each(this.testScripts, function(v, k) {
+		$each(this.testScripts, function(v, k){
 			this.loadSource(k, '/tests.json', this.tests, this.testScripts);
 		}, this);
 		//set up the textarea that lets you run your own code
@@ -92,7 +92,7 @@ var UnitTester = new Class({
 	},
 	//handle scripts.json decoding
 	loadJson: function(source, result, target, sources){
-		if (result) {
+		if (result){
 			target[source] = JSON.decode(result);
 			this.dataLoaded(target, sources);
 		}
@@ -100,7 +100,7 @@ var UnitTester = new Class({
 	//manage loaded data; fire onReady when all sources are loaded
 	dataLoaded: function(target, sources){
 		var loaded = true;
-		$each(sources, function(v, k) {
+		$each(sources, function(v, k){
 			if (!target[k]) loaded = false;
 		}, this);
 		if (loaded) this.fireEvent('onReady', [target, sources]);
@@ -128,7 +128,7 @@ var UnitTester = new Class({
 		var reqs = [];
 		if (script == "None") return reqs;
 		var deps = this.getDepsForScript(script);
-		if (!deps) {
+		if (!deps){
 			dbug.log('dependencies not mapped: script: %o, map: %o, :deps: %o', script, this.pathMap, this.deps);
 		} else {
 			deps.each(function(scr){
@@ -157,7 +157,7 @@ var UnitTester = new Class({
 		var scripts = this.calculateDependencies(script).include(script);
 		scripts = scripts.filter(function(s){return !this.loadedScripts.contains(s)}, this);
 		this.loadedScripts.combine(scripts);
-		if (scripts.length) {
+		if (scripts.length){
 			scripts.filter(function(scr){
 				return scr != "None"
 			}).each(function(scr){
@@ -181,20 +181,20 @@ var UnitTester = new Class({
 		this.waiter.start();
 		win = win||this.getFrame();
 		target = target||win.document.getElementsByTagName('head')[0];
-		var finish = function() {
-			if (this.loaders[0]) {
+		var finish = function(){
+			if (this.loaders[0]){
 				try {
 					this.loaders[0].apply(this);
-				} catch(e) {}
+				} catch(e){}
 			}	else {
 				this.waiter.stop();
 				this.fireEvent('scriptsLoaded');
 			}
 		};
 		this.loaders.push(function(){
-			if (scr.contains('dbug.js')) {
+			if (scr.contains('dbug.js')){
 				finish.delay(100, this);
-			} else	if (Browser.Engine.trident) {
+			} else	if (Browser.Engine.trident){
 				win.$LoadScript(this.getPath(scr));
 				finish.delay(100, this);
 			} else {
@@ -221,14 +221,14 @@ var UnitTester = new Class({
 		var dds = [];
 		$each(this.tests, function(tests, section){
 			new Element('h3', {html: section}).inject(sel);
-			$each(tests, function(dir, dirName) {
+			$each(tests, function(dir, dirName){
 				new Element('h4', {html: dirName}).inject(sel);
 				$each(dir, function(tests, script){
 					var dt = new Element('dt', {html: script}).inject(sel);
 					dts.push(dt);
 					var container = new Element('div', {'class':'testList'}).inject(dt, 'after');
 					dds.push(container);
-					if (tests.length == 1) {
+					if (tests.length == 1){
 						var dd = new Element('dd').inject(container).hide();
 						dd.store('testindex', 0);
 						dd.store('testPath', section+'/'+dirName+'/'+script+'/'+tests[0]);
@@ -238,7 +238,7 @@ var UnitTester = new Class({
 						}.bind(this));
 						dt.store('testPath', section+'/'+dirName+'/'+script+'/'+tests[0]);
 					} else {
-						tests.each(function(test, i) {
+						tests.each(function(test, i){
 							var dd = new Element('dd', {
 								html: '&raquo; '+test
 							}).inject(container);
@@ -253,9 +253,9 @@ var UnitTester = new Class({
 				}, this);
 			}, this);
 		}, this);
-		var selectTest  = function(container) {
+		var selectTest  = function(container){
 			dds.each(function(div){
-				div.getElements('dd').each(function(dd) {
+				div.getElements('dd').each(function(dd){
 					if (container != dd) dd.removeClass('selected');
 					else dd.addClass('selected');
 				});
@@ -308,7 +308,7 @@ var UnitTester = new Class({
 					if (this.options.autoplay) this.runTest.delay(100, this, 0);
 				}.bind(this);
 				this.removeEvents('scriptsLoaded').addEvent('scriptsLoaded', dr);
-				if (this.testObjs.otherScripts) {
+				if (this.testObjs.otherScripts){
 					var head = this.getFrame().document.getElementsByTagName('head')[0];
 					this.testObjs.otherScripts.each(function(s){
 						this.loadDependencies(s, head, this.getFrame())
@@ -329,7 +329,7 @@ var UnitTester = new Class({
 	currentTest: {},
 	//load the html into the iframe
 	loadTestHtml: function(name, html, script){
-		if ($defined(name)) {
+		if ($defined(name)){
 			this.currentTest['name'] = name;
 			this.currentTest['html'] = html;
 		}
@@ -346,7 +346,7 @@ var UnitTester = new Class({
 			scripts += arguments[1] + '\n';
 			return '';
 		});
-		if (!Browser.Engine.trident) {
+		if (!Browser.Engine.trident){
 			text = this.currentTest['html'].replace(/<style[^>]*>([\s\S]*?)<\/style>/gi, function(){
 				styles += arguments[1] + '\n';
 				return '';
@@ -359,7 +359,7 @@ var UnitTester = new Class({
 		} else {
 			body.innerHTML += this.currentTest['html'];
 		}
-		if (styles) {
+		if (styles){
 				var style = new Element('style');
 				style.inject(head);
 				$(style).set('text', styles);
@@ -373,7 +373,7 @@ var UnitTester = new Class({
 			modifiers: {x: null}
 		});
 		code.addEvent('keydown', function(e){
-			if ((e.control||e.meta) && e.key == "enter") {
+			if ((e.control||e.meta) && e.key == "enter"){
 				e.stop();
 				this.exec(code.get('value'));
 			}
@@ -386,7 +386,7 @@ var UnitTester = new Class({
 	//js = the test.js contents
 	loadTestJs: function(js){
 		this.currentTest['js'] = js;
-		if (this.currentTest['js']) {
+		if (this.currentTest['js']){
 			$('tests').empty();
 			this.waiter.start();
 			this.testObjs = JSON.decode(this.currentTest['js']);
@@ -406,7 +406,7 @@ var UnitTester = new Class({
 					testEl.getElement('dd').get('reveal').toggle();
 				});
 				var interactive = code.get('value') != "";
-				if (!interactive) {
+				if (!interactive){
 					code.dispose();
 					handle.dispose();
 				} else {
@@ -415,7 +415,7 @@ var UnitTester = new Class({
 						modifiers: {x: null}
 					});
 				}
-				if (!test.verify) {
+				if (!test.verify){
 					ver.dispose();
 				} else {
 					ver.getElement('a.pass').addEvent('click', this.pass.bind(this, i))
@@ -432,7 +432,7 @@ var UnitTester = new Class({
 	exec: function(val, wrapFunc){
 		if (!val) return;
 		this.getFrame().dbug = dbug;
-		if (val) {
+		if (val){
 			if (wrapFunc) val = '('+val+')()';
 			return this.getFrame().$exec(val);
 		}
@@ -449,8 +449,8 @@ var UnitTester = new Class({
 		try {
 			if (test.before) this.exec(test.before.toString(), true);
 			if (code) this.exec(code.get('value'));
-			if (test.post) {
-				if (!this.exec(test.post.toString(), true)) {
+			if (test.post){
+				if (!this.exec(test.post.toString(), true)){
 					alert('The conditions for this test have failed.');
 					this.fail(testIndex);
 				}
@@ -461,7 +461,7 @@ var UnitTester = new Class({
 			return;
 		}
 		container.addClass('selected');
-		if (ver) {
+		if (ver){
 			ver.reveal();
 		} else {
 			this.pass(testIndex);
@@ -486,25 +486,25 @@ var UnitTester = new Class({
 	},
 	loadNextTest: function(current){
 		var div, dt;
-		if (this.testElements[current+1]) {
+		if (this.testElements[current+1]){
 			//load the next test in the currently loaded set
 			this.runTest(current+1);
 		} else {
 			
 			var dd = $E('dd.selected');
 			var next = dd.getNext('dd');
-			if (!next) {
+			if (!next){
 				dt = dd.getParent().getNext('dt');
-				if (dt && dt.retrieve('testPath')) {
+				if (dt && dt.retrieve('testPath')){
 					next = dt;
-				}	else if(dt) {
+				}	else if (dt){
 					div = dt.getNext();
-					if (div && div.get('tag') == 'div') {
+					if (div && div.get('tag') == 'div'){
 						next = div.getElement('dd');
 					}
 				}
 			}
-			if (next) {
+			if (next){
 				new StickyWin({
 					content: StickyWin.ui("Move to next test?", "Would you like to move to the next set of tests?", {
 						buttons: [
@@ -531,26 +531,26 @@ var UnitTester = new Class({
 			if (passed != null && $defined(this.testResults[i]) && !this.testResults[i]) passed = false;
 			else if (!$defined(this.testResults[i])) passed = null;
 		}, this);
-		if (passed === true) {
+		if (passed === true){
 			$E('dd.selected').addClass('success');
-		} else if (passed === false) {
+		} else if (passed === false){
 			$E('dd.selected').addClass('exception');
-		} else if (passed === null) {
+		} else if (passed === null){
 			$E('dd.selected').removeClass('exception').removeClass('success');
 		}
-		if (passed === true) {
+		if (passed === true){
 			var dt = $E('dd.selected').getParent().getPrevious();
 			if (dt.get('tag') != 'dt') return;
 			$E('dd.selected').getParent().getElements('dd').each(function(dd){
 				if (!dd.hasClass('success') && !dd.hasClass('exception')){
 					passed = null;
-				} else if (dd.hasClass('exception')) {
+				} else if (dd.hasClass('exception')){
 					passed = false;
 				}
 			});
 			if (passed === false){
 				dt.addClass('exception');
-			} else if (passed === true) {
+			} else if (passed === true){
 				dt.addClass('success');
 			}
 		}
@@ -560,17 +560,17 @@ var UnitTester = new Class({
 	//also tests for whether or not the page is served from a webserver
 	//url - the url to get
 	//callback - executed on success/complete, passed the reponse text
-	request: function(url, callback) {
+	request: function(url, callback){
 		url = url+(url.test(/\?/)?"&":"?")+"nocache="+new Date().getTime()
 		var req = new Request({
 			url: url,
 			onComplete: function(result){
-				if (result) {
+				if (result){
 					callback(result);
 				}
 			}.bind(this)
 		}).send();
-		if (!window.location.href.test('http')) {
+		if (!window.location.href.test('http')){
 			(function(){
 				callback(req.xhr.responseText);
 			}).delay(100);

@@ -2,6 +2,9 @@
 	"Core":{
 		"dbug":['all']
 	},
+	"Browser": {
+		"IframeShim":['all']
+	},
 	"Class.Extras": {
 		"Chain.Wait":['all']
 	},

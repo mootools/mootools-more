@@ -2,14 +2,22 @@
 Script: Element.Measure.js
 	Extends the Element native object to include methods useful in measuring dimensions.
 
+	Element.measure / .expose methods by Daniel Steigerwald
+	License: MIT-style license.
+	Copyright: Copyright (c) 2008 Daniel Steigerwald, daniel.steigerwald.cz
+
 	License:
 		MIT-style license.
+
+	Authors:
+		Aaron Newton
+		Daniel Steigerwald
 
 */
 
 Element.implement({
 
-	measure: function(fn) {
+	measure: function(fn){
 		var restore = this.expose();
 		var result = fn.apply(this);
 		restore();
@@ -26,7 +34,7 @@ Element.implement({
 		return (function(){ return this.set('style', cssText); }).bind(this);
 	},
 	
-	getDimensions: function(options) {
+	getDimensions: function(options){
 		options = $merge({computeSize: false},options);
 		var dim = {};
 		function getSize(el, options){
@@ -82,7 +90,7 @@ Element.implement({
 				size['computed'+edge.capitalize()] = 0;
 				getStyles.each(function(style,i){ //padding, border, etc.
 					//'padding-left'.test('left') size['totalWidth'] = size['width']+[padding-left]
-					if (style.test(edge)) {
+					if (style.test(edge)){
 						styles[style] = styles[style].toInt(); //styles['padding-left'] = 5;
 						if (isNaN(styles[style]))styles[style]=0;
 						size['total'+key.capitalize()] = size['total'+key.capitalize()]+styles[style];
@@ -90,19 +98,19 @@ Element.implement({
 					}
 					//if width != width (so, padding-left, for instance), then subtract that from the total
 					if (style.test(edge) && key!=style && 
-						(style.test('border') || style.test('padding')) && !subtracted.contains(style)) {
+						(style.test('border') || style.test('padding')) && !subtracted.contains(style)){
 						subtracted.push(style);
 						size['computed'+key.capitalize()] = size['computed'+key.capitalize()]-styles[style];
 					}
 				});
 			});
 		});
-		if ($chk(size.width)) {
+		if ($chk(size.width)){
 			size.width = size.width+this.offsetWidth+size.computedWidth;
 			size.totalWidth = size.width + size.totalWidth;
 			delete size.computedWidth;
 		}
-		if ($chk(size.height)) {
+		if ($chk(size.height)){
 			size.height = size.height+this.offsetHeight+size.computedHeight;
 			size.totalHeight = size.height + size.totalHeight;
 			delete size.computedHeight;

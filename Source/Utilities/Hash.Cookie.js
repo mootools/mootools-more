@@ -2,8 +2,12 @@
 Script: Hash.Cookie.js
 	Class for creating, reading, and deleting Cookies in JSON format.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
+		Aaron Newton
 */
 
 Hash.Cookie = new Class({

@@ -5,16 +5,19 @@ Script: Request.NoCache.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 (function(){
-	var rqst = function(cls) {
+	var rqst = function(cls){
 
 		return Class.refactor(cls, {
 /*		options: {
 				noCache: false
 			}, */
 			send: function(options){
-				if (this.options.noCache) {
+				if (this.options.noCache){
 					var type = $type(options);
 					if (type == 'string' || type == 'element') options = {data: options};
 
@@ -22,7 +25,7 @@ Script: Request.NoCache.js
 					options = $extend({data: old.data, url: old.url, method: old.method}, options);
 					var data = options.data, url = options.url, method = options.method;
 
-					if (options.url) {
+					if (options.url){
 						options.url += (options.url.contains("?")?"&":"?")+"noCache=" + new Date().getTime();
 					} else  {
 						switch ($type(data)){

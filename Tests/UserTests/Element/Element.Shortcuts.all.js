@@ -4,16 +4,16 @@
 			title: "Element.hide",
 			description: "Switches an element from display:block|inline|etc to display:none",
 			verify: "Did the element disappear?",
-			before: function() {$('foo').setStyle('display','block');},
-			post: function() {return $('foo').getStyle('display') == 'none'},
+			before: function(){$('foo').setStyle('display','block');},
+			post: function(){return $('foo').getStyle('display') == 'none'},
 			body: "$('foo').hide();"
 		},
 		{
 			title: "Element.show",
 			description: "Switches an element from display:none to display:block",
 			verify: "Did the element appear?",
-			before: function() {$('foo').setStyle('display','none');},
-			post: function() {return $('foo').getStyle('display') == 'block'},
+			before: function(){$('foo').setStyle('display','none');},
+			post: function(){return $('foo').getStyle('display') == 'block'},
 			body: "$('foo').show();"
 		},
 		{
@@ -40,7 +40,7 @@
 			before: function(){
 				$('foo').show();
 				$('foo').visTest = false;
-				if ($('foo').isVisible()) {
+				if ($('foo').isVisible()){
 					dbug.log('show successful; foo is visible');
 					$('foo').visTest = true;
 				}	else {
@@ -48,7 +48,7 @@
 					$('foo').visTest = false;
 				}
 				$('foo').hide();
-				if (!$('foo').isVisible()) {
+				if (!$('foo').isVisible()){
 					dbug.log('hide successful; foo is not visible');
 				} else {
 					dbug.log('either hide or isVisible failed');

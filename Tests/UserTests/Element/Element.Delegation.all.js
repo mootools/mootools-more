@@ -4,15 +4,15 @@
 			title: "Element.addEvent",
 			description: "Adds hover and click events to the list items",
 			verify: "Do the items change color when you mouseover/out? Does the text show when you click?",
-			before: function() {
+			before: function(){
 				$('someListing').removeEvents('mouseover(.item)').removeEvents('mousedown(.item)').removeEvents('mouseout(.item)');
-				var over = function() {
+				var over = function(){
 						this.morph({ backgroundColor: '#222' });
 			  };
-				var out = 	function() {
+				var out = 	function(){
 					this.morph({ backgroundColor: '#2D5E4C' });
 			  };
-				var down = function(e, el) { // el == this, that's important, event when child is clicked
+				var down = function(e, el){ // el == this, that's important, event when child is clicked
 				   var text = this.get('text') + 
 					   ' this.tagName: ' + this.tagName + 
 					   ' e.target.tagName: ' + e.target.tagName +
@@ -27,7 +27,7 @@
 			title: "Element.removeEvent",
 			description: "Removes the behavior added in the above test.",
 			verify: "Did the colors stop changing on mouseover/out? When you click does the text remain unchanged?",
-			before: function() {
+			before: function(){
 				var tests = $('someListing').retrieve('delegateTests');
 				$('someListing').removeEvent('mouseover', tests[0]);
 				$('someListing').removeEvent('mouseout', tests[1]);
@@ -38,15 +38,15 @@
 			title: "Element.AddEvents",
 			description: "Adds hover and click events to the list items",
 			verify: "Do the items change color when you mouseover/out? Does the text show when you click?",
-			before: function() {
+			before: function(){
 				$('someListing').removeEvents('mouseover(.item)').removeEvents('mousedown(.item)').removeEvents('mouseout(.item)');
-				var over = function() {
+				var over = function(){
 						this.morph({ backgroundColor: '#222' });
 			  };
-				var out = 	function() {
+				var out = 	function(){
 					this.morph({ backgroundColor: '#2D5E4C' });
 			  };
-				var down = function(e, el) { // el == this, that's important, event when child is clicked
+				var down = function(e, el){ // el == this, that's important, event when child is clicked
 				   var text = this.get('text') + 
 					   ' this.tagName: ' + this.tagName + 
 					   ' e.target.tagName: ' + e.target.tagName +
@@ -65,7 +65,7 @@
 			title: "Element.removeEvents",
 			description: "Removes the behavior added in the above test.",
 			verify: "Did the colors stop changing on mouseover/out? When you click does the text remain unchanged?",
-			before: function() {
+			before: function(){
 				var tests = $('someListing').retrieve('delegateTests');
 				$('someListing').removeEvents({
 					'mouseover(.item)': tests[0],

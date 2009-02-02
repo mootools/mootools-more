@@ -63,7 +63,7 @@ Date Method: timeDiffInWords {#Date:timeDiffInWords}
 
 This method is now an alias for the old *Date.timeAgoInWords*.
 
-Date Method: get('ordinal') {#Date:getOrdinal}
+Date Method: get('ordinal'){#Date:getOrdinal}
 ------------------------------------------
 
 ### Syntax
@@ -74,7 +74,7 @@ Date Method: get('ordinal') {#Date:getOrdinal}
 
 * (*string*) the ordinal for the day ('th', 'st', 'nd', etc).
 
-Date Method: get('dayofyear') {#Date:getDayOfYear}
+Date Method: get('dayofyear'){#Date:getDayOfYear}
 ----------------------------------------------
 
 ### Syntax
@@ -83,7 +83,7 @@ Date Method: get('dayofyear') {#Date:getDayOfYear}
 
 * (*integer*) the day of the year (i.e. for Dec. 10, you'll get 344 in a non-leap year).
 
-Date Method: get('lastdayofmonth') {#Date:getLastDayOfMonth}
+Date Method: get('lastdayofmonth'){#Date:getLastDayOfMonth}
 ---------------------------------------------------
 
 ### Syntax

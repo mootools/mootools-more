@@ -2,8 +2,11 @@
 Script: SmoothScroll.js
 	Class for creating a smooth scrolling effect to all internal links on the page.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var SmoothScroll = new Class({

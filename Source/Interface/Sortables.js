@@ -2,8 +2,11 @@
 Script: Sortables.js
 	Class for creating a drag and drop sorting interface for lists of items.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Tom Occhino
 */
 
 var Sortables = new Class({

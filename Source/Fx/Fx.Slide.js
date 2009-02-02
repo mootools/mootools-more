@@ -2,8 +2,11 @@
 Script: Fx.Slide.js
 	Effect to slide an element in and out of view.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 Fx.Slide = new Class({

@@ -5,6 +5,9 @@ Script: Request.Queue.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
  */
 Request.Queue = new Class({
 
@@ -49,7 +52,7 @@ Request.Queue = new Class({
 		return this;
 	},
 
-	getName: function(req) {
+	getName: function(req){
 		return this.requests.keyOf(req);
 	},
 
@@ -70,12 +73,12 @@ Request.Queue = new Class({
 		return this;
 	},
 
-	removeRequest: function(req) {
+	removeRequest: function(req){
 		var name = $type(req) == 'object' ? this.getName(req) : req;
 		if (!name && $type(name) != 'string') return false;
 		req = this.requests.get(name);
 		if (!req) return false;
-		['onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'].each(function(evt) {
+		['onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'].each(function(evt){
 			req.removeEvent(evt, this.reqBinders[name][evt]);
 		}, this);
 		req.send = req._groupSend;
@@ -85,7 +88,7 @@ Request.Queue = new Class({
 
 	getRunning: function(){
 		var running = [];
-		this.requests.each(function(req) {
+		this.requests.each(function(req){
 			if (req.running) running.include(req);
 		});
 		return running;
@@ -95,7 +98,7 @@ Request.Queue = new Class({
 		return !!this.getRunning().length 
 	},
 
-	send: function(name, options) {
+	send: function(name, options){
 		var q;
 		q = function(){
 			this.requests.get(name)._groupSend(options);
@@ -109,7 +112,7 @@ Request.Queue = new Class({
 
 	hasNext: function(name){
 		if (!name) return !!this.queue.length;
-		return !!this.queue.filter(function(q) { return q.name == name; }).length;
+		return !!this.queue.filter(function(q){ return q.name == name; }).length;
 	},
 
 	resume: function(){
@@ -119,13 +122,13 @@ Request.Queue = new Class({
 	},
 
 	runNext: function(name){
-		if (this.queue.length) {
-			if (!name) {
+		if (this.queue.length){
+			if (!name){
 				this.queue[0]();
 			} else {
 				var found;
 				this.queue.each(function(q){
-					if (!found && q.name == name) {
+					if (!found && q.name == name){
 						found = true;
 						q();
 					}
@@ -136,7 +139,7 @@ Request.Queue = new Class({
 	},
 
 	clear: function(name){
-		if (!name) {
+		if (!name){
 			this.queue.empty();
 		} else {
 			this.queue = this.queue.map(function(q){
@@ -146,7 +149,7 @@ Request.Queue = new Class({
 		}
 	},
 
-	cancel: function(name) {
+	cancel: function(name){
 		this.requests.get(name).cancel();
 		return this;
 	},

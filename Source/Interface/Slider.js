@@ -2,8 +2,11 @@
 Script: Slider.js
 	Class for creating horizontal and vertical slider controls.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Slider = new Class({
@@ -67,7 +70,7 @@ var Slider = new Class({
 				this.end();
 			}.bind(this)
 		});
-		if (this.options.snap) {
+		if (this.options.snap){
 			this.drag.options.grid = Math.ceil(this.stepWidth);
 			this.drag.options.limit[this.axis][1] = this.full;
 		}

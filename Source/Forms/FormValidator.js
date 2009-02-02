@@ -2,8 +2,11 @@
 Script: FormValidator.js
 	A css-class based form validation system.
 
-License:
-	MIT-style license
+	License:
+		MIT-style license.
+
+	Authors:
+		Aaron Newton
 */
 var InputValidator = new Class({
 
@@ -53,10 +56,10 @@ Element.Properties.validatorProps = {
 				return {}
 			}
 		} else {
-			var vals = this.get('class').split(' ').filter(function(cls) {
+			var vals = this.get('class').split(' ').filter(function(cls){
 				return cls.test(':');
 			});
-			if (!vals.length) {
+			if (!vals.length){
 				this.store('validatorProps', {});
 			} else {
 				props = {};
@@ -95,8 +98,8 @@ var FormValidator = new Class({
 		}
 //	onFormValidate: function(isValid, form, event){},
 //	onElementValidate: function(isValid, field, className, warn){},
-//	onElementPass: function(field) {},
-//	onElementFail: function(field, validatorsFailed) {}
+//	onElementPass: function(field){},
+//	onElementFail: function(field, validatorsFailed){}
 	},
 
 	initialize: function(form, options){
@@ -130,13 +133,13 @@ var FormValidator = new Class({
 		else this.reset();
 	},
 
-	reset: function() {
+	reset: function(){
 		this.getFields().each(this.resetField, this);
 		return this;
 	}, 
 
-	validate: function(event) {
-		var result = this.getFields().map(function(field) { 
+	validate: function(event){
+		var result = this.getFields().map(function(field){ 
 			return this.validateField(field, true);
 		}, this).every(function(v){ return v;});
 		this.fireEvent('onFormValidate', [result, $(this), event]);
@@ -149,7 +152,7 @@ var FormValidator = new Class({
 		field = $(field);
 		var passed = !field.hasClass('validation-failed');
 		var failed, warned;
-		if (this.options.serial && !force) {
+		if (this.options.serial && !force){
 			failed = $(this).getElement('.validation-failed');
 			warned = $(this).getElement('.warning');
 		}
@@ -163,7 +166,7 @@ var FormValidator = new Class({
 			}, this);
 			passed = validatorsFailed.length === 0;
 			if (validators && !field.hasClass('warnOnly')){
-				if (passed) {
+				if (passed){
 					field.addClass('validation-passed').removeClass('validation-failed');
 					this.fireEvent('onElementPass', field);
 				} else {
@@ -171,7 +174,7 @@ var FormValidator = new Class({
 					this.fireEvent('onElementFail', [field, validatorsFailed]);
 				}
 			}
-			if (!warned) {
+			if (!warned){
 				var warnings = field.className.split(" ").some(function(cn){
 					if (cn.test('^warn-') || field.hasClass('warnOnly')) 
 						return this.getValidator(cn.replace(/^warn-/,""));
@@ -200,19 +203,19 @@ var FormValidator = new Class({
 		return isValid;
 	},
 
-	isVisible : function(field) {
+	isVisible : function(field){
 		if (!this.options.ignoreHidden) return true;
-		while(field != document.body) {
+		while(field != document.body){
 			if ($(field).getStyle('display') == "none") return false;
 			field = field.getParent();
 		}
 		return true;
 	},
 
-	resetField: function(field) {
+	resetField: function(field){
 		field = $(field);
-		if (field) {
-			field.className.split(" ").each(function(className) {
+		if (field){
+			field.className.split(" ").each(function(className){
 				if (className.test('^warn-')) className = className.replace(/^warn-/,"");
 				field.removeClass('validation-failed');
 				field.removeClass('warning');
@@ -232,7 +235,7 @@ var FormValidator = new Class({
 		return this;
 	},
 
-	ignoreField: function(field, warn) {
+	ignoreField: function(field, warn){
 		field = $(field);
 		if (field){
 			FormValidator.enforceField(field);
@@ -242,7 +245,7 @@ var FormValidator = new Class({
 		return this;
 	},
 
-	enforceField: function(field) {
+	enforceField: function(field){
 		field = $(field);
 		if (field) field.removeClass('warnOnly').removeClass('ignoreValidation');
 		return this;
@@ -251,40 +254,41 @@ var FormValidator = new Class({
 });
 
 
-FormValidator.resources = {
+MooTools.lang.set('usENG', 'FormValidator', {
 
-	enUS: {
-		required:'This field is required.',
-		minLength:'Please enter at least {minLength} characters (you entered {length} characters).',
-		maxLength:'Please enter no more than {maxLength} characters (you entered {length} characters).',
-		integer:'Please enter an integer in this field. Numbers with decimals (e.g. 1.25) are not permitted.',
-		numeric:'Please enter only numeric values in this field (i.e. "1" or "1.1" or "-1" or "-1.1").',
-		digits:'Please use numbers and punctuation only in this field (for example, a phone number with dashes or dots is permitted).',
-		alpha:'Please use letters only (a-z) with in this field. No spaces or other characters are allowed.',
-		alphanum:'Please use only letters (a-z) or numbers (0-9) only in this field. No spaces or other characters are allowed.',
-		dateSuchAs:'Please enter a valid date such as {date}',
-		dateInFormatMDY:'Please enter a valid date such as MM/DD/YYYY (i.e. "12/31/1999")',
-		email:'Please enter a valid email address. For example "fred@domain.com".',
-		url:'Please enter a valid URL such as http://www.google.com.',
-		currencyDollar:'Please enter a valid $ amount. For example $100.00 .',
-		oneRequired:'Please enter something for at least one of these inputs.',
-		errorPrefix: 'Error: ',
-		warningPrefix: 'Warning: '
-	}
+	required:'This field is required.',
+	minLength:'Please enter at least {minLength} characters (you entered {length} characters).',
+	maxLength:'Please enter no more than {maxLength} characters (you entered {length} characters).',
+	integer:'Please enter an integer in this field. Numbers with decimals (e.g. 1.25) are not permitted.',
+	numeric:'Please enter only numeric values in this field (i.e. "1" or "1.1" or "-1" or "-1.1").',
+	digits:'Please use numbers and punctuation only in this field (for example, a phone number with dashes or dots is permitted).',
+	alpha:'Please use letters only (a-z) with in this field. No spaces or other characters are allowed.',
+	alphanum:'Please use only letters (a-z) or numbers (0-9) only in this field. No spaces or other characters are allowed.',
+	dateSuchAs:'Please enter a valid date such as {date}',
+	dateInFormatMDY:'Please enter a valid date such as MM/DD/YYYY (i.e. "12/31/1999")',
+	email:'Please enter a valid email address. For example "fred@domain.com".',
+	url:'Please enter a valid URL such as http://www.google.com.',
+	currencyDollar:'Please enter a valid $ amount. For example $100.00 .',
+	oneRequired:'Please enter something for at least one of these inputs.',
+	errorPrefix: 'Error: ',
+	warningPrefix: 'Warning: '
 
-};
+}).addEvent('onLangChange', function(){
 
-FormValidator.language = "enUS";
+	FormValidator.lang = MooTools.lang.get('FormValidator');
 
-FormValidator.getMsg = function(key, language){
-	return FormValidator.resources[language||FormValidator.language][key];
+});
+FormValidator.lang = MooTools.lang.get('FormValidator');
+
+FormValidator.getMsg = function(key){
+	return FormValidator.lang[key];
 };
 
 FormValidator.adders = {
 
 	validators:{},
 
-	add : function(className, options) {
+	add : function(className, options){
 		this.validators[className] = new InputValidator(className, options);
 		//if this is a class (this method is used by instances of FormValidator and the FormValidator namespace)
 		//extend these validators into it
@@ -296,8 +300,8 @@ FormValidator.adders = {
 		}
 	},
 
-	addAllThese : function(validators) {
-		$A(validators).each(function(validator) {
+	addAllThese : function(validators){
+		$A(validators).each(function(validator){
 			this.add(validator[0], validator[1]);
 		}, this);
 	},
@@ -315,7 +319,7 @@ FormValidator.implement(FormValidator.adders);
 FormValidator.add('IsEmpty', {
 
 	errorMsg: false,
-	test: function(element) { 
+	test: function(element){ 
 		if (element.type == "select-one"||element.type == "select")
 			return !(element.selectedIndex >= 0 && element.options[element.selectedIndex].value != "");
 		else
@@ -330,7 +334,7 @@ FormValidator.addAllThese([
 		errorMsg: function(){
 			return FormValidator.getMsg('required');
 		},
-		test: function(element) { 
+		test: function(element){ 
 			return !FormValidator.getValidator('IsEmpty').test(element); 
 		}
 	}],
@@ -341,7 +345,7 @@ FormValidator.addAllThese([
 				return FormValidator.getMsg('minLength').substitute({minLength:props.minLength,length:element.get('value').length });
 			else return '';
 		}, 
-		test: function(element, props) {
+		test: function(element, props){
 			if ($type(props.minLength)) return (element.get('value').length >= $pick(props.minLength, 0));
 			else return true;
 		}
@@ -354,7 +358,7 @@ FormValidator.addAllThese([
 				return FormValidator.getMsg('maxLength').substitute({maxLength:props.maxLength,length:element.get('value').length });
 			else return '';
 		}, 
-		test: function(element, props) {
+		test: function(element, props){
 			//if the value is <= than the maxLength value, element passes test
 			return (element.get('value').length <= $pick(props.maxLength, 10000));
 		}
@@ -362,14 +366,14 @@ FormValidator.addAllThese([
 
 	['validate-integer', {
 		errorMsg: FormValidator.getMsg.pass('integer'),
-		test: function(element) {
+		test: function(element){
 			return FormValidator.getValidator('IsEmpty').test(element) || /^-?[1-9]\d*$/.test(element.get('value'));
 		}
 	}],
 
 	['validate-numeric', {
 		errorMsg: FormValidator.getMsg.pass('numeric'), 
-		test: function(element) {
+		test: function(element){
 			return FormValidator.getValidator('IsEmpty').test(element) || 
 				/^-?(?:0$0(?=\d*\.)|[1-9]|0)\d*(\.\d+)?$/.test(element.get('value'));
 		}
@@ -377,37 +381,37 @@ FormValidator.addAllThese([
 
 	['validate-digits', {
 		errorMsg: FormValidator.getMsg.pass('digits'), 
-		test: function(element) {
+		test: function(element){
 			return FormValidator.getValidator('IsEmpty').test(element) || (/^[\d() .:\-\+#]+$/.test(element.get('value')));
 		}
 	}],
 
 	['validate-alpha', {
 		errorMsg: FormValidator.getMsg.pass('alpha'), 
-		test: function (element) {
+		test: function (element){
 			return FormValidator.getValidator('IsEmpty').test(element) ||  /^[a-zA-Z]+$/.test(element.get('value'))
 		}
 	}],
 
 	['validate-alphanum', {
 		errorMsg: FormValidator.getMsg.pass('alphanum'), 
-		test: function(element) {
+		test: function(element){
 			return FormValidator.getValidator('IsEmpty').test(element) || !/\W/.test(element.get('value'))
 		}
 	}],
 
 	['validate-date', {
-		errorMsg: function(element, props) {
-			if (Date.parse) {
+		errorMsg: function(element, props){
+			if (Date.parse){
 				var format = props.dateFormat || "%x";
 				return FormValidator.getMsg('dateSuchAs').substitute({date:new Date().format(format)});
 			} else {
 				return FormValidator.getMsg('dateInFormatMDY');
 			}
 		},
-		test: function(element, props) {
+		test: function(element, props){
 			if (FormValidator.getValidator('IsEmpty').test(element)) return true;
-			if (Date.parse) {
+			if (Date.parse){
 				var format = props.dateFormat || "%x";
 				var d = Date.parse(element.get('value'));
 				var formatted = d.format(format);
@@ -426,21 +430,21 @@ FormValidator.addAllThese([
 
 	['validate-email', {
 		errorMsg: FormValidator.getMsg.pass('email'), 
-		test: function (element) {
+		test: function (element){
 			return FormValidator.getValidator('IsEmpty').test(element) || /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(element.get('value'));
 		}
 	}],
 
 	['validate-url', {
 		errorMsg: FormValidator.getMsg.pass('url'), 
-		test: function (element) {
+		test: function (element){
 			return FormValidator.getValidator('IsEmpty').test(element) || /^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i.test(element.get('value'));
 		}
 	}],
 
 	['validate-currency-dollar', {
 		errorMsg: FormValidator.getMsg.pass('currencyDollar'), 
-		test: function(element) {
+		test: function(element){
 			// [$]1[##][,###]+[.##]
 			// [$]1###+[.##]
 			// [$]0.##
@@ -451,9 +455,9 @@ FormValidator.addAllThese([
 
 	['validate-one-required', {
 		errorMsg: FormValidator.getMsg.pass('oneRequired'), 
-		test: function (element) {
+		test: function (element){
 			var p = element.parentNode;
-			return p.getElements('input').some(function(el) {
+			return p.getElements('input').some(function(el){
 				if (['checkbox', 'radio'].contains(el.get('type'))) return el.get('checked');
 				return el.get('value');
 			});

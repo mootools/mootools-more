@@ -5,13 +5,15 @@ Script: Class.Binds.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
 (function(){
 
 	var binder = function(self, binds){
 		var oldInit = self.initialize;
-		self.initialize = function() {
-			Array.flatten(binds).each(function(binder) {
+		self.initialize = function(){
+			Array.flatten(binds).each(function(binder){
 				var original = this[binder];
 				this[binder] = function(){
 					return original.apply(this, arguments);
@@ -23,13 +25,13 @@ Script: Class.Binds.js
 		return self;
 	};
 
-	Class.Mutators.Binds = function(self, binds) {
+	Class.Mutators.Binds = function(self, binds){
 		if (!self.Binds) return self;
 		delete self.Binds;
 		return binder(self, binds);
 	};
 
-	Class.Mutators.binds = function(self, binds) {
+	Class.Mutators.binds = function(self, binds){
 		if (!self.binds) return self;
 		delete self['binds'];
 		return binder(self, binds);

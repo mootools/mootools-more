@@ -5,6 +5,8 @@ Script: Element.Position.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
 
 Element.implement({
@@ -33,7 +35,7 @@ Element.implement({
 		var offsetParent = this.measure(function(){
 			return $(this.getOffsetParent());
 		});
-		if (offsetParent && offsetParent != this.getDocument().body) {
+		if (offsetParent && offsetParent != this.getDocument().body){
 			parentOffset = offsetParent.measure(function(){
 				return this.getPosition();
 			});
@@ -43,7 +45,7 @@ Element.implement({
 		}
 		//upperRight, bottomRight, centerRight, upperLeft, bottomLeft, centerLeft
 		//topRight, topLeft, centerTop, centerBottom, center
-		function fixValue(option) {
+		function fixValue(option){
 			if ($type(option) != "string") return option;
 			option = option.toLowerCase();
 			var val = {};
@@ -58,7 +60,7 @@ Element.implement({
 		};
 		options.edge = fixValue(options.edge);
 		options.position = fixValue(options.position);
-		if (!options.edge) {
+		if (!options.edge){
 			if (options.position.x == 'center' && options.position.y == 'center') options.edge = {x:'center',y:'center'};
 			else options.edge = {x:'left',y:'top'};
 		}
@@ -68,14 +70,14 @@ Element.implement({
 		var top = (rel == document.body)?window.getScroll().y:rel.getPosition().y;
 		var left = (rel == document.body)?window.getScroll().x:rel.getPosition().x;
 		var dim = this.getDimensions({computeSize: true, styles:['padding', 'border','margin']});
-		if (options.ignoreMargins) {
+		if (options.ignoreMargins){
 			options.offset.x = options.offset.x - dim['margin-left'];
 			options.offset.y = options.offset.y - dim['margin-top'];
 		}
 		var pos = {};
 		var prefY = options.offset.y.toInt();
 		var prefX = options.offset.x.toInt();
-		switch(options.position.x) {
+		switch(options.position.x){
 			case 'left':
 				pos.x = left + prefX;
 				break;
@@ -86,7 +88,7 @@ Element.implement({
 				pos.x = left + (((rel == document.body)?window.getSize().x:rel.offsetWidth)/2) + prefX;
 				break;
 		};
-		switch(options.position.y) {
+		switch(options.position.y){
 			case 'top':
 				pos.y = top + prefY;
 				break;
@@ -101,7 +103,7 @@ Element.implement({
 		if (options.edge){
 			var edgeOffset = {};
 			
-			switch(options.edge.x) {
+			switch(options.edge.x){
 				case 'left':
 					edgeOffset.x = 0;
 					break;
@@ -112,7 +114,7 @@ Element.implement({
 					edgeOffset.x = -(dim.x/2);
 					break;
 			};
-			switch(options.edge.y) {
+			switch(options.edge.y){
 				case 'top':
 					edgeOffset.y = 0;
 					break;
@@ -130,7 +132,7 @@ Element.implement({
 			left: ((pos.x >= 0 || parentPositioned || options.allowNegative)?pos.x:0).toInt(),
 			top: ((pos.y >= 0 || parentPositioned || options.allowNegative)?pos.y:0).toInt()
 		};
-		if (rel.getStyle('position') == "fixed"||options.relFixedPosition) {
+		if (rel.getStyle('position') == "fixed"||options.relFixedPosition){
 			pos.top = pos.top.toInt() + window.getScroll().y;
 			pos.left = pos.left.toInt() + window.getScroll().x;
 		}
@@ -148,7 +150,7 @@ Element.implement({
 
 	Element.implement({
 
-		setPosition: function(obj) {
+		setPosition: function(obj){
 			if ($defined(obj.x) || $defined(obj.y)) return oldSetPosition.apply(this, arguments);
 			return this.position.apply(this, arguments);			
 		}

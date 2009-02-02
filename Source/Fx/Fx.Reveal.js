@@ -5,6 +5,9 @@ Script: Fx.Reveal.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 Fx.Reveal = new Class({
 
@@ -23,7 +26,7 @@ Fx.Reveal = new Class({
 
 	dissolve: function(){
 		try {
-			if (!this.hiding && !this.showing) {
+			if (!this.hiding && !this.showing){
 				if (this.element.getStyle('display') != 'none'){
 					this.hiding = true;
 					this.showing = false;
@@ -44,9 +47,9 @@ Fx.Reveal = new Class({
 					//put the final fx method at the front of the chain
 					this.$chain = this.$chain || [];
 					this.$chain.unshift(function(){
-						if (this.hidden) {
+						if (this.hidden){
 							this.hiding = false;
-							$each(startStyles, function(style, name) {
+							$each(startStyles, function(style, name){
 								startStyles[name] = style;
 							}, this);
 							this.element.setStyles($merge({display: 'none', overflow: overflowBefore}, startStyles));
@@ -61,13 +64,13 @@ Fx.Reveal = new Class({
 					this.fireEvent('complete', this.element);
 					this.fireEvent('hide', this.element);
 				}
-			} else if (this.options.link == "chain") {
+			} else if (this.options.link == "chain"){
 				this.chain(this.dissolve.bind(this));
-			} else if (this.options.link == "cancel" && !this.hiding) {
+			} else if (this.options.link == "cancel" && !this.hiding){
 				this.cancel();
 				this.dissolve();
 			}
-		} catch(e) {
+		} catch(e){
 			this.hiding = false;
 			this.element.hide();
 			this.callChain.delay(10, this);
@@ -79,7 +82,7 @@ Fx.Reveal = new Class({
 
 	reveal: function(){
 		try {
-			if (!this.showing && !this.hiding) {
+			if (!this.showing && !this.hiding){
 				if (this.element.getStyle('display') == "none" || 
 					 this.element.getStyle('visiblity') == "hidden" || 
 					 this.element.getStyle('opacity')==0){
@@ -103,7 +106,7 @@ Fx.Reveal = new Class({
 					});
 					//reset the styles back to hidden now
 					this.element.setStyles(before);
-					$each(startStyles, function(style, name) {
+					$each(startStyles, function(style, name){
 						startStyles[name] = style;
 					}, this);
 					//if we're overridding height/width
@@ -123,7 +126,7 @@ Fx.Reveal = new Class({
 					this.start(startStyles);
 					if (!this.$chain) this.$chain = [];
 					this.$chain.unshift(function(){
-						if (!this.options.heightOverride && setToAuto) {
+						if (!this.options.heightOverride && setToAuto){
 							if (["vertical", "both"].contains(this.options.mode)) this.element.setStyle('height', 'auto');
 							if (["width", "both"].contains(this.options.mode)) this.element.setStyle('width', 'auto');
 						}
@@ -137,13 +140,13 @@ Fx.Reveal = new Class({
 					this.fireEvent('complete', this.element);
 					this.fireEvent('show', this.element);
 				}
-			} else if (this.options.link == "chain") {
+			} else if (this.options.link == "chain"){
 				this.chain(this.reveal.bind(this));
-			} else if (this.options.link == "cancel" && !this.showing) {
+			} else if (this.options.link == "cancel" && !this.showing){
 				this.cancel();
 				this.reveal();
 			}
-		} catch(e) {
+		} catch(e){
 			this.element.setStyles({
 				display: 'block',
 				visiblity: 'visible',
@@ -166,7 +169,7 @@ Fx.Reveal = new Class({
 		 	} else {
 				this.dissolve();
 			}
-		} catch(e) { this.show(); }
+		} catch(e){ this.show(); }
 	 return this;
 	}
 
@@ -204,7 +207,7 @@ Element.implement({
 		return this;
 	},
 
-	nix: function() {
+	nix: function(){
 		var  params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
 		this.get('reveal', params.options).dissolve().chain(function(){
 			this[params.destroy?'destroy':'dispose']();

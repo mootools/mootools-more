@@ -13,7 +13,7 @@ Contributors:
 License:
 	MIT-style license.
 */
-if(!language) var language = {};
+if (!language) var language = {};
 
 language.FORUM = {
 
@@ -71,7 +71,7 @@ language.FORUM = {
 		},
 
 		"date" : {
-			command: function(k) {
+			command: function(k){
 				var dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
 						monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"],
 						dt = new Date(),
@@ -113,37 +113,37 @@ language.FORUM = {
 
 	//ctrl+shift+number
 	selections: {
-		"0": function(sel) {
+		"0": function(sel){
 			return ['<strong>',sel,'</strong>'];
 		},
-		"1": function(sel) {
+		"1": function(sel){
 			return ['<em>',sel,'</em>'];
 		},
-		"2": function(sel) {
+		"2": function(sel){
 			return ['<blockquote>',sel,'</blockquote>'];
 		},
-		"3": function(sel) {
+		"3": function(sel){
 			return ['<code>',sel,'</code>'];
 		},
-		"4": function(sel) {
+		"4": function(sel){
 			return ['<javascript>',sel,'</javascript>'];
 		},
-		"5": function(sel) {
+		"5": function(sel){
 			return ['<html>',sel,'</html>'];
 		},
-		"6": function(sel) {
+		"6": function(sel){
 			return ['<a href="">',sel,'</a>'];
 		},
-		"7": function(sel) {
+		"7": function(sel){
 			return {
 				selection: [this.ss(),this.se()],
 				snippet: ['',sel.toLowerCase(),'']
 			};
 		},
-		"8": function(sel) {
+		"8": function(sel){
 			return ['',sel.toUpperCase(),''];
 		},
-		"9": function(sel) {
+		"9": function(sel){
 			var mtoc = /<([^<>]*)>/g;
 			return ['',sel.replace(mtoc,"&lt;$1&gt;"),''];
 		}

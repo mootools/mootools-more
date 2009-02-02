@@ -137,7 +137,7 @@ Stops (removes) all attached events from the Drag instance and executes the 'com
 		onSnap: function(){
 			this.moved = this.moved || 0;
 			this.moved++;
-			if(this.moved > 100) {
+			if (this.moved > 100){
 				this.stop();
 				alert("Stop! You'll make the Element angry.");
 			}

@@ -5,6 +5,9 @@ Script: Request.JsonP.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 Request.JsonP = new Class({
 
@@ -32,7 +35,7 @@ Request.JsonP = new Class({
 
 	request: function(url, requestIndex){
 		var u = this.makeUrl(url);
-		if (!$chk(requestIndex)) {
+		if (!$chk(requestIndex)){
 			requestIndex = this.requests;
 			this.requests++;
 		}
@@ -54,10 +57,10 @@ Request.JsonP = new Class({
 			
 			if ($chk(this.options.abortAfter) && ! remaining) script.dispose.delay(this.options.abortAfter, script);
 
-			if (remaining) {
+			if (remaining){
 				(function(){
 					this.triesRemaining[requestIndex] = remaining - 1;
-					if (script.getParent() && remaining) {
+					if (script.getParent() && remaining){
 						if (window.dbug) dbug.log('removing script (%o) and retrying: try: %s, remaining: %s', requestIndex, remaining);
 						script.dispose();
 						this.request(url, requestIndex);
@@ -70,13 +73,13 @@ Request.JsonP = new Class({
 
 	makeUrl: function(url){
 		var index;
-		if (Request.JsonP.requestors.contains(this)) {
+		if (Request.JsonP.requestors.contains(this)){
 			index = Request.JsonP.requestors.indexOf(this);
 		} else {
 			index = Request.JsonP.requestors.push(this) - 1;
 			Request.JsonP.requestors['request_'+index] = this;
 		}
-		if (url) {
+		if (url){
 			var separator = (url.test('\\?'))?'&':'?';
 			var jurl = url + separator + this.options.callBackKey + "=Request.JsonP.requestors.request_" +
 				index+".handleResults";
@@ -85,7 +88,7 @@ Request.JsonP = new Class({
 		} else {
 			var jurl = this.url;
 		}
-		if ($chk(this.options.globalFunction)) {
+		if ($chk(this.options.globalFunction)){
 			window[this.options.globalFunction] = function(r){
 				Request.JsonP.requestors[index].handleResults(r)
 			};

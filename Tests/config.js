@@ -6,7 +6,7 @@ window.addEvent('load', function(){
 		mootoolsCore: '../../mootools-core',
 		mootoolsMore: '../../mootools-more'
 	};
-	if (window.location.href.contains("http://www.clientcide.com/tests")) {
+	if (window.location.href.contains("http://www.clientcide.com/tests")){
 		sources = {
 			mootoolsCore: '/cnet.gf/svn/Mootools/mootools-core',
 			mootoolsMore: '/cnet.gf/svn/Mootools/mootools-more'

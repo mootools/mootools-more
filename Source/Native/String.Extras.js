@@ -5,28 +5,31 @@ Script: String.Extras.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 String.implement({
 
-	stripTags: function() {
+	stripTags: function(){
 		return this.replace(/<\/?[^>]+>/gi, '');
 	},
 
-	parseQuery: function(encodeKeys, encodeValues) {
+	parseQuery: function(encodeKeys, encodeValues){
 		encodeKeys = $pick(encodeKeys, true);
 		encodeValues = $pick(encodeValues, true);
 		var vars = this.split(/[&;]/);
 		var rs = {};
-		if (vars.length) vars.each(function(val) {
+		if (vars.length) vars.each(function(val){
 			var keys = val.split('=');
-			if (keys.length && keys.length == 2) {
+			if (keys.length && keys.length == 2){
 				rs[(encodeKeys)?encodeURIComponent(keys[0]):keys[0]] = (encodeValues)?encodeURIComponent(keys[1]):keys[1];
 			}
 		});
 		return rs;
 	},
 
-	tidy: function() {
+	tidy: function(){
 		var txt = this.toString();
 		$each({
 			"[\xa0\u2002\u2003\u2009]": " ",

@@ -33,7 +33,7 @@
 					r.addEvents(events);
 					q.addRequest(num.toString(), r);
 				});
-				reqs.each(function(r) {
+				reqs.each(function(r){
 					r.send();
 				});
 			}

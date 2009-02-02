@@ -5,11 +5,13 @@ Script: Class.Refactor.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
-Class.refactor = function(orig, props) {
+Class.refactor = function(orig, props){
 	props = $extend($unlink(props), { Extends: orig	});
 	var update = new Class(props);
-	$each(orig, function(v, k) {
+	$each(orig, function(v, k){
 		update[k] = update[k] || v;
 	});
 	return update;

@@ -5,6 +5,8 @@ Script: Browser.Extras.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
 
 $extend(Browser, {
@@ -14,7 +16,7 @@ $extend(Browser, {
 		return match ? match[1] : null;
 	},
 
-	getQueryStringValue: function(key, url) {
+	getQueryStringValue: function(key, url){
 			return Browser.getQueryStringValues(url)[key];
 	},
 
@@ -25,7 +27,7 @@ $extend(Browser, {
 		return qs.parseQuery();
 	},
 
-	getPort: function(url) {
+	getPort: function(url){
 		url = $pick(url, window.location.href);
 		var m = $pick(url, window.location.href).match(/:([0-9]{2,4})/);
 		if (m == null) return false;

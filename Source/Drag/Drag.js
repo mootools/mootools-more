@@ -2,8 +2,13 @@
 Script: Drag.js
 	The base Drag Class. Can be used to drag and resize Elements using mouse events.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
+		Tom Occhinno
+		Jan Kassens
 */
 
 var Drag = new Class({

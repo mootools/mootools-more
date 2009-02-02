@@ -5,6 +5,8 @@ Script: Chain.Wait.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
 (function(){
 
@@ -18,9 +20,9 @@ Script: Chain.Wait.js
 
 	Chain.implement(wait);
 
-	if (window.Fx) {
+	if (window.Fx){
 		Fx.implement(wait);
-		['Css', 'Tween', 'Elements'].each(function(cls) {
+		['Css', 'Tween', 'Elements'].each(function(cls){
 			if (Fx[cls]) Fx[cls].implement(wait);
 		});
 	}
@@ -37,7 +39,7 @@ Script: Chain.Wait.js
 				}, this);
 				return this;
 			},
-			pauseFx: function(duration, effect) {
+			pauseFx: function(duration, effect){
 				this.chains(effect).get($pick(effect, 'tween')).wait(duration);
 				return this;
 			}

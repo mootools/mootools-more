@@ -5,6 +5,9 @@ Script: Element.Forms.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 Element.implement({
 
@@ -12,11 +15,11 @@ Element.implement({
 		this.set('value', this.get('value').tidy());
 	},
 
-	getTextInRange: function(start, end) {
+	getTextInRange: function(start, end){
 		return this.get('value').substring(start, end);
 	},
 
-	getSelectedText: function() {
+	getSelectedText: function(){
 		if (Browser.Engine.trident) return document.selection.createRange().text;
 		return this.get('value').substring(this.getSelectionStart(), this.getSelectionEnd());
 	},
@@ -31,36 +34,36 @@ Element.implement({
 		return { start: dupe.text.length, end: dupe.text.length + range.text.length, length: range.text.length, text: range.text };
 	},
 
-	getSelectionStart: function() {
+	getSelectionStart: function(){
 		if (Browser.Engine.trident) return this.getIERanges().start;
 		return this.selectionStart;
 	},
 
-	getSelectionEnd: function() {
+	getSelectionEnd: function(){
 		if (Browser.Engine.trident) return this.getIERanges().end;
 		return this.selectionEnd;
 	},
 
-	getSelectedRange: function() {
+	getSelectedRange: function(){
 		return {
 			start: this.getSelectionStart(),
 			end: this.getSelectionEnd()
 		}
 	},
 
-	setCaretPosition: function(pos) {
+	setCaretPosition: function(pos){
 		if (pos == 'end') pos = this.get('value').length;
 		this.selectRange(pos, pos);
 		return this;
 	},
 
-	getCaretPosition: function() {
+	getCaretPosition: function(){
 		return this.getSelectedRange().start;
 	},
 
-	selectRange: function(start, end) {
+	selectRange: function(start, end){
 		this.focus();
-		if (Browser.Engine.trident) {
+		if (Browser.Engine.trident){
 			var range = this.createTextRange();
 			range.collapse(true);
 			range.moveStart('character', start);
@@ -72,7 +75,7 @@ Element.implement({
 		return this;
 	},
 
-	insertAtCursor: function(value, select) {
+	insertAtCursor: function(value, select){
 		var start = this.getSelectionStart();
 		var end = this.getSelectionEnd();
 		this.set('value', this.get('value').substring(0, start) + value + this.get('value').substring(end, this.get('value').length));
@@ -81,7 +84,7 @@ Element.implement({
 		return this;
 	},
 
-	insertAroundCursor: function(options, select) {
+	insertAroundCursor: function(options, select){
 		options = $extend({
 			before: '',
 			defaultMiddle: 'SOMETHING HERE',
@@ -90,7 +93,7 @@ Element.implement({
 		value = this.getSelectedText() || options.defaultMiddle;
 		var start = this.getSelectionStart();
 		var end = this.getSelectionEnd();
-		if (start == end) {
+		if (start == end){
 			var text = this.get('value');
 			this.set('value', text.substring(0, start) + options.before + value + options.after + text.substring(end, text.length));
 			this.selectRange(start + options.before.length, end + options.before.length + value.length);

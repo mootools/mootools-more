@@ -5,8 +5,10 @@ Script: Class.ToElement.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
-var Class.ToElement = new Class({
+Class.ToElement = new Class({
 
 	toElement: function(){
 		return this.element;

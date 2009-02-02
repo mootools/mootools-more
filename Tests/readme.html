@@ -16,12 +16,12 @@
 			}).send();		
 		},
 		
-		local: function() {
+		local: function(){
 			Request.implement({
 				getXHR: function(){
 					return (window.ActiveXObject) ? new ActiveXObject('Microsoft.XMLHTTP') : new XMLHttpRequest();
 				},
-				isSuccess: function() {
+				isSuccess: function(){
 					return (!this.status || (this.status >= 200) && (this.status < 300));
 				}
 			});

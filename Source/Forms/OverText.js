@@ -2,8 +2,11 @@
 Script: OverText.js
 	Shows text over an input that disappears when the user clicks into it. The text remains hidden if the user adds a value.
 
-License:
-	MIT-style license
+	License:
+		MIT-style license.
+
+	Authors:
+		Aaron Newton
 */
 
 var OverText = new Class({
@@ -28,7 +31,7 @@ var OverText = new Class({
 
 	overTxtEls: [],
 
-	initialize: function(inputs, options) {
+	initialize: function(inputs, options){
 		this.setOptions(options);
 		$splat($(inputs)||$$(inputs)).each(this.addElement, this);
 		OverText.instances.push(this);
@@ -66,7 +69,7 @@ var OverText = new Class({
 		return this.poll();
 	},
 
-	poll: function(stop) {
+	poll: function(stop){
 		//start immediately
 		//pause on focus
 		//resumeon blur
@@ -90,7 +93,7 @@ var OverText = new Class({
 
 	hideTxt: function(el, focus){
 		var txt = el.retrieve('OverTextDiv');
-		if (txt && txt.isVisible() && !el.get('disabled')) {
+		if (txt && txt.isVisible() && !el.get('disabled')){
 			txt.hide(); 
 			try {
 				if (focus) el.fireEvent('focus').focus();
@@ -103,7 +106,7 @@ var OverText = new Class({
 
 	showTxt: function(el){
 		var txt = el.retrieve('OverTextDiv');
-		if (txt && !txt.isVisible()) {
+		if (txt && !txt.isVisible()){
 			txt.show();
 			this.fireEvent('textShow', [txt, el]);
 			el.store('ot_paused', false);

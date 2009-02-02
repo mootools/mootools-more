@@ -5,14 +5,16 @@ Script: Class.Occlude.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
-var Class.Occlude = new Class({
+Class.Occlude = new Class({
 
 	// usage: if (this.occlude()) return this.occluded;
-	occlude: function(property, element) {
+	occlude: function(property, element){
 		element = $(element || this.element);
 		var instance = element.retrieve(property || this.property);
-		if (instance && (this.occluded === null || this.occluded)) {
+		if (instance && !$defined(this.occluded)){
 			this.occluded = instance; 
 		} else {
 			this.occluded = false;

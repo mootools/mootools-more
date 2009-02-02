@@ -5,6 +5,8 @@ Script: dbug.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
 var dbug = {
 
@@ -16,11 +18,11 @@ var dbug = {
 
 	enabled: false, 
 
-	log: function() {
+	log: function(){
 		dbug.logged.push(arguments);
 	},
 
-	nolog: function(msg) {
+	nolog: function(msg){
 		dbug.logged.push(arguments);
 	},
 
@@ -29,15 +31,15 @@ var dbug = {
 	},
 
 	timeEnd: function(name){
-		if (dbug.timers[name]) {
+		if (dbug.timers[name]){
 			var end = new Date().getTime() - dbug.timers[name];
 			dbug.timers[name] = false;
 			dbug.log('%s: %s', name, end);
 		} else dbug.log('no such timer: %s', name);
 	},
 
-	enable: function(silent) { 
-		if (dbug.firebug) {
+	enable: function(silent){ 
+		if (dbug.firebug){
 			try {
 				dbug.enabled = true;
 				dbug.log = function(){
@@ -52,7 +54,7 @@ var dbug = {
 				if (!silent) dbug.log('enabling dbug');
 				for(var i=0;i<dbug.logged.length;i++){ dbug.log.apply(console, dbug.logged[i]); }
 				dbug.logged=[];
-			} catch(e) {
+			} catch(e){
 				dbug.enable.delay(400);
 			}
 		}
@@ -68,7 +70,7 @@ var dbug = {
 	cookie: function(set){
 		var value = document.cookie.match('(?:^|;)\\s*jsdebug=([^;]*)');
 		var debugCookie = value ? unescape(value[1]) : false;
-		if ((!$defined(set) && debugCookie != 'true') || ($defined(set) && set)) {
+		if ((!$defined(set) && debugCookie != 'true') || ($defined(set) && set)){
 			dbug.enable();
 			dbug.log('setting debugging cookie');
 			var date = new Date();
@@ -92,7 +94,7 @@ var dbug = {
 
 	var otherMethods = ['trace','group','groupEnd','profile','profileEnd','count'];
 
-	function set(methodList, defaultFunction) {
+	function set(methodList, defaultFunction){
 		for(var i = 0; i < methodList.length; i++){
 			dbug[methodList[i]] = (fb && console[methodList[i]])?console[methodList[i]]:defaultFunction;
 		}

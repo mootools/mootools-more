@@ -5,6 +5,8 @@ Script: Element.Pin.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
 */
 
 window.addEvent('domready', function(){
@@ -24,18 +26,18 @@ Element.implement({
 
 	pin: function(enable){
 		if (!Browser.loaded && window.dbug) dbug.log('cannot pin ' + this + ' natively because the dom is not ready');
-		if (this.getStyle('display') == 'none') {
+		if (this.getStyle('display') == 'none'){
 			if (window.dbug) dbug.log('cannot pin ' + this + ' because it is hidden');
 			return;
 		}
-		if (enable!==false) {
+		if (enable!==false){
 			var p = this.getPosition();
-			if (!this.retrieve('pinned')) {
+			if (!this.retrieve('pinned')){
 				var pos = {
 					top: (p.y - window.getScroll().y),
 					left: (p.x - window.getScroll().x)
 				};
-				if (Browser.supportsPositionFixed) {
+				if (Browser.supportsPositionFixed){
 					this.setStyle('position','fixed').setStyles(pos);
 				} else {
 					this.store('pinnedByJS', true);
@@ -45,7 +47,7 @@ Element.implement({
 						left: p.x
 					});
 					this.store('scrollFixer', function(){
-						if (this.retrieve('pinned')) {
+						if (this.retrieve('pinned')){
 							var to = {
 								top: (pos.top.toInt() + window.getScroll().y),
 								left: (pos.left.toInt() + window.getScroll().x)
@@ -59,14 +61,14 @@ Element.implement({
 			}
 		} else {
 			var op;
-			if (!Browser.Engine.trident) {
+			if (!Browser.Engine.trident){
 				if (this.getParent().getComputedStyle('position') != 'static') op = this.getParent();
 				else op = this.getParent().getOffsetParent();
 			}
 			var p = this.getPosition(op);
 			this.store('pinned', false);
 			var reposition;
-			if (Browser.supportsPositionFixed && !this.retrieve('pinnedByJS')) {
+			if (Browser.supportsPositionFixed && !this.retrieve('pinnedByJS')){
 				reposition = {
 					top: (p.y + window.getScroll().y),
 					left: (p.x + window.getScroll().x)

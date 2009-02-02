@@ -4,7 +4,6 @@ MooTools Plugins and Enhancements Repository
 
 * Tests don't work - need to figure out how to manage mootools-core dependency
 * PostEditor needs docs, unit test
-* Date needs general clean up; it works well, but needs to be organized
-* Localization needs to be flushed out more clearly with a well thought out scheme.
 * Put author names in files (per Tom)
 * Rename Class.Extras/ to Class/ (per Tom)
+* Localization for FormValidator

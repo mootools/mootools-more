@@ -9,7 +9,7 @@ License:
 	var Tester = new Class({
 		Implements: Class.Binds,
 		binds: ["getFoo"],
-		initialize: function(foo) {
+		initialize: function(foo){
 			this.foo = foo;
 		},
 		getFoo: function(){
@@ -20,7 +20,7 @@ License:
 		}
 	});
 	var Tester2 = new Class({
-		initialize: function(foo) {
+		initialize: function(foo){
 			this.foo = foo;
 		},
 		getFoo: function(){
@@ -33,7 +33,7 @@ License:
 	var Tester3 = new Class({
 		Implements: [Class.Binds, Options],
 		binds: ["getFoo"],
-		initialize: function(foo) {
+		initialize: function(foo){
 			this.foo = foo;
 			this.setOptions({a: 'b'});
 		},

@@ -43,20 +43,20 @@ All of the events supplied to the [Request][] class are supported. These methods
 	var myRequests = {
 		r1: new Request({ 
 			url: '/foo1.php', data: { foo1: 'bar1'}, 
-			onComplete: function(text, xml) {
+			onComplete: function(text, xml){
 				console.log('myRequests.r1: ', text, xml);
 			}
 		}),
 		r2: new Request({ 
 			url: '/foo2.php', data: { foo2: 'bar2'}, 
-			onComplete: function(text, xml) {
+			onComplete: function(text, xml){
 				console.log('myRequests.r2: ', text, xml);
 			}
 		})
 	};
 	var myQueue = new Request.Queue({
 		requests: myRequests,
-		onRequestComplete: function(name, instance, text, xml) {
+		onRequestComplete: function(name, instance, text, xml){
 			console.log('queue: '+name+' response: ', text, xml);
 		}
 	});

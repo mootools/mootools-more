@@ -5,6 +5,9 @@ Script: Fx.Move.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 Fx.Move = new Class({
 
