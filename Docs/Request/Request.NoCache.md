@@ -1,4 +1,4 @@
-Class: Request {#Request}
+Class: Request.NoCache {#Request}
 =========================
 
 Extends [Request][] and [Request.HTML][] to automatically include a unique noCache value to prevent request caching.

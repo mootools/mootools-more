@@ -59,13 +59,18 @@ var Slider = new Class({
 		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
+
 		this.drag = new Drag(this.knob, {
 			snap: 0,
 			limit: limit,
 			modifiers: modifiers,
 			onDrag: this.draggedKnob.bind(this),
+			onBeforeStart: (function(){
+				this.isDragging = true;
+			}).bind(this),
 			onStart: this.draggedKnob.bind(this),
 			onComplete: function(){
+				this.isDragging = false;
 				this.draggedKnob();
 				this.end();
 			}.bind(this)
@@ -88,6 +93,8 @@ var Slider = new Class({
 	},
 
 	clickedElement: function(event){
+		if (this.isDragging) return;
+		
 		var dir = this.range < 0 ? -1 : 1;
 		var position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
 		position = position.limit(-this.options.offset, this.full -this.options.offset);

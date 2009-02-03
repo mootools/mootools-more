@@ -97,7 +97,7 @@ var Drag = new Class({
 				mousemove: this.bound.drag,
 				mouseup: this.bound.stop
 			});
-			this.fireEvent('start', this.element).fireEvent('snap', this.element);
+			this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
 		}
 	},
 
@@ -119,7 +119,7 @@ var Drag = new Class({
 			if (this.options.style) this.element.setStyle(this.options.modifiers[z], this.value.now[z] + this.options.unit);
 			else this.element[this.options.modifiers[z]] = this.value.now[z];
 		}
-		this.fireEvent('drag', this.element);
+		this.fireEvent('drag', [this.element, event]);
 	},
 
 	cancel: function(event){
@@ -135,7 +135,7 @@ var Drag = new Class({
 		this.document.removeEvent(this.selection, this.bound.eventStop);
 		this.document.removeEvent('mousemove', this.bound.drag);
 		this.document.removeEvent('mouseup', this.bound.stop);
-		if (event) this.fireEvent('complete', this.element);
+		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
 });
