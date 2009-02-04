@@ -5,7 +5,7 @@ Enables the modification of two CSS properties of an Element based on the positi
 
 ### Implements:
 
-[Events][], [Chain](/Class/Class.Extras#Options)
+[Events][], [Chain], [Options][], [ToElement][]
 
 
 Drag Method: constructor {#Drag:constructor}
@@ -188,5 +188,7 @@ Adds drag-to-resize behavior to an Element using supplied options.
 [Element:addEvent]: /Element/Element.Event/#Element:addEvent
 [Element:makeDraggable]: /Drag/Drag.Move/#Element:makeDraggable
 [Events]: /Class/Class.Extras#Events
-[Chain]: /Class/Class.Extras#Options
+[Chain]: /Class/Class.Extras#Chain
+[Options]: /Class/Class.Extras#Options
+[ToElement]: /Class/Class.Extras#Options
 [W3Schools: CSS Units]: http://www.w3schools.com/css/css_units.asp
