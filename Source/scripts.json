@@ -271,7 +271,7 @@
 		"MooTools.Lang":{
 			"deps": ["Class.Extras"],
 			"desc": ["Enables classes to contain text that can be localized to specific languages."]
-		}
+		},
 
 		"Date.Dutch":{
 			"deps":["MooTools.Lang"],

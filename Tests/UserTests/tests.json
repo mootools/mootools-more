@@ -19,7 +19,7 @@
 		"FormValidator.Inline":['all'],
 		"FormValidator.Extras":['all'],
 		"OverText": ['all']
-	}
+	},
 	"Fx": {
 		"Fx.Move":['all'],
 		"Fx.Reveal":['all'],

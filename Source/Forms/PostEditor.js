@@ -32,7 +32,7 @@ Options:
 
 var PostEditor = new Class({
 	
-	Implements: [Options],
+	Implements: Options,
 
 	tab: "\t",
 
