@@ -55,7 +55,7 @@
 	"Native":{
 
 		"Date":{
-			"deps": ["Core", "String", "Number", "Hash", "Array", "MooTools.Lang"],
+			"deps": ["Core", "String", "Number", "Hash", "Array", "MooTools.Lang", "Date.English.US"],
 			"desc": "Extends the Date native object to include methods useful in managing dates."
 		},
 
@@ -118,7 +118,7 @@
 	"Forms":{
 
 		"FormValidator":{
-			"deps":["Class.Extras", "Class.Binds", "ToElement", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms"],
+			"deps":["Class.Extras", "Class.Binds", "ToElement", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
 			"optional":["Fx.Reveal"],
 			"desc":"A css-class based form validation system."
 		},
@@ -131,16 +131,6 @@
 		"OverText":{
 			"deps": ["Class.Extras", "Element.Event", "Element.Position", "Element.Shortcuts"],
 			"desc": "Displays text over empty inputs until the user focuses the input or adds information."
-		},
-		
-		"PostEditor":{
-			"deps": ["Class.Extras", "Element.Style", "Element.Event"],
-			"desc": "A MooTools 1.2 compliant version of PostEditor for typing code into textareas."
-		},
-
-		"PostEditor.Snippets":{
-			"deps": ["PostEditor"],
-			"desc": "A default set of snippets for PostEditor."
 		}
 
 	},
@@ -182,7 +172,7 @@
 	"Drag": {
 		
 		"Drag": {
-			"deps": ["Class.Extras", "Element.Event", "Element.Style"],
+			"deps": ["Class.Extras", "Element.Event", "Element.Style", "ToElement"],
 			"desc": "The base Drag Class. Can be used to drag and resize Elements using mouse events."
 		},
 
@@ -279,6 +269,17 @@
 			"exclude": true
 		},
 
+		"Date.English.GB":{
+			"deps":["MooTools.Lang"],
+			"desc":"Date messages in English (with conventions for Great Britain) (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"Date.English.US":{
+			"deps":["MooTools.Lang"],
+			"desc":"Date messages in English (with conventions for the US) (feel free to send in your own translations).",
+		},
+
 		"Date.Norwegian":{
 			"deps":["MooTools.Lang"],
 			"desc":"Date messages in Norwegian (feel free to send in your own translations).",
@@ -307,6 +308,11 @@
 			"deps":["MooTools.Lang"],
 			"desc":"FormValidator messages in Dutch (feel free to send in your own translations).",
 			"exclude": true
+		},
+
+		"FormValidator.English.US":{
+			"deps":["MooTools.Lang"],
+			"desc":"FormValidator messages in English (feel free to send in your own translations)."
 		},
 
 		"FormValidator.French":{
@@ -344,6 +350,20 @@
 			"desc":"FormValidator messages in Spanish (feel free to send in your own translations).",
 			"exclude": true
 		},
+
+	},
+	
+	"Beta": {
+	
+		"PostEditor":{
+			"deps": ["Class.Extras", "Element.Style", "Element.Event"],
+			"desc": "A MooTools 1.2 compliant version of PostEditor for typing code into textareas."
+		},
+
+		"PostEditor.Forum":{
+			"deps": ["PostEditor"],
+			"desc": "A default set of snippets for PostEditor."
+		}
 
 	}
 

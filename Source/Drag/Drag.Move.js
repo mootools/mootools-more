@@ -27,12 +27,11 @@ Drag.Move = new Class({
 		this.droppables = $$(this.options.droppables);
 		this.container = $(this.options.container);
 		if (this.container && $type(this.container) != 'element') this.container = $(this.container.getDocument().body);
-		element = this.element;
 
-		var current = element.getStyle('position');
+		var current = $(this).getStyle('position');
 		var position = (current != 'static') ? current : 'absolute';
-		if (element.getStyle('left') == 'auto' || element.getStyle('top') == 'auto') element.position(element.getPosition(element.offsetParent));
-		element.setStyle('position', position);
+		if ($(this).getStyle('left') == 'auto' || $(this).getStyle('top') == 'auto') $(this).position($(this).getPosition($(this).offsetParent));
+		$(this).setStyle('position', position);
 
 		this.addEvent('start', this.checkDroppables, true);
 
@@ -41,14 +40,14 @@ Drag.Move = new Class({
 
 	start: function(event){
 		if (this.container){
-			var el = this.element, cont = this.container, ccoo = cont.getCoordinates(el.offsetParent), cps = {}, ems = {};
+			var cont = this.container, ccoo = cont.getCoordinates($(this).offsetParent), cps = {}, ems = {};
 
 			['top', 'right', 'bottom', 'left'].each(function(pad){
 				cps[pad] = cont.getStyle('padding-' + pad).toInt();
-				ems[pad] = el.getStyle('margin-' + pad).toInt();
+				ems[pad] = $(this).getStyle('margin-' + pad).toInt();
 			}, this);
 
-			var width = el.offsetWidth + ems.left + ems.right, height = el.offsetHeight + ems.top + ems.bottom;
+			var width = $(this).offsetWidth + ems.left + ems.right, height = $(this).offsetHeight + ems.top + ems.bottom;
 			var x = [ccoo.left + cps.left, ccoo.right - cps.right - width];
 			var y = [ccoo.top + cps.top, ccoo.bottom - cps.bottom - height];
 
@@ -66,8 +65,8 @@ Drag.Move = new Class({
 	checkDroppables: function(){
 		var overed = this.droppables.filter(this.checkAgainst, this).getLast();
 		if (this.overed != overed){
-			if (this.overed) this.fireEvent('leave', [this.element, this.overed]);
-			if (overed) this.fireEvent('enter', [this.element, overed]);
+			if (this.overed) this.fireEvent('leave', [$(this), this.overed]);
+			if (overed) this.fireEvent('enter', [$(this), overed]);
 			this.overed = overed;
 		}
 	},
@@ -79,7 +78,7 @@ Drag.Move = new Class({
 
 	stop: function(event){
 		this.checkDroppables();
-		this.fireEvent('drop', [this.element, this.overed]);
+		this.fireEvent('drop', [$(this), this.overed]);
 		this.overed = null;
 		return this.parent(event);
 	}

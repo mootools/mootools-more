@@ -39,6 +39,6 @@ Element.implement({
 
 	swapClass: function(remove, add){
 		return this.removeClass(remove).addClass(add);
-	},
+	}
 
 });

@@ -3,5 +3,4 @@ MooTools Plugins and Enhancements Repository
 ### TO DO
 
 * Tests don't work - need to figure out how to manage mootools-core dependency
-* PostEditor needs docs, unit test
 * Rename Class.Extras/ to Class/ (per Tom)

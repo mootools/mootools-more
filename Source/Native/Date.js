@@ -230,23 +230,8 @@ Date.implement({
 Date.alias('diff', 'compare');
 Date.alias('format', 'strftime');
 
-MooTools.lang.set('usENG', 'Date', {
-
-	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-	days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-	dateOrder: ['month', 'date', 'year', '/'],
-	AM: "AM",
-	PM: "PM"
-
-}).set('gbENG', 'Date', {
-
-	dateOrder: ['date', 'month', 'year', '/'],
-	cascades: ['usENG']
-
-}).addEvent('onLangChange', function(){
-
+MooTools.lang.addEvent('onLangChange', function(){
 	Date.lang = MooTools.lang.get('Date');
-
 });
 Date.lang = MooTools.lang.get('Date');
 

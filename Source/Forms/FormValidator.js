@@ -96,10 +96,10 @@ var FormValidator = new Class({
 		errorPrefix: function(){
 			return FormValidator.resources[FormValidator.language].errorPrefix || 'Error: ';
 		}
-//	onFormValidate: function(isValid, form, event){},
-//	onElementValidate: function(isValid, field, className, warn){},
-//	onElementPass: function(field){},
-//	onElementFail: function(field, validatorsFailed){}
+//		onFormValidate: function(isValid, form, event){},
+//		onElementValidate: function(isValid, field, className, warn){},
+//		onElementPass: function(field){},
+//		onElementFail: function(field, validatorsFailed){}
 	},
 
 	initialize: function(form, options){
@@ -254,29 +254,8 @@ var FormValidator = new Class({
 });
 
 
-MooTools.lang.set('usENG', 'FormValidator', {
-
-	required:'This field is required.',
-	minLength:'Please enter at least {minLength} characters (you entered {length} characters).',
-	maxLength:'Please enter no more than {maxLength} characters (you entered {length} characters).',
-	integer:'Please enter an integer in this field. Numbers with decimals (e.g. 1.25) are not permitted.',
-	numeric:'Please enter only numeric values in this field (i.e. "1" or "1.1" or "-1" or "-1.1").',
-	digits:'Please use numbers and punctuation only in this field (for example, a phone number with dashes or dots is permitted).',
-	alpha:'Please use letters only (a-z) with in this field. No spaces or other characters are allowed.',
-	alphanum:'Please use only letters (a-z) or numbers (0-9) only in this field. No spaces or other characters are allowed.',
-	dateSuchAs:'Please enter a valid date such as {date}',
-	dateInFormatMDY:'Please enter a valid date such as MM/DD/YYYY (i.e. "12/31/1999")',
-	email:'Please enter a valid email address. For example "fred@domain.com".',
-	url:'Please enter a valid URL such as http://www.google.com.',
-	currencyDollar:'Please enter a valid $ amount. For example $100.00 .',
-	oneRequired:'Please enter something for at least one of these inputs.',
-	errorPrefix: 'Error: ',
-	warningPrefix: 'Warning: '
-
-}).addEvent('onLangChange', function(){
-
+MooTools.lang.addEvent('onLangChange', function(){
 	FormValidator.lang = MooTools.lang.get('FormValidator');
-
 });
 FormValidator.lang = MooTools.lang.get('FormValidator');
 
