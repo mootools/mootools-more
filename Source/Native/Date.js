@@ -11,7 +11,6 @@ Script: Date.js
 		Harald Kirshner - mail [at] digitarald.de; http://digitarald.de
 
 */
-
 new Native({name: 'Date', initialize: Date, protect: true});
 
 
@@ -233,7 +232,6 @@ Date.alias('format', 'strftime');
 MooTools.lang.addEvent('onLangChange', function(){
 	Date.lang = MooTools.lang.get('Date');
 });
-Date.lang = MooTools.lang.get('Date');
 
 (function(){
 

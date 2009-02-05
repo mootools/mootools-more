@@ -84,6 +84,10 @@
 			//});
 			if (lang == this.getCurrentLanguage()) this.fireEvent('onLangChange', lang);
 			return this;
+		},
+		
+		dir: function(){
+			console.dir(data);
 		}
 
 	});

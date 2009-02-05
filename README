@@ -2,5 +2,5 @@ MooTools Plugins and Enhancements Repository
 
 ### TO DO
 
-* Tests don't work - need to figure out how to manage mootools-core dependency
 * Rename Class.Extras/ to Class/ (per Tom)
+* Localization needs docs

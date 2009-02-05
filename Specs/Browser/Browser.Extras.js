@@ -40,5 +40,21 @@ License:
 			}	
 
 	});
+	
+	describe('Browser.mergeQueryStringValues', {
+	
+			'should set query string values': function(){
+				value_of(Browser.mergeQueryStringValues({a: 'b'}, 'www.test.com')).should_be('www.test.com?a=b');
+			},
+
+			'should merge url query string values': function(){
+				value_of(Browser.mergeQueryStringValues({a: 'c'}, 'www.test.com?x=y&a=b')).should_be('www.test.com?x=y&a=c');
+			},
+			
+			'should merge query string values': function(){
+				value_of(Browser.mergeQueryStringValues({a: 'c'}, 'x=y&a=b')).should_be('x=y&a=c');
+			}
+	
+	});
 
 })();

@@ -129,4 +129,45 @@ Forces the window to refresh/redraw. Useful for some cases where the browser jus
 
 	Browser.redraw();
 
+Browser Method: mergeQueryStringValues {#Browser:mergeQueryStringValues}
+--------------------------------------------------------------------
+
+Combines query string values into a query string.
+
+### Syntax
+
+	Browser.mergeQueryStringValues(values[, url]);
+
+### Arguments
+
+1. values - (*object*) an object of key/value pairs to merge into a url/queryString
+2. url - (*string*) a url or query string that you'd like to merge with the values
+
+### Examples
+
+	//merges foo=bar with the current window's query string
+	//so if the page is http://www.test.com?x=y
+	//this would return http://www.test.com?x=y&a=b
+	Browser.mergeQueryStringValues({a: 'b'})
+	
+	//merges with a specified url
+	//this would yeild www.test.com?x=y&a=b
+	Browser.mergeQueryStringValues({a: 'b'}, 'http://www.test.com?x=y');
+	
+	//specified values overwrite the url values
+	//this would yeild http://www.test.com?x=y&a=c
+	Browser.mergeQueryStringValues({a: 'c'}, 'http://www.test.com?x=y&a=b');
+	
+	//query strings can be passed without the full url
+	//this would yeild x=y&a=c
+	Browser.mergeQueryStringValues({a: 'c'}, 'x=y&a=b');
+
+### Returns
+
+* *string* the resulting url.
+
+### Note
+
+The url returned is *not* encoded.
+
 [Browser]: http://docs.mootools.net/Core/Browser

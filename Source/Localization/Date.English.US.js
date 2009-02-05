@@ -4,7 +4,7 @@ MooTools.lang.set('usENG', 'Date', {
 	days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 	dateOrder: ['month', 'date', 'year', '/'],
 	AM: "AM",
-	PM: "PM"
+	PM: "PM",
 
 /* Date.Extras */
 	getOrdinal: function(dayOfMonth){

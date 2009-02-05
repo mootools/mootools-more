@@ -5,6 +5,11 @@
 		"dbug":{
 			"deps":["dbug"],
 			"desc":"Wrapper for the firebug console.log() function."
+		},
+
+		"MooTools.Lang":{
+			"deps": ["Class.Extras"],
+			"desc": ["Enables classes to contain text that can be localized to specific languages."]
 		}
 
 	},
@@ -257,11 +262,6 @@
 	},
 
 	"Localization": {
-
-		"MooTools.Lang":{
-			"deps": ["Class.Extras"],
-			"desc": ["Enables classes to contain text that can be localized to specific languages."]
-		},
 
 		"Date.Dutch":{
 			"deps":["MooTools.Lang"],

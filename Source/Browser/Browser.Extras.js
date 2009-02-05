@@ -8,7 +8,6 @@ Script: Browser.Extras.js
 	Authors:
 		Aaron Newton
 */
-
 $extend(Browser, {
 
 	getHost:function(url){
@@ -39,6 +38,16 @@ $extend(Browser, {
 		this.adopt(n);
 		(function(){n.dispose()}).delay(1);
 		return this;
+	},
+
+	//thanks to Lennart Pilon
+	mergeQueryStringValues: function(values, url){
+		url = $pick(url, window.location.href);
+		var merged = $merge(url.contains('?') ? this.getQueryStringValues(url) : url.parseQuery(), values);
+		var newUrl = url.contains('?') ? url.split('?')[0] + '?' : url.contains("=") ? '' : url + '?';
+		for (key in merged) newUrl += key + '=' +merged[key] + '&';
+		newUrl = newUrl.substring(0, newUrl.length-1);
+		return newUrl;
 	}
 
 });
