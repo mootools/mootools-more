@@ -207,7 +207,7 @@
 			"desc":"Manages a group of Request instances so that connections are queued."
 		}
 		"Request.Timer": {
-			"deps":["Request.JSON"],
+			"deps":["Request"],
 			"desc":"Requests the same url at a time interval that increases when no data is returned from the requested server."
 		}
 	},

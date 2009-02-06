@@ -21,7 +21,7 @@ Script: Request.Timer.js
 				limit: 60000
 			},
 
-			start: function(data){
+			startTimer: function(data){
 				var fn = (function(){
 					if (!this.running) this.send({data: data});
 				});
@@ -37,7 +37,7 @@ Script: Request.Timer.js
 				return this;
 			},
 
-			stop: function(){
+			stopTimer: function(){
 				$clear(this.timer);
 				this.removeEvent('complete', this.completeCheck);
 				return this;
@@ -45,8 +45,8 @@ Script: Request.Timer.js
 		};
 	};
 
-	Request.Timer = maker(Request);
-	Request.HTML.Timer = maker(Request.HTML);
-	Request.JSON.Timer = maker(Request.JSON);
+	Request = Class.refactor(maker(Request));
+	if (Request.HTML) Request.HTML = Class.refactor(maker(Request.HTML));
+	if (Request.JSON) Request.JSON = Class.refactor(maker(Request.JSON));
 
 });
