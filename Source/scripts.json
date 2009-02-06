@@ -74,6 +74,11 @@
 			"desc": "Extends the Hash native object to include getFromPath which allows a path notation to child elements."
 		},
 
+		"Array.Extras": {
+			"deps": ["Core", "Array"],
+			"desc": "Extends the Array native object to include useful methods to work with arrays."
+		},
+
 		"String.Extras": {
 			"deps": ["String", "Array", "Hash.Extras"],
 			"desc": "Extends the String native object to include methods useful in managing strings (query strings, urls, etc)."
@@ -201,6 +206,10 @@
 			"deps":["Request"],
 			"desc":"Manages a group of Request instances so that connections are queued."
 		}
+		"Request.Timer": {
+			"deps":["Request.JSON"],
+			"desc":"Requests the same url at a time interval that increases when no data is returned from the requested server."
+		}
 	},
 
 	"Utilities": {
@@ -235,7 +244,7 @@
 		},
 		
 		"Tips": {
-			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions"],
+			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions", "ToElement"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
 		},
 

@@ -11,7 +11,7 @@ Script: Tips.js
 
 var Tips = new Class({
 
-	Implements: [Events, Options],
+	Implements: [Events, Options, ToElement],
 
 	options: {
 		onShow: function(tip){
@@ -29,103 +29,91 @@ var Tips = new Class({
 
 	initialize: function(){
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
-		this.setOptions(params.options || null);
-
-		this.tip = new Element('div').inject(document.body);
-
-		if (this.options.className) this.tip.addClass(this.options.className);
-
-		var top = new Element('div', {'class': 'tip-top'}).inject(this.tip);
-		this.container = new Element('div', {'class': 'tip'}).inject(this.tip);
-		var bottom = new Element('div', {'class': 'tip-bottom'}).inject(this.tip);
-
-		this.tip.setStyles({position: 'absolute', top: 0, left: 0, visibility: 'hidden'});
-
+		this.setOptions(params.options);
+		this.element = new Element('div').inject(document.body);
+		if (this.options.className) $(this).addClass(this.options.className);
+		this.container = new Element('div', {'class': 'tip'});
+		$(this).adopt(
+			new Element('div', {'class': 'tip-top'}),
+			this.container,
+			new Element('div', {'class': 'tip-bottom'})
+		);
+		$(this).setStyles({position: 'absolute', top: 0, left: 0, visibility: 'hidden'});
 		if (params.elements) this.attach(params.elements);
 	},
-
+	
 	attach: function(elements){
 		$$(elements).each(function(element){
-			var title = element.retrieve('tip:title', element.get('title'));
-			var text = element.retrieve('tip:text', element.get('rel') || element.get('href'));
-			var enter = element.retrieve('tip:enter', this.elementEnter.bindWithEvent(this, element));
-			var leave = element.retrieve('tip:leave', this.elementLeave.bindWithEvent(this, element));
-			element.addEvents({mouseenter: enter, mouseleave: leave});
-			if (!this.options.fixed){
-				var move = element.retrieve('tip:move', this.elementMove.bindWithEvent(this, element));
-				element.addEvent('mousemove', move);
-			}
-			element.store('tip:native', element.get('title'));
-			element.erase('title');
+			var title = element.get('title');
+			element.store('tip:native', title).erase('title').retrieve('tip:title', title);
+			element.retrieve('tip:text', element.get('rel') || element.get('href'));
+			var events = ['enter', 'leave'];
+			if (!this.options.fixed) events.push('move');
+			events.each(function(value){
+				element.addEvent('mouse' + value, element.retrieve('tip:' + value, this['element' + value.capitalize()].bindWithEvent(this, element)));
+			}, this);
 		}, this);
 		return this;
 	},
-
+	
 	detach: function(elements){
 		$$(elements).each(function(element){
-			element.removeEvent('mouseenter', element.retrieve('tip:enter') || $empty);
-			element.removeEvent('mouseleave', element.retrieve('tip:leave') || $empty);
-			element.removeEvent('mousemove', element.retrieve('tip:move') || $empty);
+			['enter', 'leave', 'move'].each(function(value){
+				element.removeEvent('mouse' + value, element.retrieve('tip:' + value) || $empty);
+			});
 			element.eliminate('tip:enter').eliminate('tip:leave').eliminate('tip:move');
 			var original = element.retrieve('tip:native');
 			if (original) element.set('title', original);
 		});
 		return this;
 	},
-
+	
 	elementEnter: function(event, element){
-
 		$A(this.container.childNodes).each(Element.dispose);
-
-		var title = element.retrieve('tip:title');
-
-		if (title){
-			this.titleElement = new Element('div', {'class': 'tip-title'}).inject(this.container);
-			this.fill(this.titleElement, title);
-		}
-
-		var text = element.retrieve('tip:text');
-		if (text){
-			this.textElement = new Element('div', {'class': 'tip-text'}).inject(this.container);
-			this.fill(this.textElement, text);
-		}
-
+		['title', 'text'].each(function(value){
+			var content = element.retrieve('tip:' + value);
+			if (content){
+				this[value + 'Element'] = new Element('div', {'class': 'tip-' + value}).inject(this.container);
+				this.fill(this[value + 'Element'], content);
+			}
+		}, this);
 		this.timer = $clear(this.timer);
-		this.timer = this.show.delay(this.options.showDelay, this);
-
+		this.timer = this.show.delay(this.options.showDelay, this, element);
 		this.position((!this.options.fixed) ? event : {page: element.getPosition()});
 	},
-
-	elementLeave: function(event){
+	
+	elementLeave: function(event, element){
 		$clear(this.timer);
-		this.timer = this.hide.delay(this.options.hideDelay, this);
+		this.timer = this.hide.delay(this.options.hideDelay, this, element);
 	},
-
+	
 	elementMove: function(event){
 		this.position(event);
 	},
-
+	
 	position: function(event){
-		var size = window.getSize(), scroll = window.getScroll();
-		var tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight};
-		var props = {x: 'left', y: 'top'};
+		var size = window.getSize(), scroll = window.getScroll(),
+			tip = {x: $(this).offsetWidth, y: $(this).offsetHeight},
+			props = {x: 'left', y: 'top'},
+			obj = {};
 		for (var z in props){
-			var pos = event.page[z] + this.options.offsets[z];
-			if ((pos + tip[z] - scroll[z]) > size[z]) pos = event.page[z] - this.options.offsets[z] - tip[z];
-			this.tip.setStyle(props[z], pos);
+			obj[props[z]] = event.page[z] + this.options.offsets[z];
+			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z]) obj[props[z]] = event.page[z] - this.options.offsets[z] - tip[z];
 		}
+		$(this).setStyles(obj);
 	},
-
+	
 	fill: function(element, contents){
-		(typeof contents == 'string') ? element.set('html', contents) : element.adopt(contents);
+		if(typeof contents == 'string') element.set('html', contents);
+		else element.adopt(contents);
 	},
 
-	show: function(){
-		this.fireEvent('show', this.tip);
+	show: function(el){
+		this.fireEvent('show', [$(this), el]);
 	},
 
-	hide: function(){
-		this.fireEvent('hide', this.tip);
+	hide: function(el){
+		this.fireEvent('hide', [$(this), el]);
 	}
 
 });
