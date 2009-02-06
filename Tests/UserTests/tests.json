@@ -5,7 +5,7 @@
 	"Browser": {
 		"IframeShim":['all']
 	},
-	"Class.Extras": {
+	"Class": {
 		"Chain.Wait":['all']
 	},
 	"Element":{
