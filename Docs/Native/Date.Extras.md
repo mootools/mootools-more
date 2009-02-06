@@ -94,5 +94,26 @@ Date Method: get('lastdayofmonth'){#Date:getLastDayOfMonth}
 
 * (*integer*) the last day of the month (i.e. for December, you'll get 31).
 
+Date.Extras Language Localization {#Localization}
+==========================================
+
+*Date.Extras.js* includes the following key/values for localization.
+
+* getOrdinal - (*function*) A method that returns the proper ordinal ("th", "st", "nd", etc) given a day of the month.
+* lessThanMinuteAgo - (*string*) 'less than a minute ago'
+* minuteAgo - (*string*) 'about a minute ago'
+* minutesAgo - (*string*) '{delta} minutes ago' where {delta} is the number of minutes
+* hourAgo - (*string*) 'about an hour ago' 
+* hoursAgo - (*string*) 'about {delta} hours ago' where {delta} is the number of hours
+* dayAgo - (*string*) '1 day ago'
+* daysAgo - (*string*) '{delta} days ago' where {delta} is the number of days
+* lessThanMinuteUntil - (*string*) 'less than a minute from now'
+* minuteUntil - (*string*) 'about a minute from now'
+* minutesUntil - (*string*) '{delta} minutes from now' where {delta} is the number of minutes
+* hourUntil - (*string*) 'about an hour from now'
+* hoursUntil - (*string*) 'about {delta} hours from now' where {delta} is the number of hours
+* dayUntil - (*string*) '1 day from now'
+* daysUntil - (*string*) '{delta} days from now' where {delta} is the number of days
+
 [Date.js]: /docs/Native/Date
 [Date:parse]: /docs/Native/Date#Date:parse

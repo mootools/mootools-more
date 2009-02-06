@@ -61,4 +61,4 @@ The string used to bind the instance of the class to the element.
 In the example above, because we have a *toElement* method and because we define the *property* property in the class, the method *occlude* doesn't require any arguments as it uses these by default. See also [Class.ToElement][];
 
 [Element.Storage]: http://mootools.net/docs/Element/Element#Element:store
-[Class.ToElement]: http://www.mootools.net/more/docs/Class.Extras/ToElement
+[Class.ToElement]: http://www.mootools.net/more/docs/Class/ToElement

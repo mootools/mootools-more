@@ -86,8 +86,8 @@
 			return this;
 		},
 		
-		dir: function(){
-			console.dir(data);
+		list: function(){
+			return $A(data.languages);
 		}
 
 	});

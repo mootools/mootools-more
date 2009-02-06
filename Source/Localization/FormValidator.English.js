@@ -15,6 +15,21 @@ MooTools.lang.set('usENG', 'FormValidator', {
 	currencyDollar:'Please enter a valid $ amount. For example $100.00 .',
 	oneRequired:'Please enter something for at least one of these inputs.',
 	errorPrefix: 'Error: ',
-	warningPrefix: 'Warning: '
+	warningPrefix: 'Warning: ',
+	
+	//FormValidator.Extras
+	
+	noSpace: 'There can be no spaces in this input.',
+	reqChkByNode: 'No items are selected.',
+	requiredChk: 'This field is required.',
+	reqChkByName: 'Please select a {label}.',
+	match: 'This field needs to match the {matchName} field',
+	startDate: 'the start date',
+	endDate: 'the end date',
+	currendDate: 'the current date',
+	afterDate: 'The date should be the same or after {label}.',
+	beforeDate: 'The date should be the same or before {label}.',
+	startMonth: 'Please select a start month',
+	sameMonth: 'These two dates must be in the same month - you must change one or the other.'
 
 });

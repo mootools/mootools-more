@@ -14,7 +14,7 @@
 
 	},
 
-	"Class.Extras": {
+	"Class": {
 
 		"Class.Refactor": {
 			"deps":["Class"],

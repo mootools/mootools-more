@@ -460,6 +460,17 @@ Returns a value with as many digits as specified.
 
 * (*string*) the string with zeros prepended to it to make it the specified length
 
+Date Language Localization {#Localization}
+==========================================
+
+*Date.js* includes the following key/values for localization.
+
+* months - (*array*) An array of month names for the language (January, February, etc)
+* days - (*array*) An array of names for the days of the week (Monday, Tuesday, etc)
+* dateOrder - (*array*) An array specifying the order for date expression followed by a default delimiter (usually /). US english is *['month', 'date', 'year', '/']*, for instance.
+* AM - (*string*) the string that denotes morning in 12 hour time
+* PM - (*string*) the string that denotes evening in 12 hour time
+
 [Date:increment]: #Date:increment
 [Date:$parsePatterns]: #Date:parsePatterns
 [Date.Extras.js]: /docs/Native/Date.Extras

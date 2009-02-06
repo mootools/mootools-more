@@ -130,6 +130,24 @@ Takes in an id of a field and matches them together. Can also take *matchName* t
 	<input type="input" class="validate-match matchInput:'password' matchName:'password'"/>
 	//error msg: This field needs to match the password field.
 
+FormValidator.Extras Language Localization {#Localization}
+==========================================
+
+*FormValidator.Extras.js* includes the following key/values for localization.
+
+* noSpace - (*string*) 'There can be no spaces in this input.'
+* reqChkByNode - (*string*) 'No items are selected.'
+* requiredChk - (*string*) 'This field is required.'
+* reqChkByName - (*string*) 'Please select a {label}.'
+* match - (*string*) 'This field needs to match the {matchName} field' where *matchName* is the name of another field
+* startDate - (*string*)  'the start date'
+* endDate - (*string*)  'the end date'
+* currendDate - (*string*)  'the current date'
+* afterDate - (*string*)  'The date should be the same or after {label}.' where *label* is the name of another date field
+* beforeDate - (*string*)  'The date should be the same or before {label}.' where *label* is the name of another date field
+* startMonth - (*string*)  'Please select a start month'
+* sameMonth - (*string*)  'These two dates must be in the same month - you must change one or the other.'
+
 
 [FormValidator]: #FormValidator
 [FormValidator:add]: #AddingValidators:add

@@ -2,5 +2,4 @@ MooTools Plugins and Enhancements Repository
 
 ### TO DO
 
-* Rename Class.Extras/ to Class/ (per Tom)
-* Localization needs docs
+* Need to add tests for all libs
