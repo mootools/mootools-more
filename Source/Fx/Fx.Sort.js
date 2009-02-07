@@ -9,27 +9,28 @@ Script: Fx.Sort.js
 		Aaron Newton
 
 */
+
 Fx.Sort = new Class({
 
 	Extends: Fx.Elements,
 
 	options: {
-			mode: 'vertical' //or 'horizontal'
+		mode: 'vertical' //or 'horizontal'
 	},
 
 	initialize: function(elements, options){
-			this.parent(elements, options);
-			//set the position of each element to relative
-			this.elements.each(function(el){
-					if (el.getStyle('position') == 'static') el.setStyle('position', 'relative');
-			});
-			this.setDefaultOrder();
+		this.parent(elements, options);
+		//set the position of each element to relative
+		this.elements.each(function(el){
+			if (el.getStyle('position') == 'static') el.setStyle('position', 'relative');
+		});
+		this.setDefaultOrder();
 	},
 
 	setDefaultOrder: function(){
-			this.currentOrder = this.elements.map(function(el, index){
-				return index;
-			});
+		this.currentOrder = this.elements.map(function(el, index){
+			return index;
+		});
 	},
 
 	sort: function(newOrder){
@@ -40,7 +41,7 @@ Fx.Sort = new Class({
 		var vert = this.options.mode == "vertical";
 		//calculate the current location of all the elements
 		var current = this.elements.map(function(el, index){
-			var size = el.getComputedSize({styles:['border','padding','margin']});
+			var size = el.getComputedSize({styles: ['border', 'padding', 'margin']});
 			var val;
 			if (vert){
 				val =	{
@@ -57,7 +58,7 @@ Fx.Sort = new Class({
 				};
 				left += val.width;
 			}
-			var plain = vert?'top':'left';
+			var plain = vert ? 'top' : 'left';
 			zero[index]={};
 			var start = el.getStyle(plain).toInt();
 			zero[index][plain] = ($chk(start))?start:0;
@@ -67,7 +68,7 @@ Fx.Sort = new Class({
 		//if the array passed in is not the same size as
 		//the amount of elements we have, fill it in
 		//or cut it short
-		newOrder = newOrder.map(function(i){ return i.toInt() });
+		newOrder = newOrder.map(function(i){ return i.toInt(); });
 		if (newOrder.length != this.elements.length){
 			this.currentOrder.each(function(index){
 				if (!newOrder.contains(index)) newOrder.push(index);
@@ -125,7 +126,7 @@ Fx.Sort = new Class({
 	getDefaultOrder: function(){
 		return this.elements.map(function(el, index){
 			return index;
-		})
+		});
 	},
 
 	forward: function(){

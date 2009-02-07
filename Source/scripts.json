@@ -46,7 +46,7 @@
 	"Browser": {
 
 		"Browser.Extras": {
-			"deps": ["Browser", "String.Extras", "DomReady"],
+			"deps": ["Browser", "String.Extras"],
 			"desc": "Extends the Window native class with numerous shortcuts."
 		},
 		

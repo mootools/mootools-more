@@ -24,7 +24,6 @@ Element.implement({
 		return result;
 	},
 
-	// Daniel Steigerwald - MIT licence
 	expose: function(){
 		var style = this.style;
 		var cssText = style.cssText;
@@ -33,7 +32,7 @@ Element.implement({
 		if (style.display == 'none') style.display = '';
 		return (function(){ return this.set('style', cssText); }).bind(this);
 	},
-	
+
 	getDimensions: function(options){
 		options = $merge({computeSize: false},options);
 		var dim = {};
@@ -105,16 +104,14 @@ Element.implement({
 				});
 			});
 		});
-		if ($chk(size.width)){
-			size.width = size.width+this.offsetWidth+size.computedWidth;
-			size.totalWidth = size.width + size.totalWidth;
-			delete size.computedWidth;
-		}
-		if ($chk(size.height)){
-			size.height = size.height+this.offsetHeight+size.computedHeight;
-			size.totalHeight = size.height + size.totalHeight;
-			delete size.computedHeight;
-		}
+		
+		['width', 'height'].each(function(v){
+			if(!$chk(size[v])) return;
+			
+			size[v] = size[v]+this['offset'+v.capitalize()]+size['computed'+v.capitalize()];
+			delete size['computed'+v.capitalize()];
+		}, this);
+		
 		return $extend(styles, size);
 	}
 

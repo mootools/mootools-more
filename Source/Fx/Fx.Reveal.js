@@ -9,6 +9,7 @@ Script: Fx.Reveal.js
 		Aaron Newton
 
 */
+
 Fx.Reveal = new Class({
 
 	Extends: Fx.Morph,
@@ -20,8 +21,8 @@ Fx.Reveal = new Class({
 		mode:'vertical',
 		heightOverride: null,
 		widthOverride: null
-/*	onShow: $empty,
-		onHide: $empty */
+		/*onShow: $empty,
+		onHide: $empty*/
 	},
 
 	dissolve: function(){
@@ -96,7 +97,7 @@ Fx.Reveal = new Class({
 						display: 'block',
 						position:'absolute'
 					});
-					var setToAuto = this.element.style.height === ""||this.element.style.height=="auto";
+					var setToAuto = this.element.style.height === "" || this.element.style.height=="auto";
 					//enable opacity effects
 					if (this.options.transitionOpacity) this.element.setStyle('opacity',0);
 					//create the styles for the opened/visible state
@@ -118,7 +119,7 @@ Fx.Reveal = new Class({
 						height: 0,
 						display: 'block'
 					};
-					$each(startStyles, function(style, name){ zero[name] = 0 }, this);
+					$each(startStyles, function(style, name){ zero[name] = 0; }, this);
 					var overflowBefore = this.element.getStyle('overflow');
 					//set to zero
 					this.element.setStyles($merge(zero, {overflow: 'hidden'}));
@@ -164,7 +165,7 @@ Fx.Reveal = new Class({
 		try {
 			if (this.element.getStyle('display') == "none" || 
 				 this.element.getStyle('visiblity') == "hidden" || 
-				 this.element.getStyle('opacity')==0){
+				 this.element.getStyle('opacity') == 0){
 				this.reveal();
 		 	} else {
 				this.dissolve();
@@ -210,7 +211,7 @@ Element.implement({
 	nix: function(){
 		var  params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
 		this.get('reveal', params.options).dissolve().chain(function(){
-			this[params.destroy?'destroy':'dispose']();
+			this[params.destroy ? 'destroy' : 'dispose']();
 		}.bind(this));
 		return this;
 	}

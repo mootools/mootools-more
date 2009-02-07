@@ -44,8 +44,7 @@ Fx.Scroll = new Class({
 
 	compute: function(from, to, delta){
 		var now = [];
-		var x = 2;
-		x.times(function(i){
+		(2).times(function(i){
 			now.push(Fx.compute(from[i], to[i], delta));
 		});
 		return now;
