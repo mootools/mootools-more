@@ -18,7 +18,7 @@ var IframeShim = new Class({
 		display: false,
 		zindex: null,
 		margin: 0,
-		offsets: {x: 0, y: 0},
+		offset: {x: 0, y: 0},
 		browsers: (Browser.Engine.trident4 || (Browser.Engine.gecko && !Browser.Engine.gecko19 && Browser.Platform.mac))
 	},
 
@@ -74,15 +74,15 @@ var IframeShim = new Class({
 		if ($type(this.options.margin)){
 			size.x = size.x-(this.options.margin*2);
 			size.y = size.y-(this.options.margin*2);
-			this.options.offsets.x += this.options.margin; 
-			this.options.offsets.y += this.options.margin;
+			this.options.offset.x += this.options.margin; 
+			this.options.offset.y += this.options.margin;
 		}
 		this.shim.set({
 			width: size.x,
 			height: size.y
 		}).position({
 			relativeTo: this.element,
-			offsets: this.options.offset
+			offset: this.options.offset
 		});
 		return this;
 	},

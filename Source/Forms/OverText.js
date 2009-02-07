@@ -18,8 +18,8 @@ var OverText = new Class({
 //	onTextHide: $empty,
 //	onTextShow: $empty,
 		positionOptions: {
-			position:"upperLeft",
-			edge:"upperLeft",
+			position: "upperLeft",
+			edge: "upperLeft",
 			offset: {
 				x: 4,
 				y: 2
@@ -33,7 +33,7 @@ var OverText = new Class({
 
 	initialize: function(inputs, options){
 		this.setOptions(options);
-		$splat($(inputs)||$$(inputs)).each(this.addElement, this);
+		$splat($(inputs) || $$(inputs)).each(this.addElement, this);
 		OverText.instances.push(this);
 		if (this.options.poll) this.poll();
 	},
@@ -44,15 +44,15 @@ var OverText = new Class({
 		if (!val) return;
 		this.overTxtEls.push(el);
 		var txt = new Element('div', {
-		  'class': 'overTxtDiv',
+			'class': 'overTxtDiv',
 			styles: {
 				lineHeight: 'normal',
 				position: 'absolute'
 			},
-		  html: val,
-		  events: {
-		    click: this.hideTxt.pass([el, true], this)
-		  }
+			html: val,
+			events: {
+				click: this.hideTxt.pass([el, true], this)
+			}
 		}).inject(el, 'after');
 		el.addEvents({
 			focus: this.hideTxt.pass([el, true], this),
