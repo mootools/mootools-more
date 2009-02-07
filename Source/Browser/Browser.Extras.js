@@ -29,7 +29,7 @@ $extend(Browser, {
 
 	mergeQueryString: function(values, url){
 		url = $pick(url, window.location.href);
-		var merged = $merge(url.contains('?') ? this.getQueryStringValues(url) : url.parseQuery(), values);
+		var merged = $merge(url.contains('?') ? this.getQueryString(url) : url.parseQuery(), values);
 		var newUrl = url.contains('?') ? url.split('?')[0] + '?' : url.contains('=') ? '' : url + '?';
 		for (key in merged) newUrl += key + '=' +merged[key] + '&';
 		return newUrl.substring(0, newUrl.length-1);

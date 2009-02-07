@@ -105,11 +105,13 @@ Element.implement({
 			});
 		});
 		
-		['width', 'height'].each(function(v){
-			if(!$chk(size[v])) return;
+		['Width', 'Height'].each(function(value){
+			var lower = value.toLowerCase();
+			if(!$chk(size[lower])) return;
 			
-			size[v] = size[v]+this['offset'+v.capitalize()]+size['computed'+v.capitalize()];
-			delete size['computed'+v.capitalize()];
+			size[lower] = size[lower]+this['offset'+value]+size['computed'+value];
+			size['total'+value] = size[lower] + size['total'+value];
+			delete size['computed'+value];
 		}, this);
 		
 		return $extend(styles, size);
