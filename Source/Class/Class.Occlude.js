@@ -8,6 +8,7 @@ Script: Class.Occlude.js
 	Authors:
 		Aaron Newton
 */
+
 Class.Occlude = new Class({
 
 	// usage: if (this.occlude()) return this.occluded;

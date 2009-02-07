@@ -8,8 +8,9 @@ Script: Class.Refactor.js
 	Authors:
 		Aaron Newton
 */
+
 Class.refactor = function(orig, props){
-	props = $extend($unlink(props), { Extends: orig	});
+	props = $extend($unlink(props), {Extends: orig});
 	var update = new Class(props);
 	$each(orig, function(v, k){
 		update[k] = update[k] || v;

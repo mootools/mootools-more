@@ -8,6 +8,7 @@ Script: Class.Binds.js
 	Authors:
 		Aaron Newton
 */
+
 (function(){
 
 	var binder = function(self, binds){

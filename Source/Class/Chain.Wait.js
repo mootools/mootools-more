@@ -8,6 +8,7 @@ Script: Chain.Wait.js
 	Authors:
 		Aaron Newton
 */
+
 (function(){
 
 	var wait = {

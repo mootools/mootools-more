@@ -8,6 +8,7 @@ Script: Class.ToElement.js
 	Authors:
 		Aaron Newton
 */
+
 Class.ToElement = new Class({
 
 	toElement: function(){
