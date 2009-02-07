@@ -1,6 +1,6 @@
 /*
 Script: Class.Binds.js
-	Specs for String.Extras.js
+	Specs for Class.Binds.js
 
 License:
 	MIT-style license.
