@@ -30,7 +30,7 @@ There are two types of elements that (sometimes) prohibit you from positioning a
 ### Options
 
 * display -  (*boolean*) display the shim on instantiation; defaults to *false*
-* zindex -  (*integer*) the z-index of the shim; optional, default is 1 less than the element
+* zIndex -  (*integer*) the z-index of the shim; optional, default is 1 less than the element
 * margin -  (*integer*) make the iframe smaller than the element to give a buffer (for things like shadows)
 * offset -  (*object: {x:#, y:#}*) move the iframe up/down, left/right relative to the element
 * className - (*string*) className for the shim; defaults to *"iframeShim"*

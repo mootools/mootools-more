@@ -16,9 +16,9 @@ var IframeShim = new Class({
 	options: {
 		className: 'iframeShim',
 		display: false,
-		zindex: null,
+		zIndex: null,
 		margin: 0,
-		offset: {x: 0, y: 0},
+		offset: {'x': 0, 'y': 0},
 		browsers: (Browser.Engine.trident4 || (Browser.Engine.gecko && !Browser.Engine.gecko19 && Browser.Platform.mac))
 	},
 
@@ -28,48 +28,39 @@ var IframeShim = new Class({
 		this.element = $(element);
 		if (this.occlude()) return this.occludes;
 		this.setOptions(options);
-		this.makeShim();
-	},
-
-	makeShim: function(){
-		if (!this.options.browsers) return;
-		
-		var zIndex = this.element.getStyle('zIndex').toInt();
-		if (!zIndex){
-			zIndex = 5;
-			this.element.setStyle('zIndex', 5);
+		if(this.options.browsers){
+		  var zIndex = this.element.getStyle('zIndex').toInt();
+  		if (!zIndex){
+  			zIndex = 5;
+  			this.element.setStyle('zIndex', 5);
+  		}
+  		var z = ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1;
+  		this.shim = new Element('iframe', {
+  			src: (window.location.protocol == 'https') ? '://0' : 'javascript:void(0)',
+  			scrolling: 'no',
+  			frameborder: 0,
+  			styles: {
+  				zIndex: z,
+  				position: 'absolute',
+  				border: 'none',
+  				filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
+  			},
+  			'class': this.options.className
+  		}).store('IframeShim', this);
+  		var inject = (function(){
+  			this.shim.inject(this.element, 'after');
+  			this[this.options.display ? 'show' : 'hide']();
+  			this.fireEvent('inject');
+  		}).bind(this);
+  		if (Browser.Engine.trident && !IframeShim.ready) window.addEvent('load', inject);
+  		else inject();
+		} else {
+		  ['position', 'hide', 'show', 'dispose'].each(function(m){ this[m] = $lambda(this) }, this);
 		}
-		
-		var z = zIndex-1;
-		if ($chk(this.options.zindex) && zIndex > this.options.zindex)
-			 z = this.options.zindex;
-		
-		this.shim = new Element('iframe').set({
-			src: (window.location.protocol == 'https') ? '://0' : 'javascript:void(0)',
-			scrolling: 'no',
-			frameborder: 0,
-			styles: {
-				zIndex: z,
-				position: 'absolute',
-				border: 'none',
-				filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
-			},
-			'class': this.options.className
-		}).store('IframeShim', this);
-		
-		var inject = (function(){
-			this.shim.inject(this.element, 'after');
-			this[this.options.display ? 'show' : 'hide']();
-			this.fireEvent('inject');
-		}).bind(this);
-		
-		if (Browser.Engine.trident && !IframeShim.ready) window.addEvent('load', inject);
-		else inject();
 	},
 
 	position: function(){
-		if (!this.options.browsers || !IframeShim.ready) return this;
-		
+		if (!IframeShim.ready) return this;
 		var size = this.element.measure(function(){ return this.getSize(); });
 		if ($type(this.options.margin)){
 			size.x = size.x-(this.options.margin*2);
@@ -77,34 +68,23 @@ var IframeShim = new Class({
 			this.options.offset.x += this.options.margin; 
 			this.options.offset.y += this.options.margin;
 		}
-		this.shim.set({
-			width: size.x,
-			height: size.y
-		}).position({
-			relativeTo: this.element,
-			offset: this.options.offset
-		});
+		this.shim.set({width: size.x, height: size.y}).position({relativeTo: this.element, offset: this.options.offset});
 		return this;
 	},
 
 	hide: function(){
-		if (this.options.browsers) this.shim.hide();
-		
+	  this.shim.hide();
 		return this;
 	},
 
 	show: function(){
-		if (this.options.browsers){
-			this.shim.show();
-			this.position();
-		}
-		
+	  this.shim.show();
+		this.position();
 		return this;
 	},
 
 	dispose: function(){
-		if (this.options.browsers) this.shim.dispose();
-		
+	  this.shim.dispose();
 		return this;
 	}
 
