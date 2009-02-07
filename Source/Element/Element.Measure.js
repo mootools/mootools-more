@@ -49,7 +49,7 @@ Element.implement({
 				dim = getSize(this, options);
 			}catch(e){}
 		}
-		return $chk(dim.x)?$extend(dim, {width: dim.x, height: dim.y}):$extend(dim, {x: dim.width, y: dim.height});
+		return $chk(dim.x) ? $extend(dim, {width: dim.x, height: dim.y}) : $extend(dim, {x: dim.width, y: dim.height});
 	},
 
 	getComputedSize: function(options){

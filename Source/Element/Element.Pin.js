@@ -10,32 +10,27 @@ Script: Element.Pin.js
 */
 
 window.addEvent('domready', function(){
-
 	var test = new Element('div').setStyles({
 		position: 'fixed',
 		top: 0,
 		right: 0
 	}).inject(document.body);
-	var supported = (test.offsetTop === 0);
+	Browser.supportsPositionFixed = (test.offsetTop === 0);
 	test.dispose();
-	Browser.supportsPositionFixed = supported;
-
 });
 
 Element.implement({
 
 	pin: function(enable){
-		if (!Browser.loaded && window.dbug) dbug.log('cannot pin ' + this + ' natively because the dom is not ready');
-		if (this.getStyle('display') == 'none'){
-			if (window.dbug) dbug.log('cannot pin ' + this + ' because it is hidden');
+		if (this.getStyle('display') == 'none')
 			return;
-		}
+		
 		if (enable!==false){
 			var p = this.getPosition();
 			if (!this.retrieve('pinned')){
 				var pos = {
-					top: (p.y - window.getScroll().y),
-					left: (p.x - window.getScroll().x)
+					top: p.y - window.getScroll().y,
+					left: p.x - window.getScroll().x
 				};
 				if (Browser.supportsPositionFixed){
 					this.setStyle('position','fixed').setStyles(pos);
@@ -46,15 +41,15 @@ Element.implement({
 						top: p.y,
 						left: p.x
 					});
-					this.store('scrollFixer', function(){
+					this.store('scrollFixer', (function(){
 						if (this.retrieve('pinned')){
 							var to = {
-								top: (pos.top.toInt() + window.getScroll().y),
-								left: (pos.left.toInt() + window.getScroll().x)
+								top: pos.top.toInt() + window.getScroll().y,
+								left: pos.left.toInt() + window.getScroll().x
 							};
 							this.setStyles(to);
 						}
-					}.bind(this));
+					}).bind(this));
 					window.addEvent('scroll', this.retrieve('scrollFixer'));
 				}
 				this.store('pinned', true);
@@ -70,15 +65,15 @@ Element.implement({
 			var reposition;
 			if (Browser.supportsPositionFixed && !this.retrieve('pinnedByJS')){
 				reposition = {
-					top: (p.y + window.getScroll().y),
-					left: (p.x + window.getScroll().x)
+					top: p.y + window.getScroll().y,
+					left: p.x + window.getScroll().x
 				};
 			} else {
 				this.store('pinnedByJS', false);
 				window.removeEvent('scroll', this.retrieve('scrollFixer'));
 				reposition = {
-					top: (p.y),
-					left: (p.x)
+					top: p.y,
+					left: p.x
 				};
 			}
 			this.setStyles($merge(reposition, {position: 'absolute'}));
