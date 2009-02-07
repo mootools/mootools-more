@@ -48,6 +48,7 @@ $extend(Browser, {
 	}
 
 });
+
 window.addEvent('domready', function(){
 	//just a shortcut so you can do
 	//Browser.qs['foo']
