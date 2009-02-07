@@ -54,9 +54,8 @@ var IframeShim = new Class({
   		}).bind(this);
   		if (Browser.Engine.trident && !IframeShim.ready) window.addEvent('load', inject);
   		else inject();
-		} else {
-		  ['position', 'hide', 'show', 'dispose'].each(function(m){ this[m] = $lambda(this) }, this);
-		}
+		} else 
+		  ['position', 'hide', 'show', 'dispose'].each(function(m){ this[m] = $lambda(this); }, this);
 	},
 
 	position: function(){
