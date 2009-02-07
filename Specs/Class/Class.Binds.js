@@ -8,7 +8,7 @@ License:
 (function(){
 	var Tester = new Class({
 		Implements: Class.Binds,
-		binds: ["getFoo"],
+		Binds: ["getFoo"],
 		initialize: function(foo){
 			this.foo = foo;
 		},
@@ -32,7 +32,7 @@ License:
 	});
 	var Tester3 = new Class({
 		Implements: [Class.Binds, Options],
-		binds: ["getFoo"],
+		Binds: ["getFoo"],
 		initialize: function(foo){
 			this.foo = foo;
 			this.setOptions({a: 'b'});
