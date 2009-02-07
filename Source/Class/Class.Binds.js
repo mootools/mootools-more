@@ -31,10 +31,4 @@ Script: Class.Binds.js
 		return binder(self, binds);
 	};
 
-	Class.Mutators.binds = function(self, binds){
-		if (!self.binds) return self;
-		delete self['binds'];
-		return binder(self, binds);
-	};
-
 })();
