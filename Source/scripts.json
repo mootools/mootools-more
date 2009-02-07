@@ -1,13 +1,13 @@
 {
 
-	"Core":{
+	"Core": {
 
-		"dbug":{
+		"dbug": {
 			"deps":["dbug"],
 			"desc":"Wrapper for the firebug console.log() function."
 		},
 
-		"MooTools.Lang":{
+		"MooTools.Lang": {
 			"deps": ["Class.Extras"],
 			"desc": ["Enables classes to contain text that can be localized to specific languages."]
 		}
@@ -17,54 +17,54 @@
 	"Class": {
 
 		"Class.Refactor": {
-			"deps":["Class"],
-			"desc":"Allows for a class to extend itself without damaging it's namespace."
+			"deps": ["Class"],
+			"desc": "Allows for a class to extend itself without damaging it's namespace."
 		},
 
 		"Class.Binds": {
-			"deps":["Class"],
-			"desc":"Adds the Binds Mutator to all classes."
+			"deps": ["Class"],
+			"desc": "Adds the Binds Mutator to all classes."
 		},
 
-		"Chain.Wait":{
-			"deps":["Class.Extras"],
-			"desc":"Adds a delay method for chaining that allows you to easily introduce pauses."
+		"Chain.Wait": {
+			"deps": ["Class.Extras"],
+			"desc": "Adds a delay method for chaining that allows you to easily introduce pauses."
 		},
 
 		"Class.Occlude": {
-			"deps":["Class", "Element"],
-			"desc":"Mixin class for preventing a class from applying itself to the same element twice."
+			"deps": ["Class", "Element"],
+			"desc": "Mixin class for preventing a class from applying itself to the same element twice."
 		},
 
 		"Class.ToElement": {
-			"deps":["Class"],
-			"desc":"Mixin class that returns *this.element*. Allows you to do $(myInstance)."
+			"deps": ["Class"],
+			"desc": "Mixin class that returns *this.element*. Allows you to do $(myInstance)."
 		}
 
 	},
 
-	"Browser":{
+	"Browser": {
 
 		"Browser.Extras": {
 			"deps": ["Browser", "String.Extras", "DomReady"],
 			"desc": "Extends the Window native class with numerous shortcuts."
 		},
 		
-		"IframeShim":{
-			"deps":["Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude", "Class.ToElement"],
-			"desc":"Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
+		"IframeShim": {
+			"deps": ["Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude", "Class.ToElement"],
+			"desc": "Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
 		}
 
 	},
 
-	"Native":{
+	"Native": {
 
-		"Date":{
+		"Date": {
 			"deps": ["Core", "String", "Number", "Hash", "Array", "MooTools.Lang", "Date.English.US"],
 			"desc": "Extends the Date native object to include methods useful in managing dates."
 		},
 
-		"Date.Extras":{
+		"Date.Extras": {
 			"deps": ["Date"],
 			"desc": "Extends the Date native object to include extra methods (on top of those in Date.js)."
 		},
@@ -86,11 +86,11 @@
 
 	},
 
-	"Element":{
+	"Element": {
 
 		"Element.Delegation": {
-			"deps":["Element.Event"],
-			"desc":"Delegates events for child elements to their parents for greater efficiency."
+			"deps": ["Element.Event"],
+			"desc": "Delegates events for child elements to their parents for greater efficiency."
 		},
 
 		"Element.Forms": {
@@ -125,20 +125,20 @@
 
 	},
 
-	"Forms":{
+	"Forms": {
 
-		"FormValidator":{
-			"deps":["Class.Extras", "Class.Binds", "Class.ToElement", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
-			"optional":["Fx.Reveal"],
-			"desc":"A css-class based form validation system."
+		"FormValidator": {
+			"deps": ["Class.Extras", "Class.Binds", "Class.ToElement", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
+			"optional": ["Fx.Reveal"],
+			"desc": "A css-class based form validation system."
 		},
 
 		"FormValidator.Extras": {
-			"deps":["FormValidator"],
-			"desc":"Additional validators for FormValidator."
+			"deps": ["FormValidator"],
+			"desc": "Additional validators for FormValidator."
 		},
 
-		"OverText":{
+		"OverText": {
 			"deps": ["Class.Extras", "Element.Event", "Element.Position", "Element.Shortcuts"],
 			"desc": "Displays text over empty inputs until the user focuses the input or adds information."
 		}
@@ -193,22 +193,22 @@
 		
 	},
 
-	"Request":{
-		"Request.JsonP":{
-			"deps":["Browser", "Element", "Request", "Class.Extras"],
-			"desc":"Creates a Json request using a script tag include and handles the callbacks for you."
+	"Request": {
+		"Request.JsonP": {
+			"deps": ["Browser", "Element", "Request", "Class.Extras"],
+			"desc": "Creates a Json request using a script tag include and handles the callbacks for you."
 		},
 		"Request.NoCache": {
-			"deps":["Request", "Request.HTML", "Class.Refactor"],
-			"desc":"Extends Request and Request.HTML to automatically include a unique noCache value to prevent request caching."
+			"deps": ["Request", "Request.HTML", "Class.Refactor"],
+			"desc": "Extends Request and Request.HTML to automatically include a unique noCache value to prevent request caching."
 		},
 		"Request.Queue": {
-			"deps":["Request"],
-			"desc":"Manages a group of Request instances so that connections are queued."
+			"deps": ["Request"],
+			"desc": "Manages a group of Request instances so that connections are queued."
 		}
 		"Request.Timer": {
-			"deps":["Request"],
-			"desc":"Requests the same url at a time interval that increases when no data is returned from the requested server."
+			"deps": ["Request"],
+			"desc": "Requests the same url at a time interval that increases when no data is returned from the requested server."
 		}
 	},
 
@@ -272,107 +272,93 @@
 
 	"Localization": {
 
-		"Date.Dutch":{
-			"deps":["MooTools.Lang"],
-			"desc":"Date messages in Dutch (feel free to send in your own translations).",
+		"Date.Dutch": {
+			"deps": ["MooTools.Lang"],
+			"desc": "Date messages in Dutch (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"Date.English.GB":{
-			"deps":["MooTools.Lang"],
-			"desc":"Date messages in English (with conventions for Great Britain) (feel free to send in your own translations).",
+		"Date.English.GB": {
+			"deps": ["MooTools.Lang"],
+			"desc": "Date messages in English (with conventions for Great Britain) (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"Date.English.US":{
-			"deps":["MooTools.Lang"],
-			"desc":"Date messages in English (with conventions for the US) (feel free to send in your own translations).",
+		"Date.English.US": {
+			"deps": ["MooTools.Lang"],
+			"desc": "Date messages in English (with conventions for the US) (feel free to send in your own translations).",
 		},
 
-		"Date.Norwegian":{
-			"deps":["MooTools.Lang"],
-			"desc":"Date messages in Norwegian (feel free to send in your own translations).",
+		"Date.Norwegian": {
+			"deps": ["MooTools.Lang"],
+			"desc": "Date messages in Norwegian (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.Arabic":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Arabic (feel free to send in your own translations).",
+		"FormValidator.Arabic": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Arabic (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.Catalan":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Catalan (feel free to send in your own translations).",
+		"FormValidator.Catalan": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Catalan (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.Chinese":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Chinese (feel free to send in your own translations).",
+		"FormValidator.Chinese": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Chinese (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.Dutch":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Dutch (feel free to send in your own translations).",
+		"FormValidator.Dutch": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Dutch (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.English.US":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in English (feel free to send in your own translations)."
+		"FormValidator.English.US": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in English (feel free to send in your own translations)."
 		},
 
-		"FormValidator.French":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in French (feel free to send in your own translations).",
+		"FormValidator.French": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in French (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.Italian":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Italian (feel free to send in your own translations).",
+		"FormValidator.Italian": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Italian (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.Norwegian":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Norwegian (feel free to send in your own translations).",
+		"FormValidator.Norwegian": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Norwegian (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.Portuguese":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Portuguese (feel free to send in your own translations).",
+		"FormValidator.Portuguese": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Portuguese (feel free to send in your own translations).",
 			"exclude": true
 		},		
 
-		"FormValidator.Russian":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Russian (feel free to send in your own translations).",
+		"FormValidator.Russian": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Russian (feel free to send in your own translations).",
 			"exclude": true
 		},
 
-		"FormValidator.Spanish":{
-			"deps":["MooTools.Lang"],
-			"desc":"FormValidator messages in Spanish (feel free to send in your own translations).",
+		"FormValidator.Spanish": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Spanish (feel free to send in your own translations).",
 			"exclude": true
 		},
-
-	},
-	
-	"Beta": {
-	
-		"PostEditor":{
-			"deps": ["Class.Extras", "Element.Style", "Element.Event"],
-			"desc": "A MooTools 1.2 compliant version of PostEditor for typing code into textareas."
-		},
-
-		"PostEditor.Forum":{
-			"deps": ["PostEditor"],
-			"desc": "A default set of snippets for PostEditor."
-		}
 
 	}
 
