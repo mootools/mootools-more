@@ -77,7 +77,7 @@ Element.Properties.validatorProps = {
 
 var FormValidator = new Class({
 
-	Implements:[Options, Events, ToElement],
+	Implements:[Options, Events, Class.ToElement],
 	
 	Binds: ['onSubmit'],
 

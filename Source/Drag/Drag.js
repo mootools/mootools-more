@@ -13,7 +13,7 @@ Script: Drag.js
 
 var Drag = new Class({
 
-	Implements: [Events, Options, ToElement],
+	Implements: [Events, Options, Class.ToElement],
 
 	options: {/*
 		onBeforeStart: $empty,
