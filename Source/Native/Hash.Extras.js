@@ -23,7 +23,7 @@ Hash.implement({
 	},
 
 	cleanValues: function(method){
-		method = method||$defined;
+		method = method || $defined;
 		this.each(function(v, k){
 			if (!method(v)) this.erase(k);
 		}, this);
@@ -31,9 +31,9 @@ Hash.implement({
 	},
 
 	run: function(){
-		var args = $arguments;
+		var args = arguments;
 		this.each(function(v, k){
-			if ($type(v) == "function") v.run(args);
+			if ($type(v) == 'function') v.run(args);
 		});
 	}
 
