@@ -18,11 +18,11 @@ Creates a Json request using script tag injection and handles the callbacks for 
 
 ### Arguments
 
-1. url - (*url*) the url to get the json data
-2. options - (*object*) an object with key/value options
+1. options - (*object*) an object with key/value options
 
 ### Options
 
+* url - (*url*) the url to get the json data
 * callBackKey - (*string*) the key in the url that the server uses to wrap the Json results. So, for example, if you used *callBackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; defaults to "callback". This must be defined correctly.
 * queryString - (*string*) additional querystring values to append to the url
 * data - (*object*) additional key/value data to append to the url
@@ -46,7 +46,7 @@ Creates a Json request using script tag injection and handles the callbacks for 
 			query: 'ipod'
 		},
 		onComplete: myFunction.bind(someObject)
-	}).request();
+	}).send();
 
 The above example would generate this url:  
 
@@ -55,14 +55,14 @@ The above example would generate this url:
 
 It would embed a script tag (in the head of the document) with this url and, when it loaded, execute the "myFunction" callback defined.
 
-Request.JsonP Method: request {#Request-JsonP:request}
+Request.JsonP Method: send {#Request-JsonP:send}
 --------------------------------------
 
 Executes the Json request.
 
 ### Syntax
 
-	myJsonP.request();
+	myJsonP.send();
 
 ### Returns
 

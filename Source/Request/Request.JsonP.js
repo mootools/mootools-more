@@ -13,28 +13,29 @@ Request.JsonP = new Class({
 
 	Implements: [Options, Events],
 
-	options: {
-//	onComplete: $empty,
-//	globalFunction: '',
-//	abortAfter: 0,
-		callBackKey: "callback",
-		queryString: "",
+	options: {/*
+	  onComplete: $empty,*/
+	  url: '',
 		data: {},
+		retries: 0,
 		timeout: 5000,
-		retries: 0
+	  abortAfter: 0,
+		queryString: "",
+	  globalFunction: '',
+		callBackKey: "callback"
 	},
 
-	initialize: function(url, options){
+	initialize: function(options){
 		this.setOptions(options);
-		this.url = this.makeUrl(url).url;
+		this.url = this.prepareUrl(this.options.url).url;
 		this.fired = false;
 		this.scripts = [];
 		this.requests = 0;
 		this.triesRemaining = [];
 	},
 
-	request: function(url, requestIndex){
-		var u = this.makeUrl(url);
+	send: function(url, requestIndex){
+		var u = this.parseUrl(url);
 		if (!$chk(requestIndex)){
 			requestIndex = this.requests;
 			this.requests++;
@@ -71,7 +72,7 @@ Request.JsonP = new Class({
 		return this;
 	},
 
-	makeUrl: function(url){
+	prepareUrl: function(url){
 		var index;
 		if (Request.JsonP.requestors.contains(this)){
 			index = Request.JsonP.requestors.indexOf(this);
@@ -95,10 +96,12 @@ Request.JsonP = new Class({
 		}
 		return {url: jurl, index: index};
 	},
+	
 	handleResults: function(data){
 		if (window.dbug) dbug.log('jsonp received: ', data);
 		this.fireEvent('complete', [data, this]);
 	}
 
 });
+
 Request.JsonP.requestors = [];
