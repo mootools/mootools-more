@@ -34,13 +34,12 @@ var IframeShim = new Class({
   			zIndex = 5;
   			this.element.setStyle('zIndex', 5);
   		}
-  		var z = ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1;
   		this.shim = new Element('iframe', {
   			src: (window.location.protocol == 'https') ? '://0' : 'javascript:void(0)',
   			scrolling: 'no',
   			frameborder: 0,
   			styles: {
-  				zIndex: z,
+  				zIndex: ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1,
   				position: 'absolute',
   				border: 'none',
   				filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
@@ -55,7 +54,7 @@ var IframeShim = new Class({
   		if (Browser.Engine.trident && !IframeShim.ready) window.addEvent('load', inject);
   		else inject();
 		} else 
-		  ['position', 'hide', 'show', 'dispose'].each(function(m){ this[m] = $lambda(this); }, this);
+		  this.position = this.hide = this.show = this.dispose = $lambda(this);
 	},
 
 	position: function(){
@@ -67,7 +66,10 @@ var IframeShim = new Class({
 			this.options.offset.x += this.options.margin; 
 			this.options.offset.y += this.options.margin;
 		}
-		this.shim.set({width: size.x, height: size.y}).position({relativeTo: this.element, offset: this.options.offset});
+		this.shim.set({width: size.x, height: size.y}).position({
+		  relativeTo: this.element, 
+		  offset: this.options.offset
+		});
 		return this;
 	},
 
