@@ -14,7 +14,7 @@ Fx.Scroll = new Class({
 	Extends: Fx,
 
 	options: {
-		offset: {'x': 0, 'y': 0},
+		offset: {x: 0, y: 0},
 		wheelStops: true
 	},
 
