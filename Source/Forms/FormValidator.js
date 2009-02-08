@@ -106,6 +106,6 @@ Element.implement({
 
 FormValidator.Textual = new Class({
   
-
   
-})
+  
+});
