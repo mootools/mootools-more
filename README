@@ -22,7 +22,12 @@ MooTools Plugins and Enhancements Repository
   - options:zindex renamed to zIndex
   - makeShim method gone
 * JsonP
-  - renamed to Request.JsonP
-  - url now part of the options hash, not a constructor argument
-  - makeUrl renamed to prepareUrl
-  - request renamed to send
+  - constructor/send/prepareUrl take options hash, no longer an url directly (like Request)
+  - user can change options on the fly when calling send() with a new hash, reusing the object
+  - added check method. support for link: ignore, cancel, chain (like Request)
+  - added success, request and cancel events
+  - data can be a hash or string now (like Request)
+  - queryString option gone
+  - makeUrl logic now moved to new getScript(), which directly returns the script
+  - changed how it essentially works. instead of storing the object reference, we store a new function every time a request is made, that keeps a reference of the script element and the object instance.
+  - abortAfter renamed to timeout, and timeout to retryTimeout, which makes more sense
