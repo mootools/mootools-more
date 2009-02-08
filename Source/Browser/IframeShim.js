@@ -54,9 +54,7 @@ var IframeShim = new Class({
 			if (Browser.Engine.trident && !IframeShim.ready) window.addEvent('load', inject);
 			else inject();
 		} else {
-			['position', 'hide', 'show', 'dispose'].each(function(m){
-				this[m] = $lambda(this);
-			}, this);
+			this.position = this.hide = this.show = this.dispose = $lambda(this);
 		}
 	},
 
@@ -64,12 +62,15 @@ var IframeShim = new Class({
 		if (!IframeShim.ready) return this;
 		var size = this.element.measure(function(){ return this.getSize(); });
 		if ($type(this.options.margin)){
-			size.x = size.x-(this.options.margin*2);
-			size.y = size.y-(this.options.margin*2);
+			size.x = size.x - (this.options.margin * 2);
+			size.y = size.y - (this.options.margin * 2);
 			this.options.offset.x += this.options.margin; 
 			this.options.offset.y += this.options.margin;
 		}
-		this.shim.set({width: size.x, height: size.y}).position({relativeTo: this.element, offset: this.options.offset});
+		this.shim.set({width: size.x, height: size.y}).position({
+			relativeTo: this.element,
+			offset: this.options.offset
+		});
 		return this;
 	},
 
