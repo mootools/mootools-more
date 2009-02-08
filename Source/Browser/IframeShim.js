@@ -30,31 +30,32 @@ var IframeShim = new Class({
 		this.setOptions(options);
 		if(this.options.browsers){
 		  var zIndex = this.element.getStyle('zIndex').toInt();
-  		if (!zIndex){
-  			zIndex = 5;
-  			this.element.setStyle('zIndex', 5);
-  		}
-  		this.shim = new Element('iframe', {
-  			src: (window.location.protocol == 'https') ? '://0' : 'javascript:void(0)',
-  			scrolling: 'no',
-  			frameborder: 0,
-  			styles: {
-  				zIndex: ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1,
-  				position: 'absolute',
-  				border: 'none',
-  				filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
-  			},
-  			'class': this.options.className
-  		}).store('IframeShim', this);
-  		var inject = (function(){
-  			this.shim.inject(this.element, 'after');
-  			this[this.options.display ? 'show' : 'hide']();
-  			this.fireEvent('inject');
-  		}).bind(this);
-  		if (Browser.Engine.trident && !IframeShim.ready) window.addEvent('load', inject);
-  		else inject();
-		} else 
-		  this.position = this.hide = this.show = this.dispose = $lambda(this);
+			if (!zIndex){
+				zIndex = 5;
+				this.element.setStyle('zIndex', 5);
+			}
+			this.shim = new Iframe({
+				src: (window.location.protocol == 'https') ? '://0' : 'javascript:void(0)',
+				scrolling: 'no',
+				frameborder: 0,
+				styles: {
+					zIndex: ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1,
+					position: 'absolute',
+					border: 'none',
+					filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
+				},
+				'class': this.options.className
+			}).store('IframeShim', this);
+			var inject = (function(){
+				this.shim.inject(this.element, 'after');
+				this[this.options.display ? 'show' : 'hide']();
+				this.fireEvent('inject');
+			}).bind(this);
+			if (Browser.Engine.trident && !IframeShim.ready) window.addEvent('load', inject);
+			else inject();
+		} else {
+			this.position = this.hide = this.show = this.dispose = $lambda(this);
+		}
 	},
 
 	position: function(){
@@ -67,8 +68,8 @@ var IframeShim = new Class({
 			this.options.offset.y += this.options.margin;
 		}
 		this.shim.set({width: size.x, height: size.y}).position({
-		  relativeTo: this.element, 
-		  offset: this.options.offset
+			relativeTo: this.element,
+			offset: this.options.offset
 		});
 		return this;
 	},
