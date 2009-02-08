@@ -3,3 +3,19 @@ MooTools Plugins and Enhancements Repository
 ### TO DO
 
 * Need to add tests for all libs
+* Discuss how to handle ToElement and Drag :)
+* Make the Date Specs pass in all browsers but Firefox
+* Decide if reworking the whole source of all plugins makes you an author ( :P )
+
+### StyleGuide
+
+* See mootools-core and apply that same coding style to mootools-more :)
+
+### Breaking Changes
+
+* Option offsets in Tips renamed to offset
+
+### Breaking Changes regarding Clientcide
+
+* IframeShim works a little different now
+* Removing dbug when not in that Request.JSONP thingy

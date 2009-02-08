@@ -48,8 +48,8 @@ Script: Element.Delegation.js
 		if (type.test(/^.*?\(.*?\)$/)){
 			return {
 				event: type.match(/.*?(?=\()/),
-				selector: type.replace(/^.*?\((.*)\)$/,"$1")
-			}
+				selector: type.replace(/^.*?\((.*)\)$/, "$1")
+			};
 		}
 		return {event: type};
 	};

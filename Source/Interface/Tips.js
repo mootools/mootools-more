@@ -11,7 +11,7 @@ Script: Tips.js
 
 var Tips = new Class({
 
-	Implements: [Events, Options, ToElement],
+	Implements: [Events, Options, Class.ToElement],
 
 	options: {
 		onShow: function(tip){

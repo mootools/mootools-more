@@ -5,6 +5,7 @@ Script: Date.js
 License:
 	MIT-style license.
 */
+
 describe('String.repeat', {
 
 	'should repeat (concatenate) a string a specified number of times': function(){

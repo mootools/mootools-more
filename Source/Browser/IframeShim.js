@@ -74,18 +74,17 @@ var IframeShim = new Class({
 	},
 
 	hide: function(){
-	  this.shim.hide();
+		this.shim.hide();
 		return this;
 	},
 
 	show: function(){
-	  this.shim.show();
-		this.position();
-		return this;
+		this.shim.show();
+		return this.position();
 	},
 
 	dispose: function(){
-	  this.shim.dispose();
+		this.shim.dispose();
 		return this;
 	}
 

@@ -16,42 +16,29 @@ $extend(Browser, {
 		return match ? match[1] : null;
 	},
 
-	getQueryStringValue: function(key, url){
-		return Browser.getQueryStringValues(url)[key];
+	getPort: function(url){
+		var match = $pick(url, window.location.href).match(/:([0-9]{2,4})/);
+		return match ? match[1] : null;
 	},
 
-	getQueryStringValues: function(url){
+	getQueryString: function(url){
 		var qs = $pick(url, window.location.search, '').split('?')[1];
 		if (!$chk(qs)) return {};
-		qs = qs.split("#")[0];
-		return qs.parseQuery();
+		return qs.split('#')[0].parseQuery();
 	},
 
-	getPort: function(url){
-		var m = $pick(url, window.location.href).match(/:([0-9]{2,4})/);
-		return m ? m[1] : false;
+	mergeQueryString: function(values, url){
+		url = $pick(url, window.location.href);
+		var merged = $merge(url.contains('?') ? this.getQueryString(url) : url.parseQuery(), values);
+		var newUrl = url.contains('?') ? url.split('?')[0] + '?' : url.contains('=') ? '' : url + '?';
+		for (key in merged) newUrl += key + '=' +merged[key] + '&';
+		return newUrl.substring(0, newUrl.length-1);
 	},
 
 	redraw: function(){
 		var n = document.createTextNode(' ');
 		this.adopt(n);
 		(function(){ n.dispose(); }).delay(1);
-		return this;
-	},
-
-	mergeQueryStringValues: function(values, url){
-		url = $pick(url, window.location.href);
-		var merged = $merge(url.contains('?') ? this.getQueryStringValues(url) : url.parseQuery(), values);
-		var newUrl = url.contains('?') ? url.split('?')[0] + '?' : url.contains("=") ? '' : url + '?';
-		for (key in merged) newUrl += key + '=' +merged[key] + '&';
-		return newUrl.substring(0, newUrl.length-1);
 	}
 
-});
-
-window.addEvent('domready', function(){
-	//just a shortcut so you can do
-	//Browser.qs['foo']
-	//instead of Browser.getQueryStringValue('foo');
-	Browser.qs = Browser.getQueryStringValues();
 });
