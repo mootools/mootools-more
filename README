@@ -11,11 +11,18 @@ MooTools Plugins and Enhancements Repository
 
 * See mootools-core and apply that same coding style to mootools-more :)
 
-### Breaking Changes
+### Breaking Changes from More
 
-* Option offsets in Tips renamed to offset
+* Tips
+  - options:offsets in Tips renamed to offset
 
-### Breaking Changes regarding Clientcide
+### Breaking Changes from Clientcide
 
-* IframeShim works a little different now
-* Removing dbug when not in that Request.JSONP thingy
+* IframeShim
+  - options:zindex renamed to zIndex
+  - makeShim method gone
+* JsonP
+  - renamed to Request.JsonP
+  - url now part of the options hash, not a constructor argument
+  - makeUrl renamed to prepareUrl
+  - request renamed to send
