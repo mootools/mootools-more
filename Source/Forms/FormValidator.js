@@ -20,9 +20,9 @@ var FormValidator = new Class({
     var r = [];
     this.element.getElements('input, select, textarea').each(function(input) { 
       var errors = this.check(input);
-      if(errors){
+      if(errors){        
+        this.error(input, errors);
         r.push([input, errors]);
-        this.error(input, errors)
         if(r.length === this.options.elementsLimit) return;
       }
     }, this);
@@ -42,7 +42,7 @@ var FormValidator = new Class({
   check: function(input){
     var errors = [], v = FormValidator.Validators;
     Hash.each(v, function(value, key){
-      if ((input.hasClass(this.options.classPrefix + key) || input.retrieve(validators, []).contains(key)) && !v[key](value)) 
+      if ((input.hasClass(this.options.classPrefix + key) || $splat(input.retrieve(validators, [])).contains(key)) && !v[key](value)) 
         errors.push(key);
       if (errors.length === this.options.errorsLimit) return;
     });
