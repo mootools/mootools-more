@@ -29,7 +29,7 @@ Element.implement({
 		//compute the offset of the parent positioned element if this element is in one
 		var parentOffset = {x: 0, y: 0};
 		var parentPositioned = false;
-		/* dollar around getOffsetParent should not be necessary, but as it does not return 
+		/* dollar around getOffsetParent should not be necessary, but as it does not return
 		 * a mootools extended element in IE, an error occurs on the call to expose. See:
 		 * http://mootools.lighthouseapp.com/projects/2706/tickets/333-element-getoffsetparent-inconsistency-between-ie-and-other-browsers */
 		var offsetParent = this.measure(function(){
@@ -64,7 +64,7 @@ Element.implement({
 			if (options.position.x == 'center' && options.position.y == 'center') options.edge = {x:'center', y:'center'};
 			else options.edge = {x:'left', y:'top'};
 		}
-		
+
 		this.setStyle('position', 'absolute');
 		var rel = $(options.relativeTo) || document.body;
 		var top = (rel == document.body) ? window.getScroll().y : rel.getPosition().y;
@@ -99,10 +99,10 @@ Element.implement({
 				pos.y = top + ((rel == document.body ? window.getSize().y : rel.offsetHeight)/2) + prefY;
 				break;
 		};
-		
+
 		if (options.edge){
 			var edgeOffset = {};
-			
+
 			switch(options.edge.x){
 				case 'left':
 					edgeOffset.x = 0;
@@ -125,8 +125,8 @@ Element.implement({
 					edgeOffset.y = -(dim.y/2);
 					break;
 			};
-			pos.x = pos.x+edgeOffset.x;
-			pos.y = pos.y+edgeOffset.y;
+			pos.x = pos.x + edgeOffset.x;
+			pos.y = pos.y + edgeOffset.y;
 		}
 		pos = {
 			left: ((pos.x >= 0 || parentPositioned || options.allowNegative) ? pos.x : 0).toInt(),
@@ -152,7 +152,7 @@ Element.implement({
 
 		setPosition: function(obj){
 			if ($defined(obj.x) || $defined(obj.y)) return oldSetPosition.apply(this, arguments);
-			return this.position.apply(this, arguments);			
+			return this.position.apply(this, arguments);
 		}
 
 	});

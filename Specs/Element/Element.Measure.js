@@ -22,7 +22,7 @@ License:
 			}
 		}).inject(document.body);
 	});
-	
+
 	describe('Element.Measure', {
 
 		'should measure the width and height of the hidden element': function(){
@@ -51,7 +51,7 @@ License:
 				"computedRight":4
 			});
 		},
-		
+
 		'should measure the computed width of an element': function(){
 			value_of(div.getDimensions({computeSize: true, mode: 'horizontal'})).should_be({
 				"padding-left":3,
@@ -67,5 +67,5 @@ License:
 		}
 
 	});
-	
+
 })();

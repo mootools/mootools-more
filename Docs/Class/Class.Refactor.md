@@ -65,7 +65,7 @@ MooTools is designed to be extended and as you can see in this repository, I mak
 
 	//but new instances get the new properties:
 	var secondTest = new Test();
-	secondTest.log('this is the second test instance'); //logs the message and 
+	secondTest.log('this is the second test instance'); //logs the message and
 			//then "altered version..." message
 	secondTest.logMsg('foo'); //logs "not bar anymore!" and then "altered version.." message
 

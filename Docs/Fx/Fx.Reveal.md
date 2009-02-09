@@ -39,7 +39,7 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 
 * (*object*) A new instance of [Fx.Reveal][].
 
-### Example 
+### Example
 
 	new Fx.Reveal($('myElement'), {duration: 500, mode: 'horizontal'});
 

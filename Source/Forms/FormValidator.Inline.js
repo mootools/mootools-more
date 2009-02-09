@@ -41,32 +41,32 @@ FormValidator.Inline = new Class({
 				errorMsg += (this.options.useTitles) ? field.title || error:error;
 		var advice = this.getAdvice(className, field);
 		if (!advice){
-			var cssClass = (warn)?'warning-advice':'validation-advice';
+			var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
 			advice = new Element('div', {
 				text: errorMsg,
 				styles: { display: 'none' },
-				id: 'advice-'+className+'-'+this.getFieldId(field)
+				id: 'advice-' + className + '-' + this.getFieldId(field)
 			}).addClass(cssClass);
 		} else{
 			advice.set('html', errorMsg);
 		}
-		field.store('advice-'+className, advice);
+		field.store('advice-' + className, advice);
 		return advice;
 	},
 
 	getFieldId : function(field){
-		return field.id ? field.id : field.id = "input_"+field.name;
+		return field.id ? field.id : field.id = "input_" + field.name;
 	},
 
 	showAdvice: function(className, field){
 		var advice = this.getAdvice(className, field);
 		if (advice && !field.retrieve(this.getPropName(className))
-			 && (advice.getStyle('display') == "none" 
-			 || advice.getStyle('visiblity') == "hidden" 
-			 || advice.getStyle('opacity')==0)){
+				&& (advice.getStyle('display') == "none"
+				|| advice.getStyle('visiblity') == "hidden"
+				|| advice.getStyle('opacity') == 0)){
 			field.store(this.getPropName(className), true);
 			if (advice.reveal) advice.reveal();
-			else advice.setStyle('display','block');
+			else advice.setStyle('display', 'block');
 		}
 	},
 
@@ -76,12 +76,12 @@ FormValidator.Inline = new Class({
 			field.store(this.getPropName(className), false);
 			//if Fx.Reveal.js is present, transition the advice out
 			if (advice.dissolve) advice.dissolve();
-			else advice.setStyle('display','none');
+			else advice.setStyle('display', 'none');
 		}
 	},
 
 	getPropName: function(className){
-		return 'advice'+className;
+		return 'advice' + className;
 	},
 
 	resetField: function(field){
@@ -124,21 +124,21 @@ FormValidator.Inline = new Class({
 				case 'radio':
 					var p = field.getParent().adopt(advice);
 					break;
-				default: 
+				default:
 					advice.inject($(field), 'after');
 			};
 		} else {
 			$(props.msgPos).grab(advice);
 		}
 	},
-	
+
 	validate: function(field, force){
 		var result = this.parent(field, force);
 		if (this.options.scrollToErrorsOnSubmit && !result){
-			var failed = $(this).getElement('.validation-failed');		
+			var failed = $(this).getElement('.validation-failed');
 			var par = $(this).getParent();
 			var isScrolled = function(p){
-				return p.getScrollSize().y != p.getSize().y
+				return p.getScrollSize().y != p.getSize().y;
 			};
 			var scrolls;
 			while (par != document.body && !isScrolled(par)){

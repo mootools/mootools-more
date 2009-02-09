@@ -6,7 +6,7 @@ window.addEvent('load', function(){
 		mootoolsCore: '../assets/mootools-core',
 		mootoolsMore: '../'
 	};
-	
+
 	new UnitTester(sources, {
 		'mootools-more': 'UserTests/'
 	}, {

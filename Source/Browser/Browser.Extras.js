@@ -11,7 +11,7 @@ Script: Browser.Extras.js
 
 $extend(Browser, {
 
-	getHost:function(url){
+	getHost: function(url){
 		var match = $pick(url, window.location.href).match(/http[s]?:\/\/([\w-.]+)/);
 		return match ? match[1] : null;
 	},

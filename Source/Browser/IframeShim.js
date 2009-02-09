@@ -4,7 +4,7 @@ Script: IframeShim.js
 
 	License:
 		MIT-style license.
-	
+
 	Authors:
 		Aaron Newton
 */
@@ -64,7 +64,7 @@ var IframeShim = new Class({
 		if ($type(this.options.margin)){
 			size.x = size.x - (this.options.margin * 2);
 			size.y = size.y - (this.options.margin * 2);
-			this.options.offset.x += this.options.margin; 
+			this.options.offset.x += this.options.margin;
 			this.options.offset.y += this.options.margin;
 		}
 		this.shim.set({width: size.x, height: size.y}).position({

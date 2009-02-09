@@ -50,7 +50,7 @@ Alternatively, you can be a little more expicit by using an object with x and y 
 * {x: 'left', y: 'bottom'} // same as "bottomLeft"
 * etc.
 
-Using these options you can specify a position for each corner of the relativeTo object as well as the points between those corners (center, left, top, right, bottom and the center of the entire object). 
+Using these options you can specify a position for each corner of the relativeTo object as well as the points between those corners (center, left, top, right, bottom and the center of the entire object).
 
 ### Returns
 

@@ -22,7 +22,7 @@ When added to a checkbox/radio button, and a list (*array*) of element id's can 
 
 	<input type="checkbox" class="validate-enforce-oncheck toEnforce:['name', 'email', 'phone']"/>
 	//when checked, the inputs with the ids 'name', 'email', and 'phone' will also be validated on change/submit
-	
+
 	<input type="checkbox" class="validate-enforce-oncheck enforceChildrenOf:'someParent'"/>
 	//when checked, all inputs inside $('someParent') will be validated on change/submit
 
@@ -69,7 +69,7 @@ At least one checkbox/radio is required to be checked in this node. *nodeId* nee
 ### Example
 
 	<input type="checkbox" class="validate-reqchk-bynode nodeId:'someParent'"/>
-	
+
 	//you can also specify a selector for the parent
 	<input type="checkbox" class="validate-reqchk-bynode nodeId:'someParent' selector:'input.foo[type=checkbox]'"/>
 

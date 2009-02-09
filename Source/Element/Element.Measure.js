@@ -55,7 +55,7 @@ Element.implement({
 		options = $merge({
 			styles: ['padding','border'],
 			plains: {
-				height: ['top','bottom'], 
+				height: ['top','bottom'],
 				width: ['left','right']
 			},
 			mode: 'both'
@@ -76,44 +76,44 @@ Element.implement({
 		$each(options.plains, function(plain, key){
 			plain.each(function(edge){
 				options.styles.each(function(style){
-					getStyles.push((style=="border")?style+'-'+edge+'-'+'width':style+'-'+edge);
+					getStyles.push((style == "border") ? style + '-' + edge + '-' + 'width' : style + '-' + edge);
 				});
 			});
 		});
 		var styles = this.getStyles.apply(this, getStyles);
 		var subtracted = [];
-		$each(options.plains, function(plain, key){ //keys: width, height, plains: ['left','right'], ['top','bottom']
-			size['total'+key.capitalize()] = 0;
-			size['computed'+key.capitalize()] = 0;
+		$each(options.plains, function(plain, key){ //keys: width, height, plains: ['left', 'right'], ['top','bottom']
+			size['total' + key.capitalize()] = 0;
+			size['computed' + key.capitalize()] = 0;
 			plain.each(function(edge){ //top, left, right, bottom
-				size['computed'+edge.capitalize()] = 0;
-				getStyles.each(function(style,i){ //padding, border, etc.
-					//'padding-left'.test('left') size['totalWidth'] = size['width']+[padding-left]
+				size['computed' + edge.capitalize()] = 0;
+				getStyles.each(function(style, i){ //padding, border, etc.
+					//'padding-left'.test('left') size['totalWidth'] = size['width'] + [padding-left]
 					if (style.test(edge)){
 						styles[style] = styles[style].toInt(); //styles['padding-left'] = 5;
-						if (isNaN(styles[style]))styles[style]=0;
-						size['total'+key.capitalize()] = size['total'+key.capitalize()]+styles[style];
-						size['computed'+edge.capitalize()] = size['computed'+edge.capitalize()]+styles[style];
+						if (isNaN(styles[style]))styles[style] = 0;
+						size['total' + key.capitalize()] = size['total' + key.capitalize()] + styles[style];
+						size['computed' + edge.capitalize()] = size['computed' + edge.capitalize()] + styles[style];
 					}
 					//if width != width (so, padding-left, for instance), then subtract that from the total
-					if (style.test(edge) && key!=style && 
+					if (style.test(edge) && key != style &&
 						(style.test('border') || style.test('padding')) && !subtracted.contains(style)){
 						subtracted.push(style);
-						size['computed'+key.capitalize()] = size['computed'+key.capitalize()]-styles[style];
+						size['computed' + key.capitalize()] = size['computed' + key.capitalize()]-styles[style];
 					}
 				});
 			});
 		});
-		
+
 		['Width', 'Height'].each(function(value){
 			var lower = value.toLowerCase();
 			if(!$chk(size[lower])) return;
-			
-			size[lower] = size[lower]+this['offset'+value]+size['computed'+value];
-			size['total'+value] = size[lower] + size['total'+value];
-			delete size['computed'+value];
+
+			size[lower] = size[lower] + this['offset' + value] + size['computed' + value];
+			size['total' + value] = size[lower] + size['total' + value];
+			delete size['computed' + value];
 		}, this);
-		
+
 		return $extend(styles, size);
 	}
 

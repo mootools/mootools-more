@@ -20,7 +20,7 @@ new Native({name: 'Date', initialize: Date, protect: true});
 
 Date.Methods = new Hash();
 
-["Date", "Day", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "TimezoneOffset", 
+["Date", "Day", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "TimezoneOffset",
 	"Week", "Timezone", "GMTOffset", "DayOfYear", "LastMonth", "UTCDate", "UTCDay", "UTCFullYear",
 	"AMPM", "UTCHours", "UTCMilliseconds", "UTCMinutes", "UTCMonth", "UTCSeconds"].each(function(method){
 	Date.Methods.set(method.toLowerCase(), method);
@@ -64,7 +64,7 @@ Date.implement({
 	decrement: function(interval, times){
 		return this.multiply(interval, times, false);
 	},
-	
+
 	multiply: function(interval, times, increment){
 		interval = interval || 'day';
 		times = $pick(times, 1);
@@ -160,7 +160,7 @@ Date.implement({
 		this.set('time', Date.parse(str));
 		return this;
 	},
-	
+
 	isValid: function(date) {
 		return !!(date || this).valueOf();
 	},
@@ -197,7 +197,7 @@ Date.implement({
 					case 'U': return d.get('week').zeroise(2);
 					case 'W': throw new Error('%W is not supported yet');
 					case 'w': return d.get('day');
-					case 'x': 
+					case 'x':
 						var c = Date.lang.dateOrder;
 						//return d.format("%{0}{3}%{1}{3}%{2}".substitute(c.map(function(s){return s.substr(0,1)}))); //grr!
 						return d.format('%' + c[0].substr(0,1) +
@@ -217,7 +217,7 @@ Date.implement({
 
 	setAMPM: function(ampm){
 		ampm = ampm.toUpperCase();
-		if (this.format("%H").toInt() > 11 && ampm == Date.lang.AM) 
+		if (this.format("%H").toInt() > 11 && ampm == Date.lang.AM)
 			return this.decrement('hour', 12);
 		else if (this.format("%H").toInt() < 12 && ampm == Date.lang.PM)
 			return this.increment('hour', 12);
@@ -241,7 +241,7 @@ MooTools.lang.addEvent('onLangChange', function(){
 		if (Date.isLeapYear(year.toInt()) && monthIndex === 1) return 29;
 		return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][monthIndex];
 	};
-	
+
 
 	$extend(Date, {
 
@@ -261,9 +261,9 @@ MooTools.lang.addEvent('onLangChange', function(){
 				return Date.isLeapYear(year.toInt())?31622400000:31536000000;
 			}
 		},
-	
+
 		isLeapYear: function(yr){
-			return new Date(yr,1,29).getDate()==29;
+			return new Date(yr,1,29).getDate() == 29;
 		},
 
 		fixY2K: function(d){
@@ -275,7 +275,7 @@ MooTools.lang.addEvent('onLangChange', function(){
 				return d;
 			}
 		},
-	
+
 		parse: function(from){
 			var t = $type(from);
 			if (t == 'number') return new Date(from);
@@ -285,7 +285,7 @@ MooTools.lang.addEvent('onLangChange', function(){
 			Date.parsePatterns.each(function(pattern){
 				if (parsed) return;
 				var r = Date.parsePatterns[i].re.exec(from);
-				if (r) parsed = Date.parsePatterns[i].handler(r);		
+				if (r) parsed = Date.parsePatterns[i].handler(r);
 			});
 			return parsed || new Date(nativeParse(from));
 		},
@@ -335,7 +335,7 @@ MooTools.lang.addEvent('onLangChange', function(){
 			localDate.get('date'), localDate.get('hr'), localDate.get('min'), localDate.get('sec'));
 			return new Date(utcSeconds);
 		},
-		
+
 		orderIndex: function(unit){
 			return Date.lang.dateOrder.indexOf(unit)+1;
 		},

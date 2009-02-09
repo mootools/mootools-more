@@ -49,7 +49,7 @@
 			"deps": ["Browser", "String.Extras"],
 			"desc": "Extends the Window native class with numerous shortcuts."
 		},
-		
+
 		"IframeShim": {
 			"deps": ["Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude", "Class.ToElement"],
 			"desc": "Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
@@ -178,9 +178,9 @@
 		}
 
 	},
-	
+
 	"Drag": {
-		
+
 		"Drag": {
 			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Class.ToElement"],
 			"desc": "The base Drag Class. Can be used to drag and resize Elements using mouse events."
@@ -190,7 +190,7 @@
 			"deps": ["Drag", "Element.Dimensions"],
 			"desc": "A Drag extension that provides support for the constraining of draggables to containers and droppables."
 		}
-		
+
 	},
 
 	"Request": {
@@ -213,12 +213,12 @@
 	},
 
 	"Utilities": {
-		
+
 		"Hash.Cookie": {
 			"deps": ["Class.Extras", "Cookie", "JSON"],
 			"desc": "Class for creating, reading, and deleting browser Cookies in JSON format."
 		},
-		
+
 		"Color": {
 			"deps": ["Core", "Array", "String", "Function", "Number", "Hash"],
 			"desc": "Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa."
@@ -228,21 +228,21 @@
 			"deps": ["Class.Extras"],
 			"desc": "Class for monitoring collections of events."
 		},
-		
+
 		"Assets": {
 			"deps": ["Element.Event"],
 			"desc": "Provides methods to dynamically load JavaScript, CSS, and Image files into the document."
 		}
 
 	},
-	
+
 	"Interface": {
-		
+
 		"Sortables": {
 			"deps": ["Drag.Move"],
 			"desc": "Class for creating a drag and drop sorting interface for lists of items."
 		},
-		
+
 		"Tips": {
 			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions", "Class.ToElement"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
@@ -262,12 +262,12 @@
 			"deps": ["Class.Extras", "Element.Event", "Element.Dimensions"],
 			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
 		},
-		
+
 		"Accordion": {
 			"deps": ["Fx.Elements", "Element.Event"],
 			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
 		}
-		
+
 	},
 
 	"Localization": {
@@ -346,7 +346,7 @@
 			"deps": ["MooTools.Lang"],
 			"desc": "FormValidator messages in Portuguese (feel free to send in your own translations).",
 			"exclude": true
-		},		
+		},
 
 		"FormValidator.Russian": {
 			"deps": ["MooTools.Lang"],

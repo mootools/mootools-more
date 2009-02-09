@@ -48,7 +48,7 @@ Element.implement({
 		return {
 			start: this.getSelectionStart(),
 			end: this.getSelectionEnd()
-		}
+		};
 	},
 
 	setCaretPosition: function(pos){
@@ -79,7 +79,7 @@ Element.implement({
 		var start = this.getSelectionStart();
 		var end = this.getSelectionEnd();
 		this.set('value', this.get('value').substring(0, start) + value + this.get('value').substring(end, this.get('value').length));
- 		if ($pick(select, true)) this.selectRange(start, start + value.length);
+		if ($pick(select, true)) this.selectRange(start, start + value.length);
 		else this.setCaretPosition(start + value.length);
 		return this;
 	},
@@ -104,7 +104,7 @@ Element.implement({
 			var selStart = start + options.before.length;
 			if ($pick(select, true)) this.selectRange(selStart, selStart + text.length);
 			else this.setCaretPosition(selStart + text.length);
-		}	
+		}
 		return this;
 	}
 

@@ -13,9 +13,9 @@
 			new Request({
 				url: "readme.md",
 				onComplete: Docs.update
-			}).send();		
+			}).send();
 		},
-		
+
 		local: function(){
 			Request.implement({
 				getXHR: function(){
@@ -51,7 +51,7 @@
 			return temp;
 		}
 
-		
+
 
 	};
 
@@ -66,10 +66,10 @@
 	};
 
 	window.addEvent('domready', Docs.start);
-	
+
 	</script>
-	
-	
+
+
 	<link rel="stylesheet" href="assets/docs.css" type="text/css" media="screen" />
 </head>
 <body>

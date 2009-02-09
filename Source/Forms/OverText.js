@@ -94,7 +94,7 @@ var OverText = new Class({
 	hideTxt: function(el, focus){
 		var txt = el.retrieve('OverTextDiv');
 		if (txt && txt.isVisible() && !el.get('disabled')){
-			txt.hide(); 
+			txt.hide();
 			try {
 				if (focus) el.fireEvent('focus').focus();
 			} catch(e){} //IE barfs if you call focus on hidden elements
@@ -116,7 +116,7 @@ var OverText = new Class({
 
 	testOverTxt: function(el){
 		if (el.get('value')) this.hideTxt(el);
-		else this.showTxt(el);	
+		else this.showTxt(el);
 	},
 
 	repositionAll: function(){

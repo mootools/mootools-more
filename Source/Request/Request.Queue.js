@@ -94,8 +94,8 @@ Request.Queue = new Class({
 		return running;
 	},
 
-	isRunning: function(){ 
-		return !!this.getRunning().length 
+	isRunning: function(){
+		return !!this.getRunning().length;
 	},
 
 	send: function(name, options){
@@ -159,7 +159,7 @@ Request.Queue = new Class({
 	},
 
 	onComplete: function(){
-		this.fireEvent('complete', arguments);		
+		this.fireEvent('complete', arguments);
 	},
 
 	onCancel: function(){
@@ -183,5 +183,5 @@ Request.Queue = new Class({
 		if (!this.options.stopOnFailure && this.options.autoAdvance) this.runNext();
 		this.fireEvent('exception', arguments);
 	}
-	
+
 });

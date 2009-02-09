@@ -48,7 +48,7 @@ Creates a Json request using script tag injection and handles the callbacks for 
 		onComplete: myFunction.bind(someObject)
 	}).request();
 
-The above example would generate this url:  
+The above example would generate this url:
 
 	http://api.cnet.com/restApi/v1.0/techProductSearch?partTag=mtvo&iod=hlPrice&viewType=json&results=100&query=ipod&callback=Request.JsonP.requestors[0].handleResults&
 

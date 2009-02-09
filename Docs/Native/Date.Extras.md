@@ -103,7 +103,7 @@ Date.Extras Language Localization {#Localization}
 * lessThanMinuteAgo - (*string*) 'less than a minute ago'
 * minuteAgo - (*string*) 'about a minute ago'
 * minutesAgo - (*string*) '{delta} minutes ago' where {delta} is the number of minutes
-* hourAgo - (*string*) 'about an hour ago' 
+* hourAgo - (*string*) 'about an hour ago'
 * hoursAgo - (*string*) 'about {delta} hours ago' where {delta} is the number of hours
 * dayAgo - (*string*) '1 day ago'
 * daysAgo - (*string*) '{delta} days ago' where {delta} is the number of days

@@ -20,9 +20,9 @@ Class.refactor = function(orig, props){
 
 $extend(Class.prototype, {
 
-	refactor: function(props){ 
+	refactor: function(props){
 		this.prototype = Class.refactor(this, props).prototype;
 		return this;
-	} 
+	}
 
 });

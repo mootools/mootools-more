@@ -62,7 +62,7 @@ This event is fired whenever the language is changed for the user (for instance,
 MooTools.lang Methods
 ====================
 
-MooTools.lang method: setLanguage {#MooTools-lang:setLanguage} 
+MooTools.lang method: setLanguage {#MooTools-lang:setLanguage}
 --------------------------------------------------------------
 
 Sets the current language for the user.
@@ -79,7 +79,7 @@ Sets the current language for the user.
 
 * *object* - MooTools.lang (the instance)
 
-MooTools.lang method: getCurrentLanguage {#MooTools-lang:getCurrentLanguage} 
+MooTools.lang method: getCurrentLanguage {#MooTools-lang:getCurrentLanguage}
 --------------------------------------------------------------
 
 Returns the language currently in use.
@@ -92,7 +92,7 @@ Returns the language currently in use.
 
 * *string* - the language (i.e. "usENG").
 
-MooTools.lang method: get {#MooTools-lang:get} 
+MooTools.lang method: get {#MooTools-lang:get}
 ----------------------------------------------
 
 Retrieves a set of language properties for the current language.
@@ -114,7 +114,7 @@ Retrieves a set of language properties for the current language.
 
 * *object* The language key/values for the given set.
 
-MooTools.lang method: set {#MooTools-lang:set} 
+MooTools.lang method: set {#MooTools-lang:set}
 ----------------------------------------------
 
 Sets properties for a given set in a given language.
@@ -143,7 +143,7 @@ Sets properties for a given set in a given language.
 
 * *object* - MooTools.lang (the instance)
 
-MooTools.lang method: list {#MooTools-lang:list} 
+MooTools.lang method: list {#MooTools-lang:list}
 ------------------------------------------------
 
 Returns an array of languages currently supported.

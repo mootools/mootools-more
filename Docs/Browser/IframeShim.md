@@ -43,7 +43,7 @@ There are two types of elements that (sometimes) prohibit you from positioning a
 ### Example
 
 	<div id="myFloatingDiv">stuff</div>
-	
+
 	var myFloatingDivShim = new IframeShim('myFloatingDiv', {
 		display: false,
 		name: 'myFloatingDivShimId'

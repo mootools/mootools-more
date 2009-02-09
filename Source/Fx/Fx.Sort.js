@@ -88,7 +88,7 @@ Fx.Sort = new Class({
 					newPos.top = top - current[item].top - margin;
 					top += current[item].height;
 			} else {
-					newPos.left = left - current[item].left;	
+					newPos.left = left - current[item].left;
 					left += current[item].width;
 			}
 			margin = margin + current[item].margin;

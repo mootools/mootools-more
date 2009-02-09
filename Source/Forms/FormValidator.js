@@ -53,7 +53,7 @@ Element.Properties.validatorProps = {
 			try {
 				this.store('validatorProps', JSON.decode(this.getProperty('validatorProps')));
 			}catch(e){
-				return {}
+				return {};
 			}
 		} else {
 			var vals = this.get('class').split(' ').filter(function(cls){
@@ -65,7 +65,7 @@ Element.Properties.validatorProps = {
 				props = {};
 				vals.each(function(cls){
 					var split = cls.indexOf(':');
-					props[cls.substring(0, split)] = JSON.decode(cls.substring(split+1, cls.length))
+					props[cls.substring(0, split)] = JSON.decode(cls.substring(split + 1, cls.length));
 				});
 				this.store('validatorProps', props);
 			}
@@ -78,7 +78,7 @@ Element.Properties.validatorProps = {
 var FormValidator = new Class({
 
 	Implements:[Options, Events, Class.ToElement],
-	
+
 	Binds: ['onSubmit'],
 
 	options: {
@@ -136,10 +136,10 @@ var FormValidator = new Class({
 	reset: function(){
 		this.getFields().each(this.resetField, this);
 		return this;
-	}, 
+	},
 
 	validate: function(event){
-		var result = this.getFields().map(function(field){ 
+		var result = this.getFields().map(function(field){
 			return this.validateField(field, true);
 		}, this).every(function(v){ return v;});
 		this.fireEvent('onFormValidate', [result, $(this), event]);
@@ -176,13 +176,13 @@ var FormValidator = new Class({
 			}
 			if (!warned){
 				var warnings = field.className.split(" ").some(function(cn){
-					if (cn.test('^warn-') || field.hasClass('warnOnly')) 
+					if (cn.test('^warn-') || field.hasClass('warnOnly'))
 						return this.getValidator(cn.replace(/^warn-/,""));
 					else return null;
 				}, this);
 				field.removeClass('warning');
 				var warnResult = field.className.split(" ").map(function(cn){
-					if (cn.test('^warn-') || field.hasClass('warnOnly')) 
+					if (cn.test('^warn-') || field.hasClass('warnOnly'))
 						return this.test(cn.replace(/^warn-/,""), field, true);
 					else return null;
 				}, this);
@@ -298,7 +298,7 @@ FormValidator.implement(FormValidator.adders);
 FormValidator.add('IsEmpty', {
 
 	errorMsg: false,
-	test: function(element){ 
+	test: function(element){
 		if (element.type == "select-one"||element.type == "select")
 			return !(element.selectedIndex >= 0 && element.options[element.selectedIndex].value != "");
 		else
@@ -313,8 +313,8 @@ FormValidator.addAllThese([
 		errorMsg: function(){
 			return FormValidator.getMsg('required');
 		},
-		test: function(element){ 
-			return !FormValidator.getValidator('IsEmpty').test(element); 
+		test: function(element){
+			return !FormValidator.getValidator('IsEmpty').test(element);
 		}
 	}],
 
@@ -323,7 +323,7 @@ FormValidator.addAllThese([
 			if ($type(props.minLength))
 				return FormValidator.getMsg('minLength').substitute({minLength:props.minLength,length:element.get('value').length });
 			else return '';
-		}, 
+		},
 		test: function(element, props){
 			if ($type(props.minLength)) return (element.get('value').length >= $pick(props.minLength, 0));
 			else return true;
@@ -336,7 +336,7 @@ FormValidator.addAllThese([
 			if ($type(props.maxLength))
 				return FormValidator.getMsg('maxLength').substitute({maxLength:props.maxLength,length:element.get('value').length });
 			else return '';
-		}, 
+		},
 		test: function(element, props){
 			//if the value is <= than the maxLength value, element passes test
 			return (element.get('value').length <= $pick(props.maxLength, 10000));
@@ -346,36 +346,36 @@ FormValidator.addAllThese([
 	['validate-integer', {
 		errorMsg: FormValidator.getMsg.pass('integer'),
 		test: function(element){
-			return FormValidator.getValidator('IsEmpty').test(element) || /^-?[1-9]\d*$/.test(element.get('value'));
+			return FormValidator.getValidator('IsEmpty').test(element) || (/^-?[1-9]\d*$/).test(element.get('value'));
 		}
 	}],
 
 	['validate-numeric', {
-		errorMsg: FormValidator.getMsg.pass('numeric'), 
+		errorMsg: FormValidator.getMsg.pass('numeric'),
 		test: function(element){
-			return FormValidator.getValidator('IsEmpty').test(element) || 
-				/^-?(?:0$0(?=\d*\.)|[1-9]|0)\d*(\.\d+)?$/.test(element.get('value'));
+			return FormValidator.getValidator('IsEmpty').test(element) ||
+				(/^-?(?:0$0(?=\d*\.)|[1-9]|0)\d*(\.\d+)?$/).test(element.get('value'));
 		}
 	}],
 
 	['validate-digits', {
-		errorMsg: FormValidator.getMsg.pass('digits'), 
+		errorMsg: FormValidator.getMsg.pass('digits'),
 		test: function(element){
 			return FormValidator.getValidator('IsEmpty').test(element) || (/^[\d() .:\-\+#]+$/.test(element.get('value')));
 		}
 	}],
 
 	['validate-alpha', {
-		errorMsg: FormValidator.getMsg.pass('alpha'), 
+		errorMsg: FormValidator.getMsg.pass('alpha'),
 		test: function (element){
-			return FormValidator.getValidator('IsEmpty').test(element) ||  /^[a-zA-Z]+$/.test(element.get('value'))
+			return FormValidator.getValidator('IsEmpty').test(element) ||  (/^[a-zA-Z]+$/).test(element.get('value'));
 		}
 	}],
 
 	['validate-alphanum', {
-		errorMsg: FormValidator.getMsg.pass('alphanum'), 
+		errorMsg: FormValidator.getMsg.pass('alphanum'),
 		test: function(element){
-			return FormValidator.getValidator('IsEmpty').test(element) || !/\W/.test(element.get('value'))
+			return FormValidator.getValidator('IsEmpty').test(element) || !(/\W/).test(element.get('value'));
 		}
 	}],
 
@@ -400,40 +400,40 @@ FormValidator.addAllThese([
 			var regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 			if (!regex.test(element.get('value'))) return false;
 			var d = new Date(element.get('value').replace(regex, '$1/$2/$3'));
-			return (parseInt(RegExp.$1, 10) == (1+d.getMonth())) && 
-			(parseInt(RegExp.$2, 10) == d.getDate()) && 
-			(parseInt(RegExp.$3, 10) == d.getFullYear() );
+			return (parseInt(RegExp.$1, 10) == (1 + d.getMonth())) &&
+				(parseInt(RegExp.$2, 10) == d.getDate()) &&
+				(parseInt(RegExp.$3, 10) == d.getFullYear());
 			}
 		}
 	}],
 
 	['validate-email', {
-		errorMsg: FormValidator.getMsg.pass('email'), 
+		errorMsg: FormValidator.getMsg.pass('email'),
 		test: function (element){
-			return FormValidator.getValidator('IsEmpty').test(element) || /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(element.get('value'));
+			return FormValidator.getValidator('IsEmpty').test(element) || (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i).test(element.get('value'));
 		}
 	}],
 
 	['validate-url', {
-		errorMsg: FormValidator.getMsg.pass('url'), 
+		errorMsg: FormValidator.getMsg.pass('url'),
 		test: function (element){
-			return FormValidator.getValidator('IsEmpty').test(element) || /^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i.test(element.get('value'));
+			return FormValidator.getValidator('IsEmpty').test(element) || (/^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i).test(element.get('value'));
 		}
 	}],
 
 	['validate-currency-dollar', {
-		errorMsg: FormValidator.getMsg.pass('currencyDollar'), 
+		errorMsg: FormValidator.getMsg.pass('currencyDollar'),
 		test: function(element){
 			// [$]1[##][,###]+[.##]
 			// [$]1###+[.##]
 			// [$]0.##
 			// [$].##
-			return FormValidator.getValidator('IsEmpty').test(element) ||  /^\$?\-?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}\d*(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/.test(element.get('value'));
+			return FormValidator.getValidator('IsEmpty').test(element) ||  (/^\$?\-?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}\d*(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/).test(element.get('value'));
 		}
 	}],
 
 	['validate-one-required', {
-		errorMsg: FormValidator.getMsg.pass('oneRequired'), 
+		errorMsg: FormValidator.getMsg.pass('oneRequired'),
 		test: function (element){
 			var p = element.parentNode;
 			return p.getElements('input').some(function(el){

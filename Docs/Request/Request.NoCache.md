@@ -34,9 +34,9 @@ Want to have all your Requests default to this behavior? No problem:
 
 	(function(){ //don't polute the global namespace
 		var ref = function(cls){
-		    return Class.refactor(cls, options: {
-		        noCache: true
-		    });
+			return Class.refactor(cls, options: {
+				noCache: true
+			});
 		});
 		Request = ref(Request);
 		Request.HTML = ref(Request.HTML);

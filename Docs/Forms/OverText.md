@@ -129,7 +129,7 @@ This method is NOT a method on the instance. Rather it is on the namespace. So:
 	var myOverText_2 = new OverText(...);
 	//...later
 	OverText.update(); //updates all the instances of OverText
-	
+
 ### Returns
 
 * nothing

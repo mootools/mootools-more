@@ -94,7 +94,7 @@ var Slider = new Class({
 
 	clickedElement: function(event){
 		if (this.isDragging) return;
-		
+
 		var dir = this.range < 0 ? -1 : 1;
 		var position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
 		position = position.limit(-this.options.offset, this.full -this.options.offset);

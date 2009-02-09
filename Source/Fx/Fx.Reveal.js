@@ -36,12 +36,12 @@ Fx.Reveal = new Class({
 						styles: this.options.styles,
 						mode: this.options.mode
 					});
-					var setToAuto = this.element.style.height === ""||this.element.style.height=="auto";
+					var setToAuto = this.element.style.height === ""||this.element.style.height == "auto";
 					this.element.setStyle('display', 'block');
 					if (this.options.transitionOpacity) startStyles.opacity = 1;
 					var zero = {};
 					$each(startStyles, function(style, name){
-						zero[name] = [style, 0]; 
+						zero[name] = [style, 0];
 					}, this);
 					var overflowBefore = this.element.getStyle('overflow');
 					this.element.setStyle('overflow', 'hidden');
@@ -84,9 +84,9 @@ Fx.Reveal = new Class({
 	reveal: function(){
 		try {
 			if (!this.showing && !this.hiding){
-				if (this.element.getStyle('display') == "none" || 
-					 this.element.getStyle('visiblity') == "hidden" || 
-					 this.element.getStyle('opacity')==0){
+				if (this.element.getStyle('display') == "none" ||
+					 this.element.getStyle('visiblity') == "hidden" ||
+					 this.element.getStyle('opacity') == 0){
 					this.showing = true;
 					this.hiding = false;
 					this.hidden = false;
@@ -97,7 +97,7 @@ Fx.Reveal = new Class({
 						display: 'block',
 						position:'absolute'
 					});
-					var setToAuto = this.element.style.height === "" || this.element.style.height=="auto";
+					var setToAuto = this.element.style.height === "" || this.element.style.height == "auto";
 					//enable opacity effects
 					if (this.options.transitionOpacity) this.element.setStyle('opacity',0);
 					//create the styles for the opened/visible state
@@ -115,7 +115,7 @@ Fx.Reveal = new Class({
 					if ($chk(this.options.widthOverride)) startStyles['width'] = this.options.widthOverride.toInt();
 					if (this.options.transitionOpacity) startStyles.opacity = 1;
 					//create the zero state for the beginning of the transition
-					var zero = { 
+					var zero = {
 						height: 0,
 						display: 'block'
 					};
@@ -163,11 +163,11 @@ Fx.Reveal = new Class({
 
 	toggle: function(){
 		try {
-			if (this.element.getStyle('display') == "none" || 
-				 this.element.getStyle('visiblity') == "hidden" || 
+			if (this.element.getStyle('display') == "none" ||
+				 this.element.getStyle('visiblity') == "hidden" ||
 				 this.element.getStyle('opacity') == 0){
 				this.reveal();
-		 	} else {
+			} else {
 				this.dissolve();
 			}
 		} catch(e){ this.show(); }
@@ -202,7 +202,7 @@ Element.implement({
 		this.get('reveal', options).reveal();
 		return this;
 	},
-	
+
 	dissolve: function(options){
 		this.get('reveal', options).dissolve();
 		return this;

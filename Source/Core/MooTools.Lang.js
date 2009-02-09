@@ -84,13 +84,13 @@
 			if (lang == this.getCurrentLanguage()) this.fireEvent('langChange', lang);
 			return this;
 		},
-		
+
 		list: function(){
 			return $A(data.languages);
 		}
 
 	});
-	
+
 	MooTools.lang = new Lang();
 
 })();

@@ -26,7 +26,7 @@ License:
 			}).inject(container);
 			(3).times(function(i){
 				var opt = new Element('option', {
-					text: i+'_txt'
+					text: i + '_txt'
 				}).inject(selectList);
 				if (i>0) opt.set('value', i+'_val');
 			});
@@ -51,16 +51,16 @@ License:
 		}).delay(1000);
 	});
 	describe('Element.getTextInRange', {
-	
+
 		'should get text in a specific range from an input': function(){
 			value_of(input.getTextInRange(2,5)).should_be('234');
 		},
-	
+
 
 		'should get a partial match on text in range where the range is outside the bounds of the text': function(){
 			value_of(input.getTextInRange(8,20)).should_be('89');
 		}
-	
+
 	});
 
 	describe('Element.selectRange', {
@@ -68,23 +68,23 @@ License:
 		'should select range of text in an input': function(){
 			value_of(input.selectRange(2,5).getSelectedRange()).should_be({start: 2, end: 5});
 		}
-	
+
 	});
 
 	describe('Element.getSelectedText', {
-	
+
 		'should return selected text in an input': function(){
 			value_of(input.selectRange(0,10).getSelectedText()).should_be('0123456789');
 		}
-	
+
 	});
 
 	describe('Element.getSelectionStart', {
-		
+
 		'should get the selection start': function(){
 			value_of(input.selectRange(2,5).getSelectionStart()).should_be(2);
 		}
-	
+
 	});
 
 	describe('Element.getSelectionEnd', {
@@ -92,7 +92,7 @@ License:
 		'should get the selection end': function(){
 			value_of(input.selectRange(2,5).getSelectionEnd()).should_be(5);
 		}
-	
+
 	});
 
 	describe('Element.setCaretPosition, Element.getCaretPosition', {
@@ -100,7 +100,7 @@ License:
 		'should set the caret position': function(){
 			value_of(input.setCaretPosition(3).getCaretPosition()).should_be(3);
 		}
-	
+
 	});
 
 	describe('Element.getSelectionStart', {
@@ -108,7 +108,7 @@ License:
 		'should compare the caret position to the selection start': function(){
 			value_of(input.setCaretPosition(3).getSelectionStart()).should_be(3);
 		}
-	
+
 	});
 
 	describe('Element.insertAtCursor', {
@@ -116,7 +116,7 @@ License:
 		'should insert at cursor': function(){
 			value_of(input.setCaretPosition(3).insertAtCursor('test').get('value')).should_be('012test3456789');
 		}
-	
+
 	});
 
 	describe('Element.insertAroundCursor', {
@@ -127,7 +127,7 @@ License:
 				after: '}'
 			}).get('value')).should_be('01{234}56789');
 		},
-	
+
 
 		'should insert around cursor w/o selection': function(){
 			value_of(input.set('value', '0123456789').setCaretPosition(2).insertAroundCursor({
@@ -136,7 +136,7 @@ License:
 				defaultMiddle: 'X'
 			}).get('value')).should_be('01{X}23456789');
 		}
-	
+
 	});
 
 })();

@@ -18,7 +18,7 @@
 				$('un').addEvent('change', function(){
 					$('pw').set('value', 'asdfasdf');
 				});
-				
+
 			},
 			verify: "When you enter avalue for the first input (username), the second input will be auto-filled. Does it's OverText disappear?"
 		}

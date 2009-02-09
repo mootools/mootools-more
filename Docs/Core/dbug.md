@@ -12,7 +12,7 @@ About dbug
 ----------
 dbug is a wrapper for the firebug console plugin for firefox. The syntax for logging is the same as documented at [http://getfirebug.com][].
 
-You can leave *dbug.log()* statements in your code and they will not be echoed out to the screen in any way. 
+You can leave *dbug.log()* statements in your code and they will not be echoed out to the screen in any way.
 
 Enabling dbug {#dbug:enable}
 ----------------------------

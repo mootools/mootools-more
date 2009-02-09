@@ -41,7 +41,7 @@ var Tips = new Class({
 		$(this).setStyles({position: 'absolute', top: 0, left: 0, visibility: 'hidden'});
 		if (params.elements) this.attach(params.elements);
 	},
-	
+
 	attach: function(elements){
 		$$(elements).each(function(element){
 			var title = element.get('title');
@@ -55,7 +55,7 @@ var Tips = new Class({
 		}, this);
 		return this;
 	},
-	
+
 	detach: function(elements){
 		$$(elements).each(function(element){
 			['enter', 'leave', 'move'].each(function(value){
@@ -67,7 +67,7 @@ var Tips = new Class({
 		});
 		return this;
 	},
-	
+
 	elementEnter: function(event, element){
 		$A(this.container.childNodes).each(Element.dispose);
 		['title', 'text'].each(function(value){
@@ -81,16 +81,16 @@ var Tips = new Class({
 		this.timer = this.show.delay(this.options.showDelay, this, element);
 		this.position((!this.options.fixed) ? event : {page: element.getPosition()});
 	},
-	
+
 	elementLeave: function(event, element){
 		$clear(this.timer);
 		this.timer = this.hide.delay(this.options.hideDelay, this, element);
 	},
-	
+
 	elementMove: function(event){
 		this.position(event);
 	},
-	
+
 	position: function(event){
 		var size = window.getSize(), scroll = window.getScroll(),
 			tip = {x: $(this).offsetWidth, y: $(this).offsetHeight},
@@ -102,7 +102,7 @@ var Tips = new Class({
 		}
 		$(this).setStyles(obj);
 	},
-	
+
 	fill: function(element, contents){
 		if(typeof contents == 'string') element.set('html', contents);
 		else element.adopt(contents);

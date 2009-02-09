@@ -14,7 +14,7 @@ MooTools.lang.set('IT', 'FormValidator', {
 	digits:'Si prega di usare esclusivamente valori numerici e punteggiatura in questo campo di testo (per esempio, un numero di telefono con trattini o barre non può essere accettato).',
 	alpha:'Si prega di utilizzare esclusivamente lettere (a-z) in questo campo di testo. Spazi o altri caratteri non sono accettatti.',
 	alphanum:'Si prega di utilizzare esclusivamente lettere (a-z) o numeri (0-9) in questo campo di testo. Spazi o altri caratteri non sono	accettatti.',
-	dateSuchAs:'Si prega di inserire correttamente la data: {date}', 
+	dateSuchAs:'Si prega di inserire correttamente la data: {date}',
 	dateInFormatMDY:'Si prega di inserire la data nel formato: GG/MM/AAAA (es.: "31/12/1999")',
 	email:'Si prega di inserire un indirizzo e-mail valido. Per esempio: "mionome@tuodominio.com".',
 	url:'Si prega di inserire una URL valida. Per esempio: "http://www.miodominio.com".',

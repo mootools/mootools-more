@@ -41,7 +41,7 @@ FormValidator.addAllThese([
 		errorMsg: function(){
 			return FormValidator.getMsg('noSpace');
 		},
-		 test: function(element, props){
+		test: function(element, props){
 			return !element.get('value').test(/\s/);
 		}
 	}],
@@ -103,7 +103,7 @@ FormValidator.addAllThese([
 	['validate-validate-match', {
 		errorMsg: function(element, props){
 			return FormValidator.getMsg('match').substitute({matchName: props.matchName || $(props.matchInput).get('name')});
-		}, 
+		},
 		test: function(element, props){
 			var eleVal = element.get('value');
 			var matchVal = $(props.matchInput) && $(props.matchInput).get('value');

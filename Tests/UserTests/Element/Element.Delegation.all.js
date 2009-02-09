@@ -7,19 +7,19 @@
 			before: function(){
 				$('someListing').removeEvents('mouseover(.item)').removeEvents('mousedown(.item)').removeEvents('mouseout(.item)');
 				var over = function(){
-						this.morph({ backgroundColor: '#222' });
-			  };
-				var out = 	function(){
+					this.morph({ backgroundColor: '#222' });
+				};
+				var out = function(){
 					this.morph({ backgroundColor: '#2D5E4C' });
-			  };
+				};
 				var down = function(e, el){ // el == this, that's important, event when child is clicked
-				   var text = this.get('text') + 
-					   ' this.tagName: ' + this.tagName + 
-					   ' e.target.tagName: ' + e.target.tagName +
-					   ' el.tagName: ' + el.tagName;
-				   $$('label')[0].set('text', text);
-			   };
-				$('someListing').store('delegateTests', [over, out, down])
+					var text = this.get('text') +
+						' this.tagName: ' + this.tagName +
+						' e.target.tagName: ' + e.target.tagName +
+						' el.tagName: ' + el.tagName;
+					$$('label')[0].set('text', text);
+				};
+				$('someListing').store('delegateTests', [over, out, down]);
 				$('someListing').addEvent('mouseover(.item)', over).addEvent('mouseout(.item)', out).addEvent('mousedown(.item)', down);
 			}
 		},
@@ -41,23 +41,23 @@
 			before: function(){
 				$('someListing').removeEvents('mouseover(.item)').removeEvents('mousedown(.item)').removeEvents('mouseout(.item)');
 				var over = function(){
-						this.morph({ backgroundColor: '#222' });
-			  };
-				var out = 	function(){
+					this.morph({ backgroundColor: '#222' });
+				};
+				var out = function(){
 					this.morph({ backgroundColor: '#2D5E4C' });
-			  };
+				};
 				var down = function(e, el){ // el == this, that's important, event when child is clicked
-				   var text = this.get('text') + 
-					   ' this.tagName: ' + this.tagName + 
-					   ' e.target.tagName: ' + e.target.tagName +
-					   ' el.tagName: ' + el.tagName;
-				   $$('label')[0].set('text', text);
-			   };
-				$('someListing').store('delegateTests', [over, out, down])
+					var text = this.get('text') +
+						' this.tagName: ' + this.tagName +
+						' e.target.tagName: ' + e.target.tagName +
+						' el.tagName: ' + el.tagName;
+					$$('label')[0].set('text', text);
+				};
+				$('someListing').store('delegateTests', [over, out, down]);
 				$('someListing').addEvents({
-				   'mouseover(.item)': over,
-				   'mouseout(.item)': out,
-				   'mousedown(.item)': down 
+					'mouseover(.item)': over,
+					'mouseout(.item)': out,
+					'mousedown(.item)': down
 				});
 			}
 		},

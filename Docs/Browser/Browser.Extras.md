@@ -61,7 +61,7 @@ Browser Method: getPort {#Browser:getPort}
 
 1. url - (*string*, optional) the url to test for a port; defaults to *window location*
 
-### Returns 
+### Returns
 
 * (*string*) the port number of the window location
 
@@ -102,15 +102,15 @@ Combines query string values into a query string.
 	//so if the page is http://www.test.com?x=y
 	//this would return http://www.test.com?x=y&a=b
 	Browser.mergeQueryString({a: 'b'})
-	
+
 	//merges with a specified url
 	//this would yeild www.test.com?x=y&a=b
 	Browser.mergeQueryString({a: 'b'}, 'http://www.test.com?x=y');
-	
+
 	//specified values overwrite the url values
 	//this would yeild http://www.test.com?x=y&a=c
 	Browser.mergeQueryString({a: 'c'}, 'http://www.test.com?x=y&a=b');
-	
+
 	//query strings can be passed without the full url
 	//this would yeild x=y&a=c
 	Browser.mergeQueryString({a: 'c'}, 'x=y&a=b');

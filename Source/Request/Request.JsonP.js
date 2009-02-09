@@ -45,7 +45,7 @@ Request.JsonP = new Class({
 		var dl = (Browser.Engine.trident)?50:0; //for some reason, IE needs a moment here...
 		(function(){
 			var script = new Element('script', {
-				src: u.url, 
+				src: u.url,
 				type: 'text/javascript',
 				id: 'jsonp_'+u.index+'_'+requestIndex
 			});
@@ -54,7 +54,7 @@ Request.JsonP = new Class({
 				try {script.dispose();}catch(e){}
 			}.bind(this));
 			script.inject(document.head);
-			
+
 			if ($chk(this.options.abortAfter) && ! remaining) script.dispose.delay(this.options.abortAfter, script);
 
 			if (remaining){
@@ -90,7 +90,7 @@ Request.JsonP = new Class({
 		}
 		if ($chk(this.options.globalFunction)){
 			window[this.options.globalFunction] = function(r){
-				Request.JsonP.requestors[index].handleResults(r)
+				Request.JsonP.requestors[index].handleResults(r);
 			};
 		}
 		return {url: jurl, index: index};

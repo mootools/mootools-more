@@ -15,7 +15,7 @@ Class.Occlude = new Class({
 		element = $(element || this.element);
 		var instance = element.retrieve(property || this.property);
 		if (instance && !$defined(this.occluded)){
-			this.occluded = instance; 
+			this.occluded = instance;
 		} else {
 			this.occluded = false;
 			element.store(property || this.property, this);

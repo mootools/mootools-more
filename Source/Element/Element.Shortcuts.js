@@ -26,7 +26,7 @@ Element.implement({
 			//IE fails here if the element is not in the dom
 			if ('none' != this.getStyle('display')) d = this.getStyle('display');
 		} catch(e){}
-		
+
 		return this.store('originalDisplay', d || 'block').setStyle('display', 'none');
 	},
 

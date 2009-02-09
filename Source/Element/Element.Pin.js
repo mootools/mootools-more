@@ -22,11 +22,11 @@ Script: Element.Pin.js
 	});
 
 	Element.implement({
-	
+
 		pin: function(enable){
 			if (this.getStyle('display') == 'none')
 				return;
-			
+
 			if (enable!==false){
 				var p = this.getPosition();
 				if (!this.retrieve('pinned')){
@@ -80,15 +80,15 @@ Script: Element.Pin.js
 			}
 			return this.addClass('isPinned');
 		},
-	
+
 		unpin: function(){
 			return this.pin(false).removeClass('isPinned');
 		},
-	
+
 		togglepin: function(){
 			this.pin(!this.retrieve('pinned'));
 		}
-	
+
 	});
 
 })();

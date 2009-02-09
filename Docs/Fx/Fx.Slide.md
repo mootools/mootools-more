@@ -182,7 +182,7 @@ Shows the Element without a transition.
 
     //Slides "myElement" out.
 	myFx.slideOut().chain(function(){
-	    //Waits one second, then the Element appears without transition.
+		//Waits one second, then the Element appears without transition.
 		this.show.delay(1000, this);
 	});
 
