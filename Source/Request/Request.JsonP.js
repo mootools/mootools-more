@@ -22,7 +22,6 @@ Request.JsonP = new Class({
 	  url: '',
 		data: {},
 		retries: 0,
-		retryTimeout: 5000,
 	  timeout: 0,
 		link: 'ignore',
 		callBackKey: 'callback',
@@ -80,7 +79,7 @@ Request.JsonP = new Class({
 						script.destroy();
 						this.request(options, index);
 					}
-				}).delay(this.options.retryTimeout, this);
+				}).delay(this.options.timeout, this);
 			}
 		}.delay(! Browser.Engine.trident || 50, this);
 		return this;
