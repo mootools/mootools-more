@@ -29,7 +29,7 @@ var IframeShim = new Class({
 		if (this.occlude()) return this.occludes;
 		this.setOptions(options);
 		if(this.options.browsers){
-			var zIndex = this.element.getStyle('zIndex').toInt();
+		  var zIndex = this.element.getStyle('zIndex').toInt();
 			if (!zIndex){
 				zIndex = 5;
 				this.element.setStyle('zIndex', 5);

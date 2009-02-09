@@ -9,96 +9,112 @@ Script: Request.JsonP.js
 		Aaron Newton
 
 */
+
 Request.JsonP = new Class({
 
-	Implements: [Options, Events],
+	Implements: [Chain, Events, Options],
 
-	options: {
-//	onComplete: $empty,
-//	globalFunction: '',
-//	abortAfter: 0,
-		callBackKey: "callback",
-		queryString: "",
+	options: {/*
+		onRequest: $empty,
+	  onComplete: $empty,
+		onSuccess: $empty,
+		onCancel: $empty,*/
+	  url: '',
 		data: {},
-		timeout: 5000,
-		retries: 0
+		retries: 0,
+	  timeout: 0,
+		link: 'ignore',
+		callBackKey: 'callback',
+		injectScript: document.head
 	},
 
-	initialize: function(url, options){
+	initialize: function(options){
 		this.setOptions(options);
-		this.url = this.makeUrl(url).url;
-		this.fired = false;
-		this.scripts = [];
+		this.running = false;
 		this.requests = 0;
 		this.triesRemaining = [];
 	},
-
-	request: function(url, requestIndex){
-		var u = this.makeUrl(url);
-		if (!$chk(requestIndex)){
-			requestIndex = this.requests;
-			this.requests++;
+	
+	check: function(caller){
+		if (!this.running) return true;
+		switch (this.options.link){
+			case 'cancel': this.cancel(); return true;
+			case 'chain': this.chain(caller.bind(this, Array.slice(arguments, 1))); return false;
 		}
-		if (!$chk(this.triesRemaining[requestIndex])) this.triesRemaining[requestIndex] = this.options.retries;
-		var remaining = this.triesRemaining[requestIndex]; //saving bytes
-		if (window.dbug) dbug.log('retrieving by json script method: %s', u.url);
-		var dl = (Browser.Engine.trident)?50:0; //for some reason, IE needs a moment here...
-		(function(){
-			var script = new Element('script', {
-				src: u.url,
-				type: 'text/javascript',
-				id: 'jsonp_'+u.index+'_'+requestIndex
-			});
-			this.fired = true;
-			this.addEvent('onComplete', function(){
-				try {script.dispose();}catch(e){}
-			}.bind(this));
-			script.inject(document.head);
+		return false;
+	},
 
-			if ($chk(this.options.abortAfter) && ! remaining) script.dispose.delay(this.options.abortAfter, script);
+	send: function(options){
+		if (!$chk(arguments[1]) && !this.check(arguments.callee, options)) return this;
+		
+		var type = $type(options), old = this.options, index = $chk(arguments[1]) ? arguments[1] : this.requests++;
+		if (type == 'string' || type == 'element') options = {data: options};
+		
+		options = $extend({data: old.data, url: old.url}, options);				
+		var url = this.prepareUrl(options);
+		
+		if (!$chk(this.triesRemaining[index])) this.triesRemaining[index] = this.options.retries;
+		var remaining = this.triesRemaining[index];
+		
+		if (window.dbug) dbug.log('retrieving by json script method: %s', url);
+		
+		(function(){
+			var script = this.getScript(options);
+			this.running = true;
+			
+			if (!remaining && this.options.timeout){
+				(function(){
+					if (script){
+						script.destroy();
+						this.cancel();
+					}
+				}).delay(this.options.timeout, this);	
+			}
 
 			if (remaining){
 				(function(){
-					this.triesRemaining[requestIndex] = remaining - 1;
-					if (script.getParent() && remaining){
-						if (window.dbug) dbug.log('removing script (%o) and retrying: try: %s, remaining: %s', requestIndex, remaining);
-						script.dispose();
-						this.request(url, requestIndex);
+					this.triesRemaining[index] = remaining - 1;
+					if (script && remaining){
+						if (window.dbug) dbug.log('removing script (%o) and retrying: try: %s, remaining: %s', index, remaining);
+						script.destroy();
+						this.request(options, index);
 					}
 				}).delay(this.options.timeout, this);
 			}
-		}.bind(this)).delay(dl);
+		}.delay(! Browser.Engine.trident || 50, this);
 		return this;
 	},
-
-	makeUrl: function(url){
-		var index;
-		if (Request.JsonP.requestors.contains(this)){
-			index = Request.JsonP.requestors.indexOf(this);
-		} else {
-			index = Request.JsonP.requestors.push(this) - 1;
-			Request.JsonP.requestors['request_'+index] = this;
-		}
-		if (url){
-			var separator = (url.test('\\?'))?'&':'?';
-			var jurl = url + separator + this.options.callBackKey + "=Request.JsonP.requestors.request_" +
-				index+".handleResults";
-			if (this.options.queryString) jurl += "&"+this.options.queryString;
-			jurl += "&"+Hash.toQueryString(this.options.data);
-		} else {
-			var jurl = this.url;
-		}
-		if ($chk(this.options.globalFunction)){
-			window[this.options.globalFunction] = function(r){
-				Request.JsonP.requestors[index].handleResults(r);
-			};
-		}
-		return {url: jurl, index: index};
+	
+	cancel: function(){
+		if (!this.running) return this;
+		this.running = false;
+		this.fireEvent('cancel');
+		return this;
 	},
-	handleResults: function(data){
+ 	
+	getScript: function(options){
+		var options = options || this.options, index, data;
+		
+		switch ($type(options.data)){
+			case 'element': data = $(options.data).toQueryString(); break;
+			case 'object': case 'hash': data = Hash.toQueryString(options.data);
+		}
+		
+		var index = Request.JsonP.requestors.length;
+		var script = new Element('script', {type: 'text/javascript', src: options.url + (options.url.test('\\?') ? '&' :'?') + options.callBackKey + "=Request.JsonP.requestors["+ index +"].success&" + data}).inject(this.options.injectScript);
+		
+		Request.JsonP.requestors.push(function(data){ this.success(data, script); }.bind(this));
+				
+		return script;
+	},
+	
+	success: function(data, script){
 		if (window.dbug) dbug.log('jsonp received: ', data);
-		this.fireEvent('complete', [data, this]);
+		if(script) script.destroy();
+		this.running = false;
+		this.fireEvent('complete', data).fireEvent('success', data).callChain();
 	}
 
 });
+
 Request.JsonP.requestors = [];
