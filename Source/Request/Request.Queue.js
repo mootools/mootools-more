@@ -71,9 +71,9 @@ Request.Queue = new Class({
 
 	removeRequest: function(req){
 		var name = $type(req) == 'object' ? this.getName(req) : req;
-		if (!name && $type(name) != 'string') return false;
+		if (!name && $type(name) != 'string') return this;
 		req = this.requests.get(name);
-		if (!req) return false;
+		if (!req) return this;
 		['onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'].each(function(evt){
 			req.removeEvent(evt, this.reqBinders[name][evt]);
 		}, this);
@@ -91,8 +91,7 @@ Request.Queue = new Class({
 	},
 
 	send: function(name, options){
-		var q;
-		q = function(){
+		var q = function(){
 			this.requests.get(name)._groupSend(options);
 			this.queue.erase(q);
 		}.bind(this);
