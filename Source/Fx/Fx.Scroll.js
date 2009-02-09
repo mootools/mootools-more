@@ -2,8 +2,11 @@
 Script: Fx.Scroll.js
 	Effect to smoothly scroll any element, including the window.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 Fx.Scroll = new Class({

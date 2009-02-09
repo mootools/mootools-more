@@ -2,8 +2,11 @@
 Script: Assets.js
 	Provides methods to dynamically load JavaScript, CSS, and Image files into the document.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Asset = new Hash({
@@ -25,8 +28,7 @@ var Asset = new Hash({
 			readystatechange: function(){
 				if (['loaded', 'complete'].contains(this.readyState)) load();
 			}
-		}).setProperties(properties);
-
+		}).set(properties);
 
 		if (Browser.Engine.webkit419) var checker = (function(){
 			if (!$try(check)) return;
@@ -45,9 +47,9 @@ var Asset = new Hash({
 
 	image: function(source, properties){
 		properties = $merge({
-			'onload': $empty,
-			'onabort': $empty,
-			'onerror': $empty
+			onload: $empty,
+			onabort: $empty,
+			onerror: $empty
 		}, properties);
 		var image = new Image();
 		var element = $(image) || new Element('img');
@@ -68,7 +70,7 @@ var Asset = new Hash({
 		});
 		image.src = element.src = source;
 		if (image && image.complete) image.onload.delay(1);
-		return element.setProperties(properties);
+		return element.set(properties);
 	},
 
 	images: function(sources, options){
@@ -76,20 +78,18 @@ var Asset = new Hash({
 			onComplete: $empty,
 			onProgress: $empty
 		}, options);
-		if (!sources.push) sources = [sources];
+		sources = $splat(sources);
 		var images = [];
 		var counter = 0;
-		sources.each(function(source){
-			var img = new Asset.image(source, {
-				'onload': function(){
+		return new Elements(sources.map(function(source){
+			return Asset.image(source, {
+				onload: function(){
 					options.onProgress.call(this, counter, sources.indexOf(source));
 					counter++;
 					if (counter == sources.length) options.onComplete();
 				}
 			});
-			images.push(img);
-		});
-		return new Elements(images);
+		}));
 	}
 
 });

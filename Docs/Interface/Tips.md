@@ -64,10 +64,11 @@ Tips Event: show {#Tips:show}
 ### Arguments:
 
 1. tip - (*element*) The tip element. Useful if you want to apply effects to it.
+2. el - (*element*) The element on which the tip is based on.
 
 ### Example:
 
-	myTips.addEvent('show', function(tip){
+	myTips.addEvent('show', function(tip, el){
 		tip.fade('in');
 	});
 
@@ -83,10 +84,11 @@ Tips Event: hide {#Tips:hide}
 ### Arguments:
 
 1. tip - (*element*) The tip element. Useful if you want to apply effects to it.
+2. el - (*element*) The element on which the tip is based on.
 
 ### Example:
 
-	myTips.addEvent('hide', function(tip){
+	myTips.addEvent('hide', function(tip, el){
 		tip.fade('out');
 	});
 

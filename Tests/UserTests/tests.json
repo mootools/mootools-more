@@ -1,0 +1,32 @@
+{
+	"Core":{
+		"dbug":['all']
+	},
+	"Browser": {
+		"IframeShim":['all']
+	},
+	"Class": {
+		"Chain.Wait":['all']
+	},
+	"Element":{
+		"Element.Delegation":['all'],	
+		"Element.Forms":['all'],
+		"Element.Shortcuts":['all'],
+		"Element.Pin":['all'],
+		"Element.Position":['all']
+	},
+	"Forms": {
+		"FormValidator.Inline":['all'],
+		"FormValidator.Extras":['all'],
+		"OverText": ['all']
+	},
+	"Fx": {
+		"Fx.Move":['all'],
+		"Fx.Reveal":['all'],
+		"Fx.Sort":['all']
+	},
+	"Request":{
+		"Request.JsonP": ['all'],
+		"Request.Queue": ['all']
+	}
+}

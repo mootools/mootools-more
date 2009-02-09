@@ -126,7 +126,7 @@ Slider Method: set {#Slider:set}
 	mySlider.set(0);
 
 	var myPeriodical = (function(){
-		if(this.step == this.options.steps) $clear(myPeriodical);
+		if (this.step == this.options.steps) $clear(myPeriodical);
 			this.set(this.step++);
 	}).periodical(1000, mySlider);
 

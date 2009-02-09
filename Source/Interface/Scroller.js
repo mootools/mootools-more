@@ -2,8 +2,11 @@
 Script: Scroller.js
 	Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Scroller = new Class({

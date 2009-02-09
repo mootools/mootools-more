@@ -5,7 +5,7 @@ Enables the modification of two CSS properties of an Element based on the positi
 
 ### Implements:
 
-[Events][], [Chain](/Class/Class.Extras#Options)
+[Events][], [Chain], [Options][], [Class.ToElement][]
 
 
 Drag Method: constructor {#Drag:constructor}
@@ -36,8 +36,8 @@ Drag Method: constructor {#Drag:constructor}
 * beforeStart - Executed before the Drag instance attaches the events. Receives the dragged element as an argument.
 * start       - Executed when the user starts to drag (on mousedown). Receives the dragged element as an argument.
 * snap        - Executed when the user has dragged past the snap option. Receives the dragged element as an argument.
-* drag        - Executed on every step of the drag. Receives the dragged element as an argument.
-* complete    - Executed when the user completes the drag. Receives the dragged element as an argument.
+* drag        - Executed on every step of the drag. Receives the dragged element and the event as arguments.
+* complete    - Executed when the user completes the drag. Receives the dragged element and the event as arguments.
 
 ### Examples:
 
@@ -137,7 +137,7 @@ Stops (removes) all attached events from the Drag instance and executes the 'com
 		onSnap: function(){
 			this.moved = this.moved || 0;
 			this.moved++;
-			if(this.moved > 100) {
+			if (this.moved > 100){
 				this.stop();
 				alert("Stop! You'll make the Element angry.");
 			}
@@ -188,5 +188,7 @@ Adds drag-to-resize behavior to an Element using supplied options.
 [Element:addEvent]: /Element/Element.Event/#Element:addEvent
 [Element:makeDraggable]: /Drag/Drag.Move/#Element:makeDraggable
 [Events]: /Class/Class.Extras#Events
-[Chain]: /Class/Class.Extras#Options
+[Chain]: /Class/Class.Extras#Chain
+[Options]: /Class/Class.Extras#Options
+[Class.ToElement]: http://www.mootools.net/more/docs/Class/Class.ToElement
 [W3Schools: CSS Units]: http://www.w3schools.com/css/css_units.asp

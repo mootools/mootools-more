@@ -30,7 +30,7 @@ All the base Drag options, plus:
 
 ### Events:
 
-* drop  - Executed when the element drops. Passes as argument the element and the element dropped on. If dropped on nothing, the second argument is null.
+* drop  - Executed when the element drops. Passes as argument the element and the element dropped on and the event. If dropped on nothing, the second argument is null.
 * leave - Executed when the element leaves one of the droppables.
 * enter - Executed when the element enters one of the droppables.
 
@@ -40,9 +40,9 @@ All the base Drag options, plus:
 
 		droppables: '.droppable',
 
-		onDrop: function(element, droppable){
+		onDrop: function(element, droppable, event){
 			if (!droppable) console.log(element, ' dropped on nothing');
-			else console.log(element, 'dropped on', droppable);
+			else console.log(element, 'dropped on', droppable, 'event', event);
 		},
 
 		onEnter: function(element, droppable){
@@ -87,7 +87,7 @@ Fires the 'drop' event and calls the Drag Class stop method.
 		onSnap: function(){ // due to MooTool's inheritance, all [Drag][]'s Events are also available.
 			this.moved = this.moved || 0;
 			this.moved++;
-			if(this.moved > 1000){
+			if (this.moved > 1000){
 				alert("You've gone far enough.");
 				this.stop();
 			}
