@@ -32,3 +32,4 @@ MooTools Plugins and Enhancements Repository
   - makeUrl logic now moved to new getScript(), which directly returns the script
   - changed how it essentially works. instead of storing the object reference, we store a new function every time a request is made, that keeps a reference of the script element and the object instance.
   - abortAfter renamed to timeout, and timeout to retryTimeout, which makes more sense
+  - globalFunction gone, deemed useless
