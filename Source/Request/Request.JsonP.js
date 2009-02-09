@@ -25,7 +25,7 @@ Request.JsonP = new Class({
 		retryTimeout: 5000,
 	  timeout: 0,
 		link: 'ignore',
-		callBackKey: "callback",
+		callBackKey: 'callback',
 		injectScript: document.head
 	},
 
