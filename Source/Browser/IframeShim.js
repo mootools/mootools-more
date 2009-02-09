@@ -22,7 +22,7 @@ var IframeShim = new Class({
 		browsers: (Browser.Engine.trident4 || (Browser.Engine.gecko && !Browser.Engine.gecko19 && Browser.Platform.mac))
 	},
 
-	property: 'IframeShim',
+	property: 'iframeShim',
 
 	initialize: function (element, options){
 		this.element = $(element);
@@ -84,8 +84,8 @@ var IframeShim = new Class({
 		return this.position();
 	},
 
-	dispose: function(){
-		this.shim.dispose();
+	dispose: function(forever){
+		this.shim[forever ? 'destroy' : 'dispose']();
 		return this;
 	}
 
@@ -93,4 +93,31 @@ var IframeShim = new Class({
 
 window.addEvent('load', function(){
 	IframeShim.ready = true;
+});
+
+Element.Properties.iframeShim = {
+
+	set: function(options){
+		var shim = this.retrieve('iframeShim');
+		if (shim) shim.dispose(true);
+		return this.eliminate('iframeShim').store('iframeShim:options', options);
+	},
+
+	get: function(options){
+		if (options || !this.retrieve('iframeShim')){
+			if (options || !this.retrieve('iframeShim:options')) this.set('iframeShim', options);
+			new IframeShim(this, this.retrieve('iframeShim:options');
+		}
+		return this.retrieve('iframeShim');
+	}
+
+};
+
+['position', 'hide', 'show', 'dispose'].each(function(m){
+	
+	Element.implement(m + 'IframeShim', function(){
+		this.get('iframeShim')[m]();
+		return this;
+	});
+	
 });

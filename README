@@ -21,6 +21,7 @@ MooTools Plugins and Enhancements Repository
 * IframeShim
   - options:zindex renamed to zIndex
   - makeShim method gone
+  - occluded property (Element.storage) now camelcase (iframeShim). consistent with tween, morph, etc
 * JsonP
   - constructor/send/prepareUrl take options hash, no longer an url directly (like Request)
   - user can change options on the fly when calling send() with a new hash, reusing the object
