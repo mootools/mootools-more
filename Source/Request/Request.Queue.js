@@ -7,26 +7,22 @@ Script: Request.Queue.js
 
 	Authors:
 		Aaron Newton
+*/
 
- */
 Request.Queue = new Class({
 
 	Implements: [Options, Events],
 
 	Binds: ['attach', 'onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'],
 
-	reqBinders: {},
-
-	queue: [],
-
-	options: {
-/*	onRequestStart: $empty,
+	options: {/*
+		onRequestStart: $empty,
 		onRequestEnd: $empty,
 		onRequestSuccess: $empty,
 		onRequestComplete: $empty,
 		onRequestCancel: $empty,
 		onRequestException: $empty,
-		onRequestFailure: $empty, */
+		onRequestFailure: $empty,*/
 		stopOnFailure: true,
 		autoAdvance: true,
 		concurrent: 1,
@@ -35,8 +31,10 @@ Request.Queue = new Class({
 
 	initialize: function(options){
 		this.setOptions(options);
-		this.requests = new Hash();
+		this.requests = new Hash;
 		this.addRequests(this.options.requests);
+		this.queue = [];
+		this.reqBinders = {};
 	},
 
 	addRequest: function(name, request){
@@ -45,10 +43,8 @@ Request.Queue = new Class({
 		return this;
 	},
 
-	addRequests: function(reqs){
-		$each(reqs, function(v, k){
-			this.addRequest(k, v);
-		}, this);
+	addRequests: function(obj){
+		$each(obj, this.addRequest, this);
 		return this;
 	},
 
@@ -75,9 +71,9 @@ Request.Queue = new Class({
 
 	removeRequest: function(req){
 		var name = $type(req) == 'object' ? this.getName(req) : req;
-		if (!name && $type(name) != 'string') return false;
+		if (!name && $type(name) != 'string') return this;
 		req = this.requests.get(name);
-		if (!req) return false;
+		if (!req) return this;
 		['onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'].each(function(evt){
 			req.removeEvent(evt, this.reqBinders[name][evt]);
 		}, this);
@@ -87,11 +83,7 @@ Request.Queue = new Class({
 	},
 
 	getRunning: function(){
-		var running = [];
-		this.requests.each(function(req){
-			if (req.running) running.include(req);
-		});
-		return running;
+		return this.requests.filter(function(r){ return r.running; });
 	},
 
 	isRunning: function(){
@@ -99,8 +91,7 @@ Request.Queue = new Class({
 	},
 
 	send: function(name, options){
-		var q;
-		q = function(){
+		var q = function(){
 			this.requests.get(name)._groupSend(options);
 			this.queue.erase(q);
 		}.bind(this);
@@ -117,23 +108,22 @@ Request.Queue = new Class({
 
 	resume: function(){
 		this.error = false;
-		(this.options.concurrent - this.getRunning().length).times(this.runNext.bind(this));
+		(this.options.concurrent - this.getRunning().length).times(this.runNext, this);
 		return this;
 	},
 
 	runNext: function(name){
-		if (this.queue.length){
-			if (!name){
-				this.queue[0]();
-			} else {
-				var found;
-				this.queue.each(function(q){
-					if (!found && q.name == name){
-						found = true;
-						q();
-					}
-				});
-			}
+		if (!this.queue.length) return;
+		if (!name){
+			this.queue[0]();
+		} else {
+			var found;
+			this.queue.each(function(q){
+				if (!found && q.name == name){
+					found = true;
+					q();
+				}
+			});
 		}
 		return this;
 	},
@@ -147,6 +137,7 @@ Request.Queue = new Class({
 				else return false;
 			}).filter(function(q){ return q; });
 		}
+		return this;
 	},
 
 	cancel: function(name){

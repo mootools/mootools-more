@@ -15,12 +15,11 @@ Fx.Sort = new Class({
 	Extends: Fx.Elements,
 
 	options: {
-		mode: 'vertical' //or 'horizontal'
+		mode: 'vertical'
 	},
 
 	initialize: function(elements, options){
 		this.parent(elements, options);
-		//set the position of each element to relative
 		this.elements.each(function(el){
 			if (el.getStyle('position') == 'static') el.setStyle('position', 'relative');
 		});
@@ -39,7 +38,6 @@ Fx.Sort = new Class({
 		var left = 0;
 		var zero = {};
 		var vert = this.options.mode == "vertical";
-		//calculate the current location of all the elements
 		var current = this.elements.map(function(el, index){
 			var size = el.getComputedSize({styles: ['border', 'padding', 'margin']});
 			var val;
@@ -65,9 +63,6 @@ Fx.Sort = new Class({
 			return val;
 		}, this);
 		this.set(zero);
-		//if the array passed in is not the same size as
-		//the amount of elements we have, fill it in
-		//or cut it short
 		newOrder = newOrder.map(function(i){ return i.toInt(); });
 		if (newOrder.length != this.elements.length){
 			this.currentOrder.each(function(index){
@@ -81,7 +76,6 @@ Fx.Sort = new Class({
 		var left = 0;
 		var margin = 0;
 		var next = {};
-		//calculate the new location of each item
 		newOrder.each(function(item, index){
 			var newPos = {};
 			if (vert){
@@ -98,8 +92,6 @@ Fx.Sort = new Class({
 		$A(newOrder).sort().each(function(index){
 			mapped[index] = next[index];
 		});
-		//store the current order
-		//execute the effect
 		this.start(mapped);
 		this.currentOrder = newOrder;
 		return this;

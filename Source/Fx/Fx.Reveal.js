@@ -14,15 +14,14 @@ Fx.Reveal = new Class({
 
 	Extends: Fx.Morph,
 
-	options: {
-		styles: ['padding','border','margin'],
-		//by default, we don't transition opacity in ie6 because it can garble fonts
+	options: {/*	  
+		onShow: $empty,
+		onHide: $empty,*/
+		styles: ['padding', 'border', 'margin'],
 		transitionOpacity: !Browser.Engine.trident4,
-		mode:'vertical',
+		mode: 'vertical',
 		heightOverride: null,
 		widthOverride: null
-		/*onShow: $empty,
-		onHide: $empty*/
 	},
 
 	dissolve: function(){
