@@ -9,10 +9,10 @@ Script: Request.Timer.js
 		Christoph Pojer
 
 */
-(function(){
-	var maker = function(klass) {
-		return {
 
+(function(){
+	var refactor = function(klass){
+		return {
 			Extends: klass,
 
 			options: {
@@ -45,8 +45,7 @@ Script: Request.Timer.js
 		};
 	};
 
-	Request = Class.refactor(maker(Request));
-	if (Request.HTML) Request.HTML = Class.refactor(maker(Request.HTML));
-	if (Request.JSON) Request.JSON = Class.refactor(maker(Request.JSON));
-
-});
+	Request = Class.refactor(Request, refactor(Request));
+	if (Request.HTML) Request.HTML = Class.refactor(Request.HTML, refactor(Request.HTML));
+	if (Request.JSON) Request.JSON = Class.refactor(Request.JSON, refactor(Request.JSON));
+})();
