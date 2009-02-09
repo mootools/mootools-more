@@ -26,8 +26,7 @@ Creates a Json request using script tag injection and handles the callbacks for 
 * callBackKey - (*string*) the key in the url that the server uses to wrap the Json results. So, for example, if you used *callBackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; defaults to "callback". This must be defined correctly.
 * data - (*object*) additional key/value data to append to the url
 * retries - (*integer*; defaults to *zero*) if this value is a positive integer, the JsonP request will abort after the duration specified in the *timeout* option and fire again until the number of retries has been exhausted.
-* retryTimeout - (*integer*; defaults to *5000*) if retries is a positive integer, the duration between tries in milliseconds.
-* timeout - (*integer*; defaults to *zero*) the duration to wait before aborting a request. Only used if retries are 0, or if all retries are used up.
+* timeout - (*integer*; defaults to *zero*) the duration to wait before aborting a request or retrying.
 * injectScript - (*mixed*) where to inject the script elements used for the calls
 
 ### Events
@@ -47,7 +46,7 @@ Creates a Json request using script tag injection and handles the callbacks for 
 		onComplete: myFunction.bind(someObject)
 	}).send();
 
-The above example would generate this url:  
+The above example would generate this url:
 
 	http://api.cnet.com/restApi/v1.0/techProductSearch?partTag=mtvo&iod=hlPrice&viewType=json&results=100&query=ipod&callback=Request.JsonP.requestors[0].handleResults&
 
