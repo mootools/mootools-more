@@ -16,13 +16,13 @@ Request.JsonP = new Class({
 
 	options: {/*
 		onRequest: $empty,
-	  onComplete: $empty,
+		onComplete: $empty,
 		onSuccess: $empty,
 		onCancel: $empty,*/
-	  url: '',
+		url: '',
 		data: {},
 		retries: 0,
-	  timeout: 0,
+		timeout: 0,
 		link: 'ignore',
 		callBackKey: 'callback',
 		injectScript: document.head
@@ -48,7 +48,7 @@ Request.JsonP = new Class({
 		if (!$chk(arguments[1]) && !this.check(arguments.callee, options)) return this;
 		
 		var type = $type(options), old = this.options, index = $chk(arguments[1]) ? arguments[1] : this.requests++;
-		if (type == 'string' || type == 'element') options = {data: options};
+		if (['string', 'element'].contains(type)) options = {data: options};
 		
 		options = $extend({data: old.data, url: old.url}, options);				
 		var url = this.prepareUrl(options);
@@ -81,7 +81,7 @@ Request.JsonP = new Class({
 					}
 				}).delay(this.options.timeout, this);
 			}
-		}.delay(! Browser.Engine.trident || 50, this);
+		}).delay(Browser.Engine.trident ? 50 : 0, this);
 		return this;
 	},
 	
@@ -100,10 +100,13 @@ Request.JsonP = new Class({
 			case 'object': case 'hash': data = Hash.toQueryString(options.data);
 		}
 		
-		var index = Request.JsonP.requestors.length;
-		var script = new Element('script', {type: 'text/javascript', src: options.url + (options.url.test('\\?') ? '&' :'?') + options.callBackKey + "=Request.JsonP.requestors["+ index +"].success&" + data}).inject(this.options.injectScript);
+		var index = Request.JsonP.requests.length;
+		var script = new Element('script', {
+			type: 'text/javascript',
+			src: options.url + (options.url.test('\\?') ? '&' :'?') + options.callBackKey + "=Request.JsonP.requests["+ index +"].success&" + data
+		}).inject(this.options.injectScript);
 		
-		Request.JsonP.requestors.push(function(data){ this.success(data, script); }.bind(this));
+		Request.JsonP.requests.push(function(data){ this.success(data, script); }.bind(this));
 				
 		return script;
 	},
@@ -117,4 +120,4 @@ Request.JsonP = new Class({
 
 });
 
-Request.JsonP.requestors = [];
+Request.JsonP.requests = [];
