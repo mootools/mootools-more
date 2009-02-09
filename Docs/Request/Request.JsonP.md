@@ -27,7 +27,7 @@ Creates a Json request using script tag injection and handles the callbacks for 
 * data - (*object*) additional key/value data to append to the url
 * retries - (*integer*; defaults to *zero*) if this value is a positive integer, the JsonP request will abort after the duration specified in the *timeout* option and fire again until the number of retries has been exhausted.
 * timeout - (*integer*; defaults to *zero*) the duration to wait before aborting a request or retrying.
-* injectScript - (*mixed*) where to inject the script elements used for the calls
+* injectScript - (*mixed*; defaults to document head) where to inject the script elements used for the calls
 
 ### Events
 
