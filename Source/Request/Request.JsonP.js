@@ -63,12 +63,14 @@ Request.JsonP = new Class({
 			var script = this.getScript(options);
 			this.running = true;
 			
-			if (this.options.abortAfter && !remaining) (function(){
-				if (script){
-					script.destroy();
-					this.cancel();
-				}
-			}).delay(this.options.timeout, this);
+			if (!remaining && this.options.timeout){
+				(function(){
+					if (script){
+						script.destroy();
+						this.cancel();
+					}
+				}).delay(this.options.timeout, this);	
+			}
 
 			if (remaining){
 				(function(){
