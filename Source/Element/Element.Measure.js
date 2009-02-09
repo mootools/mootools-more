@@ -24,7 +24,6 @@ Element.implement({
 		return result;
 	},
 
-	// Daniel Steigerwald - MIT licence
 	expose: function(){
 		var style = this.style;
 		var cssText = style.cssText;
@@ -33,7 +32,7 @@ Element.implement({
 		if (style.display == 'none') style.display = '';
 		return (function(){ return this.set('style', cssText); }).bind(this);
 	},
-	
+
 	getDimensions: function(options){
 		options = $merge({computeSize: false},options);
 		var dim = {};
@@ -49,7 +48,7 @@ Element.implement({
 				dim = getSize(this, options);
 			}catch(e){}
 		}
-		return $chk(dim.x)?$extend(dim, {width: dim.x, height: dim.y}):$extend(dim, {x: dim.width, y: dim.height});
+		return $chk(dim.x) ? $extend(dim, {width: dim.x, height: dim.y}) : $extend(dim, {x: dim.width, y: dim.height});
 	},
 
 	getComputedSize: function(options){
@@ -105,16 +104,16 @@ Element.implement({
 				});
 			});
 		});
-		if ($chk(size.width)){
-			size.width = size.width+this.offsetWidth+size.computedWidth;
-			size.totalWidth = size.width + size.totalWidth;
-			delete size.computedWidth;
-		}
-		if ($chk(size.height)){
-			size.height = size.height+this.offsetHeight+size.computedHeight;
-			size.totalHeight = size.height + size.totalHeight;
-			delete size.computedHeight;
-		}
+		
+		['Width', 'Height'].each(function(value){
+			var lower = value.toLowerCase();
+			if(!$chk(size[lower])) return;
+			
+			size[lower] = size[lower]+this['offset'+value]+size['computed'+value];
+			size['total'+value] = size[lower] + size['total'+value];
+			delete size['computed'+value];
+		}, this);
+		
 		return $extend(styles, size);
 	}
 

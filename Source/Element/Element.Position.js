@@ -20,7 +20,7 @@ Element.implement({
 				y: 'center' //top, center, bottom
 			},
 			edge: false,
-			offset: {x:0,y:0},
+			offset: {x: 0, y: 0},
 			returnPos: false,
 			relFixedPosition: false,
 			ignoreMargins: false,
@@ -53,7 +53,7 @@ Element.implement({
 			else if (option.test('right')) val.x = 'right';
 			else val.x = 'center';
 
-			if (option.test('upper')||option.test('top')) val.y = 'top';
+			if (option.test('upper') || option.test('top')) val.y = 'top';
 			else if (option.test('bottom')) val.y = 'bottom';
 			else val.y = 'center';
 			return val;
@@ -61,22 +61,22 @@ Element.implement({
 		options.edge = fixValue(options.edge);
 		options.position = fixValue(options.position);
 		if (!options.edge){
-			if (options.position.x == 'center' && options.position.y == 'center') options.edge = {x:'center',y:'center'};
-			else options.edge = {x:'left',y:'top'};
+			if (options.position.x == 'center' && options.position.y == 'center') options.edge = {x:'center', y:'center'};
+			else options.edge = {x:'left', y:'top'};
 		}
 		
 		this.setStyle('position', 'absolute');
 		var rel = $(options.relativeTo) || document.body;
-		var top = (rel == document.body)?window.getScroll().y:rel.getPosition().y;
-		var left = (rel == document.body)?window.getScroll().x:rel.getPosition().x;
+		var top = (rel == document.body) ? window.getScroll().y : rel.getPosition().y;
+		var left = (rel == document.body) ? window.getScroll().x : rel.getPosition().x;
 		var dim = this.getDimensions({computeSize: true, styles:['padding', 'border','margin']});
 		if (options.ignoreMargins){
 			options.offset.x = options.offset.x - dim['margin-left'];
 			options.offset.y = options.offset.y - dim['margin-top'];
 		}
 		var pos = {};
-		var prefY = options.offset.y.toInt();
-		var prefX = options.offset.x.toInt();
+		var prefY = options.offset.y;
+		var prefX = options.offset.x;
 		switch(options.position.x){
 			case 'left':
 				pos.x = left + prefX;
@@ -85,7 +85,7 @@ Element.implement({
 				pos.x = left + prefX + rel.offsetWidth;
 				break;
 			default: //center
-				pos.x = left + (((rel == document.body)?window.getSize().x:rel.offsetWidth)/2) + prefX;
+				pos.x = left + ((rel == document.body ? window.getSize().x : rel.offsetWidth)/2) + prefX;
 				break;
 		};
 		switch(options.position.y){
@@ -96,7 +96,7 @@ Element.implement({
 				pos.y = top + prefY + rel.offsetHeight;
 				break;
 			default: //center
-				pos.y = top + (((rel == document.body)?window.getSize().y:rel.offsetHeight)/2) + prefY;
+				pos.y = top + ((rel == document.body ? window.getSize().y : rel.offsetHeight)/2) + prefY;
 				break;
 		};
 		
@@ -129,10 +129,10 @@ Element.implement({
 			pos.y = pos.y+edgeOffset.y;
 		}
 		pos = {
-			left: ((pos.x >= 0 || parentPositioned || options.allowNegative)?pos.x:0).toInt(),
-			top: ((pos.y >= 0 || parentPositioned || options.allowNegative)?pos.y:0).toInt()
+			left: ((pos.x >= 0 || parentPositioned || options.allowNegative) ? pos.x : 0).toInt(),
+			top: ((pos.y >= 0 || parentPositioned || options.allowNegative) ? pos.y : 0).toInt()
 		};
-		if (rel.getStyle('position') == "fixed"||options.relFixedPosition){
+		if (rel.getStyle('position') == "fixed" || options.relFixedPosition){
 			pos.top = pos.top.toInt() + window.getScroll().y;
 			pos.left = pos.left.toInt() + window.getScroll().x;
 		}

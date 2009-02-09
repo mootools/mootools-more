@@ -5,6 +5,7 @@ Script: String.Extras.js
 License:
 	MIT-style license.
 */
+
 describe('String.stripTags', {
 
 	'should remove all tags from an html string': function(){

@@ -8,9 +8,9 @@ Script: Class.Occlude.js
 	Authors:
 		Aaron Newton
 */
+
 Class.Occlude = new Class({
 
-	// usage: if (this.occlude()) return this.occluded;
 	occlude: function(property, element){
 		element = $(element || this.element);
 		var instance = element.retrieve(property || this.property);

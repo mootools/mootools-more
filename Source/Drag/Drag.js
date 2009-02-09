@@ -13,7 +13,7 @@ Script: Drag.js
 
 var Drag = new Class({
 
-	Implements: [Events, Options, Class.ToElement],
+	Implements: [Events, Options],
 
 	options: {/*
 		onBeforeStart: $empty,
@@ -35,10 +35,10 @@ var Drag = new Class({
 	initialize: function(){
 		var params = Array.link(arguments, {'options': Object.type, 'element': $defined});
 		this.element = $(params.element);
-		this.document = $(this).getDocument();
+		this.document = this.element.getDocument();
 		this.setOptions(params.options || {});
 		var htype = $type(this.options.handle);
-		this.handles = (htype == 'array' || htype == 'collection') ? $$(this.options.handle) : $(this.options.handle) || $(this);
+		this.handles = (htype == 'array' || htype == 'collection') ? $$(this.options.handle) : $(this.options.handle) || this.element;
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
 
@@ -68,13 +68,13 @@ var Drag = new Class({
 	start: function(event){
 		if (this.options.preventDefault) event.preventDefault();
 		this.mouse.start = event.page;
-		this.fireEvent('beforeStart', $(this));
+		this.fireEvent('beforeStart', this.element);
 		var limit = this.options.limit;
 		this.limit = {'x': [], 'y': []};
 		for (var z in this.options.modifiers){
 			if (!this.options.modifiers[z]) continue;
-			if (this.options.style) this.value.now[z] = $(this).getStyle(this.options.modifiers[z]).toInt();
-			else this.value.now[z] = $(this)[this.options.modifiers[z]];
+			if (this.options.style) this.value.now[z] = this.element.getStyle(this.options.modifiers[z]).toInt();
+			else this.value.now[z] = this.element[this.options.modifiers[z]];
 			if (this.options.invert) this.value.now[z] *= -1;
 			this.mouse.pos[z] = event.page[z] - this.value.now[z];
 			if (limit && limit[z]){
@@ -97,7 +97,7 @@ var Drag = new Class({
 				mousemove: this.bound.drag,
 				mouseup: this.bound.stop
 			});
-			this.fireEvent('start', [$(this), event]).fireEvent('snap', $(this));
+			this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
 		}
 	},
 
@@ -116,10 +116,10 @@ var Drag = new Class({
 				}
 			}
 			if (this.options.grid[z]) this.value.now[z] -= (this.value.now[z] % this.options.grid[z]);
-			if (this.options.style) $(this).setStyle(this.options.modifiers[z], this.value.now[z] + this.options.unit);
-			else $(this)[this.options.modifiers[z]] = this.value.now[z];
+			if (this.options.style) this.element.setStyle(this.options.modifiers[z], this.value.now[z] + this.options.unit);
+			else this.element[this.options.modifiers[z]] = this.value.now[z];
 		}
-		this.fireEvent('drag', [$(this), event]);
+		this.fireEvent('drag', [this.element, event]);
 	},
 
 	cancel: function(event){
@@ -127,7 +127,7 @@ var Drag = new Class({
 		this.document.removeEvent('mouseup', this.bound.cancel);
 		if (event){
 			this.document.removeEvent(this.selection, this.bound.eventStop);
-			this.fireEvent('cancel', $(this));
+			this.fireEvent('cancel', this.element);
 		}
 	},
 
@@ -135,7 +135,7 @@ var Drag = new Class({
 		this.document.removeEvent(this.selection, this.bound.eventStop);
 		this.document.removeEvent('mousemove', this.bound.drag);
 		this.document.removeEvent('mouseup', this.bound.stop);
-		if (event) this.fireEvent('complete', [$(this), event]);
+		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
 });

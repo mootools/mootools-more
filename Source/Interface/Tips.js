@@ -23,7 +23,7 @@ var Tips = new Class({
 		showDelay: 100,
 		hideDelay: 100,
 		className: null,
-		offsets: {x: 16, y: 16},
+		offset: {x: 16, y: 16},
 		fixed: false
 	},
 
@@ -97,8 +97,8 @@ var Tips = new Class({
 			props = {x: 'left', y: 'top'},
 			obj = {};
 		for (var z in props){
-			obj[props[z]] = event.page[z] + this.options.offsets[z];
-			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z]) obj[props[z]] = event.page[z] - this.options.offsets[z] - tip[z];
+			obj[props[z]] = event.page[z] + this.options.offset[z];
+			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z]) obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
 		}
 		$(this).setStyles(obj);
 	},

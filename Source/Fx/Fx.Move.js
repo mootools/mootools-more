@@ -9,6 +9,7 @@ Script: Fx.Move.js
 		Aaron Newton
 
 */
+
 Fx.Move = new Class({
 
 	Extends: Fx.Morph,
@@ -17,7 +18,7 @@ Fx.Move = new Class({
 		relativeTo: document.body,
 		position: 'center',
 		edge: false,
-		offset: {x:0,y:0}
+		offset: {x:0, y:0}
 	},
 
 	start: function(destination){

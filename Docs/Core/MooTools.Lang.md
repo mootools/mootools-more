@@ -54,7 +54,7 @@ This event is fired whenever the language is changed for the user (for instance,
 ### Example
 
 	Date.lang = MooTools.lang.get("Date");
-	MooTools.lang.addEvent("onLangChange", function(newLang){
+	MooTools.lang.addEvent("langChange", function(newLang){
 		Date.lange = MooTools.lang.get("Date");
 	});
 
