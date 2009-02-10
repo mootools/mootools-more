@@ -1,6 +1,6 @@
 /*
-Script: Request.JsonP.js
-	Defines Request.JsonP, a class for cross domain javascript via script injection.
+Script: Request.JSONP.js
+	Defines Request.JSONP, a class for cross domain javascript via script injection.
 
 	License:
 		MIT-style license.
@@ -9,7 +9,7 @@ Script: Request.JsonP.js
 		Aaron Newton
 */
 
-Request.JsonP = new Class({
+Request.JSONP = new Class({
 
 	Implements: [Chain, Events, Options],
 
@@ -84,7 +84,7 @@ Request.JsonP = new Class({
 	},
  	
 	getScript: function(options){
-		var options = options || this.options, index = Request.JsonP.requests.length, data;
+		var options = options || this.options, index = Request.JSONP.requests.length, data;
 		
 		switch ($type(options.data)){
 			case 'element': data = $(options.data).toQueryString(); break;
@@ -93,10 +93,10 @@ Request.JsonP = new Class({
 		
 		var script = new Element('script', {
 			type: 'text/javascript',
-			src: options.url + (options.url.test('\\?') ? '&' :'?') + options.callBackKey + "=Request.JsonP.requests["+ index +"].success&" + data
+			src: options.url + (options.url.test('\\?') ? '&' :'?') + options.callBackKey + "=Request.JSONP.requests["+ index +"].success&" + data
 		}).inject(this.options.injectScript);
 		
-		Request.JsonP.requests.push(function(data){ this.success(data, script); }.bind(this));
+		Request.JSONP.requests.push(function(data){ this.success(data, script); }.bind(this));
 				
 		return script;
 	},
@@ -109,4 +109,4 @@ Request.JsonP = new Class({
 
 });
 
-Request.JsonP.requests = [];
+Request.JSONP.requests = [];
