@@ -38,7 +38,7 @@ var Drag = new Class({
 		this.document = this.element.getDocument();
 		this.setOptions(params.options || {});
 		var htype = $type(this.options.handle);
-		this.handles = (htype == 'array' || htype == 'collection') ? $$(this.options.handle) : $(this.options.handle) || this.element;
+		this.handles = ((htype == 'array' || htype == 'collection') ? $$(this.options.handle) : $(this.options.handle)) || this.element;
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
 
@@ -70,7 +70,7 @@ var Drag = new Class({
 		this.mouse.start = event.page;
 		this.fireEvent('beforeStart', this.element);
 		var limit = this.options.limit;
-		this.limit = {'x': [], 'y': []};
+		this.limit = {x: [], y: []};
 		for (var z in this.options.modifiers){
 			if (!this.options.modifiers[z]) continue;
 			if (this.options.style) this.value.now[z] = this.element.getStyle(this.options.modifiers[z]).toInt();
@@ -83,7 +83,7 @@ var Drag = new Class({
 				}
 			}
 		}
-		if ($type(this.options.grid) == 'number') this.options.grid = {'x': this.options.grid, 'y': this.options.grid};
+		if ($type(this.options.grid) == 'number') this.options.grid = {x: this.options.grid, y: this.options.grid};
 		this.document.addEvents({mousemove: this.bound.check, mouseup: this.bound.cancel});
 		this.document.addEvent(this.selection, this.bound.eventStop);
 	},
@@ -143,7 +143,7 @@ var Drag = new Class({
 Element.implement({
 
 	makeResizable: function(options){
-		return new Drag(this, $merge({modifiers: {'x': 'width', 'y': 'height'}}, options));
+		return new Drag(this, $merge({modifiers: {x: 'width', y: 'height'}}, options));
 	}
 
 });
