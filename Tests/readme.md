@@ -107,7 +107,7 @@ Each test comes with HTML and a JavaScript configuration file. These files look 
 				},
 				body: "//User editable JavaScript run after *before* and before *post*",
 				post: function(){
-					//code to execute immediately after the *before* test above; 
+					//code to execute immediately after the *before* test above;
 					//if this returns a "falsy" value, the test will fail immediately
 					//before the user does anything else
 				}
@@ -130,9 +130,9 @@ Each test has the following properties:
 	test will fail immediately.
  * body - (*string*; optional) this code is evaluated when the user runs the test after the *before* method if it is defined. This is user-editable so this string is displayed to them for them to change if they like. If this code throws an error the test
 	will fail immediately.
- * post - (*function*; optional) this code is run immediately after the *body* code is evaluated (if it's defined). 
+ * post - (*function*; optional) this code is run immediately after the *body* code is evaluated (if it's defined).
 	If this code throws an error or returns a 'falsy' value the test will fail immediately.
-	
+
 In addition to the tests, the test author can define additional scripts that should be loaded. This will include any missing dependencies for that script as well. This is useful if you're testing something that, say, doesn't require *Selector.js*, but you want to use *Selectors* for your test. This property is an array of script names assigned to the property *otherScripts*.
 
 Configuration
@@ -143,7 +143,7 @@ The test framework must be configured for each environment in which it runs. All
 	window.addEvent('load', function(){
 		new UnitTester(scripts, tests);
 	});
-	
+
 ### Arguments
 
 1. sources - (*object*) a set of name/value pairs for the locations of scripts.json files for dependency mapping

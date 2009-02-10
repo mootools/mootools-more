@@ -13,7 +13,7 @@ Element Method: pin {#Element:pin}
 
 Affixes an element at its current position, even if the window is scrolled.
 
-### Arguments 
+### Arguments
 
 1. pin - (*boolean*, optional) *true*: pins the element; *false*: unpins the element; defaults to *true*; See also [Element:unpin][].
 

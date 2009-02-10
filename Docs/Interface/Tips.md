@@ -31,7 +31,7 @@ Tips Method: constructor {#Tips:constructor}
  * The tooltip element inside the tooltip container above will have 'tip' as classname.
  * The title will have as classname: tip-title
  * The text will have as classname: tip-text
-* offsets       - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
+* offset       - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
 * fixed         - (*boolean*: defaults to false) If set to true, the toolTip will not follow the mouse.
 
 

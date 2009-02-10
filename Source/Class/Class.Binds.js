@@ -8,6 +8,7 @@ Script: Class.Binds.js
 	Authors:
 		Aaron Newton
 */
+
 (function(){
 
 	var binder = function(self, binds){
@@ -28,12 +29,6 @@ Script: Class.Binds.js
 	Class.Mutators.Binds = function(self, binds){
 		if (!self.Binds) return self;
 		delete self.Binds;
-		return binder(self, binds);
-	};
-
-	Class.Mutators.binds = function(self, binds){
-		if (!self.binds) return self;
-		delete self['binds'];
 		return binder(self, binds);
 	};
 

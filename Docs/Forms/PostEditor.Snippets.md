@@ -1,7 +1,7 @@
 THIS IS A TODO FILE
 
 Script: PostEditor.js
-	Using postEditor you can tabulate without losing your focus and maintain the tabsize in line brakes. 
+	Using postEditor you can tabulate without losing your focus and maintain the tabsize in line brakes.
 	You can also use snippets like in TextMate.
 
 Author:
@@ -17,12 +17,12 @@ License:
 
 Class: PostEditor
 	The base class of the postEditor.
-	
+
 Arguments:
 	el - required. the textarea $(element) to apply postEditor.
 	next - optional. the $(element) to apply the next tab (shift+enter).
-	options - optional. The options object. 
-	
+	options - optional. The options object.
+
 Options:
 	snippets - optional, Snippets like in TextMate.
 	smartTypingPairs - optional, smartTypingPairs.

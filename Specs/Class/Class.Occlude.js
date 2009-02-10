@@ -15,7 +15,7 @@ License:
 			if (this.occlude()) return this.occluded;
 		}
 	});
-	
+
 	var t1 = new Tester(testDiv);
 	var t2 = new Tester(testDiv);
 	describe('Class.Occlude', {
@@ -26,5 +26,3 @@ License:
 
 	});
 })();
-
-

@@ -59,7 +59,7 @@ Delegates the events to the parent just as with addEvent above.
 
 ### Example
 
-	
+
 	myElement.addEvents({
 		//monitor an element for mouseover
 		mouseover: fn,
@@ -79,12 +79,12 @@ Removes a method from an element as [removeEvent][] always does. Provided here j
 ### Arguments
 
 1. type - (*string*) An event name (*click*, *click(selector)*, etc) that should was originally added.
-3. fn - (*function*; optional) A pointer to the original call back passed when the event was originally added. 
+3. fn - (*function*; optional) A pointer to the original call back passed when the event was originally added.
 
 ### Example
 
 	var monitor = function(){ alert('you clicked a link!')};
-	$(element).addEvent('click(a)', monitor); 
+	$(element).addEvent('click(a)', monitor);
 	//link clicks are delegated to element
 	//...now we remove the delegation:
 	$(element).removeEvent('click(a)', monitor);
@@ -117,7 +117,7 @@ Removes a series of methods from delegation if the functions were used for deleg
 	$(element).addEvents({
 		'mouseover(a)': monitor,
 		'click(a)': monitor
-	}); 
+	});
 	//link clicks are delegated to element
 	//...now we remove the delegation:
 	$(element).removeEvents({

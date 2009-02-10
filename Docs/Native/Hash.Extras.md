@@ -68,7 +68,7 @@ Removes values from the Hash.
 		something: 'else',
 		missing: null
 	}).cleanValues();
-	
+
 	//remove all values < 0
 	$H({
 		a: -1,

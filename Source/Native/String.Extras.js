@@ -47,13 +47,13 @@ String.implement({
 	},
 
 	cleanQueryString: function(method){
-		return this.split("&").filter(method||function(set){
-			return $chk(set.split("=")[1]);
-		}).join("&");
+		return this.split('&').filter(method || function(set){
+			return $chk(set.split('=')[1]);
+		}).join('&');
 	},
 
 	findAllEmails: function(){
-			return this.match(new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", "gi")) || [];
+		return this.match(new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", "gi")) || [];
 	}
 
 });

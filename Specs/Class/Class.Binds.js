@@ -8,7 +8,7 @@ License:
 (function(){
 	var Tester = new Class({
 		Implements: Class.Binds,
-		binds: ["getFoo"],
+		Binds: ["getFoo"],
 		initialize: function(foo){
 			this.foo = foo;
 		},
@@ -32,7 +32,7 @@ License:
 	});
 	var Tester3 = new Class({
 		Implements: [Class.Binds, Options],
-		binds: ["getFoo"],
+		Binds: ["getFoo"],
 		initialize: function(foo){
 			this.foo = foo;
 			this.setOptions({a: 'b'});
@@ -44,7 +44,7 @@ License:
 			return [0].map(this.getFoo)[0];
 		}
 	});
-	
+
 	var tester = new Tester('test');
 	var tester2 = new Tester2('test');
 	var tester3 = new Tester3('test');
@@ -59,8 +59,8 @@ License:
 		'verfies that the setOptions invocation works properly': function(){
 			value_of(tester3.test()+tester3.options.a).should_be(tester3.foo+'b');
 		}
-		
-		
+
+
 	});
 })();
 

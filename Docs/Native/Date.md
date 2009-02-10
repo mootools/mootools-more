@@ -39,7 +39,7 @@ Retrieves a property of a date.
 * All of the native date methods work with *get* in addition to most of the *get...* methods added in Date.js. These are: "Date", "Day", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "TimezoneOffset", "Week", "Timezone", "GMTOffset", "Ordinal", "DayOfYear", "LastMonth", "UTCDate", "UTCDay", "UTCFullYear", "AMPM", "UTCHours", "UTCMilliseconds", "UTCMinutes", "UTCMonth", "UTCSeconds"
 * *get* is **not** case sensitive; so you can do *get('date')*
 
-### Aliases 
+### Aliases
 
 The following aliases/shortcuts are available:
 
@@ -76,7 +76,7 @@ Sets a property of a date.
 * All of the native date methods work with *set*. These are: "Date", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "UTCDate", "UTCFullYear", "UTCHours", "UTCMilliseconds", "UTCMinutes", "UTCMonth", "UTCSeconds"
 * *set* is **not** case sensitive; so you can do *set('date')*
 
-### Aliases 
+### Aliases
 
 The following aliases/shortcuts are available:
 
@@ -161,7 +161,7 @@ Returns true if the date is in a leap year.
 
 ### Syntax
 
-	new Date().isLeapYear(); 
+	new Date().isLeapYear();
 
 ### Returns
 
@@ -198,7 +198,7 @@ Compares two dates.
 	var today = new Date();
 	var tomorrow = today.clone().increment();
 	today.diff(tomorrow); //returns 1
-	today.diff(tomorrow, 'minute'); //returns 1440 
+	today.diff(tomorrow, 'minute'); //returns 1440
 
 ### Returns
 
@@ -331,10 +331,10 @@ Parses a string to a date. In the examples below, parsing works with dates using
 	Date.parse('10/12/1982') //"Tue Oct 12 1982 11:53:25 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('10/12/1982 10:45pm') //"Tue Oct 12 1982 10:45:25 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('10.12.1982 22:45:00') //"Tue Oct 12 1982 10:45:25 GMT-0700 (Pacific Daylight Time)"
-	
+
 
 	var PrinceParty = new Date();
-	PrinceParty.parse("12/31/1999 11:59pm"); 
+	PrinceParty.parse("12/31/1999 11:59pm");
 	//PrinceParty is now set for 12/31/1999 just before midnight
 
 	var PrinceParty = Date.parse("12/31/1999 11:59pm");

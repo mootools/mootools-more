@@ -6,14 +6,13 @@
 		language: 'usENG',
 		//available languages
 		languages: {
-			usENG:{}
+			usENG: {}
 		},
 		//default cascade order, cannot be modified by the user
 		cascades: ['usENG']
 	};
 
-	//MooTools.lang is an instance; i.e. new Class()();
-	var Lang = new Class({
+	MooTools.lang = new new Class({
 
 		Implements: Events,
 
@@ -24,7 +23,7 @@
 			//set the language
 			data.language = lang;
 			//fire the event
-			this.fireEvent('onLangChange', lang);
+			this.fireEvent('langChange', lang);
 			return this;
 		},
 
@@ -45,7 +44,7 @@
 		cascade: function(lang){
 			//the cascades are either the current language's casades or the
 			//default global cascades
-			var cascades = $A((data.languages[lang]||{}).cascades || data.cascades);
+			var cascades = $A((data.languages[lang] || {}).cascades || data.cascades);
 			//make sure the language specified is the last, so it's members gain preference
 			cascades.erase(lang).push(lang);
 			//get the sets for each language
@@ -68,7 +67,6 @@
 		//set the values for a language set
 		//lang = string, set = string, members = obj
 		set: function(lang, set, members){
-			go = false;
 			//ensure the language exists in the data
 			this.addLanguage(lang);
 			//get the object
@@ -79,19 +77,17 @@
 			$extend(langData[set], members);
 			//if the language altered is the current language, fire onLangChange so that
 			//classes can update their local version, i.e.
-			//MooTools.lang.addEvent('onLangChange', function(){
+			//MooTools.lang.addEvent('langChange', function(){
 			//	Date.lang = MooTools.lang.get('Date');
 			//});
-			if (lang == this.getCurrentLanguage()) this.fireEvent('onLangChange', lang);
+			if (lang == this.getCurrentLanguage()) this.fireEvent('langChange', lang);
 			return this;
 		},
-		
+
 		list: function(){
 			return $A(data.languages);
 		}
 
 	});
-	
-	MooTools.lang = new Lang();
 
 })();

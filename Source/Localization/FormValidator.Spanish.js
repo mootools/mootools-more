@@ -5,6 +5,7 @@ Script: FormValidator.Spanish.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('ESP', 'FormValidator', {
 	required:'Este campo es obligatorio.',
 	minLength:'Por favor escribe como m&iacute;nimo {minLength} caracteres (has escrito {length} caracteres).',

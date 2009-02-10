@@ -18,8 +18,8 @@ var OverText = new Class({
 //	onTextHide: $empty,
 //	onTextShow: $empty,
 		positionOptions: {
-			position:"upperLeft",
-			edge:"upperLeft",
+			position: "upperLeft",
+			edge: "upperLeft",
 			offset: {
 				x: 4,
 				y: 2
@@ -33,7 +33,7 @@ var OverText = new Class({
 
 	initialize: function(inputs, options){
 		this.setOptions(options);
-		$splat($(inputs)||$$(inputs)).each(this.addElement, this);
+		$splat($(inputs) || $$(inputs)).each(this.addElement, this);
 		OverText.instances.push(this);
 		if (this.options.poll) this.poll();
 	},
@@ -44,15 +44,15 @@ var OverText = new Class({
 		if (!val) return;
 		this.overTxtEls.push(el);
 		var txt = new Element('div', {
-		  'class': 'overTxtDiv',
+			'class': 'overTxtDiv',
 			styles: {
 				lineHeight: 'normal',
 				position: 'absolute'
 			},
-		  html: val,
-		  events: {
-		    click: this.hideTxt.pass([el, true], this)
-		  }
+			html: val,
+			events: {
+				click: this.hideTxt.pass([el, true], this)
+			}
 		}).inject(el, 'after');
 		el.addEvents({
 			focus: this.hideTxt.pass([el, true], this),
@@ -94,7 +94,7 @@ var OverText = new Class({
 	hideTxt: function(el, focus){
 		var txt = el.retrieve('OverTextDiv');
 		if (txt && txt.isVisible() && !el.get('disabled')){
-			txt.hide(); 
+			txt.hide();
 			try {
 				if (focus) el.fireEvent('focus').focus();
 			} catch(e){} //IE barfs if you call focus on hidden elements
@@ -116,7 +116,7 @@ var OverText = new Class({
 
 	testOverTxt: function(el){
 		if (el.get('value')) this.hideTxt(el);
-		else this.showTxt(el);	
+		else this.showTxt(el);
 	},
 
 	repositionAll: function(){

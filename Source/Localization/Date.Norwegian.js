@@ -5,6 +5,7 @@ Script: Date.Norwegian.js
 License:
        http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('NO', 'Date', {
 
 	lessThanMinuteAgo: 'kortere enn et minutt siden',

@@ -26,15 +26,12 @@ Element.implement({
 			//IE fails here if the element is not in the dom
 			if ('none' != this.getStyle('display')) d = this.getStyle('display');
 		} catch(e){}
-		this.store('originalDisplay', d||'block'); 
-		this.setStyle('display','none');
-		return this;
+
+		return this.store('originalDisplay', d || 'block').setStyle('display', 'none');
 	},
 
 	show: function(display){
-		original = this.retrieve('originalDisplay')?this.retrieve('originalDisplay'):this.get('originalDisplay');
-		this.setStyle('display',(display || original || 'block'));
-		return this;
+		return this.setStyle('display', display || $pick(this.retrieve('originalDisplay'), this.get('originalDisplay')) || 'block');
 	},
 
 	swapClass: function(remove, add){

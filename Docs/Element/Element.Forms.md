@@ -162,7 +162,7 @@ Selects text within a given range.
 ### Example
 
 	$('myInput').selectRange(2, 4);
-	
+
 	<input id="test" value="012345" />
 	$('test').selectRange(2, 4); //selects "23"
 

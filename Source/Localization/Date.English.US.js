@@ -3,10 +3,10 @@ MooTools.lang.set('usENG', 'Date', {
 	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 	days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 	dateOrder: ['month', 'date', 'year', '/'],
-	AM: "AM",
-	PM: "PM",
+	AM: 'AM',
+	PM: 'PM',
 
-/* Date.Extras */
+	/* Date.Extras */
 	getOrdinal: function(dayOfMonth){
 		return (dayOfMonth > 3 && dayOfMonth < 21) ? 'th' : ['th', 'st', 'nd', 'rd', 'th'][Math.min(dayOfMonth % 10, 4)];
 	},

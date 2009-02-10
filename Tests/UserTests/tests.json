@@ -9,7 +9,7 @@
 		"Chain.Wait":['all']
 	},
 	"Element":{
-		"Element.Delegation":['all'],	
+		"Element.Delegation":['all'],
 		"Element.Forms":['all'],
 		"Element.Shortcuts":['all'],
 		"Element.Pin":['all'],

@@ -28,7 +28,7 @@ See: [http://blog.kassens.net/binds-class-mutator][]
 			alert(this.message);
 		}
 	});
-	
+
 By using *binds* in the example above, you don't need to bind *this.say* to *this* in the *addEvent* method in the *monitor* method; it has already been bound to *this*.
 
 [Class]: http://docs.mootools.net/Class/Class

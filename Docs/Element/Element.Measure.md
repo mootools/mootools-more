@@ -89,7 +89,7 @@ Calculates the size of an element including the width, border, padding, etc.
 ### Returns
 
 * (*object*) An object that contans dimension values (integers); see list below
-	
+
 ### Dimension Values Returned
 
 * width - the actual width of the object (not including borders or padding)

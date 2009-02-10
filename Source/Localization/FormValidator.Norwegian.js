@@ -5,6 +5,7 @@ Script: FormValidator.Norwegian.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('NO', 'FormValidator', {
    required:'Dette feltet er pÃ¥krevd.',
    minLength:'Vennligst skriv inn minst {minLength} tegn (du skrev {length} tegn).',

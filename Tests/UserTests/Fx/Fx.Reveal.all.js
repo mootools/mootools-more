@@ -8,7 +8,7 @@
 			body: "\
 	var effect = new Fx.Reveal($('foo'));\n\
 	effect.reveal();"
-		}, 
+		},
 		{
 			title: "Fx.Reveal::dissolve",
 			description: "Tests the dissolve method, hiding the object smoothly.",

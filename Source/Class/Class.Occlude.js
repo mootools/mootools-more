@@ -8,14 +8,14 @@ Script: Class.Occlude.js
 	Authors:
 		Aaron Newton
 */
+
 Class.Occlude = new Class({
 
-	// usage: if (this.occlude()) return this.occluded;
 	occlude: function(property, element){
 		element = $(element || this.element);
 		var instance = element.retrieve(property || this.property);
 		if (instance && !$defined(this.occluded)){
-			this.occluded = instance; 
+			this.occluded = instance;
 		} else {
 			this.occluded = false;
 			element.store(property || this.property, this);

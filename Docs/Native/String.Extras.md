@@ -40,7 +40,7 @@ Turns a querystring into an object of key/value pairs.
 ### Syntax
 
 	myString.parseQuery(encodeKeys, encodeValues);
-	
+
 ### Arguments
 
 1. encodeKeys - (*boolean*, optional) if set to *false*, keys are passed through [encodeURIComponent][]; defaults to *true*

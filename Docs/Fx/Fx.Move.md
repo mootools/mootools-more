@@ -146,7 +146,7 @@ Creates a new instance of [Fx.Move][] and calls its *start* method.
 
 	$(element).move(options);
 
-### Arguments 
+### Arguments
 
 * options - (*object*) a key/value set of options. See [Fx.Move:options][].
 

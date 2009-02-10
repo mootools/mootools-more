@@ -57,7 +57,7 @@ The test option is a function that will be passed the field being evaluated and 
 	});
 	isEmpty.test($("firstName")); //true if empty
 	isEmpty.getError($("firstName")) //returns "This field is required."
-	
+
 	//two complex validators
 	<input type="text" name="username" class="minLength:10 maxLength:100" id="username"/>
 
@@ -68,7 +68,7 @@ The test option is a function that will be passed the field being evaluated and 
 				return 'Please enter at least ' + props.minLength + ' characters' +
 					' (you entered ' + element.value.length + ' characters).';
 			else return '';
-		}, 
+		},
 		test: function(element, props){
 			//if the value is >= than the minLength value, element passes test
 			return (element.value.length >= $pick(props.minLength, 0));
@@ -83,7 +83,7 @@ The test option is a function that will be passed the field being evaluated and 
 				return 'Please enter no more than ' + props.maxLength + ' characters' +
 					'(you entered ' + element.value.length + ' characters).';
 			else return '';
-		}, 
+		},
 		test: function(element, props){
 			//if the value is <= than the maxLength value, element passes test
 			return (element.value.length <= $pick(props.maxLength, 10000));
@@ -179,7 +179,7 @@ Evaluates an entire form against all the validators that are set up, firing even
 
 		//the minimum length the user can supply is the integer 10
 		<input class="minLength:10">
-		//there isn't a default validator like this, but if there were, 
+		//there isn't a default validator like this, but if there were,
 		//it would be passed the *string* 'foo'
 		<input class="cannotContain:'foo'">
 
@@ -216,7 +216,7 @@ FormValidator comes with numerous built-in validators (see below), each of which
 		}
 	};
 	FormValidator.language = "usENG";
-	
+
 	//To localize it (pardon the french; if it's bad, blame babelfish):
 	FormValidator.resources.French = {
 		required:'Ce champ est exig&#233;.',
@@ -229,7 +229,7 @@ FormValidator comes with numerous built-in validators (see below), each of which
 If you wanted to localize these, just view the source of FormValidator and copy this section and place it in your document after you include FormValidator.js. Then translate the english messages and then change the **FormValidator.language** value to be your selection.
 
 If you do translate these, please [send them back to us][] so we can add them to our repository.
-	
+
 
 FormValidator Method: reset {#FormValidator:reset}
 --------------------------------------------------
@@ -269,11 +269,11 @@ Validates the value of a field against all the validators.
 ### Syntax
 
 	myFormValidator.validateField(field[, force]);
-	
+
 ### Arguments
 
 1. field - (*mixed*) A string of the id for an Element or an Element reference of the input element to evaluate
-2. force - (*boolean*, optional) whether to force validation; if *false* (or *undefined*) **and** *options.serial==true*, the validation does not occur
+2. force - (*boolean*, optional) whether to force validation; if *false* (or *undefined*) **and** *options.serial == true*, the validation does not occur
 
 ### Returns
 
@@ -457,7 +457,7 @@ An array of [InputValidator][] configurations (see [FormValidator:add][] above).
 		['className3', {errorMsg: ..., test: ...}],
 		// etc..
 	]);
-	
+
 Native: Element {#Element}
 ==========================
 
@@ -598,7 +598,7 @@ Error Msg: "Please use numbers only in this field. Please avoid spaces or other 
 Validator: validate-alpha {#Validators:validate-alpha}
 ------------------------------------------------------
 
-Validates that the entry contains only letters 
+Validates that the entry contains only letters
 
 Error Msg - "Please use letters only (a-z) in this field."
 
@@ -688,7 +688,7 @@ FormValidator Language Localization {#Localization}
 [FormValidator:ignoreField]: #FormValidator:ignoreField
 [FormValidator:enforceField]: #FormValidator:enforceField
 [FormValidator:add]: #AddingValidators:add
-[FormValidator.required]: #FormValidator:required 
+[FormValidator.required]: #FormValidator:required
 [validation.js by Andrew Tetlaw]: http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
 [Options]: http://docs.mootools.net/Class/Class.Extras#Options
 [Events]: http://docs.mootools.net/Class/Class.Extras#Events

@@ -18,7 +18,7 @@ Sums up all values in an array
 	myArray.sum();
 
 ### Example
-	
+
 	$$('ul.menu li').getWidth().sum();
 	//returns the width of all li elements inside ul.menu as a sum
 

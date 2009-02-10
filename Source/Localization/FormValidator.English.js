@@ -16,9 +16,9 @@ MooTools.lang.set('usENG', 'FormValidator', {
 	oneRequired:'Please enter something for at least one of these inputs.',
 	errorPrefix: 'Error: ',
 	warningPrefix: 'Warning: ',
-	
+
 	//FormValidator.Extras
-	
+
 	noSpace: 'There can be no spaces in this input.',
 	reqChkByNode: 'No items are selected.',
 	requiredChk: 'This field is required.',

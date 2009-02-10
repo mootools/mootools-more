@@ -10,8 +10,8 @@
 					$('foo').adopt(new Element('p').appendText(new Date()));
 					chain.callChain();
 				};
-				
-				
+
+
 				chain.chain(stamp);
 				chain.wait(1000);
 				chain.chain(stamp);

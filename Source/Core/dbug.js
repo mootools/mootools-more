@@ -10,13 +10,13 @@ Script: dbug.js
 */
 var dbug = {
 
-	logged: [],	
+	logged: [],
 
 	timers: {},
 
-	firebug: false, 
+	firebug: false,
 
-	enabled: false, 
+	enabled: false,
 
 	log: function(){
 		dbug.logged.push(arguments);
@@ -38,7 +38,7 @@ var dbug = {
 		} else dbug.log('no such timer: %s', name);
 	},
 
-	enable: function(silent){ 
+	enable: function(silent){
 		if (dbug.firebug){
 			try {
 				dbug.enabled = true;
@@ -60,7 +60,7 @@ var dbug = {
 		}
 	},
 
-	disable: function(){ 
+	disable: function(){
 		if (dbug.firebug) dbug.enabled = false;
 		dbug.log = dbug.nolog;
 		dbug.time = function(){};
@@ -74,8 +74,8 @@ var dbug = {
 			dbug.enable();
 			dbug.log('setting debugging cookie');
 			var date = new Date();
-			date.setTime(date.getTime()+(24*60*60*1000));
-			document.cookie = 'jsdebug=true;expires='+date.toGMTString()+';path=/;';
+			date.setTime(date.getTime() + (24 * 60 * 60 * 1000));
+			document.cookie = 'jsdebug=true;expires=' + date.toGMTString() + ';path=/;';
 		} else dbug.disableCookie();
 	},
 
@@ -114,9 +114,9 @@ if (typeof console != "undefined" && console.warn){
 
 	var debugCookie = value ? unescape(value[1]) : false;
 
-	if (window.location.href.indexOf("jsdebug=true")>0 || debugCookie=='true') dbug.enable();
+	if (window.location.href.indexOf("jsdebug=true")>0 || debugCookie == 'true') dbug.enable();
 
-	if (debugCookie=='true')dbug.log('debugging cookie enabled');
+	if (debugCookie == 'true')dbug.log('debugging cookie enabled');
 
 	if (window.location.href.indexOf("jsdebugCookie=true")>0){
 		dbug.cookie();

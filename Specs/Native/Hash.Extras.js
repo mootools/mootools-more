@@ -5,6 +5,7 @@ Script: Hash.Extras.js
 License:
 	MIT-style license.
 */
+
 describe('Hash.getFromPath', {
 
 	'should retrieve a hash value from a path': function(){

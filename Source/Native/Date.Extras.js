@@ -87,7 +87,7 @@ Date.parsePatterns.extend([
 	{
 		//"1999-12-31 23:59:59"
 		re: /^(\d{4})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2}):(\d{1,2})/,
-		handler: function(bits){			
+		handler: function(bits){
 			var d = new Date();
 			d.set('yr', bits[1]);
 			d.set('date', bits[3]);
@@ -99,7 +99,7 @@ Date.parsePatterns.extend([
 		}
 	},
 
-	{		
+	{
 		// yyyy-mm-ddTHH:MM:SS-0500 (ISO8601) i.e.2007-04-17T23:15:22Z
 		// inspired by: http://delete.me.uk/2005/03/iso8601.html
 		re: /^(\d{4})(?:-?(\d{2})(?:-?(\d{2})(?:[T ](\d{2})(?::?(\d{2})(?::?(\d{2})(?:\.(\d+))?)?)?(?:Z|(?:([-+])(\d{2})(?::?(\d{2}))?)?)?)?)?)?$/,
@@ -151,7 +151,7 @@ Date.parsePatterns.extend([
 		re: /^(\d{1,2})(st|nd|rd|th)?$/i,
 		handler: function(bits){
 			var d = new Date();
-			d..set('date', bits[1].toInt());
+			d.set('date', bits[1].toInt());
 			return d;
 		}
 	},
@@ -175,7 +175,7 @@ Date.parsePatterns.extend([
 			d.setYear(bits[3]);
 			return d;
 		}
-	}, 
+	},
 
 	{
 		//Jan 4th
@@ -199,7 +199,7 @@ Date.parsePatterns.extend([
 			if (newDay <= day){
 				addDays += 7;
 			}
-			d..set('date', d.getDate() + addDays);
+			d.set('date', d.getDate() + addDays);
 			return d;
 		}
 	},
@@ -210,7 +210,7 @@ Date.parsePatterns.extend([
 		handler: function(bits){
 			var d = new Date();
 			bits = bits[0].split(" ");
-			d..set('date', bits[0]);
+			d.set('date', bits[0]);
 			var m;
 			Date.lang.months.each(function(mo, i){
 				if (new RegExp("^"+bits[1]).test(mo)) m = i;

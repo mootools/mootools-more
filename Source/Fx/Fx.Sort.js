@@ -9,27 +9,27 @@ Script: Fx.Sort.js
 		Aaron Newton
 
 */
+
 Fx.Sort = new Class({
 
 	Extends: Fx.Elements,
 
 	options: {
-			mode: 'vertical' //or 'horizontal'
+		mode: 'vertical'
 	},
 
 	initialize: function(elements, options){
-			this.parent(elements, options);
-			//set the position of each element to relative
-			this.elements.each(function(el){
-					if (el.getStyle('position') == 'static') el.setStyle('position', 'relative');
-			});
-			this.setDefaultOrder();
+		this.parent(elements, options);
+		this.elements.each(function(el){
+			if (el.getStyle('position') == 'static') el.setStyle('position', 'relative');
+		});
+		this.setDefaultOrder();
 	},
 
 	setDefaultOrder: function(){
-			this.currentOrder = this.elements.map(function(el, index){
-				return index;
-			});
+		this.currentOrder = this.elements.map(function(el, index){
+			return index;
+		});
 	},
 
 	sort: function(newOrder){
@@ -37,13 +37,12 @@ Fx.Sort = new Class({
 		var top = 0;
 		var left = 0;
 		var zero = {};
-		var vert = this.options.mode == "vertical";
-		//calculate the current location of all the elements
+		var vert = this.options.mode == 'vertical';
 		var current = this.elements.map(function(el, index){
-			var size = el.getComputedSize({styles:['border','padding','margin']});
+			var size = el.getComputedSize({styles: ['border', 'padding', 'margin']});
 			var val;
 			if (vert){
-				val =	{
+				val = {
 					top: top,
 					margin: size['margin-top'],
 					height: size.totalHeight
@@ -57,38 +56,33 @@ Fx.Sort = new Class({
 				};
 				left += val.width;
 			}
-			var plain = vert?'top':'left';
-			zero[index]={};
+			var plain = vert ? 'top' : 'left';
+			zero[index] = {};
 			var start = el.getStyle(plain).toInt();
-			zero[index][plain] = ($chk(start))?start:0;
+			zero[index][plain] = start || 0;
 			return val;
 		}, this);
 		this.set(zero);
-		//if the array passed in is not the same size as
-		//the amount of elements we have, fill it in
-		//or cut it short
-		newOrder = newOrder.map(function(i){ return i.toInt() });
+		newOrder = newOrder.map(function(i){ return i.toInt(); });
 		if (newOrder.length != this.elements.length){
 			this.currentOrder.each(function(index){
 				if (!newOrder.contains(index)) newOrder.push(index);
 			});
-			if (newOrder.length > this.elements.length){
+			if (newOrder.length > this.elements.length)
 				newOrder.splice(this.elements.length-1, newOrder.length-this.elements.length);
-			}
 		}
 		var top = 0;
 		var left = 0;
 		var margin = 0;
 		var next = {};
-		//calculate the new location of each item
 		newOrder.each(function(item, index){
 			var newPos = {};
 			if (vert){
-					newPos.top = top - current[item].top - margin;
-					top += current[item].height;
+				newPos.top = top - current[item].top - margin;
+				top += current[item].height;
 			} else {
-					newPos.left = left - current[item].left;	
-					left += current[item].width;
+				newPos.left = left - current[item].left;
+				left += current[item].width;
 			}
 			margin = margin + current[item].margin;
 			next[item]=newPos;
@@ -97,8 +91,6 @@ Fx.Sort = new Class({
 		$A(newOrder).sort().each(function(index){
 			mapped[index] = next[index];
 		});
-		//store the current order
-		//execute the effect
 		this.start(mapped);
 		this.currentOrder = newOrder;
 		return this;
@@ -125,7 +117,7 @@ Fx.Sort = new Class({
 	getDefaultOrder: function(){
 		return this.elements.map(function(el, index){
 			return index;
-		})
+		});
 	},
 
 	forward: function(){
@@ -143,19 +135,16 @@ Fx.Sort = new Class({
 	sortByElements: function(elements){
 		return this.sort(elements.map(function(el){
 			return this.elements.indexOf(el);
-		}));
+		}, this));
 	},
 
 	swap: function(one, two){
-		if ($type(one) == 'element'){
-			one = this.elements.indexOf(one);
-			two = this.elements.indexOf(two);
-		}
-		var indexOne = this.currentOrder.indexOf(one);
-		var indexTwo = this.currentOrder.indexOf(two);
+		if ($type(one) == 'element') one = this.elements.indexOf(one);
+		if ($type(two) == 'element') two = this.elements.indexOf(two);
+		
 		var newOrder = $A(this.currentOrder);
-		newOrder[indexOne] = two;
-		newOrder[indexTwo] = one;
+		newOrder[this.currentOrder.indexOf(one)] = two;
+		newOrder[this.currentOrder.indexOf(two)] = one;
 		this.sort(newOrder);
 	}
 

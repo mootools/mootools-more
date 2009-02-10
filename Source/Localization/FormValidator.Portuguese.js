@@ -5,6 +5,7 @@ Script: FormValidator.Portuguese.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('POR', 'FormValidator', {
 	required:'Este campo é necessário.',
 	minLength:'Digite pelo menos{minLength} caracteres (comprimento {length} caracteres).',

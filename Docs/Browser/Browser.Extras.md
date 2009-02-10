@@ -24,37 +24,13 @@ Browser Method: getHost	{#Browser:getHost}
 
 1. url (*string*, optional) - the url you wish to get the host for (otherwise *Browser.getHost* returns the host of the current window location).
 
-Browser Method: getQueryStringValue {#Browser:getQueryStringValue}
-------------------------------------------------------------------
-
-### Syntax
-
-	Browser.getQueryStringValue(key[, url]);
-
-### Arguments
-
-1. key - (*string*) the key to search for in the querystring
-2. url - (*string*, optional) url with a querystring to parse; defaults to *window.location*
-
-### Returns 
-
-* (*string*) a specific querystring value from the window location.
-
-### Example
-
-	//window.location is http://www.example.com/?red=apple&yellow=lemon
-	var something = window.getQueryStringValue("red");
-	> something = "apple"
-	var something = window.getQueryStringValue("red", "http://www.example.com/?red=apple&yellow=lemon");
-	> something = "apple"
-
-Browser Method: getQueryStringValues {#Browser:getQueryStringValues}
+Browser Method: getQueryString {#Browser:getQueryString}
 ---------------------------------------------------------------------
 
 ### Syntax
 
-	Browser.getQueryStringValues();
-	Browser.getQueryStringValues(url);
+	Browser.getQueryString();
+	Browser.getQueryString(url);
 
 ### Arguments
 
@@ -67,9 +43,9 @@ Browser Method: getQueryStringValues {#Browser:getQueryStringValues}
 ### Example
 
 	//window.location is http://www.example.com/?red=apple&yellow=lemon
-	Browser.getQueryStringValues();
+	Browser.getQueryString();
 	//returns: { red: 'apple', yellow: 'lemon' }
-	Browser.getQueryStringValues("http://www.example.com/?red=apple&yellow=lemon");
+	Browser.getQueryString("http://www.example.com/?red=apple&yellow=lemon");
 	//returns: { red: 'apple', yellow: 'lemon' }
 
 
@@ -79,13 +55,13 @@ Browser Method: getPort {#Browser:getPort}
 ### Syntax
 
 	Browser.getPort();
-	Brower.getPort(url);
+	Browser.getPort(url);
 
 ### Arguments
 
 1. url - (*string*, optional) the url to test for a port; defaults to *window location*
 
-### Returns 
+### Returns
 
 * (*string*) the port number of the window location
 
@@ -97,29 +73,6 @@ Browser Method: getPort {#Browser:getPort}
 	Browser.getPort("http://www.example.com:8001/blah.html");
 	> 8001
 
-Browser Method:	qs {#Browser:qs}
---------------------------------
-
-### Syntax
-
-	Browser.qs;
-
-### Returns
-
-* (*object*) an object with name/value pairs of the values in the querystring of the window
-
-### Example
-
-	//window.location.href is http://www.example.com?red=apple&yellow=lemon
-	Browser.qs["red"]; //or Browser.qs.red
-	> apple
-	Browser.qs["yellow"]; //or Browser.qs.yellow
-	> lemon
-
-### Notes
-
-- This is a shortcut to *Browser.getQueryStringValues()*.
-
 Browser Method: redraw {#Browser:qs}
 ------------------------------------
 
@@ -129,14 +82,14 @@ Forces the window to refresh/redraw. Useful for some cases where the browser jus
 
 	Browser.redraw();
 
-Browser Method: mergeQueryStringValues {#Browser:mergeQueryStringValues}
+Browser Method: mergeQueryString {#Browser:mergeQueryString}
 --------------------------------------------------------------------
 
 Combines query string values into a query string.
 
 ### Syntax
 
-	Browser.mergeQueryStringValues(values[, url]);
+	Browser.mergeQueryString(values[, url]);
 
 ### Arguments
 
@@ -148,19 +101,19 @@ Combines query string values into a query string.
 	//merges foo=bar with the current window's query string
 	//so if the page is http://www.test.com?x=y
 	//this would return http://www.test.com?x=y&a=b
-	Browser.mergeQueryStringValues({a: 'b'})
-	
+	Browser.mergeQueryString({a: 'b'})
+
 	//merges with a specified url
 	//this would yeild www.test.com?x=y&a=b
-	Browser.mergeQueryStringValues({a: 'b'}, 'http://www.test.com?x=y');
-	
+	Browser.mergeQueryString({a: 'b'}, 'http://www.test.com?x=y');
+
 	//specified values overwrite the url values
 	//this would yeild http://www.test.com?x=y&a=c
-	Browser.mergeQueryStringValues({a: 'c'}, 'http://www.test.com?x=y&a=b');
-	
+	Browser.mergeQueryString({a: 'c'}, 'http://www.test.com?x=y&a=b');
+
 	//query strings can be passed without the full url
 	//this would yeild x=y&a=c
-	Browser.mergeQueryStringValues({a: 'c'}, 'x=y&a=b');
+	Browser.mergeQueryString({a: 'c'}, 'x=y&a=b');
 
 ### Returns
 

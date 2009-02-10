@@ -1,7 +1,7 @@
 /*
 Script: Element.Delegation.js
 	Extends the Element native object to include the delegate method for more efficient event management.
-	
+
 	Event checking based on the work of Daniel Steigerwald.
 	License: MIT-style license.
 	Copyright: Copyright (c) 2008 Daniel Steigerwald, daniel.steigerwald.cz
@@ -29,7 +29,7 @@ Script: Element.Delegation.js
 			return ($type(el) != 'document' && related != el && related.prefix != 'xul' && !el.hasChild(related));
 		}
 	};
-	
+
 	var check = function(e, test){
 		var target = e.target;
 		var isOverOut = /^(mouseover|mouseout)$/.test(e.type);
@@ -43,17 +43,17 @@ Script: Element.Delegation.js
 			}
 		}
 	};
-	
+
 	var splitType = function(type){
 		if (type.test(/^.*?\(.*?\)$/)){
 			return {
 				event: type.match(/.*?(?=\()/),
-				selector: type.replace(/^.*?\((.*)\)$/,"$1")
-			}
+				selector: type.replace(/^.*?\((.*)\)$/, "$1")
+			};
 		}
 		return {event: type};
 	};
-	
+
 	var oldAddEvent = Element.prototype.addEvent,
 		oldAddEvents = Element.prototype.addEvents,
 		oldRemoveEvent = Element.prototype.removeEvent,
@@ -71,7 +71,7 @@ Script: Element.Delegation.js
 				//if there's not a delegate for this type already
 				if (!monitors[type]){
 					//create a monitor that will fire the event when it occurs
-					var monitor = function(e){ 
+					var monitor = function(e){
 						var el = check.call(this, e, splitted.selector);
 						if (el) this.fireEvent(type, [e, el], 0, el);
 					}.bind(this);

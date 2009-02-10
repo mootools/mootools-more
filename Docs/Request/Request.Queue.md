@@ -39,16 +39,16 @@ All of the events supplied to the [Request][] class are supported. These methods
 * onRequestFailure
 
 ### Example
-	
+
 	var myRequests = {
-		r1: new Request({ 
-			url: '/foo1.php', data: { foo1: 'bar1'}, 
+		r1: new Request({
+			url: '/foo1.php', data: { foo1: 'bar1'},
 			onComplete: function(text, xml){
 				console.log('myRequests.r1: ', text, xml);
 			}
 		}),
-		r2: new Request({ 
-			url: '/foo2.php', data: { foo2: 'bar2'}, 
+		r2: new Request({
+			url: '/foo2.php', data: { foo2: 'bar2'},
 			onComplete: function(text, xml){
 				console.log('myRequests.r2: ', text, xml);
 			}
@@ -57,15 +57,15 @@ All of the events supplied to the [Request][] class are supported. These methods
 	var myQueue = new Request.Queue({
 		requests: myRequests,
 		onRequestComplete: function(name, instance, text, xml){
-			console.log('queue: '+name+' response: ', text, xml);
+			console.log('queue: ' + name + ' response: ', text, xml);
 		}
 	});
-	
+
 	r1.send();
 	r2.send(); //sends when above request completes
 	r1.send(); //sends when above request completes
 	etc.
-	
+
 In the above example, when each request completes, it will first log out the 'myRequests.rq: &lt;text&gt;, &lt;xml&gt;' message from the *onComplete* event specified in each request instance. Then it will log the 'queue: r1/r2 response: &lt;text&gt;, &lt;xml&gt;' message from the *onRequestComplete* method in the [Request.Queue][] event specified in its options.
 
 Request.Queue Method: addRequest {#Request-Queue:addRequest}

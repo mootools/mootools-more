@@ -42,12 +42,13 @@ var Builder = {
 		
 		more: {
 			'Core'		: ['MooTools.Lang'],
-			'Class'		: ['Class.Refactor', 'Class.Binds', 'Class.Occlude', 'Class.ToElement'],
-			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras'],
+			'Class'		: ['Class.Refactor', 'Class.Binds', 'Class.Occlude'],
+			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras'],
 			'Browser'	: ['Browser.Extras'],
 			'Element'	: ['Element.Forms', 'Element.Measure'],
 			'Drag'      : ['Drag', 'Drag.Move'],
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements'],
+			'Request'   : ['Request.JsonP', 'Request.Queue', 'Request.Timer'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie.js'],
 			'Interface' : ['Accordion', 'Scroller', 'Slider', 'SmoothScroll', 'Sortables', 'Tips'],
 			'Localization':['Date.English.US']

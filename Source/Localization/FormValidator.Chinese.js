@@ -20,7 +20,7 @@ In Chinese:
 In English:
 ------------
 It should be noted that:
-Simplified  Chinese apply to mainland Chinese, 
+Simplified  Chinese apply to mainland Chinese,
 Traditional Chinese apply to Hong Kong, Macao and Taiwan Province.
 There are a lot of different from Simplified  Chinese and Traditional Chinese , Contains font and syntax .
 
@@ -52,33 +52,33 @@ MooTools.lang.set('cnCHS', 'FormValidator', {
 
 // Traditional Chinese
 MooTools.lang.set('cnCHT', 'FormValidator', {
-	required:'這是必填項。', 
-	minLength:'請至少鍵入 {minLength} 個字符(已鍵入 {length} 個)。', 
-	maxLength:'最多只能鍵入 {maxLength} 個字符(已鍵入 {length} 個)。', 
-	integer:'請鍵入一個整數，不能包含小數點。例如："1", "200"。', 
-	numeric:'請鍵入一個數字，例如："1", "1.1", "-1", "-1.1"。', 
-	digits:'這裡只能接受數字和標點的鍵入，標點可以是："(", ")", ".", ":", "-", "+", "#"和空格。', 
-	alpha:'請鍵入 A-Z 的 26 個字母，不能包含空格或任何其他字符。', 
-	alphanum:'請鍵入 A-Z 的 26 個字母或 0-9 的 10 個數字，不能包含空格或任何其他字符。', 
-	dateSuchAs:'請鍵入合法的日期格式，如：{date}。', 
-	dateInFormatMDY:'請鍵入合法的日期格式，例如：MM/DD/YYYY ("12/31/1999")。', 
-	email:'請鍵入合法的電子信箱地址，例如："fred@domain.com"。', 
-	url:'請鍵入合法的 Url 地址，例如：http://www.google.com。', 
-	currencyYuan:'請鍵入合法的貨幣符號，例如：￥', 
-	oneRequired:'請至少選擇一項。', 
-	errorPrefix: '錯誤：', 
+	required:'這是必填項。',
+	minLength:'請至少鍵入 {minLength} 個字符(已鍵入 {length} 個)。',
+	maxLength:'最多只能鍵入 {maxLength} 個字符(已鍵入 {length} 個)。',
+	integer:'請鍵入一個整數，不能包含小數點。例如："1", "200"。',
+	numeric:'請鍵入一個數字，例如："1", "1.1", "-1", "-1.1"。',
+	digits:'這裡只能接受數字和標點的鍵入，標點可以是："(", ")", ".", ":", "-", "+", "#"和空格。',
+	alpha:'請鍵入 A-Z 的 26 個字母，不能包含空格或任何其他字符。',
+	alphanum:'請鍵入 A-Z 的 26 個字母或 0-9 的 10 個數字，不能包含空格或任何其他字符。',
+	dateSuchAs:'請鍵入合法的日期格式，如：{date}。',
+	dateInFormatMDY:'請鍵入合法的日期格式，例如：MM/DD/YYYY ("12/31/1999")。',
+	email:'請鍵入合法的電子信箱地址，例如："fred@domain.com"。',
+	url:'請鍵入合法的 Url 地址，例如：http://www.google.com。',
+	currencyYuan:'請鍵入合法的貨幣符號，例如：￥',
+	oneRequired:'請至少選擇一項。',
+	errorPrefix: '錯誤：',
 	warningPrefix: '警告：'
 });
 
 FormValidator.add('validate-currency-yuan', {
 	errorMsg: function(){
-		return FormValidator.getMsg('currencyYuan')
-	}, 
+		return FormValidator.getMsg('currencyYuan');
+	},
 	test: function(element) {
 		// [￥]1[##][,###]+[.##]
 		// [￥]1###+[.##]
 		// [￥]0.##
 		// [￥].##
-		return FormValidator.getValidator('IsEmpty').test(element) ||  /^￥?\-?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}\d*(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/.test(element.get('value'));
+		return FormValidator.getValidator('IsEmpty').test(element) ||  (/^￥?\-?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}\d*(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/).test(element.get('value'));
 	}
 });
