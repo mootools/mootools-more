@@ -66,7 +66,7 @@ var UnitTester = new Class({
 		});
 		//when sources are loaded, inject the tree of tests into the nav
 		this.addEvent('onReady', function(target, sources){
-			if (sources == this.sources) this.mapTree()
+			if (sources == this.sources) this.mapTree();
 			else this.setupLoaderSelection();
 		}.bind(this));
 		//load each test and source

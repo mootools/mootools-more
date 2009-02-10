@@ -18,7 +18,7 @@ var IframeShim = new Class({
 		display: false,
 		zIndex: null,
 		margin: 0,
-		offset: {'x': 0, 'y': 0},
+		offset: {x: 0, y: 0},
 		browsers: (Browser.Engine.trident4 || (Browser.Engine.gecko && !Browser.Engine.gecko19 && Browser.Platform.mac))
 	},
 
