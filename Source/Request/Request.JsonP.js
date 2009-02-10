@@ -7,7 +7,6 @@ Script: Request.JsonP.js
 
 	Authors:
 		Aaron Newton
-
 */
 
 Request.JsonP = new Class({
@@ -48,39 +47,31 @@ Request.JsonP = new Class({
 		if (!$chk(arguments[1]) && !this.check(arguments.callee, options)) return this;
 		
 		var type = $type(options), old = this.options, index = $chk(arguments[1]) ? arguments[1] : this.requests++;
-		if (['string', 'element'].contains(type)) options = {data: options};
+		if (type == 'string' || type == 'element') options = {data: options};
 		
 		options = $extend({data: old.data, url: old.url}, options);				
 		var url = this.prepareUrl(options);
 		
 		if (!$chk(this.triesRemaining[index])) this.triesRemaining[index] = this.options.retries;
 		var remaining = this.triesRemaining[index];
-		
-		if (window.dbug) dbug.log('retrieving by json script method: %s', url);
-		
+				
 		(function(){
 			var script = this.getScript(options);
 			this.running = true;
 			
-			if (!remaining && this.options.timeout){
-				(function(){
+			(function(){
+				if (remaining){
+					this.triesRemaining[index] = remaining - 1;
 					if (script){
 						script.destroy();
-						this.cancel();
-					}
-				}).delay(this.options.timeout, this);	
-			}
-
-			if (remaining){
-				(function(){
-					this.triesRemaining[index] = remaining - 1;
-					if (script && remaining){
-						if (window.dbug) dbug.log('removing script (%o) and retrying: try: %s, remaining: %s', index, remaining);
-						script.destroy();
 						this.request(options, index);
+						this.fireEvent('retry', this.options.retries());
 					}
-				}).delay(this.options.timeout, this);
-			}
+				} else if(script && this.options.timeout){
+					script.destroy();
+					this.cancel();
+				}					
+			}).delay(this.options.timeout, this);
 		}).delay(Browser.Engine.trident ? 50 : 0, this);
 		return this;
 	},
@@ -93,14 +84,13 @@ Request.JsonP = new Class({
 	},
  	
 	getScript: function(options){
-		var options = options || this.options, index, data;
+		var options = options || this.options, index = Request.JsonP.requests.length, data;
 		
 		switch ($type(options.data)){
 			case 'element': data = $(options.data).toQueryString(); break;
 			case 'object': case 'hash': data = Hash.toQueryString(options.data);
 		}
 		
-		var index = Request.JsonP.requests.length;
 		var script = new Element('script', {
 			type: 'text/javascript',
 			src: options.url + (options.url.test('\\?') ? '&' :'?') + options.callBackKey + "=Request.JsonP.requests["+ index +"].success&" + data
@@ -112,8 +102,7 @@ Request.JsonP = new Class({
 	},
 	
 	success: function(data, script){
-		if (window.dbug) dbug.log('jsonp received: ', data);
-		if(script) script.destroy();
+		if (script) script.destroy();
 		this.running = false;
 		this.fireEvent('complete', data).fireEvent('success', data).callChain();
 	}
