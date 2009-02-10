@@ -12,8 +12,7 @@
 		cascades: ['usENG']
 	};
 
-	//MooTools.lang is an instance; i.e. new Class()();
-	var Lang = new Class({
+	MooTools.lang = new new Class({
 
 		Implements: Events,
 
@@ -90,7 +89,5 @@
 		}
 
 	});
-
-	MooTools.lang = new Lang();
 
 })();
