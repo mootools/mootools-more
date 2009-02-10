@@ -5,6 +5,7 @@ Script: Date.Dutch.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('NL', 'Date', {
 
 	lessThanMinuteAgo: 'korter dan een minuut geleden',

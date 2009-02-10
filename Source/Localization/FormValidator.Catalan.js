@@ -5,6 +5,7 @@ Script: FormValidator.Catalan.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('CAT', 'FormValidator', {
 	required:'Aquest camp és obligatori.',
 	minLength:'Sisplau escriu com a mnim {minLength} carcters (has escrit {length} carcters).',

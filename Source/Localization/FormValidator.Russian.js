@@ -5,6 +5,7 @@ Script: FormValidator.Russian.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('RU_unicode', 'FormValidator', {
 	required:'Это поле обязательно к заполнению.',
 	minLength:'Пожалуйста, введите хотя бы {minLength} символов (Вы ввели {length}).',

@@ -5,6 +5,7 @@ Script: FormValidator.Arabic.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('AR', 'FormValidator', {
 	required:'هذا الحقل مطلوب.',
 	minLength:'رجاءً إدخال {minLength}  أحرف على الأقل (تم إدخال {length} أحرف).',

@@ -3,7 +3,7 @@ MooTools Plugins and Enhancements Repository
 ### TO DO
 
 * Need to add tests for all libs
-* Discuss how to handle ToElement and Drag :)
+* Adjust License information in Localization
 * Make the Date Specs pass in all browsers but Firefox
 * Decide if reworking the whole source of all plugins makes you an author ( :P )
 

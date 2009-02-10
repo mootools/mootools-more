@@ -5,6 +5,7 @@ Script: FormValidator.Italian.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('IT', 'FormValidator', {
 	required:'Il campo è richiesto.',
 	minLength:'Si prega di inserire un minimo di {minLength} caratteri (Lei ne ha inseriti {length}).',

@@ -5,6 +5,7 @@ Script: FormValidator.Dutch.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('NL', 'FormValidator', {
 	required:'Dit veld is verplicht.',
 	minLength:'Vul minimaal {minLength} karakters in (je hebt {length} karakters ingevoerd).',

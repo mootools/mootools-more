@@ -5,6 +5,7 @@ Script: FormValidator.French.js
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+
 MooTools.lang.set('FR', 'FormValidator', {
 	required:'Ce champ est obligatoire.',
 	minLength:'S\'il vous vous plat crivez au moins {minLength} caractres (vous avez crit {length} caractres).',
