@@ -40,9 +40,9 @@ Element.implement({
 			return (options.computeSize)?el.getComputedSize(options):el.getSize();
 		};
 		if (this.getStyle('display') == 'none'){
-			var restore = this.expose();
-			dim = getSize(this, options); //works now, because the display isn't none
-			restore(); //put it back where it was
+			dim = this.measure(function(){
+				return getSize(this, options);
+			});
 		} else {
 			try { //safari sometimes crashes here, so catch it
 				dim = getSize(this, options);
