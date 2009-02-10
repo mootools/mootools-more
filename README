@@ -23,6 +23,7 @@ MooTools Plugins and Enhancements Repository
   - makeShim method gone
   - occluded property (Element.storage) now camelcase (iframeShim). consistent with tween, morph, etc
 * JsonP
+  - renamed to Request.JSONP
   - constructor/send/prepareUrl take options hash, no longer an url directly (like Request)
   - user can change options on the fly when calling send() with a new hash, reusing the object
   - added check method. support for link: ignore, cancel, chain (like Request)
