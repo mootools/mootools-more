@@ -1,3 +1,11 @@
+/*
+Script: Class.Refactor.js
+	Specs for Class.Refactor.js
+
+License:
+	MIT-style license.
+*/
+
 (function(){
 	var Test = new Class({
 		options: {
