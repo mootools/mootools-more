@@ -83,7 +83,7 @@ var Tips = new Class({
 	},
 	
 	elementEnter: function(event, element){
-		this.container.getChildren().dispose();
+		$A(this.container.childNodes).each(Element.dispose);
 		
 		['title', 'text'].each(function(value){
 			var content = element.retrieve('tip:' + value);
