@@ -1,6 +1,6 @@
 /*
-Script: Class.Binds.js
-	Specs for Class.Binds.js
+Script: Class.Occlude.js
+	Specs for Class.Occlude.js
 
 License:
 	MIT-style license.
