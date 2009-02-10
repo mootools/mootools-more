@@ -194,7 +194,7 @@
 	},
 
 	"Request": {
-		"Request.JsonP": {
+		"Request.JSONP": {
 			"deps": ["Browser", "Element", "Request", "Class.Extras"],
 			"desc": "Creates a Json request using a script tag include and handles the callbacks for you."
 		},
