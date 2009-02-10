@@ -100,7 +100,7 @@ FormValidator.addAllThese([
 		}
 	}],
 
-	['validate-validate-match', {
+	['validate-match', {
 		errorMsg: function(element, props){
 			return FormValidator.getMsg('match').substitute({matchName: props.matchName || $(props.matchInput).get('name')});
 		}, 
