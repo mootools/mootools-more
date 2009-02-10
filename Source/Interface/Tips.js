@@ -30,25 +30,25 @@ var Tips = new Class({
 	initialize: function(){
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
 		this.setOptions(params.options);
-		
 		this.container = new Element('div', {'class': 'tip'});
-			
-		this.tip = new Element('div', {
+		this.tip = this.getTip();
+		if (params.elements) this.attach(params.elements);
+	},
+	
+	getTip: function(){
+		return new Element('div', {
 			styles: {
 				visibility: 'hidden',
 				position: 'absolute',
 				top: 0,
 				left: 0
-			}
+			},
+			'class': this.options.className
 		}).adopt(
 			new Element('div', {'class': 'tip-top'}),
 			this.container,
 			new Element('div', {'class': 'tip-bottom'})
-		).inject(document.body);
-		
-		if (this.options.className) this.tip.addClass(this.options.className);
-		
-		if (params.elements) this.attach(params.elements);
+		).inject(document.body)
 	},
 	
 	attach: function(elements){
@@ -83,7 +83,7 @@ var Tips = new Class({
 	},
 	
 	elementEnter: function(event, element){
-		$A(this.container.childNodes).each(Element.dispose);
+		this.container.getChildren().dispose();
 		
 		['title', 'text'].each(function(value){
 			var content = element.retrieve('tip:' + value);
