@@ -64,34 +64,31 @@ var Sortables = new Class({
 	},
 
 	removeItems: function(){
-		var elements = [];
-		Array.flatten(arguments).each(function(element){
-			elements.push(element);
+		return $$(Array.flatten(arguments).map(function(element){
 			this.elements.erase(element);
 			var start = element.retrieve('sortables:start');
 			(this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
-		}, this);
-		return $$(elements);
+			
+			return element;
+		}, this));
 	},
 
 	removeLists: function(){
-		var lists = [];
-		Array.flatten(arguments).each(function(list){
-			lists.push(list);
+		return $$(Array.flatten(arguments).map(function(list){
 			this.lists.erase(list);
 			this.removeItems(list.getChildren());
-		}, this);
-		return $$(lists);
+			
+			return list;
+		}, this));
 	},
 
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
 		if ($type(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
 		return element.clone(true).setStyles({
-			'margin': '0px',
-			'position': 'absolute',
-			'visibility': 'hidden',
-			'width': element.getStyle('width')
+			margin: '0px',
+			position: 'absolute',
+			visibility: 'hidden'
 		}).inject(this.list).position(element.getPosition(element.getOffsetParent()));
 	},
 
