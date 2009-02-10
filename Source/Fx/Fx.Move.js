@@ -18,7 +18,7 @@ Fx.Move = new Class({
 		relativeTo: document.body,
 		position: 'center',
 		edge: false,
-		offset: {x:0, y:0}
+		offset: {x: 0, y: 0}
 	},
 
 	start: function(destination){

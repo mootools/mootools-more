@@ -35,7 +35,7 @@ Fx.Reveal = new Class({
 						styles: this.options.styles,
 						mode: this.options.mode
 					});
-					var setToAuto = this.element.style.height === ""||this.element.style.height == "auto";
+					var setToAuto = this.element.style.height === '' || this.element.style.height == 'auto';
 					this.element.setStyle('display', 'block');
 					if (this.options.transitionOpacity) startStyles.opacity = 1;
 					var zero = {};
@@ -64,9 +64,9 @@ Fx.Reveal = new Class({
 					this.fireEvent('complete', this.element);
 					this.fireEvent('hide', this.element);
 				}
-			} else if (this.options.link == "chain"){
+			} else if (this.options.link == 'chain'){
 				this.chain(this.dissolve.bind(this));
-			} else if (this.options.link == "cancel" && !this.hiding){
+			} else if (this.options.link == 'cancel' && !this.hiding){
 				this.cancel();
 				this.dissolve();
 			}
@@ -83,8 +83,8 @@ Fx.Reveal = new Class({
 	reveal: function(){
 		try {
 			if (!this.showing && !this.hiding){
-				if (this.element.getStyle('display') == "none" ||
-					 this.element.getStyle('visiblity') == "hidden" ||
+				if (this.element.getStyle('display') == 'none' ||
+					 this.element.getStyle('visiblity') == 'hidden' ||
 					 this.element.getStyle('opacity') == 0){
 					this.showing = true;
 					this.hiding = false;
@@ -96,9 +96,9 @@ Fx.Reveal = new Class({
 						display: 'block',
 						position:'absolute'
 					});
-					var setToAuto = this.element.style.height === "" || this.element.style.height == "auto";
+					var setToAuto = this.element.style.height === '' || this.element.style.height == 'auto';
 					//enable opacity effects
-					if (this.options.transitionOpacity) this.element.setStyle('opacity',0);
+					if (this.options.transitionOpacity) this.element.setStyle('opacity', 0);
 					//create the styles for the opened/visible state
 					var startStyles = this.element.getComputedSize({
 						styles: this.options.styles,
@@ -110,8 +110,8 @@ Fx.Reveal = new Class({
 						startStyles[name] = style;
 					}, this);
 					//if we're overridding height/width
-					if ($chk(this.options.heightOverride)) startStyles['height'] = this.options.heightOverride.toInt();
-					if ($chk(this.options.widthOverride)) startStyles['width'] = this.options.widthOverride.toInt();
+					if ($chk(this.options.heightOverride)) startStyles.height = this.options.heightOverride.toInt();
+					if ($chk(this.options.widthOverride)) startStyles.width = this.options.widthOverride.toInt();
 					if (this.options.transitionOpacity) startStyles.opacity = 1;
 					//create the zero state for the beginning of the transition
 					var zero = {
@@ -127,8 +127,8 @@ Fx.Reveal = new Class({
 					if (!this.$chain) this.$chain = [];
 					this.$chain.unshift(function(){
 						if (!this.options.heightOverride && setToAuto){
-							if (["vertical", "both"].contains(this.options.mode)) this.element.setStyle('height', 'auto');
-							if (["width", "both"].contains(this.options.mode)) this.element.setStyle('width', 'auto');
+							if (['vertical', 'both'].contains(this.options.mode)) this.element.setStyle('height', 'auto');
+							if (['width", 'both'].contains(this.options.mode)) this.element.setStyle('width', 'auto');
 						}
 						if (!this.hidden) this.showing = false;
 						this.element.setStyle('overflow', overflowBefore);
@@ -140,9 +140,9 @@ Fx.Reveal = new Class({
 					this.fireEvent('complete', this.element);
 					this.fireEvent('show', this.element);
 				}
-			} else if (this.options.link == "chain"){
+			} else if (this.options.link == 'chain'){
 				this.chain(this.reveal.bind(this));
-			} else if (this.options.link == "cancel" && !this.showing){
+			} else if (this.options.link == 'cancel' && !this.showing){
 				this.cancel();
 				this.reveal();
 			}
@@ -162,8 +162,8 @@ Fx.Reveal = new Class({
 
 	toggle: function(){
 		try {
-			if (this.element.getStyle('display') == "none" ||
-				 this.element.getStyle('visiblity') == "hidden" ||
+			if (this.element.getStyle('display') == 'none' ||
+				 this.element.getStyle('visiblity') == 'hidden' ||
 				 this.element.getStyle('opacity') == 0){
 				this.reveal();
 			} else {

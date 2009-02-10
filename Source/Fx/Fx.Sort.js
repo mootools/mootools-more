@@ -37,12 +37,12 @@ Fx.Sort = new Class({
 		var top = 0;
 		var left = 0;
 		var zero = {};
-		var vert = this.options.mode == "vertical";
+		var vert = this.options.mode == 'vertical';
 		var current = this.elements.map(function(el, index){
 			var size = el.getComputedSize({styles: ['border', 'padding', 'margin']});
 			var val;
 			if (vert){
-				val =	{
+				val = {
 					top: top,
 					margin: size['margin-top'],
 					height: size.totalHeight
@@ -57,9 +57,9 @@ Fx.Sort = new Class({
 				left += val.width;
 			}
 			var plain = vert ? 'top' : 'left';
-			zero[index]={};
+			zero[index] = {};
 			var start = el.getStyle(plain).toInt();
-			zero[index][plain] = ($chk(start))?start:0;
+			zero[index][plain] = start || 0;
 			return val;
 		}, this);
 		this.set(zero);
@@ -68,9 +68,8 @@ Fx.Sort = new Class({
 			this.currentOrder.each(function(index){
 				if (!newOrder.contains(index)) newOrder.push(index);
 			});
-			if (newOrder.length > this.elements.length){
+			if (newOrder.length > this.elements.length)
 				newOrder.splice(this.elements.length-1, newOrder.length-this.elements.length);
-			}
 		}
 		var top = 0;
 		var left = 0;
@@ -79,11 +78,11 @@ Fx.Sort = new Class({
 		newOrder.each(function(item, index){
 			var newPos = {};
 			if (vert){
-					newPos.top = top - current[item].top - margin;
-					top += current[item].height;
+				newPos.top = top - current[item].top - margin;
+				top += current[item].height;
 			} else {
-					newPos.left = left - current[item].left;
-					left += current[item].width;
+				newPos.left = left - current[item].left;
+				left += current[item].width;
 			}
 			margin = margin + current[item].margin;
 			next[item]=newPos;
@@ -136,19 +135,16 @@ Fx.Sort = new Class({
 	sortByElements: function(elements){
 		return this.sort(elements.map(function(el){
 			return this.elements.indexOf(el);
-		}));
+		}, this));
 	},
 
 	swap: function(one, two){
-		if ($type(one) == 'element'){
-			one = this.elements.indexOf(one);
-			two = this.elements.indexOf(two);
-		}
-		var indexOne = this.currentOrder.indexOf(one);
-		var indexTwo = this.currentOrder.indexOf(two);
+		if ($type(one) == 'element') one = this.elements.indexOf(one);
+		if ($type(two) == 'element') two = this.elements.indexOf(two);
+		
 		var newOrder = $A(this.currentOrder);
-		newOrder[indexOne] = two;
-		newOrder[indexTwo] = one;
+		newOrder[this.currentOrder.indexOf(one)] = two;
+		newOrder[this.currentOrder.indexOf(two)] = one;
 		this.sort(newOrder);
 	}
 
