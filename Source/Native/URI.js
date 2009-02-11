@@ -35,7 +35,7 @@ URI.prototype = new String;
 		},
 
 		parseURI: function(){ 
-			var bits = this.match(URI.reg).associate([
+			var bits = this.match(reg).associate([
 				'full', 'protocol', 'domain', 'port', 'path', 'query', 'hash'
 			]);
 			delete bits.trash;
