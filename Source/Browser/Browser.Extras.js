@@ -9,15 +9,18 @@ Script: URI.js
 		Aaron Newton, Lennart Pilon
 */
 
-var URI = new Native('String', function(uri){
-	this.value = uri || '';
-	this.length = uri.length;
-	
+var URI = new Native({
+
+	initialize: function(uri){
+		this.value = uri || '';
+		this.length = uri.length;
+	}
+
 });
 
-URI.reg = /^(?:(\w+):\/\/)?(?:([^\/:]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
-
 URI.prototype = new String;
+
+URI.reg = /^(?:(\w+):\/\/)?(?:([^\/:]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
 
 URI.implement({
 
@@ -27,7 +30,7 @@ URI.implement({
 
 	valueOf: function(){
 		return this.value;
-	}
+	},
 
 	parseURI: function(){ 
 		var bits = this.match(URI.reg).associate([
@@ -41,12 +44,13 @@ URI.implement({
 		if (part == 'data') return this.setData(value);
 		var bits = this.parseURI();
 		bits[part] = value;
-		this.combine(bits)
+		this.combine(bits);
+		return this;
 	},
 
 	get: function(part) {
 		if (part == 'data') return this.getData();
-		return this.parseURI(part);
+		return this.parseURI()[part];
 	},
 
 	combine: function(bits){
@@ -58,7 +62,8 @@ URI.implement({
 		if (bits.path) result += bits.path;
 		if (bits.query) result += '?' + bits.query;
 		if (bits.hash) result += '#' + bits.hash;
-		return this = new URI(result);
+		this.value = new URI(result);
+		return this;
 	},
 
 	getData: function(key){
@@ -72,7 +77,7 @@ URI.implement({
 		var merged = merge ? $merge(this.getData(), values) : values;
 		var newQuery = "";
 		for (key in merged) newQuery += key + '=' +merged[key] + '&';
-		return this.set('query', newUri.substring(0, newUri.length-1));
+		return this.set('query', newQuery.substring(0, newQuery.length-1));
 	},
 	
 	go: function(){
