@@ -89,13 +89,15 @@ URI.prototype = new String;
 
 	var methods = {};
 
-	parts.each(funciton(name){
+	parts.each(function(part){
 
-		['get', 'set'].each(function(method){
-			methods[method + name.capitalize()] = function(){
-				return this[method](name);
-			};
-		})
+		methods['get' + part.capitalize()] = function(){
+			return this[method](part);
+		};
+
+		methods['set' + part.capitalize()] = function(value){
+			return this[method](part, value);
+		};
 
 	});
 
