@@ -11,7 +11,7 @@ Script: OverText.js
 
 var OverText = new Class({
 
-	Implements: [Options, Events],
+	Implements: [Options, Events, Class.Occlude],
 
 	options: {
 //	textOverride: null,
@@ -29,21 +29,26 @@ var OverText = new Class({
 		pollInterval: 250
 	},
 
-	overTxtEls: [],
+	Binds: ['reposition', 'test']
 
-	initialize: function(inputs, options){
+	property: 'IframeShim',
+
+	initialize: function(input, options){
+		this.element = $(input);
+		if (this.occlude()) return this.occluded;
 		this.setOptions(options);
-		$splat($(inputs) || $$(inputs)).each(this.addElement, this);
 		OverText.instances.push(this);
 		if (this.options.poll) this.poll();
 	},
 
-	addElement: function(el){
-		if (el.retrieve('OverText')) return;
-		var val = this.options.textOverride || el.get('alt') || el.get('title');
+	toElement: function(){
+		return this.element
+	},
+
+	attach: function(){
+		var val = this.options.textOverride || this.element.get('alt') || this.element.get('title');
 		if (!val) return;
-		this.overTxtEls.push(el);
-		var txt = new Element('div', {
+		this.text = new Element('div', {
 			'class': 'overTxtDiv',
 			styles: {
 				lineHeight: 'normal',
@@ -51,17 +56,17 @@ var OverText = new Class({
 			},
 			html: val,
 			events: {
-				click: this.hideTxt.pass([el, true], this)
+				click: this.hide.pass(true, this)
 			}
 		}).inject(el, 'after');
 		el.addEvents({
-			focus: this.hideTxt.pass([el, true], this),
-			blur: this.testOverTxt.pass(el, this),
-			change: this.testOverTxt.pass(el, this)
-		}).store('OverTextDiv', txt).store('OverText', this);
-		window.addEvent('resize', this.repositionAll.bind(this));
-		this.testOverTxt(el);
-		this.repositionOverTxt(el);
+			focus: this.hide.pass(true, this),
+			blur: this.test,
+			change: this.test
+		}).store('OverTextDiv', this.text);
+		window.addEvent('resize', this.reposition.bind(this));hide
+		this.test();
+		this.reposition();
 	},
 
 	startPolling: function(){
@@ -75,11 +80,7 @@ var OverText = new Class({
 		//resumeon blur
 		if (this.poller && !stop) return this;
 		var test = function(){
-			if (this.pollingPaused == true) return;
-			this.overTxtEls.each(function(el){
-				if (el.retrieve('ot_paused')) return;
-				this.testOverTxt(el);
-			}, this);
+			if (!this.pollingPaused) this.test();
 		}.bind(this);
 		if (stop) $clear(this.poller);
 		else this.poller = test.periodical(this.options.pollInterval, this);
@@ -91,48 +92,39 @@ var OverText = new Class({
 		return this.poll(true);
 	},
 
-	hideTxt: function(el, focus){
-		var txt = el.retrieve('OverTextDiv');
-		if (txt && txt.isVisible() && !el.get('disabled')){
-			txt.hide();
+	hide: function(focus){
+		if (this.text.isVisible() && !this.element.get('disabled')){
+			this.text.hide();
 			try {
-				if (focus) el.fireEvent('focus').focus();
+				if (focus) this.element.fireEvent('focus').focus();
 			} catch(e){} //IE barfs if you call focus on hidden elements
-			this.fireEvent('textHide', [txt, el]);
-			el.store('ot_paused', true);
+			this.fireEvent('textHide', [this.text, this.element]);
+			this.pollingPaused = true;
 		}
 		return this;
 	},
 
-	showTxt: function(el){
-		var txt = el.retrieve('OverTextDiv');
-		if (txt && !txt.isVisible()){
-			txt.show();
-			this.fireEvent('textShow', [txt, el]);
-			el.store('ot_paused', false);
+	show: function(){
+		if (!this.text.isVisible()){
+			this.text.show();
+			this.fireEvent('textShow', [this.text, this.element]);
+			this.pollingPaused = false;
 		}
 		return this;
 	},
 
-	testOverTxt: function(el){
-		if (el.get('value')) this.hideTxt(el);
-		else this.showTxt(el);
+	test: function(){
+		if (this.element.get('value')) this.hide();
+		else this.show();
 	},
 
-	repositionAll: function(){
-		this.overTxtEls.each(this.repositionOverTxt.bind(this));
-		return this;
-	},
-
-	repositionOverTxt: function (el){
-		if (!el) return;
+	reposition: function (){
 		try {
-			var txt = el.retrieve('OverTextDiv');
-			if (!txt || !el.getParent()) return;
-			this.testOverTxt(el);
-			txt.position($merge(this.options.positionOptions, {relativeTo: el}));
-			if (el.offsetHeight) this.testOverTxt(el);
-			else this.hideTxt(el);
+			if (this.element.getParent()) return;
+			this.test();
+			this.text.position($merge(this.options.positionOptions, {relativeTo: this.element}));
+			if (this.element.offsetHeight) this.test();
+			else this.hide();
 		} catch(e){	}
 		return this;
 	}
@@ -144,7 +136,7 @@ OverText.instances = [];
 OverText.update = function(){
 
 	return OverText.instances.map(function(ot){
-		return ot.repositionAll();
+		return ot.reposition();
 	});
 
 };

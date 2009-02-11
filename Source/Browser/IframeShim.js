@@ -26,7 +26,7 @@ var IframeShim = new Class({
 
 	initialize: function (element, options){
 		this.element = $(element);
-		if (this.occlude()) return this.occludes;
+		if (this.occlude()) return this.occluded;
 		this.setOptions(options);
 		if(this.options.browsers){
 		  var zIndex = this.element.getStyle('zIndex').toInt();

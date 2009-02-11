@@ -6,6 +6,8 @@ MooTools Plugins and Enhancements Repository
 * Adjust License information in Localization
 * Make the Date Specs pass in all browsers but Firefox
 * Decide if reworking the whole source of all plugins makes you an author ( :P )
+* Revisit branch commits from other users in github that have not made it into master (http://github.com/anutron/mootools-more/network)
+* Update documentation for OverText changes
 
 ### StyleGuide
 
@@ -34,3 +36,8 @@ MooTools Plugins and Enhancements Repository
   - changed how it essentially works. instead of storing the object reference, we store a new function every time a request is made, that keeps a reference of the script element and the object instance.
   - abortAfter and timeout gone. there's now a single timeout for retries and for when retries run out.
   - globalFunction gone, deemed useless
+* Browser.Extras completely refactored into URI Native object
+* Class.Binds no longer supports lowercase binds
+* Element.fxOpacityOk (which was never documented or intended for external use) is gone
+* FormValidator base class no longer does what it did (that is now in FormValidator.Inline)
+* OverText no longer takes a collection of inputs.
