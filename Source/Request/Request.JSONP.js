@@ -18,7 +18,7 @@ Request.JSONP = new Class({
 		onComplete: $empty,
 		onSuccess: $empty,
 		onCancel: $empty,*/
-		log: false,
+		logger: $empty,
 		url: '',
 		data: {},
 		retries: 0,
@@ -33,7 +33,6 @@ Request.JSONP = new Class({
 		this.running = false;
 		this.requests = 0;
 		this.triesRemaining = [];
-		this.log = this.options.log ? $pick(window.dbug, window.console, { log: $empty }).log : { log: $empty };
 	},
 	
 	check: function(caller){
@@ -59,7 +58,7 @@ Request.JSONP = new Class({
 				
 		(function(){
 			var script = this.getScript(options);
-			this.log('Running script with url ' + script.src);
+			this.options.logger('Running script with url ' + script.src);
 			this.running = true;
 			
 			(function(){
@@ -107,7 +106,7 @@ Request.JSONP = new Class({
 	success: function(data, script){
 		if (script) script.destroy();
 		this.running = false;
-		this.log('JSONP successfully retrieved: ' + data);
+		this.options.logger('JSONP successfully retrieved: ' + data);
 		this.fireEvent('complete', data).fireEvent('success', data).callChain();
 	}
 

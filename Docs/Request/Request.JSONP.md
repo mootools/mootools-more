@@ -28,6 +28,7 @@ Creates a Json request using script tag injection and handles the callbacks for 
 * retries - (*integer*; defaults to *zero*) if this value is a positive integer, the JSONP request will abort after the duration specified in the *timeout* option and fire again until the number of retries has been exhausted.
 * timeout - (*integer*; defaults to *zero*) the duration to wait before aborting a request or retrying.
 * injectScript - (*mixed*; defaults to document head) where to inject the script elements used for the calls
+* logger - (*function*) the function that you want to use to log I/O. Typically this is *console.log* (as with Firebug) or *dbug.log* if you are using [dbug][]. This method will be passed two arguments - a *string* and the url (also a *string*) - when a request is sent and it will be passed a *string* and an *object* when data is received. Note that if you want to use something like *console.log* you must bind the method to *console* (i.e. *logger: console.log.bind(console)*).
 
 ### Events
 
@@ -69,3 +70,4 @@ Executes the Json request.
 [Request.JSONP]: #Request-JSONP
 [Options]: http://docs.mootools.net/Class/Class.Extras#Options
 [Events]: http://docs.mootools.net/Class/Class.Extras#Events
+[dbug]: http://www.mootools.net/more/docs/Core/dbug
