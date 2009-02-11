@@ -103,4 +103,4 @@ URI.prototype = new String;
 
 	URI.implement(methods);
 
-})():
+})();

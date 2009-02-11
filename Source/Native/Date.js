@@ -357,7 +357,7 @@ MooTools.lang.addEvent('onLangChange', function(){
 				re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2})(\w{2})$/,
 				handler: function(bits){
 					var d = new Date(bits[Date.orderIndex('year')],
-									 bits[Date.orderIndex('month')] - 1
+									 bits[Date.orderIndex('month')] - 1,
 									 bits[Date.orderIndex('date')]);
 					d.set('hr', bits[4]);
 					d.set('min', bits[5]);
