@@ -53,13 +53,12 @@ URI.prototype = new String;
 		},
 
 		get: function(part){
-			if (part == 'data') return this.getData();
-			return this.parseURI()[part];
+			return (part == 'data') ? this.getData() : this.parseURI()[part];
 		},
 
 		combine: function(bits){
 			bits = bits || this.parseURI();
-			var result = "";
+			var result = '';
 			if (bits.protocol) result += bits.protocol + '://';
 			if (bits.domain) result += bits.domain;
 			if ($defined(bits.port)) result += ':' + bits.port;
@@ -79,7 +78,7 @@ URI.prototype = new String;
 
 		setData: function(values, merge){
 			var merged = merge ? $merge(this.getData(), values) : values;
-			var newQuery = "";
+			var newQuery = '';
 			for (key in merged) newQuery += key + '=' +merged[key] + '&';
 			return this.set('query', newQuery.substring(0, newQuery.length-1));
 		},
