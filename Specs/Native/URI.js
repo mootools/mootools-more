@@ -48,11 +48,11 @@ License:
 	describe('URI.setData', {
 
 			'should set query string values': function(){
-				value_of(new URI('www.test.com').setData({a: 'b'})).should_be('www.test.com?a=b');
+				value_of(new URI('www.test.com').setData({a: 'b'}).toString()).should_be('www.test.com?a=b');
 			},
 
 			'should merge url query string values': function(){
-				value_of(new URI('www.test.com?x=y&a=b').setData({a: 'c'}, true)).should_be('www.test.com?x=y&a=c');
+				value_of(new URI('www.test.com?x=y&a=b').setData({a: 'c'}, true).toString()).should_be('www.test.com?x=y&a=c');
 			}
 
 	});

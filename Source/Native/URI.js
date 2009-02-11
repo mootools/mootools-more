@@ -6,7 +6,7 @@ Script: URI.js
 		MIT-style license.
 
 	Authors:
-		Aaron Newton, Lennart Pilon
+		Aaron Newton, Lennart Pilon, Valerio Proietti
 */
 
 var URI = new Native({
@@ -20,7 +20,7 @@ var URI = new Native({
 
 URI.prototype = new String;
 
-URI.reg = /^(?:(\w+):\/\/)?(?:([^\/:]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
+URI.reg = /^(?:(\w+):\/\/)?(?:([^\/:?]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
 
 URI.implement({
 
@@ -79,8 +79,9 @@ URI.implement({
 		for (key in merged) newQuery += key + '=' +merged[key] + '&';
 		return this.set('query', newQuery.substring(0, newQuery.length-1));
 	},
-	
+
 	go: function(){
-		window.location.href = this;
+		window.location.href = this.value;
 	}
+
 });
