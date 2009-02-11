@@ -17,9 +17,8 @@ Script: Date.Extras.js
 
 Date.implement({
 
-	timeDiffInWords: function(){
-		var relative_to = (arguments.length > 0) ? arguments[1] : new Date();
-		return Date.distanceOfTimeInWords(this, relative_to);
+	timeDiffInWords: function(relative_to){
+		return Date.distanceOfTimeInWords(this, relative_to || new Date);
 	},
 
 	getOrdinal: function(dayOfMonth){

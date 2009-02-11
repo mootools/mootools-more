@@ -44,7 +44,11 @@ Date Method: timeDiffInWords {#Date:timeDiffInWords}
 
 ### Syntax
 
-	date.timeDiffInWords();
+	date.timeDiffInWords([otherDate]);
+
+### Arguments
+
+1. otherDate - (*date*; optional) an optional date to use for the differential. Defaults to the current date/time.
 
 ### Example
 
