@@ -41,7 +41,7 @@ URI.prototype = new String;
 			return bits;		
 		},
 
-		set: function(part, value) {
+		set: function(part, value){
 			if (part == 'data') return this.setData(value);
 			var bits = this.parseURI();
 			bits[part] = value;
@@ -49,7 +49,7 @@ URI.prototype = new String;
 			return this;
 		},
 
-		get: function(part) {
+		get: function(part){
 			if (part == 'data') return this.getData();
 			return this.parseURI()[part];
 		},
@@ -89,10 +89,14 @@ URI.prototype = new String;
 
 	var methods = {};
 
-	parts.each(funciton(n) {
-		methods['get'+n.capitalize()] = function(){
-			return this.get(n);
-		};
+	parts.each(funciton(name){
+
+		['get', 'set'].each(function(method){
+			methods[method + name.capitalize()] = function(){
+				return this[method](name);
+			};
+		})
+
 	});
 
 	URI.implement(methods);
