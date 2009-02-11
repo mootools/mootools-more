@@ -12,7 +12,7 @@ Script: URI.js
 var URI = new Native({
 
 	initialize: function(uri){
-		this.value = uri || '';
+		this.value = uri || document.location.href || '';
 		this.length = uri.length;
 	}
 
