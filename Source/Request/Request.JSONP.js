@@ -18,6 +18,7 @@ Request.JSONP = new Class({
 		onComplete: $empty,
 		onSuccess: $empty,
 		onCancel: $empty,*/
+		log: false,
 		url: '',
 		data: {},
 		retries: 0,
@@ -32,7 +33,7 @@ Request.JSONP = new Class({
 		this.running = false;
 		this.requests = 0;
 		this.triesRemaining = [];
-		this.log = $pick(window.dbug, window.console, { log: $empty }).log;
+		this.log = this.options.log ? $pick(window.dbug, window.console, { log: $empty }).log : { log: $empty };
 	},
 	
 	check: function(caller){
@@ -106,6 +107,7 @@ Request.JSONP = new Class({
 	success: function(data, script){
 		if (script) script.destroy();
 		this.running = false;
+		this.log('JSONP successfully retrieved: ' + data);
 		this.fireEvent('complete', data).fireEvent('success', data).callChain();
 	}
 
