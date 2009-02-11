@@ -20,68 +20,72 @@ var URI = new Native({
 
 URI.prototype = new String;
 
-URI.reg = /^(?:(\w+):\/\/)?(?:([^\/:?]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
+(function(){
 
-URI.implement({
+	var reg = /^(?:(\w+):\/\/)?(?:([^\/:?]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
 
-	toString: function(){
-		return this.value;
-	},
+	URI.implement({
 
-	valueOf: function(){
-		return this.value;
-	},
+		toString: function(){
+			return this.value;
+		},
 
-	parseURI: function(){ 
-		var bits = this.match(URI.reg).associate([
-			'full', 'protocol', 'domain', 'port', 'path', 'query', 'hash'
-		]);
-		delete bits.trash;
-		return bits;		
-	},
+		valueOf: function(){
+			return this.value;
+		},
 
-	set: function(part, value) {
-		if (part == 'data') return this.setData(value);
-		var bits = this.parseURI();
-		bits[part] = value;
-		this.combine(bits);
-		return this;
-	},
+		parseURI: function(){ 
+			var bits = this.match(URI.reg).associate([
+				'full', 'protocol', 'domain', 'port', 'path', 'query', 'hash'
+			]);
+			delete bits.trash;
+			return bits;		
+		},
 
-	get: function(part) {
-		if (part == 'data') return this.getData();
-		return this.parseURI()[part];
-	},
+		set: function(part, value) {
+			if (part == 'data') return this.setData(value);
+			var bits = this.parseURI();
+			bits[part] = value;
+			this.combine(bits);
+			return this;
+		},
 
-	combine: function(bits){
-		bits = bits || this.parseURI();
-		var result = "";
-		if (bits.protocol) result += bits.protocol + '://';
-		if (bits.domain) result += bits.domain;
-		if ($defined(bits.port)) result += bits.port + ':';
-		if (bits.path) result += bits.path;
-		if (bits.query) result += '?' + bits.query;
-		if (bits.hash) result += '#' + bits.hash;
-		this.value = new URI(result);
-		return this;
-	},
+		get: function(part) {
+			if (part == 'data') return this.getData();
+			return this.parseURI()[part];
+		},
 
-	getData: function(key){
-		var qs = this.get('query');
-		if (!$chk(qs)) return key ? null : {};
-		var obj = qs.parseQuery();
-		return key ? obj[key] : obj;
-	},
+		combine: function(bits){
+			bits = bits || this.parseURI();
+			var result = "";
+			if (bits.protocol) result += bits.protocol + '://';
+			if (bits.domain) result += bits.domain;
+			if ($defined(bits.port)) result += bits.port + ':';
+			if (bits.path) result += bits.path;
+			if (bits.query) result += '?' + bits.query;
+			if (bits.hash) result += '#' + bits.hash;
+			this.value = new URI(result);
+			return this;
+		},
 
-	setData: function(values, merge){
-		var merged = merge ? $merge(this.getData(), values) : values;
-		var newQuery = "";
-		for (key in merged) newQuery += key + '=' +merged[key] + '&';
-		return this.set('query', newQuery.substring(0, newQuery.length-1));
-	},
+		getData: function(key){
+			var qs = this.get('query');
+			if (!$chk(qs)) return key ? null : {};
+			var obj = qs.parseQuery();
+			return key ? obj[key] : obj;
+		},
 
-	go: function(){
-		window.location.href = this.value;
-	}
+		setData: function(values, merge){
+			var merged = merge ? $merge(this.getData(), values) : values;
+			var newQuery = "";
+			for (key in merged) newQuery += key + '=' +merged[key] + '&';
+			return this.set('query', newQuery.substring(0, newQuery.length-1));
+		},
 
-});
+		go: function(){
+			window.location.href = this.value;
+		}
+
+	});
+
+})():
