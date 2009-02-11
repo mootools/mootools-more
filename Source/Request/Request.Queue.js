@@ -13,7 +13,7 @@ Request.Queue = new Class({
 
 	Implements: [Options, Events],
 
-	Binds: ['attach', 'request', 'complete', 'cancel', 'success', 'failure', 'exception'],
+	Binds: ['attach', 'onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'],
 
 	options: {/*
 		onRequestStart: $empty,
@@ -54,8 +54,8 @@ Request.Queue = new Class({
 
 	attach: function(name, req){
 		if (req._groupSend) return this;
-		['request', 'complete', 'cancel', 'success', 'failure', 'exception'].each(function(evt){
-			if(!this.reqBinders[name]) this.reqBinders[name] = {};
+		['onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'].each(function(evt){
+			this.reqBinders[name] = this.reqBinders[name] || {};
 			this.reqBinders[name][evt] = function(){
 				this[evt].apply(this, [name, req].extend(arguments));
 			}.bind(this);
@@ -74,7 +74,7 @@ Request.Queue = new Class({
 		if (!name && $type(name) != 'string') return this;
 		req = this.requests.get(name);
 		if (!req) return this;
-		['request', 'complete', 'cancel', 'success', 'failure', 'exception'].each(function(evt){
+		['onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'].each(function(evt){
 			req.removeEvent(evt, this.reqBinders[name][evt]);
 		}, this);
 		req.send = req._groupSend;
@@ -102,7 +102,8 @@ Request.Queue = new Class({
 	},
 
 	hasNext: function(name){
-		return (!name) ? !!this.queue.length : !!this.queue.filter(function(q){ return q.name == name; }).length;
+		if (!name) return !!this.queue.length;
+		return !!this.queue.filter(function(q){ return q.name == name; }).length;
 	},
 
 	resume: function(){

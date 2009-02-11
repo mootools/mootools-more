@@ -18,7 +18,7 @@ var Asset = new Hash({
 			check: $lambda(true)
 		}, properties);
 
-		var script = new Element('script', {src: source, type: 'text/javascript'});
+		var script = new Element('script', {'src': source, 'type': 'text/javascript'});
 
 		var load = properties.onload.bind(script), check = properties.check, doc = properties.document;
 		delete properties.onload; delete properties.check; delete properties.document;
@@ -41,7 +41,7 @@ var Asset = new Hash({
 
 	css: function(source, properties){
 		return new Element('link', $merge({
-			rel: 'stylesheet', media: 'screen', type: 'text/css', href: source
+			'rel': 'stylesheet', 'media': 'screen', 'type': 'text/css', 'href': source
 		}, properties)).inject(document.head);
 	},
 
