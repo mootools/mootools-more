@@ -22,7 +22,7 @@ URI.prototype = new String;
 
 (function(){
 
-	var reg = /^(?:(\w+):\/\/)?(?:([^\/:?]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
+	var reg = /^(?:(\w+):\/\/)?(?:([^\/:?#]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
 	var parts = ['full', 'protocol', 'domain', 'port', 'path', 'query', 'fragment'];
 
 	URI.implement({
@@ -36,7 +36,7 @@ URI.prototype = new String;
 		},
 
 		parseURI: function(){ 
-			var bits = this.match(reg).associate(parts);
+			var bits = this.value.match(reg).associate(parts);
 			delete bits.trash;
 			return bits;		
 		},
@@ -63,7 +63,7 @@ URI.prototype = new String;
 			if (bits.path) result += bits.path;
 			if (bits.query) result += '?' + bits.query;
 			if (bits.fragment) result += '#' + bits.fragment;
-			this.value = new URI(result);
+			this.value = result;
 			return this;
 		},
 
