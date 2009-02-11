@@ -5,6 +5,9 @@ Script: URI.js
 	License:
 		MIT-style license.
 
+	String subclass based on:
+		http://webreflection.blogspot.com/2008/10/subclassing-javascript-native-string.html
+
 	Authors:
 		Aaron Newton, Lennart Pilon, Valerio Proietti
 */
