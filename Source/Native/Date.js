@@ -345,10 +345,9 @@ MooTools.lang.addEvent('onLangChange', function(){
 				//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
 				re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})$/,
 				handler: function(bits){
-					var d = new Date();
-					d.set('yr', bits[Date.orderIndex('year')]);
-					d.set('date', bits[Date.orderIndex('date')]);
-					d.set('mo', bits[Date.orderIndex('month')] - 1);
+					var d = new Date(bits[Date.orderIndex('year')],
+									 bits[Date.orderIndex('month')] - 1,
+									 bits[Date.orderIndex('date')]);
 					return Date.fixY2K(d);
 				}
 			},
@@ -357,10 +356,9 @@ MooTools.lang.addEvent('onLangChange', function(){
 			{
 				re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2})(\w{2})$/,
 				handler: function(bits){
-					var d = new Date();
-					d.set('yr', bits[Date.orderIndex('year')]);
-					d.set('date', bits[Date.orderIndex('date')]);
-					d.set('mo', bits[Date.orderIndex('month')] - 1);
+					var d = new Date(bits[Date.orderIndex('year')],
+									 bits[Date.orderIndex('month')] - 1
+									 bits[Date.orderIndex('date')]);
 					d.set('hr', bits[4]);
 					d.set('min', bits[5]);
 					d.set('ampm', bits[6]);
@@ -371,10 +369,9 @@ MooTools.lang.addEvent('onLangChange', function(){
 				//"12.31.08 11:59:59", "12-31-08 11:59:59", "12/31/08 11:59:59", "12.31.2008 11:59:59", "12-31-2008 11:59:59", "12/31/2008 11:59:59"
 				re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2}):(\d{1,2})/,
 				handler: function(bits){
-					var d = new Date();
-					d.set('yr', bits[Date.orderIndex('year')]);
-					d.set('date', bits[Date.orderIndex('date')]);
-					d.set('mo', bits[Date.orderIndex('month')] - 1);
+					var d = new Date(bits[Date.orderIndex('year')],
+									 bits[Date.orderIndex('month')] - 1,
+									 bits[Date.orderIndex('date')]);
 					d.set('hr', bits[4]);
 					d.set('min', bits[5]);
 					d.set('sec', bits[6]);
