@@ -83,7 +83,7 @@ URI.prototype = new String;
 		},
 
 		go: function(){
-			window.location.href = this.value;
+			document.location.href = this.value;
 		}
 
 	});
