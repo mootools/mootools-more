@@ -32,6 +32,7 @@ Request.JSONP = new Class({
 		this.running = false;
 		this.requests = 0;
 		this.triesRemaining = [];
+		this.log = $pick(window.dbug, window.console, { log: $empty }).log;
 	},
 	
 	check: function(caller){
@@ -57,6 +58,7 @@ Request.JSONP = new Class({
 				
 		(function(){
 			var script = this.getScript(options);
+			this.log('Running script with url ' + script.src);
 			this.running = true;
 			
 			(function(){
