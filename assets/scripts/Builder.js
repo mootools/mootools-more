@@ -43,8 +43,7 @@ var Builder = {
 		more: {
 			'Core'		: ['MooTools.Lang'],
 			'Class'		: ['Class.Refactor', 'Class.Binds', 'Class.Occlude'],
-			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras'],
-			'Browser'	: ['Browser.Extras'],
+			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras', 'URI'],
 			'Element'	: ['Element.Forms', 'Element.Measure'],
 			'Drag'      : ['Drag', 'Drag.Move'],
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements'],

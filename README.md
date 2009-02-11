@@ -6,7 +6,6 @@ MooTools Plugins and Enhancements Repository
 * Adjust License information in Localization
 * Make the Date Specs pass in all browsers but Firefox
 * Decide if reworking the whole source of all plugins makes you an author ( :P )
-* Need to rename Browser.Extras to /Native/URI.js
 
 ### StyleGuide
 

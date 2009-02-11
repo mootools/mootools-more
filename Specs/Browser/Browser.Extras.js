@@ -1,6 +1,6 @@
 /*
-Script: Browser.Extras.js
-	Specs for Browser.Extras.js
+Script: URI.js
+	Specs for URI.js
 
 License:
 	MIT-style license.
