@@ -9,50 +9,50 @@ License:
 
 	var url = 'http://www.test.com:8383/this/is/the/path.html?apple=red#anchor';
 
-	describe('Browser.getHost', {
+	describe('URL.get(\'host\')', {
 
-			'should get the host of a url': function(){
-				value_of(Browser.getHost(url)).should_be('www.test.com');
+			'should get the domain of a url': function(){
+				value_of(new URI(url.toString()).get('domain')).should_be('www.test.com');
 			}
 
 	});
 
-	describe('Browser.getQueryString', {
-
-			'should get the query string value from a url': function(){
-				value_of(Browser.getQueryString(url)['apple']).should_be('red');
-			}
-
-	});
-
-	describe('Browser.getQueryString', {
+	describe('URL.getData', {
 
 			'should get the query string values from a url': function(){
-				value_of(Browser.getQueryString(url)).should_be({apple: 'red'});
+				value_of(new URI(url.toString()).getData()['apple']).should_be('red');
+			},
+
+			'should get the query string value from a url': function(){
+				value_of(new URI(url.toString()).getData('apple')).should_be('red');
 			}
 
 	});
 
-	describe('Browser.getPort', {
+	describe('URI.get(\'domain\')', {
+
+			'should get the protocol from a url': function(){
+				value_of(new URI(url.toString()).get('protocol')).should_be('http');
+			}
+
+	});
+
+	describe('URI.get(\'port\')', {
 
 			'should get the port from a url': function(){
-				value_of(Browser.getPort(url)).should_be('8383');
+				value_of(new URI(url.toString()).get('port')).should_be('8383');
 			}
 
 	});
 
-	describe('Browser.mergeQueryString', {
+	describe('URI.setData', {
 
 			'should set query string values': function(){
-				value_of(Browser.mergeQueryString({a: 'b'}, 'www.test.com')).should_be('www.test.com?a=b');
+				value_of(new URI('www.test.com').setData({a: 'b'})).should_be('www.test.com?a=b');
 			},
 
 			'should merge url query string values': function(){
-				value_of(Browser.mergeQueryString({a: 'c'}, 'www.test.com?x=y&a=b')).should_be('www.test.com?x=y&a=c');
-			},
-
-			'should merge query string values': function(){
-				value_of(Browser.mergeQueryString({a: 'c'}, 'x=y&a=b')).should_be('x=y&a=c');
+				value_of(new URI('www.test.com?x=y&a=b').setData({a: 'c'}, true)).should_be('www.test.com?x=y&a=c');
 			}
 
 	});

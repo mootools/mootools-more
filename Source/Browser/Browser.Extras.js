@@ -1,6 +1,6 @@
 /*
-Script: Browser.Extras.js
-	Extends the Window native object to include methods useful in managing the window location and urls.
+Script: URI.js
+	Provides methods useful in managing the window location and uris.
 
 	License:
 		MIT-style license.
@@ -9,36 +9,73 @@ Script: Browser.Extras.js
 		Aaron Newton, Lennart Pilon
 */
 
-$extend(Browser, {
+var URI = new Native('String', function(uri){
+	this.value = uri || '';
+	this.length = uri.length;
+	
+});
 
-	getHost: function(url){
-		var match = $pick(url, window.location.href).match(/http[s]?:\/\/([\w-.]+)/);
-		return match ? match[1] : null;
+URI.reg = /^(?:(\w+):\/\/)?(?:([^\/:]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
+
+URI.prototype = new String;
+
+URI.implement({
+
+	toString: function(){
+		return this.value;
 	},
 
-	getPort: function(url){
-		var match = $pick(url, window.location.href).match(/:([0-9]{2,4})/);
-		return match ? match[1] : null;
-	},
-
-	getQueryString: function(url){
-		var qs = $pick(url, window.location.search, '').split('?')[1];
-		if (!$chk(qs)) return {};
-		return qs.split('#')[0].parseQuery();
-	},
-
-	mergeQueryString: function(values, url){
-		url = $pick(url, window.location.href);
-		var merged = $merge(url.contains('?') ? this.getQueryString(url) : url.parseQuery(), values);
-		var newUrl = url.contains('?') ? url.split('?')[0] + '?' : url.contains('=') ? '' : url + '?';
-		for (key in merged) newUrl += key + '=' +merged[key] + '&';
-		return newUrl.substring(0, newUrl.length-1);
-	},
-
-	redraw: function(){
-		var n = document.createTextNode(' ');
-		this.adopt(n);
-		(function(){ n.dispose(); }).delay(1);
+	valueOf: function(){
+		return this.value;
 	}
 
+	parseURI: function(){ 
+		var bits = this.match(URI.reg).associate([
+			'full', 'protocol', 'domain', 'port', 'path', 'query', 'hash'
+		]);
+		delete bits.trash;
+		return bits;		
+	},
+
+	set: function(part, value) {
+		if (part == 'data') return this.setData(value);
+		var bits = this.parseURI();
+		bits[part] = value;
+		this.combine(bits)
+	},
+
+	get: function(part) {
+		if (part == 'data') return this.getData();
+		return this.parseURI(part);
+	},
+
+	combine: function(bits){
+		bits = bits || this.parseURI();
+		var result = "";
+		if (bits.protocol) result += bits.protocol + '://';
+		if (bits.domain) result += bits.domain;
+		if ($defined(bits.port)) result += bits.port + ':';
+		if (bits.path) result += bits.path;
+		if (bits.query) result += '?' + bits.query;
+		if (bits.hash) result += '#' + bits.hash;
+		return this = new URI(result);
+	},
+
+	getData: function(key){
+		var qs = this.get('query');
+		if (!$chk(qs)) return key ? null : {};
+		var obj = qs.parseQuery();
+		return key ? obj[key] : obj;
+	},
+
+	setData: function(values, merge){
+		var merged = merge ? $merge(this.getData(), values) : values;
+		var newQuery = "";
+		for (key in merged) newQuery += key + '=' +merged[key] + '&';
+		return this.set('query', newUri.substring(0, newUri.length-1));
+	},
+	
+	go: function(){
+		window.location.href = this;
+	}
 });
