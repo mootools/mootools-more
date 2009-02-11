@@ -92,11 +92,11 @@ URI.prototype = new String;
 	parts.each(function(part){
 
 		methods['get' + part.capitalize()] = function(){
-			return this[method](part);
+			return this.get(part);
 		};
 
 		methods['set' + part.capitalize()] = function(value){
-			return this[method](part, value);
+			return this.set(part, value);
 		};
 
 	});
