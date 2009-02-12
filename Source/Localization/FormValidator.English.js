@@ -1,3 +1,12 @@
+/*
+Script: FormValidator.English.js
+	Date messages for English.
+
+	License:
+		MIT-style license.
+
+*/
+
 MooTools.lang.set('usENG', 'FormValidator', {
 
 	required:'This field is required.',

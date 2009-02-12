@@ -2,8 +2,9 @@
 Script: FormValidator.Russian.js
 	FormValidator messages in Russian (utf-8 and cp1251). Thanks Chernodarov Egor.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	License:
+		MIT-style license.
+
 */
 
 MooTools.lang.set('RU_unicode', 'FormValidator', {

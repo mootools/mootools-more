@@ -1,3 +1,12 @@
+/*
+Script: Date.English.US.js
+	Date messages for US English.
+
+	License:
+		MIT-style license.
+
+*/
+
 MooTools.lang.set('usENG', 'Date', {
 
 	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],

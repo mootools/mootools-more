@@ -2,8 +2,9 @@
 Script: FormValidator.Norwegian.js
 	FormValidator messages in Norwegian. Thanks Espen 'Rexxars' Hovlandsdal.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	License:
+		MIT-style license.
+
 */
 
 MooTools.lang.set('NO', 'FormValidator', {

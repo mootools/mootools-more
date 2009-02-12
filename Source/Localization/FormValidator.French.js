@@ -2,8 +2,9 @@
 Script: FormValidator.French.js
 	FormValidator messages in French. Thanks Miquel Hudin.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	License:
+		MIT-style license.
+
 */
 
 MooTools.lang.set('FR', 'FormValidator', {

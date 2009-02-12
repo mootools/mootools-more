@@ -2,9 +2,8 @@
 Script: FormValidator.Chinese.js
 	FormValidator messages in chinese (both simplified and traditional).
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
-
+	License:
+		MIT-style license.
 
 In Chinese:
 ------------

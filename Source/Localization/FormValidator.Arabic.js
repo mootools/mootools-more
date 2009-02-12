@@ -2,8 +2,9 @@
 Script: FormValidator.Arabic.js
 	FormValidator messages in Arabic. Thanks Chafik Barbar.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	License:
+		MIT-style license.
+
 */
 
 MooTools.lang.set('AR', 'FormValidator', {

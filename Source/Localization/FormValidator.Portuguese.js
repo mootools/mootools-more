@@ -2,8 +2,9 @@
 Script: FormValidator.Portuguese.js
 	FormValidator messages in Portuguese. Thanks Miquel Hudin.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	License:
+		MIT-style license.
+
 */
 
 MooTools.lang.set('POR', 'FormValidator', {

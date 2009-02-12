@@ -1,9 +1,10 @@
 /*
 Script: Date.Dutch.js
-	FormValidator messages in Dutch. Thanks Lennart Pilon.
+	Date messages in Dutch. Thanks Lennart Pilon.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	License:
+		MIT-style license.
+
 */
 
 MooTools.lang.set('NL', 'Date', {

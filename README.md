@@ -3,11 +3,9 @@ MooTools Plugins and Enhancements Repository
 ### TO DO
 
 * Need to add tests for all libs
-* Adjust License information in Localization
 * Make the Date Specs pass in all browsers but Firefox
 * Decide if reworking the whole source of all plugins makes you an author ( :P )
 * Revisit branch commits from other users in github that have not made it into master (http://github.com/anutron/mootools-more/network)
-* Update documentation for OverText changes
 * Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
 
 ### StyleGuide

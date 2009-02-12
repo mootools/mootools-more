@@ -2,8 +2,9 @@
 Script: FormValidator.Catalan.js
 	FormValidator messages in Catalan. Thanks Miquel Hudin.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	License:
+		MIT-style license.
+
 */
 
 MooTools.lang.set('CAT', 'FormValidator', {

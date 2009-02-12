@@ -2,8 +2,9 @@
 Script: FormValidator.Italian.js
 	FormValidator messages in Italian. Thanks Leonardo Laureti.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	License:
+		MIT-style license.
+
 */
 
 MooTools.lang.set('IT', 'FormValidator', {
