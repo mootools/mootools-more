@@ -69,15 +69,15 @@ Color.implement({
 
 });
 
-function $RGB(r, g, b){
+var $RGB = function(r, g, b){
 	return new Color([r, g, b], 'rgb');
 };
 
-function $HSB(h, s, b){
+var $HSB = function(h, s, b){
 	return new Color([h, s, b], 'hsb');
 };
 
-function $HEX(hex){
+var $HEX = function(hex){
 	return new Color(hex, 'hex');
 };
 

@@ -367,7 +367,7 @@ FormValidator.addAllThese([
 
 	['validate-alpha', {
 		errorMsg: FormValidator.getMsg.pass('alpha'),
-		test: function (element){
+		test: function(element){
 			return FormValidator.getValidator('IsEmpty').test(element) ||  (/^[a-zA-Z]+$/).test(element.get('value'));
 		}
 	}],
@@ -409,14 +409,14 @@ FormValidator.addAllThese([
 
 	['validate-email', {
 		errorMsg: FormValidator.getMsg.pass('email'),
-		test: function (element){
+		test: function(element){
 			return FormValidator.getValidator('IsEmpty').test(element) || (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i).test(element.get('value'));
 		}
 	}],
 
 	['validate-url', {
 		errorMsg: FormValidator.getMsg.pass('url'),
-		test: function (element){
+		test: function(element){
 			return FormValidator.getValidator('IsEmpty').test(element) || (/^(https?|ftp|rmtp|mms):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i).test(element.get('value'));
 		}
 	}],
@@ -434,7 +434,7 @@ FormValidator.addAllThese([
 
 	['validate-one-required', {
 		errorMsg: FormValidator.getMsg.pass('oneRequired'),
-		test: function (element){
+		test: function(element){
 			var p = element.parentNode;
 			return p.getElements('input').some(function(el){
 				if (['checkbox', 'radio'].contains(el.get('type'))) return el.get('checked');

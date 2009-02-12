@@ -94,7 +94,7 @@ var dbug = {
 
 	var otherMethods = ['trace','group','groupEnd','profile','profileEnd','count'];
 
-	function set(methodList, defaultFunction){
+	var set = function(methodList, defaultFunction){
 		for(var i = 0; i < methodList.length; i++){
 			dbug[methodList[i]] = (fb && console[methodList[i]])?console[methodList[i]]:defaultFunction;
 		}

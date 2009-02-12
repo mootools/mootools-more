@@ -36,7 +36,7 @@ Element.implement({
 	getDimensions: function(options){
 		options = $merge({computeSize: false},options);
 		var dim = {};
-		function getSize(el, options){
+		var getSize = function(el, options){
 			return (options.computeSize)?el.getComputedSize(options):el.getSize();
 		};
 		if (this.getStyle('display') == 'none'){

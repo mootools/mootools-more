@@ -13,10 +13,10 @@ var OverText = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
-	options: {
-//	textOverride: null,
-//	onTextHide: $empty,
-//	onTextShow: $empty,
+	options: {/*
+		textOverride: null,
+		onTextHide: $empty,
+		onTextShow: $empty, */
 		positionOptions: {
 			position: "upperLeft",
 			edge: "upperLeft",
@@ -33,8 +33,8 @@ var OverText = new Class({
 
 	property: 'IframeShim',
 
-	initialize: function(input, options){
-		this.element = $(input);
+	initialize: function(element, options){
+		this.element = $(element);
 		if (this.occlude()) return this.occluded;
 		this.setOptions(options);
 		OverText.instances.push(this);
@@ -42,7 +42,7 @@ var OverText = new Class({
 	},
 
 	toElement: function(){
-		return this.element
+		return this.element;
 	},
 
 	attach: function(){
@@ -118,7 +118,7 @@ var OverText = new Class({
 		else this.show();
 	},
 
-	reposition: function (){
+	reposition: function(){
 		try {
 			if (this.element.getParent()) return;
 			this.test();

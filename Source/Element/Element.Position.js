@@ -45,7 +45,7 @@ Element.implement({
 		}
 		//upperRight, bottomRight, centerRight, upperLeft, bottomLeft, centerLeft
 		//topRight, topLeft, centerTop, centerBottom, center
-		function fixValue(option){
+		var fixValue = function(option){
 			if ($type(option) != "string") return option;
 			option = option.toLowerCase();
 			var val = {};

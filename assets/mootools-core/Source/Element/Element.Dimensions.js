@@ -162,27 +162,27 @@ Native.implement([Document, Window], {
 
 var styleString = Element.getComputedStyle;
 
-function styleNumber(element, style){
+var styleNumber = function(element, style){
 	return styleString(element, style).toInt() || 0;
 };
 
-function borderBox(element){
+var borderBox = function(element){
 	return styleString(element, '-moz-box-sizing') == 'border-box';
 };
 
-function topBorder(element){
+var topBorder = function(element){
 	return styleNumber(element, 'border-top-width');
 };
 
-function leftBorder(element){
+var leftBorder = function(element){
 	return styleNumber(element, 'border-left-width');
 };
 
-function isBody(element){
+var isBody = function(element){
 	return (/^(?:body|html)$/i).test(element.tagName);
 };
 
-function getCompatElement(element){
+var getCompatElement = function(element){
 	var doc = element.getDocument();
 	return (!doc.compatMode || doc.compatMode == 'CSS1Compat') ? doc.html : doc.body;
 };
