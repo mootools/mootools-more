@@ -8,6 +8,7 @@ MooTools Plugins and Enhancements Repository
 * Decide if reworking the whole source of all plugins makes you an author ( :P )
 * Revisit branch commits from other users in github that have not made it into master (http://github.com/anutron/mootools-more/network)
 * Update documentation for OverText changes
+* Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
 
 ### StyleGuide
 
@@ -40,4 +41,8 @@ MooTools Plugins and Enhancements Repository
 * Class.Binds no longer supports lowercase binds
 * Element.fxOpacityOk (which was never documented or intended for external use) is gone
 * FormValidator base class no longer does what it did (that is now in FormValidator.Inline)
-* OverText no longer takes a collection of inputs.
+* OverText
+  - no longer takes a collection of inputs.
+  - .showTxt > .show, .hideTxt > .hide
+  - .hide and .show no longer take the element and 'focus' arguments.
+  - .repositionAll is gone; .repositionOverTxt is now just .reposition; it does not take an argument

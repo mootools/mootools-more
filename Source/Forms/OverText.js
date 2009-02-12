@@ -13,6 +13,8 @@ var OverText = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
+	Binds: ['reposition', 'test', 'focus'],
+
 	options: {/*
 		textOverride: null,
 		onTextHide: $empty,
@@ -29,9 +31,7 @@ var OverText = new Class({
 		pollInterval: 250
 	},
 
-	Binds: ['reposition', 'test']
-
-	property: 'IframeShim',
+	property: 'OverText',
 
 	initialize: function(element, options){
 		this.element = $(element);
@@ -58,9 +58,9 @@ var OverText = new Class({
 			events: {
 				click: this.hide.pass(true, this)
 			}
-		}).inject(el, 'after');
-		el.addEvents({
-			focus: this.hide.pass(true, this),
+		}).inject(this.element, 'after');
+		this.element.addEvents({
+			focus: this.focus,
 			blur: this.test,
 			change: this.test
 		}).store('OverTextDiv', this.text);
@@ -92,12 +92,17 @@ var OverText = new Class({
 		return this.poll(true);
 	},
 
-	hide: function(focus){
+	focus: function(){
+		if (!this.text.isVisible() || this.element.get('disabled')) return;
+		this.hide();
+		try {
+			this.element.fireEvent('focus').focus();
+		} catch(e){} //IE barfs if you call focus on hidden elements
+	},
+
+	hide: function(){
 		if (this.text.isVisible() && !this.element.get('disabled')){
 			this.text.hide();
-			try {
-				if (focus) this.element.fireEvent('focus').focus();
-			} catch(e){} //IE barfs if you call focus on hidden elements
 			this.fireEvent('textHide', [this.text, this.element]);
 			this.pollingPaused = true;
 		}
@@ -114,17 +119,15 @@ var OverText = new Class({
 	},
 
 	test: function(){
-		if (this.element.get('value')) this.hide();
-		else this.show();
+		var v = this.element.get('value');
+		this[v ? 'show' : 'hide']();
+		return v;
 	},
 
 	reposition: function(){
 		try {
-			if (this.element.getParent()) return;
-			this.test();
-			this.text.position($merge(this.options.positionOptions, {relativeTo: this.element}));
-			if (this.element.offsetHeight) this.test();
-			else this.hide();
+			if (!this.element.getParent() || !this.element.offsetHeight) return this.hide();
+			if (this.test()) this.text.position($merge(this.options.positionOptions, {relativeTo: this.element}));
 		} catch(e){	}
 		return this;
 	}
@@ -136,7 +139,8 @@ OverText.instances = [];
 OverText.update = function(){
 
 	return OverText.instances.map(function(ot){
-		return ot.reposition();
+		if (ot.element && ot.text) return ot.reposition();
+		return null; //the input or the text was destroyed
 	});
 
 };
