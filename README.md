@@ -7,6 +7,9 @@ MooTools Plugins and Enhancements Repository
 * Decide if reworking the whole source of all plugins makes you an author ( :P )
 * Revisit branch commits from other users in github that have not made it into master (http://github.com/anutron/mootools-more/network)
 * Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
+* Decide if delegation stays in -more for now
+* move logging to MooTools.log in Request.JSONP
+* move IframeShim into /Utilities and nix Browser
 
 ### StyleGuide
 
