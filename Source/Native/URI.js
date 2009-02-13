@@ -83,6 +83,10 @@ URI.prototype = new String;
 			return this.set('query', newQuery.substring(0, newQuery.length-1));
 		},
 
+		clearData: function(){
+			this.set('query', '');
+		},
+
 		go: function(){
 			document.location.href = this.value;
 		}
