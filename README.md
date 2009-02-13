@@ -12,6 +12,13 @@ MooTools Plugins and Enhancements Repository
 * Revisit branch commits from other users in github that have not made it into master (http://github.com/anutron/mootools-more/network)
 * Decide if delegation stays in -more for now
 
+### Server
+
+* need to figure out docs
+* need to decide how more is presented w/ regards to -core; http://www.mootools.net/more/* ?
+* need to get access to push releases (for Aaron at least - I don't have access now)
+* need demos
+
 ### StyleGuide
 
 * http://wiki.github.com/mootools/mootools-core/syntax-and-coding-style-conventions
