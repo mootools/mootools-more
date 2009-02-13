@@ -2,9 +2,6 @@
 	"Core":{
 		"dbug":['all']
 	},
-	"Browser": {
-		"IframeShim":['all']
-	},
 	"Class": {
 		"Chain.Wait":['all']
 	},
@@ -28,5 +25,8 @@
 	"Request":{
 		"Request.JsonP": ['all'],
 		"Request.Queue": ['all']
+	},
+	"Utilities":{
+		"IframeShim":['all']
 	}
 }

@@ -2,11 +2,6 @@
 
 	"Core": {
 
-		"dbug": {
-			"deps":["dbug"],
-			"desc":"Wrapper for the firebug console.log() function."
-		},
-
 		"MooTools.Lang": {
 			"deps": ["Class.Extras"],
 			"desc": ["Enables classes to contain text that can be localized to specific languages."]
@@ -26,38 +21,24 @@
 			"desc": "Adds the Binds Mutator to all classes."
 		},
 
-		"Chain.Wait": {
-			"deps": ["Class.Extras"],
-			"desc": "Adds a delay method for chaining that allows you to easily introduce pauses."
-		},
-
 		"Class.Occlude": {
 			"deps": ["Class", "Element"],
 			"desc": "Mixin class for preventing a class from applying itself to the same element twice."
 		},
 
-		"Class.ToElement": {
-			"deps": ["Class"],
-			"desc": "Mixin class that returns *this.element*. Allows you to do $(myInstance)."
-		}
-
-	},
-
-	"Browser": {
-
-		"Browser.Extras": {
-			"deps": ["Browser", "String.Extras"],
-			"desc": "Extends the Window native class with numerous shortcuts."
-		},
-
-		"IframeShim": {
-			"deps": ["Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude", "Class.ToElement"],
-			"desc": "Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
+		"Chain.Wait": {
+			"deps": ["Class.Extras"],
+			"desc": "Adds a delay method for chaining that allows you to easily introduce pauses."
 		}
 
 	},
 
 	"Native": {
+
+		"Array.Extras": {
+			"deps": ["Core", "Array"],
+			"desc": "Extends the Array native object to include useful methods to work with arrays."
+		},
 
 		"Date": {
 			"deps": ["Core", "String", "Number", "Hash", "Array", "MooTools.Lang", "Date.English.US"],
@@ -74,14 +55,14 @@
 			"desc": "Extends the Hash native object to include getFromPath which allows a path notation to child elements."
 		},
 
-		"Array.Extras": {
-			"deps": ["Core", "Array"],
-			"desc": "Extends the Array native object to include useful methods to work with arrays."
-		},
-
 		"String.Extras": {
 			"deps": ["String", "Array", "Hash.Extras"],
 			"desc": "Extends the String native object to include methods useful in managing strings (query strings, urls, etc)."
+		},
+		
+		"URI": {
+			"deps": ["Function", "Array", "String.Extras"],
+			"desc": "Extends a string to provide numerous methods for managing URI components."
 		}
 
 	},
@@ -101,11 +82,6 @@
 		"Element.Measure": {
 			"deps": ["Element.Style"],
 			"desc": "Extends the Element native object to include methods useful in measuring dimensions."
-		},
-
-		"Element.MouseOvers": {
-			"deps": ["Element.Event", "DomReady", "Element.Shortcuts"],
-			"desc": "Collection of mouseover behaviours (images, class toggles, etc.)."
 		},
 
 		"Element.Pin": {
@@ -194,29 +170,29 @@
 	},
 
 	"Request": {
+
 		"Request.JSONP": {
 			"deps": ["Browser", "Element", "Request", "Class.Extras"],
 			"desc": "Creates a Json request using a script tag include and handles the callbacks for you."
 		},
-		"Request.NoCache": {
-			"deps": ["Request", "Request.HTML", "Class.Refactor"],
-			"desc": "Extends Request and Request.HTML to automatically include a unique noCache value to prevent request caching."
-		},
+
 		"Request.Queue": {
 			"deps": ["Request"],
 			"desc": "Manages a group of Request instances so that connections are queued."
 		},
+
 		"Request.Timer": {
 			"deps": ["Request"],
 			"desc": "Requests the same url at a time interval that increases when no data is returned from the requested server."
 		}
+
 	},
 
 	"Utilities": {
 
-		"Hash.Cookie": {
-			"deps": ["Class.Extras", "Cookie", "JSON"],
-			"desc": "Class for creating, reading, and deleting browser Cookies in JSON format."
+		"Assets": {
+			"deps": ["Element.Event"],
+			"desc": "Provides methods to dynamically load JavaScript, CSS, and Image files into the document."
 		},
 
 		"Color": {
@@ -229,14 +205,40 @@
 			"desc": "Class for monitoring collections of events."
 		},
 
-		"Assets": {
-			"deps": ["Element.Event"],
-			"desc": "Provides methods to dynamically load JavaScript, CSS, and Image files into the document."
+		"Hash.Cookie": {
+			"deps": ["Class.Extras", "Cookie", "JSON"],
+			"desc": "Class for creating, reading, and deleting browser Cookies in JSON format."
+		},
+		
+		"IframeShim": {
+			"deps": ["Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude"],
+			"desc": "Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
 		}
 
 	},
 
 	"Interface": {
+
+		"Accordion": {
+			"deps": ["Fx.Elements", "Element.Event"],
+			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
+		},
+
+		"Scroller": {
+			"deps": ["Class.Extras", "Element.Event", "Element.Dimensions"],
+			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
+		},
+
+
+		"Slider": {
+			"deps": ["Drag", "Element.Dimensions"],
+			"desc": "Class for creating horizontal and vertical slider controls."
+		},
+
+		"SmoothScroll": {
+			"deps": ["Fx.Scroll"],
+			"desc": "Class for creating a smooth scrolling effect to all internal links on the page."
+		},
 
 		"Sortables": {
 			"deps": ["Drag.Move"],
@@ -246,26 +248,6 @@
 		"Tips": {
 			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions", "Class.ToElement"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
-		},
-
-		"SmoothScroll": {
-			"deps": ["Fx.Scroll"],
-			"desc": "Class for creating a smooth scrolling effect to all internal links on the page."
-		},
-
-		"Slider": {
-			"deps": ["Drag", "Element.Dimensions"],
-			"desc": "Class for creating horizontal and vertical slider controls."
-		},
-
-		"Scroller": {
-			"deps": ["Class.Extras", "Element.Event", "Element.Dimensions"],
-			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
-		},
-
-		"Accordion": {
-			"deps": ["Fx.Elements", "Element.Event"],
-			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
 		}
 
 	},
@@ -358,7 +340,7 @@
 			"deps": ["MooTools.Lang"],
 			"desc": "FormValidator messages in Spanish (feel free to send in your own translations).",
 			"exclude": true
-		},
+		}
 
 	}
 

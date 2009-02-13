@@ -28,7 +28,6 @@ Creates a Json request using script tag injection and handles the callbacks for 
 * retries - (*integer*; defaults to *zero*) if this value is a positive integer, the JSONP request will abort after the duration specified in the *timeout* option and fire again until the number of retries has been exhausted.
 * timeout - (*integer*; defaults to *zero*) the duration to wait before aborting a request or retrying.
 * injectScript - (*mixed*; defaults to document head) where to inject the script elements used for the calls
-* logger - (*function*) the function that you want to use to log I/O. Typically this is *console.log* (as with Firebug) or *dbug.log* if you are using [dbug][]. This method will be passed two arguments - a *string* and the url (also a *string*) - when a request is sent and it will be passed a *string* and an *object* when data is received. Note that if you want to use something like *console.log* you must bind the method to *console* (i.e. *logger: console.log.bind(console)*).
 
 ### Events
 
@@ -53,6 +52,16 @@ The above example would generate this url:
 	http://api.cnet.com/restApi/v1.0/techProductSearch?partTag=mtvo&iod=hlPrice&viewType=json&results=100&query=ipod&callback=Request.JSONP.requests[0].handleResults&
 
 It would embed a script tag (in the head of the document) with this url and, when it loaded, execute the "myFunction" callback defined.
+
+### Logging
+
+*Request.JSONP* logs I/O operations to *MooTools.log*, which is a function that simply passes arguments into an array called *MooTools.logged*. You can redefine *MooTools.log* so that I/O operations show up in your preferred logger (like Firebug). Until you redefine it, log messages are cashed in the *MooTools.logged* array so that you can retrieve any messages already logged before you remap the method. For example, you might do this:
+
+		MooTools.log = console.log.bind(console);
+		//then dump any existing logs to the console:
+		MooTools.logged.each(function(log){
+			console.log.apply(console, log);
+		});
 
 Request.JSONP Method: send {#Request-JSONP:send}
 --------------------------------------

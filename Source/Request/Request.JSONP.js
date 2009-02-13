@@ -18,7 +18,6 @@ Request.JSONP = new Class({
 		onComplete: $empty,
 		onSuccess: $empty,
 		onCancel: $empty,*/
-		logger: $empty,
 		url: '',
 		data: {},
 		retries: 0,
@@ -58,7 +57,7 @@ Request.JSONP = new Class({
 				
 		(function(){
 			var script = this.getScript(options);
-			this.options.logger('Running script with url ' + script.src);
+			MooTools.log('JSONP retrieving script with url: ' + script.src);
 			this.running = true;
 			
 			(function(){
@@ -106,10 +105,15 @@ Request.JSONP = new Class({
 	success: function(data, script){
 		if (script) script.destroy();
 		this.running = false;
-		this.options.logger('JSONP successfully retrieved: ' + data);
+		MooTools.log('JSONP successfully retrieved: ',  data);
 		this.fireEvent('complete', data).fireEvent('success', data).callChain();
 	}
 
 });
 
-Request.JSONP.requests = [];
+$extend(MooTools, {
+	logged: [],
+	log: function(){
+		logged.push(arguments);
+	}
+});
