@@ -127,7 +127,15 @@ Returns the query string values as an *object*. Same as *URI.get('data')*.
 
 ### Syntax
 
-	myURI.getData();
+	myURI.getData([key]);
+
+### Arguments
+
+1. key - (*string*; optional) If specified, returns the value for the given key.
+
+### Returns
+
+* *string* - the value for the given key
 
 URI Method: clearData {#URI:clearData}
 --------------------------------------

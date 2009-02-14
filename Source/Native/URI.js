@@ -72,14 +72,14 @@ URI.prototype = new String;
 		getData: function(key){
 			var qs = this.get('query');
 			if (!$chk(qs)) return key ? null : {};
-			var obj = qs.parseQuery();
+			var obj = decodeURI(qs).parseQuery(false, false); 
 			return key ? obj[key] : obj;
 		},
 
 		setData: function(values, merge){
 			var merged = merge ? $merge(this.getData(), values) : values;
 			var newQuery = '';
-			for (key in merged) newQuery += key + '=' +merged[key] + '&';
+			for (key in merged) newQuery += encodeURIComponent(key) + '=' + encodeURIComponent(merged[key]) + '&';
 			return this.set('query', newQuery.substring(0, newQuery.length-1));
 		},
 
