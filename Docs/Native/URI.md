@@ -1,126 +1,153 @@
-Hash: Browser {#Browser}
+String Subclass: URI {#URI}
 ========================
 
-Adds numerous methods for managing various window location data to the [Browser][] Object.
+Extends a *string* to add numerous methods useful for managing URIs.
 
-### Tutorial/Demo
+Usage {#Usage}
+--------------
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/02-browser/00-browser.extras
+Pass a *string* to the URI subclass and it will extend it, returning a new string-like object with new methods useful for managing that URI. 
 
-Browser Method: getHost	{#Browser:getHost}
+### Syntax
+
+	var myURI = new URI('http://www.test.com:8383/this/is/the/path.html?query=value#anchor');
+
+### Returns
+
+* *URI* - a *string*-like object that has new methods useful for managing the URI.
+
+### Notes
+
+* If you pass the extended *string* to *typeof* it will return "object". However, if you pass it to MooTools' *$type* it will return "string".
+* If you test the string against another string it will work as expected (i.e. *if (myURI == 'http://www.test.com...')*).
+
+URI Method: toString {#URI:toString}
 ------------------------------------------
 
-### Syntax
-
-	Browser.getHost();
-	Browser.getHost(url);
-
-### Returns
-
-* (*string*) the domain of the window or the passed in url.
-
-### Arguments
-
-1. url (*string*, optional) - the url you wish to get the host for (otherwise *Browser.getHost* returns the host of the current window location).
-
-Browser Method: getQueryString {#Browser:getQueryString}
----------------------------------------------------------------------
+Returns an regular *string* without the URI extensions.
 
 ### Syntax
 
-	Browser.getQueryString();
-	Browser.getQueryString(url);
-
-### Arguments
-
-1. url - (*string*, optional) url with a querystring to parse; defaults to *window.location*
+	myURI.toString(); //"http://www.test.com...etc"
 
 ### Returns
 
-* (*object*) An object with name/value pairs of the values in the querystring of the window
+* (*string*) the unaltered url.
+
+URI Method: set {#URI:set}
+--------------------------
+
+Set's a portion of the URI to the specified value.
+
+### Syntax
+
+	myURI.set(part, value);
+
+### Arguments
+
+1. type - (*string*, optional) url with a querystring to parse; defaults to *window.location*
 
 ### Example
 
-	//window.location is http://www.example.com/?red=apple&yellow=lemon
-	Browser.getQueryString();
-	//returns: { red: 'apple', yellow: 'lemon' }
-	Browser.getQueryString("http://www.example.com/?red=apple&yellow=lemon");
-	//returns: { red: 'apple', yellow: 'lemon' }
-
-
-Browser Method: getPort {#Browser:getPort}
-------------------------------------------
-
-### Syntax
-
-	Browser.getPort();
-	Browser.getPort(url);
-
-### Arguments
-
-1. url - (*string*, optional) the url to test for a port; defaults to *window location*
+	myURI.set('protocol', 'https');
+	myURI.set('domain', 'www.foo.com');
+	//etc.
 
 ### Returns
 
-* (*string*) the port number of the window location
+* (*URI*) This instance of *URI*.
+
+### Valid parts
+
+* protocol - (*string*) 'http', 'https', 'ftp', etc.
+* domain - (*string*) 'www.example.com', 'exmaple.com', 'subdomain.example.com', etc.
+* port - (*string* or *integer*) 80, 8080, etc.
+* path - (*string*) '/directory/file.html'
+* query - (*string*) 'foo=bar&something=else' (the *?* is added for you)
+* fragment - (*string*)  'anAnchor' (the *#* is added for you)
+* data - (*object*) an object of key/value pairs to set the query to (*{foo: 'bar', something: 'else'}*)
+
+URI Method: get {#URI:get}
+--------------------------
+
+Returns the current value for the specified portion of the URI.
+
+### Syntax
+
+	myURI.get(part);
 
 ### Example
 
-	//window.location.href is http://www.example.com:8001/blah.html
-	Browser.getPort();
-	> 8001
-	Browser.getPort("http://www.example.com:8001/blah.html");
-	> 8001
+	myURI.get('protocol'); //returns "http", for example
+	myURI.get('domain'); //returns "www.example.com", for example
 
-Browser Method: redraw {#Browser:qs}
+### Returns
+
+* *mixed* - usually returns a *string*, but in the case of 'data' returns an *object*.
+
+### Valid parts
+
+* protocol - (returns *string*) 'http', 'https', 'ftp', etc.
+* domain - (returns *string*) 'www.example.com', 'exmaple.com', 'subdomain.example.com', etc.
+* port - (returns *string*) 80, 8080, etc.
+* path - (returns *string*) '/directory/file.html'
+* query - (returns *string*) 'foo=bar&something=else' (the *?* is added for you)
+* fragment - (returns *string*)  'anAnchor' (the *#* is added for you)
+* data - (returns *object*) an *object* of key/value pairs to set the query to (*{foo: 'bar', something: 'else'}*)
+
+URI Method: setData {#URI:setData}
+------------------------------------------
+
+Sets the query string from an *object* (much like *myURI.set('data', obj)*) but also allows merging.
+
+### Syntax
+
+	myURI.setData(data[, merge]);
+
+
+### Arguments
+
+1. object - (*object*) the key/values you want to set for the query string
+2. merge - (*boolean*, optional) if *true* the values will be merged with the existing query string. Defaults to *false*.
+
+### Returns
+
+* (*URI*) this instance of *URI*
+
+### Example
+
+	myURI.setData(myObject); //same as myURI.set('data', myObject);
+	myURI.setData(myObject, true); //merges myObject w/ existing query values
+	
+
+URI Method: getData {#URI:getData}
 ------------------------------------
 
-Forces the window to refresh/redraw. Useful for some cases where the browser just... doesn't.
+Returns the query string values as an *object*. Same as *URI.get('data')*.
 
 ### Syntax
 
-	Browser.redraw();
+	myURI.getData();
 
-Browser Method: mergeQueryString {#Browser:mergeQueryString}
---------------------------------------------------------------------
+URI Method: clearData {#URI:clearData}
+--------------------------------------
 
-Combines query string values into a query string.
+Clears the query string values entirely.
 
 ### Syntax
 
-	Browser.mergeQueryString(values[, url]);
+	myURI.clearData();
 
-### Arguments
+URI Method: go {#URI:go}
+------------------------
 
-1. values - (*object*) an object of key/value pairs to merge into a url/queryString
-2. url - (*string*) a url or query string that you'd like to merge with the values
+Loads the url into the document location.
 
-### Examples
+### Syntax
 
-	//merges foo=bar with the current window's query string
-	//so if the page is http://www.test.com?x=y
-	//this would return http://www.test.com?x=y&a=b
-	Browser.mergeQueryString({a: 'b'})
+	myURI.go();
 
-	//merges with a specified url
-	//this would yeild www.test.com?x=y&a=b
-	Browser.mergeQueryString({a: 'b'}, 'http://www.test.com?x=y');
+Method Tranlsations
+===================
 
-	//specified values overwrite the url values
-	//this would yeild http://www.test.com?x=y&a=c
-	Browser.mergeQueryString({a: 'c'}, 'http://www.test.com?x=y&a=b');
-
-	//query strings can be passed without the full url
-	//this would yeild x=y&a=c
-	Browser.mergeQueryString({a: 'c'}, 'x=y&a=b');
-
-### Returns
-
-* *string* the resulting url.
-
-### Note
-
-The url returned is *not* encoded.
-
-[Browser]: http://docs.mootools.net/Core/Browser
+All the URI parts ('protocol', 'domain', 'port', 'query', and 'hash') have corresponding *get<Part>* methods. So you can call *myURI.get('domain')* or *myURI.getDomain()*. The same is true of *set* - you can call *myURI.set('domain', 'www.foo.com')* or *myURI.setDomain('www.foo.com')*. The *set/get(part)* method is the prefered method.

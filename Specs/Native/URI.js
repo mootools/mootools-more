@@ -7,7 +7,7 @@ License:
 */
 (function(){
 
-	var url = 'http://www.test.com:8383/this/is/the/path.html?apple=red#anchor';
+	var url = 'http://www.test.com:8383/this/is/the/path.html?query=value#anchor';
 
 	describe('URL.get(\'host\')', {
 
@@ -20,11 +20,11 @@ License:
 	describe('URL.getData', {
 
 			'should get the query string values from a url': function(){
-				value_of(new URI(url.toString()).getData()['apple']).should_be('red');
+				value_of(new URI(url.toString()).getData()['query']).should_be('value');
 			},
 
 			'should get the query string value from a url': function(){
-				value_of(new URI(url.toString()).getData('apple')).should_be('red');
+				value_of(new URI(url.toString()).getData('query')).should_be('value');
 			}
 
 	});

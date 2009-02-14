@@ -5,7 +5,6 @@ MooTools Plugins and Enhancements Repository
 * Need to add tests for all libs
 * Make the Date Specs pass in all browsers
 * Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
-* author URI docs
 
 ### Decisions/discussions
 * Decide if reworking the whole source of all plugins makes you an author ( :P )
@@ -47,6 +46,7 @@ MooTools Plugins and Enhancements Repository
   - abortAfter and timeout gone. there's now a single timeout for retries and for when retries run out.
   - globalFunction gone, deemed useless
 * Browser.Extras completely refactored into URI Native object
+  - Browser.redraw is gone
 * Class.Binds no longer supports lowercase binds
 * Element.fxOpacityOk (which was never documented or intended for external use) is gone
 * FormValidator base class no longer does what it did (that is now in FormValidator.Inline)
