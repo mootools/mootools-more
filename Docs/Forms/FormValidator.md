@@ -692,5 +692,5 @@ FormValidator Language Localization {#Localization}
 [validation.js by Andrew Tetlaw]: http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
 [Options]: http://docs.mootools.net/Class/Class.Extras#Options
 [Events]: http://docs.mootools.net/Class/Class.Extras#Events
-[send them back to us]: http://www.clientcide.com/shout-out/
+[send them back to us]: http://groups.google.com/group/mootools-lang
 [JSON.decode]: http://docs.mootools.net/Utilities/JSON#decode
