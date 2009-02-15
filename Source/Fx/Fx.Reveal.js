@@ -16,12 +16,12 @@ Fx.Reveal = new Class({
 
 	options: {/*	  
 		onShow: $empty,
-		onHide: $empty,*/
+		onHide: $empty,
+		heightOverride: null,
+		widthOverride: null, */
 		styles: ['padding', 'border', 'margin'],
 		transitionOpacity: !Browser.Engine.trident4,
-		mode: 'vertical',
-		heightOverride: null,
-		widthOverride: null
+		mode: 'vertical'
 	},
 
 	dissolve: function(){
@@ -44,8 +44,6 @@ Fx.Reveal = new Class({
 					}, this);
 					var overflowBefore = this.element.getStyle('overflow');
 					this.element.setStyle('overflow', 'hidden');
-					//put the final fx method at the front of the chain
-					this.$chain = this.$chain || [];
 					this.$chain.unshift(function(){
 						if (this.hidden){
 							this.hiding = false;
@@ -72,7 +70,7 @@ Fx.Reveal = new Class({
 			}
 		} catch(e){
 			this.hiding = false;
-			this.element.hide();
+			this.element.setStyle('display', 'bock');
 			this.callChain.delay(10, this);
 			this.fireEvent('complete', this.element);
 			this.fireEvent('hide', this.element);
@@ -89,46 +87,41 @@ Fx.Reveal = new Class({
 					this.showing = true;
 					this.hiding = false;
 					this.hidden = false;
+					var setToAuto, startStyles;
 					//toggle display, but hide it
-					var before = this.element.getStyles('visibility', 'display', 'position');
-					this.element.setStyles({
-						visibility: 'hidden',
-						display: 'block',
-						position:'absolute'
+					this.element.measure(function(){
+						setToAuto = this.element.style.height === '' || this.element.style.height == 'auto';
+						//create the styles for the opened/visible state
+						startStyles = this.element.getComputedSize({
+							styles: this.options.styles,
+							mode: this.options.mode
+						});
 					});
-					var setToAuto = this.element.style.height === '' || this.element.style.height == 'auto';
-					//enable opacity effects
-					if (this.options.transitionOpacity) this.element.setStyle('opacity', 0);
-					//create the styles for the opened/visible state
-					var startStyles = this.element.getComputedSize({
-						styles: this.options.styles,
-						mode: this.options.mode
-					});
-					//reset the styles back to hidden now
-					this.element.setStyles(before);
 					$each(startStyles, function(style, name){
 						startStyles[name] = style;
-					}, this);
+					});
 					//if we're overridding height/width
 					if ($chk(this.options.heightOverride)) startStyles.height = this.options.heightOverride.toInt();
 					if ($chk(this.options.widthOverride)) startStyles.width = this.options.widthOverride.toInt();
-					if (this.options.transitionOpacity) startStyles.opacity = 1;
+					if (this.options.transitionOpacity) {
+						this.element.setStyle('opacity', 0);
+						startStyles.opacity = 1;
+					}
 					//create the zero state for the beginning of the transition
 					var zero = {
 						height: 0,
 						display: 'block'
 					};
-					$each(startStyles, function(style, name){ zero[name] = 0; }, this);
+					$each(startStyles, function(style, name){ zero[name] = 0; });
 					var overflowBefore = this.element.getStyle('overflow');
 					//set to zero
 					this.element.setStyles($merge(zero, {overflow: 'hidden'}));
 					//start the effect
 					this.start(startStyles);
-					if (!this.$chain) this.$chain = [];
 					this.$chain.unshift(function(){
 						if (!this.options.heightOverride && setToAuto){
 							if (['vertical', 'both'].contains(this.options.mode)) this.element.setStyle('height', 'auto');
-							if (['width", 'both'].contains(this.options.mode)) this.element.setStyle('width', 'auto');
+							if (['width', 'both'].contains(this.options.mode)) this.element.setStyle('width', 'auto');
 						}
 						if (!this.hidden) this.showing = false;
 						this.element.setStyle('overflow', overflowBefore);
@@ -161,16 +154,14 @@ Fx.Reveal = new Class({
 	},
 
 	toggle: function(){
-		try {
-			if (this.element.getStyle('display') == 'none' ||
-				 this.element.getStyle('visiblity') == 'hidden' ||
-				 this.element.getStyle('opacity') == 0){
-				this.reveal();
-			} else {
-				this.dissolve();
-			}
-		} catch(e){ this.show(); }
-	 return this;
+		if (this.element.getStyle('display') == 'none' ||
+			 this.element.getStyle('visiblity') == 'hidden' ||
+			 this.element.getStyle('opacity') == 0){
+			this.reveal();
+		} else {
+			this.dissolve();
+		}
+		return this;
 	}
 
 });
