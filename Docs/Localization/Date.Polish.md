@@ -1,7 +1,7 @@
 Class: Date {#Date}
 =====================================
 
-Contains the messages for [Date.Extras][] in Norwegian. Thanks Espen 'Rexxars' Hovlandsdal for the translation.
+Contains the messages for [Date.Extras][] in Polish. Thanks Oskar Krawczyk for the translation.
 
 ### Usage
 

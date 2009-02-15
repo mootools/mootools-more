@@ -7,8 +7,9 @@ Contains the messages for FormValidator in Norwegian. Thanks Espen 'Rexxars' Hov
 
 Simply change the language property to *NO*.
 
-	FormValidator.language = "NO";
+	MooTools.lang.setLanguage("NO");
 
-See also: [FormValidator][]
+See also: [FormValidator][] and [MooTools.Lang][]
 
-[FormValidator]: http://www.clientcide.com/docs/Forms/FormValidator#FormValidator
+[FormValidator]: http://www.mootools.net/more/docs/Forms/FormValidator#FormValidator
+[MooTools.Lang]: http://www.mootools.net/more/docs/Core/MooTools.Lang

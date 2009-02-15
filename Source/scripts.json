@@ -272,6 +272,12 @@
 			"exclude": true
 		},
 
+		"Date.Polish": {
+			"deps": ["MooTools.Lang"],
+			"desc": "Date messages in Polish (feel free to send in your own translations).",
+			"exclude": true
+		},
+
 		"FormValidator.Arabic": {
 			"deps": ["MooTools.Lang"],
 			"desc": "FormValidator messages in Arabic (feel free to send in your own translations).",
@@ -316,6 +322,12 @@
 		"FormValidator.Norwegian": {
 			"deps": ["MooTools.Lang"],
 			"desc": "FormValidator messages in Norwegian (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"FormValidator.Polish": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in Polish (feel free to send in your own translations).",
 			"exclude": true
 		},
 

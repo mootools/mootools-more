@@ -1,19 +1,13 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Chinese.
+Contains the messages for FormValidator in Polish. Thanks Oskar Krawczyk for the translation.
 
-### Simplified Chinese Usage
+### Usage
 
-Simply change the language property to *cnCHS*.
+Simply change the language property to *PL*.
 
-	MooTools.lang.setLanguage("cnCHS");
-
-### Traditional Chinese Usage
-
-Simply change the language property to *cnCHT*.
-
-	MooTools.lang.setLanguage("cnCHT");
+	FormValidator.language = "PL";
 
 See also: [FormValidator][] and [MooTools.Lang][]
 
