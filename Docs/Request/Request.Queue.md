@@ -246,6 +246,20 @@ Runs the next request in the queue. If the option "autoAdvance" is set to *true*
 
 * *object* - This instance of Request.Queue.
 
+Request.Queue Method: runAll {#Request-Queue:runAll}
+------------------------------------------------------
+
+Runs all queued requests at once.
+
+### Syntax
+
+	myRequestQueue.runAll()
+
+### Returns
+
+* *object* - This instance of Request.Queue.
+
+
 Request.Queue Method: resume {#Request-Queue:resume}
 ------------------------------------------------------
 

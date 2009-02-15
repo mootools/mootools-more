@@ -50,7 +50,7 @@ var Builder = {
 			'Request'   : ['Request.JsonP', 'Request.Queue', 'Request.Timer'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie.js'],
 			'Interface' : ['Accordion', 'Scroller', 'Slider', 'SmoothScroll', 'Sortables', 'Tips'],
-			'Localization':['Date.English.US']
+			'Localization':['Date.English.US', 'Date.Norwegian', 'FormValidator.English', 'FormValidator.French']
 		},
 
 		specs: {

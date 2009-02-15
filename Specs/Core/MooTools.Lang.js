@@ -5,40 +5,20 @@ Script: MooTools.Lang.js
 License:
 	MIT-style license.
 */
-describe('String.stripTags', {
+describe('MooTools.Lang', {
 
-	'should remove all tags from an html string': function(){
-		value_of('<b>test<a>another</a><br><hr/><div>thing</div></b>'.stripTags()).should_be('testanotherthing');
+	'should return english form validator message': function(){
+		value_of(MooTools.lang.get('FormValidator')['required']).should_be('This field is required.');
 	},
-
-	'should leave a string w/o html alone': function(){
-		value_of('i like cookies'.stripTags()).should_be('i like cookies');
-	}
-
-});
-
-describe('String.parseQuery', {
-
-	'should parse a query string to an object': function(){
-		value_of('apple=red&lemon=yellow'.parseQuery().apple).should_be('red');
+	
+	'should cascade through to english': function(){
+		MooTools.lang.setLanguage('gbENG');
+		value_of(MooTools.lang.get('FormValidator')['required']).should_be('This field is required.');
 	},
-
-	'should parse a plain string to an empty object': function(){
-		value_of($H('appleyellow'.parseQuery()).getLength() == 0).should_be_true();
-	}
-
-});
-
-describe('String.cleanQueryString', {
-
-	'should remove empty keys': function(){
-		value_of('a=b&x=y&z=123&e='.cleanQueryString()).should_be('a=b&x=y&z=123');
-	},
-
-	'should remove specified keys': function(){
-		value_of('a=b&x=y&z=123&e='.cleanQueryString(function(set){
-			return !set.split("=")[1].match(/[0-9]/);
-		})).should_be('a=b&x=y&e=');
+	
+	'should return french form validator message': function(){
+		MooTools.lang.setLanguage('FR');
+		value_of(MooTools.lang.get('FormValidator')['required']).should_be('Ce champ est obligatoire.');
 	}
 
 });

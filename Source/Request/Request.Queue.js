@@ -126,6 +126,13 @@ Request.Queue = new Class({
 		}
 		return this;
 	},
+	
+	runAll: function() {
+		this.queue.each(function(q) {
+			q();
+		});
+		return this;
+	},
 
 	clear: function(name){
 		if (!name){
