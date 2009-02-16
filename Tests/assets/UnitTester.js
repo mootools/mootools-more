@@ -275,11 +275,11 @@ var UnitTester = new Class({
 		var base = chunks[0];
 		var dir = chunks[1];
 		chunks.splice(chunks.indexOf(base), 1);
-		chunks.erase(dir);
+		if (chunks.contains(dir) >= 0) chunks.splice(chunks.indexOf(dir), 1);
 		var script = chunks[0];
 		var file = chunks.join('.');
 		var name = base+': '+dir+' &raquo; '+file;
-		var filePath = this.testScripts[base]+'/'+dir+'/'+file;
+		var filePath = this.testScripts[base]+dir+'/'+file;
 		return {
 			filePath: filePath,
 			script: script,
