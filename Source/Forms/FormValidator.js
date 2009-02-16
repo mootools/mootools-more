@@ -81,7 +81,11 @@ var FormValidator = new Class({
 
 	Binds: ['onSubmit'],
 
-	options: {
+	options: {/*
+		onFormValidate: function(isValid, form, event){},
+		onElementValidate: function(isValid, field, className, warn){},
+		onElementPass: function(field){},
+		onElementFail: function(field, validatorsFailed){} */
 		fieldSelectors:"input, select, textarea",
 		ignoreHidden: true,
 		useTitles:false,
@@ -91,33 +95,29 @@ var FormValidator = new Class({
 		serial: true,
 		stopOnFailure: true,
 		warningPrefix: function(){
-			return FormValidator.resources[FormValidator.language].warningPrefix || 'Warning: ';
+			return FormValidator.lang.warningPrefix || 'Warning: ';
 		},
 		errorPrefix: function(){
-			return FormValidator.resources[FormValidator.language].errorPrefix || 'Error: ';
+			return FormValidator.lang.errorPrefix || 'Error: ';
 		}
-//		onFormValidate: function(isValid, form, event){},
-//		onElementValidate: function(isValid, field, className, warn){},
-//		onElementPass: function(field){},
-//		onElementFail: function(field, validatorsFailed){}
 	},
 
 	initialize: function(form, options){
 		this.setOptions(options);
 		this.element = $(form);
-		$(this).store('validator', this);
+		this.element.store('validator', this);
 		this.warningPrefix = $lambda(this.options.warningPrefix)();
 		this.errorPrefix = $lambda(this.options.errorPrefix)();
-		if (this.options.evaluateOnSubmit) $(this).addEvent('submit', this.onSubmit);
+		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this.onSubmit);
 		if (this.options.evaluateFieldsOnBlur) this.watchFields();
 	},
 
 	toElement: function(){
-		return this.form;
+		return this.element;
 	},
 
 	getFields: function(){
-		return this.fields = $(this).getElements(this.options.fieldSelectors);
+		return this.fields = this.element.getElements(this.options.fieldSelectors);
 	},
 
 	watchFields: function(){
@@ -142,7 +142,7 @@ var FormValidator = new Class({
 		var result = this.getFields().map(function(field){
 			return this.validateField(field, true);
 		}, this).every(function(v){ return v;});
-		this.fireEvent('onFormValidate', [result, $(this), event]);
+		this.fireEvent('onFormValidate', [result, this.element, event]);
 		if (this.options.stopOnFailure && !result && event) event.preventDefault();
 		return result;
 	},
@@ -153,8 +153,8 @@ var FormValidator = new Class({
 		var passed = !field.hasClass('validation-failed');
 		var failed, warned;
 		if (this.options.serial && !force){
-			failed = $(this).getElement('.validation-failed');
-			warned = $(this).getElement('.warning');
+			failed = this.element.getElement('.validation-failed');
+			warned = this.element.getElement('.warning');
 		}
 		if (field && (!failed || force || field.hasClass('validation-failed') || (failed && !this.options.serial))){
 			var validators = field.className.split(" ").some(function(cn){
@@ -162,7 +162,7 @@ var FormValidator = new Class({
 			}, this);
 			var validatorsFailed = [];
 			field.className.split(" ").each(function(className){
-				if (!this.test(className,field)) validatorsFailed.include(className);
+				if (className && !this.test(className, field)) validatorsFailed.include(className);
 			}, this);
 			passed = validatorsFailed.length === 0;
 			if (validators && !field.hasClass('warnOnly')){
@@ -192,12 +192,12 @@ var FormValidator = new Class({
 	},
 
 	test: function(className, field, warn){
+		var validator = this.getValidator(className);
 		field = $(field);
 		if (field.hasClass('ignoreValidation')) return true;
 		warn = $pick(warn, false);
 		if (field.hasClass('warnOnly')) warn = true;
-		var validator = this.getValidator(className);
-		var isValid = validator.test(field);
+		var isValid = validator ? validator.test(field) : true;
 		if (validator && this.isVisible(field)) this.fireEvent('onElementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;

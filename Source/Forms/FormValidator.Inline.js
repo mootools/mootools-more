@@ -28,11 +28,12 @@ FormValidator.Inline = new Class({
 			var validator = this.getValidator(className);
 			if (!isValid && validator.getError(field)){
 				if (warn) field.addClass('warning');
-				else this.hideAdvice(className, field);
+				var advice = this.makeAdvice(className, field, validator.getError(field), warn);
+				this.insertAdvice(advice, field);
+				this.showAdvice(className, field);
+			} else {
+				this.hideAdvice(className, field);
 			}
-			var advice = this.makeAdvice(className, field, validator.getError(field), warn);
-			this.insertAdvice(advice, field);
-			this.showAdvice(className, field);
 		});
 	},
 

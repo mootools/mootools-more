@@ -306,7 +306,7 @@
 			"exclude": true
 		},
 
-		"FormValidator.English.US": {
+		"FormValidator.English": {
 			"deps": ["MooTools.Lang"],
 			"desc": "FormValidator messages in English (feel free to send in your own translations)."
 		},
