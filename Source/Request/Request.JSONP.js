@@ -49,8 +49,7 @@ Request.JSONP = new Class({
 		var type = $type(options), old = this.options, index = $chk(arguments[1]) ? arguments[1] : this.requests++;
 		if (type == 'string' || type == 'element') options = {data: options};
 		
-		options = $extend({data: old.data, url: old.url}, options);				
-		var url = this.prepareUrl(options);
+		options = $extend({data: old.data, url: old.url}, options);
 		
 		if (!$chk(this.triesRemaining[index])) this.triesRemaining[index] = this.options.retries;
 		var remaining = this.triesRemaining[index];
@@ -85,7 +84,7 @@ Request.JSONP = new Class({
 	},
  	
 	getScript: function(options){
-		var options = options || this.options, index = Request.JSONP.requests.length, data;
+		var options = this.options, index = Request.JSONP.requests.length, data;
 		
 		switch ($type(options.data)){
 			case 'element': data = $(options.data).toQueryString(); break;
@@ -94,7 +93,11 @@ Request.JSONP = new Class({
 		
 		var script = new Element('script', {
 			type: 'text/javascript',
-			src: options.url + (options.url.test('\\?') ? '&' :'?') + options.callBackKey + "=Request.JSONP.requests["+ index +"].success&" + data
+			src: options.url + 
+				 (options.url.test('\\?') ? '&' :'?') + 
+				 (options.callBackKey || this.options.callBackKey) + 
+				 "=Request.JSONP.requests["+ index +"]" + 
+				 (data ? '&' + data : '')
 		}).inject(this.options.injectScript);
 		
 		Request.JSONP.requests.push(function(data){ this.success(data, script); }.bind(this));
@@ -111,9 +114,11 @@ Request.JSONP = new Class({
 
 });
 
+Request.JSONP.requests = [];
+
 $extend(MooTools, {
 	logged: [],
 	log: function(){
-		logged.push(arguments);
+		MooTools.logged.push(arguments);
 	}
 });
