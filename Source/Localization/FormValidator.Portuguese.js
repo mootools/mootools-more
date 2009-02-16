@@ -24,6 +24,7 @@ MooTools.lang.set('POR', 'FormValidator', {
 	oneRequired:'Digite algo para pelo menos um desses insumos.',
 	errorPrefix: 'Erro: ',
 	warningPrefix: 'Aviso: '
+
 }).set('POR', 'Date', {
 	dateOrder: ['date', 'month', 'year', '/']
 });

@@ -77,7 +77,7 @@ Element.Properties.validatorProps = {
 
 var FormValidator = new Class({
 
-	Implements:[Options, Events, Class.ToElement],
+	Implements:[Options, Events],
 
 	Binds: ['onSubmit'],
 
@@ -113,7 +113,7 @@ var FormValidator = new Class({
 	},
 
 	toElement: function(){
-		return $(this);
+		return this.form;
 	},
 
 	getFields: function(){

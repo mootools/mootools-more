@@ -99,8 +99,12 @@
 	"Forms": {
 
 		"FormValidator": {
-			"deps": ["Class.Extras", "Class.Binds", "Class.ToElement", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
-			"optional": ["Fx.Reveal"],
+			"deps": ["Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
+			"desc": "A css-class based form validation system."
+		},
+
+		"FormValidator.Inline": {
+			"deps": ["FormValidator"],
 			"desc": "A css-class based form validation system."
 		},
 
@@ -153,7 +157,7 @@
 	"Drag": {
 
 		"Drag": {
-			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Class.ToElement"],
+			"deps": ["Class.Extras", "Element.Event", "Element.Style"],
 			"desc": "The base Drag Class. Can be used to drag and resize Elements using mouse events."
 		},
 
@@ -241,7 +245,7 @@
 		},
 
 		"Tips": {
-			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions", "Class.ToElement"],
+			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
 		}
 

@@ -8,6 +8,7 @@ Script: FormValidator.French.js
 */
 
 MooTools.lang.set('FR', 'FormValidator', {
+
 	required:'Ce champ est obligatoire.',
 	minLength:'S\'il vous vous plat crivez au moins {minLength} caractres (vous avez crit {length} caractres).',
 	maxLength:'S\'il vous vous plat n\'crivez pas plus de {maxLength} caractres (vous avez crit {length} caractres).',
@@ -24,4 +25,5 @@ MooTools.lang.set('FR', 'FormValidator', {
 	oneRequired:'S\'il vous vous plat slectionnez au moins une de ces options.',
 	errorPrefix: 'Erreur: ',
 	warningPrefix: 'Attention: '
+
 });

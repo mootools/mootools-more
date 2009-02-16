@@ -54,3 +54,4 @@ MooTools Plugins and Enhancements Repository
   - .showTxt > .show, .hideTxt > .hide
   - .hide and .show no longer take the element and 'focus' arguments.
   - .repositionAll is gone; .repositionOverTxt is now just .reposition; it does not take an argument
+* Element.setPosition is now Element.position

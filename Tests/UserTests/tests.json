@@ -5,6 +5,10 @@
 	"Class": {
 		"Chain.Wait":['all']
 	},
+	"Drag": {
+		"Drag":['all'],
+		"Drag.Move":['all']
+	},
 	"Element":{
 		"Element.Forms":['all'],
 		"Element.Shortcuts":['all'],
