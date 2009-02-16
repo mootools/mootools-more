@@ -2,11 +2,13 @@
 Script: FormValidator.French.js
   FormValidator messages in French.
 
-Author: 
-  Nicolas Sorosac <nicolas.sorosac@gmail.com>
+	License:
+		MIT-style license.
 
-License:
-  http://www.clientcide.com/wiki/cnet-libraries#license
+	Authors: 
+		Miquel Hudin
+		Nicolas Sorosac <nicolas <dot> sorosac <at> gmail <dot> com>
+
 */
  
 MooTools.lang.set('FR', 'FormValidator', {
