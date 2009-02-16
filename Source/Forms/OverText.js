@@ -35,8 +35,10 @@ var OverText = new Class({
 
 	initialize: function(element, options){
 		this.element = $(element);
+		dbug.log(this.element);
 		if (this.occlude()) return this.occluded;
 		this.setOptions(options);
+		this.attach(this.element);
 		OverText.instances.push(this);
 		if (this.options.poll) this.poll();
 	},
@@ -64,7 +66,7 @@ var OverText = new Class({
 			blur: this.test,
 			change: this.test
 		}).store('OverTextDiv', this.text);
-		window.addEvent('resize', this.reposition.bind(this));hide
+		window.addEvent('resize', this.reposition.bind(this));
 		this.test();
 		this.reposition();
 	},
@@ -120,8 +122,8 @@ var OverText = new Class({
 
 	test: function(){
 		var v = this.element.get('value');
-		this[v ? 'show' : 'hide']();
-		return v;
+		this[v ? 'hide' : 'show']();
+		return !v;
 	},
 
 	reposition: function(){

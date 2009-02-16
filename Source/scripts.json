@@ -114,7 +114,7 @@
 		},
 
 		"OverText": {
-			"deps": ["Class.Extras", "Element.Event", "Element.Position", "Element.Shortcuts"],
+			"deps": ["Class.Extras", "Element.Event", "Class.Binds", "Class.Occlude", "Element.Position", "Element.Shortcuts"],
 			"desc": "Displays text over empty inputs until the user focuses the input or adds information."
 		}
 
