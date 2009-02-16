@@ -57,7 +57,7 @@ Request.Queue = new Class({
 		['request', 'complete', 'cancel', 'success', 'failure', 'exception'].each(function(evt){
 			if(!this.reqBinders[name]) this.reqBinders[name] = {};
 			this.reqBinders[name][evt] = function(){
-				this[evt].apply(this, [name, req].extend(arguments));
+				this['on' + evt.capitalize()].apply(this, [name, req].extend(arguments));
 			}.bind(this);
 			req.addEvent(evt, this.reqBinders[name][evt]);
 		}, this);
