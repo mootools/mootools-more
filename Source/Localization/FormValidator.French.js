@@ -27,7 +27,7 @@ MooTools.lang.set('FR', 'FormValidator', {
   currencyDollar:'Veuillez saisir une quantit&eacute; correcte. Par example 100,00&euro;.',
   oneRequired:'Veuillez s&eacute;lectionner au moins une de ces options.',
   errorPrefix: 'Erreur : ',
-  warningPrefix: 'Attention : '
+  warningPrefix: 'Attention : ',
   
   //FormValidator.Extras
  
