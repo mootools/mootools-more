@@ -1,7 +1,4 @@
 {
-	"Core":{
-		"dbug":['all']
-	},
 	"Class": {
 		"Chain.Wait":['all']
 	},
