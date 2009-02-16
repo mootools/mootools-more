@@ -96,7 +96,7 @@ Fx.Reveal = new Class({
 							styles: this.options.styles,
 							mode: this.options.mode
 						});
-					});
+					}.bind(this));
 					$each(startStyles, function(style, name){
 						startStyles[name] = style;
 					});

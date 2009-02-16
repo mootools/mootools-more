@@ -32,7 +32,7 @@
 		{
 			title: "Element::dissolve",
 			description: "Tests the Element.dissolve method, showing the object smoothly.",
-			verify: "Did the element appear smoothly?",
+			verify: "Did the element hide smoothly?",
 			before: function(){$("foo").show();},
 			post: function(){
 				$('foo').show.delay(1200, $('foo'));
