@@ -5,6 +5,9 @@ Script: Date.English.GB.js
 	License:
 		MIT-style license.
 
+	Authors:
+		Aaron Newton
+
 */
 
 MooTools.lang.set('gbENG', 'Date', {

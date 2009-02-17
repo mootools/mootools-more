@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Russian.js
-	FormValidator messages in Russian (utf-8 and cp1251). Thanks Chernodarov Egor.
+	FormValidator messages in Russian (utf-8 and cp1251).
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Chernodarov Egor
 
 */
 

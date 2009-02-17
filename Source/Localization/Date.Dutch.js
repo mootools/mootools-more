@@ -1,9 +1,12 @@
 /*
 Script: Date.Dutch.js
-	Date messages in Dutch. Thanks Lennart Pilon.
+	Date messages in Dutch.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Lennart Pilon
 
 */
 

@@ -5,6 +5,9 @@ Script: FormValidator.Chinese.js
 	License:
 		MIT-style license.
 
+	Authors:
+		陈桂军 - guidy <at> ixuer [dot] net
+
 In Chinese:
 ------------
 需要指出的是：

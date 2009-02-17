@@ -1,9 +1,12 @@
 /*
 Script: Date.Norwegian.js
-       Date messages in Norwegian. Thanks Espen 'Rexxars' Hovlandsdal.
+       Date messages in Norwegian.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Espen 'Rexxars' Hovlandsdal
 
 */
 

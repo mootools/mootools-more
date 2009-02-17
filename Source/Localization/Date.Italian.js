@@ -1,10 +1,14 @@
 /*
 Script: Date.Italian.js
-  Date messages for Italian. Thanks Andrea Novero
- 
-  License:
-    MIT-style license.
- 
+	Date messages for Italian.
+
+	License:
+    	MIT-style license.
+
+	Authors:
+		Andrea Novero
+		Valerio Proietti
+
 */
  
 MooTools.lang.set('IT', 'Date', {
@@ -23,19 +27,19 @@ MooTools.lang.set('IT', 'Date', {
     return '&ordm;';
   },
  
-  lessThanMinuteAgo: 'meno di un minuto fa',
-  minuteAgo: 'circa un minuto fa',
-  minutesAgo: '{delta} minuti fa',
-  hourAgo: 'circa un\'ora fa',
-  hoursAgo: 'circa {delta} ore fa',
-  dayAgo: '1 giorno fa',
-  daysAgo: '{delta} giorni fa',
-  lessThanMinuteUntil: 'meno di un minuto da adesso',
-  minuteUntil: 'circa un minuto da adesso',
-  minutesUntil: '{delta} minuti da adesso',
-  hourUntil: 'circa un\'ora da adesso',
-  hoursUntil: 'circa {delta} ore da adesso',
-  dayUntil: '1 giorno da adesso',
-  daysUntil: '{delta} giorni da adesso'
+	lessThanMinuteAgo: 'meno di un minuto fa',
+	minuteAgo: 'circa un minuto fa',
+	minutesAgo: 'circa {delta} minuti fa',
+	hourAgo: 'circa un\'ora fa',
+	hoursAgo: 'circa {delta} ore fa',
+	dayAgo: 'circa 1 giorno fa',
+	daysAgo: 'circa {delta} giorni fa',
+	lessThanMinuteUntil: 'tra meno di un minuto',
+	minuteUntil: 'tra circa un minuto',
+	minutesUntil: 'tra circa {delta} minuti',
+	hourUntil: 'tra circa un\'ora',
+	hoursUntil: 'tra circa {delta} ore',
+	dayUntil: 'tra circa un giorno',
+	daysUntil: 'tra circa {delta} giorni'
  
 });

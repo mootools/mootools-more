@@ -9,7 +9,7 @@ Simply change the language property to *NL*.
 
 	MooTools.lang.setLanguage("NL");
 
-See also: [FormValidator][] and [MooTools.Lang][]
+See also: [Date.Extras][] and [MooTools.Lang][]
 
 [FormValidator]: http://www.mootools.net/more/docs/Forms/FormValidator#FormValidator
 [Date.Extras]: http://www.mootools.net/more/docs/Native/Date.Extras

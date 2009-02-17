@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Italian.js
-	FormValidator messages in Italian. Thanks Leonardo Laureti.
+	FormValidator messages in Italian.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Leonardo Laureti
 
 */
 

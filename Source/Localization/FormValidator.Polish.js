@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Polish.js
-	Date messages for Polish. Thanks Oskar Krawczyk.
+	Date messages for Polish.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Oskar Krawczyk
 
 */
 

@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Portuguese.js
-	FormValidator messages in Portuguese. Thanks Miquel Hudin.
+	FormValidator messages in Portuguese.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Miquel Hudin
 
 */
 

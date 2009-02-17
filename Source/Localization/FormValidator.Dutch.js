@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Dutch.js
-	FormValidator messages in Dutch. Thanks Lennart Pilon.
+	FormValidator messages in Dutch.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Lennart Pilon
 
 */
 

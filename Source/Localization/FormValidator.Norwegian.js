@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Norwegian.js
-	FormValidator messages in Norwegian. Thanks Espen 'Rexxars' Hovlandsdal.
+	FormValidator messages in Norwegian.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Espen 'Rexxars' Hovlandsdal
 
 */
 

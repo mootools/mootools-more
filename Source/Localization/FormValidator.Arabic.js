@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Arabic.js
-	FormValidator messages in Arabic. Thanks Chafik Barbar.
+	FormValidator messages in Arabic.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Chafik Barbar
 
 */
 

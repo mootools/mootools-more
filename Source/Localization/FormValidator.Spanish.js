@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Spanish.js
-	FormValidator messages in Spanish. Thanks Miquel Hudin.
+	FormValidator messages in Spanish.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Miquel Hudin
 
 */
 

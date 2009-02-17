@@ -7,9 +7,9 @@ Contains the messages for [Date.Extras][] in Norwegian. Thanks Espen 'Rexxars' H
 
 Simply change the language property to *NO*.
 
-	Date.$language = "NO";
+	MooTools.lang.setLanguage("NO");
 
-See also: [FormValidator][]
+See also: [Date.Extras][] and [MooTools.Lang][]
 
 [FormValidator]: http://www.mootools.net/more/docs/Forms/FormValidator#FormValidator
 [Date.Extras]: http://www.mootools.net/more/docs/Native/Date.Extras

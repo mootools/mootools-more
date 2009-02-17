@@ -1,9 +1,12 @@
 /*
 Script: FormValidator.Catalan.js
-	FormValidator messages in Catalan. Thanks Miquel Hudin.
+	FormValidator messages in Catalan.
 
 	License:
 		MIT-style license.
+
+	Authors:
+		Miquel Hudin
 
 */
 

@@ -1,13 +1,13 @@
 Class: Date {#Date}
 =====================================
 
-Contains the messages for [Date.Extras][] in Polish. Thanks Oskar Krawczyk for the translation.
+Contains the messages for [Date.Extras][] in English specific to the US.
 
 ### Usage
 
-Simply change the language property to *PL*.
+Simply change the language property to *usENG*.
 
-	MooTools.lang.setLanguage("PL");
+	MooTools.lang.setLanguage("usENG");
 
 See also: [Date.Extras][] and [MooTools.Lang][]
 
