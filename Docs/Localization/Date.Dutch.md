@@ -1,7 +1,11 @@
 Class: Date {#Date}
 =====================================
 
-Contains the messages for [Date.Extras][] in Dutch. Thanks Lennart Pilon for the translation.
+Contains the messages for [Date.Extras][] in Dutch.
+
+### Authors
+
+* Lennart Pilon
 
 ### Usage
 

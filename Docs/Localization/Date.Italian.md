@@ -3,6 +3,11 @@ Class: Date {#Date}
 
 Contains the messages for [Date.Extras][] in Italian.
 
+### Authors
+
+* Andrea Novero
+* Valerio Proietti
+
 ### Usage
 
 Simply change the language property to *IT*.

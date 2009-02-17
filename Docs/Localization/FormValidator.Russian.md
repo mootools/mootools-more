@@ -1,7 +1,11 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Russian. Thanks Chernodarov Egor for the translations.
+Contains the messages for FormValidator in Russian.
+
+### Authors
+
+* Chernodarov Egor
 
 ### Usage
 

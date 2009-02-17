@@ -1,7 +1,11 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in French. Thanks Miquel Hudin for the translation.
+Contains the messages for FormValidator in French.
+
+### Authors
+
+* Miquel Hudin
 
 ### Usage
 

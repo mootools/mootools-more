@@ -3,6 +3,10 @@ Class: FormValidator {#FormValidator}
 
 Contains the messages for FormValidator in English.
 
+### Authors
+
+* Aaron Newton
+
 ### Usage
 
 Simply change the language property to *usENG*.

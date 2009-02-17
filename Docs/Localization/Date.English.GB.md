@@ -3,6 +3,10 @@ Class: Date {#Date}
 
 Contains the messages for [Date.Extras][] in English specific to the UK.
 
+### Authors
+
+* Aaron Newton
+
 ### Usage
 
 Simply change the language property to *gbENG*.

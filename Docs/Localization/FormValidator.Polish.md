@@ -1,7 +1,11 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Polish. Thanks Oskar Krawczyk for the translation.
+Contains the messages for FormValidator in Polish.
+
+### Authors
+
+* Oskar Krawczyk
 
 ### Usage
 

@@ -1,7 +1,11 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Dutch. Thanks Lennart Pilon for the translation.
+Contains the messages for FormValidator in Dutch.
+
+### Authors
+
+* Lennart Pilon
 
 ### Usage
 

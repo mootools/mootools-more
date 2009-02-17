@@ -1,7 +1,11 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Catalan. Thanks Miquel Hudin for the translation.
+Contains the messages for FormValidator in Catalan.
+
+### Authors
+
+* Miquel Hudin
 
 ### Usage
 

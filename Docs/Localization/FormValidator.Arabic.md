@@ -1,7 +1,11 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Arabic. Thanks Chafik Barbar for the translation.
+Contains the messages for FormValidator in Arabic.
+
+### Authors
+
+* Chafik Barbar
 
 ### Usage
 

@@ -1,7 +1,11 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Italian. Thanks Leonardo Laureti for the translation.
+Contains the messages for FormValidator in Italian.
+
+### Authors
+
+* Leonardo Laureti
 
 ### Usage
 
