@@ -4,7 +4,7 @@
 	},
 	"Drag": {
 		"Drag":['all'],
-		"Drag.Move":['all']
+		"Drag.Move":['basic', 'container']
 	},
 	"Element":{
 		"Element.Forms":['all'],

@@ -40,7 +40,7 @@ Drag.Move = new Class({
 
 	start: function(event){
 		if (this.container){
-			var ccoo = cont.getCoordinates(this.element.offsetParent), cps = {}, ems = {};
+			var ccoo = this.container.getCoordinates(this.element.offsetParent), cps = {}, ems = {};
 
 			['top', 'right', 'bottom', 'left'].each(function(pad){
 				cps[pad] = this.container.getStyle('padding-' + pad).toInt();
