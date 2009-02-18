@@ -18,6 +18,7 @@
 		"OverText": ['all']
 	},
 	"Fx": {
+		"Fx.Elements":['all'],
 		"Fx.Move":['all'],
 		"Fx.Reveal":['all'],
 		"Fx.Sort":['all']
