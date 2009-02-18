@@ -87,7 +87,7 @@ Request.Queue = new Class({
 	},
 
 	isRunning: function(){
-		return !!this.getRunning().length;
+		return !!this.getRunning().getKeys().length;
 	},
 
 	send: function(name, options){
@@ -96,7 +96,7 @@ Request.Queue = new Class({
 			this.queue.erase(q);
 		}.bind(this);
 		q.name = name;
-		if (this.getRunning().length >= this.options.concurrent || (this.error && this.options.stopOnFailure)) this.queue.push(q);
+		if (this.getRunning().getKeys().length >= this.options.concurrent || (this.error && this.options.stopOnFailure)) this.queue.push(q);
 		else q();
 		return this;
 	},
@@ -107,7 +107,7 @@ Request.Queue = new Class({
 
 	resume: function(){
 		this.error = false;
-		(this.options.concurrent - this.getRunning().length).times(this.runNext, this);
+		(this.options.concurrent - this.getRunning().getKeys().length).times(this.runNext, this);
 		return this;
 	},
 

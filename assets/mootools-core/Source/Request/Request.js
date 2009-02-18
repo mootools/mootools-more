@@ -138,7 +138,6 @@ var Request = new Class({
 
 		if (data && method == 'get'){
 			url = url + (url.contains('?') ? '&' : '?') + data;
-			dbug.log('method is get, url is: ', url);
 			data = null;
 		}
 
