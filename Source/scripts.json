@@ -127,6 +127,11 @@
 			"desc": "Effect to change any number of CSS properties of any number of Elements."
 		},
 
+		"Fx.Accordion": {
+			"deps": ["Fx.Elements", "Element.Event"],
+			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
+		},
+
 		"Fx.Move": {
 			"deps": ["Fx.Morph", "Element.Position"],
 			"desc": "Moves an element to another location (relative to another element) with a transition."
@@ -145,6 +150,11 @@
 		"Fx.Slide": {
 			"deps": ["Fx", "Element.Style"],
 			"desc": "Effect to slide an element in and out of view."
+		},
+
+		"Fx.SmoothScroll": {
+			"deps": ["Fx.Scroll"],
+			"desc": "Class for creating a smooth scrolling effect to all internal links on the page."
 		},
 
 		"Fx.Sort": {
@@ -218,11 +228,6 @@
 
 	"Interface": {
 
-		"Accordion": {
-			"deps": ["Fx.Elements", "Element.Event"],
-			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
-		},
-
 		"Scroller": {
 			"deps": ["Class.Extras", "Element.Event", "Element.Dimensions"],
 			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
@@ -232,11 +237,6 @@
 		"Slider": {
 			"deps": ["Drag", "Element.Dimensions"],
 			"desc": "Class for creating horizontal and vertical slider controls."
-		},
-
-		"SmoothScroll": {
-			"deps": ["Fx.Scroll"],
-			"desc": "Class for creating a smooth scrolling effect to all internal links on the page."
 		},
 
 		"Sortables": {

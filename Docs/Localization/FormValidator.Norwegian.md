@@ -1,7 +1,7 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Norwegian.
+Contains the messages for [FormValidator][] in Norwegian.
 
 ### Authors
 

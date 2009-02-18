@@ -1,7 +1,7 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Catalan.
+Contains the messages for [FormValidator][] in Catalan.
 
 ### Authors
 

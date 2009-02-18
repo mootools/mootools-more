@@ -1,5 +1,5 @@
 /*
-Script: SmoothScroll.js
+Script: Fx.SmoothScroll.js
 	Class for creating a smooth scrolling effect to all internal links on the page.
 
 	License:
@@ -9,7 +9,7 @@ Script: SmoothScroll.js
 		Valerio Proietti
 */
 
-var SmoothScroll = new Class({
+var Fx.SmoothScroll = new Class({
 
 	Extends: Fx.Scroll,
 

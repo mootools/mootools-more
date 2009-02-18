@@ -46,10 +46,10 @@ var Builder = {
 			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras', 'URI'],
 			'Element'	: ['Element.Forms', 'Element.Measure'],
 			'Drag'      : ['Drag', 'Drag.Move'],
-			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements'],
+			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements', 'Fx.Accordion', 'Fx.SmoothScroll'],
 			'Request'   : ['Request.JsonP', 'Request.Queue', 'Request.Timer'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie.js'],
-			'Interface' : ['Accordion', 'Scroller', 'Slider', 'SmoothScroll', 'Sortables', 'Tips'],
+			'Interface' : ['Scroller', 'Slider', 'Sortables', 'Tips'],
 			'Localization':['Date.English.US', 'Date.Norwegian', 'FormValidator.English', 'FormValidator.French']
 		},
 

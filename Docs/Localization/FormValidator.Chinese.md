@@ -1,7 +1,7 @@
 Class: FormValidator {#FormValidator}
 =====================================
 
-Contains the messages for FormValidator in Chinese.
+Contains the messages for [FormValidator][] in Chinese.
 
 ### Simplified Chinese Usage
 

@@ -21,6 +21,8 @@
 		"Fx.Elements":['all'],
 		"Fx.Move":['all'],
 		"Fx.Reveal":['all'],
+		"Fx.Scroll":['all'],
+		"Fx.Slide":['all'],
 		"Fx.Sort":['all']
 	},
 	"Request":{

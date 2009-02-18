@@ -16,7 +16,7 @@ var URI = new Native({
 
 	initialize: function(uri){
 		this.value = uri || document.location.href || '';
-		this.length = uri.length;
+		this.assertLength();
 	}
 
 });
@@ -29,6 +29,10 @@ URI.prototype = new String;
 	var parts = ['full', 'protocol', 'domain', 'port', 'path', 'query', 'fragment'];
 
 	URI.implement({
+
+		assertLength: function(){
+			if (this.length != this.value.length) this.length = this.value.length;
+		}
 
 		toString: function(){
 			return this.value;
@@ -66,6 +70,7 @@ URI.prototype = new String;
 			if (bits.query) result += '?' + bits.query;
 			if (bits.fragment) result += '#' + bits.fragment;
 			this.value = result;
+			this.assertLength();
 			return this;
 		},
 

@@ -25,6 +25,10 @@ MooTools Plugins and Enhancements Repository
 
 * Tips
   - options:offsets in Tips renamed to offset
+* Accorion
+  - renamed to Fx.Accordion
+* SmoothScroll
+  - renamed to Fx.SmoothScroll
 
 ### Breaking Changes from Clientcide
 
