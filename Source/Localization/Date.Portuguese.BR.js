@@ -12,13 +12,17 @@ Script: Date.Portuguese.BR.js
 
 MooTools.lang.set('brPOR', 'Date', {
 
-	months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-	days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+	months: function(i) {
+		return ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'][i];
+	},
+	days: function(i) {
+		return ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'][i];
+	},
 	//culture's date order: DD/MM/YYYY
-	dateOrder: ['data', 'mês', 'ano', '/'],
+	dateOrder: ['date', 'month', 'year', '/'],
 
 	/* Date.Extras */
-	getOrdinal: function(dayOfMonth){
+	ordinal: function(dayOfMonth){
 		//1º, 2º, 3º, etc.
     	return '&ordm;';
 	},
@@ -36,8 +40,6 @@ MooTools.lang.set('brPOR', 'Date', {
 	hourUntil: 'em uma hora',
 	hoursUntil: 'em {delta} horas',
 	dayUntil: 'em 1 dia',
-	daysUntil: 'em {delta} dias',
-	
-	cascades: ['usENG']
+	daysUntil: 'em {delta} dias'
 
 });

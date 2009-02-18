@@ -270,6 +270,12 @@
 			"desc": "Date messages in English (with conventions for the US) (feel free to send in your own translations).",
 		},
 
+		"Date.Italian": {
+			"deps": ["MooTools.Lang"],
+			"desc": "Date messages in Italian (feel free to send in your own translations).",
+			"exclude": true
+		},
+
 		"Date.Norwegian": {
 			"deps": ["MooTools.Lang"],
 			"desc": "Date messages in Norwegian (feel free to send in your own translations).",
@@ -279,6 +285,12 @@
 		"Date.Polish": {
 			"deps": ["MooTools.Lang"],
 			"desc": "Date messages in Polish (feel free to send in your own translations).",
+			"exclude": true
+		},
+
+		"Date.Portuguese.BR": {
+			"deps": ["MooTools.Lang"],
+			"desc": "Date messages in Portuguese for Brazil (feel free to send in your own translations).",
 			"exclude": true
 		},
 

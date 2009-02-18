@@ -251,11 +251,11 @@ describe('Date.getWeek', {
 
 	'should return the week of the year of a Date instance': function(){
 		var d = new Date(2000, 0, 1, 1, 1, 1);
-    value_of(d.get('week')).should_be(1);
+		value_of(d.get('week')).should_be(1);
 		d.increment('day', 7 * 10 + 1);
-    value_of(d.get('week')).should_be(11);
+		value_of(d.get('week')).should_be(11);
 		d.increment('week', 42);
-    value_of(d.get('week')).should_be(1);
+		value_of(d.get('week')).should_be(1);
 	}
 
 });
@@ -264,16 +264,16 @@ describe('Date.format', {
 
 	'should format a Date instance as a string': function(){
 		var d = new Date('Thu Nov 20 1997 01:02:03');
-		value_of(d.format('%a')).should_be(Date.lang.days[4].substr(0,3));
+		value_of(d.format('%a')).should_be(Date.lang.get('days', 4).substr(0,3));
 		value_of(d.format('%a')).should_be('Thu');
 
-		value_of(d.format('%A')).should_be(Date.lang.days[4]);
+		value_of(d.format('%A')).should_be(Date.lang.get('days', 4));
 		value_of(d.format('%A')).should_be('Thursday');
 
-		value_of(d.format('%b')).should_be(Date.lang.months[10].substr(0,3));
+		value_of(d.format('%b')).should_be(Date.lang.get('months', 10).substr(0,3));
 		value_of(d.format('%b')).should_be('Nov');
 
-		value_of(d.format('%B')).should_be(Date.lang.months[10]);
+		value_of(d.format('%B')).should_be(Date.lang.get('months', 10));
 		value_of(d.format('%B')).should_be('November');
 
     //value_of(d.format('%c')).should_be('Thu Nov 20 1997 01:02:03 GMT+0000 (GMT Standard Time)');

@@ -103,7 +103,7 @@ Date.Extras Language Localization {#Localization}
 
 *Date.Extras.js* includes the following key/values for localization.
 
-* getOrdinal - (*function*) A method that returns the proper ordinal ("th", "st", "nd", etc) given a day of the month.
+* ordinal - (*function*) A method that returns the proper ordinal ("th", "st", "nd", etc) given a day of the month.
 * lessThanMinuteAgo - (*string*) 'less than a minute ago'
 * minuteAgo - (*string*) 'about a minute ago'
 * minutesAgo - (*string*) '{delta} minutes ago' where {delta} is the number of minutes

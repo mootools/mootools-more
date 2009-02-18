@@ -13,20 +13,24 @@ Script: Date.Italian.js
  
 MooTools.lang.set('IT', 'Date', {
  
-  months: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
-  days: ['Domenica', 'Luned&igrave;', 'Marted&igrave;', 'Mercoled&igrave;', 'Gioved&igrave;', 'Venerd&igrave;', 'Sabato'],
-  //culture's date order: DD/MM/YYYY
-  dateOrder: ['date', 'month', 'year', '/'],
-  AM: 'AM',
-  PM: 'PM',
- 
-  /* Date.Extras */
-  getOrdinal: function(dayOfMonth){
-    //1st, 2nd, 3rd, etc.
-    //return (dayOfMonth > 3 && dayOfMonth < 21) ? 'th' : ['th', 'st', 'nd', 'rd', 'th'][Math.min(dayOfMonth % 10, 4)];
-    return '&ordm;';
-  },
- 
+	months: function(i) {
+		return ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'][i];
+	},
+	days: function(i) {
+		return ['Domenica', 'Luned&igrave;', 'Marted&igrave;', 'Mercoled&igrave;', 'Gioved&igrave;', 'Venerd&igrave;', 'Sabato'][i];
+	},
+	//culture's date order: DD/MM/YYYY
+	dateOrder: ['date', 'month', 'year', '/'],
+	AM: 'AM',
+	PM: 'PM',
+
+	/* Date.Extras */
+	ordinal: function(dayOfMonth){
+	  //1st, 2nd, 3rd, etc.
+	  //return (dayOfMonth > 3 && dayOfMonth < 21) ? 'th' : ['th', 'st', 'nd', 'rd', 'th'][Math.min(dayOfMonth % 10, 4)];
+	  return '&ordm;';
+	},
+
 	lessThanMinuteAgo: 'meno di un minuto fa',
 	minuteAgo: 'circa un minuto fa',
 	minutesAgo: 'circa {delta} minuti fa',
@@ -41,5 +45,5 @@ MooTools.lang.set('IT', 'Date', {
 	hoursUntil: 'tra circa {delta} ore',
 	dayUntil: 'tra circa un giorno',
 	daysUntil: 'tra circa {delta} giorni'
- 
+
 });

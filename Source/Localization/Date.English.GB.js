@@ -12,7 +12,6 @@ Script: Date.English.GB.js
 
 MooTools.lang.set('gbENG', 'Date', {
 
-	dateOrder: ['date', 'month', 'year', '/'],
-	cascades: ['usENG']
+	dateOrder: ['date', 'month', 'year', '/']
 
-});
+}).set('cascade', ['usENG']);

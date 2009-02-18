@@ -12,15 +12,19 @@ Script: Date.English.US.js
 
 MooTools.lang.set('usENG', 'Date', {
 
-	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-	days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+	months: function(i){
+		return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][i]
+	},
+	days: function(i) {
+		return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][i];
+	},
 	//culture's date order: MM/DD/YYYY
 	dateOrder: ['month', 'date', 'year', '/'],
 	AM: 'AM',
 	PM: 'PM',
 
 	/* Date.Extras */
-	getOrdinal: function(dayOfMonth){
+	ordinal: function(dayOfMonth){
 		//1st, 2nd, 3rd, etc.
 		return (dayOfMonth > 3 && dayOfMonth < 21) ? 'th' : ['th', 'st', 'nd', 'rd', 'th'][Math.min(dayOfMonth % 10, 4)];
 	},

@@ -22,7 +22,7 @@ Date.implement({
 	},
 
 	getOrdinal: function(dayOfMonth){
-		return Date.lang.getOrdinal(dayOfMonth || this.get('date'));
+		return Date.lang.get('ordinal', dayOfMonth || this.get('date'));
 	},
 
 	getDayOfYear: function(){
@@ -57,22 +57,22 @@ $extend(Date, {
 				suffix = 'Until';
 			}
 			if (delta < 60){
-				return lang['lessThanMinute' + suffix];
+				return lang.get('lessThanMinute' + suffix, delta);
 			} else if (delta < 120){
-				return lang['minute' + suffix];
+				return lang.get('minute' + suffix, delta);
 			} else if (delta < (45*60)){
 				delta = (delta / 60).round();
-				return lang['minutes' + suffix];
+				return lang.get('minutes' + suffix, delta);
 			} else if (delta < (90*60)){
-				return lang['hour' + suffix];
+				return lang.get('hour' + suffix, delta);
 			} else if (delta < (24*60*60)){
 				delta = (delta / 3600).round();
-				return lang['hours' + suffix];
+				return lang.get('hours' + suffix, delta);
 			} else if (delta < (48*60*60)){
-				return lang['day' + suffix];
+				return lang.get('day' + suffix, delta);
 			} else {
 				delta = (delta / 86400).round();
-				return lang['days' + suffix];
+				return lang.get('days' + suffix, delta);
 			}
 		};
 		return getPhrase().substitute({delta: delta});
@@ -211,7 +211,7 @@ Date.parsePatterns.extend([
 			bits = bits[0].split(" ");
 			d.set('date', bits[0]);
 			var m;
-			Date.lang.months.each(function(mo, i){
+			Date.lang.get('months').each(function(mo, i){
 				if (new RegExp("^"+bits[1]).test(mo)) m = i;
 			});
 			d.set('mo', m);

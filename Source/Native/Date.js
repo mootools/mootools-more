@@ -181,10 +181,10 @@ Date.implement({
 		return f.replace(/\%([aAbBcdHIjmMpSUWwxXyYTZ])/g,
 			function($1, $2){
 				switch ($2){
-					case 'a': return Date.lang.days[d.get('day')].substr(0, 3);
-					case 'A': return Date.lang.days[d.get('day')];
-					case 'b': return Date.lang.months[d.get('month')].substr(0, 3);
-					case 'B': return Date.lang.months[d.get('month')];
+					case 'a': return Date.lang.get('days', d.get('day')).substr(0, 3);
+					case 'A': return Date.lang.get('days', d.get('day'));
+					case 'b': return Date.lang.get('months', d.get('month')).substr(0, 3);
+					case 'B': return Date.lang.get('months', d.get('month'));
 					case 'c': return d.toString();
 					case 'd': return d.get('date').zeroise(2);
 					case 'H': return d.get('hr').zeroise(2);
@@ -198,7 +198,7 @@ Date.implement({
 					case 'W': throw new Error('%W is not supported yet');
 					case 'w': return d.get('day');
 					case 'x':
-						var c = Date.lang.dateOrder;
+						var c = Date.lang.get('dateOrder');
 						//return d.format("%{0}{3}%{1}{3}%{2}".substitute(c.map(function(s){return s.substr(0,1)}))); //grr!
 						return d.format('%' + c[0].substr(0,1) +
 							c[3] + '%' + c[1].substr(0,1) +
@@ -217,9 +217,9 @@ Date.implement({
 
 	setAMPM: function(ampm){
 		ampm = ampm.toUpperCase();
-		if (this.format("%H").toInt() > 11 && ampm == Date.lang.AM)
+		if (this.format("%H").toInt() > 11 && ampm == Date.lang.get('AM'))
 			return this.decrement('hour', 12);
-		else if (this.format("%H").toInt() < 12 && ampm == Date.lang.PM)
+		else if (this.format("%H").toInt() < 12 && ampm == Date.lang.('PM'))
 			return this.increment('hour', 12);
 		return this;
 	}
@@ -230,6 +230,7 @@ Date.alias('diff', 'compare');
 Date.alias('format', 'strftime');
 
 MooTools.lang.addEvent('onLangChange', function(){
+	console.log('lang change', arguments);
 	Date.lang = MooTools.lang.get('Date');
 });
 
@@ -294,39 +295,39 @@ MooTools.lang.addEvent('onLangChange', function(){
 			var ret = -1;
 			switch ($type(day)){
 				case 'number':
-					ret = Date.lang.days[day - 1] || false;
+					ret = Date.lang.get('days', day - 1) || false;
 					if (!ret) throw new Error('Invalid day index value must be between 1 and 7');
 					break;
 				case 'string':
-					var match = Date.lang.days.filter(function(name){
+					var match = Date.lang.get('days').filter(function(name){
 						return this.test(name);
 					}, new RegExp('^' + day, 'i'));
 					if (!match.length) throw new Error('Invalid day string');
 					if (match.length > 1) throw new Error('Ambiguous day');
 					ret = match[0];
 			}
-			return (num) ? Date.lang.days.indexOf(ret) : ret;
+			return (num) ? Date.lang.get('days').indexOf(ret) : ret;
 		},
 
 		parseMonth: function(month, num){
 			var ret = -1;
 			switch ($type(month)){
 				case 'object':
-					ret = Date.lang.months[month.get('mo')];
+					ret = Date.lang.get('months')[month.get('mo')];
 					break;
 				case 'number':
-					ret = Date.lang.months[month - 1] || false;
+					ret = Date.lang.get('months')[month - 1] || false;
 					if (!ret) throw new Error('Invalid month index value must be between 1 and 12:' + index);
 					break;
 				case 'string':
-					var match = Date.lang.months.filter(function(name){
+					var match = Date.lang.get('months').filter(function(name){
 						return this.test(name);
 					}, new RegExp('^' + month, 'i'));
 					if (!match.length) throw new Error('Invalid month string');
 					if (match.length > 1) throw new Error('Ambiguous month');
 					ret = match[0];
 			}
-			return (num) ? Date.lang.months.indexOf(ret) : ret;
+			return (num) ? Date.lang.get('months').indexOf(ret) : ret;
 		},
 
 		parseUTC: function(value){
@@ -337,7 +338,7 @@ MooTools.lang.addEvent('onLangChange', function(){
 		},
 
 		orderIndex: function(unit){
-			return Date.lang.dateOrder.indexOf(unit)+1;
+			return Date.lang.get('dateOrder').indexOf(unit)+1;
 		},
 
 		parsePatterns: [
