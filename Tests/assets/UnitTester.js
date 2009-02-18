@@ -293,7 +293,7 @@ var UnitTester = new Class({
 	loadTest: function(testPath){
 		console.log('load: ', testPath);
 		this.clearLoaders();
-		this.getFrame().location.href = this.getFrame().location.href;
+		this.getFrame().location.href = this.getFrame().location.href.split("#")[0];
 		$('testFrame').removeEvents('load');
 		$('testFrame').addEvent('load', function(){
 			testPath = testPath || $('testLoaderSel').get('value');
