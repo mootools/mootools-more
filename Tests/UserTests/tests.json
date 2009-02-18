@@ -27,6 +27,9 @@
 		"Fx.SmoothScroll":['all'],
 		"Fx.Sort":['all']
 	},
+	"Interface":{
+		"Scroller":['all']
+	},
 	"Request":{
 		"Request.JSONP": ['all'],
 		"Request.Queue": ['all']

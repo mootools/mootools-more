@@ -17,6 +17,7 @@ var Scroller = new Class({
 		area: 20,
 		velocity: 1,
 		onChange: function(x, y){
+			dbug.log(x,y);
 			this.element.scrollTo(x, y);
 		}
 	},
@@ -44,7 +45,10 @@ var Scroller = new Class({
 	},
 
 	scroll: function(){
-		var size = this.element.getSize(), scroll = this.element.getScroll(), pos = this.element.getPosition(), change = {'x': 0, 'y': 0};
+		var size = this.element.getSize(), 
+			scroll = this.element.getScroll(), 
+			pos = this.element.getPosition(), 
+			change = {'x': 0, 'y': 0};
 		for (var z in this.page){
 			if (this.page[z] < (this.options.area + pos[z]) && scroll[z] != 0)
 				change[z] = (this.page[z] - this.options.area - pos[z]) * this.options.velocity;
