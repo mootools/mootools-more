@@ -1,32 +1,47 @@
 /*
 Script: FormValidator.Italian.js
-	FormValidator messages in Italian.
+		FormValidator messages in Italian.
 
 	License:
 		MIT-style license.
 
 	Authors:
 		Leonardo Laureti
-
+		Andrea Novero
 */
-
+ 
 MooTools.lang.set('IT', 'FormValidator', {
-	required:'Il campo è richiesto.',
-	minLength:'Si prega di inserire un minimo di {minLength} caratteri (Lei ne ha inseriti {length}).',
-	maxLength:'Si prega di non inserire più di {maxLength} caratteri (Lei ne ha inseriti {length}).',
-	integer:'Si prega di inserire un numero intero. Numeri con decimali (es.: 1.25) non sono permessi.',
-	numeric:'Si prega di inserire esclusivamente valori numerici (es.: "1" oppure "1.1" oppure "-1" oppure "-1.1").',
-	digits:'Si prega di usare esclusivamente valori numerici e punteggiatura in questo campo di testo (per esempio, un numero di telefono con trattini o barre non può essere accettato).',
-	alpha:'Si prega di utilizzare esclusivamente lettere (a-z) in questo campo di testo. Spazi o altri caratteri non sono accettatti.',
-	alphanum:'Si prega di utilizzare esclusivamente lettere (a-z) o numeri (0-9) in questo campo di testo. Spazi o altri caratteri non sono	accettatti.',
-	dateSuchAs:'Si prega di inserire correttamente la data: {date}',
-	dateInFormatMDY:'Si prega di inserire la data nel formato: GG/MM/AAAA (es.: "31/12/1999")',
-	email:'Si prega di inserire un indirizzo e-mail valido. Per esempio: "mionome@tuodominio.com".',
-	url:'Si prega di inserire una URL valida. Per esempio: "http://www.miodominio.com".',
-	currencyDollar:'Si prega di inserire una valuta $ corretta. Per esempio: "$100.00".',
-	oneRequired:'Si prega di riempire almeno uno dei campi richiesti.',
-	warningPrefix: 'Avvertimento: ',
-	errorPrefix: 'Errore: '
-}).set('IT', 'Date', {
-	dateOrder: ['date', 'month', 'year', '/']
+
+	required:'Il campo &egrave; obbligatorio.',
+	minLength:'Inserire almeno {minLength} caratteri (ne sono stati inseriti {length}).',
+	maxLength:'Inserire al massimo {maxLength} caratteri (ne sono stati inseriti {length}).',
+	integer:'Inserire un numero intero. Non sono consentiti decimali (es.: 1.25).',
+	numeric:'Inserire solo valori numerici (es.: "1" oppure "1.1" oppure "-1" oppure "-1.1").',
+	digits:'Inserire solo numeri e caratteri di punteggiatura. Per esempio &egrave; consentito un numero telefonico con trattini o punti.',
+	alpha:'Inserire solo lettere (a-z). Non sono consentiti spazi o altri caratteri.',
+	alphanum:'Inserire solo lettere (a-z) o numeri (0-9). Non sono consentiti spazi o altri caratteri.',
+	dateSuchAs:'Inserire una data valida del tipo {date}',
+	dateInFormatMDY:'Inserire una data valida nel formato MM/GG/AAAA (es.: "12/31/1999")',
+	email:'Inserire un indirizzo email valido. Per esempio "nome@dominio.com".',
+	url:'Inserire un indirizzo valido. Per esempio "http://www.dominio.com".',
+	currencyDollar:'Inserire un importo valido. Per esempio "$100.00".',
+	oneRequired:'Completare almeno uno dei campi richiesti.',
+	errorPrefix: 'Errore: ',
+	warningPrefix: 'Attenzione: ',
+
+	//FormValidator.Extras
+
+	noSpace: 'Non sono consentiti spazi.',
+	reqChkByNode: 'Nessuna voce selezionata.',
+	requiredChk: 'Il campo &egrave; obbligatorio.',
+	reqChkByName: 'Selezionare un(a) {label}.',
+	match: 'Il valore deve corrispondere al campo {matchName}',
+	startDate: 'data d\'inizio',
+	endDate: 'data di fine',
+	currendDate: 'data attuale',
+	afterDate: 'La data deve corrispondere o essere successiva al {label}.',
+	beforeDate: 'La data deve corrispondere o essere precedente al {label}.',
+	startMonth: 'Selezionare un mese d\'inizio',
+	sameMonth: 'Le due date devono essere dello stesso mese - occorre modificarne una.'
+
 });

@@ -6,6 +6,7 @@ Contains the messages for FormValidator in Italian.
 ### Authors
 
 * Leonardo Laureti
+* Andrea Novero
 
 ### Usage
 
