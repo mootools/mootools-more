@@ -5,6 +5,8 @@ MooTools Plugins and Enhancements Repository
 * Need to add tests for all libs
 * Make the Date Specs pass in all browsers
 * Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
+* Go through lighthouse tickets and identify criticals for 1.0 release
+* Go through docs files and fix any inconsistencies with -core syntax for docs
 
 ### Decisions/discussions
 * Decide if reworking the whole source of all plugins makes you an author ( :P )

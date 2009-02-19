@@ -153,7 +153,7 @@
 		},
 
 		"Fx.SmoothScroll": {
-			"deps": ["Fx.Scroll"],
+			"deps": ["Fx.Scroll", "Selectors"],
 			"desc": "Class for creating a smooth scrolling effect to all internal links on the page."
 		},
 
