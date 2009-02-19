@@ -30,7 +30,8 @@
 	"Interface":{
 		"Scroller":['all'],
 		"Slider":['all'],
-		"Sortables":['single', 'multi']
+		"Sortables":['single', 'multi'],
+		"Tips":['all']
 	},
 	"Request":{
 		"Request.JSONP": ['all'],
