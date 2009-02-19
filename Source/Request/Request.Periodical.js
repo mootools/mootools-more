@@ -1,5 +1,5 @@
 /*
-Script: Request.Timer.js
+Script: Request.Periodical.js
 	Requests the same url at a time interval that increases when no data is returned from the requested server
 
 	License:

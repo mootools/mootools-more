@@ -13,7 +13,10 @@
 				}); */
 				['onSuccess', 'onFailure', 'onException'].each(function(evt){
 					events[evt] = function(a){
-						dbug.log(evt + ': ', a);
+						$('response').adopt(new Element('li', {
+								html: evt + ': ', a
+							})
+						);
 					}
 				});
 				var q = new Request.Queue();

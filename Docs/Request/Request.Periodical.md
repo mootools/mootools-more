@@ -1,7 +1,7 @@
-Class: Request {#Request}
+Class: Request {#Request-Periodical}
 =====================================
 
-*Request.Timer.js* extends [Request][], [Request.HTML][], and [Request.JSON][] to add methods that periodically request the same URL but increases the interval if no data is returned from the requested server. This helps reducing load on a server and prevents pointless requests. If any valid response data is returned it resets the interval and requests more often.
+*Request.Periodical.js* extends [Request][], [Request.HTML][], and [Request.JSON][] to add methods that periodically request the same URL but increases the interval if no data is returned from the requested server. This helps reducing load on a server and prevents pointless requests. If any valid response data is returned it resets the interval and requests more often.
 
 ### Extends
 
@@ -36,7 +36,7 @@ Class: Request {#Request}
 	// interval until the next request that returns data resets the interval.
 	// This example uses a limit so the maximum interval will be 15 seconds.
 
-Request Method: startTimer {#Request-Timer:startTimer}
+Request Method: startTimer {#Request-Periodical:startTimer}
 ------------------------------------------------------
 
 Starts requesting the URL given by the initial options
@@ -74,4 +74,4 @@ Stops the timer and does not execute any more requests beside an already running
 [Request]: http://www.mootools.net/docs/Request/Request
 [Request.HTML]: http://www.mootools.net/docs/Request/Request.HTML
 [Request.JSON]: http://www.mootools.net/docs/Request/Request.JSON
-[Request.Timer]: #Request-Timer
+[Request.Periodical]: #Request-Periodical

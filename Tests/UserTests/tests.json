@@ -35,7 +35,8 @@
 	},
 	"Request":{
 		"Request.JSONP": ['all'],
-		"Request.Queue": ['all']
+		"Request.Queue": ['all'],
+		"Request.Timer": ['all']
 	},
 	"Utilities":{
 		"IframeShim":['all']
