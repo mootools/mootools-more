@@ -28,7 +28,9 @@
 		"Fx.Sort":['all']
 	},
 	"Interface":{
-		"Scroller":['all']
+		"Scroller":['all'],
+		"Slider":['all'],
+		"Sortables":['single', 'multi']
 	},
 	"Request":{
 		"Request.JSONP": ['all'],
