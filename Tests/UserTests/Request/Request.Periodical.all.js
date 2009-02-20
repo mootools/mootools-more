@@ -6,7 +6,7 @@
 			verify: "Do you see the log? Did the request eventually succeed (after a few seconds)?",
 			before: function(){
 				var i = 0;
-				new Request({
+				var r = new Request({
 					url: 'UserTests/Request/simple.php',
 					method: 'get',
 					initialDelay: 100,
@@ -25,6 +25,7 @@
 				}).startTimer({
 					sleep: 2
 				});
+				r.stopTimer.delay(3000, r);
 			}
 		}
 	]

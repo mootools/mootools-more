@@ -36,9 +36,10 @@
 	"Request":{
 		"Request.JSONP": ['all'],
 		"Request.Queue": ['all'],
-		"Request.Timer": ['all']
+		"Request.Periodical": ['all']
 	},
 	"Utilities":{
+		"Assets":['css', 'image', 'images', 'javascript'],
 		"IframeShim":['all']
 	}
 }

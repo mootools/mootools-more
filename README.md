@@ -1,5 +1,9 @@
 MooTools Plugins and Enhancements Repository
 
+### Wiki
+
+* [See the wiki for how to get involved](http://wiki.github.com/mootools/mootools-more).
+
 ### TO DO
 
 * Need to add tests for all libs
