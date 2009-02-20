@@ -40,15 +40,12 @@ Script: MooTools.Lang.js
 		},
 
 		cascade: function(lang){
-			console.log(lang);
 			var cascades = (data.languages[lang] || {}).cascades || [];
 			cascades.combine(data.cascades);
 			cascades.erase(lang).push(lang);
-			console.log('cascades: ', cascades);
 			var langs = cascades.map(function(lng){
 				return data.languages[lng];
 			}, this);
-			console.log('cascade langs: ', langs);
 			return $merge.apply(this, langs);
 		},
 
@@ -63,7 +60,6 @@ Script: MooTools.Lang.js
 		get: function(set, key){
 			var lang = data.languages[this.getCurrentLanguage()];
 			var cascaded = this.lambda(this.cascade(this.getCurrentLanguage())[set]);
-			console.log('set: ', set, cascaded);
 			if (key) return cascaded.get(key);
 			return cascaded;
 		},

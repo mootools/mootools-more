@@ -230,7 +230,6 @@ Date.alias('diff', 'compare');
 Date.alias('format', 'strftime');
 
 MooTools.lang.addEvent('onLangChange', function(){
-	console.log('lang change', arguments);
 	Date.lang = MooTools.lang.get('Date');
 });
 

@@ -32,7 +32,7 @@ URI.prototype = new String;
 
 		assertLength: function(){
 			if (this.length != this.value.length) this.length = this.value.length;
-		}
+		},
 
 		toString: function(){
 			return this.value;
