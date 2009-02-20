@@ -40,6 +40,7 @@
 	},
 	"Utilities":{
 		"Assets":['css', 'image', 'images', 'javascript'],
+		"Group":['all'],
 		"IframeShim":['all']
 	}
 }
