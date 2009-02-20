@@ -48,7 +48,7 @@ var Builder = {
 			'Drag'      : ['Drag', 'Drag.Move'],
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements', 'Fx.Accordion', 'Fx.SmoothScroll'],
 			'Request'   : ['Request.JsonP', 'Request.Queue', 'Request.Periodical'],
-			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie.js'],
+			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie'],
 			'Interface' : ['Scroller', 'Slider', 'Sortables', 'Tips'],
 			'Localization':['Date.English.US', 'Date.Norwegian', 'FormValidator.English', 'FormValidator.French']
 		},
