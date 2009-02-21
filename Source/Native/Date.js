@@ -40,7 +40,7 @@ $each({
 });
 
 var zeroise = function(what, length){
-	return new String(what).pad(length, '0');
+	return new String(what).pad(length, '0', 'left');
 }
 
 Date.implement({
