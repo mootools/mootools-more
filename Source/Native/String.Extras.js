@@ -53,10 +53,11 @@ String.implement({
 	},
 
 	repeat: function(times){
-		var text = '';
-		for(var i = 0; i < times; i++)
-			text += this.toString();
-		return text;
+		var text = [];
+		for(var i = 0; i < times; i++){
+			text.push(this.toString());
+		}
+		return text.join('');
 	},
 
 	pad: function(length, str, dir){
