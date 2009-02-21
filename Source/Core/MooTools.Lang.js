@@ -18,6 +18,8 @@ Script: MooTools.Lang.js
 		},
 		cascades: ['usENG']
 	};
+	
+	var cascaded;
 
 	MooTools.lang = new new Class({
 
@@ -26,8 +28,17 @@ Script: MooTools.Lang.js
 		setLanguage: function(lang){
 			if (!data.languages[lang]) return;
 			data.language = lang;
+			this.load();
 			this.fireEvent('langChange', lang);
 			return this;
+		},
+
+		load: function() {
+			var langs = this.cascade(this.getCurrentLanguage());
+			cascaded = {};
+			$each(langs, function(set, setName){
+				cascaded[setName] = this.lambda(set);
+			}, this);
 		},
 
 		getCurrentLanguage: function(){
@@ -57,11 +68,8 @@ Script: MooTools.Lang.js
 			return set;
 		},
 
-		get: function(set, key){
-			var lang = data.languages[this.getCurrentLanguage()];
-			var cascaded = this.lambda(this.cascade(this.getCurrentLanguage())[set]);
-			if (key) return cascaded.get(key);
-			return cascaded;
+		get: function(set, key, args){
+			if (cascaded[set]) return (key ? cascaded[set].get(key, args) : cascaded[set]);
 		},
 
 		set: function(lang, set, members){
@@ -69,7 +77,10 @@ Script: MooTools.Lang.js
 			langData = data.languages[lang];
 			if (!langData[set]) langData[set] = {};
 			$extend(langData[set], members);
-			if (lang == this.getCurrentLanguage()) this.fireEvent('langChange', lang);
+			if (lang == this.getCurrentLanguage()) {
+				this.load();
+				this.fireEvent('langChange', lang);
+			}
 			return this;
 		},
 

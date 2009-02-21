@@ -22,7 +22,7 @@ Date.implement({
 	},
 
 	getOrdinal: function(dayOfMonth){
-		return Date.lang.get('ordinal', dayOfMonth || this.get('date'));
+		return Date.getMsg('ordinal', dayOfMonth || this.get('date'));
 	},
 
 	getDayOfYear: function(){
@@ -47,7 +47,6 @@ $extend(Date, {
 	},
 
 	getTimePhrase: function(delta, fromTime, toTime){
-		var lang = Date.lang; //saving bytes
 		var getPhrase = function(){
 			var suffix;
 			if (delta >= 0){
@@ -57,22 +56,22 @@ $extend(Date, {
 				suffix = 'Until';
 			}
 			if (delta < 60){
-				return lang.get('lessThanMinute' + suffix, delta);
+				return Date.getMsg('lessThanMinute' + suffix, delta);
 			} else if (delta < 120){
-				return lang.get('minute' + suffix, delta);
+				return Date.getMsg('minute' + suffix, delta);
 			} else if (delta < (45*60)){
 				delta = (delta / 60).round();
-				return lang.get('minutes' + suffix, delta);
+				return Date.getMsg('minutes' + suffix, delta);
 			} else if (delta < (90*60)){
-				return lang.get('hour' + suffix, delta);
+				return Date.getMsg('hour' + suffix, delta);
 			} else if (delta < (24*60*60)){
 				delta = (delta / 3600).round();
-				return lang.get('hours' + suffix, delta);
+				return Date.getMsg('hours' + suffix, delta);
 			} else if (delta < (48*60*60)){
-				return lang.get('day' + suffix, delta);
+				return Date.getMsg('day' + suffix, delta);
 			} else {
 				delta = (delta / 86400).round();
-				return lang.get('days' + suffix, delta);
+				return Date.getMsg('days' + suffix, delta);
 			}
 		};
 		return getPhrase().substitute({delta: delta});
@@ -211,7 +210,7 @@ Date.parsePatterns.extend([
 			bits = bits[0].split(" ");
 			d.set('date', bits[0]);
 			var m;
-			Date.lang.get('months').each(function(mo, i){
+			Date.getMsg('months').each(function(mo, i){
 				if (new RegExp("^"+bits[1]).test(mo)) m = i;
 			});
 			d.set('mo', m);

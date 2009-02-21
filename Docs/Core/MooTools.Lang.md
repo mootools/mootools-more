@@ -6,7 +6,6 @@ Contains methods and data necessary to provide localization.
 ### Notes
 
 * The language sets are protected in a private variable that can only be altered using methods in *MooTools.lang* documented below. Though you can retrieve language sets which are objects, you should not alter these through assignment but instead use the *.set* method.
-* Classes that make use of these languages should attach an event listener to *MooTools.lang* to update their local copy of the current language settings whenever the language is altered or the language changes.
 * Language sets can contain any type of object, so, for instance, a language item could be an *array*, a *function*, a *string*, or even another *class*. Classes that make use of these items must be aware of the types of objects in the language file.
 * Objects that are functions are executed and their results are returned. So if you execute *MooTools.lang.get('Date').get('ordinal', 4)*, then the ordinal member will be executed and passed *4* as its argument. If *ordinal* is not a function, then its value will simply be returned.
 * Languages cascade. If there are members in the language set for a given key, it will be returned, but if not, the next language in the specified cascade will be inspected for that key and so on. This way if there are new language properties added for a given set but not every language has a translation yet, the set will at least have a value, though not in the right language.
@@ -58,18 +57,7 @@ Example of setting the cascade for a language
 MooTools.lang event: onLangChange {#MooTools-lang:onLangChange}
 ---------------------------------------------------------------
 
-This event is fired whenever the language is changed for the user (for instance, from "usENG" to "ESP") or whenever the current selected language is updated with new data. It is intended to be used by classes so that they can update their language set whenever the language changes.
-
-### Example
-
-	Date.lang = MooTools.lang.get("Date");
-	MooTools.lang.addEvent("langChange", function(newLang){
-		Date.lang = MooTools.lang.get("Date");
-	});
-	//later
-	Date.lang.get('months'); //array of months
-	Date.lang.get('ordinal', 1); //returns "st" for "1st" - ordinal is a function, that takes the integer as an argument
-
+This event is fired whenever the language is changed for the user (for instance, from "usENG" to "ESP") or whenever the current selected language is updated with new data.
 
 MooTools.lang Methods
 ====================
@@ -111,27 +99,27 @@ Retrieves a set of language properties for the current language.
 
 ### Syntax
 
-	MooTools.lang.get(set[, key]);
+	MooTools.lang.get(set[, key, args]);
 
 ### Arguments
 
 1. set - (*string*) The set you wish to retrieve.
-2. key - (*string*) The member of the set you wish to retrieve. 
+2. key - (*string*; optional) The member of the set you wish to retrieve. 
+3. args - (*mixed*; optional) A single value or an array of values that are passed to the language value (if it is not a function, these are ignored; if it is a function, these are passed);
 
-
-### Note
-
-It is not the preferred usage to include the *key* as the cascading represents a small expense. It is better to cache the language using the *onLangChange* event. See example.
 
 ### Example
 
-	//cache the set
-	var dateLang = MooTools.lang.get("Date");
-	dateLang.get('months')[0]; //January
+	MooTools.lang.get('Date', 'months', 0); //"January"
+	MooTools.lang.get('Date', 'dayAgo'); //"1 day ago"
+	MooTools.lang.get('Date', 'dayAgo', 'foo'); //foo is ignored
+	MooTools.lang.get('Date'); //returns the object of key/values for Date in the current language
 
 ### Returns
 
-* *object* The language key/values for the given set.
+* If passed a valid set and key, returns the language value for the given set (usually a string).
+* If passed a valid set and no key, returns an object containing all the key/values in the translation.
+* If passed a valid set, key, and arguments, passes the arguments to the value if it is a function and returns what it returns, otherwise returns the value.
 
 MooTools.lang method: set {#MooTools-lang:set}
 ----------------------------------------------

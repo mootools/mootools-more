@@ -95,10 +95,10 @@ var FormValidator = new Class({
 		serial: true,
 		stopOnFailure: true,
 		warningPrefix: function(){
-			return FormValidator.lang.get('warningPrefix') || 'Warning: ';
+			return FormValidator.getMsg('warningPrefix') || 'Warning: ';
 		},
 		errorPrefix: function(){
-			return FormValidator.lang.get('errorPrefix') || 'Error: ';
+			return FormValidator.getMsg('errorPrefix') || 'Error: ';
 		}
 	},
 
@@ -253,14 +253,8 @@ var FormValidator = new Class({
 
 });
 
-
-MooTools.lang.addEvent('onLangChange', function(){
-	FormValidator.lang = MooTools.lang.get('FormValidator');
-});
-FormValidator.lang = MooTools.lang.get('FormValidator');
-
 FormValidator.getMsg = function(key){
-	return FormValidator.lang.get(key);
+	return MooTools.lang.get('FormValidator', key);
 };
 
 FormValidator.adders = {
