@@ -6,30 +6,6 @@ License:
 	MIT-style license.
 */
 
-describe('String.repeat', {
-
-	'should repeat (concatenate) a string a specified number of times': function(){
-		value_of('fab'.repeat(3)).should_be('fabfabfab');
-	}
-
-});
-
-describe('String.zeroise', {
-
-	'should pad a string with zeros up to the length specified': function(){
-		value_of('1234'.zeroise(6)).should_be('001234');
-	}
-
-});
-
-describe('Number.zeroise', {
-
-	'should convert an integer to a string and pad that string with zeros up to the length specified': function(){
-		value_of(Number(1234).zeroise(6)).should_be('001234');
-	}
-
-});
-
 describe('Date.clone', {
 
 	'should clone a Date instance': function(){

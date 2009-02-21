@@ -11,8 +11,10 @@ Script: Date.js
 		Harald Kirshner - mail [at] digitarald.de; http://digitarald.de
 
 */
-new Native({name: 'Date', initialize: Date, protect: true});
 
+(function(){
+	
+new Native({name: 'Date', initialize: Date, protect: true});
 
 ['now','parse','UTC'].each(function(method){
 	Native.genericize(Date, method, true);
@@ -36,6 +38,10 @@ $each({
 }, function(value, key){
 	Date.Methods.set(key, value);
 });
+
+var zeroise = function(what, length){
+	return new String(what).pad(length, '0');
+}
 
 Date.implement({
 
@@ -152,8 +158,8 @@ Date.implement({
 	getGMTOffset: function(){
 		var off = this.get('timezoneOffset');
 		return ((off > 0) ? '-' : '+')
-			+ Math.floor(Math.abs(off) / 60).zeroise(2)
-			+ (off % 60).zeroise(2);
+			+ zeroise(Math.floor(Math.abs(off) / 60), 2)
+			+ zeroise((off % 60), 2);
 	},
 
 	parse: function(str){
@@ -186,15 +192,15 @@ Date.implement({
 					case 'b': return Date.lang.months[d.get('month')].substr(0, 3);
 					case 'B': return Date.lang.months[d.get('month')];
 					case 'c': return d.toString();
-					case 'd': return d.get('date').zeroise(2);
-					case 'H': return d.get('hr').zeroise(2);
+					case 'd': return zeroise(d.get('date'), 2);
+					case 'H': return zeroise(d.get('hr'), 2);
 					case 'I': return ((d.get('hr') % 12) || 12);
-					case 'j': return d.get('dayofyear').zeroise(3);
-					case 'm': return (d.get('mo') + 1).zeroise(2);
-					case 'M': return d.get('min').zeroise(2);
+					case 'j': return zeroise(d.get('dayofyear'), 3);
+					case 'm': return zeroise((d.get('mo') + 1), 2);
+					case 'M': return zeroise(d.get('min'), 2);
 					case 'p': return d.get('hr') < 12 ? 'AM' : 'PM';
-					case 'S': return d.get('seconds').zeroise(2);
-					case 'U': return d.get('week').zeroise(2);
+					case 'S': return zeroise(d.get('seconds'), 2);
+					case 'U': return zeroise(d.get('week'), 2);
 					case 'W': throw new Error('%W is not supported yet');
 					case 'w': return d.get('day');
 					case 'x':
@@ -233,177 +239,151 @@ MooTools.lang.addEvent('onLangChange', function(){
 	Date.lang = MooTools.lang.get('Date');
 });
 
-(function(){
+var nativeParse = Date.parse;
 
-	var nativeParse = Date.parse;
-
-	var daysInMonth = function(monthIndex, year){
-		if (Date.isLeapYear(year.toInt()) && monthIndex === 1) return 29;
-		return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][monthIndex];
-	};
+var daysInMonth = function(monthIndex, year){
+	if (Date.isLeapYear(year.toInt()) && monthIndex === 1) return 29;
+	return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][monthIndex];
+};
 
 
-	$extend(Date, {
+$extend(Date, {
 
-		units: {
-			ms: $lambda(1),
-			second: $lambda(1000),
-			minute: $lambda(60000),
-			hour: $lambda(3600000),
-			day: $lambda(86400000),
-			week: $lambda(608400000),
-			month: function(monthIndex, year){
-				var d = new Date();
-				return daysInMonth($pick(monthIndex,d.format("%m").toInt()), $pick(year,d.format("%Y").toInt())) * 86400000;
-			},
-			year: function(year){
-				year = year || new Date().format("%Y").toInt();
-				return Date.isLeapYear(year.toInt())?31622400000:31536000000;
-			}
+	units: {
+		ms: $lambda(1),
+		second: $lambda(1000),
+		minute: $lambda(60000),
+		hour: $lambda(3600000),
+		day: $lambda(86400000),
+		week: $lambda(608400000),
+		month: function(monthIndex, year){
+			var d = new Date();
+			return daysInMonth($pick(monthIndex,d.format("%m").toInt()), $pick(year,d.format("%Y").toInt())) * 86400000;
 		},
+		year: function(year){
+			year = year || new Date().format("%Y").toInt();
+			return Date.isLeapYear(year.toInt())?31622400000:31536000000;
+		}
+	},
 
-		isLeapYear: function(yr){
-			return new Date(yr,1,29).getDate() == 29;
-		},
+	isLeapYear: function(yr){
+		return new Date(yr,1,29).getDate() == 29;
+	},
 
-		fixY2K: function(d){
-			if (!isNaN(d)){
-				var newDate = new Date(d);
-				if (newDate.get('year') < 2000 && d.toString().indexOf(newDate.get('year')) < 0) newDate.increment('year', 100);
-				return newDate;
-			} else {
-				return d;
-			}
-		},
+	fixY2K: function(d){
+		if (!isNaN(d)){
+			var newDate = new Date(d);
+			if (newDate.get('year') < 2000 && d.toString().indexOf(newDate.get('year')) < 0) newDate.increment('year', 100);
+			return newDate;
+		} else {
+			return d;
+		}
+	},
 
-		parse: function(from){
-			var t = $type(from);
-			if (t == 'number') return new Date(from);
-			if (t != 'string') return from;
-			if (!from.length) return null;
-			var parsed;
-			Date.parsePatterns.each(function(pattern){
-				if (parsed) return;
-				var r = Date.parsePatterns[i].re.exec(from);
-				if (r) parsed = Date.parsePatterns[i].handler(r);
-			});
-			return parsed || new Date(nativeParse(from));
-		},
+	parse: function(from){
+		var t = $type(from);
+		if (t == 'number') return new Date(from);
+		if (t != 'string') return from;
+		if (!from.length) return null;
+		var parsed;
+		Date.parsePatterns.each(function(pattern){
+			if (parsed) return;
+			var r = Date.parsePatterns[i].re.exec(from);
+			if (r) parsed = Date.parsePatterns[i].handler(r);
+		});
+		return parsed || new Date(nativeParse(from));
+	},
 
-		parseDay: function(day, num){
-			var ret = -1;
-			switch ($type(day)){
-				case 'number':
-					ret = Date.lang.days[day - 1] || false;
-					if (!ret) throw new Error('Invalid day index value must be between 1 and 7');
-					break;
-				case 'string':
-					var match = Date.lang.days.filter(function(name){
-						return this.test(name);
-					}, new RegExp('^' + day, 'i'));
-					if (!match.length) throw new Error('Invalid day string');
-					if (match.length > 1) throw new Error('Ambiguous day');
-					ret = match[0];
-			}
-			return (num) ? Date.lang.days.indexOf(ret) : ret;
-		},
+	parseDay: function(day, num){
+		var ret = -1;
+		switch ($type(day)){
+			case 'number':
+				ret = Date.lang.days[day - 1] || false;
+				if (!ret) throw new Error('Invalid day index value must be between 1 and 7');
+				break;
+			case 'string':
+				var match = Date.lang.days.filter(function(name){
+					return this.test(name);
+				}, new RegExp('^' + day, 'i'));
+				if (!match.length) throw new Error('Invalid day string');
+				if (match.length > 1) throw new Error('Ambiguous day');
+				ret = match[0];
+		}
+		return (num) ? Date.lang.days.indexOf(ret) : ret;
+	},
 
-		parseMonth: function(month, num){
-			var ret = -1;
-			switch ($type(month)){
-				case 'object':
-					ret = Date.lang.months[month.get('mo')];
-					break;
-				case 'number':
-					ret = Date.lang.months[month - 1] || false;
-					if (!ret) throw new Error('Invalid month index value must be between 1 and 12:' + index);
-					break;
-				case 'string':
-					var match = Date.lang.months.filter(function(name){
-						return this.test(name);
-					}, new RegExp('^' + month, 'i'));
-					if (!match.length) throw new Error('Invalid month string');
-					if (match.length > 1) throw new Error('Ambiguous month');
-					ret = match[0];
-			}
-			return (num) ? Date.lang.months.indexOf(ret) : ret;
-		},
+	parseMonth: function(month, num){
+		var ret = -1;
+		switch ($type(month)){
+			case 'object':
+				ret = Date.lang.months[month.get('mo')];
+				break;
+			case 'number':
+				ret = Date.lang.months[month - 1] || false;
+				if (!ret) throw new Error('Invalid month index value must be between 1 and 12:' + index);
+				break;
+			case 'string':
+				var match = Date.lang.months.filter(function(name){
+					return this.test(name);
+				}, new RegExp('^' + month, 'i'));
+				if (!match.length) throw new Error('Invalid month string');
+				if (match.length > 1) throw new Error('Ambiguous month');
+				ret = match[0];
+		}
+		return (num) ? Date.lang.months.indexOf(ret) : ret;
+	},
 
-		parseUTC: function(value){
-			var localDate = new Date(value);
-			var utcSeconds = Date.UTC(localDate.get('year'), localDate.get('mo'),
-			localDate.get('date'), localDate.get('hr'), localDate.get('min'), localDate.get('sec'));
-			return new Date(utcSeconds);
-		},
+	parseUTC: function(value){
+		var localDate = new Date(value);
+		var utcSeconds = Date.UTC(localDate.get('year'), localDate.get('mo'),
+		localDate.get('date'), localDate.get('hr'), localDate.get('min'), localDate.get('sec'));
+		return new Date(utcSeconds);
+	},
 
-		orderIndex: function(unit){
-			return Date.lang.dateOrder.indexOf(unit)+1;
-		},
+	orderIndex: function(unit){
+		return Date.lang.dateOrder.indexOf(unit)+1;
+	},
 
-		parsePatterns: [
-			{
-				//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
-				re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})$/,
-				handler: function(bits){
-					var d = new Date(bits[Date.orderIndex('year')],
-									 bits[Date.orderIndex('month')] - 1,
-									 bits[Date.orderIndex('date')]);
-					return Date.fixY2K(d);
-				}
-			},
+	parsePatterns: [
+		{
 			//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
-			//above plus "10:45pm" ex: 12.31.08 10:45pm
-			{
-				re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2})(\w{2})$/,
-				handler: function(bits){
-					var d = new Date(bits[Date.orderIndex('year')],
-									 bits[Date.orderIndex('month')] - 1,
-									 bits[Date.orderIndex('date')]);
-					d.set('hr', bits[4]);
-					d.set('min', bits[5]);
-					d.set('ampm', bits[6]);
-					return Date.fixY2K(d);
-				}
-			},
-			{
-				//"12.31.08 11:59:59", "12-31-08 11:59:59", "12/31/08 11:59:59", "12.31.2008 11:59:59", "12-31-2008 11:59:59", "12/31/2008 11:59:59"
-				re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2}):(\d{1,2})/,
-				handler: function(bits){
-					var d = new Date(bits[Date.orderIndex('year')],
-									 bits[Date.orderIndex('month')] - 1,
-									 bits[Date.orderIndex('date')]);
-					d.set('hr', bits[4]);
-					d.set('min', bits[5]);
-					d.set('sec', bits[6]);
-					return Date.fixY2K(d);
-				}
+			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})$/,
+			handler: function(bits){
+				var d = new Date(bits[Date.orderIndex('year')],
+								 bits[Date.orderIndex('month')] - 1,
+								 bits[Date.orderIndex('date')]);
+				return Date.fixY2K(d);
 			}
-		]
-
-	});
-
-	Number.implement({
-
-		zeroise: function(length){
-			return String(this).zeroise(length);
-		}
-
-	});
-
-	String.implement({
-
-		repeat: function(times){
-			var ret = [];
-			times.times(function(){
-				ret.push(this);
-			}, this);
-			return ret.join('');
 		},
-
-		zeroise: function(length){
-			return '0'.repeat(length - this.length) + this;
+		//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
+		//above plus "10:45pm" ex: 12.31.08 10:45pm
+		{
+			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2})(\w{2})$/,
+			handler: function(bits){
+				var d = new Date(bits[Date.orderIndex('year')],
+								 bits[Date.orderIndex('month')] - 1,
+								 bits[Date.orderIndex('date')]);
+				d.set('hr', bits[4]);
+				d.set('min', bits[5]);
+				d.set('ampm', bits[6]);
+				return Date.fixY2K(d);
+			}
+		},
+		{
+			//"12.31.08 11:59:59", "12-31-08 11:59:59", "12/31/08 11:59:59", "12.31.2008 11:59:59", "12-31-2008 11:59:59", "12/31/2008 11:59:59"
+			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2}):(\d{1,2})/,
+			handler: function(bits){
+				var d = new Date(bits[Date.orderIndex('year')],
+								 bits[Date.orderIndex('month')] - 1,
+								 bits[Date.orderIndex('date')]);
+				d.set('hr', bits[4]);
+				d.set('min', bits[5]);
+				d.set('sec', bits[6]);
+				return Date.fixY2K(d);
+			}
 		}
+	]
 
-	});
+});
 
 })();
