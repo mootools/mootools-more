@@ -63,4 +63,8 @@ MooTools Plugins and Enhancements Repository
   - .showTxt > .show, .hideTxt > .hide
   - .hide and .show no longer take the element and 'focus' arguments.
   - .repositionAll is gone; .repositionOverTxt is now just .reposition; it does not take an argument
+* String.Extras
+  - findAllEmails gone, too specific
+* Date
+  - Number / String extensions moved to string extras. zeroise made an anonymous function, was lame
 * Element.setPosition is now Element.position

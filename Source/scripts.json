@@ -41,7 +41,7 @@
 		},
 
 		"Date": {
-			"deps": ["Core", "String", "Number", "Hash", "Array", "MooTools.Lang", "Date.English.US"],
+			"deps": ["Core", "String", "Number", "Hash", "Array", "String.Extras", "MooTools.Lang", "Date.English.US"],
 			"desc": "Extends the Date native object to include methods useful in managing dates."
 		},
 
