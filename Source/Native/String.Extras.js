@@ -31,41 +31,41 @@ var tidymap = {
 String.implement({
 	
 	standarize: function(){
-		var text;
+		var text = this;
 		special.each(function(ch, i){
-			text += this.replace(ch, standard[i]);
+			text = text.replace(new RegExp(ch, 'g'), standard[i]);
 		});
 		return text;
 	},
 
 	toSlug: function(ch){
-		return this.clean().standarize().toLowerCase().replace(/[^a-z0-9 ]/, '').replace(' ', ch || '-');
+		return this.clean().standarize().toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s/g, ch || '-');
 	},
 
 	truncate: function(length, add, notrim){
-		if(text.length > length) return this;
-		var text = text.substr(0, length || 30);
-		return (notrim ? text : text.trim()) + ($defined(add) ? add : '...');
+		if(this.length <= length) return this;
+		var text = this.substr(0, length || 30);
+		return (notrim ? text : text.trim()) + ($chk(add) ? add : '...');
 	},
 
 	highlight: function(str, format){
-		return this.replace(new RegExp('/('+ str.escapeRegExp() +')/', 'i'), format || '<strong class="highlight">$1</strong>');
+		return this.replace(new RegExp('('+ str.escapeRegExp() +')', 'gi'), format || '<strong class="highlight">$1</strong>');
 	},
 
 	repeat: function(times){
 		var text = '';
 		for(var i = 0; i < times; i++)
-			text += this;
+			text += this.toString();
 		return text;
 	},
 
 	pad: function(length, str, dir){
-		if (this.length <= length) return this;
-		var str = str || ' ';
-		var pad = str.repeat(this.length - str.length).substr(0, this.length - str.length);
-		if (!dir || dir == 'left') return this + pad;
-		if (dir == 'right') return pad + this;
-		return pad.substr(0, floor(pad / 2)) + this + pad.substr(0, ceil(pad / 2));
+		if (this.length >= length) return this;
+		str = str || ' ';
+		var pad = str.repeat(length - this.length).substr(0, length - this.length);
+		if (!dir || dir == 'right') return this + pad;
+		if (dir == 'left') return pad + this;
+		return pad.substr(0, (pad.length / 2).floor()) + this + pad.substr(0, (pad.length / 2).ceil());
 	},
 
 	stripTags: function(){

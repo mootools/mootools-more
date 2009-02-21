@@ -20,7 +20,7 @@ describe('String.toSlug', {
 
 	'should convert text into a slug phrase': function(){
 		value_of('I\'m called _JOHN_!'.toSlug()).should_be('im-called-john');
-		value_of(' óóóóhh!   ---rare'.standarize()).should_be('oooohh-rare');
+		value_of(' óóóóhh!   ---rare'.toSlug()).should_be('oooohh-rare');
 	}
 
 });
@@ -29,8 +29,8 @@ describe('String.truncate', {
 
 	'should truncate text at a given length': function(){
 		value_of('Lorem Ipsum is'.truncate(10, '..')).should_be('Lorem Ipsu..');
-		value_of('Hello space '.truncate(12)).should_be('Hello space...');
-		value_of('Hello space '.truncate(12, '...', true)).should_be('Hello space ...');
+		value_of('Hello space '.truncate(11)).should_be('Hello space...');
+		value_of('Hello space !'.truncate(12, '...', true)).should_be('Hello space ...');
 	}
 
 });
@@ -46,8 +46,8 @@ describe('String.highlight', {
 describe('String.repeat', {
 
 	'should repeat the given string a number of times': function(){
-		value_of('ha'.repeat(5)).should_be('hahaha');
-		value_of('ha'.repeat(0)).should_be('ha');
+		value_of('ha'.repeat(5)).should_be('hahahahaha');
+		value_of('ha'.repeat(0)).should_be('');
 	}
 
 });
