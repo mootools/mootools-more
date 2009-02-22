@@ -147,11 +147,6 @@
 			"desc": "Effect to smoothly scroll any element, including the window."
 		},
 
-		"Fx.Shake": {
-			"deps": ["Fx.Tween"],
-			"desc": "Effect to shake an element."
-		},		
-
 		"Fx.Slide": {
 			"deps": ["Fx", "Element.Style"],
 			"desc": "Effect to slide an element in and out of view."

@@ -25,7 +25,6 @@
 		"Fx.Move":['all'],
 		"Fx.Reveal":['all'],
 		"Fx.Scroll":['all'],
-		"Fx.Shake":['all'],
 		"Fx.Slide":['all'],
 		"Fx.SmoothScroll":['all'],
 		"Fx.Sort":['all']
