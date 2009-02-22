@@ -6,60 +6,9 @@ License:
 	MIT-style license.
 */
 
-var Chain = new Class({
-
-	$chains: {},
-
-	getChain: function(key) {
-
-		this.$chains[key] = this.$chains[key] || {
-
-			$chain: [],
-
-			chain: function(){
-				this.getChain(key).$chain.extend(Array.flatten(arguments));
-				return this;
-			}.bind(this),
-
-			callChain: function(){
-				return (this.getChain(key).$chain.length) ? this.getChain(key).$chain.shift().apply(this, arguments) : false;
-			}.bind(this),
-
-			clearChain: function(){
-				this.getChain(key).$chain.empty();
-				return this;
-			}.bind(this)
-
-		};
-
-		return this.$chains[key];
-
-	}
-
-});
-
-(function(){
-
-	var methods = {};
-
-	['chain', 'callChain', 'clearChain'].each(function(method) {
-
-		methods[method] = function(){
-			return this.getChain('default')[method].apply(this, arguments);
-		};
-	
-	});
-
-	Chain.implement(methods);
-
-})();
-
-
 Fx.Shake = new Class({
 
 	Extends: Fx.Tween,
-
-	Implements: Chain,
 
 	options: {
 		times: 5
@@ -70,11 +19,12 @@ Fx.Shake = new Class({
 		this._start = this.start;
 		this.start = this.shake;
 		this.duration = this.options.duration;
+		this.shakeChain = new Chain();
 	},
 
 	complete: function(){
-		if (!this.getChain('shake').$chain.length && this.stopTimer()) this.onComplete();
-		else if (this.getChain('shake').$chain.length) this.getChain('shake').callChain();
+		if (!this.shakeChain.$chain.length && this.stopTimer()) this.onComplete();
+		else if (this.shakeChain.$chain.length) this.shakeChain.callChain();
 		return this;
 	},
 
@@ -86,7 +36,7 @@ Fx.Shake = new Class({
 		this.stepDur = this.duration / (times + 2);
 		this._getTransition = this.getTransition;
 		this.origin = this.element.getStyle(property).toInt()||0;
-		this.getChain('shake').chain(
+		this.shakeChain.chain(
 			function(){
 				this.getTransition = function(){
 					return function(p){
@@ -96,13 +46,13 @@ Fx.Shake = new Class({
 				this.stopTimer();
 				this.options.duration = this.stepDur * times;
 				this._start(property, this.origin - args.distance);
-				this.getChain('shake').chain(
+				this.shakeChain.chain(
 					function() {
 							this.stopTimer();
 							this.getTransition = this._getTransition;
 							this.options.duration = this.stepDur;
 							this._start(property, this.origin);
-					}
+					}.bind(this)
 				);
 			}.bind(this)
 		);
@@ -111,7 +61,7 @@ Fx.Shake = new Class({
 	},
 
 	onCancel: function(){
-		this.parent().getChain('shake').clearChain();
+		this.parent().shakeChain.clearChain();
 	}
 
 });
