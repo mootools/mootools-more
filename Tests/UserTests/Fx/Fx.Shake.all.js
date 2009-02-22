@@ -2,10 +2,11 @@
 	tests: [
 		{
 			title: "Fx.Shake",
-			description: "Tests the reveal method, showing the object smoothly.",
-			verify: "Did the element appear smoothly?",
+			description: "Tests the Fx.Shake class, shaking an item left to right.",
+			verify: "Did the element shake left to right?",
 			before: function(){
-				new Fx.Shake($("box")).start('left', 20, 5);
+				$("box").shake('left', 20);
+				
 			}
 		}
 	]
