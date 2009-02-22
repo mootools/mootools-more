@@ -45,11 +45,11 @@ var Builder = {
 			'Class'		: ['Class.Refactor', 'Class.Binds', 'Class.Occlude'],
 			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras', 'URI'],
 			'Element'	: ['Element.Forms', 'Element.Measure'],
-			'Drag'      : ['Drag', 'Drag.Move'],
+			'Drag'      : ['Drag', 'Drag.Move', 'Slider', 'Sortables'],
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements', 'Fx.Accordion', 'Fx.SmoothScroll'],
 			'Request'   : ['Request.JsonP', 'Request.Queue', 'Request.Periodical'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie'],
-			'Interface' : ['Scroller', 'Slider', 'Sortables', 'Tips'],
+			'Interface' : ['Scroller', 'Tips'],
 			'Localization':['Date.English.US', 'Date.Norwegian', 'FormValidator.English', 'FormValidator.French']
 		},
 

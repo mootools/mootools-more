@@ -179,6 +179,16 @@
 		"Drag.Move": {
 			"deps": ["Drag", "Element.Dimensions"],
 			"desc": "A Drag extension that provides support for the constraining of draggables to containers and droppables."
+		},
+
+		"Slider": {
+			"deps": ["Drag", "Element.Dimensions"],
+			"desc": "Class for creating horizontal and vertical slider controls."
+		},
+
+		"Sortables": {
+			"deps": ["Drag.Move"],
+			"desc": "Class for creating a drag and drop sorting interface for lists of items."
 		}
 
 	},
@@ -236,17 +246,6 @@
 		"Scroller": {
 			"deps": ["Class.Extras", "Element.Event", "Element.Dimensions"],
 			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
-		},
-
-
-		"Slider": {
-			"deps": ["Drag", "Element.Dimensions"],
-			"desc": "Class for creating horizontal and vertical slider controls."
-		},
-
-		"Sortables": {
-			"deps": ["Drag.Move"],
-			"desc": "Class for creating a drag and drop sorting interface for lists of items."
 		},
 
 		"Tips": {
