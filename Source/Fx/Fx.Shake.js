@@ -34,7 +34,7 @@ Fx.Shake = new Class({
 
 	shake: function(property, distance, times){
 		if (!this.check(arguments.callee, property, distance)) return this;
-		var args = Array.flatten(arguments).link({property: String.type, distance: $defined, times: $defined});
+		var args = Array.link(arguments, {property: String.type, distance: $defined, times: $defined});
 		property = this.property || args.property;
 		times = args.times || this.options.times;
 		dbug.log(times);
@@ -95,7 +95,7 @@ Element.Properties.shake = {
 Element.implement({
 
 	shake: function(property, distance, times, options){
-		var args = Array.flatten(arguments).link({property: String.type, distance: Number.type, times: Number.type, options: Object.type});
+		var args = Array.link(arguments, {property: String.type, distance: Number.type, times: Number.type, options: Object.type});
 		if (args.options) this.set('shake', args.options);
 		this.get('shake').start(args.property, args.distance, args.times);
 		return this;
