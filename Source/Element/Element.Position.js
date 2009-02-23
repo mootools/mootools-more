@@ -69,6 +69,17 @@ Element.implement({
 		var rel = $(options.relativeTo) || document.body;
 		var top = (rel == document.body) ? window.getScroll().y : rel.getPosition().y;
 		var left = (rel == document.body) ? window.getScroll().x : rel.getPosition().x;
+
+		if (Browser.Engine.trident){
+			var par = rel.getParent(), scr;
+			while (par != document.body) {
+				scr = par.getScroll();
+				top += scr.y;
+				left += scr.x;
+				par = par.getParent();
+			}
+		}
+
 		var dim = this.getDimensions({computeSize: true, styles:['padding', 'border','margin']});
 		if (options.ignoreMargins){
 			options.offset.x = options.offset.x - dim['margin-left'];
