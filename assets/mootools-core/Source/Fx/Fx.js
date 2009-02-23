@@ -99,7 +99,6 @@ var Fx = new Class({
 	},
 
 	pause: function(){
-		dbug.log('pause');
 		this.stopTimer();
 		return this;
 	},
