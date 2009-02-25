@@ -35,7 +35,7 @@ Fx.Reveal = new Class({
 						styles: this.options.styles,
 						mode: this.options.mode
 					});
-					var setToAuto = this.element.style.height === '' || this.element.style.height == 'auto';
+					var setToAuto = (this.element.style.height === ""||this.element.style.height=="auto") && !this.element.getStyle('height').toInt();
 					this.element.setStyle('display', 'block');
 					if (this.options.transitionOpacity) startStyles.opacity = 1;
 					var zero = {};
@@ -90,7 +90,7 @@ Fx.Reveal = new Class({
 					var setToAuto, startStyles;
 					//toggle display, but hide it
 					this.element.measure(function(){
-						setToAuto = this.element.style.height === '' || this.element.style.height == 'auto';
+						setToAuto = (this.element.style.height === ""||this.element.style.height=="auto") && !this.element.getStyle('height').toInt();
 						//create the styles for the opened/visible state
 						startStyles = this.element.getComputedSize({
 							styles: this.options.styles,
