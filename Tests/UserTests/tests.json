@@ -4,7 +4,9 @@
 	},
 	"Drag": {
 		"Drag":['all'],
-		"Drag.Move":['basic', 'container']
+		"Drag.Move":['basic', 'container'],
+		"Slider":['all'],
+		"Sortables":['single', 'multi']
 	},
 	"Element":{
 		"Element.Forms":['all'],
@@ -29,8 +31,6 @@
 	},
 	"Interface":{
 		"Scroller":['all'],
-		"Slider":['all'],
-		"Sortables":['single', 'multi'],
 		"Tips":['all']
 	},
 	"Request":{
