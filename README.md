@@ -3,6 +3,7 @@ MooTools Plugins and Enhancements Repository
 ### Wiki
 
 * [See the wiki for how to get involved](http://wiki.github.com/mootools/mootools-more).
+* See also [MooTools-Core](https://github.com/mootools/mootools-core/tree) and [MooTools-Lang](http://github.com/anutron/mootools-lang/tree/master)
 
 ### TO DO
 
