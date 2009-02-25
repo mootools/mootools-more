@@ -18,7 +18,8 @@ var Builder = {
 		more: 'Source',
 		specs: 'Specs',
 		docs: 'Source',
-		scroll: 'Source'
+		scroll: 'Source',
+		lang: 'Source'
 	},
 
 	included: {
@@ -26,7 +27,8 @@ var Builder = {
 		more: {},
 		specs: {},
 		docs: {},
-		scroll: {}
+		scroll: {},
+		lang: {}
 	},
 
 	scripts: {
@@ -49,7 +51,10 @@ var Builder = {
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements', 'Fx.Accordion', 'Fx.SmoothScroll'],
 			'Request'   : ['Request.JsonP', 'Request.Queue', 'Request.Periodical'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie'],
-			'Interface' : ['Scroller', 'Tips'],
+			'Interface' : ['Scroller', 'Tips']
+		},
+
+		lang: {
 			'Localization':['Date.English.US', 'Date.Norwegian', 'FormValidator.English', 'FormValidator.French']
 		},
 
@@ -104,6 +109,7 @@ var Builder = {
 
 	includeFile: function(type, folder, file){
 		folder = folder || this.getFolder(type, file);
+		console.log('js: %s/%s', folder, file);
 		if (!folder) return false;
 		this.included[type][folder] = this.included[type][folder] || [];
 		var files = this.included[type][folder];
@@ -111,10 +117,12 @@ var Builder = {
 			if (files[i] == file) return false;
 		}
 		this.included[type][folder].push(file);
+		console.log(this.root + this.paths[type] + '/' + folder + '/' + file + '.js')
 		return document.writeln('\t<script type="text/javascript" src="' + this.root + this.paths[type] + '/' + folder + '/' + file + '.js"></script>');
 	},
 
 	includeFolder: function(type, folder){
+		console.log('%s/%s', type, folder);
 		var scripts = this.scripts[type][folder];
 		for (var i = 0, l = scripts.length; i < l; i++) this.includeFile(type, folder, scripts[i]);
 	},
