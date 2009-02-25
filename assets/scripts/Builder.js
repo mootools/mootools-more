@@ -109,7 +109,6 @@ var Builder = {
 
 	includeFile: function(type, folder, file){
 		folder = folder || this.getFolder(type, file);
-		console.log('js: %s/%s', folder, file);
 		if (!folder) return false;
 		this.included[type][folder] = this.included[type][folder] || [];
 		var files = this.included[type][folder];
@@ -117,12 +116,10 @@ var Builder = {
 			if (files[i] == file) return false;
 		}
 		this.included[type][folder].push(file);
-		console.log(this.root + this.paths[type] + '/' + folder + '/' + file + '.js')
 		return document.writeln('\t<script type="text/javascript" src="' + this.root + this.paths[type] + '/' + folder + '/' + file + '.js"></script>');
 	},
 
 	includeFolder: function(type, folder){
-		console.log('%s/%s', type, folder);
 		var scripts = this.scripts[type][folder];
 		for (var i = 0, l = scripts.length; i < l; i++) this.includeFile(type, folder, scripts[i]);
 	},
