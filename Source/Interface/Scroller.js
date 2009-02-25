@@ -17,7 +17,6 @@ var Scroller = new Class({
 		area: 20,
 		velocity: 1,
 		onChange: function(x, y){
-			dbug.log(x,y);
 			this.element.scrollTo(x, y);
 		},
 		fps: 50
