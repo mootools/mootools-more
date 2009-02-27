@@ -25,12 +25,14 @@ Element.implement({
 	},
 
 	expose: function(){
-		var style = this.style;
-		var cssText = style.cssText;
-		style.visibility = 'hidden';
-		style.position = 'absolute';
-		if (style.display == 'none') style.display = '';
-		return (function(){ return this.set('style', cssText); }).bind(this);
+		if (this.getStyle('display') != 'none') return $empty;
+		var before = {};
+		var styles = { visibility: 'hidden', display: 'block', position:'absolute' };
+		$each(styles, function(value, style){
+			before[style] = this.style[style]||'';
+		}, this);
+		this.setStyles(styles);
+		return (function(){ this.setStyles(before); }).bind(this);
 	},
 
 	getDimensions: function(options){
