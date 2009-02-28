@@ -14,10 +14,11 @@ Request.JSONP = new Class({
 	Implements: [Chain, Events, Options],
 
 	options: {/*
-		onRequest: $empty,
-		onComplete: $empty,
-		onSuccess: $empty,
-		onCancel: $empty,*/
+		onRetry: $empty(intRetries),
+		onRequest: $empty(scriptElement),
+		onComplete: $empty(data),
+		onSuccess: $empty(data),
+		onCancel: $empty(),*/
 		url: '',
 		data: {},
 		retries: 0,
@@ -57,6 +58,7 @@ Request.JSONP = new Class({
 		(function(){
 			var script = this.getScript(options);
 			MooTools.log('JSONP retrieving script with url: ' + script.src);
+			this.fireEvent('request', script);
 			this.running = true;
 			
 			(function(){
@@ -65,7 +67,7 @@ Request.JSONP = new Class({
 					if (script){
 						script.destroy();
 						this.request(options, index);
-						this.fireEvent('retry', this.options.retries());
+						this.fireEvent('retry', this.triesRemaining[index]);
 					}
 				} else if(script && this.options.timeout){
 					script.destroy();

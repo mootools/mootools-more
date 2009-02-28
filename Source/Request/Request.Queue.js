@@ -16,13 +16,12 @@ Request.Queue = new Class({
 	Binds: ['attach', 'request', 'complete', 'cancel', 'success', 'failure', 'exception'],
 
 	options: {/*
-		onRequestStart: $empty,
-		onRequestEnd: $empty,
-		onRequestSuccess: $empty,
-		onRequestComplete: $empty,
-		onRequestCancel: $empty,
-		onRequestException: $empty,
-		onRequestFailure: $empty,*/
+		onRequest: $empty(argsPassedToOnRequest),
+		onSuccess: $empty(argsPassedToOnSuccess),
+		onComplete: $empty(argsPassedToOnComplete),
+		onCancel: $empty(argsPassedToOnCancel),
+		onException: $empty(argsPassedToOnException),
+		onFailure: $empty(argsPassedToOnFailure),*/
 		stopOnFailure: true,
 		autoAdvance: true,
 		concurrent: 1,

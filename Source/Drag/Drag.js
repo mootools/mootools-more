@@ -16,11 +16,12 @@ var Drag = new Class({
 	Implements: [Events, Options],
 
 	options: {/*
-		onBeforeStart: $empty,
-		onStart: $empty,
-		onDrag: $empty,
-		onCancel: $empty,
-		onComplete: $empty,*/
+		onBeforeStart: $empty(thisElement),
+		onStart: $empty(thisElement, event),
+		onSnap: $empty(thisElement)
+		onDrag: $empty(thisElement, event),
+		onCancel: $empty(thisElement),
+		onComplete: $empty(thisElement, event),*/
 		snap: 6,
 		unit: 'px',
 		grid: false,

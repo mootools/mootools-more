@@ -82,10 +82,10 @@ var FormValidator = new Class({
 	Binds: ['onSubmit'],
 
 	options: {/*
-		onFormValidate: function(isValid, form, event){},
-		onElementValidate: function(isValid, field, className, warn){},
-		onElementPass: function(field){},
-		onElementFail: function(field, validatorsFailed){} */
+		onFormValidate: $empty(isValid, form, event),
+		onElementValidate: $empty(isValid, field, className, warn),
+		onElementPass: $empty(field),
+		onElementFail: $empty(field, validatorsFailed) */
 		fieldSelectors:"input, select, textarea",
 		ignoreHidden: true,
 		useTitles:false,

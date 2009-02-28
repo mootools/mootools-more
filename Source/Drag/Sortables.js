@@ -14,9 +14,9 @@ var Sortables = new Class({
 	Implements: [Events, Options],
 
 	options: {/*
-		onSort: $empty,
-		onStart: $empty,
-		onComplete: $empty,*/
+		onSort: $empty(element, clone),
+		onStart: $empty(element, clone),
+		onComplete: $empty(element),*/
 		snap: 4,
 		opacity: 1,
 		clone: false,

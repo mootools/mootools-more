@@ -14,8 +14,8 @@ Fx.Accordion = new Class({
 	Extends: Fx.Elements,
 
 	options: {/*
-		onActive: $empty,
-		onBackground: $empty,*/
+		onActive: $empty(toggler, section),
+		onBackground: $empty(toggler, section),*/
 		display: 0,
 		show: false,
 		height: true,
