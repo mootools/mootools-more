@@ -2,8 +2,11 @@
 Script: Fx.Elements.js
 	Effect to change any number of CSS properties of any number of Elements.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 Fx.Elements = new Class({

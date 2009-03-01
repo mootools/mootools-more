@@ -2,8 +2,11 @@
 Script: Fx.Scroll.js
 	Effect to smoothly scroll any element, including the window.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 Fx.Scroll = new Class({
@@ -11,7 +14,7 @@ Fx.Scroll = new Class({
 	Extends: Fx,
 
 	options: {
-		offset: {'x': 0, 'y': 0},
+		offset: {x: 0, y: 0},
 		wheelStops: true
 	},
 
@@ -40,12 +43,9 @@ Fx.Scroll = new Class({
 	},
 
 	compute: function(from, to, delta){
-		var now = [];
-		var x = 2;
-		x.times(function(i){
-			now.push(Fx.compute(from[i], to[i], delta));
+		return [0, 1].map(function(i){
+			return Fx.compute(from[i], to[i], delta);
 		});
-		return now;
 	},
 
 	start: function(x, y){
