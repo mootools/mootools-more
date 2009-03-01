@@ -1,14 +1,4 @@
 /*
-<<<<<<< HEAD:Source/Interface/Accordion.js
-Script: Accordion.js
-	An Fx.Elements extension which allows you to easily create accordion type controls.
-
-License:
-	MIT-style license.
-*/
-
-var Accordion = new Class({
-=======
 Script: Fx.Accordion.js
 	An Fx.Elements extension which allows you to easily create accordion type controls.
 
@@ -20,23 +10,14 @@ Script: Fx.Accordion.js
 */
 
 Fx.Accordion = new Class({
->>>>>>> dcfa2bbebe1364e8c2c7d10f53397b70da72d1b3:Source/Fx/Fx.Accordion.js
 
 	Extends: Fx.Elements,
 
 	options: {/*
-<<<<<<< HEAD:Source/Interface/Accordion.js
-		onActive: $empty,
-		onBackground: $empty,*/
-		display: 0,
-		show: false,
-		trigger: 'click',
-=======
 		onActive: $empty(toggler, section),
 		onBackground: $empty(toggler, section),*/
 		display: 0,
 		show: false,
->>>>>>> dcfa2bbebe1364e8c2c7d10f53397b70da72d1b3:Source/Fx/Fx.Accordion.js
 		height: true,
 		width: false,
 		opacity: true,
@@ -91,12 +72,8 @@ Fx.Accordion = new Class({
 			toggler.inject(this.container);
 			element.inject(this.container);
 		}
-<<<<<<< HEAD:Source/Interface/Accordion.js
-		toggler.addEvent(this.options.trigger, this.display.bind(this,this.togglers.indexOf(toggler)));
-=======
 		var idx = this.togglers.indexOf(toggler);
 		toggler.addEvent('click', this.display.bind(this, idx));
->>>>>>> dcfa2bbebe1364e8c2c7d10f53397b70da72d1b3:Source/Fx/Fx.Accordion.js
 		if (this.options.height) element.setStyles({'padding-top': 0, 'border-top': 'none', 'padding-bottom': 0, 'border-bottom': 'none'});
 		if (this.options.width) element.setStyles({'padding-left': 0, 'border-left': 'none', 'padding-right': 0, 'border-right': 'none'});
 		element.fullOpacity = 1;
