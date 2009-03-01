@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Mootools More Specs</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="../assets/styles/specs.css" />
+	<script type="text/javascript" src="../assets/scripts/JSSpec.js"></script>
+	<script type="text/javascript" src="../assets/scripts/DiffMatchPatch.js"></script>
+	<script type="text/javascript" src="../assets/scripts/Builder.js"></script>
+	<script type="text/javascript">
+		Builder.root = "../assets/mootools-core/";
+		Builder.includeType('core');
+
+		Builder.root = "../";
+		Builder.includeType('more');
+		
+		Builder.root = "../assets/mootools-lang/";
+		Builder.includeType('lang');
+
+		Builder.root = "../";
+		Builder.scripts.specs = {
+			'Core' : ['MooTools.Lang'],
+			'Class' : ['Class.Refactor', 'Class.Binds', 'Class.Occlude'],
+			'Native' : ['Date', 'Date.Extras', 'Hash.Extras', 'String.Extras', 'Array.Extras', 'URI'],
+			'Element' : ['Element.Forms', 'Element.Measure'],
+			'Utilities' : ['Color', 'Hash.Cookie']
+		};
+
+		if (!Builder.includeRequest('specs')) Builder.includeType('specs');
+	</script>
+</head>
+<body>
+</body>
+</html>

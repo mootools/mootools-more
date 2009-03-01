@@ -1,0 +1,1 @@
+$('msg').set('html', 'JavaScript loaded successfully!');
