@@ -2,8 +2,11 @@
 Script: Slider.js
 	Class for creating horizontal and vertical slider controls.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Slider = new Class({
@@ -11,8 +14,9 @@ var Slider = new Class({
 	Implements: [Events, Options],
 
 	options: {/*
-		onChange: $empty,
-		onComplete: $empty,*/
+		onTick: $empty(intPosition),
+		onChange: $empty(intStep),
+		onComplete: $empty(strStep),*/
 		onTick: function(position){
 			if (this.options.snap) position = this.toPosition(this.step);
 			this.knob.setStyle(this.property, position);
@@ -56,18 +60,23 @@ var Slider = new Class({
 		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
+
 		this.drag = new Drag(this.knob, {
 			snap: 0,
 			limit: limit,
 			modifiers: modifiers,
 			onDrag: this.draggedKnob.bind(this),
+			onBeforeStart: (function(){
+				this.isDragging = true;
+			}).bind(this),
 			onStart: this.draggedKnob.bind(this),
 			onComplete: function(){
+				this.isDragging = false;
 				this.draggedKnob();
 				this.end();
 			}.bind(this)
 		});
-		if (this.options.snap) {
+		if (this.options.snap){
 			this.drag.options.grid = Math.ceil(this.stepWidth);
 			this.drag.options.limit[this.axis][1] = this.full;
 		}
@@ -85,6 +94,8 @@ var Slider = new Class({
 	},
 
 	clickedElement: function(event){
+		if (this.isDragging) return;
+
 		var dir = this.range < 0 ? -1 : 1;
 		var position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
 		position = position.limit(-this.options.offset, this.full -this.options.offset);
