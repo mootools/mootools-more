@@ -61,7 +61,7 @@
 		},
 		
 		"URI": {
-			"deps": ["Function", "Array", "String.Extras"],
+			"deps": ["Function", "Array"],
 			"desc": "Extends a string to provide numerous methods for managing URI components."
 		}
 
