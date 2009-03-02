@@ -39,7 +39,7 @@ String.implement({
 	},
 
 	repeat: function(times){
-		return new Array(times).join(text);
+		return new Array(times + 1).join(this);
 	},
 
 	pad: function(length, str, dir){
