@@ -69,3 +69,5 @@ MooTools Plugins and Enhancements Repository
 * Date
   - Number / String extensions moved to string extras. zeroise made an anonymous function, was lame
 * Element.setPosition is now Element.position
+* String.Extra query functions moved to URI.js
+ - parseQuery > parseQueryString for consistency with cleanQueryString

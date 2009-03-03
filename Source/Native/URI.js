@@ -12,6 +12,29 @@ Script: URI.js
 		Aaron Newton, Lennart Pilon, Valerio Proietti
 */
 
+String.implement({
+	
+	parseQueryString: function(encodeKeys, encodeValues){
+		encodeKeys = $pick(encodeKeys, true);
+		encodeValues = $pick(encodeValues, true);
+		var vars = this.split(/[&;]/), rs = {};
+		if (vars.length) vars.each(function(val){
+			var keys = val.split('=');
+			if (keys.length && keys.length == 2){
+				rs[(encodeKeys) ? encodeURIComponent(keys[0]):keys[0]] = (encodeValues) ? encodeURIComponent(keys[1]) : keys[1];
+			}
+		});
+		return rs;
+	},
+
+	cleanQueryString: function(method){
+		return this.split('&').filter(method || function(set){
+			return $chk(set.split('=')[1]);
+		}).join('&');
+	}
+	
+});
+
 var URI = new Native({
 
 	initialize: function(uri){
@@ -77,7 +100,7 @@ URI.prototype = new String;
 		getData: function(key){
 			var qs = this.get('query');
 			if (!$chk(qs)) return key ? null : {};
-			var obj = decodeURI(qs).parseQuery(false, false); 
+			var obj = decodeURI(qs).parseQueryString(false, false); 
 			return key ? obj[key] : obj;
 		},
 
