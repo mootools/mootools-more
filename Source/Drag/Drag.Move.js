@@ -15,9 +15,9 @@ Drag.Move = new Class({
 	Extends: Drag,
 
 	options: {/*
-		onEnter: $empty,
-		onLeave: $empty,
-		onDrop: $empty,*/
+		onEnter: $empty(thisElement, overed),
+		onLeave: $empty(thisElement, overed),
+		onDrop: $empty(thisElement, overed, event),*/
 		droppables: [],
 		container: false
 	},

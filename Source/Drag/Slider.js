@@ -14,8 +14,9 @@ var Slider = new Class({
 	Implements: [Events, Options],
 
 	options: {/*
-		onChange: $empty,
-		onComplete: $empty,*/
+		onTick: $empty(intPosition),
+		onChange: $empty(intStep),
+		onComplete: $empty(strStep),*/
 		onTick: function(position){
 			if (this.options.snap) position = this.toPosition(this.step);
 			this.knob.setStyle(this.property, position);
