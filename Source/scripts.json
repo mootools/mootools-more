@@ -4,7 +4,7 @@
 
 		"MooTools.Lang": {
 			"deps": ["Class.Extras"],
-			"desc": ["Enables classes to contain text that can be localized to specific languages."]
+			"desc": "Enables classes to contain text that can be localized to specific languages."
 		}
 
 	},
