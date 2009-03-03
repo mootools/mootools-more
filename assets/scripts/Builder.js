@@ -49,7 +49,7 @@ var Builder = {
 			'Element'	: ['Element.Forms', 'Element.Measure'],
 			'Drag'      : ['Drag', 'Drag.Move', 'Slider', 'Sortables'],
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements', 'Fx.Accordion', 'Fx.SmoothScroll'],
-			'Request'   : ['Request.JsonP', 'Request.Queue', 'Request.Periodical'],
+			'Request'   : ['Request.JSONP', 'Request.Queue', 'Request.Periodical'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie'],
 			'Interface' : ['Scroller', 'Tips']
 		},

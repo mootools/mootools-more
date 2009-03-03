@@ -386,84 +386,10 @@ Each pattern is an object with two properties: a regular expression and a handle
 	]);
 
 
-Native: Number {#Number}
-========================
-
-Date.js extends the native Number class.
-
-Number Method: zeroise {#Number:zeroise}
-----------------------------------------
-
-Returns a value with as many digits as specified.
-
-### Syntax
-
-	number.zeroise(digits)
-
-###	Arguments
-
-1. digits - (*integer*) the number of digits.
-
-
-### Example
-
-	(12).zeroise(3); //012
-
-### Returns
-
-* (*string*) the number with as many digits specified
-
-Native: String {#String}
-========================
-
-Extends the native String Class.
-
-String Method: repeat {#String:repeat}
---------------------------------------
-
-Repeats a string as many times as specified.
-
-### Syntax
-
-	str.times(count);
-
-### Arguments
-
-1. count - (*integer*) the number of times to repeat the string.
-
-### Example
-
-	"foo".repeat(3); //returns "foofoofoo"
-
-### Returns
-
-* (*string*) the string repeated the times specified
-
-String Method: zeroise {#String:zeroise}
-----------------------------------------
-
-Returns a value with as many digits as specified.
-
-### Syntax
-
-	str.zeroise(length);
-
-### Arguments
-
-1. length - (*integer*) the number of digits.
-
-### Example
-
-	"12".zeroise(3); //"012"
-
-### Returns
-
-* (*string*) the string with zeros prepended to it to make it the specified length
-
 Date Language Localization {#Localization}
 ==========================================
 
-*Date.js* includes the following key/values for localization.
+*Date.js* includes the following key/values for localization. See [MooTools.Lang][].
 
 * months - (*array*) An array of month names for the language (January, February, etc)
 * days - (*array*) An array of names for the days of the week (Monday, Tuesday, etc)
@@ -474,3 +400,4 @@ Date Language Localization {#Localization}
 [Date:increment]: #Date:increment
 [Date:$parsePatterns]: #Date:parsePatterns
 [Date.Extras.js]: /docs/Native/Date.Extras
+[MooTools.Lang]: http://www.mootools.net/more/docs/Core/MooTools.Lang
