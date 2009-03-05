@@ -248,6 +248,20 @@
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
 		}
 
+	},
+
+	"Localization":{
+
+		"Date.English.US": {
+			"deps": ["MooTools.Lang"],
+			"desc": "Date messages in English (with conventions for the US)."
+		},
+
+		"FormValidator.English": {
+			"deps": ["MooTools.Lang"],
+			"desc": "FormValidator messages in English."
+		}
+
 	}
 
 }

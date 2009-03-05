@@ -97,9 +97,6 @@ var OverText = new Class({
 	focus: function(){
 		if (!this.text.isVisible() || this.element.get('disabled')) return;
 		this.hide();
-		try {
-			this.element.fireEvent('focus').focus();
-		} catch(e){} //IE barfs if you call focus on hidden elements
 	},
 
 	hide: function(){
@@ -107,6 +104,9 @@ var OverText = new Class({
 			this.text.hide();
 			this.fireEvent('textHide', [this.text, this.element]);
 			this.pollingPaused = true;
+			try {
+				this.element.fireEvent('focus').focus();
+			} catch(e){} //IE barfs if you call focus on hidden elements
 		}
 		return this;
 	},
