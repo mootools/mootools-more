@@ -114,6 +114,7 @@ var OverText = new Class({
 	show: function(){
 		if (!this.text.isVisible()){
 			this.text.show();
+			this.reposition();
 			this.fireEvent('textShow', [this.text, this.element]);
 			this.pollingPaused = false;
 		}
