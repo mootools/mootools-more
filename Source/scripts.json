@@ -5,6 +5,11 @@
 		"MooTools.Lang": {
 			"deps": ["Class.Extras"],
 			"desc": "Enables classes to contain text that can be localized to specific languages."
+		},
+
+		"Version": {
+			"deps": ["Core"],
+			"desc": "Defines MooTools.More.version."
 		}
 
 	},
