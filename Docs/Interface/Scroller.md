@@ -89,5 +89,5 @@ Scroller Method: stop {#Scroller:stop}
 
 
 
-[Events]: /Class/Class.Extras#Events
-[Options]: /Class/Class.Extras#Options
+[Events]: /docs/core/Class/Class.Extras#Events
+[Options]: /docs/core/Class/Class.Extras#Options

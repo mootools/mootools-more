@@ -227,11 +227,11 @@ Hash: Element.Properties {#Element-Properties}
 This [Hash][] contains the functions that respond to the first argument passed in [Element:get][], [Element:set][] and [Element:erase][] (this is all standard Mootools methodology).
 
 
-[String:tidy]: /docs/Native/String.Extras#String:tidy
+[String:tidy]: /docs/more/Native/String.Extras#String:tidy
 [Element:getTextInRange]: #Element:getTextInRange
 [Element:getSelectionStart]: #Element:getSelectionStart
-[Element]: http://docs.mootools.net/Element/Element
-[Element:get]: http://docs.mootools.net/Element/Element#Element:get
-[Element:set]: http://docs.mootools.net/Element/Element#Element:set
-[Element:erase]: http://docs.mootools.net/Element/Element#Element:erase
-[Hash]: http://docs.mootools.net/Native/Hash
+[Element]: /docs/core/Element/Element
+[Element:get]: /docs/core/Element/Element#Element:get
+[Element:set]: /docs/core/Element/Element#Element:set
+[Element:erase]: /docs/core/Element/Element#Element:erase
+[Hash]: /docs/core/Native/Hash

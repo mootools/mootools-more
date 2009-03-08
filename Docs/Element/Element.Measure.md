@@ -128,4 +128,4 @@ An object with all the style properties as well as summed properties (like *tota
 	}
 
 [Element:getComputedSize]: #Element:getComputedSize
-[Element]: http://docs.mootools.net/Element/Element
+[Element]: /docs/core/Element/Element

@@ -203,5 +203,5 @@ Note that either or both of these may be specified and in any order.
 
 [Fx.Reveal]: #Fx-Reveal
 [Fx.Reveal:options]: #Fx-Reveal:options
-[Fx.Morph]: http://docs.mootools.net/Fx/Fx.Morph
-[Element]: http://docs.mootools.net/Element/Element
+[Fx.Morph]: /docs/core/Fx/Fx.Morph
+[Element]: /docs/core/Element/Element

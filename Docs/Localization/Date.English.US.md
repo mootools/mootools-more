@@ -15,5 +15,5 @@ Simply change the language property to *usENG*.
 
 See also: [Date.Extras][] and [MooTools.Lang][]
 
-[FormValidator]: http://www.mootools.net/more/docs/Forms/FormValidator#FormValidator
-[Date.Extras]: http://www.mootools.net/more/docs/Native/Date.Extras
+[FormValidator]: /docs/more/Forms/FormValidator#FormValidator
+[Date.Extras]: /docs/more/Native/Date.Extras

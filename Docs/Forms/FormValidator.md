@@ -690,7 +690,7 @@ FormValidator Language Localization {#Localization}
 [FormValidator:add]: #AddingValidators:add
 [FormValidator.required]: #FormValidator:required
 [validation.js by Andrew Tetlaw]: http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
-[Options]: http://docs.mootools.net/Class/Class.Extras#Options
-[Events]: http://docs.mootools.net/Class/Class.Extras#Events
+[Options]: /docs/core/Class/Class.Extras#Options
+[Events]: /docs/core/Class/Class.Extras#Events
 [send them back to us]: http://groups.google.com/group/mootools-lang
-[JSON.decode]: http://docs.mootools.net/Utilities/JSON#decode
+[JSON.decode]: /docs/core/Utilities/JSON#decode

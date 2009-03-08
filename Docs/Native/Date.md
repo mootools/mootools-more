@@ -399,5 +399,5 @@ Date Language Localization {#Localization}
 
 [Date:increment]: #Date:increment
 [Date:$parsePatterns]: #Date:parsePatterns
-[Date.Extras.js]: /docs/Native/Date.Extras
-[MooTools.Lang]: http://www.mootools.net/more/docs/Core/MooTools.Lang
+[Date.Extras.js]: /docs/more/Native/Date.Extras
+[MooTools.Lang]: /docs/more/Core/MooTools.Lang

@@ -10,7 +10,7 @@ Pass a *string* to the URI subclass and it will extend it, returning a new strin
 
 ### Syntax
 
-	var myURI = new URI('http://www.test.com:8383/this/is/the/path.html?query=value#anchor');
+	var myURI = new URI('http://www.test.com:8383/the/path.html?query=value#anchor');
 
 ### Returns
 

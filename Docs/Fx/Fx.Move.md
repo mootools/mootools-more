@@ -160,5 +160,5 @@ Creates a new instance of [Fx.Move][] and calls its *start* method.
 
 [Fx.Move]: #Fx-Move
 [Fx.Move:options]: #Fx-Move:options
-[Fx.Morph]: http://docs.mootools.net/Fx/Fx.Morph
-[Element]: http://docs.mootools.net/Element/Element
+[Fx.Morph]: /docs/core/Fx/Fx.Morph
+[Element]: /docs/core/Element/Element
