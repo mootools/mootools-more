@@ -44,7 +44,7 @@ FormValidator.Inline = new Class({
 		if (!advice){
 			var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
 			advice = new Element('div', {
-				text: errorMsg,
+				html: errorMsg,
 				styles: { display: 'none' },
 				id: 'advice-' + className + '-' + this.getFieldId(field)
 			}).addClass(cssClass);

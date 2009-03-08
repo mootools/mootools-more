@@ -49,6 +49,7 @@ MooTools Plugins and Enhancements Repository
   - Browser.redraw is gone
 * Class.Binds no longer supports lowercase binds
 * Element.fxOpacityOk (which was never documented or intended for external use) is gone
+* Element.isVisible renamed to Element.isDisplayed
 * FormValidator base class no longer does what it did (that is now in FormValidator.Inline)
 * OverText
   - no longer takes a collection of inputs.

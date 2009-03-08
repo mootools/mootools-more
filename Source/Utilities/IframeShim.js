@@ -31,8 +31,9 @@ var IframeShim = new Class({
 		if(this.options.browsers){
 		  var zIndex = this.element.getStyle('zIndex').toInt();
 			if (!zIndex){
-				zIndex = 5;
-				this.element.setStyle('zIndex', 5);
+				var pos = this.element.getStyle('position');
+				if (pos == "static" || !pos) this.element.setStyle('position', 'relative');
+				this.element.setStyle('zIndex', zIndex);
 			}
 			this.shim = new Iframe({
 				src: (window.location.protocol == 'https') ? '://0' : 'javascript:void(0)',
