@@ -389,7 +389,7 @@ Each pattern is an object with two properties: a regular expression and a handle
 Date Language Localization {#Localization}
 ==========================================
 
-*Date.js* includes the following key/values for localization. See [MooTools.Lang][].
+*Date.js* includes the following key/values for localization. See [Lang][].
 
 * months - (*array*) An array of month names for the language (January, February, etc)
 * days - (*array*) An array of names for the days of the week (Monday, Tuesday, etc)
@@ -400,4 +400,4 @@ Date Language Localization {#Localization}
 [Date:increment]: #Date:increment
 [Date:$parsePatterns]: #Date:parsePatterns
 [Date.Extras.js]: /docs/more/Native/Date.Extras
-[MooTools.Lang]: /docs/more/Core/MooTools.Lang
+[Lang]: /docs/more/Core/Lang

@@ -13,7 +13,7 @@ Simply change the language property to *usENG*.
 
 	MooTools.lang.setLanguage("usENG");
 
-See also: [FormValidator][] and [MooTools.Lang][]
+See also: [FormValidator][] and [Lang][]
 
 [FormValidator]: /docs/more/Forms/FormValidator#FormValidator
-[MooTools.Lang]: /docs/more/Core/MooTools.Lang
+[Lang]: /docs/more/Core/Lang

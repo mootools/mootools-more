@@ -1,5 +1,5 @@
 /*
-Script: Lang.js
+Script: MooTools.Lang.js
 	Provides methods for localization.
 
 	License:
