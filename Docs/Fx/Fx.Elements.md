@@ -108,4 +108,4 @@ Applies the passed in style transitions to each object named (see example).
 
 
 
-[Fx]: /Fx/Fx
+[Fx]: /docs/core/Fx/Fx

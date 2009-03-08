@@ -26,6 +26,7 @@ Class: Scroller {#Scroller}
 
 * area     - (*number*: defaults to 20) The necessary boundaries to make the element scroll.
 * velocity - (*number*: defaults to 1) The modifier for the window scrolling speed.
+* fps      - (*number*: defaults to 50) The frames per second that the scroller updates and scrolls.
 
 ### Events:
 
@@ -88,5 +89,5 @@ Scroller Method: stop {#Scroller:stop}
 
 
 
-[Events]: /Class/Class.Extras#Events
-[Options]: /Class/Class.Extras#Options
+[Events]: /docs/core/Class/Class.Extras#Events
+[Options]: /docs/core/Class/Class.Extras#Options

@@ -5,7 +5,7 @@ Enables the modification of two CSS properties of an Element based on the positi
 
 ### Implements:
 
-[Events][], [Chain](/Class/Class.Extras#Options)
+[Events][], [Chain], [Options][]
 
 
 Drag Method: constructor {#Drag:constructor}
@@ -25,7 +25,7 @@ Drag Method: constructor {#Drag:constructor}
 * grid      - (*integer*: defaults to false) Distance in pixels for snap-to-grid dragging.
 * handle    - (*element*: defaults to the element passed in) The Element to act as the handle for the draggable element.
 * invert    - (*boolean*: defaults to false) Whether or not to invert the values reported on start and drag.
-* limit     - (*object*: defaults to false) An object with x and y properties used to limit the movement of the Element.
+* limit     - (*object*: defaults to false) An object with x and y dimensions used to limit the movement of the Element.
 * modifiers - (*object*: defaults to {'x': 'left', 'y': 'top'}) An object with x and y properties used to indicate the CSS modifiers (i.e. 'left').
 * snap      - (*integer*: defaults to 6) The distance to drag before the Element starts to respond to the drag.
 * style     - (*boolean*: defaults to true) Whether or not to set the modifier as a style property of the element.
@@ -36,8 +36,9 @@ Drag Method: constructor {#Drag:constructor}
 * beforeStart - Executed before the Drag instance attaches the events. Receives the dragged element as an argument.
 * start       - Executed when the user starts to drag (on mousedown). Receives the dragged element as an argument.
 * snap        - Executed when the user has dragged past the snap option. Receives the dragged element as an argument.
-* drag        - Executed on every step of the drag. Receives the dragged element as an argument.
-* complete    - Executed when the user completes the drag. Receives the dragged element as an argument.
+* drag        - Executed on every step of the drag. Receives the dragged element and the event as arguments.
+* complete    - Executed when the user completes the drag. Receives the dragged element and the event as arguments.
+* cancel      - Executed when the user has cancelled the drag. Receives the dragged element as an argument.
 
 ### Examples:
 
@@ -137,7 +138,7 @@ Stops (removes) all attached events from the Drag instance and executes the 'com
 		onSnap: function(){
 			this.moved = this.moved || 0;
 			this.moved++;
-			if(this.moved > 100) {
+			if (this.moved > 100){
 				this.stop();
 				alert("Stop! You'll make the Element angry.");
 			}
@@ -184,9 +185,10 @@ Adds drag-to-resize behavior to an Element using supplied options.
 
 
 
-[$]: /Element/Element/#dollar
-[Element:addEvent]: /Element/Element.Event/#Element:addEvent
-[Element:makeDraggable]: /Drag/Drag.Move/#Element:makeDraggable
-[Events]: /Class/Class.Extras#Events
-[Chain]: /Class/Class.Extras#Options
+[$]: /docs/core/Element/Element/#dollar
+[Element:addEvent]: /docs/core/Element/Element.Event/#Element:addEvent
+[Element:makeDraggable]: /docs/more/Drag/Drag.Move/#Element:makeDraggable
+[Events]: /docs/core/Class/Class.Extras#Events
+[Chain]: /docs/core/Class/Class.Extras#Chain
+[Options]: /docs/core/Class/Class.Extras#Options
 [W3Schools: CSS Units]: http://www.w3schools.com/css/css_units.asp

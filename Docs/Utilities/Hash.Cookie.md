@@ -101,7 +101,7 @@ Loads the cookie and assigns it to the Hash.
 
 	(function(){
 		myHashCookie.load();
-		if(!myHashCookie.length) alert('Cookie Monster must of eaten it!');
+		if (!myHashCookie.length) alert('Cookie Monster must of eaten it!');
 	}).periodical(5000);
 
 ### Notes:
@@ -110,5 +110,5 @@ Loads the cookie and assigns it to the Hash.
 
 
 
-[Hash]: /Native/Hash/#Hash
-[Cookie]: /Utilities/Cookie
+[Hash]: /docs/core/Native/Hash/#Hash
+[Cookie]: /docs/core/Utilities/Cookie

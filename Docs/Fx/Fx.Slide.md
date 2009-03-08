@@ -182,7 +182,7 @@ Shows the Element without a transition.
 
     //Slides "myElement" out.
 	myFx.slideOut().chain(function(){
-	    //Waits one second, then the Element appears without transition.
+		//Waits one second, then the Element appears without transition.
 		this.show.delay(1000, this);
 	});
 
@@ -264,6 +264,6 @@ Slides this Element in view.
 
 
 [Fx.Slide]: #Fx-Slide
-[Fx]: /Fx/Fx
-[$]: /Element/Element#dollar
-[Element.Properties]: /Element/Element/#Element-Properties
+[Fx]: /docs/core/Fx/Fx
+[$]: /docs/core/Element/Element#dollar
+[Element.Properties]: /docs/core/Element/Element/#Element-Properties

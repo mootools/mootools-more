@@ -2,8 +2,11 @@
 Script: Scroller.js
 	Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Scroller = new Class({
@@ -15,7 +18,8 @@ var Scroller = new Class({
 		velocity: 1,
 		onChange: function(x, y){
 			this.element.scrollTo(x, y);
-		}
+		},
+		fps: 50
 	},
 
 	initialize: function(element, options){
@@ -37,15 +41,19 @@ var Scroller = new Class({
 
 	getCoords: function(event){
 		this.page = (this.listener.get('tag') == 'body') ? event.client : event.page;
-		if (!this.timer) this.timer = this.scroll.periodical(50, this);
+		if (!this.timer) this.timer = this.scroll.periodical(Math.round(1000 / this.options.fps), this);
 	},
 
 	scroll: function(){
-		var size = this.element.getSize(), scroll = this.element.getScroll(), pos = this.element.getPosition(), change = {'x': 0, 'y': 0};
+		var size = this.element.getSize(), 
+			scroll = this.element.getScroll(), 
+			pos = this.element.getOffsets(), 
+			scrollSize = this.element.getScrollSize(), 
+			change = {'x': 0, 'y': 0};
 		for (var z in this.page){
 			if (this.page[z] < (this.options.area + pos[z]) && scroll[z] != 0)
 				change[z] = (this.page[z] - this.options.area - pos[z]) * this.options.velocity;
-			else if (this.page[z] + this.options.area > (size[z] + pos[z]) && size[z] + size[z] != scroll[z])
+			else if (this.page[z] + this.options.area > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z])
 				change[z] = (this.page[z] - size[z] + this.options.area - pos[z]) * this.options.velocity;
 		}
 		if (change.y || change.x) this.fireEvent('change', [scroll.x + change.x, scroll.y + change.y]);

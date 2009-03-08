@@ -27,10 +27,11 @@ All the base Drag options, plus:
 
 * container  - (*element*) If an Element is passed, drag will be limited to the passed Element's size and position.
 * droppables - (*array*) The Elements that the draggable can drop into. The class's drop, enter, and leave events will be fired in conjunction with interaction with one of these elements.
+* precalculate - (*boolean*; defaults to *false*) If *true*, the class will calculate the locations and dimensions of the droppables which will increase performance. If the droppables are likely to change shape, size, or location it is best to leave this as *false*.
 
 ### Events:
 
-* drop  - Executed when the element drops. Passes as argument the element and the element dropped on. If dropped on nothing, the second argument is null.
+* drop  - Executed when the element drops. Passes as argument the element and the element dropped on and the event. If dropped on nothing, the second argument is null.
 * leave - Executed when the element leaves one of the droppables.
 * enter - Executed when the element enters one of the droppables.
 
@@ -40,9 +41,9 @@ All the base Drag options, plus:
 
 		droppables: '.droppable',
 
-		onDrop: function(element, droppable){
+		onDrop: function(element, droppable, event){
 			if (!droppable) console.log(element, ' dropped on nothing');
-			else console.log(element, 'dropped on', droppable);
+			else console.log(element, 'dropped on', droppable, 'event', event);
 		},
 
 		onEnter: function(element, droppable){
@@ -87,7 +88,7 @@ Fires the 'drop' event and calls the Drag Class stop method.
 		onSnap: function(){ // due to MooTool's inheritance, all [Drag][]'s Events are also available.
 			this.moved = this.moved || 0;
 			this.moved++;
-			if(this.moved > 1000){
+			if (this.moved > 1000){
 				alert("You've gone far enough.");
 				this.stop();
 			}
@@ -138,7 +139,7 @@ Adds drag-to-move behavior to an Element using supplied options.
 
 
 
-[$]: /Element/Element/#dollar
-[Drag]: /Drag/Drag/#Drag
-[Drag:stop]: /Drag/Drag/#Drag:stop
-[Element:getPosition]: /Utilities/Dimensions/#Element:getPosition
+[$]: /docs/core/Element/Element/#dollar
+[Drag]: /docs/more/Drag/Drag/#Drag
+[Drag:stop]: /docs/more/Drag/Drag/#Drag:stop
+[Element:getPosition]: /docs/core/Element/Element.Dimensions/#Element:getPosition

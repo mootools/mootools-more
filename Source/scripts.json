@@ -1,20 +1,170 @@
 {
 
+	"Core": {
+
+		"More": {
+			"deps": ["Core"],
+			"desc": "Defines MooTools.More.version."
+		},
+
+		"Lang": {
+			"deps": ["More", "Class.Extras"],
+			"desc": "Enables classes to contain text that can be localized to specific languages."
+		}
+
+	},
+
+	"Class": {
+
+		"Class.Refactor": {
+			"deps": ["More", "Class"],
+			"desc": "Allows for a class to extend itself without damaging it's namespace."
+		},
+
+		"Class.Binds": {
+			"deps": ["More", "Class"],
+			"desc": "Adds the Binds Mutator to all classes."
+		},
+
+		"Class.Occlude": {
+			"deps": ["More", "Class", "Element"],
+			"desc": "Mixin class for preventing a class from applying itself to the same element twice."
+		},
+
+		"Chain.Wait": {
+			"deps": ["More", "Class.Extras"],
+			"desc": "Adds a delay method for chaining that allows you to easily introduce pauses."
+		}
+
+	},
+
+	"Native": {
+
+		"Array.Extras": {
+			"deps": ["More", "Core", "Array"],
+			"desc": "Extends the Array native object to include useful methods to work with arrays."
+		},
+
+		"Date": {
+			"deps": ["More", "Core", "String", "Number", "Hash", "Array", "String.Extras", "Lang", "Date.English.US"],
+			"desc": "Extends the Date native object to include methods useful in managing dates."
+		},
+
+		"Date.Extras": {
+			"deps": ["More", "Date"],
+			"desc": "Extends the Date native object to include extra methods (on top of those in Date.js)."
+		},
+
+		"Hash.Extras": {
+			"deps": ["More", "Core"],
+			"desc": "Extends the Hash native object to include getFromPath which allows a path notation to child elements."
+		},
+
+		"String.Extras": {
+			"deps": ["More", "String", "Array", "Hash.Extras"],
+			"desc": "Extends the String native object to include methods useful in managing strings (query strings, urls, etc)."
+		},
+		
+		"URI": {
+			"deps": ["More", "Function", "Array"],
+			"desc": "Extends a string to provide numerous methods for managing URI components."
+		}
+
+	},
+
+	"Element": {
+
+		"Element.Forms": {
+			"deps": ["More", "Element"],
+			"desc": "Extends the Element native object to include methods useful in managing inputs."
+		},
+
+		"Element.Measure": {
+			"deps": ["More", "Element.Style"],
+			"desc": "Extends the Element native object to include methods useful in measuring dimensions."
+		},
+
+		"Element.Pin": {
+			"deps": ["More", "Element.Event", "Element.Dimensions", "Element.Style"],
+			"desc": "Extends the Element native object to include the pin method useful for fixed positioning for elements."
+		},
+
+		"Element.Position": {
+			"deps": ["More", "Element.Dimensions", "Element.Measure"],
+			"desc": "Extends the Element native object to include methods useful positioning elements relative to others."
+		},
+
+		"Element.Shortcuts": {
+			"deps": ["More", "Element.Style"],
+			"desc": "Extends the Element native object to include some shortcut methods."
+		}
+
+	},
+
+	"Forms": {
+
+		"FormValidator": {
+			"deps": ["More", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
+			"desc": "A css-class based form validation system."
+		},
+
+		"FormValidator.Inline": {
+			"deps": ["More", "FormValidator"],
+			"desc": "A css-class based form validation system."
+		},
+
+		"FormValidator.Extras": {
+			"deps": ["More", "FormValidator"],
+			"desc": "Additional validators for FormValidator."
+		},
+
+		"OverText": {
+			"deps": ["More", "Class.Extras", "Element.Event", "Class.Binds", "Class.Occlude", "Element.Position", "Element.Shortcuts"],
+			"desc": "Displays text over empty inputs until the user focuses the input or adds information."
+		}
+
+	},
+
 	"Fx": {
 
-		"Fx.Slide": {
-			"deps": ["None"],
-			"desc": "Effect to slide an element in and out of view."
+		"Fx.Elements": {
+			"deps": ["More", "Fx.CSS"],
+			"desc": "Effect to change any number of CSS properties of any number of Elements."
+		},
+
+		"Fx.Accordion": {
+			"deps": ["More", "Fx.Elements", "Element.Event"],
+			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
+		},
+
+		"Fx.Move": {
+			"deps": ["More", "Fx.Morph", "Element.Position"],
+			"desc": "Moves an element to another location (relative to another element) with a transition."
+		},
+
+		"Fx.Reveal": {
+			"deps": ["More", "Fx.Morph", "Element.Shortcuts", "Element.Measure"],
+			"desc": "Executes a transition from display:block to display:none and vice versa."
 		},
 
 		"Fx.Scroll": {
-			"deps": ["None"],
+			"deps": ["More", "Fx", "Element.Event", "Element.Dimensions"],
 			"desc": "Effect to smoothly scroll any element, including the window."
 		},
 
-		"Fx.Elements": {
-			"deps": ["None"],
-			"desc": "Effect to change any number of CSS properties of any number of Elements."
+		"Fx.Slide": {
+			"deps": ["More", "Fx", "Element.Style"],
+			"desc": "Effect to slide an element in and out of view."
+		},
+
+		"Fx.SmoothScroll": {
+			"deps": ["More", "Fx.Scroll", "Selectors"],
+			"desc": "Class for creating a smooth scrolling effect to all internal links on the page."
+		},
+
+		"Fx.Sort": {
+			"deps": ["More", "Fx.Elements", "Element.Dimensions", "Element.Measure"],
+			"desc": "Reorders a group of items with a transition."
 		}
 
 	},
@@ -22,71 +172,99 @@
 	"Drag": {
 
 		"Drag": {
-			"deps": ["None"],
+			"deps": ["More", "Class.Extras", "Element.Event", "Element.Style"],
 			"desc": "The base Drag Class. Can be used to drag and resize Elements using mouse events."
 		},
 
 		"Drag.Move": {
-			"deps": ["Drag"],
+			"deps": ["More", "Drag", "Element.Dimensions"],
 			"desc": "A Drag extension that provides support for the constraining of draggables to containers and droppables."
+		},
+
+		"Slider": {
+			"deps": ["More", "Drag", "Element.Dimensions"],
+			"desc": "Class for creating horizontal and vertical slider controls."
+		},
+
+		"Sortables": {
+			"deps": ["More", "Drag.Move"],
+			"desc": "Class for creating a drag and drop sorting interface for lists of items."
+		}
+
+	},
+
+	"Request": {
+
+		"Request.JSONP": {
+			"deps": ["More", "Browser", "Element", "Request", "Class.Extras"],
+			"desc": "Creates a Json request using a script tag include and handles the callbacks for you."
+		},
+
+		"Request.Queue": {
+			"deps": ["More", "Request"],
+			"desc": "Manages a group of Request instances so that connections are queued."
+		},
+
+		"Request.Periodical": {
+			"deps": ["More", "Request", "Class.Refactor"],
+			"desc": "Requests the same url at a time interval that increases when no data is returned from the requested server."
 		}
 
 	},
 
 	"Utilities": {
 
-		"Hash.Cookie": {
-			"deps": ["None"],
-			"desc": "Class for creating, reading, and deleting browser Cookies in JSON format."
+		"Assets": {
+			"deps": ["More", "Element.Event"],
+			"desc": "Provides methods to dynamically load JavaScript, CSS, and Image files into the document."
 		},
 
 		"Color": {
-			"deps": ["None"],
+			"deps": ["More", "Core", "Array", "String", "Function", "Number", "Hash"],
 			"desc": "Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa."
 		},
 
 		"Group": {
-			"deps": ["None"],
+			"deps": ["More", "Class.Extras"],
 			"desc": "Class for monitoring collections of events."
 		},
 
-		"Assets": {
-			"deps": ["None"],
-			"desc": "Provides methods to dynamically load JavaScript, CSS, and Image files into the document."
+		"Hash.Cookie": {
+			"deps": ["More", "Class.Extras", "Cookie", "JSON"],
+			"desc": "Class for creating, reading, and deleting browser Cookies in JSON format."
+		},
+		
+		"IframeShim": {
+			"deps": ["More", "Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude"],
+			"desc": "Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
 		}
 
 	},
 
 	"Interface": {
 
-		"Sortables": {
-			"deps": ["Drag.Move"],
-			"desc": "Class for creating a drag and drop sorting interface for lists of items."
-		},
-
-		"Tips": {
-			"deps": ["None"],
-			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
-		},
-
-		"SmoothScroll": {
-			"deps": ["Fx.Scroll"],
-			"desc": "Class for creating a smooth scrolling effect to all internal links on the page."
-		},
-
-		"Slider": {
-			"deps": ["Drag"],
-			"desc": "Class for creating horizontal and vertical slider controls."
-		},
-
 		"Scroller": {
-			"deps": ["None"],
+			"deps": ["More", "Class.Extras", "Element.Event", "Element.Dimensions"],
 			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
 		},
 
-		"Accordion": {
-			"deps": ["Fx.Elements"],
-			"desc": "An Fx.Elements extension which allows you to easily create accordion type controls."
+		"Tips": {
+			"deps": ["More", "Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions"],
+			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
+		}
+
+	},
+
+	"Localization":{
+
+		"Date.English.US": {
+			"deps": ["More", "Lang"],
+			"desc": "Date messages in English (with conventions for the US)."
+		},
+
+		"FormValidator.English": {
+			"deps": ["More", "Lang"],
+			"desc": "FormValidator messages in English."
 		}
 
 	}

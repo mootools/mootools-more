@@ -133,4 +133,4 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 
 
 
-[Elements]: /Element/Element#Elements
+[Elements]: /docs/core/Element/Element#Elements

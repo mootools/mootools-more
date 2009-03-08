@@ -2,15 +2,18 @@
 Script: Color.js
 	Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Color = new Native({
 
 	initialize: function(color, type){
 		if (arguments.length >= 3){
-			type = "rgb"; color = Array.slice(arguments, 0, 3);
+			type = 'rgb'; color = Array.slice(arguments, 0, 3);
 		} else if (typeof color == 'string'){
 			if (color.match(/rgb/)) color = color.rgbToHex().hexToRgb(true);
 			else if (color.match(/hsb/)) color = color.hsbToRgb();
@@ -66,15 +69,15 @@ Color.implement({
 
 });
 
-function $RGB(r, g, b){
+var $RGB = function(r, g, b){
 	return new Color([r, g, b], 'rgb');
 };
 
-function $HSB(h, s, b){
+var $HSB = function(h, s, b){
 	return new Color([h, s, b], 'hsb');
 };
 
-function $HEX(hex){
+var $HEX = function(hex){
 	return new Color(hex, 'hex');
 };
 

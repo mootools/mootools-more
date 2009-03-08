@@ -2,8 +2,11 @@
 Script: Group.js
 	Class for monitoring collections of events
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 var Group = new Class({

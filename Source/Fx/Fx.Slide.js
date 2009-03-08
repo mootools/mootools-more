@@ -2,8 +2,11 @@
 Script: Fx.Slide.js
 	Effect to slide an element in and out of view.
 
-License:
-	MIT-style license.
+	License:
+		MIT-style license.
+
+	Authors:
+		Valerio Proietti
 */
 
 Fx.Slide = new Class({
@@ -23,7 +26,7 @@ Fx.Slide = new Class({
 		this.parent(options);
 		var wrapper = this.element.retrieve('wrapper');
 		this.wrapper = wrapper || new Element('div', {
-			styles: $extend(this.element.getStyles('margin', 'position'), {'overflow': 'hidden'})
+			styles: $extend(this.element.getStyles('margin', 'position'), {overflow: 'hidden'})
 		}).wraps(this.element);
 		this.element.store('wrapper', this.wrapper).setStyle('margin', 0);
 		this.now = [];
@@ -49,12 +52,9 @@ Fx.Slide = new Class({
 	},
 
 	compute: function(from, to, delta){
-		var now = [];
-		var x = 2;
-		x.times(function(i){
-			now[i] = Fx.compute(from[i], to[i], delta);
+		return [0, 1].map(function(i){
+			return Fx.compute(from[i], to[i], delta);
 		});
-		return now;
 	},
 
 	start: function(how, mode){
@@ -68,7 +68,7 @@ Fx.Slide = new Class({
 		switch (how){
 			case 'in': start = caseIn; break;
 			case 'out': start = caseOut; break;
-			case 'toggle': start = (this.wrapper['offset' + this.layout.capitalize()] == 0) ? caseIn : caseOut;
+			case 'toggle': start = (layout == 0) ? caseIn : caseOut;
 		}
 		return this.parent(start[0], start[1]);
 	},
@@ -127,7 +127,7 @@ Element.implement({
 			case 'show': slide.show(mode); break;
 			case 'toggle':
 				var flag = this.retrieve('slide:flag', slide.open);
-				slide[(flag) ? 'slideOut' : 'slideIn'](mode);
+				slide[flag ? 'slideOut' : 'slideIn'](mode);
 				this.store('slide:flag', !flag);
 				toggle = true;
 			break;

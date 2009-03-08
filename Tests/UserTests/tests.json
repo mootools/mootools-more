@@ -1,0 +1,46 @@
+{
+	"Class": {
+		"Chain.Wait":['all']
+	},
+	"Drag": {
+		"Drag":['all'],
+		"Drag.Move":['basic', 'container'],
+		"Slider":['all'],
+		"Sortables":['single', 'multi']
+	},
+	"Element":{
+		"Element.Forms":['all'],
+		"Element.Shortcuts":['all'],
+		"Element.Pin":['all'],
+		"Element.Position":['all']
+	},
+	"Forms": {
+		"FormValidator.Inline":['all'],
+		"FormValidator.Extras":['all'],
+		"OverText": ['all']
+	},
+	"Fx": {
+		"Fx.Accordion":['all'],
+		"Fx.Elements":['all'],
+		"Fx.Move":['all'],
+		"Fx.Reveal":['all'],
+		"Fx.Scroll":['all'],
+		"Fx.Slide":['all'],
+		"Fx.SmoothScroll":['all'],
+		"Fx.Sort":['all']
+	},
+	"Interface":{
+		"Scroller":['all'],
+		"Tips":['all']
+	},
+	"Request":{
+		"Request.JSONP": ['all'],
+		"Request.Queue": ['all'],
+		"Request.Periodical": ['all']
+	},
+	"Utilities":{
+		"Assets":['css', 'image', 'images', 'javascript'],
+		"Group":['all'],
+		"IframeShim":['all']
+	}
+}

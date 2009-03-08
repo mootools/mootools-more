@@ -31,7 +31,7 @@ Tips Method: constructor {#Tips:constructor}
  * The tooltip element inside the tooltip container above will have 'tip' as classname.
  * The title will have as classname: tip-title
  * The text will have as classname: tip-text
-* offsets       - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
+* offset       - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
 * fixed         - (*boolean*: defaults to false) If set to true, the toolTip will not follow the mouse.
 
 
@@ -64,10 +64,11 @@ Tips Event: show {#Tips:show}
 ### Arguments:
 
 1. tip - (*element*) The tip element. Useful if you want to apply effects to it.
+2. el - (*element*) The element on which the tip is based on.
 
 ### Example:
 
-	myTips.addEvent('show', function(tip){
+	myTips.addEvent('show', function(tip, el){
 		tip.fade('in');
 	});
 
@@ -83,10 +84,11 @@ Tips Event: hide {#Tips:hide}
 ### Arguments:
 
 1. tip - (*element*) The tip element. Useful if you want to apply effects to it.
+2. el - (*element*) The element on which the tip is based on.
 
 ### Example:
 
-	myTips.addEvent('hide', function(tip){
+	myTips.addEvent('hide', function(tip, el){
 		tip.fade('out');
 	});
 
@@ -176,5 +178,5 @@ You can also assign tips titles and contents via [Element Storage](/Element/Elem
 If you use tips storage you can use elements and / or html as tips title and text.
 
 
-[Events]: /Class/Class.Extras#Events
-[Options]: /Class/Class.Extras#Options
+[Events]: /docs/core/Class/Class.Extras#Events
+[Options]: /docs/core/Class/Class.Extras#Options
