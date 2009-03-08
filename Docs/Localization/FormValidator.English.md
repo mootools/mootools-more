@@ -9,9 +9,9 @@ Contains the messages for [FormValidator][] in English.
 
 ### Usage
 
-Simply change the language property to *usENG*.
+Simply change the language property to *en-US*.
 
-	MooTools.lang.setLanguage("usENG");
+	MooTools.lang.setLanguage("en-US");
 
 See also: [FormValidator][] and [Lang][]
 

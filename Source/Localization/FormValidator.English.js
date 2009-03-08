@@ -10,7 +10,7 @@ Script: FormValidator.English.js
 
 */
 
-MooTools.lang.set('usENG', 'FormValidator', {
+MooTools.lang.set('en-US', 'FormValidator', {
 
 	required:'This field is required.',
 	minLength:'Please enter at least {minLength} characters (you entered {length} characters).',
