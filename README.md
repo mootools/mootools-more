@@ -10,18 +10,9 @@ MooTools Plugins and Enhancements Repository
 * Need to run tests against all browsers
 * Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
 * Go through lighthouse tickets and identify criticals for 1.0 release
-* Go through docs files and fix any inconsistencies with -core syntax for docs
-
-### Decisions/discussions
-* Decide if reworking the whole source of all plugins makes you an author ( :P )
-* Revisit branch commits from other users in github that have not made it into master (http://github.com/anutron/mootools-more/network)
-
-### Server
-
-* need to figure out docs
-* need to decide how more is presented w/ regards to -core; http://www.mootools.net/more/* ?
-* need to get access to push releases (for Aaron at least - I don't have access now)
-* need demos
+* Compat for previous version of -more
+* Verify compat for multi-builder on mootools.net
+* Compat for Clientcide
 
 ### StyleGuide
 
