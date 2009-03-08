@@ -8,14 +8,14 @@ Extends the [Element][] native object with some basic shortcuts (like .hide and 
 * [Online Tutorial/Demo][]
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/04-element/05-element.shortcuts
 
-Element Method: isVisible {#Element:isVisible}
+Element Method: isDisplayed {#Element:isDisplayed}
 ----------------------------------------------
 
 Returns the state of the display of the element.
 
 ### Syntax
 
-	myElement.isVisible();
+	myElement.isDisplayed();
 
 ### Returns
 

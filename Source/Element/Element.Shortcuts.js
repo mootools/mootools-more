@@ -12,12 +12,12 @@ Script: Element.Shortcuts.js
 
 Element.implement({
 
-	isVisible: function(){
+	isDisplayed: function(){
 		return this.getStyle('display') != 'none';
 	},
 
 	toggle: function(){
-		return this[this.isVisible() ? 'hide' : 'show']();
+		return this[this.isDisplayed() ? 'hide' : 'show']();
 	},
 
 	hide: function(){
@@ -31,7 +31,7 @@ Element.implement({
 	},
 
 	show: function(display){
-		return this.setStyle('display', display || $pick(this.retrieve('originalDisplay'), this.get('originalDisplay')) || 'block');
+		return this.setStyle('display', display || this.retrieve('originalDisplay') || 'block');
 	},
 
 	swapClass: function(remove, add){

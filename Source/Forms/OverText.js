@@ -95,12 +95,12 @@ var OverText = new Class({
 	},
 
 	focus: function(){
-		if (!this.text.isVisible() || this.element.get('disabled')) return;
+		if (!this.text.isDisplayed() || this.element.get('disabled')) return;
 		this.hide();
 	},
 
 	hide: function(){
-		if (this.text.isVisible() && !this.element.get('disabled')){
+		if (this.text.isDisplayed() && !this.element.get('disabled')){
 			this.text.hide();
 			this.fireEvent('textHide', [this.text, this.element]);
 			this.pollingPaused = true;
@@ -112,7 +112,7 @@ var OverText = new Class({
 	},
 
 	show: function(){
-		if (!this.text.isVisible()){
+		if (!this.text.isDisplayed()){
 			this.text.show();
 			this.reposition();
 			this.fireEvent('textShow', [this.text, this.element]);
