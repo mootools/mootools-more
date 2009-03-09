@@ -41,15 +41,18 @@ FormValidator.Inline = new Class({
 		var errorMsg = (warn)?this.warningPrefix:this.errorPrefix;
 				errorMsg += (this.options.useTitles) ? field.title || error:error;
 		var cssClass = (warn)?'warning-advice':'validation-advice';
-		var newAdvice = new Element('div', {
-			html: errorMsg,
-			styles: { display: 'none' },
-			id: 'advice-'+className+'-'+this.getFieldId(field)
-		}).addClass(cssClass);
 		var advice = this.getAdvice(className, field);
-		if(advice) newAdvice.replaces(advice);
-		field.store('advice-'+className, newAdvice);
-		return newAdvice;
+		if(advice) {
+			advice = advice.clone(true).set('html', errorMsg).replaces(advice);
+		} else {
+			advice = new Element('div', {
+				html: errorMsg,
+				styles: { display: 'none' },
+				id: 'advice-'+className+'-'+this.getFieldId(field)
+			}).addClass(cssClass);
+		}
+		field.store('advice-'+className, advice);
+		return advice;
 	},
 
 	getFieldId : function(field){
