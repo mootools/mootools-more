@@ -120,12 +120,12 @@ Fx.Reveal = new Class({
 					//start the effect
 					this.start(startStyles);
 					this.$chain.unshift(function(){
+						this.element.setStyle('overflow', overflowBefore);
 						if (!this.options.heightOverride && setToAuto){
 							if (['vertical', 'both'].contains(this.options.mode)) this.element.setStyle('height', 'auto');
 							if (['width', 'both'].contains(this.options.mode)) this.element.setStyle('width', 'auto');
 						}
 						if (!this.hidden) this.showing = false;
-						this.element.setStyle('overflow', overflowBefore);
 						this.callChain();
 						this.fireEvent('show', this.element);
 					}.bind(this));
