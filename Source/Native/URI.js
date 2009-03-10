@@ -49,7 +49,7 @@ URI.prototype = new String;
 (function(){
 
 	var reg = /^(?:(\w+):\/\/)?(?:([^\/:?#]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
-	var parts = ['full', 'protocol', 'domain', 'port', 'path', 'query', 'fragment'];
+	var parts = ['full', 'protocol', 'host', 'port', 'path', 'query', 'fragment'];
 
 	URI.implement({
 
@@ -87,7 +87,7 @@ URI.prototype = new String;
 			bits = bits || this.parseURI();
 			var result = '';
 			if (bits.protocol) result += bits.protocol + '://';
-			if (bits.domain) result += bits.domain;
+			if (bits.host) result += bits.host;
 			if ($defined(bits.port)) result += ':' + bits.port;
 			if (bits.path) result += bits.path;
 			if (bits.query) result += '?' + bits.query;
