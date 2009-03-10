@@ -198,7 +198,7 @@ var FormValidator = new Class({
 		warn = $pick(warn, false);
 		if (field.hasClass('warnOnly')) warn = true;
 		var isValid = validator ? validator.test(field) : true;
-		if (validator && this.isDisplayed(field)) this.fireEvent('elementValidate', [isValid, field, className, warn]);
+		if (validator && this.isVisible(field)) this.fireEvent('elementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
 	},

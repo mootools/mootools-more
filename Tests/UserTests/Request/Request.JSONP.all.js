@@ -28,7 +28,7 @@
 							})
 						).inject(document.body);
 					}
-				}).send(); //alerts 8.3 - the rating of the ipod
+				}).send();
 			}
 		}
 	]
