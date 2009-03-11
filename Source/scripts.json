@@ -10,6 +10,11 @@
 		"Lang": {
 			"deps": ["More", "Class.Extras"],
 			"desc": "Enables classes to contain text that can be localized to specific languages."
+		},
+		
+		"Log": {
+		  "deps": ["More"],
+		  "desc": "Provides a logging interface for plugins to implement."
 		}
 
 	},
@@ -196,7 +201,7 @@
 	"Request": {
 
 		"Request.JSONP": {
-			"deps": ["More", "Browser", "Element", "Request", "Class.Extras"],
+			"deps": ["More", "Log", "Browser", "Element", "Request", "Class.Extras"],
 			"desc": "Creates a Json request using a script tag include and handles the callbacks for you."
 		},
 
