@@ -115,7 +115,7 @@ Request.JSONP = new Class({
 		if (script) script.destroy();
 		this.running = false;
 		this.log('JSONP successfully retrieved: ', data);
-		this.fireEvent('complete', data).fireEvent('success', data).callChain();
+		this.fireEvent('complete', [data]).fireEvent('success', [data]).callChain();
 	}
 
 });
