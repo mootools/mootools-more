@@ -204,29 +204,7 @@ Each [InputValidator][] can also be used to generate warnings. Warnings still sh
 
 ### Internationalization
 
-FormValidator comes with numerous built-in validators (see below), each of which presents a validation error to the user when they trip it. These can be altered for different languages. Here is a sample of some of the messages and how to alter them:
-
-	//this is what's in FormValidator by default:
-	FormValidator.resources = {
-		usENG: {
-			required:'This field is required.',
-			minLength:'Please enter at least {minLength} characters (you entered {length} characters).',
-			maxLength:'Please enter no more than {maxLength} characters (you entered {length} characters).',
-			//... and more
-		}
-	};
-	FormValidator.language = "usENG";
-
-	//To localize it (pardon the french; if it's bad, blame babelfish):
-	FormValidator.resources.French = {
-		required:'Ce champ est exig&#233;.',
-		minLength:'Veuillez &#233;crire au moins {minLength} (vous avez &#233;crit {length}).',
-		maxLength:'Veuillez n\'entrer dans pas plus que {maxLength} (vous avez &#233;crit {length})',
-		//... et plus
-	}
-	FormValidator.language = "French";
-
-If you wanted to localize these, just view the source of FormValidator and copy this section and place it in your document after you include FormValidator.js. Then translate the english messages and then change the **FormValidator.language** value to be your selection.
+FormValidator comes with numerous built-in validators (see below), each of which presents a validation error to the user when they trip it. These can be altered for different languages. See [Lang][]
 
 If you do translate these, please [send them back to us][] so we can add them to our repository.
 
@@ -694,3 +672,4 @@ FormValidator Language Localization {#Localization}
 [Events]: /docs/core/Class/Class.Extras#Events
 [send them back to us]: http://groups.google.com/group/mootools-lang
 [JSON.decode]: /docs/core/Utilities/JSON#decode
+[Lang]: /docs/lang/

@@ -104,7 +104,7 @@
 	"Forms": {
 
 		"FormValidator": {
-			"deps": ["More", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
+			"deps": ["More", "Lang", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
 			"desc": "A css-class based form validation system."
 		},
 

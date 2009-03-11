@@ -40,18 +40,18 @@ FormValidator.Inline = new Class({
 	makeAdvice: function(className, field, error, warn){
 		var errorMsg = (warn)?this.warningPrefix:this.errorPrefix;
 				errorMsg += (this.options.useTitles) ? field.title || error:error;
+		var cssClass = (warn)?'warning-advice':'validation-advice';
 		var advice = this.getAdvice(className, field);
-		if (!advice){
-			var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
+		if(advice) {
+			advice = advice.clone(true).set('html', errorMsg).replaces(advice);
+		} else {
 			advice = new Element('div', {
-				text: errorMsg,
+				html: errorMsg,
 				styles: { display: 'none' },
-				id: 'advice-' + className + '-' + this.getFieldId(field)
+				id: 'advice-'+className+'-'+this.getFieldId(field)
 			}).addClass(cssClass);
-		} else{
-			advice.set('html', errorMsg);
 		}
-		field.store('advice-' + className, advice);
+		field.store('advice-'+className, advice);
 		return advice;
 	},
 
@@ -146,7 +146,7 @@ FormValidator.Inline = new Class({
 				par = par.getParent();
 			};
 			var fx = par.retrieve('fvScroller');
-			if (!fx && window.Fx){
+			if (!fx && window.Fx && Fx.Scroll){
 				fx = new Fx.Scroll(par, {
 					transition: 'quad:out',
 					offset: {

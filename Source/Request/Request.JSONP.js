@@ -86,7 +86,8 @@ Request.JSONP = new Class({
 	},
  	
 	getScript: function(options){
-		var options = this.options, index = Request.JSONP.requests.length, data;
+		var options = this.options, index = Request.JSONP.counter, data;
+		Request.JSONP.counter++;
 		
 		switch ($type(options.data)){
 			case 'element': data = $(options.data).toQueryString(); break;
@@ -98,11 +99,12 @@ Request.JSONP = new Class({
 			src: options.url + 
 				 (options.url.test('\\?') ? '&' :'?') + 
 				 (options.callBackKey || this.options.callBackKey) + 
-				 "=Request.JSONP.requests["+ index +"]" + 
+				 "=Request.JSONP.request_map.req_"+ index + 
 				 (data ? '&' + data : '')
 		}).inject(this.options.injectScript);
 		
-		Request.JSONP.requests.push(function(data){ this.success(data, script); }.bind(this));
+		var callback = function(data){ this.success(data, script); }.bind(this);
+		Request.JSONP.request_map['req_' + index] = callback;
 				
 		return script;
 	},
@@ -116,7 +118,8 @@ Request.JSONP = new Class({
 
 });
 
-Request.JSONP.requests = [];
+Request.JSONP.counter = 0;
+Request.JSONP.request_map = {};
 
 $extend(MooTools, {
 	logged: [],

@@ -221,11 +221,6 @@ Inserts two strings around the selected text.
 	//<ninjas> are the most dangerous thing in the world
 
 
-Hash: Element.Properties {#Element-Properties}
-==============================================
-
-This [Hash][] contains the functions that respond to the first argument passed in [Element:get][], [Element:set][] and [Element:erase][] (this is all standard Mootools methodology).
-
 
 [String:tidy]: /docs/more/Native/String.Extras#String:tidy
 [Element:getTextInRange]: #Element:getTextInRange

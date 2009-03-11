@@ -22,7 +22,8 @@ Fx.Reveal = new Class({
 		widthOverride: null, */
 		styles: ['padding', 'border', 'margin'],
 		transitionOpacity: !Browser.Engine.trident4,
-		mode: 'vertical'
+		mode: 'vertical',
+		display: 'block'
 	},
 
 	dissolve: function(){
@@ -71,7 +72,7 @@ Fx.Reveal = new Class({
 			}
 		} catch(e){
 			this.hiding = false;
-			this.element.setStyle('display', 'bock');
+			this.element.setStyle('display', 'none');
 			this.callChain.delay(10, this);
 			this.fireEvent('complete', this.element);
 			this.fireEvent('hide', this.element);
@@ -111,7 +112,7 @@ Fx.Reveal = new Class({
 					//create the zero state for the beginning of the transition
 					var zero = {
 						height: 0,
-						display: 'block'
+						display: this.options.display
 					};
 					$each(startStyles, function(style, name){ zero[name] = 0; });
 					var overflowBefore = this.element.getStyle('overflow');
@@ -120,12 +121,12 @@ Fx.Reveal = new Class({
 					//start the effect
 					this.start(startStyles);
 					this.$chain.unshift(function(){
+						this.element.setStyle('overflow', overflowBefore);
 						if (!this.options.heightOverride && setToAuto){
 							if (['vertical', 'both'].contains(this.options.mode)) this.element.setStyle('height', 'auto');
 							if (['width', 'both'].contains(this.options.mode)) this.element.setStyle('width', 'auto');
 						}
 						if (!this.hidden) this.showing = false;
-						this.element.setStyle('overflow', overflowBefore);
 						this.callChain();
 						this.fireEvent('show', this.element);
 					}.bind(this));
@@ -142,7 +143,7 @@ Fx.Reveal = new Class({
 			}
 		} catch(e){
 			this.element.setStyles({
-				display: 'block',
+				display: this.options.display,
 				visiblity: 'visible',
 				opacity: 1
 			});
