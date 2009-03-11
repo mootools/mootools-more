@@ -14,7 +14,7 @@ Script: MooTools.Lang.js
 	var data = {
 		language: 'en-US',
 		languages: {
-			usENG: {}
+			'en-US': {}
 		},
 		cascades: ['en-US']
 	};
