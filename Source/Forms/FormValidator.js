@@ -65,7 +65,9 @@ Element.Properties.validatorProps = {
 				props = {};
 				vals.each(function(cls){
 					var split = cls.indexOf(':');
-					props[cls.substring(0, split)] = JSON.decode(cls.substring(split + 1, cls.length));
+					try {
+						props[cls.substring(0, split)] = JSON.decode(cls.substring(split + 1, cls.length));
+					} catch(e) {}
 				});
 				this.store('validatorProps', props);
 			}

@@ -13,6 +13,7 @@ MooTools Plugins and Enhancements Repository
 * Compat for previous version of -more
 * Verify compat for multi-builder on mootools.net
 * Compat for Clientcide
+* Switch to feature detection instead of engine detection
 
 ### StyleGuide
 
