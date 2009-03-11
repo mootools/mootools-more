@@ -21,34 +21,36 @@ Element.implement({
 
 	getSelectedText: function(){
 		if (Browser.Engine.trident) return document.selection.createRange().text;
-		return this.get('value').substring(this.getSelectionStart(), this.getSelectionEnd());
+		return this.getTextInRange(this.getSelectionStart(), this.getSelectionEnd());
 	},
 
-	getIERanges: function(){
-		this.focus();
-		var range = document.selection.createRange();
-		var re = this.createTextRange();
-		var dupe = re.duplicate();
-		re.moveToBookmark(range.getBookmark());
-		dupe.setEndPoint('EndToStart', re);
-		return { start: dupe.text.length, end: dupe.text.length + range.text.length, length: range.text.length, text: range.text };
+	getSelectedRange: function() {
+		if (!Browser.Engine.trident) return {start: this.selectionStart, end: this.selectionEnd};
+		var pos = {start: 0, end: 0};
+		var range = this.getDocument().selection.createRange();
+		if (!range || range.parentElement() != this) return pos;
+		var dup = range.duplicate();
+		if (this.type == 'text') {
+			pos.start = 0 - dup.moveStart('character', -100000);
+			pos.end = pos.start + range.text.length;
+		} else {
+			var value = this.get('value');
+			var offset = value.length - value.match(/[\n\r]*$/)[0].length;
+			dup.moveToElementText(this);
+			dup.setEndPoint('StartToEnd', range);
+			pos.end = offset - dup.text.length;
+			dup.setEndPoint('StartToStart', range);
+			pos.start = offset - dup.text.length;
+		}
+		return pos;
 	},
 
 	getSelectionStart: function(){
-		if (Browser.Engine.trident) return this.getIERanges().start;
-		return this.selectionStart;
+		return this.getSelectedRange().start;
 	},
 
 	getSelectionEnd: function(){
-		if (Browser.Engine.trident) return this.getIERanges().end;
-		return this.selectionEnd;
-	},
-
-	getSelectedRange: function(){
-		return {
-			start: this.getSelectionStart(),
-			end: this.getSelectionEnd()
-		};
+		return this.getSelectedRange().end;
 	},
 
 	setCaretPosition: function(pos){
@@ -62,47 +64,48 @@ Element.implement({
 	},
 
 	selectRange: function(start, end){
-		this.focus();
 		if (Browser.Engine.trident){
+			var value = this.get('value');
+			var diff = value.substr(start, end - start).replace(/\r/g, '').length;
+			start = value.substr(0, start).replace(/\r/g, '').length;
 			var range = this.createTextRange();
 			range.collapse(true);
+			range.moveEnd('character', start + diff);
 			range.moveStart('character', start);
-			range.moveEnd('character', end - start);
 			range.select();
-			return this;
+		} else {
+			this.focus();
+			this.setSelectionRange(start, end);
 		}
-		this.setSelectionRange(start, end);
 		return this;
 	},
 
 	insertAtCursor: function(value, select){
-		var start = this.getSelectionStart();
-		var end = this.getSelectionEnd();
-		this.set('value', this.get('value').substring(0, start) + value + this.get('value').substring(end, this.get('value').length));
-		if ($pick(select, true)) this.selectRange(start, start + value.length);
-		else this.setCaretPosition(start + value.length);
+		var pos = this.getSelectedRange();
+		var text = this.get('value');
+		this.set('value', text.substring(0, pos.start) + value + text.substring(pos.end, text.length));
+		if ($pick(select, true)) this.selectRange(pos.start, pos.start + value.length);
+		else this.setCaretPosition(pos.start + value.length);
 		return this;
 	},
 
 	insertAroundCursor: function(options, select){
 		options = $extend({
 			before: '',
-			defaultMiddle: 'SOMETHING HERE',
+			defaultMiddle: '',
 			after: ''
 		}, options);
-		value = this.getSelectedText() || options.defaultMiddle;
-		var start = this.getSelectionStart();
-		var end = this.getSelectionEnd();
-		if (start == end){
-			var text = this.get('value');
-			this.set('value', text.substring(0, start) + options.before + value + options.after + text.substring(end, text.length));
-			this.selectRange(start + options.before.length, end + options.before.length + value.length);
-			text = null;
+		var value = this.getSelectedText() || options.defaultMiddle;
+		var pos = this.getSelectedRange();
+		var text = this.get('value');
+		if (pos.start == pos.end){
+			this.set('value', text.substring(0, pos.start) + options.before + value + options.after + text.substring(pos.end, text.length));
+			this.selectRange(pos.start + options.before.length, pos.end + options.before.length + value.length);
 		} else {
-			text = this.get('value').substring(start, end);
-			this.set('value', this.get('value').substring(0, start) + options.before + text + options.after + this.get('value').substring(end, this.get('value').length));
-			var selStart = start + options.before.length;
-			if ($pick(select, true)) this.selectRange(selStart, selStart + text.length);
+			var current = text.substring(pos.start, pos.end);
+			this.set('value', text.substring(0, pos.start) + options.before + current + options.after + text.substring(pos.end, text.length));
+			var selStart = pos.start + options.before.length;
+			if ($pick(select, true)) this.selectRange(selStart, selStart + current.length);
 			else this.setCaretPosition(selStart + text.length);
 		}
 		return this;
