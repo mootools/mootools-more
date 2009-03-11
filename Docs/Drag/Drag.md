@@ -38,6 +38,7 @@ Drag Method: constructor {#Drag:constructor}
 * snap        - Executed when the user has dragged past the snap option. Receives the dragged element as an argument.
 * drag        - Executed on every step of the drag. Receives the dragged element and the event as arguments.
 * complete    - Executed when the user completes the drag. Receives the dragged element and the event as arguments.
+* cancel      - Executed when the user has cancelled the drag. Receives the dragged element as an argument.
 
 ### Examples:
 
@@ -184,10 +185,10 @@ Adds drag-to-resize behavior to an Element using supplied options.
 
 
 
-[$]: /Element/Element/#dollar
-[Element:addEvent]: /Element/Element.Event/#Element:addEvent
-[Element:makeDraggable]: /Drag/Drag.Move/#Element:makeDraggable
-[Events]: /Class/Class.Extras#Events
-[Chain]: /Class/Class.Extras#Chain
-[Options]: /Class/Class.Extras#Options
+[$]: /docs/core/Element/Element/#dollar
+[Element:addEvent]: /docs/core/Element/Element.Event/#Element:addEvent
+[Element:makeDraggable]: /docs/more/Drag/Drag.Move/#Element:makeDraggable
+[Events]: /docs/core/Class/Class.Extras#Events
+[Chain]: /docs/core/Class/Class.Extras#Chain
+[Options]: /docs/core/Class/Class.Extras#Options
 [W3Schools: CSS Units]: http://www.w3schools.com/css/css_units.asp

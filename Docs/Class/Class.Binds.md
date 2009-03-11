@@ -31,5 +31,5 @@ See: [http://blog.kassens.net/binds-class-mutator][]
 
 By using *binds* in the example above, you don't need to bind *this.say* to *this* in the *addEvent* method in the *monitor* method; it has already been bound to *this*.
 
-[Class]: http://docs.mootools.net/Class/Class
+[Class]: /docs/core/Class/Class
 [http://blog.kassens.net/binds-class-mutator]: http://blog.kassens.net/binds-class-mutator

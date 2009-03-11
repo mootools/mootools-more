@@ -281,5 +281,5 @@ If more than one list is being used, all lists will be serialized and returned i
 
 
 
-[Element]: /Elements/Element
-[Elements]: /Element/Element/Element#Elements
+[Element]: /docs/core/Elements/Element
+[Elements]: /docs/core/Element/Element#Elements

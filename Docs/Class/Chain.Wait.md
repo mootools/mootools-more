@@ -63,7 +63,7 @@ Pauses a specified effect chain using [Chain.wait][].
 1. duration - (*integer*) The duration (in milliseconds) to pause the chain stack; defaults to *500*.
 2. effect - (*string*) Either "tween" or "morph" (defaults to "tween" so you only need specify it if it's morph).
 
-[Fx.Tween]: http://docs.mootools.net/Fx/Fx.Tween
-[Fx.Morph]: http://docs.mootools.net/Fx/Fx.Morph
-[Chain]: http://docs.mootools.net/Class/Class.Extras#Chain
+[Fx.Tween]: /docs/core/Fx/Fx.Tween
+[Fx.Morph]: /docs/core/Fx/Fx.Morph
+[Chain]: /docs/core/Class/Class.Extras#Chain
 [Chain.wait]: #Chain:wait

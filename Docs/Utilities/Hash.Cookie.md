@@ -110,5 +110,5 @@ Loads the cookie and assigns it to the Hash.
 
 
 
-[Hash]: /Native/Hash/#Hash
-[Cookie]: /Utilities/Cookie
+[Hash]: /docs/core/Native/Hash/#Hash
+[Cookie]: /docs/core/Utilities/Cookie

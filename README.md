@@ -10,22 +10,19 @@ MooTools Plugins and Enhancements Repository
 * Need to run tests against all browsers
 * Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
 * Go through lighthouse tickets and identify criticals for 1.0 release
-* Go through docs files and fix any inconsistencies with -core syntax for docs
-
-### Decisions/discussions
-* Decide if reworking the whole source of all plugins makes you an author ( :P )
-* Revisit branch commits from other users in github that have not made it into master (http://github.com/anutron/mootools-more/network)
-
-### Server
-
-* need to figure out docs
-* need to decide how more is presented w/ regards to -core; http://www.mootools.net/more/* ?
-* need to get access to push releases (for Aaron at least - I don't have access now)
-* need demos
+* Compat for previous version of -more
+* Verify compat for multi-builder on mootools.net
+* Compat for Clientcide
+* Switch to feature detection instead of engine detection
 
 ### StyleGuide
 
 * http://wiki.github.com/mootools/mootools-core/syntax-and-coding-style-conventions
+
+### Breaking changes from RC1
+
+* URI
+ - domain renamed to host
 
 ### Breaking Changes from More
 
@@ -58,6 +55,7 @@ MooTools Plugins and Enhancements Repository
   - Browser.redraw is gone
 * Class.Binds no longer supports lowercase binds
 * Element.fxOpacityOk (which was never documented or intended for external use) is gone
+* Element.isVisible renamed to Element.isDisplayed
 * FormValidator base class no longer does what it did (that is now in FormValidator.Inline)
 * OverText
   - no longer takes a collection of inputs.
@@ -69,3 +67,5 @@ MooTools Plugins and Enhancements Repository
 * Date
   - Number / String extensions moved to string extras. zeroise made an anonymous function, was lame
 * Element.setPosition is now Element.position
+* String.Extra query functions moved to URI.js
+ - parseQuery > parseQueryString for consistency with cleanQueryString

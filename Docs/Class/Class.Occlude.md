@@ -27,7 +27,7 @@ Determines if the class has already been applied to the element.
 	var Widget = new Class({
 		Implements: [Class.Occlude],
 		intialize: function(element){
-			if (this.occlude('widget', element)) return this.occludes;
+			if (this.occlude('widget', element)) return this.occluded;
 			//returns the instance already bound to the element and exits
 		}
 	});
@@ -48,7 +48,7 @@ The string used to bind the instance of the class to the element.
 		property: 'widget',
 		intialize: function(element){
 			this.element = $(element);
-			if (this.occlude()) return this.occludes;
+			if (this.occlude()) return this.occluded;
 			//returns the instance already bound to the element and exits
 		},
 		toElement: function(){
@@ -60,4 +60,4 @@ The string used to bind the instance of the class to the element.
 
 In the example above, because we have a *toElement* method and because we define the *property* property in the class, the method *occlude* doesn't require any arguments as it uses these by default.
 
-[Element.Storage]: http://mootools.net/docs/Element/Element#Element:store
+[Element.Storage]: http://mootools.net/docs/core/Element/Element#Element:store

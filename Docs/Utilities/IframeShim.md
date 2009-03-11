@@ -115,6 +115,6 @@ Element property: IframeShim {#Element:IframeShim}
 
 [IframeShim]: #IframeShim
 [http://www.macridesweb.com/oltest/IframeShim.html]: http://www.macridesweb.com/oltest/IframeShim.html
-[Options]: http://docs.mootools.net/Class/Class.Extras#Options
-[Events]: http://docs.mootools.net/Class/Class.Extras#Events
-[Class.Occlude]: http://mootools.net/more/docs/Class/Class.Occlude
+[Options]: /docs/core/Class/Class.Extras#Options
+[Events]: /docs/core/Class/Class.Extras#Events
+[Class.Occlude]: http://mootools.net/docs/more/Class/Class.Occlude

@@ -137,7 +137,7 @@ Element property: OverText {#Element:overtext}
 
 [Overtext]: #OverText
 [OverText.reposition]: #OverText:reposition
-[Element.position]: /docs/Native/Element.Position#Element:position
-[Options]: http://docs.mootools.net/Class/Class.Extras#Options
-[Events]: http://docs.mootools.net/Class/Class.Extras#Events
-[Class.Binds]: http://www.mootools.net/more/docs/Class/Class.Binds
+[Element.position]: /docs/more/Native/Element.Position#Element:position
+[Options]: /docs/core/Class/Class.Extras#Options
+[Events]: /docs/core/Class/Class.Extras#Events
+[Class.Binds]: /docs/more/Class/Class.Binds

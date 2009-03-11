@@ -35,23 +35,23 @@
 	$('foo').toggle.delay(1500, $('foo'));"
 		},
 		{
-			title: "Element.isVisible",
+			title: "Element.isDisplayed",
 			description: "Returns true if the element's display is not = none.",
 			before: function(){
 				$('foo').show();
 				$('foo').visTest = false;
-				if ($('foo').isVisible()){
+				if ($('foo').isDisplayed()){
 					dbug.log('show successful; foo is visible');
 					$('foo').visTest = true;
 				}	else {
-					dbug.log('either show or isVisible failed');
+					dbug.log('either show or isDisplayed failed');
 					$('foo').visTest = false;
 				}
 				$('foo').hide();
-				if (!$('foo').isVisible()){
+				if (!$('foo').isDisplayed()){
 					dbug.log('hide successful; foo is not visible');
 				} else {
-					dbug.log('either hide or isVisible failed');
+					dbug.log('either hide or isDisplayed failed');
 					$('foo').visTest = false;
 				}
 			},

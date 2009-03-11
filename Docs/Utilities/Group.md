@@ -66,4 +66,4 @@ Adds an Event to the stack of Events of the Class instances.
 
 ### See Also:
 
-[Element.addEvent]: /Element/Element.Event/#Element:addEvent
+[Element.addEvent]: /docs/core/Element/Element.Event#Element:addEvent

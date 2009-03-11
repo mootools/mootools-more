@@ -1,11 +1,11 @@
 /*
-Script: MooTools.Lang.js
-	Specs for MooTools.Lang.js
+Script: Lang.js
+	Specs for Lang.js
 
 License:
 	MIT-style license.
 */
-describe('MooTools.Lang', {
+describe('Lang', {
 
 	'should return english form validator message': function(){
 		value_of(MooTools.lang.get('FormValidator', 'required')).should_be('This field is required.');

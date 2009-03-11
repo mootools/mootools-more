@@ -68,7 +68,7 @@ Fx.Slide = new Class({
 		switch (how){
 			case 'in': start = caseIn; break;
 			case 'out': start = caseOut; break;
-			case 'toggle': start = (this.wrapper['offset' + this.layout.capitalize()] == 0) ? caseIn : caseOut;
+			case 'toggle': start = (layout == 0) ? caseIn : caseOut;
 		}
 		return this.parent(start[0], start[1]);
 	},

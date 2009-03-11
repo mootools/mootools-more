@@ -119,5 +119,5 @@ Date.Extras Language Localization {#Localization}
 * dayUntil - (*string*) '1 day from now'
 * daysUntil - (*string*) '{delta} days from now' where {delta} is the number of days
 
-[Date.js]: /docs/Native/Date
-[Date:parse]: /docs/Native/Date#Date:parse
+[Date.js]: /docs/more/Native/Date
+[Date:parse]: /docs/more/Native/Date#Date:parse

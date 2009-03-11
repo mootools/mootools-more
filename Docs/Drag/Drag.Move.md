@@ -27,6 +27,7 @@ All the base Drag options, plus:
 
 * container  - (*element*) If an Element is passed, drag will be limited to the passed Element's size and position.
 * droppables - (*array*) The Elements that the draggable can drop into. The class's drop, enter, and leave events will be fired in conjunction with interaction with one of these elements.
+* precalculate - (*boolean*; defaults to *false*) If *true*, the class will calculate the locations and dimensions of the droppables which will increase performance. If the droppables are likely to change shape, size, or location it is best to leave this as *false*.
 
 ### Events:
 
@@ -138,7 +139,7 @@ Adds drag-to-move behavior to an Element using supplied options.
 
 
 
-[$]: /Element/Element/#dollar
-[Drag]: /Drag/Drag/#Drag
-[Drag:stop]: /Drag/Drag/#Drag:stop
-[Element:getPosition]: /Utilities/Dimensions/#Element:getPosition
+[$]: /docs/core/Element/Element/#dollar
+[Drag]: /docs/more/Drag/Drag/#Drag
+[Drag:stop]: /docs/more/Drag/Drag/#Drag:stop
+[Element:getPosition]: /docs/core/Element/Element.Dimensions/#Element:getPosition

@@ -70,13 +70,31 @@ Executes the Json request.
 
 ### Syntax
 
+	myJsonP.send([options]);
+
+### Arguments
+
+1. options - (*object*; optional) key/value options that configure the request. Can either be the same as (or a subset of) the options for the class, an element (such as a form) whose child inputs will be converted into a query string, or a query string.
+
+### Returns
+
+* (*object*) This instance of [Request.JSONP][]
+
+Request.JSONP Method: send {#Request-JSONP:send}
+--------------------------------------
+
+Executes the Json request.
+
+### Syntax
+
 	myJsonP.send();
 
 ### Returns
 
 * (*object*) This instance of [Request.JSONP][]
 
+
 [Request.JSONP]: #Request-JSONP
-[Options]: http://docs.mootools.net/Class/Class.Extras#Options
-[Events]: http://docs.mootools.net/Class/Class.Extras#Events
-[dbug]: http://www.mootools.net/more/docs/Core/dbug
+[Options]: /docs/core/Class/Class.Extras#Options
+[Events]: /docs/core/Class/Class.Extras#Events
+[dbug]: /docs/more/Core/dbug

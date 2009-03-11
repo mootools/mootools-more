@@ -196,4 +196,4 @@ Swaps the position of one item with another.
 
 [Fx.Sort:rearrangeDOM]: #Fx-Sort:rearrangeDOM
 [Fx.Sort]: #Fx-Sort
-[Fx.Elements]: http://docs.mootools.net/Plugins/Fx.Elements
+[Fx.Elements]: /docs/more/Fx/Fx.Elements

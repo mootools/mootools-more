@@ -12,11 +12,11 @@ Script: MooTools.Lang.js
 (function(){
 
 	var data = {
-		language: 'usENG',
+		language: 'en-US',
 		languages: {
 			usENG: {}
 		},
-		cascades: ['usENG']
+		cascades: ['en-US']
 	};
 	
 	var cascaded;
@@ -69,7 +69,7 @@ Script: MooTools.Lang.js
 		},
 
 		get: function(set, key, args){
-			if (cascaded[set]) return (key ? cascaded[set].get(key, args) : cascaded[set]);
+			if (cascaded && cascaded[set]) return (key ? cascaded[set].get(key, args) : cascaded[set]);
 		},
 
 		set: function(lang, set, members){

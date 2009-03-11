@@ -7,6 +7,32 @@ License:
 */
 (function(){
 
+	describe('String.parseQueryString', {
+
+		'should parse a query string to an object': function(){
+			value_of('apple=red&lemon=yellow'.parseQueryString().apple).should_be('red');
+		},
+
+		'should parse a plain string to an empty object': function(){
+			value_of($H('appleyellow'.parseQueryString()).getLength() == 0).should_be_true();
+		}
+
+	});
+
+	describe('String.cleanQueryString', {
+
+		'should remove empty keys': function(){
+			value_of('a=b&x=y&z=123&e='.cleanQueryString()).should_be('a=b&x=y&z=123');
+		},
+
+		'should remove specified keys': function(){
+			value_of('a=b&x=y&z=123&e='.cleanQueryString(function(set){
+				return !set.split("=")[1].match(/[0-9]/);
+			})).should_be('a=b&x=y&e=');
+		}
+
+	});
+
 	var url = 'http://www.test.com:8383/this/is/the/path.html?query=value#anchor';
 
 	describe('URL.get(\'host\')', {

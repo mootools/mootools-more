@@ -13,6 +13,77 @@ A collection of the String Object prototype methods.
 - [String][]
 
 
+String Method: pad {#String:pad}
+-------------------------------------
+
+Pads a string with the specified character(s) either before or after the current value.
+
+### Syntax
+
+	myString.pad(length, string, direction);
+
+### Arguments
+
+1. length - (*number*) the number of characters to pad.
+2. string - (*string*) the string to use for padding; defaults to a space.
+3. direction - (*string*) either "left" or "right" (defaults to "right"); the side to add the padding.
+
+### Example
+
+	var tonyTheTigerSez = "They're gr".pad(5, 'r') + 'eat!';
+	//returns "They're grrrrrreat!"
+
+### Returns
+
+* (*string*) a string with the specified character repeated the specified number of times either to the right or left of the current value.
+
+
+String Method: repeat {#String:repeat}
+-------------------------------------
+
+Repeats a string a specified number of times.
+
+### Syntax
+
+	myString.repeat(times);
+
+### Arguments
+
+1. times - (*number*) The number of times to repeat the string.
+
+### Example
+
+	var one = "1";
+	var eleventyOne = one.repeat(3);
+	//returns "111"
+
+### Returns
+
+* (*string*) the string repeated the specified number of times.
+
+
+String Method: standardize {#String:standardize}
+-------------------------------------
+
+Removes non-ascii characters and converts them to their most appropriate ascii character.
+
+### Syntax
+
+	myString.standardize();
+
+### Example
+
+	var bjorkProper = "Björk";
+	var bjorkAscii = bjorkProper.standarize();
+	//returns "Bjork"
+
+### Returns
+
+* (*string*) a string without any non-ascii characters.
+
+
+
+
 String Method: stripTags {#String:stripTags}
 -------------------------------------
 
@@ -32,58 +103,6 @@ Remove all html tags from a string.
 
 * (*string*) a string without any HTML tags
 
-String Method: parseQuery {#String:parseQuery}
-----------------------------------------------
-
-Turns a querystring into an object of key/value pairs.
-
-### Syntax
-
-	myString.parseQuery(encodeKeys, encodeValues);
-
-### Arguments
-
-1. encodeKeys - (*boolean*, optional) if set to *false*, keys are passed through [encodeURIComponent][]; defaults to *true*
-1. encodeValues - (*boolean*, optional) if set to *false*, values are passed through [encodeURIComponent][]; defaults to *true*
-
-### Example
-
-	"apple=red&lemon=yellow".parseQuery();
-	//returns { apple: "red", lemon: "yellow }
-	var fruits = "apple=red&lemon=yellow".parseQuery();
-	//returns fruits.apple > "red"
-
-### Returns
-
-* (*object*) the querystring as key/value pairs
-
-String Method: cleanQueryString {#String:cleanQueryString}
-----------------------------------
-
-Removes from a query string any keys that have empty values.
-
-### Syntax
-
-	myQueryString.cleanQueryString([method]);
-
-### Arguments
-
-1. method - (*funciton*, optional) a method passed to [Array.filter][] that returns true if a key/value set should be included. Defaults to a method that checks that the value is not an empty string.
-
-### Example
-
-	var cleaned = "a=b&x=&z=123&e=".cleanQueryString();
-	//cleaned = "a=b&z=123"
-	var noNumberValues = "a=b&x=y&z=123&e=".cleanQueryString(function(set){
-		//set is "a=b", "x=y", "z=123", "e="
-		return !set.split("=")[1].match(/[0-9]/);
-	});
-	//noNumberValues = "a=b&x=y&e="
-
-### Returns
-
-* (*string*) the string appropriate key/values removed
-
 String Method: tidy {#String:tidy}
 ----------------------------------
 
@@ -97,20 +116,6 @@ Replaces common special characters with their ASCII counterparts (smart quotes, 
 
 * (*string*) the string with the non-ASCII characters replaced
 
-String Method: findAllEmails {#findAllEmails}
---------------------------------------------
-
-Finds all the email addresses present in a string.
-
-### Syntax
-
-	var arrayOfEmails = myString.findAllEmails();
-
-### Example
-
-	var arrayOfEmails = "fred: fred@flintstone.com, barney: barney@rubble.com".findAllEmails();
-	//arrayOfEmails = ['fred@flintstone.com', 'barney@rubble.com'];
-
-[String]: http://docs.mootools.net/Native/String
-[Array.filter]: http://docs.mootools.net/Native/Array#Array:filter
+[String]: /docs/core/Native/String
+[Array.filter]: /docs/core/Native/Array#Array:filter
 [encodeURIComponent]: http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Functions:encodeURIComponent

@@ -17,7 +17,7 @@ Example language file
 
 Below is an example language file from *Date.English.US.js*. Note that some members are arrays (months and days), others are strings, and one is even a function. Also note that some of the strings contain notation for variable substitution. Each class establishes it's own conventions for the language file that is required and is therefor required to document those conventions. Look for these at the bottom of the class's documentation.
 
-		MooTools.lang.set('usENG', 'Date', {
+		MooTools.lang.set('en-US', 'Date', {
 
 			months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -45,7 +45,7 @@ Below is an example language file from *Date.English.US.js*. Note that some memb
 
 		});
 
-All the above code does is register these values for the 'usENG' language for 'Date'. *Date* has attached an event to *MooTools.lang* in order to monitor these changes and update it's local store of this data. See below.
+All the above code does is register these values for the 'en-US' language for 'Date'. *Date* has attached an event to *MooTools.lang* in order to monitor these changes and update it's local store of this data. See below.
 
 Example of setting the cascade for a language
 ---------------------------------------------
@@ -57,7 +57,7 @@ Example of setting the cascade for a language
 MooTools.lang event: onLangChange {#MooTools-lang:onLangChange}
 ---------------------------------------------------------------
 
-This event is fired whenever the language is changed for the user (for instance, from "usENG" to "ESP") or whenever the current selected language is updated with new data.
+This event is fired whenever the language is changed for the user (for instance, from "en-US" to "ESP") or whenever the current selected language is updated with new data.
 
 MooTools.lang Methods
 ====================
@@ -90,7 +90,7 @@ Returns the language currently in use.
 
 ### Returns
 
-* *string* - the language (i.e. "usENG").
+* *string* - the language (i.e. "en-US").
 
 MooTools.lang method: get {#MooTools-lang:get}
 ----------------------------------------------
@@ -138,7 +138,7 @@ Sets properties for a given set in a given language.
 
 ### Example
 
-	MooTools.lang.set('usENG', 'Date', {
+	MooTools.lang.set('en-US', 'Date', {
 		months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 		days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 		dateOrder: ['month', 'date', 'year', '/'],

@@ -30,7 +30,7 @@ var tidymap = {
 
 String.implement({
 	
-	standarize: function(){
+	standardize: function(){
 		var text = this;
 		special.each(function(ch, i){
 			text = text.replace(new RegExp(ch, 'g'), standard[i]);
@@ -38,26 +38,8 @@ String.implement({
 		return text;
 	},
 
-	toSlug: function(ch){
-		return this.clean().standarize().toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s/g, ch || '-');
-	},
-
-	truncate: function(length, add, notrim){
-		if(this.length <= length) return this;
-		var text = this.substr(0, length || 30);
-		return (notrim ? text : text.trim()) + ($chk(add) ? add : '...');
-	},
-
-	highlight: function(str, format){
-		return this.replace(new RegExp('('+ str.escapeRegExp() +')', 'gi'), format || '<strong class="highlight">$1</strong>');
-	},
-
 	repeat: function(times){
-		var text = [];
-		for(var i = 0; i < times; i++){
-			text.push(this.toString());
-		}
-		return text.join('');
+		return new Array(times + 1).join(this);
 	},
 
 	pad: function(length, str, dir){
@@ -73,32 +55,12 @@ String.implement({
 		return this.replace(/<\/?[^>]+>/gi, '');
 	},
 
-	parseQuery: function(encodeKeys, encodeValues){
-		encodeKeys = $pick(encodeKeys, true);
-		encodeValues = $pick(encodeValues, true);
-		var vars = this.split(/[&;]/);
-		var rs = {};
-		if (vars.length) vars.each(function(val){
-			var keys = val.split('=');
-			if (keys.length && keys.length == 2){
-				rs[(encodeKeys)?encodeURIComponent(keys[0]):keys[0]] = (encodeValues)?encodeURIComponent(keys[1]):keys[1];
-			}
-		});
-		return rs;
-	},
-
 	tidy: function(){
 		var txt = this.toString();
 		$each(tidymap, function(value, key){
 			txt = txt.replace(new RegExp(key, 'g'), value);
 		});
 		return txt;
-	},
-
-	cleanQueryString: function(method){
-		return this.split('&').filter(method || function(set){
-			return $chk(set.split('=')[1]);
-		}).join('&');
 	}
 
 });

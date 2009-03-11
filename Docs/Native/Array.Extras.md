@@ -26,4 +26,4 @@ Sums up all values in an array
 
 * (*number*) a number containing the sum of all values in the given array
 
-[Array]: http://www.mootools.net/docs/Native/Array
+[Array]: /docs/core/Native/Array

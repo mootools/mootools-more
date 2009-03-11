@@ -28,6 +28,7 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 * mode - (*string*) "vertical", 2horizontal", or "both" to describe how the element should slide in; defaults to *"vertical"*
 * heightOverride - (*integer*) height to open to; overrides the default offsetHeight
 * widthOverride - (*integer*) width to open to; overrides the default offsetWidth
+* display - (*string*) the property for the display style when your reveal the element. Defaults to *block* but could be, for isntance, *list-style* or whatever.
 
 ### Events
 
@@ -203,5 +204,5 @@ Note that either or both of these may be specified and in any order.
 
 [Fx.Reveal]: #Fx-Reveal
 [Fx.Reveal:options]: #Fx-Reveal:options
-[Fx.Morph]: http://docs.mootools.net/Fx/Fx.Morph
-[Element]: http://docs.mootools.net/Element/Element
+[Fx.Morph]: /docs/core/Fx/Fx.Morph
+[Element]: /docs/core/Element/Element

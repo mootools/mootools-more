@@ -143,4 +143,4 @@ What happens if you wanted to take the example above (where we set the default z
 	});
 
 
-[Class]: http://docs.mootools.net/Class/Class
+[Class]: /docs/core/Class/Class

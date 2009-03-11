@@ -178,5 +178,5 @@ You can also assign tips titles and contents via [Element Storage](/Element/Elem
 If you use tips storage you can use elements and / or html as tips title and text.
 
 
-[Events]: /Class/Class.Extras#Events
-[Options]: /Class/Class.Extras#Options
+[Events]: /docs/core/Class/Class.Extras#Events
+[Options]: /docs/core/Class/Class.Extras#Options
