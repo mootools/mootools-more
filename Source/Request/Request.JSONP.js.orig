@@ -95,6 +95,16 @@ Request.JSONP = new Class({
 			case 'object': case 'hash': data = Hash.toQueryString(options.data);
 		}
 		
+<<<<<<< HEAD:Source/Request/Request.JSONP.js
+		var script = new Element('script', {
+			type: 'text/javascript',
+			src: options.url + 
+				 (options.url.test('\\?') ? '&' :'?') + 
+				 (options.callBackKey || this.options.callBackKey) + 
+				 "=Request.JSONP.request_map.req_"+ index + 
+				 (data ? '&' + data : '')
+		}).inject(this.options.injectScript);
+=======
 		var src = options.url + 
 			 (options.url.test('\\?') ? '&' :'?') + 
 			 (options.callbackKey || this.options.callbackKey) + 
@@ -104,8 +114,10 @@ Request.JSONP = new Class({
 		if (src.length > 2083) this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
 				
 		var script = new Element('script', {type: 'text/javascript', src: src});
+>>>>>>> guille:Source/Request/Request.JSONP.js
 		
-		Request.JSONP.requests.push(function(data){ this.success(data, script); }.bind(this));
+		var callback = function(data){ this.success(data, script); }.bind(this);
+		Request.JSONP.request_map['req_' + index] = callback;
 				
 		return script.inject(this.options.injectScript);
 	},
@@ -119,6 +131,7 @@ Request.JSONP = new Class({
 
 });
 
+<<<<<<< HEAD:Source/Request/Request.JSONP.js
 Request.JSONP.counter = 0;
 Request.JSONP.request_map = {};
 
@@ -128,3 +141,6 @@ $extend(MooTools, {
 		MooTools.logged.push(arguments);
 	}
 });
+=======
+Request.JSONP.requests = [];
+>>>>>>> guille:Source/Request/Request.JSONP.js

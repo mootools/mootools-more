@@ -19,6 +19,11 @@ MooTools Plugins and Enhancements Repository
 
 * http://wiki.github.com/mootools/mootools-core/syntax-and-coding-style-conventions
 
+### Breaking changes from RC1
+
+* URI
+ - domain renamed to host
+
 ### Breaking Changes from More
 
 * Tips
