@@ -10,7 +10,7 @@
 
 */
 
-MooTools.lang.set('DK', 'FormValidator', {
+MooTools.lang.set('da-DK', 'FormValidator', {
 
 	required:'Feltet skal udfyldes.',
 	minLength:'Skriv mindst {minLength} tegn (du skrev {length} tegn).',

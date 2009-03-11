@@ -43,7 +43,7 @@ var Builder = {
 		},
 		
 		more: {
-			'Core'		: ['Lang'],
+			'Core'		: ['More', 'Lang', 'Log'],
 			'Class'		: ['Class.Refactor', 'Class.Binds', 'Class.Occlude'],
 			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras', 'URI'],
 			'Element'	: ['Element.Forms', 'Element.Measure'],
@@ -51,11 +51,12 @@ var Builder = {
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements', 'Fx.Accordion', 'Fx.SmoothScroll'],
 			'Request'   : ['Request.JSONP', 'Request.Queue', 'Request.Periodical'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie'],
-			'Interface' : ['Scroller', 'Tips']
+			'Interface' : ['Scroller', 'Tips'],
+			'Localization':['Date.English.US', 'FormValidator.English']
 		},
 
 		lang: {
-			'Localization':['Date.English.US', 'Date.Norwegian', 'FormValidator.English', 'FormValidator.French']
+			'Localization':['Date.Norwegian', 'FormValidator.French']
 		},
 
 		specs: {

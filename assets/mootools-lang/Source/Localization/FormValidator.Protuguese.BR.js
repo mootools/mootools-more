@@ -10,7 +10,7 @@ Script: FormValidator.Portuguese.BR.js
 
 */
 
-MooTools.lang.set('brPOR', 'FormValidator', {
+MooTools.lang.set('pt-BR', 'FormValidator', {
 
 	required: 'Este campo é obrigatório.',
 	minLength: 'Digite pelo menos {minLength} caracteres (tamanho atual: {length}).',

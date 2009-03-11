@@ -10,7 +10,7 @@ Script: FormValidator.Catalan.js
 
 */
 
-MooTools.lang.set('CAT', 'FormValidator', {
+MooTools.lang.set('ca-CA', 'FormValidator', {
 	required:'Aquest camp és obligatori.',
 	minLength:'Sisplau escriu com a mnim {minLength} carcters (has escrit {length} carcters).',
 	maxLength:'Sisplau no escriguis ms de {maxLength} carcters (has escrit {length} carcters).',
@@ -27,6 +27,6 @@ MooTools.lang.set('CAT', 'FormValidator', {
 	oneRequired:'Sisplau selecciona almenys una d\'aquestes opcions.',
 	errorPrefix: 'Error: ',
 	warningPrefix: 'Avís: '
-}).set('CAT', 'Date', {
+}).set('ca-CA', 'Date', {
 	dateOrder: ['date', 'month', 'year', '/']
 });

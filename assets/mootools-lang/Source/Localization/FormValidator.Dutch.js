@@ -10,7 +10,7 @@ Script: FormValidator.Dutch.js
 
 */
 
-MooTools.lang.set('NL', 'FormValidator', {
+MooTools.lang.set('nl-NL', 'FormValidator', {
 	required:'Dit veld is verplicht.',
 	minLength:'Vul minimaal {minLength} karakters in (je hebt {length} karakters ingevoerd).',
 	maxLength:'Vul niet meer dan {maxLength} karakters in (je hebt {length} karakters ingevoerd).',

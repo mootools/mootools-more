@@ -10,7 +10,7 @@ Script: Date.Polish.js
 
 */
 
-MooTools.lang.set('PL', 'Date', {
+MooTools.lang.set('pl-PL', 'Date', {
 
 	months: function(i) {
 		return ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'][i];

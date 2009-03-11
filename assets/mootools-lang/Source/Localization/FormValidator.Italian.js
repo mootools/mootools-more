@@ -10,7 +10,7 @@ Script: FormValidator.Italian.js
 		Andrea Novero
 */
  
-MooTools.lang.set('IT', 'FormValidator', {
+MooTools.lang.set('it-IT', 'FormValidator', {
 
 	required:'Il campo &egrave; obbligatorio.',
 	minLength:'Inserire almeno {minLength} caratteri (ne sono stati inseriti {length}).',

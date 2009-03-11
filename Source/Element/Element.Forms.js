@@ -20,12 +20,12 @@ Element.implement({
 	},
 
 	getSelectedText: function(){
-		if (Browser.Engine.trident) return document.selection.createRange().text;
+		if (document.selection && document.selection.createRange) return document.selection.createRange().text;
 		return this.getTextInRange(this.getSelectionStart(), this.getSelectionEnd());
 	},
 
 	getSelectedRange: function() {
-		if (!Browser.Engine.trident) return {start: this.selectionStart, end: this.selectionEnd};
+		if ($defined(this.selectionStart)) return {start: this.selectionStart, end: this.selectionEnd};
 		var pos = {start: 0, end: 0};
 		var range = this.getDocument().selection.createRange();
 		if (!range || range.parentElement() != this) return pos;
@@ -64,7 +64,7 @@ Element.implement({
 	},
 
 	selectRange: function(start, end){
-		if (Browser.Engine.trident){
+		if (this.createTextRange){
 			var value = this.get('value');
 			var diff = value.substr(start, end - start).replace(/\r/g, '').length;
 			start = value.substr(0, start).replace(/\r/g, '').length;
