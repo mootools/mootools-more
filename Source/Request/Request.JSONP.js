@@ -7,11 +7,12 @@ Script: Request.JSONP.js
 
 	Authors:
 		Aaron Newton
+		Guillermo Rauch
 */
 
 Request.JSONP = new Class({
 
-	Implements: [Chain, Events, Options],
+	Implements: [Chain, Events, Options, Log],
 
 	options: {/*
 		onRetry: $empty(intRetries),
@@ -24,7 +25,7 @@ Request.JSONP = new Class({
 		retries: 0,
 		timeout: 0,
 		link: 'ignore',
-		callBackKey: 'callback',
+		callbackKey: 'callback',
 		injectScript: document.head
 	},
 
@@ -57,7 +58,7 @@ Request.JSONP = new Class({
 				
 		(function(){
 			var script = this.getScript(options);
-			MooTools.log('JSONP retrieving script with url: ' + script.src);
+			this.log('JSONP retrieving script with url: ' + script.get('src'));
 			this.fireEvent('request', script);
 			this.running = true;
 			
@@ -72,6 +73,7 @@ Request.JSONP = new Class({
 				} else if(script && this.options.timeout){
 					script.destroy();
 					this.cancel();
+					this.fireEvent('failure');
 				}					
 			}).delay(this.options.timeout, this);
 		}).delay(Browser.Engine.trident ? 50 : 0, this);
@@ -86,41 +88,37 @@ Request.JSONP = new Class({
 	},
  	
 	getScript: function(options){
-		var options = this.options, index = Request.JSONP.requests.length, data;
+		var options = this.options, index = Request.JSONP.counter, data;
+		Request.JSONP.counter++;
 		
 		switch ($type(options.data)){
 			case 'element': data = $(options.data).toQueryString(); break;
 			case 'object': case 'hash': data = Hash.toQueryString(options.data);
 		}
 		
-		var script = new Element('script', {
-			type: 'text/javascript',
-			src: options.url + 
-				 (options.url.test('\\?') ? '&' :'?') + 
-				 (options.callBackKey || this.options.callBackKey) + 
-				 "=Request.JSONP.requests["+ index +"]" + 
-				 (data ? '&' + data : '')
-		}).inject(this.options.injectScript);
+		var src = options.url + 
+			 (options.url.test('\\?') ? '&' :'?') + 
+			 (options.callbackKey || this.options.callbackKey) + 
+			 "=Request.JSONP.requests["+ index +"]" + 
+			 (data ? '&' + data : '');
+			
+		if (src.length > 2083) this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
+				
+		var script = new Element('script', {type: 'text/javascript', src: src});
 		
 		Request.JSONP.requests.push(function(data){ this.success(data, script); }.bind(this));
 				
-		return script;
+		return script.inject(this.options.injectScript);
 	},
 	
 	success: function(data, script){
 		if (script) script.destroy();
 		this.running = false;
-		MooTools.log('JSONP successfully retrieved: ',  data);
+		this.log('JSONP successfully retrieved: ', data);
 		this.fireEvent('complete', data).fireEvent('success', data).callChain();
 	}
 
 });
 
-Request.JSONP.requests = [];
-
-$extend(MooTools, {
-	logged: [],
-	log: function(){
-		MooTools.logged.push(arguments);
-	}
-});
+Request.JSONP.counter = 0;
+Request.JSONP.request_map = {};
