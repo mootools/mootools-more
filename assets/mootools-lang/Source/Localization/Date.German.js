@@ -11,7 +11,7 @@ Script: Date.German.js
 
 */
 
-MooTools.lang.set('DE', 'Date', {
+MooTools.lang.set('de-DE', 'Date', {
 
 	months: function(i) {
 		return ['Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'][i];

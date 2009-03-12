@@ -33,7 +33,7 @@ If you are unsure, you can only use the simplified Chinese language pack, as it 
 */
 
 // Simplified Chinese
-MooTools.lang.set('cnCHS', 'FormValidator', {
+MooTools.lang.set('zhs-CN', 'FormValidator', {
 	required:'这是必填项。',
 	minLength:'请至少输入 {minLength} 个字符 (已输入 {length} 个)。',
 	maxLength:'最多只能输入 {maxLength} 个字符 (已输入 {length} 个)。',
@@ -53,7 +53,7 @@ MooTools.lang.set('cnCHS', 'FormValidator', {
 });
 
 // Traditional Chinese
-MooTools.lang.set('cnCHT', 'FormValidator', {
+MooTools.lang.set('zht-CN', 'FormValidator', {
 	required:'這是必填項。',
 	minLength:'請至少鍵入 {minLength} 個字符(已鍵入 {length} 個)。',
 	maxLength:'最多只能鍵入 {maxLength} 個字符(已鍵入 {length} 個)。',

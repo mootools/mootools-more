@@ -10,7 +10,7 @@ Script: FormValidator.Russian.js
 
 */
 
-MooTools.lang.set('RU_unicode', 'FormValidator', {
+MooTools.lang.set('ru-RU-unicode', 'FormValidator', {
 	required:'Это поле обязательно к заполнению.',
 	minLength:'Пожалуйста, введите хотя бы {minLength} символов (Вы ввели {length}).',
 	maxLength:'Пожалуйста, введите не больше {maxLength} символов (Вы ввели {length}).',
@@ -30,7 +30,7 @@ MooTools.lang.set('RU_unicode', 'FormValidator', {
 });
 
 //translation in windows-1251 codepage
-MooTools.lang.set('RU', 'FormValidator', {
+MooTools.lang.set('ru-RU', 'FormValidator', {
 	required:'Ýòî ïîëå îáÿçàòåëüíî ê çàïîëíåíèþ.',
 	minLength:'Ïîæàëóéñòà, ââåäèòå õîòÿ áû {minLength} ñèìâîëîâ (Âû ââåëè {length}).',
 	maxLength:'Ïîæàëóéñòà, ââåäèòå íå áîëüøå {maxLength} ñèìâîëîâ (Âû ââåëè {length}).',

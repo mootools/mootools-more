@@ -10,7 +10,7 @@ Script: Date.French.js
 
 */
  
-MooTools.lang.set('FR', 'Date', {
+MooTools.lang.set('fr-FR', 'Date', {
 
 	months: function(i) {
 		return ['janvier', 'f&eacute;vrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'ao&ucirc;t', 'septembre', 'octobre', 'novembre', 'd&eacute;cembre'][i];

@@ -10,7 +10,7 @@ Script: FormValidator.Norwegian.js
 
 */
 
-MooTools.lang.set('NO', 'FormValidator', {
+MooTools.lang.set('no-NO', 'FormValidator', {
    required:'Dette feltet er pÃ¥krevd.',
    minLength:'Vennligst skriv inn minst {minLength} tegn (du skrev {length} tegn).',
    maxLength:'Vennligst skriv inn maksimalt {maxLength} tegn (du skrev {length} tegn).',

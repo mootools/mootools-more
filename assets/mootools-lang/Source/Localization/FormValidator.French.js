@@ -11,7 +11,7 @@ Script: FormValidator.French.js
 
 */
  
-MooTools.lang.set('FR', 'FormValidator', {
+MooTools.lang.set('fr-FR', 'FormValidator', {
   required:'Ce champ est obligatoire.',
   minLength:'Veuillez saisir un minimum de {minLength} caract&egrave;re(s) (vous avez saisi {length} caract&egrave;re(s)).',
   maxLength:'Veuillez saisir un maximum de {maxLength} caract&egrave;re(s) (vous avez saisi {length} caract&egrave;re(s)).',

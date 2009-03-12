@@ -10,7 +10,7 @@ Script: Date.Dutch.js
 
 */
 
-MooTools.lang.set('NL', 'Date', {
+MooTools.lang.set('nl-NL', 'Date', {
 
 	months: function(i){
 		return ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustys', 'September', 'Oktober', 'November', 'December'][i];
@@ -35,7 +35,7 @@ MooTools.lang.set('NL', 'Date', {
 	hourAgo: 'ongeveer een uur geleden',
 	hoursAgo: 'ongeveer {delta} uur geleden',
 	dayAgo: '{delta} dag geleden',
-	daysAgo: 'dagen geleden'
+	daysAgo: 'dagen geleden',
 	lessThanMinuteUntil: 'minder dan een minuut vanaf nu',
 	minuteUntil: 'ongeveer een minuut vanaf nu',
 	minutesUntil: '{delta} minuten vanaf nu',

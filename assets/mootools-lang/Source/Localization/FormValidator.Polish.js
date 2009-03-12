@@ -10,7 +10,7 @@ Script: FormValidator.Polish.js
 
 */
 
-MooTools.lang.set('PL', 'FormValidator', {
+MooTools.lang.set('pl-PL', 'FormValidator', {
 
 	required:'To pole jest wymagane.',
 	minLength:'Wymagane jest przynajmniej {minLenght} znaków (wpisanych zostało tylko {length}).',

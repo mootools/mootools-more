@@ -51,11 +51,12 @@ var Builder = {
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements', 'Fx.Accordion', 'Fx.SmoothScroll'],
 			'Request'   : ['Request.JSONP', 'Request.Queue', 'Request.Periodical'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie'],
-			'Interface' : ['Scroller', 'Tips']
+			'Interface' : ['Scroller', 'Tips'],
+			'Localization':['Date.English.US', 'FormValidator.English']
 		},
 
 		lang: {
-			'Localization':['Date.English.US', 'Date.Norwegian', 'FormValidator.English', 'FormValidator.French']
+			'Localization':['Date.Norwegian', 'FormValidator.French']
 		},
 
 		specs: {

@@ -10,7 +10,7 @@ Script: Date.Norwegian.js
 
 */
 
-MooTools.lang.set('NO', 'Date', {
+MooTools.lang.set('no-NO', 'Date', {
 
 	lessThanMinuteAgo: 'kortere enn et minutt siden',
 	minuteAgo: 'omtrent et minutt siden',

@@ -10,7 +10,7 @@ Script: Date.Danish.js
 
 */
  
-MooTools.lang.set('DK', 'Date', {
+MooTools.lang.set('da-DK', 'Date', {
 
 	months: function(i){
 		return ['Januar', 'Februa', 'Marts', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December'][i];

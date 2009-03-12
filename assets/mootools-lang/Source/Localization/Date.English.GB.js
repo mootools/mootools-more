@@ -10,8 +10,8 @@ Script: Date.English.GB.js
 
 */
 
-MooTools.lang.set('gbENG', 'Date', {
+MooTools.lang.set('en-GB', 'Date', {
 
 	dateOrder: ['date', 'month', 'year', '/']
 
-}).set('cascade', ['usENG']);
+}).set('cascade', ['en-US']);

@@ -38,7 +38,7 @@ License:
 	describe('URL.get(\'host\')', {
 
 			'should get the domain of a url': function(){
-				value_of(new URI(url.toString()).get('domain')).should_be('www.test.com');
+				value_of(new URI(url.toString()).get('host')).should_be('www.test.com');
 			}
 
 	});
