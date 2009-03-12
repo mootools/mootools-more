@@ -43,7 +43,7 @@ var Builder = {
 		},
 		
 		more: {
-			'Core'		: ['Lang'],
+			'Core'		: ['More', 'Lang', 'Log'],
 			'Class'		: ['Class.Refactor', 'Class.Binds', 'Class.Occlude'],
 			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras', 'URI'],
 			'Element'	: ['Element.Forms', 'Element.Measure'],

@@ -26,4 +26,24 @@ Sums up all values in an array
 
 * (*number*) a number containing the sum of all values in the given array
 
+Array Method: dedupe {#Array:dedupe}
+-------------------------------------
+
+Returns a new array without duplicate values.
+
+### Syntax
+
+	myArrayWithoutDupes = myArray.dedupe();
+
+### Example
+
+	var fruits = ['apple', 'lemon', 'pear', 'lemon', 'apple'].dedupe();
+	//fruits == ['apple', 'lemon', 'pear']
+
+### Returns
+
+* (*array*) a new array without duplicates.
+
+
+
 [Array]: /docs/core/Native/Array

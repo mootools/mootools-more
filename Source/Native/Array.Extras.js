@@ -15,6 +15,12 @@ Array.implement({
 		var s = 0;
 		for(var i = 0, l = this.length; i < l; i++) s += this[i];
 		return s;
+	},
+
+	dedupe: function(){
+		var result = [];
+		for(var i = 0, l = this.length; i < l; i++) result.include(this[i]);
+		return result;
 	}
 
 });
