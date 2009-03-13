@@ -27,15 +27,35 @@ var Scroller = new Class({
 		this.element = $(element);
 		this.listener = ($type(this.element) != 'element') ? $(this.element.getDocument().body) : this.element;
 		this.timer = null;
-		this.coord = this.getCoords.bind(this);
+		
+		this.bound = {
+			attach: this.attach.bind(this),
+			detach: this.detach.bind(this),
+			getCoords: this.getCoords.bind(this)
+		};
 	},
 
 	start: function(){
-		this.listener.addEvent('mousemove', this.coord);
+		this.listener.addEvents({
+			mouseenter: this.bound.attach,
+			mouseleave: this.bound.detach
+		});
 	},
 
 	stop: function(){
-		this.listener.removeEvent('mousemove', this.coord);
+		this.listener.removeEvents({
+			mouseenter: this.bound.attach,
+			mouseleave: this.bound.detach
+		});
+		this.timer = $clear(this.timer);
+	},
+	
+	attach: function(){
+		this.listener.addEvent('mousemove', this.bound.getCoords);
+	},
+	
+	detach: function(){
+		this.listener.removeEvent('mousemove', this.bound.getCoords);
 		this.timer = $clear(this.timer);
 	},
 
@@ -49,7 +69,8 @@ var Scroller = new Class({
 			scroll = this.element.getScroll(), 
 			pos = this.element.getOffsets(), 
 			scrollSize = this.element.getScrollSize(), 
-			change = {'x': 0, 'y': 0};
+			change = {x: 0, y: 0};
+		
 		for (var z in this.page){
 			if (this.page[z] < (this.options.area + pos[z]) && scroll[z] != 0)
 				change[z] = (this.page[z] - this.options.area - pos[z]) * this.options.velocity;
