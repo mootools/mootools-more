@@ -88,8 +88,8 @@ var Slider = new Class({
 
 		this.step = Math.round(step);
 		this.checkStep();
-		this.end();
 		this.fireEvent('tick', this.toPosition(this.step));
+		this.end();
 		return this;
 	},
 
@@ -102,8 +102,8 @@ var Slider = new Class({
 
 		this.step = Math.round(this.min + dir * this.toStep(position));
 		this.checkStep();
-		this.end();
 		this.fireEvent('tick', position);
+		this.end();
 	},
 
 	scrolledElement: function(event){
