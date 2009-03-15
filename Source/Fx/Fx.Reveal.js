@@ -23,7 +23,8 @@ Fx.Reveal = new Class({
 		styles: ['padding', 'border', 'margin'],
 		transitionOpacity: !Browser.Engine.trident4,
 		mode: 'vertical',
-		display: 'block'
+		display: 'block',
+		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed' : false
 	},
 
 	dissolve: function(){
@@ -46,6 +47,7 @@ Fx.Reveal = new Class({
 					}, this);
 					var overflowBefore = this.element.getStyle('overflow');
 					this.element.setStyle('overflow', 'hidden');
+					var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
 					this.$chain.unshift(function(){
 						if (this.hidden){
 							this.hiding = false;
@@ -54,10 +56,12 @@ Fx.Reveal = new Class({
 							}, this);
 							this.element.setStyles($merge({display: 'none', overflow: overflowBefore}, startStyles));
 							if (setToAuto) this.element.setStyle('height', 'auto');
+							if (hideThese) hideThese.setStyle('visibility', 'visible');
 						}
 						this.fireEvent('hide', this.element);
 						this.callChain();
 					}.bind(this));
+					if (hideThese) hideThese.setStyle('visibility', 'hidden');
 					this.start(zero);
 				} else {
 					this.callChain.delay(10, this);
@@ -118,6 +122,9 @@ Fx.Reveal = new Class({
 					var overflowBefore = this.element.getStyle('overflow');
 					//set to zero
 					this.element.setStyles($merge(zero, {overflow: 'hidden'}));
+					//hide inputs
+					var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
+					if (hideThese) hideThese.setStyle('visibility', 'hidden');
 					//start the effect
 					this.start(startStyles);
 					this.$chain.unshift(function(){
@@ -127,6 +134,7 @@ Fx.Reveal = new Class({
 							if (['width', 'both'].contains(this.options.mode)) this.element.setStyle('width', 'auto');
 						}
 						if (!this.hidden) this.showing = false;
+						if (hideThese) hideThese.setStyle('visibility', 'visible');
 						this.callChain();
 						this.fireEvent('show', this.element);
 					}.bind(this));
