@@ -20,6 +20,10 @@ var Tips = new Class({
 		onHide: function(tip){
 			tip.setStyle('visibility', 'hidden');
 		},
+		title: 'title',
+		text: function(el){
+			return el.get('rel') || el.get('href');
+		},
 		showDelay: 100,
 		hideDelay: 100,
 		className: null,
@@ -32,6 +36,22 @@ var Tips = new Class({
 		this.setOptions(params.options);
 		this.container = new Element('div', {'class': 'tip'});
 		this.tip = this.getTip();
+		
+		this.restore = false;
+		if ($type(this.options.title)=='string'){
+			var title = this.options.title;
+			if (title=='title') this.restore = title;
+			this.options.title = function(el){
+				return el.get(title);
+			};
+		}
+		if ($type(this.options.text)=='string'){
+			var text = this.options.text;
+			this.options.text = function(el){
+				return el.get(text);
+			};
+		}
+		
 		if (params.elements) this.attach(params.elements);
 	},
 	
@@ -53,9 +73,9 @@ var Tips = new Class({
 	
 	attach: function(elements){
 		$$(elements).each(function(element){
-			var title = element.get('title');
-			element.store('tip:native', title).erase('title').retrieve('tip:title', title);
-			element.retrieve('tip:text', element.get('rel') || element.get('href'));
+			var title = this.options.title(element);
+			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
+			element.retrieve('tip:text', this.options.text(element));
 			
 			var events = ['enter', 'leave'];
 			if (!this.options.fixed) events.push('move');
@@ -75,9 +95,12 @@ var Tips = new Class({
 			});
 			
 			element.eliminate('tip:enter').eliminate('tip:leave').eliminate('tip:move');
+			
+			if(!this.restore) return;
+			
 			var original = element.retrieve('tip:native');
-			if (original) element.set('title', original);
-		});
+			if (original) element.set(this.restore, original);
+		}, this);
 		
 		return this;
 	},
