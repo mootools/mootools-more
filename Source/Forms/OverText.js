@@ -147,3 +147,9 @@ OverText.update = function(){
 	});
 
 };
+
+if (window.Fx && Fx.Reveal) {
+	Fx.Reveal.refactor({
+		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed, .overTxtDiv' : false
+	});
+}

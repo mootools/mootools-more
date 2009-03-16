@@ -10,11 +10,11 @@ Pass a *string* to the URI subclass and it will extend it, returning a new strin
 
 ### Syntax
 
-	var myURI = new URI('http://www.test.com:8383/the/path.html?query=value#anchor');
+	var myURI = new URI(['http://www.test.com:8383/the/path.html?query=value#anchor']);
 
 ### Returns
 
-* *URI* - a *string*-like object that has new methods useful for managing the URI.
+* *URI* - (*string*; optional) - like object that has new methods useful for managing the URI. If not declared the window's current location is used.
 
 ### Notes
 

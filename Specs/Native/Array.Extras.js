@@ -17,3 +17,16 @@ describe('Array.sum', {
 	}
 
 });
+
+
+describe('Array.dedupe', {
+
+	'should remove duplicates from an array': function(){
+		value_of(['apple', 'lemon', 'pear', 'lemon', 'apple'].dedupe()).should_be(["apple", "lemon", "pear"]);
+	},
+
+	'should not remove items that are dedupe':function(){
+		value_of([0, '0', false, null, true].dedupe()).should_be([0, '0', false, null, true]);
+	}
+
+});
