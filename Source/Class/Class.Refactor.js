@@ -17,12 +17,3 @@ Class.refactor = function(orig, props){
 	}
 	return update;
 };
-
-$extend(Class.prototype, {
-
-	refactor: function(props){
-		this.prototype = Class.refactor(this, props).prototype;
-		return this;
-	}
-
-});

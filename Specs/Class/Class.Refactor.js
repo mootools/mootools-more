@@ -20,7 +20,7 @@ License:
 		}
 	});
 	Test.static_method = function(){ return 'static';};
-	Test.refactor({
+	Test = Class.refactor(Test, {
 		options: { foo: 'rab' },
 		altered: function(){
 			return 'this is ' + this.parent();

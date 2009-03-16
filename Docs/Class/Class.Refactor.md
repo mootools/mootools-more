@@ -81,10 +81,6 @@ The catch with this approach is that you must assign a class back onto it's own 
 
 All that *Class.refactor* does is allow you to assign new properties to a class in the same manner as extending the class onto itself *without* destroying the namespace.
 
-This functionality comes in two flavors: A static method on the *Class* namespace and a method available on all classes defined after this script is included in your environment. Why two flavors? Because any class that is defined *before* *Class.Refactor.js* is included in your environment won't have the method baked in. So:
-
-Use this method on any class that existed before *Class.refactor* was included in your environment (i.e. all the MooTools classes defined before the Clientcide javascript):
-
 	Fx = Class.refactor(Fx, {
 		options: {
 			duration: 100
@@ -93,51 +89,13 @@ Use this method on any class that existed before *Class.refactor* was included i
 	//all new instances of Fx start with a default duration of 100
 	//Fx.Css, Fx.Tween, etc are unaltered in any way
 
-Class Instance Method: refactor {#Class:refactor}
--------------------------------------------------
-
-Automatically augments a class (a shorthand of the static method above).
-
-### Syntax
-
-	MyClass.refactor(newProperties)
-
-### Arguments
-
-1. newProperties - (*object*) properties to assign to the class
-
-### Example
-
-	MyClass.refactor({
-		options: {
-			height: 100
-		},
-		someMethod: function(){
-			this.parent();
-			...some new functionality...
-		}
-	});
-
-### Notes
-
-For all other classes (the Clientcide code and your own classes) you can just use the instance method:
-
-	StickyWin.refactor({
-		options: {
-			zIndex: 100
-		}
-	});
-	//all new instances of StickyWin will have //options.zIndex// set to //100//
-	//StickyWin.Fx, StickyWin.Modal, etc. are unaltered in any way
-
-
 Refactoring Class Families
 --------------------------
 
 What happens if you wanted to take the example above (where we set the default zIndex on *StickyWin*) and apply it to all the *StickyWin* classes? Well, you'll have to refactor them all. This would look like this:
 
 	[StickyWin, StickyWin.Fx, StickyWin.Modal, StickyWin.Fx.Modal, etc].each(function(cls){
-		cls.refactor({
+		cls = Class.refactor(cls, {
 			...new properties...
 		});
 	});
