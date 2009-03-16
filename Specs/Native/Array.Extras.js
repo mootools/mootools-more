@@ -19,14 +19,14 @@ describe('Array.sum', {
 });
 
 
-describe('Array.dedupe', {
+describe('Array.unique', {
 
 	'should remove duplicates from an array': function(){
-		value_of(['apple', 'lemon', 'pear', 'lemon', 'apple'].dedupe()).should_be(["apple", "lemon", "pear"]);
+		value_of(['apple', 'lemon', 'pear', 'lemon', 'apple'].unique()).should_be(["apple", "lemon", "pear"]);
 	},
 
 	'should not remove items that are dedupe':function(){
-		value_of([0, '0', false, null, true].dedupe()).should_be([0, '0', false, null, true]);
+		value_of([0, '0', false, null, true].unique()).should_be([0, '0', false, null, true]);
 	}
 
 });

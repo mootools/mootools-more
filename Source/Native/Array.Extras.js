@@ -17,10 +17,8 @@ Array.implement({
 		return s;
 	},
 
-	dedupe: function(){
-		var result = [];
-		for(var i = 0, l = this.length; i < l; i++) result.include(this[i]);
-		return result;
+	unique: function(){
+		return [].combine(this);
 	}
 
 });

@@ -26,18 +26,18 @@ Sums up all values in an array
 
 * (*number*) a number containing the sum of all values in the given array
 
-Array Method: dedupe {#Array:dedupe}
+Array Method: unique {#Array:unique}
 -------------------------------------
 
 Returns a new array without duplicate values.
 
 ### Syntax
 
-	myArrayWithoutDupes = myArray.dedupe();
+	myArrayWithoutDupes = myArray.unique();
 
 ### Example
 
-	var fruits = ['apple', 'lemon', 'pear', 'lemon', 'apple'].dedupe();
+	var fruits = ['apple', 'lemon', 'pear', 'lemon', 'apple'].unique();
 	//fruits == ['apple', 'lemon', 'pear']
 
 ### Returns
