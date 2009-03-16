@@ -20,15 +20,12 @@ Array.implement({
 	},
 
 	average: function(){
-		var l = this.length;
-		return l ? this.sum() / l : 0;
+		return this.length ? this.sum() / this.length : 0;
 	},
 
 	sum: function(){
 		var result = 0, l = this.length;
-		if (l) do {
-			result += this[--l];
-		} while (l);
+		if (l) do { result += this[--l]; } while (l);
 		return result;
 	},
 
