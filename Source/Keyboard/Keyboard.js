@@ -5,7 +5,7 @@ KeyboardEvents used to intercept events on a class for keyboard and format modif
   alt+shift+c the same as shift+alt+c.
 
 */
-var Events.Keyboard = new Class({
+Events.Keyboard = new Class({
 
 	Extends: Events,
 
@@ -24,7 +24,6 @@ var Events.Keyboard = new Class({
 			if (modifiers.has(mod)) modType += mod + '+';
 		});
 		modType += mainKey;
-		console.log('addEvent type: ' + modType);
 		return this.parent(modType, fn, internal);
 	},
 
