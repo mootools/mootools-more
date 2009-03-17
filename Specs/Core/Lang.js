@@ -12,12 +12,12 @@ describe('Lang', {
 	},
 	
 	'should cascade through to english': function(){
-		MooTools.lang.setLanguage('gbENG');
+		MooTools.lang.setLanguage('en-GB');
 		value_of(MooTools.lang.get('FormValidator', 'required')).should_be('This field is required.');
 	},
 	
 	'should return french form validator message': function(){
-		MooTools.lang.setLanguage('FR');
+		MooTools.lang.setLanguage('fr-FR');
 		value_of(MooTools.lang.get('FormValidator', 'required')).should_be('Ce champ est obligatoire.');
 	}
 

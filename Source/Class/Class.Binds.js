@@ -16,9 +16,7 @@ Script: Class.Binds.js
 		self.initialize = function(){
 			Array.flatten(binds).each(function(binder){
 				var original = this[binder];
-				this[binder] = function(){
-					return original.apply(this, arguments);
-				}.bind(this);
+				this[binder] = original.bind(this);
 				this[binder].parent = original.parent;
 			}, this);
 			return oldInit.apply(this,arguments);
