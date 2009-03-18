@@ -7,6 +7,7 @@ Script: Tips.js
 
 	Authors:
 		Valerio Proietti
+		Christoph Pojer
 */
 
 var Tips = new Class({
@@ -57,13 +58,13 @@ var Tips = new Class({
 	
 	getTip: function(){
 		return new Element('div', {
+			'class': this.options.className,
 			styles: {
 				visibility: 'hidden',
 				position: 'absolute',
 				top: 0,
 				left: 0
-			},
-			'class': this.options.className
+			}
 		}).adopt(
 			new Element('div', {'class': 'tip-top'}),
 			this.container,
@@ -74,7 +75,7 @@ var Tips = new Class({
 	attach: function(elements){
 		$$(elements).each(function(element){
 			var title = this.options.title(element);
-			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
+			element.store('tip:native', title).retrieve('tip:title', title).erase('title');
 			element.retrieve('tip:text', this.options.text(element));
 			
 			var events = ['enter', 'leave'];
@@ -96,7 +97,7 @@ var Tips = new Class({
 			
 			element.eliminate('tip:enter').eliminate('tip:leave').eliminate('tip:move');
 			
-			if(!this.restore) return;
+			if (!this.restore) return;
 			
 			var original = element.retrieve('tip:native');
 			if (original) element.set(this.restore, original);
@@ -110,7 +111,6 @@ var Tips = new Class({
 		
 		['title', 'text'].each(function(value){
 			var content = element.retrieve('tip:' + value);
-			
 			if (!content) return;
 			
 			this[value + 'Element'] = new Element('div', {'class': 'tip-' + value}).inject(this.container);
