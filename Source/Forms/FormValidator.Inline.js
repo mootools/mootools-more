@@ -22,8 +22,8 @@ FormValidator.Inline = new Class({
 		}
 	},
 
-	initialize: function(){
-		this.parent.apply(this, arguments);
+	initialize: function(form, options){
+		this.parent(form, options);
 		this.addEvent('onElementValidate', function(isValid, field, className, warn){
 			var validator = this.getValidator(className);
 			if (!isValid && validator.getError(field)){
