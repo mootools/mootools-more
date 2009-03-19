@@ -88,7 +88,7 @@ Request.JSONP = new Class({
 	},
  	
 	getScript: function(options){
-		var options = this.options, index = Request.JSONP.counter, data;
+		var index = Request.JSONP.counter, data;
 		Request.JSONP.counter++;
 		
 		switch ($type(options.data)){
