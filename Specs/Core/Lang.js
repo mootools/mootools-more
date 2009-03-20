@@ -5,6 +5,12 @@ Script: Lang.js
 License:
 	MIT-style license.
 */
+
+// In the specs there is only english available
+MooTools.lang.set('fr-FR', 'FormValidator', {
+	required: 'Ce champ est obligatoire.'
+});
+
 describe('Lang', {
 
 	'should return english form validator message': function(){

@@ -11,16 +11,26 @@ Script: Array.Extras.js
 */
 Array.implement({
 
-	sum: function(){
-		var s = 0;
-		for(var i = 0, l = this.length; i < l; i++) s += this[i];
-		return s;
+	min: function(){
+		return Math.min.apply(null, this);
 	},
 
-	dedupe: function(){
-		var result = [];
-		for(var i = 0, l = this.length; i < l; i++) result.include(this[i]);
+	max: function(){
+		return Math.max.apply(null, this);
+	},
+
+	average: function(){
+		return this.length ? this.sum() / this.length : 0;
+	},
+
+	sum: function(){
+		var result = 0, l = this.length;
+		if (l) do { result += this[--l]; } while (l);
 		return result;
+	},
+
+	unique: function(){
+		return [].combine(this);
 	}
 
 });
