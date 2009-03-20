@@ -34,6 +34,7 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 * fixedHeight - (*boolean*: defaults to false) If set to true, displayed elements will have a fixed height.
 * fixedWidth  - (*boolean*: defaults to false) If set to true, displayed elements will have a fixed width.
 * alwaysHide  - (*boolean*: defaults to false) If set to true, it will be possible to close all displayable elements. Otherwise, one will remain open at all time.
+* initialDisplayFx - (*boolean*; defaults to true) If set to false, the initial item displayed will not display with an effect but will just be shown immediately.
 
 ### Returns:
 
@@ -87,13 +88,12 @@ Dynamically adds a new section into the *Fx.Accordion* at the specified position
 
 ### Syntax:
 
-	myAccordion.addSection(toggler, element[, pos]);
+	myAccordion.addSection(toggler, element);
 
 ### Arguments:
 
 1. toggler - (*element*) The Element that toggles the *Fx.Accordion* section open.
 2. element - (*element*) The Element that should stretch open when the toggler is clicked.
-3. pos     - (*integer*, optional) The index at which these objects are to be inserted within the *Fx.Accordion* (defaults to the end).
 
 ### Returns:
 

@@ -25,7 +25,8 @@ Fx.Accordion = new Class({
 		fixedWidth: false,
 		wait: false,
 		alwaysHide: false,
-		trigger: 'click'
+		trigger: 'click',
+		initialDisplayFx: true
 	},
 
 	initialize: function(){
@@ -55,24 +56,15 @@ Fx.Accordion = new Class({
 				for (var fx in this.effects) el.setStyle(fx, 0);
 			}
 		}, this);
-		if ($chk(this.options.display)) this.display(this.options.display);
+		if ($chk(this.options.display)) this.display(this.options.display, this.options.initialDisplayFx);
 	},
 
-	addSection: function(toggler, element, pos){
+	addSection: function(toggler, element){
 		toggler = $(toggler);
 		element = $(element);
 		var test = this.togglers.contains(toggler);
-		var len = this.togglers.length;
 		this.togglers.include(toggler);
 		this.elements.include(element);
-		if (len && (!test || pos)){
-			pos = $pick(pos, len - 1);
-			toggler.inject(this.togglers[pos], 'before');
-			element.inject(toggler, 'after');
-		} else if (this.container && !test){
-			toggler.inject(this.container);
-			element.inject(this.container);
-		}
 		var idx = this.togglers.indexOf(toggler);
 		toggler.addEvent(this.options.trigger, this.display.bind(this, idx));
 		if (this.options.height) element.setStyles({'padding-top': 0, 'border-top': 'none', 'padding-bottom': 0, 'border-bottom': 'none'});
@@ -81,13 +73,12 @@ Fx.Accordion = new Class({
 		if (this.options.fixedWidth) element.fullWidth = this.options.fixedWidth;
 		if (this.options.fixedHeight) element.fullHeight = this.options.fixedHeight;
 		element.setStyle('overflow', 'hidden');
-		if (!test){
-			for (var fx in this.effects) element.setStyle(fx, 0);
-		}
+		if (!test) for (var fx in this.effects) element.setStyle(fx, 0);
 		return this;
 	},
 
-	display: function(index){
+	display: function(index, useFx){
+		useFx = $pick(useFx, true);
 		index = ($type(index) == 'element') ? this.elements.indexOf(index) : index;
 		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
@@ -98,7 +89,7 @@ Fx.Accordion = new Class({
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
 		}, this);
-		return this.start(obj);
+		return useFx ? this.start(obj) : this.set(obj);
 	}
 
 });

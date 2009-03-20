@@ -18,9 +18,21 @@ Script: Element.Measure.js
 Element.implement({
 
 	measure: function(fn){
+		var parent = this.getParent(),
+			toMeasure = [], restorers = [],
+			vis = function(el) {
+				return !!(el.offSetHeight || el.offsetWidth);
+			};
+		while (!vis(parent) && parent != document.body) {
+			toMeasure.push(parent.expose());
+			parent = parent.getParent();
+		}
 		var restore = this.expose();
 		var result = fn.apply(this);
 		restore();
+		toMeasure.each(function(restore){
+			restore();
+		});
 		return result;
 	},
 

@@ -240,7 +240,7 @@ var FormValidator = new Class({
 	ignoreField: function(field, warn){
 		field = $(field);
 		if (field){
-			FormValidator.enforceField(field);
+			this.enforceField(field);
 			if (warn) field.addClass('warnOnly');
 			else field.addClass('ignoreValidation');
 		}
