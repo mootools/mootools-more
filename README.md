@@ -24,6 +24,8 @@ MooTools Plugins and Enhancements Repository
 
 * URI
  - domain renamed to host
+* Fx.Accordion
+ - no longer organizes the DOM for you
 
 ### Breaking Changes from More
 
