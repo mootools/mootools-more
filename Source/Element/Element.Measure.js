@@ -20,7 +20,7 @@ Element.implement({
 		var parent = this.getParent(),
 			toMeasure = [], restorers = [],
 			vis = function(el) {
-				return !!(el.offSetHeight || el.offsetWidth);
+				return !!(el.offsetHeight || el.offsetWidth);
 			};
 		while (!vis(parent) && parent != document.body) {
 			toMeasure.push(parent.expose());
