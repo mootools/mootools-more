@@ -11,7 +11,6 @@ Script: Element.Measure.js
 
 	Authors:
 		Aaron Newton
-		Daniel Steigerwald
 
 */
 
@@ -37,14 +36,9 @@ Element.implement({
 	},
 
 	expose: function(){
-		if (this.getStyle('display') != 'none') return $empty;
-		var before = {};
-		var styles = { visibility: 'hidden', display: 'block', position:'absolute' };
-		$each(styles, function(value, style){
-			before[style] = this.style[style]||'';
-		}, this);
-		this.setStyles(styles);
-		return (function(){ this.setStyles(before); }).bind(this);
+		if (this.style.display != 'none') return $empty;
+		var before = this.style.cssText;
+		return this.set('style', 'display: block; position: absolute; visibility: hidden').set.pass(['style', before], this);
 	},
 
 	getDimensions: function(options){
