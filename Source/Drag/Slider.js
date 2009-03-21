@@ -13,6 +13,8 @@ var Slider = new Class({
 
 	Implements: [Events, Options],
 
+	Binds: ['clickedElement', 'draggedKnob', 'scrolledElement'],
+
 	options: {/*
 		onTick: $empty(intPosition),
 		onChange: $empty(intStep),
@@ -34,8 +36,8 @@ var Slider = new Class({
 		this.element = $(element);
 		this.knob = $(knob);
 		this.previousChange = this.previousEnd = this.step = -1;
-		this.element.addEvent('mousedown', this.clickedElement.bind(this));
-		if (this.options.wheel) this.element.addEvent('mousewheel', this.scrolledElement.bindWithEvent(this));
+		this.element.addEvent('mousedown', this.clickedElement);
+		if (this.options.wheel) this.element.addEvent('mousewheel', this.scrolledElement);
 		var offset, limit = {}, modifiers = {'x': false, 'y': false};
 		switch (this.options.mode){
 			case 'vertical':
@@ -65,11 +67,11 @@ var Slider = new Class({
 			snap: 0,
 			limit: limit,
 			modifiers: modifiers,
-			onDrag: this.draggedKnob.bind(this),
+			onDrag: this.draggedKnob,
 			onBeforeStart: (function(){
 				this.isDragging = true;
 			}).bind(this),
-			onStart: this.draggedKnob.bind(this),
+			onStart: this.draggedKnob,
 			onComplete: function(){
 				this.isDragging = false;
 				this.draggedKnob();
@@ -94,7 +96,7 @@ var Slider = new Class({
 	},
 
 	clickedElement: function(event){
-		if (this.isDragging) return;
+		if (this.isDragging || event.target == this.knob) return;
 
 		var dir = this.range < 0 ? -1 : 1;
 		var position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
