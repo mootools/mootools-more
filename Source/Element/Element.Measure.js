@@ -90,7 +90,8 @@ Element.implement({
 				});
 			});
 		});
-		var styles = this.getStyles.apply(this, getStyles);
+		var styles = {};
+		getStyles.each(function(style){ styles[style] = this.getComputedStyle(style); }, this);
 		var subtracted = [];
 		$each(options.plains, function(plain, key){ //keys: width, height, plains: ['left', 'right'], ['top','bottom']
 			size['total' + key.capitalize()] = 0;
