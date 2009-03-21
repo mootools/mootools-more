@@ -89,9 +89,6 @@ Slider Event: tick {#Slider:tick}
 		range: [-50, 50],
 		wheel: true,
 		snap: true,
-		onStart: function(){
-			this.borderFx = this.borderFx || this.element.tween('border').start('#ccc');
-		},
 		onTick: function(pos){
 			this.element.setStyle('border-color', '#f00');
 			this.knob.setStyle(this.property, pos);
