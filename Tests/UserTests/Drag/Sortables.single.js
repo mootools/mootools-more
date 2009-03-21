@@ -14,5 +14,6 @@
 				});
 			}
 		}
-	]
+	],
+	otherScripts: ['Element.Position']
 }
