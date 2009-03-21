@@ -64,10 +64,12 @@ Element.Properties.validatorProps = {
 			} else {
 				props = {};
 				vals.each(function(cls){
-					var split = cls.indexOf(':');
-					try {
-						props[cls.substring(0, split)] = JSON.decode(cls.substring(split + 1, cls.length));
-					} catch(e) {}
+					var split = cls.split(':');
+					if (split[1]) {
+						try {
+							props[split[0]] = JSON.decode(split[1]);
+						} catch(e) {}
+					}
 				});
 				this.store('validatorProps', props);
 			}
@@ -111,7 +113,7 @@ var FormValidator = new Class({
 		this.warningPrefix = $lambda(this.options.warningPrefix)();
 		this.errorPrefix = $lambda(this.options.errorPrefix)();
 		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this.onSubmit);
-		if (this.options.evaluateFieldsOnBlur) this.watchFields();
+		if (this.options.evaluateFieldsOnBlur) this.watchFields(this.getFields());
 	},
 
 	toElement: function(){
@@ -122,8 +124,8 @@ var FormValidator = new Class({
 		return this.fields = this.element.getElements(this.options.fieldSelectors);
 	},
 
-	watchFields: function(){
-		this.getFields().each(function(el){
+	watchFields: function(fields){
+		fields.each(function(el){
 				el.addEvent('blur', this.validateField.pass([el, false], this));
 			if (this.options.evaluateFieldsOnChange)
 				el.addEvent('change', this.validateField.pass([el, true], this));
@@ -430,8 +432,8 @@ FormValidator.addAllThese([
 
 	['validate-one-required', {
 		errorMsg: FormValidator.getMsg.pass('oneRequired'),
-		test: function(element){
-			var p = element.parentNode;
+		test: function(element, props){
+			var p = $(props['validate-one-required']) || element.parentNode;
 			return p.getElements('input').some(function(el){
 				if (['checkbox', 'radio'].contains(el.get('type'))) return el.get('checked');
 				return el.get('value');
