@@ -17,11 +17,13 @@ Script: Element.Measure.js
 Element.implement({
 
 	measure: function(fn){
+		var vis = function(el) {
+			return !!(el.offsetHeight || el.offsetWidth);
+		};
+		if (vis(this)) return fn.apply(this);
 		var parent = this.getParent(),
-			toMeasure = [], restorers = [],
-			vis = function(el) {
-				return !!(el.offsetHeight || el.offsetWidth);
-			};
+			toMeasure = [], 
+			restorers = [];
 		while (!vis(parent) && parent != document.body) {
 			toMeasure.push(parent.expose());
 			parent = parent.getParent();

@@ -61,6 +61,7 @@ var Tips = new Class({
 			'class': this.options.className,
 			styles: {
 				visibility: 'hidden',
+				display: 'none',
 				position: 'absolute',
 				top: 0,
 				left: 0
@@ -75,7 +76,7 @@ var Tips = new Class({
 	attach: function(elements){
 		$$(elements).each(function(element){
 			var title = this.options.title(element);
-			element.store('tip:native', title).retrieve('tip:title', title).erase('title');
+			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
 			element.retrieve('tip:text', this.options.text(element));
 			
 			var events = ['enter', 'leave'];
@@ -119,12 +120,13 @@ var Tips = new Class({
 		
 		this.timer = $clear(this.timer);
 		this.timer = this.show.delay(this.options.showDelay, this, element);
-
+		this.tip.setStyle('display', 'block');
 		this.position((!this.options.fixed) ? event : {page: element.getPosition()});
 	},
 	
 	elementLeave: function(event, element){
 		$clear(this.timer);
+		this.tip.setStyle('display', 'none');
 		this.timer = this.hide.delay(this.options.hideDelay, this, element);
 	},
 	
