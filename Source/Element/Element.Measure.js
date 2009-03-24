@@ -18,7 +18,7 @@ Element.implement({
 
 	measure: function(fn){
 		var vis = function(el) {
-			return !!(el.offsetHeight || el.offsetWidth);
+			return !!(!el || el.offsetHeight || el.offsetWidth);
 		};
 		if (vis(this)) return fn.apply(this);
 		var parent = this.getParent(),
