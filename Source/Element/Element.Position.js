@@ -17,8 +17,7 @@ var oldPosition = Element.prototype.position;
 Element.implement({
 
 	position: function(options){
-		if ($defined(options.x) || $defined(options.y)) return oldPosition ? oldPosition.apply(this, arguments) : this;
-		
+		if (options && ($defined(options.x) || $defined(options.y))) return oldPosition ? oldPosition.apply(this, arguments) : this;
 		$each(options||{}, function(v, k){ if (!$defined(v)) delete options[k]; });
 		options = $merge({
 			relativeTo: document.body,
