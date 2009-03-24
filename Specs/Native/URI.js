@@ -38,7 +38,7 @@ License:
 	describe('URL.get(\'host\')', {
 
 			'should get the domain of a url': function(){
-				value_of(new URI(url.toString()).get('host')).should_be('www.test.com');
+				value_of(new URI.URL(url.toString()).get('host')).should_be('www.test.com');
 			}
 
 	});
@@ -46,11 +46,11 @@ License:
 	describe('URL.getData', {
 
 			'should get the query string values from a url': function(){
-				value_of(new URI(url.toString()).getData()['query']).should_be('value');
+				value_of(new URI.URL(url.toString()).getData()['query']).should_be('value');
 			},
 
 			'should get the query string value from a url': function(){
-				value_of(new URI(url.toString()).getData('query')).should_be('value');
+				value_of(new URI.URL(url.toString()).getData('query')).should_be('value');
 			}
 
 	});
@@ -58,7 +58,7 @@ License:
 	describe('URI.get(\'domain\')', {
 
 			'should get the protocol from a url': function(){
-				value_of(new URI(url.toString()).get('protocol')).should_be('http');
+				value_of(new URI.URL(url.toString()).get('protocol')).should_be('http');
 			}
 
 	});
@@ -66,7 +66,7 @@ License:
 	describe('URI.get(\'port\')', {
 
 			'should get the port from a url': function(){
-				value_of(new URI(url.toString()).get('port')).should_be('8383');
+				value_of(new URI.URL(url.toString()).get('port')).should_be('8383');
 			}
 
 	});
@@ -74,11 +74,11 @@ License:
 	describe('URI.setData', {
 
 			'should set query string values': function(){
-				value_of(new URI('www.test.com').setData({a: 'b'}).toString()).should_be('www.test.com?a=b');
+				value_of(new URI.URL('www.test.com').setData({a: 'b'}).toString()).should_be('www.test.com?a=b');
 			},
 
 			'should merge url query string values': function(){
-				value_of(new URI('www.test.com?x=y&a=b').setData({a: 'c'}, true).toString()).should_be('www.test.com?x=y&a=c');
+				value_of(new URI.URL('www.test.com?x=y&a=b').setData({a: 'c'}, true).toString()).should_be('www.test.com?x=y&a=c');
 			}
 
 	});
