@@ -38,9 +38,13 @@ Element.implement({
 	},
 
 	expose: function(){
-		if (this.style.display != 'none') return $empty;
-		var before = this.style.cssText;
-		return this.set('style', 'display: block; position: absolute; visibility: hidden').set.pass(['style', before], this);
+		if (this.getStyle('display') != 'none') return $empty;
+		var before = this.getStyles('display', 'position', 'visibility');
+		return this.setStyles({
+			display: 'block',
+			position: 'absolute',
+			visibility: 'hidden'
+		}).setStyles.pass(before, this);
 	},
 
 	getDimensions: function(options){
