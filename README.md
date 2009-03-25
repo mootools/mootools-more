@@ -15,6 +15,7 @@ MooTools Plugins and Enhancements Repository
 * Compat for Clientcide
 * Switch to feature detection instead of engine detection
 * update all the Element.Forms methods to getters/setters; tidy them up a bit
+* Update calls to .position to use .setPosition
 
 ### StyleGuide
 

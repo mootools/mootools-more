@@ -21,9 +21,9 @@ Script: MooTools.Lang.js
 	
 	var cascaded;
 
-	MooTools.lang = new new Class({
+	MooTools.lang = new Events();
 
-		Implements: Events,
+	$extend(MooTools.lang, {
 
 		setLanguage: function(lang){
 			if (!data.languages[lang]) return;

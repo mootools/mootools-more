@@ -32,10 +32,31 @@ String.implement({
 			return $chk(set.split('=')[1]);
 		}).join('&');
 	}
-	
+
 });
 
 var URI = new Class({
+
+	Implements: Options,
+
+	options: {
+		regex: /^(?:(\w+):\/\/)?(?:(?:(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]+)?(?::(\d*))?)?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/,
+		parts: ['full', 'scheme', 'user', 'password', 'host', 'port', 'path', 'query', 'fragment'],
+		schemes: ['https','ftp','file','rtsp','mms'],
+		required: ['scheme', 'host'],
+		wrappers: {
+			scheme: function(s) { return s ? s += '://' : '' },
+			password: function(s) { return s ? ':' + s : '' },
+			port: function(s) { return s ? ':' + s : ''},
+			query: function(s) { return s ? '?' + s : ''},
+			fragment: function(s) { return s ? '#' + s : ''}
+		}
+	},
+
+	initialize: function(uri, options){
+		this.setOptions(options);
+		this.value = uri || document.location.href || '';
+	},
 
 	toString: function(){
 		return this.value;
@@ -45,23 +66,25 @@ var URI = new Class({
 		return this.value;
 	},
 
-	validate: function(regex, parts){
-		parts = parts || this.parts;
+	validate: function(parts, regex){
+		parts = parts || this.options.parts;
 		var bits = this.parse(regex, parts);
-		return parts.every(function(part) {
+		var valid = parts.every(function(part) {
 			return !!bits[part];
 		});
+		return valid && (this.schemes.contains(bits.scheme) || !bits.scheme);
 	},
 
 	parse: function(regex, parts) {
-		regex = regex || this.regex;
-		parts = parts || this.parts;
+		regex = regex || this.options.regex;
+		parts = parts || this.options.parts;
 		var bits = this.value.match(regex).associate(parts);
 		delete bits.full;
 		return bits;
 	},
 
 	set: function(part, value){
+		if (part == "data") return this.setData(value);
 		var bits = this.parse();
 		bits[part] = value;
 		this.combine(bits);
@@ -69,14 +92,33 @@ var URI = new Class({
 	},
 
 	get: function(part){
+		if (part == "data") return this.getData();
 		return this.parse()[part];
+	},
+
+	getData: function(key){
+		var qs = this.get('query');
+		if (!$chk(qs)) return key ? null : {};
+		var obj = decodeURI(qs).parseQueryString(false, false); 
+		return key ? obj[key] : obj;
+	},
+
+	setData: function(values, merge){
+		var merged = merge ? $merge(this.getData(), values) : values;
+		var newQuery = '';
+		for (key in merged) newQuery += encodeURIComponent(key) + '=' + encodeURIComponent(merged[key]) + '&';
+		return this.set('query', newQuery.substring(0, newQuery.length-1));
+	},
+
+	clearData: function(){
+		this.set('query', '');
 	},
 
 	combine: function(bits){
 		bits = bits || this.parse();
 		var result = '';
 		$each(bits, function(value, key) {
-			var wrapped = this.wrappers[key] ? this.wrappers[key](value) : value;
+			var wrapped = this.options.wrappers[key] ? this.options.wrappers[key](value) : value;
 			result += wrapped ? wrapped : '';
 		}, this);
 		this.value = result;
@@ -91,86 +133,9 @@ var URI = new Class({
 
 (function(){
 
-	//HTTP: protocol, user, password, hostname, port, directory, pathname, file, search, hash
-	//MAILTO: email, username, hostname, headers, subject, body
-	URI.URL = new Class({
-
-		Extends: URI,
-
-		wrappers: {
-			protocol: function(s) { return s ? s += '://' : s },
-			password: function(s) { return s ? ':' + s : s },
-			port: function(s) { return s ? ':' + s : s},
-			query: function(s) { return s ? '?' + s : s},
-			fragment: function(s) { return s ? '#' + s : s}
-		},
-
-		initialize: function(uri){
-			this.value = uri || document.location.href || '';
-			this.regex = URI.URL.regex;
-			this.parts = URI.URL.parts;
-		},
-
-		parse: function(){
-			return this.parent(URI.URL.regex, URI.URL.parts);
-		},
-
-		validate: function(regex, parts){
-			return this.parent(regex || this.regex, parts || ['protocol', 'host']);
-		},
-
-		set: function(part, value){
-			switch(part) {
-				case 'data': return this.setData(value);
-				case 'directory': return this.setDirectory(value);
-			}
-			return this.parent(part, value);
-		},
-
-		get: function(part){
-			switch(part) {
-				case 'data': return this.getData();
-				case 'directory': return this.getDirectory();
-			}
-			return this.parent(part);
-		},
-
-		getData: function(key){
-			var qs = this.get('query');
-			if (!$chk(qs)) return key ? null : {};
-			var obj = decodeURI(qs).parseQueryString(false, false); 
-			return key ? obj[key] : obj;
-		},
-
-		getDirectory: function() {
-			var bits = this.get('path').split('/');
-			bits.pop();
-			return bits.join('/');
-		},
-
-		setDirectory: function(dir){
-			return this.set('path', dir + '/' + this.get('path').split('/').getLast());
-		},
-
-		setData: function(values, merge){
-			var merged = merge ? $merge(this.getData(), values) : values;
-			var newQuery = '';
-			for (key in merged) newQuery += encodeURIComponent(key) + '=' + encodeURIComponent(merged[key]) + '&';
-			return this.set('query', newQuery.substring(0, newQuery.length-1));
-		},
-
-		clearData: function(){
-			this.set('query', '');
-		}
-
-	});
-
-	URI.URL.regex = /^(?:(\w+):\/\/)?(?:(?:(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]+)?(?::(\d*))?)?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
-	URI.URL.parts = ['full', 'protocol', 'user', 'password', 'host', 'port', 'path', 'query', 'fragment'];
-
 	var methods = {};
 
-	URI.URL.parts.each(function(part){
+	new URI().options.parts.each(function(part){
 
 		methods['get' + part.capitalize()] = function(){
 			return this.get(part);
@@ -182,6 +147,6 @@ var URI = new Class({
 
 	});
 
-	URI.URL.implement(methods);
+	URI.implement(methods);
 
 })();
