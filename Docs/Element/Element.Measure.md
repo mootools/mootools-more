@@ -44,7 +44,7 @@ Returns width and height for element even if the element is not visible.
 
 ### Syntax
 
-	element.getDimentions([options]);
+	element.getDimensions([options]);
 
 ### Arguments
 
@@ -74,7 +74,7 @@ Calculates the size of an element including the width, border, padding, etc.
 
 ### Syntax
 
-	element.getDimentions([options]);
+	element.getDimensions([options]);
 
 ### Arguments
 
