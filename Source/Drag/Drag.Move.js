@@ -41,7 +41,7 @@ Drag.Move = new Class({
 
 	start: function(event){
 		if (this.container){
-			var ccoo = this.container.getCoordinates(this.element.offsetParent), 
+			var ccoo = this.container.getCoordinates(this.element.getOffsetParent()), 
 				cbs = {},
 				cps = {},
 				ems = {};
@@ -55,7 +55,7 @@ Drag.Move = new Class({
 			var width = this.element.offsetWidth + ems.left + ems.right;
 			var height = this.element.offsetHeight + ems.top + ems.bottom;
 
-			if (this.container == this.element.offsetParent) {
+			if (this.container == this.element.getOffsetParent()) {
 				this.options.limit = {
 					x: [0 - ems.left, ccoo.right - cbs.right - width - cps.left + ems.right],
 					y: [0 - ems.top, ccoo.bottom - cbs.bottom - height - cps.top + ems.bottom]
