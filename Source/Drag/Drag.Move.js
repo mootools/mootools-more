@@ -41,14 +41,10 @@ Drag.Move = new Class({
 
 	start: function(event){
 		if (this.container){
-			var ccoo = this.container.getCoordinates(this.element.getOffsetParent()), 
-				cbs = {},
-				cps = {},
-				ems = {};
+			var ccoo = this.container.getCoordinates(this.element.getOffsetParent()), cbs = {}, ems = {};
 
 			['top', 'right', 'bottom', 'left'].each(function(pad){
 				cbs[pad] = this.container.getStyle('border-' + pad).toInt();
-				cps[pad] = this.container.getStyle('padding-' + pad).toInt();
 				ems[pad] = this.element.getStyle('margin-' + pad).toInt();
 			}, this);
 
@@ -57,13 +53,13 @@ Drag.Move = new Class({
 
 			if (this.container == this.element.getOffsetParent()) {
 				this.options.limit = {
-					x: [0 - ems.left, ccoo.right - cbs.right - width - cps.left + ems.right],
-					y: [0 - ems.top, ccoo.bottom - cbs.bottom - height - cps.top + ems.bottom]
+					x: [0 - ems.left, ccoo.right - cbs.left - cbs.right - width + ems.right],
+					y: [0 - ems.top, ccoo.bottom - cbs.top - cbs.bottom - height + ems.bottom]
 				};
 			} else {
 				this.options.limit = {
-					x: [ccoo.left + cbs.left - ems.left, ccoo.right - cps.right - width + ems.right],
-					y: [ccoo.top + cbs.top - ems.top, ccoo.bottom - cps.bottom - height + ems.bottom]
+					x: [ccoo.left + cbs.left - ems.left, ccoo.right - cbs.right - width + ems.right],
+					y: [ccoo.top + cbs.top - ems.top, ccoo.bottom - cbs.bottom - height + ems.bottom]
 				};
 			}
 
