@@ -5,95 +5,55 @@ Script: URI.js
 	License:
 		MIT-style license.
 
-	String subclass based on:
-		http://webreflection.blogspot.com/2008/10/subclassing-javascript-native-string.html
-
 	Authors:
-		Aaron Newton, Lennart Pilon, Valerio Proietti
+		Sebastian Markbåge, Aaron Newton
 */
-
-String.implement({
-	
-	parseQueryString: function(encodeKeys, encodeValues){
-		encodeKeys = $pick(encodeKeys, true);
-		encodeValues = $pick(encodeValues, true);
-		var vars = this.split(/[&;]/), rs = {};
-		if (vars.length) vars.each(function(val){
-			var keys = val.split('=');
-			if (keys.length && keys.length == 2){
-				rs[(encodeKeys) ? encodeURIComponent(keys[0]):keys[0]] = (encodeValues) ? encodeURIComponent(keys[1]) : keys[1];
-			}
-		});
-		return rs;
-	},
-
-	cleanQueryString: function(method){
-		return this.split('&').filter(method || function(set){
-			return $chk(set.split('=')[1]);
-		}).join('&');
-	}
-
-});
 
 var URI = new Class({
 
 	Implements: Options,
-
+	
+	/*
 	options: {
-		regex: /^(?:(\w+):\/\/)?(?:(?:(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]+)?(?::(\d*))?)?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/,
-		parts: ['full', 'scheme', 'user', 'password', 'host', 'port', 'path', 'query', 'fragment'],
-		schemes: ['https','ftp','file','rtsp','mms'],
-		required: ['scheme', 'host'],
-		wrappers: {
-			scheme: function(s) { return s ? s += '://' : '' },
-			password: function(s) { return s ? ':' + s : '' },
-			port: function(s) { return s ? ':' + s : ''},
-			query: function(s) { return s ? '?' + s : ''},
-			fragment: function(s) { return s ? '#' + s : ''}
-		}
-	},
+		scheme: false,
+		base: false
+	}
+	*/
 
 	initialize: function(uri, options){
 		this.setOptions(options);
-		this.value = uri || document.location.href || '';
-		this.parsed = this.parse(this.value);
+		if (!uri) return;
+		uri = uri.href || uri.toString();
+		if(uri.test(/^\w+:/)){
+			var base = new URI(this.options.base, { base: URI.base });
+			this.bits = base.bits;
+		}
+		
+		var bits, scheme = this.options.scheme;
+		if (scheme)
+			bits = scheme.parse(uri, base);
+		else if(URI.Schemes.some(function(s){ scheme = s; return bits = s.parse(uri, base); }))
+			
+		if(!bits) return false;
+
+		this.$scheme = scheme;
+		this.parsed = bits;
+	},
+
+	getScheme: function(){
+		return this.options.scheme || URI.Schemes[this.scheme];
 	},
 
 	toString: function(){
-		return this.combine();
+		return this.getScheme().combine(this);
 	},
-
-	valueOf: function(){
-		return this.combine();
-	},
-
-	validate: function(parts, regex){
-		parts = parts || this.options.parts;
-		var valid = parts.every(function(part) {
-			return !!this.parsed[part];
-		}, this);
-		return valid && (this.schemes.contains(bits.scheme) || !bits.scheme);
-	},
-
-	parse: function(regex, parts) {
-		regex = regex || this.options.regex;
-		parts = parts || this.options.parts;
-		var bits = this.value.match(regex).associate(parts);
-		delete bits.full;
-		return bits;
-	},
-
+	
 	set: function(part, value){
 		switch(part){
 			case "data": return this.setData(value);
-			case "value": 
-				this.value = value;
-				this.parse();
-				return this;
+			case "value": this.parsed = this.$scheme.parse(value); return this;
 		}
-		var bits = this.parse();
-		bits[part] = value;
-		this.combine(bits);
+		this.parsed[part] = value;
 		return this;
 	},
 
@@ -102,40 +62,66 @@ var URI = new Class({
 			case "data": return this.getData();
 			case "value": return this.toString();
 		}
-		return this.parse()[part];
-	},
-
-	getData: function(key){
-		var qs = this.get('query');
-		if (!$chk(qs)) return key ? null : {};
-		var obj = decodeURI(qs).parseQueryString(false, false); 
-		return key ? obj[key] : obj;
-	},
-
-	setData: function(values, merge){
-		var merged = merge ? $merge(this.getData(), values) : values;
-		var newQuery = '';
-		for (key in merged) newQuery += encodeURIComponent(key) + '=' + encodeURIComponent(merged[key]) + '&';
-		return this.set('query', newQuery.substring(0, newQuery.length-1));
-	},
-
-	clearData: function(){
-		this.set('query', '');
-	},
-
-	combine: function(bits){
-		bits = bits || this.parse();
-		var result = '';
-		$each(bits, function(value, key) {
-			var wrapped = this.options.wrappers[key] ? this.options.wrappers[key](value) : value;
-			result += wrapped ? wrapped : '';
-		}, this);
-		this.value = result;
-		return this;
+		return this.parsed[part];
 	},
 
 	go: function(){
-		document.location.href = this.value;
+		document.location.href = this.toString();
 	}
 
+});
+
+URI.base = new URI($$('base[href]').getLast(), { base: document.location });
+
+URI.validate = function(value){
+	return URI.Schemes.some(function(scheme){ return scheme.validate(value); });
+};
+
+URI.Scheme = function(options){
+	var scheme = new RegExp('^' + options.scheme + ':', 'i'),
+		length = options.scheme.length + 1;
+	return {
+		parse: function(value){
+			if(!scheme.test(value)) return false;
+			var bits = value.substr(length).match(options.regex),
+				defaults = options.defaults;
+			if(!bits) return false;
+			bits.shift();
+			if(defaults) bits = bits.map(function(part, index){ return part || defaults[index]; });
+			return bits.associate(options.parts);
+		},
+		validate: function(value){
+			return scheme.test(value) && value.substr(length).test(options.regex);
+		},
+		combine: function(bits){
+			return options.scheme + ':' + options.combine(bits);
+		}
+	};
+};
+
+URI.Schemes = new Hash();
+
+Hash.each({ http: 80, https: 443, ftp: 21, file: undefined, rtsp: 554, mms: 1755 }, function(port, scheme){
+
+	URI.Schemes[scheme] = new URI.Scheme({
+		scheme: scheme,
+		regex: /^(?:\/\/(?:(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]+)?(?::(\d*))?)?((?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?/,
+		parts: ['user', 'password', 'host', 'port', 'directory', 'file', 'query', 'fragment'],
+		defaults: ['', '', '', port, '/', '', '', ''],
+		combine: function(bits){
+			return '//' + (bits.user ? bits.user + (bits.password ? ':' + bits.password : '') + '@' : '') +
+				   (bits.hostname || '') + (bits.port && bits.port != port ? ':' + bits.port : '') +
+				   (bits.directory || '/') + (bits.file || '') +
+				   (bits.query ? '?' + bits.query : '') +
+				   (bits.fragment ? '#' + bits.fragment : '');
+		},
+		props: {
+			path: {
+				regex: /^([^\/]*)(.*)$/,
+				parts: ['directory', 'file'],
+				combine: function(uri){ return uri.directory + (uri.file || ''); }
+			}
+		}
+	});
+	
 });
