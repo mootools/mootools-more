@@ -25,23 +25,6 @@ URI.implement({
 
 $extend(URI.Schemes.http, {
 
-	fromRelative: {
-		regex: /^(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(\?[^#]*)?(#.*)?/,
-		parts: ['directory', 'file', 'query', 'hash'],
-		init: function(bits){
-			var newDirectory = bits.directory || './';
-			var oldDirectory = /^\/.?/.test(newDirectory) ? '' : this.directory || '/';
-			var dirs = (oldDirectory || '') + directory, result = [];
-			dirs.split('/').each(function(dir){
-				if(dir == '..' && result.length > 1)
-					result.pop();
-				else if(dir != '.')
-					result.push(dir);
-			});
-			uri.directory = result.join('/') + '/';
-		}
-	},
-
 	relative: function(baseURI){
 		var uri = this;
 		baseURI = baseURI ? new URI(uri, baseURI) : new URI();

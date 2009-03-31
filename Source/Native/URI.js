@@ -22,36 +22,39 @@ var URI = new Class({
 
 	initialize: function(uri, options){
 		this.setOptions(options);
-		if (!uri) return;
-		uri = uri.href || uri.toString();
-		if(uri.test(/^\w+:/)){
+		if (uri) uri = uri.href || uri.toString();
+		if (!uri.test(/^\w+:/)){
 			var base = new URI(this.options.base, { base: URI.base });
-			this.bits = base.bits;
+			this.parsed = base.parsed;
+			var scheme = base.scheme;
+			if(!scheme || !scheme.fromRelative) return false;
+			scheme.fromRelative(this.parsed, uri);
+			return this;
 		}
 		
 		var bits, scheme = this.options.scheme;
 		if (scheme)
 			bits = scheme.parse(uri, base);
-		else if(URI.Schemes.some(function(s){ scheme = s; return bits = s.parse(uri, base); }))
+		else
+			URI.Schemes.some(function(s){ scheme = s; return bits = s.parse(uri, base); });
 			
 		if(!bits) return false;
 
-		this.$scheme = scheme;
+		this.scheme = scheme;
 		this.parsed = bits;
 	},
 
-	getScheme: function(){
-		return this.options.scheme || URI.Schemes[this.scheme];
-	},
-
 	toString: function(){
-		return this.getScheme().combine(this);
+		return this.scheme.combine(this.parsed);
 	},
 	
 	set: function(part, value){
 		switch(part){
 			case "data": return this.setData(value);
-			case "value": this.parsed = this.$scheme.parse(value); return this;
+			case "value":
+			var bits = this.scheme.parse(value);
+			if(bits) this.parsed = bits;
+			return this;
 		}
 		this.parsed[part] = value;
 		return this;
@@ -95,13 +98,14 @@ URI.Scheme = function(options){
 		},
 		combine: function(bits){
 			return options.scheme + ':' + options.combine(bits);
-		}
+		},
+		// TODO: fromRelative...
 	};
 };
 
 URI.Schemes = new Hash();
 
-Hash.each({ http: 80, https: 443, ftp: 21, file: undefined, rtsp: 554, mms: 1755 }, function(port, scheme){
+Hash.each({ http: 80, https: 443, ftp: 21, rtsp: 554, mms: 1755, file: undefined }, function(port, scheme){
 
 	URI.Schemes[scheme] = new URI.Scheme({
 		scheme: scheme,
@@ -120,6 +124,23 @@ Hash.each({ http: 80, https: 443, ftp: 21, file: undefined, rtsp: 554, mms: 1755
 				regex: /^([^\/]*)(.*)$/,
 				parts: ['directory', 'file'],
 				combine: function(uri){ return uri.directory + (uri.file || ''); }
+			}
+		},
+		fromRelative: {
+			regex: /^(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(\?[^#]*)?(#.*)?/,
+			parts: ['directory', 'file', 'query', 'fragment'],
+			init: function(bits){
+				var newDirectory = bits.directory || '';
+				var oldDirectory = /^\/.?/.test(newDirectory) ? '' : (this.directory || '/');
+				var dirs = oldDirectory + newDirectory.replace(/\/\s*$/, '');
+				var result = [];
+				dirs.split('/').each(function(dir){
+					if(dir == '..' && result.length > 0)
+						result.pop();
+					else if(dir != '.')
+						result.push(dir);
+				});
+				uri.directory = result.join('/') + '/';
 			}
 		}
 	});
