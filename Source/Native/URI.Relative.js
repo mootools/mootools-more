@@ -29,20 +29,16 @@ $extend(URI.Schemes.http, {
 		regex: /^(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(\?[^#]*)?(#.*)?/,
 		parts: ['directory', 'file', 'query', 'hash'],
 		init: function(bits){
-			var dir = bits.directory, oldDir = ...; 
-			if(dir){
-				var baseDir = !oldDir || /^\/.?/.test(dir) ? [] : oldDir.replace(/\/$/, '').split('/'),
-					relDir = dir.replace(/\/$/, '').split('/');
-				relDir.each(function(d, i){
-					if(d == '..'){
-						if(baseDir.length > 1 || (baseDir.length > 0 && baseDir[0] != '')) baseDir.pop();
-					} else if(d != '.')
-						baseDir.push(d);
-				});
-				uri.directory = baseDir.join('/') + '/';
-			}
-			else
-				bits.directory = oldDir || '/';
+			var newDirectory = bits.directory || './';
+			var oldDirectory = /^\/.?/.test(newDirectory) ? '' : this.directory || '/';
+			var dirs = (oldDirectory || '') + directory, result = [];
+			dirs.split('/').each(function(dir){
+				if(dir == '..' && result.length > 1)
+					result.pop();
+				else if(dir != '.')
+					result.push(dir);
+			});
+			uri.directory = result.join('/') + '/';
 		}
 	},
 
