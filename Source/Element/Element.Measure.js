@@ -11,28 +11,40 @@ Script: Element.Measure.js
 
 	Authors:
 		Aaron Newton
-		Daniel Steigerwald
 
 */
 
 Element.implement({
 
 	measure: function(fn){
+		var vis = function(el) {
+			return !!(!el || el.offsetHeight || el.offsetWidth);
+		};
+		if (vis(this)) return fn.apply(this);
+		var parent = this.getParent(),
+			toMeasure = [], 
+			restorers = [];
+		while (!vis(parent) && parent != document.body) {
+			toMeasure.push(parent.expose());
+			parent = parent.getParent();
+		}
 		var restore = this.expose();
 		var result = fn.apply(this);
 		restore();
+		toMeasure.each(function(restore){
+			restore();
+		});
 		return result;
 	},
 
 	expose: function(){
 		if (this.getStyle('display') != 'none') return $empty;
-		var before = {};
-		var styles = { visibility: 'hidden', display: 'block', position:'absolute' };
-		$each(styles, function(value, style){
-			before[style] = this.style[style]||'';
-		}, this);
-		this.setStyles(styles);
-		return (function(){ this.setStyles(before); }).bind(this);
+		var before = this.getStyles('display', 'position', 'visibility');
+		return this.setStyles({
+			display: 'block',
+			position: 'absolute',
+			visibility: 'hidden'
+		}).setStyles.pass(before, this);
 	},
 
 	getDimensions: function(options){
@@ -82,7 +94,8 @@ Element.implement({
 				});
 			});
 		});
-		var styles = this.getStyles.apply(this, getStyles);
+		var styles = {};
+		getStyles.each(function(style){ styles[style] = this.getComputedStyle(style); }, this);
 		var subtracted = [];
 		$each(options.plains, function(plain, key){ //keys: width, height, plains: ['left', 'right'], ['top','bottom']
 			size['total' + key.capitalize()] = 0;

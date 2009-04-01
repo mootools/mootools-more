@@ -210,10 +210,6 @@ p.left, p.uri {
 	font-family: Monaco, Courier New, monospace;
 }
 
-li div {
-	display: none;
-}
-
 p#footer {
 	text-align: right;
 	padding: 10px 16px 0 0;
@@ -259,6 +255,10 @@ p#footer {
 #list .success h3 {
 	background-color: #e2e5d2;
 	color: #657528;
+}
+
+ul.examples {
+	display: none;
 }
 
 a.rerun {

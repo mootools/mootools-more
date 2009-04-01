@@ -202,6 +202,28 @@ Note that either or both of these may be specified and in any order.
 
 * (*element*) This Element
 
+Element Method: wink {#Element:wink}
+----------------------------------
+
+Retrieves the "build-in" instance of [Fx.Reveal][] and calls its *reveal* method, then pauses the specified duration, and then calls its *dissolve* method.
+
+### Syntax
+
+	$('myElement').wink([duration]);
+
+### Arguments
+
+* duration - (*integer*, optional) The duration that the element should remain visible before it hides again. Defaults to 2000 (ms).
+
+### Examples
+
+	$('myElement').wink(); //2 second pause
+	$('myElement').wink(500); //.5 second pause
+
+### Returns
+
+* (*element*) This Element
+
 [Fx.Reveal]: #Fx-Reveal
 [Fx.Reveal:options]: #Fx-Reveal:options
 [Fx.Morph]: /docs/core/Fx/Fx.Morph

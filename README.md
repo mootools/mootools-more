@@ -15,6 +15,7 @@ MooTools Plugins and Enhancements Repository
 * Compat for Clientcide
 * Switch to feature detection instead of engine detection
 * update all the Element.Forms methods to getters/setters; tidy them up a bit
+* Update calls to .position to use .setPosition
 
 ### StyleGuide
 
@@ -24,6 +25,8 @@ MooTools Plugins and Enhancements Repository
 
 * URI
  - domain renamed to host
+* Fx.Accordion
+ - no longer organizes the DOM for you
 
 ### Breaking Changes from More
 

@@ -88,7 +88,7 @@ Request.JSONP = new Class({
 	},
  	
 	getScript: function(options){
-		var options = this.options, index = Request.JSONP.counter, data;
+		var index = Request.JSONP.counter, data;
 		Request.JSONP.counter++;
 		
 		switch ($type(options.data)){
@@ -99,14 +99,14 @@ Request.JSONP = new Class({
 		var src = options.url + 
 			 (options.url.test('\\?') ? '&' :'?') + 
 			 (options.callbackKey || this.options.callbackKey) + 
-			 "=Request.JSONP.requests["+ index +"]" + 
+			 "=Request.JSONP.request_map.request_"+ index + 
 			 (data ? '&' + data : '');
 			
 		if (src.length > 2083) this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
 				
 		var script = new Element('script', {type: 'text/javascript', src: src});
 		
-		Request.JSONP.requests.push(function(data){ this.success(data, script); }.bind(this));
+		Request.JSONP.request_map["request_" + index] = function(data){ this.success(data, script); }.bind(this);
 				
 		return script.inject(this.options.injectScript);
 	},

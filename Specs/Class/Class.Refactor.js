@@ -20,13 +20,33 @@ License:
 		}
 	});
 	Test.static_method = function(){ return 'static';};
-	Test.refactor({
+	Test = Class.refactor(Test, {
 		options: { foo: 'rab' },
 		altered: function(){
-			return 'this is ' + this.parent();
+			return 'this is ' + this.previous();
 		}
 	});
+	var Test2 = new Class({
+		altered: function(){
+			return 'altered';
+		}
+	});
+	Test2 = Class.refactor(Test2, {
+		altered: function(){
+			return 'this is ' + this.previous();
+		}
+	});
+	Test2 = Class.refactor(Test2, {
+		altered: function(){
+			return this.previous() + ' for reals.';
+		}
+	});
+
 	describe('Class.Refactor', {
+
+		'should return a method that has been altered twice': function(){
+			value_of(new Test2().altered()).should_be('this is altered for reals.');
+		},
 
 		'should return an unaltered method': function(){
 			value_of(new Test().untouched()).should_be('untouched');

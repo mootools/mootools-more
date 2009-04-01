@@ -32,109 +32,113 @@ String.implement({
 			return $chk(set.split('=')[1]);
 		}).join('&');
 	}
-	
+
 });
 
-var URI = new Native({
+var URI = new Class({
 
-	initialize: function(uri){
+	Implements: Options,
+
+	options: {
+		regex: /^(?:(\w+):\/\/)?(?:(?:(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]+)?(?::(\d*))?)?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/,
+		parts: ['full', 'scheme', 'user', 'password', 'host', 'port', 'path', 'query', 'fragment'],
+		schemes: ['https','ftp','file','rtsp','mms'],
+		required: ['scheme', 'host'],
+		wrappers: {
+			scheme: function(s) { return s ? s += '://' : '' },
+			password: function(s) { return s ? ':' + s : '' },
+			port: function(s) { return s ? ':' + s : ''},
+			query: function(s) { return s ? '?' + s : ''},
+			fragment: function(s) { return s ? '#' + s : ''}
+		}
+	},
+
+	initialize: function(uri, options){
+		this.setOptions(options);
 		this.value = uri || document.location.href || '';
-		this.assertLength();
+		this.parsed = this.parse(this.value);
+	},
+
+	valueOf: function(){
+		return this.combine();
+	},
+
+	validate: function(parts, regex){
+		parts = parts || this.options.parts;
+		var valid = parts.every(function(part) {
+			return !!this.parsed[part];
+		}, this);
+		return valid && (this.schemes.contains(bits.scheme) || !bits.scheme);
+	},
+
+	parse: function(value, regex, parts) {
+		value = value || this.value;
+		regex = regex || this.options.regex;
+		parts = parts || this.options.parts;
+		var match = this.value.match(regex);
+		if (!match) return {};
+		var bits = match.associate(parts);
+		delete bits.full;
+		return bits;
+	},
+
+	set: function(part, value){
+		switch(part){
+			case "data": return this.setData(value);
+			case "value": 
+				this.value = value;
+				this.parse();
+				return this;
+		}
+		var bits = this.parse();
+		bits[part] = value;
+		this.combine(bits);
+		return this;
+	},
+
+	get: function(part){
+		switch(part) {
+			case "data": return this.getData();
+			case "value": return this.toString();
+		}
+		return this.parse()[part];
+	},
+
+	getData: function(key){
+		var qs = this.get('query');
+		if (!$chk(qs)) return key ? null : {};
+		var obj = decodeURI(qs).parseQueryString(false, false); 
+		return key ? obj[key] : obj;
+	},
+
+	setData: function(values, merge){
+		var merged = merge ? $merge(this.getData(), values) : values;
+		var newQuery = '';
+		for (key in merged) newQuery += encodeURIComponent(key) + '=' + encodeURIComponent(merged[key]) + '&';
+		return this.set('query', newQuery.substring(0, newQuery.length-1));
+	},
+
+	clearData: function(){
+		this.set('query', '');
+	},
+
+	combine: function(bits){
+		bits = bits || this.parse();
+		var result = '';
+		$each(bits, function(value, key) {
+			var wrapped = this.options.wrappers[key] ? this.options.wrappers[key](value) : value;
+			result += wrapped ? wrapped : '';
+		}, this);
+		this.value = result;
+		return this.value;
+	},
+
+	go: function(){
+		document.location.href = this.value;
 	}
 
 });
 
-URI.prototype = new String;
-
-(function(){
-
-	var reg = /^(?:(\w+):\/\/)?(?:([^\/:?#]*))?(?::(\d+))?([^#?]*)(?:\?([^#]*))?(?:#(.*))?$/;
-	var parts = ['full', 'protocol', 'host', 'port', 'path', 'query', 'fragment'];
-
-	URI.implement({
-
-		assertLength: function(){
-			if (this.length != this.value.length) this.length = this.value.length;
-		},
-
-		toString: function(){
-			return this.value;
-		},
-
-		valueOf: function(){
-			return this.value;
-		},
-
-		parseURI: function(){ 
-			var bits = this.value.match(reg).associate(parts);
-			delete bits.trash;
-			return bits;		
-		},
-
-		set: function(part, value){
-			if (part == 'data') return this.setData(value);
-			var bits = this.parseURI();
-			bits[part] = value;
-			this.combine(bits);
-			return this;
-		},
-
-		get: function(part){
-			return (part == 'data') ? this.getData() : this.parseURI()[part];
-		},
-
-		combine: function(bits){
-			bits = bits || this.parseURI();
-			var result = '';
-			if (bits.protocol) result += bits.protocol + '://';
-			if (bits.host) result += bits.host;
-			if ($defined(bits.port)) result += ':' + bits.port;
-			if (bits.path) result += bits.path;
-			if (bits.query) result += '?' + bits.query;
-			if (bits.fragment) result += '#' + bits.fragment;
-			this.value = result;
-			this.assertLength();
-			return this;
-		},
-
-		getData: function(key){
-			var qs = this.get('query');
-			if (!$chk(qs)) return key ? null : {};
-			var obj = decodeURI(qs).parseQueryString(false, false); 
-			return key ? obj[key] : obj;
-		},
-
-		setData: function(values, merge){
-			var merged = merge ? $merge(this.getData(), values) : values;
-			var newQuery = '';
-			for (key in merged) newQuery += encodeURIComponent(key) + '=' + encodeURIComponent(merged[key]) + '&';
-			return this.set('query', newQuery.substring(0, newQuery.length-1));
-		},
-
-		clearData: function(){
-			this.set('query', '');
-		},
-
-		go: function(){
-			document.location.href = this.value;
-		}
-
-	});
-
-	var methods = {};
-
-	parts.each(function(part){
-
-		methods['get' + part.capitalize()] = function(){
-			return this.get(part);
-		};
-
-		methods['set' + part.capitalize()] = function(value){
-			return this.set(part, value);
-		};
-
-	});
-
-	URI.implement(methods);
-
-})();
+URI.prototype.toString = function(){
+	return this.combine();
+};

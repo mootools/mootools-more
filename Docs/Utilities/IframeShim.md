@@ -101,6 +101,19 @@ This will remove the iframe from the DOM.
 
 * (*object*) This instance of [IframeShim][]
 
+IframeShim Method: destroy {#IframeShim:destroy}
+----------------------------------------------
+
+This will remove the iframe from memory.
+
+### Syntax
+
+	myShim.destroy();
+
+### Returns
+
+* (*object*) This instance of [IframeShim][]
+
 Native: Element {#Element}
 ==========================
 

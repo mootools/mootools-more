@@ -187,7 +187,7 @@
 		},
 
 		"Slider": {
-			"deps": ["More", "Drag", "Element.Dimensions"],
+			"deps": ["More", "Class.Binds", "Drag", "Element.Dimensions"],
 			"desc": "Class for creating horizontal and vertical slider controls."
 		},
 
@@ -254,7 +254,7 @@
 		},
 
 		"Tips": {
-			"deps": ["More", "Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions"],
+			"deps": ["More", "Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions", "Element.Measure"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
 		}
 

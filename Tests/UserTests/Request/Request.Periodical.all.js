@@ -28,5 +28,6 @@
 				r.stopTimer.delay(3000, r);
 			}
 		}
-	]
+	],
+	otherScripts: ['Element']
 }

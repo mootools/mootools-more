@@ -129,21 +129,21 @@ Element.implement({
 Native.implement([Document, Window], {
 
 	getSize: function(){
-		var win = this.getWindow();
-		if (Browser.Engine.presto || Browser.Engine.webkit) return {x: win.innerWidth, y: win.innerHeight};
+		if (Browser.Engine.presto || Browser.Engine.webkit) {
+			var win = this.getWindow();
+			return {x: win.innerWidth, y: win.innerHeight};
+		}
 		var doc = getCompatElement(this);
 		return {x: doc.clientWidth, y: doc.clientHeight};
 	},
 
 	getScroll: function(){
-		var win = this.getWindow();
-		var doc = getCompatElement(this);
+		var win = this.getWindow(), doc = getCompatElement(this);
 		return {x: win.pageXOffset || doc.scrollLeft, y: win.pageYOffset || doc.scrollTop};
 	},
 
 	getScrollSize: function(){
-		var doc = getCompatElement(this);
-		var min = this.getSize();
+		var doc = getCompatElement(this), min = this.getSize();
 		return {x: Math.max(doc.scrollWidth, min.x), y: Math.max(doc.scrollHeight, min.y)};
 	},
 
@@ -162,27 +162,27 @@ Native.implement([Document, Window], {
 
 var styleString = Element.getComputedStyle;
 
-var styleNumber = function(element, style){
+function styleNumber(element, style){
 	return styleString(element, style).toInt() || 0;
 };
 
-var borderBox = function(element){
+function borderBox(element){
 	return styleString(element, '-moz-box-sizing') == 'border-box';
 };
 
-var topBorder = function(element){
+function topBorder(element){
 	return styleNumber(element, 'border-top-width');
 };
 
-var leftBorder = function(element){
+function leftBorder(element){
 	return styleNumber(element, 'border-left-width');
 };
 
-var isBody = function(element){
+function isBody(element){
 	return (/^(?:body|html)$/i).test(element.tagName);
 };
 
-var getCompatElement = function(element){
+function getCompatElement(element){
 	var doc = element.getDocument();
 	return (!doc.compatMode || doc.compatMode == 'CSS1Compat') ? doc.html : doc.body;
 };

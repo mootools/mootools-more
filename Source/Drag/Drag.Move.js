@@ -20,7 +20,8 @@ Drag.Move = new Class({
 		onDrop: $empty(thisElement, overed, event),*/
 		droppables: [],
 		container: false,
-		precalculate: false
+		precalculate: false,
+		includeMargins: true
 	},
 
 	initialize: function(element, options){
@@ -41,20 +42,33 @@ Drag.Move = new Class({
 
 	start: function(event){
 		if (this.container){
-			var ccoo = this.container.getCoordinates(this.element.offsetParent), cps = {}, ems = {};
+			var ccoo = this.container.getCoordinates(this.element.getOffsetParent()), cbs = {}, ems = {};
 
 			['top', 'right', 'bottom', 'left'].each(function(pad){
-				cps[pad] = this.container.getStyle('padding-' + pad).toInt();
+				cbs[pad] = this.container.getStyle('border-' + pad).toInt();
 				ems[pad] = this.element.getStyle('margin-' + pad).toInt();
 			}, this);
 
 			var width = this.element.offsetWidth + ems.left + ems.right;
 			var height = this.element.offsetHeight + ems.top + ems.bottom;
-			
-			this.options.limit = {
-				x: [ccoo.left + cps.left, ccoo.right - cps.right - width],
-				y: [ccoo.top + cps.top, ccoo.bottom - cps.bottom - height]
-			};
+
+			if (this.options.includeMargins) {
+				$each(ems, function(value, key) {
+					ems[key] = 0;
+				})
+			}
+			if (this.container == this.element.getOffsetParent()) {
+				this.options.limit = {
+					x: [0 - ems.left, ccoo.right - cbs.left - cbs.right - width + ems.right],
+					y: [0 - ems.top, ccoo.bottom - cbs.top - cbs.bottom - height + ems.bottom]
+				};
+			} else {
+				this.options.limit = {
+					x: [ccoo.left + cbs.left - ems.left, ccoo.right - cbs.right - width + ems.right],
+					y: [ccoo.top + cbs.top - ems.top, ccoo.bottom - cbs.bottom - height + ems.bottom]
+				};
+			}
+
 		}
 		if (this.options.precalculate){
 			this.positions = this.droppables.map(function(el) {
@@ -96,7 +110,9 @@ Drag.Move = new Class({
 Element.implement({
 
 	makeDraggable: function(options){
-		return new Drag.Move(this, options);
+		var drag = new Drag.Move(this, options);
+		this.store('dragger', drag);
+		return drag;
 	}
 
 });

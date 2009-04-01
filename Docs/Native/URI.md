@@ -10,7 +10,7 @@ Pass a *string* to the URI subclass and it will extend it, returning a new strin
 
 ### Syntax
 
-	var myURI = new URI(['http://www.test.com:8383/the/path.html?query=value#anchor']);
+	var myURI = new URI(['http://user:password@www.test.com:8383/the/path.html?query=value#anchor']);
 
 ### Returns
 
@@ -34,6 +34,28 @@ Returns an regular *string* without the URI extensions.
 
 * (*string*) the unaltered url.
 
+URI Method: validate {#URI:validate}
+------------------------------------
+
+Validates the URI.
+
+### Syntax
+
+	myURI.validate([parts, regex]);
+
+### Arguments
+
+1. parts - (*array*; optional) An array of parts (*scheme*, *domain*, etc) that must be present for the URI to be valid. By default this is set to *scheme* and *host* but you could, for example, require only *path* to validate a relative URI.
+2. regex - (*RegExp*; optional) A regular expression to validate against the url. By default this expression is the standard URL scheme. 
+
+### Example
+
+	myURI.validate(['path']); //validate relative url
+
+### Note
+
+The validation parts are only checked to verify that they are defined. This means that other parts may also be defined. The example above ensures that *path* is defined, but doesn't ensure that, for example, *domain* isn't.
+
 URI Method: set {#URI:set}
 --------------------------
 
@@ -49,7 +71,7 @@ Set's a portion of the URI to the specified value.
 
 ### Example
 
-	myURI.set('protocol', 'https');
+	myURI.set('scheme', 'https');
 	myURI.set('domain', 'www.foo.com');
 	//etc.
 
@@ -59,7 +81,9 @@ Set's a portion of the URI to the specified value.
 
 ### Valid parts
 
-* protocol - (*string*) 'http', 'https', 'ftp', etc.
+* scheme - (*string*) 'http', 'https', 'ftp', etc.
+* user - (*string*) the username portion of the credentials
+* password - (*string*) the password portion of the credentials
 * domain - (*string*) 'www.example.com', 'exmaple.com', 'subdomain.example.com', etc.
 * port - (*string* or *integer*) 80, 8080, etc.
 * path - (*string*) '/directory/file.html'
@@ -78,7 +102,7 @@ Returns the current value for the specified portion of the URI.
 
 ### Example
 
-	myURI.get('protocol'); //returns "http", for example
+	myURI.get('scheme'); //returns "http", for example
 	myURI.get('domain'); //returns "www.example.com", for example
 
 ### Returns
@@ -87,7 +111,7 @@ Returns the current value for the specified portion of the URI.
 
 ### Valid parts
 
-* protocol - (returns *string*) 'http', 'https', 'ftp', etc.
+* scheme - (returns *string*) 'http', 'https', 'ftp', etc.
 * domain - (returns *string*) 'www.example.com', 'exmaple.com', 'subdomain.example.com', etc.
 * port - (returns *string*) 80, 8080, etc.
 * path - (returns *string*) '/directory/file.html'
@@ -158,7 +182,7 @@ Loads the url into the document location.
 Method Translations
 ===================
 
-All the URI parts ('protocol', 'domain', 'port', 'query', and 'hash') have corresponding *get<Part>* methods. So you can call *myURI.get('domain')* or *myURI.getDomain()*. The same is true of *set* - you can call *myURI.set('domain', 'www.foo.com')* or *myURI.setDomain('www.foo.com')*. The *set/get(part)* method is the prefered method.
+All the URI parts ('scheme', 'domain', 'port', 'query', and 'hash') have corresponding *get<Part>* methods. So you can call *myURI.get('domain')* or *myURI.getDomain()*. The same is true of *set* - you can call *myURI.set('domain', 'www.foo.com')* or *myURI.setDomain('www.foo.com')*. The *set/get(part)* method is the prefered method.
   
 String Method: parseQueryString {#String:parseQueryString}
 ----------------------------------------------------------

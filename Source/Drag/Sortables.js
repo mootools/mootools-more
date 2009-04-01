@@ -88,7 +88,8 @@ var Sortables = new Class({
 		return element.clone(true).setStyles({
 			margin: '0px',
 			position: 'absolute',
-			visibility: 'hidden'
+			visibility: 'hidden',
+			'width': element.getStyle('width')
 		}).inject(this.list).position(element.getPosition(element.getOffsetParent()));
 	},
 

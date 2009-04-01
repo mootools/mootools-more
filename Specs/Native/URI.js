@@ -57,8 +57,8 @@ License:
 
 	describe('URI.get(\'domain\')', {
 
-			'should get the protocol from a url': function(){
-				value_of(new URI(url.toString()).get('protocol')).should_be('http');
+			'should get the scheme from a url': function(){
+				value_of(new URI(url.toString()).get('scheme')).should_be('http');
 			}
 
 	});

@@ -38,18 +38,10 @@ Hash.Cookie = new Class({
 
 });
 
-Hash.Cookie.implement((function(){
-
-	var methods = {};
-
-	Hash.each(Hash.prototype, function(method, name){
-		methods[name] = function(){
-			var value = method.apply(this.hash, arguments);
-			if (this.options.autoSave) this.save();
-			return value;
-		};
+Hash.each(Hash.prototype, function(method, name){
+	if (typeof method == 'function') Hash.Cookie.implement(name, function(){
+		var value = method.apply(this.hash, arguments);
+		if (this.options.autoSave) this.save();
+		return value;
 	});
-
-	return methods;
-
-})());
+});
