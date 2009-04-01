@@ -75,9 +75,12 @@ var Tips = new Class({
 	
 	attach: function(elements){
 		$$(elements).each(function(element){
-			var title = this.options.title(element);
+			var read = function(option) {
+				return $type(option) == "function" ? option(element) : element.get(option);
+			}
+			var title = read(this.options.title);
 			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
-			element.retrieve('tip:text', this.options.text(element));
+			element.retrieve('tip:text', read(this.options.text));
 			
 			var events = ['enter', 'leave'];
 			if (!this.options.fixed) events.push('move');

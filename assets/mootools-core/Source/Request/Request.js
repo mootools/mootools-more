@@ -32,7 +32,8 @@ var Request = new Class({
 		urlEncoded: true,
 		encoding: 'utf-8',
 		evalScripts: false,
-		evalResponse: false
+		evalResponse: false,
+		noCache: false
 	},
 
 	initialize: function(options){
@@ -95,17 +96,17 @@ var Request = new Class({
 		}.bind(this));
 	},
 
-	check: function(caller){
+	check: function(){
 		if (!this.running) return true;
 		switch (this.options.link){
 			case 'cancel': this.cancel(); return true;
-			case 'chain': this.chain(caller.bind(this, Array.slice(arguments, 1))); return false;
+			case 'chain': this.chain(this[this.caller].bind(this, arguments)); return false;
 		}
 		return false;
 	},
 
 	send: function(options){
-		if (!this.check(arguments.callee, options)) return this;
+		if (!this.check(options)) return this;
 		this.running = true;
 
 		var type = $type(options);
@@ -136,10 +137,17 @@ var Request = new Class({
 			this.headers.set('Content-type', 'application/x-www-form-urlencoded' + encoding);
 		}
 
+		if(this.options.noCache) {
+			var noCache = "noCache=" + new Date().getTime();
+			data = (data) ? noCache + '&' + data : noCache;
+		}
+
+
 		if (data && method == 'get'){
 			url = url + (url.contains('?') ? '&' : '?') + data;
 			data = null;
 		}
+
 
 		this.xhr.open(method.toUpperCase(), url, this.options.async);
 
@@ -184,33 +192,3 @@ var methods = {};
 Request.implement(methods);
 
 })();
-
-Element.Properties.send = {
-
-	set: function(options){
-		var send = this.retrieve('send');
-		if (send) send.cancel();
-		return this.eliminate('send').store('send:options', $extend({
-			data: this, link: 'cancel', method: this.get('method') || 'post', url: this.get('action')
-		}, options));
-	},
-
-	get: function(options){
-		if (options || !this.retrieve('send')){
-			if (options || !this.retrieve('send:options')) this.set('send', options);
-			this.store('send', new Request(this.retrieve('send:options')));
-		}
-		return this.retrieve('send');
-	}
-
-};
-
-Element.implement({
-
-	send: function(url){
-		var sender = this.get('send');
-		sender.send({data: this, url: url || sender.options.url});
-		return this;
-	}
-
-});

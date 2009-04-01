@@ -68,25 +68,32 @@ var IframeShim = new Class({
 			this.options.offset.x += this.options.margin;
 			this.options.offset.y += this.options.margin;
 		}
-		this.shim.set({width: size.x, height: size.y}).position({
-			relativeTo: this.element,
-			offset: this.options.offset
-		});
+		if (this.shim) {
+			this.shim.set({width: size.x, height: size.y}).position({
+				relativeTo: this.element,
+				offset: this.options.offset
+			});
+		}
 		return this;
 	},
 
 	hide: function(){
-		this.shim.hide();
+		if (this.shim) this.shim.hide();
 		return this;
 	},
 
 	show: function(){
-		this.shim.show();
+		if (this.shim) this.shim.show();
 		return this.position();
 	},
 
 	dispose: function(){
-		this.shim.dispose();
+		if (this.shim) this.shim.dispose();
+		return this;
+	},
+
+	destroy: function(){
+		if (this.shim) this.shim.desroy();
 		return this;
 	}
 

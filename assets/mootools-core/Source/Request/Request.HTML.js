@@ -12,6 +12,7 @@ Request.HTML = new Class({
 
 	options: {
 		update: false,
+		append: false,
 		evalScripts: true,
 		filter: false
 	},
@@ -32,6 +33,7 @@ Request.HTML = new Class({
 				doc = new DOMParser().parseFromString(root, 'text/xml');
 			}
 			root = doc.getElementsByTagName('root')[0];
+			if (!root) return;
 			for (var i = 0, k = root.childNodes.length; i < k; i++){
 				var child = Element.clone(root.childNodes[i], true, true);
 				if (child) container.grab(child);
@@ -54,12 +56,33 @@ Request.HTML = new Class({
 
 		if (options.filter) response.tree = response.elements.filter(options.filter);
 		if (options.update) $(options.update).empty().set('html', response.html);
+		else if (options.append) $(options.append).adopt(temp.getChildren());
 		if (options.evalScripts) $exec(response.javascript);
 
 		this.onSuccess(response.tree, response.elements, response.html, response.javascript);
 	}
 
 });
+
+Element.Properties.send = {
+
+	set: function(options){
+		var send = this.retrieve('send');
+		if (send) send.cancel();
+		return this.eliminate('send').store('send:options', $extend({
+			data: this, link: 'cancel', method: this.get('method') || 'post', url: this.get('action')
+		}, options));
+	},
+
+	get: function(options){
+		if (options || !this.retrieve('send')){
+			if (options || !this.retrieve('send:options')) this.set('send', options);
+			this.store('send', new Request(this.retrieve('send:options')));
+		}
+		return this.retrieve('send');
+	}
+
+};
 
 Element.Properties.load = {
 
@@ -80,6 +103,12 @@ Element.Properties.load = {
 };
 
 Element.implement({
+
+	send: function(url){
+		var sender = this.get('send');
+		sender.send({data: this, url: url || sender.options.url});
+		return this;
+	},
 
 	load: function(){
 		this.get('load').send(Array.link(arguments, {data: Object.type, url: String.type}));

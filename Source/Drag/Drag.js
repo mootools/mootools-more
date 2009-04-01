@@ -144,7 +144,11 @@ var Drag = new Class({
 Element.implement({
 
 	makeResizable: function(options){
-		return new Drag(this, $merge({modifiers: {x: 'width', y: 'height'}}, options));
+		var drag = new Drag(this, $merge({modifiers: {x: 'width', y: 'height'}}, options));
+		this.store('resizer', drag);
+		drag.addEvent('drag', function(){
+			this.fireEvent('resize', drag);
+		}.bind(this))
 	}
 
 });
