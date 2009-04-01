@@ -23,7 +23,7 @@ License:
 	Test = Class.refactor(Test, {
 		options: { foo: 'rab' },
 		altered: function(){
-			return 'this is ' + this.parent();
+			return 'this is ' + this.previous();
 		}
 	});
 	describe('Class.Refactor', {

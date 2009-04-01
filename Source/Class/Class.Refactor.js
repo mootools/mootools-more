@@ -11,7 +11,7 @@ Script: Class.Refactor.js
 
 Class.refactor = function(original, refactors){
 
-	$each(refractors, function(item, name){
+	$each(refactors, function(item, name){
 		var origin = original.prototype[name];
 		if (origin && (origin = origin._origin) && typeof item == 'function') original.implement(name, function(){
 			var old = this.previous;
