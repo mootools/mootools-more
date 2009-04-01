@@ -13,8 +13,8 @@
 				}); */
 				['onSuccess', 'onFailure', 'onException'].each(function(evt){
 					events[evt] = function(a){
-						$('response').adopt(new Element('li', {
-								html: evt + ': ', a
+						$('responses').adopt(new Element('li', {
+								html: evt + ': ' + a
 							})
 						);
 					}
@@ -41,5 +41,6 @@
 				});
 			}
 		}
-	]
+	],
+	otherScripts: ['Element']
 }
