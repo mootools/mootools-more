@@ -59,10 +59,6 @@ var URI = new Class({
 		this.parsed = this.parse(this.value);
 	},
 
-	toString: function(){
-		return this.combine();
-	},
-
 	valueOf: function(){
 		return this.combine();
 	},
@@ -75,10 +71,13 @@ var URI = new Class({
 		return valid && (this.schemes.contains(bits.scheme) || !bits.scheme);
 	},
 
-	parse: function(regex, parts) {
+	parse: function(value, regex, parts) {
+		value = value || this.value;
 		regex = regex || this.options.regex;
 		parts = parts || this.options.parts;
-		var bits = this.value.match(regex).associate(parts);
+		var match = this.value.match(regex);
+		if (!match) return {};
+		var bits = match.associate(parts);
 		delete bits.full;
 		return bits;
 	},
@@ -131,7 +130,7 @@ var URI = new Class({
 			result += wrapped ? wrapped : '';
 		}, this);
 		this.value = result;
-		return this;
+		return this.value;
 	},
 
 	go: function(){
@@ -139,3 +138,7 @@ var URI = new Class({
 	}
 
 });
+
+URI.prototype.toString = function(){
+	return this.combine();
+};
