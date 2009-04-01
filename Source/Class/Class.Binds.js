@@ -9,25 +9,18 @@ Script: Class.Binds.js
 		Aaron Newton
 */
 
-(function(){
+Class.Mutators.Binds = function(binds){
+    return binds;
+};
 
-	var binder = function(self, binds){
-		var oldInit = self.initialize;
-		self.initialize = function(){
-			Array.flatten(binds).each(function(binder){
-				var original = this[binder];
-				this[binder] = original.bind(this);
-				this[binder].parent = original.parent;
-			}, this);
-			return oldInit.apply(this,arguments);
-		};
-		return self;
+Class.Mutators.initialize = function(initialize){
+	
+	return function(){
+		$splat(this.Binds).each(function(name){
+			var original = this[name];
+			if (original) this[name] = original.bind(this);
+		}, this);
+		return initialize.apply(this, arguments);
 	};
 
-	Class.Mutators.Binds = function(self, binds){
-		if (!self.Binds) return self;
-		delete self.Binds;
-		return binder(self, binds);
-	};
-
-})();
+};
