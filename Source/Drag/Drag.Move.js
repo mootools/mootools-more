@@ -21,7 +21,10 @@ Drag.Move = new Class({
 		droppables: [],
 		container: false,
 		precalculate: false,
-		includeMargins: true
+		includeMargins: true,
+		onDrag: function() {
+			if (this.droppables.length) this.checkDroppables();
+		}
 	},
 
 	initialize: function(element, options){
@@ -95,7 +98,6 @@ Drag.Move = new Class({
 
 	drag: function(event){
 		this.parent(event);
-		if (this.droppables.length) this.checkDroppables();
 	},
 
 	stop: function(event){
