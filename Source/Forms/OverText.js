@@ -149,7 +149,7 @@ OverText.update = function(){
 };
 
 if (window.Fx && Fx.Reveal) {
-	Fx.Reveal = Class.refactor(Fx.Reveal, {
+	Fx.Reveal.implement({
 		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed, .overTxtDiv' : false
 	});
 }
