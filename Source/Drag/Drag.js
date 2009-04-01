@@ -146,7 +146,7 @@ Element.implement({
 	makeResizable: function(options){
 		var drag = new Drag(this, $merge({modifiers: {x: 'width', y: 'height'}}, options));
 		this.store('resizer', drag);
-		drag.addEvent('drag', function(){
+		return drag.addEvent('drag', function(){
 			this.fireEvent('resize', drag);
 		}.bind(this))
 	}
