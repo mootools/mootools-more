@@ -34,8 +34,12 @@ var Slider = new Class({
 		this.element = $(element);
 		this.knob = $(knob);
 		this.previousChange = this.previousEnd = this.step = -1;
-		this.element.addEvent('mousedown', this.clickedElement.bind(this));
-		if (this.options.wheel) this.element.addEvent('mousewheel', this.scrolledElement.bindWithEvent(this));
+		this.bound = {
+			clickedElement: this.clickedElement.bind(this),
+			scrolledElement: this.scrolledElement.bindWithEvent(this)
+		};
+		this.element.addEvent('mousedown', this.bound.clickedElement);
+		if (this.options.wheel) this.element.addEvent('mousewheel', this.bound.scrolledElement);
 		var offset, limit = {}, modifiers = {'x': false, 'y': false};
 		switch (this.options.mode){
 			case 'vertical':
@@ -141,6 +145,12 @@ var Slider = new Class({
 
 	toPosition: function(step){
 		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset;
+	},
+	
+	stop: function(){
+		this.element.removeEvent('mousedown', this.bound.clickedElement);
+		this.element.removeEvent('mousewheel', this.bound.scrolledElement);
+		this.drag.stop();
 	}
 
 });
