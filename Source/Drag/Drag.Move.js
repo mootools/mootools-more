@@ -20,7 +20,8 @@ Drag.Move = new Class({
 		onDrop: $empty(thisElement, overed, event),*/
 		droppables: [],
 		container: false,
-		precalculate: false
+		precalculate: false,
+		includeMargins: true
 	},
 
 	initialize: function(element, options){
@@ -51,15 +52,20 @@ Drag.Move = new Class({
 			var width = this.element.offsetWidth + ems.left + ems.right;
 			var height = this.element.offsetHeight + ems.top + ems.bottom;
 
+			if (this.options.includeMargins) {
+				$each(ems, function(value, key) {
+					ems[key] = 0;
+				})
+			}
 			if (this.container == this.element.getOffsetParent()) {
 				this.options.limit = {
-					x: [0, ccoo.right - cbs.left - cbs.right - width],
-					y: [0, ccoo.bottom - cbs.top - cbs.bottom - height]
+					x: [0 - ems.left, ccoo.right - cbs.left - cbs.right - width + ems.right],
+					y: [0 - ems.top, ccoo.bottom - cbs.top - cbs.bottom - height + ems.bottom]
 				};
 			} else {
 				this.options.limit = {
-					x: [ccoo.left + cbs.left, ccoo.right - cbs.right - width],
-					y: [ccoo.top + cbs.top, ccoo.bottom - cbs.bottom - height]
+					x: [ccoo.left + cbs.left - ems.left, ccoo.right - cbs.right - width + ems.right],
+					y: [ccoo.top + cbs.top - ems.top, ccoo.bottom - cbs.bottom - height + ems.bottom]
 				};
 			}
 
@@ -104,7 +110,9 @@ Drag.Move = new Class({
 Element.implement({
 
 	makeDraggable: function(options){
-		return new Drag.Move(this, options);
+		var drag = new Drag.Move(this, options);
+		this.store('dragger', drag);
+		return drag;
 	}
 
 });
