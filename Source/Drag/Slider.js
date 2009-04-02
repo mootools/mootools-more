@@ -36,12 +36,6 @@ var Slider = new Class({
 		this.element = $(element);
 		this.knob = $(knob);
 		this.previousChange = this.previousEnd = this.step = -1;
-		this.bound = {
-			clickedElement: this.clickedElement.bind(this),
-			scrolledElement: this.scrolledElement.bindWithEvent(this)
-		};
-		this.element.addEvent('mousedown', this.bound.clickedElement);
-		if (this.options.wheel) this.element.addEvent('mousewheel', this.bound.scrolledElement);
 		var offset, limit = {}, modifiers = {'x': false, 'y': false};
 		switch (this.options.mode){
 			case 'vertical':
@@ -66,26 +60,51 @@ var Slider = new Class({
 		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
-
-		this.drag = new Drag(this.knob, {
+		
+		this.bound = {
+			clickedElement: this.clickedElement.bind(this),
+			scrolledElement: this.scrolledElement.bindWithEvent(this),
+			draggedKnob: this.draggedKnob.bind(this)
+		};
+		
+		var dragOptions = {
 			snap: 0,
 			limit: limit,
 			modifiers: modifiers,
-			onDrag: this.draggedKnob,
+			onDrag: this.bound.draggedKnob,
+			onStart: this.bound.draggedKnob,
 			onBeforeStart: (function(){
 				this.isDragging = true;
 			}).bind(this),
-			onStart: this.draggedKnob,
 			onComplete: function(){
 				this.isDragging = false;
 				this.draggedKnob();
 				this.end();
 			}.bind(this)
-		});
+		};
+		
 		if (this.options.snap){
-			this.drag.options.grid = Math.ceil(this.stepWidth);
-			this.drag.options.limit[this.axis][1] = this.full;
+			dragOptions.grid = Math.ceil(this.stepWidth);
+			dragOptions.limit[this.axis][1] = this.full;
 		}
+		
+		this.drag = new Drag(this.knob, dragOptions);
+		
+		this.attach();
+	},
+	
+	attach: function(){
+		this.element.addEvent('mousedown', this.bound.clickedElement);
+		if (this.options.wheel) this.element.addEvent('mousewheel', this.bound.scrolledElement);
+		this.drag.attach();
+		return this;
+	},
+	
+	detach: function(){
+		this.element.removeEvent('mousedown', this.bound.clickedElement);
+		this.element.removeEvent('mousewheel', this.bound.scrolledElement);
+		this.drag.detach();
+		return this;
 	},
 
 	set: function(step){
@@ -147,12 +166,6 @@ var Slider = new Class({
 
 	toPosition: function(step){
 		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset;
-	},
-	
-	stop: function(){
-		this.element.removeEvent('mousedown', this.bound.clickedElement);
-		this.element.removeEvent('mousewheel', this.bound.scrolledElement);
-		this.drag.stop();
 	}
 
 });

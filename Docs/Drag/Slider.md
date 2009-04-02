@@ -1,7 +1,7 @@
 Class: Slider {#Slider}
 =======================
 
-**Creates a slider with two elements: a knob and a container.**
+Creates a slider with two elements: a knob and a container.
 
 ### Note:
 
@@ -103,7 +103,7 @@ Slider Event: tick {#Slider:tick}
 Slider Method: set {#Slider:set}
 --------------------------------
 
-**The slider will move to the passed position.**
+The slider will move to the passed position.
 
 ### Syntax:
 
@@ -130,3 +130,62 @@ Slider Method: set {#Slider:set}
 ### Notes:
 
 - Step will automatically be limited between 0 and the optional steps value.
+
+
+
+Slider Method: attach {#Slider:attach}
+--------------------------------
+
+Attaches the mouse listeners to the Slider making the Slider draggable
+
+### Syntax:
+
+	mySlider.attach();
+
+### Returns:
+
+* (*object*) This Slider instance.
+
+### Examples:
+
+	var mySlider = new Slider('myElement', 'myKnob');
+	mySlider.detach();
+	myElement.addEvent('click', function(){
+		mySlider.attach();
+		alert('Slider enabled!');
+	});
+
+### Notes:
+
+- You only need to use this method when you manually detached the mouse listeners before.
+
+### See Also:
+
+- [Slider:detach](#Slider:detach), [Element:addEvent][]
+
+
+
+Slider Method: detach {#Slider:detach}
+--------------------------------
+
+Detaches the mouse listeners from the Slider so its value can't be changed any longer
+
+### Syntax:
+
+	mySlider.detach();
+
+### Returns:
+
+* (*object*) This Slider instance.
+
+### Examples:
+
+	var mySlider = new Slider('myElement', 'myKnob');
+	myElement.addEvent('click', function(){
+		mySlider.detach();
+		alert('Slider disabled!');
+	});
+
+### See Also:
+
+- [Slider:attach](#Slider:attach), [Element:removeEvent][]
