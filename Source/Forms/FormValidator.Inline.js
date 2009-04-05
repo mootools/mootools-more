@@ -40,7 +40,7 @@ FormValidator.Inline = new Class({
 	makeAdvice: function(className, field, error, warn){
 		var errorMsg = (warn)?this.warningPrefix:this.errorPrefix;
 				errorMsg += (this.options.useTitles) ? field.title || error:error;
-		var cssClass = (warn)?'warning-advice':'validation-advice';
+		var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
 		var advice = this.getAdvice(className, field);
 		if(advice) {
 			advice = advice.clone(true).set('html', errorMsg).replaces(advice);
@@ -48,22 +48,22 @@ FormValidator.Inline = new Class({
 			advice = new Element('div', {
 				html: errorMsg,
 				styles: { display: 'none' },
-				id: 'advice-'+className+'-'+this.getFieldId(field)
+				id: 'advice-' + className + '-' + this.getFieldId(field)
 			}).addClass(cssClass);
 		}
-		field.store('advice-'+className, advice);
+		field.store('advice-' + className, advice);
 		return advice;
 	},
 
 	getFieldId : function(field){
-		return field.id ? field.id : field.id = "input_" + field.name;
+		return field.id ? field.id : field.id = 'input_' + field.name;
 	},
 
 	showAdvice: function(className, field){
 		var advice = this.getAdvice(className, field);
 		if (advice && !field.retrieve(this.getPropName(className))
-				&& (advice.getStyle('display') == "none"
-				|| advice.getStyle('visiblity') == "hidden"
+				&& (advice.getStyle('display') == 'none'
+				|| advice.getStyle('visiblity') == 'hidden'
 				|| advice.getStyle('opacity') == 0)){
 			field.store(this.getPropName(className), true);
 			if (advice.reveal) advice.reveal();
@@ -89,7 +89,7 @@ FormValidator.Inline = new Class({
 		field = $(field);
 		if (!field) return this;
 		this.parent(field);
-		field.className.split(" ").each(function(className){
+		field.className.split(' ').each(function(className){
 			this.hideAdvice(className, field);
 		}, this);
 	},
@@ -97,9 +97,9 @@ FormValidator.Inline = new Class({
 	getAllAdviceMessages: function(field, force){
 		var advice = [];
 		if (field.hasClass('ignoreValidation') && !force) return advice;
-		var validators = field.className.split(" ").some(function(cn){
+		var validators = field.className.split(' ').some(function(cn){
 			var warner = cn.test('^warn-') || field.hasClass('warnOnly');
-			if (warner) cn = cn.replace(/^warn-/,"");
+			if (warner) cn = cn.replace(/^warn-/, '');
 			var validator = this.getValidator(cn);
 			if (!validator) return;
 			advice.push({
@@ -113,7 +113,7 @@ FormValidator.Inline = new Class({
 	},
 
 	getAdvice: function(className, field){
-		return field.retrieve('advice-'+className);
+		return field.retrieve('advice-' + className);
 	},
 
 	insertAdvice: function(advice, field){

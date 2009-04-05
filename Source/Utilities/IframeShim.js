@@ -32,7 +32,7 @@ var IframeShim = new Class({
 		  var zIndex = this.element.getStyle('zIndex').toInt();
 			if (!zIndex){
 				var pos = this.element.getStyle('position');
-				if (pos == "static" || !pos) this.element.setStyle('position', 'relative');
+				if (pos == 'static' || !pos) this.element.setStyle('position', 'relative');
 				this.element.setStyle('zIndex', zIndex);
 			}
 			this.shim = new Iframe({

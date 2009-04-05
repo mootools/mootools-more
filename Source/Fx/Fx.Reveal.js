@@ -38,7 +38,7 @@ Fx.Reveal = new Class({
 						styles: this.options.styles,
 						mode: this.options.mode
 					});
-					var setToAuto = (this.element.style.height === ""||this.element.style.height=="auto");
+					var setToAuto = (this.element.style.height === ''||this.element.style.height == 'auto');
 					this.element.setStyle('display', 'block');
 					if (this.options.transitionOpacity) startStyles.opacity = 1;
 					var zero = {};
@@ -56,8 +56,8 @@ Fx.Reveal = new Class({
 							}, this);
 							this.element.setStyles($merge({display: 'none', overflow: overflowBefore}, startStyles));
 							if (setToAuto){
-								if (['vertical', 'both'].contains(this.options.mode)) this.element.style.height = "";
-								if (['width', 'both'].contains(this.options.mode)) this.element.style.width = "";
+								if (['vertical', 'both'].contains(this.options.mode)) this.element.style.height = '';
+								if (['width', 'both'].contains(this.options.mode)) this.element.style.width = '';
 							}
 							if (hideThese) hideThese.setStyle('visibility', 'visible');
 						}
@@ -99,7 +99,7 @@ Fx.Reveal = new Class({
 					var setToAuto, startStyles;
 					//toggle display, but hide it
 					this.element.measure(function(){
-						setToAuto = (this.element.style.height === ""||this.element.style.height=="auto");
+						setToAuto = (this.element.style.height === '' || this.element.style.height == 'auto');
 						//create the styles for the opened/visible state
 						startStyles = this.element.getComputedSize({
 							styles: this.options.styles,
@@ -133,8 +133,8 @@ Fx.Reveal = new Class({
 					this.$chain.unshift(function(){
 						this.element.setStyle('overflow', overflowBefore);
 						if (!this.options.heightOverride && setToAuto){
-							if (['vertical', 'both'].contains(this.options.mode)) this.element.style.height = "";
-							if (['width', 'both'].contains(this.options.mode)) this.element.style.width = "";
+							if (['vertical', 'both'].contains(this.options.mode)) this.element.style.height = '';
+							if (['width', 'both'].contains(this.options.mode)) this.element.style.width = '';
 						}
 						if (!this.hidden) this.showing = false;
 						if (hideThese) hideThese.setStyle('visibility', 'visible');
@@ -212,7 +212,7 @@ Element.implement({
 	},
 
 	nix: function(){
-		var  params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
+		var params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
 		this.get('reveal', params.options).dissolve().chain(function(){
 			this[params.destroy ? 'destroy' : 'dispose']();
 		}.bind(this));
@@ -220,7 +220,7 @@ Element.implement({
 	},
 
 	wink: function(){
-		var  params = Array.link(arguments, {duration: Number.type, options: Object.type});
+		var params = Array.link(arguments, {duration: Number.type, options: Object.type});
 		var reveal = this.get('reveal', params.options);
 		reveal.reveal().chain(function(){
 			(function(){

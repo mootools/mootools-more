@@ -10,7 +10,7 @@ Script: Date.Extras.js
 
 */
 
-["LastDayOfMonth", "Ordinal"].each(function(method){
+['LastDayOfMonth', 'Ordinal'].each(function(method){
 	Date.Methods.set(method.toLowerCase(), method);
 });
 
@@ -59,15 +59,15 @@ $extend(Date, {
 				return Date.getMsg('lessThanMinute' + suffix, delta);
 			} else if (delta < 120){
 				return Date.getMsg('minute' + suffix, delta);
-			} else if (delta < (45*60)){
+			} else if (delta < (45 * 60)){
 				delta = (delta / 60).round();
 				return Date.getMsg('minutes' + suffix, delta);
-			} else if (delta < (90*60)){
+			} else if (delta < (90 * 60)){
 				return Date.getMsg('hour' + suffix, delta);
-			} else if (delta < (24*60*60)){
+			} else if (delta < (24 * 60 * 60)){
 				delta = (delta / 3600).round();
 				return Date.getMsg('hours' + suffix, delta);
-			} else if (delta < (48*60*60)){
+			} else if (delta < (48 * 60 * 60)){
 				return Date.getMsg('day' + suffix, delta);
 			} else {
 				delta = (delta / 86400).round();
@@ -207,15 +207,15 @@ Date.parsePatterns.extend([
 		re: /^\d+\s[a-zA-z]..\s\d.\:\d.$/,
 		handler: function(bits){
 			var d = new Date();
-			bits = bits[0].split(" ");
+			bits = bits[0].split(' ');
 			d.set('date', bits[0]);
 			var m;
 			Date.getMsg('months').each(function(mo, i){
-				if (new RegExp("^"+bits[1]).test(mo)) m = i;
+				if (new RegExp('^' + bits[1]).test(mo)) m = i;
 			});
 			d.set('mo', m);
-			d.set('hr', bits[2].split(":")[0]);
-			d.set('min', bits[2].split(":")[1]);
+			d.set('hr', bits[2].split(':')[0]);
+			d.set('min', bits[2].split(':')[1]);
 			d.set('ms', 0);
 			return d;
 		}

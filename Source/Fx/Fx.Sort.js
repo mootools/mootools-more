@@ -69,7 +69,7 @@ Fx.Sort = new Class({
 				if (!newOrder.contains(index)) newOrder.push(index);
 			});
 			if (newOrder.length > this.elements.length)
-				newOrder.splice(this.elements.length-1, newOrder.length-this.elements.length);
+				newOrder.splice(this.elements.length-1, newOrder.length - this.elements.length);
 		}
 		var top = 0;
 		var left = 0;

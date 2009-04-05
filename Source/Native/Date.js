@@ -22,19 +22,19 @@ new Native({name: 'Date', initialize: Date, protect: true});
 
 Date.Methods = new Hash();
 
-["Date", "Day", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "TimezoneOffset",
-	"Week", "Timezone", "GMTOffset", "DayOfYear", "LastMonth", "UTCDate", "UTCDay", "UTCFullYear",
-	"AMPM", "UTCHours", "UTCMilliseconds", "UTCMinutes", "UTCMonth", "UTCSeconds"].each(function(method){
+['Date', 'Day', 'FullYear', 'Hours', 'Milliseconds', 'Minutes', 'Month', 'Seconds', 'Time', 'TimezoneOffset',
+	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
+	'AMPM', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds'].each(function(method){
 	Date.Methods.set(method.toLowerCase(), method);
 });
 
 $each({
-	ms: "Milliseconds",
-	year: "FullYear",
-	min: "Minutes",
-	mo: "Month",
-	sec: "Seconds",
-	hr: "Hours"
+	ms: 'Milliseconds',
+	year: 'FullYear',
+	min: 'Minutes',
+	mo: 'Month',
+	sec: 'Seconds',
+	hr: 'Hours'
 }, function(value, key){
 	Date.Methods.set(key, value);
 });
@@ -48,14 +48,14 @@ Date.implement({
 	set: function(key, value){
 		key = key.toLowerCase();
 		var m = Date.Methods;
-		if (m.has(key)) this['set'+m.get(key)](value);
+		if (m.has(key)) this['set' + m.get(key)](value);
 		return this;
 	},
 
 	get: function(key){
 		key = key.toLowerCase();
 		var m = Date.Methods;
-		if (m.has(key)) return this['get'+m.get(key)]();
+		if (m.has(key)) return this['get' + m.get(key)]();
 		return null;
 	},
 
@@ -75,9 +75,9 @@ Date.implement({
 		interval = interval || 'day';
 		times = $pick(times, 1);
 		increment = $pick(increment, true);
-		var multiplier = increment?1:-1;
-		var month = this.format("%m").toInt()-1;
-		var year = this.format("%Y").toInt();
+		var multiplier = increment ? 1 : -1;
+		var month = this.format('%m').toInt() - 1;
+		var year = this.format('%Y').toInt();
 		var time = this.get('time');
 		var offset = 0;
 		switch (interval) {
@@ -91,15 +91,15 @@ Date.implement({
 				case 'month':
 					times.times(function(val){
 						if (multiplier < 0) val++;
-						var mo = month+(val*multiplier);
+						var mo = month+(val * multiplier);
 						var year = year;
 						if (mo < 0) {
 							year--;
 							mo = 12+mo;
 						}
 						if (mo > 11 || mo < 0) {
-							year += (mo/12).toInt()*multiplier;
-							mo = mo%12;
+							year += (mo / 12).toInt() * multiplier;
+							mo = mo % 12;
 						}
 						offset += Date.units.month(mo, year);
 					});
@@ -107,10 +107,10 @@ Date.implement({
 				case 'day':
 					return this.set('date', this.get('date')+(multiplier*times));
 				default:
-					offset = Date.units[interval]()*times;
+					offset = Date.units[interval]() * times;
 					break;
 		}
-		this.set('time', time+(offset*multiplier));
+		this.set('time', time + (offset * multiplier));
 		return this;
 	},
 
@@ -130,11 +130,11 @@ Date.implement({
 		if ($type(d) == 'string') d = Date.parse(d);
 		switch (resolution){
 			case 'year':
-				return d.format("%Y").toInt() - this.format("%Y").toInt();
+				return d.format('%Y').toInt() - this.format('%Y').toInt();
 				break;
 			case 'month':
-				var months = (d.format("%Y").toInt() - this.format("%Y").toInt())*12;
-				return months + d.format("%m").toInt() - this.format("%m").toInt();
+				var months = (d.format('%Y').toInt() - this.format('%Y').toInt())*12;
+				return months + d.format('%m').toInt() - this.format('%m').toInt();
 				break;
 			default:
 				var diff = d.get('time') - this.get('time');
@@ -157,7 +157,7 @@ Date.implement({
 
 	getGMTOffset: function(){
 		var off = this.get('timezoneOffset');
-		return ((off > 0) ? '-' : '+')
+		return ((off > 0) ? '-' : ' + ')
 			+ zeroize(Math.floor(Math.abs(off) / 60), 2)
 			+ zeroize(off % 60, 2);
 	},
@@ -173,7 +173,7 @@ Date.implement({
 
 	format: function(f){
 		if (!this.isValid()) return 'invalid date';
-		f = f || "%x %X";
+		f = f || '%x %X';
 		//replace short-hand with actual format
 		f = ({
 			db: '%Y-%m-%d %H:%M:%S',
@@ -223,9 +223,9 @@ Date.implement({
 
 	setAMPM: function(ampm){
 		ampm = ampm.toUpperCase();
-		if (this.format("%H").toInt() > 11 && ampm == Date.getMsg('AM'))
+		if (this.format('%H').toInt() > 11 && ampm == Date.getMsg('AM'))
 			return this.decrement('hour', 12);
-		else if (this.format("%H").toInt() < 12 && ampm == Date.getMsg('PM'))
+		else if (this.format('%H').toInt() < 12 && ampm == Date.getMsg('PM'))
 			return this.increment('hour', 12);
 		return this;
 	}
@@ -258,16 +258,16 @@ $extend(Date, {
 		week: $lambda(608400000),
 		month: function(monthIndex, year){
 			var d = new Date();
-			return daysInMonth($pick(monthIndex,d.format("%m").toInt()), $pick(year,d.format("%Y").toInt())) * 86400000;
+			return daysInMonth($pick(monthIndex,d.format('%m').toInt()), $pick(year,d.format('%Y').toInt())) * 86400000;
 		},
 		year: function(year){
-			year = year || new Date().format("%Y").toInt();
-			return Date.isLeapYear(year.toInt())?31622400000:31536000000;
+			year = year || new Date().format('%Y').toInt();
+			return Date.isLeapYear(year.toInt()) ? 31622400000 : 31536000000;
 		}
 	},
 
 	isLeapYear: function(yr){
-		return new Date(yr,1,29).getDate() == 29;
+		return new Date(yr , 1, 29).getDate() == 29;
 	},
 
 	fixY2K: function(d){
@@ -341,7 +341,7 @@ $extend(Date, {
 	},
 
 	orderIndex: function(unit){
-		return Date.getMsg('dateOrder').indexOf(unit)+1;
+		return Date.getMsg('dateOrder').indexOf(unit) + 1;
 	},
 
 	parsePatterns: [

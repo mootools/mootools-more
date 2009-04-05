@@ -160,7 +160,7 @@ FormValidator.addAllThese([
 		test: function(element, props){
 			var d1 = Date.parse(element.get('value'));
 			var d2 = Date.parse($(props.sameMonthAs) && $(props.sameMonthAs).get('value'));
-			return d1 && d2 ? d1.format("%B") == d2.format("%B") : true;
+			return d1 && d2 ? d1.format('%B') == d2.format('%B') : true;
 		}
 	}]
 

@@ -84,8 +84,8 @@ var URI = new Class({
 
 	set: function(part, value){
 		switch(part){
-			case "data": return this.setData(value);
-			case "value": 
+			case 'data': return this.setData(value);
+			case 'value': 
 				this.value = value;
 				this.parse();
 				return this;
@@ -98,8 +98,8 @@ var URI = new Class({
 
 	get: function(part){
 		switch(part) {
-			case "data": return this.getData();
-			case "value": return this.toString();
+			case 'data': return this.getData();
+			case 'value': return this.toString();
 		}
 		return this.parse()[part];
 	},

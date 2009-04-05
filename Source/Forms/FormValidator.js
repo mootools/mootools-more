@@ -29,7 +29,7 @@ var InputValidator = new Class({
 
 	getError: function(field, props){
 		var err = this.options.errorMsg;
-		if ($type(err) == "function") err = err($(field), props||this.getProps(field));
+		if ($type(err) == 'function') err = err($(field), props||this.getProps(field));
 		return err;
 	},
 
@@ -90,10 +90,10 @@ var FormValidator = new Class({
 		onElementValidate: $empty(isValid, field, className, warn),
 		onElementPass: $empty(field),
 		onElementFail: $empty(field, validatorsFailed) */
-		fieldSelectors:"input, select, textarea",
+		fieldSelectors: 'input, select, textarea',
 		ignoreHidden: true,
-		useTitles:false,
-		evaluateOnSubmit:true,
+		useTitles: false,
+		evaluateOnSubmit: true,
 		evaluateFieldsOnBlur: true,
 		evaluateFieldsOnChange: true,
 		serial: true,
@@ -161,11 +161,11 @@ var FormValidator = new Class({
 			warned = this.element.getElement('.warning');
 		}
 		if (field && (!failed || force || field.hasClass('validation-failed') || (failed && !this.options.serial))){
-			var validators = field.className.split(" ").some(function(cn){
+			var validators = field.className.split(' ').some(function(cn){
 				return this.getValidator(cn);
 			}, this);
 			var validatorsFailed = [];
-			field.className.split(" ").each(function(className){
+			field.className.split(' ').each(function(className){
 				if (className && !this.test(className, field)) validatorsFailed.include(className);
 			}, this);
 			passed = validatorsFailed.length === 0;
@@ -179,15 +179,15 @@ var FormValidator = new Class({
 				}
 			}
 			if (!warned){
-				var warnings = field.className.split(" ").some(function(cn){
+				var warnings = field.className.split(' ').some(function(cn){
 					if (cn.test('^warn-') || field.hasClass('warnOnly'))
-						return this.getValidator(cn.replace(/^warn-/,""));
+						return this.getValidator(cn.replace(/^warn-/,''));
 					else return null;
 				}, this);
 				field.removeClass('warning');
-				var warnResult = field.className.split(" ").map(function(cn){
+				var warnResult = field.className.split(' ').map(function(cn){
 					if (cn.test('^warn-') || field.hasClass('warnOnly'))
-						return this.test(cn.replace(/^warn-/,""), field, true);
+						return this.test(cn.replace(/^warn-/,''), field, true);
 					else return null;
 				}, this);
 			}
@@ -210,7 +210,7 @@ var FormValidator = new Class({
 	isVisible : function(field){
 		if (!this.options.ignoreHidden) return true;
 		while(field != document.body){
-			if ($(field).getStyle('display') == "none") return false;
+			if ($(field).getStyle('display') == 'none') return false;
 			field = field.getParent();
 		}
 		return true;
@@ -219,8 +219,8 @@ var FormValidator = new Class({
 	resetField: function(field){
 		field = $(field);
 		if (field){
-			field.className.split(" ").each(function(className){
-				if (className.test('^warn-')) className = className.replace(/^warn-/,"");
+			field.className.split(' ').each(function(className){
+				if (className.test('^warn-')) className = className.replace(/^warn-/, '');
 				field.removeClass('validation-failed');
 				field.removeClass('warning');
 				field.removeClass('validation-passed');
@@ -284,7 +284,7 @@ FormValidator.adders = {
 	},
 
 	getValidator: function(className){
-		return this.validators[className.split(":")[0]];
+		return this.validators[className.split(':')[0]];
 	}
 
 };
@@ -297,8 +297,8 @@ FormValidator.add('IsEmpty', {
 
 	errorMsg: false,
 	test: function(element){
-		if (element.type == "select-one"||element.type == "select")
-			return !(element.selectedIndex >= 0 && element.options[element.selectedIndex].value != "");
+		if (element.type == 'select-one' || element.type == 'select')
+			return !(element.selectedIndex >= 0 && element.options[element.selectedIndex].value != '');
 		else
 			return ((element.get('value') == null) || (element.get('value').length == 0));
 	}
@@ -380,7 +380,7 @@ FormValidator.addAllThese([
 	['validate-date', {
 		errorMsg: function(element, props){
 			if (Date.parse){
-				var format = props.dateFormat || "%x";
+				var format = props.dateFormat || '%x';
 				return FormValidator.getMsg('dateSuchAs').substitute({date:new Date().format(format)});
 			} else {
 				return FormValidator.getMsg('dateInFormatMDY');
@@ -389,10 +389,10 @@ FormValidator.addAllThese([
 		test: function(element, props){
 			if (FormValidator.getValidator('IsEmpty').test(element)) return true;
 			if (Date.parse){
-				var format = props.dateFormat || "%x";
+				var format = props.dateFormat || '%x';
 				var d = Date.parse(element.get('value'));
 				var formatted = d.format(format);
-				if (formatted != "invalid date") element.set('value', formatted);
+				if (formatted != 'invalid date') element.set('value', formatted);
 				return !isNaN(d);
 			} else {
 			var regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;

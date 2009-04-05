@@ -52,7 +52,7 @@ Element.implement({
 		//upperRight, bottomRight, centerRight, upperLeft, bottomLeft, centerLeft
 		//topRight, topLeft, centerTop, centerBottom, center
 		var fixValue = function(option){
-			if ($type(option) != "string") return option;
+			if ($type(option) != 'string') return option;
 			option = option.toLowerCase();
 			var val = {};
 			if (option.test('left')) val.x = 'left';
@@ -146,7 +146,7 @@ Element.implement({
 			left: ((pos.x >= 0 || parentPositioned || options.allowNegative) ? pos.x : 0).toInt(),
 			top: ((pos.y >= 0 || parentPositioned || options.allowNegative) ? pos.y : 0).toInt()
 		};
-		if (rel.getStyle('position') == "fixed" || options.relFixedPosition){
+		if (rel.getStyle('position') == 'fixed' || options.relFixedPosition){
 			var winScroll = window.getScroll();
 			pos.top = pos.top.toInt() + winScroll.y;
 			pos.left = pos.left.toInt() + winScroll.x;

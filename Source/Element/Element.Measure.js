@@ -90,7 +90,7 @@ Element.implement({
 		$each(options.plains, function(plain, key){
 			plain.each(function(edge){
 				options.styles.each(function(style){
-					getStyles.push((style == "border") ? style + '-' + edge + '-' + 'width' : style + '-' + edge);
+					getStyles.push((style == 'border') ? style + '-' + edge + '-' + 'width' : style + '-' + edge);
 				});
 			});
 		});

@@ -21,8 +21,8 @@ var OverText = new Class({
 		onTextHide: $empty(textEl, inputEl),
 		onTextShow: $empty(textEl, inputEl), */
 		positionOptions: {
-			position: "upperLeft",
-			edge: "upperLeft",
+			position: 'upperLeft',
+			edge: 'upperLeft',
 			offset: {
 				x: 4,
 				y: 2
