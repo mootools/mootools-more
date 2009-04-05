@@ -39,14 +39,14 @@ var Tips = new Class({
 		this.tip = this.getTip();
 		
 		this.restore = false;
-		if ($type(this.options.title)=='string'){
+		if ($type(this.options.title) == 'string'){
 			var title = this.options.title;
-			if (title=='title') this.restore = title;
+			if (title == 'title') this.restore = title;
 			this.options.title = function(el){
 				return el.get(title);
 			};
 		}
-		if ($type(this.options.text)=='string'){
+		if ($type(this.options.text) == 'string'){
 			var text = this.options.text;
 			this.options.text = function(el){
 				return el.get(text);
@@ -76,7 +76,7 @@ var Tips = new Class({
 	attach: function(elements){
 		$$(elements).each(function(element){
 			var read = function(option) {
-				return $type(option) == "function" ? option(element) : element.get(option);
+				return $type(option) == 'function' ? option(element) : element.get(option);
 			}
 			var title = read(this.options.title);
 			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
