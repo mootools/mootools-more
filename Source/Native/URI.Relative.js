@@ -9,26 +9,14 @@ Script: URI.Relative.js
 		Sebastian Markbåge
 */
 
+(function(){
+
+var combine = URI.prototype.combine;
+
 URI.implement({
 	
-	toAbsolute: function(base){
-		base = new URI(base);
-		if (base) base.set('path', '');
-		return this.toRelative(base);
-	},
-	
-	toRelative: function(base){
-		return this.get('value', new URI(base));
-	}
-	
-});
-
-['http', 'https', 'ftp', 'rtsp', 'mms', 'file'].each(function(key){
-
-	var scheme = URI.Schemes[key], combine = scheme.combine;
-	
-	scheme.combine = function(bits, base, property){
-		if(property != 'value' || !base || bits.scheme != base.scheme || bits.host != base.host || bits.port != base.port)
+	combine: function(bits, base){
+		if(!base || bits.scheme != base.scheme || bits.host != base.host || bits.port != base.port)
 			return combine.apply(this, arguments);
 		
 		var end = bits.file + (bits.query ? '?' + bits.query : '') + (bits.fragment ? '#' + bits.fragment : '')
@@ -45,6 +33,18 @@ URI.implement({
 		for(var i = offset; i < relDir.length - 1; i++) path += relDir[i] + '/';
 			
 		return (path || (bits.file ? '' : './')) + end;
-	};
-
+	},
+	
+	toAbsolute: function(base){
+		base = new URI(base);
+		if (base) base.set('directory', '').set('file', '');
+		return this.toRelative(base);
+	},
+	
+	toRelative: function(base){
+		return this.get('value', new URI(base));
+	}
+	
 });
+
+})();

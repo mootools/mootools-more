@@ -116,12 +116,6 @@ License:
 			value_of(uri.get('file')).should_be('myfile.html');
 			value_of(uri.get('query')).should_be('myquery=true');
 			value_of(uri.get('fragment')).should_be('myhash');
-		},
-		
-		'set and get path property': function(){
-			value_of(uri.set('path', '/mypath')).should_be('http://myuser:mypass@www.calyptus.eu/mypath?myquery=true#myhash');
-			value_of(uri.set('path', '/mypath/myfile')).should_be('http://myuser:mypass@www.calyptus.eu/mypath/myfile?myquery=true#myhash');
-			value_of(uri.get('path')).should_be('/mypath/myfile');
 		}
 		
 	});
@@ -152,7 +146,7 @@ License:
 	describe('URI mailto protocol', {
 
 		before: function(){
-			uri = new URI('mailto:info@calyptus.eu?subject=This%20rocks');
+			uri = new URI.MailTo('mailto:info@calyptus.eu?subject=This%20rocks');
 		},
 
 		'toString() should be same as input': function(){
@@ -161,7 +155,6 @@ License:
 		
 		'should have all mailto properties set': function(){
 			value_of(uri.get('scheme')).should_be('mailto');
-			value_of(uri.get('email')).should_be('info@calyptus.eu');
 			value_of(uri.get('user')).should_be('info');
 			value_of(uri.get('host')).should_be('calyptus.eu');
 			value_of(uri.get('query')).should_be('subject=This%20rocks');

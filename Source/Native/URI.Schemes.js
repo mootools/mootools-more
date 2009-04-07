@@ -9,49 +9,51 @@ Script: URI.Schemes.js
 		Sebastian Markbåge
 */
 
-URI.Schemes.extend({
+URI.MailTo = new Class({
 
-	mailto: new URI.Scheme({
+	Extends: URI,
 
-		value: {
-			regex: /^(mailto):([^\.:@]+(?:\.[^:@]+)*)@((?:[^?:\.]+\.)*[^?:\.]+)(?:\?(.*))?/i,
-			parts: ['scheme', 'user', 'host', 'query'],
-			combine: function(bits){
-				return 'mailto:' + bits.user + '@' + bits.host + (bits.query ? '?' + bits.query : '');
-			}
-		},
-
-		email: {
-			regex: /^([^\.:@]+(?:\.[^:@]+)*)@((?:[^?:\.]+\.)*[^?:\.]+)$/,
-			parts: ['username', 'hostname'],
-			combine: function(bits){ return bits.user + '@' + bits.host; }
-		}
-
-	}),
+	regex: /^(mailto):([^\.:@]+(?:\.[^:@]+)*)@((?:[^?:\.]+\.)*[^?:\.]+)(?:\?(.*))?/i,
+	parts: ['scheme', 'user', 'host', 'query'],
+	schemes: { mailto: undefined },
 	
-	javascript: new URI.Scheme({
+	merge: function(bits){ return bits; },
 
-		value: {
-			regex: /(javascript):(.*)/i,
-			parts: ['scheme', 'script'],
-			combine: function(bits){
-				return 'javascript:' + (bits.script || '').toString().replace(/\r?\n/g, ' ');
-			}
-		}
-
-	}),
+	combine: function(bits){
+		return 'mailto:' + bits.user + '@' + bits.host + (bits.query ? '?' + bits.query : '');
+	}
 	
-	about: new URI.Scheme({
+});
 
-		value: {
-			regex: /(about):([^?]*)(?:\?(.*))?/i,
-			parts: ['scheme', 'about', 'query'],
-			combine: function(bits){
-				return 'about:' + bits.about + (bits.query ? '?' + bits.query : '');
-			}
-		}
+URI.JavaScript = new Class({
 
-	})
+	Extends: URI,
+
+	regex: /^(javascript):(.*)/i,
+	parts: ['scheme', 'script'],
+	schemes: { javascript: undefined },
+
+	merge: function(bits){ return bits; },
+
+	combine: function(bits){
+		return 'javascript:' + (bits.script || '').toString().replace(/\r?\n/g, ' ');
+	}
+
+});
+
+URI.About = new Class({
+
+	Extends: URI,
+
+	regex: /^(about):([^?]*)(?:\?(.*))?/i,
+	parts: ['scheme', 'about', 'query'],
+	schemes: { about: undefined },
+
+	merge: function(bits){ return bits; },
+
+	combine: function(bits){
+		return 'about:' + bits.about + (bits.query ? '?' + bits.query : '');
+	}
 
 });
 
