@@ -7,79 +7,110 @@ License:
 */
 (function(){
 
-	describe('String.parseQueryString', {
+	var uri;
 
-		'should parse a query string to an object': function(){
-			value_of('apple=red&lemon=yellow'.parseQueryString().apple).should_be('red');
+	describe('URI initialize', {
+
+		'new URI() should return the current location': function(){
+			value_of(new URI()).should_be(window.location.href.replace(/#$|\?$|\?(?=#)/, ''));
 		},
 
-		'should parse a plain string to an empty object': function(){
-			value_of($H('appleyellow'.parseQueryString()).getLength() == 0).should_be_true();
+		'new URI(\'http://www.calyptus.eu\') should return itself with a trailing slash': function(){
+			value_of(new URI('http://www.calyptus.eu')).should_be('http://www.calyptus.eu/');
+		},
+
+		'new URI(\'http://www.calyptus.eu/\') should return itself': function(){
+			value_of(new URI('http://www.calyptus.eu/')).should_be('http://www.calyptus.eu/');
+		},
+		
+		'\'http://www.calyptus.eu/\' + \'./mydirectory/myfile.html\' == http://www.calyptus.eu/mydirectory/myfile.html': function(){
+			value_of(new URI('./mydirectory/myfile.html', { base: 'http://www.calyptus.eu/' })).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
+		},
+
+		'\'http://www.calyptus.eu\' + \'mydirectory/myfile.html\' == http://www.calyptus.eu/mydirectory/myfile.html': function(){
+			value_of(new URI('mydirectory/myfile.html', { base: 'http://www.calyptus.eu' })).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
+		},
+		
+		'\'http://www.calyptus.eu/mydirectory/#\' + \'../myfile.html\' == http://www.calyptus.eu/myfile.html': function(){
+			value_of(new URI('../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/#' })).should_be('http://www.calyptus.eu/myfile.html');
+		},
+		
+		'\'http://www.calyptus.eu/mydirectory/mydirectory2/\' + \'../../myfile.html\' == http://www.calyptus.eu/myfile.html': function(){
+			value_of(new URI('../../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/' })).should_be('http://www.calyptus.eu/myfile.html');
+		},
+
+		'\'http://www.calyptus.eu/mydirectory/mydirectory2/\' + \'../test/../myfile.html\' == http://www.calyptus.eu/mydirectory/myfile.html': function(){
+			value_of(new URI('../test/../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/' })).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
+		},
+		
+		'\'http://www.calyptus.eu/\' + \'http://otherdomain/mydirectory/myfile.html\' == http://otherdomain/mydirectory/myfile.html': function(){
+			value_of(new URI('http://otherdomain/mydirectory/myfile.html', { base: 'http://www.calyptus.eu/' })).should_be('http://otherdomain/mydirectory/myfile.html');
+		},
+		
+		'\'http://www.calyptus.eu/mydirectory2/myfile.html\' + \'/mydirectory/myfile.html\' == http://www.calyptus.eu/mydirectory/myfile.html': function(){
+			value_of(new URI('/mydirectory/myfile.html', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
+		},
+
+		'\'http://www.calyptus.eu/mydirectory2/\' + \'mydirectory/myfile.html\' == http://www.calyptus.eu/mydirectory2/mydirectory/myfile.html': function(){
+			value_of(new URI('mydirectory/myfile.html', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory2/mydirectory/myfile.html');
+		},
+
+		'\'http://www.calyptus.eu/mydirectory2/\' + \'mydirectory\' == http://www.calyptus.eu/mydirectory2/mydirectory': function(){
+			value_of(new URI('mydirectory', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory2/mydirectory');
+		},
+
+		'\'http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html\' + \'..\' == http://www.calyptus.eu/mydirectory/': function(){
+			value_of(new URI('..', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory/');
 		}
 
 	});
 
-	describe('String.cleanQueryString', {
+	describe('URI methods', {
 
-		'should remove empty keys': function(){
-			value_of('a=b&x=y&z=123&e='.cleanQueryString()).should_be('a=b&x=y&z=123');
+		before_all: function(){
+			uri = new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
+		},
+		
+		'URI.toString() should be same as input': function(){
+			value_of(uri.toString()).should_be('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
+		},
+		
+		'URI.setData({ keyName: \'my value\' }) should return ?keyName=my%20value as the query': function(){
+			uri.setData({ keyName: 'my value' });
+			value_of(uri.get('query')).should_be('keyName=my%20value');
+		},
+		
+		'URI.getData() should return an object with the value set above': function(){
+			value_of(uri.getData().keyName).should_be('my value');
 		},
 
-		'should remove specified keys': function(){
-			value_of('a=b&x=y&z=123&e='.cleanQueryString(function(set){
-				return !set.split("=")[1].match(/[0-9]/);
-			})).should_be('a=b&x=y&e=');
+		'URI.getData(\'keyName\') should return the string with the value set above': function(){
+			value_of(uri.getData('keyName')).should_be('my value');
 		}
-
+		
 	});
 
-	var url = 'http://www.test.com:8383/this/is/the/path.html?query=value#anchor';
+	describe('URI use where string is expected', {
 
-	describe('URL.get(\'host\')', {
-
-			'should get the domain of a url': function(){
-				value_of(new URI(url.toString()).get('host')).should_be('www.test.com');
-			}
-
-	});
-
-	describe('URL.getData', {
-
-			'should get the query string values from a url': function(){
-				value_of(new URI(url.toString()).getData()['query']).should_be('value');
-			},
-
-			'should get the query string value from a url': function(){
-				value_of(new URI(url.toString()).getData('query')).should_be('value');
-			}
-
-	});
-
-	describe('URI.get(\'domain\')', {
-
-			'should get the scheme from a url': function(){
-				value_of(new URI(url.toString()).get('scheme')).should_be('http');
-			}
-
-	});
-
-	describe('URI.get(\'port\')', {
-
-			'should get the port from a url': function(){
-				value_of(new URI(url.toString()).get('port')).should_be('8383');
-			}
-
-	});
-
-	describe('URI.setData', {
-
-			'should set query string values': function(){
-				value_of(new URI('www.test.com').setData({a: 'b'}).toString()).should_be('www.test.com?a=b');
-			},
-
-			'should merge url query string values': function(){
-				value_of(new URI('www.test.com?x=y&a=b').setData({a: 'c'}, true).toString()).should_be('www.test.com?x=y&a=c');
-			}
+		'Request self should work with an URI object': function(){
+			new Request({ url: new URI() }).get();
+		},
+		
+		'A HREF should take an URI object': function(){
+			value_of(new Element('a').set('href', new URI()).get('href')).should_be(new URI().toString());
+		},
+		
+		'post-concatenation with string': function(){
+			value_of(new URI('http://www.calyptus.eu/') + '?test').should_be('http://www.calyptus.eu/?test');
+		},
+		
+		'pre-concatenation with string': function(){
+			value_of('URL: ' + new URI('http://www.calyptus.eu/')).should_be('URL: http://www.calyptus.eu/');
+		},
+		
+		'regexp test': function(){
+			value_of(/^http/.test(new URI('http://www.calyptus.eu/'))).should_be(true);
+		}
 
 	});
 
