@@ -45,7 +45,7 @@ var Builder = {
 		more: {
 			'Core'		: ['More', 'Lang', 'Log'],
 			'Class'		: ['Class.Refactor', 'Class.Binds', 'Class.Occlude'],
-			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras', 'URI'],
+			'Native'	: ['Date', 'Date.Extras', 'String.Extras', 'Hash.Extras', 'Array.Extras', 'String.QueryString', 'URI', 'URI.Data', 'URI.Schemes', 'URI.Relative'],
 			'Element'	: ['Element.Forms', 'Element.Measure'],
 			'Drag'      : ['Drag', 'Drag.Move', 'Slider', 'Sortables'],
 			'Fx'        : ['Fx.Scroll', 'Fx.Slide', 'Fx.Elements', 'Fx.Accordion', 'Fx.SmoothScroll'],

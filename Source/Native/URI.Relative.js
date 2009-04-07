@@ -12,42 +12,39 @@ Script: URI.Relative.js
 URI.implement({
 	
 	toAbsolute: function(base){
-		base = new URI(base, { base: this });
-		...
+		base = new URI(base);
+		if (base) base.set('path', '');
+		return this.toRelative(base);
 	},
 	
 	toRelative: function(base){
-		base = new URI(base, { base: this });
-		...
+		return this.get('value', new URI(base));
 	}
 	
 });
 
-$extend(URI.Schemes.http, {
+['http', 'https', 'ftp', 'rtsp', 'mms', 'file'].each(function(key){
 
-	relative: function(baseURI){
-		var uri = this;
-		baseURI = baseURI ? new URI(uri, baseURI) : new URI();
-		if(!uri.directory || !baseURI.directory || uri.protocol != baseURI.protocol || uri.hostname != baseURI.hostname || uri.port != baseURI.port)
-			return uri.get('href');
-
-		var baseDir, relDir, path = '', o;
-		baseDir = baseURI.directory.split('/');
-		relDir = uri.directory.split('/');
-		
-		for(o = 0; o < baseDir.length && o < relDir.length && baseDir[o] == relDir[o]; o++);
-		for(var i = 0; i < baseDir.length - o - 1; i++) path += '../';
-		for(var i = o; i < relDir.length - 1; i++) path += relDir[i] + '/';
-			
-		return (path || (uri.file ? '' : './')) + (uri.file || '') + (uri.search || '') + (uri.hash || '');
-	},
+	var scheme = URI.Schemes[key], combine = scheme.combine;
 	
-	absolute: function(baseURI){
-		var uri = this;
-		baseURI = baseURI ? new URI(uri, baseURI) : new URI();
-		if(!uri.directory || !baseURI.directory || uri.protocol != baseURI.protocol || uri.hostname != baseURI.hostname || uri.port != baseURI.port)
-			return uri.get('href');
-		return uri.d
-	}
+	scheme.combine = function(bits, base, property){
+		if(property != 'value' || !base || bits.scheme != base.scheme || bits.host != base.host || bits.port != base.port)
+			return combine.apply(this, arguments);
+		
+		var end = bits.file + (bits.query ? '?' + bits.query : '') + (bits.fragment ? '#' + bits.fragment : '')
+		
+		if (!base.directory) return (bits.directory || (bits.file ? '' : './')) + end;
+		
+		var baseDir = base.directory.split('/'),
+			relDir = bits.directory.split('/'),
+			path = '',
+			offset;
+		
+		for(offset = 0; offset < baseDir.length && offset < relDir.length && baseDir[offset] == relDir[offset]; offset++);
+		for(var i = 0; i < baseDir.length - offset - 1; i++) path += '../';
+		for(var i = offset; i < relDir.length - 1; i++) path += relDir[i] + '/';
+			
+		return (path || (bits.file ? '' : './')) + end;
+	};
 
 });

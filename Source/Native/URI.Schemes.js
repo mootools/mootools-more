@@ -12,24 +12,48 @@ Script: URI.Schemes.js
 URI.Schemes.extend({
 
 	mailto: new URI.Scheme({
-		scheme: 'mailto',
-		regex: /^([^\.:@]+(?:\.[^:@]+)*)@((?:[^?:\.]+\.)*[^?:\.]+)(?:\?(.*))?/i,
-		parts: ['user', 'host', 'query'],
-		combine: function(bits){ return bits.user + '@' + bits.host + (bits.query ? '?' + bits.query : ''); },
-		props: {
-			email: {
-				regex: /^([^\.:@]+(?:\.[^:@]+)*)@((?:[^?:\.]+\.)*[^?:\.]+)$/,
-				parts: ['username', 'hostname'],
-				combine: function(bits){ return bits.user + '@' + bits.host; }
+
+		value: {
+			regex: /^(mailto):([^\.:@]+(?:\.[^:@]+)*)@((?:[^?:\.]+\.)*[^?:\.]+)(?:\?(.*))?/i,
+			parts: ['scheme', 'user', 'host', 'query'],
+			required: ['scheme', 'user', 'host'],
+			combine: function(bits){
+				return 'mailto:' + bits.user + '@' + bits.host + (bits.query ? '?' + bits.query : '');
 			}
+		},
+
+		email: {
+			regex: /^([^\.:@]+(?:\.[^:@]+)*)@((?:[^?:\.]+\.)*[^?:\.]+)$/,
+			parts: ['username', 'hostname'],
+			combine: function(bits){ return bits.user + '@' + bits.host; }
 		}
+
 	}),
 	
 	javascript: new URI.Scheme({
-		scheme: 'javascript',
-		regex: /^(.*)/,
-		parts: ['script'],
-		combine: function(bits){ return (bits.script || '').toString().replace(/\r?\n/g, ' '); }
+
+		value: {
+			regex: /(javascript):(.*)/i,
+			parts: ['scheme', 'script'],
+			combine: function(bits){
+				return 'javascript:' + (bits.script || '').toString().replace(/\r?\n/g, ' ');
+			}
+		}
+
+	}),
+	
+	about: new URI.Scheme({
+
+		value: {
+			regex: /(about):([^?]*)(?:\?(.*))?/i,
+			parts: ['scheme', 'about', 'query'],
+			combine: function(bits){
+				return 'about:' + bits.about + (bits.query ? '?' + bits.query : '');
+			}
+		}
+
 	})
 
 });
+
+// TODO: Add prefix schemes WebCal: 80, WebCalS: 443, Feed: 80, 'Feed:HTTPS': 443
