@@ -9,6 +9,7 @@ Script: URI.Relative.js
 		Sebastian Markbåge
 */
 
+console.log('refactoring URI')
 URI = Class.refactor(URI, {
 	
 	combine: function(bits, base){
