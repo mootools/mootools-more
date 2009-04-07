@@ -1,0 +1,8 @@
+{
+	"Element": {
+		"Element.Dimensions":['offsets']
+	},
+	"Request": {
+		"Request":['all']
+	}
+}
