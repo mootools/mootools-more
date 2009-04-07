@@ -120,7 +120,7 @@ Hash.each({ http: 80, https: 443, ftp: 21, rtsp: 554, mms: 1755, file: undefined
 				if (bits.directory){
 					var directory = ((/^\/.?/.test(bits.directory)) ? '' :
 									(base && base.directory ? base.directory : '/')) +
-									(bits.directory || '');
+									bits.directory;
 
 					var result = [];
 					directory.replace(/\/$/, '').split('/').each(function(dir){
