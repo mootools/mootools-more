@@ -95,7 +95,10 @@ var URI = new Class({
 	},
 
 	get: function(part, base){
-		if (part == 'value') return this.combine(this.parsed, base ? base.parsed : false);
+		switch(part){
+			case 'value': return this.combine(this.parsed, base ? base.parsed : false);
+			case 'data' : return this.getData();
+		}
 		return this.parsed[part] || undefined;
 	},
 
@@ -109,6 +112,23 @@ var URI = new Class({
 	
 	toString: function(){
 		return this.get('value');
+	},
+	
+	getData: function(key, part){
+		var qs = this.get(part || 'query');
+		if (!$chk(qs)) return key ? null : {};
+		var obj = qs.parseQueryString();
+		return key ? obj[key] : obj;
+	},
+
+	setData: function(values, merge, part){
+		if($type(arguments[0]) == 'string'){ values = this.getData(); values[arguments[0]] = arguments[1]; }
+		else if(merge) values = $merge(this.getData(), values);
+		return this.set(part || 'query', Hash.toQueryString(values));
+	},
+	
+	clearData: function(part){
+		return this.set(part || 'query', '');
 	}
 
 });
