@@ -9,17 +9,13 @@ Script: URI.Relative.js
 		Sebastian Markbåge
 */
 
-(function(){
-
-var combine = URI.prototype.combine;
-
-URI.implement({
+URI = Class.refactor(URI, {
 	
 	combine: function(bits, base){
-		if(!base || bits.scheme != base.scheme || bits.host != base.host || bits.port != base.port)
-			return combine.apply(this, arguments);
+		if (!base || bits.scheme != base.scheme || bits.host != base.host || bits.port != base.port)
+			return this.previous.apply(this, arguments);
 		
-		var end = bits.file + (bits.query ? '?' + bits.query : '') + (bits.fragment ? '#' + bits.fragment : '')
+		var end = bits.file + (bits.query ? '?' + bits.query : '') + (bits.fragment ? '#' + bits.fragment : '');
 		
 		if (!base.directory) return (bits.directory || (bits.file ? '' : './')) + end;
 		
@@ -46,5 +42,3 @@ URI.implement({
 	}
 	
 });
-
-})();

@@ -1,7 +1,7 @@
-String Subclass: URI {#URI}
-========================
+Native: URI {#URI}
+==================
 
-Extends a *string* to add numerous methods useful for managing URIs.
+Provides numerous methods useful for managing URIs.
 
 Usage {#Usage}
 --------------
@@ -10,21 +10,29 @@ Pass a *string* to the URI subclass and it will extend it, returning a new strin
 
 ### Syntax
 
-	var myURI = new URI(['http://user:password@www.test.com:8383/the/path.html?query=value#anchor']);
+	new URI([strURI, options]);
+
+### Arguments
+
+1. strURI - (*string*) the URI to parse into the class.
+2. options - (*object*) a key/value set of options.
+
+### Options
+
+* base - (*mixed*) A base href for the URI (defaults to the document location). Can be a *string* or an instance of *URI*. This is used to interpret relative urls (for instance if you were to call *new URI('/foo/bar.html')* the class will infer that this path is relative to the current document location).
+
+### Example
+
+	var myURI = new URI('http://user:password@www.test.com:8383/the/path.html?query=value#anchor');
 
 ### Returns
 
-* *URI* - (*string*; optional) - like object that has new methods useful for managing the URI. If not declared the window's current location is used.
-
-### Notes
-
-* If you pass the extended *string* to *typeof* it will return "object". However, if you pass it to MooTools' *$type* it will return "string".
-* If you test the string against another string it will work as expected (i.e. *if (myURI == 'http://www.test.com...')*).
+* *URI* - (*string*; optional) - an instance of the URI class that has new methods useful for managing the URI. If not declared the window's current location is used.
 
 URI Method: toString {#URI:toString}
 ------------------------------------------
 
-Returns an regular *string* without the URI extensions.
+Returns the URI as a *string*.
 
 ### Syntax
 
@@ -33,28 +41,6 @@ Returns an regular *string* without the URI extensions.
 ### Returns
 
 * (*string*) the unaltered url.
-
-URI Method: validate {#URI:validate}
-------------------------------------
-
-Validates the URI.
-
-### Syntax
-
-	myURI.validate([parts, regex]);
-
-### Arguments
-
-1. parts - (*array*; optional) An array of parts (*scheme*, *domain*, etc) that must be present for the URI to be valid. By default this is set to *scheme* and *host* but you could, for example, require only *path* to validate a relative URI.
-2. regex - (*RegExp*; optional) A regular expression to validate against the url. By default this expression is the standard URL scheme. 
-
-### Example
-
-	myURI.validate(['path']); //validate relative url
-
-### Note
-
-The validation parts are only checked to verify that they are defined. This means that other parts may also be defined. The example above ensures that *path* is defined, but doesn't ensure that, for example, *domain* isn't.
 
 URI Method: set {#URI:set}
 --------------------------
@@ -86,7 +72,8 @@ Set's a portion of the URI to the specified value.
 * password - (*string*) the password portion of the credentials
 * domain - (*string*) 'www.example.com', 'exmaple.com', 'subdomain.example.com', etc.
 * port - (*string* or *integer*) 80, 8080, etc.
-* path - (*string*) '/directory/file.html'
+* directory - (*string*) '/directory/'
+* file - (*string*) 'file.html'
 * query - (*string*) 'foo=bar&something=else' (the *?* is added for you)
 * fragment - (*string*)  'anAnchor' (the *#* is added for you)
 * data - (*object*) an object of key/value pairs to set the query to (*{foo: 'bar', something: 'else'}*)
@@ -114,7 +101,8 @@ Returns the current value for the specified portion of the URI.
 * scheme - (returns *string*) 'http', 'https', 'ftp', etc.
 * domain - (returns *string*) 'www.example.com', 'exmaple.com', 'subdomain.example.com', etc.
 * port - (returns *string*) 80, 8080, etc.
-* path - (returns *string*) '/directory/file.html'
+* directory - (returns *string*) '/directory/'
+* path - (returns *string*) 'file.html'
 * query - (returns *string*) 'foo=bar&something=else' (the *?* is added for you)
 * fragment - (returns *string*)  'anAnchor' (the *#* is added for you)
 * data - (returns *object*) an *object* of key/value pairs to set the query to (*{foo: 'bar', something: 'else'}*)
@@ -126,13 +114,23 @@ Sets the query string from an *object* (much like *myURI.set('data', obj)*) but 
 
 ### Syntax
 
-	myURI.setData(data[, merge]);
+	myURI.setData(data[, merge, part]);
 
 
 ### Arguments
 
 1. object - (*object*) the key/values you want to set for the query string
 2. merge - (*boolean*, optional) if *true* the values will be merged with the existing query string. Defaults to *false*.
+3. part - (*string*, optional) this defaults to 'query' for setting query string data to the URI, but you could, for example specify 'fragment' to assign query string data to the '#...' portion of the URI (which is useful in ajax applications that wish to store state in the URI without reloading the document).
+
+### Alternate Syntax
+
+	myURI.setData(key, value);
+
+### Alternate Syntax Arguments
+
+1. key - (*string*) the key of the data which you wish to assign
+2. value - (*string* or *number*) the value you wish to assign
 
 ### Returns
 
@@ -142,24 +140,27 @@ Sets the query string from an *object* (much like *myURI.set('data', obj)*) but 
 
 	myURI.setData(myObject); //same as myURI.set('data', myObject);
 	myURI.setData(myObject, true); //merges myObject w/ existing query values
+	myURI.setData('foo', 'bar'); //sets foo=bar in the query string
+	myURI.setData({foo: 'bar'}, false, 'fragment'); //adds #foo=bar to the url fragment
 	
 
 URI Method: getData {#URI:getData}
-------------------------------------
+----------------------------------
 
 Returns the query string values as an *object*. Same as *URI.get('data')*.
 
 ### Syntax
 
-	myURI.getData([key]);
+	myURI.getData([key, part]);
 
 ### Arguments
 
 1. key - (*string*; optional) If specified, returns the value for the given key.
+2. part - (*string*; optional) If specified, returns the data from the given part (defaults to 'query'). This is useful if you choose to store data in the fragment (the '#...' part of the URI) which is useful in ajax applications that wish to store state in the URI without reloading the document.
 
 ### Returns
 
-* *string* - the value for the given key
+* *mixed* - the *string* value for the given key; if key is not specified, returns an *object* for all the query string values.
 
 URI Method: clearData {#URI:clearData}
 --------------------------------------
@@ -179,60 +180,20 @@ Loads the url into the document location.
 
 	myURI.go();
 
-Method Translations
-===================
+Native: String {#String}
+========================
 
-All the URI parts ('scheme', 'domain', 'port', 'query', and 'hash') have corresponding *get<Part>* methods. So you can call *myURI.get('domain')* or *myURI.getDomain()*. The same is true of *set* - you can call *myURI.set('domain', 'www.foo.com')* or *myURI.setDomain('www.foo.com')*. The *set/get(part)* method is the prefered method.
-  
-String Method: parseQueryString {#String:parseQueryString}
-----------------------------------------------------------
+Adds a method to instantiate a *URI* instance from a string.
 
-Turns a querystring into an object of key/value pairs.
+String Method: toURI {#String:toURI}
+------------------------------------
 
-### Syntax
-
-	myString.parseQueryString(encodeKeys, encodeValues);
-
-### Arguments
-
-1. encodeKeys - (*boolean*, optional) if set to *false*, keys are passed through [encodeURIComponent][]; defaults to *true*
-1. encodeValues - (*boolean*, optional) if set to *false*, values are passed through [encodeURIComponent][]; defaults to *true*
-
-### Example
-
-	"apple=red&lemon=yellow".parseQuery();
-	//returns { apple: "red", lemon: "yellow }
-	var fruits = "apple=red&lemon=yellow".parseQuery();
-	//returns fruits.apple > "red"
-
-### Returns
-
-* (*object*) the querystring as key/value pairs
-
-String Method: cleanQueryString {#String:cleanQueryString}
-----------------------------------------------------------
-
-Removes from a query string any keys that have empty values.
+Returns a *URI* instance.
 
 ### Syntax
 
-	myQueryString.cleanQueryString([method]);
-
-### Arguments
-
-1. method - (*funciton*, optional) a method passed to [Array.filter][] that returns true if a key/value set should be included. Defaults to a method that checks that the value is not an empty string.
-
-### Example
-
-	var cleaned = "a=b&x=&z=123&e=".cleanQueryString();
-	//cleaned = "a=b&z=123"
-	var noNumberValues = "a=b&x=y&z=123&e=".cleanQueryString(function(set){
-		//set is "a=b", "x=y", "z=123", "e="
-		return !set.split("=")[1].match(/[0-9]/);
-	});
-	//noNumberValues = "a=b&x=y&e="
+	"http://www.domain.com/etc".toURI()
 
 ### Returns
 
-* (*string*) the string appropriate key/values removed
-  
+* an instance of URI

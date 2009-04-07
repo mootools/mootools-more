@@ -82,12 +82,9 @@ var URI = new Class({
 	set: function(part, value, base){
 		if (part == 'value'){
 			var scheme = value.match(URI.regs.scheme);
-			if (scheme && !Hash.has(this.schemes, scheme[1].toLowerCase())){
-				this.parsed = { scheme: scheme[1], value: value };
-			} else {
-				var bits = this.parse(value, (base || this).parsed);
-				this.parsed = bits || (scheme ? { scheme: scheme[1], value: value } : { value: value });
-			}
+			if (scheme) scheme = scheme[1].toLowerCase();
+			if (scheme && !$defined(this.schemes[scheme])) this.parsed = { scheme: scheme, value: value };
+			else this.parsed = this.parse(value, (base || this).parsed) || (scheme ? { scheme: scheme, value: value } : { value: value });
 		} else {
 			this.parsed[part] = value;
 		}
@@ -110,10 +107,6 @@ var URI = new Class({
 		return this;
 	},
 	
-	toString: function(){
-		return this.get('value');
-	},
-	
 	getData: function(key, part){
 		var qs = this.get(part || 'query');
 		if (!$chk(qs)) return key ? null : {};
@@ -122,8 +115,12 @@ var URI = new Class({
 	},
 
 	setData: function(values, merge, part){
-		if($type(arguments[0]) == 'string'){ values = this.getData(); values[arguments[0]] = arguments[1]; }
-		else if(merge) values = $merge(this.getData(), values);
+		if ($type(arguments[0]) == 'string'){ 
+			values = this.getData(); 
+			values[arguments[0]] = arguments[1]; 
+		} else if (merge) {
+			values = $merge(this.getData(), values);
+		}
 		return this.set(part || 'query', Hash.toQueryString(values));
 	},
 	
@@ -132,6 +129,13 @@ var URI = new Class({
 	}
 
 });
+
+URI.prototype.toString = function(){
+	return this.get('value');
+};
+URI.prototype.valueOf = function(){
+	return this.get('value');
+};
 
 URI.regs = {
 	endSlash: /\/$/,
