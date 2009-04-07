@@ -16,7 +16,6 @@ URI.Schemes.extend({
 		value: {
 			regex: /^(mailto):([^\.:@]+(?:\.[^:@]+)*)@((?:[^?:\.]+\.)*[^?:\.]+)(?:\?(.*))?/i,
 			parts: ['scheme', 'user', 'host', 'query'],
-			required: ['scheme', 'user', 'host'],
 			combine: function(bits){
 				return 'mailto:' + bits.user + '@' + bits.host + (bits.query ? '?' + bits.query : '');
 			}
