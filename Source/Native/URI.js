@@ -28,7 +28,7 @@ var URI = new Class({
 		var base = this.options.base || URI.base;
 		uri = uri || base;
 		if (uri && uri.parsed){
-			this.parsed = uri.parsed;
+			this.parsed = $unlink(uri.parsed);
 			return;
 		}
 		this.set('value', uri.href || uri.toString(), base ? new URI(base) : false);
@@ -43,6 +43,8 @@ var URI = new Class({
 	},
 	
 	merge: function(bits, base){
+		if (!bits.scheme && !base.scheme) return false;
+
 		if (base){
 			this.parts.every(function(part){
 				if (bits[part]) return false;
@@ -50,27 +52,22 @@ var URI = new Class({
 				return true;
 			});
 		}
-		
-		if (!bits.scheme) return false;
-
 		bits.port = bits.port || this.schemes[bits.scheme];
-	
-		if (bits.directory){
-			var directory = ((/^\/.?/.test(bits.directory)) ? '' :
-							(base && base.directory ? base.directory : '/')) +
-							bits.directory;
-
-			var result = [];
-			directory.replace(/\/$/, '').split('/').each(function(dir){
-				if (dir == '..' && result.length > 0)
-					result.pop();
-				else if (dir != '.')
-					result.push(dir);
-			});
-			bits.directory = result.join('/') + '/';
-		}
-
+		if (bits.directory) bits.directory = this.parseDirectory(bits.directory, base);
 		return bits;
+	},
+
+	parseDirectory: function(directory, base) {
+		var directory = ((URI.regs.slashDot.test(directory)) ? '' :
+						(base && base.directory ? base.directory : '/')) +
+						directory;
+		if (!directory.test(URI.regs.directoryDot)) return directory;
+		var result = [];
+		directory.replace(URI.regs.endSlash, '').split('/').each(function(dir){
+			if (dir == '..' && result.length > 0) result.pop();
+			else if (dir != '.') result.push(dir);
+		});
+		return result.join('/') + '/';
 	},
 
 	combine: function(bits){
@@ -84,7 +81,7 @@ var URI = new Class({
 
 	set: function(part, value, base){
 		if (part == 'value'){
-			var scheme = value.match(/^(\w+):/);
+			var scheme = value.match(URI.regs.scheme);
 			if (scheme && !Hash.has(this.schemes, scheme[1].toLowerCase())){
 				this.parsed = { scheme: scheme[1], value: value };
 			} else {
@@ -108,12 +105,19 @@ var URI = new Class({
 	
 	toURI: function(){
 		return this;
+	},
+	
+	toString: function(){
+		return this.get('value');
 	}
 
 });
 
-URI.prototype.toString = function(){
-	return this.get('value');
+URI.regs = {
+	endSlash: /\/$/,
+	slashDot: /^\/.?/,
+	scheme: /^(\w+):/,
+	directoryDot: /\.\/|\.$/
 };
 
 URI.base = new URI($$('base[href]').getLast(), { base: document.location });
