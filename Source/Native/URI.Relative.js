@@ -1,6 +1,6 @@
 ﻿/*
 Script: URI.Relative.js
-	...
+	Extends the URI class to add methods for computing relative and absolute urls.
 
 	License:
 		MIT-style license.

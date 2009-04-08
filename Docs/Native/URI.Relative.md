@@ -6,7 +6,7 @@ Extends the [URI][] class to add methods for computing relative and absolute url
 URI Method: toAbsolute {#URI:toAbsolute}
 ----------------------------------------
 
-Returns the absolute path for a given url (i.e. a path beginning with '/').
+Returns the absolute path for a given url (i.e. a path beginning with '/'). If a different schemes or hosts are used, it returns the full url.
 
 ### Syntax
 
@@ -23,7 +23,7 @@ Returns the absolute path for a given url (i.e. a path beginning with '/').
 URI Method: toRelative {#URI:toRelative}
 ----------------------------------------
 
-Returns the relative path for a given url (i.e. a path that might include '../' for example).
+Returns the relative path for a given url (i.e. a path that might include '../' for example). If a different schemes or hosts are used, it returns the full url.
 
 ### Syntax
 
@@ -37,7 +37,7 @@ Returns the relative path for a given url (i.e. a path that might include '../' 
 
 	var uri1 = new URI('http://www.test.com/this/is/a/path.html');
 	var uri2 = new URI('http://www.test.com/this/is/an/adjacent/path.html')
-	uri.toRelative(uri2); //returns "../../a/path.html"
+	uri1.toRelative(uri2); //returns "../../a/path.html"
 
 ### Returns
 

@@ -34,7 +34,7 @@ var uri;
 
 	});
 
-	describe('toRelative functionality', {
+	describe('URI toRelative functionality', {
 		before: function(){
 			uri = new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
 		},

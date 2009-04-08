@@ -69,31 +69,22 @@
 			"deps": ["More", "String", "Array", "Hash.Extras"],
 			"desc": "Extends the String native object to include methods useful in managing strings (query strings, urls, etc)."
 		},
-		
+
 		"String.QueryString": {
 			"deps": ["More", "String", "Array"],
 			"desc": "..."
 		},
-		
+
 		"URI": {
-			"deps": ["More", "Function", "Array"],
-			"desc": "Extends a string to provide numerous methods for managing URI components."
+			"deps": ["More", "Function", "Array", "Hash"],
+			"desc": "Provides methods useful in managing the window location and uris."
 		},
-		
-		"URI.Data": {
-			"deps": ["URI"],
-			"desc": "..."
-		},
-		
+
 		"URI.Relative": {
 			"deps": ["URI"],
-			"desc": "..."
-		},
-		
-		"URI.Schemes": {
-			"deps": ["URI"],
-			"desc": "..."
+			"desc": "Extends the URI class to add methods for computing relative and absolute urls."
 		}
+
 	},
 
 	"Element": {

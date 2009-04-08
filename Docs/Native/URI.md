@@ -19,7 +19,7 @@ Pass a *string* to the URI subclass and it will extend it, returning a new strin
 
 ### Options
 
-* base - (*mixed*) A base href for the URI (defaults to the document location). Can be a *string* or an instance of *URI*. This is used to interpret relative urls (for instance if you were to call *new URI('/foo/bar.html')* the class will infer that this path is relative to the current document location).
+* base - (*mixed*) A base href for the URI (defaults to the document base location). Can be a *string* or an instance of *URI*. This is used to interpret relative urls (for instance if you were to call *new URI('/foo/bar.html')* the class will infer that this path is relative to the current document base location).
 
 ### Example
 
@@ -27,7 +27,7 @@ Pass a *string* to the URI subclass and it will extend it, returning a new strin
 
 ### Returns
 
-* *URI* - (*string*; optional) - an instance of the URI class that has new methods useful for managing the URI. If not declared the window's current location is used.
+* *URI* - (*string*; optional) - an instance of the URI class that has new methods useful for managing the URI. If not declared the window's current base location is used.
 
 URI Method: toString {#URI:toString}
 ------------------------------------------
@@ -58,7 +58,7 @@ Set's a portion of the URI to the specified value.
 ### Example
 
 	myURI.set('scheme', 'https');
-	myURI.set('domain', 'www.foo.com');
+	myURI.set('host', 'www.foo.com');
 	//etc.
 
 ### Returns
@@ -70,7 +70,7 @@ Set's a portion of the URI to the specified value.
 * scheme - (*string*) 'http', 'https', 'ftp', etc.
 * user - (*string*) the username portion of the credentials
 * password - (*string*) the password portion of the credentials
-* domain - (*string*) 'www.example.com', 'exmaple.com', 'subdomain.example.com', etc.
+* host - (*string*) 'www.example.com', 'example.com', 'subdomain.example.com', etc.
 * port - (*string* or *integer*) 80, 8080, etc.
 * directory - (*string*) '/directory/'
 * file - (*string*) 'file.html'
@@ -90,7 +90,7 @@ Returns the current value for the specified portion of the URI.
 ### Example
 
 	myURI.get('scheme'); //returns "http", for example
-	myURI.get('domain'); //returns "www.example.com", for example
+	myURI.get('host'); //returns "www.example.com", for example
 
 ### Returns
 
@@ -99,7 +99,7 @@ Returns the current value for the specified portion of the URI.
 ### Valid parts
 
 * scheme - (returns *string*) 'http', 'https', 'ftp', etc.
-* domain - (returns *string*) 'www.example.com', 'exmaple.com', 'subdomain.example.com', etc.
+* host - (returns *string*) 'www.example.com', 'example.com', 'subdomain.example.com', etc.
 * port - (returns *string*) 80, 8080, etc.
 * directory - (returns *string*) '/directory/'
 * path - (returns *string*) 'file.html'
@@ -179,6 +179,18 @@ Loads the url into the document location.
 ### Syntax
 
 	myURI.go();
+
+URI Method: toURI {#URI:toURI}
+------------------------
+
+Returns the current instance of *URI*. Useful when a parameter type is known to be either string or URI.
+
+### Example
+
+	// Accepts either a string or URI instance
+	function(uri){
+		this.filename = uri.toURI().get('file');
+	}
 
 Native: String {#String}
 ========================
