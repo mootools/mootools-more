@@ -21,25 +21,23 @@ var URI = new Class({
 
 	regex: /^(?:(\w+):)?(?:\/\/(?:(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?/,
 	parts: ['scheme', 'user', 'password', 'host', 'port', 'directory', 'file', 'query', 'fragment'],
-	schemes: { http: 80, https: 443, ftp: 21, rtsp: 554, mms: 1755, file: undefined },
+	schemes: { http: 80, https: 443, ftp: 21, rtsp: 554, mms: 1755, file: 0 },
 
 	initialize: function(uri, options){
 		this.setOptions(options);
 		var base = this.options.base || URI.base;
 		uri = uri || base;
-		if (uri && uri.parsed){
+		if (uri && uri.parsed)
 			this.parsed = $unlink(uri.parsed);
-			return;
-		}
-		this.set('value', uri.href || uri.toString(), base ? new URI(base) : false);
+		else
+			this.set('value', uri.href || uri.toString(), base ? new URI(base) : false);
 	},
 	
 	parse: function(value, base){
 		var bits = value.match(this.regex);
 		if (!bits) return false;
 		bits.shift()
-		bits = bits.associate(this.parts);
-		return this.merge(bits, base);
+		return this.merge(bits.associate(this.parts), base);
 	},
 	
 	merge: function(bits, base){
@@ -52,15 +50,13 @@ var URI = new Class({
 				return true;
 			});
 		}
-		bits.port = bits.port || this.schemes[bits.scheme];
-		if (bits.directory) bits.directory = this.parseDirectory(bits.directory, base);
+		bits.port = bits.port || this.schemes[bits.scheme.toLowerCase()];
+		bits.directory = bits.directory ? this.parseDirectory(bits.directory, base ? base.directory : '') : '/';
 		return bits;
 	},
 
-	parseDirectory: function(directory, base) {
-		var directory = ((URI.regs.slashDot.test(directory)) ? '' :
-						(base && base.directory ? base.directory : '/')) +
-						directory;
+	parseDirectory: function(directory, baseDirectory) {
+		directory = (directory.substr(0, 1) == '/' ? '' : (baseDirectory || '/')) + directory;
 		if (!directory.test(URI.regs.directoryDot)) return directory;
 		var result = [];
 		directory.replace(URI.regs.endSlash, '').split('/').each(function(dir){
@@ -82,8 +78,8 @@ var URI = new Class({
 	set: function(part, value, base){
 		if (part == 'value'){
 			var scheme = value.match(URI.regs.scheme);
-			if (scheme) scheme = scheme[1].toLowerCase();
-			if (scheme && !$defined(this.schemes[scheme])) this.parsed = { scheme: scheme, value: value };
+			if (scheme) scheme = scheme[1];
+			if (scheme && !$defined(this.schemes[scheme.toLowerCase()])) this.parsed = { scheme: scheme, value: value };
 			else this.parsed = this.parse(value, (base || this).parsed) || (scheme ? { scheme: scheme, value: value } : { value: value });
 		} else {
 			this.parsed[part] = value;
@@ -139,7 +135,6 @@ URI.prototype.valueOf = function(){
 
 URI.regs = {
 	endSlash: /\/$/,
-	slashDot: /^\/.?/,
 	scheme: /^(\w+):/,
 	directoryDot: /\.\/|\.$/
 };
