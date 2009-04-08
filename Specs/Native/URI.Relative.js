@@ -35,6 +35,9 @@ var uri;
 	});
 
 	describe('toRelative functionality', {
+		before: function(){
+			uri = new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
+		},
 		'new URI(\'../otherfolder\').toRelative() should return a folder up from the current location': function(){
 			value_of(new URI('../otherfolder').toRelative()).should_be('../otherfolder');
 		},

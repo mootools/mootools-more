@@ -9,13 +9,11 @@ Script: URI.Relative.js
 		Sebastian Markbåge
 */
 
-console.log('refactoring URI')
 URI = Class.refactor(URI, {
 	
 	combine: function(bits, base){
 		if (!base || bits.scheme != base.scheme || bits.host != base.host || bits.port != base.port)
 			return this.previous.apply(this, arguments);
-		
 		var end = bits.file + (bits.query ? '?' + bits.query : '') + (bits.fragment ? '#' + bits.fragment : '');
 		
 		if (!base.directory) return (bits.directory || (bits.file ? '' : './')) + end;
