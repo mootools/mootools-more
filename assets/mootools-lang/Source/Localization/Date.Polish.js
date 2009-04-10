@@ -12,12 +12,8 @@ Script: Date.Polish.js
 
 MooTools.lang.set('pl-PL', 'Date', {
 
-	months: function(i) {
-		return ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'][i];
-	},
-	days: function(i) {
-		return ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'][i];
-	},
+	months: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
+	days: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
 	dateOrder: ['month', 'date', 'year', '/'],
 	AM: 'nad ranem',
 	PM: 'po południu',

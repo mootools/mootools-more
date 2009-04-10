@@ -1,32 +1,48 @@
 /*
 Script: FormValidator.Catalan.js
-	FormValidator messages in Catalan.
+	Date messages for Catalan.
 
 	License:
 		MIT-style license.
 
 	Authors:
 		Miquel Hudin
+		Alfons Sanchez
 
 */
 
 MooTools.lang.set('ca-CA', 'FormValidator', {
-	required:'Aquest camp és obligatori.',
-	minLength:'Sisplau escriu com a mnim {minLength} carcters (has escrit {length} carcters).',
-	maxLength:'Sisplau no escriguis ms de {maxLength} carcters (has escrit {length} carcters).',
-	integer:'Sisplau escriu un nmero enter en aquest camp. Els nmeros amb decimals (p.ex. 1\'25) no estan permesos.',
-	numeric:'Sisplau escribiu noms valors numrics en aquest camp (p.ex. "1" o "1\'1" o "-1" o "-1\'1").',
-	digits:'Sisplau utilitza nmeros i signess de puntuaci noms en aquest camp (per exemple, un nmero de telfon amb guions est perms).',
-	alpha:'Sisplau utilitza noms lletres (a-z) en aquest camp. Els espais o altres carcters no estan permesos.',
-	alphanum:'Sisplau utilitza noms lletres (a-z) o nmeros (0-9) en aquest camp. Els espais o altres carcters no estan permesos..',
-	dateSuchAs:'Sisplau escriu una data vlida, com ara {date}',
-	dateInFormatMDY:'Sisplau escriu una data vlida, com ara DD/MM/AAAA (p.ex. "31/11/1999")',
-	email:'Sisplau escriu una adrea de correu electrnic vlida. Per exemple "fred@domain.com".',
-	url:'Sisplau escriu una URL vlida, com ara http://www.google.com.',
-	currencyDollar:'Sisplau escriu una quantitat vlida. Per exemple $100.00 .',
-	oneRequired:'Sisplau selecciona almenys una d\'aquestes opcions.',
+
+	required:'Aquest camp es obligatori.',
+	minLength:'Per favor introdueix al menys {minLength} caracters (has introduit {length} caracters).',
+	maxLength:'Per favor introdueix no mes de {maxLength} caracters (has introduit {length} caracters).',
+	integer:'Per favor introdueix un nombre enter en aquest camp. Nombres amb decimals (p.e. 1,25) no estan permesos.',
+	numeric:'Per favor introdueix sols valors numerics en aquest camp (p.e. "1" o "1,1" o "-1" o "-1,1").',
+	digits:'Per favor usa sols numeros i puntuacio en aquest camp (per exemple, un nombre de telefon amb guions i punts no esta permes).',
+	alpha:'Per favor utilitza lletres nomes (a-z) en aquest camp. No s´admiteixen espais ni altres caracters.',
+	alphanum:'Per favor, utilitza nomes lletres (a-z) o numeros (0-9) en aquest camp. No s´admiteixen espais ni altres caracters.',
+	dateSuchAs:'Per favor introdueix una data valida com {date}',
+	dateInFormatMDY:'Per favor introdueix una data valida com DD/MM/YYYY (p.e. "31/12/1999")',
+	email:'Per favor, introdueix una adreça de correu electronic valida. Per exemple,  "fred@domain.com".',
+	url:'Per favor introdueix una URL valida com http://www.google.com.',
+	currencyDollar:'Per favor introdueix una quantitat valida de €. Per exemple €100,00 .',
+	oneRequired:'Per favor introdueix alguna cosa per al menys una d´aquestes entrades.',
 	errorPrefix: 'Error: ',
-	warningPrefix: 'Avís: '
-}).set('ca-CA', 'Date', {
-	dateOrder: ['date', 'month', 'year', '/']
+	warningPrefix: 'Avis: ',
+
+	//FormValidator.Extras
+
+	noSpace: 'No poden haver espais en aquesta entrada.',
+	reqChkByNode: 'No hi han elements seleccionats.',
+	requiredChk: 'Aquest camp es obligatori.',
+	reqChkByName: 'Per favor selecciona una {label}.',
+	match: 'Aquest camp necessita coincidir amb el camp {matchName}',
+	startDate: 'la data de inici',
+	endDate: 'la data de fi',
+	currendDate: 'la data actual',
+	afterDate: 'La data deu ser igual o posterior a {label}.',
+	beforeDate: 'La data deu ser igual o anterior a {label}.',
+	startMonth: 'Per favor selecciona un mes d´orige',
+	sameMonth: 'Aquestes dos dates deuen estar dins del mateix mes - deus canviar una o altra.'
+
 });

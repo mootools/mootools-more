@@ -12,22 +12,15 @@ Script: Date.Estonian.js
 
 MooTools.lang.set('et-EE', 'Date', {
 
-	months: function(i){
-		return ['jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'][i]
-	},
-	days: function(i) {
-		return ['pühapäev', 'esmaspäev', 'teisipäev', 'kolmapäev', 'neljapäev', 'reede', 'laupäev'][i];
-	},
+	months: ['jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'],
+	days: ['pühapäev', 'esmaspäev', 'teisipäev', 'kolmapäev', 'neljapäev', 'reede', 'laupäev'],
 	//culture's date order: MM.DD.YYYY
 	dateOrder: ['month', 'date', 'year', '.'],
 	AM: 'AM',
 	PM: 'PM',
 
 	/* Date.Extras */
-	ordinal: function(){
-		// The Estonian language does not have
-		return '';
-	},
+	ordinal: '',
 
 	lessThanMinuteAgo: 'vähem kui minut aega tagasi',
 	minuteAgo: 'umbes minut aega tagasi',

@@ -12,12 +12,8 @@ Script: Date.Danish.js
  
 MooTools.lang.set('da-DK', 'Date', {
 
-	months: function(i){
-		return ['Januar', 'Februa', 'Marts', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December'][i];
-	},
-	days: function(i){
-		return ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'][i];
-	},
+	months: ['Januar', 'Februa', 'Marts', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December'],
+	days: ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'],
 	//culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year', '-'],
 	AM: 'AM',

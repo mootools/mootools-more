@@ -13,12 +13,8 @@ Script: Date.Italian.js
  
 MooTools.lang.set('it-IT', 'Date', {
  
-	months: function(i) {
-		return ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'][i];
-	},
-	days: function(i) {
-		return ['Domenica', 'Luned&igrave;', 'Marted&igrave;', 'Mercoled&igrave;', 'Gioved&igrave;', 'Venerd&igrave;', 'Sabato'][i];
-	},
+	months: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+	days: ['Domenica', 'Luned&igrave;', 'Marted&igrave;', 'Mercoled&igrave;', 'Gioved&igrave;', 'Venerd&igrave;', 'Sabato'],
 	//culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year', '/'],
 	AM: 'AM',
