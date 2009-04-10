@@ -240,16 +240,16 @@ describe('Date.format', {
 
 	'should format a Date instance as a string': function(){
 		var d = new Date('Thu Nov 20 1997 01:02:03');
-		value_of(d.format('%a')).should_be(Date.getMsg('days', 4).substr(0,3));
+		value_of(d.format('%a')).should_be(Date.getMsg('days')[4].substr(0,3));
 		value_of(d.format('%a')).should_be('Thu');
 
-		value_of(d.format('%A')).should_be(Date.getMsg('days', 4));
+		value_of(d.format('%A')).should_be(Date.getMsg('days')[4]);
 		value_of(d.format('%A')).should_be('Thursday');
 
-		value_of(d.format('%b')).should_be(Date.getMsg('months', 10).substr(0,3));
+		value_of(d.format('%b')).should_be(Date.getMsg('months')[10].substr(0,3));
 		value_of(d.format('%b')).should_be('Nov');
 
-		value_of(d.format('%B')).should_be(Date.getMsg('months', 10));
+		value_of(d.format('%B')).should_be(Date.getMsg('months')[10]);
 		value_of(d.format('%B')).should_be('November');
 
 		//value_of(d.format('%c')).should_be('Thu Nov 20 1997 01:02:03 GMT+0000 (GMT Standard Time)');
