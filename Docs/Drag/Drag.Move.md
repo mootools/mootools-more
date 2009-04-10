@@ -29,6 +29,7 @@ All the base Drag options, plus:
 * droppables - (*array*) The Elements that the draggable can drop into. The class's drop, enter, and leave events will be fired in conjunction with interaction with one of these elements.
 * precalculate - (*boolean*; defaults to *false*) If *true*, the class will calculate the locations and dimensions of the droppables which will increase performance. If the droppables are likely to change shape, size, or location it is best to leave this as *false*.
 * includeMargins - (*boolean*; defaults to *true*) This option only applies when the container option is set. If *true* (the default) the margins are included in the calculations for the bounding box of the draggable item. This means that if you have a margin on your draggable then the border of the draggable can never touch the edge of the container. Setting it to false ignores this margin.
+* checkDroppables - (*boolean*; defaults to *true*) Checks against the droppables on drag if *true*.
 
 ### Events:
 
