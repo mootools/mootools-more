@@ -85,7 +85,7 @@ Script: MooTools.Lang.js
 		},
 
 		list: function(){
-			return $A(Hash.getKeys(data.languages));
+			return Hash.getKeys(data.languages);
 		}
 
 	});
