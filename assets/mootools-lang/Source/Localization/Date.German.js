@@ -13,22 +13,15 @@ Script: Date.German.js
 
 MooTools.lang.set('de-DE', 'Date', {
 
-	months: function(i) {
-		return ['Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'][i];
-	},
-	days: function(i) {
-		return ['Sontag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'][i];
-	},
+	months: ['Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+	days: ['Sontag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
 	//culture's date order: MM/DD/YYYY
 	dateOrder: [ 'date', 'month', 'year', '.'],
 	AM: 'vormittags',
 	PM: 'nachmittags',
 
 	/* Date.Extras */
-	ordinal: function(dayOfMonth){
-		//1st, 2nd, 3rd, etc.
-		return ".";
-	},
+	ordinal: '.',
 
 	lessThanMinuteAgo: 'Vor weniger als einer Minute',
 	minuteAgo: 'Vor ca. einer Minute',

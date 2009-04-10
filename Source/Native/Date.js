@@ -187,10 +187,10 @@ Date.implement({
 		return f.replace(/\%([aAbBcdHIjmMpSUWwxXyYTZ])/g,
 			function($1, $2){
 				switch ($2){
-					case 'a': return Date.getMsg('days', d.get('day')).substr(0, 3);
-					case 'A': return Date.getMsg('days', d.get('day'));
-					case 'b': return Date.getMsg('months', d.get('month')).substr(0, 3);
-					case 'B': return Date.getMsg('months', d.get('month'));
+					case 'a': return Date.getMsg('days')[d.get('day')].substr(0, 3);
+					case 'A': return Date.getMsg('days')[d.get('day')];
+					case 'b': return Date.getMsg('months')[d.get('month')].substr(0, 3);
+					case 'B': return Date.getMsg('months')[d.get('month')];
 					case 'c': return d.toString();
 					case 'd': return zeroize(d.get('date'), 2);
 					case 'H': return zeroize(d.get('hr'), 2);
@@ -298,7 +298,7 @@ $extend(Date, {
 		var ret = -1;
 		switch ($type(day)){
 			case 'number':
-				ret = Date.getMsg('days', day - 1) || false;
+				ret = Date.getMsg('days')[day - 1] || false;
 				if (!ret) throw new Error('Invalid day index value must be between 1 and 7');
 				break;
 			case 'string':

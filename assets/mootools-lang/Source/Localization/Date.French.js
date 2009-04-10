@@ -12,12 +12,8 @@ Script: Date.French.js
  
 MooTools.lang.set('fr-FR', 'Date', {
 
-	months: function(i) {
-		return ['janvier', 'f&eacute;vrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'ao&ucirc;t', 'septembre', 'octobre', 'novembre', 'd&eacute;cembre'][i];
-	},
-	days: function(i){
-		return ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'][i]
-	},
+	months: ['janvier', 'f&eacute;vrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'ao&ucirc;t', 'septembre', 'octobre', 'novembre', 'd&eacute;cembre'],
+	days: ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
 	dateOrder: ['date', 'month', 'year', '/'],
 	AM: 'AM',
 	PM: 'PM',
