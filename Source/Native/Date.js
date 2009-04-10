@@ -288,8 +288,8 @@ $extend(Date, {
 		var parsed;
 		Date.parsePatterns.each(function(pattern){
 			if (parsed) return;
-			var r = Date.parsePatterns[i].re.exec(from);
-			if (r) parsed = Date.parsePatterns[i].handler(r);
+			var r = pattern.re.exec(from);
+			if (r) parsed = pattern.handler(r);
 		});
 		return parsed || new Date(nativeParse(from));
 	},
