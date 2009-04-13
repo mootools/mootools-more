@@ -286,7 +286,7 @@ $extend(Date, {
 		if (t != 'string') return from;
 		if (!from.length) return null;
 		var parsed;
-		Date.parsePatterns.each(function(pattern){
+		Date.parsePatterns.each(function(pattern, i){
 			if (parsed) return;
 			var r = Date.parsePatterns[i].re.exec(from);
 			if (r) parsed = Date.parsePatterns[i].handler(r);

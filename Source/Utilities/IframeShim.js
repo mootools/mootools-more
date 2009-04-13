@@ -93,7 +93,7 @@ var IframeShim = new Class({
 	},
 
 	destroy: function(){
-		if (this.shim) this.shim.desroy();
+		if (this.shim) this.shim.destroy();
 		return this;
 	}
 
