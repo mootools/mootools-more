@@ -250,7 +250,7 @@
 		},
 		
 		"IframeShim": {
-			"deps": ["More", "Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude", "Element.Shortcuts"],
+			"deps": ["More", "Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude"],
 			"desc": "Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
 		}
 

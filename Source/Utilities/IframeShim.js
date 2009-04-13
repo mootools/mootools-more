@@ -78,12 +78,12 @@ var IframeShim = new Class({
 	},
 
 	hide: function(){
-		if (this.shim) this.shim.hide();
+		if (this.shim) this.shim.setStyle('display', 'none');
 		return this;
 	},
 
 	show: function(){
-		if (this.shim) this.shim.show();
+		if (this.shim) this.shim.setStyle('display', 'block');
 		return this.position();
 	},
 
