@@ -126,12 +126,12 @@ var URI = new Class({
 
 });
 
-URI.prototype.toString = function(){
-	return this.get('value');
-};
-URI.prototype.valueOf = function(){
-	return this.get('value');
-};
+['toString', 'valueOf'].each(function(method){
+	URI.prototype[method] = function(){
+		return this.get('value');
+	};
+});
+
 
 URI.regs = {
 	endSlash: /\/$/,
