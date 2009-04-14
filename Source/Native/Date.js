@@ -203,13 +203,8 @@ Date.implement({
 					case 'U': return zeroize(d.get('week'), 2);
 					case 'W': throw new Error('%W is not supported yet');
 					case 'w': return d.get('day');
-					case 'x':
-						var c = Date.getMsg('dateOrder');
-						//return d.format("%{0}{3}%{1}{3}%{2}".substitute(c.map(function(s){return s.substr(0,1)}))); //grr!
-						return d.format(('%' + c[0].substr(0,1) +
-							c[3] + '%' + c[1].substr(0,1) +
-							c[3] + '%' + c[2].substr(0,1)).replace('%y', '%Y'));
-					case 'X': return d.format('%I:%M%p');
+					case 'x': return d.format(Date.getMsg('shortDate'));
+					case 'X': return d.format(Date.getMsg('shortTime'));
 					case 'y': return d.get('year').toString().substr(2);
 					case 'Y': return d.get('year');
 					case 'T': return d.get('GMTOffset');
@@ -377,7 +372,7 @@ $extend(Date, {
 		//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
 		//above plus "10:45pm" ex: 12.31.08 10:45pm
 		{
-			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2})(?:\:(\d{1,2}))?(\w{2})?$/,
+			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2})[:\.](\d{1,2})(?:[\:\.](\d{1,2}))?(\w{2})?$/,
 			handler: function(bits){
 				var d = new Date(bits[Date.orderIndex('year')],
 								 bits[Date.orderIndex('month')] - 1,

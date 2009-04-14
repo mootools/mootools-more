@@ -15,7 +15,11 @@ MooTools.lang.set('ca-CA', 'Date', {
 	months: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juli', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
 	days: ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'],
 	//culture's date order: MM/DD/YYYY
-	dateOrder: ['date', 'month', 'year', '/'],
+	dateOrder: ['date', 'month', 'year'],
+
+	shortDate: '%d/%m/%Y',
+	shortTime: '%I:%M%p',
+
 	AM: 'AM',
 	PM: 'PM',
 

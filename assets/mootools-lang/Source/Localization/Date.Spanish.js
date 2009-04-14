@@ -15,9 +15,12 @@ MooTools.lang.set('es-ES', 'Date', {
 	months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 	days: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
 	//culture's date order: MM/DD/YYYY
-	dateOrder: ['date', 'month', 'year', '/'],
+	dateOrder: ['date', 'month', 'year'],
 	AM: 'AM',
 	PM: 'PM',
+
+	shortDate: '%d/%m/%Y',
+	shortTime: '%H:%M',
 
 	/* Date.Extras */
 	ordinal: '',

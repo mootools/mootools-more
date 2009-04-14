@@ -15,9 +15,12 @@ MooTools.lang.set('sv-SE', 'Date', {
 	months: ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'],
 	days: ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'],
 	// culture's date order: YYYY-MM-DD
-	dateOrder: ['year', 'month', 'date', '-'],
+	dateOrder: ['year', 'month', 'date'],
 	AM: '',
 	PM: '',
+
+	shortDate: '%Y-%m-%d',
+	shortTime: '%H:%M',
 
 	/* Date.Extras */
 	ordinal: function(dayOfMonth){

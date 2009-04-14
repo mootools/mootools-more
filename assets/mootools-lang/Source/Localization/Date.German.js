@@ -17,8 +17,12 @@ MooTools.lang.set('de-DE', 'Date', {
 	days: ['Sontag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
 	//culture's date order: MM/DD/YYYY
 	dateOrder: [ 'date', 'month', 'year', '.'],
+
 	AM: 'vormittags',
 	PM: 'nachmittags',
+
+	shortDate: '%d.%m.%Y',
+	shortTime: '%H:%M',
 
 	/* Date.Extras */
 	ordinal: '.',
