@@ -108,7 +108,7 @@ var uri;
 
 		'new URI(\'../otherfolder\').toRelative(window.location) should return the same as input': function(){
 			value_of(new URI('../otherfolder').toRelative(window.location)).should_be('../otherfolder');
-		},
+		}
 		
 	})
 
