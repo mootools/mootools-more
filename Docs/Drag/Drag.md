@@ -126,11 +126,15 @@ Detaches the mouse listener from the handle, preventing the Element from being d
 Drag Method: stop {#Drag:stop}
 ------------------------------
 
-Stops (removes) all attached events from the Drag instance and executes the 'complete' Event.
+Stops (removes) all attached events from the Drag instance. If the event is passed, it executes the 'complete' Event.
 
 ### Syntax:
 
-	myDrag.stop();
+	myDrag.stop([event]);
+
+### Arguments
+
+1. event - (*event*) the Event that is fired (typically by mouseup). This is passed along to the 'complete' Event in addition to the element that was dragged. If you pass along any truth-y value (i.e. not *false*, *zero*, etc) the 'complete' event will be fired and that value will be passed to the 'complete' event.
 
 ### Examples:
 
