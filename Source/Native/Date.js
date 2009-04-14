@@ -184,7 +184,7 @@ Date.implement({
 			'long': '%B %d, %Y %H:%M'
 		})[f.toLowerCase()] || f;
 		var d = this;
-		return f.replace(/\%([aAbBcdHIjmMpSUWwxXyYTZ])/g,
+		return f.replace(/\%([aAbBcdHIjmMpSUWwxXyYTZ\%])/g,
 			function($1, $2){
 				switch ($2){
 					case 'a': return Date.getMsg('days')[d.get('day')].substr(0, 3);
@@ -198,7 +198,7 @@ Date.implement({
 					case 'j': return zeroize(d.get('dayofyear'), 3);
 					case 'm': return zeroize((d.get('mo') + 1), 2);
 					case 'M': return zeroize(d.get('min'), 2);
-					case 'p': return d.get('hr') < 12 ? 'AM' : 'PM';
+					case 'p': return Date.getMsg(d.get('hr') < 12 ? 'AM' : 'PM');
 					case 'S': return zeroize(d.get('seconds'), 2);
 					case 'U': return zeroize(d.get('week'), 2);
 					case 'W': throw new Error('%W is not supported yet');
@@ -206,9 +206,9 @@ Date.implement({
 					case 'x':
 						var c = Date.getMsg('dateOrder');
 						//return d.format("%{0}{3}%{1}{3}%{2}".substitute(c.map(function(s){return s.substr(0,1)}))); //grr!
-						return d.format('%' + c[0].substr(0,1) +
+						return d.format(('%' + c[0].substr(0,1) +
 							c[3] + '%' + c[1].substr(0,1) +
-							c[3] + '%' + c[2].substr(0,1).toUpperCase());
+							c[3] + '%' + c[2].substr(0,1)).replace('%y', '%Y'));
 					case 'X': return d.format('%I:%M%p');
 					case 'y': return d.get('year').toString().substr(2);
 					case 'Y': return d.get('year');
@@ -346,6 +346,25 @@ $extend(Date, {
 
 	parsePatterns: [
 		{
+			//"1999-12-31"
+			re: /^(\d{4})[\.\-\/](\d{1,2})[\.\-\/](\d{1,2})$/,
+			handler: function(bits){
+				return new Date(bits[1], bits[2] - 1, bits[3]);
+			}
+		},
+		{
+			//"1999-12-31 23:59:59"
+			re: /^(\d{4})[\.\-\/](\d{1,2})[\.\-\/](\d{1,2})\s(\d{1,2}):(\d{1,2})(?:\:(\d{1,2}))?(\w{2})?$/,
+			handler: function(bits){
+				var d = new Date(bits[1], bits[2] - 1, bits[3]);
+				d.set('hr', bits[4]);
+				d.set('min', bits[5]);
+				d.set('sec', bits[6] || 0);
+				if (bits[7]) d.set('ampm', bits[7]);
+				return d;
+			}
+		},
+		{
 			//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
 			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})$/,
 			handler: function(bits){
@@ -358,27 +377,15 @@ $extend(Date, {
 		//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
 		//above plus "10:45pm" ex: 12.31.08 10:45pm
 		{
-			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2})(\w{2})$/,
+			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2})(?:\:(\d{1,2}))?(\w{2})?$/,
 			handler: function(bits){
 				var d = new Date(bits[Date.orderIndex('year')],
 								 bits[Date.orderIndex('month')] - 1,
 								 bits[Date.orderIndex('date')]);
 				d.set('hr', bits[4]);
 				d.set('min', bits[5]);
-				d.set('ampm', bits[6]);
-				return Date.fixY2K(d);
-			}
-		},
-		{
-			//"12.31.08 11:59:59", "12-31-08 11:59:59", "12/31/08 11:59:59", "12.31.2008 11:59:59", "12-31-2008 11:59:59", "12/31/2008 11:59:59"
-			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2}):(\d{1,2}):(\d{1,2})/,
-			handler: function(bits){
-				var d = new Date(bits[Date.orderIndex('year')],
-								 bits[Date.orderIndex('month')] - 1,
-								 bits[Date.orderIndex('date')]);
-				d.set('hr', bits[4]);
-				d.set('min', bits[5]);
-				d.set('sec', bits[6]);
+				d.set('sec', bits[6] || 0);
+				if (bits[7]) d.set('ampm', bits[7]);
 				return Date.fixY2K(d);
 			}
 		}
