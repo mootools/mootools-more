@@ -130,6 +130,15 @@ Takes in an id of a field and matches them together. Can also take *matchName* t
 	<input type="input" class="validate-match matchInput:'password' matchName:'password'"/>
 	//error msg: This field needs to match the password field.
 
+Validator: validate-cc-num {#Validators:validate-cc-num}
+--------------------------------------------------------
+
+Validates the data in the field against the four main credit cards (Visa, MasterCard, Discover, AmEx).
+
+###Example
+
+	<input type="input" class="validate-cc-num">
+
 FormValidator.Extras Language Localization {#Localization}
 ==========================================
 
@@ -147,6 +156,7 @@ FormValidator.Extras Language Localization {#Localization}
 * beforeDate - (*string*)  'The date should be the same or before {label}.' where *label* is the name of another date field
 * startMonth - (*string*)  'Please select a start month'
 * sameMonth - (*string*)  'These two dates must be in the same month - you must change one or the other.'
+
 
 
 [FormValidator]: #FormValidator
