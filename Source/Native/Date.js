@@ -225,9 +225,9 @@ Date.implement({
 
 	setAMPM: function(ampm){
 		ampm = ampm.toUpperCase();
-		if (this.format('%H').toInt() > 11 && ampm == Date.getMsg('AM'))
+		if (this.format('%H').toInt() > 11 && ampm == 'AM')
 			return this.decrement('hour', 12);
-		else if (this.format('%H').toInt() < 12 && ampm == Date.getMsg('PM'))
+		else if (this.format('%H').toInt() < 12 && ampm == 'PM')
 			return this.increment('hour', 12);
 		return this;
 	}

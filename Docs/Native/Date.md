@@ -268,13 +268,13 @@ Outputs the date into a specific format.
 * j - the day of the year to three digits (001 is Jan 1st)
 * m - the numerical month to two digits (01 is Jan, 12 is Dec)
 * M - the minutes to two digits (01, 40, 59)
-* p - 'AM' or 'PM'
+* p - The current language equivalent of either AM or PM
 * S - the seconds to two digits (01, 40, 59)
 * U - the week to two digits (01 is the week of Jan 1, 52 is the week of Dec 31)
 * W - not yet supported
 * w - the numerical day of the week, one digit (0 is Sunday, 1 is Monday)
-* x - returns the format %m/%d/%Y (12/10/2007)
-* X - returns %I:%M%p (02:45PM)
+* x - the date in the current language prefered format. en-US: %m/%d/%Y (12/10/2007)
+* X - the time in the current language prefered format. en-US: %I:%M%p (02:45PM)
 * y - the short year (two digits; "07")
 * Y - the full year (four digits; "2007")
 * T - the GMT offset ("-0800")
@@ -302,18 +302,6 @@ These keys are NOT preceded by the percent sign.
 
 * (*string*) the corresponding format for the Date.
 
-Date Property: $culture {#Date:culture}
----------------------------------------
-
-The Date class contains two default options for the order of default date formatting. In the US, dates are formatted as MM/DD/YYYY, while in the UK (and perhaps elsewhere in Europe? - sorry, I'm a yank), the order is DD/MM/YYYY. The Date class has a value called **$culture** that can either be **US** or **GB**, which will switch these orders when you're using shortcuts like **%x** and when parsing dates.
-
-### Syntax
-
-	Date.$culture = "GB"; //use DD/MM/YYYY
-	//create a culture for "Wonderland" where the format is "YYYY!!!DD!!!MM" :
-	Date.$cultures['Wonderland'] = ['year', 'date', 'month', '!!!'];
-
-
 Date Method: parse {#Date:parse}
 --------------------------------
 
@@ -326,14 +314,14 @@ Parses a string to a date. In the examples below, parsing works with dates using
 
 ### Arguments
 
-1. date - (*string*) a string date that has a predefined parser (see [Date:$parsePatterns][])
+1. date - (*string*) a string date that has a predefined parser (see [Date:parsePatterns][])
 
 ### Example
 
 	Date.parse('10/12/1982') //"Tue Oct 12 1982 11:53:25 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('10/12/1982 10:45pm') //"Tue Oct 12 1982 10:45:25 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('10.12.1982 22:45:00') //"Tue Oct 12 1982 10:45:25 GMT-0700 (Pacific Daylight Time)"
-
+	Date.parse('2007-06-08 16:34:52') //"Fri Jun 08 2007 09:34:52 GMT-0700 (Pacific Daylight Time)"
 
 	var PrinceParty = new Date();
 	PrinceParty.parse("12/31/1999 11:59pm");
@@ -347,7 +335,7 @@ Parses a string to a date. In the examples below, parsing works with dates using
 
 ### Notes
 
-* *Date.js* includes two default parsers - for *MM/DD/YYYY* and *MM/DD/YYYY HH:mm[AM|PM]*
+* *Date.js* includes four default parsers - for *YYYY-MM-DD*, *YYYY-MM-DD HH:mm[:ss][AM|PM]*, *MM/DD/YYYY* and *MM/DD/YYYY HH:mm[:ss][AM|PM]*
 * If you include *[Date.Extras.js][]* you will get more parsers
 * You can write your own parsers - see [Date:$parsePatterns][]
 * If you execute the *parse* method against an instance of *Date*, that instance will take on the parsed value
@@ -360,21 +348,21 @@ Additional parsers can be authored than those already outlined by default in *Da
 
 ### Syntax
 
-	Date.$parsePatterns.push(pattern);
-	Date.$parsePatterns.extend([pattern, pattern, etc]);
+	Date.parsePatterns.push(pattern);
+	Date.parsePatterns.extend([pattern, pattern, etc]);
 
 ### Patterns
 
 Each pattern is an object with two properties: a regular expression and a handler that is passed the result of that expression.
 
-	Date.$parsePatterns.push({
+	Date.parsePatterns.push({
 		re: <regularExpression>,
 		handler: function(bits){...}
 	});
 
 ### Example
 
-	Date.$parsePatterns.extend([
+	Date.parsePatterns.extend([
 		{
 			//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
 			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})$/,
@@ -400,6 +388,6 @@ Date Language Localization {#Localization}
 * PM - (*string*) the string that denotes evening in 12 hour time
 
 [Date:increment]: #Date:increment
-[Date:$parsePatterns]: #Date:parsePatterns
+[Date:parsePatterns]: #Date:CustomParsers
 [Date.Extras.js]: /docs/more/Native/Date.Extras
 [Lang]: /docs/more/Core/Lang
