@@ -15,7 +15,11 @@ MooTools.lang.set('en-US', 'Date', {
 	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 	days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 	//culture's date order: MM/DD/YYYY
-	dateOrder: ['month', 'date', 'year', '/'],
+	dateOrder: ['month', 'date', 'year'],
+	
+	shortDate: '%m/%d/%Y',
+	shortTime: '%I:%M%p',
+	
 	AM: 'AM',
 	PM: 'PM',
 

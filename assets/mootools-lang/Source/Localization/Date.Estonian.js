@@ -15,9 +15,13 @@ MooTools.lang.set('et-EE', 'Date', {
 	months: ['jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'],
 	days: ['pühapäev', 'esmaspäev', 'teisipäev', 'kolmapäev', 'neljapäev', 'reede', 'laupäev'],
 	//culture's date order: MM.DD.YYYY
-	dateOrder: ['month', 'date', 'year', '.'],
+	dateOrder: ['month', 'date', 'year'],
+
 	AM: 'AM',
 	PM: 'PM',
+
+	shortDate: '%m.%d.%Y',
+	shortTime: '%H:%M',
 
 	/* Date.Extras */
 	ordinal: '',

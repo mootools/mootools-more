@@ -10,14 +10,14 @@ describe('Date.clone', {
 
 	'should clone a Date instance': function(){
 		var d = new Date(Date.UTC(1999, 11, 31));
-    var dc = d.clone();
+		var dc = d.clone();
 		value_of(d.get('time')).should_be(dc.get('time'));
 	},
 
 	'the cloned Date should be a new instance of Date': function(){
 		var d = new Date(Date.UTC(1999, 11, 31));
-    var dc = d.clone();
-    dc.set('date', 1);
+		var dc = d.clone();
+		dc.set('date', 1);
 		value_of(d.get('time')).should_not_be(dc.get('time'));
   }
 
@@ -136,21 +136,21 @@ describe('Date.isLeapYear', {
 
 	'should return whether a Date instance is in a leap year': function(){
 		var d1 = new Date(Date.UTC(1900, 2, 1));
-    d2 = new Date(Date.UTC(2000,2,1));
-    d3 = new Date(Date.UTC(2002,2,1));
-    d4 = new Date(Date.UTC(2004,2,1));
+		d2 = new Date(Date.UTC(2000,2,1));
+		d3 = new Date(Date.UTC(2002,2,1));
+		d4 = new Date(Date.UTC(2004,2,1));
 		expect([d1.isLeapYear(), d2.isLeapYear(), d3.isLeapYear(), d4.isLeapYear()]).should_be([false, true, false, true]);
 		/* better mut messy error output! */
 		/*
-    var years = $H({'1600':true, '1900':false, '2000':true, '2002':false, '2004':true});
-		var result = new Hash(), year, d;
-		years.each(function(bool, year){
-      d = new Date(Date.UTC(Number(year),0,1));
-		  result.set(year, d.isLeapYear());
-    });
+		var years = $H({'1600':true, '1900':false, '2000':true, '2002':false, '2004':true});
+			var result = new Hash(), year, d;
+			years.each(function(bool, year){
+		  d = new Date(Date.UTC(Number(year),0,1));
+			  result.set(year, d.isLeapYear());
+		});
 		expect(result).should_be(years);
-    )
-    */
+		)
+		*/
 	}
 
 });
@@ -158,9 +158,9 @@ describe('Date.isLeapYear', {
 describe('Date.clearTime', {
 
 	'should clear the time portion of a Date instance': function(){
-    var d =  new Date('Oct 01 1997 10:45:25');
+		var d =  new Date('Oct 01 1997 10:45:25');
 		var d2 = new Date('Oct 01 1997 00:00:00');
-    d.clearTime();
+		d.clearTime();
 		expect(d).should_be(d2);
 	}
 
@@ -172,43 +172,43 @@ describe('Date.diff', {
 
 	'should compare two Date instances (milliseconds)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 0));
-    var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 999));
-    value_of(d.diff(d2, 'ms')).should_be(999);
+		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 999));
+		value_of(d.diff(d2, 'ms')).should_be(999);
 	},
 	'should compare two Date instances (seconds)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1,  0));
-    var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 10));
-    value_of(d.diff(d2, 'second')).should_be(10);
+		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 10));
+		value_of(d.diff(d2, 'second')).should_be(10);
 	},
 	'should compare two Date instances (minutes)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1,  0, 1));
-    var d2 = new Date(Date.UTC(1997, 10, 20, 1, 10, 1));
-    value_of(d.diff(d2, 'minute')).should_be(10);
+		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 10, 1));
+		value_of(d.diff(d2, 'minute')).should_be(10);
 	},
 	'should compare two Date instances (hours)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20,  0, 1, 1));
-    var d2 = new Date(Date.UTC(1997, 10, 20, 10, 1, 1));
-    value_of(d.diff(d2, 'hour')).should_be(10);
+		var d2 = new Date(Date.UTC(1997, 10, 20, 10, 1, 1));
+		value_of(d.diff(d2, 'hour')).should_be(10);
 	},
 	'should compare two Date instances (default)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
-    var d2 = new Date(Date.UTC(1997, 10, 30, 1, 1, 1));
-    value_of(d.diff(d2)).should_be(10);
+		var d2 = new Date(Date.UTC(1997, 10, 30, 1, 1, 1));
+		value_of(d.diff(d2)).should_be(10);
 	},
 	'should compare two Date instances (days)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
-    var d2 = new Date(Date.UTC(1997, 10, 30, 1, 1, 1));
-    value_of(d.diff(d2, 'day')).should_be(10);
+		var d2 = new Date(Date.UTC(1997, 10, 30, 1, 1, 1));
+		value_of(d.diff(d2, 'day')).should_be(10);
 	},
 	'should compare two Date instances (months)': function(){
 		var d  = new Date(Date.UTC(1997,  9, 20, 1, 1, 1));
-    var d2 = new Date(Date.UTC(1997, 11, 20, 1, 1, 1));
-    value_of(d.diff(d2, 'month')).should_be(2);
+		var d2 = new Date(Date.UTC(1997, 11, 20, 1, 1, 1));
+		value_of(d.diff(d2, 'month')).should_be(2);
 	},
 	'should compare two Date instances (years)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
-    var d2 = new Date(Date.UTC(1999, 10, 20, 1, 1, 1));
-    value_of(d.diff(d2, 'year')).should_be(2);
+		var d2 = new Date(Date.UTC(1999, 10, 20, 1, 1, 1));
+		value_of(d.diff(d2, 'year')).should_be(2);
 	}
 
 });
@@ -217,7 +217,7 @@ describe('Date.getTimezone', {
 
 	'should return the time zone of a Date instance': function(){
 		var d = new Date(Date.UTC(2000, 0, 1, 1, 1, 1));
-    if (Browser.Engine.trident) value_of(d.get('timezone')).should_be(new Date(Date.UTC()).get('timezone'));
+		if (Browser.Engine.trident) value_of(d.get('timezone')).should_be(new Date(Date.UTC()).get('timezone'));
 		else value_of(d.get('timezone')).should_be('GMT');
 	}
 
@@ -252,12 +252,12 @@ describe('Date.format', {
 		value_of(d.format('%B')).should_be(Date.getMsg('months')[10]);
 		value_of(d.format('%B')).should_be('November');
 
-    //value_of(d.format('%c')).should_be('Thu Nov 20 1997 01:02:03 GMT+0000 (GMT Standard Time)');
-    /* This is never going to work consistantly...
-     * "Tue Apr 08 2008 17:55:39 GMT+0100 (GMT Daylight Time)"
-     * "Tue Apr 08 2008 17:55:39 GMT+0100 (GMT Standard Time)"
-     * "Tue Apr 08 2008 17:55:39 GMT+0100 (Pacific Standard Time)"
-     * The timezone the browser is in changes the offset/timezone parts! */
+		//value_of(d.format('%c')).should_be('Thu Nov 20 1997 01:02:03 GMT+0000 (GMT Standard Time)');
+		/* This is never going to work consistantly...
+		 * "Tue Apr 08 2008 17:55:39 GMT+0100 (GMT Daylight Time)"
+		 * "Tue Apr 08 2008 17:55:39 GMT+0100 (GMT Standard Time)"
+		 * "Tue Apr 08 2008 17:55:39 GMT+0100 (Pacific Standard Time)"
+		 * The timezone the browser is in changes the offset/timezone parts! */
 
 		value_of(d.format('%d')).should_be('20');
 		value_of(d.format('%H')).should_be('01');
@@ -310,8 +310,8 @@ describe('Date.parse', {
 	},
 
 	'should parse a string value into a date': function(){
-		$H(Date.$cultures).each(function(v, k){
-			Date.$culture = k;
+		MooTools.lang.list().each(function(lang){
+			MooTools.lang.setLanguage(lang);
 			var d = new Date(2000, 11, 2, 0, 0, 0, 0);
 			value_of(Date.parse(d.format('%x')).clearTime()).should_be(d);
 			d = new Date(2000, 11, 2, 22, 45, 0, 0);

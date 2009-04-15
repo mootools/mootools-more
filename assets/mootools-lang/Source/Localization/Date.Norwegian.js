@@ -12,6 +12,11 @@ Script: Date.Norwegian.js
 
 MooTools.lang.set('no-NO', 'Date', {
 
+	dateOrder: ['date', 'month', 'year'],
+
+	shortDate: '%d.%m.%Y',
+	shortTime: '%H:%M',
+
 	lessThanMinuteAgo: 'kortere enn et minutt siden',
 	minuteAgo: 'omtrent et minutt siden',
 	minutesAgo: '{delta} minutter siden',
