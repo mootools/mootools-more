@@ -300,18 +300,6 @@ These keys are NOT preceded by the percent sign.
 
 * (*string*) the corresponding format for the Date.
 
-Date Property: $culture {#Date:culture}
----------------------------------------
-
-The Date class contains two default options for the order of default date formatting. In the US, dates are formatted as MM/DD/YYYY, while in the UK (and perhaps elsewhere in Europe? - sorry, I'm a yank), the order is DD/MM/YYYY. The Date class has a value called **$culture** that can either be **US** or **GB**, which will switch these orders when you're using shortcuts like **%x** and when parsing dates.
-
-### Syntax
-
-	Date.$culture = "GB"; //use DD/MM/YYYY
-	//create a culture for "Wonderland" where the format is "YYYY!!!DD!!!MM" :
-	Date.$cultures['Wonderland'] = ['year', 'date', 'month', '!!!'];
-
-
 Date Method: parse {#Date:parse}
 --------------------------------
 
@@ -324,7 +312,7 @@ Parses a string to a date. In the examples below, parsing works with dates using
 
 ### Arguments
 
-1. date - (*string*) a string date that has a predefined parser (see [Date:$parsePatterns][])
+1. date - (*string*) a string date that has a predefined parser (see [Date:parsePatterns][])
 
 ### Example
 
@@ -358,21 +346,21 @@ Additional parsers can be authored than those already outlined by default in *Da
 
 ### Syntax
 
-	Date.$parsePatterns.push(pattern);
-	Date.$parsePatterns.extend([pattern, pattern, etc]);
+	Date.parsePatterns.push(pattern);
+	Date.parsePatterns.extend([pattern, pattern, etc]);
 
 ### Patterns
 
 Each pattern is an object with two properties: a regular expression and a handler that is passed the result of that expression.
 
-	Date.$parsePatterns.push({
+	Date.parsePatterns.push({
 		re: <regularExpression>,
 		handler: function(bits){...}
 	});
 
 ### Example
 
-	Date.$parsePatterns.extend([
+	Date.parsePatterns.extend([
 		{
 			//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
 			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})$/,
@@ -398,6 +386,6 @@ Date Language Localization {#Localization}
 * PM - (*string*) the string that denotes evening in 12 hour time
 
 [Date:increment]: #Date:increment
-[Date:$parsePatterns]: #Date:parsePatterns
+[Date:parsePatterns]: #Date:CustomParsers
 [Date.Extras.js]: /docs/more/Native/Date.Extras
 [Lang]: /docs/more/Core/Lang
