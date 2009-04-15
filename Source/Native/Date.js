@@ -45,12 +45,19 @@ var zeroize = function(what, length){
 
 Date.implement({
 
-	set: function(key, value){
-		key = key.toLowerCase();
-		var m = Date.Methods;
-		if (m.has(key)) this['set' + m.get(key)](value);
+	set: function(prop, value){
+		switch ($type(prop)){
+			case 'object':
+				for (var p in prop) this.set(p, prop[p]);
+				break;
+			case 'string':
+				prop = prop.toLowerCase();
+				var m = Date.Methods;
+				if (m.has(prop)) this['set' + m.get(prop)](value);
+		}
 		return this;
-	},
+	}
+
 
 	get: function(key){
 		key = key.toLowerCase();

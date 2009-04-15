@@ -64,13 +64,15 @@ Sets a property of a date.
 
 ### Syntax
 
-	date.set(key, value);
+	date.set(arguments);
 
 ### Arguments
 
-1. key - (*string*) the key that you want to set
-2. value - (*mixed*) the value for the key
-
+- Two Arguments (property, value)
+	1. property - (*string*) the property that you want to set
+	2. value - (*mixed*) the value for the key
+- One Argument (properties)
+	1. properties - (*object*) Object with its keys/value pairs representing the properties and values to set for the Date (as described below).
 ### Notes
 
 * All of the native date methods work with *set*. These are: "Date", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "UTCDate", "UTCFullYear", "UTCHours", "UTCMilliseconds", "UTCMinutes", "UTCMonth", "UTCSeconds"
