@@ -24,7 +24,6 @@ In addition to the two default parsers included in *[Date.js][]*, *Date.Extras.j
 
 ### Examples
 
-	Date.parse('2007-06-08 16:34:52') = "Fri Jun 08 2007 09:34:52 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('2007-06-08T16:34:52+0200') = "Fri Jun 08 2007 07:34:52 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('today') = "Mon Dec 10 2007 11:53:25 GMT-0800 (Pacific Standard Time)"
 	Date.parse('tomorrow') = "Tue Dec 11 2007 11:53:25 GMT-0800 (Pacific Standard Time)"
