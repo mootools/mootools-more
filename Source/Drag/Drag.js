@@ -148,7 +148,7 @@ Element.implement({
 		this.store('resizer', drag);
 		return drag.addEvent('drag', function(){
 			this.fireEvent('resize', drag);
-		}.bind(this))
+		}.bind(this));
 	}
 
 });

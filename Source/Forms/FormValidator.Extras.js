@@ -150,12 +150,7 @@ FormValidator.addAllThese([
 		errorMsg: function(element, props){
 			var startMo = $(props.sameMonthAs) && $(props.sameMonthAs).get('value');
 			var eleVal = element.get('value');
-			if (eleVal != ''){
-				if (!startMo){ return FormValidator.getMsg('startMonth');}
-				else {
-					return FormValidator.getMsg('sameMonth');
-				}
-			}
+			if (eleVal != '') return FormValidator.getMsg(startMo ? 'sameMonth' : 'startMonth');
 		},
 		test: function(element, props){
 			var d1 = Date.parse(element.get('value'));
@@ -167,8 +162,7 @@ FormValidator.addAllThese([
 
 	['validate-cc-num', {
 		errorMsg: function(element){
-			return 'The credit card number entered is invalid. Please check the number and try again. '
-			 		+ (element.get('value').replace(/[^0-9]/g, '').length) + ' digits entered.';
+			return 'The credit card number entered is invalid. Please check the number and try again. ' + (element.get('value').replace(/[^0-9]/g, '').length) + ' digits entered.';
 		},
 		test: function(element){
 			if (FormValidator.getValidator('IsEmpty').test(element)) return true;

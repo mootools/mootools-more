@@ -56,7 +56,7 @@ Drag.Move = new Class({
 			if (this.options.includeMargins) {
 				$each(ems, function(value, key) {
 					ems[key] = 0;
-				})
+				});
 			}
 			if (this.container == this.element.getOffsetParent()) {
 				this.options.limit = {

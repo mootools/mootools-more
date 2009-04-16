@@ -24,10 +24,9 @@ Script: Element.Pin.js
 	Element.implement({
 
 		pin: function(enable){
-			if (this.getStyle('display') == 'none')
-				return;
+			if (this.getStyle('display') == 'none') return;
 
-			if (enable!==false){
+			if (enable !== false){
 				var p = this.getPosition();
 				if (!this.retrieve('pinned')){
 					var pos = {
@@ -35,7 +34,7 @@ Script: Element.Pin.js
 						left: p.x - window.getScroll().x
 					};
 					if (supportsPositionFixed){
-						this.setStyle('position','fixed').setStyles(pos);
+						this.setStyle('position', 'fixed').setStyles(pos);
 					} else {
 						this.store('pinnedByJS', true);
 						this.setStyles({
