@@ -56,8 +56,7 @@ Date.implement({
 				if (m.has(prop)) this['set' + m.get(prop)](value);
 		}
 		return this;
-	}
-
+	},
 
 	get: function(key){
 		key = key.toLowerCase();
