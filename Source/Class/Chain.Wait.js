@@ -32,7 +32,7 @@ Script: Chain.Wait.js
 		Element.implement({
 			chains: function(effects){
 				$splat($pick(effects, ['tween', 'morph', 'reveal'])).each(function(effect){
-					var effect = this.get(effect);
+					effect = this.get(effect);
 					if (!effect) return;
 					effect.setOptions({
 						link:'chain'

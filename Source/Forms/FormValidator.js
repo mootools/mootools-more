@@ -121,7 +121,7 @@ var FormValidator = new Class({
 	},
 
 	getFields: function(){
-		return this.fields = this.element.getElements(this.options.fieldSelectors);
+		return (this.fields = this.element.getElements(this.options.fieldSelectors));
 	},
 
 	watchFields: function(fields){

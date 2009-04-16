@@ -150,12 +150,7 @@ FormValidator.addAllThese([
 		errorMsg: function(element, props){
 			var startMo = $(props.sameMonthAs) && $(props.sameMonthAs).get('value');
 			var eleVal = element.get('value');
-			if (eleVal != ''){
-				if (!startMo){ return FormValidator.getMsg('startMonth');}
-				else {
-					return FormValidator.getMsg('sameMonth');
-				}
-			}
+			if (eleVal != '') return FormValidator.getMsg(startMo ? 'sameMonth' : 'startMonth');
 		},
 		test: function(element, props){
 			var d1 = Date.parse(element.get('value'));

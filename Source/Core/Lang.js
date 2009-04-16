@@ -61,8 +61,7 @@ Script: MooTools.Lang.js
 		},
 
 		lambda: function(set) {
-			(set||{}).get = function(key, args) {
-				var key = arguments[0];
+			(set || {}).get = function(key, args){
 				return $lambda(set[key]).apply(this, $splat(args));
 			};
 			return set;
@@ -77,7 +76,7 @@ Script: MooTools.Lang.js
 			langData = data.languages[lang];
 			if (!langData[set]) langData[set] = {};
 			$extend(langData[set], members);
-			if (lang == this.getCurrentLanguage()) {
+			if (lang == this.getCurrentLanguage()){
 				this.load();
 				this.fireEvent('langChange', lang);
 			}

@@ -101,7 +101,7 @@ Element.implement({
 			default: //center
 				pos.x = left + ((rel == document.body ? winSize.x : rel.offsetWidth)/2) + prefX;
 				break;
-		};
+		}
 		switch(options.position.y){
 			case 'top':
 				pos.y = top + prefY;
@@ -112,7 +112,7 @@ Element.implement({
 			default: //center
 				pos.y = top + ((rel == document.body ? winSize.y : rel.offsetHeight)/2) + prefY;
 				break;
-		};
+		}
 
 		if (options.edge){
 			var edgeOffset = {};
@@ -127,7 +127,7 @@ Element.implement({
 				default: //center
 					edgeOffset.x = -(dim.x/2);
 					break;
-			};
+			}
 			switch(options.edge.y){
 				case 'top':
 					edgeOffset.y = 0;
@@ -138,7 +138,7 @@ Element.implement({
 				default: //center
 					edgeOffset.y = -(dim.y/2);
 					break;
-			};
+			}
 			pos.x = pos.x + edgeOffset.x;
 			pos.y = pos.y + edgeOffset.y;
 		}

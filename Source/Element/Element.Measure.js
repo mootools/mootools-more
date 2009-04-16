@@ -84,7 +84,7 @@ Element.implement({
 				delete size.height;
 				delete options.plains.height;
 				break;
-		};
+		}
 		var getStyles = [];
 		//this function might be useful in other places; perhaps it should be outside this function?
 		$each(options.plains, function(plain, key){
@@ -98,23 +98,23 @@ Element.implement({
 		getStyles.each(function(style){ styles[style] = this.getComputedStyle(style); }, this);
 		var subtracted = [];
 		$each(options.plains, function(plain, key){ //keys: width, height, plains: ['left', 'right'], ['top','bottom']
-			size['total' + key.capitalize()] = 0;
-			size['computed' + key.capitalize()] = 0;
+			var capitalized = key.capitalize();
+			size['total' + capitalized] = 0;
+			size['computed' + capitalized] = 0;
 			plain.each(function(edge){ //top, left, right, bottom
 				size['computed' + edge.capitalize()] = 0;
 				getStyles.each(function(style, i){ //padding, border, etc.
 					//'padding-left'.test('left') size['totalWidth'] = size['width'] + [padding-left]
 					if (style.test(edge)){
-						styles[style] = styles[style].toInt(); //styles['padding-left'] = 5;
-						if (isNaN(styles[style]))styles[style] = 0;
-						size['total' + key.capitalize()] = size['total' + key.capitalize()] + styles[style];
+						styles[style] = styles[style].toInt() || 0; //styles['padding-left'] = 5;
+						size['total' + capitalized] = size['total' + capitalized] + styles[style];
 						size['computed' + edge.capitalize()] = size['computed' + edge.capitalize()] + styles[style];
 					}
 					//if width != width (so, padding-left, for instance), then subtract that from the total
 					if (style.test(edge) && key != style &&
 						(style.test('border') || style.test('padding')) && !subtracted.contains(style)){
 						subtracted.push(style);
-						size['computed' + key.capitalize()] = size['computed' + key.capitalize()]-styles[style];
+						size['computed' + capitalized] = size['computed' + capitalized]-styles[style];
 					}
 				});
 			});
