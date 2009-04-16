@@ -71,8 +71,8 @@ Fx.Sort = new Class({
 			if (newOrder.length > this.elements.length)
 				newOrder.splice(this.elements.length-1, newOrder.length - this.elements.length);
 		}
-		var top = 0;
-		var left = 0;
+		top = 0;
+		left = 0;
 		var margin = 0;
 		var next = {};
 		newOrder.each(function(item, index){
