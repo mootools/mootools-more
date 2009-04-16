@@ -164,46 +164,4 @@ FormValidator.addAllThese([
 		}
 	}]
 
-
-	['validate-cc-num', {
-		errorMsg: function(element){
-			return 'The credit card number entered is invalid. Please check the number and try again. '
-			 		+ (element.get('value').replace(/[^0-9]/g, '').length) + ' digits entered.';
-		},
-		test: function(element){
-			if (FormValidator.getValidator('IsEmpty').test(element)) return true;
-			var ccNum = element.get('value').replace(/[^0-9]/g, '');
-
-			var valid_type = false;
-			if (ccNum.test(/^4[0-9]{12}([0-9]{3})?$/)) valid_type = 'Visa';
-			else if (ccNum.test(/^5[1-5]([0-9]{14})$/)) valid_type = 'Master Card';
-			else if (ccNum.test(/^3[47][0-9]{13}$/)) valid_type = 'American Express';
-			else if (ccNum.test(/^6011[0-9]{12}$/)) valid_type = 'Discover';
-
-			if (valid_type) {
-				var sum = 0,
-					cur = 0;
-
-				for(var i=ccNum.length-1; i>=0; --i) {
-					cur = ccNum.charAt(i).toInt();
-					if (cur === 0) { continue; }
-					if ((ccNum.length-i) % 2 === 0) { cur += cur; }
-					if (cur > 9) { cur = cur.toString().charAt(0).toInt() + cur.toString().charAt(1).toInt(); }
-					sum += cur;
-				}
-				if ((sum % 10) === 0) { return true; }
-			}
-
-			var chunks = '';
-			while (ccNum != '') {
-				chunks += ' ' + ccNum.substr(0,4);
-				ccNum = ccNum.substr(4);
-			}
-
-			element.set('value', chunks.clean());
-			return false;
-		}
-	}]
-
-
 ]);

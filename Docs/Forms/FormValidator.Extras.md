@@ -130,15 +130,6 @@ Takes in an id of a field and matches them together. Can also take *matchName* t
 	<input type="input" class="validate-match matchInput:'password' matchName:'password'"/>
 	//error msg: This field needs to match the password field.
 
-Validator: validate-cc-num {#Validators:validate-cc-num}
---------------------------------------------------------
-
-Validates the data in the field against the four main credit cards (Visa, MasterCard, Discover, AmEx).
-
-###Example
-
-	<input type="input" class="validate-cc-num">
-
 FormValidator.Extras Language Localization {#Localization}
 ==========================================
 
