@@ -38,21 +38,6 @@ var Tips = new Class({
 		this.container = new Element('div', {'class': 'tip'});
 		this.tip = this.getTip();
 		
-		this.restore = false;
-		if ($type(this.options.title) == 'string'){
-			var title = this.options.title;
-			if (title == 'title') this.restore = title;
-			this.options.title = function(el){
-				return el.get(title);
-			};
-		}
-		if ($type(this.options.text) == 'string'){
-			var text = this.options.text;
-			this.options.text = function(el){
-				return el.get(text);
-			};
-		}
-		
 		if (params.elements) this.attach(params.elements);
 	},
 	
@@ -70,17 +55,18 @@ var Tips = new Class({
 			new Element('div', {'class': 'tip-top'}),
 			this.container,
 			new Element('div', {'class': 'tip-bottom'})
-		).inject(document.body)
+		).inject(document.body);
 	},
 	
 	attach: function(elements){
+		var read = function(option, element){
+			if (option == null) return '';
+			return $type(option) == 'function' ? option(element) : element.get(option);
+		};
 		$$(elements).each(function(element){
-			var read = function(option) {
-				return $type(option) == 'function' ? option(element) : element.get(option);
-			}
-			var title = read(this.options.title);
+			var title = read(this.options.title, element);
 			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
-			element.retrieve('tip:text', read(this.options.text));
+			element.retrieve('tip:text', read(this.options.text, element));
 			
 			var events = ['enter', 'leave'];
 			if (!this.options.fixed) events.push('move');
@@ -101,10 +87,10 @@ var Tips = new Class({
 			
 			element.eliminate('tip:enter').eliminate('tip:leave').eliminate('tip:move');
 			
-			if (!this.restore) return;
-			
-			var original = element.retrieve('tip:native');
-			if (original) element.set(this.restore, original);
+			if ($type(this.options.title) == 'string' && this.options.title == 'title'){
+				var original = element.retrieve('tip:native');
+				if (original) element.set('title', original);
+			}
 		}, this);
 		
 		return this;
