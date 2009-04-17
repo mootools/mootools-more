@@ -25,9 +25,10 @@ Script: Element.Pin.js
 
 		pin: function(enable){
 			if (this.getStyle('display') == 'none') return;
-
+			
+			var p;
 			if (enable !== false){
-				var p = this.getPosition();
+				p = this.getPosition();
 				if (!this.retrieve('pinned')){
 					var pos = {
 						top: p.y - window.getScroll().y,
@@ -59,7 +60,7 @@ Script: Element.Pin.js
 					if (this.getParent().getComputedStyle('position') != 'static') op = this.getParent();
 					else op = this.getParent().getOffsetParent();
 				}
-				var p = this.getPosition(op);
+				p = this.getPosition(op);
 				this.store('pinned', false);
 				var reposition;
 				if (supportsPositionFixed && !this.retrieve('pinnedByJS')){

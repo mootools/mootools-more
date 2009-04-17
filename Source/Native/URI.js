@@ -36,7 +36,7 @@ var URI = new Class({
 	parse: function(value, base){
 		var bits = value.match(this.regex);
 		if (!bits) return false;
-		bits.shift()
+		bits.shift();
 		return this.merge(bits.associate(this.parts), base);
 	},
 	

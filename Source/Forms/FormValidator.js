@@ -381,26 +381,27 @@ FormValidator.addAllThese([
 		errorMsg: function(element, props){
 			if (Date.parse){
 				var format = props.dateFormat || '%x';
-				return FormValidator.getMsg('dateSuchAs').substitute({date:new Date().format(format)});
+				return FormValidator.getMsg('dateSuchAs').substitute({date: new Date().format(format)});
 			} else {
 				return FormValidator.getMsg('dateInFormatMDY');
 			}
 		},
 		test: function(element, props){
 			if (FormValidator.getValidator('IsEmpty').test(element)) return true;
+			var d;
 			if (Date.parse){
 				var format = props.dateFormat || '%x';
-				var d = Date.parse(element.get('value'));
+				d = Date.parse(element.get('value'));
 				var formatted = d.format(format);
 				if (formatted != 'invalid date') element.set('value', formatted);
 				return !isNaN(d);
 			} else {
-			var regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
-			if (!regex.test(element.get('value'))) return false;
-			var d = new Date(element.get('value').replace(regex, '$1/$2/$3'));
-			return (parseInt(RegExp.$1, 10) == (1 + d.getMonth())) &&
-				(parseInt(RegExp.$2, 10) == d.getDate()) &&
-				(parseInt(RegExp.$3, 10) == d.getFullYear());
+				var regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+				if (!regex.test(element.get('value'))) return false;
+				d = new Date(element.get('value').replace(regex, '$1/$2/$3'));
+				return (parseInt(RegExp.$1, 10) == (1 + d.getMonth())) &&
+					(parseInt(RegExp.$2, 10) == d.getDate()) &&
+					(parseInt(RegExp.$3, 10) == d.getFullYear());
 			}
 		}
 	}],

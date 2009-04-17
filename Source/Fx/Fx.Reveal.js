@@ -225,7 +225,7 @@ Element.implement({
 		reveal.reveal().chain(function(){
 			(function(){
 				reveal.dissolve();
-			}).delay(params.duration || 2000)
+			}).delay(params.duration || 2000);
 		});
 	}
 
