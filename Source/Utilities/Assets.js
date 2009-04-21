@@ -9,7 +9,7 @@ Script: Assets.js
 		Valerio Proietti
 */
 
-var Asset = new Hash({
+var Asset = {
 
 	javascript: function(source, properties){
 		properties = $extend({
@@ -92,4 +92,4 @@ var Asset = new Hash({
 		}));
 	}
 
-});
+};

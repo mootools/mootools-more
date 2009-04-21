@@ -11,7 +11,7 @@ Script: Date.Extras.js
 */
 
 ['LastDayOfMonth', 'Ordinal'].each(function(method){
-	Date.Methods.set(method.toLowerCase(), method);
+	Date.Methods[method.toLowerCase()] = method;
 });
 
 

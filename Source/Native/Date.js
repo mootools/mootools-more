@@ -20,12 +20,12 @@ new Native({name: 'Date', initialize: Date, protect: true});
 	Native.genericize(Date, method, true);
 });
 
-Date.Methods = new Hash();
+Date.Methods = {};
 
 ['Date', 'Day', 'FullYear', 'Hours', 'Milliseconds', 'Minutes', 'Month', 'Seconds', 'Time', 'TimezoneOffset',
 	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
 	'AMPM', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds'].each(function(method){
-	Date.Methods.set(method.toLowerCase(), method);
+	Date.Methods[method.toLowerCase()] = method;
 });
 
 $each({
@@ -36,7 +36,7 @@ $each({
 	sec: 'Seconds',
 	hr: 'Hours'
 }, function(value, key){
-	Date.Methods.set(key, value);
+	Date.Methods[key] = value;
 });
 
 var zeroize = function(what, length){
@@ -53,7 +53,7 @@ Date.implement({
 			case 'string':
 				prop = prop.toLowerCase();
 				var m = Date.Methods;
-				if (m.has(prop)) this['set' + m.get(prop)](value);
+				if (m[prop]) this['set' + m[prop]](value);
 		}
 		return this;
 	},
@@ -61,7 +61,7 @@ Date.implement({
 	get: function(key){
 		key = key.toLowerCase();
 		var m = Date.Methods;
-		if (m.has(key)) return this['get' + m.get(key)]();
+		if (m[key]) return this['get' + m[key]]();
 		return null;
 	},
 
