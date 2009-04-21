@@ -1,3 +1,3 @@
 MooTools.More = {
-	'version': 'more-1.01'
+	'version': 'more-1.02'
 };
