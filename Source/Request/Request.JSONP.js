@@ -36,17 +36,17 @@ Request.JSONP = new Class({
 		this.triesRemaining = [];
 	},
 	
-	check: function(caller){
+	check: function(){
 		if (!this.running) return true;
 		switch (this.options.link){
 			case 'cancel': this.cancel(); return true;
-			case 'chain': this.chain(caller.bind(this, Array.slice(arguments, 1))); return false;
+			case 'chain': this.chain(this.caller.bind(this, arguments)); return false;
 		}
 		return false;
 	},
 
 	send: function(options){
-		if (!$chk(arguments[1]) && !this.check(arguments.callee, options)) return this;
+		if (!$chk(arguments[1]) && !this.check(options)) return this;
 		
 		var type = $type(options), old = this.options, index = $chk(arguments[1]) ? arguments[1] : this.requests++;
 		if (type == 'string' || type == 'element') options = {data: options};

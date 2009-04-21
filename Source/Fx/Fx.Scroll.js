@@ -49,7 +49,7 @@ Fx.Scroll = new Class({
 	},
 
 	start: function(x, y){
-		if (!this.check(arguments.callee, x, y)) return this;
+		if (!this.check(x, y)) return this;
 		var offsetSize = this.element.getSize(), scrollSize = this.element.getScrollSize();
 		var scroll = this.element.getScroll(), values = {x: x, y: y};
 		for (var z in values){
