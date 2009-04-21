@@ -29,7 +29,7 @@ var tidymap = {
 };
 
 String.implement({
-	
+
 	standardize: function(){
 		var text = this;
 		special.each(function(ch, i){

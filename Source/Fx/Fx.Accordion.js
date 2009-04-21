@@ -9,7 +9,7 @@ Script: Fx.Accordion.js
 		Valerio Proietti
 */
 
-Fx.Accordion = new Class({
+var Accordion = Fx.Accordion = new Class({
 
 	Extends: Fx.Elements,
 

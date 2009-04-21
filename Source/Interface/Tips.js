@@ -34,13 +34,14 @@ var Tips = new Class({
 
 	initialize: function(){
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
+		if (params.options) params.options.offset = params.options.offsets;
 		this.setOptions(params.options);
 		this.container = new Element('div', {'class': 'tip'});
 		this.tip = this.getTip();
 		
 		if (params.elements) this.attach(params.elements);
 	},
-	
+
 	getTip: function(){
 		return new Element('div', {
 			'class': this.options.className,
@@ -57,7 +58,7 @@ var Tips = new Class({
 			new Element('div', {'class': 'tip-bottom'})
 		).inject(document.body);
 	},
-	
+
 	attach: function(elements){
 		var read = function(option, element){
 			if (option == null) return '';
@@ -78,7 +79,7 @@ var Tips = new Class({
 		
 		return this;
 	},
-	
+
 	detach: function(elements){
 		$$(elements).each(function(element){
 			['enter', 'leave', 'move'].each(function(value){
@@ -95,7 +96,7 @@ var Tips = new Class({
 		
 		return this;
 	},
-	
+
 	elementEnter: function(event, element){
 		$A(this.container.childNodes).each(Element.dispose);
 		
@@ -112,17 +113,17 @@ var Tips = new Class({
 		this.tip.setStyle('display', 'block');
 		this.position((!this.options.fixed) ? event : {page: element.getPosition()});
 	},
-	
+
 	elementLeave: function(event, element){
 		$clear(this.timer);
 		this.tip.setStyle('display', 'none');
 		this.timer = this.hide.delay(this.options.hideDelay, this, element);
 	},
-	
+
 	elementMove: function(event){
 		this.position(event);
 	},
-	
+
 	position: function(event){
 		var size = window.getSize(), scroll = window.getScroll(),
 			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
@@ -136,7 +137,7 @@ var Tips = new Class({
 		
 		this.tip.setStyles(obj);
 	},
-	
+
 	fill: function(element, contents){
 		if(typeof contents == 'string') element.set('html', contents);
 		else element.adopt(contents);

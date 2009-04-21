@@ -9,7 +9,7 @@ Script: Fx.SmoothScroll.js
 		Valerio Proietti
 */
 
-Fx.SmoothScroll = new Class({
+var SmoothScroll = Fx.SmoothScroll = new Class({
 
 	Extends: Fx.Scroll,
 

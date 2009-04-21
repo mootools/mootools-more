@@ -125,7 +125,7 @@ Request.Queue = new Class({
 		}
 		return this;
 	},
-	
+
 	runAll: function() {
 		this.queue.each(function(q) {
 			q();

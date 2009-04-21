@@ -12,7 +12,7 @@ Script: URI.js
 var URI = new Class({
 
 	Implements: Options,
-	
+
 	/*
 	options: {
 		base: false
@@ -32,17 +32,16 @@ var URI = new Class({
 		else
 			this.set('value', uri.href || uri.toString(), base ? new URI(base) : false);
 	},
-	
+
 	parse: function(value, base){
 		var bits = value.match(this.regex);
 		if (!bits) return false;
 		bits.shift();
 		return this.merge(bits.associate(this.parts), base);
 	},
-	
+
 	merge: function(bits, base){
 		if (!bits.scheme && !base.scheme) return false;
-
 		if (base){
 			this.parts.every(function(part){
 				if (bits[part]) return false;
@@ -98,11 +97,11 @@ var URI = new Class({
 	go: function(){
 		document.location.href = this.toString();
 	},
-	
+
 	toURI: function(){
 		return this;
 	},
-	
+
 	getData: function(key, part){
 		var qs = this.get(part || 'query');
 		if (!$chk(qs)) return key ? null : {};
@@ -119,7 +118,7 @@ var URI = new Class({
 		}
 		return this.set(part || 'query', Hash.toQueryString(values));
 	},
-	
+
 	clearData: function(part){
 		return this.set(part || 'query', '');
 	}
