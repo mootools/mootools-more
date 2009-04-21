@@ -39,7 +39,7 @@
 				var toggler = function(){
 					fx.toggle.delay(250, fx);
 				};
-				fx.hide().toggle().chain(toggler).chain(toggler);
+				fx.hide().toggle().chain(toggler).chain(toggler).chain(toggler).chain(toggler);
 			}
 		}
 	]
