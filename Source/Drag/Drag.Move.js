@@ -33,7 +33,7 @@ Drag.Move = new Class({
 
 		var position = this.element.getStyle('position');
 		if (position=='static') position = 'absolute';
-		if ([this.element.getStyle('left'), this.element.getStyle('top')].contains('auto')) this.element.position(this.element.getPosition(this.element.offsetParent));
+		if ([this.element.getStyle('left'), this.element.getStyle('top')].contains('auto')) this.element.setPosition(this.element.getPosition(this.element.offsetParent));
 		this.element.setStyle('position', position);
 
 		this.addEvent('start', this.checkDroppables, true);
