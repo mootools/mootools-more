@@ -7,15 +7,10 @@ MooTools Plugins and Enhancements Repository
 
 ### TO DO
 
-* Need to run tests against all browsers
 * Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
-* Go through lighthouse tickets and identify criticals for 1.0 release
-* Compat for previous version of -more
-* Verify compat for multi-builder on mootools.net
 * Compat for Clientcide
-* Switch to feature detection instead of engine detection
-* update all the Element.Forms methods to getters/setters; tidy them up a bit
-* Update calls to .position to use .setPosition
+* make detach method for all classes that attach to elements
+* make destroy method for all classes that create elements
 
 ### StyleGuide
 
@@ -41,8 +36,6 @@ MooTools Plugins and Enhancements Repository
 
 * IframeShim
   - options:zindex renamed to zIndex
-  - makeShim method gone
-  - occluded property (Element.storage) now camelcase (iframeShim). consistent with tween, morph, etc
 * JsonP
   - renamed to Request.JSONP
   - constructor/send/prepareUrl take options hash, no longer an url directly (like Request)
@@ -73,3 +66,5 @@ MooTools Plugins and Enhancements Repository
 * Element.setPosition is now Element.position
 * String.Extra query functions moved to URI.js
  - parseQuery > parseQueryString for consistency with cleanQueryString
+* Request.Queue
+	- event names all renamed; *onRequestStart* >> *onRequest*, *onRequestSuccess* >> *onSuccess*, etc
