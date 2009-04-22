@@ -19,7 +19,7 @@
 			verify: "Did it load an image?",
 			before: function(){
 				new Request.JSONP({
-					callBackKey: 'jsoncallback',
+					callbackKey: 'jsoncallback',
 					url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
 					onComplete: function(data){
 						new Element('div').adopt(

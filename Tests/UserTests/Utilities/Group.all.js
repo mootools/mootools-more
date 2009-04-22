@@ -3,7 +3,7 @@
 		{
 			title: "Group",
 			description: "Tests that a group of animations have completed.",
-			verify: "Did each ",
+			verify: "After all the effects completed did you see an alert?",
 			before: function(){
 				var fx = $$('.exampleBar').map(function(el) {
 					return el.get('tween');

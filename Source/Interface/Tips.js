@@ -34,7 +34,7 @@ var Tips = new Class({
 
 	initialize: function(){
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
-		if (params.options) params.options.offset = params.options.offsets;
+		if (params.options && params.options.offsets) params.options.offset = params.options.offsets;
 		this.setOptions(params.options);
 		this.container = new Element('div', {'class': 'tip'});
 		this.tip = this.getTip();

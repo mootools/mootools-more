@@ -3,7 +3,7 @@
 		{
 			title: "Request.Queue",
 			description: "Stacks up request calls.",
-			verify: "Look in the console, you should see the requests log out numbers 1-5 in <b>reverse</b> order.",
+			verify: "Look in the console, you should see the requests log out numbers 1-5 in order on the page.",
 			before: function(){
 				var events = {};
 /*				['onRequest', 'onComplete', 'onCancel', 'onSuccess', 'onFailure', 'onException'].each(function(evt){
