@@ -59,12 +59,13 @@ Element.implement({
 		return null;
 	},
 
-	getOffsets: function(){
+	getOffsets: function(){		
 		if (Browser.Engine.trident){
 			var bound = this.getBoundingClientRect(), html = this.getDocument().documentElement;
+			var isFixed = styleString(this, 'position') == 'fixed';
 			return {
-				x: bound.left + html.scrollLeft - html.clientLeft,
-				y: bound.top + html.scrollTop - html.clientTop
+				x: bound.left + ((isFixed) ? 0 : html.scrollLeft) - html.clientLeft,
+				y: bound.top +  ((isFixed) ? 0 : html.scrollTop)  - html.clientTop
 			};
 		}
 
@@ -120,7 +121,7 @@ Element.implement({
 		return {left: obj.x - styleNumber(this, 'margin-left'), top: obj.y - styleNumber(this, 'margin-top')};
 	},
 
-	position: function(obj){
+	setPosition: function(obj){
 		return this.setStyles(this.computePosition(obj));
 	}
 
@@ -190,6 +191,8 @@ function getCompatElement(element){
 })();
 
 //aliases
+
+Element.alias('position', 'setPosition'); //compatability
 
 Native.implement([Window, Document, Element], {
 

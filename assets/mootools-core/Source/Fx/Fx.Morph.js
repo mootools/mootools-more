@@ -11,7 +11,6 @@ Fx.Morph = new Class({
 	Extends: Fx.CSS,
 
 	initialize: function(element, options){
-		dbug.log('new MORPH! ', element)
 		this.element = this.subject = $(element);
 		this.parent(options);
 	},

@@ -16,7 +16,7 @@ Element.implement({
 
 	position: function(options){
 		//call setPosition if the options are x/y values
-		if (options && ($defined(options.x) || $defined(options.y))) return this.setPosition.apply(this, arguments) : this;
+		if (options && ($defined(options.x) || $defined(options.y))) return this.setPosition.apply(this, arguments);
 		$each(options||{}, function(v, k){ if (!$defined(v)) delete options[k]; });
 		options = $merge({
 			relativeTo: document.body,
