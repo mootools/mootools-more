@@ -148,6 +148,7 @@ Date.implement({
 				else if (diff >= 0 && diff < Date.units[resolution]()) return 0;
 				return ((d.get('time') - this.get('time')) / Date.units[resolution]()).round();
 		}
+		return null;
 	},
 
 	getWeek: function(){

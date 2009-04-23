@@ -41,6 +41,7 @@ var OverText = new Class({
 		this.attach(this.element);
 		OverText.instances.push(this);
 		if (this.options.poll) this.poll();
+		return this;
 	},
 
 	toElement: function(){

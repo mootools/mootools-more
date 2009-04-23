@@ -25,7 +25,11 @@ Array.implement({
 
 	sum: function(){
 		var result = 0, l = this.length;
-		if (l) do { result += this[--l]; } while (l);
+		if (l){
+			do {
+				result += this[--l];
+			} while (l);
+		}
 		return result;
 	},
 

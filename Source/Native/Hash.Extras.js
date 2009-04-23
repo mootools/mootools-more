@@ -14,7 +14,7 @@ Hash.implement({
 	getFromPath: function(notation){
 		var source = this.getClean();
 		notation.replace(/\[([^\]]+)\]|\.([^.[]+)|[^[.]+/g, function(match){
-			if (!source) return;
+			if (!source) return null;
 			var prop = arguments[2] || arguments[1] || arguments[0];
 			source = (prop in source) ? source[prop] : null;
 			return match;

@@ -26,7 +26,7 @@ Script: MooTools.Lang.js
 	$extend(MooTools.lang, {
 
 		setLanguage: function(lang){
-			if (!data.languages[lang]) return;
+			if (!data.languages[lang]) return this;
 			data.language = lang;
 			this.load();
 			this.fireEvent('langChange', lang);

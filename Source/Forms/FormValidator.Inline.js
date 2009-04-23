@@ -92,6 +92,7 @@ FormValidator.Inline = new Class({
 		field.className.split(' ').each(function(className){
 			this.hideAdvice(className, field);
 		}, this);
+		return this;
 	},
 
 	getAllAdviceMessages: function(field, force){

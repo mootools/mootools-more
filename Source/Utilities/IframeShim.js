@@ -29,6 +29,7 @@ var IframeShim = new Class({
 		if (this.occlude()) return this.occluded;
 		this.setOptions(options);
 		this.makeShim();
+		return this;
 	},
 
 	makeShim: function(){

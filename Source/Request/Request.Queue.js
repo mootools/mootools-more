@@ -111,7 +111,7 @@ Request.Queue = new Class({
 	},
 
 	runNext: function(name){
-		if (!this.queue.length) return;
+		if (!this.queue.length) return this;
 		if (!name){
 			this.queue[0]();
 		} else {

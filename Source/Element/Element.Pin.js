@@ -24,7 +24,7 @@ Script: Element.Pin.js
 	Element.implement({
 
 		pin: function(enable){
-			if (this.getStyle('display') == 'none') return;
+			if (this.getStyle('display') == 'none') return null;
 			
 			var p;
 			if (enable !== false){
