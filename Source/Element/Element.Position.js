@@ -11,12 +11,13 @@ Script: Element.Position.js
 
 (function(){
 
+var original = Element.prototype.position;
 
 Element.implement({
 
 	position: function(options){
-		//call setPosition if the options are x/y values
-		if (options && ($defined(options.x) || $defined(options.y))) return this.setPosition.apply(this, arguments);
+		//call original position if the options are x/y values
+		if (options && ($defined(options.x) || $defined(options.y))) return original ? original.apply(this, arguments) : this;
 		$each(options||{}, function(v, k){ if (!$defined(v)) delete options[k]; });
 		options = $merge({
 			relativeTo: document.body,
