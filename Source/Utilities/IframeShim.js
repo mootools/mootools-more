@@ -19,7 +19,7 @@ var IframeShim = new Class({
 		zIndex: null,
 		margin: 0,
 		offset: {x: 0, y: 0},
-		browsers: (Browser.Engine.trident4 || (Browser.Engine.gecko && !Browser.Engine.gecko19 && Browser.Platform.mac))
+		browsers: true || (Browser.Engine.trident4 || (Browser.Engine.gecko && !Browser.Engine.gecko19 && Browser.Platform.mac))
 	},
 
 	property: 'IframeShim',
@@ -34,18 +34,21 @@ var IframeShim = new Class({
 
 	makeShim: function(){
 		if(this.options.browsers){
-		  var zIndex = this.element.getStyle('zIndex').toInt();
+			var zIndex = this.element.getStyle('zIndex').toInt();
+
 			if (!zIndex){
 				var pos = this.element.getStyle('position');
 				if (pos == 'static' || !pos) this.element.setStyle('position', 'relative');
-				this.element.setStyle('zIndex', zIndex);
+				this.element.setStyle('zIndex', zIndex || 1);
 			}
-			this.shim = new Iframe({
+			zIndex = ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1;
+			if (zIndex < 0) zIndex = 1;
+			this.shim = new Element('iframe', {
 				src: (window.location.protocol == 'https') ? '://0' : 'javascript:void(0)',
 				scrolling: 'no',
 				frameborder: 0,
 				styles: {
-					zIndex: ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1,
+					zIndex: zIndex,
 					position: 'absolute',
 					border: 'none',
 					filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
