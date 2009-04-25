@@ -20,6 +20,7 @@ var OverText = new Class({
 		onFocus: $empty()
 		onTextHide: $empty(textEl, inputEl),
 		onTextShow: $empty(textEl, inputEl), */
+		element: 'label',
 		positionOptions: {
 			position: 'upperLeft',
 			edge: 'upperLeft',
@@ -51,7 +52,7 @@ var OverText = new Class({
 	attach: function(){
 		var val = this.options.textOverride || this.element.get('alt') || this.element.get('title');
 		if (!val) return;
-		this.text = new Element('div', {
+		this.text = new Element(this.options.element, {
 			'class': 'overTxtDiv',
 			styles: {
 				lineHeight: 'normal',
