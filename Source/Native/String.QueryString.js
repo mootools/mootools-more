@@ -1,4 +1,4 @@
-﻿/*
+/*
 Script: String.QueryString.js
 	...
 
