@@ -63,6 +63,7 @@ var OverText = new Class({
 				click: this.hide.pass(true, this)
 			}
 		}).inject(this.element, 'after');
+		if (this.options.element == 'label') this.text.set('for', this.element.get('id'));
 		this.element.addEvents({
 			focus: this.focus,
 			blur: this.assert,
