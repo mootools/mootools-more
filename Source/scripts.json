@@ -76,7 +76,7 @@
 		},
 
 		"URI": {
-			"deps": ["More", "Function", "Array", "Hash"],
+			"deps": ["More", "Function", "Array", "Hash", "Class.Refactor"],
 			"desc": "Provides methods useful in managing the window location and uris."
 		},
 
