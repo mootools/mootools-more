@@ -43,7 +43,9 @@ Request.Queue = new Class({
 	},
 
 	addRequests: function(obj){
-		$each(obj, this.addRequest, this);
+		$each(obj, function(req, name){
+			this.addRequest(name, req);
+		}, this);
 		return this;
 	},
 
