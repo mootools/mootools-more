@@ -19,9 +19,9 @@ Turns a querystring into an object of key/value pairs.
 
 ### Example
 
-	"apple=red&lemon=yellow".parseQuery();
+	"apple=red&lemon=yellow".parseQueryString();
 	//returns { apple: "red", lemon: "yellow }
-	var fruits = "apple=red&lemon=yellow".parseQuery();
+	var fruits = "apple=red&lemon=yellow".parseQueryString();
 	//returns fruits.apple > "red"
 
 ### Returns
