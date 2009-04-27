@@ -156,6 +156,7 @@ FormValidator.Inline = new Class({
 				else par.scrollTo(par.getScroll().x, failed.getPosition(par).y - 20);
 			}
 		}
+		return result;
 	}
 
 });

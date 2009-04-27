@@ -154,6 +154,9 @@ textarea {
 	padding: 4px;
 	height: 25px;
 }
+textarea.example {
+	height: auto;
+}
 #testFrameContainer textarea {
 	width: 391px;
 	height: 100px;
