@@ -23,10 +23,10 @@ Shows text over an input that disappears when the user clicks into it. The text 
 
 ### Options
 
-* element - (*string*) type of element to be used for the OverText; defaults to *label*
-* positionOptions - (*object*) data passed to [Element.position][]
+* element - (*string*) type of element to be used for the OverText; defaults to *label*.
+* positionOptions - (*object*) data passed to [Element.position][].
 * poll - (*boolean*) whether to periodically re-evaluate the input to set their overtext element's position and visibility (useful for login in fields that are often populated by remembered usernames and passwords by the browser); defaults to *false*.
-* pollInterval - (*integer*) the duration between polling in milliseconds; defaults to *250*
+* pollInterval - (*integer*) the duration between polling in milliseconds; defaults to *250*.
 
 ### Events
 
