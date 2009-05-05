@@ -43,7 +43,7 @@ FormValidator.Inline = new Class({
 		var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
 		var advice = this.getAdvice(className, field);
 		if(advice) {
-			advice = advice.clone(true).set('html', errorMsg).replaces(advice);
+			advice = advice.clone(true, true).set('html', errorMsg).replaces(advice);
 		} else {
 			advice = new Element('div', {
 				html: errorMsg,
@@ -129,7 +129,7 @@ FormValidator.Inline = new Class({
 		}
 	},
 
-	validate: function(field, force){
+	validateField: function(field, force){
 		var result = this.parent(field, force);
 		if (this.options.scrollToErrorsOnSubmit && !result){
 			var failed = $(this).getElement('.validation-failed');
