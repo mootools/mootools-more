@@ -15,5 +15,5 @@
 			}
 		}
 	],
-	otherScripts: ['Element.Dimensions']
+	otherScripts: ['Element.Dimensions', 'Fx.Reveal']
 }

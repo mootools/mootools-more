@@ -126,10 +126,15 @@ var FormValidator = new Class({
 
 	watchFields: function(fields){
 		fields.each(function(el){
-				el.addEvent('blur', this.validateField.pass([el, false], this));
+				el.addEvent('blur', this.validationMonitor.pass([el, false], this));
 			if (this.options.evaluateFieldsOnChange)
-				el.addEvent('change', this.validateField.pass([el, true], this));
+				el.addEvent('change', this.validationMonitor.pass([el, true], this));
 		}, this);
+	},
+
+	validationMonitor: function(){
+		$clear(this.timer);
+		this.timer = this.validateField.delay(50, this, arguments);
 	},
 
 	onSubmit: function(event){
