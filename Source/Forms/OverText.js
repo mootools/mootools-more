@@ -53,7 +53,7 @@ var OverText = new Class({
 		var val = this.options.textOverride || this.element.get('alt') || this.element.get('title');
 		if (!val) return;
 		this.text = new Element(this.options.element, {
-			'class': 'overTxtDiv',
+			'class': 'overTxtLabel',
 			styles: {
 				lineHeight: 'normal',
 				position: 'absolute'
@@ -157,6 +157,6 @@ OverText.update = function(){
 
 if (window.Fx && Fx.Reveal) {
 	Fx.Reveal.implement({
-		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed, .overTxtDiv' : false
+		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed, .overTxtLabel' : false
 	});
 }
