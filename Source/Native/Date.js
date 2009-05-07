@@ -348,49 +348,44 @@ $extend(Date, {
 
 	parsePatterns: [
 		{
-			//"1999-12-31"
-			re: /^(\d{4})[\.\-\/](\d{1,2})[\.\-\/](\d{1,2})$/,
-			handler: function(bits){
-				return new Date(bits[1], bits[2] - 1, bits[3]);
-			}
-		},
-		{
-			//"1999-12-31 23:59:59"
-			re: /^(\d{4})[\.\-\/](\d{1,2})[\.\-\/](\d{1,2})\s(\d{1,2}):(\d{1,2})(?:\:(\d{1,2}))?(\w{2})?$/,
+			// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59"
+			re: /^(\d{4})[\.\-\/](\d{1,2})[\.\-\/](\d{1,2})(?:,?\s(\d{1,2})(?:[:.](\d{1,2}))?(?:[:.](\d{1,2}))?\s?([a-z]{2})?)?$/,
 			handler: function(bits){
 				var d = new Date(bits[1], bits[2] - 1, bits[3]);
-				d.set('hr', bits[4]);
-				d.set('min', bits[5]);
-				d.set('sec', bits[6] || 0);
-				if (bits[7]) d.set('ampm', bits[7]);
+				if (bits[4]){
+					d.set({
+						hr: bits[4],
+						min: bits[5] || 0,
+						sec: bits[6] || 0
+					});
+					if (bits[7]) d.set('ampm', bits[7]);
+				}
 				return d;
 			}
 		},
+		
 		{
-			//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
-			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})$/,
+			// "12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
+			// above plus "10:45pm" ex: 12.31.08 10:45pm
+			re: /^(\d{1,2})[\.\-\/](\d{1,2})(?:[\.\-\/](\d{2,4}))?(?:,?\s(\d{1,2})(?:[:.](\d{1,2}))?(?:[:.](\d{1,2}))?\s?([a-z]{2})?)?$/,
 			handler: function(bits){
-				var d = new Date(bits[Date.orderIndex('year')],
-								 bits[Date.orderIndex('month')] - 1,
-								 bits[Date.orderIndex('date')]);
-				return Date.fixY2K(d);
-			}
-		},
-		//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
-		//above plus "10:45pm" ex: 12.31.08 10:45pm
-		{
-			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})\s(\d{1,2})[:\.](\d{1,2})(?:[\:\.](\d{1,2}))?(\w{2})?$/,
-			handler: function(bits){
-				var d = new Date(bits[Date.orderIndex('year')],
-								 bits[Date.orderIndex('month')] - 1,
-								 bits[Date.orderIndex('date')]);
-				d.set('hr', bits[4]);
-				d.set('min', bits[5]);
-				d.set('sec', bits[6] || 0);
-				if (bits[7]) d.set('ampm', bits[7]);
+				var d = new Date().set({
+					mo: bits[Date.orderIndex('month')] - 1,
+					date: bits[Date.orderIndex('date')]
+				});
+				if (bits[3]) d.set('year', bits[3]);
+				if (bits[4]){
+					d.set({
+						hr: bits[4],
+						min: bits[5] || 0,
+						sec: bits[6] || 0
+					});
+					if (bits[7]) d.set('ampm', bits[7]);
+				}
 				return Date.fixY2K(d);
 			}
 		}
+
 	]
 
 });
