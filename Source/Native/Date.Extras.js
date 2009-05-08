@@ -80,6 +80,49 @@ $extend(Date, {
 });
 
 
+Date.parsePatterns = [
+
+		{
+			// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59"
+			re: /^(\d{4})[\.\-\/](\d{1,2})[\.\-\/](\d{1,2})(?:,?\s(\d{1,2})(?:[:.](\d{1,2}))?(?:[:.](\d{1,2}))?\s?([a-z]{2})?)?$/,
+			handler: function(bits){
+				var d = new Date(bits[1], bits[2] - 1, bits[3]);
+				if (bits[4]){
+					d.set({
+						hr: bits[4],
+						min: bits[5] || 0,
+						sec: bits[6] || 0
+					});
+					if (bits[7]) d.set('ampm', bits[7]);
+				}
+				return d;
+			}
+		},
+		
+		{
+			// "12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
+			// above plus "10:45pm" ex: 12.31.08 10:45pm
+			re: /^(\d{1,2})[\.\-\/](\d{1,2})(?:[\.\-\/](\d{2,4}))?(?:,?\s(\d{1,2})(?:[:.](\d{1,2}))?(?:[:.](\d{1,2}))?\s?([a-z]{2})?)?$/,
+			handler: function(bits){
+				var d = new Date().set({
+					mo: bits[Date.orderIndex('month')] - 1,
+					date: bits[Date.orderIndex('date')]
+				});
+				if (bits[3]) d.set('year', bits[3]);
+				if (bits[4]){
+					d.set({
+						hr: bits[4],
+						min: bits[5] || 0,
+						sec: bits[6] || 0
+					});
+					if (bits[7]) d.set('ampm', bits[7]);
+				}
+				return Date.fixY2K(d);
+			}
+		}
+
+];
+
 Date.parsePatterns.extend([
 
 	{
@@ -104,9 +147,37 @@ Date.parsePatterns.extend([
 			return d;
 		}
 	},
+	
+	{
+		// "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
+		re: /^(\d{1,2})(?:st|nd|rd|th)?\s([a-z]+)(?:,?\s(\d{4}))?(,?\s\d{1,2}(?:[:.]\d{1,2})?(?:[:.]\d{1,2})?\s?[a-z]{2}?)?$/i,
+		handler: function(bits){
+			var str = (bits[3] || new Date().get('year')) + '-' + (Date.parseMonth(bits[2], true) + 1) + '-' + bits[1];
+			if (bits[4]) str += bits[4];
+			return Date.parse(str);
+		}
+	},
 
 	{
-		//"today"
+		// same as above with month and day switched
+		re: /^([a-z]+)\s(\d{1,2})(?:st|nd|rd|th)?(?:,?\s(\d{4}))?(,?\s\d{1,2}(?:[:.]\d{1,2})?(?:[:.]\d{1,2})?\s?[a-z]{2}?)?$/i,
+		handler: function(bits){
+			var str = (bits[3] || new Date().get('year')) + '-' + (Date.parseMonth(bits[1], true) + 1) + '-' + bits[2];
+			if (bits[4]) str += bits[4];
+			return Date.parse(str);
+		}
+	},
+	
+	{
+		// 4th, 23rd
+		re: /^(\d{1,2})(?:st|nd|rd|th)?$/i,
+		handler: function(bits){
+			return new Date().set('date', bits[1]);
+		}
+	},
+
+	{
+		// today
 		re: /^tod/i,
 		handler: function(){
 			return new Date();
@@ -114,7 +185,7 @@ Date.parsePatterns.extend([
 	},
 
 	{
-		//"tomorow"
+		// tomorrow
 		re: /^tom/i,
 		handler: function(){
 			return new Date().increment();
@@ -122,7 +193,7 @@ Date.parsePatterns.extend([
 	},
 
 	{
-		//"yesterday"
+		// yesterday
 		re: /^yes/i,
 		handler: function(){
 			return new Date().decrement();
@@ -130,86 +201,23 @@ Date.parsePatterns.extend([
 	},
 
 	{
-		//4th, 23rd
-		re: /^(\d{1,2})(st|nd|rd|th)?$/i,
-		handler: function(bits){
-			var d = new Date();
-			d.set('date', bits[1].toInt());
-			return d;
-		}
-	},
-
-	{
-		//4th Jan, 23rd May
-		re: /^(\d{1,2})(?:st|nd|rd|th)? (\w+)$/i,
-		handler: function(bits){
-			var d = new Date();
-			d.set('mo', Date.parseMonth(bits[2], true), bits[1].toInt());
-			return d;
-		}
-	},
-
-	{
-		//4th Jan 2000, 23rd May 2004
-		re: /^(\d{1,2})(?:st|nd|rd|th)? (\w+),? (\d{4})$/i,
-		handler: function(bits){
-			var d = new Date();
-			d.set('mo', Date.parseMonth(bits[2], true), bits[1].toInt());
-			d.setYear(bits[3]);
-			return d;
-		}
-	},
-
-	{
-		//Jan 4th
-		re: /^(\w+) (\d{1,2})(?:st|nd|rd|th)?,? (\d{4})$/i,
-		handler: function(bits){
-			var d = new Date();
-			d.set('mo', Date.parseMonth(bits[1], true), bits[2].toInt());
-			d.setYear(bits[3]);
-			return d;
-		}
-	},
-
-	{
-		//Jan 4th 2003
-		re: /^next (\w+)$/i,
+		// next Wednesday
+		re: /^next ([a-z]+)$/i,
 		handler: function(bits){
 			var d = new Date();
 			var day = d.getDay();
 			var newDay = Date.parseDay(bits[1], true);
 			var addDays = newDay - day;
-			if (newDay <= day){
-				addDays += 7;
-			}
-			d.set('date', d.getDate() + addDays);
-			return d;
+			if (newDay <= day) addDays += 7;
+			return d.set('date', d.getDate() + addDays);
 		}
 	},
 
 	{
-		//4 May 08:12
-		re: /^\d+\s[a-zA-z]..\s\d.\:\d.$/,
+		// last Wednesday
+		re: /^last ([a-z]+)$/i,
 		handler: function(bits){
-			var d = new Date();
-			bits = bits[0].split(' ');
-			d.set('date', bits[0]);
-			var m;
-			Date.getMsg('months').each(function(mo, i){
-				if (new RegExp('^' + bits[1]).test(mo)) m = i;
-			});
-			d.set('mo', m);
-			d.set('hr', bits[2].split(':')[0]);
-			d.set('min', bits[2].split(':')[1]);
-			d.set('ms', 0);
-			return d;
-		}
-	},
-
-	{
-		re: /^last (\w+)$/i,
-		handler: function(bits){
-			return Date.parse('next ' + bits[0]).decrement('day', 7);
+			return Date.parse('next ' + bits[1]).decrement('day', 7);
 		}
 	}
 
