@@ -362,7 +362,7 @@ $extend(Date, {
 		var parsed = [null];
 
 		format = (format.source || format)	// allow format to be regex
-		 .replace(/%([xX])/g,
+		 .replace(/%([xXo])/g,
 			function($1, $2){
 				return formats[$2] ? formats[$2].source : $2;
 			}
