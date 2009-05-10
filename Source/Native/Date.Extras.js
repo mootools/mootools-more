@@ -80,7 +80,7 @@ $extend(Date, {
 });
 
 
-Date.parsePatterns.extend([
+Date.defineParsers(
 
 	{
 		// yyyy-mm-ddTHH:MM:SS-0500 (ISO8601) i.e.2007-04-17T23:15:22Z
@@ -102,34 +102,6 @@ Date.parsePatterns.extend([
 			//offset -= d.getTimezoneOffset();
 			d.setTime((d * 1) + (offset * 60 * 1000).toInt());
 			return d;
-		}
-	},
-	
-	{
-		// "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
-		re: /^(\d{1,2})(?:st|nd|rd|th)?\s([a-z]+)(?:,?\s(\d{4}))?(,?\s\d{1,2}(?:[:.]\d{1,2})?(?:[:.]\d{1,2})?\s?(?:[a-z]{2})?)?$/i,
-		handler: function(bits){
-			var str = (bits[3] || new Date().get('year')) + '-' + (Date.parseMonth(bits[2], true) + 1) + '-' + bits[1];
-			if (bits[4]) str += bits[4];
-			return Date.parse(str);
-		}
-	},
-
-	{
-		// same as above with month and day switched
-		re: /^([a-z]+)\s(\d{1,2})(?:st|nd|rd|th)?(?:,?\s(\d{4}))?(,?\s\d{1,2}(?:[:.]\d{1,2})?(?:[:.]\d{1,2})?\s?(?:[a-z]{2})?)?$/i,
-		handler: function(bits){
-			var str = (bits[3] || new Date().get('year')) + '-' + (Date.parseMonth(bits[1], true) + 1) + '-' + bits[2];
-			if (bits[4]) str += bits[4];
-			return Date.parse(str);
-		}
-	},
-	
-	{
-		// 4th, 23rd
-		re: /^(\d{1,2})(?:st|nd|rd|th)?$/i,
-		handler: function(bits){
-			return new Date().set('date', bits[1]);
 		}
 	},
 
@@ -178,4 +150,4 @@ Date.parsePatterns.extend([
 		}
 	}
 
-]);
+);

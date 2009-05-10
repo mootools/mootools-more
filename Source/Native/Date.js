@@ -350,48 +350,118 @@ $extend(Date, {
 		return Date.getMsg('dateOrder').indexOf(unit) + 1;
 	},
 
-	parsePatterns: [
-		
-		{
-			// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59"
-			re: /^(\d{4})[\.\-\/](\d{1,2})[\.\-\/](\d{1,2})(?:,?\s(\d{1,2})(?:[:.](\d{1,2}))?(?:[:.](\d{1,2}))?\s?([a-z]{2})?)?$/i,
-			handler: function(bits){
-				var d = new Date(bits[1], bits[2] - 1, bits[3]);
-				if (bits[4]){
-					d.set({
-						hr: bits[4],
-						min: bits[5] || 0,
-						sec: bits[6] || 0
-					});
-					if (bits[7]) d.set('ampm', bits[7]);
-				}
-				return d;
-			}
-		},
-		
-		{
-			// "12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008", "12.31", "12-31", "12/31"
-			// above plus "10:45pm" ex: 12.31.08 10:45pm
-			re: /^(\d{1,2})[\.\-\/](\d{1,2})(?:[\.\-\/](\d{2,4}))?(?:,?\s(\d{1,2})(?:[:.](\d{1,2}))?(?:[:.](\d{1,2}))?\s?([a-z]{2})?)?$/i,
-			handler: function(bits){
-				var d = new Date().set({
-					mo: bits[Date.orderIndex('month')] - 1,
-					date: bits[Date.orderIndex('date')]
-				});
-				if (bits[3]) d.set('year', bits[3]);
-				if (bits[4]){
-					d.set({
-						hr: bits[4],
-						min: bits[5] || 0,
-						sec: bits[6] || 0
-					});
-					if (bits[7]) d.set('ampm', bits[7]);
-				}
-				return Date.fixY2K(d);
-			}
+	parsePatterns: [],
+	
+	defineParser: function(format, custom){
+
+		if (format.re && format.handler){
+			Date.parsePatterns.push(format);
+			return Date;
 		}
 
-	]
+		var parsed = [null];
+
+		format = (format.source || format)	// allow format to be regex
+		 .replace(/%([xX])/g,
+			function($1, $2){
+				return formats[$2] ? formats[$2].source : $2;
+			}
+		).replace(/\((?!\?)/g, '(?:')		// make all groups non-capturing
+		 .replace(/ (?!\?|\*)/g, ',?\\s+')	// be forgiving with spaces and commas
+		 .replace(/%([aAbBcdHIjmMpSUWwyYTZ%])/g,
+			function($1, $2){
+				if (keys[$2]){
+					parsed.push($2);
+					return '(' + keys[$2].source + ')';
+				}
+				return $2;
+			}
+		);
+
+		Date.parsePatterns.push({
+			re: new RegExp('^\\s*' + format + '\\s*$', 'i'),
+
+			handler: function(bits){
+				var date = new Date;
+
+				if (custom) date = custom.call(date, bits) || date;
+
+				for (var i = 1; i < parsed.length; i++)
+					date = handle.call(date, parsed[i], bits[i]);
+
+				return date;
+			}
+		});
+
+		return Date;
+	},
+	
+	defineParsers: function(){
+		Array.flatten(arguments).each(function(format){
+			Date.defineParser(format);
+		});
+		return Date;
+	}
+
+});
+
+var formats = {
+	x: /%m[-.\/]%d[-.\/]%y/,
+	X: /%H([.:]%M)?([.:]%S)?\s*%p?/,
+	o: /(st|nd|rd|th)/
+};
+
+var keys = {
+	a: /[a-z]{3,}/,
+	d: /\d{1,2}/,
+	p: /[ap]m/,
+	y: /\d{2}|\d{4}/,
+	Y: /\d{4}/
+};
+
+keys.B = keys.b = keys.A = keys.a;
+keys.H = keys.I = keys.m = keys.M = keys.S = keys.d;
+
+var handle = function(key, value){
+	
+	if (!value){
+		if (/[HIMS]/.test(key)) value = 0;
+		else if (key == 'd') value = 1;
+		else return this;
+	}
+	
+	switch(key){
+		case 'a': case 'A': return this.set('day', Date.parseDay(value, true));
+		case 'b': case 'B': return this.set('mo', Date.parseMonth(value, true));
+		case 'd': 			return this.set('date', value);
+		case 'H': case 'I': return this.set('hr', value);
+		case 'm':			return this.set('mo', value - 1);
+		case 'M':			return this.set('min', value);
+		case 'p':			return this.set('ampm', value);
+		case 'S':			return this.set('sec', value);
+		case 'w':			return this.set('day', value);
+		case 'Y':			return this.set('year', value);
+		case 'y':			this.setYear(value); return Date.fixY2K(this);
+	}
+	
+	return this;
+	
+};
+
+Date.defineParsers(
+	'%Y[-./]%m[-./]%d( %X)?',	// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59"
+	'%d%o?( %b)?( %Y)?( %X)?',	// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
+	'%b( %d%o?)?( %Y)?( %X)?',	// "December 1999" and same as above with month and day switched
+	'%a',						// "Wed", "Wednesday"
+	'%X'						// "5pm", "5:45 pm", "17:45"
+);
+
+// "12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008", "12.31", "12-31", "12/31"
+// above plus "10:45pm" ex: 12.31.08 10:45pm
+// using custom callback to handle localization differences
+Date.defineParser('%x( %X)?', function(bits){
+	
+	bits.splice(1, 3, bits[Date.orderIndex('month')], bits[Date.orderIndex('date')], bits[Date.orderIndex('year')]);
 
 });
 
