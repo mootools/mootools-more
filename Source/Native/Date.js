@@ -368,7 +368,7 @@ $extend(Date, {
 			}
 		).replace(/\((?!\?)/g, '(?:')		// make all groups non-capturing
 		 .replace(/ (?!\?|\*)/g, ',?\\s+')	// be forgiving with spaces and commas
-		 .replace(/%([aAbBcdHIjmMpSUWwyYTZ%])/g,
+		 .replace(/%([a-z%])/gi,
 			function($1, $2){
 				if (keys[$2]){
 					parsed.push($2);
@@ -380,10 +380,10 @@ $extend(Date, {
 
 		Date.parsePatterns.push({
 			re: new RegExp('^\\s*' + format + '\\s*$', 'i'),
-
+			
 			handler: function(bits){
 				var date = new Date;
-
+				
 				if (custom) date = custom.call(date, bits) || date;
 
 				for (var i = 1; i < parsed.length; i++)
@@ -407,7 +407,7 @@ $extend(Date, {
 
 var formats = {
 	x: /%m[-.\/]%d[-.\/]%y/,
-	X: /%H([.:]%M)?([.:]%S)?\s*%p?/,
+	X: /%H([.:]%M)?([.:]%S([.:]%s)?)?\s*%p?%T?/,
 	o: /(st|nd|rd|th)/
 };
 
@@ -415,8 +415,10 @@ var keys = {
 	a: /[a-z]{3,}/,
 	d: /\d{1,2}/,
 	p: /[ap]m/,
+	s: /\d+/,
 	y: /\d{2}|\d{4}/,
-	Y: /\d{4}/
+	Y: /\d{4}/,
+	T: /Z|[+-]\d{2}(?::?\d{2})?/
 };
 
 keys.B = keys.b = keys.A = keys.a;
@@ -425,7 +427,7 @@ keys.H = keys.I = keys.m = keys.M = keys.S = keys.d;
 var handle = function(key, value){
 	
 	if (!value){
-		if (/[HIMS]/.test(key)) value = 0;
+		if (/[HIMSs]/.test(key)) value = 0;
 		else if (key == 'd') value = 1;
 		else return this;
 	}
@@ -439,9 +441,15 @@ var handle = function(key, value){
 		case 'M':			return this.set('min', value);
 		case 'p':			return this.set('ampm', value);
 		case 'S':			return this.set('sec', value);
+		case 's': 			return this.set('ms', ('0.' + value) * 1000);
 		case 'w':			return this.set('day', value);
 		case 'Y':			return this.set('year', value);
 		case 'y':			this.setYear(value); return Date.fixY2K(this);
+		case 'T':
+			if (value == 'Z') value = '+00';
+			var offset = value.match(/([+-]\d{2}):?(\d{2})?/);
+			offset = offset[1] * 60 + (offset[2] || 0).toInt() + this.getTimezoneOffset();
+			return this.set('time', (this * 1) + offset * 60000);
 	}
 	
 	return this;
@@ -449,11 +457,10 @@ var handle = function(key, value){
 };
 
 Date.defineParsers(
-	'%Y[-./]%m[-./]%d( %X)?',	// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59"
-	'%d%o?( %b)?( %Y)?( %X)?',	// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
-	'%b( %d%o?)?( %Y)?( %X)?',	// "December 1999" and same as above with month and day switched
-	'%a',						// "Wed", "Wednesday"
-	'%X'						// "5pm", "5:45 pm", "17:45"
+	'%Y([-./]%m([-./]%d((T| )%X)?)?)?',		// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59", ISO8601
+	'%d%o?( %b)?( %Y)?( %X)?',				// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
+	'%b( %d%o?)?( %Y)?( %X)?',				// "December 1999" and same as above with month and day switched
+	'%a'									// "Wed", "Wednesday"
 );
 
 // "12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008", "12.31", "12-31", "12/31"

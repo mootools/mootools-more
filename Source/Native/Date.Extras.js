@@ -83,70 +83,29 @@ $extend(Date, {
 Date.defineParsers(
 
 	{
-		// yyyy-mm-ddTHH:MM:SS-0500 (ISO8601) i.e.2007-04-17T23:15:22Z
-		// inspired by: http://delete.me.uk/2005/03/iso8601.html
-		re: /^(\d{4})(?:-?(\d{2})(?:-?(\d{2})(?:[T ](\d{2})(?::?(\d{2})(?::?(\d{2})(?:\.(\d+))?)?)?(?:Z|(?:([-+])(\d{2})(?::?(\d{2}))?)?)?)?)?)?$/,
+		// "today", "tomorrow", "yesterday"
+		re: /^tod|tom|yes/i,
 		handler: function(bits){
-			var offset = 0;
-			var d = new Date(bits[1], 0, 1);
-			if (bits[3]) d.set('date', bits[3]);
-			if (bits[2]) d.set('mo', bits[2] - 1);
-			if (bits[4]) d.set('hr', bits[4]);
-			if (bits[5]) d.set('min', bits[5]);
-			if (bits[6]) d.set('sec', bits[6]);
-			if (bits[7]) d.set('ms', ('0.' + bits[7]).toInt() * 1000);
-			if (bits[9]){
-				offset = (bits[9].toInt() * 60) + bits[10].toInt();
-				offset *= ((bits[8] == '-') ? 1 : -1);
+			var d = new Date();
+			switch(bits[0]){
+				case 'tom': return d.increment();
+				case 'yes': return d.decrement();
+				default: 	return d;
 			}
-			//offset -= d.getTimezoneOffset();
-			d.setTime((d * 1) + (offset * 60 * 1000).toInt());
-			return d;
 		}
 	},
 
 	{
-		// today
-		re: /^tod/i,
-		handler: function(){
-			return new Date();
-		}
-	},
-
-	{
-		// tomorrow
-		re: /^tom/i,
-		handler: function(){
-			return new Date().increment();
-		}
-	},
-
-	{
-		// yesterday
-		re: /^yes/i,
-		handler: function(){
-			return new Date().decrement();
-		}
-	},
-
-	{
-		// next Wednesday
-		re: /^next ([a-z]+)$/i,
+		// "next Wednesday", "last Thursday"
+		re: /^(next|last) ([a-z]+)$/i,
 		handler: function(bits){
 			var d = new Date();
 			var day = d.getDay();
-			var newDay = Date.parseDay(bits[1], true);
+			var newDay = Date.parseDay(bits[2], true);
 			var addDays = newDay - day;
 			if (newDay <= day) addDays += 7;
+			if (bits[1] == 'last') addDays -= 7;
 			return d.set('date', d.getDate() + addDays);
-		}
-	},
-
-	{
-		// last Wednesday
-		re: /^last ([a-z]+)$/i,
-		handler: function(bits){
-			return Date.parse('next ' + bits[1]).decrement('day', 7);
 		}
 	}
 
