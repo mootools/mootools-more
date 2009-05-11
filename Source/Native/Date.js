@@ -290,13 +290,12 @@ $extend(Date, {
 		var t = $type(from);
 		if (t == 'number') return new Date(from);
 		if (t != 'string') return from;
-		if (!from.length) return null;
 		from = from.clean();
+		if (!from.length) return null;
 		var parsed;
-		Date.parsePatterns.each(function(pattern, i){
-			if (parsed) return;
+		Date.parsePatterns.some(function(pattern){
 			var r = pattern.re.exec(from);
-			if (r) parsed = pattern.handler(r);
+			return (r) ? (parsed = pattern.handler(r)) : false;
 		});
 		return parsed || new Date(nativeParse(from));
 	},
@@ -429,7 +428,7 @@ var handle = function(key, value){
 	
 	if (!value){
 		if (/[HIMSs]/.test(key)) value = 0;
-		else if (key == 'd') value = 1;
+		else if (/[md]/.test(key)) value = 1;
 		else return this;
 	}
 	
