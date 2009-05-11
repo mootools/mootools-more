@@ -291,6 +291,7 @@ $extend(Date, {
 		if (t == 'number') return new Date(from);
 		if (t != 'string') return from;
 		if (!from.length) return null;
+		from = from.clean();
 		var parsed;
 		Date.parsePatterns.each(function(pattern, i){
 			if (parsed) return;
@@ -367,7 +368,7 @@ $extend(Date, {
 				return formats[$2] ? formats[$2].source : $2;
 			}
 		).replace(/\((?!\?)/g, '(?:')		// make all groups non-capturing
-		 .replace(/ (?!\?|\*)/g, ',?\\s+')	// be forgiving with spaces and commas
+		 .replace(/ (?!\?|\*)/g, ',? ')		// be forgiving with spaces and commas
 		 .replace(/%([a-z%])/gi,
 			function($1, $2){
 				if (keys[$2]){
@@ -379,7 +380,7 @@ $extend(Date, {
 		);
 
 		Date.parsePatterns.push({
-			re: new RegExp('^\\s*' + format + '\\s*$', 'i'),
+			re: new RegExp('^' + format + '$', 'i'),
 			
 			handler: function(bits){
 				var date = new Date;
@@ -407,7 +408,7 @@ $extend(Date, {
 
 var formats = {
 	x: /%m[-.\/]%d[-.\/]%y/,
-	X: /%H([.:]%M)?([.:]%S([.:]%s)?)?\s*%p?%T?/,
+	X: /%H([.:]%M)?([.:]%S([.:]%s)?)?\s?%p?%T?/,
 	o: /(st|nd|rd|th)/
 };
 
