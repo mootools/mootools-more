@@ -314,8 +314,14 @@ describe('Date.parse', {
 			MooTools.lang.setLanguage(lang);
 			var d = new Date(2000, 11, 2, 0, 0, 0, 0);
 			value_of(Date.parse(d.format('%x')).clearTime()).should_be(d);
+			value_of(Date.parse(d.format('%b %d %Y')).clearTime()).should_be(d);
+			value_of(Date.parse(d.format('%d %B %Y')).clearTime()).should_be(d);
 			d = new Date(2000, 11, 2, 22, 45, 0, 0);
 			value_of(Date.parse(d.format('%x %X')).set('sec',0).set('ms',0)).should_be(d);
+			value_of(Date.parse(d.format('%B %d %Y %X')).set('sec',0).set('ms',0)).should_be(d);
+			value_of(Date.parse(d.format('%d %b %Y %H:%M')).set('sec',0).set('ms',0)).should_be(d);
+			value_of(Date.parse(d.format('iso8601')).set('sec', 0).set('ms', 0)).should_be(d);
+			value_of(Date.parse(d.format('compact')).set('sec', 0).set('ms', 0)).should_be(d);
 		});
 	}
 
