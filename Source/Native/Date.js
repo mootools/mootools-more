@@ -352,7 +352,7 @@ $extend(Date, {
 
 	parsePatterns: [],
 	
-	defineParser: function(format, custom){
+	defineParser: function(format){
 		Date.parsePatterns.push( (format.re && format.handler) ? format : build(format) );
 		return Date;
 	},
@@ -375,7 +375,7 @@ var keys = {
 	Y: /\d{4}/,
 	T: /Z|[+-]\d{2}(?::?\d{2})?/,
 	
-	o: /[^\d\s]+/,
+	o: /[^\d\s]*/,
 	X: /%H([.:]%M)?([.:]%S([.:]%s)?)?\s?%p?\s?%T?/
 };
 
@@ -393,7 +393,11 @@ var formats = function(key){
 	
 };
 
+var lang;
+
 var build = function(format){
+	
+	if (!lang) return {format: format};	// wait until language is set
 	
 	var parsed = [null];
 
@@ -419,8 +423,6 @@ var build = function(format){
 		
 		handler: function(bits){
 			var date = new Date;
-			
-			if (custom) date = custom.call(date, bits) || date;
 
 			for (var i = 1; i < parsed.length; i++)
 				date = handle.call(date, parsed[i], bits[i]);
@@ -466,14 +468,15 @@ var handle = function(key, value){
 Date.defineParsers(
 	'%Y([-./]%m([-./]%d((T| )%X)?)?)?',		// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59", ISO8601
 	'%x( %X)?',								// "12/31", "12.31.99", "12-31-1999", "12/31/2008 11:59 PM"
-	'%d%o?( %b( %Y)?)?( %X)?',				// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
-	'%b( %d%o?)?( %Y)?( %X)?',				// "December 1999" and same as above with month and day switched
-	'%Y%m%dT%H%M%S',						// compact
-	'%a'									// "Wed", "Wednesday"
+	'%d%o( %b( %Y)?)?( %X)?',				// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
+	'%b( %d%o)?( %Y)?( %X)?',				// "December 1999" and same as above with month and day switched
+	'%Y%m%dT%H%M%S'							// compact
 );
 
-MooTools.lang.addEvent('langChange', function(){
+MooTools.lang.addEvent('langChange', function(language){
+	if (!MooTools.lang.get('Date')) return;
 	
+	lang = language;
 	Date.parsePatterns.each(function(pattern, i){
 		if (pattern.format) Date.parsePatterns[i] = build(pattern.format);
 	});
