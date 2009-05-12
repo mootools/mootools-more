@@ -353,46 +353,7 @@ $extend(Date, {
 	parsePatterns: [],
 	
 	defineParser: function(format, custom){
-
-		if (format.re && format.handler){
-			Date.parsePatterns.push(format);
-			return Date;
-		}
-
-		var parsed = [null];
-
-		format = (format.source || format)	// allow format to be regex
-		 .replace(/%([xXo])/g,
-			function($1, $2){
-				return formats[$2] ? formats[$2].source : $2;
-			}
-		).replace(/\((?!\?)/g, '(?:')		// make all groups non-capturing
-		 .replace(/ (?!\?|\*)/g, ',? ')		// be forgiving with spaces and commas
-		 .replace(/%([a-z%])/gi,
-			function($1, $2){
-				if (keys[$2]){
-					parsed.push($2);
-					return '(' + keys[$2].source + ')';
-				}
-				return $2;
-			}
-		);
-
-		Date.parsePatterns.push({
-			re: new RegExp('^' + format + '$', 'i'),
-			
-			handler: function(bits){
-				var date = new Date;
-				
-				if (custom) date = custom.call(date, bits) || date;
-
-				for (var i = 1; i < parsed.length; i++)
-					date = handle.call(date, parsed[i], bits[i]);
-
-				return date;
-			}
-		});
-
+		Date.parsePatterns.push( (format.re && format.handler) ? format : build(format) );
 		return Date;
 	},
 	
@@ -405,24 +366,70 @@ $extend(Date, {
 
 });
 
-var formats = {
-	x: /%m[-.\/]%d[-.\/]%y/,
-	X: /%H([.:]%M)?([.:]%S([.:]%s)?)?\s?%p?%T?/,
-	o: /(st|nd|rd|th)/
-};
-
 var keys = {
 	a: /[a-z]{3,}/,
 	d: /\d{1,2}/,
-	p: /[ap]m/,
+	p: /[ap]\.?m\.?/,
 	s: /\d+/,
 	y: /\d{2}|\d{4}/,
 	Y: /\d{4}/,
-	T: /Z|[+-]\d{2}(?::?\d{2})?/
+	T: /Z|[+-]\d{2}(?::?\d{2})?/,
+	
+	o: /[^\d\s]+/,
+	X: /%H([.:]%M)?([.:]%S([.:]%s)?)?\s?%p?\s?%T?/
 };
 
 keys.B = keys.b = keys.A = keys.a;
 keys.H = keys.I = keys.m = keys.M = keys.S = keys.d;
+
+var formats = function(key){
+	
+	if (key == 'x')
+		return (Date.orderIndex('month') == 1) ?
+			'%m[.-/]%d([.-/]%y)?' :
+			'%d[.-/]%m([.-/]%y)?';
+	
+	return keys[key] ? keys[key].source : null;
+	
+};
+
+var build = function(format){
+	
+	var parsed = [null];
+
+	var re = (format.source || format)	// allow format to be regex
+	 .replace(/%([xXo])/g,
+		function($1, $2){
+			return formats($2) || $2;
+		}
+	).replace(/\((?!\?)/g, '(?:')		// make all groups non-capturing
+	 .replace(/ (?!\?|\*)/g, ',? ')		// be forgiving with spaces and commas
+	 .replace(/%([a-z%])/gi,
+		function($1, $2){
+			var f = formats($2);
+			if (!f) return $2;
+			parsed.push($2);
+			return '(' + f + ')';
+		}
+	);
+	
+	return {
+		format: format,
+		re: new RegExp('^' + re + '$', 'i'),
+		
+		handler: function(bits){
+			var date = new Date;
+			
+			if (custom) date = custom.call(date, bits) || date;
+
+			for (var i = 1; i < parsed.length; i++)
+				date = handle.call(date, parsed[i], bits[i]);
+
+			return date;
+		}
+	};
+	
+};
 
 var handle = function(key, value){
 	
@@ -439,7 +446,7 @@ var handle = function(key, value){
 		case 'H': case 'I': return this.set('hr', value);
 		case 'm':			return this.set('mo', value - 1);
 		case 'M':			return this.set('min', value);
-		case 'p':			return this.set('ampm', value);
+		case 'p':			return this.set('ampm', value.replace(/\./g, ''));
 		case 'S':			return this.set('sec', value);
 		case 's': 			return this.set('ms', ('0.' + value) * 1000);
 		case 'w':			return this.set('day', value);
@@ -458,18 +465,19 @@ var handle = function(key, value){
 
 Date.defineParsers(
 	'%Y([-./]%m([-./]%d((T| )%X)?)?)?',		// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59", ISO8601
-	'%d%o?( %b)?( %Y)?( %X)?',				// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
+	'%x( %X)?',								// "12/31", "12.31.99", "12-31-1999", "12/31/2008 11:59 PM"
+	'%d%o?( %b( %Y)?)?( %X)?',				// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
 	'%b( %d%o?)?( %Y)?( %X)?',				// "December 1999" and same as above with month and day switched
+	'%Y%m%dT%H%M%S',						// compact
 	'%a'									// "Wed", "Wednesday"
 );
 
-// "12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008", "12.31", "12-31", "12/31"
-// above plus "10:45pm" ex: 12.31.08 10:45pm
-// using custom callback to handle localization differences
-Date.defineParser('%x( %X)?', function(bits){
+MooTools.lang.addEvent('langChange', function(){
 	
-	bits.splice(1, 3, bits[Date.orderIndex('month')], bits[Date.orderIndex('date')], bits[Date.orderIndex('year')]);
-
+	Date.parsePatterns.each(function(pattern, i){
+		if (pattern.format) Date.parsePatterns[i] = build(pattern.format);
+	});
+	
 });
 
 })();

@@ -99,6 +99,7 @@ describe('Date.extras.parse', {
 			value_of(Date.parse(d.format('%B %d %Y %X')).set('sec',0).set('ms',0)).should_be(d);
 			value_of(Date.parse(d.format('%d %b %Y %H:%M')).set('sec',0).set('ms',0)).should_be(d);
 			value_of(Date.parse(d.format('iso8601')).set('sec', 0).set('ms', 0)).should_be(d);
+			value_of(Date.parse(d.format('compact')).set('sec', 0).set('ms', 0)).should_be(d);
 		});
 	}
 
