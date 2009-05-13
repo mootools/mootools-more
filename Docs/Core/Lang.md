@@ -110,8 +110,8 @@ Retrieves a set of language properties for the current language.
 
 ### Example
 
-	MooTools.lang.get('Date', 'months', 0); //"January"
 	MooTools.lang.get('Date', 'dayAgo'); //"1 day ago"
+	MooTools.lang.get('ordinal', 1); //"st" > as in "1st"
 	MooTools.lang.get('Date', 'dayAgo', 'foo'); //foo is ignored
 	MooTools.lang.get('Date'); //returns the object of key/values for Date in the current language
 
