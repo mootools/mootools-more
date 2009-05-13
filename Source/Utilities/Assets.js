@@ -77,13 +77,14 @@ var Asset = {
 		options = $merge({
 			onComplete: $empty,
 			onProgress: $empty,
-			onError: $empty
+			onError: $empty,
+			properties: {}
 		}, options);
 		sources = $splat(sources);
 		var images = [];
 		var counter = 0;
 		return new Elements(sources.map(function(source){
-			return Asset.image(source, {
+			return Asset.image(source, $extend(options.properties, {
 				onload: function(){
 					options.onProgress.call(this, counter, sources.indexOf(source));
 					counter++;
@@ -94,7 +95,7 @@ var Asset = {
 					counter++;
 					if (counter == sources.length) options.onComplete();
 				}
-			});
+			}));
 		}));
 	}
 
