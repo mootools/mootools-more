@@ -273,7 +273,7 @@ $extend(Date, {
 	},
 
 	isLeapYear: function(yr){
-		return new Date(yr , 1, 29).getDate() == 29;
+		return ((yr % 4 == 0) && (yr % 100 != 0)) || (yr % 400 == 0);
 	},
 
 	fixY2K: function(d){
