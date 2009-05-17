@@ -205,7 +205,7 @@ Date.implement({
 					case 'j': return zeroize(d.get('dayofyear'), 3);
 					case 'm': return zeroize((d.get('mo') + 1), 2);
 					case 'M': return zeroize(d.get('min'), 2);
-					case 'p': return Date.getMsg(d.get('hr') < 12 ? 'AM' : 'PM');
+					case 'p': return Date.getMsg(d.get('ampm'));
 					case 'S': return zeroize(d.get('seconds'), 2);
 					case 'U': return zeroize(d.get('week'), 2);
 					case 'W': throw new Error('%W is not supported yet');
@@ -230,6 +230,10 @@ Date.implement({
 		else if (this.format('%H').toInt() < 12 && ampm == 'PM')
 			return this.increment('hour', 12);
 		return this;
+	},
+	
+	getAMPM: function(){
+		return (this.get('hr') < 12) ? 'AM' : 'PM';
 	}
 
 });
