@@ -14,9 +14,7 @@ Script: Date.js
 
 (function(){
 
-new Native({name: 'Date', initialize: Date, protect: true});
-
-['now','parse','UTC'].each(function(method){
+['now', 'parse', 'UTC'].each(function(method){
 	Native.genericize(Date, method, true);
 });
 
@@ -58,10 +56,10 @@ Date.implement({
 		return this;
 	},
 
-	get: function(key){
-		key = key.toLowerCase();
+	get: function(prop){
+		prop = prop.toLowerCase();
 		var m = Date.Methods;
-		if (m[key]) return this['get' + m[key]]();
+		if (m[prop]) return this['get' + m[prop]]();
 		return null;
 	},
 
@@ -82,40 +80,44 @@ Date.implement({
 		times = $pick(times, 1);
 		increment = $pick(increment, true);
 		var multiplier = increment ? 1 : -1;
-		var month = this.format('%m').toInt() - 1;
-		var year = this.format('%Y').toInt();
+		var month = this.get('mo');
+		var year = this.get('year');
 		var time = this.get('time');
 		var offset = 0;
-		switch (interval) {
+		
+		switch (interval){
 				case 'year':
-					times.times(function(val) {
-						if (Date.isLeapYear(year+val) && month > 1 && multiplier > 0) val++;
-						if (Date.isLeapYear(year+val) && month <= 1 && multiplier < 0) val--;
-						offset += Date.units.year(year+val);
+					times.times(function(val){
+						if (Date.isLeapYear(year + val)){
+							if      (month >  1 && multiplier > 0) val++;
+							else if (month <= 1 && multiplier < 0) val--;
+						}
+						offset += Date.units.year(year + val);
 					});
 					break;
 				case 'month':
 					times.times(function(val){
 						if (multiplier < 0) val++;
-						var mo = month+(val * multiplier);
-						var year = year;
-						if (mo < 0) {
-							year--;
-							mo = 12+mo;
+						var mo = month + (val * multiplier);
+						var yr = year;
+						if (mo < 0){
+							yr--;
+							mo += 12;
 						}
-						if (mo > 11 || mo < 0) {
-							year += (mo / 12).toInt() * multiplier;
+						if (mo > 11 || mo < 0){
+							yr += (mo / 12).toInt() * multiplier;
 							mo = mo % 12;
 						}
-						offset += Date.units.month(mo, year);
+						offset += Date.units.month(mo, yr);
 					});
 					break;
 				case 'day':
-					return this.set('date', this.get('date')+(multiplier*times));
+					return this.set('date', this.get('date') + (multiplier * times));
 				default:
 					offset = Date.units[interval]() * times;
 					break;
 		}
+		
 		this.set('time', time + (offset * multiplier));
 		return this;
 	},
@@ -134,26 +136,24 @@ Date.implement({
 	diff: function(d, resolution){
 		resolution = resolution || 'day';
 		if ($type(d) == 'string') d = Date.parse(d);
+		
 		switch (resolution){
 			case 'year':
-				return d.format('%Y').toInt() - this.format('%Y').toInt();
-				break;
+				return d.get('year') - this.get('year');
 			case 'month':
-				var months = (d.format('%Y').toInt() - this.format('%Y').toInt())*12;
-				return months + d.format('%m').toInt() - this.format('%m').toInt();
-				break;
+				var months = (d.get('year') - this.get('year')) * 12;
+				return months + d.get('mo') - this.get('mo');
 			default:
 				var diff = d.get('time') - this.get('time');
-				if (diff < 0 && Date.units[resolution]() > (-1*(diff))) return 0;
-				else if (diff >= 0 && diff < Date.units[resolution]()) return 0;
+				if (Date.units[resolution]() > diff.abs()) return 0;
 				return ((d.get('time') - this.get('time')) / Date.units[resolution]()).round();
 		}
+		
 		return null;
 	},
 
 	getWeek: function(){
-		var day = (new Date(this.get('year'), 0, 1)).get('date');
-		return Math.round((this.get('dayofyear') + (day > 3 ? day - 4 : day + 3)) / 7);
+		return (this.get('dayofyear') / 7).ceil();
 	},
 
 	getTimezone: function(){
@@ -164,9 +164,23 @@ Date.implement({
 
 	getGMTOffset: function(){
 		var off = this.get('timezoneOffset');
-		return ((off > 0) ? '-' : ' + ')
-			+ zeroize(Math.floor(Math.abs(off) / 60), 2)
+		return ((off > 0) ? '-' : '+')
+			+ zeroize((off.abs() / 60).floor(), 2)
 			+ zeroize(off % 60, 2);
+	},
+	
+	setAMPM: function(ampm){
+		ampm = ampm.toUpperCase();
+		var hr = this.get('hr');
+		if (hr > 11 && ampm == 'AM')
+			return this.decrement('hour', 12);
+		else if (hr < 12 && ampm == 'PM')
+			return this.increment('hour', 12);
+		return this;
+	},
+	
+	getAMPM: function(){
+		return (this.get('hr') < 12) ? 'AM' : 'PM';
 	},
 
 	parse: function(str){
@@ -181,16 +195,9 @@ Date.implement({
 	format: function(f){
 		if (!this.isValid()) return 'invalid date';
 		f = f || '%x %X';
-		//replace short-hand with actual format
-		f = ({
-			db: '%Y-%m-%d %H:%M:%S',
-			compact: '%Y%m%dT%H%M%S',
-			iso8601: '%Y-%m-%dT%H:%M:%S%T',
-			rfc822: '%a, %d %b %Y %H:%M:%S %Z',
-			'short': '%d %b %H:%M',
-			'long': '%B %d, %Y %H:%M'
-		})[f.toLowerCase()] || f;
+		f = formats[f.toLowerCase()] || f;	// replace short-hand with actual format
 		var d = this;
+		
 		return f.replace(/\%([aAbBcdHIjmMpSUWwxXyYTZ\%])/g,
 			function($1, $2){
 				switch ($2){
@@ -221,19 +228,6 @@ Date.implement({
 				return $2;
 			}
 		);
-	},
-
-	setAMPM: function(ampm){
-		ampm = ampm.toUpperCase();
-		if (this.format('%H').toInt() > 11 && ampm == 'AM')
-			return this.decrement('hour', 12);
-		else if (this.format('%H').toInt() < 12 && ampm == 'PM')
-			return this.increment('hour', 12);
-		return this;
-	},
-	
-	getAMPM: function(){
-		return (this.get('hr') < 12) ? 'AM' : 'PM';
 	}
 
 });
@@ -241,11 +235,44 @@ Date.implement({
 Date.alias('diff', 'compare');
 Date.alias('format', 'strftime');
 
+var formats = {
+	db: '%Y-%m-%d %H:%M:%S',
+	compact: '%Y%m%dT%H%M%S',
+	iso8601: '%Y-%m-%dT%H:%M:%S%T',
+	rfc822: '%a, %d %b %Y %H:%M:%S %Z',
+	'short': '%d %b %H:%M',
+	'long': '%B %d, %Y %H:%M'
+};
+
 var nativeParse = Date.parse;
 
 var daysInMonth = function(monthIndex, year){
-	if (Date.isLeapYear(year.toInt()) && monthIndex === 1) return 29;
+	if (Date.isLeapYear(year) && monthIndex === 1) return 29;
 	return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][monthIndex];
+};
+
+var parseWord = function(type, word, num){
+	var ret = -1;
+	var translated = Date.getMsg(type + 's');
+	
+	switch ($type(word)){
+		case 'object':
+			ret = translated[word.get(type)];
+			break;
+		case 'number':
+			ret = translated[month - 1];
+			if (!ret) throw new Error('Invalid ' + type + ' index:' + index);
+			break;
+		case 'string':
+			var match = translated.filter(function(name){
+				return this.test(name);
+			}, new RegExp('^' + word, 'i'));
+			if (!match.length) throw new Error('Invalid ' + type + ' string');
+			if (match.length > 1) throw new Error('Ambiguous ' + type);
+			ret = match[0];
+	}
+	
+	return (num) ? translated.indexOf(ret) : ret;
 };
 
 
@@ -264,22 +291,23 @@ $extend(Date, {
 		week: $lambda(608400000),
 		month: function(monthIndex, year){
 			var d = new Date();
-			return daysInMonth($pick(monthIndex,d.format('%m').toInt()), $pick(year,d.format('%Y').toInt())) * 86400000;
+			return daysInMonth($pick(monthIndex, d.get('mo')), $pick(year, d.get('year'))) * 86400000;
 		},
 		year: function(year){
-			year = year || new Date().format('%Y').toInt();
-			return Date.isLeapYear(year.toInt()) ? 31622400000 : 31536000000;
+			year = year || new Date().get('year');
+			return Date.isLeapYear(year) ? 31622400000 : 31536000000;
 		}
 	},
 
-	isLeapYear: function(yr){
-		return new Date(yr , 1, 29).getDate() == 29;
+	isLeapYear: function(year){
+		return new Date(year, 1, 29).get('date') == 29;
 	},
 
 	fixY2K: function(d){
 		if (!isNaN(d)){
 			var newDate = new Date(d);
-			if (newDate.get('year') < 2000 && d.toString().indexOf(newDate.get('year')) < 0) newDate.increment('year', 100);
+			if (newDate.get('year') < 2000 && d.toString().indexOf(newDate.get('year')) < 0)
+				newDate.increment('year', 100);
 			return newDate;
 		} else {
 			return d;
@@ -292,51 +320,22 @@ $extend(Date, {
 		if (t != 'string') return from;
 		from = from.clean();
 		if (!from.length) return null;
+		
 		var parsed;
 		Date.parsePatterns.some(function(pattern){
 			var r = pattern.re.exec(from);
 			return (r) ? (parsed = pattern.handler(r)) : false;
 		});
+		
 		return parsed || new Date(nativeParse(from));
 	},
 
 	parseDay: function(day, num){
-		var ret = -1;
-		switch ($type(day)){
-			case 'number':
-				ret = Date.getMsg('days')[day - 1] || false;
-				if (!ret) throw new Error('Invalid day index value must be between 1 and 7');
-				break;
-			case 'string':
-				var match = Date.getMsg('days').filter(function(name){
-					return this.test(name);
-				}, new RegExp('^' + day, 'i'));
-				if (!match.length) throw new Error('Invalid day string');
-				if (match.length > 1) throw new Error('Ambiguous day');
-				ret = match[0];
-		}
-		return (num) ? Date.getMsg('days').indexOf(ret) : ret;
+		return parseWord('day', day, num);
 	},
 
 	parseMonth: function(month, num){
-		var ret = -1;
-		switch ($type(month)){
-			case 'object':
-				ret = Date.getMsg('months')[month.get('mo')];
-				break;
-			case 'number':
-				ret = Date.getMsg('months')[month - 1] || false;
-				if (!ret) throw new Error('Invalid month index value must be between 1 and 12:' + index);
-				break;
-			case 'string':
-				var match = Date.getMsg('months').filter(function(name){
-					return this.test(name);
-				}, new RegExp('^' + month, 'i'));
-				if (!match.length) throw new Error('Invalid month string');
-				if (match.length > 1) throw new Error('Ambiguous month');
-				ret = match[0];
-		}
-		return (num) ? Date.getMsg('months').indexOf(ret) : ret;
+		return parseWord('month', month, num);
 	},
 
 	parseUTC: function(value){
@@ -348,6 +347,16 @@ $extend(Date, {
 
 	orderIndex: function(unit){
 		return Date.getMsg('dateOrder').indexOf(unit) + 1;
+	},
+
+	defineFormat: function(f, format){
+		formats[f] = format;
+		return Date;
+	},
+
+	defineFormats: function(format){
+		for (var f in format) Date.defineFormat(f, format[f]);
+		return Date;
 	},
 
 	parsePatterns: [],
@@ -369,7 +378,6 @@ $extend(Date, {
 var keys = {
 	a: /[a-z]{3,}/,
 	d: /\d{1,2}/,
-	p: /[ap]\.?m\.?/,
 	s: /\d+/,
 	y: /\d{2}|\d{4}/,
 	Y: /\d{4}/,
@@ -382,21 +390,19 @@ var keys = {
 keys.B = keys.b = keys.A = keys.a;
 keys.H = keys.I = keys.m = keys.M = keys.S = keys.d;
 
-var formats = function(key){
-	
-	if (key == 'x')
-		return (Date.orderIndex('month') == 1) ?
-			'%m[.-/]%d([.-/]%y)?' :
-			'%d[.-/]%m([.-/]%y)?';
-	
+var parsers = function(key){
+	switch(key){
+		case 'p':
+			return ['[ap]\\.?m\\.?', Date.getMsg('AM'), Date.getMsg('PM')].join('|');
+		case 'x':
+			return (Date.orderIndex('month') == 1) ? '%m[.-/]%d([.-/]%y)?' : '%d[.-/]%m([.-/]%y)?';
+	}
 	return keys[key] ? keys[key].source : null;
-	
 };
 
 var lang;
 
 var build = function(format){
-	
 	if (!lang) return {format: format};	// wait until language is set
 	
 	var parsed = [null];
@@ -404,13 +410,13 @@ var build = function(format){
 	var re = (format.source || format)	// allow format to be regex
 	 .replace(/%([xXo])/g,
 		function($1, $2){
-			return formats($2) || $2;
+			return parsers($2) || $2;
 		}
 	).replace(/\((?!\?)/g, '(?:')		// make all groups non-capturing
 	 .replace(/ (?!\?|\*)/g, ',? ')		// be forgiving with spaces and commas
 	 .replace(/%([a-z%])/gi,
 		function($1, $2){
-			var f = formats($2);
+			var f = parsers($2);
 			if (!f) return $2;
 			parsed.push($2);
 			return '(' + f + ')';
@@ -430,11 +436,9 @@ var build = function(format){
 			return date;
 		}
 	};
-	
 };
 
 var handle = function(key, value){
-	
 	if (!value){
 		if (/[HIMSs]/.test(key)) value = 0;
 		else if (/[md]/.test(key)) value = 1;
@@ -462,7 +466,6 @@ var handle = function(key, value){
 	}
 	
 	return this;
-	
 };
 
 Date.defineParsers(
