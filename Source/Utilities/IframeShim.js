@@ -44,7 +44,7 @@ var IframeShim = new Class({
 			zIndex = ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1;
 			if (zIndex < 0) zIndex = 1;
 			this.shim = new Element('iframe', {
-				src: (window.location.protocol == 'https') ? '://0' : 'javascript:void(0)',
+				src:'javascript:false;document.write("");',
 				scrolling: 'no',
 				frameborder: 0,
 				styles: {
