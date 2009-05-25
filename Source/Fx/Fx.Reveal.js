@@ -15,9 +15,9 @@ Fx.Reveal = new Class({
 	Extends: Fx.Morph,
 
 	options: {/*	  
-		onShow: $empty(thisElemeng),
-		onHide: $empty(thisElemeng),
-		onComplete: $empty(thisElemeng),
+		onShow: $empty(thisElement),
+		onHide: $empty(thisElement),
+		onComplete: $empty(thisElement),
 		heightOverride: null,
 		widthOverride: null, */
 		styles: ['padding', 'border', 'margin'],
