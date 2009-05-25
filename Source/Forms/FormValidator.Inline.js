@@ -39,7 +39,7 @@ FormValidator.Inline = new Class({
 
 	makeAdvice: function(className, field, error, warn){
 		var errorMsg = (warn)?this.warningPrefix:this.errorPrefix;
-				errorMsg += (this.options.useTitles) ? field.title || error:error;
+			errorMsg += (this.options.useTitles) ? field.title || error:error;
 		var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
 		var advice = this.getAdvice(className, field);
 		if(advice) {
