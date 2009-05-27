@@ -228,6 +228,10 @@ Date.implement({
 				return $2;
 			}
 		);
+	},
+	
+	toISOString: function(){
+		return this.format('iso8601');
 	}
 
 });
