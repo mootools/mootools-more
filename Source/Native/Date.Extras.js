@@ -86,7 +86,7 @@ Date.defineParsers(
 		// "today", "tomorrow", "yesterday"
 		re: /^tod|tom|yes/i,
 		handler: function(bits){
-			var d = new Date();
+			var d = new Date().clearTime();
 			switch(bits[0]){
 				case 'tom': return d.increment();
 				case 'yes': return d.decrement();
@@ -99,7 +99,7 @@ Date.defineParsers(
 		// "next Wednesday", "last Thursday"
 		re: /^(next|last) ([a-z]+)$/i,
 		handler: function(bits){
-			var d = new Date();
+			var d = new Date().clearTime();
 			var day = d.getDay();
 			var newDay = Date.parseDay(bits[2], true);
 			var addDays = newDay - day;

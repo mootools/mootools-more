@@ -265,13 +265,13 @@ var parseWord = function(type, word, num){
 			break;
 		case 'number':
 			ret = translated[month - 1];
-			if (!ret) throw new Error('Invalid ' + type + ' index:' + index);
+			if (!ret) throw new Error('Invalid ' + type + ' index: ' + index);
 			break;
 		case 'string':
 			var match = translated.filter(function(name){
 				return this.test(name);
 			}, new RegExp('^' + word, 'i'));
-			if (!match.length) throw new Error('Invalid ' + type + ' string');
+			if (!match.length)    throw new Error('Invalid ' + type + ' string');
 			if (match.length > 1) throw new Error('Ambiguous ' + type);
 			ret = match[0];
 	}
@@ -394,7 +394,7 @@ keys.B = keys.b = keys.A = keys.a;
 keys.H = keys.I = keys.m = keys.M = keys.S = keys.d;
 
 var parsers = function(key){
-	if (key == 'x')
+	if (key == 'x')		// iso8601 covers yyyy-mm-dd, so just check if month is first
 		return (Date.orderIndex('month') == 1) ? '%m[.-/]%d([.-/]%y)?' : '%d[.-/]%m([.-/]%y)?';
 	
 	return keys[key] ? keys[key].source : null;
@@ -428,7 +428,7 @@ var build = function(format){
 		re: new RegExp('^' + re + '$', 'i'),
 		
 		handler: function(bits){
-			var date = new Date;
+			var date = new Date().clearTime();
 
 			for (var i = 1; i < parsed.length; i++)
 				date = handle.call(date, parsed[i], bits[i]);
@@ -440,8 +440,7 @@ var build = function(format){
 
 var handle = function(key, value){
 	if (!value){
-		if (/[HIMSs]/.test(key)) value = 0;
-		else if (/[md]/.test(key)) value = 1;
+		if (key == 'm' || key == 'd') value = 1;
 		else return this;
 	}
 	
