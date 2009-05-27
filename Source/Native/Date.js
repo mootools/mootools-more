@@ -353,13 +353,13 @@ $extend(Date, {
 		return Date.getMsg('dateOrder').indexOf(unit) + 1;
 	},
 
-	defineFormat: function(f, format){
-		formats[f] = format;
+	defineFormat: function(name, format){
+		formats[name] = format;
 		return Date;
 	},
 
-	defineFormats: function(format){
-		for (var f in format) Date.defineFormat(f, format[f]);
+	defineFormats: function(formats){
+		for (var name in formats) Date.defineFormat(name, formats[f]);
 		return Date;
 	},
 
@@ -381,6 +381,7 @@ var keys = {
 	a: /[a-z]{3,}/,
 	d: /\d{1,2}/,
 	s: /\d+/,
+	p: /[ap]\.?m\.?/,
 	y: /\d{2}|\d{4}/,
 	Y: /\d{4}/,
 	T: /Z|[+-]\d{2}(?::?\d{2})?/,
@@ -393,12 +394,9 @@ keys.B = keys.b = keys.A = keys.a;
 keys.H = keys.I = keys.m = keys.M = keys.S = keys.d;
 
 var parsers = function(key){
-	switch(key){
-		case 'p':
-			return ['[ap]\\.?m\\.?', Date.getMsg('AM'), Date.getMsg('PM')].join('|');
-		case 'x':
-			return (Date.orderIndex('month') == 1) ? '%m[.-/]%d([.-/]%y)?' : '%d[.-/]%m([.-/]%y)?';
-	}
+	if (key == 'x')
+		return (Date.orderIndex('month') == 1) ? '%m[.-/]%d([.-/]%y)?' : '%d[.-/]%m([.-/]%y)?';
+	
 	return keys[key] ? keys[key].source : null;
 };
 
