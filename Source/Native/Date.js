@@ -251,7 +251,7 @@ var formats = {
 var nativeParse = Date.parse;
 
 var daysInMonth = function(monthIndex, year){
-	if (Date.isLeapYear(year) && monthIndex === 1) return 29;
+	if (Date.isLeapYear(year) && monthIndex == 1) return 29;
 	return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][monthIndex];
 };
 
@@ -371,9 +371,7 @@ $extend(Date, {
 	},
 	
 	defineParsers: function(){
-		Array.flatten(arguments).each(function(format){
-			Date.defineParser(format);
-		});
+		Array.flatten(arguments).each(Date.defineParser);
 		return Date;
 	}
 
@@ -488,6 +486,6 @@ MooTools.lang.addEvent('langChange', function(language){
 		if (pattern.format) Date.parsePatterns[i] = build(pattern.format);
 	});
 	
-});
+}).fireEvent('langChange', MooTools.lang.getCurrentLanguage());
 
 })();
