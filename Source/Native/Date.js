@@ -263,16 +263,15 @@ $extend(Date, {
 		hour: $lambda(3600000),
 		day: $lambda(86400000),
 		week: $lambda(608400000),
-		month: function(monthIndex, year){
-			var d = new Date();
-			return daysInMonth($pick(monthIndex,d.format('%m').toInt()), $pick(year,d.format('%Y').toInt())) * 86400000;
+		month: function(month, year){
+			var d = new Date;
+			return Date.daysInMonth($pick(month, d.get('mo')), $pick(year, d.get('year'))) * 86400000;
 		},
 		year: function(year){
-			year = year || new Date().format('%Y').toInt();
-			return Date.isLeapYear(year.toInt()) ? 31622400000 : 31536000000;
+			year = year || new Date().get('year');
+			return Date.isLeapYear(year) ? 31622400000 : 31536000000;
 		}
 	},
-	
 	
 	daysInMonth: function(month, year){
 		return [31, Date.isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
