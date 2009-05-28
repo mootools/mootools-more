@@ -80,6 +80,8 @@ var URI = new Class({
 			if (scheme) scheme = scheme[1];
 			if (scheme && !$defined(this.schemes[scheme.toLowerCase()])) this.parsed = { scheme: scheme, value: value };
 			else this.parsed = this.parse(value, (base || this).parsed) || (scheme ? { scheme: scheme, value: value } : { value: value });
+		} else if (part == 'data') {
+			this.setData(value);
 		} else {
 			this.parsed[part] = value;
 		}
