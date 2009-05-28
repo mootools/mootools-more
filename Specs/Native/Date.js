@@ -228,7 +228,7 @@ describe('Date.getWeek', {
 	'should return the week of the year of a Date instance': function(){
 		var d = new Date(2000, 0, 1, 1, 1, 1);
 		value_of(d.get('week')).should_be(1);
-		d.increment('day', 7 * 10 + 1);
+		d.increment('day', 7 * 10 + 2);
 		value_of(d.get('week')).should_be(11);
 		d.increment('week', 42);
 		value_of(d.get('week')).should_be(1);

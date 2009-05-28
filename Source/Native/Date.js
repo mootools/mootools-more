@@ -21,7 +21,7 @@ Script: Date.js
 Date.Methods = {};
 
 ['Date', 'Day', 'FullYear', 'Hours', 'Milliseconds', 'Minutes', 'Month', 'Seconds', 'Time', 'TimezoneOffset',
-	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
+	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'DaysInMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
 	'AMPM', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds'].each(function(method){
 	Date.Methods[method.toLowerCase()] = method;
 });
@@ -68,58 +68,29 @@ Date.implement({
 	},
 
 	increment: function(interval, times){
-		return this.multiply(interval, times);
+		interval = interval || 'day';
+		times = $pick(times, 1);
+		
+		switch (interval){
+			case 'year':
+				return this.increment('month', times * 12);
+			case 'month':
+				var d = this.get('date');
+				this.set('date', 1).set('mo', this.get('mo') + times);
+				return this.set('date', d.min(this.get('daysInMonth')));
+			case 'week':
+				return this.increment('day', times * 7);
+			case 'day':
+				return this.set('date', this.get('date') + times);
+		}
+		
+		if (!Date.units[interval]) throw new Error(interval + ' is not a supported interval');
+		
+		return this.set('time', this.get('time') + times * Date.units[interval]());
 	},
 
 	decrement: function(interval, times){
-		return this.multiply(interval, times, false);
-	},
-
-	multiply: function(interval, times, increment){
-		interval = interval || 'day';
-		times = $pick(times, 1);
-		increment = $pick(increment, true);
-		var multiplier = increment ? 1 : -1;
-		var month = this.get('mo');
-		var year = this.get('year');
-		var time = this.get('time');
-		var offset = 0;
-		
-		switch (interval){
-				case 'year':
-					times.times(function(val){
-						if (Date.isLeapYear(year + val)){
-							if      (month >  1 && multiplier > 0) val++;
-							else if (month <= 1 && multiplier < 0) val--;
-						}
-						offset += Date.units.year(year + val);
-					});
-					break;
-				case 'month':
-					times.times(function(val){
-						if (multiplier < 0) val++;
-						var mo = month + (val * multiplier);
-						var yr = year;
-						if (mo < 0){
-							yr--;
-							mo += 12;
-						}
-						if (mo > 11 || mo < 0){
-							yr += (mo / 12).toInt() * multiplier;
-							mo = mo % 12;
-						}
-						offset += Date.units.month(mo, yr);
-					});
-					break;
-				case 'day':
-					return this.set('date', this.get('date') + (multiplier * times));
-				default:
-					offset = Date.units[interval]() * times;
-					break;
-		}
-		
-		this.set('time', time + (offset * multiplier));
-		return this;
+		return this.increment(interval, -1 * $pick(times, 1));
 	},
 
 	isLeapYear: function(){
@@ -150,6 +121,10 @@ Date.implement({
 		}
 		
 		return null;
+	},
+	
+	getDaysInMonth: function(){
+		return Date.daysInMonth(this.get('mo'), this.get('year'));
 	},
 
 	getWeek: function(){
@@ -250,11 +225,6 @@ var formats = {
 
 var nativeParse = Date.parse;
 
-var daysInMonth = function(monthIndex, year){
-	if (Date.isLeapYear(year) && monthIndex == 1) return 29;
-	return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][monthIndex];
-};
-
 var parseWord = function(type, word, num){
 	var ret = -1;
 	var translated = Date.getMsg(type + 's');
@@ -285,7 +255,7 @@ $extend(Date, {
 	getMsg: function(key, args) {
 		return MooTools.lang.get('Date', key, args);
 	},
-
+	
 	units: {
 		ms: $lambda(1),
 		second: $lambda(1000),
@@ -295,12 +265,17 @@ $extend(Date, {
 		week: $lambda(608400000),
 		month: function(monthIndex, year){
 			var d = new Date();
-			return daysInMonth($pick(monthIndex, d.get('mo')), $pick(year, d.get('year'))) * 86400000;
+			return daysInMonth($pick(monthIndex,d.format('%m').toInt()), $pick(year,d.format('%Y').toInt())) * 86400000;
 		},
 		year: function(year){
-			year = year || new Date().get('year');
-			return Date.isLeapYear(year) ? 31622400000 : 31536000000;
+			year = year || new Date().format('%Y').toInt();
+			return Date.isLeapYear(year.toInt()) ? 31622400000 : 31536000000;
 		}
+	},
+	
+	
+	daysInMonth: function(month, year){
+		return [31, Date.isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
 	},
 
 	isLeapYear: function(year){
