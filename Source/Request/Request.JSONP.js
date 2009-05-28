@@ -67,7 +67,7 @@ Request.JSONP = new Class({
 					this.triesRemaining[index] = remaining - 1;
 					if (script){
 						script.destroy();
-						this.request(options, index);
+						this.send(options, index);
 						this.fireEvent('retry', this.triesRemaining[index]);
 					}
 				} else if(script && this.options.timeout){
