@@ -80,12 +80,13 @@ Fx.Scroll = new Class({
 	toElement: function(el){
 		var position = $(el).getPosition(this.element);
 		return this.start(position.x, position.y);
-	}
+	},
 
 	scrollIntoView: function(el, axes, offset){
 		axes = $splat(axes || ['x','y']);
 		var to = {};
-		var pos = $(el).getPosition(this.element);
+		el = $(el);
+		var pos = el.getPosition(this.element);
 		var size = el.getSize();
 		var scroll = this.element.getScroll();
 		var containerSize = this.element.getSize();
