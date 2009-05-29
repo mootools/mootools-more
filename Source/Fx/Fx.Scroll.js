@@ -83,7 +83,7 @@ Fx.Scroll = new Class({
 	},
 
 	scrollIntoView: function(el, axes, offset){
-		axes = $splat(axes || ['x','y']);
+		axes = axes ? $splat(axes) : ['x','y'];
 		var to = {};
 		el = $(el);
 		var pos = el.getPosition(this.element);
@@ -99,7 +99,7 @@ Fx.Scroll = new Class({
 				if (edge[axis] > scroll[axis] + containerSize[axis]) to[axis] = edge[axis] - containerSize[axis];
 				if (pos[axis] < scroll[axis]) to[axis] = pos[axis];
 			}
-			if (to[axis] === undefined) to[axis] = scroll[axis];
+			if (to[axis] == null) to[axis] = scroll[axis];
 			if (offset && offset[axis]) to[axis] = to[axis] + offset[axis];
 		}, this);
 		if (to.x != scroll.x || to.y != scroll.y) this.start(to.x, to.y);
