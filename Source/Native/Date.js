@@ -398,6 +398,8 @@ var build = function(format){
 	};
 };
 
+var yr = new Date().get('year') % 100;	// store the two digit year
+
 var handle = function(key, value){
 	if (!value){
 		if (key == 'm' || key == 'd') value = 1;
@@ -416,7 +418,9 @@ var handle = function(key, value){
 		case 's': 			return this.set('ms', ('0.' + value) * 1000);
 		case 'w':			return this.set('day', value);
 		case 'Y':			return this.set('year', value);
-		case 'y':			this.setYear(value); return (+value < 70) ? this.set('year', +value + 2000) : this;
+		case 'y':
+			this.setYear(value);
+			return (+value <= yr) ? this.set('year', +value + 2000) : this;		// breaks after year 2100
 		case 'T':
 			if (value == 'Z') value = '+00';
 			var offset = value.match(/([+-]\d{2}):?(\d{2})?/);
