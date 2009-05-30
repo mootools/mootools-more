@@ -312,10 +312,12 @@ describe('Date.parse', {
 	'should parse a string value into a date': function(){
 		MooTools.lang.list().each(function(lang){
 			MooTools.lang.setLanguage(lang);
+			
 			var d = new Date(2000, 11, 2, 0, 0, 0, 0);
 			value_of(Date.parse(d.format('%x')).clearTime()).should_be(d);
 			value_of(Date.parse(d.format('%b %d %Y')).clearTime()).should_be(d);
 			value_of(Date.parse(d.format('%d %B %Y')).clearTime()).should_be(d);
+			
 			d = new Date(2000, 11, 2, 22, 45, 0, 0);
 			value_of(Date.parse(d.format('%x %X')).set('sec',0).set('ms',0)).should_be(d);
 			value_of(Date.parse(d.format('%B %d %Y %X')).set('sec',0).set('ms',0)).should_be(d);
