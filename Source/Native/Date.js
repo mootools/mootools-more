@@ -278,17 +278,6 @@ $extend(Date, {
 		return new Date(year, 1, 29).get('date') == 29;
 	},
 
-	fixY2K: function(d){
-		if (!isNaN(d)){
-			var newDate = new Date(d);
-			if (newDate.get('year') < 2000 && d.toString().indexOf(newDate.get('year')) < 0)
-				newDate.increment('year', 100);
-			return newDate;
-		} else {
-			return d;
-		}
-	},
-
 	parse: function(from){
 		var t = $type(from);
 		if (t == 'number') return new Date(from);
@@ -427,7 +416,7 @@ var handle = function(key, value){
 		case 's': 			return this.set('ms', ('0.' + value) * 1000);
 		case 'w':			return this.set('day', value);
 		case 'Y':			return this.set('year', value);
-		case 'y':			this.setYear(value); return Date.fixY2K(this);
+		case 'y':			this.setYear(value); return (+value < 70) ? this.set('year', +value + 2000) : this;
 		case 'T':
 			if (value == 'Z') value = '+00';
 			var offset = value.match(/([+-]\d{2}):?(\d{2})?/);
