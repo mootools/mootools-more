@@ -16,8 +16,7 @@ License:
 				margin: 2,
 				padding: 3,
 				border: '1px solid black',
-				visibility: 'hidden',
-				display: 'block',
+				display: 'none',
 				position: 'absolute'
 			}
 		}).inject(document.body);
@@ -29,8 +28,7 @@ License:
 				margin: 2,
 				padding: 3,
 				border: '1px solid black',
-				visibility: 'hidden',
-				display: 'block',
+				display: 'none',
 				position: 'absolute'
 			}
 		}).inject(div);
