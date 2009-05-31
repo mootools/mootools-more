@@ -247,7 +247,7 @@ var parseWord = function(type, word, num){
 };
 
 
-$extend(Date, {
+Date.extend({
 
 	getMsg: function(key, args) {
 		return MooTools.lang.get('Date', key, args);
@@ -333,9 +333,18 @@ $extend(Date, {
 	defineParsers: function(){
 		Array.flatten(arguments).each(Date.defineParser);
 		return Date;
+	},
+	
+	define2DigitYearStart: function(year){
+		yr_start = year % 100;
+		yr_base = year - yr_start;
+		return Date;
 	}
 
 });
+
+var yr_base = 1900;
+var yr_start = 70;
 
 var keys = {
 	a: /[a-z]{3,}/,
@@ -398,8 +407,6 @@ var build = function(format){
 	};
 };
 
-var yr = new Date().get('year') % 100;	// store the two digit year
-
 var handle = function(key, value){
 	if (!value){
 		if (key == 'm' || key == 'd') value = 1;
@@ -419,8 +426,9 @@ var handle = function(key, value){
 		case 'w':			return this.set('day', value);
 		case 'Y':			return this.set('year', value);
 		case 'y':
-			this.setYear(value);
-			return (+value <= yr) ? this.set('year', +value + 2000) : this;		// breaks after year 2100
+			value = +value;
+			if (value < 100) value += yr_base + (value < yr_start ? 100 : 0);
+			return this.set('year', value);
 		case 'T':
 			if (value == 'Z') value = '+00';
 			var offset = value.match(/([+-]\d{2}):?(\d{2})?/);
@@ -433,7 +441,7 @@ var handle = function(key, value){
 
 Date.defineParsers(
 	'%Y([-./]%m([-./]%d((T| )%X)?)?)?',		// "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59", ISO8601
-	'%Y%m%d(T%H(%M(%S)?)?)?',				// "19991231", "19991231T1159, compact
+	'%Y%m%d(T%H(%M%S?)?)?',					// "19991231", "19991231T1159", compact
 	'%x( %X)?',								// "12/31", "12.31.99", "12-31-1999", "12/31/2008 11:59 PM"
 	'%d%o( %b( %Y)?)?( %X)?',				// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
 	'%b( %d%o)?( %Y)?( %X)?'				// "December 1999" and same as above with month and day switched
