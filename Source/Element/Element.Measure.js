@@ -39,12 +39,15 @@ Element.implement({
 
 	expose: function(){
 		if (this.getStyle('display') != 'none') return $empty;
-		var before = this.getStyles('display', 'position', 'visibility');
-		return this.setStyles({
+		var before = $('ElementMeasureTest').style.cssText;
+		this.setStyles({
 			display: 'block',
 			position: 'absolute',
 			visibility: 'hidden'
-		}).setStyles.pass(before, this);
+		});
+		return function(){
+			this.style.cssText = before;
+		}.bind(this);
 	},
 
 	getDimensions: function(options){
