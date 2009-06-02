@@ -41,7 +41,7 @@ var URI = new Class({
 	},
 
 	merge: function(bits, base){
-		if (!bits.scheme && !base.scheme) return false;
+		if ((!bits || !bits.scheme) && (!base || !base.scheme)) return false;
 		if (base){
 			this.parts.every(function(part){
 				if (bits[part]) return false;
