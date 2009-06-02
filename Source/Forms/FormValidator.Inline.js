@@ -16,7 +16,7 @@ FormValidator.Inline = new Class({
 	options: {
 		scrollToErrorsOnSubmit: true,
 		scrollFxOptions: {
-                        transition: 'quad:out',
+			transition: 'quad:out',
 			offset: {
 				y: -20
 			}
@@ -135,11 +135,7 @@ FormValidator.Inline = new Class({
 		if (this.options.scrollToErrorsOnSubmit && !result){
 			var failed = $(this).getElement('.validation-failed');
 			var par = $(this).getParent();
-			var isScrolled = function(p){
-				return p.getScrollSize().y != p.getSize().y;
-			};
-			var scrolls;
-			while (par != document.body && !isScrolled(par)){
+			while (par != document.body && par.getScrollSize().y == par.getSize().y){
 				par = par.getParent();
 			}
 			var fx = par.retrieve('fvScroller');
