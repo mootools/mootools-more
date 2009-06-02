@@ -39,7 +39,7 @@ Element.implement({
 
 	expose: function(){
 		if (this.getStyle('display') != 'none') return $empty;
-		var before = $('ElementMeasureTest').style.cssText;
+		var before = this.style.cssText;
 		this.setStyles({
 			display: 'block',
 			position: 'absolute',
