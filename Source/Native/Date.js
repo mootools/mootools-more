@@ -14,9 +14,7 @@ Script: Date.js
 
 (function(){
 
-['now', 'parse', 'UTC'].each(function(method){
-	Native.genericize(Date, method, true);
-});
+if (!Date.now) Date.now = $time;
 
 Date.Methods = {};
 
