@@ -52,7 +52,7 @@ The test option is a function that will be passed the field being evaluated and 
 	var isEmpty = new InputValidator('required', {
 		errorMsg: 'This field is required.',
 		test: function(field){
-			return ((element.getValue() == null) || (element.getValue().length == 0));
+			return ((field.get('value') == null) || (field.get('value').length == 0));
 		}
 	});
 	isEmpty.test($("firstName")); //true if empty
@@ -396,8 +396,8 @@ This method is a property of every instance of [FormValidator][] as well as the 
 	var myFormValidatorInstance = new FormValidator('myform');
 	myFormValidatorInstance.add('doesNotContainTheLetterQ', {
 		errorMsg: 'This field cannot contain the letter Q!',
-		test: function(element){
-			return !element.getValue().test(/q/,'i');
+		test: function(field){
+			return !field.get('value').test(/q/,'i');
 		}
 	});
 	//Extend FormValidator, add a global validator for all instances of that version
@@ -406,8 +406,8 @@ This method is a property of every instance of [FormValidator][] as well as the 
 	});
 	NewFormValidator.add('doesNotContainTheLetterZ', {
 		errorMsg: 'This field cannot contain the letter Z!',
-		test: function(element){
-			return !element.getValue().test(/z/,'i');
+		test: function(field){
+			return !field.get('value').test(/z/,'i');
 		}
 	});
 
@@ -668,8 +668,8 @@ FormValidator Language Localization {#Localization}
 [FormValidator:add]: #AddingValidators:add
 [FormValidator.required]: #FormValidator:required
 [validation.js by Andrew Tetlaw]: http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
-[Options]: /docs/core/Class/Class.Extras#Options
-[Events]: /docs/core/Class/Class.Extras#Events
+[Options]: /core/Class/Class.Extras#Options
+[Events]: /core/Class/Class.Extras#Events
 [send them back to us]: http://groups.google.com/group/mootools-lang
-[JSON.decode]: /docs/core/Utilities/JSON#decode
-[Lang]: /docs/lang/
+[JSON.decode]: /core/Utilities/JSON#decode
+[Lang]: /lang/

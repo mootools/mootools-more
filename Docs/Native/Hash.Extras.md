@@ -103,5 +103,5 @@ Runs all the methods that are values of the hash.
 	};
 	window.addEvent('domready', myPage.init.run.bind(myPage.init));
 
-[Mootools:Hash]: /docs/core/Native/Hash
-[$defined]: /docs/core/Core/Core#defined
+[Mootools:Hash]: /core/Native/Hash
+[$defined]: /core/Core/Core#defined

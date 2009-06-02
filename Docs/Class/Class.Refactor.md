@@ -62,4 +62,4 @@ Class.refactor, however, allows you to reference the previous state with *this.p
 
 Note also that changes to a class affect the subclasses of that class.
 
-[Class]: /docs/core/Class/Class
+[Class]: /core/Class/Class

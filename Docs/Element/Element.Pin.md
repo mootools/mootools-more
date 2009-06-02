@@ -54,4 +54,4 @@ Toggles the pin state of the element.
 
 [Element:unpin]: #Element:unpin
 [Element:pin]: #Element:pin
-[Element]: /docs/core/Element/Element
+[Element]: /core/Element/Element

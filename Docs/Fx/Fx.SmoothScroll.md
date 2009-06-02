@@ -39,4 +39,4 @@ Auto targets all the anchors in a page and display a smooth scrolling effect upo
 
 - [Fx.Scroll][]
 
-[Fx.Scroll]: /docs/more/Fx/Fx.Scroll
+[Fx.Scroll]: /more/Fx/Fx.Scroll

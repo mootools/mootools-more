@@ -325,10 +325,10 @@ This method isn't really meant to be used. As illustrated above, you can just ca
 
 * *object* - This instance of Request.Queue.
 
-[Request]: /docs/core/Request/Request
-[Request.HTML]: /docs/core/Request/Request.HTML
+[Request]: /core/Request/Request
+[Request.HTML]: /core/Request/Request.HTML
 [Request.Queue]: #Request-Queue
 [addRequest]: #Request-Queue:addRequest
 [clear]: #Request-Queue:clear
-[Options]: /docs/core/Class/Class.Extras#Options
-[Events]: /docs/core/Class/Class.Extras#Events
+[Options]: /core/Class/Class.Extras#Options
+[Events]: /core/Class/Class.Extras#Events

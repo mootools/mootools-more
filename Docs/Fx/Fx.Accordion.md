@@ -135,5 +135,5 @@ Shows a specific section and hides all others. Useful when triggering an accordi
 
 
 
-[Fx]: /docs/core/Fx/Fx
-[Fx.Elements]: /docs/more/Fx/Fx.Elements
+[Fx]: /core/Fx/Fx
+[Fx.Elements]: /more/Fx/Fx.Elements

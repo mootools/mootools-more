@@ -95,6 +95,6 @@ Executes the Json request.
 
 
 [Request.JSONP]: #Request-JSONP
-[Options]: /docs/core/Class/Class.Extras#Options
-[Events]: /docs/core/Class/Class.Extras#Events
-[dbug]: /docs/more/Core/dbug
+[Options]: /core/Class/Class.Extras#Options
+[Events]: /core/Class/Class.Extras#Events
+[dbug]: /more/Core/dbug

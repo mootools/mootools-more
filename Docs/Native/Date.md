@@ -389,5 +389,5 @@ Date Language Localization {#Localization}
 
 [Date:increment]: #Date:increment
 [Date:parsePatterns]: #Date:CustomParsers
-[Date.Extras.js]: /docs/more/Native/Date.Extras
-[Lang]: /docs/more/Core/Lang
+[Date.Extras.js]: /more/Native/Date.Extras
+[Lang]: /more/Core/Lang

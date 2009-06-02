@@ -189,10 +189,10 @@ Adds drag-to-resize behavior to an Element using supplied options.
 
 
 
-[$]: /docs/core/Element/Element/#dollar
-[Element:addEvent]: /docs/core/Element/Element.Event/#Element:addEvent
-[Element:makeDraggable]: /docs/more/Drag/Drag.Move/#Element:makeDraggable
-[Events]: /docs/core/Class/Class.Extras#Events
-[Chain]: /docs/core/Class/Class.Extras#Chain
-[Options]: /docs/core/Class/Class.Extras#Options
+[$]: /core/Element/Element/#dollar
+[Element:addEvent]: /core/Element/Element.Event/#Element:addEvent
+[Element:makeDraggable]: /more/Drag/Drag.Move/#Element:makeDraggable
+[Events]: /core/Class/Class.Extras#Events
+[Chain]: /core/Class/Class.Extras#Chain
+[Options]: /core/Class/Class.Extras#Options
 [W3Schools: CSS Units]: http://www.w3schools.com/css/css_units.asp

@@ -228,6 +228,6 @@ Scrolls the specified Element to the position the passed in Element is found.
 
 
 
-[Fx]: /docs/core/Fx/Fx
+[Fx]: /core/Fx/Fx
 [Fx.Scroll]: #Fx-Scroll
-[Element:getPosition]: /docs/core/Element/Element.Dimensions#Element:getPosition
+[Element:getPosition]: /core/Element/Element.Dimensions#Element:getPosition

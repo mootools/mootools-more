@@ -222,11 +222,11 @@ Inserts two strings around the selected text.
 
 
 
-[String:tidy]: /docs/more/Native/String.Extras#String:tidy
+[String:tidy]: /more/Native/String.Extras#String:tidy
 [Element:getTextInRange]: #Element:getTextInRange
 [Element:getSelectionStart]: #Element:getSelectionStart
-[Element]: /docs/core/Element/Element
-[Element:get]: /docs/core/Element/Element#Element:get
-[Element:set]: /docs/core/Element/Element#Element:set
-[Element:erase]: /docs/core/Element/Element#Element:erase
-[Hash]: /docs/core/Native/Hash
+[Element]: /core/Element/Element
+[Element:get]: /core/Element/Element#Element:get
+[Element:set]: /core/Element/Element#Element:set
+[Element:erase]: /core/Element/Element#Element:erase
+[Hash]: /core/Native/Hash

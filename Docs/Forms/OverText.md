@@ -138,7 +138,7 @@ Element property: OverText {#Element:overtext}
 
 [Overtext]: #OverText
 [OverText.reposition]: #OverText:reposition
-[Element.position]: /docs/more/Native/Element.Position#Element:position
-[Options]: /docs/core/Class/Class.Extras#Options
-[Events]: /docs/core/Class/Class.Extras#Events
-[Class.Binds]: /docs/more/Class/Class.Binds
+[Element.position]: /more/Native/Element.Position#Element:position
+[Options]: /core/Class/Class.Extras#Options
+[Events]: /core/Class/Class.Extras#Events
+[Class.Binds]: /more/Class/Class.Binds

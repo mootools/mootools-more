@@ -92,4 +92,4 @@ Adds one class and removes the other. If the one to remove is not found the one 
 	$(id).swapClass('green', 'blue'); //adds green, removes blue
 
 [Element:hide]: #Element:hide
-[Element]: /docs/core/Element/Element
+[Element]: /core/Element/Element

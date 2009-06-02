@@ -15,5 +15,5 @@ Simply change the language property to *en-US*.
 
 See also: [Date.Extras][] and [Lang][]
 
-[FormValidator]: /docs/more/Forms/FormValidator#FormValidator
-[Date.Extras]: /docs/more/Native/Date.Extras
+[FormValidator]: /more/Forms/FormValidator#FormValidator
+[Date.Extras]: /more/Native/Date.Extras

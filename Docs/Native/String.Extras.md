@@ -116,6 +116,6 @@ Replaces common special characters with their ASCII counterparts (smart quotes, 
 
 * (*string*) the string with the non-ASCII characters replaced
 
-[String]: /docs/core/Native/String
-[Array.filter]: /docs/core/Native/Array#Array:filter
+[String]: /core/Native/String
+[Array.filter]: /core/Native/Array#Array:filter
 [encodeURIComponent]: http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Functions:encodeURIComponent

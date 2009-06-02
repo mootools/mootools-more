@@ -160,5 +160,5 @@ Creates a new instance of [Fx.Move][] and calls its *start* method.
 
 [Fx.Move]: #Fx-Move
 [Fx.Move:options]: #Fx-Move:options
-[Fx.Morph]: /docs/core/Fx/Fx.Morph
-[Element]: /docs/core/Element/Element
+[Fx.Morph]: /core/Fx/Fx.Morph
+[Element]: /core/Element/Element

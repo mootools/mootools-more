@@ -270,5 +270,5 @@ Converts an HSB array to a RGB array.
 
 
 
-[Element:setStyle]: /docs/core/Element/Element.Style#Element:setStyles
+[Element:setStyle]: /core/Element/Element.Style#Element:setStyles
 [MDC Array]: http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:Array

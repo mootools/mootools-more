@@ -51,5 +51,5 @@ Extends the [Class][] native, this is a mutator.
 
 By using *binds* in the example above, you don't need to bind *this.say* to *this* in the *addEvent* method in the *monitor* method; it has already been bound to *this*.
 
-[Class]: /docs/core/Class/Class
+[Class]: /core/Class/Class
 [http://blog.kassens.net/binds-class-mutator]: http://blog.kassens.net/binds-class-mutator

@@ -71,7 +71,7 @@ Stops the timer and does not execute any more requests beside an already running
 
 * *object* - This instance of Request.
 
-[Request]: /docs/core/Request/Request
-[Request.HTML]: /docs/core/Request/Request.HTML
-[Request.JSON]: /docs/core/Request/Request.JSON
+[Request]: /core/Request/Request
+[Request.HTML]: /core/Request/Request.HTML
+[Request.JSON]: /core/Request/Request.JSON
 [Request.Periodical]: #Request-Periodical

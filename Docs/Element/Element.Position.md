@@ -70,4 +70,4 @@ Using these options you can specify a position for each corner of the relativeTo
 
 * The element must be absolutely positioned (if it isn't, this method will set it to be).
 
-[Element]: /docs/core/Element/Element
+[Element]: /core/Element/Element

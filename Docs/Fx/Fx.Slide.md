@@ -264,6 +264,6 @@ Slides this Element in view.
 
 
 [Fx.Slide]: #Fx-Slide
-[Fx]: /docs/core/Fx/Fx
-[$]: /docs/core/Element/Element#dollar
-[Element.Properties]: /docs/core/Element/Element/#Element-Properties
+[Fx]: /core/Fx/Fx
+[$]: /core/Element/Element#dollar
+[Element.Properties]: /core/Element/Element/#Element-Properties

@@ -141,7 +141,7 @@ Adds drag-to-move behavior to an Element using supplied options.
 
 
 
-[$]: /docs/core/Element/Element/#dollar
-[Drag]: /docs/more/Drag/Drag/#Drag
-[Drag:stop]: /docs/more/Drag/Drag/#Drag:stop
-[Element:getPosition]: /docs/core/Element/Element.Dimensions/#Element:getPosition
+[$]: /core/Element/Element/#dollar
+[Drag]: /more/Drag/Drag/#Drag
+[Drag:stop]: /more/Drag/Drag/#Drag:stop
+[Element:getPosition]: /core/Element/Element.Dimensions/#Element:getPosition

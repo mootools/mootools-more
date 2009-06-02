@@ -226,5 +226,5 @@ Retrieves the "build-in" instance of [Fx.Reveal][] and calls its *reveal* method
 
 [Fx.Reveal]: #Fx-Reveal
 [Fx.Reveal:options]: #Fx-Reveal:options
-[Fx.Morph]: /docs/core/Fx/Fx.Morph
-[Element]: /docs/core/Element/Element
+[Fx.Morph]: /core/Fx/Fx.Morph
+[Element]: /core/Element/Element

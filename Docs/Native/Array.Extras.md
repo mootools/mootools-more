@@ -100,4 +100,4 @@ Returns a new array without duplicate values.
 
 
 
-[Array]: /docs/core/Native/Array
+[Array]: /core/Native/Array

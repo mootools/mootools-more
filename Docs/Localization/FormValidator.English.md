@@ -15,5 +15,5 @@ Simply change the language property to *en-US*.
 
 See also: [FormValidator][] and [Lang][]
 
-[FormValidator]: /docs/more/Forms/FormValidator#FormValidator
-[Lang]: /docs/more/Core/Lang
+[FormValidator]: /more/Forms/FormValidator#FormValidator
+[Lang]: /more/Core/Lang
