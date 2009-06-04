@@ -344,6 +344,18 @@ Date.extend({
 var yr_base = 1900;
 var yr_start = 70;
 
+var parsers = function(key){
+	switch(key){
+		case 'x': 	// iso8601 covers yyyy-mm-dd, so just check if month is first
+			return (Date.orderIndex('month') == 1) ? '%m[.-/]%d([.-/]%y)?' : '%d[.-/]%m([.-/]%y)?';
+		case 'X':
+			return '%H([.:]%M)?([.:]%S([.:]%s)?)?\\s?%p?\\s?%T?';
+		case 'o':
+			return '[^\\d\\s]*';
+	}
+	return null;
+};
+
 var keys = {
 	a: /[a-z]{3,}/,
 	d: /\d{1,2}/,
@@ -351,21 +363,11 @@ var keys = {
 	p: /[ap]\.?m\.?/,
 	y: /\d{2}|\d{4}/,
 	Y: /\d{4}/,
-	T: /Z|[+-]\d{2}(?::?\d{2})?/,
-	
-	o: /[^\d\s]*/,
-	X: /%H([.:]%M)?([.:]%S([.:]%s)?)?\s?%p?\s?%T?/
+	T: /Z|[+-]\d{2}(?::?\d{2})?/
 };
 
 keys.B = keys.b = keys.A = keys.a;
 keys.H = keys.I = keys.m = keys.M = keys.S = keys.d;
-
-var parsers = function(key){
-	if (key == 'x')		// iso8601 covers yyyy-mm-dd, so just check if month is first
-		return (Date.orderIndex('month') == 1) ? '%m[.-/]%d([.-/]%y)?' : '%d[.-/]%m([.-/]%y)?';
-	
-	return keys[key] ? keys[key].source : null;
-};
 
 var lang;
 
@@ -375,18 +377,18 @@ var build = function(format){
 	var parsed = [null];
 
 	var re = (format.source || format)	// allow format to be regex
-	 .replace(/%([xXo])/g,
+	 .replace(/%([a-z])/gi,
 		function($1, $2){
-			return parsers($2) || $2;
+			return parsers($2) || $1;
 		}
 	).replace(/\((?!\?)/g, '(?:')		// make all groups non-capturing
 	 .replace(/ (?!\?|\*)/g, ',? ')		// be forgiving with spaces and commas
 	 .replace(/%([a-z%])/gi,
 		function($1, $2){
-			var f = parsers($2);
-			if (!f) return $2;
+			var p = keys[$2];
+			if (!p) return $2;
 			parsed.push($2);
-			return '(' + f + ')';
+			return '(' + p.source + ')';
 		}
 	);
 	
