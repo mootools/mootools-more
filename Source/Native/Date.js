@@ -19,8 +19,8 @@ if (!Date.now) Date.now = $time;
 Date.Methods = {};
 
 ['Date', 'Day', 'FullYear', 'Hours', 'Milliseconds', 'Minutes', 'Month', 'Seconds', 'Time', 'TimezoneOffset',
-	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'DaysInMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
-	'AMPM', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds'].each(function(method){
+	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'LastDayOfMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
+	'AMPM', 'Ordinal', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds'].each(function(method){
 	Date.Methods[method.toLowerCase()] = method;
 });
 
@@ -75,7 +75,7 @@ Date.implement({
 			case 'month':
 				var d = this.get('date');
 				this.set('date', 1).set('mo', this.get('mo') + times);
-				return this.set('date', d.min(this.get('daysInMonth')));
+				return this.set('date', d.min(this.get('lastdayofmonth')));
 			case 'week':
 				return this.increment('day', times * 7);
 			case 'day':
@@ -118,12 +118,21 @@ Date.implement({
 		return null;
 	},
 	
-	getDaysInMonth: function(){
+	getLastDayOfMonth: function(){
 		return Date.daysInMonth(this.get('mo'), this.get('year'));
+	},
+	
+	getDayOfYear: function(){
+		return (Date.UTC(this.get('year'), this.get('mo'), this.get('date') + 1)
+			  - Date.UTC(this.get('year'), 0, 1)) / Date.units.day();
 	},
 
 	getWeek: function(){
 		return (this.get('dayofyear') / 7).ceil();
+	},
+	
+	getOrdinal: function(day){
+		return Date.getMsg('ordinal', day || this.get('date'));
 	},
 
 	getTimezone: function(){
@@ -168,7 +177,7 @@ Date.implement({
 		f = formats[f.toLowerCase()] || f;	// replace short-hand with actual format
 		var d = this;
 		
-		return f.replace(/\%([aAbBcdHIjmMpSUWwxXyYTZ\%])/g,
+		return f.replace(/%([a-z%])/gi,
 			function($1, $2){
 				switch ($2){
 					case 'a': return Date.getMsg('days')[d.get('day')].substr(0, 3);
@@ -182,10 +191,10 @@ Date.implement({
 					case 'j': return zeroize(d.get('dayofyear'), 3);
 					case 'm': return zeroize((d.get('mo') + 1), 2);
 					case 'M': return zeroize(d.get('min'), 2);
+					case 'o': return d.get('ordinal');
 					case 'p': return Date.getMsg(d.get('ampm'));
 					case 'S': return zeroize(d.get('seconds'), 2);
 					case 'U': return zeroize(d.get('week'), 2);
-					case 'W': throw new Error('%W is not supported yet');
 					case 'w': return d.get('day');
 					case 'x': return d.format(Date.getMsg('shortDate'));
 					case 'X': return d.format(Date.getMsg('shortTime'));
@@ -193,7 +202,6 @@ Date.implement({
 					case 'Y': return d.get('year');
 					case 'T': return d.get('GMTOffset');
 					case 'Z': return d.get('Timezone');
-					case '%': return '%';
 				}
 				return $2;
 			}
@@ -344,7 +352,7 @@ Date.extend({
 var yr_base = 1900;
 var yr_start = 70;
 
-var parsers = function(key){
+var replacers = function(key){
 	switch(key){
 		case 'x': 	// iso8601 covers yyyy-mm-dd, so just check if month is first
 			return (Date.orderIndex('month') == 1) ? '%m[.-/]%d([.-/]%y)?' : '%d[.-/]%m([.-/]%y)?';
@@ -379,7 +387,7 @@ var build = function(format){
 	var re = (format.source || format)	// allow format to be regex
 	 .replace(/%([a-z])/gi,
 		function($1, $2){
-			return parsers($2) || $1;
+			return replacers($2) || $1;
 		}
 	).replace(/\((?!\?)/g, '(?:')		// make all groups non-capturing
 	 .replace(/ (?!\?|\*)/g, ',? ')		// be forgiving with spaces and commas
@@ -432,7 +440,7 @@ var handle = function(key, value){
 		case 'T':
 			if (value == 'Z') value = '+00';
 			var offset = value.match(/([+-]\d{2}):?(\d{2})?/);
-			offset = offset[1] * 60 + (offset[2] || 0).toInt() + this.getTimezoneOffset();
+			offset = offset[1] * 60 + (+offset[2] || 0) + this.getTimezoneOffset();
 			return this.set('time', (this * 1) + offset * 60000);
 	}
 	

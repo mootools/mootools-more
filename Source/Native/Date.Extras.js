@@ -10,37 +10,17 @@ Script: Date.Extras.js
 
 */
 
-['LastDayOfMonth', 'Ordinal'].each(function(method){
-	Date.Methods[method.toLowerCase()] = method;
-});
-
-
 Date.implement({
 
 	timeDiffInWords: function(relative_to){
 		return Date.distanceOfTimeInWords(this, relative_to || new Date);
-	},
-
-	getOrdinal: function(dayOfMonth){
-		return Date.getMsg('ordinal', dayOfMonth || this.get('date'));
-	},
-
-	getDayOfYear: function(){
-		return ((Date.UTC(this.getFullYear(), this.getMonth(), this.getDate() + 1, 0, 0, 0)
-			- Date.UTC(this.getFullYear(), 0, 1, 0, 0, 0) ) / Date.units.day());
-	},
-
-	getLastDayOfMonth: function(){
-		var ret = this.clone();
-		ret.setMonth(ret.getMonth() + 1, 0);
-		return ret.getDate();
 	}
 
 });
 
 Date.alias('timeDiffInWords', 'timeAgoInWords');
 
-$extend(Date, {
+Date.extend({
 
 	distanceOfTimeInWords: function(fromTime, toTime){
 		return this.getTimePhrase(((toTime.getTime() - fromTime.getTime()) / 1000).toInt(), fromTime, toTime);
