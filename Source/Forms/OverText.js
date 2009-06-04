@@ -70,7 +70,7 @@ var OverText = new Class({
 			change: this.assert
 		}).store('OverTextDiv', this.text);
 		window.addEvent('resize', this.reposition.bind(this));
-		this.assert();
+		this.assert(true);
 		this.reposition();
 	},
 
@@ -85,7 +85,7 @@ var OverText = new Class({
 		//resumeon blur
 		if (this.poller && !stop) return this;
 		var test = function(){
-			if (!this.pollingPaused) this.assert();
+			if (!this.pollingPaused) this.assert(true);
 		}.bind(this);
 		if (stop) $clear(this.poller);
 		else this.poller = test.periodical(this.options.pollInterval, this);
@@ -102,13 +102,13 @@ var OverText = new Class({
 		this.hide();
 	},
 
-	hide: function(){
+	hide: function(suppressFocus){
 		if (this.text.isDisplayed() && !this.element.get('disabled')){
 			this.text.hide();
 			this.fireEvent('textHide', [this.text, this.element]);
 			this.pollingPaused = true;
 			try {
-				this.element.fireEvent('focus').focus();
+				if (!suppressFocus) this.element.fireEvent('focus').focus();
 			} catch(e){} //IE barfs if you call focus on hidden elements
 		}
 		return this;
@@ -124,8 +124,8 @@ var OverText = new Class({
 		return this;
 	},
 
-	assert: function(){
-		this[this.test() ? 'show' : 'hide']();
+	assert: function(suppressFocus){
+		this[this.test() ? 'show' : 'hide'](suppressFocus);
 	},
 
 	test: function(){
@@ -134,7 +134,7 @@ var OverText = new Class({
 	},
 
 	reposition: function(){
-		this.assert();
+		this.assert(true);
 		if (!this.element.getParent() || !this.element.offsetHeight) return this.stopPolling().hide();
 		if (this.test()) this.text.position($merge(this.options.positionOptions, {relativeTo: this.element}));
 		return this;
