@@ -321,30 +321,25 @@ Date.extend({
 
 	defineFormat: function(name, format){
 		formats[name] = format;
-		return Date;
 	},
 
 	defineFormats: function(formats){
 		for (var name in formats) Date.defineFormat(name, formats[f]);
-		return Date;
 	},
 
 	parsePatterns: [],
 	
 	defineParser: function(format){
 		Date.parsePatterns.push( (format.re && format.handler) ? format : build(format) );
-		return Date;
 	},
 	
 	defineParsers: function(){
 		Array.flatten(arguments).each(Date.defineParser);
-		return Date;
 	},
 	
 	define2DigitYearStart: function(year){
 		yr_start = year % 100;
 		yr_base = year - yr_start;
-		return Date;
 	}
 
 });
@@ -439,9 +434,9 @@ var handle = function(key, value){
 			return this.set('year', value);
 		case 'T':
 			if (value == 'Z') value = '+00';
-			var offset = value.match(/([+-]\d{2}):?(\d{2})?/);
-			offset = offset[1] * 60 + (+offset[2] || 0) + this.getTimezoneOffset();
-			return this.set('time', (this * 1) + offset * 60000);
+			var offset = value.match(/([+-])(\d{2}):?(\d{2})?/);
+			offset = (offset[1] + '1') * (offset[2] * 60 + (+offset[3] || 0)) + this.getTimezoneOffset();
+			return this.set('time', (this * 1) - offset * 60000);
 	}
 	
 	return this;
