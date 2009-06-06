@@ -9,6 +9,7 @@ Script: Date.js
 		Aaron Newton
 		Nicholas Barthelemy - https://svn.nbarthelemy.com/date-js/
 		Harald Kirshner - mail [at] digitarald.de; http://digitarald.de
+		Scott Kyle - scott [at] appden.com; http://appden.com
 
 */
 
