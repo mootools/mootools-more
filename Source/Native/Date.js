@@ -329,8 +329,8 @@ Date.extend({
 
 	parsePatterns: [],
 	
-	defineParser: function(format){
-		Date.parsePatterns.push( (format.re && format.handler) ? format : build(format) );
+	defineParser: function(pattern){
+		Date.parsePatterns.push( (pattern.re && pattern.handler) ? pattern : build(pattern) );
 	},
 	
 	defineParsers: function(){
@@ -361,7 +361,10 @@ var replacers = function(key){
 
 var keys = {
 	a: /[a-z]{3,}/,
-	d: /\d{1,2}/,
+	d: /[0-2]?[0-9]|3[01]/,
+	H: /[01]?[0-9]|2[0-3]/,
+	I: /0?[1-9]|1[0-2]/,
+	M: /[0-5]?\d/,
 	s: /\d+/,
 	p: /[ap]\.?m\.?/,
 	y: /\d{2}|\d{4}/,
@@ -370,7 +373,8 @@ var keys = {
 };
 
 keys.B = keys.b = keys.A = keys.a;
-keys.H = keys.I = keys.m = keys.M = keys.S = keys.d;
+keys.m = keys.I;
+keys.S = keys.M;
 
 var lang;
 
