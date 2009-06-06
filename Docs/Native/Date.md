@@ -12,6 +12,7 @@ Extends the Date native to include more powerful parsing and formatting function
 * Nicholas Barthelemy - https://svn.nbarthelemy.com/date-js/
 * Harald Kirshner - mail [at] digitarald.de; http://digitarald.de
 * Aaron Newton - aaron [dot] newton [at] cnet [dot] com
+* Scott Kyle - scott [at] appden.com; http://appden.com
 
 ### License:
 
@@ -73,6 +74,7 @@ Sets a property of a date.
 	2. value - (*mixed*) the value for the key
 - One Argument (properties)
 	1. properties - (*object*) Object with its keys/value pairs representing the properties and values to set for the Date (as described below).
+
 ### Notes
 
 * All of the native date methods work with *set*. These are: "Date", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "UTCDate", "UTCFullYear", "UTCHours", "UTCMilliseconds", "UTCMinutes", "UTCMonth", "UTCSeconds"
@@ -140,7 +142,7 @@ Increments a value in the date.
 
 ### Note
 
-* the only acceptable values for interval are **year**, **month**, **day**, **hour**, **minute**, and **millisecond**
+* the only acceptable values for interval are **year**, **month**, **week**, **day**, **hour**, **minute**, **second**, and **ms**
 
 Date Method: decrement {#Date:decrement}
 ----------------------------------------
@@ -153,7 +155,7 @@ Decrements a value in the date. See [Date:increment][].
 
 ### Note
 
-* the only acceptable values for interval are **year**, **month**, **day**, **hour**, **minute**, and **millisecond**
+* the only acceptable values for interval are **year**, **month**, **week**, **day**, **hour**, **minute**, **second**, and **ms**
 
 
 Date Method: isLeapYear {#Date:isLeapYear}
@@ -206,7 +208,7 @@ Compares two dates.
 
 * (*integer*) the difference in time at the specified resolution
 
-Date Method: get('timezone'){#Date:getTimezone}
+Date Method: get('timezone') {#Date:getTimezone}
 ------------------------------------------------
 
 Returns the time zone for the date. Example: "GMT".
@@ -219,7 +221,7 @@ Returns the time zone for the date. Example: "GMT".
 
 * (*string*) the time zone stamp ("GMT" for example);
 
-Date Method: get('gmtoffset'){#Date:getGMTOffset}
+Date Method: get('gmtoffset') {#Date:getGMTOffset}
 --------------------------------------------------
 
 Returns the offset to GMT *as a string*. Example: "-0800".
@@ -232,7 +234,7 @@ Returns the offset to GMT *as a string*. Example: "-0800".
 
 * (*string*) the GMT offset
 
-Date Method: get('week'){#Date:getWeek}
+Date Method: get('week') {#Date:getWeek}
 ----------------------------------------
 
 ### Syntax
@@ -242,6 +244,37 @@ Date Method: get('week'){#Date:getWeek}
 ### Returns
 
 * (*integer*) the week of the year for the date (i.e. 1 - 52).
+
+Date Method: get('ordinal') {#Date:getOrdinal}
+----------------------------------------------
+
+### Syntax
+
+	new Date().get('ordinal');
+
+### Returns
+
+* (*string*) the ordinal for the day ('th', 'st', 'nd', etc).
+
+Date Method: get('dayofyear') {#Date:getDayOfYear}
+--------------------------------------------------
+
+### Syntax
+
+	new Date().get('dayofyear');
+
+* (*integer*) the day of the year (i.e. for Dec. 10, you'll get 344 in a non-leap year).
+
+Date Method: get('lastdayofmonth') {#Date:getLastDayOfMonth}
+------------------------------------------------------------
+
+### Syntax
+
+	new Date().get('lastdayofmonth');
+
+### Returns
+
+* (*integer*) the last day of the month (i.e. for December, you'll get 31).
 
 Date Method: format {#Date:format}
 ----------------------------------
@@ -268,10 +301,10 @@ Outputs the date into a specific format.
 * j - the day of the year to three digits (001 is Jan 1st)
 * m - the numerical month to two digits (01 is Jan, 12 is Dec)
 * M - the minutes to two digits (01, 40, 59)
+* o - the ordinal of the day of the month in the current language ("st" for the 1st, "nd" for the 2nd, etc.)
 * p - The current language equivalent of either AM or PM
 * S - the seconds to two digits (01, 40, 59)
 * U - the week to two digits (01 is the week of Jan 1, 52 is the week of Dec 31)
-* W - not yet supported
 * w - the numerical day of the week, one digit (0 is Sunday, 1 is Monday)
 * x - the date in the current language prefered format. en-US: %m/%d/%Y (12/10/2007)
 * X - the time in the current language prefered format. en-US: %I:%M%p (02:45PM)
@@ -283,7 +316,7 @@ Outputs the date into a specific format.
 
 ### Shortcuts:
 
-These keys are NOT preceded by the percent sign.
+These shortcuts are NOT preceded by the percent sign.
 
 * db - "%Y-%m-%d %H:%M:%S",
 * compact - "%Y%m%dT%H%M%S",
@@ -292,20 +325,35 @@ These keys are NOT preceded by the percent sign.
 * short - "%d %b %H:%M",
 * long - "%B %d, %Y %H:%M"
 
+See [Date:defineFormat][] to define new shortcuts.
+
 ### Examples
 
-	new Date().format("db"); //1999-12-31 23:59:59
-	new Date().format("%x"); //12/31/1999
-	new Date().format("%y"); //99
+	new Date().format('db'); //1999-12-31 23:59:59
+	new Date().format('%x'); //12/31/1999
+	new Date().format('%y'); //99
 
 ### Returns
 
 * (*string*) the corresponding format for the Date.
 
+Date Method: toISOString {#Date:toISOString}
+--------------------------------------------
+
+Outputs the date in the ISO-8601 standard format (i.e. 1999-12-31T11:59:59-0800).
+
+### Syntax
+
+	new Date().toISOString();  //equivalent to format('iso8601')
+	
+### Returns
+
+* (*string*) the date in ISO-8601 format.
+
 Date Method: parse {#Date:parse}
 --------------------------------
 
-Parses a string to a date. In the examples below, parsing works with dates using / (slash), - (dash), or (space). (12.31.2007, 12-31-2007, 12/31/2007).
+Parses a string to a date. In the examples below, parsing works with dates using / (slash), - (dash), or . (period). (12.31.2007, 12-31-2007, 12/31/2007).
 
 ### Syntax
 
@@ -314,20 +362,23 @@ Parses a string to a date. In the examples below, parsing works with dates using
 
 ### Arguments
 
-1. date - (*string*) a string date that has a predefined parser (see [Date:parsePatterns][])
+1. date - (*string*) a string date that has a predefined parser (see [Date:defineParser][])
 
 ### Example
 
-	Date.parse('10/12/1982') //"Tue Oct 12 1982 11:53:25 GMT-0700 (Pacific Daylight Time)"
-	Date.parse('10/12/1982 10:45pm') //"Tue Oct 12 1982 10:45:25 GMT-0700 (Pacific Daylight Time)"
-	Date.parse('10.12.1982 22:45:00') //"Tue Oct 12 1982 10:45:25 GMT-0700 (Pacific Daylight Time)"
-	Date.parse('2007-06-08 16:34:52') //"Fri Jun 08 2007 09:34:52 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('10/12/1982') //"Tue Oct 12 1982 00:00:00 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('10/12/1982 10:45pm') //"Tue Oct 12 1982 22:45:00 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('10.12.1982 22:45:00') //"Tue Oct 12 1982 22:45:00 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('2007-06-08 16:34:52') //"Fri Jun 08 2007 16:34:52 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('2007-06-08T16:34:52+0200') //"Fri Jun 08 2007 07:34:52 GMT-0700 (Pacific Daylight Time)"
+	
+	Date.parse('1st') //"Sat Dec 01 2007 00:00:00 GMT-0800 (Pacific Standard Time)"
+	Date.parse('14th October') //"Sun Oct 14 2007 00:00:00 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('24th May, 2007') //"Thu May 24 2007 00:00:00 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('May 3rd 2006 10:45pm') //"Wed May 03 2006 22:45:00 GMT-0700 (Pacific Daylight Time)"
 
 	var PrinceParty = new Date();
-	PrinceParty.parse("12/31/1999 11:59pm");
-	//PrinceParty is now set for 12/31/1999 just before midnight
-
-	var PrinceParty = Date.parse("12/31/1999 11:59pm");
+	PrinceParty.parse('12/31/1999 11:59pm'); //PrinceParty is now set for 12/31/1999 just before midnight
 
 ### Returns
 
@@ -335,46 +386,137 @@ Parses a string to a date. In the examples below, parsing works with dates using
 
 ### Notes
 
-* *Date.js* includes four default parsers - for *YYYY-MM-DD*, *YYYY-MM-DD HH:mm[:ss][AM|PM]*, *MM/DD/YYYY* and *MM/DD/YYYY HH:mm[:ss][AM|PM]*
-* If you include *[Date.Extras.js][]* you will get more parsers
-* You can write your own parsers - see [Date:$parsePatterns][]
+* *Date.js* includes many default parsers, you will get some more if you include *[Date.Extras.js][]*
+* You can write your own parsers - see [Date:defineParser][]
 * If you execute the *parse* method against an instance of *Date*, that instance will take on the parsed value
 * If you execute the *parse* method against the *Date* namespace a new *Date* object is created and returned
 
-Custom Parsers {#Date:CustomParsers}
-------------------------------------
+
+Static Methods {#Static}
+=========================
+
+Static Method: defineFormat {#Date:defineFormat}
+------------------------------------------------
+
+Adds a new shortcut for [Date:format][].
+
+### Syntax
+
+	Date.defineFormat(name, format);
+
+### Arguments
+
+1. name - (*string*) name of the new format
+2. format - (*string*) format string (see [Date:format][])
+
+### Example
+
+	Date.defineFormat('time', '%H:%M');
+	new Date().format('time');	//17:30
+
+Static Method: defineFormats {#Date:defineFormats}
+--------------------------------------------------
+
+Add a new shortcuts for [Date:format][].  Plural form of [Date:defineFormat][].
+
+### Syntax
+
+	Date.defineFormats(formats);
+
+### Arguments
+
+1. formats - (*object*) key/value pairs corresponding to the name and format passed into [Date:defineFormat][]
+
+### Example
+
+	Date.defineFormats({
+		time: '%H:%M',
+		day: '%A'
+	});
+
+Static Method: parse {#Date:staticParse}
+----------------------------------------
+
+See [Date:parse][] above.
+
+Static Method: defineParser {#Date:defineParser}
+------------------------------------------------
 
 Additional parsers can be authored than those already outlined by default in *Date.js*. If you include *Date.Extras.js* you'll get several more, but you can write your own.
 
 ### Syntax
 
-	Date.parsePatterns.push(pattern);
-	Date.parsePatterns.extend([pattern, pattern, etc]);
+	Date.defineParser(pattern);
 
-### Patterns
+### Arguments
 
-Each pattern is an object with two properties: a regular expression and a handler that is passed the result of that expression.
+- pattern - (*string* or *object*) see descriptions below.
 
-	Date.parsePatterns.push({
+### Pattern String
+
+A pattern string is somewhat of a hybrid between regular expressions and the format strings passed into [Date:format][]. First, an example:
+
+	Date.defineParser('%d%o( %b( %Y)?)?( %X)?');
+	
+As you can see, the above pattern (already included in *Date.js*) uses parantheses for grouping with a question mark to denote the preceding item or group as being optional, just as in a regular expression.  It parsers strings such as:
+
+* 14th
+* 31st October
+* 1 Jan 2000
+* 1 Jan 12:00am
+
+All of the same keys that are supported in [Date:format][] are supported here, except **%c**, **%U**, **%w**, and **%Z**.  However, the matching rules for each key is as loose as possible in order to parse the greatest number of variations.
+
+### Custom Pattern Object
+
+Each custom pattern object has two properties: a regular expression and a handler that is passed the result of that expression executed on the string to be parsed.
+
+	Date.defineParser({
 		re: <regularExpression>,
 		handler: function(bits){...}
 	});
 
+### Notes
+
+The legacy method of adding parsers is still supported but considered deprecated.
+
+	Date.parsePatterns.push(pattern);
+	Date.parsePatterns.extend([pattern, pattern, etc]);
+
+Static Method: defineParsers {#Date:defineParsers}
+--------------------------------------------------
+
+Plural form of [Date:defineParser][].
+
+### Syntax
+
+	Date.defineParsers(pattern, pattern, etc.);
+	
+### Arguments
+
+1. format - can be multiple format arguments or an array of formats.
+
+Static Method: define2DigitYearStart {#Date:define2DigitYearStart}
+------------------------------------------------------------------
+
+Define the first year of the 100-year period that 2-digit years will be fall within when parsed.  The default start year is 1970.
+
+### Syntax
+
+	Date.define2DigitYearStart(year)
+	
+### Arguments
+
+1. year - (*integer*) first year of the 100-year period
+
 ### Example
-
-	Date.parsePatterns.extend([
-		{
-			//"12.31.08", "12-31-08", "12/31/08", "12.31.2008", "12-31-2008", "12/31/2008"
-			re: /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{2,4})$/,
-			handler: function(bits){
-				var d = new Date();
-				d.setYear(bits[3]);
-				d.setMonth(bits[1].toInt() - 1, bits[2].toInt());
-				return Date.fixY2K(d);
-			}
-		}
-	]);
-
+	
+	Date.parse('01/01/00');  //Jan 1, 2000
+	Date.parse('12/31/99');  //Dec 31, 1999
+	
+	Date.define2DigitYearStart(2000);
+	Date.parse('01/01/00');  //Jan 1, 2000
+	Date.parse('12/31/99');  //Dec 31, 2099
 
 Date Language Localization {#Localization}
 ==========================================
@@ -386,8 +528,13 @@ Date Language Localization {#Localization}
 * dateOrder - (*array*) An array specifying the order for date expression followed by a default delimiter (usually /). US english is *['month', 'date', 'year', '/']*, for instance.
 * AM - (*string*) the string that denotes morning in 12 hour time
 * PM - (*string*) the string that denotes evening in 12 hour time
+* ordinal - (*function*) A method that returns the proper ordinal ("th", "st", "nd", etc) given a day of the month.
 
 [Date:increment]: #Date:increment
+[Date:parse]: #Date:parse
+[Date:format]: #Date:format
+[Date:defineFormat]: #Date:defineFormat
+[Date:defineParser]: #Date:defineParser
 [Date:parsePatterns]: #Date:CustomParsers
 [Date.Extras.js]: /docs/more/Native/Date.Extras
 [Lang]: /docs/more/Core/Lang
