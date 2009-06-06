@@ -451,7 +451,8 @@ Date.defineParsers(
 	'%Y%m%d(T%H(%M%S?)?)?',					// "19991231", "19991231T1159", compact
 	'%x( %X)?',								// "12/31", "12.31.99", "12-31-1999", "12/31/2008 11:59 PM"
 	'%d%o( %b( %Y)?)?( %X)?',				// "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
-	'%b( %d%o)?( %Y)?( %X)?'				// "December 1999" and same as above with month and day switched
+	'%b %d%o?( %Y)?( %X)?',					// Same as above with month and day switched
+	'%b %Y'									// "December 1999"
 );
 
 MooTools.lang.addEvent('langChange', function(language){
