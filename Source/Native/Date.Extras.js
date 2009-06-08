@@ -22,39 +22,29 @@ Date.alias('timeDiffInWords', 'timeAgoInWords');
 
 Date.extend({
 
-	distanceOfTimeInWords: function(fromTime, toTime){
-		return this.getTimePhrase(((toTime.getTime() - fromTime.getTime()) / 1000).toInt(), fromTime, toTime);
+	distanceOfTimeInWords: function(from, to){
+		return Date.getTimePhrase(((to - from) / 1000).toInt());
 	},
 
-	getTimePhrase: function(delta, fromTime, toTime){
-		var getPhrase = function(){
-			var suffix;
-			if (delta >= 0){
-				suffix = 'Ago';
-			} else {
-				delta = delta * -1;
-				suffix = 'Until';
-			}
-			if (delta < 60){
-				return Date.getMsg('lessThanMinute' + suffix, delta);
-			} else if (delta < 120){
-				return Date.getMsg('minute' + suffix, delta);
-			} else if (delta < (45 * 60)){
-				delta = (delta / 60).round();
-				return Date.getMsg('minutes' + suffix, delta);
-			} else if (delta < (90 * 60)){
-				return Date.getMsg('hour' + suffix, delta);
-			} else if (delta < (24 * 60 * 60)){
-				delta = (delta / 3600).round();
-				return Date.getMsg('hours' + suffix, delta);
-			} else if (delta < (48 * 60 * 60)){
-				return Date.getMsg('day' + suffix, delta);
-			} else {
-				delta = (delta / 86400).round();
-				return Date.getMsg('days' + suffix, delta);
-			}
-		};
-		return getPhrase().substitute({delta: delta});
+	getTimePhrase: function(delta){
+		var suffix = (delta < 0) ? 'Until' : 'Ago';
+		if (delta < 0) delta *= -1;
+		
+		var msg = (delta < 60) ? 'lessThanMinute' :
+				  (delta < 120) ? 'minute' :
+				  (delta < (45 * 60)) ? 'minutes' :
+				  (delta < (90 * 60)) ? 'hour' :
+				  (delta < (24 * 60 * 60)) ? 'hours' :
+				  (delta < (48 * 60 * 60)) ? 'day' :
+				  'days';
+		
+		switch(msg){
+			case 'minutes': delta = (delta / 60).round(); break;
+			case 'hours':   delta = (delta / 3600).round(); break;
+			case 'days': 	delta = (delta / 86400).round();
+		}
+		
+		return Date.getMsg(msg + suffix, delta).substitute({delta: delta});
 	}
 
 });
