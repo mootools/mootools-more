@@ -51,7 +51,7 @@
 		},
 
 		"Date": {
-			"deps": ["More", "Core", "String", "Number", "Array", "String.Extras", "Lang", "Date.English.US"],
+			"deps": ["More", "Core", "String", "Number", "Array", "Lang", "Date.English.US"],
 			"desc": "Extends the Date native object to include methods useful in managing dates."
 		},
 
