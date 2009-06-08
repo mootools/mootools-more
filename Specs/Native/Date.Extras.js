@@ -6,60 +6,6 @@ License:
 	MIT-style license.
 */
 
-describe('Date.getOrdinal', {
-
-	'should get the ordinal for a Date instance': function(){
-		Date.$culture = 'GB';
-		var d = new Date(1999, 11, 1);
-		value_of(d.get('ordinal')).should_be('st');
-		d.increment();
-		value_of(d.get('ordinal')).should_be('nd');
-		d.increment();
-		value_of(d.get('ordinal')).should_be('rd');
-		d.increment();
-		value_of(d.get('ordinal')).should_be('th');
-		d.increment('day', 17);
-		value_of(d.get('ordinal')).should_be('st');
-		d.increment();
-		value_of(d.get('ordinal')).should_be('nd');
-		d.increment();
-		value_of(d.get('ordinal')).should_be('rd');
-		d.increment();
-		value_of(d.get('ordinal')).should_be('th');
-		d.increment('day', 7);
-		value_of(d.get('ordinal')).should_be('st');
-	}
-
-});
-
-describe('Date.getDayOfYear', {
-
-	'should get the day of the year for a Date instance': function(){
-		var d = new Date(1999, 0, 1, 1, 1, 1, 1);
-		value_of(d.get('dayofyear')).should_be(1); // 1st jan 1999
-		d.increment();
-		value_of(d.get('dayofyear')).should_be(2); //2nd jan 1999
-		d.increment('day', 364);
-		value_of(d.get('dayofyear')).should_be(1); // 1st jan 2000 - a leap year
-		d.increment('day', 365); // should stay in the same year!
-		value_of(d.get('dayofyear')).should_be(366);
-	}
-
-});
-
-describe('Date.getLastDayOfMonth', {
-
-	'should get the last day of the month for a Date instance': function(){
-		var d = new Date(1999, 0, 1, 1, 1, 1, 1);
-		value_of(d.get('lastdayofmonth')).should_be(31); // 1st jan 1999
-		d.increment('day', 31);
-		value_of(d.get('lastdayofmonth')).should_be(28); // 1st Feb 1999
-		d.increment('day', 365); // 29th feb 2000 - a leap year!
-		value_of(d.get('lastdayofmonth')).should_be(29);
-	}
-
-});
-
 describe('Date.getTimePhrase', {
 	'should describe a number of seconds in simple terms': function(){
 		value_of(Date.getTimePhrase(65)).should_be('about a minute ago');
@@ -87,18 +33,14 @@ describe('Date.timeAgoInWords', {
 
 });
 
-describe('Date.extras.parse', {
+describe('Date.Extras.parse', {
 
 	'should parse a string value into a date': function(){
-		MooTools.lang.list().each(function(lang){
-			MooTools.lang.setLanguage(lang);
-			var d = new Date(2000, 11, 2, 0, 0, 0, 0);
-			value_of(Date.parse(d.format('%b %d %Y')).clearTime()).should_be(d);
-			value_of(Date.parse(d.format('%d %B %Y')).clearTime()).should_be(d);
-			d = new Date(2000, 11, 2, 22, 45, 0, 0);
-			value_of(Date.parse(d.format('%B %d %Y %X')).set('sec',0).set('ms',0)).should_be(d);
-			value_of(Date.parse(d.format('%d %b %Y %H:%M')).set('sec',0).set('ms',0)).should_be(d);
-		});
+		var d = new Date;
+		
+		value_of(Date.parse('today').get('date')).should_be(d.get('date'));
+		value_of(Date.parse('yesterday').get('date')).should_be(d.get('date') - 1);
+		value_of(Date.parse('tomorrow').get('date')).should_be(d.get('date') + 1);
 	}
 
 });

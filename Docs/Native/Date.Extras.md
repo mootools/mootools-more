@@ -20,19 +20,15 @@ MIT-style license
 	Extra Date Parsers: {#Date:parsers}
 -----------------------------------
 
-In addition to the two default parsers included in *[Date.js][]*, *Date.Extras.js* includes numerous additional parsers.
+In addition to the two default parsers included in *[Date.js][]*, *Date.Extras.js* includes some additional parsers.
 
 ### Examples
 
-	Date.parse('2007-06-08T16:34:52+0200') = "Fri Jun 08 2007 07:34:52 GMT-0700 (Pacific Daylight Time)"
-	Date.parse('today') = "Mon Dec 10 2007 11:53:25 GMT-0800 (Pacific Standard Time)"
-	Date.parse('tomorrow') = "Tue Dec 11 2007 11:53:25 GMT-0800 (Pacific Standard Time)"
-	Date.parse('yesterday') = "Sun Dec 09 2007 11:53:25 GMT-0800 (Pacific Standard Time)"
-	Date.parse('next monday') = "Mon Dec 17 2007 11:53:25 GMT-0800 (Pacific Standard Time)"
-	Date.parse('1st') = "Sat Dec 01 2007 11:53:25 GMT-0800 (Pacific Standard Time)"
-	Date.parse('14th October') = "Sun Oct 14 2007 11:53:25 GMT-0700 (Pacific Daylight Time)"
-	Date.parse('24th May, 2007') = "Thu May 24 2007 11:53:25 GMT-0700 (Pacific Daylight Time)"
-	Date.parse('May 3rd 2006') = "Wed May 03 2006 11:53:25 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('today') //"Mon Dec 10 2007 00:00:00 GMT-0800 (Pacific Standard Time)"
+	Date.parse('tomorrow') //"Tue Dec 11 2007 00:00:00 GMT-0800 (Pacific Standard Time)"
+	Date.parse('yesterday') //"Sun Dec 09 2007 00:00:00 GMT-0800 (Pacific Standard Time)"
+	Date.parse('next monday') //"Mon Dec 17 2007 00:00:00 GMT-0800 (Pacific Standard Time)"
+	Date.parse('last wednesday') //"Wed Dec 05 2007 00:00:00 GMT-0800 (Pacific Standard Time)"
 
 ### See Also:
 
@@ -66,43 +62,11 @@ Date Method: timeDiffInWords {#Date:timeDiffInWords}
 
 This method is now an alias for the old *Date.timeAgoInWords*.
 
-Date Method: get('ordinal'){#Date:getOrdinal}
-------------------------------------------
-
-### Syntax
-
-	new Date().get('ordinal');
-
-### Returns
-
-* (*string*) the ordinal for the day ('th', 'st', 'nd', etc).
-
-Date Method: get('dayofyear'){#Date:getDayOfYear}
-----------------------------------------------
-
-### Syntax
-
-	new Date().get('dayofyear');
-
-* (*integer*) the day of the year (i.e. for Dec. 10, you'll get 344 in a non-leap year).
-
-Date Method: get('lastdayofmonth'){#Date:getLastDayOfMonth}
----------------------------------------------------
-
-### Syntax
-
-	new Date().get('lastdayofmonth');
-
-### Returns
-
-* (*integer*) the last day of the month (i.e. for December, you'll get 31).
-
 Date.Extras Language Localization {#Localization}
 ==========================================
 
 *Date.Extras.js* includes the following key/values for localization.
 
-* ordinal - (*function*) A method that returns the proper ordinal ("th", "st", "nd", etc) given a day of the month.
 * lessThanMinuteAgo - (*string*) 'less than a minute ago'
 * minuteAgo - (*string*) 'about a minute ago'
 * minutesAgo - (*string*) '{delta} minutes ago' where {delta} is the number of minutes
