@@ -37,9 +37,10 @@ var IframeShim = new Class({
 			var zIndex = this.element.getStyle('zIndex').toInt();
 
 			if (!zIndex){
+				zIndex = 1;
 				var pos = this.element.getStyle('position');
 				if (pos == 'static' || !pos) this.element.setStyle('position', 'relative');
-				this.element.setStyle('zIndex', zIndex || 1);
+				this.element.setStyle('zIndex', zIndex);
 			}
 			zIndex = ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1;
 			if (zIndex < 0) zIndex = 1;
