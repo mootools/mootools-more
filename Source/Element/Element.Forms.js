@@ -97,7 +97,6 @@ Element.implement({
 			after: ''
 		}, options);
 		var value = this.getSelectedText() || options.defaultMiddle;
-		console.log('value: ', value);
 		var pos = this.getSelectedRange();
 		var text = this.get('value');
 		if (pos.start == pos.end){

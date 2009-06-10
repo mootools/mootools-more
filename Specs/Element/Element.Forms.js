@@ -48,7 +48,7 @@ License:
 				name: 'checkbox',
 				value: 'checkboxValue'
 			}).inject(container);
-		}).delay(1000);
+		}).delay(10);
 	});
 	describe('Element.getTextInRange', {
 
