@@ -24,8 +24,8 @@ var Scroller = new Class({
 
 	initialize: function(element, options){
 		this.setOptions(options);
-		this.element = $(element);
-		this.listener = ($type(this.element) != 'element') ? $(this.element.getDocument().body) : this.element;
+		this.element = document.id(element);
+		this.listener = ($type(this.element) != 'element') ? document.id(this.element.getDocument().body) : this.element;
 		this.timer = null;
 		this.bound = {
 			attach: this.attach.bind(this),

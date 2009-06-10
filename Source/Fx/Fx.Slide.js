@@ -22,7 +22,7 @@ Fx.Slide = new Class({
 			this.open = (this.wrapper['offset' + this.layout.capitalize()] != 0);
 			if (this.open && Browser.Engine.webkit419) this.element.dispose().inject(this.wrapper);
 		}, true);
-		this.element = this.subject = $(element);
+		this.element = this.subject = document.id(element);
 		this.parent(options);
 		var wrapper = this.element.retrieve('wrapper');
 		this.wrapper = wrapper || new Element('div', {

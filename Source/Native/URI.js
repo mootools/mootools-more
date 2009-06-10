@@ -140,7 +140,7 @@ URI.regs = {
 	directoryDot: /\.\/|\.$/
 };
 
-URI.base = new URI($$('base[href]').getLast(), { base: document.location });
+URI.base = new URI(document.id('base[href]').getLast(), { base: document.location });
 
 String.implement({
 

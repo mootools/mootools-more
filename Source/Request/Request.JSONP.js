@@ -92,7 +92,7 @@ Request.JSONP = new Class({
 		Request.JSONP.counter++;
 
 		switch ($type(options.data)){
-			case 'element': data = $(options.data).toQueryString(); break;
+			case 'element': data = document.id(options.data).toQueryString(); break;
 			case 'object': case 'hash': data = Hash.toQueryString(options.data);
 		}
 

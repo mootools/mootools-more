@@ -25,7 +25,7 @@ var IframeShim = new Class({
 	property: 'IframeShim',
 
 	initialize: function(element, options){
-		this.element = $(element);
+		this.element = document.id(element);
 		if (this.occlude()) return this.occluded;
 		this.setOptions(options);
 		this.makeShim();
