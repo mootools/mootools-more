@@ -37,7 +37,7 @@ $each({
 });
 
 var zeroize = function(what, length){
-	return '0'.repeat(length - what.toString().length) + what;
+	return new Array(length - what.toString().length + 1).join('0') + what;
 };
 
 Date.implement({
