@@ -87,7 +87,7 @@ FormValidator.Inline = new Class({
 	},
 
 	resetField: function(field){
-		field = document.id(field);
+		field = $(field);
 		if (!field) return this;
 		this.parent(field);
 		field.className.split(' ').each(function(className){
@@ -122,19 +122,19 @@ FormValidator.Inline = new Class({
 		//Check for error position prop
 		var props = field.get('validatorProps');
 		//Build advice
-		if (!props.msgPos || !document.id(props.msgPos)){
+		if (!props.msgPos || !$(props.msgPos)){
 			if(field.type.toLowerCase() == 'radio') field.getParent().adopt(advice);
-			else advice.inject(document.id(field), 'after');
+			else advice.inject($(field), 'after');
 		} else {
-			document.id(props.msgPos).grab(advice);
+			$(props.msgPos).grab(advice);
 		}
 	},
 
 	validateField: function(field, force){
 		var result = this.parent(field, force);
 		if (this.options.scrollToErrorsOnSubmit && !result){
-			var failed = document.id(this).getElement('.validation-failed');
-			var par = document.id(this).getParent();
+			var failed = $(this).getElement('.validation-failed');
+			var par = $(this).getParent();
 			while (par != document.body && par.getScrollSize().y == par.getSize().y){
 				par = par.getParent();
 			}

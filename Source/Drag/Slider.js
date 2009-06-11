@@ -33,8 +33,8 @@ var Slider = new Class({
 
 	initialize: function(element, knob, options){
 		this.setOptions(options);
-		this.element = document.id(element);
-		this.knob = document.id(knob);
+		this.element = $(element);
+		this.knob = $(knob);
 		this.previousChange = this.previousEnd = this.step = -1;
 		var offset, limit = {}, modifiers = {'x': false, 'y': false};
 		switch (this.options.mode){

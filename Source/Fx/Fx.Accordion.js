@@ -32,8 +32,8 @@ var Accordion = Fx.Accordion = new Class({
 	initialize: function(){
 		var params = Array.link(arguments, {'container': Element.type, 'options': Object.type, 'togglers': $defined, 'elements': $defined});
 		this.parent(params.elements, params.options);
-		this.togglers = document.id(params.togglers);
-		this.container = document.id(params.container);
+		this.togglers = $$(params.togglers);
+		this.container = $(params.container);
 		this.previous = -1;
 		if (this.options.alwaysHide) this.options.wait = true;
 		if ($chk(this.options.show)){
@@ -60,8 +60,8 @@ var Accordion = Fx.Accordion = new Class({
 	},
 
 	addSection: function(toggler, element){
-		toggler = document.id(toggler);
-		element = document.id(element);
+		toggler = $(toggler);
+		element = $(element);
 		var test = this.togglers.contains(toggler);
 		this.togglers.include(toggler);
 		this.elements.include(element);
