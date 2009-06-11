@@ -4,3 +4,6 @@
 [submodule "assets/mootools-core"]
 	path = assets/mootools-core
 	url = git://github.com/mootools/mootools-core.git
+[submodule "assets/mootools-lang"]
+	path = assets/mootools-lang
+	url = git://github.com/mootools/mootools-lang.git
