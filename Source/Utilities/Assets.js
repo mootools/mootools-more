@@ -52,7 +52,7 @@ var Asset = {
 			onerror: $empty
 		}, properties);
 		var image = new Image();
-		var element = $(image) || new Element('img');
+		var element = document.id(image) || new Element('img');
 		['load', 'abort', 'error'].each(function(name){
 			var type = 'on' + name;
 			var event = properties[type];

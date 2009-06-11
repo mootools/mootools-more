@@ -28,8 +28,8 @@ Drag.Move = new Class({
 	initialize: function(element, options){
 		this.parent(element, options);
 		this.droppables = $$(this.options.droppables);
-		this.container = $(this.options.container);
-		if (this.container && $type(this.container) != 'element') this.container = $(this.container.getDocument().body);
+		this.container = document.id(this.options.container);
+		if (this.container && $type(this.container) != 'element') this.container = document.id(this.container.getDocument().body);
 
 		var position = this.element.getStyle('position');
 		if (position=='static') position = 'absolute';
