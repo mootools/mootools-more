@@ -36,7 +36,7 @@ var OverText = new Class({
 	property: 'OverText',
 
 	initialize: function(element, options){
-		this.element = $(element);
+		this.element = document.id(element);
 		if (this.occlude()) return this.occluded;
 		this.setOptions(options);
 		this.attach(this.element);

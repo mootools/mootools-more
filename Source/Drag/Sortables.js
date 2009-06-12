@@ -31,7 +31,7 @@ var Sortables = new Class({
 		this.lists = [];
 		this.idle = true;
 
-		this.addLists($$($(lists) || lists));
+		this.addLists($$(document.id(lists) || lists));
 		if (!this.options.clone) this.options.revert = false;
 		if (this.options.revert) this.effect = new Fx.Morph(null, $merge({duration: 250, link: 'cancel'}, this.options.revert));
 	},

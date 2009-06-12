@@ -19,11 +19,11 @@ Fx.Scroll = new Class({
 	},
 
 	initialize: function(element, options){
-		this.element = this.subject = $(element);
+		this.element = this.subject = document.id(element);
 		this.parent(options);
 		var cancel = this.cancel.bind(this, false);
 
-		if ($type(this.element) != 'element') this.element = $(this.element.getDocument().body);
+		if ($type(this.element) != 'element') this.element = document.id(this.element.getDocument().body);
 
 		var stopper = this.element;
 
@@ -78,14 +78,14 @@ Fx.Scroll = new Class({
 	},
 
 	toElement: function(el){
-		var position = $(el).getPosition(this.element);
+		var position = document.id(el).getPosition(this.element);
 		return this.start(position.x, position.y);
 	},
 
 	scrollIntoView: function(el, axes, offset){
 		axes = axes ? $splat(axes) : ['x','y'];
 		var to = {};
-		el = $(el);
+		el = document.id(el);
 		var pos = el.getPosition(this.element);
 		var size = el.getSize();
 		var scroll = this.element.getScroll();

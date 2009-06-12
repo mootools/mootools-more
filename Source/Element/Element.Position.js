@@ -39,7 +39,7 @@ Element.implement({
 		 * a mootools extended element in IE, an error occurs on the call to expose. See:
 		 * http://mootools.lighthouseapp.com/projects/2706/tickets/333-element-getoffsetparent-inconsistency-between-ie-and-other-browsers */
 		var offsetParent = this.measure(function(){
-			return $(this.getOffsetParent());
+			return document.id(this.getOffsetParent());
 		});
 		if (offsetParent && offsetParent != this.getDocument().body){
 			parentOffset = offsetParent.measure(function(){
@@ -71,7 +71,7 @@ Element.implement({
 		}
 
 		this.setStyle('position', 'absolute');
-		var rel = $(options.relativeTo) || document.body;
+		var rel = document.id(options.relativeTo) || document.body;
 		var calc = rel == document.body ? window.getScroll() : rel.getPosition();
 		var top = calc.y;
 		var left = calc.x;

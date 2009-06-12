@@ -35,11 +35,11 @@ var Drag = new Class({
 
 	initialize: function(){
 		var params = Array.link(arguments, {'options': Object.type, 'element': $defined});
-		this.element = $(params.element);
+		this.element = document.id(params.element);
 		this.document = this.element.getDocument();
 		this.setOptions(params.options || {});
 		var htype = $type(this.options.handle);
-		this.handles = ((htype == 'array' || htype == 'collection') ? $$(this.options.handle) : $(this.options.handle)) || this.element;
+		this.handles = ((htype == 'array' || htype == 'collection') ? $$(this.options.handle) : document.id(this.options.handle)) || this.element;
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
 
