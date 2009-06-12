@@ -64,7 +64,7 @@ var Tips = new Class({
 			if (option == null) return '';
 			return $type(option) == 'function' ? option(element) : element.get(option);
 		};
-		document.id(elements).each(function(element){
+		$$(elements).each(function(element){
 			var title = read(this.options.title, element);
 			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
 			element.retrieve('tip:text', read(this.options.text, element));
@@ -81,7 +81,7 @@ var Tips = new Class({
 	},
 
 	detach: function(elements){
-		document.id(elements).each(function(element){
+		$$(elements).each(function(element){
 			['enter', 'leave', 'move'].each(function(value){
 				element.removeEvent('mouse' + value, element.retrieve('tip:' + value) || $empty);
 			});

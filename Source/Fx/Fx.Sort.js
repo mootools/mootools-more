@@ -109,7 +109,7 @@ Fx.Sort = new Class({
 			}));
 		}, this);
 		this.elements.setStyle('opacity', 1);
-		this.elements = document.id(rearranged);
+		this.elements = $$(rearranged);
 		this.setDefaultOrder();
 		return this;
 	},

@@ -14,7 +14,7 @@ Fx.Elements = new Class({
 	Extends: Fx.CSS,
 
 	initialize: function(elements, options){
-		this.elements = this.subject = document.id(elements);
+		this.elements = this.subject = $$(elements);
 		this.parent(options);
 	},
 
