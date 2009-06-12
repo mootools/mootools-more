@@ -5,7 +5,7 @@
 			description: "Loads an image file into the document.",
 			verify: "Did the image appear?",
 			before: function(){
-				Asset.image('assets/moobugger/images/mootools.png', {
+				Asset.image('UserTests/Utilities/mootools.png', {
 					events: {
 						load: function(){
 							this.inject(document.body);

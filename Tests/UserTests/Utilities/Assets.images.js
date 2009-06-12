@@ -6,9 +6,9 @@
 			verify: "Did three images appear?",
 			before: function(){
 				var imgs = Asset.images([
-					'assets/moobugger/images/mootools.png',
-					'assets/moobugger/images/mootools.png',
-					'assets/moobugger/images/mootools.png'
+					'UserTests/Utilities/mootools.png',
+					'UserTests/Utilities/mootools.png',
+					'UserTests/Utilities/mootools.png'
 					], {
 					onComplete: function(){
 						imgs.inject(document.body);
