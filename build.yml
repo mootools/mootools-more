@@ -1,6 +1,6 @@
 # list of paths to necessary scripts.json
 :dependency_paths:
-  - './assets/mootools-core/Source'  # Mootools Core
+  - './assets/core/Source'  # Mootools Core
   - './Source'                       # This project
 
 # output file path
