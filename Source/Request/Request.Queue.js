@@ -84,11 +84,13 @@ Request.Queue = new Class({
 	},
 
 	getRunning: function(){
-		return this.requests.filter(function(r){ return r.running; });
+		return this.requests.filter(function(r){
+			return r.running;
+		});
 	},
 
 	isRunning: function(){
-		return !!this.getRunning().getKeys().length;
+		return !!(this.getRunning().getKeys().length);
 	},
 
 	send: function(name, options){
