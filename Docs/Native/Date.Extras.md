@@ -74,6 +74,12 @@ Date.Extras Language Localization {#Localization}
 * hoursAgo - (*string*) 'about {delta} hours ago' where {delta} is the number of hours
 * dayAgo - (*string*) '1 day ago'
 * daysAgo - (*string*) '{delta} days ago' where {delta} is the number of days
+* weekAgo - (*string*) '1 day ago'
+* weeksAgo - (*string*) '{delta} days ago' where {delta} is the number of days
+* monthAgo - (*string*) '1 day ago'
+* monthsAgo - (*string*) '{delta} days ago' where {delta} is the number of days
+* yearAgo - (*string*) '1 day ago'
+* yearsAgo - (*string*) '{delta} days ago' where {delta} is the number of days
 * lessThanMinuteUntil - (*string*) 'less than a minute from now'
 * minuteUntil - (*string*) 'about a minute from now'
 * minutesUntil - (*string*) '{delta} minutes from now' where {delta} is the number of minutes
@@ -81,6 +87,12 @@ Date.Extras Language Localization {#Localization}
 * hoursUntil - (*string*) 'about {delta} hours from now' where {delta} is the number of hours
 * dayUntil - (*string*) '1 day from now'
 * daysUntil - (*string*) '{delta} days from now' where {delta} is the number of days
+* weekUntil - (*string*) '1 day from now'
+* weeksUntil - (*string*) '{delta} days from now' where {delta} is the number of days
+* monthUntil - (*string*) '1 day from now'
+* monthsUntil - (*string*) '{delta} days from now' where {delta} is the number of days
+* yearUntil - (*string*) '1 day from now'
+* yearsUntil - (*string*) '{delta} days from now' where {delta} is the number of days
 
 [Date.js]: /more/Native/Date
 [Date:parse]: /more/Native/Date#Date:parse
