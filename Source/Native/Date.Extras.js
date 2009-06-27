@@ -36,12 +36,21 @@ Date.extend({
 				  (delta < (90 * 60)) ? 'hour' :
 				  (delta < (24 * 60 * 60)) ? 'hours' :
 				  (delta < (48 * 60 * 60)) ? 'day' :
-				  'days';
+				  (delta < (7 * 24 * 60 * 60)) ? 'days' :
+				  (delta < (14 * 24 * 60 * 60)) ? 'week' :
+				  (delta < (30 * 24 * 60 * 60)) ? 'weeks' :
+				  (delta < (60 * 24 * 60 * 60)) ? 'month' :
+				  (delta < (12 * 30 * 24 * 60 * 60)) ? 'months' :
+				  (delta < (24 * 30 * 24 * 60 * 60)) ? 'year' :
+				  'years';
 		
 		switch(msg){
 			case 'minutes': delta = (delta / 60).round(); break;
 			case 'hours':   delta = (delta / 3600).round(); break;
-			case 'days': 	delta = (delta / 86400).round();
+			case 'days': 	delta = (delta / 86400).round(); break;
+			case 'weeks': 	delta = (delta / 604800).round(); break;
+			case 'months': 	delta = (delta / 2592000).round(); break;
+			case 'years': 	delta = (delta / 31104000).round();
 		}
 		
 		return Date.getMsg(msg + suffix, delta).substitute({delta: delta});
