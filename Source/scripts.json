@@ -258,6 +258,11 @@
 
 	"Interface": {
 
+		"Mask": {
+			"deps": ["Class.Extras", "Element.Style", "Element.Event", "Element.Position", "IframeShim"],
+			"desc": "Creates a mask over a specified element."
+		},
+
 		"Scroller": {
 			"deps": ["More", "Class.Extras", "Element.Event", "Element.Dimensions"],
 			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
