@@ -111,7 +111,7 @@ var Tips = new Class({
 		this.timer = $clear(this.timer);
 		this.timer = this.show.delay(this.options.showDelay, this, element);
 		this.tip.setStyle('display', 'block');
-		this.position((!this.options.fixed) ? event : {page: element.getPosition()});
+		this.setPosition((!this.options.fixed) ? event : {page: element.getPosition()});
 	},
 
 	elementLeave: function(event, element){
@@ -121,7 +121,7 @@ var Tips = new Class({
 	},
 
 	elementMove: function(event){
-		this.position(event);
+		this.setPosition(event);
 	},
 
 	position: function(event){
