@@ -1,0 +1,11 @@
+.waiter-msg {
+	text-align: center;
+	font-weight: bold;
+}
+
+.waiter-img {
+	background: url('waiter.gif') no-repeat;
+	width: 24px;
+	height: 24px;
+	margin: 0 auto;
+}
