@@ -13,7 +13,6 @@ var Mask = new Class({
 		//  where: 'after',
 		//  target: null,
 		//},
-		// hideElements: false,
 		// hideOnClick: false,
 		// id: null,
 		// destroyOnHide: false,
@@ -25,6 +24,7 @@ var Mask = new Class({
 			background: '#fff'
 		},
 		useIframeShim: true,
+		hideElements: Browser.Engine.trident4,
 		elementsToHide: 'select, embed, object'
 	},
 
@@ -35,7 +35,6 @@ var Mask = new Class({
 		if (this.target == document.body) {
 			if(!Browser.Engine.trident4) this.options.style.position = 'fixed';
 			this.options.useIframeShim = false;
-			this.options.hideElements = true;
 		}
 		this.render();
 		this.inject();
@@ -86,7 +85,6 @@ var Mask = new Class({
 
 	resize: function(x, y){
 		var dim = this.target.getComputedSize();
-		console.log(dim);
 		this.element.setStyles({
 			width:($pick(x, dim.totalWidth)),
 			height:($pick(y, dim.totalHeight))
@@ -94,37 +92,41 @@ var Mask = new Class({
 	},
 
 	show: function(){
-		if (!this.hidden) return;
+		if (!this.hidden) return this;
 		this.target.addEvent('resize', this.resize);
 		this.position();
 		this.togglePopThroughElements(0);
-		this.hidden = false;
-		this.showMask();
-		this.fireEvent('show');
+		this.showMask.apply(this, arguments);
 		return this;
 	},
 
 	showMask: function(){
 		this.element.setStyle('display', 'block');
+		this.hidden = false;
+		this.fireEvent('show');
 	},
 
 	hide: function(){
 		if (this.options.destroyOnHide) return this.destroy();
-		if (this.hidden) return;
+		if (this.hidden) return this;
 		this.togglePopThroughElements(1);
 		this.target.removeEvent('resize', this.resize);
-		this.hidden = true;
-		this.hideMask();
-		this.fireEvent('hide');
+		this.hideMask.apply(this, arguments);
 		return this;
 	},
 
 	hideMask: function(){
 		this.element.setStyle('display', 'none');
+		this.hidden = true;
+		this.fireEvent('hide');
+	},
+
+	toggle: function(){
+		this[this.hidden ? 'show' : 'hide']();
 	},
 
 	togglePopThroughElements: function(opacity){
-		if (this.options.elementsToHide) {
+		if (this.options.hideElements) {
 			this.target.getElements(this.options.elementsToHide).each(function(sel){
 				sel.setStyle('opacity', opacity);
 			});
@@ -149,8 +151,8 @@ Element.Properties.mask = {
 
 	get: function(options){
 		if (options || !this.retrieve('mask')){
-			if (options || !this.retrieve('mask:options')) this.store('mask:options', options);
 			if (this.retrieve('mask')) this.retrieve('mask').destroy();
+			if (options || !this.retrieve('mask:options')) this.set('mask', options);
 			this.store('mask', new Mask(this, this.retrieve('mask:options')));
 		}
 		return this.retrieve('mask');

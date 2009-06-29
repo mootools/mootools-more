@@ -271,6 +271,12 @@
 		"Tips": {
 			"deps": ["More", "Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
+		},
+
+		"Waiter":{
+			"deps": ["Class.Refactor", "Fx.Tween", "Mask"],
+			"desc": "Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.",
+			"styles": true
 		}
 
 	},
