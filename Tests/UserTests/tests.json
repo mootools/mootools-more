@@ -30,8 +30,10 @@
 		"Fx.Sort":['all']
 	},
 	"Interface":{
+		"Mask":['all'],
 		"Scroller":['all'],
-		"Tips":['all']
+		"Tips":['all'],
+		"Waiter":['all']
 	},
 	"Request":{
 		"Request.JSONP": ['all'],

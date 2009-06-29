@@ -258,6 +258,11 @@
 
 	"Interface": {
 
+		"Mask": {
+			"deps": ["Class.Extras", "Element.Style", "Element.Event", "Element.Position", "IframeShim"],
+			"desc": "Creates a mask over a specified element."
+		},
+
 		"Scroller": {
 			"deps": ["More", "Class.Extras", "Element.Event", "Element.Dimensions"],
 			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
@@ -266,6 +271,12 @@
 		"Tips": {
 			"deps": ["More", "Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
+		},
+
+		"Waiter":{
+			"deps": ["Class.Refactor", "Fx.Tween", "Mask"],
+			"desc": "Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.",
+			"styles": true
 		}
 
 	},

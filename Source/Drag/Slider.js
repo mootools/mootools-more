@@ -61,18 +61,12 @@ var Slider = new Class({
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
 
-		this.bound = {
-			clickedElement: this.clickedElement.bind(this),
-			scrolledElement: this.scrolledElement.bindWithEvent(this),
-			draggedKnob: this.draggedKnob.bind(this)
-		};
-
 		var dragOptions = {
 			snap: 0,
 			limit: limit,
 			modifiers: modifiers,
-			onDrag: this.bound.draggedKnob,
-			onStart: this.bound.draggedKnob,
+			onDrag: this.draggedKnob,
+			onStart: this.draggedKnob,
 			onBeforeStart: (function(){
 				this.isDragging = true;
 			}).bind(this),
@@ -92,15 +86,15 @@ var Slider = new Class({
 	},
 
 	attach: function(){
-		this.element.addEvent('mousedown', this.bound.clickedElement);
-		if (this.options.wheel) this.element.addEvent('mousewheel', this.bound.scrolledElement);
+		this.element.addEvent('mousedown', this.clickedElement);
+		if (this.options.wheel) this.element.addEvent('mousewheel', this.scrolledElement);
 		this.drag.attach();
 		return this;
 	},
 
 	detach: function(){
-		this.element.removeEvent('mousedown', this.bound.clickedElement);
-		this.element.removeEvent('mousewheel', this.bound.scrolledElement);
+		this.element.removeEvent('mousedown', this.clickedElement);
+		this.element.removeEvent('mousewheel', this.scrolledElement);
 		this.drag.detach();
 		return this;
 	},
