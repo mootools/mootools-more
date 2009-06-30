@@ -94,8 +94,7 @@ Fx.Reveal = new Class({
 					 this.element.getStyle('visiblity') == 'hidden' ||
 					 this.element.getStyle('opacity') == 0){
 					this.showing = true;
-					this.hiding = false;
-					this.hidden = false;
+					this.hiding = this.hidden =  false;
 					var setToAuto, startStyles;
 					//toggle display, but hide it
 					this.element.measure(function(){

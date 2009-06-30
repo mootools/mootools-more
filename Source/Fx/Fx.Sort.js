@@ -34,9 +34,8 @@ Fx.Sort = new Class({
 
 	sort: function(newOrder){
 		if ($type(newOrder) != 'array') return false;
-		var top = 0;
-		var left = 0;
-		var zero = {};
+		var top = left = 0;
+		var zero = next = {};
 		var vert = this.options.mode == 'vertical';
 		var current = this.elements.map(function(el, index){
 			var size = el.getComputedSize({styles: ['border', 'padding', 'margin']});
@@ -71,10 +70,7 @@ Fx.Sort = new Class({
 			if (newOrder.length > this.elements.length)
 				newOrder.splice(this.elements.length-1, newOrder.length - this.elements.length);
 		}
-		top = 0;
-		left = 0;
-		var margin = 0;
-		var next = {};
+		var margin = top = left = 0;
 		newOrder.each(function(item, index){
 			var newPos = {};
 			if (vert){
