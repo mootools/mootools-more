@@ -7,6 +7,7 @@ Script: Log.js
 
 	Authors:
 		Guillermo Rauch
+		Thomas Aylott
 */
 
 var Log = new Class({
@@ -20,6 +21,7 @@ var Log = new Class({
 Log.logged = [];
 
 Log.logger = function(){
-	if(window.console && console.log) console.log.apply(console, arguments);
-	else Log.logged.push(arguments);
+	var args = Array.slice(arguments);
+	if (window.console && console.log) console.log(args);
+	else Log.logged.push(args);
 };
