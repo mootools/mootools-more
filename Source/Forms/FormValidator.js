@@ -440,7 +440,7 @@ FormValidator.addAllThese([
 	['validate-one-required', {
 		errorMsg: FormValidator.getMsg.pass('oneRequired'),
 		test: function(element, props){
-			var p = document.id(props['validate-one-required']) || element.parentNode;
+			var p = document.id(props['validate-one-required']) || element.getParent();
 			return p.getElements('input').some(function(el){
 				if (['checkbox', 'radio'].contains(el.get('type'))) return el.get('checked');
 				return el.get('value');
