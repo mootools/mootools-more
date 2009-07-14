@@ -19,6 +19,19 @@ Returns the state of the display of the element.
 
 ### Returns
 
+* (*boolean*) true = display != "none", false = display == "none".
+
+Element Method: isVisible {#Element:isVisible}
+----------------------------------------------
+
+Determines if an element is displayed using offset height/width. If both of these are zero it usually means the element is not displayed or one of its parent's is not. 
+
+### Syntax
+
+	myElement.isVisible();
+
+### Returns
+
 * (*boolean*) true = visible, false = not visible.
 
 Element Method: toggle {#Element:toggle}
