@@ -16,6 +16,11 @@ Element.implement({
 		return this.getStyle('display') != 'none';
 	},
 
+	isVisible: function(){
+		var w = this.offsetWidth, h = this.offsetHeight;
+		return (w===0 && h===0) ? false : (w>0 && h>0) ? true : this.getStyle('display') !== 'none';
+	},
+
 	toggle: function(){
 		return this[this.isDisplayed() ? 'hide' : 'show']();
 	},
