@@ -102,8 +102,8 @@ var OverText = new Class({
 		this.hide();
 	},
 
-	hide: function(suppressFocus){
-		if (this.text.isDisplayed() && !this.element.get('disabled')){
+	hide: function(suppressFocus, force){
+		if (this.text.isDisplayed() && (!this.element.get('disabled') || force)){
 			this.text.hide();
 			this.fireEvent('textHide', [this.text, this.element]);
 			this.pollingPaused = true;
@@ -144,14 +144,38 @@ var OverText = new Class({
 
 OverText.instances = [];
 
-OverText.update = function(){
+$extend(OverText, {
 
-	return OverText.instances.map(function(ot){
-		if (ot.element && ot.text) return ot.reposition();
-		return null; //the input or the text was destroyed
-	});
+	each: function(fn) {
+		return OverText.instances.map(function(ot){
+			if (ot.element && ot.text) return fn.apply(OverText, fn);
+			return null; //the input or the text was destroyed
+		});
+	},
+	
+	update: function(){
 
-};
+		return OverText.each(function(ot){
+			return ot.reposition();
+		});
+
+	},
+
+	hideAll: function(){
+
+		return OverText.each(function(ot){
+			return ot.hide(true, true);
+		});
+
+	},
+
+	showAll: function(){
+		return OverText.each(function(ot) {
+			return ot.show();
+		})
+	}
+
+});
 
 if (window.Fx && Fx.Reveal) {
 	Fx.Reveal.implement({

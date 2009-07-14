@@ -99,10 +99,16 @@ Cancels the polling of the input.
 
 * (*object*) - This instance of [OverText][]
 
+OverText Static Methods: update {#OverText:update}
+==================================================
+
+These method calls are made against the OverText namespace (not instances of OverText) and apply their actions to all running instances.
+
+
 OverText Static Method: update {#OverText:update}
 -------------------------------------------------
 
-This method calls [OverText.reposition][] for all running instances of OverText. This allows you to manually re-assert the positioning and visibility of all the OverTexts on the page.
+This allows you to manually re-assert the positioning and visibility of all the OverTexts on the page.
 
 ### Syntax
 
@@ -121,7 +127,56 @@ This method is NOT a method on the instance. Rather it is on the namespace. So:
 
 ### Returns
 
-* nothing
+* *array* - an array of all the running instances of the class.
+
+OverText Static Method: update {#OverText:hideAll}
+-------------------------------------------------
+
+This allows you to manually hide all the OverTexts on the page.
+
+### Syntax
+
+	OverText.hideAll();
+
+### Note
+
+This method is NOT a method on the instance. Rather it is on the namespace. So:
+
+### Example
+
+	var myOverText_1 = new OverText(...);
+	var myOverText_2 = new OverText(...);
+	//...later
+	OverText.hideAll(); //hides all the instances of OverText
+
+### Returns
+
+* *array* - an array of all the running instances of the class.
+
+
+OverText Static Method: update {#OverText:showAll}
+-------------------------------------------------
+
+This allows you to manually show all the OverTexts on the page.
+
+### Syntax
+
+	OverText.showAll();
+
+### Note
+
+This method is NOT a method on the instance. Rather it is on the namespace. So:
+
+### Example
+
+	var myOverText_1 = new OverText(...);
+	var myOverText_2 = new OverText(...);
+	//...later
+	OverText.showAll(); //updates all the instances of OverText
+
+### Returns
+
+* *array* - an array of all the running instances of the class.
 
 Native: Element {#Element}
 ==========================
