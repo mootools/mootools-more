@@ -14,7 +14,8 @@ var Tips = new Class({
 
 	Implements: [Events, Options],
 
-	options: {
+	options: {/*
+		onAttach: $empty(tip, element),*/
 		onShow: function(tip){
 			tip.setStyle('visibility', 'visible');
 		},
@@ -27,7 +28,7 @@ var Tips = new Class({
 		},
 		showDelay: 100,
 		hideDelay: 100,
-		className: null,
+		className: 'tip-wrap',
 		offset: {x: 16, y: 16},
 		fixed: false
 	},
@@ -69,6 +70,7 @@ var Tips = new Class({
 			var title = read(this.options.title, element), text = read(this.options.text, element);
 			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
 			element.retrieve('tip:text', text);
+			this.fireEvent('attach', [this.tip, element]);
 			
 			var events = ['enter', 'leave'];
 			if (!this.options.fixed) events.push('move');
@@ -117,7 +119,6 @@ var Tips = new Class({
 
 	elementLeave: function(event, element){
 		$clear(this.timer);
-		this.tip.setStyle('display', 'none');
 		this.timer = this.hide.delay(this.options.hideDelay, this, element);
 	},
 
