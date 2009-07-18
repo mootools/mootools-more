@@ -1,3 +1,14 @@
+/*
+Script: Mask.js
+	Creates a mask element to cover another.
+
+	License:
+		MIT-style license.
+
+	Authors:
+		Aaron Newton
+*/
+
 var Mask = new Class({
 
 	Implements: [Options, Events],

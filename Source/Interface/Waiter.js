@@ -1,11 +1,14 @@
 /*
 Script: Waiter.js
+	Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.
 
-Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.
+		License:
+			MIT-style license.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
-*/
+		Authors:
+			Aaron Newton
+	*/
+
 var Waiter = new Class({
 
 	Extends: Mask,
