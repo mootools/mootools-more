@@ -1,60 +1,74 @@
-/*  CrypticSwarm (Perrin) (c)2009 */
-
 /*
-KeyboardEvents used to intercept events on a class for keyboard and format modifiers in a specific order so as to make
-  alt+shift+c the same as shift+alt+c.
+Script: Mask.js
+	KeyboardEvents used to intercept events on a class for keyboard and format modifiers in a specific order so as to make
+	alt+shift+c the same as shift+alt+c.
 
+	License:
+		MIT-style license.
+
+	Authors:
+		CrypticSwarm (Perrin)
 */
-Events.Keyboard = new Class({
 
-	Extends: Events,
+(function(){
+	
+	var modifier_regex = /^(shift|ctrl|alt|meta)$/;
 
-	addEvent: function(type, fn, internal){
-		var modifiers = $H();
-		var parts = type.split('+');
-		var modifier_regex = /^(shift|ctrl|alt|meta)$/;
-		var mainKey = '';
-		parts.each(function(part){
-			if (match = modifier_regex.exec(part))
-				modifiers.set(match[1], true);
-			else mainKey = part;
-		});
-		var modType = '';
-		this.Modifiers.each(function(mod){
-			if (modifiers.has(mod)) modType += mod + '+';
-		});
-		modType += mainKey;
-		return this.parent(modType, fn, internal);
-	},
+	Events.Keyboard = new Class({
 
-	Modifiers: ['shift', 'ctrl', 'alt', 'meta']
+		Extends: Events,
 
-});
+		addEvent: function(type, fn, internal){
+			var modifiers = $H();
+			var parts = type.split('+');
+			var mainKey = '';
+			parts.each(function(part){
+				if (match = modifier_regex.exec(part)) modifiers.set(match[1], true);
+				else mainKey = part;
+			});
+			var modType = '';
+			this.Modifiers.each(function(mod){
+				if (modifiers.has(mod)) modType += mod + '+';
+			});
+			modType += mainKey;
+			return this.parent(modType, fn, internal);
+		},
+
+		Modifiers: ['shift', 'ctrl', 'alt', 'meta']
+
+	});
+
+})();
+
 
 var Keyboard = new Class({
 
 	Implements: [Options, Events.Keyboard],
 
 	options: {
-		caseSensitive: false,
+/*		preventDefault: false,
+		caseSensitive: false, */
 		eventType: 'keydown',
 		active: true,
-		preventDefault: false,
 		events: {}
 	},
 
 	initialize: function(){
 		params = Array.link(arguments, {elem: Element.type, options: Object.type});
 		this.setOptions(params.options);
-		(params.elem || window).addEvent(this.options.eventType, this.handle.bind(this));
 		this.active = this.options.active;
 		this.addEvents(this.options.events);
-		this.preventDefault = this.options.preventDefault;
+		this.attach();
+	},
+
+	attach: function(attach) {
+		this.boundHandle = this.handle.bind(this);
+		(params.elem || window)[$pick(attach, true) ? 'addEvents' : 'removeEvents'](this.options.eventType, this.boundHandle);
 	},
 
 	handle: function(e){
-		if(!this.active) return;
-		if(this.preventDefault) e.preventDefault();
+		if (!this.active) return;
+		if (this.options.preventDefault) e.preventDefault();
 		if (this.options.caseSensitive) key = e.shift ? e.key.toUpperCase() : e.key;
 		else key = e.key;
 		if (Event.Keys.hasValue(e.key)) key = Event.Keys.keyOf(e.key);
@@ -79,7 +93,7 @@ var Keyboard = new Class({
 	},
 
 	toggleActive: function(){
-		return (this.active ? deactivate() : activate());
+		return this[this.active ? 'deactivate' : 'activate']();
 	}
 
 
