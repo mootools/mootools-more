@@ -23,6 +23,7 @@ var Mask = new Class({
 			zIndex: 999,
 			background: '#fff'
 		},
+		maskMargins: false,
 		useIframeShim: true,
 		hideElements: Browser.Engine.trident4,
 		elementsToHide: 'select, embed, object'
@@ -76,17 +77,21 @@ var Mask = new Class({
 	},
 
 	position: function(){
+		this.resize(this.options.width, this.options.height);
 		this.element.position({
 			relativeTo: this.target,
-			position: 'upperLeft',
+			ignoreMargins: !this.options.maskMargins,
 			ignoreScroll: this.target == document.body
 		});
-		this.resize(this.options.width, this.options.height);
 		return this;
 	},
 
 	resize: function(x, y){
-		var dim = this.target.getComputedSize();
+		var opt = {
+			styles: ['padding', 'border']
+		};
+		if (this.options.maskMargins) opt.styles.push('margin');
+		var dim = this.target.getComputedSize(opt);
 		this.element.setStyles({
 			width:($pick(x, dim.totalWidth)),
 			height:($pick(y, dim.totalHeight))
