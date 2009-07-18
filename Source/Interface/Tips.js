@@ -64,10 +64,11 @@ var Tips = new Class({
 			if (option == null) return '';
 			return $type(option) == 'function' ? option(element) : element.get(option);
 		};
+		
 		$$(elements).each(function(element){
-			var title = read(this.options.title, element);
+			var title = read(this.options.title, element), text = read(this.options.text, element);
 			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
-			element.retrieve('tip:text', read(this.options.text, element));
+			element.retrieve('tip:text', text);
 			
 			var events = ['enter', 'leave'];
 			if (!this.options.fixed) events.push('move');

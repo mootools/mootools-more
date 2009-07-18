@@ -28,15 +28,14 @@ A controller class for [Request][] instances (and its subclasses) that stacks up
 
 ### Events
 
-All of the events supplied to the [Request][] class are supported. These methods are passed the exact same arguments as each individual instance's events except that they are first passed the name of the request in the [Request.Queue][] class followed by the [Request][] instance itself. So, for instance, if *onComplete* returns the response text and then the response xml for [Request][], then the *onRequestComplete* returns first the name of the instance, the instance of [Request][], followed by the response text and then the response xml.
+All of the events supplied to the [Request][] class are supported with the difference that the class first passes the name of the request in the [Request.Queue][] class followed by the [Request][] instance itself. So, for instance, if *onComplete* passes the response text and then the response xml for [Request][], then the *onComplete* passes first the name of the instance, the instance of [Request][], followed by the response text and then the response xml.
 
-* onRequestStart
-* onRequestEnd
-* onRequestSuccess
-* onRequestComplete
-* onRequestCancel
-* onRequestException
-* onRequestFailure
+* onRequest
+* onSuccess
+* onComplete
+* onCancel
+* onException
+* onFailure
 
 ### Example
 
@@ -56,7 +55,7 @@ All of the events supplied to the [Request][] class are supported. These methods
 	};
 	var myQueue = new Request.Queue({
 		requests: myRequests,
-		onRequestComplete: function(name, instance, text, xml){
+		onComplete: function(name, instance, text, xml){
 			console.log('queue: ' + name + ' response: ', text, xml);
 		}
 	});
@@ -66,7 +65,7 @@ All of the events supplied to the [Request][] class are supported. These methods
 	r1.send(); //sends when above request completes
 	etc.
 
-In the above example, when each request completes, it will first log out the 'myRequests.rq: &lt;text&gt;, &lt;xml&gt;' message from the *onComplete* event specified in each request instance. Then it will log the 'queue: r1/r2 response: &lt;text&gt;, &lt;xml&gt;' message from the *onRequestComplete* method in the [Request.Queue][] event specified in its options.
+In the above example, when each request completes, it will first log out the 'myRequests.rq: &lt;text&gt;, &lt;xml&gt;' message from the *onComplete* event specified in each request instance. Then it will log the 'queue: r1/r2 response: &lt;text&gt;, &lt;xml&gt;' message from the *onComplete* method in the [Request.Queue][] event specified in its options.
 
 Request.Queue Method: addRequest {#Request-Queue:addRequest}
 ------------------------------------------------------

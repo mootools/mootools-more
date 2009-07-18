@@ -23,7 +23,6 @@ var Accordion = Fx.Accordion = new Class({
 		opacity: true,
 		fixedHeight: false,
 		fixedWidth: false,
-		wait: false,
 		alwaysHide: false,
 		trigger: 'click',
 		initialDisplayFx: true
@@ -80,6 +79,7 @@ var Accordion = Fx.Accordion = new Class({
 	},
 
 	display: function(index, useFx){
+		if (!this.check(index, useFx)) return this;
 		useFx = $pick(useFx, true);
 		index = ($type(index) == 'element') ? this.elements.indexOf(index) : index;
 		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
@@ -87,7 +87,7 @@ var Accordion = Fx.Accordion = new Class({
 		var obj = {};
 		this.elements.each(function(el, i){
 			obj[i] = {};
-			var hide = (i != index) || (this.options.alwaysHide && (el.offsetHeight > 0));
+			var hide = (i != index) || (this.options.alwaysHide && ((el.offsetHeight > 0 && this.options.height) || el.offsetWidth > 0 && this.options.width));
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
 		}, this);

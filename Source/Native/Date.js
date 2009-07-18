@@ -277,7 +277,7 @@ Date.extend({
 	},
 
 	isLeapYear: function(year){
-		return new Date(year, 1, 29).get('date') == 29;
+		return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 	},
 
 	parse: function(from){
