@@ -42,6 +42,7 @@ var Waiter = new Class({
 
 	render: function(){
 		this.parent();
+		this.element.set('id', this.options.id || 'waiter-'+$time())
 		this.content = document.id(this.options.content) || new Element('div', this.options.content);
 		this.content.inject(this.element);
 		if (this.options.message) {

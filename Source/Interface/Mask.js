@@ -43,7 +43,7 @@ var Mask = new Class({
 	render: function() {
 		this.element = new Element('div', {
 			'class': this.options['class'],
-			id: this.options.id || 'mask-' + Date.now(),
+			id: this.options.id || 'mask-' + $time(),
 			styles: $merge(this.options.style, {
 				display: 'none'
 			}),
@@ -78,9 +78,11 @@ var Mask = new Class({
 	position: function(){
 		this.element.position({
 			relativeTo: this.target,
-			position: 'upperLeft'
+			position: 'upperLeft',
+			ignoreScroll: this.target == document.body
 		});
 		this.resize(this.options.width, this.options.height);
+		return this;
 	},
 
 	resize: function(x, y){
