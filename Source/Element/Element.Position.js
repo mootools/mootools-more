@@ -30,6 +30,7 @@ Element.implement({
 			returnPos: false,
 			relFixedPosition: false,
 			ignoreMargins: false,
+			ignoreScroll: false,
 			allowNegative: false
 		}, options);
 		//compute the offset of the parent positioned element if this element is in one
@@ -150,6 +151,11 @@ Element.implement({
 			var winScroll = window.getScroll();
 			pos.top = pos.top.toInt() + winScroll.y;
 			pos.left = pos.left.toInt() + winScroll.x;
+		}
+		if (options.ignoreScroll) {
+			var relScroll = rel.getScroll();
+			pos.top = pos.top - relScroll.y;
+			pos.left = pos.left - relScroll.x;
 		}
 
 		if (options.returnPos) return pos;
