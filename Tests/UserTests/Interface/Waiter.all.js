@@ -39,15 +39,7 @@
 					url: 'UserTests/Request/simple.php?sleep=1',
 					method: 'get',
 					useWaiter: true,
-					update: $('foo2'),
-					onRequest: function(){
-						if (location.protocol != 'http') {
-							(function(){
-								this.response = {text: this.xhr.responseText, xml: this.xhr.responseXML};
-								this.success(this.response.text, this.response.xml);
-							}).delay(1000, this);
-						}
-					}
+					update: $('foo2')
 				});
 				req.send();
 			}
