@@ -39,6 +39,20 @@
 			before: function(){
 				$('box').position({relativeTo: $('foo'), position: 'centerRight', edge: 'centerRight'});
 			}
+		},
+		{
+			title: "document.body position: upper left",
+			description: "Puts the upper left edge of the red box to the upper left corner of the document body even if the body is scrolled.",
+			verify: "Is the red box in the upper left corner of the document body?",
+			before: function(){
+				$(document.body).scrollTo(0, 100);
+				$('box').position({
+					relativeTo: document.body, 
+					position: 'upperLeft', 
+					edge: 'upperLeft',
+					ignoreScroll: true
+				});
+			}
 		}
 	]
 }
