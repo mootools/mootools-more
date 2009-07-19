@@ -13,10 +13,10 @@ var Waiter = new Class({
 
 	Extends: Mask,
 
-	options: {
+	options: {/*
+		message: false,*/
 		'class':'waiter',
 		containerPosition: {},
-		message: false,
 		content: {
 			'class':'waiter-content'
 		},
@@ -58,7 +58,7 @@ var Waiter = new Class({
 		}
 		this.element.set('tween', this.options.fxOptions);
 	},
-	
+
 	show: function(noFx){
 		if (this.active) return this.chain(this.show.bind(this));
 		if (!this.hidden) {
@@ -113,7 +113,6 @@ var Waiter = new Class({
 });
 
 Waiter.implement(new Chain);
-
 
 if (window.Request) {
 	Request = Class.refactor(Request, {

@@ -1,5 +1,5 @@
 /*
-Script: Mask.js
+Script: Keyboard.js
 	KeyboardEvents used to intercept events on a class for keyboard and format modifiers in a specific order so as to make
 	alt+shift+c the same as shift+alt+c.
 
@@ -7,7 +7,8 @@ Script: Mask.js
 		MIT-style license.
 
 	Authors:
-		CrypticSwarm (Perrin)
+		Perrin Westrich
+		Aaron Newton
 */
 
 (function(){
@@ -46,7 +47,9 @@ var Keyboard = new Class({
 	Implements: [Options, Events.Keyboard],
 
 	options: {
-/*		preventDefault: false,
+/*		onActivate: $empty,
+		onDeactivate: $empty,
+		preventDefault: false,
 		caseSensitive: false, */
 		eventType: 'keydown',
 		active: true,
@@ -84,11 +87,13 @@ var Keyboard = new Class({
 /* Perhaps should move these to a subclass? */
 	activate: function(){
 		this.active = true;
+		this.fireEvent('activate');
 		return this;
 	},
 
 	deactivate: function(){
 		this.active = false;
+		this.fireEvent('deactivate');
 		return this;
 	},
 

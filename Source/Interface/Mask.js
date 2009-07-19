@@ -35,19 +35,13 @@ var Mask = new Class({
 			background: '#fff'
 		},
 		maskMargins: false,
-		useIframeShim: true,
-		hideElements: Browser.Engine.trident4,
-		elementsToHide: 'select, embed, object'
+		useIframeShim: true
 	},
 
 	initialize: function(target, options){
 		this.target = document.id(target) || document.body;
 		this.target.store('mask', this);
 		this.setOptions(options);
-		if (this.target == document.body) {
-			if(!Browser.Engine.trident4) this.options.style.position = 'fixed';
-			this.options.useIframeShim = false;
-		}
 		this.render();
 		this.inject();
 	},
@@ -107,13 +101,13 @@ var Mask = new Class({
 			width:($pick(x, dim.totalWidth)),
 			height:($pick(y, dim.totalHeight))
 		});
+		return this;
 	},
 
 	show: function(){
 		if (!this.hidden) return this;
 		this.target.addEvent('resize', this.resize);
 		this.position();
-		this.togglePopThroughElements(0);
 		this.showMask.apply(this, arguments);
 		return this;
 	},
@@ -127,7 +121,6 @@ var Mask = new Class({
 	hide: function(){
 		if (this.options.destroyOnHide) return this.destroy();
 		if (this.hidden) return this;
-		this.togglePopThroughElements(1);
 		this.target.removeEvent('resize', this.resize);
 		this.hideMask.apply(this, arguments);
 		return this;
@@ -141,14 +134,6 @@ var Mask = new Class({
 
 	toggle: function(){
 		this[this.hidden ? 'show' : 'hide']();
-	},
-
-	togglePopThroughElements: function(opacity){
-		if (this.options.hideElements) {
-			this.target.getElements(this.options.elementsToHide).each(function(sel){
-				sel.setStyle('opacity', opacity);
-			});
-		}
 	},
 
 	destroy: function(){
