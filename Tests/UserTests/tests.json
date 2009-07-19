@@ -30,6 +30,7 @@
 		"Fx.Sort":['all']
 	},
 	"Interface":{
+		"Keyboard":['all'],
 		"Mask":['all'],
 		"Scroller":['all'],
 		"Tips":['all'],

@@ -258,6 +258,11 @@
 
 	"Interface": {
 
+		"Keyboard": {
+			"deps": ["Class.Extras", "Element.Event"],
+			"desc": "Provides enhanced group key event management."
+		},
+
 		"Mask": {
 			"deps": ["Class.Extras", "Element.Style", "Element.Event", "Element.Position", "IframeShim"],
 			"desc": "Creates a mask over a specified element."

@@ -10,14 +10,32 @@ Script: Keyboard.js
 		Perrin Westrich
 		Aaron Newton
 */
-
 (function(){
-	
 	var modifier_regex = /^(shift|ctrl|alt|meta)$/;
 
-	Events.Keyboard = new Class({
+	this.Keyboard = new Class({
 
 		Extends: Events,
+
+		Implements: Options,
+
+		options: {
+/*			onActivate: $empty,
+			onDeactivate: $empty,
+			preventDefault: false,
+			caseSensitive: false, */
+			eventType: 'keydown',
+			active: true,
+			events: {}
+		},
+
+		initialize: function(){
+			params = Array.link(arguments, {elem: Element.type, options: Object.type});
+			this.setOptions(params.options);
+			this.active = this.options.active;
+			this.addEvents(this.options.events);
+			this.attach();
+		},
 
 		addEvent: function(type, fn, internal){
 			var modifiers = $H();
@@ -35,71 +53,47 @@ Script: Keyboard.js
 			return this.parent(modType, fn, internal);
 		},
 
-		Modifiers: ['shift', 'ctrl', 'alt', 'meta']
+		Modifiers: ['shift', 'ctrl', 'alt', 'meta'],
+
+
+		attach: function(attach) {
+			this.boundHandle = this.handle.bind(this);
+			(params.elem || window)[$pick(attach, true) ? 'addEvent' : 'removeEvent'](this.options.eventType, this.boundHandle);
+		},
+
+		handle: function(e){
+			if (!this.active) return;
+			if (this.options.preventDefault) e.preventDefault();
+			if (this.options.caseSensitive) key = e.shift ? e.key.toUpperCase() : e.key;
+			else key = e.key;
+			if (Event.Keys.hasValue(e.key)) key = Event.Keys.keyOf(e.key);
+			key = ''+key;
+			var modKey = '';
+			if (e.shift) modKey += 'shift+';
+			if (e.ctrl) modKey += 'ctrl+';
+			if (e.alt) modKey += 'alt+';
+			if (e.meta) modKey += 'meta+';
+			this.fireEvent(modKey + key, e);
+		},
+
+	/* Perhaps should move these to a subclass? */
+		activate: function(){
+			this.active = true;
+			this.fireEvent('activate');
+			return this;
+		},
+
+		deactivate: function(){
+			this.active = false;
+			this.fireEvent('deactivate');
+			return this;
+		},
+
+		toggleActive: function(){
+			return this[this.active ? 'deactivate' : 'activate']();
+		}
+
 
 	});
 
 })();
-
-
-var Keyboard = new Class({
-
-	Implements: [Options, Events.Keyboard],
-
-	options: {
-/*		onActivate: $empty,
-		onDeactivate: $empty,
-		preventDefault: false,
-		caseSensitive: false, */
-		eventType: 'keydown',
-		active: true,
-		events: {}
-	},
-
-	initialize: function(){
-		params = Array.link(arguments, {elem: Element.type, options: Object.type});
-		this.setOptions(params.options);
-		this.active = this.options.active;
-		this.addEvents(this.options.events);
-		this.attach();
-	},
-
-	attach: function(attach) {
-		this.boundHandle = this.handle.bind(this);
-		(params.elem || window)[$pick(attach, true) ? 'addEvents' : 'removeEvents'](this.options.eventType, this.boundHandle);
-	},
-
-	handle: function(e){
-		if (!this.active) return;
-		if (this.options.preventDefault) e.preventDefault();
-		if (this.options.caseSensitive) key = e.shift ? e.key.toUpperCase() : e.key;
-		else key = e.key;
-		if (Event.Keys.hasValue(e.key)) key = Event.Keys.keyOf(e.key);
-		key = ''+key;
-		var modKey = '';
-		if (e.shift) modKey += 'shift+';
-		if (e.ctrl) modKey += 'ctrl+';
-		if (e.alt) modKey += 'alt+';
-		if (e.meta) modKey += 'meta+';
-		this.fireEvent(modKey + key, e);
-	},
-
-/* Perhaps should move these to a subclass? */
-	activate: function(){
-		this.active = true;
-		this.fireEvent('activate');
-		return this;
-	},
-
-	deactivate: function(){
-		this.active = false;
-		this.fireEvent('deactivate');
-		return this;
-	},
-
-	toggleActive: function(){
-		return this[this.active ? 'deactivate' : 'activate']();
-	}
-
-
-});
