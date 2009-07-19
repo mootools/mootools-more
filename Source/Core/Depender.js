@@ -15,35 +15,46 @@ var Depender = new Class({
 
 	options: {
 		/* 
-		target: document.head,
+		onRequire: $empty(scripts),
 		onReady: $empty(loadedScripts),
-		requirementLoaded: $empty(loadedScripts),
-		scriptLoaded: $empty(script),
+		onRequirementLoaded: $empty(loadedScripts),
+		scriptLoaded: $empty(script, percentOfTotalLoaded, percentOfBatch, loadedScripts),
 		*/
-		loaded: 'core',
-		noCache: true,
-		serial: Browser.Engine.trident4
+		loadedSources: [],
+		loadedScripts: ['Core', 'Browser', 'Array', 'String', 'Function', 'Number', 'Hash', 'Element', 'Event', 'Element.Event', 'Class', 'Class.Extras', 'Request', 'JSON', 'Request.JSON', 'More', 'Depender'],
+		noCache: false
 	},
 
-	initialize: function(url, options){
+	initialize: function(libs, options){
+		var prev = document.id(document.body).retrieve('Depender');
+		if (prev) return prev.fetchLibs(libs);
 		this.setOptions(options);
-		this.fetchLibs(url);
+		document.id(document.body).store('Depender', this);
+		this.fetchLibs(libs);
 	},
 
 	loaded: [],
 
 	sources: {},
 
-	fetchLibs: function(url) {
-		this.request(url, function(data){
-			this.libs = data;
+	libs: {},
+
+	fetchLibs: function(libs) {
+		var loader = function(data){
+			this.libs = $merge(this.libs, data);
 			$each(this.libs, function(data, lib) {
 				if (data.scripts) this.loadSource(lib, data.scripts);
 			}, this);
-		}.bind(this))
+		}.bind(this);
+		if ($type(libs) == 'string') {
+			this.request(libs, loader);
+		} else {
+			loader(libs);
+		}
 	},
 
 	require: function(){
+		this.fireEvent('require', [$A(arguments)]);
 		if (this.mapLoaded) {
 			this.loadDependencies.apply(this, arguments);
 			return this;
@@ -56,6 +67,12 @@ var Depender = new Class({
 
 		this.addEvent('mapLoaded', fetcher);
 		return this;
+	},
+
+	requireSources: function() {
+		$A(arguments).each(function(source){
+			this.require.apply(this, this.libs[source].files)
+		}, this);
 	},
 
 	cleanDoubleSlash: function(str){
@@ -78,13 +95,14 @@ var Depender = new Class({
 	},
 
 	loadSource: function(lib, source){
+		if (this.libs[lib].files) return this.dataLoaded();
 		this.request(this.cleanDoubleSlash(source + '/scripts.json'), function(result){
 			this.libs[lib].files = result;
 			this.dataLoaded();
 		}.bind(this));
 	},
 
-	//manage loaded data; fire onReady when all sources are loaded
+	//manage loaded data
 	dataLoaded: function(){
 		var loaded = true;
 		$each(this.libs, function(v, k) {
@@ -99,26 +117,14 @@ var Depender = new Class({
 	},
 
 	calculateLoaded: function(){
-		var loaded = this.options.loaded;
 		var set = function(script) {
 			this.loadedScripts[script] = true;
 		}.bind(this);
-		if (loaded) {
-			if ($type(loaded) == 'string') {
-				if (this.libs[loaded]) {
-					$each(this.libs[loaded].files, function(scripts) {
-						$each(scripts, function(data, name) {
-							set(name);
-						});
-					}, this);
-				} else {
-					this.loadedScripts[loaded] = true;
-				}
-			} else if ($type(loaded) == 'array') {
-				loaded.each(set);
-			} else if ($type(loaded) == 'object') {
-				$each(loaded, set);
-			}
+		if (this.options.loadedScripts) this.options.loadedScripts.each(set);
+		if (this.options.loadedSources) {
+			this.options.loadedSources.each(function(lib) {
+				this.libs[lib].files.each(set);
+			}, this);
 		}
 	},
 
@@ -167,7 +173,7 @@ var Depender = new Class({
 			var chunks = this.pathMap[script].split(':');
 			var dir = this.libs[chunks[0]].scripts + '/';
 			chunks.erase(chunks[0]);
-			return this.cleanDoubleSlash(dir + chunks.join('/') + '.js' + (this.options.noCache ? '?noCache=' + new Date().getTime() : ''));
+			return this.cleanDoubleSlash(dir + chunks.join('/') + '.js');
 		} catch(e){
 			return script;
 		}
@@ -201,10 +207,11 @@ var Depender = new Class({
 			this.scriptLoaded(script);
 			if (this.toLoad.length) this.load(this.toLoad.shift());
 		}.bind(this);
-		if (this.options.serial && this.loading) return this.toLoad.push(script);
+		if (this.loading) return this.toLoad.push(script);
 		this.loading = true;
 		new Request({
 			url: this.getPath(script),
+			noCache: this.options.noCache,
 			onComplete: function(js) {
 				$exec(js);
 				finish.delay(50, this);
@@ -214,19 +221,24 @@ var Depender = new Class({
 
 	loadedScripts: $H({}),
 
-	scriptLoaded: function(script) {
+	scriptLoaded: function(script) {`
 		this.loadedScripts[script] = true;
-		this.fireEvent('scriptLoaded', script);
-		var ready = this.loadedScripts.every(function(loaded, scr) {
+		var ready = true;
+		var loaded = this.loadedScripts.filter(function(loaded, scr) {
+			if (!loaded) ready = false;
 			return loaded;
 		}, this);
-		if (ready) {
-			this.ready();
-		}
+		//passed the script loaded, the % loaded of total dependencies, the % of the current batch, and an array of the loaded scripts.
+		this.fireEvent('scriptLoaded', [script, loaded.length / this.loadedScripts.getKeys() * 100, loaded.length - this.lastLoaded / this.loadedScripts.getKeys() * 100, loaded]);
+		if (ready) this.ready();
 	},
 
+	lastLoaded: 0,
+
 	ready: function(){
-		this.fireEvent('ready', this.loadedScripts.getKeys());
+		var loaded = this.loadedScripts.getKeys();
+		this.fireEvent('ready', loaded);
+		this.lastLoaded = loaded.length;
 		this.removeEvents('ready');
 		this.addEvent('ready', function(scripts){
 			this.fireEvent('requirementLoaded', scripts);
