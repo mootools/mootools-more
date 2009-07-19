@@ -34,6 +34,7 @@ Script: Keyboard.js
 			this.setOptions(params.options);
 			this.active = this.options.active;
 			this.addEvents(this.options.events);
+			this.boundHandle = this.handle.bind(this);
 			this.attach();
 		},
 
@@ -57,7 +58,6 @@ Script: Keyboard.js
 
 
 		attach: function(attach) {
-			this.boundHandle = this.handle.bind(this);
 			(params.elem || window)[$pick(attach, true) ? 'addEvent' : 'removeEvent'](this.options.eventType, this.boundHandle);
 		},
 
@@ -69,7 +69,7 @@ Script: Keyboard.js
 			if (Event.Keys.hasValue(e.key)) key = Event.Keys.keyOf(e.key);
 			key = ''+key;
 			var modKey = '';
-			if (e.shift) modKey += 'shift+';
+			if (e.shift && !this.options.caseSensitive) modKey += 'shift+';
 			if (e.ctrl) modKey += 'ctrl+';
 			if (e.alt) modKey += 'alt+';
 			if (e.meta) modKey += 'meta+';
