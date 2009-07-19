@@ -17,10 +17,10 @@ var Tips = new Class({
 	options: {/*
 		onAttach: $empty(tip, element),*/
 		onShow: function(tip){
-			tip.setStyle('visibility', 'visible');
+			this.tip.setStyle('display', 'block');
 		},
 		onHide: function(tip){
-			tip.setStyle('visibility', 'hidden');
+			this.tip.setStyle('display', 'none');
 		},
 		title: 'title',
 		text: function(el){
@@ -113,7 +113,6 @@ var Tips = new Class({
 		
 		this.timer = $clear(this.timer);
 		this.timer = this.show.delay(this.options.showDelay, this, element);
-		this.tip.setStyle('display', 'block');
 		this.setPosition((!this.options.fixed) ? event : {page: element.getPosition()});
 	},
 
