@@ -7,6 +7,11 @@
 			"desc": "Defines MooTools.More.version."
 		},
 
+		"Depender": {
+			"deps": ["Element.Event", "Request.JSON"],
+			"desc": "A dependency loader for the MooTools library."
+		},
+
 		"Lang": {
 			"deps": ["More", "Class.Extras"],
 			"desc": "Enables classes to contain text that can be localized to specific languages."

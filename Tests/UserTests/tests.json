@@ -1,4 +1,7 @@
 {
+	"Core": {
+		"Depender": ['all']
+	},
 	"Class": {
 		"Chain.Wait":['all']
 	},
