@@ -27,13 +27,8 @@ var Mask = new Class({
 		// hideOnClick: false,
 		// id: null,
 		// destroyOnHide: false,
+		style: {},
 		'class': 'mask',
-		style: {
-			position: 'absolute',
-			opacity: 0.9,
-			zIndex: 999,
-			background: '#fff'
-		},
 		maskMargins: false,
 		useIframeShim: true
 	},

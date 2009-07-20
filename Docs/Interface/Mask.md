@@ -27,7 +27,7 @@ Adds a semi-transparent overlay over a DOM element.
 * id - (*string*) if defined, the overlay layer will be assigned this id. If not defined, the id will default to 'mask-<timestamp>'
 * destroyOnHide - (*boolean*) if *true* the mask layer is destroyed when hidden. The class will no longer function after this. Defaults to *false*.
 * class - (*string*) the css class to apply to the layer; defaults to 'mask'.
-* style - (*object*) if defined, will apply to the mask with [Element.setStyles][]. Defaults to *position: absolute, opacity: 0.9, zIndex: 999, background: #fff*.
+* style - (*object*) if defined, will apply to the mask with [Element.setStyles][]. You can also style the layer by just defining a style for the layer class name (defaults to ".mask"). Default styles can be found in the Styles directory of the MooTools More library on github or downloaded on the More builder on MooTools.net.
 * maskMargins - (*boolean*) if *true* the mask will extend to the margins of the target. Defaults to *false*.
 * useIframeShim - (*boolean*) if true the mask will use [IframeShim][] to hide OS elements (select boxes, flash, etc) for IE6.
 

@@ -37,6 +37,7 @@ Adds a semi-transparent overlay over a DOM element with a 'spinning' ajax icon.
 ### Styles
 
 Download the default styles which include css styles and a default spinner image.
+You can also style the layer and its contents by just defining a css styles for the class names specified in the options class name (these default to ".waiter", ".waiter-content", and ".waiter-img"). Default styles can be found in the Styles directory of the MooTools More library on github or downloaded on the More builder on MooTools.net.
 
 ### Events
 
@@ -167,20 +168,7 @@ Extends [Request.HTML][] to add integrated [Waiter][] functionality.
 		url: '/myHtmlFragment.html',
 		update: $('myElement'),
 		useWaiter: true,
-		waiterOptions: {
-			baseHref: 'http://myserver.com/art',
-			img: {
-				src: 'waiter.gif',
-				styles: {
-					width: 24,
-					height: 24
-				}
-			},
-			layer: {
-				background: '#fff',
-				opacity: 0.9
-			}
-		}
+		waiterOptions: {...etc...}
 	});
 
 ### Notes

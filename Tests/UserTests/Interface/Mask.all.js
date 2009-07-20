@@ -5,12 +5,7 @@
 			description: "Overlays a target element with a semi-transparent layer.",
 			verify: "Does the box have a transparent layer over it (precisely, covering only it)?",
 			before: function(){
-				$('foo').mask({
-					style: {
-						// background: '#666',
-						// opacity: 0.6
-					}
-				});
+				$('foo').mask();
 			}
 		},
 		{
