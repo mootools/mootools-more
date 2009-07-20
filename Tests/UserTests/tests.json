@@ -20,6 +20,8 @@
 	"Forms": {
 		"FormValidator.Inline":['all'],
 		"FormValidator.Extras":['all'],
+		"Fupdate": ['all'],
+		"Fupdate.Append": ['all'],
 		"OverText": ['all']
 	},
 	"Fx": {

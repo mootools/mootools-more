@@ -123,6 +123,17 @@
 
 	"Forms": {
 
+		"Fupdate":{
+			"deps":["Element.Event",  "Request.HTML", "Class.Binds", "Class.Occlude", "Waiter", "String.QueryString"],
+			"desc":"Handles the basic functionality of submitting a form via ajax and updating a DOM element with the result."
+		},
+
+		"Fupdate.Append":{
+			"deps": ["Fupdate", "Fx.Reveal"],
+			"desc":"Uses Fupdate to fetch and update a DOM element, but appends the result into the target instead of overwriting its contents."
+		},
+
+
 		"FormValidator": {
 			"deps": ["More", "Lang", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
 			"desc": "A css-class based form validation system."
