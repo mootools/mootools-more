@@ -14,6 +14,8 @@ Elements.from = function(text) {
 	if (text.match(/^\<(td|tr|th)/)) {
 		var table = new Element('table');
 		container = new Element('tbody').inject(table);
+	} else if (text.match(/^<tbody/)) {
+		container = new Element('table');
 	} else {
 		container = new Element('div');
 	}
