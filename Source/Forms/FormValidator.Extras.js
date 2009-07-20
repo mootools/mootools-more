@@ -163,7 +163,7 @@ FormValidator.addAllThese([
 	['validate-cc-num', {
 		errorMsg: function(element){
 			var ccNum = element.get('value').ccNum.replace(/[^0-9]/g, '');
-			return 'The credit card number entered is invalid. Please check the number and try again. ' + (ccNum.length) + ' digits entered.';
+			return FormValidator.getMsg('creditcard').substitute({length: ccNum.length});
 		},
 		test: function(element){
 			// required is a different test
