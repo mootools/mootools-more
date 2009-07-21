@@ -22,15 +22,39 @@ var Depender = new Class({
 		*/
 		loadedSources: [],
 		loadedScripts: ['Core', 'Browser', 'Array', 'String', 'Function', 'Number', 'Hash', 'Element', 'Event', 'Element.Event', 'Class', 'Class.Extras', 'Request', 'JSON', 'Request.JSON', 'More', 'Depender'],
-		noCache: false
+		noCache: false,
+		log: false
 	},
 
 	initialize: function(libs, options){
-		var prev = document.id(document.body).retrieve('Depender');
+		var prev = document.id(window).retrieve('Depender');
 		if (prev) return prev.fetchLibs(libs);
 		this.setOptions(options);
-		document.id(document.body).store('Depender', this);
+		if (this.options.log) this.enableLog();
+		else this.disableLog();
+		document.id(window).store('Depender', this);
 		this.fetchLibs(libs);
+	},
+
+	enableLog: function(){
+		this.log = function(){
+			console.log.apply(console, arguments);
+			return this;
+		};
+		this.log('enabling depender log.');
+		this.logged.each(function(logged){
+			this.log.apply(this, logged);
+		}, this);
+		this.logged.empty();
+	},
+
+	logged:[],
+
+	disableLog: function(){
+		this.log = function(){
+			this.logged.push(arguments);
+			return this;
+		};
 	},
 
 	loaded: [],
@@ -47,6 +71,7 @@ var Depender = new Class({
 			}, this);
 		}.bind(this);
 		if ($type(libs) == 'string') {
+			this.log('fetching libs ', libs);
 			this.request(libs, loader);
 		} else {
 			loader(libs);
@@ -96,6 +121,7 @@ var Depender = new Class({
 
 	loadSource: function(lib, source){
 		if (this.libs[lib].files) return this.dataLoaded();
+		this.log('loading source: ', source);
 		this.request(this.cleanDoubleSlash(source + '/scripts.json'), function(result){
 			this.libs[lib].files = result;
 			this.dataLoaded();
@@ -123,7 +149,11 @@ var Depender = new Class({
 		if (this.options.loadedScripts) this.options.loadedScripts.each(set);
 		if (this.options.loadedSources) {
 			this.options.loadedSources.each(function(lib) {
-				this.libs[lib].files.each(set);
+				$each(this.libs[lib].files, function(dir) {
+					$each(dir, function(data, file){
+						set(file);
+					}, this);
+				}, this);
 			}, this);
 		}
 	},
@@ -143,6 +173,7 @@ var Depender = new Class({
 				}, this);
 			}, this);
 		}, this);
+		this.log('dependencies mapped: ', this.deps);
 	},
 
 	//get the dependencies for a given script
@@ -209,19 +240,26 @@ var Depender = new Class({
 		}.bind(this);
 		if (this.loading) return this.toLoad.push(script);
 		this.loading = true;
+		this.log('loading script: ', script);
+		var error = function() {
+			this.log('could not load: ', script);
+		}.bind(this);
 		new Request({
 			url: this.getPath(script),
 			noCache: this.options.noCache,
 			onComplete: function(js) {
+				this.log('loaded script: ', script);
 				$exec(js);
 				finish.delay(50, this);
-			}.bind(this)
+			}.bind(this),
+			onFailure: error,
+			onException: error
 		}).send();
 	},
 
 	loadedScripts: $H({}),
 
-	scriptLoaded: function(script) {`
+	scriptLoaded: function(script) {
 		this.loadedScripts[script] = true;
 		var ready = true;
 		var loaded = this.loadedScripts.filter(function(loaded, scr) {
