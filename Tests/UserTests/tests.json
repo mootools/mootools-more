@@ -12,6 +12,7 @@
 		"Sortables":['single', 'multi']
 	},
 	"Element":{
+		"Element.Delegation":['all'],
 		"Element.Forms":['all'],
 		"Element.Shortcuts":['all'],
 		"Element.Pin":['all'],

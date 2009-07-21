@@ -99,6 +99,11 @@
 			"desc": "Extends the Element native object to include methods useful in managing inputs."
 		},
 
+		"Element.Delegation": {
+			"deps":["Element.Event"],
+			"desc":"Delegates events for child elements to their parents for greater efficiency."
+		},
+
 		"Element.Measure": {
 			"deps": ["More", "Element.Style"],
 			"desc": "Extends the Element native object to include methods useful in measuring dimensions."
