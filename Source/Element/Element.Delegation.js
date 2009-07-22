@@ -23,22 +23,20 @@ Script: Element.Delegation.js
 	};
 	
 	var regs = {
-		test: /^.*:relay?\(.*?\)$/,
-		event: /.*?(?=:relay\()/,
-		selector: /^.*?:relay\((.*)\)$/,
+		match: /(.*?):relay\(([^)]+)\)$/,
 		warn: /^.*?\(.*?\)$/
 	};
 	
 	var splitType = function(type){
-		if (type.test(regs.test)){
+		var bits = type.match(regs.match);
+		if (bits){
 			return {
-				event: type.match(regs.event)[0],
-				selector: type.replace(regs.selector, "$1")
+				event: bits[1],
+				selector: bits[2]
 			};
-		} else if (type.test(/^.*?\(.*?\)$/)) {
-			if (window.console && console.warn) {
-				console.warn('The selector ' + type + ' could not be delegated; the syntax has changed. Check the documentation.');
-			}
+		}
+		if (regs.warn.test(type) && window.console && console.warn){
+			console.warn('The selector ' + type + ' could not be delegated; the syntax has changed. Check the documentation.');
 		}		
 		return {event: type};
 	};
