@@ -25,7 +25,8 @@ var Accordion = Fx.Accordion = new Class({
 		fixedWidth: false,
 		alwaysHide: false,
 		trigger: 'click',
-		initialDisplayFx: true
+		initialDisplayFx: true,
+		returnHeightToAuto: true
 	},
 
 	initialize: function(){
@@ -34,6 +35,7 @@ var Accordion = Fx.Accordion = new Class({
 		this.togglers = $$(params.togglers);
 		this.container = document.id(params.container);
 		this.previous = -1;
+		this.internalChain = new Chain();
 		if (this.options.alwaysHide) this.options.wait = true;
 		if ($chk(this.options.show)){
 			this.options.display = false;
@@ -56,6 +58,7 @@ var Accordion = Fx.Accordion = new Class({
 			}
 		}, this);
 		if ($chk(this.options.display)) this.display(this.options.display, this.options.initialDisplayFx);
+		this.addEvent('complete', this.internalChain.callChain.bind(this.internalChain));
 	},
 
 	addSection: function(toggler, element){
@@ -81,16 +84,28 @@ var Accordion = Fx.Accordion = new Class({
 	display: function(index, useFx){
 		if (!this.check(index, useFx)) return this;
 		useFx = $pick(useFx, true);
+		if (this.options.returnHeightToAuto) {
+			var prev = this.elements[this.previous];
+			if (prev) for (var fx in this.effects) prev.setStyle(fx, prev[this.effects[fx]]);
+		}
 		index = ($type(index) == 'element') ? this.elements.indexOf(index) : index;
 		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
 		var obj = {};
 		this.elements.each(function(el, i){
 			obj[i] = {};
-			var hide = (i != index) || (this.options.alwaysHide && ((el.offsetHeight > 0 && this.options.height) || el.offsetWidth > 0 && this.options.width));
+			var hide = (i != index) || 
+						(this.options.alwaysHide && ((el.offsetHeight > 0 && this.options.height) || 
+							el.offsetWidth > 0 && this.options.width));
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
 		}, this);
+		this.internalChain.chain(function(){
+			if (this.options.returnHeightToAuto) {
+				var el = this.elements[index];
+				el.setStyle('height', 'auto');
+			};
+		}.bind(this));
 		return useFx ? this.start(obj) : this.set(obj);
 	}
 
