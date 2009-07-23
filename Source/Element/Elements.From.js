@@ -9,11 +9,20 @@ Script: Elements.From.js
 		Aaron Newton
 
 */
-Elements.from = function(text) {
-	var container;
-	if (text.match(/^\<(td|th)/)) container = new Element('tr').inject(new Element('tbody').inject(new Element('table')));
-	else if (text.match(/^\<tr/)) container = new Element('tbody').inject(new Element('table'));
-	else if (text.match(/^<tbody/)) container = new Element('table');
-	else container = new Element('div');
+
+Elements.from = function(text){
+	var container, match = text.match(/^<(t[dhr]|tbody|tfoot|thead)/i);
+
+	if (match){
+		container = new Element('table');
+		var tag = match[1].toLowerCase();
+		if (tag == 'td' || tag == 'th' || tag == 'tr'){
+			container = new Element('tbody').inject(container);
+			if (tag != 'tr') container = new Element('tr').inject(container);
+		}
+	} else {
+		container = new Element('div');
+	}
+
 	return container.set('html', text).getChildren();
 };
