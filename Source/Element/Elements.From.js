@@ -11,13 +11,9 @@ Script: Elements.From.js
 */
 Elements.from = function(text) {
 	var container;
-	if (text.match(/^\<(td|tr|th)/)) {
-		var table = new Element('table');
-		container = new Element('tbody').inject(table);
-	} else if (text.match(/^<tbody/)) {
-		container = new Element('table');
-	} else {
-		container = new Element('div');
-	}
+	if (text.match(/^\<(td|th)/)) container = new Element('tr').inject(new Element('tbody').inject(new Element('table')));
+	else if (text.match(/^\<tr/)) container = new Element('tbody').inject(new Element('table'));
+	else if (text.match(/^<tbody/)) container = new Element('table');
+	else container = new Element('div');
 	return container.set('html', text).getChildren();
 };
