@@ -23,7 +23,8 @@ var Depender = new Class({
 		loadedSources: [],
 		loadedScripts: ['Core', 'Browser', 'Array', 'String', 'Function', 'Number', 'Hash', 'Element', 'Event', 'Element.Event', 'Class', 'Class.Extras', 'Request', 'JSON', 'Request.JSON', 'More', 'Depender'],
 		noCache: false,
-		log: false
+		log: false,
+		useRequest: true
 	},
 
 	initialize: function(libs, options){
@@ -240,21 +241,34 @@ var Depender = new Class({
 		}.bind(this);
 		if (this.loading) return this.toLoad.push(script);
 		this.loading = true;
-		this.log('loading script: ', script);
+		scriptPath = this.getPath(script);
+		this.log('loading script: ', scriptPath);
 		var error = function() {
-			this.log('could not load: ', script);
+			this.log('could not load: ', scriptPath);
 		}.bind(this);
-		new Request({
-			url: this.getPath(script),
-			noCache: this.options.noCache,
-			onComplete: function(js) {
-				this.log('loaded script: ', script);
-				$exec(js);
-				finish.delay(50, this);
-			}.bind(this),
-			onFailure: error,
-			onException: error
-		}).send();
+		if (this.options.useRequest) {
+			new Request({
+				url: scriptPath,
+				noCache: this.options.noCache,
+				onComplete: function(js) {
+					this.log('loaded script: ', scriptPath);
+					$exec(js);
+					finish.delay(50, this);
+				}.bind(this),
+				onFailure: error,
+				onException: error
+			}).send();
+		} else {
+			new Element('script', {
+				src: scriptPath + (this.options.noCache ? '?noCache=' + new Date().getTime() : ''),
+				events: {
+					load: function() {
+						this.log('loaded script: ', scriptPath);
+						finish.delay(50, this)
+					}.bind(this)
+				}
+			}).inject(document.head);
+		}
 	},
 
 	loadedScripts: $H({}),

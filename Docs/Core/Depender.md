@@ -22,6 +22,7 @@ Loads dependencies from MooTools script repositories.
 * loadedScripts - (*array*) This is a list of scripts already loaded into the document. By default, it is an array of the scripts on which Depender depends (*Core*, *Browser*, *Array*, *String*, *Function*, *Number*, *Hash*, *Element*, *Event*, *Element.Event*, *Class*, *Class.Extras*, *Request*, *JSON*, *Request.JSON*, *More*, and *Depender*).
 * loadedSources - (*array*) An array of lib keys that are loaded in their entirety. For example, if your libs.json object has a definition for 'mootools-core' and you have all of core loaded, you can just define *loadedLibs: ['mootools-core']* and all the files in that source will be marked as having been loaded.
 * noCache - (*boolean*) this setting is passed along to [Request][] to prevent caching. This is useful in development where scripts are changing often but should be left disabled for production. Defaults to *false*.
+* useRequest - (*boolean*) if *true* (the default), scripts are loaded with [Request][] and evaluated. If *false*, script tags are injected into the document.head. The advantage of using [Request][] is that the requests are asynchronous, so other activities are not blocked. The downside to using [Request][] is that errors in your external script files are hard to find (as there is no line number reported) and the scripts *must* be on the same domain as your web app.
 
 ### Events
 
@@ -58,10 +59,9 @@ This implies you have your files organized like so in your web document root:
 	/more/Source/scripts.json
 	/Source/scripts.json << your scripts
 
-Note that these locations must be accessible locally (i.e. via ajax) as all scripts are fetched with [Request][]. *External dependencies are currently not supported*.
+Note that these locations must be accessible locally (i.e. via ajax) as these json files are fetched with [Request][].
 
 If you want to pass the libs object directly to Depender you can. Simply pass the object instead of the url to the object.
-
 
 ### Scripts
 
@@ -170,4 +170,4 @@ Loads the entire contents of the specified sources.
 
 [Events]: /core/Class/Class.Extras#Events
 [Options]: /core/Class/Class.Extras#Options
-
+[Request]: /core/Request/Request
