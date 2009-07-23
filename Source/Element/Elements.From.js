@@ -11,7 +11,7 @@ Script: Elements.From.js
 */
 
 Elements.from = function(text){
-	var container, match = text.trim().match(/^<(t[dhr]|tbody|tfoot|thead)/i);
+	var container, match = text.match(/^\s*<(t[dhr]|tbody|tfoot|thead)/i);
 
 	if (match){
 		container = new Element('table');
