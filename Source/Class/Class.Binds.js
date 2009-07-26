@@ -18,7 +18,6 @@ Class.Binds = new Class({
 });
 
 Class.Mutators.Binds = function(binds){
-	try {
+	if (window.console && console.warn)
 		console.warn("You are using the deprecated Binds mutator on one of your classes, you should remove it. The bound methods are: ", binds);
-	} catch(e) {}
 };
