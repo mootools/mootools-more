@@ -13,8 +13,6 @@ Request.Queue = new Class({
 
 	Implements: [Options, Events],
 
-	Binds: ['attach', 'request', 'complete', 'cancel', 'success', 'failure', 'exception'],
-
 	options: {/*
 		onRequest: $empty(argsPassedToOnRequest),
 		onSuccess: $empty(argsPassedToOnSuccess),
