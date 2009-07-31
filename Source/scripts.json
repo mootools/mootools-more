@@ -285,8 +285,9 @@
 		},
 
 		"Mask": {
-			"deps": ["More", "Class.Extras", "Element.Style", "Element.Event", "Element.Position", "IframeShim"],
-			"desc": "Creates a mask over a specified element."
+			"deps": ["More", "Class.Extras", "Element.Style", "Element.Event", "Element.Position", "IframeShim", "Class.Binds"],
+			"desc": "Creates a mask over a specified element.",
+			"styles": true
 		},
 
 		"Scroller": {
