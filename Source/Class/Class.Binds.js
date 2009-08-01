@@ -10,14 +10,17 @@ Script: Class.Binds.js
 */
 
 Class.Binds = new Class({
-	_bound: {},
+	
+	_bound_: {},
+	
 	bound: function(name) {
-		if (!this._bound[name]) this._bound[name] = this[name].bind(this);
-		return this._bound[name]
+		return (this._bound_[name]) ? this._bound_[name] : this._bound_[name] = this[name].bind(this);
 	}
+	
 });
 
-Class.Mutators.Binds = function(binds){
-	if (window.console && console.warn)
-		console.warn("You are using the deprecated Binds mutator on one of your classes, you should remove it. The bound methods are: ", binds);
-};
+
+if (window.console && console.warn)
+	Class.Mutators.Binds = function(binds){
+		console.warn('You are using the deprecated Binds mutator on one of your classes, you should remove it. The bound methods are: ', binds);
+	};
