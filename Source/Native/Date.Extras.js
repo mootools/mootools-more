@@ -14,6 +14,31 @@ Date.implement({
 
 	timeDiffInWords: function(relative_to){
 		return Date.distanceOfTimeInWords(this, relative_to || new Date);
+	},
+
+	timeDiff: function(to, joiner) {
+		if (!to) to = new Date();
+		var diff = (to - this)/1000;
+		var vals = [];
+		var br = false;
+		$H({
+			second: 60,
+			minute: 60,
+			hour: 24,
+			day: 365,
+			year: 0
+		}).every(function(duration, step){
+			var s = step.substring(0,1);
+			if (!diff) return false;
+			if (!duration) {
+				vals.push(diff+s);
+			} else {
+				vals.push((diff % duration).toInt() + s);
+				diff = (diff / duration).toInt();
+			}
+			return true;
+		}, this);
+		return vals.length ? vals.reverse().join(joiner || ':') : "0s";
 	}
 
 });

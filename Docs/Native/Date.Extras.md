@@ -34,6 +34,35 @@ In addition to the two default parsers included in *[Date.js][]*, *Date.Extras.j
 
 - [Date:parse][]
 
+Date Method: timeDiff {#Date:timeDiff}
+--------------------------------------
+
+Returns the difference between two dates in a compact format.
+
+### Syntax
+
+	date.timeDiff([otherDate, joiner]);
+
+### Arguments
+
+1. otherDate - (*date*) the date to compare to; defaults to the current time.
+2. joiner - (*string*) the string to join the values; defaults to ':'.
+
+### Example
+
+	var example = new Date();
+	example.timeDiff(); //0s
+	example.decrement('minute');
+	example.timeDiff(); //1m:0s
+	example.decrement('hour');
+	example.timeDiff(); //1h:1m:0s
+	example.increment('hour', 2);
+	example.timeDiff(); //3h:1m:0s
+
+### Returns
+
+* (*string*) the compact representation of the differences in the times.
+
 Date Method: timeDiffInWords {#Date:timeDiffInWords}
 --------------------------------------------------
 
