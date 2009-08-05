@@ -81,7 +81,9 @@ Element.Properties.validatorProps = {
 
 var FormValidator = new Class({
 
-	Implements:[Options, Events, Class.Binds],
+	Implements:[Options, Events],
+
+	Binds: ['onSubmit'],
 
 	options: {/*
 		onFormValidate: $empty(isValid, form, event),
@@ -110,7 +112,7 @@ var FormValidator = new Class({
 		this.element.store('validator', this);
 		this.warningPrefix = $lambda(this.options.warningPrefix)();
 		this.errorPrefix = $lambda(this.options.errorPrefix)();
-		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this.bound('onSubmit'));
+		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this.onSubmit);
 		if (this.options.evaluateFieldsOnBlur || this.options.evaluateFieldsOnChange) this.watchFields(this.getFields());
 	},
 

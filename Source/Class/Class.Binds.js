@@ -9,15 +9,16 @@ Script: Class.Binds.js
 		Aaron Newton
 */
 
-Class.Binds = new Class({
-	_bound: {},
-	bound: function(name) {
-		if (!this._bound[name]) this._bound[name] = this[name].bind(this);
-		return this._bound[name]
-	}
-});
-
 Class.Mutators.Binds = function(binds){
-	if (window.console && console.warn)
-		console.warn("You are using the deprecated Binds mutator on one of your classes, you should remove it. The bound methods are: ", binds);
+    return binds;
+};
+
+Class.Mutators.initialize = function(initialize){
+	return function(){
+		$splat(this.Binds).each(function(name){
+			var original = this[name];
+			if (original) this[name] = original.bind(this);
+		}, this);
+		return initialize.apply(this, arguments);
+	};
 };
