@@ -279,6 +279,26 @@
 
 	"Interface": {
 
+		"HtmlTable":{
+			"deps":["Element", "Class.Extras"],
+			"desc":"Builds table elements with methods to add rows quickly."
+		},
+
+		"HtmlTable.Zebra": {
+			"deps":["HtmlTable"],
+			"desc":"Adds stripes to an HTML table's rows."
+		},
+
+		"HtmlTable.Sort": {
+			"deps":["HtmlTable.Zebra", "Element.Delegation", "Hash", "Date"],
+			"desc":"Adds the ability to sort the columns of a HtmlTable.Zebra instance."
+		},
+
+		"HtmlTable.Select": {
+			"deps":["HtmlTable.Sort", "Keyboard"],
+			"desc":"Adds the ability to highlight and select rows on a HtmlTable.Sort instance."
+		},
+
 		"Keyboard": {
 			"deps": ["More", "Class.Extras", "Element.Event"],
 			"desc": "Provides enhanced group key event management."
