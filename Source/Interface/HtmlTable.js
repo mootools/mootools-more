@@ -1,13 +1,18 @@
 /*
 Script: HtmlTable.js
+	Builds table elements with methods to add rows.
 
-Builds table elements with methods to add rows quickly.
+	License:
+		MIT-style license.
 
-License:
-	http://www.clientcide.com/wiki/cnet-libraries#license
+	Authors:
+		Aaron Newton
 */
+
 var HtmlTable = new Class({
+
 	Implements: [Options, Events],
+
 	options: {
 		properties: {
 			cellpadding: 0,
@@ -18,11 +23,13 @@ var HtmlTable = new Class({
 		headers: [],
 		footers: []
 	},
-	initialize: function(options) {
+
+	initialize: function() {
 		var params = Array.link(arguments, {options: Object.type, table: Element.type});
 		this.setOptions(params.options);
 		this.build(params.element);
 	},
+
 	build: function(table){
 		this.element = table || new Element('table', this.options.properties);
 		this.element.store('HtmlTable', this);
@@ -46,12 +53,15 @@ var HtmlTable = new Class({
 				this[method] = this.element[method].bind(this.element);
 		}, this);
 	},
+
 	empty: function(){
 		this.body.empty();
 	},
+
 	toElement: function(){
 		return this.element;
 	},
+
 	setHeaders: function(headers){
 		this.thead = $(this.element.tHead);
 		if (!this.thead) this.thead = new Element('thead').inject(this.element, 'top');
@@ -59,6 +69,7 @@ var HtmlTable = new Class({
 		this.push(headers, this.thead, 'th');
 		this.head = $(this.thead.rows[0]);
 	},
+
 	setFooters: function(footers) {
 		this.tfoot = $(this.element.tFoot);
 		if (!this.tfoot) this.tfoot = new Element('tfoot').inject(this.element, 'top');
@@ -66,6 +77,7 @@ var HtmlTable = new Class({
 		this.push(footers, this.tfoot);
 		this.foot = $(this.thead.rows[0]);
 	},
+
 	push: function(row, target, tag) {
 		var tr = new Element('tr').inject(target || this.body);
 		var tds = row.map(function (tdata) {
@@ -82,4 +94,5 @@ var HtmlTable = new Class({
 		}, this);
 		return {tr: tr, tds: tds};
 	}
+
 });

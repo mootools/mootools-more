@@ -1,14 +1,15 @@
-/**
- * Table.Sort - Sortable tables for everyone
- *
- * Bascically this is just a demo for optimized sorting
- * of elements.
- *
- * @license		LGPL (http://www.gnu.org/licenses/lgpl.html)
- *
- * @author		Harald Kirschner <mail [at] digitarald [dot] de>
- * @copyright	Authors
- */
+/*
+Script: HtmlTable.Sort.js
+	Builds a stripy, sortable table with methods to add rows.
+
+	License:
+		MIT-style license.
+
+	Authors:
+		Harald Kirschner
+		Aaron Newton
+*/
+
 HtmlTable.Sort = new Class({
 
 	Extends: HtmlTable.Zebra,
@@ -27,14 +28,8 @@ HtmlTable.Sort = new Class({
 		classCellSort: 'table-td-sort'
 	},
 
-	/**
-	 * Constructor
-	 *
-	 * @param		Element Table
-	 * @param		Object options
-	 */
-	initialize: function (element, options) {
-		this.parent(element, options);
+	initialize: function () {
+		this.parent.apply(this, arguments);
 		this.sorted = {index: null, dir: 1};
 		this.attach();
 		this.detectParsers();

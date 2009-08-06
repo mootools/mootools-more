@@ -1,3 +1,15 @@
+/*
+Script: HtmlTable.Zebra.js
+	Builds a stripy table with methods to add rows.
+
+	License:
+		MIT-style license.
+
+	Authors:
+		Harald Kirschner
+		Aaron Newton
+*/
+
 HtmlTable.Zebra = new Class({
 
 	Extends: HtmlTable,
@@ -7,12 +19,6 @@ HtmlTable.Zebra = new Class({
 		grouped: 1
 	},
 
-	/**
-	 * Constructor
-	 *
-	 * @param		Element Table
-	 * @param		Object options
-	 */
 	initialize: function () {
 		this.parent.apply(this, arguments);
 		this.update();

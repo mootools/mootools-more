@@ -1,3 +1,15 @@
+/*
+Script: HtmlTable.Select.js
+	Builds a stripy, sortable table with methods to add rows. Rows can be selected with the mouse or keyboard navigation.
+
+	License:
+		MIT-style license.
+
+	Authors:
+		Harald Kirschner
+		Aaron Newton
+*/
+
 HtmlTable.Select = new Class({
 
 	Extends: HtmlTable.Sort,
@@ -12,14 +24,8 @@ HtmlTable.Select = new Class({
 		allowMultiSelect: true
 	},
 
-	/**
-	 * Constructor
-	 *
-	 * @param		Element Table
-	 * @param		Object options
-	 */
-	initialize: function (element, options) {
-		this.parent(element, options);
+	initialize: function () {
+		this.parent.apply(this, arguments);
 		this.selectedRows = new Elements();
 	},
 
