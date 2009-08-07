@@ -146,9 +146,9 @@ OverText.instances = [];
 
 $extend(OverText, {
 
-	each: function(fn, args) {
+	each: function(fn) {
 		return OverText.instances.map(function(ot){
-			if (ot.element && ot.text) return fn.apply(OverText, $splat(args));
+			if (ot.element && ot.text) return fn.apply(OverText, [ot]);
 			return null; //the input or the text was destroyed
 		});
 	},
