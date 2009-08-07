@@ -35,8 +35,9 @@ HtmlTable.Zebra = new Class({
 	},
 
 	push: function(){
-		this.parent.apply(this, arguments);
+		var pushed = this.parent.apply(this, arguments);
 		this.update();
+		return pushed;
 	}
 
 });

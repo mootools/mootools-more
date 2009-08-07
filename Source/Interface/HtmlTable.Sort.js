@@ -25,27 +25,35 @@ HtmlTable.Sort = new Class({
 		classNoSort: 'table-th-nosort',
 		classGroupHead: 'table-tr-group-head',
 		classGroup: 'table-tr-group',
-		classCellSort: 'table-td-sort'
+		classCellSort: 'table-td-sort',
+		enableSort: true
 	},
 
 	initialize: function () {
 		this.parent.apply(this, arguments);
 		this.sorted = {index: null, dir: 1};
-		this.attach();
 		this.detectParsers();
+		this.attach();
+		if (this.options.enableSort) this.enableSort();
 		if (this.options.sortIndex != null) this.sort(this.options.sortIndex, this.options.sortReverse);
 	},
 
 	attach: function(){
-		this.head.addEvent('click:relay(th)', this.headClick.bind(this));
+		this.table.addEvent('click:relay(th)', this.headClick.bind(this));
+	},
+
+	setHeaders: function(){
+		this.parent.apply(this, arguments);
+		this.detectParsers();
 	},
 
 	detectParsers: function(){
+		if (!this.getHead()) return;
 		var parsers = this.options.parsers;
 		var rows = this.body.rows;
 
 		// auto-detect
-		this.parsers = $$(this.head.cells).map(function(cell, index) {
+		this.parsers = $$(this.getHead().cells).map(function(cell, index) {
 			if (cell.hasClass(this.options.classNoSort)) return null;
 
 			new Element('span', {'html': '&#160;', 'class': 'table-th-sort-span'}).inject(cell, 'top');
@@ -74,12 +82,13 @@ HtmlTable.Sort = new Class({
 	},
 
 	headClick: function(event, el) {
-		var index = Array.indexOf(this.head.cells, el);
+		var index = Array.indexOf(this.getHead().cells, el);
 		this.sort(index);
 		return false;
 	},
 
 	sort: function(index, reverse, pre) {
+		if (!this.sortEnabled) return;
 		pre = !!(pre);
 		var classCellSort = this.options.classCellSort;
 		var classGroup = this.options.classGroup, classGroupHead = this.options.classGroupHead;
@@ -91,7 +100,9 @@ HtmlTable.Sort = new Class({
 				} else {
 					if (this.sorted.index != null) {
 						this.sorted.reverse = false;
-						this.head.cells[this.sorted.index].removeClass(this.options.classHeadSort).removeClass(this.options.classHeadSortRev);
+						this.getHead().cells[this.sorted.index]
+							.removeClass(this.options.classHeadSort)
+							.removeClass(this.options.classHeadSortRev);
 					} else {
 						this.sorted.reverse = true;
 					}
@@ -103,10 +114,12 @@ HtmlTable.Sort = new Class({
 
 			if (reverse != null) this.sorted.reverse = reverse;
 
-			var head = $(this.head.cells[index]).addClass(this.options.classHeadSort);
-			if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
-			else head.removeClass(this.options.classHeadSortRev);
-
+			var head = $(this.getHead().cells[index]);
+			if (head) {
+				head.addClass(this.options.classHeadSort);
+				if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
+				else head.removeClass(this.options.classHeadSortRev);
+			}
 
 			this.body.getElements('td').removeClass(this.options.classCellSort);
 		}
@@ -174,6 +187,14 @@ HtmlTable.Sort = new Class({
 		if (rel) rel.grab(body);
 
 		this.fireEvent('sort', [body, index]);
+	},
+
+	enableSort: function(){
+		this.sortEnabled = true;
+	},
+
+	disableSort: function(){
+		this.sortEnabled = false;
 	}
 
 });

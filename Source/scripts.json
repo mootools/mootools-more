@@ -280,7 +280,7 @@
 	"Interface": {
 
 		"HtmlTable":{
-			"deps":["Element", "Class.Extras"],
+			"deps":["Class.Extras", "Selectors"],
 			"desc":"Builds table elements with methods to add rows quickly."
 		},
 

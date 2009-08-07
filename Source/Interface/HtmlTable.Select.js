@@ -31,7 +31,7 @@ HtmlTable.Select = new Class({
 
 	attach: function(){
 		this.parent();
-		this.element.addEvent('mouseleave', function() {
+		this.table.addEvent('mouseleave', function() {
 			if (this.hover) this.leaveRow(this.hover);
 		}.bind(this));
 		this.body.addEvents({
