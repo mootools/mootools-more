@@ -149,7 +149,7 @@ FormValidator.Extras Language Localization {#Localization}
 * match - (*string*) 'This field needs to match the {matchName} field' where *matchName* is the name of another field
 * startDate - (*string*)  'the start date'
 * endDate - (*string*)  'the end date'
-* currendDate - (*string*)  'the current date'
+* currentDate - (*string*)  'the current date'
 * afterDate - (*string*)  'The date should be the same or after {label}.' where *label* is the name of another date field
 * beforeDate - (*string*)  'The date should be the same or before {label}.' where *label* is the name of another date field
 * startMonth - (*string*)  'Please select a start month'
