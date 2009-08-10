@@ -81,12 +81,12 @@
 		},
 
 		"URI": {
-			"deps": ["More", "Function", "Array", "Hash", "Class.Refactor", "String.QueryString"],
+			"deps": ["More", "Function", "Array", "Hash", "String.QueryString"],
 			"desc": "Provides methods useful in managing the window location and uris."
 		},
 
 		"URI.Relative": {
-			"deps": ["More", "URI"],
+			"deps": ["More", "URI", "Class.Refactor"],
 			"desc": "Extends the URI class to add methods for computing relative and absolute urls."
 		}
 
