@@ -18,7 +18,7 @@ Element.implement({
 
 	isVisible: function(){
 		var w = this.offsetWidth, h = this.offsetHeight;
-		return (w===0 && h===0) ? false : (w>0 && h>0) ? true : this.getStyle('display') !== 'none';
+		return (w == 0 && h == 0) ? false : (w > 0 && h > 0) ? true : this.isDisplayed();
 	},
 
 	toggle: function(){
@@ -28,10 +28,10 @@ Element.implement({
 	hide: function(){
 		var d;
 		try {
-			//IE fails here if the element is not in the dom
-			if ('none' != this.getStyle('display')) d = this.getStyle('display');
+			// IE fails here if the element is not in the dom
+			if ((d = this.getStyle('display')) == 'none') d = null;
 		} catch(e){}
-
+		
 		return this.store('originalDisplay', d || 'block').setStyle('display', 'none');
 	},
 

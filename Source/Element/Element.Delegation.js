@@ -16,15 +16,10 @@ Script: Element.Delegation.js
 */
 (function(){
 	
-	var check = function(e, test){
-		// walk up tree from event target, testing against selector
-		for (var t = e.target; t && t != this; t = t.parentNode)
-			if (Element.match(t, test)) return document.id(t);
-	};
-	
 	var regs = {
 		match: /(.*?):relay\(([^)]+)\)$/,
-		warn: /^.*?\(.*?\)$/
+		warn: /^.*?\(.*?\)$/,
+		combinators: /[+>~\s]/
 	};
 	
 	var splitType = function(type){
@@ -40,9 +35,28 @@ Script: Element.Delegation.js
 		}		
 		return {event: type};
 	};
+	
+	var check = function(e, selector){
+		var t = e.target;
+		if (regs.combinators.test(selector = selector.trim())){
+			// if selector has combinators, search downward (much slower)
+			var els = this.getElements(selector);
+			for (var i = els.length; i--; ){
+				var el = els[i];
+				if (t == el || el.hasChild(t)) return el;
+			}
+		} else {
+			// walk up tree from event target, testing against selector
+			for ( ; t && t != this; t = t.parentNode){
+				if (Element.match(t, selector)) return document.id(t);
+			}
+		}
+		return null;
+	};
 
 	var oldAddEvent = Element.prototype.addEvent,
 		oldRemoveEvent = Element.prototype.removeEvent;
+		
 	Element.implement({
 		//use as usual (this.addEvent('click', fn))
 		//or for delegation
@@ -86,7 +100,7 @@ Script: Element.Delegation.js
 				//else empty all the events of this type
 				else oldRemoveEvent.apply(this, type);
 				//if there are none left, we remove the monitor, too
-				var events = this.retrieve('events');
+				events = this.retrieve('events');
 				if (events && events[type] && events[type].length == 0){
 					//get the monitors we've created
 					var monitors = this.retrieve('$moo:delegateMonitors', {});
