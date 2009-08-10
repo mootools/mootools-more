@@ -8,6 +8,7 @@ License:
 (function(){
 	var Tester = new Class({
 		Implements: Class.Binds,
+		Binds: ["getFoo"],
 		initialize: function(foo){
 			this.foo = foo;
 		},
@@ -15,7 +16,7 @@ License:
 			return this.foo;
 		},
 		test: function(){
-			return [0].map(this.bound('getFoo'))[0];
+			return [0].map(this.getFoo)[0];
 		}
 	});
 	var Tester2 = new Class({
@@ -31,6 +32,7 @@ License:
 	});
 	var Tester3 = new Class({
 		Implements: [Class.Binds, Options],
+		Binds: ["getFoo"],
 		initialize: function(foo){
 			this.foo = foo;
 			this.setOptions({a: 'b'});
@@ -39,7 +41,7 @@ License:
 			return this.foo;
 		},
 		test: function(){
-			return [0].map(this.bound('getFoo'))[0];
+			return [0].map(this.getFoo)[0];
 		}
 	});
 

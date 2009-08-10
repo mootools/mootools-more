@@ -11,7 +11,9 @@ Script: OverText.js
 
 var OverText = new Class({
 
-	Implements: [Options, Events, Class.Occlude, Class.Binds],
+	Implements: [Options, Events, Class.Occlude],
+
+	Binds: ['reposition', 'assert', 'focus'],
 
 	options: {/*
 		textOverride: null,
@@ -63,11 +65,11 @@ var OverText = new Class({
 		}).inject(this.element, 'after');
 		if (this.options.element == 'label') this.text.set('for', this.element.get('id'));
 		this.element.addEvents({
-			focus: this.bound('focus'),
-			blur: this.bound('assert'),
-			change: this.bound('assert')
+			focus: this.focus,
+			blur: this.assert,
+			change: this.assert
 		}).store('OverTextDiv', this.text);
-		window.addEvent('resize', this.bound('reposition'));
+		window.addEvent('resize', this.reposition.bind(this));
 		this.assert(true);
 		this.reposition();
 	},

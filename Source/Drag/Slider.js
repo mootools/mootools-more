@@ -11,7 +11,9 @@ Script: Slider.js
 
 var Slider = new Class({
 
-	Implements: [Events, Options, Class.Binds],
+	Implements: [Events, Options],
+
+	Binds: ['clickedElement', 'draggedKnob', 'scrolledElement'],
 
 	options: {/*
 		onTick: $empty(intPosition),
@@ -63,8 +65,8 @@ var Slider = new Class({
 			snap: 0,
 			limit: limit,
 			modifiers: modifiers,
-			onDrag: this.bound('clickedElement'),
-			onStart: this.bound('draggedKnob'),
+			onDrag: this.draggedKnob,
+			onStart: this.draggedKnob,
 			onBeforeStart: (function(){
 				this.isDragging = true;
 			}).bind(this),
@@ -84,15 +86,15 @@ var Slider = new Class({
 	},
 
 	attach: function(){
-		this.element.addEvent('mousedown', this.bound('clickedElement'));
-		if (this.options.wheel) this.element.addEvent('mousewheel', this.bound('scrolledElement'));
+		this.element.addEvent('mousedown', this.clickedElement);
+		if (this.options.wheel) this.element.addEvent('mousewheel', this.scrolledElement);
 		this.drag.attach();
 		return this;
 	},
 
 	detach: function(){
-		this.element.removeEvent('mousedown', this.bound('clickedElement'));
-		this.element.removeEvent('mousewheel', this.bound('scrolledElement'));
+		this.element.removeEvent('mousedown', this.clickedElement);
+		this.element.removeEvent('mousewheel', this.scrolledElement);
 		this.drag.detach();
 		return this;
 	},

@@ -22,14 +22,18 @@ Loads dependencies from MooTools script repositories.
 * loadedScripts - (*array*) This is a list of scripts already loaded into the document. By default, it is an array of the scripts on which Depender depends (*Core*, *Browser*, *Array*, *String*, *Function*, *Number*, *Hash*, *Element*, *Event*, *Element.Event*, *Class*, *Class.Extras*, *Request*, *JSON*, *Request.JSON*, *More*, and *Depender*).
 * loadedSources - (*array*) An array of lib keys that are loaded in their entirety. For example, if your libs.json object has a definition for 'mootools-core' and you have all of core loaded, you can just define *loadedLibs: ['mootools-core']* and all the files in that source will be marked as having been loaded.
 * noCache - (*boolean*) this setting is passed along to [Request][] to prevent caching. This is useful in development where scripts are changing often but should be left disabled for production. Defaults to *false*.
-* useRequest - (*boolean*) if *true* (the default), scripts are loaded with [Request][] and evaluated. If *false*, script tags are injected into the document.head. The advantage of using [Request][] is that the requests are asynchronous, so other activities are not blocked. The downside to using [Request][] is that errors in your external script files are hard to find (as there is no line number reported) and the scripts *must* be on the same domain as your web app.
+* useScriptInjection - (*boolean*) if *false* (the default), scripts are loaded with [Request][] and evaluated. If *true*, script tags are injected into the document.head. The advantage of using [Request][] is that the requests are asynchronous, so other activities are not blocked. The downside to using [Request][] is that errors in your external script files are hard to find (as there is no line number reported) and the scripts *must* be on the same domain as your web app.
 
 ### Events
 
 * onRequire - (*function*) callback executed whenever new requirements are passed in to be loaded. Passed an array of the scripts required.
 * onReady - (*function*) callback executed when all scripts have finished loading. Note that all *onReady* events are removed when it is fired. This means that if you require a script, all its dependencies and that script will load and then all *onReady* callbacks will be executed, and then those callback will be removed. This allows you to later require additional scripts without executing the callback for the first batch. See the *onRequirementLoaded* event if you want to attach an event to every time the *onReady* event is fired. Passed an array of currently loaded and available scripts.
 * onRequirementLoaded - (*function*) callback executed anytime the current set of requirements is loaded. This event fires every time *onReady* fires, but its attached events are not removed. Pased a list of currently loaded and available scripts.
-* scriptLoaded - (*function*) callback executed whenever a script loads. Passed the script loaded, the % loaded of total dependencies, the % of the current batch (so if you load a group of scripts, and then later require a second group, the third argument here is the percent of that 2nd batch loaded), and an array of all the loaded scripts.
+* scriptLoaded - (*function*) callback executed whenever a script loads. Passed an object with the following properties:
+** script: the script loaded, 
+** totalLoaded: the % loaded of total dependencies, 
+** currentLoaded: the % of the current batch (so if you load a group of scripts, and then later require a second group, the third argument here is the percent of that 2nd batch loaded), 
+** loaded: and an array of all the loaded scripts.
 
 ### Notes
 

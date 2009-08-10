@@ -16,7 +16,9 @@ var Fupdate;
 
 	Fupdate = new Class({
 
-		Implements: [Options, Events, Class.Occlude, Class.Binds],
+		Binds: ['onSubmit', 'onFormValidate'],
+
+		Implements: [Options, Events, Class.Occlude],
 
 		options: {
 			//onFailure: $empty,
@@ -80,8 +82,8 @@ var Fupdate;
 			method = attach ? 'addEvent' : 'removeEvent';
 			
 			var fv = this.element.retrieve('validator');
-			if (fv) fv[method]('onFormValidate', this.found('onFormValidate'));
-			if (!fv || !attach) this.element[method]('submit', this.bound('onSubmit'));
+			if (fv) fv[method]('onFormValidate', this.onFormValidate);
+			if (!fv || !attach) this.element[method]('submit', this.onSubmit);
 		},
 
 		detach: function(){

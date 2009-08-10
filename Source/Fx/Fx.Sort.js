@@ -145,7 +145,7 @@ Fx.Sort = new Class({
 		var newOrder = $A(this.currentOrder);
 		newOrder[this.currentOrder.indexOf(one)] = two;
 		newOrder[this.currentOrder.indexOf(two)] = one;
-		this.sort(newOrder);
+		return this.sort(newOrder);
 	}
 
 });

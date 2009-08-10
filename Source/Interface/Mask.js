@@ -11,7 +11,9 @@ Script: Mask.js
 
 var Mask = new Class({
 
-	Implements: [Options, Events, Class.Binds],
+	Implements: [Options, Events],
+
+	Binds: ['resize'],
 
 	options: {
 		// onShow: $empty,
@@ -99,7 +101,7 @@ var Mask = new Class({
 
 	show: function(){
 		if (!this.hidden) return this;
-		this.target.addEvent('resize', this.bound('resize'));
+		this.target.addEvent('resize', this.resize);
 		this.position();
 		this.showMask.apply(this, arguments);
 		return this;
@@ -114,7 +116,7 @@ var Mask = new Class({
 	hide: function(){
 		if (this.options.destroyOnHide) return this.destroy();
 		if (this.hidden) return this;
-		this.target.removeEvent('resize', this.bound('resize'));
+		this.target.removeEvent('resize', this.resize);
 		this.hideMask.apply(this, arguments);
 		return this;
 	},
