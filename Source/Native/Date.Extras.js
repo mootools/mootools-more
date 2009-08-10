@@ -16,29 +16,25 @@ Date.implement({
 		return Date.distanceOfTimeInWords(this, relative_to || new Date);
 	},
 
-	timeDiff: function(to, joiner) {
-		if (!to) to = new Date();
-		var diff = (to - this)/1000;
-		var vals = [];
-		var br = false;
-		$H({
-			second: 60,
-			minute: 60,
-			hour: 24,
-			day: 365,
-			year: 0
-		}).every(function(duration, step){
-			var s = step.substring(0,1);
-			if (!diff) return false;
-			if (!duration) {
-				vals.push(diff+s);
+	timeDiff: function(to, joiner){
+		if (to == null) to = new Date;
+		var delta = ((to - this) / 1000).toInt();
+		if (!delta) return '0s';
+		
+		var durations = {s: 60, m: 60, h: 24, d: 365, y: 0};
+		var duration, vals = [];
+		
+		for (var step in durations){
+			if (!delta) break;
+			if ((duration = durations[step])){
+				vals.unshift((delta % duration) + step);
+				delta = (delta / duration).toInt();
 			} else {
-				vals.push((diff % duration).toInt() + s);
-				diff = (diff / duration).toInt();
+				vals.unshift(delta + step);
 			}
-			return true;
-		}, this);
-		return vals.length ? vals.reverse().join(joiner || ':') : "0s";
+		}
+		
+		return vals.join(joiner || ':');
 	}
 
 });
@@ -69,14 +65,16 @@ Date.extend({
 				  (delta < (24 * 30 * 24 * 60 * 60)) ? 'year' :
 				  'years';
 		
-		switch(msg){
-			case 'minutes': delta = (delta / 60).round(); break;
-			case 'hours':   delta = (delta / 3600).round(); break;
-			case 'days': 	delta = (delta / 86400).round(); break;
-			case 'weeks': 	delta = (delta / 604800).round(); break;
-			case 'months': 	delta = (delta / 2592000).round(); break;
-			case 'years': 	delta = (delta / 31104000).round();
-		}
+		var divisors = {
+			minutes: 60,
+			hours: 60 * 60,
+			days: 24 * 60 * 60,
+			weeks: 7 * 24 * 60 * 60,
+			months: 30 * 24 * 60 * 60,
+			years: 365 * 24 * 60 * 60
+		};
+		
+		delta = (delta / (divisors[msg] || 1)).round();
 		
 		return Date.getMsg(msg + suffix, delta).substitute({delta: delta});
 	}
