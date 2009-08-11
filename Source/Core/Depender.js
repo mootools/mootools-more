@@ -300,7 +300,7 @@ var Depender = new Class({
 		this.fireEvent('scriptLoaded', {
 			script: script,
 			totalLoaded: loaded.getLength() / this.loadedScripts.getLength() * 100,
-			currentLoaded: (loaded.getLength() - this.lastLoaded) / this.loadedScripts.getLength() * 100,
+			currentLoaded: (loaded.getLength() - this.lastLoaded) / (this.loadedScripts.getLength() - this.lastLoaded) * 100,
 			loaded: loaded
 		});
 		if (ready) this.ready();
