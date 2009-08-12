@@ -39,7 +39,7 @@ HtmlTable.Sort = new Class({
 	},
 
 	attach: function(){
-		this.table.addEvent('click:relay(th)', this.headClick.bind(this));
+		this.element.addEvent('click:relay(th)', this.headClick.bind(this));
 	},
 
 	setHeaders: function(){
@@ -48,12 +48,12 @@ HtmlTable.Sort = new Class({
 	},
 
 	detectParsers: function(){
-		if (!this.getHead()) return;
+		if (!this.head) return;
 		var parsers = this.options.parsers;
 		var rows = this.body.rows;
 
 		// auto-detect
-		this.parsers = $$(this.getHead().cells).map(function(cell, index) {
+		this.parsers = $$(this.head.cells).map(function(cell, index) {
 			if (cell.hasClass(this.options.classNoSort)) return null;
 
 			new Element('span', {'html': '&#160;', 'class': 'table-th-sort-span'}).inject(cell, 'top');
@@ -82,13 +82,14 @@ HtmlTable.Sort = new Class({
 	},
 
 	headClick: function(event, el) {
-		var index = Array.indexOf(this.getHead().cells, el);
+		if (!this.head) return;
+		var index = Array.indexOf(this.head.cells, el);
 		this.sort(index);
 		return false;
 	},
 
 	sort: function(index, reverse, pre) {
-		if (!this.sortEnabled) return;
+		if (!this.sortEnabled || !this.head) return;
 		pre = !!(pre);
 		var classCellSort = this.options.classCellSort;
 		var classGroup = this.options.classGroup, classGroupHead = this.options.classGroupHead;
@@ -100,7 +101,7 @@ HtmlTable.Sort = new Class({
 				} else {
 					if (this.sorted.index != null) {
 						this.sorted.reverse = false;
-						this.getHead().cells[this.sorted.index]
+						this.head.cells[this.sorted.index]
 							.removeClass(this.options.classHeadSort)
 							.removeClass(this.options.classHeadSortRev);
 					} else {
@@ -114,7 +115,7 @@ HtmlTable.Sort = new Class({
 
 			if (reverse != null) this.sorted.reverse = reverse;
 
-			var head = $(this.getHead().cells[index]);
+			var head = $(this.head.cells[index]);
 			if (head) {
 				head.addClass(this.options.classHeadSort);
 				if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
