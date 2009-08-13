@@ -10,19 +10,21 @@ Script: Keyboard.js
 		Perrin Westrich
 		Aaron Newton
 */
+
 (function(){
 	
 	var parsed = {};
-	var modifiers = ['shift', 'ctrl', 'alt', 'meta'];
-	var regex = /^(shift|ctrl|alt|meta)$/;
+	var modifiers = ['shift', 'control', 'alt', 'meta'];
+	var regex = /^shift|control|ctrl|alt|meta$/;
 	
 	var parse = function(type){
 		if (parsed[type]) return parsed[type];
 		var match, key = '', mods = {};
 		type.split('+').each(function(part){
-			if (match = part.toLowerCase().match(regex)) modifiers[match[1]] = true;
+			if ((match = part.toLowerCase().match(regex))) mods[match[0]] = true;
 			else key = part;
 		});
+		mods.control = mods.control || mods.ctrl;	// allow both control and ctrl
 		match = '';
 		modifiers.each(function(mod){
 			if (mods[mod]) match += mod + '+';
@@ -43,7 +45,7 @@ Script: Keyboard.js
 			preventDefault: false,
 			caseSensitive: false,
 			*/
-			eventType: 'keydown',
+			eventType: 'keyup',
 			active: true,
 			events: {}
 		},
