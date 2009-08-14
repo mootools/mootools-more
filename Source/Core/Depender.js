@@ -9,38 +9,24 @@ Script: Depender.js
 		Aaron Newton
 */
 
-var Depender = new Class({
-
-	Implements: [Events, Options],
+var Depender = {
 
 	options: {
 		/* 
-		onRequire: $empty(scripts),
-		onReady: $empty(loadedScripts),
-		onRequirementLoaded: $empty(loadedScripts),
+		onRequire: $empty(options),
+		onRequirementLoaded: $empty([scripts, options]),
 		onScriptLoaded: $empty({
 			script: script, 
 			totalLoaded: percentOfTotalLoaded, 
-			currentLoaded: percentOfBatch, 
-			loaded: loadedScripts
+			loaded: scriptsState
 		}),
-		*/
+		serial: false,
+		target: null,
+		noCache: false,
+		log: false,*/
 		loadedSources: [],
 		loadedScripts: ['Core', 'Browser', 'Array', 'String', 'Function', 'Number', 'Hash', 'Element', 'Event', 'Element.Event', 'Class', 'DomReady', 'Class.Extras', 'Request', 'JSON', 'Request.JSON', 'More', 'Depender'],
-		noCache: false,
-		log: false,
-		useScriptInjection: false
-	},
-
-	initialize: function(libs, options){
-		var prev = Depender.instance;
-		if (prev) return prev.fetchLibs(libs);
-		Depender.instance = this;
-		this.setOptions(options);
-		if (this.options.log) this.enableLog();
-		else this.disableLog();
-		document.id(window).store('Depender', this);
-		this.fetchLibs(libs);
+		useScriptInjection: true
 	},
 
 	resetLog: function(){
@@ -76,7 +62,7 @@ var Depender = new Class({
 
 	libs: {},
 
-	fetchLibs: function(libs) {
+	include: function(libs) {
 		this.mapLoaded = false;
 		var loader = function(data){
 			this.libs = $merge(this.libs, data);
@@ -93,26 +79,33 @@ var Depender = new Class({
 		return this;
 	},
 
-	require: function(){
-		this.fireEvent('require', [$A(arguments)]);
+	required: [],
+
+	require: function(options){
+		var loaded = function(){
+			var scripts = this.calculateDependencies(options.scripts);
+			if (options.sources) {
+				options.sources.each(function(source){
+					scripts.combine(this.libs[source].files);
+				}, this);
+			}
+			if (options.serial) scripts.combine(this.getLoadedScripts());
+			options.scripts = scripts;
+			this.required.push(options);
+			this.fireEvent('require', options);
+			this.loadScripts(options.scripts);
+		}.bind(this);
 		if (this.mapLoaded) {
-			this.loadDependencies.apply(this, arguments);
-			return this;
+			loaded();
+		} else {
+			//if !this.mapLoaded, then fetchLibs is still running and the map isn't loaded
+			var fetcher = function(){
+				loaded();
+				this.removeEvent('mapLoaded', fetcher);
+			}.bind(this);
+			this.addEvent('mapLoaded', fetcher);
 		}
-		//if !this.mapLoaded, then fetchLibs is still running and the map isn't loaded
-		var fetcher = function(){
-			this.require.apply(this, arguments);
-			this.removeEvent('mapLoaded', fetcher);
-		}.bind(this, arguments);
-
-		this.addEvent('mapLoaded', fetcher);
 		return this;
-	},
-
-	requireSources: function() {
-		$A(arguments).each(function(source){
-			this.require.apply(this, this.libs[source].files)
-		}, this);
 	},
 
 	cleanDoubleSlash: function(str){
@@ -160,7 +153,7 @@ var Depender = new Class({
 
 	calculateLoaded: function(){
 		var set = function(script) {
-			this.loadedScripts[script] = true;
+			this.scriptsState[script] = true;
 		}.bind(this);
 		if (this.options.loadedScripts) this.options.loadedScripts.each(set);
 		if (this.options.loadedSources) {
@@ -198,27 +191,31 @@ var Depender = new Class({
 	},
 
 	//calculate the dependencies for a given script
-	calculateDependencies: function(script){
+	calculateDependencies: function(scripts){
 		var reqs = [];
-		if (script == 'None' || !script) return reqs;
-		var deps = this.getDepsForScript(script);
-		if (!deps) {
-			if (window.console && console.warn) console.warn('dependencies not mapped: script: %o, map: %o, :deps: %o', script, this.pathMap, this.deps);
-		} else {
-			deps.each(function(scr){
-				if (scr == script || scr == 'None' || !scr) return;
-				if (!reqs.contains(scr)) reqs.combine(this.calculateDependencies(scr));
-				reqs.include(scr);
-			}, this);
-			return reqs;
-		}
+		$splat(scripts).each(function(script){
+			if (script == 'None' || !script) return reqs;
+			var deps = this.getDepsForScript(script);
+			if (!deps) {
+				if (window.console && console.warn) console.warn('dependencies not mapped: script: %o, map: %o, :deps: %o', script, this.pathMap, this.deps);
+			} else {
+				deps.each(function(scr){
+					if (scr == script || scr == 'None' || !scr) return;
+					if (!reqs.contains(scr)) reqs.combine(this.calculateDependencies(scr));
+					reqs.include(scr);
+				}, this);
+			}
+			reqs.include(script);
+		}, this);
+		return reqs;
 	},
 
 	//get the path for a script
 	getPath: function(script){
 		try {
 			var chunks = this.pathMap[script].split(':');
-			var dir = this.libs[chunks[0]].scripts + '/';
+			var lib = this.libs[chunks[0]];
+			var dir = (lib.path || lib.scripts) + '/';
 			chunks.erase(chunks[0]);
 			return this.cleanDoubleSlash(dir + chunks.join('/') + '.js');
 		} catch(e){
@@ -227,34 +224,31 @@ var Depender = new Class({
 	},
 
 	//load the missing dependencies for a given script
-	loadDependencies: function(){
-		$each(arguments, function(script){
-			var scripts = this.calculateDependencies(script).include(script);
-			scripts = scripts.filter(function(s){return !this.loadedScripts.get(s)}, this);
-			scripts.each(function(scr) {
-				this.loadedScripts[scr] = this.loadedScripts.get(scr) || false;
-			}, this);
-			if (scripts.length) {
-				scripts.filter(function(scr){
-					return scr != 'None'
-				}).each(function(scr){
-					this.load(scr);
-				}.bind(this));
-			} else {
-				this.ready();
+	loadScripts: function(scripts){
+		scripts = scripts.filter(function(s){
+			if (!this.scriptsState[s] && s != "None") {
+				this.scriptsState[s] = false;
+				return true;
 			}
 		}, this);
+		if (scripts.length) {
+			scripts.each(function(scr){
+				this.loadScript(scr);
+			}.bind(this));
+		} else {
+			this.check();
+		}
 	},
 
 	toLoad: [],
 
-	load: function(script) {
+	loadScript: function(script) {
 		var finish = function() {
 			this.loading = false;
 			this.scriptLoaded(script);
-			if (this.toLoad.length) this.load(this.toLoad.shift());
+			if (this.toLoad.length) this.loadScript(this.toLoad.shift());
 		}.bind(this);
-		if (this.loadedScripts[script] && this.toLoad.length) return this.load(this.toLoad.shift());
+		if (this.scriptsState[script] && this.toLoad.length) return this.loadScript(this.toLoad.shift());
 		if (this.loading) return this.toLoad.push(script);
 		this.loading = true;
 		scriptPath = this.getPath(script);
@@ -271,7 +265,7 @@ var Depender = new Class({
 					}.bind(this),
 					error: error
 				}
-			}).inject(document.head);
+			}).inject(this.options.target || document.head);
 		} else {
 			new Request({
 				url: scriptPath,
@@ -287,33 +281,57 @@ var Depender = new Class({
 		}
 	},
 
-	loadedScripts: $H({}),
+	scriptsState: $H({}),
+	getLoadedScripts: function(){
+		return this.scriptsState.filter(function(state){
+			return state;
+		});
+	},
 
 	scriptLoaded: function(script) {
-		this.loadedScripts[script] = true;
-		var ready = true;
-		var loaded = $H(this.loadedScripts.filter(function(loaded, scr) {
-			if (!loaded) ready = false;
-			return loaded;
-		}, this));
-		//passed the script loaded, the % loaded of total dependencies, the % of the current batch, and an array of the loaded scripts.
+		this.scriptsState[script] = true;
+		this.check();
+		var loaded = this.getLoadedScripts();
+		var loadedLength = loaded.getLength();
+		var toLoad = this.scriptsState.getLength();
 		this.fireEvent('scriptLoaded', {
 			script: script,
-			totalLoaded: loaded.getLength() / this.loadedScripts.getLength() * 100,
-			currentLoaded: (loaded.getLength() - this.lastLoaded) / (this.loadedScripts.getLength() - this.lastLoaded) * 100,
+			totalLoaded: loadedLength / toLoad * 100,
+			currentLoaded: (loadedLength - this.lastLoaded) / toLoad * 100,
 			loaded: loaded
 		});
-		if (ready) this.ready();
+		if (loadedLength == toLoad) this.lastLoaded = loadedLength;
 	},
 
 	lastLoaded: 0,
 
-	ready: function(){
-		var loaded = this.loadedScripts.getKeys();
-		window.addEvent('domready', this.fireEvent.bind(this, ['ready', loaded]))
-		this.lastLoaded = loaded.length;
-		this.removeEvents('ready');
-		this.fireEvent('requirementLoaded', loaded);
+	check: function(){
+		var incomplete = [];
+		this.required.each(function(required) {
+			var loaded = [];
+			required.scripts.each(function(script) {
+				if (this.scriptsState[script]) loaded.push(script);
+			}, this);
+			if (required.onStep) {
+				required.onStep({
+					percent: loaded.length / required.scripts.length * 100,
+					scripts: loaded
+				});
+			};
+			if (required.scripts.length != loaded.length) return;
+			required.callback();
+			this.required.erase(required);
+			this.fireEvent('requirementLoaded', [loaded, required])
+		}, this);
 	}
 
-});
+};
+$extend(Depender, new Events);
+$extend(Depender, new Options);
+Depender._setOptions = Depender.setOptions;
+Depender.setOptions = function() {
+	Depender._setOptions.apply(Depender, arguments);
+	if (this.options.log) Depender.enableLog();
+	return this;
+};
+Depender.disableLog();
