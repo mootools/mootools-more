@@ -10,7 +10,9 @@ Script: Elements.From.js
 
 */
 
-Elements.from = function(text){
+Elements.from = function(text, excludeScripts){
+	if ($pick(excludeScripts, true)) text = text.stripScripts();
+
 	var container, match = text.match(/^\s*<(t[dhr]|tbody|tfoot|thead)/i);
 
 	if (match){

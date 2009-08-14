@@ -99,6 +99,11 @@
 			"desc": "Extends the Element native object to include methods useful in managing inputs."
 		},
 
+		"Elements.From": {
+			"deps": ["Element"],
+			"desc": "Adds a static method to Element to parse html."
+		},
+
 		"Element.Delegation": {
 			"deps":["Element.Event"],
 			"desc":"Delegates events for child elements to their parents for greater efficiency."

@@ -10,11 +10,12 @@ Returns a collection of elements from a string of html.
 
 ### Syntax
 
-	Elements.from(str);
+	Elements.from(str, excludeScripts);
 
 ### Arguments
 
 1. str - (*string*) an html string.
+2. excludeScripts - (*boolean*) if *true*, the default, scripts are not included in the element collection returned.
 
 ### Example
 
