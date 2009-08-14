@@ -128,7 +128,7 @@ var Depender = {
 	},
 
 	loadSource: function(lib, source){
-		this.log('load :', source)
+		this.log('load :', source);
 		if (this.libs[lib].files) return this.dataLoaded();
 		this.log('loading source: ', source);
 		this.request(this.cleanDoubleSlash(source + '/scripts.json'), function(result){
@@ -261,7 +261,7 @@ var Depender = {
 				events: {
 					load: function() {
 						this.log('loaded script: ', scriptPath);
-						finish.delay(50, this)
+						finish.delay(50, this);
 					}.bind(this),
 					error: error
 				}
@@ -321,7 +321,7 @@ var Depender = {
 			if (required.scripts.length != loaded.length) return;
 			required.callback();
 			this.required.erase(required);
-			this.fireEvent('requirementLoaded', [loaded, required])
+			this.fireEvent('requirementLoaded', [loaded, required]);
 		}, this);
 	}
 
