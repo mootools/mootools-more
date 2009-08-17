@@ -147,6 +147,7 @@ var Depender = {
 			this.mapTree();
 			this.mapLoaded = true;
 			this.calculateLoaded();
+			this.lastLoaded = this.getLoadedScripts().getLength();
 			this.fireEvent('mapLoaded');
 		}
 	},
@@ -296,8 +297,8 @@ var Depender = {
 		var toLoad = this.scriptsState.getLength();
 		this.fireEvent('scriptLoaded', {
 			script: script,
-			totalLoaded: loadedLength / toLoad * 100,
-			currentLoaded: (loadedLength - this.lastLoaded) / toLoad * 100,
+			totalLoaded: (loadedLength / toLoad * 100).round(),
+			currentLoaded: ((loadedLength - this.lastLoaded) / (toLoad - this.lastLoaded) * 100).round(),
 			loaded: loaded
 		});
 		if (loadedLength == toLoad) this.lastLoaded = loadedLength;
