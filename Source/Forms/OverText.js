@@ -13,7 +13,7 @@ var OverText = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
-	Binds: ['reposition', 'assert', 'focus'],
+	Binds: ['reposition', 'assert', 'focus', 'hide'],
 
 	options: {/*
 		textOverride: null,
@@ -108,7 +108,8 @@ var OverText = new Class({
 			this.fireEvent('textHide', [this.text, this.element]);
 			this.pollingPaused = true;
 			try {
-				if (!suppressFocus) this.element.fireEvent('focus').focus();
+				if (!suppressFocus) this.element.fireEvent('focus');
+				this.element.focus();
 			} catch(e){} //IE barfs if you call focus on hidden elements
 		}
 		return this;
@@ -172,7 +173,7 @@ $extend(OverText, {
 	showAll: function(){
 		return OverText.each(function(ot) {
 			return ot.show();
-		})
+		});
 	}
 
 });
