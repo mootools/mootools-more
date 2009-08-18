@@ -128,7 +128,6 @@ var Depender = {
 	},
 
 	loadSource: function(lib, source){
-		this.log('load :', source);
 		if (this.libs[lib].files) return this.dataLoaded();
 		this.log('loading source: ', source);
 		this.request(this.cleanDoubleSlash(source + '/scripts.json'), function(result){
@@ -262,7 +261,7 @@ var Depender = {
 				events: {
 					load: function() {
 						this.log('loaded script: ', scriptPath);
-						finish.delay(50, this);
+						finish();//.delay(50, this); << can't remember why I had this delay, but I bet it matters; leaving this comment for now
 					}.bind(this),
 					error: error
 				}
@@ -274,7 +273,7 @@ var Depender = {
 				onComplete: function(js) {
 					this.log('loaded script: ', scriptPath);
 					$exec(js);
-					finish.delay(50, this);
+					finish();//.delay(50, this); << can't remember why I had this delay, but I bet it matters; leaving this comment for now
 				}.bind(this),
 				onFailure: error,
 				onException: error
