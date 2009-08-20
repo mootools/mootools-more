@@ -1,4 +1,7 @@
 {
+	"Core": {
+		"Depender": ['all']
+	},
 	"Class": {
 		"Chain.Wait":['all']
 	},
@@ -9,6 +12,7 @@
 		"Sortables":['single', 'multi']
 	},
 	"Element":{
+		"Element.Delegation":['all'],
 		"Element.Forms":['all'],
 		"Element.Shortcuts":['all'],
 		"Element.Pin":['all'],
@@ -17,6 +21,8 @@
 	"Forms": {
 		"FormValidator.Inline":['all'],
 		"FormValidator.Extras":['all'],
+		"Fupdate": ['all'],
+		"Fupdate.Append": ['all'],
 		"OverText": ['all']
 	},
 	"Fx": {
@@ -30,8 +36,15 @@
 		"Fx.Sort":['all']
 	},
 	"Interface":{
+		"HtmlTable":['all'],
+		"HtmlTable.Zebra":['all'],
+		"HtmlTable.Sort":['all'],
+		"HtmlTable.Select":['all'],
+		"Keyboard":['all'],
+		"Mask":['all'],
 		"Scroller":['all'],
-		"Tips":['all']
+		"Tips":['all'],
+		"Waiter":['all']
 	},
 	"Request":{
 		"Request.JSONP": ['all'],

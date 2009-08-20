@@ -99,10 +99,12 @@ Returns the current value for the specified portion of the URI.
 ### Valid parts
 
 * scheme - (returns *string*) 'http', 'https', 'ftp', etc.
+* user - (*string*) the username portion of the credentials
+* password - (*string*) the password portion of the credentials
 * host - (returns *string*) 'www.example.com', 'example.com', 'subdomain.example.com', etc.
 * port - (returns *string*) 80, 8080, etc.
 * directory - (returns *string*) '/directory/'
-* path - (returns *string*) 'file.html'
+* file - (returns *string*) 'file.html'
 * query - (returns *string*) 'foo=bar&something=else' (the *?* is added for you)
 * fragment - (returns *string*)  'anAnchor' (the *#* is added for you)
 * data - (returns *object*) an *object* of key/value pairs to set the query to (*{foo: 'bar', something: 'else'}*)

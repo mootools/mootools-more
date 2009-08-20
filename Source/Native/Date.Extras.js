@@ -14,6 +14,27 @@ Date.implement({
 
 	timeDiffInWords: function(relative_to){
 		return Date.distanceOfTimeInWords(this, relative_to || new Date);
+	},
+
+	timeDiff: function(to, joiner){
+		if (to == null) to = new Date;
+		var delta = ((to - this) / 1000).toInt();
+		if (!delta) return '0s';
+		
+		var durations = {s: 60, m: 60, h: 24, d: 365, y: 0};
+		var duration, vals = [];
+		
+		for (var step in durations){
+			if (!delta) break;
+			if ((duration = durations[step])){
+				vals.unshift((delta % duration) + step);
+				delta = (delta / duration).toInt();
+			} else {
+				vals.unshift(delta + step);
+			}
+		}
+		
+		return vals.join(joiner || ':');
 	}
 
 });
@@ -36,13 +57,24 @@ Date.extend({
 				  (delta < (90 * 60)) ? 'hour' :
 				  (delta < (24 * 60 * 60)) ? 'hours' :
 				  (delta < (48 * 60 * 60)) ? 'day' :
-				  'days';
+				  (delta < (7 * 24 * 60 * 60)) ? 'days' :
+				  (delta < (14 * 24 * 60 * 60)) ? 'week' :
+				  (delta < (30 * 24 * 60 * 60)) ? 'weeks' :
+				  (delta < (60 * 24 * 60 * 60)) ? 'month' :
+				  (delta < (12 * 30 * 24 * 60 * 60)) ? 'months' :
+				  (delta < (24 * 30 * 24 * 60 * 60)) ? 'year' :
+				  'years';
 		
-		switch(msg){
-			case 'minutes': delta = (delta / 60).round(); break;
-			case 'hours':   delta = (delta / 3600).round(); break;
-			case 'days': 	delta = (delta / 86400).round();
-		}
+		var divisors = {
+			minutes: 60,
+			hours: 60 * 60,
+			days: 24 * 60 * 60,
+			weeks: 7 * 24 * 60 * 60,
+			months: 30 * 24 * 60 * 60,
+			years: 365 * 24 * 60 * 60
+		};
+		
+		delta = (delta / (divisors[msg] || 1)).round();
 		
 		return Date.getMsg(msg + suffix, delta).substitute({delta: delta});
 	}

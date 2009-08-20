@@ -7,13 +7,18 @@
 			"desc": "Defines MooTools.More.version."
 		},
 
+		"Depender": {
+			"deps": ["More", "Element.Event", "Request.JSON"],
+			"desc": "A dependency loader for the MooTools library."
+		},
+
 		"Lang": {
 			"deps": ["More", "Class.Extras"],
 			"desc": "Enables classes to contain text that can be localized to specific languages."
 		},
 
 		"Log": {
-			"deps": ["Class"],
+			"deps": ["More", "Class"],
 			"desc": "A default logger for MooTools. Logs to Firebug or a similar console unless it is not present."
 		}
 
@@ -72,16 +77,16 @@
 
 		"String.QueryString": {
 			"deps": ["More", "String", "Array"],
-			"desc": "..."
+			"desc": "String shortcuts for working with query strings."
 		},
 
 		"URI": {
-			"deps": ["More", "Function", "Array", "Hash", "Class.Refactor"],
+			"deps": ["More", "Function", "Array", "Hash", "String.QueryString"],
 			"desc": "Provides methods useful in managing the window location and uris."
 		},
 
 		"URI.Relative": {
-			"deps": ["URI"],
+			"deps": ["More", "URI", "Class.Refactor"],
 			"desc": "Extends the URI class to add methods for computing relative and absolute urls."
 		}
 
@@ -92,6 +97,16 @@
 		"Element.Forms": {
 			"deps": ["More", "Element"],
 			"desc": "Extends the Element native object to include methods useful in managing inputs."
+		},
+
+		"Elements.From": {
+			"deps": ["Element"],
+			"desc": "Adds a static method to Element to parse html."
+		},
+
+		"Element.Delegation": {
+			"deps":["Element.Event"],
+			"desc":"Delegates events for child elements to their parents for greater efficiency."
 		},
 
 		"Element.Measure": {
@@ -117,6 +132,17 @@
 	},
 
 	"Forms": {
+
+		"Fupdate":{
+			"deps":["Element.Event",  "Request.HTML", "Class.Binds", "Class.Occlude", "Waiter", "String.QueryString"],
+			"desc":"Handles the basic functionality of submitting a form via ajax and updating a DOM element with the result."
+		},
+
+		"Fupdate.Append":{
+			"deps": ["Fupdate", "Fx.Reveal"],
+			"desc":"Uses Fupdate to fetch and update a DOM element, but appends the result into the target instead of overwriting its contents."
+		},
+
 
 		"FormValidator": {
 			"deps": ["More", "Lang", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
@@ -258,6 +284,37 @@
 
 	"Interface": {
 
+		"HtmlTable":{
+			"deps":["Class.Extras", "Selectors"],
+			"desc":"Builds table elements with methods to add rows quickly."
+		},
+
+		"HtmlTable.Zebra": {
+			"deps":["HtmlTable"],
+			"desc":"Adds stripes to an HTML table's rows."
+		},
+
+		"HtmlTable.Sort": {
+			"deps":["HtmlTable.Zebra", "Element.Delegation", "Hash", "Date"],
+			"desc":"Adds the ability to sort the columns of a HtmlTable.Zebra instance."
+		},
+
+		"HtmlTable.Select": {
+			"deps":["HtmlTable.Sort", "Keyboard"],
+			"desc":"Adds the ability to highlight and select rows on a HtmlTable.Sort instance."
+		},
+
+		"Keyboard": {
+			"deps": ["More", "Class.Extras", "Element.Event"],
+			"desc": "Provides enhanced group key event management."
+		},
+
+		"Mask": {
+			"deps": ["More", "Class.Extras", "Element.Style", "Element.Event", "Element.Position", "IframeShim", "Class.Binds"],
+			"desc": "Creates a mask over a specified element.",
+			"styles": true
+		},
+
 		"Scroller": {
 			"deps": ["More", "Class.Extras", "Element.Event", "Element.Dimensions"],
 			"desc": "Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries."
@@ -266,6 +323,12 @@
 		"Tips": {
 			"deps": ["More", "Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions"],
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
+		},
+
+		"Waiter":{
+			"deps": ["More", "Class.Refactor", "Fx.Tween", "Mask"],
+			"desc": "Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.",
+			"styles": true
 		}
 
 	},

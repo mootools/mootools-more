@@ -72,7 +72,6 @@ The test option is a function that will be passed the field being evaluated and 
 		test: function(element, props){
 			//if the value is >= than the minLength value, element passes test
 			return (element.value.length >= $pick(props.minLength, 0));
-			else return false;
 		}
 	});
 	minLength.test($('username'));

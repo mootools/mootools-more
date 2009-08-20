@@ -157,6 +157,57 @@ FormValidator.addAllThese([
 			var d2 = Date.parse(document.id(props.sameMonthAs) && document.id(props.sameMonthAs).get('value'));
 			return d1 && d2 ? d1.format('%B') == d2.format('%B') : true;
 		}
+	}],
+
+
+	['validate-cc-num', {
+		errorMsg: function(element){
+			var ccNum = element.get('value').ccNum.replace(/[^0-9]/g, '');
+			return FormValidator.getMsg('creditcard').substitute({length: ccNum.length});
+		},
+		test: function(element){
+			// required is a different test
+			if (FormValidator.getValidator('IsEmpty').test(element)) { return true; }
+
+			// Clean number value
+			var ccNum = element.get('value');
+			ccNum = ccNum.replace(/[^0-9]/g, '');
+
+			var valid_type = false;
+
+			if (ccNum.test(/^4[0-9]{12}([0-9]{3})?$/)) valid_type = 'Visa';
+			else if (ccNum.test(/^5[1-5]([0-9]{14})$/)) valid_type = 'Master Card';
+			else if (ccNum.test(/^3[47][0-9]{13}$/)) valid_type = 'American Express';
+			else if (ccNum.test(/^6011[0-9]{12}$/)) valid_type = 'Discover';
+
+			if (valid_type) {
+				var sum = 0;
+				var cur = 0;
+
+				for(var i=ccNum.length-1; i>=0; --i) {
+					cur = ccNum.charAt(i).toInt();
+					if (cur == 0) { continue; }
+
+					if ((ccNum.length-i) % 2 == 0) { cur += cur; }
+					if (cur > 9) { cur = cur.toString().charAt(0).toInt() + cur.toString().charAt(1).toInt(); }
+
+					sum += cur;
+				}
+				if ((sum % 10) == 0) { return true; }
+			}
+
+			var chunks = '';
+			while (ccNum != '') {
+				chunks += ' ' + ccNum.substr(0,4);
+				ccNum = ccNum.substr(4);
+			}
+
+			element.getParent('form').retrieve('validator').ignoreField(element);
+			element.set('value', chunks.clean());
+			element.getParent('form').retrieve('validator').enforceField(element);
+			return false;
+		}
 	}]
+
 
 ]);

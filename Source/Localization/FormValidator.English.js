@@ -42,6 +42,7 @@ MooTools.lang.set('en-US', 'FormValidator', {
 	afterDate: 'The date should be the same or after {label}.',
 	beforeDate: 'The date should be the same or before {label}.',
 	startMonth: 'Please select a start month',
-	sameMonth: 'These two dates must be in the same month - you must change one or the other.'
+	sameMonth: 'These two dates must be in the same month - you must change one or the other.',
+	creditcard: 'The credit card number entered is invalid. Please check the number and try again. {length} digits entered.'
 
 });

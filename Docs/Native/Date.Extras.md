@@ -34,6 +34,35 @@ In addition to the two default parsers included in *[Date.js][]*, *Date.Extras.j
 
 - [Date:parse][]
 
+Date Method: timeDiff {#Date:timeDiff}
+--------------------------------------
+
+Returns the difference between two dates in a compact format.
+
+### Syntax
+
+	date.timeDiff([otherDate, joiner]);
+
+### Arguments
+
+1. otherDate - (*date*) the date to compare to; defaults to the current time.
+2. joiner - (*string*) the string to join the values; defaults to ':'.
+
+### Example
+
+	var example = new Date();
+	example.timeDiff(); //0s
+	example.decrement('minute');
+	example.timeDiff(); //1m:0s
+	example.decrement('hour');
+	example.timeDiff(); //1h:1m:0s
+	example.increment('hour', 2);
+	example.timeDiff(); //3h:1m:0s
+
+### Returns
+
+* (*string*) the compact representation of the differences in the times.
+
 Date Method: timeDiffInWords {#Date:timeDiffInWords}
 --------------------------------------------------
 
@@ -74,6 +103,12 @@ Date.Extras Language Localization {#Localization}
 * hoursAgo - (*string*) 'about {delta} hours ago' where {delta} is the number of hours
 * dayAgo - (*string*) '1 day ago'
 * daysAgo - (*string*) '{delta} days ago' where {delta} is the number of days
+* weekAgo - (*string*) '1 week ago'
+* weeksAgo - (*string*) '{delta} weeks ago' where {delta} is the number of weeks
+* monthAgo - (*string*) '1 month ago'
+* monthsAgo - (*string*) '{delta} months ago' where {delta} is the number of months
+* yearAgo - (*string*) '1 year ago'
+* yearsAgo - (*string*) '{delta} years ago' where {delta} is the number of years
 * lessThanMinuteUntil - (*string*) 'less than a minute from now'
 * minuteUntil - (*string*) 'about a minute from now'
 * minutesUntil - (*string*) '{delta} minutes from now' where {delta} is the number of minutes
@@ -81,6 +116,12 @@ Date.Extras Language Localization {#Localization}
 * hoursUntil - (*string*) 'about {delta} hours from now' where {delta} is the number of hours
 * dayUntil - (*string*) '1 day from now'
 * daysUntil - (*string*) '{delta} days from now' where {delta} is the number of days
+* weekUntil - (*string*) '1 week from now'
+* weeksUntil - (*string*) '{delta} weeks from now' where {delta} is the number of weeks
+* monthUntil - (*string*) '1 month from now'
+* monthsUntil - (*string*) '{delta} months from now' where {delta} is the number of months
+* yearUntil - (*string*) '1 year from now'
+* yearsUntil - (*string*) '{delta} years from now' where {delta} is the number of years
 
 [Date.js]: /more/Native/Date
 [Date:parse]: /more/Native/Date#Date:parse

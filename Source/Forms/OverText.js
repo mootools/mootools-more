@@ -13,7 +13,7 @@ var OverText = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
-	Binds: ['reposition', 'assert', 'focus'],
+	Binds: ['reposition', 'assert', 'focus', 'hide'],
 
 	options: {/*
 		textOverride: null,
@@ -102,13 +102,14 @@ var OverText = new Class({
 		this.hide();
 	},
 
-	hide: function(suppressFocus){
-		if (this.text.isDisplayed() && !this.element.get('disabled')){
+	hide: function(suppressFocus, force){
+		if (this.text.isDisplayed() && (!this.element.get('disabled') || force)){
 			this.text.hide();
 			this.fireEvent('textHide', [this.text, this.element]);
 			this.pollingPaused = true;
 			try {
-				if (!suppressFocus) this.element.fireEvent('focus').focus();
+				if (!suppressFocus) this.element.fireEvent('focus');
+				this.element.focus();
 			} catch(e){} //IE barfs if you call focus on hidden elements
 		}
 		return this;
@@ -144,14 +145,38 @@ var OverText = new Class({
 
 OverText.instances = [];
 
-OverText.update = function(){
+$extend(OverText, {
 
-	return OverText.instances.map(function(ot){
-		if (ot.element && ot.text) return ot.reposition();
-		return null; //the input or the text was destroyed
-	});
+	each: function(fn) {
+		return OverText.instances.map(function(ot, i){
+			if (ot.element && ot.text) return fn.apply(OverText, [ot, i]);
+			return null; //the input or the text was destroyed
+		});
+	},
+	
+	update: function(){
 
-};
+		return OverText.each(function(ot){
+			return ot.reposition();
+		});
+
+	},
+
+	hideAll: function(){
+
+		return OverText.each(function(ot){
+			return ot.hide(true, true);
+		});
+
+	},
+
+	showAll: function(){
+		return OverText.each(function(ot) {
+			return ot.show();
+		});
+	}
+
+});
 
 if (window.Fx && Fx.Reveal) {
 	Fx.Reveal.implement({
