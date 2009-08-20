@@ -36,16 +36,16 @@ var Waiter = new Class({
 		this.target.store('waiter', this);
 
 		//add this to events for when noFx is true; parent methods handle hide/show
-		var deactivate = function(){ this.active = false }.bind(this)
+		var deactivate = function(){ this.active = false; }.bind(this);
 		this.addEvents({
 			hide: deactivate,
 			show: deactivate
-		})
+		});
 	},
 
 	render: function(){
 		this.parent();
-		this.element.set('id', this.options.id || 'waiter-'+$time())
+		this.element.set('id', this.options.id || 'waiter-'+$time());
 		this.content = document.id(this.options.content) || new Element('div', this.options.content);
 		this.content.inject(this.element);
 		if (this.options.message) {
@@ -71,9 +71,9 @@ var Waiter = new Class({
 
 	showMask: function(noFx){
 		var pos = function(){
-			this.content.position({
+			this.content.position($merge({
 				relativeTo: this.element
-			});
+			}, this.options.containerPosition));
 		}.bind(this);
 		if (noFx) {
 			this.parent();
