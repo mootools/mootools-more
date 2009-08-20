@@ -102,8 +102,7 @@ Element.implement({
 		var subtracted = [];
 		$each(options.plains, function(plain, key){ //keys: width, height, plains: ['left', 'right'], ['top','bottom']
 			var capitalized = key.capitalize();
-			size['total' + capitalized] = 0;
-			size['computed' + capitalized] = 0;
+			size['total' + capitalized] = size['computed' + capitalized] = 0;
 			plain.each(function(edge){ //top, left, right, bottom
 				size['computed' + edge.capitalize()] = 0;
 				getStyles.each(function(style, i){ //padding, border, etc.
