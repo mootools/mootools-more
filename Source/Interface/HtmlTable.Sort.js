@@ -20,6 +20,7 @@ HtmlTable.Sort = new Class({
 		sortReverse: false,
 		parsers: [],
 		defaultParser: 'string',
+		sortEnabled: 'table-sortable',
 		classHeadSort: 'table-th-sort',
 		classHeadSortRev: 'table-th-sort-rev',
 		classNoSort: 'table-th-nosort',
@@ -191,10 +192,12 @@ HtmlTable.Sort = new Class({
 	},
 
 	enableSort: function(){
+		this.element.addClass(this.options.sortEnabled);
 		this.sortEnabled = true;
 	},
 
 	disableSort: function(){
+		this.element.remove(this.options.sortEnabled);
 		this.sortEnabled = false;
 	}
 
