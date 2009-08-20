@@ -27,7 +27,7 @@ var HtmlTable = new Class({
 	initialize: function() {
 		var params = Array.link(arguments, {options: Object.type, table: Element.type});
 		this.setOptions(params.options);
-		this.build(params.element);
+		this.build(params.table);
 	},
 
 	build: function(table){
