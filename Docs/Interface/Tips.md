@@ -25,8 +25,6 @@ Tips Method: constructor {#Tips:constructor}
 
 ### Options:
 
-* onShow        - (*function*: defaults to `function(tip){ tip.setStyle('visibility', 'visible'); }`) The default function for the show event.
-* onHide        - (*function*: defaults to `function(tip){ tip.setStyle('visibility', 'hidden'); }`)  The default function for the hide event.
 * showDelay     - (*number*: defaults to 100) The delay the show event is fired.
 * hideDelay     - (*number*: defaults to 100) The delay the hide hide is fired.
 * title			- (*string|function*: defaults to title) The property of the element to be used for the tip-title. If this option is a
@@ -43,8 +41,10 @@ Tips Method: constructor {#Tips:constructor}
 
 ### Events:
 
- * show: fires when the tip is shown; passed the tip dom element
- * hide: fires when the tip is being hidden; passed the tip dom element
+* onShow        - (*function*: defaults to `function(){ this.tip.setStyle('display', 'block'); }`) The default function for the show event, passes the currently hovered element.
+* onHide        - (*function*: defaults to `function(){ this.tip.setStyle('display', 'none'); }`)  The default function for the hide event, passes the currently hovered element.
+* onAttach		- (*function*) Fires when an element gets added to the tips instance. Passes the element as argument.
+* onDetach		- (*function*) Fires when the event listeners get removed from an element. Passes the element as argument.
 
 ### Example:
 
