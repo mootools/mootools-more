@@ -11,7 +11,7 @@ Script: HtmlTable.js
 
 var HtmlTable = new Class({
 
-	Implements: [Options, Events],
+	Implements: [Options, Events, Class.Occlude],
 
 	options: {
 		properties: {
@@ -24,14 +24,17 @@ var HtmlTable = new Class({
 		footers: []
 	},
 
+	property: 'HtmlTable',
+
 	initialize: function() {
 		var params = Array.link(arguments, {options: Object.type, table: Element.type});
 		this.setOptions(params.options);
+		this.element = params.table || new Element('table', this.options.properties);
+		if (this.occlude()) return this.occluded;
 		this.build(params.table);
 	},
 
 	build: function(table){
-		this.element = table || new Element('table', this.options.properties);
 		this.element.store('HtmlTable', this);
 		
 		this.body = $(this.element.tBodies[0]);

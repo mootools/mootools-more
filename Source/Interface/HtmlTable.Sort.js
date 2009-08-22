@@ -32,6 +32,7 @@ HtmlTable.Sort = new Class({
 
 	initialize: function () {
 		this.parent.apply(this, arguments);
+		if (this.occluded) return this.occluded;
 		this.sorted = {index: null, dir: 1};
 		this.detectParsers();
 		this.attach();
@@ -55,8 +56,8 @@ HtmlTable.Sort = new Class({
 
 		// auto-detect
 		this.parsers = $$(this.head.cells).map(function(cell, index) {
-			if (cell.hasClass(this.options.classNoSort)) return null;
-
+			if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-setup')) return null;
+			cell.store('htmltable-setup', true);
 			new Element('span', {'html': '&#160;', 'class': 'table-th-sort-span'}).inject(cell, 'top');
 
 			var parser = parsers[index];

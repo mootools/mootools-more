@@ -26,6 +26,7 @@ HtmlTable.Select = new Class({
 
 	initialize: function () {
 		this.parent.apply(this, arguments);
+		if (this.occluded) return this.occluded;
 		this.selectedRows = new Elements();
 	},
 
