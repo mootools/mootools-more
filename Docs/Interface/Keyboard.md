@@ -19,7 +19,7 @@ Class takes out the need to have logic in key events to check which buttons are 
 ### Options
 
 * caseSensitive:  - (*boolean*; defaults to *false*) Specifies whether a difference between upper case and lower case letters.  When set to true shift+h and H are the same.
-* eventType:      - (*string*; defaults to 'keydown') The event type that should trigger the subevents.
+* eventType:      - (*string*; defaults to 'keyup') The event type that should trigger the subevents.
 * active:         - (*boolean*; defaults to *true*) When not active the subevents will be surpressed.
 * preventDefault: - (*boolean*; defaults to *false*) Tells whether the main event should prevent default.
 * events:         - (*object*; defaults to *{}*) object keys are event names values should be the function to fire. Same as calling addEvents({...}) on the instance after creation
@@ -41,7 +41,7 @@ Class takes out the need to have logic in key events to check which buttons are 
 		}
 	});
 
-	var myKeyboardEvents1 = new Keyboard({eventType: 'keyup'});
+	var myKeyboardEvents1 = new Keyboard({eventType: 'keydown'});
 	myKeyBoardEvents1.addEvents({
 		'shift+h': fn1,
 		'ctrl+shift+h: fn2,
