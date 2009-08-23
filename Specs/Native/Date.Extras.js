@@ -13,13 +13,13 @@ describe('Date.getTimePhrase', {
 		value_of(Date.getTimePhrase(60 * 60 * 3)).should_be('about 3 hours ago');
 		value_of(Date.getTimePhrase(60 * 60 * 25)).should_be('1 day ago');
 		value_of(Date.getTimePhrase(60 * 60 * 48)).should_be('2 days ago');
-		value_of(Date.getTimePhrase(60 * 60 * 24 * 55)).should_be('55 days ago');
+		value_of(Date.getTimePhrase(60 * 60 * 24 * 55)).should_be('1 month ago');
 		value_of(Date.getTimePhrase(-65)).should_be('about a minute from now');
 		value_of(Date.getTimePhrase(-120)).should_be('2 minutes from now');
 		value_of(Date.getTimePhrase(-60 * 60 * 3)).should_be('about 3 hours from now');
 		value_of(Date.getTimePhrase(-60 * 60 * 25)).should_be('1 day from now');
 		value_of(Date.getTimePhrase(-60 * 60 * 48)).should_be('2 days from now');
-		value_of(Date.getTimePhrase(-60 * 60 * 24 * 55)).should_be('55 days from now');
+		value_of(Date.getTimePhrase(-60 * 60 * 24 * 55)).should_be('1 month from now');
 	}
 
 });
