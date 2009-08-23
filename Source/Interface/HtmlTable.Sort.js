@@ -36,11 +36,11 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.bound = {
 			headClick: this.headClick.bind(this)
 		};
+		this.sortSpans = new Elements();
 		if (this.options.sortable) {
 			this.enableSort();
 			if (this.options.sortIndex != null) this.sort(this.options.sortIndex, this.options.sortReverse);
 		}
-		this.sortSpans = new Elements();
 	},
 
 	attachSorts: function(attach){
