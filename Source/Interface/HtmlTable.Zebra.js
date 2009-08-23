@@ -10,34 +10,32 @@ Script: HtmlTable.Zebra.js
 		Aaron Newton
 */
 
-HtmlTable.Zebra = new Class({
-
-	Extends: HtmlTable,
+HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {
 		classZebra: 'table-tr-odd',
-		grouped: 1
+		zebra: true
 	},
 
 	initialize: function () {
-		this.parent.apply(this, arguments);
+		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
-		this.update();
+		if (this.options.zebra) this.updateZebras();
 	},
 
-	update: function() {
+	updateZebras: function() {
 		Array.each(this.body.rows, this.zebra, this);
 	},
 
 	zebra: function(row, i) {
-		if (i % 2) row.removeClass(this.options.classZebra)
+		if (i % 2) row.removeClass(this.options.classZebra);
 		else row.addClass(this.options.classZebra);
 		return row;
 	},
 
 	push: function(){
-		var pushed = this.parent.apply(this, arguments);
-		this.update();
+		var pushed = this.previous.apply(this, arguments);
+		if (this.options.zebra) this.updateZebras();
 		return pushed;
 	}
 

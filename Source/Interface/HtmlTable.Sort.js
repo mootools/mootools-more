@@ -10,9 +10,7 @@ Script: HtmlTable.Sort.js
 		Aaron Newton
 */
 
-HtmlTable.Sort = new Class({
-
-	Extends: HtmlTable.Zebra,
+HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {/*
 		onSort: $empty, */
@@ -20,66 +18,75 @@ HtmlTable.Sort = new Class({
 		sortReverse: false,
 		parsers: [],
 		defaultParser: 'string',
-		sortEnabled: 'table-sortable',
+		classSortable: 'table-sortable',
 		classHeadSort: 'table-th-sort',
 		classHeadSortRev: 'table-th-sort-rev',
 		classNoSort: 'table-th-nosort',
 		classGroupHead: 'table-tr-group-head',
 		classGroup: 'table-tr-group',
 		classCellSort: 'table-td-sort',
-		enableSort: true
+		classSortSpan: 'table-th-sort-span',
+		sortable: false
 	},
 
 	initialize: function () {
-		this.parent.apply(this, arguments);
+		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
 		this.sorted = {index: null, dir: 1};
-		this.detectParsers();
-		this.attach();
-		if (this.options.enableSort) this.enableSort();
-		if (this.options.sortIndex != null) this.sort(this.options.sortIndex, this.options.sortReverse);
+		this.bound = {
+			headClick: this.headClick.bind(this)
+		};
+		if (this.options.sortable) {
+			this.enableSort();
+			if (this.options.sortIndex != null) this.sort(this.options.sortIndex, this.options.sortReverse);
+		}
+		this.sortSpans = new Elements();
 	},
 
-	attach: function(){
-		this.element.addEvent('click:relay(th)', this.headClick.bind(this));
+	attachSorts: function(attach){
+		this.element[$pick(attach, true) ? 'addEvent' : 'removeEvent']('click:relay(th)', this.bound.headClick);
 	},
 
 	setHeaders: function(){
-		this.parent.apply(this, arguments);
-		this.detectParsers();
+		this.previous.apply(this, arguments);
+		if (this.sortEnabled) this.detectParsers();
 	},
-
-	detectParsers: function(){
+	
+	detectParsers: function(force){
 		if (!this.head) return;
 		var parsers = this.options.parsers;
 		var rows = this.body.rows;
 
 		// auto-detect
 		this.parsers = $$(this.head.cells).map(function(cell, index) {
-			if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-setup')) return null;
-			cell.store('htmltable-setup', true);
-			new Element('span', {'html': '&#160;', 'class': 'table-th-sort-span'}).inject(cell, 'top');
+			if (!force && (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-sort'))) return cell.retrieve('htmltable-sort');
+			var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(cell, 'top');
+			this.sortSpans.push(sortSpan);
 
 			var parser = parsers[index];
+			var cancel;
 			switch ($type(parser)) {
-				case 'function': return {convert: parser};
-				case 'string': return parser;
+				case 'function': parser = {convert: parser}; cancel = true; break;
+				case 'string': parser = parser; cancel = true; break;
+			}
+			if (!cancel) {
+				HtmlTable.Parsers.some(function(current) {
+					var match = current.match;
+					if (!match) return false;
+					if (Browser.Engine.trident) return false;
+					for (var i = 0, j = rows.length; i < j; i++) {
+						var text = rows[i].cells[index].get('html').clean();
+						if (text && match.test(text)) {
+							parser = current;
+							return true;
+						}
+					}
+				});
 			}
 
-			HtmlTable.Parsers.some(function(current) {
-				var match = current.match;
-				if (!match) return false;
-				if (Browser.Engine.trident) return false;
-				for (var i = 0, j = rows.length; i < j; i++) {
-					var text = rows[i].cells[index].get('html').clean();
-					if (text && match.test(text)) {
-						parser = current;
-						return true;
-					}
-				}
-			});
-
-			return parser || this.options.defaultParser;
+			if (!parser) parser = this.options.defaultParser;
+			cell.store('htmltable-parser', parser);
+			return parser;
 		}, this);
 	},
 
@@ -91,7 +98,7 @@ HtmlTable.Sort = new Class({
 	},
 
 	sort: function(index, reverse, pre) {
-		if (!this.sortEnabled || !this.head) return;
+		if (!this.head) return;
 		pre = !!(pre);
 		var classCellSort = this.options.classCellSort;
 		var classGroup = this.options.classGroup, classGroupHead = this.options.classGroupHead;
@@ -129,7 +136,6 @@ HtmlTable.Sort = new Class({
 
 		var parser = this.parsers[index];
 		if ($type(parser) == 'string') parser = HtmlTable.Parsers.get(parser);
-
 		if (!parser) return;
 
 		if (!Browser.Engine.trident) {
@@ -155,7 +161,6 @@ HtmlTable.Sort = new Class({
 		}, this);
 
 		data.reverse(true);
-
 		data.sort();
 
 		if (!this.sorted.reverse) data.reverse(true);
@@ -176,7 +181,7 @@ HtmlTable.Sort = new Class({
 					group = item.value;
 					row.removeClass(classGroup).addClass(classGroupHead);
 				}
-				this.zebra(row, i);
+				if (this.zebra) this.zebra(row, i);
 
 				row.cells[index].addClass(classCellSort);
 			}
@@ -189,17 +194,24 @@ HtmlTable.Sort = new Class({
 		data = null;
 		if (rel) rel.grab(body);
 
-		this.fireEvent('sort', [body, index]);
+		return this.fireEvent('sort', [body, index]);
 	},
 
 	enableSort: function(){
-		this.element.addClass(this.options.sortEnabled);
+		this.element.addClass(this.options.classSortable);
+		this.attachSorts(true);
+		this.detectParsers();
 		this.sortEnabled = true;
+		return this;
 	},
 
 	disableSort: function(){
-		this.element.remove(this.options.sortEnabled);
+		this.element.remove(this.options.classSortable);
+		this.attachSorts(false);
+		this.sortSpans.each(function(span) { span.destroy(); });
+		this.sortSpans.empty();
 		this.sortEnabled = false;
+		return this;
 	}
 
 });
@@ -228,21 +240,21 @@ HtmlTable.Parsers = new Hash({
 	'number': {
 		match: /^\d+[^\d.,]*$/,
 		convert: function() {
-			return parseInt(this.get('text'));
+			return this.get('text').toInt();
 		},
 		number: true
 	},
 	'numberLax': {
 		match: /^[^\d]+\d+$/,
 		convert: function() {
-			return parseInt(this.get('text').replace(/[^0-9]/, ''));
+			return this.get('text').replace(/[^0-9]/, '').toInt();
 		},
 		number: true
 	},
 	'float': {
 		match: /^[\d]+\.[\d]+/,
 		convert: function() {
-			return parseFloat(this.get('text').replace(/[^\d.]/, ''));
+			return this.get('text').replace(/[^\d.]/, '').toFloat();
 		},
 		number: true
 	},

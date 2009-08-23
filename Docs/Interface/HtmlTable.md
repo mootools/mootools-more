@@ -10,24 +10,21 @@ Builds table elements with methods to add rows quickly.
 
 ### Implements
 
-* [Options][]
+* [Options][], [Events][], [Class.Occlude][]
 
 ### Syntax
 
-	new HtmlTable(options);
+	new HtmlTable([table, options]);
 
 ### Arguments
 
-1. options - (*object*) a key/value set of options
+1. table - (*mixed*; optional) - a Table DOM element or it's id; if you do not specify one, one will be created.
+1. options - (*object*; optional) a key/value set of options.
 
 ### Options
 
 * properties - (*object*) a set of properties for the Table element; defaults to *{cellpadding:0, cellspacing:0, border:0}*
-* rows - (*array*) an array of row objects (see [HtmlTable:push][])
-
-### Properties
-
-* element - (*element*) the table DOM element
+* rows - (*array*) an array of row objects (see [HtmlTable.push][])
 
 ### Example
 
@@ -42,6 +39,11 @@ Builds table elements with methods to add rows quickly.
 	  ]
 	});
 	myTable.inject($('someContainer'));
+	
+	//ALSO
+	
+	var myTable = new HtmlTable($('existingTable'));
+	myTable.push(['data','goes','here']);
 
 HtmlTable Method: push {#HtmlTable:push}
 ----------------------------------------
@@ -58,7 +60,7 @@ Inserts a new table row.
 
 ### Row data
 
-Row data can be in either of two formats.
+Row data can be in either of two formats. Note that they can be mixed and matched.
 
 * simple - (*array*) an array of strings that will be inserted into each table data
 
@@ -72,16 +74,14 @@ Row data can be in either of two formats.
 	myTable.push(['value 1', 'value 2', 'value 3']); //new row
 	//detailed rows
 	myTable.push([
-		{
+		{ //can specify data AND properties
 			content: 'value 4',
 			properties: {
 				colspan: 2,
 				className: 'doubleWide',
 				style: '1px solid blue'
 		},
-		{
-			content: 'value 5'
-		}
+		'value 5' //can just be data; mixing and the two in the same row is fine
 	]);
 	//RESULT:
 	<table cellpadding="0" cellspacing="0" border="0">
@@ -103,6 +103,53 @@ Row data can be in either of two formats.
 ### Example of Object Returned
 
 	{tr: theTableRow, tds: [td, td, td]}
+
+HtmlTable method: empty {#HtmlTable:empty}
+------------------------------------------
+
+Empties the *tbody* of the table.
+
+### Syntax
+
+	myTable.empty();
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
+HtmlTable method: setHeaders {#HtmlTable:setHeaders}
+----------------------------------------------------
+
+Sets the contents of the *thead* with *th* tags.
+
+### Syntax
+
+	myTable.setHeaders(headers);
+
+### Arguments
+
+1. headers - (*array*) an array of header information; same as the row data sent to [HtmlTable.push][]
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
+HtmlTable method: setFooters {#HtmlTable:setFooters}
+----------------------------------------------------
+
+Sets the contents of the *tfoot* with *td* tags.
+
+### Syntax
+
+	myTable.setFooters(footers);
+
+### Arguments
+
+1. footers - (*array*) an array of footer information; same as the row data sent to [HtmlTable.push][]
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
 
 HtmlTable response: $ {#HtmlTable:Dollar}
 -----------------------------------------
@@ -148,8 +195,8 @@ Element property: HtmlTable {#Element:HtmlTable}
 
 	myElement.retrieve('HtmlTable'); //the instance of HtmlTable for the element
 
-
-
 [HtmlTable]: #HtmlTable
-[HtmlTable:push]: #HtmlTable:push
-[Options]: http://www.mootools.net/docs/core/Class/Class.Extras#Options
+[HtmlTable.push]: #HtmlTable:push
+[Options]: /core/Class/Class.Extras#Options
+[Events]: /core/Class/Class.Extras#Events
+[Class.Occlude]: /more/Class/Class.Occlude

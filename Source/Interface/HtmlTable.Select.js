@@ -10,9 +10,7 @@ Script: HtmlTable.Select.js
 		Aaron Newton
 */
 
-HtmlTable.Select = new Class({
-
-	Extends: HtmlTable.Sort,
+HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {/*
 		onRowSelect: $empty,
@@ -20,26 +18,45 @@ HtmlTable.Select = new Class({
 		useKeyboard: true,
 		classRowSelected: 'table-tr-selected',
 		classRowHovered: 'table-tr-hovered',
-		classRowFocused: 'table-tr-focused',
-		allowMultiSelect: true
+		classSelectable: 'table-selectable',
+		allowMultiSelect: true,
+		selectable: false
 	},
 
 	initialize: function () {
-		this.parent.apply(this, arguments);
+		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
 		this.selectedRows = new Elements();
+		this.bound = {
+			mouseleave: this.mouseleave.bind(this),
+			focusRow: this.focusRow.bind(this)
+		};
+		if (this.options.selectable) this.enableSelect();
 	},
 
-	attach: function(){
-		this.parent();
-		this.element.addEvent('mouseleave', function() {
-			if (this.hover) this.leaveRow(this.hover);
-		}.bind(this));
-		this.body.addEvents({
-			'click:relay(tr)':this.focusRow.bind(this)
+	enableSelect: function(){
+		this.selectEnabled = true;
+		this.attachSelects();
+		this.element.addClass(this.options.classSelectable);
+	},
+
+	disableSelect: function(){
+		this.selectEnabled = false;
+		this.attach(false);
+		this.element.removeClass(this.options.classSelectable);
+	},
+
+	attachSelects: function(attach){
+		attach = $pick(attach, true);
+		var method = attach ? 'addEvents' : 'removeEvents';
+		this.element[method]({
+			mouseleave: this.bound.mouseleave
 		});
-		if (this.options.useKeyboard) {
-			this.keyboard = new Keyboard({
+		this.body[method]({
+			'click:relay(tr)':this.bound.focusRow
+		});
+		if (this.options.useKeyboard || this.keyboard) {
+			this.keyboard = this.keyboard || new Keyboard({
 				events: {
 					down: function(e) {
 						e.preventDefault();
@@ -56,7 +73,13 @@ HtmlTable.Select = new Class({
 				},
 				active: true
 			});
+			this.keyboard[attach ? 'activate' : 'deactivate']();
 		}
+		this.updateSelects();
+	},
+
+	mouseleave: function() {
+		if (this.hover) this.leaveRow(this.hover);
 	},
 
 	focus: function(){
@@ -67,16 +90,27 @@ HtmlTable.Select = new Class({
 		if (this.keyboard) this.keyboard.deactivate();
 	},
 
-	update: function(){
+	push: function(){
+		var ret = this.previous.apply(this, arguments);
+		this.updateSelects();
+		return ret;
+	},
+
+	updateSelects: function(){
 		Array.each(this.body.rows, function(row, i) {
-			if (row.$tableSort) return;
-			row.addEvents({
-				'mouseenter': this.enterRow.bind(this, [row]),
-				'mouseleave': this.leaveRow.bind(this, [row])
-			});
-			row.$tableSort = true;
+			var binders = row.retrieve('binders');
+			if ((binders && this.selectEnabled) || (!binders && !this.selectEnabled)) return;
+			if (!binders) {
+				binders = {
+					'mouseenter': this.enterRow.bind(this, [row]),
+					'mouseleave': this.leaveRow.bind(this, [row])
+				};
+				row.store('binders', binders);
+				row.addEvents(binders);
+			} else {
+				row.removeEvents(binders);
+			}
 		}, this);
-		this.parent();
 	},
 
 	enterRow: function(row) {
@@ -90,7 +124,7 @@ HtmlTable.Select = new Class({
 		if (to < 0) to = 0;
 		if (to >= this.body.rows.length) to = this.body.rows.length - 1;
 		if (this.hover == this.body.rows[to]) return this;
-		this.enterRow(this.body.rows[to])
+		this.enterRow(this.body.rows[to]);
 	},
 
 	leaveRow: function(row) {
@@ -116,11 +150,15 @@ HtmlTable.Select = new Class({
 	},
 
 	selectAll: function(status) {
-		if (!status) {
-			this.selectedRows.removeClass(this.options.classRowSelected).empty();
-		} else {
-			this.selectedRows.combine(this.body.rows).addClass(this.options.classRowSelected);
-		}
+		status = $pick(status, true);
+		if (!this.options.allowMultiSelect && status) return;
+		if (!status) this.selectedRows.removeClass(this.options.classRowSelected).empty();
+		else this.selectedRows.combine(this.body.rows).addClass(this.options.classRowSelected);
+		return this;
+	},
+
+	selectNone: function() {
+		return this.selectAll(false);
 	}
 
 });
