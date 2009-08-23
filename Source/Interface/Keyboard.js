@@ -9,6 +9,7 @@ Script: Keyboard.js
 	Authors:
 		Perrin Westrich
 		Aaron Newton
+		Scott Kyle
 */
 
 (function(){
@@ -56,7 +57,7 @@ Script: Keyboard.js
 			this.addEvents(this.options.events);
 			this.boundHandle = this.handle.bind(this);
 			this.element = params.element || window;
-			if ((this.active = this.options.active)) this.attach();
+			if (this.options.active) this.attach();
 		},
 
 		addEvent: function(type, fn, internal){
@@ -68,7 +69,8 @@ Script: Keyboard.js
 		},
 
 		attach: function(attach){
-			this.element[$pick(attach, true) ? 'addEvent' : 'removeEvent'](this.options.eventType, this.boundHandle);
+			this.active = $pick(attach, true);
+			this.element[this.active ? 'addEvent' : 'removeEvent'](this.options.eventType, this.boundHandle);
 			return this;
 		},
 
@@ -77,18 +79,17 @@ Script: Keyboard.js
 			var key = (e.shift && this.options.caseSensitive) ? e.key.toUpperCase() : e.key;
 			var mods = '';
 			modifiers.each(function(mod){
-				if (e[mod] && (mod != 'shift' || !this.options.caseSensitive))
-					mods += mod + '+';
+				if (e[mod] && (mod != 'shift' || !this.options.caseSensitive)) mods += mod + '+';
 			}, this);
 			this.fireEvent(mods + key, e);
 		},
 
 		activate: function(){
-			return this.attach(this.active = true).fireEvent('activate');
+			return this.attach(true).fireEvent('activate');
 		},
 
 		deactivate: function(){
-			return this.attach(this.active = false).fireEvent('deactivate');
+			return this.attach(false).fireEvent('deactivate');
 		},
 
 		toggleActive: function(){
