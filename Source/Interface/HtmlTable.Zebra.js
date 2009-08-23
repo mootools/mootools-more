@@ -17,20 +17,18 @@ HtmlTable = Class.refactor(HtmlTable, {
 		zebra: true
 	},
 
-	initialize: function () {
+	initialize: function(){
 		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
 		if (this.options.zebra) this.updateZebras();
 	},
 
-	updateZebras: function() {
+	updateZebras: function(){
 		Array.each(this.body.rows, this.zebra, this);
 	},
 
-	zebra: function(row, i) {
-		if (i % 2) row.removeClass(this.options.classZebra);
-		else row.addClass(this.options.classZebra);
-		return row;
+	zebra: function(row, i){
+		return row[((i % 2) ? 'remove' : 'add')+'Class'](this.options.classZebra);
 	},
 
 	push: function(){

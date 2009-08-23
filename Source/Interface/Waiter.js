@@ -13,8 +13,8 @@ var Waiter = new Class({
 
 	Extends: Mask,
 
-	options: {/*
-		message: false,*/
+	options: {
+		/*message: false,*/
 		'class':'waiter',
 		containerPosition: {},
 		content: {

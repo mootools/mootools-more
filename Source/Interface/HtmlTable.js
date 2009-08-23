@@ -26,7 +26,7 @@ var HtmlTable = new Class({
 
 	property: 'HtmlTable',
 
-	initialize: function() {
+	initialize: function(){
 		var params = Array.link(arguments, {options: Object.type, table: Element.type});
 		this.setOptions(params.options);
 		this.element = params.table || new Element('table', this.options.properties);
@@ -36,25 +36,27 @@ var HtmlTable = new Class({
 
 	build: function(){
 		this.element.store('HtmlTable', this);
-		
-		this.body = $(this.element.tBodies[0]);
-		if (!this.body) this.body = new Element('tbody').inject(this.element);
 
+		this.body = document.id(this.element.tBodies[0]) || new Element('tbody').inject(this.element);
 		$$(this.body.rows);
-		
+
 		if (this.options.headers.length) this.setHeaders(this.options.headers);
-		else this.thead = $(this.element.tHead);
-		if (this.thead) this.head = $(this.thead.rows[0]);
+		else this.thead = document.id(this.element.tHead);
+		if (this.thead) this.head = document.id(this.thead.rows[0]);
 
 		if (this.options.footers.length) this.setFooters(this.options.footers);
-		this.tfoot = $(this.element.tFoot);
-		if (this.tfoot) this.foot = $(this.thead.rows[0]);
+		this.tfoot = document.id(this.element.tFoot);
+		if (this.tfoot) this.foot = document.id(this.thead.rows[0]);
 
 		this.options.rows.each(this.push.bind(this));
 
-		["adopt", "inject", "wraps", "grab", "replaces", "dispose"].each(function(method){
+		['adopt', 'inject', 'wraps', 'grab', 'replaces', 'dispose'].each(function(method){
 				this[method] = this.element[method].bind(this.element);
 		}, this);
+	},
+
+	toElement: function(){
+		return this.element;
 	},
 
 	empty: function(){
@@ -62,43 +64,36 @@ var HtmlTable = new Class({
 		return this;
 	},
 
-	toElement: function(){
-		return this.element;
-	},
-
 	setHeaders: function(headers){
-		this.thead = $(this.element.tHead);
-		if (!this.thead) this.thead = new Element('thead').inject(this.element, 'top');
-		else this.thead.empty();
+		this.thead = (document.id(this.element.tHead) || new Element('thead').inject(this.element, 'top')).empty();
 		this.push(headers, this.thead, 'th');
-		this.head = $(this.thead.rows[0]);
+		this.head = document.id(this.thead.rows[0]);
 		return this;
 	},
 
-	setFooters: function(footers) {
-		this.tfoot = $(this.element.tFoot);
-		if (!this.tfoot) this.tfoot = new Element('tfoot').inject(this.element, 'top');
-		else this.tfoot.empty();
+	setFooters: function(footers){
+		this.tfoot = (document.id(this.element.tFoot) || new Element('tfoot').inject(this.element, 'top')).empty();
 		this.push(footers, this.tfoot);
-		this.foot = $(this.thead.rows[0]);
+		this.foot = document.id(this.thead.rows[0]);
 		return this;
 	},
 
-	push: function(row, target, tag) {
-		var tr = new Element('tr').inject(target || this.body);
-		var tds = row.map(function (tdata) {
-			tdata = tdata || '';
-			var td = new Element(tag || 'td').inject(tr);
-			if (tdata.properties) td.setProperties(tdata.properties);
-			function setContent(content){
-				if (document.id(content)) td.adopt(document.id(content));
-				else td.set('html', content);
-			};
-			if ($defined(tdata.content)) setContent(tdata.content);
-			else setContent(tdata);
+	push: function(row, target, tag){
+		var tds = row.map(function(data){
+			var td = new Element(tag || 'td', data.properties),
+				type = data.content || data || '',
+				element = document.id(type);
+
+			if(element) td.adopt(element)
+			else td.set('html', type);
+
 			return td;
-		}, this);
-		return {tr: tr, tds: tds};
+		});
+
+		return {
+			tr: new Element('tr').inject(target || this.body).adopt(tds),
+			tds: tds
+		};
 	}
 
 });

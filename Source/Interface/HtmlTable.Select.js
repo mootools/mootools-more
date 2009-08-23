@@ -12,9 +12,9 @@ Script: HtmlTable.Select.js
 
 HtmlTable = Class.refactor(HtmlTable, {
 
-	options: {/*
-		onRowSelect: $empty,
-		onRowUnselect: $empty, */
+	options: {
+		/*onRowSelect: $empty,
+		onRowUnselect: $empty,*/
 		useKeyboard: true,
 		classRowSelected: 'table-tr-selected',
 		classRowHovered: 'table-tr-hovered',
@@ -23,7 +23,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		selectable: false
 	},
 
-	initialize: function () {
+	initialize: function(){
 		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
 		this.selectedRows = new Elements();
@@ -53,10 +53,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 			mouseleave: this.bound.mouseleave
 		});
 		this.body[method]({
-			'click:relay(tr)':this.bound.focusRow
+			'click:relay(tr)': this.bound.focusRow
 		});
-		if (this.options.useKeyboard || this.keyboard) {
-			this.keyboard = this.keyboard || new Keyboard({
+		if (this.options.useKeyboard || this.keyboard){
+			if (!this.keyboard) this.keyboard = new Keyboard({
 				events: {
 					down: function(e) {
 						e.preventDefault();
@@ -78,7 +78,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.updateSelects();
 	},
 
-	mouseleave: function() {
+	mouseleave: function(){
 		if (this.hover) this.leaveRow(this.hover);
 	},
 
@@ -97,23 +97,22 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	updateSelects: function(){
-		Array.each(this.body.rows, function(row, i) {
+		Array.each(this.body.rows, function(row){
 			var binders = row.retrieve('binders');
 			if ((binders && this.selectEnabled) || (!binders && !this.selectEnabled)) return;
-			if (!binders) {
+			if (!binders){
 				binders = {
-					'mouseenter': this.enterRow.bind(this, [row]),
-					'mouseleave': this.leaveRow.bind(this, [row])
+					mouseenter: this.enterRow.bind(this, [row]),
+					mouseleave: this.leaveRow.bind(this, [row])
 				};
-				row.store('binders', binders);
-				row.addEvents(binders);
+				row.store('binders', binders).addEvents(binders);
 			} else {
 				row.removeEvents(binders);
 			}
 		}, this);
 	},
 
-	enterRow: function(row) {
+	enterRow: function(row){
 		if (this.hover) this.hover = this.leaveRow(this.hover);
 		this.hover = row.addClass(this.options.classRowHovered);
 	},
@@ -127,29 +126,29 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.enterRow(this.body.rows[to]);
 	},
 
-	leaveRow: function(row) {
+	leaveRow: function(row){
 		row.removeClass(this.options.classRowHovered);
 	},
 
-	focusRow: function() {
+	focusRow: function(){
 		var row = arguments[1] || arguments[0]; //delegation passes the event first
 		var unfocus = function(row){
 			this.selectedRows.erase(row);
 			row.removeClass(this.options.classRowSelected);
-			this.fireEvent('onRowUnfocus', [row, this.selectedRows]);
+			this.fireEvent('rowUnfocus', [row, this.selectedRows]);
 		}.bind(this);
 		if (!this.options.allowMultiSelect) this.selectedRows.each(unfocus);
 		if (!this.selectedRows.contains(row)) {
 			this.selectedRows.push(row);
 			row.addClass(this.options.classRowSelected);
-			this.fireEvent('onRowFocus', [row, this.selectedRows]);
+			this.fireEvent('rowFocus', [row, this.selectedRows]);
 		} else {
 			unfocus(row);
 		}
 		return false;
 	},
 
-	selectAll: function(status) {
+	selectAll: function(status){
 		status = $pick(status, true);
 		if (!this.options.allowMultiSelect && status) return;
 		if (!status) this.selectedRows.removeClass(this.options.classRowSelected).empty();
@@ -157,7 +156,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this;
 	},
 
-	selectNone: function() {
+	selectNone: function(){
 		return this.selectAll(false);
 	}
 
