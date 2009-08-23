@@ -290,17 +290,17 @@
 		},
 
 		"HtmlTable.Zebra": {
-			"deps":["HtmlTable"],
+			"deps":["HtmlTable", "Class.Refactor"],
 			"desc":"Adds stripes to an HTML table's rows."
 		},
 
 		"HtmlTable.Sort": {
-			"deps":["HtmlTable.Zebra", "Element.Delegation", "Hash", "Date"],
+			"deps":["HtmlTable", "Element.Delegation", "Hash", "Date", "Class.Refactor"],
 			"desc":"Adds the ability to sort the columns of a HtmlTable.Zebra instance."
 		},
 
 		"HtmlTable.Select": {
-			"deps":["HtmlTable.Sort", "Keyboard"],
+			"deps":["HtmlTable", "Keyboard", "Class.Refactor", "Element.Delegation"],
 			"desc":"Adds the ability to highlight and select rows on a HtmlTable.Sort instance."
 		},
 

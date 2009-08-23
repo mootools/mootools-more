@@ -3,9 +3,10 @@
 		{
 			title: "HtmlTable.Sort",
 			description: "Loads a striped table of data that can be sorted.",
-			verify: "Do you see the table? Is it stripey? Can you sort it by clicking the headers?",
+			verify: "Do you see the table? Can you sort it by clicking the headers?",
 			before: function(){
-				var t = new HtmlTable.Sort({
+				var t = new HtmlTable({
+					sortable: true,
 					headers: ['fruit', 'colors']
 				});
 				t.inject(document.body);
