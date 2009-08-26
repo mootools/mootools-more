@@ -34,9 +34,11 @@ Fx.Sort = new Class({
 
 	sort: function(newOrder){
 		if ($type(newOrder) != 'array') return false;
-		var top = left = 0;
-		var zero = next = {};
-		var vert = this.options.mode == 'vertical';
+		var top = 0,
+			left = 0,
+			next = {},
+			zero = {},
+			vert = this.options.mode == 'vertical';
 		var current = this.elements.map(function(el, index){
 			var size = el.getComputedSize({styles: ['border', 'padding', 'margin']});
 			var val;
