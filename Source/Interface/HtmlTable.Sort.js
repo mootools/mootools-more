@@ -197,6 +197,11 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this.fireEvent('sort', [body, index]);
 	},
 
+	reSort: function(){
+		if (this.sortEnabled) this.sort.call(this, this.sorted.index, this.sorted.reverse);
+		return this;
+	},
+
 	enableSort: function(){
 		this.element.addClass(this.options.classSortable);
 		this.attachSorts(true);
