@@ -18,7 +18,7 @@ var SmoothScroll = Fx.SmoothScroll = new Class({
 		this.doc = context.getDocument();
 		var win = context.getWindow();
 		this.parent(this.doc, options);
-		this.links = this.options.links ? $$(this.options.links) : $$(this.doc.links);
+		this.links = $$(this.options.links || this.doc.links);
 		var location = win.location.href.match(/^[^#]*/)[0] + '#';
 		this.links.each(function(link){
 			if (link.href.indexOf(location) != 0) {return;}
@@ -44,5 +44,4 @@ var SmoothScroll = Fx.SmoothScroll = new Class({
 			}
 		}.bind(this));
 	}
-
 });

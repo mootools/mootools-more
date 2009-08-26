@@ -22,8 +22,8 @@ Element.implement({
 		};
 		if (vis(this)) return fn.apply(this);
 		var parent = this.getParent(),
-			toMeasure = [], 
-			restorers = [];
+			restorers = [],
+			toMeasure = []; 
 		while (!vis(parent) && parent != document.body) {
 			toMeasure.push(parent.expose());
 			parent = parent.getParent();
