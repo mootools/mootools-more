@@ -83,6 +83,19 @@ Disables the sortable features of the table.
 
 * (*object*) This instance of HtmlTable.
 
+HtmlTable method: reSort {#HtmlTable:reSort}
+------------------------------------------
+
+Reapplies the current sort. Note that this is called whenever new rows are added.
+
+### Syntax
+
+	myTable.reSort();
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
 Hash: HtmlTable.Parsers {#HtmlTable:Parsers}
 ======================================
 
