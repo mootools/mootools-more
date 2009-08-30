@@ -8,8 +8,13 @@
 		},
 
 		"Depender": {
-			"deps": ["More", "Element.Event", "Request.JSON"],
-			"desc": "A dependency loader for the MooTools library."
+			"deps": ["More", "Class.Extras", "Element.Event"],
+			"desc": "A stand alone dependency loader for the MooTools library."
+		},
+
+		"Depender.Client": {
+			"deps": ["More", "Class.Extras", "Element.Event"],
+			"desc": "A dependency loader for the MooTools library that integrates with <a href=\"http://github.com/anutron/mootools-depender/tree/\">the server side Depender library</a>."
 		},
 
 		"Lang": {
@@ -81,7 +86,7 @@
 		},
 
 		"URI": {
-			"deps": ["More", "Function", "Array", "Hash", "String.QueryString"],
+			"deps": ["More", "String.QueryString", "Selectors"],
 			"desc": "Provides methods useful in managing the window location and uris."
 		},
 
