@@ -1,6 +1,6 @@
 /*
 Script: Depender.js
-	Clientside dependency loader for MooTools.
+	A stand alone dependency loader for the MooTools library.
 
 	License:
 		MIT-style license.
@@ -98,7 +98,6 @@ var Depender = {
 		if (this.mapLoaded){
 			loaded.call(this);
 		} else {
-			//if !this.mapLoaded, then fetchLibs is still running and the map isn't loaded
 			this.addEvent('mapLoaded', function(){
 				loaded.call(this);
 				this.removeEvent('mapLoaded', arguments.callee);
@@ -138,7 +137,6 @@ var Depender = {
 		}.bind(this));
 	},
 
-	//manage loaded data
 	dataLoaded: function(){
 		var loaded = true;
 		$each(this.libs, function(v, k){
@@ -169,12 +167,10 @@ var Depender = {
 		}
 	},
 
-	//map dependencies
 	deps: {},
 
 	pathMap: {},
 
-	//create a map of source to paths
 	mapTree: function(){
 		$each(this.libs, function(data, source){
 			$each(data.files, function(scripts, folder){
@@ -188,12 +184,10 @@ var Depender = {
 		}, this);
 	},
 
-	//get the dependencies for a given script
 	getDepsForScript: function(script){
 		return this.deps[this.pathMap[script]] || [];
 	},
 
-	//calculate the dependencies for a given script
 	calculateDependencies: function(scripts){
 		var reqs = [];
 		$splat(scripts).each(function(script){
@@ -213,7 +207,6 @@ var Depender = {
 		return reqs;
 	},
 
-	//get the path for a script
 	getPath: function(script){
 		try {
 			var chunks = this.pathMap[script].split(':');
@@ -226,7 +219,6 @@ var Depender = {
 		}
 	},
 
-	//load the missing dependencies for a given script
 	loadScripts: function(scripts){
 		scripts = scripts.filter(function(s){
 			if (!this.scriptsState[s] && s != 'None'){
@@ -269,7 +261,7 @@ var Depender = {
 				events: {
 					load: function() {
 						this.log('loaded script: ', scriptPath);
-						finish(); //.delay(50, this); << can't remember why I had this delay, but I bet it matters; leaving this comment for now
+						finish();
 					}.bind(this),
 					error: error
 				}
@@ -281,7 +273,7 @@ var Depender = {
 				onComplete: function(js) {
 					this.log('loaded script: ', scriptPath);
 					$exec(js);
-					finish(); //.delay(50, this); << can't remember why I had this delay, but I bet it matters; leaving this comment for now
+					finish();
 				}.bind(this),
 				onFailure: error,
 				onException: error

@@ -18,13 +18,13 @@ This is the setOptions method from [Options][]. As Depender is not a class, you 
 * loadedScripts - (*array*) This is a list of scripts already loaded into the document. By default, it is an array of the scripts on which Depender depends (*Core*, *Browser*, *Array*, *String*, *Function*, *Number*, *Hash*, *Element*, *Event*, *Element.Event*, *Class*, *Class.Extras*, *Request*, *JSON*, *Request.JSON*, *More*, and *Depender*).
 * loadedSources - (*array*) An array of lib keys that are loaded in their entirety. For example, if your libs.json object has a definition for 'mootools-core' and you have all of core loaded, you can just define *loadedLibs: ['mootools-core']* and all the files in that source will be marked as having been loaded.
 * noCache - (*boolean*) this setting is passed along to [Request][] to prevent caching. This is useful in development where scripts are changing often but should be left disabled for production. Defaults to *false*.
-* useScriptInjection - (*boolean*) if *false*, scripts are loaded with [Request][] and evaluated. If *true* (the default), script tags are injected into the document.head (or the target specified in the options). The advantage of using [Request][] is that the requests are asynchronous, so other activities are not blocked. The downside to using [Request][] is that errors in your external script files are hard to find (as there is no line number reported) and the scripts *must* be on the same domain as your web app.
+* useScriptInjection - (*boolean*) if *false*, scripts are loaded with [Request][] and evaluated. If *true* (the default), script tags are injected into the document.head (or the target specified in the options). The advantage of using [Request][] is that the requests are asynchronous, so other activities are not blocked. The downside to using [Request][] is that errors in your external script files are hard to find (as there is no line number reported) and the scripts *must* be on the same domain as your web app (this is not the case with the [Depender Server][]).
 * serial - (*boolean*) if *true*, Depender will ensure that all calls to [require][] are loaded in order and that the callbacks are loaded in order. For example, let's say you require scripts *A*, *B*, and *C* to load and when they are loaded you wish to execute the function *X*. You then require script *B* in a separate call to the [require][] method and, when it is loaded, you wish to execute function *Y*. When *B* loads, *Y* will execute, *before* *X* because, *X* is still waiting on *C*. If you set serial to *true*, it will wait for *X* to be executed before running *Y*, even though *Y*'s requirements are met earlier. It defaults to *false*.
 
 ### Events
 
-* onRequire - (*function*) callback executed whenever new requirements are passed in to be loaded. Passed the object that is passed to the [require][] method.
-* onRequirementLoaded - (*function*) callback executed anytime the current set of requirements is loaded. Passed the object that is passed to the [require][] method.
+* require - (*function*) callback executed whenever new requirements are passed in to be loaded. Passed the object that is passed to the [require][] method.
+* requirementLoaded - (*function*) callback executed anytime the current set of requirements is loaded. Passed the object that is passed to the [require][] method.
 * scriptLoaded - (*function*) callback executed whenever a script loads. Passed an object with the following properties:
 ** script: the script loaded, 
 ** totalLoaded: the % loaded of total dependencies, 
@@ -38,6 +38,11 @@ This is the setOptions method from [Options][]. As Depender is not a class, you 
 ** a progress bar that shows a percentage of ALL dependencies loading. This means that if you load one batch with, say, 2 items in it, it will go 0%-50%-100%. If you load a second batch at some later point, that has another 2 scripts, your progress bar will start at 50% (2 loaded, 2 to go) and go 50%-75%-100%. A subsequent load statement of 2 more scripts would produce 66%-83%-100%. This can be created with the *totalLoaded* value in the *onRequirementLoaded* callback.
 ** a progress bar that shows a percentage of the current *batch*. Whenever you require a set of scripts, the Depender starts loading them. When all dependencies are loaded, it resets its "batch" counter. If you then later require additional scripts, the counter starts going up until all requirements are loaded. Note that if Depender is loading requirements and you call the *require* method again and the total requirements to load grows in size, you'll see the counter go down, as now there are more files to load. You can create this progress bar using the *currentLoaded* value in the *onRequirementLoaded* callback.
 ** a progress bar for a specific requirement. This could be useful if you want to show numerous loading bars at once. This is created using the *onStep* callback in the *[require][]* method's argument.
+
+
+### See also
+
+You might also consider the [Depender.Client](/more/Core/Depender.Client), which integrates with the [Depender Server][]. It works very similarly to this library, but instead of loading each script individually the server side component concatenates and compresses the response into a single file. The result is a much faster experience for the user.
 
 Depender Method: include {#Depender:include}
 --------------------------------------------
@@ -218,3 +223,4 @@ Example Usage {#Depender:Example}
 [Options]: /core/Class/Class.Extras#Options
 [Request]: /core/Request/Request
 [require]: #Depender:require
+[Depender Server]: http://github.com/anutron/mootools-depender/tree/
