@@ -27,6 +27,11 @@ describe('String.repeat', {
 
 describe('String.pad', {
 
+	'should work with both numbers and strings': function(){
+		value_of('1'.pad(2, 0, 'left')).should_be('01');
+		value_of('1'.pad(2, '0', 'left')).should_be('01');
+	},
+
 	'should fill the string with the supplied pad string to left, right or both to reach a given number of characters': function(){
 		value_of('Alien'.pad(10, ' ', 'right')).should_be('Alien     ');
 		value_of('Alien'.pad(10, '-=', 'left')).should_be('-=-=-Alien');
