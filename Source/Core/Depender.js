@@ -84,7 +84,7 @@ var Depender = {
 	require: function(options){
 		var loaded = function(){
 			var scripts = this.calculateDependencies(options.scripts);
-			if (options.sources) {
+			if (options.sources){
 				options.sources.each(function(source){
 					scripts.combine(this.libs[source].files);
 				}, this);
@@ -109,7 +109,7 @@ var Depender = {
 	cleanDoubleSlash: function(str){
 		if (!str) return str;
 		var prefix = '';
-		if (str.test(/^http:\/\//)) {
+		if (str.test(/^http:\/\//)){
 			prefix = 'http://';
 			str = str.substring(7, str.length);
 		}
@@ -152,7 +152,7 @@ var Depender = {
 	},
 
 	calculateLoaded: function(){
-		var set = function(script) {
+		var set = function(script){
 			this.scriptsState[script] = true;
 		}.bind(this);
 		if (this.options.loadedScripts) this.options.loadedScripts.each(set);
@@ -259,7 +259,7 @@ var Depender = {
 			new Element('script', {
 				src: scriptPath + (this.options.noCache ? '?noCache=' + new Date().getTime() : ''),
 				events: {
-					load: function() {
+					load: function(){
 						this.log('loaded script: ', scriptPath);
 						finish();
 					}.bind(this),
@@ -270,7 +270,7 @@ var Depender = {
 			new Request({
 				url: scriptPath,
 				noCache: this.options.noCache,
-				onComplete: function(js) {
+				onComplete: function(js){
 					this.log('loaded script: ', scriptPath);
 					$exec(js);
 					finish();

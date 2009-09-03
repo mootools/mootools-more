@@ -20,7 +20,7 @@ Script: Element.Delegation.js
 		combinators = /[+>~\s]/,
 		splitType = function(type){
 			var bits = type.match(match);
-			return !bits ? {event: type } : {
+			return !bits ? {event: type} : {
 				event: bits[1],
 				selector: bits[2]
 			};
