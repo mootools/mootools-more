@@ -25,19 +25,56 @@ Script: Keyboard.js
 			if ((match = part.toLowerCase().match(regex))) mods[match[0]] = true;
 			else key = part;
 		});
-		mods.control = mods.control || mods.ctrl;	// allow both control and ctrl
+		mods.control = mods.control || mods.ctrl; // allow both control and ctrl
 		match = '';
 		modifiers.each(function(mod){
 			if (mods[mod]) match += mod + '+';
 		});
 		return (parsed[type] = match + key);
 	};
-	
+
+	var Manager = new Class({
+
+		manage: function(instance) {
+			if (instance.manager) instance.manager.drop(instance);
+			this.instances.push(instance);
+			instance.manager = this;
+			if (!this.enabled) this.enable(instance);
+			else this._disable(instance);
+		},
+
+		enable: function(instance) {
+			this.enabled = instance.fireEvent('activate');
+		},
+
+		_disable: function(instance) {
+			if (this.enabled == instance) this.enabled = null;
+		},
+
+		drop: function(instance) {
+			this._disable(instance);
+			this.instances.erase(instance);
+		},
+
+		instances: []
+
+	});
+
+	var rootMgr = new Manager();
+	window.rootMgr = rootMgr;
+	rootMgr._handle = function(event){
+		if (rootMgr.enabled) rootMgr.enabled.handle(event);
+	};
+	window.addEvents({
+		'keyup': rootMgr._handle,
+		'keydown': rootMgr._handle
+	});
+
 	this.Keyboard = new Class({
 
 		Extends: Events,
 
-		Implements: Options,
+		Implements: [Options, Manager],
 
 		options: {
 			/*
@@ -47,57 +84,65 @@ Script: Keyboard.js
 			caseSensitive: false,
 			*/
 			eventType: 'keyup',
-			active: true,
+			active: false,
 			events: {}
 		},
 
-		initialize: function(){
-			var params = Array.link(arguments, {element: Element.type, options: Object.type});
-			this.setOptions(params.options);
+		initialize: function(options){
+			this.setOptions(options);
 			this.addEvents(this.options.events);
-			this.boundHandle = this.handle.bind(this);
-			this.element = params.element || window;
-			if (this.options.active) this.attach();
-		},
-
-		addEvent: function(type, fn, internal){
-			return this.parent(parse(type), fn, internal);
-		},
-		
-		removeEvent: function(type, fn){
-			return this.parent(parse(type), fn);
-		},
-
-		attach: function(attach){
-			this.active = $pick(attach, true);
-			this.element[this.active ? 'addEvent' : 'removeEvent'](this.options.eventType, this.boundHandle);
-			return this;
+			rootMgr.manage(this);
+			if (this.options.active) this.activate();
 		},
 
 		handle: function(e){
-			if (this.options.preventDefault) e.preventDefault();
+			if (!this.active || e.type != this.options.eventType) return;
+			if (this.enabled) this.enabled.handle(e);
+
 			var key = (e.shift && this.options.caseSensitive) ? e.key.toUpperCase() : e.key;
 			var mods = '';
 			modifiers.each(function(mod){
 				if (e[mod] && (mod != 'shift' || !this.options.caseSensitive)) mods += mod + '+';
 			}, this);
-			this.fireEvent(mods + key, e);
+
+			if (this.$events[mods + key]) {
+				if (this.options.preventDefault) e.preventDefault();
+				this.fireEvent(mods + key, e);
+			}
+		},
+
+		addEvent: function(type, fn, internal) {
+			return this.parent(parse(type), fn, internal);
+		},
+
+		removeEvent: function(type, fn) {
+			return this.parent(parse(type), fn);
 		},
 
 		activate: function(){
-			return this.attach(true).fireEvent('activate');
+			this.active = true;
+			this.enable();
+			return this;
 		},
 
 		deactivate: function(){
-			return this.attach(false).fireEvent('deactivate');
+			this.active = false;
+			this.fireEvent('deactivate');
+			return this;
 		},
 
 		toggleActive: function(){
 			return this[this.active ? 'deactivate' : 'activate']();
+		},
+
+		enable: function(instance){
+			if (instance) this.enabled = instance.fireEvent('activate');
+			else this.manager.enable(this);
+			return this;
 		}
 
 	});
-	
+
 	Event.Keys.extend({
 		'pageup': 33,
 		'pagedown': 34,

@@ -40,7 +40,7 @@
 		"HtmlTable.Zebra":['all'],
 		"HtmlTable.Sort":['all'],
 		"HtmlTable.Select":['all'],
-		"Keyboard":['all'],
+		"Keyboard":['single', 'nested'],
 		"Mask":['all'],
 		"Scroller":['all'],
 		"Tips":['all'],
