@@ -12,11 +12,6 @@
 			"desc": "A stand alone dependency loader for the MooTools library."
 		},
 
-		"Depender.Client": {
-			"deps": ["More", "Class.Extras", "Element.Event"],
-			"desc": "A dependency loader for the MooTools library that integrates with <a href=\"http://github.com/anutron/mootools-depender/tree/\">the server side Depender library</a>."
-		},
-
 		"Lang": {
 			"deps": ["More", "Class.Extras"],
 			"desc": "Enables classes to contain text that can be localized to specific languages."
