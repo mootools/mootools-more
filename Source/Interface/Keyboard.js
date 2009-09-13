@@ -13,13 +13,17 @@ Script: Keyboard.js
 */
 
 (function(){
-	
+
 	var parsed = {};
 	var modifiers = ['shift', 'control', 'alt', 'meta'];
 	var regex = /^shift|control|ctrl|alt|meta$/;
 	
-	var parse = function(type){
+	var parse = function(type, defaultEventType){
 		if (parsed[type]) return parsed[type];
+		eventType = defaultEventType;
+		['keyup', 'keydown'].each(function(t) {
+			if (type.contains(t)) eventType = t;
+		});
 		var match, key = '', mods = {};
 		type.split('+').each(function(part){
 			if ((match = part.toLowerCase().match(regex))) mods[match[0]] = true;
@@ -30,60 +34,23 @@ Script: Keyboard.js
 		modifiers.each(function(mod){
 			if (mods[mod]) match += mod + '+';
 		});
-		return (parsed[type] = match + key);
+		parsed[type] = match + key;
+		return eventType + ':' + parsed[type];
 	};
-
-	var Manager = new Class({
-
-		manage: function(instance) {
-			if (instance.manager) instance.manager.drop(instance);
-			this.instances.push(instance);
-			instance.manager = this;
-			if (!this.enabled) this.enable(instance);
-			else this._disable(instance);
-		},
-
-		enable: function(instance) {
-			this.enabled = instance.fireEvent('activate');
-		},
-
-		_disable: function(instance) {
-			if (this.enabled == instance) this.enabled = null;
-		},
-
-		drop: function(instance) {
-			this._disable(instance);
-			this.instances.erase(instance);
-		},
-
-		instances: []
-
-	});
-
-	var rootMgr = new Manager();
-	window.rootMgr = rootMgr;
-	rootMgr._handle = function(event){
-		if (rootMgr.enabled) rootMgr.enabled.handle(event);
-	};
-	window.addEvents({
-		'keyup': rootMgr._handle,
-		'keydown': rootMgr._handle
-	});
 
 	this.Keyboard = new Class({
 
 		Extends: Events,
 
-		Implements: [Options, Manager],
+		Implements: Options,
 
 		options: {
 			/*
 			onActivate: $empty,
 			onDeactivate: $empty,
-			preventDefault: false,
 			caseSensitive: false,
 			*/
-			eventType: 'keyup',
+			defaultEventType: 'keyup',
 			active: false,
 			events: {}
 		},
@@ -91,32 +58,33 @@ Script: Keyboard.js
 		initialize: function(options){
 			this.setOptions(options);
 			this.addEvents(this.options.events);
-			rootMgr.manage(this);
+			//if this is the root manager, nothing manages it
+			if (Keyboard.manager) Keyboard.manager.manage(this);
 			if (this.options.active) this.activate();
 		},
 
 		handle: function(e){
-			if (!this.active || e.type != this.options.eventType) return;
-			if (this.enabled) this.enabled.handle(e);
+			//Keyboard.stop(event) prevents key propagation
+			if (!this.active || event.preventKeyboardPropagation) return;
+			var bubbles = !!this.manager;
+			if (bubbles && this.activeKB) this.activeKB.handle(e);
 
 			var key = (e.shift && this.options.caseSensitive) ? e.key.toUpperCase() : e.key;
 			var mods = '';
 			modifiers.each(function(mod){
 				if (e[mod] && (mod != 'shift' || !this.options.caseSensitive)) mods += mod + '+';
 			}, this);
-
-			if (this.$events[mods + key]) {
-				if (this.options.preventDefault) e.preventDefault();
-				this.fireEvent(mods + key, e);
-			}
+			var event = e.type + ':' + mods + key;
+			if (this.$events[event]) this.fireEvent(event, e);
+			if (!bubbles && this.activeKB) this.activeKB.handle(e);
 		},
 
 		addEvent: function(type, fn, internal) {
-			return this.parent(parse(type), fn, internal);
+			return this.parent(parse(type, this.options.defaultEventType), fn, internal);
 		},
 
 		removeEvent: function(type, fn) {
-			return this.parent(parse(type), fn);
+			return this.parent(parse(type, this.options.defaultEventType), fn);
 		},
 
 		activate: function(){
@@ -136,12 +104,46 @@ Script: Keyboard.js
 		},
 
 		enable: function(instance){
-			if (instance) this.enabled = instance.fireEvent('activate');
-			else this.manager.enable(this);
+			if (instance) this.activeKB = instance.fireEvent('activate');
+			//root manager has no manager
+			else if (this.manager) this.manager.enable(this);
 			return this;
-		}
+		},
+
+		//management logic
+		manage: function(instance) {
+			if (instance.manager) instance.manager.drop(instance);
+			this.instances.push(instance);
+			instance.manager = this;
+			if (!this.activeKB) this.enable(instance);
+			else this._disable(instance);
+		},
+
+		_disable: function(instance) {
+			if (this.activeKB == instance) this.activeKB = null;
+		},
+
+		drop: function(instance) {
+			this._disable(instance);
+			this.instances.erase(instance);
+		},
+
+		instances: []
 
 	});
+
+	Keyboard.stop = function(event) {
+		event.preventKeyboardPropagation = true;
+	};
+
+	Keyboard.manager = new this.Keyboard();
+	Keyboard.manager.active = true;
+	var handler = Keyboard.manager.handle.bind(Keyboard.manager);
+	window.addEvents({
+		'keyup': handler,
+		'keydown': handler
+	});
+
 
 	Event.Keys.extend({
 		'pageup': 33,
