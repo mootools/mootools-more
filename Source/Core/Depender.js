@@ -212,7 +212,7 @@ var Depender = {
 			var chunks = this.pathMap[script].split(':');
 			var lib = this.libs[chunks[0]];
 			var dir = (lib.path || lib.scripts) + '/';
-			chunks.erase(chunks[0]);
+			chunks.shift();
 			return this.cleanDoubleSlash(dir + chunks.join('/') + '.js');
 		} catch(e){
 			return script;

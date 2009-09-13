@@ -129,7 +129,7 @@ if (window.Request) {
 				return this;
 			};
 			this.previous(options);
-			var update = document.id(this.options.update) || document.id(this.options.waiterTarget);
+			var update = document.id(this.options.waiterTarget) || document.id(this.options.update);
 			if (this.options.useWaiter && update) {
 				this.waiter = update.get('waiter', this.options.waiterOptions);
 				['onComplete', 'onException', 'onCancel'].each(function(event){
