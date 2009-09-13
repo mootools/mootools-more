@@ -42,7 +42,7 @@ This is the setOptions method from [Options][]. As Depender is not a class, you 
 
 ### See also
 
-You might also consider the [Depender.Client](/more/Core/Depender.Client), which integrates with the [Depender Server][]. It works very similarly to this library, but instead of loading each script individually the server side component concatenates and compresses the response into a single file. The result is a much faster experience for the user.
+You might also consider the [Depender.Client], which integrates with the [Depender Server][]. It works very similarly to this library, but instead of loading each script individually the server side component concatenates and compresses the response into a single file. The result is a much faster experience for the user.
 
 Depender Method: include {#Depender:include}
 --------------------------------------------
@@ -224,3 +224,4 @@ Example Usage {#Depender:Example}
 [Request]: /core/Request/Request
 [require]: #Depender:require
 [Depender Server]: http://github.com/anutron/mootools-depender/tree/
+[Depender Client]: http://github.com/anutron/mootools-depender/tree/
