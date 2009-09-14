@@ -1,6 +1,6 @@
 /*
-	Script: FormValidator.Danish.js
-		FormValidator messages for Danish.
+	Script: Form.Validator.Danish.js
+		Form.Validator messages for Danish.
 
 	License:
 		MIT-style license.
@@ -10,7 +10,7 @@
 
 */
 
-MooTools.lang.set('da-DK', 'FormValidator', {
+MooTools.lang.set('da-DK', 'Form.Validator', {
 
 	required:'Feltet skal udfyldes.',
 	minLength:'Skriv mindst {minLength} tegn (du skrev {length} tegn).',
@@ -29,7 +29,7 @@ MooTools.lang.set('da-DK', 'FormValidator', {
 	errorPrefix: 'Fejl: ',
 	warningPrefix: 'Advarsel: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'Der må ikke benyttes mellemrum i dette felt.',
 	reqChkByNode: 'Foretag et valg.',

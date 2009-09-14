@@ -1,7 +1,7 @@
-Class: FormValidator {#FormValidator}
+Class: Form.Validator {#Form.Validator}
 =====================================
 
-Contains the messages for [FormValidator][] in Swedish.
+Contains the messages for [Form.Validator][] in Swedish.
 
 ### Authors
 
@@ -13,7 +13,7 @@ Simply change the language property to *sv-SE*.
 
 	MooTools.lang.setLanguage("sv-SE");
 
-See also: [FormValidator][] and [Lang][]
+See also: [Form.Validator][] and [Lang][]
 
-[FormValidator]: http://www.mootools.net/docs/more/Forms/FormValidator#FormValidator
+[Form.Validator]: http://www.mootools.net/docs/more/Forms/Form.Validator#Form.Validator
 [Lang]: http://www.mootools.net/docs/more/Core/Lang

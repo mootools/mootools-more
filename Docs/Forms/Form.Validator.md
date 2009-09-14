@@ -6,7 +6,7 @@ This class contains functionality to test a field for various criteria and also 
 ### Tutorial/Demo
 
 * [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/09-forms/04-formvalidator
+[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/09-forms/04-Form.Validator
 
 ### Authors
 
@@ -120,7 +120,7 @@ Retrieves the error message for the validator.
 * (*mixed*) - The error message (*string*) or *boolean false* if no message is meant to be returned.
 
 
-Class: FormValidator {#FormValidator}
+Class: Form.Validator {#Form.Validator}
 ====================================
 
 Evaluates an entire form against all the validators that are set up, firing events when inputs fail validation.
@@ -131,7 +131,7 @@ Evaluates an entire form against all the validators that are set up, firing even
 
 ### Syntax
 
-	new FormValidator(form[, options]);
+	new Form.Validator(form[, options]);
 
 ### Arguments
 
@@ -160,14 +160,14 @@ Evaluates an entire form against all the validators that are set up, firing even
 
 ### Example
 
-	var myFormValidator = new FormValidator($('myForm'), {
+	var myFormValidator = new Form.Validator($('myForm'), {
 		onFormValidate: myFormHandler,
 		useTitles: true
 	});
 
 ### Notes
 
-* [FormValidator][] must be configured with [InputValidator][] objects (see below for details as well as a list of built-in validators). Each [InputValidator][] will be applied to any input that matches its className within the elements of the form that match the fieldSelectors option.
+* [Form.Validator][] must be configured with [InputValidator][] objects (see below for details as well as a list of built-in validators). Each [InputValidator][] will be applied to any input that matches its className within the elements of the form that match the fieldSelectors option.
 * You can define a css class-name value called *msgPos* as the id of an element into which the validation errors for that input will be inserted. Example:
 
 		<input class="validate-email msgPos:'emailAdvice'">
@@ -199,16 +199,16 @@ Evaluates an entire form against all the validators that are set up, firing even
 Each [InputValidator][] can also be used to generate warnings. Warnings still show error messages, but do not prevent the form from being submitted. Warnings can be applied in two ways:
 
 * **warn per validator** - You can specify any validator as a warning by prefixing "warn-" to the class name. So, for example, if you have a validator called "validate-numbers" you can add the class "warn-validate-numbers" and a warning will be offered rather than an error. The validator will not prevent the form from submitting.
-* **warn per field** - You can also ignore all the validators for a given field. You can add the class "warnOnly" to set all it's validators to present warnings only or you can add the class "ignoreValidation" to the field to turn all the validators off. Note that the [FormValidator][] class has methods do this for you: see [FormValidator:ignoreField][] and [FormValidator:enforceField][].
+* **warn per field** - You can also ignore all the validators for a given field. You can add the class "warnOnly" to set all it's validators to present warnings only or you can add the class "ignoreValidation" to the field to turn all the validators off. Note that the [Form.Validator][] class has methods do this for you: see [Form.Validator:ignoreField][] and [Form.Validator:enforceField][].
 
 ### Internationalization
 
-FormValidator comes with numerous built-in validators (see below), each of which presents a validation error to the user when they trip it. These can be altered for different languages. See [Lang][]
+Form.Validator comes with numerous built-in validators (see below), each of which presents a validation error to the user when they trip it. These can be altered for different languages. See [Lang][]
 
 If you do translate these, please [send them back to us][] so we can add them to our repository.
 
 
-FormValidator Method: reset {#FormValidator:reset}
+Form.Validator Method: reset {#Form.Validator:reset}
 --------------------------------------------------
 
 Removes all the error messages from the form.
@@ -219,9 +219,9 @@ Removes all the error messages from the form.
 
 ### Returns
 
-* (*object*) - This instance of [FormValidator][]
+* (*object*) - This instance of [Form.Validator][]
 
-FormValidator Method: validate {#FormValidator:validate}
+Form.Validator Method: validate {#Form.Validator:validate}
 --------------------------------------------------------
 
 Validates all the inputs in the form; note that this function is called on submit unless you specify otherwise in the options.
@@ -238,7 +238,7 @@ Validates all the inputs in the form; note that this function is called on submi
 
 * (*boolean*) *true* if all the form inputs pass validation
 
-FormValidator Method: validateField {#FormValidator:validateField}
+Form.Validator Method: validateField {#Form.Validator:validateField}
 ----------------------------------------------------------------------
 
 Validates the value of a field against all the validators.
@@ -256,7 +256,7 @@ Validates the value of a field against all the validators.
 
 * (*boolean*) *true* if the form input passes validation
 
-FormValidator Method: test {#FormValidator:test}
+Form.Validator Method: test {#Form.Validator:test}
 ------------------------------------------------
 
 Tests a field against a specific validator.
@@ -275,7 +275,7 @@ Tests a field against a specific validator.
 
 * (*boolean*) *true* if the form input passes the specified validation
 
-FormValidator Method: resetField {#FormValidator:resetField}
+Form.Validator Method: resetField {#Form.Validator:resetField}
 ------------------------------------------------------------
 
 Removes all the error messages for a specific field.
@@ -290,9 +290,9 @@ Removes all the error messages for a specific field.
 
 ### Returns
 
-* (*object*) This instance of [FormValidator][]
+* (*object*) This instance of [Form.Validator][]
 
-FormValidator Method: stop {#FormValidator:stop}
+Form.Validator Method: stop {#Form.Validator:stop}
 ------------------------------------------------
 
 Stops validating the form; when form is submitted, even if there are values that do not pass validation the submission will proceed.
@@ -303,9 +303,9 @@ Stops validating the form; when form is submitted, even if there are values that
 
 ### Returns
 
-* (*object*) This instance of [FormValidator][]
+* (*object*) This instance of [Form.Validator][]
 
-FormValidator Method: start {#FormValidator:start}
+Form.Validator Method: start {#Form.Validator:start}
 ------------------------------------------------
 
 Resumes validating the form.
@@ -316,11 +316,11 @@ Resumes validating the form.
 
 ### Returns
 
-* (*object*) This instance of [FormValidator][]
+* (*object*) This instance of [Form.Validator][]
 
 
 
-FormValidator Method: ignoreField {#FormValidator Method:ignoreField}
+Form.Validator Method: ignoreField {#Form.Validator Method:ignoreField}
 ----------------------------------------------------------------------
 
 Stops validating a particular field.
@@ -336,9 +336,9 @@ Stops validating a particular field.
 
 ### Returns
 
-* (*object*) This instance of [FormValidator][]
+* (*object*) This instance of [Form.Validator][]
 
-FormValidator Method: enforceField {#FormValidator:enforceField}
+Form.Validator Method: enforceField {#Form.Validator:enforceField}
 ----------------------------------------------------------------
 
 Resumes validating a particular field
@@ -353,24 +353,24 @@ Resumes validating a particular field
 
 ### Returns
 
-* (*object*) - This instance of [FormValidator][]
+* (*object*) - This instance of [Form.Validator][]
 
 Adding Custom Validators {#AddingValidators}
 ============================================
 
-*FormValidator.js* includes many default validators. You can add your own using these methods.
+*Form.Validator.js* includes many default validators. You can add your own using these methods.
 
-FormValidator Method: add {#AddingValidators:add}
+Form.Validator Method: add {#AddingValidators:add}
 -------------------------------------------------
 
-Adds a new form validator to the global [FormValidator][] object or to an instance (see notes).
+Adds a new form validator to the global [Form.Validator][] object or to an instance (see notes).
 
 ### Syntax
 
 	//add a form validator to my instance
 	myFormValidator.add(className, options);
 	//add a form validator to all future instances (globally)
-	FormValidator.add(className, options);
+	Form.Validator.add(className, options);
 
 ### Arguments
 
@@ -379,12 +379,12 @@ Adds a new form validator to the global [FormValidator][] object or to an instan
 
 ### Notes
 
-This method is a property of every instance of [FormValidator][] as well as the [FormValidator][] object itself. That is to say that you can add validators to the [FormValidator][] object or to an instance of it. Adding validators to an instance of [FormValidator][] will make those validators apply only to that instance, while	adding them to the Class will make them available to all instances.
+This method is a property of every instance of [Form.Validator][] as well as the [Form.Validator][] object itself. That is to say that you can add validators to the [Form.Validator][] object or to an instance of it. Adding validators to an instance of [Form.Validator][] will make those validators apply only to that instance, while	adding them to the Class will make them available to all instances.
 
 ### Examples
 
 	//add a validator for ALL instances
-	FormValidator.add('isEmpty', {
+	Form.Validator.add('isEmpty', {
 		errorMsg: 'This field is required',
 		test: function(element){
 			if (element.value.length == 0) return false;
@@ -392,15 +392,15 @@ This method is a property of every instance of [FormValidator][] as well as the 
 		}
 	});
 	//this validator is only available to this single instance
-	var myFormValidatorInstance = new FormValidator('myform');
+	var myFormValidatorInstance = new Form.Validator('myform');
 	myFormValidatorInstance.add('doesNotContainTheLetterQ', {
 		errorMsg: 'This field cannot contain the letter Q!',
 		test: function(field){
 			return !field.get('value').test(/q/,'i');
 		}
 	});
-	//Extend FormValidator, add a global validator for all instances of that version
-	var NewFormValidator = FormValidator.extend({
+	//Extend Form.Validator, add a global validator for all instances of that version
+	var NewFormValidator = Form.Validator.extend({
 		//...some code
 	});
 	NewFormValidator.add('doesNotContainTheLetterZ', {
@@ -410,25 +410,25 @@ This method is a property of every instance of [FormValidator][] as well as the 
 		}
 	});
 
-FormValidator: addAllThese {#AddingValidators:addAllThese}
+Form.Validator: addAllThese {#AddingValidators:addAllThese}
 ----------------------------------------------------------
 
-An array of [InputValidator][] configurations (see [FormValidator:add][] above).
+An array of [InputValidator][] configurations (see [Form.Validator:add][] above).
 
 ### Syntax
 
-	//add several input validators to all instances of FormValidator
-	FormValidator.addAllThese(validators);
-	//add several input validators to a specific instance of FormValidator
+	//add several input validators to all instances of Form.Validator
+	Form.Validator.addAllThese(validators);
+	//add several input validators to a specific instance of Form.Validator
 	myFormValidator.addAllThese(validators);
 
 ### Arguments
 
-1. validators - (*array*) an array of validators (see example below and [FormValidator:add][]).
+1. validators - (*array*) an array of validators (see example below and [Form.Validator:add][]).
 
 ### Example
 
-	FormValidator.addAllThese([
+	Form.Validator.addAllThese([
 		['className1', {errorMsg: ..., test: ...}],
 		['className2', {errorMsg: ..., test: ...}],
 		['className3', {errorMsg: ..., test: ...}],
@@ -441,7 +441,7 @@ Native: Element {#Element}
 Element Property: validator {#Element-Properties:validator}
 ---------------------------------------------------------
 
-Sets and gets default options for the FormValidator instance of an Element.
+Sets and gets default options for the Form.Validator instance of an Element.
 
 ### Setter:
 
@@ -451,7 +451,7 @@ Sets and gets default options for the FormValidator instance of an Element.
 
 #### Arguments:
 
-* options - (*object*) the FormValidator options.
+* options - (*object*) the Form.Validator options.
 
 #### Returns:
 
@@ -470,12 +470,12 @@ Sets and gets default options for the FormValidator instance of an Element.
 
 #### Arguments:
 
-1. property - (*string*) the FormValidator property argument.
-2. options  - (*object*) the FormValidator options.
+1. property - (*string*) the Form.Validator property argument.
+2. options  - (*object*) the Form.Validator options.
 
 #### Returns:
 
-* (*object*) The Element's internal FormValidator instance.
+* (*object*) The Element's internal Form.Validator instance.
 
 #### Examples:
 
@@ -497,7 +497,7 @@ Calls the *validate* method on the specified element.
 
 ### Arguments
 
-1. options - (*object*; optional) options to apply to the internal element's of FormValidator.
+1. options - (*object*; optional) options to apply to the internal element's of Form.Validator.
 
 ### Returns
 
@@ -506,12 +506,12 @@ Calls the *validate* method on the specified element.
 Included InputValidators: {#Validators}
 =======================================
 
-Here are the validators that are included in this libary. Add the className to any input and then create a new [FormValidator][] and these will automatically be applied. See [FormValidator:add][] on how to add your own.
+Here are the validators that are included in this libary. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
 
 Validator: IsEmpty {#Validators:IsEmpty}
 ----------------------------------------
 
-Evalutes if the input is empty; this is a utility validator, see [FormValidator.required][].
+Evalutes if the input is empty; this is a utility validator, see [Form.Validator.required][].
 
 Validator: required {#Validators:required}
 ------------------------------------------
@@ -638,10 +638,10 @@ Error Msg: "Please enter something for at least one of the above options."
 	</div>
 
 
-FormValidator Language Localization {#Localization}
+Form.Validator Language Localization {#Localization}
 ==========================================
 
-*FormValidator.js* includes the following key/values for localization.
+*Form.Validator.js* includes the following key/values for localization.
 
 * required - (*string*) 'This field is required.'
 * minLength - (*string*) 'Please enter at least {minLength} characters (you entered {length} characters).' where *minLength* and *length* are variables for the minimum length and the length the user entered.
@@ -661,11 +661,11 @@ FormValidator Language Localization {#Localization}
 * warningPrefix - (*string*)  'Warning: '
 
 [InputValidator]: #InputValidator
-[FormValidator]: #FormValidator
-[FormValidator:ignoreField]: #FormValidator:ignoreField
-[FormValidator:enforceField]: #FormValidator:enforceField
-[FormValidator:add]: #AddingValidators:add
-[FormValidator.required]: #FormValidator:required
+[Form.Validator]: #Form.Validator
+[Form.Validator:ignoreField]: #Form.Validator:ignoreField
+[Form.Validator:enforceField]: #Form.Validator:enforceField
+[Form.Validator:add]: #AddingValidators:add
+[Form.Validator.required]: #Form.Validator:required
 [validation.js by Andrew Tetlaw]: http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events

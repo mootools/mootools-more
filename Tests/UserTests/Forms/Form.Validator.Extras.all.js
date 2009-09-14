@@ -5,7 +5,7 @@
 			description: "Validates that a form's inputs are correct.",
 			verify: "Fill out the form as described and submit it. Were errors reported correctly?",
 			before: function(){
-				new FormValidator.Inline('foo', {
+				new Form.Validator.Inline('foo', {
 					serial: false,
 					onFormValidate: function(passed, form, event){
 						event.stop();
@@ -16,5 +16,5 @@
 			}
 		}
 	],
-	otherScripts: ['FormValidator.Inline']
+	otherScripts: ['Form.Validator.Inline']
 }

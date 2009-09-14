@@ -19,8 +19,8 @@
 		"Element.Position":['all']
 	},
 	"Forms": {
-		"FormValidator.Inline":['all'],
-		"FormValidator.Extras":['all'],
+		"Form.Validator.Inline":['all'],
+		"Form.Validator.Extras":['all'],
 		"Fupdate": ['all'],
 		"Fupdate.Append": ['all'],
 		"OverText": ['all']

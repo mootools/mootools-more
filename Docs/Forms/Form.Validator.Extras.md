@@ -6,7 +6,7 @@ Additional InputValidators: {#Validators}
 * [Online Tutorial/Demo][]
 [Online Tutorial/Demo]:
 
-Here are the validators that are included in this libary. Add the className to any input and then create a new [FormValidator][] and these will automatically be applied. See [FormValidator:add][] on how to add your own.
+Here are the validators that are included in this libary. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
 
 Validator: validate-no-space {#Validators:validate-no-space}
 ------------------------------------------
@@ -137,10 +137,10 @@ Validates that an input is a valid credit card number (Visa, Mastercard, Amex, D
 
 	<input type="input" class="validate-cc-num"/>
 
-FormValidator.Extras Language Localization {#Localization}
+Form.Validator.Extras Language Localization {#Localization}
 ==========================================
 
-*FormValidator.Extras.js* includes the following key/values for localization.
+*Form.Validator.Extras.js* includes the following key/values for localization.
 
 * noSpace - (*string*) 'There can be no spaces in this input.'
 * reqChkByNode - (*string*) 'No items are selected.'
@@ -157,5 +157,5 @@ FormValidator.Extras Language Localization {#Localization}
 * creditcard - (*string*) 'The credit card number entered is invalid. Please check the number and try again. {length} digits entered.' where *length* is the number of integers entered.
 
 
-[FormValidator]: #FormValidator
-[FormValidator:add]: #AddingValidators:add
+[Form.Validator]: #Form.Validator
+[Form.Validator:add]: #AddingValidators:add

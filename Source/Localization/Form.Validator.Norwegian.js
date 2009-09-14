@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Norwegian.js
-	FormValidator messages in Norwegian.
+Script: Form.Validator.Norwegian.js
+	Form.Validator messages in Norwegian.
 
 	License:
 		MIT-style license.
@@ -10,7 +10,7 @@ Script: FormValidator.Norwegian.js
 
 */
 
-MooTools.lang.set('no-NO', 'FormValidator', {
+MooTools.lang.set('no-NO', 'Form.Validator', {
    required:'Dette feltet er pÃ¥krevd.',
    minLength:'Vennligst skriv inn minst {minLength} tegn (du skrev {length} tegn).',
    maxLength:'Vennligst skriv inn maksimalt {maxLength} tegn (du skrev {length} tegn).',

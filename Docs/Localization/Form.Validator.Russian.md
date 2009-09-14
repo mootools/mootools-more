@@ -1,7 +1,7 @@
-Class: FormValidator {#FormValidator}
+Class: Form.Validator {#Form.Validator}
 =====================================
 
-Contains the messages for [FormValidator][] in Russian.
+Contains the messages for [Form.Validator][] in Russian.
 
 ### Authors
 
@@ -18,7 +18,7 @@ Simply change the language property to *ru-RU* or *ru-RU-unicode*.
 
 The default encoding for Russian is *windows-1251* aka *cp1251* - this file also contains a unicode version (see example).
 
-See also: [FormValidator][] and [Lang][]
+See also: [Form.Validator][] and [Lang][]
 
-[FormValidator]: http://www.mootools.net/docs/more/Forms/FormValidator#FormValidator
+[Form.Validator]: http://www.mootools.net/docs/more/Forms/Form.Validator#Form.Validator
 [Lang]: http://www.mootools.net/docs/more/Core/Lang

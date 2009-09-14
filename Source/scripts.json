@@ -144,19 +144,19 @@
 		},
 
 
-		"FormValidator": {
-			"deps": ["More", "Lang", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
+		"Form.Validator": {
+			"deps": ["More", "Lang", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "Form.Validator.English"],
 			"desc": "A css-class based form validation system."
 		},
 
-		"FormValidator.Inline": {
-			"deps": ["More", "FormValidator"],
+		"Form.Validator.Inline": {
+			"deps": ["More", "Form.Validator"],
 			"desc": "A css-class based form validation system."
 		},
 
-		"FormValidator.Extras": {
-			"deps": ["More", "FormValidator"],
-			"desc": "Additional validators for FormValidator."
+		"Form.Validator.Extras": {
+			"deps": ["More", "Form.Validator"],
+			"desc": "Additional validators for Form.Validator."
 		},
 
 		"OverText": {
@@ -340,9 +340,9 @@
 			"desc": "Date messages in English (with conventions for the US)."
 		},
 
-		"FormValidator.English": {
+		"Form.Validator.English": {
 			"deps": ["More", "Lang"],
-			"desc": "FormValidator messages in English."
+			"desc": "Form.Validator messages in English."
 		}
 
 	}

@@ -40,10 +40,10 @@ Fupdate Method: constructor {#Fupdate:constructor}
 * onFailure - (*function*) The function to execute when the request fails. Passed the xhr that is returned by *Request* on failure.
 * onSuccess - (*function*) The function to execute when the request succeeds. Passed the target being updated, the request text, and the request xml.
 
-Fupdate and FormValidator {#Fupdate:FormValidator}
+Fupdate and Form.Validator {#Fupdate:Form.Validator}
 -------------------------------------------------
 
-*Fupdate* integrates with [FormValidator][] to prevent the ajax being sent if the validation fails. It retrieves the *FormValidator* instance from the form, so all that is required is that you instantiate the *FormValidator* before you instantiate the instance of *Fudpate*. If the instance of *FormValidator* has the *stopOnFailure* option set to *true* (the default) then *Fupdate* will not send the ajax request if the validator fails.
+*Fupdate* integrates with [Form.Validator][] to prevent the ajax being sent if the validation fails. It retrieves the *Form.Validator* instance from the form, so all that is required is that you instantiate the *Form.Validator* before you instantiate the instance of *Fudpate*. If the instance of *Form.Validator* has the *stopOnFailure* option set to *true* (the default) then *Fupdate* will not send the ajax request if the validator fails.
 
 Fupdate Method: send {#Fupdate:send}
 --------------------------------------

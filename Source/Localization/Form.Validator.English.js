@@ -1,5 +1,5 @@
 /*
-Script: FormValidator.English.js
+Script: Form.Validator.English.js
 	Date messages for English.
 
 	License:
@@ -10,7 +10,7 @@ Script: FormValidator.English.js
 
 */
 
-MooTools.lang.set('en-US', 'FormValidator', {
+MooTools.lang.set('en-US', 'Form.Validator', {
 
 	required:'This field is required.',
 	minLength:'Please enter at least {minLength} characters (you entered {length} characters).',
@@ -29,7 +29,7 @@ MooTools.lang.set('en-US', 'FormValidator', {
 	errorPrefix: 'Error: ',
 	warningPrefix: 'Warning: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'There can be no spaces in this input.',
 	reqChkByNode: 'No items are selected.',

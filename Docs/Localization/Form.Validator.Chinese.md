@@ -1,7 +1,7 @@
-Class: FormValidator {#FormValidator}
+Class: Form.Validator {#Form.Validator}
 =====================================
 
-Contains the messages for [FormValidator][] in Chinese.
+Contains the messages for [Form.Validator][] in Chinese.
 
 ### Simplified Chinese Usage
 
@@ -15,12 +15,12 @@ Simply change the language property to *zht-CN*.
 
 	MooTools.lang.setLanguage("zht-CN");
 
-See also: [FormValidator][] and [Lang][]
+See also: [Form.Validator][] and [Lang][]
 
 Included Validators
 -------------------
 
 * validate-currency-yuan - validates that the entry is a Yuan value.
 
-[FormValidator]: http://www.mootools.net/docs/more/Forms/FormValidator#FormValidator
+[Form.Validator]: http://www.mootools.net/docs/more/Forms/Form.Validator#Form.Validator
 [Lang]: http://www.mootools.net/docs/more/Core/Lang

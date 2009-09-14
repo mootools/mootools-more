@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.French.js
-  FormValidator messages in French.
+Script: Form.Validator.French.js
+  Form.Validator messages in French.
 
 	License:
 		MIT-style license.
@@ -11,7 +11,7 @@ Script: FormValidator.French.js
 
 */
  
-MooTools.lang.set('fr-FR', 'FormValidator', {
+MooTools.lang.set('fr-FR', 'Form.Validator', {
   required:'Ce champ est obligatoire.',
   minLength:'Veuillez saisir un minimum de {minLength} caract&egrave;re(s) (vous avez saisi {length} caract&egrave;re(s)).',
   maxLength:'Veuillez saisir un maximum de {maxLength} caract&egrave;re(s) (vous avez saisi {length} caract&egrave;re(s)).',
@@ -29,7 +29,7 @@ MooTools.lang.set('fr-FR', 'FormValidator', {
   errorPrefix: 'Erreur : ',
   warningPrefix: 'Attention : ',
   
-  //FormValidator.Extras
+  //Form.Validator.Extras
  
   noSpace: 'Ce champ n\'accepte pas les espaces.',
   reqChkByNode: 'Aucun &eacute;l&eacute;ment n\'est s&eacute;lectionn&eacute;.',

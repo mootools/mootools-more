@@ -1,5 +1,5 @@
 /*
-Script: FormValidator.Spanish.js
+Script: Form.Validator.Spanish.js
 	Date messages for Spanish.
 
 	License:
@@ -10,7 +10,7 @@ Script: FormValidator.Spanish.js
 
 */
 
-MooTools.lang.set('es-ES', 'FormValidator', {
+MooTools.lang.set('es-ES', 'Form.Validator', {
 
 	required:'Este campo es obligatorio.',
 	minLength:'Por favor introduce al menos {minLength} caracteres (has introducido {length} caracteres).',
@@ -29,7 +29,7 @@ MooTools.lang.set('es-ES', 'FormValidator', {
 	errorPrefix: 'Error: ',
 	warningPrefix: 'Aviso: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'No pueden haber espacios en esta entrada.',
 	reqChkByNode: 'No hay elementos seleccionados.',

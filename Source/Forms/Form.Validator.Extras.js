@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Extras.js
-	Additional validators for the FormValidator class.
+Script: Form.Validator.Extras.js
+	Additional validators for the Form.Validator class.
 
 	License:
 		MIT-style license.
@@ -8,7 +8,7 @@ Script: FormValidator.Extras.js
 	Authors:
 		Aaron Newton
 */
-FormValidator.addAllThese([
+Form.Validator.addAllThese([
 
 	['validate-enforce-oncheck', {
 		test: function(element, props){
@@ -39,7 +39,7 @@ FormValidator.addAllThese([
 
 	['validate-nospace', {
 		errorMsg: function(){
-			return FormValidator.getMsg('noSpace');
+			return Form.Validator.getMsg('noSpace');
 		},
 		test: function(element, props){
 			return !element.get('value').test(/\s/);
@@ -67,7 +67,7 @@ FormValidator.addAllThese([
 
 	['validate-reqchk-bynode', {
 		errorMsg: function(){
-			return FormValidator.getMsg('reqChkByNode');
+			return Form.Validator.getMsg('reqChkByNode');
 		},
 		test: function(element, props){
 			return (document.id(props.nodeId).getElements(props.selector || 'input[type=checkbox], input[type=radio]')).some(function(item){
@@ -78,7 +78,7 @@ FormValidator.addAllThese([
 
 	['validate-required-check', {
 		errorMsg: function(element, props){
-			return props.useTitle ? element.get('title') : FormValidator.getMsg('requiredChk');
+			return props.useTitle ? element.get('title') : Form.Validator.getMsg('requiredChk');
 		},
 		test: function(element, props){
 			return !!element.checked;
@@ -87,7 +87,7 @@ FormValidator.addAllThese([
 
 	['validate-reqchk-byname', {
 		errorMsg: function(element, props){
-			return FormValidator.getMsg('reqChkByName').substitute({label: props.label || element.get('type')});
+			return Form.Validator.getMsg('reqChkByName').substitute({label: props.label || element.get('type')});
 		},
 		test: function(element, props){
 			var grpName = props.groupName || element.get('name');
@@ -102,7 +102,7 @@ FormValidator.addAllThese([
 
 	['validate-match', {
 		errorMsg: function(element, props){
-			return FormValidator.getMsg('match').substitute({matchName: props.matchName || document.id(props.matchInput).get('name')});
+			return Form.Validator.getMsg('match').substitute({matchName: props.matchName || document.id(props.matchInput).get('name')});
 		},
 		test: function(element, props){
 			var eleVal = element.get('value');
@@ -113,8 +113,8 @@ FormValidator.addAllThese([
 
 	['validate-after-date', {
 		errorMsg: function(element, props){
-			return FormValidator.getMsg('afterDate').substitute({
-				label: props.afterLabel || (props.afterElement ? FormValidator.getMsg('startDate') : FormValidator.getMsg('currentDate'))
+			return Form.Validator.getMsg('afterDate').substitute({
+				label: props.afterLabel || (props.afterElement ? Form.Validator.getMsg('startDate') : Form.Validator.getMsg('currentDate'))
 			});
 		},
 		test: function(element, props){
@@ -126,8 +126,8 @@ FormValidator.addAllThese([
 
 	['validate-before-date', {
 		errorMsg: function(element, props){
-			return FormValidator.getMsg('beforeDate').substitute({
-				label: props.beforeLabel || (props.beforeElement ? FormValidator.getMsg('endDate') : FormValidator.getMsg('currentDate'))
+			return Form.Validator.getMsg('beforeDate').substitute({
+				label: props.beforeLabel || (props.beforeElement ? Form.Validator.getMsg('endDate') : Form.Validator.getMsg('currentDate'))
 			});
 		},
 		test: function(element, props){
@@ -139,7 +139,7 @@ FormValidator.addAllThese([
 
 	['validate-custom-required', {
 		errorMsg: function(){
-			return FormValidator.getMsg('required');
+			return Form.Validator.getMsg('required');
 		},
 		test: function(element, props){
 			return element.get('value') != props.emptyValue;
@@ -150,7 +150,7 @@ FormValidator.addAllThese([
 		errorMsg: function(element, props){
 			var startMo = document.id(props.sameMonthAs) && document.id(props.sameMonthAs).get('value');
 			var eleVal = element.get('value');
-			if (eleVal != '') return FormValidator.getMsg(startMo ? 'sameMonth' : 'startMonth');
+			if (eleVal != '') return Form.Validator.getMsg(startMo ? 'sameMonth' : 'startMonth');
 		},
 		test: function(element, props){
 			var d1 = Date.parse(element.get('value'));
@@ -163,11 +163,11 @@ FormValidator.addAllThese([
 	['validate-cc-num', {
 		errorMsg: function(element){
 			var ccNum = element.get('value').ccNum.replace(/[^0-9]/g, '');
-			return FormValidator.getMsg('creditcard').substitute({length: ccNum.length});
+			return Form.Validator.getMsg('creditcard').substitute({length: ccNum.length});
 		},
 		test: function(element){
 			// required is a different test
-			if (FormValidator.getValidator('IsEmpty').test(element)) { return true; }
+			if (Form.Validator.getValidator('IsEmpty').test(element)) { return true; }
 
 			// Clean number value
 			var ccNum = element.get('value');

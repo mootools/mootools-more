@@ -1,5 +1,5 @@
 /*
-Script: FormValidator.Polish.js
+Script: Form.Validator.Polish.js
 	Date messages for Polish.
 
 	License:
@@ -10,7 +10,7 @@ Script: FormValidator.Polish.js
 
 */
 
-MooTools.lang.set('pl-PL', 'FormValidator', {
+MooTools.lang.set('pl-PL', 'Form.Validator', {
 
 	required:'To pole jest wymagane.',
 	minLength:'Wymagane jest przynajmniej {minLenght} znaków (wpisanych zostało tylko {length}).',
@@ -29,7 +29,7 @@ MooTools.lang.set('pl-PL', 'FormValidator', {
 	errorPrefix: 'Błąd: ',
 	warningPrefix: 'Uwaga: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'W tym polu nie mogą znajdować się spacje.',
 	reqChkByNode: 'Brak zaznaczonych elementów.',

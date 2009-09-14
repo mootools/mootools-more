@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Inline.js
-	Extends FormValidator to add inline messages.
+Script: Form.Validator.Inline.js
+	Extends Form.Validator to add inline messages.
 
 	License:
 		MIT-style license.
@@ -9,9 +9,9 @@ Script: FormValidator.Inline.js
 		Aaron Newton
 */
 
-FormValidator.Inline = new Class({
+Form.Validator.Inline = new Class({
 
-	Extends: FormValidator,
+	Extends: Form.Validator,
 
 	options: {
 		scrollToErrorsOnSubmit: true,

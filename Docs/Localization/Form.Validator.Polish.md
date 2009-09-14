@@ -1,7 +1,7 @@
-Class: FormValidator {#FormValidator}
+Class: Form.Validator {#Form.Validator}
 =====================================
 
-Contains the messages for [FormValidator][] in Polish.
+Contains the messages for [Form.Validator][] in Polish.
 
 ### Authors
 
@@ -11,9 +11,9 @@ Contains the messages for [FormValidator][] in Polish.
 
 Simply change the language property to *pl-PL*.
 
-	FormValidator.language = "pl-PL";
+	Form.Validator.language = "pl-PL";
 
-See also: [FormValidator][] and [Lang][]
+See also: [Form.Validator][] and [Lang][]
 
-[FormValidator]: http://www.mootools.net/docs/more/Forms/FormValidator#FormValidator
+[Form.Validator]: http://www.mootools.net/docs/more/Forms/Form.Validator#Form.Validator
 [Lang]: http://www.mootools.net/docs/more/Core/Lang

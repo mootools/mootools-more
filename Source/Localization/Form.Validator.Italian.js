@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Italian.js
-		FormValidator messages in Italian.
+Script: Form.Validator.Italian.js
+		Form.Validator messages in Italian.
 
 	License:
 		MIT-style license.
@@ -10,7 +10,7 @@ Script: FormValidator.Italian.js
 		Andrea Novero
 */
  
-MooTools.lang.set('it-IT', 'FormValidator', {
+MooTools.lang.set('it-IT', 'Form.Validator', {
 
 	required:'Il campo &egrave; obbligatorio.',
 	minLength:'Inserire almeno {minLength} caratteri (ne sono stati inseriti {length}).',
@@ -29,7 +29,7 @@ MooTools.lang.set('it-IT', 'FormValidator', {
 	errorPrefix: 'Errore: ',
 	warningPrefix: 'Attenzione: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'Non sono consentiti spazi.',
 	reqChkByNode: 'Nessuna voce selezionata.',

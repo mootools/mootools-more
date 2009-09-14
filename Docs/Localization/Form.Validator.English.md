@@ -1,7 +1,7 @@
-Class: FormValidator {#FormValidator}
+Class: Form.Validator {#Form.Validator}
 =====================================
 
-Contains the messages for [FormValidator][] in English.
+Contains the messages for [Form.Validator][] in English.
 
 ### Authors
 
@@ -13,7 +13,7 @@ Simply change the language property to *en-US*.
 
 	MooTools.lang.setLanguage("en-US");
 
-See also: [FormValidator][] and [Lang][]
+See also: [Form.Validator][] and [Lang][]
 
-[FormValidator]: /more/Forms/FormValidator#FormValidator
+[Form.Validator]: /more/Forms/Form.Validator#Form.Validator
 [Lang]: /more/Core/Lang

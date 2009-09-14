@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Portuguese.js
-	FormValidator messages in Portuguese.
+Script: Form.Validator.Portuguese.js
+	Form.Validator messages in Portuguese.
 
 	License:
 		MIT-style license.
@@ -10,7 +10,7 @@ Script: FormValidator.Portuguese.js
 
 */
 
-MooTools.lang.set('pt-PT', 'FormValidator', {
+MooTools.lang.set('pt-PT', 'Form.Validator', {
 	required:'Este campo é necessário.',
 	minLength:'Digite pelo menos{minLength} caracteres (comprimento {length} caracteres).',
 	maxLength:'Não insira mais de {maxLength} caracteres (comprimento {length} caracteres).',

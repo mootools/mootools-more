@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Chinese.js
-	FormValidator messages in chinese (both simplified and traditional).
+Script: Form.Validator.Chinese.js
+	Form.Validator messages in chinese (both simplified and traditional).
 
 	License:
 		MIT-style license.
@@ -33,7 +33,7 @@ If you are unsure, you can only use the simplified Chinese language pack, as it 
 */
 
 // Simplified Chinese
-MooTools.lang.set('zhs-CN', 'FormValidator', {
+MooTools.lang.set('zhs-CN', 'Form.Validator', {
 	required:'这是必填项。',
 	minLength:'请至少输入 {minLength} 个字符 (已输入 {length} 个)。',
 	maxLength:'最多只能输入 {maxLength} 个字符 (已输入 {length} 个)。',
@@ -53,7 +53,7 @@ MooTools.lang.set('zhs-CN', 'FormValidator', {
 });
 
 // Traditional Chinese
-MooTools.lang.set('zht-CN', 'FormValidator', {
+MooTools.lang.set('zht-CN', 'Form.Validator', {
 	required:'這是必填項。',
 	minLength:'請至少鍵入 {minLength} 個字符(已鍵入 {length} 個)。',
 	maxLength:'最多只能鍵入 {maxLength} 個字符(已鍵入 {length} 個)。',
@@ -72,15 +72,15 @@ MooTools.lang.set('zht-CN', 'FormValidator', {
 	warningPrefix: '警告：'
 });
 
-FormValidator.add('validate-currency-yuan', {
+Form.Validator.add('validate-currency-yuan', {
 	errorMsg: function(){
-		return FormValidator.getMsg('currencyYuan');
+		return Form.Validator.getMsg('currencyYuan');
 	},
 	test: function(element) {
 		// [￥]1[##][,###]+[.##]
 		// [￥]1###+[.##]
 		// [￥]0.##
 		// [￥].##
-		return FormValidator.getValidator('IsEmpty').test(element) ||  (/^￥?\-?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}\d*(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/).test(element.get('value'));
+		return Form.Validator.getValidator('IsEmpty').test(element) ||  (/^￥?\-?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}\d*(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/).test(element.get('value'));
 	}
 });

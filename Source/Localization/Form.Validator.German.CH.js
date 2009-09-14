@@ -1,5 +1,5 @@
 /*
-Script: FormValidator.German.CH.js
+Script: Form.Validator.German.CH.js
 	Date messages for German (Switzerland).
  
 	License:
@@ -10,7 +10,7 @@ Script: FormValidator.German.CH.js
  
 */
  
-MooTools.lang.set('de-CH', 'FormValidator', {
+MooTools.lang.set('de-CH', 'Form.Validator', {
  
   required:'Dieses Feld ist obligatorisch.',
   minLength:'Geben Sie bitte mindestens {minLength} Zeichen ein (Sie haben {length} Zeichen eingegeben).',
@@ -29,7 +29,7 @@ MooTools.lang.set('de-CH', 'FormValidator', {
   errorPrefix: 'Fehler: ',
   warningPrefix: 'Warnung: ',
  
-  //FormValidator.Extras
+  //Form.Validator.Extras
  
   noSpace: 'In diesem Eingabefeld darf kein Leerzeichen sein.',
   reqChkByNode: 'Es wurden keine Elemente gew&auml;hlt.',

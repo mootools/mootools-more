@@ -1,5 +1,5 @@
 /*
-Script: FormValidator.Swedish.js
+Script: Form.Validator.Swedish.js
 	Date messages for Swedish.
 
 	License:
@@ -10,7 +10,7 @@ Script: FormValidator.Swedish.js
 
 */
 
-MooTools.lang.set('sv-SE', 'FormValidator', {
+MooTools.lang.set('sv-SE', 'Form.Validator', {
 
 	required:'Fältet är obligatoriskt.',
 	minLength:'Ange minst {minLength} tecken (du angav {length} tecken).',
@@ -29,7 +29,7 @@ MooTools.lang.set('sv-SE', 'FormValidator', {
 	errorPrefix: 'Fel: ',
 	warningPrefix: 'Varning: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'Det får inte finnas några mellanslag i detta fält.',
 	reqChkByNode: 'Inga objekt är valda.',

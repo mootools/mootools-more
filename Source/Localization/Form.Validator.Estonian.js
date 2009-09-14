@@ -1,5 +1,5 @@
 /*
-Script: FormValidator.Estonian.js
+Script: Form.Validator.Estonian.js
 	Date messages for Estonian.
 
 	License:
@@ -10,7 +10,7 @@ Script: FormValidator.Estonian.js
 
 */
 
-MooTools.lang.set('et-EE', 'FormValidator', {
+MooTools.lang.set('et-EE', 'Form.Validator', {
 
 	required:'Väli peab olema täidetud.',
 	minLength:'Palun sisestage vähemalt {minLength} tähte (te sisestasite {length} tähte).',
@@ -29,7 +29,7 @@ MooTools.lang.set('et-EE', 'FormValidator', {
 	errorPrefix: 'Viga: ',
 	warningPrefix: 'Hoiatus: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'Väli ei tohi sisaldada tühikuid.',
 	reqChkByNode: 'Ükski väljadest pole valitud.',

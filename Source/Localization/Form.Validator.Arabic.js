@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Arabic.js
-	FormValidator messages in Arabic.
+Script: Form.Validator.Arabic.js
+	Form.Validator messages in Arabic.
 
 	License:
 		MIT-style license.
@@ -10,7 +10,7 @@ Script: FormValidator.Arabic.js
 
 */
 
-MooTools.lang.set('ar', 'FormValidator', {
+MooTools.lang.set('ar', 'Form.Validator', {
 	required:'هذا الحقل مطلوب.',
 	minLength:'رجاءً إدخال {minLength}  أحرف على الأقل (تم إدخال {length} أحرف).',
 	maxLength:'الرجاء عدم إدخال أكثر من {maxLength} أحرف (تم إدخال {length} أحرف).',

@@ -1,11 +1,11 @@
-Class: FormValidator.Inline {#FormValidator-Inline}
+Class: Form.Validator.Inline {#Form.Validator-Inline}
 ====================================
 
 Evaluates an entire form against all the validators that are set up *displaying messages* in-line in the page.
 
 ### Extends
 
-* [FormValidator][]
+* [Form.Validator][]
 
 ### Implements
 
@@ -13,7 +13,7 @@ Evaluates an entire form against all the validators that are set up *displaying 
 
 ### Syntax
 
-	new FormValidator(form[, options]);
+	new Form.Validator(form[, options]);
 
 ### Arguments
 
@@ -22,16 +22,16 @@ Evaluates an entire form against all the validators that are set up *displaying 
 
 ### Options
 
-* all the options defined for [FormValidator][], plus
+* all the options defined for [Form.Validator][], plus
 * scrollToErrorsOnSubmit - (*boolean*) if *true* (the default), when the user submits the form the window (or overflown parent) will scroll up to that element so it is in view. Will use [Fx.Scroll][] if it's available, otherwise it will jump to the element.
 * scrollFxOptions - (*object*) options for [Fx.Scroll][] if it's available; used for scrolling to errors if *scrollToErrorsOnSubmit* is *true*.
 
 ### Events
 
-* all the events defined for [FormValidator][]
+* all the events defined for [Form.Validator][]
 
 
-FormValidator.Inline method: getAllAdviceMessages {#FormValidator-Inline:getAllAdviceMessages}
+Form.Validator.Inline method: getAllAdviceMessages {#Form.Validator-Inline:getAllAdviceMessages}
 ----------------------------------------------------------------------
 
 Returns all the messages that an input can produce, regardless of the user input.
@@ -56,7 +56,7 @@ Returns all the messages that an input can produce, regardless of the user input
 			validator: validator //the InputValidator instance
 		}
 
-FormValidator method: getAdvice {#FormValidator-Inline:getAdvice}
+Form.Validator method: getAdvice {#Form.Validator-Inline:getAdvice}
 ----------------------------------------------------------------------
 
 Retrieves the advice message for a field and a given validator name.
@@ -72,7 +72,7 @@ Retrieves the advice message for a field and a given validator name.
 ### Arguments
 
 1. field - (*mixed*) A string of the id for an Element or an Element reference of the input.
-2. validatorName - (*string*) A string that represents the validator's name as it was added to [FormValidator][].
+2. validatorName - (*string*) A string that represents the validator's name as it was added to [Form.Validator][].
 
 ### Returns
 

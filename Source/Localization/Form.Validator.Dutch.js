@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Dutch.js
-	FormValidator messages in Dutch.
+Script: Form.Validator.Dutch.js
+	Form.Validator messages in Dutch.
 
 	License:
 		MIT-style license.
@@ -10,7 +10,7 @@ Script: FormValidator.Dutch.js
 
 */
 
-MooTools.lang.set('nl-NL', 'FormValidator', {
+MooTools.lang.set('nl-NL', 'Form.Validator', {
 	required:'Dit veld is verplicht.',
 	minLength:'Vul minimaal {minLength} karakters in (je hebt {length} karakters ingevoerd).',
 	maxLength:'Vul niet meer dan {maxLength} karakters in (je hebt {length} karakters ingevoerd).',

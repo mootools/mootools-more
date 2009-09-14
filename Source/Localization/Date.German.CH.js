@@ -1,5 +1,5 @@
 /*
-Script: FormValidator.German.CH.js
+Script: Date.German.CH.js
 	Date messages for German (Switzerland).
  
 	License:

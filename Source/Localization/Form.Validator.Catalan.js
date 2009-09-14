@@ -1,5 +1,5 @@
 /*
-Script: FormValidator.Catalan.js
+Script: Form.Validator.Catalan.js
 	Date messages for Catalan.
 
 	License:
@@ -11,7 +11,7 @@ Script: FormValidator.Catalan.js
 
 */
 
-MooTools.lang.set('ca-CA', 'FormValidator', {
+MooTools.lang.set('ca-CA', 'Form.Validator', {
 
 	required:'Aquest camp es obligatori.',
 	minLength:'Per favor introdueix al menys {minLength} caracters (has introduit {length} caracters).',
@@ -30,7 +30,7 @@ MooTools.lang.set('ca-CA', 'FormValidator', {
 	errorPrefix: 'Error: ',
 	warningPrefix: 'Avis: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'No poden haver espais en aquesta entrada.',
 	reqChkByNode: 'No hi han elements seleccionats.',

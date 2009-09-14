@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Russian.js
-	FormValidator messages in Russian (utf-8 and cp1251).
+Script: Form.Validator.Russian.js
+	Form.Validator messages in Russian (utf-8 and cp1251).
 
 	License:
 		MIT-style license.
@@ -10,7 +10,7 @@ Script: FormValidator.Russian.js
 
 */
 
-MooTools.lang.set('ru-RU-unicode', 'FormValidator', {
+MooTools.lang.set('ru-RU-unicode', 'Form.Validator', {
 	required:'Это поле обязательно к заполнению.',
 	minLength:'Пожалуйста, введите хотя бы {minLength} символов (Вы ввели {length}).',
 	maxLength:'Пожалуйста, введите не больше {maxLength} символов (Вы ввели {length}).',
@@ -30,7 +30,7 @@ MooTools.lang.set('ru-RU-unicode', 'FormValidator', {
 });
 
 //translation in windows-1251 codepage
-MooTools.lang.set('ru-RU', 'FormValidator', {
+MooTools.lang.set('ru-RU', 'Form.Validator', {
 	required:'Ýòî ïîëå îáÿçàòåëüíî ê çàïîëíåíèþ.',
 	minLength:'Ïîæàëóéñòà, ââåäèòå õîòÿ áû {minLength} ñèìâîëîâ (Âû ââåëè {length}).',
 	maxLength:'Ïîæàëóéñòà, ââåäèòå íå áîëüøå {maxLength} ñèìâîëîâ (Âû ââåëè {length}).',

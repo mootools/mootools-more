@@ -1,6 +1,6 @@
 /*
-Script: FormValidator.Portuguese.BR.js
-	FormValidator messages in Portuguese-BR.
+Script: Form.Validator.Portuguese.BR.js
+	Form.Validator messages in Portuguese-BR.
 
 	License:
 		MIT-style license.
@@ -10,7 +10,7 @@ Script: FormValidator.Portuguese.BR.js
 
 */
 
-MooTools.lang.set('pt-BR', 'FormValidator', {
+MooTools.lang.set('pt-BR', 'Form.Validator', {
 
 	required: 'Este campo é obrigatório.',
 	minLength: 'Digite pelo menos {minLength} caracteres (tamanho atual: {length}).',
@@ -29,7 +29,7 @@ MooTools.lang.set('pt-BR', 'FormValidator', {
 	errorPrefix: 'Erro: ',
 	warningPrefix: 'Aviso: ',
 
-	//FormValidator.Extras
+	//Form.Validator.Extras
 
 	noSpace: 'Não se pode digitar espaços neste campo.',
 	reqChkByNode: 'Não foi selecionado nenhum item.',
