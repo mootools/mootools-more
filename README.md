@@ -7,6 +7,7 @@ MooTools Plugins and Enhancements Repository
 
 ### TO DO
 
+* Lang updates for additional timeAgoInWords phrases (see: https://mootools.lighthouseapp.com/projects/24057/tickets/79-additional-expressions-for-datetimediffinwords)
 * Move demo/tutorials from Clientcide wiki to Mootorial; update links in docs
 * Compat for Clientcide
 * make detach method for all classes that attach to elements
