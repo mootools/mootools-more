@@ -1,4 +1,4 @@
-Class: Form.Validator.Inline {#Form.Validator-Inline}
+Class: Form.Validator.Inline {#Form-Validator-Inline}
 ====================================
 
 Evaluates an entire form against all the validators that are set up *displaying messages* in-line in the page.
@@ -31,7 +31,7 @@ Evaluates an entire form against all the validators that are set up *displaying 
 * all the events defined for [Form.Validator][]
 
 
-Form.Validator.Inline method: getAllAdviceMessages {#Form.Validator-Inline:getAllAdviceMessages}
+Form.Validator.Inline method: getAllAdviceMessages {#Form-Validator-Inline:getAllAdviceMessages}
 ----------------------------------------------------------------------
 
 Returns all the messages that an input can produce, regardless of the user input.
@@ -56,7 +56,7 @@ Returns all the messages that an input can produce, regardless of the user input
 			validator: validator //the InputValidator instance
 		}
 
-Form.Validator method: getAdvice {#Form.Validator-Inline:getAdvice}
+Form.Validator method: getAdvice {#Form-Validator-Inline:getAdvice}
 ----------------------------------------------------------------------
 
 Retrieves the advice message for a field and a given validator name.

@@ -157,5 +157,5 @@ Form.Validator.Extras Language Localization {#Localization}
 * creditcard - (*string*) 'The credit card number entered is invalid. Please check the number and try again. {length} digits entered.' where *length* is the number of integers entered.
 
 
-[Form.Validator]: #Form.Validator
+[Form.Validator]: #Form-Validator
 [Form.Validator:add]: #AddingValidators:add

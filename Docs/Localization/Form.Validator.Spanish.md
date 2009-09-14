@@ -1,4 +1,4 @@
-Class: Form.Validator {#Form.Validator}
+Class: Form.Validator {#Form-Validator}
 =====================================
 
 Contains the messages for [Form.Validator][] in Spanish.
@@ -15,5 +15,5 @@ Simply change the language property to *es-ES*.
 
 See also: [Form.Validator][] and [Lang][]
 
-[Form.Validator]: http://www.mootools.net/docs/more/Forms/Form.Validator#Form.Validator
+[Form.Validator]: http://www.mootools.net/docs/more/Forms/Form.Validator#Form-Validator
 [Lang]: http://www.mootools.net/docs/more/Core/Lang

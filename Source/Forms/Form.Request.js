@@ -1,5 +1,5 @@
 /*
-Script: Fupdate.js
+Script: Form.Request.js
 	Handles the basic functionality of submitting a form and updating a dom element with the result.
 
 License:
@@ -10,11 +10,11 @@ Authors:
 
 */
 
-var Fupdate;
+if (!window.Form) window.Form = {};
 
 (function(){
 
-	Fupdate = new Class({
+	Form.Request = new Class({
 
 		Binds: ['onSubmit', 'onFormValidate'],
 
@@ -34,7 +34,7 @@ var Fupdate;
 			resetForm: true
 		},
 
-		property: 'fupdate',
+		property: 'form.request',
 
 		initialize: function(form, update, options) {
 			this.element = document.id(form);
@@ -109,7 +109,7 @@ var Fupdate;
 
 		onSubmit: function(e){
 			if (this.element.retrieve('validator')) {
-				//form validator was created after fupdate
+				//form validator was created after Form.Request
 				this.detach();
 				this.addFormEvent();
 				return;
@@ -129,19 +129,19 @@ var Fupdate;
 
 	});
 
-	Element.Properties.fupdate = {
+	Element.Properties.formRequest = {
 
 		set: function(){
 			var opt = Array.link(arguments, {options: Object.type, update: Element.type, updateId: String.type});
 			var update = opt.update || opt.updateId;
-			var fupdate = this.retrieve('fupdate');
+			var updater = this.retrieve('form.request');
 			if (update) {
-				if (fupdate) fupdate.update = document.id(update);
-				this.store('fupdate:update', update);
+				if (updater) updater.update = document.id(update);
+				this.store('form.request:update', update);
 			}
 			if (opt.options) {
-				if (fupdate) fupdate.setOptions(opt.options);
-				this.store('fupdate:options', opt.options)
+				if (updater) updater.setOptions(opt.options);
+				this.store('form.request:options', opt.options);
 			}
 			return this;
 		},
@@ -149,20 +149,20 @@ var Fupdate;
 		get: function(){
 			var opt = Array.link(arguments, {options: Object.type, update: Element.type, updateId: String.type});
 			var update = opt.update || opt.updateId;
-			if (opt.options || update || !this.retrieve('fupdate')){
-				if (opt.options || !this.retrieve('fupdate:options')) this.set('fupdate', opt.options);
-				if (update) this.set('fupdate', update);
-				this.store('fupdate', new Fupdate(this, this.retrieve('fupdate:update'), this.retrieve('fupdate:options')));
+			if (opt.options || update || !this.retrieve('form.request')){
+				if (opt.options || !this.retrieve('form.request:options')) this.set('form.request', opt.options);
+				if (update) this.set('form.request', update);
+				this.store('form.request', new Form.Request(this, this.retrieve('form.request:update'), this.retrieve('form.request:options')));
 			}
-			return this.retrieve('fupdate');
+			return this.retrieve('form.request');
 		}
 
 	};
 
 	Element.implement({
 
-		fupdate: function(update, options){
-			this.get('fupdate', update, options).send();
+		formUpdate: function(update, options){
+			this.get('form.request', update, options).send();
 			return this;
 		}
 

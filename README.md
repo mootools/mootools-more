@@ -47,7 +47,6 @@ NOTE: none of the changes below are breaking changes.
 ##### Changes to Clientcide plugins adopted by MooTools More in this release
 
 * Fupdate is now named Form.Request; see compat layer on [Clientcide.com](http://clientcide.com/js)
-* 
 
 #### Changes in MooTools More 1.2.3.1
 

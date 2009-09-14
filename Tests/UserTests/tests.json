@@ -21,8 +21,8 @@
 	"Forms": {
 		"Form.Validator.Inline":['all'],
 		"Form.Validator.Extras":['all'],
-		"Fupdate": ['all'],
-		"Fupdate.Append": ['all'],
+		"Form.Request": ['all'],
+		"Form.Request.Append": ['all'],
 		"OverText": ['all']
 	},
 	"Fx": {

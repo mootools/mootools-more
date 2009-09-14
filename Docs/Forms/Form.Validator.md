@@ -120,7 +120,7 @@ Retrieves the error message for the validator.
 * (*mixed*) - The error message (*string*) or *boolean false* if no message is meant to be returned.
 
 
-Class: Form.Validator {#Form.Validator}
+Class: Form.Validator {#Form-Validator}
 ====================================
 
 Evaluates an entire form against all the validators that are set up, firing events when inputs fail validation.
@@ -208,7 +208,7 @@ Form.Validator comes with numerous built-in validators (see below), each of whic
 If you do translate these, please [send them back to us][] so we can add them to our repository.
 
 
-Form.Validator Method: reset {#Form.Validator:reset}
+Form.Validator Method: reset {#Form-Validator:reset}
 --------------------------------------------------
 
 Removes all the error messages from the form.
@@ -221,7 +221,7 @@ Removes all the error messages from the form.
 
 * (*object*) - This instance of [Form.Validator][]
 
-Form.Validator Method: validate {#Form.Validator:validate}
+Form.Validator Method: validate {#Form-Validator:validate}
 --------------------------------------------------------
 
 Validates all the inputs in the form; note that this function is called on submit unless you specify otherwise in the options.
@@ -238,7 +238,7 @@ Validates all the inputs in the form; note that this function is called on submi
 
 * (*boolean*) *true* if all the form inputs pass validation
 
-Form.Validator Method: validateField {#Form.Validator:validateField}
+Form.Validator Method: validateField {#Form-Validator:validateField}
 ----------------------------------------------------------------------
 
 Validates the value of a field against all the validators.
@@ -256,7 +256,7 @@ Validates the value of a field against all the validators.
 
 * (*boolean*) *true* if the form input passes validation
 
-Form.Validator Method: test {#Form.Validator:test}
+Form.Validator Method: test {#Form-Validator:test}
 ------------------------------------------------
 
 Tests a field against a specific validator.
@@ -275,7 +275,7 @@ Tests a field against a specific validator.
 
 * (*boolean*) *true* if the form input passes the specified validation
 
-Form.Validator Method: resetField {#Form.Validator:resetField}
+Form.Validator Method: resetField {#Form-Validator:resetField}
 ------------------------------------------------------------
 
 Removes all the error messages for a specific field.
@@ -292,7 +292,7 @@ Removes all the error messages for a specific field.
 
 * (*object*) This instance of [Form.Validator][]
 
-Form.Validator Method: stop {#Form.Validator:stop}
+Form.Validator Method: stop {#Form-Validator:stop}
 ------------------------------------------------
 
 Stops validating the form; when form is submitted, even if there are values that do not pass validation the submission will proceed.
@@ -305,7 +305,7 @@ Stops validating the form; when form is submitted, even if there are values that
 
 * (*object*) This instance of [Form.Validator][]
 
-Form.Validator Method: start {#Form.Validator:start}
+Form.Validator Method: start {#Form-Validator:start}
 ------------------------------------------------
 
 Resumes validating the form.
@@ -320,7 +320,7 @@ Resumes validating the form.
 
 
 
-Form.Validator Method: ignoreField {#Form.Validator Method:ignoreField}
+Form.Validator Method: ignoreField {#Form-Validator Method:ignoreField}
 ----------------------------------------------------------------------
 
 Stops validating a particular field.
@@ -338,7 +338,7 @@ Stops validating a particular field.
 
 * (*object*) This instance of [Form.Validator][]
 
-Form.Validator Method: enforceField {#Form.Validator:enforceField}
+Form.Validator Method: enforceField {#Form-Validator:enforceField}
 ----------------------------------------------------------------
 
 Resumes validating a particular field
@@ -661,11 +661,11 @@ Form.Validator Language Localization {#Localization}
 * warningPrefix - (*string*)  'Warning: '
 
 [InputValidator]: #InputValidator
-[Form.Validator]: #Form.Validator
-[Form.Validator:ignoreField]: #Form.Validator:ignoreField
-[Form.Validator:enforceField]: #Form.Validator:enforceField
+[Form.Validator]: #Form-Validator
+[Form.Validator:ignoreField]: #Form-Validator:ignoreField
+[Form.Validator:enforceField]: #Form-Validator:enforceField
 [Form.Validator:add]: #AddingValidators:add
-[Form.Validator.required]: #Form.Validator:required
+[Form.Validator.required]: #Form-Validator:required
 [validation.js by Andrew Tetlaw]: http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events

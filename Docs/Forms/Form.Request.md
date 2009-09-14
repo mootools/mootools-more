@@ -1,26 +1,17 @@
-Class: Fupdate {#Fupdate}
+Class: Form.Request {#Form-Request}
 =========================
 Updates a DOM element with the response from the submission of a form (via Ajax).
-
-### Tutorial/Demo
-
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/09-forms/05.1-fupdate
-
-### About the name
-
-I know - "Fupdate" (Form Update abbr.) is kinda lame, but I really couldn't come up with a better name... BTW, it's pronounced as one word (not "F-Update"; rather "fupdate"). I'm open to suggestions!
 
 ### Implements
 
 - [Options][], [Events][], [Class.Occlude][]
 
-Fupdate Method: constructor {#Fupdate:constructor}
+Form.Request Method: constructor {#Form.Request:constructor}
 --------------------------------------------------
 
 ### Syntax
 
-	new Fupdate(form, update[, options]);
+	new Form.Request(form, update[, options]);
 
 ### Arguments
 
@@ -40,49 +31,49 @@ Fupdate Method: constructor {#Fupdate:constructor}
 * onFailure - (*function*) The function to execute when the request fails. Passed the xhr that is returned by *Request* on failure.
 * onSuccess - (*function*) The function to execute when the request succeeds. Passed the target being updated, the request text, and the request xml.
 
-Fupdate and Form.Validator {#Fupdate:Form.Validator}
+Form.Request and Form.Validator {#Form.Request:Form.Validator}
 -------------------------------------------------
 
-*Fupdate* integrates with [Form.Validator][] to prevent the ajax being sent if the validation fails. It retrieves the *Form.Validator* instance from the form, so all that is required is that you instantiate the *Form.Validator* before you instantiate the instance of *Fudpate*. If the instance of *Form.Validator* has the *stopOnFailure* option set to *true* (the default) then *Fupdate* will not send the ajax request if the validator fails.
+*Form.Request* integrates with [Form.Validator][] to prevent the ajax being sent if the validation fails. It retrieves the *Form.Validator* instance from the form, so all that is required is that you instantiate the *Form.Validator* before you instantiate the instance of *Fudpate*. If the instance of *Form.Validator* has the *stopOnFailure* option set to *true* (the default) then *Form.Request* will not send the ajax request if the validator fails.
 
-Fupdate Method: send {#Fupdate:send}
+Form.Request Method: send {#Form-Request:send}
 --------------------------------------
 
 Sends the form.
 
 ### Syntax
 
-	myFupdate.send();
+	myFormRequest.send();
 
 ### Returns
 
-* (*object*) - This instance of [Fupdate][]
+* (*object*) - This instance of [Form.Request][]
 
-Fupdate Method: disable {#Fupdate:disable}
+Form.Request Method: disable {#Form-Request:disable}
 --------------------------------------
 
-Detaches the Fupdate from the form (disabling the ajax).
+Detaches the Form.Request from the form (disabling the ajax).
 
 ### Syntax
 
-	myFupdate.disable();
+	myFormRequest.disable();
 
 ### Returns
 
-* (*object*) - This instance of [Fupdate][]
+* (*object*) - This instance of [Form.Request][]
 
-Fupdate Method: disable {#Fupdate:enable}
+Form.Request Method: disable {#Form-Request:enable}
 --------------------------------------
 
-Attaches the Fupdate to the form (enabling the ajax). Note that this is done on instantiation, so you only need to use this method if you disable the [Fupdate][] instance and want to re-enable it.
+Attaches the Form.Request to the form (enabling the ajax). Note that this is done on instantiation, so you only need to use this method if you disable the [Form.Request][] instance and want to re-enable it.
 
 ### Syntax
 
-	myFupdate.enable();
+	myFormRequest.enable();
 
 ### Returns
 
-* (*object*) - This instance of [Fupdate][]
+* (*object*) - This instance of [Form.Request][]
 
 
 [Chain]: /core/Class/Class.Extras#Chain

@@ -1,5 +1,5 @@
 /*
-Script: Fupdate.Append.js
+Script: Form.Request.Append.js
 	Handles the basic functionality of submitting a form and updating a dom element with the result. 
 	The result is appended to the DOM element instead of replacing its contents.
 
@@ -11,9 +11,9 @@ Authors:
 
 */
 
-Fupdate.Append = new Class({
+Form.Request.Append = new Class({
 
-	Extends: Fupdate,
+	Extends: Form.Request,
 
 	options: {
 		//onBeforeEffect: $empty,
