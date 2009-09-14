@@ -32,9 +32,17 @@ Fupdate.Append = new Class({
 			})
 		).addEvents({
 			success: function(tree, elements, html, javascript){
-				var container = new Element('div').set('html', html).hide();
-				var kids = container.getChildren();
-				if (kids.length == 1) container = kids[0];
+				var container;
+				var kids = Elements.from(html);
+				if (kids.length == 1) {
+					container = kids[0];
+				} else {
+					 container = new Element('div', {
+						styles: {
+							display: 'none'
+						}
+					}).adopt(kids);
+				}
 				container.inject(this.update, this.options.inject);
 				if (this.options.requestOptions.evalScripts) $exec(javascript);
 				this.fireEvent('beforeEffect', container);
