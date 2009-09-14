@@ -36,8 +36,8 @@ You can also style the layer and its contents by just defining a css styles for 
 
 ### Events
 
-* onShow - (*function*) callback to execute when the waiting layer is shown; passed the target element to which the [Spinner][] was attached
-* onHide - (*function*) callback to execute when the waiting layer is hidden; passed the target element to which the [Spinner][] was attached
+* onShow - (*function*) callback to execute when the spinning layer is shown; passed the target element to which the [Spinner][] was attached
+* onHide - (*function*) callback to execute when the spinning layer is hidden; passed the target element to which the [Spinner][] was attached
 
 ### Example
 
@@ -198,8 +198,8 @@ Sets a default [Spinner][] instance for an Element.
 #### Examples
 
 	el.set('spinner', {msg: 'one moment...'});
-	el.wait(); //obscure the element with the spinner
-	el.release(); //hide the spinner
+	el.spin(); //obscure the element with the spinner
+	el.unspin(); //hide the spinner
 
 ### Getter
 
@@ -221,7 +221,7 @@ Gets the default [Spinner][] instance for the Element.
 #### Examples
 
 	el.set('spinner', {msg: 'one moment...'});
-	el.wait(); //show the spinner
+	el.spin(); //show the spinner
 	el.get('spinner'); //The Spinner instance.
 
 Native: Element {#Element}
@@ -229,14 +229,14 @@ Native: Element {#Element}
 
 Adds [Spinner][] shortcuts to the [Element][] class.
 
-Element Method: wait {#Element:wait}
+Element Method: spin {#Element:spin}
 ----------------------------------------
 
 Retrieves the "build-in" instance of [Spinner][] and calls its *mask* method.
 
 ### Syntax
 
-	$('myElement').wait([options]);
+	$('myElement').spin([options]);
 
 ### Arguments
 
@@ -246,14 +246,14 @@ Retrieves the "build-in" instance of [Spinner][] and calls its *mask* method.
 
 * (*element*) This Element
 
-Element Method: release {#Element:release}
+Element Method: unspin {#Element:unspin}
 --------------------------------------------
 
 Retrieves the "build-in"  instance of [Spinner][] and calls its *hide* method.
 
 ### Syntax
 
-	$('myElement').release();
+	$('myElement').unspin();
 
 ### Returns
 

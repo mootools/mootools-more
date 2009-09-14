@@ -5,7 +5,7 @@
 			description: "Creates a semi-transparent layer that obscures an element and has a 'spinning' icon and message ovelaid upon that.",
 			verify: "Did the Spinner show up obscuring the content of the element? Did it have a 'spinning' icon and message?",
 			before: function() {
-				$('foo').wait({message: 'testing....'});
+				$('foo').spin({message: 'testing....'});
 	    }
 		},
 			{
