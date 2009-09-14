@@ -21,7 +21,7 @@ Form.Request Method: constructor {#Form.Request:constructor}
 
 ### Options
 
-* requestOptions - (*object*) The options passed on to the instance of [Request.HTML] created by the class that sends the form. Defaults to *{evalScripts: true, useWaiter: true, url: <the form url>, emulation: false, waiterTarget: <the update argument>}*.
+* requestOptions - (*object*) The options passed on to the instance of [Request.HTML] created by the class that sends the form. Defaults to *{evalScripts: true, useSpinner: true, url: <the form url>, emulation: false, spinnerTarget: <the update argument>}*.
 * extraData - (*object*) An optional set of key/value pairs to be included with the form data submitted to the server. If keys in this collide with data in the form, the form values will be preserved and the *extraData* discarded.
 * resetForm - (*boolean*) If *true* (the default), the form is reset when the request is sent.
 

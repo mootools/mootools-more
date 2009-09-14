@@ -65,9 +65,10 @@ Script: Keyboard.js
 
 		handle: function(e){
 			//Keyboard.stop(event) prevents key propagation
-			if (!this.active || event.preventKeyboardPropagation) return;
+			if (!this.active || e.preventKeyboardPropagation) return;
 			var bubbles = !!this.manager;
 			if (bubbles && this.activeKB) this.activeKB.handle(e);
+			if (e.preventKeyboardPropagation) return;
 
 			var key = (e.shift && this.options.caseSensitive) ? e.key.toUpperCase() : e.key;
 			var mods = '';

@@ -6,7 +6,6 @@
 			verify: "Enter the keys defined in the box to make them toggle colors. Do they toggle?",
 			before: function(){
 				var kb = new Keyboard({
-					preventDefault: true,
 					events: {
 						'shift+a': function(){
 							$('sa').toggleClass('active');
@@ -26,8 +25,9 @@
 						'esc': function(){
 							$('escape').toggleClass('active');
 						}
-					}
-				})
+					},
+					active: true
+				});
 				$(document.body).store('kb', kb);
 			}
 		},

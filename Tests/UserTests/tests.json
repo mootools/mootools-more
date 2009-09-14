@@ -44,7 +44,7 @@
 		"Mask":['all'],
 		"Scroller":['all'],
 		"Tips":['all'],
-		"Waiter":['all']
+		"Spinner":['all']
 	},
 	"Request":{
 		"Request.JSONP": ['all'],

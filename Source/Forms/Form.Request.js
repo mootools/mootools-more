@@ -26,7 +26,7 @@ if (!window.Form) window.Form = {};
 			//onSend: $empty
 			requestOptions: {
 				evalScripts: true,
-				useWaiter: true,
+				useSpinner: true,
 				emulation: false,
 				link: 'ignore'
 			},
@@ -60,7 +60,7 @@ if (!window.Form) window.Form = {};
 					url: this.element.get('action'),
 					update: this.update,
 					emulation: false,
-					waiterTarget: this.element,
+					spinnerTarget: this.element,
 					method: this.element.get('method') || 'post'
 			}, this.options.requestOptions)).addEvents({
 				success: function(text, xml){

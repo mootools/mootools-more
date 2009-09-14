@@ -1,12 +1,7 @@
-Class: Waiter {#Waiter}
+Class: Spinner {#Spinner}
 =======================
 
 Adds a semi-transparent overlay over a DOM element with a 'spinning' ajax icon.
-
-### Tutorial/Demo
-
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/07-ui/11-waiter
 
 ### Extends
 
@@ -18,7 +13,7 @@ Adds a semi-transparent overlay over a DOM element with a 'spinning' ajax icon.
 
 ### Syntax
 
-	new Waiter(target[, options]);
+	new Spinner(target[, options]);
 
 ### Arguments
 
@@ -28,37 +23,37 @@ Adds a semi-transparent overlay over a DOM element with a 'spinning' ajax icon.
 ### Options
 * all of [Mask][] options PLUS:
 * message - (*mixed*, optional) message placed above the spinner image (as in "Please wait..."). Can be a *string* or an *element*.
-* class - (*string*) css class name to apply to the waiter container.
+* class - (*string*) css class name to apply to the spinner container.
 * containerPosition - (*object*) options passed to [Element:position][] for the container of the message; relativeTo is set to the target in the arguments automatically (but can be overwritten).
-* content - (*object*) properties for the element that contains the spinning image and the message. Defaults only to "class:waiter-content".
-* img - (*object* or *false*) properties for the image element (note: not an img tag - a div); if set to *false* no image will be injected. Defaults to "class:waiter-img".
+* content - (*object*) properties for the element that contains the spinning image and the message. Defaults only to "class:spinner-content".
+* img - (*object* or *false*) properties for the image element (note: not an img tag - a div); if set to *false* no image will be injected. Defaults to "class:spinner-img".
 * fxOptions - (*object*) options passed to the effects used to transition the overlay and the image opacity.
 
 ### Styles
 
 Download the default styles which include css styles and a default spinner image.
-You can also style the layer and its contents by just defining a css styles for the class names specified in the options class name (these default to ".waiter", ".waiter-content", and ".waiter-img"). Default styles can be found in the Styles directory of the MooTools More library on github or downloaded on the More builder on MooTools.net.
+You can also style the layer and its contents by just defining a css styles for the class names specified in the options class name (these default to ".spinner", ".spinner-content", and ".spinner-img"). Default styles can be found in the Styles directory of the MooTools More library on github.
 
 ### Events
 
-* onShow - (*function*) callback to execute when the waiting layer is shown; passed the target element to which the [Waiter][] was attached
-* onHide - (*function*) callback to execute when the waiting layer is hidden; passed the target element to which the [Waiter][] was attached
+* onShow - (*function*) callback to execute when the waiting layer is shown; passed the target element to which the [Spinner][] was attached
+* onHide - (*function*) callback to execute when the waiting layer is hidden; passed the target element to which the [Spinner][] was attached
 
 ### Example
 
 	<div id="myElement">...</div>
 	
-	new Waiter('myElement');
+	new Spinner('myElement');
 
 
-Waiter Method: toggle {#Waiter:toggle}
+Spinner Method: toggle {#Spinner:toggle}
 --------------------------------------
 
-Toggles the [Waiter][] visibility. If the [Waiter][] is currently visible, it will hide. Otherwise it will display.
+Toggles the [Spinner][] visibility. If the [Spinner][] is currently visible, it will hide. Otherwise it will display.
 
 ### Syntax
 
-	myWaiter.toggle(element);
+	mySpinner.toggle(element);
 
 ### Arguments
 
@@ -66,82 +61,82 @@ Toggles the [Waiter][] visibility. If the [Waiter][] is currently visible, it wi
 
 ### Returns
 
-* (*object*) This instance of [Waiter][]
+* (*object*) This instance of [Spinner][]
 
-Waiter Method: show {#Waiter:show}
+Spinner Method: show {#Spinner:show}
 ------------------------------------
 
-Displays the [Waiter][] layer.
+Displays the [Spinner][] layer.
 
 ### Syntax
 
-	myWaiter.show(noFx);
+	mySpinner.show(noFx);
 
 ### Arguments
 
-1. noFx - (*boolean*) if *true* the waiter will not use effects to display but will show immediately (defaults to *false*).
+1. noFx - (*boolean*) if *true* the spinner will not use effects to display but will show immediately (defaults to *false*).
 
 ### Returns
 
-* (*object*) This instance of [Waiter][]
+* (*object*) This instance of [Spinner][]
 
-Waiter Method: hide {#Waiter:hide}
+Spinner Method: hide {#Spinner:hide}
 ----------------------------------
 
-Hides the [Waiter][] layer.
+Hides the [Spinner][] layer.
 
 ### Syntax
 
-	myWaiter.hide(noFx);
+	mySpinner.hide(noFx);
 
 ### Returns
 
-1. noFx - (*boolean*) if *true* the waiter will not use effects to hide but will hide immediately (defaults to *false*).
+1. noFx - (*boolean*) if *true* the spinner will not use effects to hide but will hide immediately (defaults to *false*).
 
-Waiter Method: destroy {#Waiter:destroy}
+Spinner Method: destroy {#Spinner:destroy}
 ------------------------------------
 
-Destroys the [Waiter][] waiter layer and its contents. This renders the instance of this class inert (and further calls to its methods will throw errors).
+Destroys the [Spinner][] spinner layer and its contents. This renders the instance of this class inert (and further calls to its methods will throw errors).
 
 ### Syntax
 
-	myWaiter.destroy()
+	mySpinner.destroy()
 
 ### Returns
 
-* (*object*) This instance of [Waiter][]
+* (*object*) This instance of [Spinner][]
 
-Waiter Method: position {#Waiter:position}
+Spinner Method: position {#Spinner:position}
 ------------------------------------
 
-Reasserts the position of the waiter layer and its contents.
+Reasserts the position of the spinner layer and its contents.
 
 ### Syntax
 
-	myWaiter.position()
+	mySpinner.position()
 
 ### Returns
 
-* (*object*) This instance of [Waiter][]
+* (*object*) This instance of [Spinner][]
 
 
-Waiter Method: resize {#Waiter:resize}
+Spinner Method: resize {#Spinner:resize}
 ------------------------------------
 
-Reasserts the dimensions of the overlay layer. Note that this method is called when [Waiter.position][] is called, so you needn't call it if you call position.
+Reasserts the dimensions of the overlay layer. Note that this method is called when [Spinner.position][] is called, so you needn't call it if you call position.
 
 ### Syntax
 
-	myWaiter.destroy()
+	mySpinner.destroy()
 
 ### Returns
 
-* (*object*) This instance of [Waiter][]
+* (*object*) This instance of [Spinner][]
 
 Class: Request.HTML {#Request-HTML}
 ===================================
 
-Extends [Request.HTML][] to add integrated [Waiter][] functionality.
+Extends [Request.HTML][] to add integrated [Spinner][] functionality.
 
 ### Extends
 
@@ -158,43 +153,43 @@ Extends [Request.HTML][] to add integrated [Waiter][] functionality.
 ### Options
 
 * all of [Request.HTML][] options PLUS:
-* useWaiter - (*boolean*) use the [Waiter][] class with this request
-* waiterOptions - (*object*) the options object for the [Waiter][] class
-* waiterTarget - (*mixed*) a string of the id for an Element or an Element reference to use instead of the one specifed in the *update* option. This is useful if you want to overlay a different area (or, say, the parent of the one being updated).
+* useSpinner - (*boolean*) use the [Spinner][] class with this request
+* spinnerOptions - (*object*) the options object for the [Spinner][] class
+* spinnerTarget - (*mixed*) a string of the id for an Element or an Element reference to use instead of the one specifed in the *update* option. This is useful if you want to overlay a different area (or, say, the parent of the one being updated).
 
 ### Example
 
 	new Request.HTML({
 		url: '/myHtmlFragment.html',
 		update: $('myElement'),
-		useWaiter: true,
-		waiterOptions: {...etc...}
+		useSpinner: true,
+		spinnerOptions: {...etc...}
 	});
 
 ### Notes
 
-* When you execute *Request.HTML.send* the [Waiter][] class will automatically overlay the area on the page that's going to get updated with the new content and when this area is updated the [Waiter][] hides itself.
+* When you execute *Request.HTML.send* the [Spinner][] class will automatically overlay the area on the page that's going to get updated with the new content and when this area is updated the [Spinner][] hides itself.
 
 
 Native: Element {#Element}
 ==========================
 
-Extends the native Element object with [Waiter][] methods.
+Extends the native Element object with [Spinner][] methods.
 
-Element Property: waiter {#Element-Properties:waiter}
+Element Property: spinner {#Element-Properties:spinner}
 ---------------------------------------------------
 
 ### Setter
 
-Sets a default [Waiter][] instance for an Element.
+Sets a default [Spinner][] instance for an Element.
 
 #### Syntax:
 
-	el.set('waiter'[, options]);
+	el.set('spinner'[, options]);
 
 #### Arguments
 
-1. options - (*object*, optional) The [Waiter][] options.
+1. options - (*object*, optional) The [Spinner][] options.
 
 #### Returns
 
@@ -202,42 +197,42 @@ Sets a default [Waiter][] instance for an Element.
 
 #### Examples
 
-	el.set('waiter', {msg: 'one moment...'});
+	el.set('spinner', {msg: 'one moment...'});
 	el.wait(); //obscure the element with the spinner
 	el.release(); //hide the spinner
 
 ### Getter
 
-Gets the default [Waiter][] instance for the Element.
+Gets the default [Spinner][] instance for the Element.
 
 #### Syntax
 
-	el.get('waiter'[, options]);
+	el.get('spinner'[, options]);
 
 #### Arguments
 
-1. name - (*string*) This should always be 'waiter'.
-1. options - (*object*, optional) The [Waiter][] options. If these are passed in, a new instance will always be generated.
+1. name - (*string*) This should always be 'spinner'.
+1. options - (*object*, optional) The [Spinner][] options. If these are passed in, a new instance will always be generated.
 
 #### Returns
 
-* (*object*) The Element's internal [Waiter][] instance.
+* (*object*) The Element's internal [Spinner][] instance.
 
 #### Examples
 
-	el.set('waiter', {msg: 'one moment...'});
+	el.set('spinner', {msg: 'one moment...'});
 	el.wait(); //show the spinner
-	el.get('waiter'); //The Waiter instance.
+	el.get('spinner'); //The Spinner instance.
 
 Native: Element {#Element}
 ==========================
 
-Adds [Waiter][] shortcuts to the [Element][] class.
+Adds [Spinner][] shortcuts to the [Element][] class.
 
 Element Method: wait {#Element:wait}
 ----------------------------------------
 
-Retrieves the "build-in" instance of [Waiter][] and calls its *mask* method.
+Retrieves the "build-in" instance of [Spinner][] and calls its *mask* method.
 
 ### Syntax
 
@@ -245,7 +240,7 @@ Retrieves the "build-in" instance of [Waiter][] and calls its *mask* method.
 
 ### Arguments
 
-1. options - (*object* - optional) the options for the default waiter.
+1. options - (*object* - optional) the options for the default spinner.
 
 ### Returns
 
@@ -254,7 +249,7 @@ Retrieves the "build-in" instance of [Waiter][] and calls its *mask* method.
 Element Method: release {#Element:release}
 --------------------------------------------
 
-Retrieves the "build-in"  instance of [Waiter][] and calls its *hide* method.
+Retrieves the "build-in"  instance of [Spinner][] and calls its *hide* method.
 
 ### Syntax
 
@@ -265,7 +260,7 @@ Retrieves the "build-in"  instance of [Waiter][] and calls its *hide* method.
 * (*element*) This Element
 
 
-[Waiter]: #Waiter
+[Spinner]: #Spinner
 [Mask]: /more/Interface/Mask
 [IframeShim]: /more/Browser/IframeShim
 [Element:position]: /more/Element/Element.Position#Element:position

@@ -26,7 +26,7 @@ Form.Request.Append = new Class({
 		this.request = new Request.HTML($merge({
 				url: this.element.get('action'),
 				method: this.element.get('method') || 'post',
-				waiterTarget: this.element
+				spinnerTarget: this.element
 			}, this.options.requestOptions, {
 				evalScripts: false
 			})

@@ -9,7 +9,7 @@ Adds a semi-transparent overlay over a DOM element.
 
 ### See Also
 
-* [Waiter][]
+* [Spinner][]
 
 ### Syntax
 
@@ -50,7 +50,7 @@ Toggles the [Mask][] visibility. If the [Mask][] is currently visible, it will h
 
 ### Syntax
 
-	myWaiter.toggle(element);
+	myMask.toggle(element);
 
 ### Arguments
 
@@ -176,7 +176,7 @@ Gets the default [Mask][] instance for the Element.
 #### Examples
 
 	el.set('mask', {onClick: function(){..etc..}});
-	el.mask(); //show the spinner
+	el.mask(); //show the mask
 	el.get('mask'); //The Mask instance.
 
 Native: Element {#Element}
@@ -215,7 +215,7 @@ Retrieves the "build-in"  instance of [Mask][] and calls its *hide* method.
 * (*element*) This Element
 
 [Mask.position]: #Mask:position
-[Waiter]: /more/Interface/Waiter
+[Spinner]: /more/Interface/Spinner
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 [Element.setStyles]: /core/Element/Element.Style

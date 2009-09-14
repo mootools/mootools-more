@@ -1,5 +1,5 @@
 /*
-Script: Waiter.js
+Script: Spinner.js
 	Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.
 
 		License:
@@ -9,22 +9,22 @@ Script: Waiter.js
 			Aaron Newton
 	*/
 
-var Waiter = new Class({
+var Spinner = new Class({
 
 	Extends: Mask,
 
 	options: {
 		/*message: false,*/
-		'class':'waiter',
+		'class':'spinner',
 		containerPosition: {},
 		content: {
-			'class':'waiter-content'
+			'class':'spinner-content'
 		},
 		messageContainer: {
-			'class':'waiter-msg'
+			'class':'spinner-msg'
 		},
 		img: {
-			'class':'waiter-img'
+			'class':'spinner-img'
 		},
 		fxOptions: {
 			link: 'chain'
@@ -33,7 +33,7 @@ var Waiter = new Class({
 
 	initialize: function(){
 		this.parent.apply(this, arguments);
-		this.target.store('waiter', this);
+		this.target.store('spinner', this);
 
 		//add this to events for when noFx is true; parent methods handle hide/show
 		var deactivate = function(){ this.active = false; }.bind(this);
@@ -45,7 +45,7 @@ var Waiter = new Class({
 
 	render: function(){
 		this.parent();
-		this.element.set('id', this.options.id || 'waiter-'+$time());
+		this.element.set('id', this.options.id || 'spinner-'+$time());
 		this.content = document.id(this.options.content) || new Element('div', this.options.content);
 		this.content.inject(this.element);
 		if (this.options.message) {
@@ -112,62 +112,62 @@ var Waiter = new Class({
 
 });
 
-Waiter.implement(new Chain);
+Spinner.implement(new Chain);
 
 if (window.Request) {
 	Request = Class.refactor(Request, {
 		options: {
-			useWaiter: false,
-			waiterOptions: {},
-			waiterTarget: false
+			useSpinner: false,
+			spinnerOptions: {},
+			spinnerTarget: false
 		},
 		initialize: function(options){
 			this._send = this.send;
 			this.send = function(options){
-				if (this.waiter) this.waiter.chain(this._send.bind(this, options)).show();
+				if (this.spinner) this.spinner.chain(this._send.bind(this, options)).show();
 				else this._send(options);
 				return this;
 			};
 			this.previous(options);
-			var update = document.id(this.options.waiterTarget) || document.id(this.options.update);
-			if (this.options.useWaiter && update) {
-				this.waiter = update.get('waiter', this.options.waiterOptions);
+			var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
+			if (this.options.useSpinner && update) {
+				this.spinner = update.get('spinner', this.options.spinnerOptions);
 				['onComplete', 'onException', 'onCancel'].each(function(event){
-					this.addEvent(event, this.waiter.hide.bind(this.waiter));
+					this.addEvent(event, this.spinner.hide.bind(this.spinner));
 				}, this);
 			}
 		}
 	});
 }
 
-Element.Properties.waiter = {
+Element.Properties.spinner = {
 
 	set: function(options){
-		var waiter = this.retrieve('waiter');
-		return this.eliminate('waiter').store('waiter:options', options);
+		var spinner = this.retrieve('spinner');
+		return this.eliminate('spinner').store('spinner:options', options);
 	},
 
 	get: function(options){
-		if (options || !this.retrieve('waiter')){
-			if (this.retrieve('waiter')) this.retrieve('waiter').destroy();
-			if (options || !this.retrieve('waiter:options')) this.set('waiter', options);
-			new Waiter(this, this.retrieve('waiter:options'));
+		if (options || !this.retrieve('spinner')){
+			if (this.retrieve('spinner')) this.retrieve('spinner').destroy();
+			if (options || !this.retrieve('spinner:options')) this.set('spinner', options);
+			new Spinner(this, this.retrieve('spinner:options'));
 		}
-		return this.retrieve('waiter');
+		return this.retrieve('spinner');
 	}
 
 };
 
 Element.implement({
 
-	wait: function(options){
-		this.get('waiter', options).show();
+	spin: function(options){
+		this.get('spinner', options).show();
 		return this;
 	},
 
-	release: function(){
+	unspin: function(){
 		var opt = Array.link(arguments, {options: Object.type, callback: Function.type});
-		this.get('waiter', opt.options).hide(opt.callback);
+		this.get('spinner', opt.options).hide(opt.callback);
 		return this;
 	}
 

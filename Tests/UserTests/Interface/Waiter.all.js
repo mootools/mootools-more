@@ -1,44 +1,44 @@
 {
 	tests: [
 		{
-			title: "Test Waiter",
+			title: "Test Spinner",
 			description: "Creates a semi-transparent layer that obscures an element and has a 'spinning' icon and message ovelaid upon that.",
-			verify: "Did the Waiter show up obscuring the content of the element? Did it have a 'spinning' icon and message?",
+			verify: "Did the Spinner show up obscuring the content of the element? Did it have a 'spinning' icon and message?",
 			before: function() {
 				$('foo').wait({message: 'testing....'});
 	    }
 		},
 			{
-			title: "Tests Waiter start and stop",
-			description: "Shows and Hides a Waiter",
-			verify: "Did the Waiter show and then hide?",
+			title: "Tests Spinner start and stop",
+			description: "Shows and Hides a Spinner",
+			verify: "Did the Spinner show and then hide?",
 			before: function() {
-			  var w = $('foo').retrieve('waiter');
+			  var w = $('foo').retrieve('spinner');
 			  w.hide();
 	      w.show();
 	      w.hide.delay(2000, w);
 	    }
 		},
 		{
-			title: "Toggle a Waiter",
-			description: "Toggles the Waiter's visibility",
-			verify: "Did the Waiter toggle on and off (if it was already visible, it will toggle off and then on again)?",
+			title: "Toggle a Spinner",
+			description: "Toggles the Spinner's visibility",
+			verify: "Did the Spinner toggle on and off (if it was already visible, it will toggle off and then on again)?",
 			before: function() {
-			  var w = $('foo').retrieve('waiter');
+			  var w = $('foo').retrieve('spinner');
 			  w.hide();
 	      w.toggle();
 	      w.toggle.delay(2000, w);
 	    }
 		},
 		{
-			title: "Waiter with Request",
-			description: "Retrieves content via ajax and automatically applies the waiter to it.",
-			verify: "Did the waiter show up until the ajax finished and updated the content?",
+			title: "Spinner with Request",
+			description: "Retrieves content via ajax and automatically applies the Spinner to it.",
+			verify: "Did the Spinner show up until the ajax finished and updated the content?",
 			before: function(){
 				var req = new Request.HTML({
 					url: 'UserTests/Request/simple.php?sleep=1',
 					method: 'get',
-					useWaiter: true,
+					useSpinner: true,
 					update: $('foo2')
 				});
 				req.send();
