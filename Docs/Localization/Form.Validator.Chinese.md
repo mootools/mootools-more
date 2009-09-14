@@ -22,5 +22,7 @@ Included Validators
 
 * validate-currency-yuan - validates that the entry is a Yuan value.
 
+[See the wiki for how to get involved](http://wiki.github.com/mootools/mootools-more)
+
 [Form.Validator]: http://www.mootools.net/docs/more/Forms/Form.Validator#Form-Validator
 [Lang]: http://www.mootools.net/docs/more/Core/Lang
