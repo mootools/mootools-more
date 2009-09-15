@@ -23,7 +23,7 @@ var Slider = new Class({
 			if (this.options.snap) position = this.toPosition(this.step);
 			this.knob.setStyle(this.property, position);
 		},
-		initial: 0,
+		initialStep: 0,
 		snap: false,
 		offset: 0,
 		range: false,
