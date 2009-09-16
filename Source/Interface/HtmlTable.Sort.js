@@ -54,8 +54,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	
 	detectParsers: function(force){
 		if (!this.head) return;
-		var parsers = this.options.parsers;
-		var rows = this.body.rows;
+		var parsers = this.options.parsers, rows = this.body.rows;
 
 		// auto-detect
 		this.parsers = $$(this.head.cells).map(function(cell, index) {
@@ -63,8 +62,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(cell, 'top');
 			this.sortSpans.push(sortSpan);
 
-			var parser = parsers[index];
-			var cancel;
+			var parser = parsers[index], cancel;
 			switch ($type(parser)) {
 				case 'function': parser = {convert: parser}; cancel = true; break;
 				case 'string': parser = parser; cancel = true; break;
@@ -110,9 +108,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 				} else {
 					if (this.sorted.index != null) {
 						this.sorted.reverse = false;
-						this.head.cells[this.sorted.index]
-							.removeClass(this.options.classHeadSort)
-							.removeClass(this.options.classHeadSortRev);
+						this.head.cells[this.sorted.index].removeClass(this.options.classHeadSort).removeClass(this.options.classHeadSortRev);
 					} else {
 						this.sorted.reverse = true;
 					}
