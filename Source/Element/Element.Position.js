@@ -45,7 +45,7 @@ Element.implement({
 			parentOffset = offsetParent.measure(function(){
 				return this.getPosition();
 			});
-			parentPositioned = true;
+			parentPositioned = offsetParent != document.id(options.relativeTo);
 			options.offset.x = options.offset.x - parentOffset.x;
 			options.offset.y = options.offset.y - parentOffset.y;
 		}

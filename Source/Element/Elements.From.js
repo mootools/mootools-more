@@ -18,13 +18,11 @@ Elements.from = function(text, excludeScripts){
 	if (match){
 		container = new Element('table');
 		var tag = match[1].toLowerCase();
-		if (tag == 'td' || tag == 'th' || tag == 'tr'){
+		if (['td', 'th', 'tr'].contains(tag)){
 			container = new Element('tbody').inject(container);
 			if (tag != 'tr') container = new Element('tr').inject(container);
 		}
-	} else {
-		container = new Element('div');
 	}
 
-	return container.set('html', text).getChildren();
+	return (container || new Element('div')).set('html', text).getChildren();
 };

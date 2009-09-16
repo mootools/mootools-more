@@ -136,7 +136,7 @@ var OverText = new Class({
 
 	reposition: function(){
 		this.assert(true);
-		if (!this.element.getParent() || !this.element.offsetHeight) return this.stopPolling().hide();
+		if (!this.element.isVisible()) return this.stopPolling().hide();
 		if (this.test()) this.text.position($merge(this.options.positionOptions, {relativeTo: this.element}));
 		return this;
 	}

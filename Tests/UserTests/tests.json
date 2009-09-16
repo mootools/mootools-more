@@ -19,10 +19,10 @@
 		"Element.Position":['all']
 	},
 	"Forms": {
-		"FormValidator.Inline":['all'],
-		"FormValidator.Extras":['all'],
-		"Fupdate": ['all'],
-		"Fupdate.Append": ['all'],
+		"Form.Validator.Inline":['all'],
+		"Form.Validator.Extras":['all'],
+		"Form.Request": ['all'],
+		"Form.Request.Append": ['all'],
 		"OverText": ['all']
 	},
 	"Fx": {
@@ -40,11 +40,11 @@
 		"HtmlTable.Zebra":['all'],
 		"HtmlTable.Sort":['all'],
 		"HtmlTable.Select":['all'],
-		"Keyboard":['all'],
+		"Keyboard":['single', 'nested'],
 		"Mask":['all'],
 		"Scroller":['all'],
 		"Tips":['all'],
-		"Waiter":['all']
+		"Spinner":['all']
 	},
 	"Request":{
 		"Request.JSONP": ['all'],

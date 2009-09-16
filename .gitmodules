@@ -4,9 +4,6 @@
 [submodule "assets/core"]
 	path = assets/core
 	url = git://github.com/mootools/mootools-core.git
-[submodule "assets/lang"]
-	path = assets/lang
-	url = git://github.com/mootools/mootools-lang.git
 [submodule "Tests/UnitTester"]
 	path = Tests/UnitTester
 	url = git://github.com/anutron/mootools-unittester.git

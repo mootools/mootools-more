@@ -63,8 +63,8 @@ var Mask = new Class({
 	},
 
 	inject: function(target, where){
-		var where = where || this.options.inject ? this.options.inject.where : '' || this.target == document.body ? 'inside' : 'after';
-		var target = target || this.options.inject ? this.options.inject.target : '' || this.target;
+		where = where || this.options.inject ? this.options.inject.where : '' || this.target == document.body ? 'inside' : 'after';
+		target = target || this.options.inject ? this.options.inject.target : '' || this.target;
 		this.element.inject(target, where);
 		if (this.options.useIframeShim) {
 			this.shim = new IframeShim(this.element);
@@ -102,6 +102,7 @@ var Mask = new Class({
 	show: function(){
 		if (!this.hidden) return this;
 		this.target.addEvent('resize', this.resize);
+		if (this.target != document.body) document.id(document.body).addEvent('resize', this.resize);
 		this.position();
 		this.showMask.apply(this, arguments);
 		return this;

@@ -10,35 +10,53 @@ Script: HtmlTable.Select.js
 		Aaron Newton
 */
 
-HtmlTable.Select = new Class({
+HtmlTable = Class.refactor(HtmlTable, {
 
-	Extends: HtmlTable.Sort,
-
-	options: {/*
-		onRowSelect: $empty,
-		onRowUnselect: $empty, */
+	options: {
+		/*onRowSelect: $empty,
+		onRowUnselect: $empty,*/
 		useKeyboard: true,
 		classRowSelected: 'table-tr-selected',
 		classRowHovered: 'table-tr-hovered',
-		classRowFocused: 'table-tr-focused',
-		allowMultiSelect: true
+		classSelectable: 'table-selectable',
+		allowMultiSelect: true,
+		selectable: false
 	},
 
-	initialize: function () {
-		this.parent.apply(this, arguments);
+	initialize: function(){
+		this.previous.apply(this, arguments);
+		if (this.occluded) return this.occluded;
 		this.selectedRows = new Elements();
+		this.bound = {
+			mouseleave: this.mouseleave.bind(this),
+			focusRow: this.focusRow.bind(this)
+		};
+		if (this.options.selectable) this.enableSelect();
 	},
 
-	attach: function(){
-		this.parent();
-		this.element.addEvent('mouseleave', function() {
-			if (this.hover) this.leaveRow(this.hover);
-		}.bind(this));
-		this.body.addEvents({
-			'click:relay(tr)':this.focusRow.bind(this)
+	enableSelect: function(){
+		this.selectEnabled = true;
+		this.attachSelects();
+		this.element.addClass(this.options.classSelectable);
+	},
+
+	disableSelect: function(){
+		this.selectEnabled = false;
+		this.attach(false);
+		this.element.removeClass(this.options.classSelectable);
+	},
+
+	attachSelects: function(attach){
+		attach = $pick(attach, true);
+		var method = attach ? 'addEvents' : 'removeEvents';
+		this.element[method]({
+			mouseleave: this.bound.mouseleave
 		});
-		if (this.options.useKeyboard) {
-			this.keyboard = new Keyboard({
+		this.body[method]({
+			'click:relay(tr)': this.bound.focusRow
+		});
+		if (this.options.useKeyboard || this.keyboard){
+			if (!this.keyboard) this.keyboard = new Keyboard({
 				events: {
 					down: function(e) {
 						e.preventDefault();
@@ -55,7 +73,13 @@ HtmlTable.Select = new Class({
 				},
 				active: true
 			});
+			this.keyboard[attach ? 'activate' : 'deactivate']();
 		}
+		this.updateSelects();
+	},
+
+	mouseleave: function(){
+		if (this.hover) this.leaveRow(this.hover);
 	},
 
 	focus: function(){
@@ -66,19 +90,29 @@ HtmlTable.Select = new Class({
 		if (this.keyboard) this.keyboard.deactivate();
 	},
 
-	update: function(){
-		Array.each(this.body.rows, function(row, i) {
-			if (row.$tableSort) return;
-			row.addEvents({
-				'mouseenter': this.enterRow.bind(this, [row]),
-				'mouseleave': this.leaveRow.bind(this, [row])
-			});
-			row.$tableSort = true;
-		}, this);
-		this.parent();
+	push: function(){
+		var ret = this.previous.apply(this, arguments);
+		this.updateSelects();
+		return ret;
 	},
 
-	enterRow: function(row) {
+	updateSelects: function(){
+		Array.each(this.body.rows, function(row){
+			var binders = row.retrieve('binders');
+			if ((binders && this.selectEnabled) || (!binders && !this.selectEnabled)) return;
+			if (!binders){
+				binders = {
+					mouseenter: this.enterRow.bind(this, [row]),
+					mouseleave: this.leaveRow.bind(this, [row])
+				};
+				row.store('binders', binders).addEvents(binders);
+			} else {
+				row.removeEvents(binders);
+			}
+		}, this);
+	},
+
+	enterRow: function(row){
 		if (this.hover) this.hover = this.leaveRow(this.hover);
 		this.hover = row.addClass(this.options.classRowHovered);
 	},
@@ -89,37 +123,41 @@ HtmlTable.Select = new Class({
 		if (to < 0) to = 0;
 		if (to >= this.body.rows.length) to = this.body.rows.length - 1;
 		if (this.hover == this.body.rows[to]) return this;
-		this.enterRow(this.body.rows[to])
+		this.enterRow(this.body.rows[to]);
 	},
 
-	leaveRow: function(row) {
+	leaveRow: function(row){
 		row.removeClass(this.options.classRowHovered);
 	},
 
-	focusRow: function() {
+	focusRow: function(){
 		var row = arguments[1] || arguments[0]; //delegation passes the event first
 		var unfocus = function(row){
 			this.selectedRows.erase(row);
 			row.removeClass(this.options.classRowSelected);
-			this.fireEvent('onRowUnfocus', [row, this.selectedRows]);
+			this.fireEvent('rowUnfocus', [row, this.selectedRows]);
 		}.bind(this);
 		if (!this.options.allowMultiSelect) this.selectedRows.each(unfocus);
 		if (!this.selectedRows.contains(row)) {
 			this.selectedRows.push(row);
 			row.addClass(this.options.classRowSelected);
-			this.fireEvent('onRowFocus', [row, this.selectedRows]);
+			this.fireEvent('rowFocus', [row, this.selectedRows]);
 		} else {
 			unfocus(row);
 		}
 		return false;
 	},
 
-	selectAll: function(status) {
-		if (!status) {
-			this.selectedRows.removeClass(this.options.classRowSelected).empty();
-		} else {
-			this.selectedRows.combine(this.body.rows).addClass(this.options.classRowSelected);
-		}
+	selectAll: function(status){
+		status = $pick(status, true);
+		if (!this.options.allowMultiSelect && status) return;
+		if (!status) this.selectedRows.removeClass(this.options.classRowSelected).empty();
+		else this.selectedRows.combine(this.body.rows).addClass(this.options.classRowSelected);
+		return this;
+	},
+
+	selectNone: function(){
+		return this.selectAll(false);
 	}
 
 });

@@ -1,6 +1,6 @@
 /*
 Script: Depender.js
-	Clientside dependency loader for MooTools.
+	A stand alone dependency loader for the MooTools library.
 
 	License:
 		MIT-style license.
@@ -62,15 +62,15 @@ var Depender = {
 
 	libs: {},
 
-	include: function(libs) {
+	include: function(libs){
 		this.mapLoaded = false;
 		var loader = function(data){
 			this.libs = $merge(this.libs, data);
-			$each(this.libs, function(data, lib) {
+			$each(this.libs, function(data, lib){
 				if (data.scripts) this.loadSource(lib, data.scripts);
 			}, this);
 		}.bind(this);
-		if ($type(libs) == 'string') {
+		if ($type(libs) == 'string'){
 			this.log('fetching libs ', libs);
 			this.request(libs, loader);
 		} else {
@@ -94,16 +94,14 @@ var Depender = {
 			this.required.push(options);
 			this.fireEvent('require', options);
 			this.loadScripts(options.scripts);
-		}.bind(this);
-		if (this.mapLoaded) {
-			loaded();
+		};
+		if (this.mapLoaded){
+			loaded.call(this);
 		} else {
-			//if !this.mapLoaded, then fetchLibs is still running and the map isn't loaded
-			var fetcher = function(){
-				loaded();
-				this.removeEvent('mapLoaded', fetcher);
-			}.bind(this);
-			this.addEvent('mapLoaded', fetcher);
+			this.addEvent('mapLoaded', function(){
+				loaded.call(this);
+				this.removeEvent('mapLoaded', arguments.callee);
+			});
 		}
 		return this;
 	},
@@ -119,7 +117,7 @@ var Depender = {
 		return prefix + str;
 	},
 
-	request: function(url, callback) {
+	request: function(url, callback){
 		new Request.JSON({
 			url: url,
 			secure: false,
@@ -128,7 +126,10 @@ var Depender = {
 	},
 
 	loadSource: function(lib, source){
-		if (this.libs[lib].files) return this.dataLoaded();
+		if (this.libs[lib].files){
+			this.dataLoaded();
+			return;
+		}
 		this.log('loading source: ', source);
 		this.request(this.cleanDoubleSlash(source + '/scripts.json'), function(result){
 			this.libs[lib].files = result;
@@ -136,13 +137,12 @@ var Depender = {
 		}.bind(this));
 	},
 
-	//manage loaded data
 	dataLoaded: function(){
 		var loaded = true;
-		$each(this.libs, function(v, k) {
+		$each(this.libs, function(v, k){
 			if (!this.libs[k].files) loaded = false;
 		}, this);
-		if (loaded) {
+		if (loaded){
 			this.mapTree();
 			this.mapLoaded = true;
 			this.calculateLoaded();
@@ -156,9 +156,9 @@ var Depender = {
 			this.scriptsState[script] = true;
 		}.bind(this);
 		if (this.options.loadedScripts) this.options.loadedScripts.each(set);
-		if (this.options.loadedSources) {
-			this.options.loadedSources.each(function(lib) {
-				$each(this.libs[lib].files, function(dir) {
+		if (this.options.loadedSources){
+			this.options.loadedSources.each(function(lib){
+				$each(this.libs[lib].files, function(dir){
 					$each(dir, function(data, file){
 						set(file);
 					}, this);
@@ -167,36 +167,33 @@ var Depender = {
 		}
 	},
 
-	//map dependencies
 	deps: {},
 
 	pathMap: {},
 
-	//create a map of source to paths
 	mapTree: function(){
 		$each(this.libs, function(data, source){
 			$each(data.files, function(scripts, folder){
 				$each(scripts, function(details, script){
-					if (this.deps[source+':'+folder+':'+script]) return;
-					this.deps[source+':'+folder+':'+script] = details.deps;
-					this.pathMap[script] = source+':'+folder+':'+script;
+					var path = source + ':' + folder + ':' + script;
+					if (this.deps[path]) return;
+					this.deps[path] = details.deps;
+					this.pathMap[script] = path;
 				}, this);
 			}, this);
 		}, this);
 	},
 
-	//get the dependencies for a given script
 	getDepsForScript: function(script){
 		return this.deps[this.pathMap[script]] || [];
 	},
 
-	//calculate the dependencies for a given script
 	calculateDependencies: function(scripts){
 		var reqs = [];
 		$splat(scripts).each(function(script){
-			if (script == 'None' || !script) return reqs;
+			if (script == 'None' || !script) return;
 			var deps = this.getDepsForScript(script);
-			if (!deps) {
+			if (!deps){
 				if (window.console && console.warn) console.warn('dependencies not mapped: script: %o, map: %o, :deps: %o', script, this.pathMap, this.deps);
 			} else {
 				deps.each(function(scr){
@@ -210,31 +207,29 @@ var Depender = {
 		return reqs;
 	},
 
-	//get the path for a script
 	getPath: function(script){
 		try {
 			var chunks = this.pathMap[script].split(':');
 			var lib = this.libs[chunks[0]];
 			var dir = (lib.path || lib.scripts) + '/';
-			chunks.erase(chunks[0]);
+			chunks.shift();
 			return this.cleanDoubleSlash(dir + chunks.join('/') + '.js');
 		} catch(e){
 			return script;
 		}
 	},
 
-	//load the missing dependencies for a given script
 	loadScripts: function(scripts){
 		scripts = scripts.filter(function(s){
-			if (!this.scriptsState[s] && s != "None") {
+			if (!this.scriptsState[s] && s != 'None'){
 				this.scriptsState[s] = false;
 				return true;
 			}
 		}, this);
-		if (scripts.length) {
+		if (scripts.length){
 			scripts.each(function(scr){
 				this.loadScript(scr);
-			}.bind(this));
+			}, this);
 		} else {
 			this.check();
 		}
@@ -242,26 +237,31 @@ var Depender = {
 
 	toLoad: [],
 
-	loadScript: function(script) {
-		var finish = function() {
+	loadScript: function(script){
+		if (this.scriptsState[script] && this.toLoad.length){
+			this.loadScript(this.toLoad.shift());
+			return;
+		} else if (this.loading){
+			this.toLoad.push(script);
+			return;
+		}
+		var finish = function(){
 			this.loading = false;
 			this.scriptLoaded(script);
 			if (this.toLoad.length) this.loadScript(this.toLoad.shift());
 		}.bind(this);
-		if (this.scriptsState[script] && this.toLoad.length) return this.loadScript(this.toLoad.shift());
-		if (this.loading) return this.toLoad.push(script);
-		this.loading = true;
-		scriptPath = this.getPath(script);
-		var error = function() {
+		var error = function(){
 			this.log('could not load: ', scriptPath);
 		}.bind(this);
-		if (this.options.useScriptInjection) {
+		this.loading = true;
+		var scriptPath = this.getPath(script);
+		if (this.options.useScriptInjection){
 			new Element('script', {
 				src: scriptPath + (this.options.noCache ? '?noCache=' + new Date().getTime() : ''),
 				events: {
 					load: function() {
 						this.log('loaded script: ', scriptPath);
-						finish();//.delay(50, this); << can't remember why I had this delay, but I bet it matters; leaving this comment for now
+						finish();
 					}.bind(this),
 					error: error
 				}
@@ -273,7 +273,7 @@ var Depender = {
 				onComplete: function(js) {
 					this.log('loaded script: ', scriptPath);
 					$exec(js);
-					finish();//.delay(50, this); << can't remember why I had this delay, but I bet it matters; leaving this comment for now
+					finish();
 				}.bind(this),
 				onFailure: error,
 				onException: error
@@ -281,14 +281,15 @@ var Depender = {
 		}
 	},
 
-	scriptsState: $H({}),
+	scriptsState: $H(),
+	
 	getLoadedScripts: function(){
 		return this.scriptsState.filter(function(state){
 			return state;
 		});
 	},
 
-	scriptLoaded: function(script) {
+	scriptLoaded: function(script){
 		this.scriptsState[script] = true;
 		this.check();
 		var loaded = this.getLoadedScripts();
@@ -307,12 +308,12 @@ var Depender = {
 
 	check: function(){
 		var incomplete = [];
-		this.required.each(function(required) {
+		this.required.each(function(required){
 			var loaded = [];
-			required.scripts.each(function(script) {
+			required.scripts.each(function(script){
 				if (this.scriptsState[script]) loaded.push(script);
 			}, this);
-			if (required.onStep) {
+			if (required.onStep){
 				required.onStep({
 					percent: loaded.length / required.scripts.length * 100,
 					scripts: loaded
@@ -326,12 +327,15 @@ var Depender = {
 	}
 
 };
+
 $extend(Depender, new Events);
 $extend(Depender, new Options);
+
 Depender._setOptions = Depender.setOptions;
-Depender.setOptions = function() {
+Depender.setOptions = function(){
 	Depender._setOptions.apply(Depender, arguments);
 	if (this.options.log) Depender.enableLog();
 	return this;
 };
+
 Depender.disableLog();

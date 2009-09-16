@@ -1,6 +1,6 @@
 /*
 Script: Request.Periodical.js
-	Requests the same url at a time interval that increases when no data is returned from the requested server
+	Requests the same URL to pull data from a server but increases the intervals if no data is returned to reduce the load
 
 	License:
 		MIT-style license.
@@ -27,7 +27,7 @@ Request.implement({
 		this.completeCheck = function(j){
 			$clear(this.timer);
 			if (j) this.lastDelay = this.options.delay;
-			else this.lastDelay = (this.lastDelay+this.options.delay).min(this.options.limit);
+			else this.lastDelay = (this.lastDelay + this.options.delay).min(this.options.limit);
 			this.timer = fn.delay(this.lastDelay, this);
 		};
 		this.addEvent('complete', this.completeCheck);

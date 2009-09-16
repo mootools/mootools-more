@@ -65,7 +65,7 @@ Preloads an image and returns the img element.
 ### Arguments:
 
 1. source     - (*string*) The path of the image file.
-2. properties - (*object*) Some additional attributes you might want to add to the img Element including the onload/onerror/onabout events.
+2. properties - (*object*) Some additional attributes you might want to add to the img Element including the onload/onerror/onabort events.
 
 ### Returns:
 

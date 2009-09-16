@@ -52,11 +52,11 @@ var Builder = {
 			'Request'   : ['Request.JSONP', 'Request.Queue', 'Request.Periodical'],
 			'Utilities' : ['Assets', 'Color', 'Group', 'Hash.Cookie'],
 			'Interface' : ['Scroller', 'Tips'],
-			'Localization':['Date.English.US', 'FormValidator.English']
+			'Localization':['Date.English.US', 'Form.Validator.English']
 		},
 
 		lang: {
-			'Localization':['Date.Italian', 'Date.Swedish', 'Date.Norwegian', 'FormValidator.French']
+			'Localization':['Date.Italian', 'Date.Swedish', 'Date.Norwegian', 'Form.Validator.French']
 		},
 
 		specs: {

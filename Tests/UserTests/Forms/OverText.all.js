@@ -23,6 +23,15 @@
 
 			},
 			verify: "When you enter avalue for the first input (username), the second input will be auto-filled. Does it's OverText disappear?"
+		},
+		{
+			title: "OverText: Polling",
+			description: "Removes OverText when an element gets removed",
+			before: function(){
+				$('un').dispose();
+				OverText.update();
+			},
+			verify: "When the input element gets removed from the DOM. Does it's OverText disappear?"
 		}
 	],
 	otherScripts: ["Selectors"]

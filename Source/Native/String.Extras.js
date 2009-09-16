@@ -44,8 +44,7 @@ String.implement({
 
 	pad: function(length, str, dir){
 		if (this.length >= length) return this;
-		str = str || ' ';
-		var pad = str.repeat(length - this.length).substr(0, length - this.length);
+		var pad = (str == null ? ' ' : '' + str).repeat(length - this.length).substr(0, length - this.length);
 		if (!dir || dir == 'right') return this + pad;
 		if (dir == 'left') return pad + this;
 		return pad.substr(0, (pad.length / 2).floor()) + this + pad.substr(0, (pad.length / 2).ceil());

@@ -93,9 +93,9 @@ License:
 	describe('URI use where string is expected', {
 
 		'Request self should work with an URI object': function(){
-			new Request({ url: new URI() }).get();
+			new Request({url: new URI()}).get();
 		},
-		
+
 		'A HREF should take an URI object': function(){
 			value_of(new Element('a').set('href', new URI()).get('href')).should_be(new URI().toString());
 		},
