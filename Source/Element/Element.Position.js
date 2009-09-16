@@ -34,8 +34,7 @@ Element.implement({
 			allowNegative: false
 		}, options);
 		//compute the offset of the parent positioned element if this element is in one
-		var parentOffset = {x: 0, y: 0};
-		var parentPositioned = false;
+		var parentOffset = {x: 0, y: 0}, parentPositioned = false;
 		/* dollar around getOffsetParent should not be necessary, but as it does not return
 		 * a mootools extended element in IE, an error occurs on the call to expose. See:
 		 * http://mootools.lighthouseapp.com/projects/2706/tickets/333-element-getoffsetparent-inconsistency-between-ie-and-other-browsers */
@@ -74,8 +73,7 @@ Element.implement({
 		this.setStyle('position', 'absolute');
 		var rel = document.id(options.relativeTo) || document.body;
 		var calc = rel == document.body ? window.getScroll() : rel.getPosition();
-		var top = calc.y;
-		var left = calc.x;
+		var top = calc.y, left = calc.x;
 
 		if (Browser.Engine.trident){
 			var scrolls = rel.getScrolls();
@@ -88,10 +86,7 @@ Element.implement({
 			options.offset.x = options.offset.x - dim['margin-left'];
 			options.offset.y = options.offset.y - dim['margin-top'];
 		}
-		var pos = {};
-		var prefY = options.offset.y;
-		var prefX = options.offset.x;
-		var winSize = window.getSize();
+		var pos = {}, prefY = options.offset.y, prefX = options.offset.x, winSize = window.getSize();
 		switch(options.position.x){
 			case 'left':
 				pos.x = left + prefX;
@@ -140,8 +135,8 @@ Element.implement({
 					edgeOffset.y = -(dim.y/2);
 					break;
 			}
-			pos.x = pos.x + edgeOffset.x;
-			pos.y = pos.y + edgeOffset.y;
+			pos.x+= edgeOffset.x;
+			pos.y+= edgeOffset.y;
 		}
 		pos = {
 			left: ((pos.x >= 0 || parentPositioned || options.allowNegative) ? pos.x : 0).toInt(),
@@ -149,13 +144,13 @@ Element.implement({
 		};
 		if (rel.getStyle('position') == 'fixed' || options.relFixedPosition){
 			var winScroll = window.getScroll();
-			pos.top = pos.top.toInt() + winScroll.y;
-			pos.left = pos.left.toInt() + winScroll.x;
+			pos.top+= winScroll.y;
+			pos.left+= winScroll.x;
 		}
 		if (options.ignoreScroll) {
 			var relScroll = rel.getScroll();
-			pos.top = pos.top - relScroll.y;
-			pos.left = pos.left - relScroll.x;
+			pos.top-= relScroll.y;
+			pos.left-= relScroll.x;
 		}
 
 		if (options.returnPos) return pos;
