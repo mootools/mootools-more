@@ -67,13 +67,11 @@ Request.JSONP = new Class({
 					this.triesRemaining[index] = remaining - 1;
 					if (script){
 						script.destroy();
-						this.send(options, index);
-						this.fireEvent('retry', this.triesRemaining[index]);
+						this.send(options, index).fireEvent('retry', this.triesRemaining[index]);
 					}
 				} else if(script && this.options.timeout){
 					script.destroy();
-					this.cancel();
-					this.fireEvent('failure');
+					this.cancel().fireEvent('failure');
 				}
 			}).delay(this.options.timeout, this);
 		}).delay(Browser.Engine.trident ? 50 : 0, this);
