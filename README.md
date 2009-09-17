@@ -43,6 +43,7 @@ NOTE: none of the changes below are breaking changes.
 * Element.setPosition is now Element.position (non-breaking change)
 * Added hideAll and showAll methods for OverText
 * Added Element.isVisible method
+* URI's get method no longer returns null for missing parts; it returns an empty string.
 * Various other tweaks and bug fixes
 
 ##### Changes to Clientcide plugins adopted by MooTools More in this release
