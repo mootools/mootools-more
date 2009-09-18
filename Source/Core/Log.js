@@ -21,7 +21,6 @@ var Log = new Class({
 Log.logged = [];
 
 Log.logger = function(){
-	var args = Array.slice(arguments);
-	if (window.console && console.log) console.log(args);
-	else Log.logged.push(args);
+	if (window.console && console.log) console.log.apply(console, arguments);
+	else Log.logged.push(arguments);
 };

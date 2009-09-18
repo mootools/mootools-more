@@ -7,24 +7,24 @@ License:
 */
 
 // In the specs there is only english available
-MooTools.lang.set('fr-FR', 'FormValidator', {
+MooTools.lang.set('fr-FR', 'Form.Validator', {
 	required: 'Ce champ est obligatoire.'
 });
 
 describe('Lang', {
 
 	'should return english form validator message': function(){
-		value_of(MooTools.lang.get('FormValidator', 'required')).should_be('This field is required.');
+		value_of(MooTools.lang.get('Form.Validator', 'required')).should_be('This field is required.');
 	},
 	
 	'should cascade through to english': function(){
 		MooTools.lang.setLanguage('en-GB');
-		value_of(MooTools.lang.get('FormValidator', 'required')).should_be('This field is required.');
+		value_of(MooTools.lang.get('Form.Validator', 'required')).should_be('This field is required.');
 	},
 	
 	'should return french form validator message': function(){
 		MooTools.lang.setLanguage('fr-FR');
-		value_of(MooTools.lang.get('FormValidator', 'required')).should_be('Ce champ est obligatoire.');
+		value_of(MooTools.lang.get('Form.Validator', 'required')).should_be('Ce champ est obligatoire.');
 	}
 
 });

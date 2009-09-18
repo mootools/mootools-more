@@ -8,7 +8,7 @@
 		},
 
 		"Depender": {
-			"deps": ["More", "Class.Extras", "Element.Event"],
+			"deps": ["More", "Class.Extras", "Element.Event", "Request.JSON"],
 			"desc": "A stand alone dependency loader for the MooTools library."
 		},
 
@@ -133,30 +133,29 @@
 
 	"Forms": {
 
-		"Fupdate":{
-			"deps":["Element.Event",  "Request.HTML", "Class.Binds", "Class.Occlude", "Waiter", "String.QueryString"],
+		"Form.Request":{
+			"deps":["Element.Event",  "Request.HTML", "Class.Binds", "Class.Occlude", "Spinner", "String.QueryString"],
 			"desc":"Handles the basic functionality of submitting a form via ajax and updating a DOM element with the result."
 		},
 
-		"Fupdate.Append":{
-			"deps": ["Fupdate", "Fx.Reveal"],
-			"desc":"Uses Fupdate to fetch and update a DOM element, but appends the result into the target instead of overwriting its contents."
+		"Form.Request.Append":{
+			"deps": ["Form.Request", "Fx.Reveal", "Elements.From"],
+			"desc":"Uses Form.Request to fetch and update a DOM element, but appends the result into the target instead of overwriting its contents."
 		},
 
-
-		"FormValidator": {
-			"deps": ["More", "Lang", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "FormValidator.English"],
+		"Form.Validator": {
+			"deps": ["More", "Lang", "Class.Extras", "Class.Binds", "Selectors", "Element.Event", "Element.Style", "JSON", "Date", "Element.Forms", "Form.Validator.English"],
 			"desc": "A css-class based form validation system."
 		},
 
-		"FormValidator.Inline": {
-			"deps": ["More", "FormValidator"],
+		"Form.Validator.Inline": {
+			"deps": ["More", "Form.Validator"],
 			"desc": "A css-class based form validation system."
 		},
 
-		"FormValidator.Extras": {
-			"deps": ["More", "FormValidator"],
-			"desc": "Additional validators for FormValidator."
+		"Form.Validator.Extras": {
+			"deps": ["More", "Form.Validator"],
+			"desc": "Additional validators for Form.Validator."
 		},
 
 		"OverText": {
@@ -285,7 +284,7 @@
 	"Interface": {
 
 		"HtmlTable":{
-			"deps":["Class.Extras", "Selectors"],
+			"deps":["Class.Extras", "Selectors", "Class.Occlude"],
 			"desc":"Builds table elements with methods to add rows quickly."
 		},
 
@@ -305,7 +304,7 @@
 		},
 
 		"Keyboard": {
-			"deps": ["More", "Class.Extras", "Element.Event"],
+			"deps": ["More", "Class.Extras", "Element.Event", "Log"],
 			"desc": "Provides enhanced group key event management."
 		},
 
@@ -325,7 +324,7 @@
 			"desc": "Class for creating nice tooltips that follow the mouse cursor when hovering over an element."
 		},
 
-		"Waiter":{
+		"Spinner":{
 			"deps": ["More", "Class.Refactor", "Fx.Tween", "Mask"],
 			"desc": "Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.",
 			"styles": true
@@ -340,9 +339,9 @@
 			"desc": "Date messages in English (with conventions for the US)."
 		},
 
-		"FormValidator.English": {
+		"Form.Validator.English": {
 			"deps": ["More", "Lang"],
-			"desc": "FormValidator messages in English."
+			"desc": "Form.Validator messages in English."
 		}
 
 	}

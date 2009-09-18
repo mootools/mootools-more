@@ -42,7 +42,7 @@ Script: Keyboard.js
 
 		Extends: Events,
 
-		Implements: Options,
+		Implements: [Options, Log],
 
 		options: {
 			/*
@@ -65,9 +65,10 @@ Script: Keyboard.js
 
 		handle: function(e){
 			//Keyboard.stop(event) prevents key propagation
-			if (!this.active || event.preventKeyboardPropagation) return;
+			if (!this.active || e.preventKeyboardPropagation) return;
 			var bubbles = !!this.manager;
 			if (bubbles && this.activeKB) this.activeKB.handle(e);
+			if (e.preventKeyboardPropagation) return;
 
 			var key = (e.shift && this.options.caseSensitive) ? e.key.toUpperCase() : e.key;
 			var mods = '';
@@ -104,10 +105,20 @@ Script: Keyboard.js
 		},
 
 		enable: function(instance){
-			if (instance) this.activeKB = instance.fireEvent('activate');
-			//root manager has no manager
-			else if (this.manager) this.manager.enable(this);
+			if (instance) {
+				//if we're stealing focus, store the last keyboard to have it so the relenquish command works
+				if (instance != this.activeKB) this.previous = this.activeKB;
+				//if we're enabling a child, assign it so that events are now passed to it
+				this.activeKB = instance.fireEvent('activate');
+			} else if (this.manager) {
+				//else we're enabling ourselves, we must ask our parent to do it for us
+				this.manager.enable(this);
+			}
 			return this;
+		},
+
+		relenquish: function(){
+			if (this.previous) this.enable(this.previous);
 		},
 
 		//management logic
@@ -128,7 +139,16 @@ Script: Keyboard.js
 			this.instances.erase(instance);
 		},
 
-		instances: []
+		instances: [],
+
+		trace: function(){
+			var item = this;
+			this.log('the following items have focus: ');
+			while (item) {
+				this.log($(item.widget) || item.widget || item);
+				item = item.activeKB;
+			}
+		}
 
 	});
 
