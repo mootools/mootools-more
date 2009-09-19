@@ -16,25 +16,30 @@ Script: Keyboard.js
 
 	var parsed = {};
 	var modifiers = ['shift', 'control', 'alt', 'meta'];
-	var regex = /^shift|control|ctrl|alt|meta$/;
+	var regex = /^(?:shift|control|ctrl|alt|meta)$/i;
 	
-	var parse = function(type, defaultEventType){
-		if (parsed[type]) return parsed[type];
-		eventType = defaultEventType;
-		['keyup', 'keydown'].each(function(t) {
-			if (type.contains(t)) eventType = t;
+	var parse = function(type, eventType){
+		type = type.replace(/^(keyup|keydown):/, function($0, $1){
+			eventType = $1;
+			return '';
 		});
-		var match, key = '', mods = {};
-		type.split('+').each(function(part){
-			if ((match = part.toLowerCase().match(regex))) mods[match[0]] = true;
-			else key = part;
-		});
-		mods.control = mods.control || mods.ctrl; // allow both control and ctrl
-		match = '';
-		modifiers.each(function(mod){
-			if (mods[mod]) match += mod + '+';
-		});
-		parsed[type] = match + key;
+		
+		if (!parsed[type]){
+			var key = '', mods = {};
+			type.split('+').each(function(part){
+				if (regex.test(part)) mods[part.toLowerCase()] = true;
+				else key = part;
+			});
+		
+			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
+			var match = '';
+			modifiers.each(function(mod){
+				if (mods[mod]) match += mod + '+';
+			});
+			
+			parsed[type] = match + key;
+		}
+		
 		return eventType + ':' + parsed[type];
 	};
 
