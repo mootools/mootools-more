@@ -96,23 +96,10 @@ Date.implement({
 		return this.set({hr: 0, min: 0, sec: 0, ms: 0});
 	},
 
-	diff: function(d, resolution){
-		resolution = resolution || 'day';
-		if ($type(d) == 'string') d = Date.parse(d);
-
-		switch (resolution){
-			case 'year':
-				return d.get('year') - this.get('year');
-			case 'month':
-				var months = (d.get('year') - this.get('year')) * 12;
-				return months + d.get('mo') - this.get('mo');
-			default:
-				var diff = d.get('time') - this.get('time');
-				if (Date.units[resolution]() > diff.abs()) return 0;
-				return ((d.get('time') - this.get('time')) / Date.units[resolution]()).round();
-		}
-
-		return null;
+	diff: function(date, resolution){
+		if ($type(date) == 'string') date = Date.parse(date);
+		
+		return ((date - this) / Date.units[resolution || 'day'](3, 3)).toInt(); // non-leap year, 30-day month
 	},
 
 	getLastDayOfMonth: function(){
