@@ -90,7 +90,7 @@ var URI = new Class({
 			case 'value': return this.combine(this.parsed, base ? base.parsed : false);
 			case 'data' : return this.getData();
 		}
-		return this.parsed[part] || null;
+		return this.parsed[part] || '';
 	},
 
 	go: function(){

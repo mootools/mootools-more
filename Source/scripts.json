@@ -304,7 +304,7 @@
 		},
 
 		"Keyboard": {
-			"deps": ["More", "Class.Extras", "Element.Event"],
+			"deps": ["More", "Class.Extras", "Element.Event", "Log"],
 			"desc": "Provides enhanced group key event management."
 		},
 
