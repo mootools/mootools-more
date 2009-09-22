@@ -48,7 +48,9 @@ Request.JSONP = new Class({
 	send: function(options){
 		if (!$chk(arguments[1]) && !this.check(options)) return this;
 
-		var type = $type(options), old = this.options, index = $chk(arguments[1]) ? arguments[1] : this.requests++;
+		var type = $type(options), 
+				old = this.options, 
+				index = $chk(arguments[1]) ? arguments[1] : this.requests++;
 		if (type == 'string' || type == 'element') options = {data: options};
 
 		options = $extend({data: old.data, url: old.url}, options);
@@ -86,7 +88,8 @@ Request.JSONP = new Class({
 	},
 
 	getScript: function(options){
-		var index = Request.JSONP.counter, data;
+		var index = Request.JSONP.counter,
+				data;
 		Request.JSONP.counter++;
 
 		switch ($type(options.data)){

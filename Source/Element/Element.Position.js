@@ -34,7 +34,8 @@ Element.implement({
 			allowNegative: false
 		}, options);
 		//compute the offset of the parent positioned element if this element is in one
-		var parentOffset = {x: 0, y: 0}, parentPositioned = false;
+		var parentOffset = {x: 0, y: 0}, 
+				parentPositioned = false;
 		/* dollar around getOffsetParent should not be necessary, but as it does not return
 		 * a mootools extended element in IE, an error occurs on the call to expose. See:
 		 * http://mootools.lighthouseapp.com/projects/2706/tickets/333-element-getoffsetparent-inconsistency-between-ie-and-other-browsers */
@@ -71,9 +72,9 @@ Element.implement({
 		}
 
 		this.setStyle('position', 'absolute');
-		var rel = document.id(options.relativeTo) || document.body;
-		var calc = rel == document.body ? window.getScroll() : rel.getPosition();
-		var top = calc.y, left = calc.x;
+		var rel = document.id(options.relativeTo) || document.body,
+				calc = rel == document.body ? window.getScroll() : rel.getPosition(),
+				top = calc.y, left = calc.x;
 
 		if (Browser.Engine.trident){
 			var scrolls = rel.getScrolls();
@@ -86,7 +87,10 @@ Element.implement({
 			options.offset.x = options.offset.x - dim['margin-left'];
 			options.offset.y = options.offset.y - dim['margin-top'];
 		}
-		var pos = {}, prefY = options.offset.y, prefX = options.offset.x, winSize = window.getSize();
+		var pos = {},
+				prefY = options.offset.y,
+				prefX = options.offset.x,
+				winSize = window.getSize();
 		switch(options.position.x){
 			case 'left':
 				pos.x = left + prefX;

@@ -26,7 +26,8 @@ Script: Element.Pin.js
 		pin: function(enable){
 			if (this.getStyle('display') == 'none') return null;
 			
-			var p, scroll = window.getScroll();
+			var p,
+					scroll = window.getScroll();
 			if (enable !== false){
 				p = this.getPosition();
 				if (!this.retrieve('pinned')){
