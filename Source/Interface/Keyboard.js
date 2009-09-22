@@ -53,7 +53,6 @@ Script: Keyboard.js
 			/*
 			onActivate: $empty,
 			onDeactivate: $empty,
-			caseSensitive: false,
 			*/
 			defaultEventType: 'keyup',
 			active: false,
@@ -78,12 +77,12 @@ Script: Keyboard.js
 				if (e.preventKeyboardPropagation) return;
 			}
 			
-			var mods = '', caseSensitive = this.options.caseSensitive;
+			var mods = '';
 			modifiers.each(function(mod){
-				if (e[mod] && (mod != 'shift' || !caseSensitive)) mods += mod + '+';
+				if (e[mod] && (mod != 'shift')) mods += mod + '+';
 			});
 			
-			var key = (e.shift && caseSensitive) ? e.key.toUpperCase() : e.key;
+			var key = (e.shift) ? e.key.toUpperCase() : e.key;
 			this.fireEvent(e.type + ':' + mods + key, e);
 			
 			if (!bubbles && this.activeKB) this.activeKB.handle(e);
