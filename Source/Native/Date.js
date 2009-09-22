@@ -17,7 +17,14 @@ Script: Date.js
 
 if (!Date.now) Date.now = $time;
 
-Date.Methods = {};
+Date.Methods = {
+	ms: 'Milliseconds',
+	year: 'FullYear',
+	min: 'Minutes',
+	mo: 'Month',
+	sec: 'Seconds',
+	hr: 'Hours'
+};
 
 ['Date', 'Day', 'FullYear', 'Hours', 'Milliseconds', 'Minutes', 'Month', 'Seconds', 'Time', 'TimezoneOffset',
 	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'LastDayOfMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
@@ -25,19 +32,8 @@ Date.Methods = {};
 	Date.Methods[method.toLowerCase()] = method;
 });
 
-$each({
-	ms: 'Milliseconds',
-	year: 'FullYear',
-	min: 'Minutes',
-	mo: 'Month',
-	sec: 'Seconds',
-	hr: 'Hours'
-}, function(value, key){
-	Date.Methods[key] = value;
-});
-
-var zeroize = function(what, length){
-	return new Array(length - what.toString().length + 1).join('0') + what;
+var pad = function(what, length){
+	return new Array(length - String(what).length + 1).join('0') + what;
 };
 
 Date.implement({
@@ -100,23 +96,10 @@ Date.implement({
 		return this.set({hr: 0, min: 0, sec: 0, ms: 0});
 	},
 
-	diff: function(d, resolution){
-		resolution = resolution || 'day';
-		if ($type(d) == 'string') d = Date.parse(d);
-
-		switch (resolution){
-			case 'year':
-				return d.get('year') - this.get('year');
-			case 'month':
-				var months = (d.get('year') - this.get('year')) * 12;
-				return months + d.get('mo') - this.get('mo');
-			default:
-				var diff = d.get('time') - this.get('time');
-				if (Date.units[resolution]() > diff.abs()) return 0;
-				return ((d.get('time') - this.get('time')) / Date.units[resolution]()).round();
-		}
-
-		return null;
+	diff: function(date, resolution){
+		if ($type(date) == 'string') date = Date.parse(date);
+		
+		return ((date - this) / Date.units[resolution || 'day'](3, 3)).toInt(); // non-leap year, 30-day month
 	},
 
 	getLastDayOfMonth: function(){
@@ -144,7 +127,7 @@ Date.implement({
 
 	getGMTOffset: function(){
 		var off = this.get('timezoneOffset');
-		return ((off > 0) ? '-' : '+') + zeroize((off.abs() / 60).floor(), 2) + zeroize(off % 60, 2);
+		return ((off > 0) ? '-' : '+') + pad((off.abs() / 60).floor(), 2) + pad(off % 60, 2);
 	},
 
 	setAMPM: function(ampm){
@@ -181,16 +164,16 @@ Date.implement({
 					case 'b': return Date.getMsg('months')[d.get('month')].substr(0, 3);
 					case 'B': return Date.getMsg('months')[d.get('month')];
 					case 'c': return d.toString();
-					case 'd': return zeroize(d.get('date'), 2);
-					case 'H': return zeroize(d.get('hr'), 2);
+					case 'd': return pad(d.get('date'), 2);
+					case 'H': return pad(d.get('hr'), 2);
 					case 'I': return ((d.get('hr') % 12) || 12);
-					case 'j': return zeroize(d.get('dayofyear'), 3);
-					case 'm': return zeroize((d.get('mo') + 1), 2);
-					case 'M': return zeroize(d.get('min'), 2);
+					case 'j': return pad(d.get('dayofyear'), 3);
+					case 'm': return pad((d.get('mo') + 1), 2);
+					case 'M': return pad(d.get('min'), 2);
 					case 'o': return d.get('ordinal');
 					case 'p': return Date.getMsg(d.get('ampm'));
-					case 'S': return zeroize(d.get('seconds'), 2);
-					case 'U': return zeroize(d.get('week'), 2);
+					case 'S': return pad(d.get('seconds'), 2);
+					case 'U': return pad(d.get('week'), 2);
 					case 'w': return d.get('day');
 					case 'x': return d.format(Date.getMsg('shortDate'));
 					case 'X': return d.format(Date.getMsg('shortTime'));
@@ -210,6 +193,7 @@ Date.implement({
 
 });
 
+Date.alias('toISOString', 'toJSON');
 Date.alias('diff', 'compare');
 Date.alias('format', 'strftime');
 
@@ -306,12 +290,14 @@ Date.extend({
 
 	parseUTC: function(value){
 		var localDate = new Date(value);
-		var utcSeconds = Date.UTC(localDate.get('year'), 
-		localDate.get('mo'),
-		localDate.get('date'), 
-		localDate.get('hr'), 
-		localDate.get('min'), 
-		localDate.get('sec'));
+		var utcSeconds = Date.UTC(
+			localDate.get('year'),
+			localDate.get('mo'),
+			localDate.get('date'),
+			localDate.get('hr'),
+			localDate.get('min'),
+			localDate.get('sec')
+		);
 		return new Date(utcSeconds);
 	},
 

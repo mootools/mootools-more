@@ -16,25 +16,30 @@ Script: Keyboard.js
 
 	var parsed = {};
 	var modifiers = ['shift', 'control', 'alt', 'meta'];
-	var regex = /^shift|control|ctrl|alt|meta$/;
+	var regex = /^(?:shift|control|ctrl|alt|meta)$/i;
 	
-	var parse = function(type, defaultEventType){
-		if (parsed[type]) return parsed[type];
-		eventType = defaultEventType;
-		['keyup', 'keydown'].each(function(t) {
-			if (type.contains(t)) eventType = t;
+	var parse = function(type, eventType){
+		type = type.replace(/^(keyup|keydown):/, function($0, $1){
+			eventType = $1;
+			return '';
 		});
-		var match, key = '', mods = {};
-		type.split('+').each(function(part){
-			if ((match = part.toLowerCase().match(regex))) mods[match[0]] = true;
-			else key = part;
-		});
-		mods.control = mods.control || mods.ctrl; // allow both control and ctrl
-		match = '';
-		modifiers.each(function(mod){
-			if (mods[mod]) match += mod + '+';
-		});
-		parsed[type] = match + key;
+		
+		if (!parsed[type]){
+			var key = '', mods = {};
+			type.split('+').each(function(part){
+				if (regex.test(part)) mods[part.toLowerCase()] = true;
+				else key = part;
+			});
+		
+			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
+			var match = '';
+			modifiers.each(function(mod){
+				if (mods[mod]) match += mod + '+';
+			});
+			
+			parsed[type] = match + key;
+		}
+		
 		return eventType + ':' + parsed[type];
 	};
 
@@ -66,17 +71,21 @@ Script: Keyboard.js
 		handle: function(e){
 			//Keyboard.stop(event) prevents key propagation
 			if (!this.active || e.preventKeyboardPropagation) return;
+			
 			var bubbles = !!this.manager;
-			if (bubbles && this.activeKB) this.activeKB.handle(e);
-			if (e.preventKeyboardPropagation) return;
-
-			var key = (e.shift && this.options.caseSensitive) ? e.key.toUpperCase() : e.key;
-			var mods = '';
+			if (bubbles && this.activeKB){
+				this.activeKB.handle(e);
+				if (e.preventKeyboardPropagation) return;
+			}
+			
+			var mods = '', caseSensitive = this.options.caseSensitive;
 			modifiers.each(function(mod){
-				if (e[mod] && (mod != 'shift' || !this.options.caseSensitive)) mods += mod + '+';
-			}, this);
-			var event = e.type + ':' + mods + key;
-			if (this.$events[event]) this.fireEvent(event, e);
+				if (e[mod] && (mod != 'shift' || !caseSensitive)) mods += mod + '+';
+			});
+			
+			var key = (e.shift && caseSensitive) ? e.key.toUpperCase() : e.key;
+			this.fireEvent(e.type + ':' + mods + key, e);
+			
 			if (!bubbles && this.activeKB) this.activeKB.handle(e);
 		},
 
@@ -90,14 +99,12 @@ Script: Keyboard.js
 
 		activate: function(){
 			this.active = true;
-			this.enable();
-			return this;
+			return this.enable();
 		},
 
 		deactivate: function(){
 			this.active = false;
-			this.fireEvent('deactivate');
-			return this;
+			return this.fireEvent('deactivate');
 		},
 
 		toggleActive: function(){
@@ -145,7 +152,7 @@ Script: Keyboard.js
 			var item = this;
 			this.log('the following items have focus: ');
 			while (item) {
-				this.log($(item.widget) || item.widget || item);
+				this.log(document.id(item.widget) || item.widget || item);
 				item = item.activeKB;
 			}
 		}
@@ -156,14 +163,15 @@ Script: Keyboard.js
 		event.preventKeyboardPropagation = true;
 	};
 
-	Keyboard.manager = new this.Keyboard();
-	Keyboard.manager.active = true;
+	Keyboard.manager = new this.Keyboard({
+		active: true
+	});
+	
 	var handler = Keyboard.manager.handle.bind(Keyboard.manager);
 	window.addEvents({
 		'keyup': handler,
 		'keydown': handler
 	});
-
 
 	Event.Keys.extend({
 		'pageup': 33,
