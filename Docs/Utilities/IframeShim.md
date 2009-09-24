@@ -35,6 +35,7 @@ There are two types of elements that (sometimes) prohibit you from positioning a
 * offset -  (*object: {x:#, y:#}*) move the iframe up/down, left/right relative to the element
 * className - (*string*) className for the shim; defaults to *"iframeShim"*
 * browsers - (*boolean*) allows you to specify the browsers that the iframe should show up for; defaults to ie6 or gecko on a mac (Browser.Engine.trident4 || (Browser.Engine.gecko && Browser.Platform.mac)). Example usage: *browsers: Browser.Engine.trident4 || Browser.Engine.presto* will show for opera and ie6
+* src - (*string*) this is the source of the Iframe. For the most part, you shouldn't mess with this option. We've tested it across numerous environments (particularly https environments), but if you need to, for some reason, alter it, we've exposed it as an option, as your environment may require you try an alternate string. The default is *'javascript:false;document.write("");'*.
 
 ### Events
 
@@ -46,7 +47,7 @@ There are two types of elements that (sometimes) prohibit you from positioning a
 
 	var myFloatingDivShim = new IframeShim('myFloatingDiv', {
 		display: false,
-		name: 'myFloatingDivShimId'
+		className: 'myFloatingDivShimClass'
 	});
 
 IframeShim Method: position {#IframeShim:position}
