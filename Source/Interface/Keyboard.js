@@ -16,10 +16,10 @@ Script: Keyboard.js
 
 	var parsed = {};
 	var modifiers = ['shift', 'control', 'alt', 'meta'];
-	var regex = /^(?:shift|control|ctrl|alt|meta)$/i;
+	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
 	
 	var parse = function(type, eventType){
-		type = type.replace(/^(keyup|keydown):/, function($0, $1){
+		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
 			eventType = $1;
 			return '';
 		});
@@ -27,7 +27,7 @@ Script: Keyboard.js
 		if (!parsed[type]){
 			var key = '', mods = {};
 			type.split('+').each(function(part){
-				if (regex.test(part)) mods[part.toLowerCase()] = true;
+				if (regex.test(part)) mods[part] = true;
 				else key = part;
 			});
 		
@@ -67,25 +67,19 @@ Script: Keyboard.js
 			if (this.options.active) this.activate();
 		},
 
-		handle: function(e){
+		handle: function(event, type){
 			//Keyboard.stop(event) prevents key propagation
-			if (!this.active || e.preventKeyboardPropagation) return;
+			if (!this.active || event.preventKeyboardPropagation) return;
 			
 			var bubbles = !!this.manager;
 			if (bubbles && this.activeKB){
-				this.activeKB.handle(e);
-				if (e.preventKeyboardPropagation) return;
+				this.activeKB.handle(event, type);
+				if (event.preventKeyboardPropagation) return;
 			}
 			
-			var mods = '';
-			modifiers.each(function(mod){
-				if (e[mod] && (mod != 'shift')) mods += mod + '+';
-			});
+			this.fireEvent(type, event);
 			
-			var key = (e.shift) ? e.key.toUpperCase() : e.key;
-			this.fireEvent(e.type + ':' + mods + key, e);
-			
-			if (!bubbles && this.activeKB) this.activeKB.handle(e);
+			if (!bubbles && this.activeKB) this.activeKB.handle(event, type);
 		},
 
 		addEvent: function(type, fn, internal) {
@@ -166,7 +160,14 @@ Script: Keyboard.js
 		active: true
 	});
 	
-	var handler = Keyboard.manager.handle.bind(Keyboard.manager);
+	var handler = function(event){
+		var mods = '';
+		modifiers.each(function(mod){
+			if (event[mod]) mods += mod + '+';
+		});
+		Keyboard.manager.handle(event, event.type + ':' + mods + event.key);
+	};
+	
 	window.addEvents({
 		'keyup': handler,
 		'keydown': handler
