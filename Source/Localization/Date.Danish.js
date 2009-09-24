@@ -7,6 +7,7 @@ Script: Date.Danish.js
 
 	Authors:
 		Martin Overgaard
+		Henrik Hansen
 
 */
  
@@ -36,12 +37,24 @@ MooTools.lang.set('da-DK', 'Date', {
 	hoursAgo: 'omkring {delta} timer siden',
 	dayAgo: '1 dag siden',
 	daysAgo: '{delta} dage siden',
+	weekAgo: '1 uge siden',
+	weeksAgo: '{delta} uger siden',
+	monthAgo: '1 måned siden',
+	monthsAgo: '{delta} måneder siden',
+	yearthAgo: '1 år siden',
+	yearsAgo: '{delta} år siden',
 	lessThanMinuteUntil: 'mindre end et minut fra nu',
 	minuteUntil: 'omkring et minut fra nu',
 	minutesUntil: '{delta} minutter fra nu',
 	hourUntil: 'omkring en time fra nu',
 	hoursUntil: 'omkring {delta} timer fra nu',
 	dayUntil: '1 dag fra nu',
-	daysUntil: '{delta} dage fra nu'
+	daysUntil: '{delta} dage fra nu',
+	weekUntil: '1 uge fra nu',
+	weeksUntil: '{delta} uger fra nu',
+	monthUntil: '1 måned fra nu',
+	monthsUntil: '{delta} måneder fra nu',
+	yearUntil: '1 år fra nu',
+	yearsUntil: '{delta} år fra nu'
 
 });
