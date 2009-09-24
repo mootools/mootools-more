@@ -108,6 +108,12 @@ var Spinner = new Class({
 			this.fireEvent('hide');
 			this.callChain();
 		}.bind(this));
+	},
+
+	destroy: function(){
+		this.content.destroy();
+		this.parent();
+		this.target.eliminate('spinner');
 	}
 
 });
