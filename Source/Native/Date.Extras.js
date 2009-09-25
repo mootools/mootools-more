@@ -51,32 +51,29 @@ Date.extend({
 		var suffix = (delta < 0) ? 'Until' : 'Ago';
 		if (delta < 0) delta *= -1;
 		
-		var msg = (delta < 60) ? 'lessThanMinute' :
-				  (delta < 120) ? 'minute' :
-				  (delta < (45 * 60)) ? 'minutes' :
-				  (delta < (90 * 60)) ? 'hour' :
-				  (delta < (24 * 60 * 60)) ? 'hours' :
-				  (delta < (48 * 60 * 60)) ? 'day' :
-				  (delta < (7 * 24 * 60 * 60)) ? 'days' :
-				  (delta < (14 * 24 * 60 * 60)) ? 'week' :
-				  (delta < (30 * 24 * 60 * 60)) ? 'weeks' :
-				  (delta < (60 * 24 * 60 * 60)) ? 'month' :
-				  (delta < (12 * 30 * 24 * 60 * 60)) ? 'months' :
-				  (delta < (24 * 30 * 24 * 60 * 60)) ? 'year' :
-				  'years';
-		
-		var divisors = {
-			minutes: 60,
-			hours: 60 * 60,
-			days: 24 * 60 * 60,
-			weeks: 7 * 24 * 60 * 60,
-			months: 30 * 24 * 60 * 60,
-			years: 365 * 24 * 60 * 60
+		var units = {
+			minute: 60,
+			hour: 60,
+			day: 24,
+			week: 7,
+			month: 52 / 12,
+			year: 12,
+			eon: Infinity
 		};
 		
-		delta = (delta / (divisors[msg] || 1)).round();
+		var msg = 'lessThanMinute';
 		
-		return Date.getMsg(msg + suffix, delta).substitute({delta: delta});
+		for (var unit in units){
+			var interval = units[unit];
+			if (delta < 1.5 * interval){
+				if (delta > 0.75 * interval) msg = unit;
+				break;
+			}
+			delta /= interval;
+			msg = unit + 's';
+		}
+		
+		return Date.getMsg(msg + suffix).substitute({delta: delta.round()});
 	}
 
 });
