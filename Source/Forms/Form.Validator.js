@@ -216,12 +216,7 @@ Form.Validator = new Class({
 	},
 
 	isVisible : function(field){
-		if (!this.options.ignoreHidden) return true;
-		while(field != document.body){
-			if (document.id(field).getStyle('display') == 'none') return false;
-			field = field.getParent();
-		}
-		return true;
+		return this.options.ignoreHidden || field.isVisible();
 	},
 
 	resetField: function(field){
