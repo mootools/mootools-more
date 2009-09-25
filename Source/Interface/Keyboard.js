@@ -160,6 +160,10 @@ Script: Keyboard.js
 		active: true
 	});
 	
+	Keyboard.trace = function(){
+		Keyboard.manager.trace();
+	};
+	
 	var handler = function(event){
 		var mods = '';
 		modifiers.each(function(mod){
