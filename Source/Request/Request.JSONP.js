@@ -19,7 +19,9 @@ Request.JSONP = new Class({
 		onRequest: $empty(scriptElement),
 		onComplete: $empty(data),
 		onSuccess: $empty(data),
-		onCancel: $empty(),*/
+		onCancel: $empty(),
+		log: false,
+		*/
 		url: '',
 		data: {},
 		retries: 0,
@@ -60,7 +62,7 @@ Request.JSONP = new Class({
 
 		(function(){
 			var script = this.getScript(options);
-			this.log('JSONP retrieving script with url: ' + script.get('src'));
+			if (this.options.log) this.log('JSONP retrieving script with url: ' + script.get('src'));
 			this.fireEvent('request', script);
 			this.running = true;
 
@@ -102,7 +104,7 @@ Request.JSONP = new Class({
 			 (options.callbackKey || this.options.callbackKey) + 
 			 '=Request.JSONP.request_map.request_'+ index + 
 			 (data ? '&' + data : '');
-		if (src.length > 2083) this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
+		if (src.length > 2083 && this.options.log) this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
 
 		var script = new Element('script', {type: 'text/javascript', src: src});
 		Request.JSONP.request_map['request_' + index] = function(data){ this.success(data, script); }.bind(this);
@@ -112,7 +114,7 @@ Request.JSONP = new Class({
 	success: function(data, script){
 		if (script) script.destroy();
 		this.running = false;
-		this.log('JSONP successfully retrieved: ', data);
+		if (this.options.log) this.log('JSONP successfully retrieved: ', data);
 		this.fireEvent('complete', [data]).fireEvent('success', [data]).callChain();
 	}
 
