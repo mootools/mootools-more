@@ -70,20 +70,18 @@ var IframeShim = new Class({
 	},
 
 	position: function(){
-		if (!IframeShim.ready) return this;
+		if (!IframeShim.ready || !this.shim) return this;
 		var size = this.element.measure(function(){ return this.getSize(); });
-		if ($type(this.options.margin)){
+		if (this.options.margin != undefined){
 			size.x = size.x - (this.options.margin * 2);
 			size.y = size.y - (this.options.margin * 2);
 			this.options.offset.x += this.options.margin;
 			this.options.offset.y += this.options.margin;
 		}
-		if (this.shim) {
-			this.shim.set({width: size.x, height: size.y}).position({
-				relativeTo: this.element,
-				offset: this.options.offset
-			});
-		}
+		this.shim.set({width: size.x, height: size.y}).position({
+			relativeTo: this.element,
+			offset: this.options.offset
+		});
 		return this;
 	},
 
