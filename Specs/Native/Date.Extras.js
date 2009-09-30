@@ -47,11 +47,10 @@ describe('Date.timeAgoInWords', {
 describe('Date.Extras.parse', {
 
 	'should parse a string value into a date': function(){
-		var d = new Date;
 		
-		value_of(Date.parse('today').get('date')).should_be(d.get('date'));
-		value_of(Date.parse('yesterday').get('date')).should_be(d.get('date') - 1);
-		value_of(Date.parse('tomorrow').get('date')).should_be(d.get('date') + 1);
+		value_of(Date.parse('today').get('date')).should_be(new Date().get('date'));
+		value_of(Date.parse('yesterday').get('date')).should_be(new Date().decrement().get('date'));
+		value_of(Date.parse('tomorrow').get('date')).should_be(new Date().increment().get('date'));
 	}
 
 });
