@@ -148,7 +148,7 @@ Script: Keyboard.js
 			var item = this;
 			this.log('the following items have focus: ');
 			while (item) {
-				this.log(document.id(item.widget) || item.widget || item);
+				this.log(item.name + ':', document.id(item.widget) || item.widget || item);
 				item = item.activeKB;
 			}
 		}
