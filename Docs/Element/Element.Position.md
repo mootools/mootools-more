@@ -22,13 +22,17 @@ Sets the location of an element relative to another (defaults to the document bo
 
 ### Options
 
-1. relativeTo - (*element*) the element relative to which to position this one; defaults to *document.body*.
-2. position - (*string* OR *object*) the aspect of the relativeTo element that this element should be positioned. See position section below.
-3. edge - (*string* OR *object*) the edge of the element to set relative to the relative element's corner; this way you can specify to position this element's upper right corner to the bottom left corner of the relative element. This is optional; the default behavior positions the element's upper left corner to the relative element unless position == center, in which case it positions the center of the element to the center of the relative element. See position section below.
-4. offset - (*object*) x/y coordinates for the offset (i.e. {x: 10, y:100} will move it down 100 and to the right 10). Negative values are allowed.
-5. returnPos - (*boolean*) don't move the element, but instead just return the position object ({top: '#', left: '#'}); defaults to *false*
-6. relFixedPosition - (*boolean*) *true*: adds the scroll position of the window to the location to account for a fixed position relativeTo item; defaults to *false*
-7. ignoreMargins - (*boolean*) you can have the position calculate the offsets added margins if you like; defaults to *false*. If *true*, the corner of the element will be used EXCLUDING the margin.
+* relativeTo - (*element*) the element relative to which to position this one; defaults to *document.body*.
+* position - (*string* OR *object*) the aspect of the relativeTo element that this element should be positioned. See position section below.
+* edge - (*string* OR *object*) the edge of the element to set relative to the relative element's corner; this way you can specify to position this element's upper right corner to the bottom left corner of the relative element. This is optional; the default behavior positions the element's upper left corner to the relative element unless position == center, in which case it positions the center of the element to the center of the relative element. See position section below.
+* offset - (*object*) x/y coordinates for the offset (i.e. {x: 10, y:100} will move it down 100 and to the right 10). Negative values are allowed.
+* returnPos - (*boolean*) don't move the element, but instead just return the position object ({top: '#', left: '#'}); defaults to *false*
+* relFixedPosition - (*boolean*) *true*: adds the scroll position of the window to the location to account for a fixed position relativeTo item; defaults to *false*
+* ignoreMargins - (*boolean*) you can have the position calculate the offsets added margins if you like; defaults to *false*. If *true*, the corner of the element will be used EXCLUDING the margin.
+* ignoreScroll - (*boolean*) if *true*, the scroll offset of the parent is ignored. defaults to *false*.
+* allowNegative - (*boolean*) if *true*, AND the element is not a descendent of an element that is positioned (relative or absolute), then the position will not allow negative values.
+* minimum - (*object*) *x* and *y* values (*integers*) for hard minimum limits on the position. Unlike allowNegative, these are not conditional; if you give zero values for the x/y values, they will be obeyed regardless of any other setting.
+* maximum - (*object*) *x* and *y* values (*integers*) for hard maximum limits on the position.
 
 ### Position & Edge Options
 
