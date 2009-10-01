@@ -63,6 +63,7 @@ Script: Keyboard.js
 			this.setOptions(options);
 			//if this is the root manager, nothing manages it
 			if (Keyboard.manager) Keyboard.manager.manage(this);
+			this.setup();
 		},
 
 		setup: function(){
@@ -148,7 +149,7 @@ Script: Keyboard.js
 			var item = this;
 			this.log('the following items have focus: ');
 			while (item) {
-				this.log(item.name + ':', document.id(item.widget) || item.widget || item);
+				this.log(document.id(item.widget) || item.widget || item, 'active: ' + this.active);
 				item = item.activeKB;
 			}
 		}
