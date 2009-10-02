@@ -80,6 +80,7 @@ var Mask = new Class({
 		this.resize(this.options.width, this.options.height);
 		this.element.position({
 			relativeTo: this.target,
+			position: 'topLeft',
 			ignoreMargins: !this.options.maskMargins,
 			ignoreScroll: this.target == document.body
 		});
@@ -92,9 +93,14 @@ var Mask = new Class({
 		};
 		if (this.options.maskMargins) opt.styles.push('margin');
 		var dim = this.target.getComputedSize(opt);
+		if (this.target == document.body) {
+			var win = window.getSize();
+			if (dim.totalHeight < win.y) dim.totalHeight = win.y;
+			if (dim.totalWidth < win.x) dim.totalWidth = win.x;
+		}
 		this.element.setStyles({
-			width:($pick(x, dim.totalWidth)),
-			height:($pick(y, dim.totalHeight))
+			width: $pick(x, dim.totalWidth, dim.x),
+			height: $pick(y, dim.totalHeight, dim.y)
 		});
 		return this;
 	},
