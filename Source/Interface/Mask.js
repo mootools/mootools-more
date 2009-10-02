@@ -121,10 +121,10 @@ var Mask = new Class({
 	},
 
 	hide: function(){
-		if (this.options.destroyOnHide) return this.destroy();
 		if (this.hidden) return this;
 		this.target.removeEvent('resize', this.resize);
 		this.hideMask.apply(this, arguments);
+		if (this.options.destroyOnHide) return this.destroy();
 		return this;
 	},
 
