@@ -371,6 +371,7 @@ describe('Date.parse', {
 			value_of(Date.parse(d.format('%x'))).should_be(d);
 			value_of(Date.parse(d.format('%b %d %Y'))).should_be(d);
 			value_of(Date.parse(d.format('%d %B %Y'))).should_be(d);
+			value_of(Date.parse(d.format('%Y %b %d'))).should_be(d);
 			
 			d = new Date(2000, 11, 2, 22, 45, 0, 0);
 			value_of(Date.parse(d.format('%x %X'))).should_be(d);
@@ -380,6 +381,14 @@ describe('Date.parse', {
 			value_of(Date.parse(d.format('compact'))).should_be(d);
 			value_of(Date.parse(d.format('db'))).should_be(d);
 			value_of(Date.parse(d.format('long'))).should_be(d);
+			
+			d = new Date(2000, 0, 1, 0, 0, 0, 0);
+			value_of(Date.parse('2000')).should_be(d);
+			
+			d = new Date().clearTime();
+			value_of(Date.parse(d.set('date', 3).format('%d'))).should_be(d);
+			value_of(Date.parse(d.set('date', 25).format('%d%o'))).should_be(d);
+			value_of(Date.parse(d.set({date: 1, mo: 11}).format('%B'))).should_be(d);
 		});
 	}
 

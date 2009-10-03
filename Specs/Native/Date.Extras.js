@@ -19,6 +19,7 @@ describe('Date.getTimePhrase', {
 			'3 weeks ago': 60 * 60 * 24 * 20,
 			'1 month ago': 60 * 60 * 24 * 30,
 			'2 months ago': 60 * 60 * 24 * 55,
+			'10 years ago': 60 * 60 * 24 * 3650,
 			'about a minute from now': -65,
 			'2 minutes from now': -120,
 			'about 3 hours from now': -60 * 60 * 3,
