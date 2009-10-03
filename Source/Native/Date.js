@@ -184,7 +184,7 @@ Date.implement({
 					case 'T': return d.get('GMTOffset');
 					case 'Z': return d.get('Timezone');
 				}
-				return $2;
+				return $1;
 			}
 		);
 	},
