@@ -1,7 +1,7 @@
 Class: Request.JSONP {#Request-JSONP}
 =====================
 
-Creates a Json request using script tag injection and handles the callbacks for you.
+Creates a JSON request using script tag injection and handles the callbacks for you.
 
 ### Tutorial/Demo
 
@@ -22,12 +22,13 @@ Creates a Json request using script tag injection and handles the callbacks for 
 
 ### Options
 
-* url - (*url*) the url to get the json data
-* callBackKey - (*string*) the key in the url that the server uses to wrap the Json results. So, for example, if you used *callBackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; defaults to "callback". This must be defined correctly.
+* url - (*url*) the url to get the JSON data
+* callBackKey - (*string*) the key in the url that the server uses to wrap the JSON results. So, for example, if you used *callBackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; defaults to "callback". This must be defined correctly.
 * data - (*object*) additional key/value data to append to the url
 * retries - (*integer*; defaults to *zero*) if this value is a positive integer, the JSONP request will abort after the duration specified in the *timeout* option and fire again until the number of retries has been exhausted.
 * timeout - (*integer*; defaults to *zero*) the duration to wait before aborting a request or retrying.
 * injectScript - (*mixed*; defaults to document head) where to inject the script elements used for the calls
+* log - (*boolean*) if *true*, sends logging messages to [Log][] (to console if it's defined). Defaults to *false*.
 
 ### Events
 
@@ -40,7 +41,7 @@ Creates a Json request using script tag injection and handles the callbacks for 
 		data: {
 			partTag: 'mtvo',
 			iod: 'hlPrice',
-			iewType: 'json',
+			viewType: 'json',
 			results: '100',
 			query: 'ipod'
 		},
@@ -66,7 +67,7 @@ It would embed a script tag (in the head of the document) with this url and, whe
 Request.JSONP Method: send {#Request-JSONP:send}
 --------------------------------------
 
-Executes the Json request.
+Executes the JSON request.
 
 ### Syntax
 
@@ -83,7 +84,7 @@ Executes the Json request.
 Request.JSONP Method: send {#Request-JSONP:send}
 --------------------------------------
 
-Executes the Json request.
+Executes the JSON request.
 
 ### Syntax
 
@@ -97,4 +98,5 @@ Executes the Json request.
 [Request.JSONP]: #Request-JSONP
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
+[Log]: /more/Core/Log
 [dbug]: /more/Core/dbug

@@ -120,10 +120,11 @@ if (!window.Form) window.Form = {};
 
 		send: function(){
 			var str = this.element.toQueryString().trim();
-			formData = str.parseQueryString();
-			var data = $H(this.options.extraData).combine(formData);
-			this.fireEvent('send', [this.element, data]);
-			this.request.send({data: data});
+			var data = $H(this.options.extraData).toQueryString();
+			if (str) str += "&" + data;
+			else str = data;
+			this.fireEvent('send', [this.element, str]);
+			this.request.send({data: str});
 			return this;
 		}
 

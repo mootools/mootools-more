@@ -61,9 +61,13 @@ Script: Keyboard.js
 
 		initialize: function(options){
 			this.setOptions(options);
-			this.addEvents(this.options.events);
 			//if this is the root manager, nothing manages it
 			if (Keyboard.manager) Keyboard.manager.manage(this);
+			this.setup();
+		},
+
+		setup: function(){
+			this.addEvents(this.options.events);
 			if (this.options.active) this.activate();
 		},
 
@@ -145,7 +149,7 @@ Script: Keyboard.js
 			var item = this;
 			this.log('the following items have focus: ');
 			while (item) {
-				this.log(document.id(item.widget) || item.widget || item);
+				this.log(document.id(item.widget) || item.widget || item, 'active: ' + this.active);
 				item = item.activeKB;
 			}
 		}
@@ -159,6 +163,10 @@ Script: Keyboard.js
 	Keyboard.manager = new this.Keyboard({
 		active: true
 	});
+	
+	Keyboard.trace = function(){
+		Keyboard.manager.trace();
+	};
 	
 	var handler = function(event){
 		var mods = '';

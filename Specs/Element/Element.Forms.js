@@ -11,7 +11,7 @@ License:
 		(function(){
 			var container = new Element('div', {
 				styles: {
-					height: 0,
+					height: 1,
 					overflow: "hidden"
 				}
 			}).inject($('log'));
