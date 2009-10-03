@@ -389,19 +389,18 @@ var build = function(format){
 		format: format,
 		re: new RegExp('^' + re + '$', 'i'),
 		handler: function(bits){
+			bits = bits.slice(1).associate(parsed);
 			var date = new Date().clearTime();
-			for (var i = 1; i < parsed.length; i++)
-				date = handle.call(date, parsed[i], bits[i]);
+			if ('d' in bits) handle.call(date, 'd', 1);
+			if ('m' in bits) handle.call(date, 'm', 1);
+			for (var key in bits) handle.call(date, key, bits[key]);
 			return date;
 		}
 	};
 };
 
 var handle = function(key, value){
-	if (!value){
-		if (key == 'm' || key == 'd') value = 1;
-		else return this;
-	}
+	if (!value) return this;
 
 	switch(key){
 		case 'a': case 'A': return this.set('day', Date.parseDay(value, true));
