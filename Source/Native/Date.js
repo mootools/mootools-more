@@ -15,6 +15,8 @@ Script: Date.js
 
 (function(){
 
+var Date = this.Date;
+
 if (!Date.now) Date.now = $time;
 
 Date.Methods = {
@@ -157,8 +159,8 @@ Date.implement({
 		f = formats[f.toLowerCase()] || f; // replace short-hand with actual format
 		var d = this;
 		return f.replace(/%([a-z%])/gi,
-			function($1, $2){
-				switch ($2){
+			function($0, $1){
+				switch ($1){
 					case 'a': return Date.getMsg('days')[d.get('day')].substr(0, 3);
 					case 'A': return Date.getMsg('days')[d.get('day')];
 					case 'b': return Date.getMsg('months')[d.get('month')].substr(0, 3);
@@ -324,23 +326,21 @@ Date.extend({
 	},
 	
 	define2DigitYearStart: function(year){
-		yr_start = year % 100;
-		yr_base = year - yr_start;
+		startYear = year % 100;
+		startCentury = year - startYear;
 	}
 
 });
 
-var yr_base = 1900;
-var yr_start = 70;
+var startCentury = 1900;
+var startYear = 70;
 
 var replacers = function(key){
 	switch(key){
 		case 'x': // iso8601 covers yyyy-mm-dd, so just check if month is first
-			return (Date.orderIndex('month') == 1) ? '%m[.-/]%d([.-/]%y)?' : '%d[.-/]%m([.-/]%y)?';
+			return ((Date.orderIndex('month') == 1) ? '%m[.-/]%d' : '%d[.-/]%m') + '([.-/]%y)?';
 		case 'X':
-			return '%H([.:]%M)?([.:]%S([.:]%s)?)?\\s?%p?\\s?%T?';
-		case 'o':
-			return '[^\\d\\s]*';
+			return '%H([.:]%M)?([.:]%S([.:]%s)?)? ?%p? ?%T?';
 	}
 	return null;
 };
@@ -352,6 +352,7 @@ var keys = {
 	I: /0?[1-9]|1[0-2]/,
 	M: /[0-5]?\d/,
 	s: /\d+/,
+	o: /[a-z]*/,
 	p: /[ap]\.?m\.?/,
 	y: /\d{2}|\d{4}/,
 	Y: /\d{4}/,
@@ -371,16 +372,16 @@ var build = function(format){
 
 	var re = (format.source || format) // allow format to be regex
 	 .replace(/%([a-z])/gi,
-		function($1, $2){
-			return replacers($2) || $1;
+		function($0, $1){
+			return replacers($1) || $0;
 		}
 	).replace(/\((?!\?)/g, '(?:') // make all groups non-capturing
 	 .replace(/ (?!\?|\*)/g, ',? ') // be forgiving with spaces and commas
 	 .replace(/%([a-z%])/gi,
-		function($1, $2){
-			var p = keys[$2];
-			if (!p) return $2;
-			parsed.push($2);
+		function($0, $1){
+			var p = keys[$1];
+			if (!p) return $1;
+			parsed.push($1);
 			return '(' + p.source + ')';
 		}
 	);
@@ -416,13 +417,13 @@ var handle = function(key, value){
 		case 'Y': return this.set('year', value);
 		case 'y':
 			value = +value;
-			if (value < 100) value += yr_base + (value < yr_start ? 100 : 0);
+			if (value < 100) value += startCentury + (value < startYear ? 100 : 0);
 			return this.set('year', value);
 		case 'T':
 			if (value == 'Z') value = '+00';
 			var offset = value.match(/([+-])(\d{2}):?(\d{2})?/);
 			offset = (offset[1] + '1') * (offset[2] * 60 + (+offset[3] || 0)) + this.getTimezoneOffset();
-			return this.set('time', (this * 1) - offset * 60000);
+			return this.set('time', this - offset * 60000);
 	}
 
 	return this;
