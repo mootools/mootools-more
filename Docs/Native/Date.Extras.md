@@ -8,6 +8,7 @@ Extends the *Date* native to include more powerful parsing and formatting functi
 * Nicholas Barthelemy - https://svn.nbarthelemy.com/date-js/
 * Harald Kirshner - mail [at] digitarald.de ; http://digitarald.de
 * Aaron Newton - aaron [dot] newton [at] cnet [dot] com
+* Scott Kyle - scott [at] appden.com; http://appden.com
 
 ### Tutorial/Demo
 

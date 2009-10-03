@@ -7,6 +7,7 @@ Script: Date.Extras.js
 
 	Authors:
 		Aaron Newton
+		Scott Kyle
 
 */
 
