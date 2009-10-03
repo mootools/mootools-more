@@ -84,7 +84,7 @@ Date.defineParsers(
 
 	{
 		// "today", "tomorrow", "yesterday"
-		re: /^tod|tom|yes/i,
+		re: /^(?:tod|tom|yes)/i,
 		handler: function(bits){
 			var d = new Date().clearTime();
 			switch(bits[0]){
