@@ -208,6 +208,7 @@ var formats = {
 	'long': '%B %d, %Y %H:%M'
 };
 
+var parsePatterns = [];
 var nativeParse = Date.parse;
 
 var parseWord = function(type, word, num){
@@ -233,7 +234,6 @@ var parseWord = function(type, word, num){
 
 	return (num) ? translated.indexOf(ret) : ret;
 };
-
 
 Date.extend({
 
@@ -274,9 +274,9 @@ Date.extend({
 		if (!from.length) return null;
 
 		var parsed;
-		Date.parsePatterns.some(function(pattern){
-			var r = pattern.re.exec(from);
-			return (r) ? (parsed = pattern.handler(r)) : false;
+		parsePatterns.some(function(pattern){
+			var bits = pattern.re.exec(from);
+			return (bits) ? (parsed = pattern.handler(bits)) : false;
 		});
 
 		return parsed || new Date(nativeParse(from));
@@ -312,13 +312,13 @@ Date.extend({
 	},
 
 	defineFormats: function(formats){
-		for (var name in formats) Date.defineFormat(name, formats[f]);
+		for (var name in formats) Date.defineFormat(name, formats[name]);
 	},
 
-	parsePatterns: [],
+	parsePatterns: parsePatterns, // this is deprecated
 	
 	defineParser: function(pattern){
-		Date.parsePatterns.push( pattern.re && pattern.handler ? pattern : build(pattern) );
+		parsePatterns.push((pattern.re && pattern.handler) ? pattern : build(pattern));
 	},
 	
 	defineParsers: function(){
@@ -335,6 +335,12 @@ Date.extend({
 var startCentury = 1900;
 var startYear = 70;
 
+var regexOf = function(type){
+	return new RegExp('(?:' + Date.getMsg(type).map(function(name){
+		return name.substr(0, 3);
+	}).join('|') + ')[a-z]*');
+};
+
 var replacers = function(key){
 	switch(key){
 		case 'x': // iso8601 covers yyyy-mm-dd, so just check if month is first
@@ -346,7 +352,6 @@ var replacers = function(key){
 };
 
 var keys = {
-	a: /[a-z]{3,}/,
 	d: /[0-2]?[0-9]|3[01]/,
 	H: /[01]?[0-9]|2[0-3]/,
 	I: /0?[1-9]|1[0-2]/,
@@ -359,17 +364,26 @@ var keys = {
 	T: /Z|[+-]\d{2}(?::?\d{2})?/
 };
 
-keys.B = keys.b = keys.A = keys.a;
 keys.m = keys.I;
 keys.S = keys.M;
 
-var lang;
+var currentLanguage;
+
+var recompile = function(language){
+	currentLanguage = language;
+	
+	keys.a = keys.A = regexOf('days');
+	keys.b = keys.B = regexOf('months');
+	
+	parsePatterns.each(function(pattern, i){
+		if (pattern.format) parsePatterns[i] = build(pattern.format);
+	});
+};
 
 var build = function(format){
-	if (!lang) return {format: format}; // wait until language is set
+	if (!currentLanguage) return {format: format};
 	
-	var parsed = [null];
-
+	var parsed = [];
 	var re = (format.source || format) // allow format to be regex
 	 .replace(/%([a-z])/gi,
 		function($0, $1){
@@ -384,7 +398,7 @@ var build = function(format){
 			parsed.push($1);
 			return '(' + p.source + ')';
 		}
-	);
+	).replace(/\[a-z\]/gi, '[a-z\\u00c0-\\uffff]'); // handle unicode words
 
 	return {
 		format: format,
@@ -434,18 +448,12 @@ Date.defineParsers(
 	'%Y%m%d(T%H(%M%S?)?)?', // "19991231", "19991231T1159", compact
 	'%x( %X)?', // "12/31", "12.31.99", "12-31-1999", "12/31/2008 11:59 PM"
 	'%d%o( %b( %Y)?)?( %X)?', // "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
-	'%b %d%o?( %Y)?( %X)?', // Same as above with month and day switched
-	'%b %Y' // "December 1999"
+	'%b( %d%o)?( %Y)?( %X)?', // Same as above with month and day switched
+	'%Y %b( %d%o( %X)?)?' // Same as above with year coming first
 );
 
 MooTools.lang.addEvent('langChange', function(language){
-	if (!MooTools.lang.get('Date')) return;
-
-	lang = language;
-	Date.parsePatterns.each(function(pattern, i){
-		if (pattern.format) Date.parsePatterns[i] = build(pattern.format);
-	});
-
+	if (MooTools.lang.get('Date')) recompile(language);
 }).fireEvent('langChange', MooTools.lang.getCurrentLanguage());
 
 })();
