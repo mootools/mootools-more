@@ -78,11 +78,9 @@ Element.implement({
 				calc = rel == document.body ? window.getScroll() : rel.getPosition(),
 				top = calc.y, left = calc.x;
 
-		if (Browser.Engine.trident){
 			var scrolls = rel.getScrolls();
 			top += scrolls.y;
 			left += scrolls.x;
-		}
 
 		var dim = this.getDimensions({computeSize: true, styles:['padding', 'border','margin']});
 		if (options.ignoreMargins){
