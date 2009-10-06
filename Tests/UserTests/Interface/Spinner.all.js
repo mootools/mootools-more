@@ -43,6 +43,15 @@
 				});
 				req.send();
 			}
+		},
+		{
+			title: "Spinner with Scroll Offsets",
+			description: "Positions Spinner correctly based on scroll offsets",
+			verify: "Did the Spinner align correctly with content?",
+			before: function(){
+				$('foo3').scrollTo(0,300);
+				$('foo3').spin({message: 'testing....'});
+			}
 		}
 	],
 	otherScripts: ["Request.HTML"]
