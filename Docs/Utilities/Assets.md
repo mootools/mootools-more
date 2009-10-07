@@ -17,7 +17,7 @@ Injects a script tag into the head section of the document, pointing to the src 
 ### Arguments:
 
 1. source     - (*string*) The location of the JavaScript file to load.
-2. properties - (*object*, optional) Additional attributes to be included into the script Element.
+2. properties - (*object*, optional) Additional attributes to be included into the script Element; this is the same as the second argument you might pass to  including the Element constructor. For instance you might specify an onload event or perhaps an id.
 
 ### Returns:
 
@@ -25,7 +25,12 @@ Injects a script tag into the head section of the document, pointing to the src 
 
 ### Examples:
 
-	var myScript = new Asset.javascript('/scripts/myScript.js', {id: 'myScript'});
+	var myScript = new Asset.javascript('/scripts/myScript.js', {
+		id: 'myScript', 
+		onload: function(){
+			alert('myScript.js is loaded!'); 
+		}
+	});
 
 
 
@@ -41,7 +46,7 @@ Injects a css file in the page.
 ### Arguments:
 
 1. source     - (*string*) The path of the CSS file.
-2. properties - (*object*) Some additional attributes you might want to add to the link Element.
+2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to  including the Element constructor. For instance you might specify an onload event or perhaps an id.
 
 ### Returns:
 
