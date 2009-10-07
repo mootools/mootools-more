@@ -50,14 +50,11 @@ The string used to bind the instance of the class to the element.
 			this.element = $(element);
 			if (this.occlude()) return this.occluded;
 			//returns the instance already bound to the element and exits
-		},
-		toElement: function(){
-			return this.element;
 		}
 	});
 
 ### Note
 
-In the example above, because we have a *toElement* method and because we define the *property* property in the class, the method *occlude* doesn't require any arguments as it uses these by default.
+In the example above, because we have a *this.element* property and because we define the *this.property* property in the class, the method *occlude* doesn't require any arguments as it uses these by default.
 
 [Element.Storage]: http://mootools.net/docs/core/Element/Element#Element:store
