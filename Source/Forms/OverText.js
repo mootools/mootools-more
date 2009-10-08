@@ -56,11 +56,12 @@ var OverText = new Class({
 			'class': 'overTxtLabel',
 			styles: {
 				lineHeight: 'normal',
-				position: 'absolute'
+				position: 'absolute',
+				cursor: 'text'
 			},
 			html: val,
 			events: {
-				click: this.hide.pass(true, this)
+				click: this.hide.pass(this.options.element == 'label', this)
 			}
 		}).inject(this.element, 'after');
 		if (this.options.element == 'label') {
