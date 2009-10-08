@@ -43,9 +43,10 @@ Script: Element.Pin.js
 							position: 'absolute',
 							top: p.y,
 							left: p.x
-						});
+						}).addClass('isPinned');
 						this.store('scrollFixer', (function(){
 							if (this.retrieve('pinned'))
+								var scroll = window.getScroll();
 								this.setStyles({
 									top: pos.top.toInt() + scroll.y,
 									left: pos.left.toInt() + scroll.x
@@ -77,13 +78,13 @@ Script: Element.Pin.js
 						left: p.x
 					};
 				}
-				this.setStyles($merge(reposition, {position: 'absolute'}));
+				this.setStyles($merge(reposition, {position: 'absolute'})).removeClass('isPinned');
 			}
-			return this.addClass('isPinned');
+			return this;
 		},
 
 		unpin: function(){
-			return this.pin(false).removeClass('isPinned');
+			return this.pin(false);
 		},
 
 		togglepin: function(){
