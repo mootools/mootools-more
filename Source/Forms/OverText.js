@@ -56,14 +56,27 @@ var OverText = new Class({
 			'class': 'overTxtLabel',
 			styles: {
 				lineHeight: 'normal',
-				position: 'absolute'
+				position: 'absolute',
+				cursor: 'text'
 			},
 			html: val,
 			events: {
-				click: this.hide.pass(true, this)
+				click: this.hide.pass(this.options.element == 'label', this)
 			}
 		}).inject(this.element, 'after');
-		if (this.options.element == 'label') this.text.set('for', this.element.get('id'));
+		if (this.options.element == 'label') {
+			if (!this.element.get('id')) this.element.set('id', 'input_' + new Date().getTime());
+			this.text.set('for', this.element.get('id'));
+		}
+
+		this.textHolder = new Element('div', {
+			styles: {
+				lineHeight: 'normal',
+				position: 'relative'
+			},
+			'class':'OverTextWrapper'
+		}).adopt(this.text).inject(this.element, 'before');
+
 		this.element.addEvents({
 			focus: this.focus,
 			blur: this.assert,
@@ -72,6 +85,13 @@ var OverText = new Class({
 		window.addEvent('resize', this.reposition.bind(this));
 		this.assert(true);
 		this.reposition();
+	},
+
+	wrap: function(){
+		if (this.options.element == 'label') {
+			if (!this.element.get('id')) this.element.set('id', 'input_' + new Date().getTime());
+			this.text.set('for', this.element.get('id'));
+		}
 	},
 
 	startPolling: function(){

@@ -21,7 +21,9 @@ Request.Queue = new Class({
 		onComplete: $empty(argsPassedToOnComplete),
 		onCancel: $empty(argsPassedToOnCancel),
 		onException: $empty(argsPassedToOnException),
-		onFailure: $empty(argsPassedToOnFailure),*/
+		onFailure: $empty(argsPassedToOnFailure),
+		onEnd: $empty,
+		*/
 		stopOnFailure: true,
 		autoAdvance: true,
 		concurrent: 1,
@@ -160,6 +162,7 @@ Request.Queue = new Class({
 
 	onComplete: function(){
 		this.fireEvent('complete', arguments);
+		if (!this.queue.length) this.fireEvent('end');
 	},
 
 	onCancel: function(){

@@ -20,8 +20,12 @@ var Asset = {
 
 		var script = new Element('script', {src: source, type: 'text/javascript'});
 
-		var load = properties.onload.bind(script), check = properties.check, doc = properties.document;
-		delete properties.onload; delete properties.check; delete properties.document;
+		var load = properties.onload.bind(script), 
+				check = properties.check, 
+				doc = properties.document;
+		delete properties.onload;
+		delete properties.check;
+		delete properties.document;
 
 		script.addEvents({
 			load: load,
@@ -41,7 +45,10 @@ var Asset = {
 
 	css: function(source, properties){
 		return new Element('link', $merge({
-			rel: 'stylesheet', media: 'screen', type: 'text/css', href: source
+			rel: 'stylesheet',
+			media: 'screen',
+			type: 'text/css',
+			href: source
 		}, properties)).inject(document.head);
 	},
 

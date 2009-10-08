@@ -6,6 +6,20 @@
 	background-color: #aaa;
 	margin-bottom: 10px;
 }
+
+#foo3 {
+	width: 350px;
+	height: 200px;
+	overflow: auto;
+	border: 1px solid black;
+	background-color:  #aaa;
+	margin-bottom: 10px;
+}
+
+#foo3_content {
+	height: 600px;
+}
+
 input, select, embed {
 	margin: 10px;
 	clear:both;
@@ -31,10 +45,13 @@ input, select, embed {
 <object width="320" height="220">
 	<param name="movie" value="UserTests/Interface/mediaplayer.swf">
 	<param name="wmode" value="transparent">
-	<embed id="mediaplayer" width="320" height="220" flashvars="width=320&height=220&file=video.flv" allowfullscreen="true" quality="high" name="mediaplayer" style="" src="UserTests/Interface/mediaplayer.swf" type="application/x-shockwave-flash" wmode="transparent"/>
+    <embed id="mediaplayer" width="320" height="220" flashvars="width=320&height=220&file=video.flv" allowfullscreen="true" quality="high" name="mediaplayer" style="" src="UserTests/Interface/mediaplayer.swf" type="application/x-shockwave-flash" wmode="transparent"/>
 </embed>
 </object>
 </div>
 <div id="foo2">
 	This content will be replaced w/ ajax
+</div>
+<div id="foo3">
+	<div id="foo3_content">spinner positioned on a container with overflow:auto and scrollbar offsets</div>
 </div>
