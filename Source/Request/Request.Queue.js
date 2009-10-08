@@ -31,14 +31,20 @@ Request.Queue = new Class({
 	},
 
 	initialize: function(options){
+		if(options){
+			var requests = options.requests;
+			delete options.requests;	
+		}
 		this.setOptions(options);
 		this.requests = new Hash;
-		this.addRequests(this.options.requests);
 		this.queue = [];
 		this.reqBinders = {};
+		
+		if(requests) this.addRequests(requests);
 	},
 
 	addRequest: function(name, request){
+		console.debug(name);
 		this.requests.set(name, request);
 		this.attach(name, request);
 		return this;
