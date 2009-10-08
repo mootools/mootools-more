@@ -67,6 +67,7 @@ var Drag = new Class({
 	},
 
 	start: function(event){
+		if (event.rightClick) return;
 		if (this.options.preventDefault) event.preventDefault();
 		this.mouse.start = event.page;
 		this.fireEvent('beforeStart', this.element);
