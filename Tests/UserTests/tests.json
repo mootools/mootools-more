@@ -29,7 +29,7 @@
 		"Fx.Accordion":['all'],
 		"Fx.Elements":['all'],
 		"Fx.Move":['all'],
-		"Fx.Reveal":['all'],
+		"Fx.Reveal":['basic', 'toggle'],
 		"Fx.Scroll":['all'],
 		"Fx.Slide":['all'],
 		"Fx.SmoothScroll":['all'],
