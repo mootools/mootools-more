@@ -30,6 +30,11 @@ Creates a slider with two elements: a knob and a container.
 ### Notes:
 
 - Range option allows an array of numbers. Numbers can be negative and positive.
+- If snap is enabled, the width of the bar in which the slider resides must fit an equation for the steps to line up just right at it's end value. The equation is:
+
+		(Math.ceil(barWidth/numSteps - knobWidth/numSteps) * numSteps) + knobWidth
+
+For instance, if you had a bar that is 300px wide and a knob that is 15px wide, and have snap enabled and 10 steps specified, then the bar's width divided by the number of steps (300 / 10 = 30) minus room for the knob (15 / 10 = 1.5) gives you the value of each step (28.5). Slider must round this value, and it rounds up (29). Take this and multiply times the number of steps and you get 290, but there must also be room for the knob, which adds 15, yielding 305. The result is that our knob can't be dragged to the 10th position because there isn't room for it; so it stops at the 9th. This takes a little tweaking in your css. Just add a few pixels until you can drag it all the way (or change the knob width).
 
 
 
