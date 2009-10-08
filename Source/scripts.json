@@ -222,7 +222,7 @@
 		},
 
 		"Slider": {
-			"deps": ["More", "Class.Binds", "Drag", "Element.Dimensions"],
+			"deps": ["More", "Class.Binds", "Drag", "Element.Dimensions", "Element.Measure"],
 			"desc": "Class for creating horizontal and vertical slider controls."
 		},
 
