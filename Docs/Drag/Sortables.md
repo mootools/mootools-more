@@ -49,7 +49,7 @@ Fired when the item is inserted into a new place in one of the lists.
 
 #### complete
 
-Fired when the item ends dragging.
+Fired when the item ends dragging. Note: fires even if the sort has not changed.
 
 ##### Signature:
 
