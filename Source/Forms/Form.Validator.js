@@ -204,8 +204,9 @@ Form.Validator = new Class({
 	},
 
 	test: function(className, field, warn){
-		var validator = this.getValidator(className);
 		field = document.id(field);
+		if(this.options.ignoreHidden && !field.isVisible()) return true;
+		var validator = this.getValidator(className);
 		if (field.hasClass('ignoreValidation')) return true;
 		warn = $pick(warn, false);
 		if (field.hasClass('warnOnly')) warn = true;
@@ -213,10 +214,6 @@ Form.Validator = new Class({
 		if (validator && this.isVisible(field)) this.fireEvent('elementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
-	},
-
-	isVisible : function(field){
-		return this.options.ignoreHidden || field.isVisible();
 	},
 
 	resetField: function(field){
