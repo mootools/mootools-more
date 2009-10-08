@@ -15,14 +15,15 @@ var Accordion = Fx.Accordion = new Class({
 
 	options: {/*
 		onActive: $empty(toggler, section),
-		onBackground: $empty(toggler, section),*/
+		onBackground: $empty(toggler, section),
+		fixedHeight: false,
+		fixedWidth: false,
+		*/
 		display: 0,
 		show: false,
 		height: true,
 		width: false,
 		opacity: true,
-		fixedHeight: false,
-		fixedWidth: false,
 		alwaysHide: false,
 		trigger: 'click',
 		initialDisplayFx: true,
@@ -86,7 +87,11 @@ var Accordion = Fx.Accordion = new Class({
 		useFx = $pick(useFx, true);
 		if (this.options.returnHeightToAuto) {
 			var prev = this.elements[this.previous];
-			if (prev) for (var fx in this.effects) prev.setStyle(fx, prev[this.effects[fx]]);
+			if (prev) {
+				for (var fx in this.effects) {
+					prev.setStyle(fx, prev[this.effects[fx]]);
+				}
+			}
 		}
 		index = ($type(index) == 'element') ? this.elements.indexOf(index) : index;
 		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
