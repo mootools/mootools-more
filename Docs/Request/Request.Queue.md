@@ -37,6 +37,8 @@ All of the events supplied to the [Request][] class are supported with the diffe
 * onException
 * onFailure
 
+In addition to these events there is an *onEnd* event that is fired when all the requests have finished.
+
 ### Example
 
 	var myRequests = {
