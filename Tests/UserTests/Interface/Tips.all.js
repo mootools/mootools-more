@@ -28,6 +28,22 @@
 					}
 				});
 			}
+		},
+		{
+			title: "Tips:nested",
+			description: "Displays a tip for a container and its child.",
+			verify: "When you mouse over the parent, do you see its tip? And the child? And the parent again?",
+			before: function(){
+				var myTips = new Tips($$('.toolTipElement3'), {
+					timeOut: 700,
+					maxTitleChars: 50, /*I like my captions a little long*/
+					maxOpacity: .9, /*let's leave a little transparancy in there */
+					offset: {
+						x: 10,
+						y: 70
+					}
+				});
+			}
 		}
 		
 	],

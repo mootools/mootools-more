@@ -125,6 +125,14 @@ this.Tips = new Class({
 	elementLeave: function(event, element){
 		$clear(this.timer);
 		this.timer = this.hide.delay(this.options.hideDelay, this, element);
+		this.fireForParent(event, element);
+	},
+
+	fireForParent: function(event, element) {
+			parentNode = element.getParent();
+			if (parentNode == document.body) return;
+			if (parentNode.retrieve('tip:enter')) parentNode.fireEvent('mouseenter', event);
+			else return this.fireForParent(parentNode, event);
 	},
 
 	elementMove: function(event, element){
