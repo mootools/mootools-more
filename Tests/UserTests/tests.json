@@ -30,7 +30,7 @@
 		"Fx.Elements":['all'],
 		"Fx.Move":['all'],
 		"Fx.Reveal":['basic', 'toggle'],
-		"Fx.Scroll":['all'],
+		"Fx.Scroll":['element', 'window'],
 		"Fx.Slide":['all'],
 		"Fx.SmoothScroll":['all'],
 		"Fx.Sort":['all']
