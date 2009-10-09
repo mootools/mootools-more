@@ -7,6 +7,18 @@
 			before: function(){
 				Asset.javascript('UserTests/Utilities/Assets.javascript.test.js');
 			}
+		},
+		{
+			title: "Assets.javascript onLoad",
+			description: "Loads a javascript file into the document and watch for the load event.",
+			verify: "Did the message change to 'JavaScript onLoad fired successfully!' ?",
+			before: function(){
+				$('msg').set('html', 'testing...');
+				Asset.javascript('UserTests/Utilities/Assets.javascript.test.js')
+				.addEvent('load',function(){
+					$('msg').set('html', 'JavaScript onLoad fired successfully!');
+				});
+			}
 		}
 	]
 }
