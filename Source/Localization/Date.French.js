@@ -7,6 +7,7 @@ Script: Date.French.js
 
 	Authors:
 		Nicolas Sorosac
+    Antoine Abt
 
 */
  
@@ -46,7 +47,7 @@ MooTools.lang.set('fr-FR', 'Date', {
 	hourUntil: 'dans une heure',
 	hoursUntil: 'dans {delta} heures',
 	dayUntil: 'dans un jour',
-	daysUntil: 'dans {delta} jours'
+	daysUntil: 'dans {delta} jours',
 	weekUntil: 'dans 1 semaine',
 	weeksUntil: 'dans {delta} semaines',
 	monthUntil: 'dans 1 mois',
