@@ -168,12 +168,6 @@ Evaluates an entire form against all the validators that are set up, firing even
 ### Notes
 
 * [Form.Validator][] must be configured with [InputValidator][] objects (see below for details as well as a list of built-in validators). Each [InputValidator][] will be applied to any input that matches its className within the elements of the form that match the fieldSelectors option.
-* You can define a css class-name value called *msgPos* as the id of an element into which the validation errors for that input will be inserted. Example:
-
-		<input class="validate-email msgPos:'emailAdvice'">
-		<div id="emailAdvice"></div>
-
-
 * The preferred method for passing in validator properties (like the minimum length) is to append the value after the class name. This value will be passed through [JSON.decode][] so it can be a number, string, array representation, etc.
 
 		//the minimum length the user can supply is the integer 10
