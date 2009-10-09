@@ -38,7 +38,7 @@ MooTools.lang.set('en-US', 'Date', {
 	weeksAgo: '{delta} weeks ago',
 	monthAgo: '1 month ago',
 	monthsAgo: '{delta} months ago',
-	yearthAgo: '1 year ago',
+	yearAgo: '1 year ago',
 	yearsAgo: '{delta} years ago',
 	lessThanMinuteUntil: 'less than a minute from now',
 	minuteUntil: 'about a minute from now',
