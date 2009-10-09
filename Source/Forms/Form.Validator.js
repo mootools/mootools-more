@@ -94,6 +94,7 @@ Form.Validator = new Class({
 		onElementFail: $empty(field, validatorsFailed) */
 		fieldSelectors: 'input, select, textarea',
 		ignoreHidden: true,
+		ignoreDisabled: true,
 		useTitles: false,
 		evaluateOnSubmit: true,
 		evaluateFieldsOnBlur: true,
@@ -205,7 +206,7 @@ Form.Validator = new Class({
 
 	test: function(className, field, warn){
 		field = document.id(field);
-		if(this.options.ignoreHidden && !field.isVisible()) return true;
+		if((this.options.ignoreHidden && !field.isVisible()) || (this.options.ignoreDisabled && field.get('disabled'))) return true;
 		var validator = this.getValidator(className);
 		if (field.hasClass('ignoreValidation')) return true;
 		warn = $pick(warn, false);

@@ -148,6 +148,7 @@ Evaluates an entire form against all the validators that are set up, firing even
 * evaluateFieldsOnChange - (*boolean*) whether to validate the fields when the change event fires; defaults to *true*
 * serial - (*boolean*) whether to validate other fields if one field fails validation unless the other fields' contents actually change (instead of onblur); defaults to *true*
 * ignoreHidden - (*boolean*) if *true* (the default), all fields that are not visible to the user (who are display:none or whose parents are display:none) are not validated.
+* ignoreDisabled - (*boolean*) if *true* (the default), all disabled fields are not validated.
 * warningPrefix - (*string*) prefix to be added to every warning; defaults to *"Warning: "*
 * errorPrefix - (*string*) prefix to be added to every error; defaults to *"Error: "*
 
