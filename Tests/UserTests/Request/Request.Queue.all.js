@@ -40,6 +40,19 @@
 					r.send();
 				});
 			}
+		},
+		{
+			title : "Request.Queue bug test",
+			description: "Lighthouse bug #60 test",
+			verify : "Look in console and verify no 'permission denied for <url> to get property XMLHttpRequest.channel' was not thrown",
+			before: function(){
+				new Request.Queue({
+					requests : {
+						'henk' : new Request()
+					}
+				});
+				
+			}
 		}
 	],
 	otherScripts: ['Element']
