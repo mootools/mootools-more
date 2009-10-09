@@ -148,6 +148,7 @@ Evaluates an entire form against all the validators that are set up, firing even
 * evaluateFieldsOnChange - (*boolean*) whether to validate the fields when the change event fires; defaults to *true*
 * serial - (*boolean*) whether to validate other fields if one field fails validation unless the other fields' contents actually change (instead of onblur); defaults to *true*
 * ignoreHidden - (*boolean*) if *true* (the default), all fields that are not visible to the user (who are display:none or whose parents are display:none) are not validated.
+* ignoreDisabled - (*boolean*) if *true* (the default), all disabled fields are not validated.
 * warningPrefix - (*string*) prefix to be added to every warning; defaults to *"Warning: "*
 * errorPrefix - (*string*) prefix to be added to every error; defaults to *"Error: "*
 
@@ -168,12 +169,6 @@ Evaluates an entire form against all the validators that are set up, firing even
 ### Notes
 
 * [Form.Validator][] must be configured with [InputValidator][] objects (see below for details as well as a list of built-in validators). Each [InputValidator][] will be applied to any input that matches its className within the elements of the form that match the fieldSelectors option.
-* You can define a css class-name value called *msgPos* as the id of an element into which the validation errors for that input will be inserted. Example:
-
-		<input class="validate-email msgPos:'emailAdvice'">
-		<div id="emailAdvice"></div>
-
-
 * The preferred method for passing in validator properties (like the minimum length) is to append the value after the class name. This value will be passed through [JSON.decode][] so it can be a number, string, array representation, etc.
 
 		//the minimum length the user can supply is the integer 10

@@ -123,7 +123,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 			if (reverse != null) this.sorted.reverse = reverse;
 
-			var head = $(this.head.cells[index]);
+			var head = document.id(this.head.cells[index]);
 			if (head) {
 				head.addClass(this.options.classHeadSort);
 				if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
@@ -143,7 +143,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		}
 
 		var data = Array.map(this.body.rows, function(row, i) {
-			var value = parser.convert.call($(row.cells[index]));
+			var value = parser.convert.call(document.id(row.cells[index]));
 
 			if (parser.number || $type(value) == 'number') {
 				value = String(value).replace(/[^\d]/, '');

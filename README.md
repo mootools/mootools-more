@@ -24,7 +24,7 @@ MooTools Plugins and Enhancements Repository
 
 NOTE: none of the changes below are breaking changes.
 
-* Issues fixed (in lighthouse): #71, #72, #76, #90, #99
+* [27 issues fixed or closed (in lighthouse)](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/tickets?q=milestone%3A1.2.4.1)
 * New feature: Eleement.Delegation - a partial port of event delegation from MooTools 2.0 (does not support custom events or blur/focus)
 * New feature: Elements.From converts html strings to DOM elements
 * New feature: Depender - a client side MooTools dependency loader

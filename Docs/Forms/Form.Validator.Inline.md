@@ -13,7 +13,7 @@ Evaluates an entire form against all the validators that are set up *displaying 
 
 ### Syntax
 
-	new Form.Validator(form[, options]);
+	new Form.Validator.Inline(form[, options]);
 
 ### Arguments
 
@@ -30,6 +30,12 @@ Evaluates an entire form against all the validators that are set up *displaying 
 
 * all the events defined for [Form.Validator][]
 
+### Note
+
+* You can define a css class-name value called *msgPos* as the id of an element into which the validation errors for that input will be inserted. Example:
+
+		<input class="validate-email msgPos:'emailAdvice'">
+		<div id="emailAdvice"></div>
 
 Form.Validator.Inline method: getAllAdviceMessages {#Form-Validator-Inline:getAllAdviceMessages}
 ----------------------------------------------------------------------
