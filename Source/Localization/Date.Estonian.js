@@ -37,7 +37,7 @@ MooTools.lang.set('et-EE', 'Date', {
 	weeksAgo: '{delta} nädalat tagasi',
 	monthAgo: '1 kuu tagasi',
 	monthsAgo: '{delta} kuud tagasi',
-	yearthAgo: '1 aasta tagasi',
+	yearAgo: '1 aasta tagasi',
 	yearsAgo: '{delta} aastat tagasi',
 	lessThanMinuteUntil: 'vähem kui minuti aja pärast',
 	minuteUntil: 'umbes minuti aja pärast',

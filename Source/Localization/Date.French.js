@@ -39,7 +39,7 @@ MooTools.lang.set('fr-FR', 'Date', {
 	weeksAgo: 'il y a {delta} semaines',
 	monthAgo: 'il y a 1 mois',
 	monthsAgo: 'il y a {delta} mois',
-	yearthAgo: 'il y a 1 an',
+	yearAgo: 'il y a 1 an',
 	yearsAgo: 'il y a {delta} ans',
 	lessThanMinuteUntil: 'dans moins d\'une minute',
 	minuteUntil: 'dans une minute',
