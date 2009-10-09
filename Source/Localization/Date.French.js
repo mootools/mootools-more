@@ -34,6 +34,12 @@ MooTools.lang.set('fr-FR', 'Date', {
 	hoursAgo: 'il y a {delta} heures',
 	dayAgo: 'il y a un jour',
 	daysAgo: 'il y a {delta} jours',
+	weekAgo: 'il y a une semaine',
+	weeksAgo: 'il y a {delta} semaines',
+	monthAgo: 'il y a 1 mois',
+	monthsAgo: 'il y a {delta} mois',
+	yearthAgo: 'il y a 1 an',
+	yearsAgo: 'il y a {delta} ans',
 	lessThanMinuteUntil: 'dans moins d\'une minute',
 	minuteUntil: 'dans une minute',
 	minutesUntil: 'dans {delta} minutes',
@@ -41,5 +47,11 @@ MooTools.lang.set('fr-FR', 'Date', {
 	hoursUntil: 'dans {delta} heures',
 	dayUntil: 'dans un jour',
 	daysUntil: 'dans {delta} jours'
+	weekUntil: 'dans 1 semaine',
+	weeksUntil: 'dans {delta} semaines',
+	monthUntil: 'dans 1 mois',
+	monthsUntil: 'dans {delta} mois',
+	yearUntil: 'dans 1 an',
+	yearsUntil: 'dans {delta} ans'
 
 });
