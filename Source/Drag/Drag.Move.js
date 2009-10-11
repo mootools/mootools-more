@@ -43,33 +43,91 @@ Drag.Move = new Class({
 
 	start: function(event){
 		if (this.container){
-			var ccoo = this.container.getCoordinates(this.element.getOffsetParent()), cbs = {}, ems = {};
+			var offsetParent = this.element.getOffsetParent();
+			var containerCoordinates = this.container.getCoordinates(offsetParent),
+					containerBorder = {},
+					elementMargin = {},
+					elementBorder = {},
+					containerMargin = {},
+					offsetParentPadding = {};
+			var position = this.element.getStyle('position');
 
 			['top', 'right', 'bottom', 'left'].each(function(pad){
-				cbs[pad] = this.container.getStyle('border-' + pad).toInt();
-				ems[pad] = this.element.getStyle('margin-' + pad).toInt();
+				containerBorder[pad] = this.container.getStyle('border-' + pad).toInt();
+				elementBorder[pad] = this.element.getStyle('border-' + pad).toInt();
+				elementMargin[pad] = this.element.getStyle('margin-' + pad).toInt();
+				containerMargin[pad] = this.container.getStyle('margin-' + pad).toInt();
+				offsetParentPadding[pad] = offsetParent.getStyle('padding-' + pad).toInt();
 			}, this);
 
-			var width = this.element.offsetWidth + ems.left + ems.right;
-			var height = this.element.offsetHeight + ems.top + ems.bottom;
-
-			if (this.options.includeMargins) {
-				$each(ems, function(value, key) {
-					ems[key] = 0;
-				});
-			}
-			if (this.container == this.element.getOffsetParent()) {
-				this.options.limit = {
-					x: [0 - ems.left, ccoo.right - cbs.left - cbs.right - width + ems.right],
-					y: [0 - ems.top, ccoo.bottom - cbs.top - cbs.bottom - height + ems.bottom]
-				};
+			var width = this.element.offsetWidth + elementMargin.left + elementMargin.right;
+			var height = this.element.offsetHeight + elementMargin.top + elementMargin.bottom;
+			var zeroMargin = {};
+			$each(elementMargin, function(value, key) {
+				zeroMargin[key] = 0;
+			});
+			if (position == 'absolute') {
+				if (this.options.includeMargins) elementMargin = zeroMargin;
+				if (this.container == offsetParent) {
+					//container is offsetParent, element position absolute
+					this.options.limit = {
+						x: [
+							0 - elementMargin.left,
+							containerCoordinates.right - containerBorder.left - containerBorder.right - width + elementMargin.right
+						],
+						y: [
+							0 - elementMargin.top,
+							containerCoordinates.bottom - containerBorder.top - containerBorder.bottom - height + elementMargin.bottom
+						]
+					};
+				} else {
+					//container is not offsetParent, element position absolute
+					this.options.limit = {
+						x: [
+							containerCoordinates.left + containerBorder.left - elementMargin.left,
+							containerCoordinates.right - containerBorder.right - width + elementMargin.right
+						],
+						y: [
+							containerCoordinates.top + containerBorder.top - elementMargin.top,
+							containerCoordinates.bottom - containerBorder.bottom - height + elementMargin.bottom
+						]
+					};
+				}
 			} else {
-				this.options.limit = {
-					x: [ccoo.left + cbs.left - ems.left, ccoo.right - cbs.right - width + ems.right],
-					y: [ccoo.top + cbs.top - ems.top, ccoo.bottom - cbs.bottom - height + ems.bottom]
+				var pos = {
+					x: this.element.getStyle('left').toInt(),
+					y: this.element.getStyle('top').toInt()
 				};
+				var coords = this.element.getCoordinates(offsetParent);
+				if (this.container == offsetParent) {
+					//container is offsetParent, element position relative
+					this.options.limit = {
+						x: [
+							pos.x - coords.left + containerBorder.left + (this.options.includeMargins ? elementMargin.left : 0),
+							containerCoordinates.right + pos.x - coords.left - width + elementMargin.left + elementMargin.right - containerBorder.right
+								- (this.options.includeMargins ? elementMargin.right : 0)
+						],
+						y: [
+							pos.y - coords.top + containerBorder.top + (this.options.includeMargins ? elementMargin.top : 0),
+							containerCoordinates.bottom + pos.y - coords.top - height + elementMargin.top + elementMargin.bottom - containerBorder.bottom
+								- (this.options.includeMargins ? elementMargin.bottom : 0)
+						]
+					};
+				} else {
+					//container is not offsetParent, element position relative
+					if (!this.options.includeMargins) elementMargin = zeroMargin;
+					this.options.limit = {
+						x: [
+							pos.x - coords.left + containerMargin.left + offsetParentPadding.left + containerBorder.left + elementMargin.left,
+							containerCoordinates.right - coords.right + pos.x - containerBorder.right - elementMargin.right
+						],
+						y: [
+							pos.y - coords.top + containerBorder.top + elementMargin.top + offsetParentPadding.top + (Browser.Engine.trident4 ? 0 :  + containerMargin.top),
+							containerCoordinates.bottom - coords.bottom + pos.y - containerBorder.bottom - elementMargin.bottom
+						]
+					};
+				}
 			}
-
 		}
 		if (this.options.precalculate){
 			this.positions = this.droppables.map(function(el) {
