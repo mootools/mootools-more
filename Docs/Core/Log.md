@@ -29,7 +29,7 @@ A Utility Class which provides a simple way to log messages from within other cl
 ### Notes
 
 - Log.log is an unique global callback to which all instances of Log report. Its default behavior is to relay the message via console.log (if present), and stack the messages in Log.logged
-- Log.logged stores all logged messages for the session. If you use a bookmarklet-based logger, make sure to iterate it and print the messages once it loads.
+- If you use a bookmarklet-based logger, make sure to call Log.enableLog() once it has loaded.
 
 ### See Also:
 
