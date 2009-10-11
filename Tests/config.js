@@ -4,7 +4,7 @@ var UnitTester = {
 	path: 'UnitTester/',
 	ready: function(){
 		var sources = {
-			mootoolsCore: '../assets/core',
+			mootoolsCore: '../../core',
 			mootoolsMore: '..'
 		};
 		new UnitTester(sources, {
