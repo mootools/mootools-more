@@ -2,20 +2,29 @@
 <html>
 	<head>
 		<title>Depender - A MooTools Dependency Builder</title>
-		<link rel="stylesheet" href="../styles/reset.css" type="text/css" media="screen" title="no title" charset="utf-8">
-		<link rel="stylesheet" href="../styles/depender.css" type="text/css" media="screen" title="no title" charset="utf-8">
-		<script src="build.php?client=true&require=Drag.Move,DomReady,Selectors"></script>
+		<link rel="stylesheet" href="../../../../styles/reset.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="../../../../styles/depender.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<script src="../../../../php/build.php?client=true&require=Drag.Move,DomReady,Selectors"></script>
 	</head>
 	<body>
 		<!-- 
 		
+			TWO WAYS TO RUN THIS PAGE:
 			to run this test, you must first install depender:
 			http://github.com/anutron/mootools-depender
 			
 			configure depender to point at your local -more and -core directories so that
 			you can test your working codebase
 			
-			then drop this test in depender/php/Drag.Move.html and hit it with your browser
+			then drop this test in depender/php/Drag.Move.html 
+			change the src and href for the link and script tags above from "../../../../" to "../"
+			and hit it with your browser
+			
+			THE OTHER WAY:
+			set up depender
+			run "git submodule init" and "git submodule update"
+			and then hit
+			localhost/depender/assets/more/Tests/DependerTests/Drag.Move.html
 			
 		 -->
 		<script>
