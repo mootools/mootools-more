@@ -8,7 +8,7 @@
 		},
 
 		"Depender": {
-			"deps": ["More", "Class.Extras", "Element.Event", "Request.JSON"],
+			"deps": ["More", "Class.Extras", "Element.Event", "Request.JSON", "Log"],
 			"desc": "A stand alone dependency loader for the MooTools library."
 		},
 
