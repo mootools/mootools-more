@@ -5,7 +5,7 @@
 			description: "Centers the red box over the text box.",
 			verify: "Is the red box centered over the text box?",
 			before: function(){
-				$('box').position({relativeTo: $('foo')});
+				$('box').position({ignoreMargins: true, relativeTo: $('foo')});
 			}
 		},
 		{
@@ -13,7 +13,7 @@
 			description: "Puts the UL corner of the red box to the UL corner of the text box.",
 			verify: "Is the upper left corner of the red box over the upper left corner of the text box?",
 			before: function(){
-				$('box').position({relativeTo: $('foo'), position: 'upperLeft'});
+				$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'upperLeft'});
 			}
 		},
 		{
@@ -21,7 +21,7 @@
 			description: "Puts the BR corner of the red box to the BR corner of the text box.",
 			verify: "Is the lower right corner of the red box over the lower right corner of the text box?",
 			before: function(){
-				$('box').position({relativeTo: $('foo'), position: 'bottomRight', edge: 'bottomRight'});
+				$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'bottomRight'});
 			}
 		},
 		{
@@ -29,7 +29,7 @@
 			description: "Puts the center of the red box to the BR corner of the text box.",
 			verify: "Is the center of the red box over the lower right corner of the text box?",
 			before: function(){
-				$('box').position({relativeTo: $('foo'), position: 'bottomRight', edge: 'center'});
+				$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'center'});
 			}
 		},
 		{
@@ -37,7 +37,7 @@
 			description: "Puts the right edge (center) of the red box to the right edge (center) of the text box.",
 			verify: "Is the right edge (center) of the red box touching the right edge (center) of the text box?",
 			before: function(){
-				$('box').position({relativeTo: $('foo'), position: 'centerRight', edge: 'centerRight'});
+				$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'centerRight', edge: 'centerRight'});
 			}
 		},
 		{
@@ -47,7 +47,7 @@
 			before: function(){
 				$(document.body).scrollTo(0, 100);
 				$('box').position({
-					relativeTo: document.body, 
+					ignoreMargins: true, relativeTo: document.body, 
 					position: 'upperLeft', 
 					edge: 'upperLeft',
 					ignoreScroll: true
