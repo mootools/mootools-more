@@ -43,7 +43,6 @@ Drag.Move = new Class({
 
 	start: function(event){
 		if (this.container){
-//			dbug.log(this.element.getOffsetParent(), this.container.getCoordinates());
 			var offsetParent = this.element.getOffsetParent();
 			var containerCoordinates = this.container.getCoordinates(offsetParent),
 					containerBorder = {},
@@ -70,6 +69,7 @@ Drag.Move = new Class({
 			if (position == 'absolute') {
 				if (this.options.includeMargins) elementMargin = zeroMargin;
 				if (this.container == offsetParent) {
+					//container is offsetParent, element position absolute
 					this.options.limit = {
 						x: [
 							0 - elementMargin.left,
@@ -81,6 +81,7 @@ Drag.Move = new Class({
 						]
 					};
 				} else {
+					//container is not offsetParent, element position absolute
 					this.options.limit = {
 						x: [
 							containerCoordinates.left + containerBorder.left - elementMargin.left,
@@ -93,15 +94,13 @@ Drag.Move = new Class({
 					};
 				}
 			} else {
-				var limit = this.options.limit;
 				var pos = {
 					x: this.element.getStyle('left').toInt(),
 					y: this.element.getStyle('top').toInt()
 				};
 				var coords = this.element.getCoordinates(offsetParent);
 				if (this.container == offsetParent) {
-					//if (!this.options.includeMargins) elementMargin = zeroMargin;
-					dbug.log(elementMargin);
+					//container is offsetParent, element position relative
 					this.options.limit = {
 						x: [
 							pos.x - coords.left + containerBorder.left + (this.options.includeMargins ? elementMargin.left : 0),
@@ -114,8 +113,8 @@ Drag.Move = new Class({
 								- (this.options.includeMargins ? elementMargin.bottom : 0)
 						]
 					};
-
 				} else {
+					//container is not offsetParent, element position relative
 					if (!this.options.includeMargins) elementMargin = zeroMargin;
 					this.options.limit = {
 						x: [
@@ -127,7 +126,6 @@ Drag.Move = new Class({
 							containerCoordinates.bottom - coords.bottom + pos.y - containerBorder.bottom - elementMargin.bottom
 						]
 					};
-
 				}
 			}
 		}
