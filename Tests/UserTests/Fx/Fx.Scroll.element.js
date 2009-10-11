@@ -5,7 +5,7 @@
 			description: "Scrolls the box to the bottom",
 			verify: "Did the box scroll to the bottom?",
 			before: function(){
-				var fx = $('scrollExample').retrieve('test') 
+				var fx = $('scrollExample').retrieve('test')
 				if (!fx) {
 					fx = new Fx.Scroll('scrollExample', {duration: 500});
 					$('scrollExample').store('test', fx);
@@ -18,7 +18,7 @@
 			description: "Scrolls the box to the right",
 			verify: "Did the box scroll to the right?",
 			before: function(){
-				var fx = $('scrollExample').retrieve('test') 
+				var fx = $('scrollExample').retrieve('test')
 				if (!fx) {
 					fx = new Fx.Scroll('scrollExample', {duration: 500});
 					$('scrollExample').store('test', fx);
@@ -31,7 +31,7 @@
 			description: "Scrolls the box to the top",
 			verify: "Did the box scroll to the top?",
 			before: function(){
-				var fx = $('scrollExample').retrieve('test') 
+				var fx = $('scrollExample').retrieve('test')
 				if (!fx) {
 					fx = new Fx.Scroll('scrollExample', {duration: 500});
 					$('scrollExample').store('test', fx);
@@ -44,7 +44,7 @@
 			description: "Scrolls the box to the left",
 			verify: "Did the box scroll to the left?",
 			before: function(){
-				var fx = $('scrollExample').retrieve('test') 
+				var fx = $('scrollExample').retrieve('test')
 				if (!fx) {
 					fx = new Fx.Scroll('scrollExample', {duration: 500});
 					$('scrollExample').store('test', fx);
@@ -57,7 +57,7 @@
 			description: "Scrolls the box to the red item",
 			verify: "Did the box scroll to the red item?",
 			before: function(){
-				var fx = $('scrollExample').retrieve('test') 
+				var fx = $('scrollExample').retrieve('test')
 				if (!fx) {
 					fx = new Fx.Scroll('scrollExample', {duration: 500});
 					$('scrollExample').store('test', fx);
@@ -70,7 +70,7 @@
 			description: "Scrolls the box so that the blue item is in the view at the bottom.",
 			verify: "Did the box scroll so that the blue item is at the bottom?",
 			before: function(){
-				var fx = $('scrollExample').retrieve('test') 
+				var fx = $('scrollExample').retrieve('test')
 				if (!fx) {
 					fx = new Fx.Scroll('scrollExample', {duration: 500});
 					$('scrollExample').store('test', fx);
@@ -84,13 +84,55 @@
 			description: "Scrolls the box so that the yellow item is in the view at the top.",
 			verify: "Did the box scroll so that the yellow item is at the top?",
 			before: function(){
-				var fx = $('scrollExample').retrieve('test') 
+				var fx = $('scrollExample').retrieve('test')
 				if (!fx) {
 					fx = new Fx.Scroll('scrollExample', {duration: 500});
 					$('scrollExample').store('test', fx);
 				}
 				fx.set(0,500);
 				fx.scrollIntoView('yellow', 'y');
+			}
+		},
+		{
+			title: "Fx.Scroll:scrollToCenter",
+			description: "Scrolls the box so that the green item is in the center.",
+			verify: "Did the box scroll so that the green item is at the center?",
+			before: function(){
+				var fx = $('scrollExample').retrieve('test');
+				if (!fx){
+					fx = new Fx.Scroll('scrollExample', {duration: 500});
+					$('scrollExample').store('test', fx);
+				}
+				fx.set(0,0);
+				fx.scrollToCenter('green');
+			}
+		},
+		{
+			title: "Fx.Scroll:scrollToCenter (x axis)",
+			description: "Scrolls the box to the center x axis of the green item.",
+			verify: "Did the box scroll to the center x axis of the green item?",
+			before: function(){
+				var fx = $('scrollExample').retrieve('test');
+				if (!fx){
+					fx = new Fx.Scroll('scrollExample', {duration: 500});
+					$('scrollExample').store('test', fx);
+				}
+				fx.set(0,0);
+				fx.scrollToCenter('green','x');
+			}
+		},
+		{
+			title: "Fx.Scroll:scrollToCenter (y axis)",
+			description: "Scrolls the box to the center y axis of the green item.",
+			verify: "Did the box scroll to the center y axis of the green item?",
+			before: function(){
+				var fx = $('scrollExample').retrieve('test');
+				if (!fx){
+					fx = new Fx.Scroll('scrollExample', {duration: 500});
+					$('scrollExample').store('test', fx);
+				}
+				fx.set(0,0);
+				fx.scrollToCenter('green','y');
 			}
 		}
 	]
