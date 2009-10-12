@@ -30,17 +30,20 @@ Drag.Move = new Class({
 
 	initialize: function(element, options){
 		this.parent(element, options);
+		element = this.element;
+		
 		this.droppables = $$(this.options.droppables);
 		this.container = document.id(this.options.container);
 		
 		if (this.container && $type(this.container) != 'element')
 			this.container = document.id(this.container.getDocument().body);
-
-		if (this.element.getStyle('left') == 'auto' || this.element.getStyle('top') == 'auto')
-			this.element.setPosition(this.element.getPosition(this.element.offsetParent));
 		
-		if (this.element.getStyle('position') == 'static')
-			this.element.setStyle('position', 'absolute');
+		var styles = element.getStyles('left', 'right', 'position');
+		if (styles.left == 'auto' || styles.top == 'auto')
+			element.setPosition(element.getPosition(element.getOffsetParent()));
+		
+		if (styles.position == 'static')
+			element.setStyle('position', 'absolute');
 
 		this.addEvent('start', this.checkDroppables, true);
 
@@ -51,7 +54,7 @@ Drag.Move = new Class({
 		if (this.container) this.options.limit = this.calculateLimit();
 		
 		if (this.options.precalculate){
-			this.positions = this.droppables.map(function(el) {
+			this.positions = this.droppables.map(function(el){
 				return el.getCoordinates();
 			});
 		}
@@ -60,8 +63,7 @@ Drag.Move = new Class({
 	},
 	
 	calculateLimit: function(){
-		var position = this.element.getStyle('position'),
-			offsetParent = this.element.getOffsetParent(),
+		var offsetParent = this.element.getOffsetParent(),
 			containerCoordinates = this.container.getCoordinates(offsetParent),
 			containerBorder = {},
 			elementMargin = {},
@@ -92,18 +94,7 @@ Drag.Move = new Class({
 			bottom += elementMargin.bottom;
 		}
 		
-		if (position == 'absolute'){
-			left -= elementMargin.left;
-			top -= elementMargin.top;
-			
-			if (this.container == offsetParent){
-				right -= containerBorder.left;
-				bottom -= containerBorder.top;
-			} else {
-				left += containerCoordinates.left + containerBorder.left;
-				top += containerCoordinates.top + containerBorder.top;
-			}
-		} else {
+		if (this.element.getStyle('position') == 'relative'){
 			var coords = this.element.getCoordinates(offsetParent);
 			coords.left -= this.element.getStyle('left').toInt();
 			coords.top -= this.element.getStyle('top').toInt();
@@ -116,6 +107,17 @@ Drag.Move = new Class({
 			if (this.container != offsetParent){
 				left += containerMargin.left + offsetParentPadding.left;
 				top += (Browser.Engine.trident4 ? 0 : containerMargin.top) + offsetParentPadding.top;
+			}
+		} else {
+			left -= elementMargin.left;
+			top -= elementMargin.top;
+			
+			if (this.container == offsetParent){
+				right -= containerBorder.left;
+				bottom -= containerBorder.top;
+			} else {
+				left += containerCoordinates.left + containerBorder.left;
+				top += containerCoordinates.top + containerBorder.top;
 			}
 		}
 		
