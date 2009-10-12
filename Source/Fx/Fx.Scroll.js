@@ -106,6 +106,30 @@ Fx.Scroll = new Class({
 		}, this);
 		if (to.x != scroll.x || to.y != scroll.y) this.start(to.x, to.y);
 		return this;
+	},
+
+	scrollToCenter: function(el, axes, offset){
+		axes = axes ? $splat(axes) : ['x', 'y'];
+		el = $(el);
+		var to = {},
+			pos = el.getPosition(this.element),
+			size = el.getSize(),
+			scroll = this.element.getScroll(),
+			containerSize = this.element.getSize(),
+			edge = {
+				x: pos.x + size.x,
+				y: pos.y + size.y
+			};
+
+		['x','y'].each(function(axis){
+			if(axes.contains(axis)){
+				to[axis] = pos[axis] - (containerSize[axis] - size[axis])/2;
+			}
+			if(to[axis] == null) to[axis] = scroll[axis];
+			if(offset && offset[axis]) to[axis] = to[axis] + offset[axis];
+		}, this);
+		if (to.x != scroll.x || to.y != scroll.y) this.start(to.x, to.y);
+		return this;
 	}
 
 });
