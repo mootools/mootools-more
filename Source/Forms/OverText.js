@@ -30,7 +30,8 @@ var OverText = new Class({
 			}
 		},
 		poll: false,
-		pollInterval: 250
+		pollInterval: 250,
+		wrap: false
 	},
 
 	property: 'OverText',
@@ -69,13 +70,15 @@ var OverText = new Class({
 			this.text.set('for', this.element.get('id'));
 		}
 
-		this.textHolder = new Element('div', {
-			styles: {
-				lineHeight: 'normal',
-				position: 'relative'
-			},
-			'class':'OverTextWrapper'
-		}).adopt(this.text).inject(this.element, 'before');
+		if (this.options.wrap) {
+			this.textHolder = new Element('div', {
+				styles: {
+					lineHeight: 'normal',
+					position: 'relative'
+				},
+				'class':'overTxtWrapper'
+			}).adopt(this.text).inject(this.element, 'before');
+		}
 
 		this.element.addEvents({
 			focus: this.focus,

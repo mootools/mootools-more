@@ -27,6 +27,8 @@ Shows text over an input that disappears when the user clicks into it. The text 
 * positionOptions - (*object*) data passed to [Element.position][].
 * poll - (*boolean*) whether to periodically re-evaluate the input to set their overtext element's position and visibility (useful for login in fields that are often populated by remembered usernames and passwords by the browser); defaults to *false*.
 * pollInterval - (*integer*) the duration between polling in milliseconds; defaults to *250*.
+* wrap - (*boolean*) if *true*, all inputs are wrapped with a div that is positioned relatively with the class "overTxtWrapper"
+* textOverride - (*string*) if defined, this will be the value of the over text rather than the input *alt* or *title*.
 
 ### Events
 
@@ -34,7 +36,7 @@ Shows text over an input that disappears when the user clicks into it. The text 
 * onTextShow - (*function*) callback fired when an overtext element is shown (passed the overtext element and the input element as arguments)
 
 ### Note
-OverText positions the text over your input. Depending on your layout, it's possible that your input might move (for instance, if you inject new content above it, or the user resizes their browser). This often happens with [Form.Validator.Inline](/more/Forms/Form.Validator.Inline), for instance. The solution here is to wrap your inputs in containers that are positioned (position: relative, for instance). By wrapping your inputs, when the page flow changes the overtext will move with them.
+OverText positions the text over your input. Depending on your layout, it's possible that your input might move (for instance, if you inject new content above it, or the user resizes their browser). This often happens with [Form.Validator.Inline](/more/Forms/Form.Validator.Inline), for instance. The solution here is to wrap your inputs in containers that are positioned (position: relative, for instance). By wrapping your inputs, when the page flow changes the overtext will move with them. The *wrap* option does this for you automatically.
 
 OverText Method: hide {#OverText:hide}
 --------------------------------------
