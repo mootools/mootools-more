@@ -33,12 +33,24 @@ MooTools.lang.set('et-EE', 'Date', {
 	hoursAgo: 'umbes {delta} tundi tagasi',
 	dayAgo: '1 päev tagasi',
 	daysAgo: '{delta} päeva tagasi',
+	weekAgo: '1 nädal tagasi',
+	weeksAgo: '{delta} nädalat tagasi',
+	monthAgo: '1 kuu tagasi',
+	monthsAgo: '{delta} kuud tagasi',
+	yearAgo: '1 aasta tagasi',
+	yearsAgo: '{delta} aastat tagasi',
 	lessThanMinuteUntil: 'vähem kui minuti aja pärast',
 	minuteUntil: 'umbes minuti aja pärast',
 	minutesUntil: '{delta} minuti pärast',
 	hourUntil: 'umbes tunni aja pärast',
 	hoursUntil: 'umbes {delta} tunni pärast',
 	dayUntil: '1 päeva pärast',
-	daysUntil: '{delta} päeva pärast'
+	daysUntil: '{delta} päeva pärast',
+	weekUntil: '1 nädala pärast',
+	weeksUntil: '{delta} nädala pärast',
+	monthUntil: '1 kuu pärast',
+	monthsUntil: '{delta} kuu pärast',
+	yearUntil: '1 aasta pärast',
+	yearsUntil: '{delta} aasta pärast'
 
 });

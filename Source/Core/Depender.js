@@ -29,33 +29,6 @@ var Depender = {
 		useScriptInjection: true
 	},
 
-	resetLog: function(){
-		this.logged.empty();
-		return this;
-	},
-
-	enableLog: function(){
-		this.log = function(){
-			console.log.apply(console, arguments);
-			return this;
-		};
-		this.log('enabling depender log.');
-		this.logged.each(function(logged){
-			this.log.apply(this, logged);
-		}, this);
-		return this.resetLog();
-	},
-
-	logged:[],
-
-	disableLog: function(){
-		this.log = function(){
-			this.logged.push(arguments);
-			return this;
-		};
-		return this;
-	},
-
 	loaded: [],
 
 	sources: {},
@@ -330,6 +303,7 @@ var Depender = {
 
 $extend(Depender, new Events);
 $extend(Depender, new Options);
+$extend(Depender, new Log);
 
 Depender._setOptions = Depender.setOptions;
 Depender.setOptions = function(){
@@ -337,5 +311,3 @@ Depender.setOptions = function(){
 	if (this.options.log) Depender.enableLog();
 	return this;
 };
-
-Depender.disableLog();

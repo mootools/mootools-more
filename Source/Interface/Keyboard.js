@@ -51,6 +51,7 @@ Script: Keyboard.js
 
 		options: {
 			/*
+			log: false,
 			onActivate: $empty,
 			onDeactivate: $empty,
 			*/
@@ -69,6 +70,7 @@ Script: Keyboard.js
 		setup: function(){
 			this.addEvents(this.options.events);
 			if (this.options.active) this.activate();
+			if (this.options.log) this.enableLog();
 		},
 
 		handle: function(event, type){
