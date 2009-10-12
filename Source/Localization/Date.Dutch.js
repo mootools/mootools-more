@@ -33,6 +33,12 @@ MooTools.lang.set('nl-NL', 'Date', {
 	hoursAgo: 'ongeveer {delta} uur geleden',
 	dayAgo: '{delta} dag geleden',
 	daysAgo: 'dagen geleden',
+	weekAgo: 'een week geleden',
+	weeksAgo: '{delta} weken geleden',
+	monthAgo: 'een maand geleden',
+	monthsAgo: '{delta} maanden geleden',
+	yearAgo: 'een jaar geleden',
+	yearsAgo: '{delta} jaar geleden',
 	lessThanMinuteUntil: 'minder dan een minuut vanaf nu',
 	minuteUntil: 'ongeveer een minuut vanaf nu',
 	minutesUntil: '{delta} minuten vanaf nu',
@@ -40,20 +46,11 @@ MooTools.lang.set('nl-NL', 'Date', {
 	hoursUntil: 'ongeveer {delta} uur vanaf nu',
 	dayUntil: '1 dag vanaf nu',
 	daysUntil: '{delta} dagen vanaf nu',
-
-
-weekAgo: 'een week geleden',
-weeksAgo: '{delta} weken geleden',
-monthAgo: 'een maand geleden',
-monthsAgo: '{delta} maanden geleden',
-yearthAgo: 'een jaar geleden',
-yearsAgo: '{delta} jaar geleden',
-
-weekUntil: 'over een week',
-weeksUntil: 'over {delta} weken',
-monthUntil: 'over een maand',
-monthsUntil: 'over {delta} maanden',
-yearUntil: 'over een jaar',
-yearsUntil: 'over {delta} jaar' 
-
+	weekUntil: 'over een week',
+	weeksUntil: 'over {delta} weken',
+	monthUntil: 'over een maand',
+	monthsUntil: 'over {delta} maanden',
+	yearUntil: 'over een jaar',
+	yearsUntil: 'over {delta} jaar'
+	
 });
