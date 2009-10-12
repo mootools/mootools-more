@@ -6,6 +6,7 @@
 			verify: "Did it alert the rating?",
 			before: function(){
 				new Request.JSONP({
+					log: true,
 					url: 'http://api.cnet.com/restApi/v1.0/techProduct?productId=32069546&iod=none&viewType=json&partKey=19926949750937665684988687810562',
 					onComplete: function(data){
 					  alert("The ipod gets an " + data.CNETResponse.TechProduct.EditorsRating.$);
@@ -19,6 +20,7 @@
 			verify: "Did it load an image?",
 			before: function(){
 				new Request.JSONP({
+					log: true,
 					callbackKey: 'jsoncallback',
 					url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
 					onComplete: function(data){
