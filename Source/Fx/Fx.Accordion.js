@@ -69,7 +69,9 @@ var Accordion = Fx.Accordion = new Class({
 		this.togglers.include(toggler);
 		this.elements.include(element);
 		var idx = this.togglers.indexOf(toggler);
-		toggler.addEvent(this.options.trigger, this.display.bind(this, idx));
+		var displayer = this.display.bind(this, idx);
+		toggler.store('accordion:display', displayer);
+		toggler.addEvent(this.options.trigger, displayer);
 		if (this.options.height) element.setStyles({'padding-top': 0, 'border-top': 'none', 'padding-bottom': 0, 'border-bottom': 'none'});
 		if (this.options.width) element.setStyles({'padding-left': 0, 'border-left': 'none', 'padding-right': 0, 'border-right': 'none'});
 		element.fullOpacity = 1;
@@ -80,6 +82,12 @@ var Accordion = Fx.Accordion = new Class({
 			for (var fx in this.effects) element.setStyle(fx, 0);
 		}
 		return this;
+	},
+
+	detach: function(){
+		this.togglers.each(function(toggler) {
+			toggler.removeEvent(this.options.trigger, toggler.retrieve('accordion:display'));
+		}, this);
 	},
 
 	display: function(index, useFx){

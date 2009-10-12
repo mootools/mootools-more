@@ -36,16 +36,17 @@ var Scroller = new Class({
 
 	start: function(){
 		this.listener.addEvents({
-			mouseenter: this.bound.attach,
-			mouseleave: this.bound.detach
+			mouseover: this.bound.attach,
+			mouseout: this.bound.detach
 		});
 	},
 
 	stop: function(){
 		this.listener.removeEvents({
-			mouseenter: this.bound.attach,
-			mouseleave: this.bound.detach
+			mouseover: this.bound.attach,
+			mouseout: this.bound.detach
 		});
+		this.detach();
 		this.timer = $clear(this.timer);
 	},
 
