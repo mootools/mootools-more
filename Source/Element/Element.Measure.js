@@ -56,14 +56,17 @@ Element.implement({
 		var getSize = function(el, options){
 			return (options.computeSize)?el.getComputedSize(options):el.getSize();
 		};
-		if (this.getStyle('display') == 'none'){
+		var parent = this.getParent('body');
+		if (parent && this.getStyle('display') == 'none'){
 			dim = this.measure(function(){
 				return getSize(this, options);
 			});
-		} else {
+		} else if (parent){
 			try { //safari sometimes crashes here, so catch it
 				dim = getSize(this, options);
 			}catch(e){}
+		} else {
+			dim = {x: 0, y: 0};
 		}
 		return $chk(dim.x) ? $extend(dim, {width: dim.x, height: dim.y}) : $extend(dim, {x: dim.width, y: dim.height});
 	},
