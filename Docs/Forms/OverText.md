@@ -33,6 +33,9 @@ Shows text over an input that disappears when the user clicks into it. The text 
 * onTextHide - (*function*) callback fired when an overtext element is hidden (passed the overtext element and the input element as arguments)
 * onTextShow - (*function*) callback fired when an overtext element is shown (passed the overtext element and the input element as arguments)
 
+### Note
+OverText positions the text over your input. Depending on your layout, it's possible that your input might move (for instance, if you inject new content above it, or the user resizes their browser). This often happens with [Form.Validator.Inline](/more/Forms/Form.Validator.Inline), for instance. The solution here is to wrap your inputs in containers that are positioned (position: relative, for instance). By wrapping your inputs, when the page flow changes the overtext will move with them.
+
 OverText Method: hide {#OverText:hide}
 --------------------------------------
 
