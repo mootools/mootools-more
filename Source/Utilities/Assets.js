@@ -21,8 +21,8 @@ var Asset = {
 		var script = new Element('script', {src: source, type: 'text/javascript'});
 
 		var load = properties.onload.bind(script), 
-				check = properties.check, 
-				doc = properties.document;
+			check = properties.check, 
+			doc = properties.document;
 		delete properties.onload;
 		delete properties.check;
 		delete properties.document;
