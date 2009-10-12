@@ -8,7 +8,10 @@ Script: Drag.Move.js
 	Authors:
 		Valerio Proietti
 		Tom Occhinno
-		Jan Kassens*/
+		Jan Kassens
+		Aaron Newton
+		Scott Kyle
+*/
 
 Drag.Move = new Class({
 
@@ -29,12 +32,15 @@ Drag.Move = new Class({
 		this.parent(element, options);
 		this.droppables = $$(this.options.droppables);
 		this.container = document.id(this.options.container);
-		if (this.container && $type(this.container) != 'element') this.container = document.id(this.container.getDocument().body);
+		
+		if (this.container && $type(this.container) != 'element')
+			this.container = document.id(this.container.getDocument().body);
 
-		var position = this.element.getStyle('position');
-		if (position=='static') position = 'absolute';
-		if ([this.element.getStyle('left'), this.element.getStyle('top')].contains('auto')) this.element.position(this.element.getPosition(this.element.offsetParent));
-		this.element.setStyle('position', position);
+		if (this.element.getStyle('left') == 'auto' || this.element.getStyle('top') == 'auto')
+			this.element.setPosition(this.element.getPosition(this.element.offsetParent));
+		
+		if (this.element.getStyle('position') == 'static')
+			this.element.setStyle('position', 'absolute');
 
 		this.addEvent('start', this.checkDroppables, true);
 
@@ -42,99 +48,81 @@ Drag.Move = new Class({
 	},
 
 	start: function(event){
-		if (this.container){
-			var offsetParent = this.element.getOffsetParent();
-			var containerCoordinates = this.container.getCoordinates(offsetParent),
-					containerBorder = {},
-					elementMargin = {},
-					elementBorder = {},
-					containerMargin = {},
-					offsetParentPadding = {};
-			var position = this.element.getStyle('position');
-
-			['top', 'right', 'bottom', 'left'].each(function(pad){
-				containerBorder[pad] = this.container.getStyle('border-' + pad).toInt();
-				elementBorder[pad] = this.element.getStyle('border-' + pad).toInt();
-				elementMargin[pad] = this.element.getStyle('margin-' + pad).toInt();
-				containerMargin[pad] = this.container.getStyle('margin-' + pad).toInt();
-				offsetParentPadding[pad] = offsetParent.getStyle('padding-' + pad).toInt();
-			}, this);
-
-			var width = this.element.offsetWidth + elementMargin.left + elementMargin.right;
-			var height = this.element.offsetHeight + elementMargin.top + elementMargin.bottom;
-			var zeroMargin = {};
-			$each(elementMargin, function(value, key) {
-				zeroMargin[key] = 0;
-			});
-			if (position == 'absolute') {
-				if (this.options.includeMargins) elementMargin = zeroMargin;
-				if (this.container == offsetParent) {
-					//container is offsetParent, element position absolute
-					this.options.limit = {
-						x: [
-							0 - elementMargin.left,
-							containerCoordinates.right - containerBorder.left - containerBorder.right - width + elementMargin.right
-						],
-						y: [
-							0 - elementMargin.top,
-							containerCoordinates.bottom - containerBorder.top - containerBorder.bottom - height + elementMargin.bottom
-						]
-					};
-				} else {
-					//container is not offsetParent, element position absolute
-					this.options.limit = {
-						x: [
-							containerCoordinates.left + containerBorder.left - elementMargin.left,
-							containerCoordinates.right - containerBorder.right - width + elementMargin.right
-						],
-						y: [
-							containerCoordinates.top + containerBorder.top - elementMargin.top,
-							containerCoordinates.bottom - containerBorder.bottom - height + elementMargin.bottom
-						]
-					};
-				}
-			} else {
-				var pos = {
-					x: this.element.getStyle('left').toInt(),
-					y: this.element.getStyle('top').toInt()
-				};
-				var coords = this.element.getCoordinates(offsetParent);
-				if (this.container == offsetParent) {
-					//container is offsetParent, element position relative
-					this.options.limit = {
-						x: [
-							pos.x - coords.left + containerBorder.left + (this.options.includeMargins ? elementMargin.left : 0),
-							containerCoordinates.right + pos.x - coords.left - width + elementMargin.left + elementMargin.right - containerBorder.right
-								- (this.options.includeMargins ? elementMargin.right : 0)
-						],
-						y: [
-							pos.y - coords.top + containerBorder.top + (this.options.includeMargins ? elementMargin.top : 0),
-							containerCoordinates.bottom + pos.y - coords.top - height + elementMargin.top + elementMargin.bottom - containerBorder.bottom
-								- (this.options.includeMargins ? elementMargin.bottom : 0)
-						]
-					};
-				} else {
-					//container is not offsetParent, element position relative
-					if (!this.options.includeMargins) elementMargin = zeroMargin;
-					this.options.limit = {
-						x: [
-							pos.x - coords.left + containerMargin.left + offsetParentPadding.left + containerBorder.left + elementMargin.left,
-							containerCoordinates.right - coords.right + pos.x - containerBorder.right - elementMargin.right
-						],
-						y: [
-							pos.y - coords.top + containerBorder.top + elementMargin.top + offsetParentPadding.top + (Browser.Engine.trident4 ? 0 :  + containerMargin.top),
-							containerCoordinates.bottom - coords.bottom + pos.y - containerBorder.bottom - elementMargin.bottom
-						]
-					};
-				}
-			}
-		}
+		if (this.container) this.options.limit = this.calculateLimit();
+		
 		if (this.options.precalculate){
 			this.positions = this.droppables.map(function(el) {
 				return el.getCoordinates();
 			});
 		}
+		
 		this.parent(event);
+	},
+	
+	calculateLimit: function(){
+		var position = this.element.getStyle('position'),
+			offsetParent = this.element.getOffsetParent(),
+			containerCoordinates = this.container.getCoordinates(offsetParent),
+			containerBorder = {},
+			elementMargin = {},
+			elementBorder = {},
+			containerMargin = {},
+			offsetParentPadding = {};
+
+		['top', 'right', 'bottom', 'left'].each(function(pad){
+			containerBorder[pad] = this.container.getStyle('border-' + pad).toInt();
+			elementBorder[pad] = this.element.getStyle('border-' + pad).toInt();
+			elementMargin[pad] = this.element.getStyle('margin-' + pad).toInt();
+			containerMargin[pad] = this.container.getStyle('margin-' + pad).toInt();
+			offsetParentPadding[pad] = offsetParent.getStyle('padding-' + pad).toInt();
+		}, this);
+
+		var width = this.element.offsetWidth + elementMargin.left + elementMargin.right,
+			height = this.element.offsetHeight + elementMargin.top + elementMargin.bottom,
+			left = 0,
+			top = 0,
+			right = containerCoordinates.right - containerBorder.right - width,
+			bottom = containerCoordinates.bottom - containerBorder.bottom - height;
+
+		if (this.options.includeMargins){
+			left += elementMargin.left;
+			top += elementMargin.top;
+		} else {
+			right += elementMargin.right;
+			bottom += elementMargin.bottom;
+		}
+		
+		if (position == 'absolute'){
+			left -= elementMargin.left;
+			top -= elementMargin.top;
+			
+			if (this.container == offsetParent){
+				right -= containerBorder.left;
+				bottom -= containerBorder.top;
+			} else {
+				left += containerCoordinates.left + containerBorder.left;
+				top += containerCoordinates.top + containerBorder.top;
+			}
+		} else {
+			var coords = this.element.getCoordinates(offsetParent);
+			coords.left -= this.element.getStyle('left').toInt();
+			coords.top -= this.element.getStyle('top').toInt();
+			
+			left += containerBorder.left - coords.left;
+			top += containerBorder.top - coords.top;
+			right += elementMargin.left - coords.left;
+			bottom += elementMargin.top - coords.top;
+			
+			if (this.container != offsetParent){
+				left += containerMargin.left + offsetParentPadding.left;
+				top += (Browser.Engine.trident4 ? 0 : containerMargin.top) + offsetParentPadding.top;
+			}
+		}
+		
+		return {
+			x: [left, right],
+			y: [top, bottom]
+		};
 	},
 
 	checkAgainst: function(el, i){
