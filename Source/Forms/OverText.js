@@ -69,14 +69,6 @@ var OverText = new Class({
 			this.text.set('for', this.element.get('id'));
 		}
 
-		this.textHolder = new Element('div', {
-			styles: {
-				lineHeight: 'normal',
-				position: 'relative'
-			},
-			'class':'OverTextWrapper'
-		}).adopt(this.text).inject(this.element, 'before');
-
 		this.element.addEvents({
 			focus: this.focus,
 			blur: this.assert,
