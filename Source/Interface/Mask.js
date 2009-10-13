@@ -7,6 +7,12 @@ Script: Mask.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Options Events Element.Event
+@requires Class.Binds Element.Position IframeShim
+
+@provides Mask
+
 */
 
 var Mask = new Class({

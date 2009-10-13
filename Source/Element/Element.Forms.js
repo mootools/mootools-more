@@ -8,6 +8,11 @@ Script: Element.Forms.js
 	Authors:
 		Aaron Newton
 
+@requires core/1.2.4: Element
+@requires MooTools.More
+
+@provides Element.Forms
+
 */
 
 Element.implement({

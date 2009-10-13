@@ -11,6 +11,11 @@ Script: Date.js
 		Harald Kirshner - mail [at] digitarald.de; http://digitarald.de
 		Scott Kyle - scott [at] appden.com; http://appden.com
 
+@requires core/1.2.4: Array String Number Lang Date.English.US
+@requires MooTools.More
+
+@provides Date
+
 */
 
 (function(){

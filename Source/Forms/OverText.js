@@ -7,6 +7,12 @@ Script: OverText.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Options Events Element.Event
+@requires Class.Binds Class.Occlude Element.Position Element.Shortcuts
+
+@provides OverText
+
 */
 
 var OverText = new Class({

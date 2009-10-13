@@ -8,6 +8,10 @@ Script: Date.Portuguese.BR.js
 	Authors:
 		Fabio Miranda Costa
 
+@requires Lang Date
+
+@provides Date.Portuguese.BR
+
 */
 
 MooTools.lang.set('pt-BR', 'Date', {

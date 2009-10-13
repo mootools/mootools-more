@@ -10,6 +10,10 @@ Script: Date.German.js
 		Frank Rossi
 		Ulrich Petri
 
+@requires Lang Date
+
+@provides Date.German
+
 */
 
 MooTools.lang.set('de-DE', 'Date', {

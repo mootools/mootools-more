@@ -8,6 +8,11 @@ Script: Fx.Sort.js
 	Authors:
 		Aaron Newton
 
+@requires core/1.2.4: Element.Dimensions
+@requires Fx.Elements Element.Measure
+
+@provides Fx.Sort
+
 */
 
 Fx.Sort = new Class({

@@ -11,6 +11,12 @@ Script: Drag.Move.js
 		Jan Kassens
 		Aaron Newton
 		Scott Kyle
+
+@requires core/1.2.4: Element.Dimensions
+@requires Drag
+
+@provides Drag.Move
+
 */
 
 Drag.Move = new Class({

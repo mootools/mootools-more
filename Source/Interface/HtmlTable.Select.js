@@ -8,6 +8,11 @@ Script: HtmlTable.Select.js
 	Authors:
 		Harald Kirschner
 		Aaron Newton
+
+@requires Keyboard HtmlTable Class.refactor Element.Delegation
+
+@provides HtmlTable.Select
+
 */
 
 HtmlTable = Class.refactor(HtmlTable, {

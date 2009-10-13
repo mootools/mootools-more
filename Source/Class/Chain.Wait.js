@@ -7,6 +7,12 @@ Script: Chain.Wait.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Chain Element Fx
+@requires MooTools.More
+
+@provides Chain.Wait
+
 */
 
 (function(){
@@ -28,23 +34,21 @@ Script: Chain.Wait.js
 		});
 	}
 
-	try {
-		Element.implement({
-			chains: function(effects){
-				$splat($pick(effects, ['tween', 'morph', 'reveal'])).each(function(effect){
-					effect = this.get(effect);
-					if (!effect) return;
-					effect.setOptions({
-						link:'chain'
-					});
-				}, this);
-				return this;
-			},
-			pauseFx: function(duration, effect){
-				this.chains(effect).get($pick(effect, 'tween')).wait(duration);
-				return this;
-			}
-		});
-	} catch(e){}
+	Element.implement({
+		chains: function(effects){
+			$splat($pick(effects, ['tween', 'morph', 'reveal'])).each(function(effect){
+				effect = this.get(effect);
+				if (!effect) return;
+				effect.setOptions({
+					link:'chain'
+				});
+			}, this);
+			return this;
+		},
+		pauseFx: function(duration, effect){
+			this.chains(effect).get($pick(effect, 'tween')).wait(duration);
+			return this;
+		}
+	});
 
 })();

@@ -8,6 +8,11 @@ Script: Request.Periodical.js
 	Authors:
 		Christoph Pojer
 
+@requires core/1.2.4: Request
+@requires MooTools.More
+
+@provides Request.Periodical
+
 */
 
 Request.implement({

@@ -8,6 +8,10 @@ Script: Form.Validator.Dutch.js
 	Authors:
 		Lennart Pilon
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Dutch
+
 */
 
 MooTools.lang.set('nl-NL', 'Form.Validator', {

@@ -8,6 +8,10 @@ Script: Date.Estonian.js
 	Authors:
 		Kevin Valdek
 
+@requires Lang Date
+
+@provides Date.Estonian
+
 */
 
 MooTools.lang.set('et-EE', 'Date', {

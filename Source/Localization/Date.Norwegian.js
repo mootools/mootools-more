@@ -8,6 +8,10 @@ Script: Date.Norwegian.js
 	Authors:
 		Espen 'Rexxars' Hovlandsdal
 
+@requires Lang Date
+
+@provides Date.Norwegian
+
 */
 
 MooTools.lang.set('no-NO', 'Date', {

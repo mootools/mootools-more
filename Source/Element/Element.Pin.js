@@ -7,6 +7,12 @@ Script: Element.Pin.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Element.Event Element.Dimensions Element.Style
+@requires MooTools.More
+
+@provides Element.Pin
+
 */
 
 (function(){

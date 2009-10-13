@@ -7,6 +7,12 @@ Script: Group.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Events
+@requires MooTools.More
+
+@provides Group
+
 */
 
 var Group = new Class({

@@ -7,7 +7,11 @@ Script: Date.German.CH.js
  
 	Authors: 
 		Michael van der Weg
- 
+
+@requires Lang Date.German
+
+@provides Date.German.CH
+
 */
 
 MooTools.lang.set('de-CH', 'cascade', ['de-DE']);

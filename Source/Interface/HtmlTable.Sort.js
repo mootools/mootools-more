@@ -8,6 +8,12 @@ Script: HtmlTable.Sort.js
 	Authors:
 		Harald Kirschner
 		Aaron Newton
+
+@requires core/1.2.4: Hash
+@requires HtmlTable Class.refactor Element.Delegation Date
+
+@provides HtmlTable.Sort
+
 */
 
 HtmlTable = Class.refactor(HtmlTable, {

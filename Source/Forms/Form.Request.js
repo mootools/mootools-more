@@ -8,6 +8,11 @@ License:
 Authors:
 	Aaron Newton
 
+@requires core/1.2.4: Element.Event Request.HTML
+@requires Class.Binds Class.Occlude Spinner String.QueryString
+
+@provides Form.Request
+
 */
 
 if (!window.Form) window.Form = {};

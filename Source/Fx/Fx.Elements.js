@@ -7,6 +7,12 @@ Script: Fx.Elements.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Fx.CSS
+@requires MooTools.More
+
+@provides Fx.Elements
+
 */
 
 Fx.Elements = new Class({

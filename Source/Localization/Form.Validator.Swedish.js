@@ -8,6 +8,10 @@ Script: Form.Validator.Swedish.js
 	Authors:
 		Martin Lundgren
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Swedish
+
 */
 
 MooTools.lang.set('sv-SE', 'Form.Validator', {

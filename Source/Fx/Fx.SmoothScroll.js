@@ -7,6 +7,12 @@ Script: Fx.SmoothScroll.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Selectors
+@requires Fx.Scroll
+
+@provides Fx.SmoothScroll
+
 */
 
 var SmoothScroll = Fx.SmoothScroll = new Class({

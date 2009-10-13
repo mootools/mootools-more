@@ -9,6 +9,12 @@ Script: Drag.js
 		Valerio Proietti
 		Tom Occhinno
 		Jan Kassens
+
+@requires core/1.2.4: Events Options Element.Event Element.Style
+@requires MooTools.More
+
+@provides Drag
+
 */
 
 var Drag = new Class({

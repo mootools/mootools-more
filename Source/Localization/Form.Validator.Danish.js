@@ -8,6 +8,10 @@
 	Authors:
 		Martin Overgaard
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Danish
+
 */
 
 MooTools.lang.set('da-DK', 'Form.Validator', {

@@ -7,6 +7,12 @@ Script: Fx.Accordion.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Element.Event
+@requires Fx.Elements
+
+@provides Fx.Accordion
+
 */
 
 var Accordion = Fx.Accordion = new Class({

@@ -42,7 +42,7 @@
 		},
 
 		"Chain.Wait": {
-			"deps": ["More", "Class.Extras"],
+			"deps": ["More", "Fx", "Element"],
 			"desc": "Adds a delay method for chaining that allows you to easily introduce pauses."
 		}
 
@@ -105,7 +105,7 @@
 		},
 
 		"Element.Delegation": {
-			"deps":["Element.Event"],
+			"deps":["Element.Event", "Selectors"],
 			"desc":"Delegates events for child elements to their parents for greater efficiency."
 		},
 
@@ -236,7 +236,7 @@
 	"Request": {
 
 		"Request.JSONP": {
-			"deps": ["More", "Log", "Browser", "Element", "Request", "Class.Extras"],
+			"deps": ["More", "Log", "Element", "Request"],
 			"desc": "Creates a Json request using a script tag include and handles the callbacks for you."
 		},
 
@@ -260,7 +260,7 @@
 		},
 
 		"Color": {
-			"deps": ["More", "Core", "Array", "String", "Function", "Number", "Hash"],
+			"deps": ["More", "Array", "String", "Function", "Number", "Hash"],
 			"desc": "Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa."
 		},
 
@@ -270,7 +270,7 @@
 		},
 
 		"Hash.Cookie": {
-			"deps": ["More", "Class.Extras", "Cookie", "JSON"],
+			"deps": ["More", "Cookie", "JSON"],
 			"desc": "Class for creating, reading, and deleting browser Cookies in JSON format."
 		},
 
@@ -284,7 +284,7 @@
 	"Interface": {
 
 		"HtmlTable":{
-			"deps":["Class.Extras", "Selectors", "Class.Occlude"],
+			"deps":["Class.Extras", "Class.Occlude"],
 			"desc":"Builds table elements with methods to add rows quickly."
 		},
 
@@ -342,6 +342,151 @@
 		"Form.Validator.English": {
 			"deps": ["More", "Lang"],
 			"desc": "Form.Validator messages in English."
+		},
+
+		"Date.Catalan": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Catalan."
+		},
+
+		"Date.Czech": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Czech."
+		},
+
+		"Date.Danish": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Danish."
+		},
+
+		"Date.Dutch": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Dutch."
+		},
+
+		"Date.English.GB": {
+			"deps": ["Lang"],
+			"desc": "Date messages in English (with conventions for Great Britain)."
+		},
+
+		"Date.Estonian": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Estonian."
+		},
+
+		"Date.French": {
+			"deps": ["Lang"],
+			"desc": "Date messages in French."
+		},
+
+		"Date.Italian": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Italian."
+		},
+
+		"Date.Norwegian": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Norwegian."
+		},
+
+		"Date.Polish": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Polish."
+		},
+
+		"Date.Portuguese.BR": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Portuguese for Brazil."
+		},
+
+		"Date.Russian": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Russian."
+		},
+
+		"Date.Spanish": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Spanish."
+		},
+
+		"Date.Swedish": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Swedish."
+		},
+
+		"Form.Validator.Arabic": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Arabic."
+		},
+
+		"Form.Validator.Catalan": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Catalan."
+		},
+
+		"Form.Validator.Czech": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Czech."
+		},
+
+		"Form.Validator.Chinese": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Chinese."
+		},
+
+		"Form.Validator.Dutch": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Dutch."
+		},
+
+		"Form.Validator.Estonian": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Estonian."
+		},
+
+		"Form.Validator.French": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in French."
+		},
+
+		"Form.Validator.Italian": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Italian."
+		},
+
+		"Form.Validator.Norwegian": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Norwegian."
+		},
+
+		"Form.Validator.Polish": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Polish."
+		},
+
+		"Form.Validator.Portuguese": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Portuguese."
+		},
+
+		"Form.Validator.Portuguese.BR": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Portuguese localized for Brazil."
+		},
+
+		"Form.Validator.Russian": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Russian."
+		},
+
+		"Form.Validator.Spanish": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Spanish."
+		},
+
+		"Form.Validator.Swedish": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Swedish."
 		}
 
 	}

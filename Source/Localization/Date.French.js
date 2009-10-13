@@ -7,7 +7,11 @@ Script: Date.French.js
 
 	Authors:
 		Nicolas Sorosac
-    Antoine Abt
+		Antoine Abt
+
+@requires Lang Date
+
+@provides Date.French
 
 */
  

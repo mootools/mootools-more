@@ -8,6 +8,11 @@ Script: HtmlTable.Zebra.js
 	Authors:
 		Harald Kirschner
 		Aaron Newton
+
+@requires HtmlTable Class.refactor
+
+@provides HtmlTable.Zebra
+
 */
 
 HtmlTable = Class.refactor(HtmlTable, {

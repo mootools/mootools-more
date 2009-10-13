@@ -7,6 +7,12 @@ Script: Class.Binds.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Class
+@requires MooTools.More
+
+@provides Class.Binds
+
 */
 
 Class.Mutators.Binds = function(binds){

@@ -8,6 +8,10 @@ Script: Form.Validator.Polish.js
 	Authors:
 		Oskar Krawczyk
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Polish
+
 */
 
 MooTools.lang.set('pl-PL', 'Form.Validator', {

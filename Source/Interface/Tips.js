@@ -8,6 +8,12 @@ Script: Tips.js
 	Authors:
 		Valerio Proietti
 		Christoph Pojer
+
+@requires core/1.2.4: Options Events Element.Event Element.Style Element.Dimensions
+@requires MooTools.More
+
+@provides Tips
+
 */
 
 (function(){

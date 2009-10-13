@@ -9,6 +9,12 @@ Script: Log.js
 		Guillermo Rauch
 		Thomas Aylott
 		Scott Kyle
+
+@requires core/1.2.4: Class
+@requires MooTools.More
+
+@provides Log
+
 */
 
 (function(){

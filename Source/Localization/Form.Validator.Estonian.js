@@ -8,6 +8,10 @@ Script: Form.Validator.Estonian.js
 	Authors:
 		Kevin Valdek
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Estonian
+
 */
 
 MooTools.lang.set('et-EE', 'Form.Validator', {

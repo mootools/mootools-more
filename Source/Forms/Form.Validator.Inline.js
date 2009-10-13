@@ -7,6 +7,11 @@ Script: Form.Validator.Inline.js
 
 	Authors:
 		Aaron Newton
+
+@requires Form.Validator
+
+@provides Form.Validator.Inline
+
 */
 
 Form.Validator.Inline = new Class({

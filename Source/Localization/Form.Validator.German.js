@@ -9,6 +9,10 @@ Script: Form.Validator.German.js
 		Frank Rossi
 		Ulrich Petri
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.German
+
 */
 
 MooTools.lang.set('de-DE', 'Form.Validator', {

@@ -7,6 +7,12 @@ Script: MooTools.Lang.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Events
+@requires MooTools.More
+
+@provides MooTools.Lang
+
 */
 
 (function(){

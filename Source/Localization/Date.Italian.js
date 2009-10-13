@@ -9,6 +9,10 @@ Script: Date.Italian.js
 		Andrea Novero
 		Valerio Proietti
 
+@requires Lang Date
+
+@provides Date.Italian
+
 */
  
 MooTools.lang.set('it-IT', 'Date', {

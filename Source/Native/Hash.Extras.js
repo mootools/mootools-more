@@ -7,6 +7,12 @@ Script: Hash.Extras.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Hash.base
+@requires MooTools.More
+
+@provides Hash.Extras
+
 */
 
 Hash.implement({

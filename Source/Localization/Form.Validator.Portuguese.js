@@ -8,6 +8,10 @@ Script: Form.Validator.Portuguese.js
 	Authors:
 		Miquel Hudin
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Portuguese
+
 */
 
 MooTools.lang.set('pt-PT', 'Form.Validator', {

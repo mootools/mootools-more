@@ -7,6 +7,12 @@ Script: Request.Queue.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Element Request
+@requires Log
+
+@provides Request.JSONP
+
 */
 
 Request.Queue = new Class({

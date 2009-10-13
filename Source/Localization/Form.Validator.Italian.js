@@ -8,6 +8,11 @@ Script: Form.Validator.Italian.js
 	Authors:
 		Leonardo Laureti
 		Andrea Novero
+
+@requires Lang Form.Validator
+
+@provides Form.Validator.Italian
+
 */
  
 MooTools.lang.set('it-IT', 'Form.Validator', {

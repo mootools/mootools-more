@@ -7,6 +7,11 @@ Script: Sortables.js
 
 	Authors:
 		Tom Occhino
+
+@requires Drag.Move
+
+@provides Slider
+
 */
 
 var Sortables = new Class({

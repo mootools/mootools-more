@@ -7,6 +7,12 @@ Script: Slider.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Element.Dimensions
+@requires Class.Binds Drag Element.Dimensions Element.Measure
+
+@provides Slider
+
 */
 
 var Slider = new Class({

@@ -9,6 +9,10 @@ Script: Date.Danish.js
 		Martin Overgaard
 		Henrik Hansen
 
+@requires Lang Date
+
+@provides Date.Danish
+
 */
  
 MooTools.lang.set('da-DK', 'Date', {

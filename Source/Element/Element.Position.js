@@ -7,6 +7,12 @@ Script: Element.Position.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Element.Dimensions
+@requires Element.Measure
+
+@provides Elements.Position
+
 */
 
 (function(){

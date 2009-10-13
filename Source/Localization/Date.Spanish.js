@@ -8,6 +8,10 @@ Script: Date.Spanish.US.js
 	Authors:
 		Ãlfons Sanchez
 
+@requires Lang Date
+
+@provides Date.Spanish
+
 */
 
 MooTools.lang.set('es-ES', 'Date', {

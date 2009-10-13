@@ -8,6 +8,10 @@ Script: Date.English.GB.js
 	Authors:
 		Aaron Newton
 
+@requires Lang Date
+
+@provides Date.English.GB
+
 */
 
 MooTools.lang.set('en-GB', 'Date', {

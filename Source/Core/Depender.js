@@ -7,6 +7,12 @@ Script: Depender.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Element.Events Request.JSON
+@requires MooTools.More Log
+
+@provides Depender
+
 */
 
 var Depender = {

@@ -7,7 +7,11 @@ Script: Form.Validator.German.CH.js
  
 	Authors: 
 		Michael van der Weg
- 
+
+@requires Lang Form.Validator.German
+
+@provides Form.Validator.German.CH
+
 */
  
 MooTools.lang.set('de-CH', 'Form.Validator', {

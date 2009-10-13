@@ -8,6 +8,10 @@ Script: Form.Validator.Portuguese.BR.js
 	Authors:
 		Fábio Miranda Costa
 
+@requires Lang Form.ValidatorPortuguese
+
+@provides Form.Validator.Portuguese.BR
+
 */
 
 MooTools.lang.set('pt-BR', 'Form.Validator', {

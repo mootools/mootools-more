@@ -8,6 +8,12 @@ Script: Hash.Cookie.js
 	Authors:
 		Valerio Proietti
 		Aaron Newton
+
+@requires core/1.2.4: Cookie JSON
+@requires MooTools.More
+
+@provides Hash.Cookie
+
 */
 
 Hash.Cookie = new Class({

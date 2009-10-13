@@ -8,6 +8,10 @@ Script: Date.Polish.js
 	Authors:
 		Oskar Krawczyk
 
+@requires Lang Date
+
+@provides Date.Polish
+
 */
 
 MooTools.lang.set('pl-PL', 'Date', {

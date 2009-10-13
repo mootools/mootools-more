@@ -9,6 +9,10 @@ Script: Form.Validator.French.js
 		Miquel Hudin
 		Nicolas Sorosac <nicolas <dot> sorosac <at> gmail <dot> com>
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.French
+
 */
  
 MooTools.lang.set('fr-FR', 'Form.Validator', {

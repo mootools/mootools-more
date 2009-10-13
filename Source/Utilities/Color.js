@@ -7,6 +7,10 @@ Script: Color.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Array String Number Hash Function $util
+
+@provides Color
 */
 
 var Color = new Native({

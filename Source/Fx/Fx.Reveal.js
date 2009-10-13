@@ -8,6 +8,11 @@ Script: Fx.Reveal.js
 	Authors:
 		Aaron Newton
 
+@requires core/1.2.4: Fx.Morph
+@requires Element.Shortcuts Element.Measure
+
+@provides Fx.Reveal
+
 */
 
 Fx.Reveal = new Class({

@@ -7,6 +7,11 @@ Script: Scroller.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Events Options Element.Event Element.Dimensions
+
+@provides Scroller
+
 */
 
 var Scroller = new Class({

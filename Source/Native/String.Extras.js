@@ -9,6 +9,11 @@ Script: String.Extras.js
 		Aaron Newton
 		Guillermo Rauch
 
+@requires core/1.2.4: String Array
+@requires Hash.Extras
+
+@provides Date
+
 */
 
 (function(){

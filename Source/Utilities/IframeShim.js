@@ -7,6 +7,12 @@ Script: IframeShim.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Element.Event Element.Style Options Events
+@requires Element.Position Class.Occlude
+
+@provides IframeShim
+
 */
 
 var IframeShim = new Class({

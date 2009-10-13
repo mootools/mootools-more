@@ -7,6 +7,12 @@ Script: Fx.Scroll.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Fx Element.Event Element.Dimensions
+@requires MooTools.More
+
+@provides Fx.Scroll
+
 */
 
 Fx.Scroll = new Class({

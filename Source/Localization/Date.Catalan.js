@@ -8,6 +8,10 @@ Script: Date.Catalan.US.js
 	Authors:
 		Alfons Sanchez
 
+@requires Lang Date
+
+@provides Date.Catalan
+
 */
 
 MooTools.lang.set('ca-CA', 'Date', {

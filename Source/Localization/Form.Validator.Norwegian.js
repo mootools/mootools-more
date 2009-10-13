@@ -8,6 +8,10 @@ Script: Form.Validator.Norwegian.js
 	Authors:
 		Espen 'Rexxars' Hovlandsdal
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Norwegian
+
 */
 
 MooTools.lang.set('no-NO', 'Form.Validator', {

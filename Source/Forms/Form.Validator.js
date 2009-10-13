@@ -7,6 +7,12 @@ Script: Form.Validator.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Options Events Selectors Element.Event Element.Style JSON
+@requires Lang Class.Binds Date Element.Forms Form.Validator.English Element.Shortcuts
+
+@provides Form.Validator InputValidator FormValidator.BaseValidators
+
 */
 if (!window.Form) window.Form = {};
 

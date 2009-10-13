@@ -8,6 +8,10 @@ Script: Form.Validator.Arabic.js
 	Authors:
 		Chafik Barbar
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Arabic
+
 */
 
 MooTools.lang.set('ar', 'Form.Validator', {

@@ -8,6 +8,10 @@ Script: Form.Validator.Spanish.js
 	Authors:
 		Ãlfons Sanchez
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Spanish
+
 */
 
 MooTools.lang.set('es-ES', 'Form.Validator', {

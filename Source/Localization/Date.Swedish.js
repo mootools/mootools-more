@@ -8,6 +8,10 @@ Script: Date.Swedish.js
 	Authors:
 		Martin Lundgren
 
+@requires Lang Date
+
+@provides Date.Swedish
+
 */
 
 MooTools.lang.set('sv-SE', 'Date', {

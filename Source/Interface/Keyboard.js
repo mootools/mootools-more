@@ -10,6 +10,12 @@ Script: Keyboard.js
 		Perrin Westrich
 		Aaron Newton
 		Scott Kyle
+
+@requires core/1.2.4: Events Options Element.Event
+@requires Log
+
+@provides Keyboard
+
 */
 
 (function(){

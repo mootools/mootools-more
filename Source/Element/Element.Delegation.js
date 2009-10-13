@@ -13,6 +13,11 @@ Script: Element.Delegation.js
 		Aaron Newton
 		Daniel Steigerwald
 
+@requires core/1.2.4: Element.Event Selectors
+@requires MooTools.More
+
+@provides Element.Delegation
+
 */
 (function(){
 	

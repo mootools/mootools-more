@@ -8,6 +8,11 @@ Script: Element.Shortcuts.js
 	Authors:
 		Aaron Newton
 
+@requires core/1.2.4: Element.Style
+@requires MooTools.More
+
+@provides Element.Shortcuts
+
 */
 
 Element.implement({
@@ -17,7 +22,8 @@ Element.implement({
 	},
 
 	isVisible: function(){
-		var w = this.offsetWidth, h = this.offsetHeight;
+		var w = this.offsetWidth,
+			h = this.offsetHeight;
 		return (w == 0 && h == 0) ? false : (w > 0 && h > 0) ? true : this.isDisplayed();
 	},
 

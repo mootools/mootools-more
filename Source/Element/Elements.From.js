@@ -8,6 +8,11 @@ Script: Elements.From.js
 	Authors:
 		Aaron Newton
 
+@requires core/1.2.4: Element
+@requires MooTools.More
+
+@provides Elements.from
+
 */
 
 Elements.from = function(text, excludeScripts){

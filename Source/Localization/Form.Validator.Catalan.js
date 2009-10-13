@@ -9,6 +9,10 @@ Script: Form.Validator.Catalan.js
 		Miquel Hudin
 		Alfons Sanchez
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Catalan
+
 */
 
 MooTools.lang.set('ca-CA', 'Form.Validator', {

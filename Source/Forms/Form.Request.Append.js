@@ -9,6 +9,10 @@ License:
 Authors:
 	Aaron Newton
 
+@requires Form.Request Fx.Reveal Elements.from
+
+@provides Form.Request.Append
+
 */
 
 Form.Request.Append = new Class({

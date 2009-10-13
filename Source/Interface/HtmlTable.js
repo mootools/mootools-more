@@ -7,6 +7,12 @@ Script: HtmlTable.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Options Events
+@requires Class.Occlude
+
+@provides HtmlTable
+
 */
 
 var HtmlTable = new Class({

@@ -8,6 +8,11 @@ Script: Fx.Move.js
 	Authors:
 		Aaron Newton
 
+@requires core/1.2.4: Fx.Morph
+@requires Element.Position
+
+@provides Fx.Move
+
 */
 
 Fx.Move = new Class({

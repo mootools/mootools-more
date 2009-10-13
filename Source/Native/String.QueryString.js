@@ -7,6 +7,12 @@ Script: String.QueryString.js
 
 	Authors:
 		Sebastian Markbåge, Aaron Newton, Lennart Pilon, Valerio Proietti
+
+@requires core/1.2.4: Array String
+@requires MooTools.More
+
+@provides String.QueryString
+
 */
 
 String.implement({

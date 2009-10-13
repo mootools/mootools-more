@@ -7,6 +7,12 @@ Script: Class.Occlude.js
 
 	Authors:
 		Aaron Newton
+
+@requires core/1.2.4: Class Element
+@requires MooTools.More
+
+@provides Class.Occlude
+
 */
 
 Class.Occlude = new Class({

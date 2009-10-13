@@ -8,6 +8,10 @@ Script: Array.Extras.js
 	Authors:
 		Christoph Pojer
 
+@requires core/1.2.4: Array
+
+@provides Array.Extras
+
 */
 Array.implement({
 

@@ -7,6 +7,11 @@ Script: Form.Validator.Extras.js
 
 	Authors:
 		Aaron Newton
+
+@requires Form.Validator
+
+@provides Form.Validator.Extras
+
 */
 Form.Validator.addAllThese([
 

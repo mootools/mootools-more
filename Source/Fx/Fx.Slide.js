@@ -7,6 +7,12 @@ Script: Fx.Slide.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Fx Element.Style
+@requires MooTools.More
+
+@provides Fx.Slide
+
 */
 
 Fx.Slide = new Class({

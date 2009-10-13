@@ -12,6 +12,11 @@ Script: Element.Measure.js
 	Authors:
 		Aaron Newton
 
+@requires core/1.2.4: Element.Style Element.Dimensions
+@requires MooTools.More
+
+@provides Element.Measure
+
 */
 
 Element.implement({

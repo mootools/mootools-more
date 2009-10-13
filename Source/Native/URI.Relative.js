@@ -7,6 +7,12 @@ Script: URI.Relative.js
 
 	Authors:
 		Sebastian Markbåge
+
+
+@requires Class.refactor URI
+
+@provides URI.Relative
+
 */
 
 URI = Class.refactor(URI, {

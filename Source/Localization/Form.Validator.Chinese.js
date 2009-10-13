@@ -8,6 +8,10 @@ Script: Form.Validator.Chinese.js
 	Authors:
 		陈桂军 - guidy <at> ixuer [dot] net
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Chinese
+
 In Chinese:
 ------------
 需要指出的是：

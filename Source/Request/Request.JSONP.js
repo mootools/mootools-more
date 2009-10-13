@@ -8,6 +8,12 @@ Script: Request.JSONP.js
 	Authors:
 		Aaron Newton
 		Guillermo Rauch
+
+@requires core/1.2.4: Element Request
+@requires Log
+
+@provides Request.JSONP
+
 */
 
 Request.JSONP = new Class({

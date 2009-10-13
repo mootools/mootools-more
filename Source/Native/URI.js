@@ -7,6 +7,12 @@ Script: URI.js
 
 	Authors:
 		Sebastian Markbåge, Aaron Newton
+
+@requires core/1.2.4: Selectors
+@requires String.QueryString
+
+@provides URI
+
 */
 
 var URI = new Class({

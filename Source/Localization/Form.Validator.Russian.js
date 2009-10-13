@@ -8,6 +8,10 @@ Script: Form.Validator.Russian.js
 	Authors:
 		Chernodarov Egor
 
+@requires Lang Form.Validator
+
+@provides Form.Validator.Russian
+
 */
 
 MooTools.lang.set('ru-RU-unicode', 'Form.Validator', {

@@ -7,6 +7,12 @@ Script: Assets.js
 
 	Authors:
 		Valerio Proietti
+
+@requires core/1.2.4: Element.Event
+@requires MooTools.More
+
+@provides Assets
+
 */
 
 var Asset = {

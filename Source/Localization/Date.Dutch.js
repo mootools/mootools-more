@@ -8,6 +8,10 @@ Script: Date.Dutch.js
 	Authors:
 		Lennart Pilon
 
+@requires Lang Date
+
+@provides Date.Dutch
+
 */
 
 MooTools.lang.set('nl-NL', 'Date', {

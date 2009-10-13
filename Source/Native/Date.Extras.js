@@ -9,6 +9,10 @@ Script: Date.Extras.js
 		Aaron Newton
 		Scott Kyle
 
+@requires Date
+
+@provides Date.Extras
+
 */
 
 Date.implement({

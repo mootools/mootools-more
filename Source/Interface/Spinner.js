@@ -2,12 +2,18 @@
 Script: Spinner.js
 	Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.
 
-		License:
-			MIT-style license.
+	License:
+		MIT-style license.
 
-		Authors:
-			Aaron Newton
-	*/
+	Authors:
+		Aaron Newton
+
+@requires core/1.2.4: Fx.Tween
+@requires Class.refactor Mask
+
+@provides Spinner
+
+*/
 
 var Spinner = new Class({
 
