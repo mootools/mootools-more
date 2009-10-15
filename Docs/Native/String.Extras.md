@@ -81,7 +81,37 @@ Removes non-ascii characters and converts them to their most appropriate ascii c
 
 * (*string*) a string without any non-ascii characters.
 
+String Method: getTags {#String:getTags}
+-------------------------------------
 
+Get all the HTML tags from a given string.
+
+### Syntax
+
+	myString.getTags([tag, contents]);
+
+### Arguments
+
+1. tag - (*string*; optional) if defined, returns the tags of the specified type in an array. If not defined, returns all tags in an array.
+2. contents - (*boolean*; optional) if *true*, you are returned an array of tag matches and their contents.
+
+### Example
+
+	var html = "<b>This is a string with <i>html</i> in it.</b>"
+	var tags = html.getTags();
+	//returns ["<b>", "<i>", "</i>", "</b>"]
+	var italics = html.getTags('i');
+	//returns ["<i>", "</i>"]
+	var italicsWithContent = html.getTags('i', true);
+	//returns ["<i>html</i>"]
+
+### Returns
+
+* (*array*) An array of strings for each matched tag (important note: NOT *elements*, *strings*)
+
+### Note
+
+Currently, you cannot ask for all tags with their content. If you want the inner content of tags, you must specify the tag type.
 
 
 String Method: stripTags {#String:stripTags}
@@ -91,17 +121,26 @@ Remove all html tags from a string.
 
 ### Syntax
 
-	myString.stripTags();
+	myString.stripTags([tag, contents]);
+
+### Arguments
+
+1. tag - (*string*; optional) if defined, returns the tags of the specified type in an array. If not defined, returns all tags in an array.
+2. contents - (*boolean*; optional) if *true*, you are returned an array of tag matches and their contents.
 
 ### Example
 
 	var html = "<b>This is a string with <i>html</i> in it.</b>"
 	var noHtml = html.stripTags();
 	//returns "This is a string with html in it."
+	var noItalics = html.stripTags('i');
+	//returns "<b>This is a string with html in it.</b>"
+	var noItalicsContent = html.stripTags('i', true);
+	returns "<b>This is a string with  in it.</b>"
 
 ### Returns
 
-* (*string*) a string without any HTML tags
+* (*string*) a string with the appropriate HTML stripped
 
 String Method: tidy {#String:tidy}
 ----------------------------------

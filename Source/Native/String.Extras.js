@@ -9,11 +9,6 @@ Script: String.Extras.js
 		Aaron Newton
 		Guillermo Rauch
 
-@requires core/1.2.4: String Array
-@requires Hash.Extras
-
-@provides Date
-
 */
 
 (function(){
@@ -31,6 +26,13 @@ var tidymap = {
 	"\u2013": "-",
 	"\u2014": "--",
 	"\uFFFD": "&raquo;"
+};
+
+var getRegForTag = function(tag, contents) {
+	tag = tag || '';
+	var regstr = contents ? "<" + tag + "[^>]*>([\\s\\S]*?)<\/" + tag + ">" : "<\/?" + tag + "([^>]+)?>";
+	reg = new RegExp(regstr, "gi");
+	return reg;
 };
 
 String.implement({
@@ -55,8 +57,12 @@ String.implement({
 		return pad.substr(0, (pad.length / 2).floor()) + this + pad.substr(0, (pad.length / 2).ceil());
 	},
 
-	stripTags: function(){
-		return this.replace(/<\/?[^>]+>/gi, '');
+	getTags: function(tag, contents){
+		return this.match(getRegForTag(tag, contents)) || [];
+	},
+
+	stripTags: function(tag, contents){
+		return this.replace(getRegForTag(tag, contents), '');
 	},
 
 	tidy: function(){
