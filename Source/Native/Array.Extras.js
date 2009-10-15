@@ -1,17 +1,21 @@
 /*
-Script: Array.Extras.js
-	Extends the Array native object to include useful methods to work with arrays.
+---
 
-	License:
-		MIT-style license.
+script: Array.Extras.js
 
-	Authors:
-		Christoph Pojer
+description: Extends the Array native object to include useful methods to work with arrays.
 
-@requires core/1.2.4: Array
+license: MIT-style license
 
-@provides Array.Extras
+authors:
+- Christoph Pojer
 
+requires:
+- core:1.2.4/Array
+
+provides: [Array.Extras]
+
+...
 */
 Array.implement({
 

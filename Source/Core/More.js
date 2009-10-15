@@ -1,19 +1,23 @@
 /*
-Script: More.js
-	MooTools More
+---
 
-	License:
-		MIT-style license.
+script: More.js
 
-	Authors:
-		Guillermo Rauch
-		Thomas Aylott
-		Scott Kyle
+description: MooTools More
 
-@requires core/1.2.4: MooTools
+license: MIT-style license
 
-@provides MooTools.More
+authors:
+- Guillermo Rauch
+- Thomas Aylott
+- Scott Kyle
 
+requires:
+- core:1.2.4/MooTools
+
+provides: [MooTools.More]
+
+...
 */
 
 MooTools.More = {

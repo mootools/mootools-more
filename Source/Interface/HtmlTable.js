@@ -1,18 +1,23 @@
 /*
-Script: HtmlTable.js
-	Builds table elements with methods to add rows.
+---
 
-	License:
-		MIT-style license.
+script: HtmlTable.js
 
-	Authors:
-		Aaron Newton
+description: Builds table elements with methods to add rows.
 
-@requires core/1.2.4: Options Events
-@requires Class.Occlude
+license: MIT-style license
 
-@provides HtmlTable
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Options
+- core:1.2.4/Events
+- /Class.Occlude
+
+provides: [HtmlTable]
+
+...
 */
 
 var HtmlTable = new Class({
@@ -90,7 +95,7 @@ var HtmlTable = new Class({
 				type = data.content || data || '',
 				element = document.id(type);
 
-			if(element) td.adopt(element)
+			if(element) td.adopt(element);
 			else td.set('html', type);
 
 			return td;

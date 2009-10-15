@@ -1,18 +1,25 @@
 /*
-Script: IframeShim.js
-	Defines IframeShim, a class for obscuring select lists and flash objects in IE.
+---
 
-	License:
-		MIT-style license.
+script: IframeShim.js
 
-	Authors:
-		Aaron Newton
+description: Defines IframeShim, a class for obscuring select lists and flash objects in IE.
 
-@requires core/1.2.4: Element.Event Element.Style Options Events
-@requires Element.Position Class.Occlude
+license: MIT-style license
 
-@provides IframeShim
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Element.Event
+- core:1.2.4/Element.Style
+- core:1.2.4/Options Events
+- /Element.Position
+- /Class.Occlude
+
+provides: [IframeShim]
+
+...
 */
 
 var IframeShim = new Class({

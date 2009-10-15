@@ -1,14 +1,24 @@
 /*
-Script: String.Extras.js
-	Extends the String native object to include methods useful in managing various kinds of strings (query strings, urls, html, etc).
+---
 
-	License:
-		MIT-style license.
+script: String.Extras.js
 
-	Authors:
-		Aaron Newton
-		Guillermo Rauch
+description: Extends the String native object to include methods useful in managing various kinds of strings (query strings, urls, html, etc).
 
+license: MIT-style license
+
+authors:
+- Aaron Newton
+- Guillermo Rauch
+
+requires:
+- core:1.2.4/String
+- core:1.2.4/$util
+- core:1.2.4/Array
+
+provides: [String.Extras]
+
+...
 */
 
 (function(){

@@ -1,18 +1,22 @@
 /*
-Script: Group.js
-	Class for monitoring collections of events
+---
 
-	License:
-		MIT-style license.
+script: Group.js
 
-	Authors:
-		Valerio Proietti
+description: Class for monitoring collections of events
 
-@requires core/1.2.4: Events
-@requires MooTools.More
+license: MIT-style license
 
-@provides Group
+authors:
+- Valerio Proietti
 
+requires:
+- core:1.2.4/Events
+- /MooTools.More
+
+provides: [Group]
+
+...
 */
 
 var Group = new Class({

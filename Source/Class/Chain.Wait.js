@@ -1,18 +1,24 @@
 /*
-Script: Chain.Wait.js
-	Adds a method to inject pauses between chained events.
+---
 
-	License:
-		MIT-style license.
+script: Chain.Wait.js
 
-	Authors:
-		Aaron Newton
+description: value, Adds a method to inject pauses between chained events.
 
-@requires core/1.2.4: Chain Element Fx
-@requires MooTools.More
+license: MIT-style license.
 
-@provides Chain.Wait
+authors:
+- Aaron Newton
 
+requires: 
+- core:1.2.4/Chain 
+- core:1.2.4/Element
+- core:1.2.4/Fx
+- /MooTools.More
+
+provides: [Chain.Wait]
+
+...
 */
 
 (function(){

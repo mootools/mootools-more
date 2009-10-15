@@ -1,17 +1,24 @@
 /*
-Script: Scroller.js
-	Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries.
+---
 
-	License:
-		MIT-style license.
+script: Scroller.js
 
-	Authors:
-		Valerio Proietti
+description: Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries.
 
-@requires core/1.2.4: Events Options Element.Event Element.Dimensions
+license: MIT-style license
 
-@provides Scroller
+authors:
+- Valerio Proietti
 
+requires:
+- core:1.2.4/Events
+- core:1.2.4/Options
+- core:1.2.4/Element.Event
+- core:1.2.4/Element.Dimensions
+
+provides: [Scroller]
+
+...
 */
 
 var Scroller = new Class({

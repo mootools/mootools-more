@@ -1,18 +1,23 @@
 /*
-Script: Form.Validator.French.js
-  Form.Validator messages in French.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.French.js
 
-	Authors: 
-		Miquel Hudin
-		Nicolas Sorosac <nicolas <dot> sorosac <at> gmail <dot> com>
+description: Form.Validator messages in French.
 
-@requires Lang Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.French
+authors: 
+- Miquel Hudin
+- Nicolas Sorosac <nicolas <dot> sorosac <at> gmail <dot> com>
 
+requires:
+- /Lang
+- /Form.Validator
+
+provides: [Form.Validator.French]
+
+...
 */
  
 MooTools.lang.set('fr-FR', 'Form.Validator', {

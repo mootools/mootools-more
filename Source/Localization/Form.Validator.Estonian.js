@@ -1,17 +1,22 @@
 /*
-Script: Form.Validator.Estonian.js
-	Date messages for Estonian.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.Estonian.js
 
-	Authors:
-		Kevin Valdek
+description: Date messages for Estonian.
 
-@requires Lang Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.Estonian
+authors:
+- Kevin Valdek
 
+requires:
+- /Lang
+- /Form.Validator
+
+provides: [Form.Validator.Estonian]
+
+...
 */
 
 MooTools.lang.set('et-EE', 'Form.Validator', {

@@ -1,17 +1,22 @@
 /*
-Script: Form.Validator.Arabic.js
-	Form.Validator messages in Arabic.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.Arabic.js
 
-	Authors:
-		Chafik Barbar
+description: Form.Validator messages in Arabic.
 
-@requires Lang Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.Arabic
+authors:
+- Chafik Barbar
 
+requires:
+- /Lang
+- /Form.Validator
+
+provides: [Form.Validator.Arabic]
+
+...
 */
 
 MooTools.lang.set('ar', 'Form.Validator', {

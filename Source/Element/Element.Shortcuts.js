@@ -1,18 +1,22 @@
 /*
-Script: Element.Shortcuts.js
-	Extends the Element native object to include some shortcut methods.
+---
 
-	License:
-		MIT-style license.
+script: Element.Shortcuts.js
 
-	Authors:
-		Aaron Newton
+description: Extends the Element native object to include some shortcut methods.
 
-@requires core/1.2.4: Element.Style
-@requires MooTools.More
+license: MIT-style license
 
-@provides Element.Shortcuts
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Element.Style
+- /MooTools.More
+
+provides: [Element.Shortcuts]
+
+...
 */
 
 Element.implement({

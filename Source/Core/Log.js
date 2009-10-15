@@ -1,20 +1,24 @@
 /*
-Script: Log.js
-	Provides basic logging functionality for plugins to implement.
+---
 
-	License:
-		MIT-style license.
+script: Log.js
 
-	Authors:
-		Guillermo Rauch
-		Thomas Aylott
-		Scott Kyle
+description: Provides basic logging functionality for plugins to implement.
 
-@requires core/1.2.4: Class
-@requires MooTools.More
+license: MIT-style license
 
-@provides Log
+authors:
+- Guillermo Rauch
+- Thomas Aylott
+- Scott Kyle
 
+requires:
+- core:1.2.4/Class
+- /MooTools.More
+
+provides: [Log]
+
+...
 */
 
 (function(){

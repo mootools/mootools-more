@@ -1,18 +1,24 @@
 /*
-Script: Element.Pin.js
-	Extends the Element native object to include the pin method useful for fixed positioning for elements.
+---
 
-	License:
-		MIT-style license.
+script: Element.Pin.js
 
-	Authors:
-		Aaron Newton
+description: Extends the Element native object to include the pin method useful for fixed positioning for elements.
 
-@requires core/1.2.4: Element.Event Element.Dimensions Element.Style
-@requires MooTools.More
+license: MIT-style license
 
-@provides Element.Pin
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Element.Event
+- core:1.2.4/Element.Dimensions
+- core:1.2.4/Element.Style
+- /MooTools.More
+
+provides: [Element.Pin]
+
+...
 */
 
 (function(){

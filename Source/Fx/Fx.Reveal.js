@@ -1,18 +1,23 @@
 /*
-Script: Fx.Reveal.js
-	Defines Fx.Reveal, a class that shows and hides elements with a transition.
+---
 
-	License:
-		MIT-style license.
+script: Fx.Reveal.js
 
-	Authors:
-		Aaron Newton
+description: Defines Fx.Reveal, a class that shows and hides elements with a transition.
 
-@requires core/1.2.4: Fx.Morph
-@requires Element.Shortcuts Element.Measure
+license: MIT-style license
 
-@provides Fx.Reveal
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Fx.Morph
+- /Element.Shortcuts
+- /Element.Measure
+
+provides: [Fx.Reveal]
+
+...
 */
 
 Fx.Reveal = new Class({

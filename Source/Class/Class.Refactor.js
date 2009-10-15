@@ -1,18 +1,22 @@
 /*
-Script: Class.Refactor.js
-	Extends a class onto itself with new property, preserving any items attached to the class's namespace.
+---
 
-	License:
-		MIT-style license.
+script: Class.Refactor.js
 
-	Authors:
-		Aaron Newton
+description: Extends a class onto itself with new property, preserving any items attached to the class's namespace.
 
-@requires core/1.2.4: Class
-@requires MooTools.More
+license: MIT-style license
 
-@provides Class.refactor
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Class
+- /MooTools.More
+
+provides: [Class.refactor]
+
+...
 */
 
 Class.refactor = function(original, refactors){

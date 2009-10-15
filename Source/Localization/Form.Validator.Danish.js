@@ -1,17 +1,22 @@
 /*
-	Script: Form.Validator.Danish.js
-		Form.Validator messages for Danish.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.Danish.js
 
-	Authors:
-		Martin Overgaard
+description: Form.Validator messages for Danish.
 
-@requires Lang Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.Danish
+authors:
+- Martin Overgaard
 
+requires:
+- /Lang
+- /Form.Validator
+
+provides: [Form.Validator.Danish]
+
+...
 */
 
 MooTools.lang.set('da-DK', 'Form.Validator', {

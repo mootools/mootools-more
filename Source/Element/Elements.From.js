@@ -1,18 +1,22 @@
 /*
-Script: Elements.From.js
-	Returns a collection of elements from a string of html.
+---
 
-	License:
-		MIT-style license.
+script: Elements.From.js
 
-	Authors:
-		Aaron Newton
+description: Returns a collection of elements from a string of html.
 
-@requires core/1.2.4: Element
-@requires MooTools.More
+license: MIT-style license
 
-@provides Elements.from
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Element
+- /MooTools.More
+
+provides: [Elements.from]
+
+...
 */
 
 Elements.from = function(text, excludeScripts){

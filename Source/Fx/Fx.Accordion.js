@@ -1,18 +1,22 @@
 /*
-Script: Fx.Accordion.js
-	An Fx.Elements extension which allows you to easily create accordion type controls.
+---
 
-	License:
-		MIT-style license.
+script: Fx.Accordion.js
 
-	Authors:
-		Valerio Proietti
+description: An Fx.Elements extension which allows you to easily create accordion type controls.
 
-@requires core/1.2.4: Element.Event
-@requires Fx.Elements
+license: MIT-style license
 
-@provides Fx.Accordion
+authors:
+- Valerio Proietti
 
+requires:
+- core:1.2.4/Element.Event
+- /Fx.Elements
+
+provides: [Fx.Accordion]
+
+...
 */
 
 var Accordion = Fx.Accordion = new Class({

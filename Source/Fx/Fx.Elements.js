@@ -1,18 +1,22 @@
 /*
-Script: Fx.Elements.js
-	Effect to change any number of CSS properties of any number of Elements.
+---
 
-	License:
-		MIT-style license.
+script: Fx.Elements.js
 
-	Authors:
-		Valerio Proietti
+description: Effect to change any number of CSS properties of any number of Elements.
 
-@requires core/1.2.4: Fx.CSS
-@requires MooTools.More
+license: MIT-style license
 
-@provides Fx.Elements
+authors:
+- Valerio Proietti
 
+requires:
+- core:1.2.4/Fx.CSS
+- /MooTools.More
+
+provides: [Fx.Elements]
+
+...
 */
 
 Fx.Elements = new Class({

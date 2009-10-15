@@ -1,22 +1,26 @@
 /*
-Script: Element.Measure.js
-	Extends the Element native object to include methods useful in measuring dimensions.
+---
 
-	Element.measure / .expose methods by Daniel Steigerwald
-	License: MIT-style license.
-	Copyright: Copyright (c) 2008 Daniel Steigerwald, daniel.steigerwald.cz
+script: Element.Measure.js
 
-	License:
-		MIT-style license.
+description: Extends the Element native object to include methods useful in measuring dimensions.
 
-	Authors:
-		Aaron Newton
+credits:
+- Element.measure / .expose methods by Daniel Steigerwald  License: MIT-style license. Copyright: Copyright (c) 2008 Daniel Steigerwald, daniel.steigerwald.cz
 
-@requires core/1.2.4: Element.Style Element.Dimensions
-@requires MooTools.More
+license: MIT-style license
 
-@provides Element.Measure
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Element.Style
+- core:1.2.4/Element.Dimensions
+- /MooTools.More
+
+provides: [Element.Measure]
+
+...
 */
 
 Element.implement({

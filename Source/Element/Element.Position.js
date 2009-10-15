@@ -1,18 +1,22 @@
 /*
-Script: Element.Position.js
-	Extends the Element native object to include methods useful positioning elements relative to others.
+---
 
-	License:
-		MIT-style license.
+script: Element.Position.js
 
-	Authors:
-		Aaron Newton
+description: Extends the Element native object to include methods useful positioning elements relative to others.
 
-@requires core/1.2.4: Element.Dimensions
-@requires Element.Measure
+license: MIT-style license
 
-@provides Elements.Position
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Element.Dimensions
+- /Element.Measure
+
+provides: [Elements.Position]
+
+...
 */
 
 (function(){

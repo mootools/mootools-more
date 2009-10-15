@@ -1,19 +1,24 @@
 /*
-Script: Request.JSONP.js
-	Defines Request.JSONP, a class for cross domain javascript via script injection.
+---
 
-	License:
-		MIT-style license.
+script: Request.JSONP.js
 
-	Authors:
-		Aaron Newton
-		Guillermo Rauch
+description: Defines Request.JSONP, a class for cross domain javascript via script injection.
 
-@requires core/1.2.4: Element Request
-@requires Log
+license: MIT-style license
 
-@provides Request.JSONP
+authors:
+- Aaron Newton
+- Guillermo Rauch
 
+requires:
+- core:1.2.4/Element
+- core:1.2.4/Request
+- /Log
+
+provides: [Request.JSONP]
+
+...
 */
 
 Request.JSONP = new Class({

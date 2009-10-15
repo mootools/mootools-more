@@ -1,23 +1,28 @@
 /*
-Script: Element.Delegation.js
-	Extends the Element native object to include the delegate method for more efficient event management.
+---
+
+script: Element.Delegation.js
+
+description: Extends the Element native object to include the delegate method for more efficient event management.
 
 	Event checking based on the work of Daniel Steigerwald.
 	License: MIT-style license.
 	Copyright: Copyright (c) 2008 Daniel Steigerwald, daniel.steigerwald.cz
 
-	License:
-		MIT-style license.
+license: MIT-style license
 
-	Authors:
-		Aaron Newton
-		Daniel Steigerwald
+authors:
+- Aaron Newton
+- Daniel Steigerwald
 
-@requires core/1.2.4: Element.Event Selectors
-@requires MooTools.More
+requires:
+- core:1.2.4/Element.Event
+- core:1.2.4/Selectors
+- /MooTools.More
 
-@provides Element.Delegation
+provides: [Element.Delegation]
 
+...
 */
 (function(){
 	

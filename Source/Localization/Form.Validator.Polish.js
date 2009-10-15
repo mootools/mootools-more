@@ -1,17 +1,22 @@
 /*
-Script: Form.Validator.Polish.js
-	Date messages for Polish.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.Polish.js
 
-	Authors:
-		Oskar Krawczyk
+description: Date messages for Polish.
 
-@requires Lang Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.Polish
+authors:
+- Oskar Krawczyk
 
+requires:
+- /Lang
+- /Form.Validator
+
+provides: [Form.Validator.Polish]
+
+...
 */
 
 MooTools.lang.set('pl-PL', 'Form.Validator', {

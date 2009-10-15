@@ -1,19 +1,24 @@
 /*
-Script: Date.German.js
-	Date messages for German.
+---
 
-	License:
-		MIT-style license.
+script: Date.German.js
 
-	Authors:
-		Christoph Pojer
-		Frank Rossi
-		Ulrich Petri
+description: Date messages for German.
 
-@requires Lang Date
+license: MIT-style license
 
-@provides Date.German
+authors:
+- Christoph Pojer
+- Frank Rossi
+- Ulrich Petri
 
+requires:
+- /Lang
+- /Date
+
+provides: [Date.German]
+
+...
 */
 
 MooTools.lang.set('de-DE', 'Date', {

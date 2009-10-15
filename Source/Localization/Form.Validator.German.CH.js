@@ -1,17 +1,22 @@
 /*
-Script: Form.Validator.German.CH.js
-	Date messages for German (Switzerland).
+---
+
+script: Form.Validator.German.CH.js
+
+description: Date messages for German (Switzerland).
  
-	License:
-		MIT-style license.
+license: MIT-style license
  
-	Authors: 
-		Michael van der Weg
+authors:
+- Michael van der Weg
 
-@requires Lang Form.Validator.German
+requires:
+- /Lang
+- /Form.Validator.German
 
-@provides Form.Validator.German.CH
+provides: [Form.Validator.German.CH]
 
+...
 */
  
 MooTools.lang.set('de-CH', 'Form.Validator', {

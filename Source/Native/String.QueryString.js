@@ -1,18 +1,23 @@
 /*
-Script: String.QueryString.js
-	...
+---
 
-	License:
-		MIT-style license.
+script: String.QueryString.js
 
-	Authors:
-		Sebastian Markbåge, Aaron Newton, Lennart Pilon, Valerio Proietti
+description: Methods for dealing with URI query strings.
 
-@requires core/1.2.4: Array String
-@requires MooTools.More
+license: MIT-style license
 
-@provides String.QueryString
+authors:
+- Sebastian Markbåge, Aaron Newton, Lennart Pilon, Valerio Proietti
 
+requires:
+- core:1.2.4/Array
+- core:1.2.4/String
+- /MooTools.More
+
+provides: [String.QueryString]
+
+...
 */
 
 String.implement({

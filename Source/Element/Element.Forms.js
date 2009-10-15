@@ -1,18 +1,22 @@
 /*
-Script: Element.Forms.js
-	Extends the Element native object to include methods useful in managing inputs.
+---
 
-	License:
-		MIT-style license.
+script: Element.Forms.js
 
-	Authors:
-		Aaron Newton
+description: Extends the Element native object to include methods useful in managing inputs.
 
-@requires core/1.2.4: Element
-@requires MooTools.More
+license: MIT-style license
 
-@provides Element.Forms
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Element
+- /MooTools.More
+
+provides: [Element.Forms]
+
+...
 */
 
 Element.implement({

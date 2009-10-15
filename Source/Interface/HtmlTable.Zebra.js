@@ -1,18 +1,23 @@
 /*
-Script: HtmlTable.Zebra.js
-	Builds a stripy table with methods to add rows.
+---
 
-	License:
-		MIT-style license.
+script: HtmlTable.Zebra.js
 
-	Authors:
-		Harald Kirschner
-		Aaron Newton
+description: Builds a stripy table with methods to add rows.
 
-@requires HtmlTable Class.refactor
+license: MIT-style license
 
-@provides HtmlTable.Zebra
+authors:
+- Harald Kirschner
+- Aaron Newton
 
+requires:
+- /HtmlTable
+- /Class.refactor
+
+provides: [HtmlTable.Zebra]
+
+...
 */
 
 HtmlTable = Class.refactor(HtmlTable, {

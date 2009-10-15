@@ -1,17 +1,22 @@
 /*
-Script: Form.Validator.English.js
-	Date messages for English.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.English.js
 
-	Authors:
-		Aaron Newton
+description: Date messages for English.
 
-@requires Lang Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.English
+authors:
+- Aaron Newton
 
+requires:
+- /Lang
+- /Form.Validator
+
+provides: [Form.Validator.English]
+
+...
 */
 
 MooTools.lang.set('en-US', 'Form.Validator', {

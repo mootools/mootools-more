@@ -1,18 +1,30 @@
 /*
-Script: Form.Validator.js
-	A css-class based form validation system.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.js
 
-	Authors:
-		Aaron Newton
+description: A css-class based form validation system.
 
-@requires core/1.2.4: Options Events Selectors Element.Event Element.Style JSON
-@requires Lang Class.Binds Date Element.Forms Form.Validator.English Element.Shortcuts
+license: MIT-style license
 
-@provides Form.Validator InputValidator FormValidator.BaseValidators
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Options
+- core:1.2.4/Events
+- core:1.2.4/Selectors
+- core:1.2.4/Element.Event
+- core:1.2.4/Element.Style
+- core:1.2.4/JSON
+- /Lang- /Class.Binds
+- /Date Element.Forms
+- /Form.Validator.English
+- /Element.Shortcuts
+
+provides: [Form.Validator, InputValidator, FormValidator.BaseValidators]
+
+...
 */
 if (!window.Form) window.Form = {};
 

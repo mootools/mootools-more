@@ -1,17 +1,22 @@
 /*
-Script: Date.English.GB.js
-	Date messages for British English.
+---
 
-	License:
-		MIT-style license.
+script: Date.English.GB.js
 
-	Authors:
-		Aaron Newton
+description: Date messages for British English.
 
-@requires Lang Date
+license: MIT-style license
 
-@provides Date.English.GB
+authors:
+- Aaron Newton
 
+requires:
+- /Lang
+- /Date
+
+provides: [Date.English.GB]
+
+...
 */
 
 MooTools.lang.set('en-GB', 'Date', {

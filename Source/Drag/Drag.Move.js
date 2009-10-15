@@ -1,22 +1,26 @@
 /*
-Script: Drag.Move.js
-	A Drag extension that provides support for the constraining of draggables to containers and droppables.
+---
 
-	License:
-		MIT-style license.
+script: Drag.Move.js
 
-	Authors:
-		Valerio Proietti
-		Tom Occhinno
-		Jan Kassens
-		Aaron Newton
-		Scott Kyle
+description: A Drag extension that provides support for the constraining of draggables to containers and droppables.
 
-@requires core/1.2.4: Element.Dimensions
-@requires Drag
+license: MIT-style license
 
-@provides Drag.Move
+authors:
+- Valerio Proietti
+- Tom Occhinno
+- Jan Kassens
+- Aaron Newton
+- Scott Kyle
 
+requires:
+- core:1.2.4/Element.Dimensions
+- /Drag
+
+provides: [Drag.Move]
+
+...
 */
 
 Drag.Move = new Class({

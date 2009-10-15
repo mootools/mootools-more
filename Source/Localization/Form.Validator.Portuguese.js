@@ -1,17 +1,22 @@
 /*
-Script: Form.Validator.Portuguese.js
-	Form.Validator messages in Portuguese.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.Portuguese.js
 
-	Authors:
-		Miquel Hudin
+description: Form.Validator messages in Portuguese.
 
-@requires Lang Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.Portuguese
+authors:
+- Miquel Hudin
 
+requires:
+- /Lang
+- /Form.Validator
+
+provides: [Form.Validator.Portuguese]
+
+...
 */
 
 MooTools.lang.set('pt-PT', 'Form.Validator', {

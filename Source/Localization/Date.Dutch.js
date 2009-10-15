@@ -1,17 +1,22 @@
 /*
-Script: Date.Dutch.js
-	Date messages in Dutch.
+---
 
-	License:
-		MIT-style license.
+script: Date.Dutch.js
 
-	Authors:
-		Lennart Pilon
+description: Date messages in Dutch.
 
-@requires Lang Date
+license: MIT-style license
 
-@provides Date.Dutch
+authors:
+- Lennart Pilon
 
+requires:
+- /Lang
+- /Date
+
+provides: [Date.Dutch]
+
+...
 */
 
 MooTools.lang.set('nl-NL', 'Date', {

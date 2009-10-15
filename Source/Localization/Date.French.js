@@ -1,18 +1,23 @@
 /*
-Script: Date.French.js
-	Date messages in French.
+---
 
-	License:
-		MIT Style License
+script: Date.French.js
 
-	Authors:
-		Nicolas Sorosac
-		Antoine Abt
+description: Date messages in French.
 
-@requires Lang Date
+license: MIT-style license
 
-@provides Date.French
+authors:
+- Nicolas Sorosac
+- Antoine Abt
 
+requires:
+- /Lang
+- /Date
+
+provides: [Date.French]
+
+...
 */
  
 MooTools.lang.set('fr-FR', 'Date', {

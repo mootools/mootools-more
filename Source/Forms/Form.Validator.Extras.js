@@ -1,17 +1,21 @@
 /*
-Script: Form.Validator.Extras.js
-	Additional validators for the Form.Validator class.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.Extras.js
 
-	Authors:
-		Aaron Newton
+description: Additional validators for the Form.Validator class.
 
-@requires Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.Extras
+authors:
+- Aaron Newton
 
+requires:
+- /Form.Validator
+
+provides: [Form.Validator.Extras]
+
+...
 */
 Form.Validator.addAllThese([
 

@@ -1,18 +1,25 @@
 /*
-Script: HtmlTable.Select.js
-	Builds a stripy, sortable table with methods to add rows. Rows can be selected with the mouse or keyboard navigation.
+---
 
-	License:
-		MIT-style license.
+script: HtmlTable.Select.js
 
-	Authors:
-		Harald Kirschner
-		Aaron Newton
+description: Builds a stripy, sortable table with methods to add rows. Rows can be selected with the mouse or keyboard navigation.
 
-@requires Keyboard HtmlTable Class.refactor Element.Delegation
+license: MIT-style license
 
-@provides HtmlTable.Select
+authors:
+- Harald Kirschner
+- Aaron Newton
 
+requires:
+- /Keyboard
+- /HtmlTable
+- /Class.refactor
+- /Element.Delegation
+
+provides: [HtmlTable.Select]
+
+...
 */
 
 HtmlTable = Class.refactor(HtmlTable, {

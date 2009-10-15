@@ -1,18 +1,26 @@
 /*
-Script: Mask.js
-	Creates a mask element to cover another.
+---
 
-	License:
-		MIT-style license.
+script: Mask.js
 
-	Authors:
-		Aaron Newton
+description: Creates a mask element to cover another.
 
-@requires core/1.2.4: Options Events Element.Event
-@requires Class.Binds Element.Position IframeShim
+license: MIT-style license
 
-@provides Mask
+authors:
+- Aaron Newton
 
+requires:
+- core:1.2.4/Options
+- core:1.2.4/Events
+- core:1.2.4/Element.Event
+- /Class.Binds
+- /Element.Position
+- /IframeShim
+
+provides: [Mask]
+
+...
 */
 
 var Mask = new Class({

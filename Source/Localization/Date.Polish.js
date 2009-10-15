@@ -1,17 +1,22 @@
 /*
-Script: Date.Polish.js
-	Date messages for Polish.
+---
 
-	License:
-		MIT-style license.
+script: Date.Polish.js
 
-	Authors:
-		Oskar Krawczyk
+description: Date messages for Polish.
 
-@requires Lang Date
+license: MIT-style license
 
-@provides Date.Polish
+authors:
+- Oskar Krawczyk
 
+requires:
+- /Lang
+- /Date
+
+provides: [Date.Polish]
+
+...
 */
 
 MooTools.lang.set('pl-PL', 'Date', {

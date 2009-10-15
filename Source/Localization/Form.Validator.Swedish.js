@@ -1,17 +1,22 @@
 /*
-Script: Form.Validator.Swedish.js
-	Date messages for Swedish.
+---
 
-	License:
-		MIT-style license.
+script: Form.Validator.Swedish.js
 
-	Authors:
-		Martin Lundgren
+description: Date messages for Swedish.
 
-@requires Lang Form.Validator
+license: MIT-style license
 
-@provides Form.Validator.Swedish
+authors:
+- Martin Lundgren
 
+requires:
+- /Lang
+- /Form.Validator
+
+provides: [Form.Validator.Swedish]
+
+...
 */
 
 MooTools.lang.set('sv-SE', 'Form.Validator', {

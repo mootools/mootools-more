@@ -1,17 +1,22 @@
 /*
-Script: Date.Norwegian.js
-       Date messages in Norwegian.
+---
 
-	License:
-		MIT-style license.
+script: Date.Norwegian.js
 
-	Authors:
-		Espen 'Rexxars' Hovlandsdal
+description: Date messages in Norwegian.
 
-@requires Lang Date
+license: MIT-style license
 
-@provides Date.Norwegian
+authors:
+- Espen 'Rexxars' Hovlandsdal
 
+requires:
+- /Lang
+- /Date
+
+provides: [Date.Norwegian]
+
+...
 */
 
 MooTools.lang.set('no-NO', 'Date', {

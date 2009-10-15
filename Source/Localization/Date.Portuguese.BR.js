@@ -1,17 +1,22 @@
 /*
-Script: Date.Portuguese.BR.js
-	Date messages in Portuguese-BR (Brazil).
+---
 
-	License:
-		MIT-style license.
+script: Date.Portuguese.BR.js
 
-	Authors:
-		Fabio Miranda Costa
+description: Date messages in Portuguese-BR (Brazil).
 
-@requires Lang Date
+license: MIT-style license
 
-@provides Date.Portuguese.BR
+authors:
+- Fabio Miranda Costa
 
+requires:
+- /Lang
+- /Date
+
+provides: [Date.Portuguese.BR]
+
+...
 */
 
 MooTools.lang.set('pt-BR', 'Date', {
