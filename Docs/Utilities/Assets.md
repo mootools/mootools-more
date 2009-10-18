@@ -1,11 +1,11 @@
-Hash: Assets {#Assets}
+Hash: Asset {#Asset}
 =======================
 
 Provides methods for the dynamic loading and management of JavaScript, CSS, and image files.
 
 
 
-Assets Method: javascript {#Assets:javascript}
+Asset Method: javascript {#Asset:javascript}
 ----------------------------------------------
 
 Injects a script tag into the head section of the document, pointing to the src specified.
@@ -34,7 +34,7 @@ Injects a script tag into the head section of the document, pointing to the src 
 
 
 
-Assets Method: css {#Assets:css}
+Asset Method: css {#Asset:css}
 --------------------------------
 
 Injects a css file in the page.
@@ -58,7 +58,7 @@ Injects a css file in the page.
 
 
 
-Assets Method: image {#Assets:image}
+Asset Method: image {#Asset:image}
 ------------------------------------
 
 Preloads an image and returns the img element.
@@ -87,7 +87,7 @@ Preloads an image and returns the img element.
 
 
 
-Assets Method: images {#Assets:images}
+Asset Method: images {#Asset:images}
 --------------------------------------
 
 Preloads an array of images (as strings) and returns an array of img elements. does not inject them to the page.
@@ -103,7 +103,7 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 
 ## Options:
 
-* properties - (*object*) Some additional attributes for all the images (same as the second argument you might bass to *Asset.image*).
+* properties - (*object*) Some additional attributes for all the images (same as the second argument you might pass to *Asset.image*).
 * onComplete/onProgress/onError - (*functions*) See events below.
 
 ### onComplete
