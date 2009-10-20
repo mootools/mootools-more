@@ -35,7 +35,7 @@ Class takes out the need to have logic in key events to check which buttons are 
 		eventType: 'keyup', 
 		events: { 
 			'shift+h': fn1, 
-			'ctrl+shift+h: fn2, 
+			'ctrl+shift+h': fn2, 
 			'shift+ctrl+h': fn3,
 			'h': fn4
 		}
@@ -44,7 +44,7 @@ Class takes out the need to have logic in key events to check which buttons are 
 	var myKeyboardEvents1 = new Keyboard({eventType: 'keydown'});
 	myKeyBoardEvents1.addEvents({
 		'shift+h': fn1,
-		'ctrl+shift+h: fn2,
+		'ctrl+shift+h': fn2,
 		'shift+ctrl+h': fn3,
 		'h': fn4
 	});
