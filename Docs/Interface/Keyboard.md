@@ -35,7 +35,7 @@ Class takes out the need to have logic in key events to check which buttons are 
 		eventType: 'keyup', 
 		events: { 
 			'shift+h': fn1, 
-			'ctrl+shift+h: fn2, 
+			'ctrl+shift+h': fn2, 
 			'shift+ctrl+h': fn3,
 			'h': fn4
 		}
