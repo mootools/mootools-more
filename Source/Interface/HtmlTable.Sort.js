@@ -236,9 +236,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 HtmlTable.Parsers = new Hash({
 
 	'date': {
-		match: /^\d{4}[^\d]|[^\d]\d{4}$/,
+		match: /^\d{2}[-\/ ]\d{2}[-\/ ]\d{2,4}$/,
 		convert: function() {
-			return Date.parse(this.get('text'));
+			return Date.parse(this.get('text').get('db'));
 		},
 		type: 'date'
 	},
