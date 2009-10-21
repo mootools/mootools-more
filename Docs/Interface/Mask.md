@@ -43,6 +43,10 @@ Adds a semi-transparent overlay over a DOM element.
 	var myMask = new Mask();
 	var myMask = new Mask($('myElement'));
 
+### Styles
+
+The mask element is not styled, so if you don't add a css rule in your style sheets, it will be invisible. You can download the default styles here: [mask.css](http://mootools.net/releases/mootools-more-1.2.4.1/Styles/Interface/Mask/mask.css)
+
 Mask Method: toggle {#Mask:toggle}
 --------------------------------------
 
@@ -214,6 +218,7 @@ Retrieves the "build-in"  instance of [Mask][] and calls its *hide* method.
 
 * (*element*) This Element
 
+[Mask]: #Mask
 [Mask.position]: #Mask:position
 [Spinner]: /more/Interface/Spinner
 [Options]: /core/Class/Class.Extras#Options
