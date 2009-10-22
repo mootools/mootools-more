@@ -71,7 +71,6 @@ this.Tips = new Class({
 		return this.tip = new Element('div', {
 			'class': this.options.className,
 			styles: {
-				display: 'none',
 				position: 'absolute',
 				top: 0,
 				left: 0
@@ -132,13 +131,13 @@ this.Tips = new Class({
 		}, this);
 		
 		$clear(this.timer);
-		this.timer = this.show.delay(this.options.showDelay, this, element);
+		this.timer = this.show.delay(this.options.showDelay, this, [this.tip, element]);
 		this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 	},
 
 	elementLeave: function(event, element){
 		$clear(this.timer);
-		this.timer = this.hide.delay(this.options.hideDelay, this, element);
+		this.timer = this.hide.delay(this.options.hideDelay, this, [this.tip, element]);
 		this.fireForParent(event, element);
 	},
 
