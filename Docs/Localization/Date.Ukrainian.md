@@ -9,7 +9,7 @@ Contains the messages for [Date.Extras][] in Ukrainian.
 
 ### Usage
 
-Simply change the language property to *'uk-UA*.
+Simply change the language property to *uk-UA*.
 
 	MooTools.lang.setLanguage("'uk-UA");
 
