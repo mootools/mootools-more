@@ -11,7 +11,7 @@ Contains the messages for [Date.Extras][] in Ukrainian.
 
 Simply change the language property to *uk-UA*.
 
-	MooTools.lang.setLanguage("'uk-UA");
+	MooTools.lang.setLanguage("uk-UA");
 
 See also: [Date.Extras][] and [Lang][]
 
