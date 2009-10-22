@@ -24,7 +24,8 @@ Fx.Slide = new Class({
 	Extends: Fx,
 
 	options: {
-		mode: 'vertical'
+		mode: 'vertical',
+		hideOverflow: true
 	},
 
 	initialize: function(element, options){
@@ -35,8 +36,10 @@ Fx.Slide = new Class({
 		this.element = this.subject = document.id(element);
 		this.parent(options);
 		var wrapper = this.element.retrieve('wrapper');
+		var styles = this.element.getStyles('margin', 'position', 'overflow');
+		if (this.options.hideOverFlow) styles = $extend(styles, {overflow: 'hidden'});
 		this.wrapper = wrapper || new Element('div', {
-			styles: this.element.getStyles('margin', 'position', 'overflow')
+			styles: styles
 		}).wraps(this.element);
 		this.element.store('wrapper', this.wrapper).setStyle('margin', 0);
 		this.now = [];
