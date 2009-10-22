@@ -45,7 +45,7 @@ Fx.Reveal = new Class({
 					this.hiding = true;
 					this.showing = false;
 					this.hidden = true;
-					var before = this.element.style.cssText;
+					this.cssText = this.element.style.cssText;
 					var startStyles = this.element.getComputedSize({
 						styles: this.options.styles,
 						mode: this.options.mode
@@ -64,7 +64,7 @@ Fx.Reveal = new Class({
 							$each(startStyles, function(style, name){
 								startStyles[name] = style;
 							}, this);
-							this.element.style.cssText = before;
+							this.element.style.cssText = this.cssText;
 							this.element.setStyle('display', 'none');
 							if (hideThese) hideThese.setStyle('visibility', 'visible');
 						}
@@ -103,7 +103,7 @@ Fx.Reveal = new Class({
 					this.showing = true;
 					this.hiding = this.hidden =  false;
 					var startStyles;
-					var before = this.element.style.cssText;
+					this.cssText = this.element.style.cssText;
 					//toggle display, but hide it
 					this.element.measure(function(){
 						//create the styles for the opened/visible state
@@ -128,7 +128,6 @@ Fx.Reveal = new Class({
 						display: this.options.display
 					};
 					$each(startStyles, function(style, name){ zero[name] = 0; });
-					var overflowBefore = this.element.getStyle('overflow');
 					//set to zero
 					this.element.setStyles($merge(zero, {overflow: 'hidden'}));
 					//hide inputs
@@ -137,8 +136,7 @@ Fx.Reveal = new Class({
 					//start the effect
 					this.start(startStyles);
 					this.$chain.unshift(function(){
-						// this.element.setStyle('overflow', overflowBefore);
-						this.element.style.cssText = before;
+						this.element.style.cssText = this.cssText;
 						this.element.setStyle('display', this.options.display);
 						if (!this.hidden) this.showing = false;
 						if (hideThese) hideThese.setStyle('visibility', 'visible');
@@ -183,6 +181,7 @@ Fx.Reveal = new Class({
 
 	cancel: function(){
 		this.parent.apply(this, arguments);
+		this.element.style.cssText = this.cssText;
 		this.hidding = false;
 		this.showing = false;
 	}
