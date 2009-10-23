@@ -131,13 +131,13 @@ this.Tips = new Class({
 		}, this);
 		
 		$clear(this.timer);
-		this.timer = this.show.delay(this.options.showDelay, this, [this.tip, element]);
+		this.timer = this.show.delay(this.options.showDelay, this, element);
 		this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 	},
 
 	elementLeave: function(event, element){
 		$clear(this.timer);
-		this.timer = this.hide.delay(this.options.hideDelay, this, [this.tip, element]);
+		this.timer = this.hide.delay(this.options.hideDelay, this, element);
 		this.fireForParent(event, element);
 	},
 
@@ -172,12 +172,12 @@ this.Tips = new Class({
 		else element.adopt(contents);
 	},
 
-	show: function(tip, element){
-		this.fireEvent('show', [tip, element]);
+	show: function(element){
+		this.fireEvent('show', [this.tip, element]);
 	},
 
 	hide: function(element){
-		this.fireEvent('hide', [tip, element]);
+		this.fireEvent('hide', [this.tip, element]);
 	}
 
 });
