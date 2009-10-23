@@ -25,26 +25,24 @@ Tips Method: constructor {#Tips:constructor}
 
 ### Options:
 
-* showDelay     - (*number*: defaults to 100) The delay the show event is fired.
-* hideDelay     - (*number*: defaults to 100) The delay the hide hide is fired.
-* title			- (*string|function*: defaults to title) The property of the element to be used for the tip-title. If this option is a
-					function it will execute it on every element with it passed as the first argument. It uses the return value of this function
-					as the tip-title
-* text			- (*string|function*) Behaves the same as the `title` option but for tip-title. By default it either uses the `rel` or the `href` attribute as tip-text.
-* className     - (*string*: defaults to null) the className your tooltip container will get. Useful for extreme styling.
+* showDelay - (*number*: defaults to 100) The delay the show event is fired.
+* hideDelay - (*number*: defaults to 100) The delay the hide hide is fired.
+* title - (*string|function*: defaults to title) The property of the element to be used for the tip-title. If this option is a function it will execute it on every element with it passed as the first argument. It uses the return value of this function as the tip-title
+* text - (*string|function*) Behaves the same as the `title` option but for tip-title. By default it either uses the `rel` or the `href` attribute as tip-text.
+* className - (*string*: defaults to null) the className your tooltip container will get. Useful for extreme styling.
  * The tooltip element inside the tooltip container above will have 'tip' as classname.
  * The title will have as classname: tip-title
  * The text will have as classname: tip-text
-* offset       - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
-* fixed         - (*boolean*: defaults to false) If set to true, the toolTip will not follow the mouse.
+* offset - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
+* fixed - (*boolean*: defaults to false) If set to true, the toolTip will not follow the mouse.
 
 
 ### Events:
 
-* onShow        - (*function*: defaults to `function(){ this.tip.setStyle('display', 'block'); }`) The default function for the show event, passes the currently hovered element.
-* onHide        - (*function*: defaults to `function(){ this.tip.setStyle('display', 'none'); }`)  The default function for the hide event, passes the currently hovered element.
-* onAttach		- (*function*) Fires when an element gets added to the tips instance. Passes the element as argument.
-* onDetach		- (*function*) Fires when the event listeners get removed from an element. Passes the element as argument.
+* onShow - (*function*: defaults to `function(tip, hovered){ tip.setStyle('display', 'block'); }`) The default function for the show event, passes the tip element and the currently hovered element.
+* onHide - (*function*: defaults to `function(tip, hovered){ tip.setStyle('display', 'none'); }`)  The default function for the hide event, passes the currently hovered element.
+* onAttach - (*function*) Fires when an element gets added to the tips instance. Passes the element as argument.
+* onDetach - (*function*) Fires when the event listeners get removed from an element. Passes the element as argument.
 
 ### Example:
 
