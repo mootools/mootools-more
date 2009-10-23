@@ -172,12 +172,12 @@ this.Tips = new Class({
 		else element.adopt(contents);
 	},
 
-	show: function(element){
-		this.fireEvent('show', [element]);
+	show: function(tip, element){
+		this.fireEvent('show', [tip, element]);
 	},
 
 	hide: function(element){
-		this.fireEvent('hide', [element]);
+		this.fireEvent('hide', [tip, element]);
 	}
 
 });
