@@ -142,11 +142,11 @@ this.Tips = new Class({
 		this.fireForParent(event, element);
 	},
 
-	fireForParent: function(event, element) {
-			parentNode = element.getParent();
-			if (parentNode == document.body) return;
-			if (parentNode.retrieve('tip:enter')) parentNode.fireEvent('mouseenter', event);
-			else return this.fireForParent(parentNode, event);
+	fireForParent: function(event, element){
+		element = element.getParent();
+		if (!element || element == document.body) return;
+		if (element.retrieve('tip:enter')) element.fireEvent('mouseenter', event);
+		else this.fireForParent(event, element);
 	},
 
 	elementMove: function(event, element){
