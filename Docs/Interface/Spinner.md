@@ -31,8 +31,7 @@ Adds a semi-transparent overlay over a DOM element with a 'spinning' ajax icon.
 
 ### Styles
 
-Download the default styles which include css styles and a default spinner image.
-You can also style the layer and its contents by just defining a css styles for the class names specified in the options class name (these default to ".spinner", ".spinner-content", and ".spinner-img"). Default styles can be found in the Styles directory of the MooTools More library on github.
+You can style the layer and its contents by just defining a css style for the class names specified in the options class name (these default to ".spinner", ".spinner-content", and ".spinner-img"). You can download the default styles and spinner image here: [spinner.css](http://mootools.net/releases/mootools-more-1.2.4.1/Styles/Interface/Spinner/spinner.css), [spinner.gif](http://mootools.net/releases/mootools-more-1.2.4.1/Styles/Interface/Spinner/spinner.gif)
 
 ### Events
 

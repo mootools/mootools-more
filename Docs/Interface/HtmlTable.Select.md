@@ -29,8 +29,8 @@ Adds the ability to select rows in a table.
 
 ### Events
 
-* onRowSelect - callback to execute when a row is selected.
-* onRowUnselect - callback to execute when a row is deselected.
+* onRowFocus - callback to execute when a row is selected.
+* onRowUnfocus - callback to execute when a row is deselected.
 
 ### Example
 

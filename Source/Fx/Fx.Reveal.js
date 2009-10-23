@@ -45,18 +45,17 @@ Fx.Reveal = new Class({
 					this.hiding = true;
 					this.showing = false;
 					this.hidden = true;
+					this.cssText = this.element.style.cssText;
 					var startStyles = this.element.getComputedSize({
 						styles: this.options.styles,
 						mode: this.options.mode
 					});
-					var setToAuto = (this.element.style.height === ''||this.element.style.height == 'auto');
 					this.element.setStyle('display', 'block');
 					if (this.options.transitionOpacity) startStyles.opacity = 1;
 					var zero = {};
 					$each(startStyles, function(style, name){
 						zero[name] = [style, 0];
 					}, this);
-					var overflowBefore = this.element.getStyle('overflow');
 					this.element.setStyle('overflow', 'hidden');
 					var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
 					this.$chain.unshift(function(){
@@ -65,11 +64,8 @@ Fx.Reveal = new Class({
 							$each(startStyles, function(style, name){
 								startStyles[name] = style;
 							}, this);
-							this.element.setStyles($merge({display: 'none', overflow: overflowBefore}, startStyles));
-							if (setToAuto){
-								if (['vertical', 'both'].contains(this.options.mode)) this.element.style.height = '';
-								if (['width', 'both'].contains(this.options.mode)) this.element.style.width = '';
-							}
+							this.element.style.cssText = this.cssText;
+							this.element.setStyle('display', 'none');
 							if (hideThese) hideThese.setStyle('visibility', 'visible');
 						}
 						this.fireEvent('hide', this.element);
@@ -106,10 +102,10 @@ Fx.Reveal = new Class({
 					 this.element.getStyle('opacity') == 0){
 					this.showing = true;
 					this.hiding = this.hidden =  false;
-					var setToAuto, startStyles;
+					var startStyles;
+					this.cssText = this.element.style.cssText;
 					//toggle display, but hide it
 					this.element.measure(function(){
-						setToAuto = (this.element.style.height === '' || this.element.style.height == 'auto');
 						//create the styles for the opened/visible state
 						startStyles = this.element.getComputedSize({
 							styles: this.options.styles,
@@ -132,7 +128,6 @@ Fx.Reveal = new Class({
 						display: this.options.display
 					};
 					$each(startStyles, function(style, name){ zero[name] = 0; });
-					var overflowBefore = this.element.getStyle('overflow');
 					//set to zero
 					this.element.setStyles($merge(zero, {overflow: 'hidden'}));
 					//hide inputs
@@ -141,11 +136,8 @@ Fx.Reveal = new Class({
 					//start the effect
 					this.start(startStyles);
 					this.$chain.unshift(function(){
-						this.element.setStyle('overflow', overflowBefore);
-						if (!this.options.heightOverride && setToAuto){
-							if (['vertical', 'both'].contains(this.options.mode)) this.element.style.height = '';
-							if (['width', 'both'].contains(this.options.mode)) this.element.style.width = '';
-						}
+						this.element.style.cssText = this.cssText;
+						this.element.setStyle('display', this.options.display);
 						if (!this.hidden) this.showing = false;
 						if (hideThese) hideThese.setStyle('visibility', 'visible');
 						this.callChain();
@@ -189,6 +181,7 @@ Fx.Reveal = new Class({
 
 	cancel: function(){
 		this.parent.apply(this, arguments);
+		this.element.style.cssText = this.cssText;
 		this.hidding = false;
 		this.showing = false;
 	}

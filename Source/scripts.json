@@ -7,11 +7,6 @@
 			"desc": "Defines MooTools.More.version."
 		},
 
-		"Depender": {
-			"deps": ["More", "Class.Extras", "Element.Event", "Request.JSON", "Log"],
-			"desc": "A stand alone dependency loader for the MooTools library."
-		},
-
 		"Lang": {
 			"deps": ["More", "Class.Extras"],
 			"desc": "Enables classes to contain text that can be localized to specific languages."
@@ -20,6 +15,11 @@
 		"Log": {
 			"deps": ["More", "Class"],
 			"desc": "A default logger for MooTools. Logs to Firebug or a similar console unless it is not present."
+		},
+
+		"Depender": {
+			"deps": ["More", "Class.Extras", "Element.Event", "Request.JSON", "Log"],
+			"desc": "A stand alone dependency loader for the MooTools library."
 		}
 
 	},
@@ -414,6 +414,11 @@
 			"desc": "Date messages in Swedish."
 		},
 
+		"Date.Ukrainian": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Ukrainian."
+		},
+
 		"Form.Validator.Arabic": {
 			"deps": ["Lang"],
 			"desc": "Form.Validator messages in Arabic."
@@ -487,6 +492,11 @@
 		"Form.Validator.Swedish": {
 			"deps": ["Lang"],
 			"desc": "Form.Validator messages in Swedish."
+		},
+
+		"Form.Validator.Ukrainian": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Ukrainian."
 		}
 
 	}

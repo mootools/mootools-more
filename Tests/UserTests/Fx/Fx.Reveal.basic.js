@@ -18,10 +18,6 @@
 				$("foo").show();
 				var effect = new Fx.Reveal($('foo'));
 				effect.dissolve();
-			},
-			post: function(){
-				$('foo').show.delay(1200, $('foo'));
-				return true;
 			}
 		},
 		{
@@ -40,12 +36,21 @@
 			before: function(){
 				$("foo").show();
 				$('foo').dissolve();
-			},
-			post: function(){
-				$('foo').show.delay(1200, $('foo'));
-				return true;
 			}
 		},
+		{
+			title: "Element::reveal in quick succession",
+			description: "Tests the Element.reveal method, calling it twice in a row.",
+			verify: "Did the element reveal smoothly?",
+			before: function(){
+				$("foo").hide();
+				$("foo").reveal();
+				(function(){
+					$('foo').reveal();
+				}).delay(40);
+			}
+		},
+		
 		{
 			title: "Element::nix",
 			description: "Removes an element from the DOM with a transition.",

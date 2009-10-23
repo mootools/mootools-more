@@ -59,7 +59,9 @@ var HtmlTable = new Class({
 		this.tfoot = document.id(this.element.tFoot);
 		if (this.tfoot) this.foot = document.id(this.thead.rows[0]);
 
-		this.options.rows.each(this.push.bind(this));
+		this.options.rows.each(function(row){
+			this.push(row);
+		}, this);
 
 		['adopt', 'inject', 'wraps', 'grab', 'replaces', 'dispose'].each(function(method){
 				this[method] = this.element[method].bind(this.element);
