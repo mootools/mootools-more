@@ -142,10 +142,11 @@ this.Tips = new Class({
 	},
 
 	fireForParent: function(event, element){
-		element = element.getParent();
-		if (!element || element == document.body) return;
-		if (element.retrieve('tip:enter')) element.fireEvent('mouseenter', event);
-		else this.fireForParent(event, element);
+		if (!element) return;
+		parentNode = element.getParent();
+		if (parentNode == document.body) return;
+		if (parentNode.retrieve('tip:enter')) parentNode.fireEvent('mouseenter', event);
+		else this.fireForParent(parentNode, event);
 	},
 
 	elementMove: function(event, element){
@@ -172,11 +173,11 @@ this.Tips = new Class({
 	},
 
 	show: function(element){
-		this.fireEvent('show', [element]);
+		this.fireEvent('show', [this.tip, element]);
 	},
 
 	hide: function(element){
-		this.fireEvent('hide', [element]);
+		this.fireEvent('hide', [this.tip, element]);
 	}
 
 });
