@@ -195,7 +195,7 @@ Adds drag-to-resize behavior to an Element using supplied options.
 [Element:addEvent]: /core/Element/Element.Event/#Element:addEvent
 [Element:makeDraggable]: /more/Drag/Drag.Move/#Element:makeDraggable
 [Events]: /core/Class/Class.Extras#Events
-[Event:prevenDefault]: /core/Native/Event#Event:prevenDefault
+[Event:preventDefault]: /core/Native/Event#Event:prevenDefault
 [Event:stopPropagation]: /core/Native/Event#Event:stopPropagation
 [Chain]: /core/Class/Class.Extras#Chain
 [Options]: /core/Class/Class.Extras#Options
