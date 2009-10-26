@@ -1,8 +1,8 @@
 .spinner {
-	position: 'absolute';
+	position: absolute;
 	opacity: 0.9;
-	filter:alpha(opacity=90);
-	zIndex: 999;
+	filter: alpha(opacity=90);
+	z-index: 999;
 	background: #fff;
 }
 .spinner-msg {
@@ -11,7 +11,7 @@
 }
 
 .spinner-img {
-	background: url('spinner.gif') no-repeat;
+	background: url(spinner.gif) no-repeat;
 	width: 24px;
 	height: 24px;
 	margin: 0 auto;
