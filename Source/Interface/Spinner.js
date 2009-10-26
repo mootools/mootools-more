@@ -108,7 +108,7 @@ var Spinner = new Class({
 			return this;
 		}
 		this.active = true;
-		return this.parent();
+		return this.parent(noFx);
 	},
 
 	hideMask: function(noFx){
