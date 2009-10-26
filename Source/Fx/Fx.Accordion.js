@@ -115,30 +115,27 @@ var Accordion = Fx.Accordion = new Class({
 		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
 		var obj = {};
-		var hideSelf;
 		this.elements.each(function(el, i){
 			obj[i] = {};
 			var hide;
 			if (i != index) {
 				hide = true;
 			} else {
-				if (this.options.alwaysHide && ((el.offsetHeight > 0 && this.options.height) || 
-					el.offsetWidth > 0 && this.options.width)) {
+				if (this.options.alwaysHide && 
+					((el.offsetHeight > 0 && this.options.height) || el.offsetWidth > 0 && this.options.width)) {
 					hide = true;
-					hideSelf = true;
+					this.selfHidden = true;
 				}
 			}
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
 		}, this);
-		this.selfHidden = hideSelf;
 		this.internalChain.chain(function(){
-			if (this.options.returnHeightToAuto && !hideSelf) {
+			if (this.options.returnHeightToAuto && !this.selfHidden) {
 				var el = this.elements[index];
 				if (el) el.setStyle('height', 'auto');
 			};
 		}.bind(this));
-		dbug.log(obj);
 		return useFx ? this.start(obj) : this.set(obj);
 	}
 
