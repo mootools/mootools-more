@@ -103,10 +103,10 @@ var Accordion = Fx.Accordion = new Class({
 	display: function(index, useFx){
 		if (!this.check(index, useFx)) return this;
 		useFx = $pick(useFx, true);
-		if (this.options.returnHeightToAuto) {
+		if (this.options.returnHeightToAuto){
 			var prev = this.elements[this.previous];
-			if (prev && !this.selfHidden) {
-				for (var fx in this.effects) {
+			if (prev && !this.selfHidden){
+				for (var fx in this.effects){
 					prev.setStyle(fx, prev[this.effects[fx]]);
 				}
 			}
@@ -118,20 +118,17 @@ var Accordion = Fx.Accordion = new Class({
 		this.elements.each(function(el, i){
 			obj[i] = {};
 			var hide;
-			if (i != index) {
+			if (i != index){
 				hide = true;
-			} else {
-				if (this.options.alwaysHide && 
-					((el.offsetHeight > 0 && this.options.height) || el.offsetWidth > 0 && this.options.width)) {
-					hide = true;
-					this.selfHidden = true;
-				}
+			} else if (this.options.alwaysHide && ((el.offsetHeight > 0 && this.options.height) || el.offsetWidth > 0 && this.options.width)){
+				hide = true;
+				this.selfHidden = true;
 			}
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
 		}, this);
 		this.internalChain.chain(function(){
-			if (this.options.returnHeightToAuto && !this.selfHidden) {
+			if (this.options.returnHeightToAuto && !this.selfHidden){
 				var el = this.elements[index];
 				if (el) el.setStyle('height', 'auto');
 			};
