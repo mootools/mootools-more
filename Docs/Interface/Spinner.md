@@ -132,18 +132,18 @@ Reasserts the dimensions of the overlay layer. Note that this method is called w
 
 * (*object*) This instance of [Spinner][]
 
-Class: Request.HTML {#Request-HTML}
+Class: Request {#Request}
 ===================================
 
-Extends [Request.HTML][] to add integrated [Spinner][] functionality.
+Extends [Request][] to add integrated [Spinner][] functionality.
 
 ### Extends
 
-* [Request.HTML][]
+* [Request][]
 
 ### Syntax
 
-	new Request.HTML(options);
+	new Request(options);
 
 ### Arguments
 
@@ -151,14 +151,14 @@ Extends [Request.HTML][] to add integrated [Spinner][] functionality.
 
 ### Options
 
-* all of [Request.HTML][] options PLUS:
+* all of [Request][] options PLUS:
 * useSpinner - (*boolean*) use the [Spinner][] class with this request
 * spinnerOptions - (*object*) the options object for the [Spinner][] class
 * spinnerTarget - (*mixed*) a string of the id for an Element or an Element reference to use instead of the one specifed in the *update* option. This is useful if you want to overlay a different area (or, say, the parent of the one being updated).
 
 ### Example
 
-	new Request.HTML({
+	new Request({
 		url: '/myHtmlFragment.html',
 		update: $('myElement'),
 		useSpinner: true,
@@ -167,7 +167,7 @@ Extends [Request.HTML][] to add integrated [Spinner][] functionality.
 
 ### Notes
 
-* When you execute *Request.HTML.send* the [Spinner][] class will automatically overlay the area on the page that's going to get updated with the new content and when this area is updated the [Spinner][] hides itself.
+* When you execute *Request.send* the [Spinner][] class will automatically overlay the area on the page that's going to get updated with the new content and when this area is updated the [Spinner][] hides itself.
 
 
 Native: Element {#Element}
@@ -266,4 +266,4 @@ Retrieves the "build-in"  instance of [Spinner][] and calls its *hide* method.
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 [Chain]: /core/Class/Class.Extras#Chain
-[Request.HTML]: /core/Request/Request.HTML
+[Request]: /core/Request/Request
