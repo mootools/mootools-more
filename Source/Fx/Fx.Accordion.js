@@ -105,7 +105,7 @@ var Accordion = Fx.Accordion = new Class({
 		useFx = $pick(useFx, true);
 		if (this.options.returnHeightToAuto) {
 			var prev = this.elements[this.previous];
-			if (prev) {
+			if (prev && !this.selfHidden) {
 				for (var fx in this.effects) {
 					prev.setStyle(fx, prev[this.effects[fx]]);
 				}
@@ -115,20 +115,30 @@ var Accordion = Fx.Accordion = new Class({
 		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
 		var obj = {};
+		var hideSelf;
 		this.elements.each(function(el, i){
 			obj[i] = {};
-			var hide = (i != index) || 
-						(this.options.alwaysHide && ((el.offsetHeight > 0 && this.options.height) || 
-							el.offsetWidth > 0 && this.options.width));
+			var hide;
+			if (i != index) {
+				hide = true;
+			} else {
+				if (this.options.alwaysHide && ((el.offsetHeight > 0 && this.options.height) || 
+					el.offsetWidth > 0 && this.options.width)) {
+					hide = true;
+					hideSelf = true;
+				}
+			}
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
 		}, this);
+		this.selfHidden = hideSelf;
 		this.internalChain.chain(function(){
-			if (this.options.returnHeightToAuto) {
+			if (this.options.returnHeightToAuto && !hideSelf) {
 				var el = this.elements[index];
 				if (el) el.setStyle('height', 'auto');
 			};
 		}.bind(this));
+		dbug.log(obj);
 		return useFx ? this.start(obj) : this.set(obj);
 	}
 
