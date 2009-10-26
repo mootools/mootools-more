@@ -371,6 +371,7 @@ Parses a string to a date. In the examples below, parsing works with dates using
 	Date.parse('10.12.1982 22:45:00') //"Tue Oct 12 1982 22:45:00 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('2007-06-08 16:34:52') //"Fri Jun 08 2007 16:34:52 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('2007-06-08T16:34:52+0200') //"Fri Jun 08 2007 07:34:52 GMT-0700 (Pacific Daylight Time)"
+	Date.parse('Thu Oct 22 08:11:23 +0000 2009') //Thu Oct 12 2009 08:11:23 GMT (Greenwich Mean Time)
 	
 	Date.parse('1st') //"Sat Dec 01 2007 00:00:00 GMT-0800 (Pacific Standard Time)"
 	Date.parse('14th October') //"Sun Oct 14 2007 00:00:00 GMT-0700 (Pacific Daylight Time)"
