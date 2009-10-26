@@ -170,7 +170,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		data.sort(function(a, b){
 			if (a.value === b.value) return 0;
-			else return a.value > b.value ? 1 : -1;
+			return a.value > b.value ? 1 : -1;
 		});
 
 		if (!this.sorted.reverse) data.reverse(true);
