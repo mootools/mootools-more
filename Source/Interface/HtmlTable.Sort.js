@@ -158,22 +158,20 @@ HtmlTable = Class.refactor(HtmlTable, {
 		var data = Array.map(this.body.rows, function(row, i) {
 			var value = parser.convert.call(document.id(row.cells[index]));
 
-			if (parser.number || $type(value) == 'number') {
-				value = String(value).replace(/[^\d]/, '');
-				value = '00000000000000000000000000000000'.substr(0, 32 - value.length).concat(value);
-			}
-
 			return {
 				position: i,
 				value: value,
 				toString:  function() {
-					return value;
+					return value.toString();
 				}
 			};
 		}, this);
-
 		data.reverse(true);
-		data.sort();
+
+		data.sort(function(a, b){
+			if (a.value === b.value) return 0;
+			else return a.value > b.value ? 1 : -1;
+		});
 
 		if (!this.sorted.reverse) data.reverse(true);
 
@@ -264,21 +262,21 @@ HtmlTable.Parsers = new Hash({
 	'numberLax': {
 		match: /^[^\d]+\d+$/,
 		convert: function() {
-			return this.get('text').replace(/[^0-9]/, '').toInt();
+			return this.get('text').replace(/[^-?^0-9]/, '').toInt();
 		},
 		number: true
 	},
 	'float': {
 		match: /^[\d]+\.[\d]+/,
 		convert: function() {
-			return this.get('text').replace(/[^\d.]/, '').toFloat();
+			return this.get('text').replace(/[^-?^\d.]/, '').toFloat();
 		},
 		number: true
 	},
 	'floatLax': {
 		match: /^[^\d]+[\d]+\.[\d]+$/,
 		convert: function() {
-			return this.get('text').replace(/[^\d.]/, '');
+			return this.get('text').replace(/[^-?^\d.]/, '');
 		},
 		number: true
 	},

@@ -294,7 +294,7 @@
 		},
 
 		"HtmlTable.Sort": {
-			"deps":["HtmlTable", "Element.Delegation", "Hash", "Date", "Class.Refactor"],
+			"deps":["HtmlTable", "Element.Delegation", "Hash", "Date", "Class.Refactor", "String.Extras"],
 			"desc":"Adds the ability to sort the columns of a HtmlTable.Zebra instance."
 		},
 
