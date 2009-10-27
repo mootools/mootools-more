@@ -20,31 +20,28 @@ MooTools Plugins and Enhancements Repository
 
 ### Changes
 
-#### Changes in MooTools More 1.2.4.1
-
 NOTE: none of the changes below are breaking changes.
 
-* [over 30 issues fixed or closed (in lighthouse)](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/tickets?q=milestone%3A1.2.4.1)
-* New feature: Element.Delegation - a partial port of event delegation from MooTools 2.0 (does not support custom events or blur/focus)
-* New feature: Elements.From converts html strings to DOM elements
-* New feature: Depender - a client side MooTools dependency loader
-** Related: [Depender App](https://github.com/anutron/mootools-depender/) - a server side implementation (that's much faster)
-* New feature: Mask - masks elements (including the window) with a semi-opaque overlay (previously known as Modalizer on Clientcide.com)
-* New feature: Spinner - automates the creation of ajax spinners over DOM elements being updated (previously known as Waiter on Clientcide.com)
-* New feature: Form.Request, Form.Request.Append - automates creating ajax forms that update HTML in DOM elements
-* New feature: HtmlTable, HtmlTable.Zebra, HtmlTable.Sort, HtmlTable.Select - interactive and auto-generated html table elements
-* New feature: Keyboard - a robust event manager for keyboard groupings
-* Added new option to Fx.Accordion: returnHeightToAuto
-* Added credit card number validator to FormValidator
-* FormValidator is now Form.Validator
-* MooTools Lang is now a part of MooTools More (again)
-* Added timeDiff method to Date.Extras
-* Added ability to ignore scroll position with Element.Position
-* Element.setPosition is now Element.position (non-breaking change)
-* Added hideAll and showAll methods for OverText
-* Added Element.isVisible method
-* URI's get method no longer returns null for missing parts; it returns an empty string.
-* Various other tweaks and bug fixes
+#### Changes in MooTools More 1.2.4.2
+
+* 
+
+#### Changes in MooTools More 1.2.4.1
+
+* [roughly a dozen issues fixed or closed (in lighthouse)](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/tickets?q=milestone%3A1.2.4.1)
+* Numerous documentation updates
+* Spinner: Adding a getSpinner method to Request in Spinner's refactoring of that Class
+* Spinner: Fixing default styles
+* Form.Validator, Date: Added Ukrainian translations
+* Date: Added new Date parser (parses "Thu Oct 22 08:11:23 +0000 2009")
+* Fx.Accordion: handling the alwaysHide option so you can still have returnHeightToAuto set to true (see [this discussion](http://groups.google.com/group/mootools-users/browse_thread/thread/27004d2d0dc227c2u))
+* Tips: Restoring arguments to the show/hide events; tip no longer defaults to display:none (this restores the previous behavior)
+* Fx.Reveal: stores cssText whenever it starts a transition and restores it when it finishes or is canceled, leaving the element without a bunch of inline styles, as if you'd just done setStyle('display', 'block'/'none')
+* Fx.SmoothScroll: adding a "scrolledTo" event
+* Drag: added new 'stopPropagation' option
+* HtmlTable.Select: ensuring that instances only delegates to immediate children (for nested tables)
+* HtmlTable.Sort.js: detects and sorts date columns more accurately, handles negative integers and floats
+* Reorganized scripts json so Depender can implement Log
 
 ##### Changes to Clientcide plugins adopted by MooTools More in this release
 
