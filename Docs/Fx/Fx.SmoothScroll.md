@@ -20,9 +20,13 @@ Auto targets all the anchors in a page and display a smooth scrolling effect upo
 1. options - (*object*, optional) In addition to all the [Fx.Scroll][] options, *Fx.SmoothScroll* has links option incase you had a predefined links collection.
 2. win     - (*object*, optional) The context of the *Fx.SmoothScroll*.
 
-#### Options:
+### Options:
 
 * links - (*mixed*) A collection of Elements or a string <Selector> of Elements that the *Fx.SmoothScroll* can use.
+
+### Events
+
+* scrolledTo - (*function*) callback executed when an element is scrolled to (after the scrolling). Passed the link clicked and the element scrolled to as arguments.
 
 ### Returns:
 

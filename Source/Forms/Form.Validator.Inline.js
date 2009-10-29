@@ -53,7 +53,7 @@ Form.Validator.Inline = new Class({
 		var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
 		var advice = this.getAdvice(className, field);
 		if(advice) {
-			advice = advice.clone(true, true).set('html', errorMsg).replaces(advice);
+			advice = advice.set('html', errorMsg);
 		} else {
 			advice = new Element('div', {
 				html: errorMsg,

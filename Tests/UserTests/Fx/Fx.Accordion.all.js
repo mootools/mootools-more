@@ -19,7 +19,7 @@
 				var acc = $('accordionExample').retrieve('acc');
 				if (acc) acc.detach();
 			}
-		},		
+		},
 		{
 			title: "Fx.Accordion",
 			description: "Mouse enter triggering",
@@ -47,6 +47,20 @@
 					new Element('dt',{'class': 'toggle', 'html' : '<b>fourth section</b>'}).inject(container),
 					new Element('dd',{'class': 'stretcher', 'html' : "I'n the content for the fourth section."}).inject(container)
 				);
+			}
+		},
+		{
+			title: "Fx.Accordion:always hide",
+			description: "Allows sections to be hidden without exposing another",
+			verify: "Can you click on an element to expose it, and click it again to hide it without another opening?",
+			before: function(){
+				var acc = $('accordionExample').retrieve('acc');
+				if (acc) acc.detach();
+				acc = new Fx.Accordion($$('dt'), $$('dd'),{
+					display: -1,
+					alwaysHide: true
+				});
+				$('accordionExample').store('acc', acc);
 			}
 		}
 	]

@@ -1,5 +1,5 @@
 Class: Spinner {#Spinner}
-=======================
+=========================
 
 Adds a semi-transparent overlay over a DOM element with a 'spinning' ajax icon.
 
@@ -31,8 +31,7 @@ Adds a semi-transparent overlay over a DOM element with a 'spinning' ajax icon.
 
 ### Styles
 
-Download the default styles which include css styles and a default spinner image.
-You can also style the layer and its contents by just defining a css styles for the class names specified in the options class name (these default to ".spinner", ".spinner-content", and ".spinner-img"). Default styles can be found in the Styles directory of the MooTools More library on github.
+You can style the layer and its contents by just defining a css style for the class names specified in the options class name (these default to ".spinner", ".spinner-content", and ".spinner-img"). You can download the default styles and spinner image here: [spinner.css](http://mootools.net/releases/mootools-more-1.2.4.1/Styles/Interface/Spinner/spinner.css), [spinner.gif](http://mootools.net/releases/mootools-more-1.2.4.1/Styles/Interface/Spinner/spinner.gif)
 
 ### Events
 
@@ -47,7 +46,7 @@ You can also style the layer and its contents by just defining a css styles for 
 
 
 Spinner Method: toggle {#Spinner:toggle}
---------------------------------------
+----------------------------------------
 
 Toggles the [Spinner][] visibility. If the [Spinner][] is currently visible, it will hide. Otherwise it will display.
 
@@ -81,7 +80,7 @@ Displays the [Spinner][] layer.
 * (*object*) This instance of [Spinner][]
 
 Spinner Method: hide {#Spinner:hide}
-----------------------------------
+------------------------------------
 
 Hides the [Spinner][] layer.
 
@@ -94,7 +93,7 @@ Hides the [Spinner][] layer.
 1. noFx - (*boolean*) if *true* the spinner will not use effects to hide but will hide immediately (defaults to *false*).
 
 Spinner Method: destroy {#Spinner:destroy}
-------------------------------------
+------------------------------------------
 
 Destroys the [Spinner][] spinner layer and its contents. This renders the instance of this class inert (and further calls to its methods will throw errors).
 
@@ -107,7 +106,7 @@ Destroys the [Spinner][] spinner layer and its contents. This renders the instan
 * (*object*) This instance of [Spinner][]
 
 Spinner Method: position {#Spinner:position}
-------------------------------------
+--------------------------------------------
 
 Reasserts the position of the spinner layer and its contents.
 
@@ -121,7 +120,7 @@ Reasserts the position of the spinner layer and its contents.
 
 
 Spinner Method: resize {#Spinner:resize}
-------------------------------------
+----------------------------------------
 
 Reasserts the dimensions of the overlay layer. Note that this method is called when [Spinner.position][] is called, so you needn't call it if you call position.
 
@@ -133,18 +132,18 @@ Reasserts the dimensions of the overlay layer. Note that this method is called w
 
 * (*object*) This instance of [Spinner][]
 
-Class: Request.HTML {#Request-HTML}
-===================================
+Class: Request {#Request}
+=========================
 
-Extends [Request.HTML][] to add integrated [Spinner][] functionality.
+Extends [Request][] to add integrated [Spinner][] functionality.
 
 ### Extends
 
-* [Request.HTML][]
+* [Request][]
 
 ### Syntax
 
-	new Request.HTML(options);
+	new Request(options);
 
 ### Arguments
 
@@ -152,14 +151,14 @@ Extends [Request.HTML][] to add integrated [Spinner][] functionality.
 
 ### Options
 
-* all of [Request.HTML][] options PLUS:
+* all of [Request][] options PLUS:
 * useSpinner - (*boolean*) use the [Spinner][] class with this request
 * spinnerOptions - (*object*) the options object for the [Spinner][] class
 * spinnerTarget - (*mixed*) a string of the id for an Element or an Element reference to use instead of the one specifed in the *update* option. This is useful if you want to overlay a different area (or, say, the parent of the one being updated).
 
 ### Example
 
-	new Request.HTML({
+	new Request({
 		url: '/myHtmlFragment.html',
 		update: $('myElement'),
 		useSpinner: true,
@@ -168,8 +167,20 @@ Extends [Request.HTML][] to add integrated [Spinner][] functionality.
 
 ### Notes
 
-* When you execute *Request.HTML.send* the [Spinner][] class will automatically overlay the area on the page that's going to get updated with the new content and when this area is updated the [Spinner][] hides itself.
+* When you execute *Request.send* the [Spinner][] class will automatically overlay the area on the page that's going to get updated with the new content and when this area is updated the [Spinner][] hides itself.
 
+Request Method: getSpinner {#Request:getSpinner}
+------------------------------------------------
+
+Retrieves the "build-in" instance of [Spinner][].
+
+### Syntax
+
+	myRequest.getSpinner();
+
+### Returns
+
+* (*object*) This instance of [Spinner][]
 
 Native: Element {#Element}
 ==========================
@@ -177,7 +188,7 @@ Native: Element {#Element}
 Extends the native Element object with [Spinner][] methods.
 
 Element Property: spinner {#Element-Properties:spinner}
----------------------------------------------------
+-------------------------------------------------------
 
 ### Setter
 
@@ -230,7 +241,7 @@ Native: Element {#Element}
 Adds [Spinner][] shortcuts to the [Element][] class.
 
 Element Method: spin {#Element:spin}
-----------------------------------------
+------------------------------------
 
 Retrieves the "build-in" instance of [Spinner][] and calls its *mask* method.
 
@@ -247,7 +258,7 @@ Retrieves the "build-in" instance of [Spinner][] and calls its *mask* method.
 * (*element*) This Element
 
 Element Method: unspin {#Element:unspin}
---------------------------------------------
+----------------------------------------
 
 Retrieves the "build-in"  instance of [Spinner][] and calls its *hide* method.
 
@@ -267,4 +278,4 @@ Retrieves the "build-in"  instance of [Spinner][] and calls its *hide* method.
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 [Chain]: /core/Class/Class.Extras#Chain
-[Request.HTML]: /core/Request/Request.HTML
+[Request]: /core/Request/Request

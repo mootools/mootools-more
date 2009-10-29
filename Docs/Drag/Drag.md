@@ -22,14 +22,16 @@ Drag Method: constructor {#Drag:constructor}
 
 ### Options:
 
-* grid      - (*integer*: defaults to false) Distance in pixels for snap-to-grid dragging.
-* handle    - (*element*: defaults to the element passed in) The Element to act as the handle for the draggable element.
-* invert    - (*boolean*: defaults to false) Whether or not to invert the values reported on start and drag.
-* limit     - (*object*: defaults to false) An object with x and y dimensions used to limit the movement of the Element.
-* modifiers - (*object*: defaults to {'x': 'left', 'y': 'top'}) An object with x and y properties used to indicate the CSS modifiers (i.e. 'left').
-* snap      - (*integer*: defaults to 6) The distance to drag before the Element starts to respond to the drag.
-* style     - (*boolean*: defaults to true) Whether or not to set the modifier as a style property of the element.
-* unit      - (*string*: defaults to 'px') A string indicating the CSS unit to append to all integer values.
+* grid            - (*integer*: defaults to false) Distance in pixels for snap-to-grid dragging.
+* handle          - (*element*: defaults to the element passed in) The Element to act as the handle for the draggable element.
+* invert          - (*boolean*: defaults to false) Whether or not to invert the values reported on start and drag.
+* limit           - (*object*: defaults to false) An object with x and y dimensions used to limit the movement of the Element.
+* modifiers       - (*object*: defaults to {'x': 'left', 'y': 'top'}) An object with x and y properties used to indicate the CSS modifiers (i.e. 'left').
+* snap            - (*integer*: defaults to 6) The distance to drag before the Element starts to respond to the drag.
+* style           - (*boolean*: defaults to true) Whether or not to set the modifier as a style property of the element.
+* unit            - (*string*: defaults to 'px') A string indicating the CSS unit to append to all integer values.
+* prevenDefault   - (*boolean*: defaults to false) Calls preventDefault on the event while dragging. See [Event:preventDefault]
+* stopPropagation - (*boolean*: defaults to false) Prevents the event from "bubbling" up in the DOM tree. See [Event:stopPropagation]
 
 ### Events:
 
@@ -193,6 +195,8 @@ Adds drag-to-resize behavior to an Element using supplied options.
 [Element:addEvent]: /core/Element/Element.Event/#Element:addEvent
 [Element:makeDraggable]: /more/Drag/Drag.Move/#Element:makeDraggable
 [Events]: /core/Class/Class.Extras#Events
+[Event:preventDefault]: /core/Native/Event#Event:prevenDefault
+[Event:stopPropagation]: /core/Native/Event#Event:stopPropagation
 [Chain]: /core/Class/Class.Extras#Chain
 [Options]: /core/Class/Class.Extras#Options
 [W3Schools: CSS Units]: http://www.w3schools.com/css/css_units.asp

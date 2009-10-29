@@ -108,7 +108,7 @@ var Spinner = new Class({
 			return this;
 		}
 		this.active = true;
-		return this.parent();
+		return this.parent(noFx);
 	},
 
 	hideMask: function(noFx){
@@ -133,11 +133,13 @@ Spinner.implement(new Chain);
 
 if (window.Request) {
 	Request = Class.refactor(Request, {
+		
 		options: {
 			useSpinner: false,
 			spinnerOptions: {},
 			spinnerTarget: false
 		},
+		
 		initialize: function(options){
 			this._send = this.send;
 			this.send = function(options){
@@ -153,7 +155,12 @@ if (window.Request) {
 					this.addEvent(event, this.spinner.hide.bind(this.spinner));
 				}, this);
 			}
+		},
+		
+		getSpinner: function(){
+			return this.spinner;
 		}
+		
 	});
 }
 
