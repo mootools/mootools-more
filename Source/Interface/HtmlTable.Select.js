@@ -25,8 +25,8 @@ provides: [HtmlTable.Select]
 HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {
-		/*onRowSelect: $empty,
-		onRowUnselect: $empty,*/
+		/*onRowFocus: $empty,
+		onRowUnfocus: $empty,*/
 		useKeyboard: true,
 		classRowSelected: 'table-tr-selected',
 		classRowHovered: 'table-tr-hovered',
