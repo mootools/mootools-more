@@ -42,11 +42,11 @@ Element.implement({
 			if ((d = this.getStyle('display')) == 'none') d = null;
 		} catch(e){}
 		
-		return this.store('originalDisplay', d || 'block').setStyle('display', 'none');
+		return this.store('originalDisplay', d || '').setStyle('display', 'none');
 	},
 
 	show: function(display){
-		return this.setStyle('display', display || this.retrieve('originalDisplay') || 'block');
+		return this.setStyle('display', display || this.retrieve('originalDisplay') || '');
 	},
 
 	swapClass: function(remove, add){
