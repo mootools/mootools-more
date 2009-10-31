@@ -23,7 +23,7 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 ### Options
 
 * url - (*url*) the url to get the JSON data
-* callBackKey - (*string*) the key in the url that the server uses to wrap the JSON results. So, for example, if you used *callBackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; defaults to "callback". This must be defined correctly.
+* callbackKey - (*string*) the key in the url that the server uses to wrap the JSON results. So, for example, if you used *callbackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; defaults to "callback". This must be defined correctly.
 * data - (*object*) additional key/value data to append to the url
 * retries - (*integer*; defaults to *zero*) if this value is a positive integer, the JSONP request will abort after the duration specified in the *timeout* option and fire again until the number of retries has been exhausted.
 * timeout - (*integer*; defaults to *zero*) the duration to wait before aborting a request or retrying.
