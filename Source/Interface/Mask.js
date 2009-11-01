@@ -44,7 +44,8 @@ var Mask = new Class({
 		style: {},
 		'class': 'mask',
 		maskMargins: false,
-		useIframeShim: true
+		useIframeShim: true,
+		iframeShimOptions: {}
 	},
 
 	initialize: function(target, options){
@@ -81,7 +82,7 @@ var Mask = new Class({
 		target = target || this.options.inject ? this.options.inject.target : '' || this.target;
 		this.element.inject(target, where);
 		if (this.options.useIframeShim) {
-			this.shim = new IframeShim(this.element);
+			this.shim = new IframeShim(this.element, this.options.iframeShimOptions);
 			this.addEvents({
 				show: this.shim.show.bind(this.shim),
 				hide: this.shim.hide.bind(this.shim),
