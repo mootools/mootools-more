@@ -38,7 +38,7 @@ Sets the location of an element relative to another (defaults to the document bo
 
 There are two ways to specify the position: strings and objects. The strings are combinations of "left", "right", and "center" with "top" (or "upper"), "bottom", and "center". These are case insensitive. These translate to:
 
-* upperLeft, topLeft (same thing) - or upperleft, leftupper, LEFTUPPER whatever.
+* upperLeft, topLeft (same thing) - or upperleft, leftupper, LEFTUPPER etc.
 * bottomLeft
 * centerLeft
 * upperRight, topRight (same thing)
