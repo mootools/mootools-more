@@ -28,7 +28,7 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 * mode - (*string*) "vertical", 2horizontal", or "both" to describe how the element should slide in; defaults to *"vertical"*
 * heightOverride - (*integer*) height to open to; overrides the default offsetHeight
 * widthOverride - (*integer*) width to open to; overrides the default offsetWidth
-* display - (*string*) the property for the display style when your reveal the element. Defaults to *block* but could be, for isntance, *list-style* or whatever.
+* display - (*string*) the property for the display style when your reveal the element. Defaults to *block* but could be, for instance, *list-style*, *inline-block*, etc.
 
 ### Events
 
