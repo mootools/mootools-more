@@ -46,7 +46,9 @@ Element.implement({
 	},
 
 	show: function(display){
-		return this.setStyle('display', display || this.retrieve('originalDisplay') || '');
+		this.setStyle('display', display || this.retrieve('originalDisplay') || '');
+		if (this.getStyle('display') == 'none') this.setStyle('display', display || 'block');
+		return this;
 	},
 
 	swapClass: function(remove, add){
