@@ -100,12 +100,12 @@
 		},
 
 		"Elements.From": {
-			"deps": ["Element"],
+			"deps": ["More", "Element"],
 			"desc": "Adds a static method to Element to parse html."
 		},
 
 		"Element.Delegation": {
-			"deps":["Element.Event", "Selectors"],
+			"deps":["More", "Element.Event", "Selectors"],
 			"desc":"Delegates events for child elements to their parents for greater efficiency."
 		},
 
@@ -134,12 +134,12 @@
 	"Forms": {
 
 		"Form.Request":{
-			"deps":["Element.Event",  "Request.HTML", "Class.Binds", "Class.Occlude", "Spinner", "String.QueryString"],
+			"deps":["More", "Element.Event",  "Request.HTML", "Class.Binds", "Class.Occlude", "Spinner", "String.QueryString"],
 			"desc":"Handles the basic functionality of submitting a form via ajax and updating a DOM element with the result."
 		},
 
 		"Form.Request.Append":{
-			"deps": ["Form.Request", "Fx.Reveal", "Elements.From"],
+			"deps": ["More", "Form.Request", "Fx.Reveal", "Elements.From"],
 			"desc":"Uses Form.Request to fetch and update a DOM element, but appends the result into the target instead of overwriting its contents."
 		},
 
@@ -284,22 +284,22 @@
 	"Interface": {
 
 		"HtmlTable":{
-			"deps":["Class.Extras", "Class.Occlude"],
+			"deps":["More", "Class.Extras", "Class.Occlude"],
 			"desc":"Builds table elements with methods to add rows quickly."
 		},
 
 		"HtmlTable.Zebra": {
-			"deps":["HtmlTable", "Class.Refactor"],
+			"deps":["More", "HtmlTable", "Class.Refactor"],
 			"desc":"Adds stripes to an HTML table's rows."
 		},
 
 		"HtmlTable.Sort": {
-			"deps":["HtmlTable", "Element.Delegation", "Hash", "Date", "Class.Refactor", "String.Extras"],
+			"deps":["More", "HtmlTable", "Element.Delegation", "Hash", "Date", "Class.Refactor", "String.Extras"],
 			"desc":"Adds the ability to sort the columns of a HtmlTable.Zebra instance."
 		},
 
 		"HtmlTable.Select": {
-			"deps":["HtmlTable", "Keyboard", "Class.Refactor", "Element.Delegation"],
+			"deps":["More", "HtmlTable", "Keyboard", "Class.Refactor", "Element.Delegation"],
 			"desc":"Adds the ability to highlight and select rows on a HtmlTable.Sort instance."
 		},
 
