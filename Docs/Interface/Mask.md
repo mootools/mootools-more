@@ -125,7 +125,7 @@ Reasserts the dimensions of the overlay layer. Note that this method is called w
 
 ### Syntax
 
-	myMask.destroy()
+	myMask.resize()
 
 ### Returns
 
