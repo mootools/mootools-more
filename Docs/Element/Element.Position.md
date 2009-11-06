@@ -30,7 +30,7 @@ Sets the location of an element relative to another (defaults to the document bo
 * relFixedPosition - (*boolean*) *true*: adds the scroll position of the window to the location to account for a fixed position relativeTo item; defaults to *false*
 * ignoreMargins - (*boolean*) you can have the position calculate the offsets added margins if you like; defaults to *false*. If *true*, the corner of the element will be used EXCLUDING the margin.
 * ignoreScroll - (*boolean*) if *true*, the scroll offset of the parent is ignored. defaults to *false*.
-* allowNegative - (*boolean*) if *true*, AND the element is not a descendent of an element that is positioned (relative or absolute), then the position will not allow negative values.
+* allowNegative - (*boolean*) if *true* (the default), AND the element is not a descendent of an element that is positioned (relative or absolute), then the position will not allow negative values.
 * minimum - (*object*) *x* and *y* values (*integers*) for hard minimum limits on the position. Unlike allowNegative, these are not conditional; if you give zero values for the x/y values, they will be obeyed regardless of any other setting.
 * maximum - (*object*) *x* and *y* values (*integers*) for hard maximum limits on the position.
 
