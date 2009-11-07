@@ -1,8 +1,8 @@
 {
 	tests: [
 		{
-			title: "Center",
-			description: "Centers the red box over the text box.",
+			title: "Scrolling and Element.Position",
+			description: "Makes the red & yellow boxes follow the green box during scroll",
 			verify: "Do the red and yellow boxes follow the green box when you scroll either scrollbar?",
 			before: function(){
 			  var red = $('red'),
