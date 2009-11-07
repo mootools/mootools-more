@@ -3,7 +3,7 @@
 		{
 			title: "Center",
 			description: "Centers the red box over the text box.",
-			verify: "Is the red box centered over the text box?",
+			verify: "Do the red and yellow boxes follow the green box when you scroll either scrollbar?",
 			before: function(){
 			  var red = $('red'),
             green = $('green'),
