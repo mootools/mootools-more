@@ -1,16 +1,22 @@
 <style>
 	#container { height:1000px; }
-	#inner-container { height:200px; overflow:scroll; margin:100px auto; width:50%; }
-	#red { width:30px; height:30px; background:red; margin:120px auto; }
-	#green { width:30px; height:30px; background:green; }
-	#yellow { width:30px; height:30px; background:yellow; }
+	#inner-container1 { height:200px; overflow:scroll; margin:100px 0; width:50%; }
+	#inner-container2 { height:200px; overflow:scroll; width:50%; position:fixed; top:145px; right:0; }
+	.red { width:30px; height:30px; background:red; margin:120px auto; }
+	.green { width:30px; height:30px; background:green; }
+	.yellow { width:30px; height:30px; background:yellow; }
 </style>
 
 <div id="container">
-	<div id="inner-container">
-			<div id="red"></div>
-			<div id="green"></div>
+	<div id="inner-container1">
+			<div id="red1" class="red"></div>
+			<div id="green1" class="green"></div>
+	</div>
+	<div id="inner-container2">
+			<div id="red2" class="red"></div>
+			<div id="green2" class="green"></div>
 	</div>
 </div>
 
-<div id="yellow"></div>
+<div id="yellow1" class="yellow"></div>
+<div id="yellow2" class="yellow"></div>
