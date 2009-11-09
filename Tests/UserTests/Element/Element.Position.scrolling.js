@@ -10,9 +10,9 @@
             yellow1 = $('yellow1'), yellow2 = $('yellow2');
 
         var position = function(){
-          green1.position({relativeTo: red1, position: 'centerLeft', edge: 'centerRight'});
+          green1.position( {relativeTo: red1, position: 'centerLeft', edge: 'centerRight'});
 				  yellow1.position({relativeTo: red1, position: 'centerRight', edge: 'centerLeft'});
-				  green2.position({relativeTo: red2, position: 'centerLeft', edge: 'centerRight'});
+				  green2.position( {relativeTo: red2, position: 'centerLeft', edge: 'centerRight'});
 				  yellow2.position({relativeTo: red2, position: 'centerRight', edge: 'centerLeft'});
         };
         
