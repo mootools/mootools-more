@@ -8,12 +8,17 @@
 			  var red = $('red'),
             green = $('green'),
             yellow = $('yellow');
-            
-				(function(){
-				  green.position({relativeTo: red, position: 'centerLeft', edge: 'centerRight'});
-				  yellow.position({relativeTo: red, position: 'centerRight', edge: 'centerLeft'});  
-				}).periodical(100);
+
+        var position = function(){
+          green.position({relativeTo: red, position: 'centerLeft', edge: 'centerRight'});
+				  yellow.position({relativeTo: red, position: 'centerRight', edge: 'centerLeft'});
+        };
+        
+        position();        
+        window.addEvent('scroll', position);
+        $('inner-container').addEvent('scroll', position);
 			}
 		}
-	]
+	],
+	otherScripts: ['Element.Event']
 }
