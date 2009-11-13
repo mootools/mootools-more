@@ -2,10 +2,14 @@ Class: Keyboard {#Keyboard}
 =================================
 
 Class takes out the need to have logic in key events to check which buttons are pressed.  The class fires individual events for keys (Individual key events are referred to as subevents in this documentation).  Modifiers are allowed. Provides methodology to disable and enable the listeners assigned to a Keyboard instance.
+Keyboard instances are nodes of a tree based heirarchy (think of the DOM) to allow complex keyboard driven functionality. The root node of the tree is generally Keyboard.manager.  When a key event is fired the root node keyboard (Generally Keyboard.manager) gets a chance to handle the event.  The event is then propagated from the currently active leafnode back towards the root.
 
 ### Implements
 
 * [Options][], [Events][]
+
+Keyboard Method: constructor {#Keyboard:constructor}
+----------------------------------------
 
 ### Syntax
 
@@ -14,15 +18,16 @@ Class takes out the need to have logic in key events to check which buttons are 
 ### Arguments
 
 1. options - (*object*, optional) The options for the class detailed below.
-2. element - (*element*, optional) The element that the events will be applied to. Defaults to window.
 
-### Options
+#### Options
 
-* caseSensitive:  - (*boolean*; defaults to *false*) Specifies whether a difference between upper case and lower case letters.  When set to true shift+h and H are the same.
-* eventType:      - (*string*; defaults to 'keyup') The event type that should trigger the subevents.
+* defaultEventType:      - (*string*; defaults to 'keyup') The event type that should trigger the subevents.
 * active:         - (*boolean*; defaults to *true*) When not active the subevents will be surpressed.
-* preventDefault: - (*boolean*; defaults to *false*) Tells whether the main event should prevent default.
 * events:         - (*object*; defaults to *{}*) object keys are event names values should be the function to fire. Same as calling addEvents({...}) on the instance after creation
+
+### Returns
+
+* (*object*) A new instance of [Keyboard][].
 
 ### Events
 
@@ -32,16 +37,17 @@ Class takes out the need to have logic in key events to check which buttons are 
 ### Examples
 
 	var myKeyboardEvents = new Keyboard({
-		eventType: 'keyup', 
+		defaultEventType: 'keyup', 
 		events: { 
 			'shift+h': fn1, 
 			'ctrl+shift+h': fn2, 
 			'shift+ctrl+h': fn3,
-			'h': fn4
+			'h': fn4,
+			'keydown:shift+d': fn5
 		}
 	});
 
-	var myKeyboardEvents1 = new Keyboard({eventType: 'keydown'});
+	var myKeyboardEvents1 = new Keyboard({defaultEventType: 'keydown'});
 	myKeyBoardEvents1.addEvents({
 		'shift+h': fn1,
 		'ctrl+shift+h': fn2,
@@ -54,6 +60,19 @@ Class takes out the need to have logic in key events to check which buttons are 
 * In Example both myKeyboardEvents and myKeyboardEvents1 achieve the same ends.
 * The order of key modifiers does not matter. ctrl+shift+h and shift+ctrl+h are the same.
 * In Example pressing 'ctrl+shift+h' will *not* trigger 'shift+h' or 'h'. Likewise with 'shift+h' will not trigger 'h'.
+* The example 'keydown:shift+d' shows how to override the defaultEventType options. You can do this technique on any addEvent type methods.
+
+
+Keyboard: stop {#Keyboard:stop}
+------------------------------------
+
+Stops propagation of the passed in event to other keyboard instances.
+
+### Syntax
+
+	Keyboard.stop(event)
+
+### Methods
 
 Keyboard Method: activate {#Keyboard:activate}
 ------------------------------------
@@ -93,6 +112,30 @@ Toggles the active state of the events managed by the keyboard.
 ### Returns
 
 * (*object*) This instance of [Keyboard][]
+
+Keyboard Method: relenquish {#Keyboard:relenquish }
+------------------------------------
+
+Attempts to give control to the previously active keyboard. Will not do anything if there is no previously active keyboard.
+
+### Syntax
+
+	myKeyboard.relenquish()
+
+
+Keyboard Method: manage {#Keyboard:manage}
+------------------------------------
+
+The keyboard will become the parent of the passed in keyboard.  (Analogous to Element.grab)
+
+### Syntax
+
+	myKeyboard.manage(otherKeyboard)
+
+### Note
+
+When otherKeyboard is active otherKeyboard will receive the event first then as long as otherKeyboard did not call Keyboard.stop(event) then the event will bubble up to myKeyboard.
+
 
 [Keyboard]: #Keyboard
 [Options]: /core/Class/Class.Extras#Options
