@@ -308,6 +308,11 @@
 			"desc": "Provides enhanced group key event management."
 		},
 
+		"Keyboard.Extras": {
+			"deps": ["More", "Keyboard"],
+			"desc": "Adds description functionality to the Keyboard"
+		},
+
 		"Mask": {
 			"deps": ["More", "Class.Extras", "Element.Style", "Element.Event", "Element.Position", "IframeShim", "Class.Binds"],
 			"desc": "Creates a mask over a specified element.",
