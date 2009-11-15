@@ -11,6 +11,7 @@ authors:
 - Christoph Pojer
 - Frank Rossi
 - Ulrich Petri
+- Fabian Beiner
 
 requires:
 - /Lang
@@ -24,7 +25,7 @@ provides: [Date.German]
 MooTools.lang.set('de-DE', 'Date', {
 
 	months: ['Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-	days: ['Sontag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+	days: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
 	//culture's date order: MM/DD/YYYY
 	dateOrder: [ 'date', 'month', 'year', '.'],
 
