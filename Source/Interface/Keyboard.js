@@ -73,8 +73,8 @@ provides: [Keyboard]
 		initialize: function(options){
 			this.setOptions(options);
 			//if this is the root manager, nothing manages it
-			if (Keyboard.manager) Keyboard.manager.manage(this);
 			this.setup();
+			if (Keyboard.manager) Keyboard.manager.manage(this);
 		},
 
 		setup: function(){
@@ -84,7 +84,7 @@ provides: [Keyboard]
 
 		handle: function(event, type){
 			//Keyboard.stop(event) prevents key propagation
-			if (!this.active || event.preventKeyboardPropagation) return;
+			if (event.preventKeyboardPropagation) return;
 			
 			var bubbles = !!this.manager;
 			if (bubbles && this.activeKB){
@@ -105,13 +105,11 @@ provides: [Keyboard]
 		},
 
 		activate: function(){
-			this.active = true;
 			return this.enable();
 		},
 
 		deactivate: function(){
-			this.active = false;
-			return this.fireEvent('deactivate');
+			return this.disable();
 		},
 
 		toggleActive: function(){
@@ -123,10 +121,26 @@ provides: [Keyboard]
 				//if we're stealing focus, store the last keyboard to have it so the relenquish command works
 				if (instance != this.activeKB) this.previous = this.activeKB;
 				//if we're enabling a child, assign it so that events are now passed to it
-				this.activeKB = instance.fireEvent('activate');
+				var e = { keyboard: instance };
+				this.activeKB = instance;
+				Keyboard.manager.handle(e, this.options.defaultEventType + ':activate');
 			} else if (this.manager) {
 				//else we're enabling ourselves, we must ask our parent to do it for us
 				this.manager.enable(this);
+			}
+			return this;
+		},
+
+		disable: function(instance) {
+			if (instance) {
+				if(instance === this.activeKB) {
+					this.activeKB = null;
+					var e = { keyboard: instance };
+					instance.handle(e, this.options.defaultEventType + ':deactivate');
+				}
+			}
+			else if (this.manager) {
+				this.manager.disable(this);
 			}
 			return this;
 		},
