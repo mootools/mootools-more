@@ -52,11 +52,12 @@ Inserts a new table row.
 
 ### Syntax
 
-	myHtmlTable.push(row);	
+	myHtmlTable.push(row, rowProperties);
 
 ### Arguments
 
 1. row - (*array*) the data for the row.
+2. rowProperties - (*object*) the properties for the row (class, id, styles, etc)
 
 ### Row data
 
@@ -71,7 +72,7 @@ Row data can be in either of two formats. Note that they can be mixed and matche
 ### Examples
 
 	//example of 'simple' rows
-	myTable.push(['value 1', 'value 2', 'value 3']); //new row
+	myTable.push(['value 1', 'value 2', 'value 3'], {'class': 'tableRowClass'}); //new row
 	//detailed rows
 	myTable.push([
 		{ //can specify data AND properties
@@ -85,7 +86,7 @@ Row data can be in either of two formats. Note that they can be mixed and matche
 	]);
 	//RESULT:
 	<table cellpadding="0" cellspacing="0" border="0">
-		<tr>
+		<tr class="tableRowClass">
 			<td>value 1</td>
 			<td>value 2</td>
 			<td>value 3</td>
