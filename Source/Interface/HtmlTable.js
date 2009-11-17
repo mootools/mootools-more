@@ -96,8 +96,7 @@ var HtmlTable = new Class({
 			var td = new Element(tag || 'td', data.properties),
 				type = data.content || data || '',
 				element = document.id(type);
-
-			if (element) td.adopt(element);
+			if($type(type) != 'string' && element) td.adopt(element);
 			else td.set('html', type);
 
 			return td;
