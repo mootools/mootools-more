@@ -2,9 +2,12 @@ Keyboard = Class.refactor(Keyboard, {
 
 	descriptors: [],
 
+	descriptorIndex: {},
+
 	addEvent: function(type, fn, internal) {
 		if($type(fn) === 'object') {
 			var descripObj = { keys: type, description: fn.description, keyboard: this, fn: fn.fn };
+			if(fn.lookup) this.descriptorIndex[fn.lookup] = descripObj;
 			this.descriptors.push(descripObj);
 			this.previous(type, fn.fn, internal);
 		}
@@ -14,30 +17,54 @@ Keyboard = Class.refactor(Keyboard, {
 	//Need to do the same for removal... 
 	//Also may want to move this into the Keyboard file so can use the parsed type....
 
-	getDescriptions: function(){
+	getDescriptors: function(){
 		return this.descriptors;
 	},
 
-	rebind: function(type, descriptor){
-		descriptor.keyboard.removeEvent(descriptor.keys, descriptor.fn);
-		descriptor.keyboard.addEvent(type, descriptor.fn);
-		descriptor.keys = type;
-		Keyboard.manager.handle({keyboard: descriptor.keyboard}, descriptor.keyboard.options.defaultEventType + ':rebound');
+	getDescriptor: function(lookup){
+		return this.descriptorIndex[lookup];
 	}
 
 });
 
-Keyboard.activeKeyboards = function(fn) {
-	var current = Keyboard.manager;
+Keyboard.rebind = function(newKeys, descriptors){
+		$splat(descriptors).each(function(descriptor){
+			descriptor.keyboard.removeEvent(descriptor.keys, descriptor.fn);
+			descriptor.keyboard.addEvent(newKeys, descriptor.fn);
+			descriptor.keys = newKeys;
+			Keyboard.manager.handle({keyboard: descriptor.keyboard}, descriptor.keyboard.options.defaultEventType + ':rebound');
+		});
+};
+
+
+Keyboard.activeKeyboards = function(fn, keyboard) {
+	var current = keyboard || Keyboard.manager;
 	while(current){
 		fn.run(current);
 		current = current.activeKB;
 	}
-}
+};
 
-Keyboard.activeShortcuts = function() {
+Keyboard.activeShortcuts = function(keyboard) {
 	var activeKBS = [], activeSCS = [];
-	Keyboard.activeKeyboards([].push.bind(activeKBS));
-	activeKBS.each(function(kb){ activeSCS.extend(kb.getDescriptions()); });
+	Keyboard.activeKeyboards([].push.bind(activeKBS), keyboard);
+	activeKBS.each(function(kb){ activeSCS.extend(kb.getDescriptors()); });
 	return activeSCS;
+};
+
+Keyboard.getDescriptor = function(lookup, opts){
+	opts = opts || {};
+	var descriptors = opts.many ? [] : null,
+		set = opts.many ? function(kb){ 
+				var descriptor = kb.getDescriptor(lookup);
+				if(descriptor) descriptors.push(descriptor);
+			} : function(kb) { 
+				if(!descriptors) descriptors = kb.getDescriptor(lookup);
+			};
+	Keyboard.activeKeyboards(set, opts.keyboard);
+	return descriptors;
+};
+
+Keyboard.getDescriptors = function(lookup, opts) {
+	return Keyboard.getDescriptor(lookup, $merge(opts, { many: true }));
 }
