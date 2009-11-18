@@ -1,19 +1,46 @@
 Class: Keyboard {#Keyboard}
 =================================
 
-Class takes out the need to have logic in key events to check which buttons are pressed.  The class fires individual events for keys (Individual key events are referred to as subevents in this documentation).  Modifiers are allowed. Provides methodology to disable and enable the listeners assigned to a Keyboard instance.
-Keyboard instances are nodes of a tree based heirarchy (think of the DOM) to allow complex keyboard driven functionality. The root node of the tree is generally Keyboard.manager.  When a key event is fired the root node keyboard (Generally Keyboard.manager) gets a chance to handle the event.  The event is then propagated from the currently active leafnode back towards the root.
+Keyboard takes out the need to have logic in key events to check which buttons are pressed.  The class fires individual events for keys (individual key events are referred to as sub-events in this documentation) and provides methodology to disable and enable the listeners assigned to a Keyboard instance. Modifiers are allowed.
 
 ### Implements
 
 * [Options][], [Events][]
+
+### Simple Usage
+
+Keyboard has both a simple and advanced use cases. The advanced usage is intended for situations where more than one Keyboard instance is required (see next section). But for simple direct usage, you can just create an instance, attach events, and that's all. If you need more than one instance, it gets more complicated.
+
+### Advanced Usage
+
+Keyboard instances are nodes of a tree based hierarchy (similar to the DOM) that allow complex keyboard driven functionality. The root node of the tree is Keyboard.manager, an instance of Keyboard itself.  When a key event is fired the root node keyboard (Keyboard.manager) gets a chance to handle the event.  The event is then propagated from the currently active leaf node back towards the root.
+
+For example. Let's say you have the following application:
+
+  Desktop UI = Keyboard.manager*
+  |------------------------------|
+  v                              v
+  Window 1 w/ hotkeys*           Window 2 w/ hotkeys
+  |                              |--------------------------------|
+  v                              v                                v
+  HTML Editor w/ hotkeys*        Slideshow w/ hotkeys*    Tagging UI w/ hotkeys
+
+(* = active)
+
+When the user hits a key command, Keyboard.manager gets the first option to handle it. If the user hits Command+Tab you might, for instance, switch window focus (this is just an analogy to a desktop UI; obviously in the real world the operating system would handle this key combo before it got to the browser). If the Keyboard.manager does not handle the event and stop it with [Keyboard.stop][], the event is passed to the deepest instance that has focus (the editor). If the user hits Command+B you might bold the text and stop the event from going further (with [Keyboard.stop][]). If the user hits Command+W the event would go to Keyboard.manager, then to the editor, and when neither of them stop the event, the Window UI instance would have the option of handling it. It might, for example, close the window.
+
+Keyboards are enabled and disabled with their [enable][] method. So if the user were to switch focus to Window 2 in the diagram above, that instance would call its *enable* method, stealing focus from Window 1. If the Keyboard for Slideshow is enabled, it will automatically receive events from the Window 2 manager. This nesting can go as deep as is required. No two siblings can be enabled at a time, and if a Keyboard's parent is not enabled, it will not receive events.
+
+In the diagram above, you can see that Slideshow's Keyboard instance is active, but because it's parent (Window 2) is not, it does not receive events. This allows for a nested state. So if the user switches to Window 2, the Slideshow will start receiving events. If the user focuses on the Tagging UI and your code enables the Tagging Keyboard, stealing from SlideShow, the event order will be Desktop UI > Tagging UI > Window 2. Switching back to Window 1 will restore Desktop UI > HTML Editor > Window 1. The point is that focus is always stolen from siblings, and the state of children remains even when the parent looses that focus.
+
+As an additional note, this means you can add keyboard events to Keyboard.manager. This is how you add "top level" events.
 
 Keyboard Method: constructor {#Keyboard:constructor}
 ----------------------------------------
 
 ### Syntax
 
-	var myKeyboardEvents = new Keyboard([[options], [element]]);
+	var myKeyboardEvents = new Keyboard([options]);
 
 ### Arguments
 
@@ -21,9 +48,9 @@ Keyboard Method: constructor {#Keyboard:constructor}
 
 #### Options
 
-* defaultEventType:      - (*string*; defaults to 'keyup') The event type that should trigger the subevents.
-* active:         - (*boolean*; defaults to *true*) When not active the subevents will be surpressed.
-* events:         - (*object*; defaults to *{}*) object keys are event names values should be the function to fire. Same as calling addEvents({...}) on the instance after creation
+* defaultEventType: - (*string*; defaults to 'keyup') The event type that should trigger the subevents (this can be changed per key rule, so this is only the default).
+* active: - (*boolean*; defaults to *false*) When not active the events will be suppressed.
+* events: - (*object*; defaults to *{}*) object keys are event names, values should be the function to fire. Same as calling addEvents({...}) on the instance after creation
 
 ### Returns
 
@@ -47,7 +74,9 @@ Keyboard Method: constructor {#Keyboard:constructor}
 		}
 	});
 
-	var myKeyboardEvents1 = new Keyboard({defaultEventType: 'keydown'});
+	var myKeyboardEvents1 = new Keyboard({
+		defaultEventType: 'keydown'
+	});
 	myKeyBoardEvents1.addEvents({
 		'shift+h': fn1,
 		'ctrl+shift+h': fn2,
@@ -72,12 +101,14 @@ Stops propagation of the passed in event to other keyboard instances.
 
 	Keyboard.stop(event)
 
-### Methods
+### Returns
+
+* (*object*) This instance of [Keyboard][]
 
 Keyboard Method: activate {#Keyboard:activate}
 ------------------------------------
 
-Activates the events managed by this instance.
+Activates the events managed by this instance. Note that this steals focus from any sibling keyboard, effectively deactivating it and its children.
 
 ### Syntax
 
@@ -126,7 +157,7 @@ Attempts to give control to the previously active keyboard. Will not do anything
 Keyboard Method: manage {#Keyboard:manage}
 ------------------------------------
 
-The keyboard will become the parent of the passed in keyboard.  (Analogous to Element.grab)
+The keyboard will become the parent of the passed in keyboard.  By default
 
 ### Syntax
 
@@ -134,7 +165,7 @@ The keyboard will become the parent of the passed in keyboard.  (Analogous to El
 
 ### Note
 
-When otherKeyboard is active otherKeyboard will receive the event first then as long as otherKeyboard did not call Keyboard.stop(event) then the event will bubble up to myKeyboard.
+When myKeyboard is active otherKeyboard will receive the event first then as long as otherKeyboard did not call Keyboard.stop(event) then the event will bubble up to myKeyboard. If myKeyboard manages more than one Keyboard instance, which ever one is active will receive the events as they bubble.
 
 
 [Keyboard]: #Keyboard
