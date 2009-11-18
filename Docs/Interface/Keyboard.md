@@ -4,16 +4,20 @@ Class: Keyboard {#Keyboard}
 Class takes out the need to have logic in key events to check which buttons are pressed.  The class fires individual events for keys (Individual key events are referred to as subevents in this documentation).  Modifiers are allowed. Provides methodology to disable and enable the listeners assigned to a Keyboard instance.
 Keyboard instances are nodes of a tree based heirarchy (think of the DOM) to allow complex keyboard driven functionality. The root node of the tree is generally Keyboard.manager.  When a key event is fired the root node keyboard (Generally Keyboard.manager) gets a chance to handle the event.  The event is then propagated from the currently active leafnode back towards the root.
 
+### Extends
+
+* [Events][]
+
 ### Implements
 
-* [Options][], [Events][]
+* [Options][], [Log][]
 
 Keyboard Method: constructor {#Keyboard:constructor}
 ----------------------------------------
 
 ### Syntax
 
-	var myKeyboardEvents = new Keyboard([[options], [element]]);
+	var myKeyboardEvents = new Keyboard([options]);
 
 ### Arguments
 
@@ -22,7 +26,7 @@ Keyboard Method: constructor {#Keyboard:constructor}
 #### Options
 
 * defaultEventType:      - (*string*; defaults to 'keyup') The event type that should trigger the subevents.
-* active:         - (*boolean*; defaults to *true*) When not active the subevents will be surpressed.
+* active:         - (*boolean*; defaults to *false*) When not active the subevents will be surpressed.
 * events:         - (*object*; defaults to *{}*) object keys are event names values should be the function to fire. Same as calling addEvents({...}) on the instance after creation
 
 ### Returns
