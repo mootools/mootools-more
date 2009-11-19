@@ -45,6 +45,26 @@
 				'purple']);
 				t.push(['green']);
 			}
+		},
+		{
+			title: "HtmlTable push:empty:push",
+			description: "Creates a table, fills it, empties it, and fills it again.",
+			verify: "Do you see the table? Does it have the contents 'I' and 'work' in the body?",
+			before: function(){
+				// create blank table with no options
+				var table = new HtmlTable();
+				// set some headers
+				table.setHeaders(['column1','column2']);
+				// inject table into myElement
+				table.inject($(document.body));
+				// push data to the table
+				table.push(['hello','world']);
+				// this is the trouble spot, it removes the tbody tag from the table
+				table.empty();
+				// at this stage if you call table.build(), the below push will work
+				// if you try to push rows into the table now it wont work as the tbody tag is missing
+				table.push(['I','work']);
+			}
 		}
 	]
 }
