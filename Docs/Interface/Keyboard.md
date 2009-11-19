@@ -3,9 +3,13 @@ Class: Keyboard {#Keyboard}
 
 Keyboard takes out the need to have logic in key events to check which buttons are pressed.  The class fires individual events for keys (individual key events are referred to as sub-events in this documentation) and provides methodology to disable and enable the listeners assigned to a Keyboard instance. Modifiers are allowed.
 
+### Extends
+
+* [Events][]
+
 ### Implements
 
-* [Options][], [Events][]
+* [Options][], [Log][]
 
 ### Simple Usage
 
@@ -171,3 +175,4 @@ Stops propagation of the passed in event to other keyboard instances. Note this 
 [Keyboard]: #Keyboard
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
+[Log]: /more/Core/Log
