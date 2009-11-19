@@ -104,7 +104,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	headClick: function(event, el) {
-		if (!this.head) return;
+		if (!this.head || el.hasClass(this.options.classNoSort)) return;
 		var index = Array.indexOf(this.head.cells, el);
 		this.sort(index);
 		return false;
