@@ -30,6 +30,21 @@ describe('Array.average', {
 
 });
 
+describe('Array.shuffle', {
+
+	'should shuffle an array': function(){
+		var toShuffle = [],
+			toShuffle2 = [];
+		(100).times(function(i){
+			toShuffle.push(i);
+			toShuffle2.push(i);
+		});
+		value_of(toShuffle.shuffle()).should_not_be(toShuffle2.shuffle());
+		value_of(toShuffle.shuffle().length).should_be(100);
+	}
+
+});
+
 describe('Array.sum', {
 
 	'should some up all number values': function(){
