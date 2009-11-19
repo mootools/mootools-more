@@ -29,7 +29,9 @@ provides: [Keyboard]
 	var modifiers = ['shift', 'control', 'alt', 'meta'];
 	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
 	
-	var parse = function(type, eventType){
+	var parse = function(type, eventType, ignore){
+		if (ignore && ignore.contains(type.toLowerCase())) return type;
+		
 		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
 			eventType = $1;
 			return '';
@@ -67,18 +69,15 @@ provides: [Keyboard]
 			*/
 			defaultEventType: 'keydown',
 			active: false,
-			events: {}
+			events: {},
+			nonParsedEvents: ["activate", "deactivate", "onactivate", "ondeactivate"]
 		},
 
 		initialize: function(options){
 			this.setOptions(options);
 			//if this is the root manager, nothing manages it
-			if (Keyboard.manager) Keyboard.manager.manage(this);
-			this.setup();
-		},
-
-		setup: function(){
 			this.addEvents(this.options.events);
+			if (Keyboard.manager) Keyboard.manager.manage(this);
 			if (this.options.active) this.activate();
 		},
 
@@ -97,19 +96,21 @@ provides: [Keyboard]
 		},
 
 		addEvent: function(type, fn, internal) {
-			return this.parent(parse(type, this.options.defaultEventType), fn, internal);
+			return this.parent(parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn, internal);
 		},
 
 		removeEvent: function(type, fn) {
-			return this.parent(parse(type, this.options.defaultEventType), fn);
+			return this.parent(parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn);
 		},
 
 		activate: function(){
+			if (this.active) return this;
 			this.active = true;
 			return this.enable();
 		},
 
 		deactivate: function(){
+			if (!this.active) return this;
 			this.active = false;
 			return this.fireEvent('deactivate');
 		},
@@ -123,7 +124,8 @@ provides: [Keyboard]
 				//if we're stealing focus, store the last keyboard to have it so the relenquish command works
 				if (instance != this.activeKB) this.previous = this.activeKB;
 				//if we're enabling a child, assign it so that events are now passed to it
-				this.activeKB = instance.fireEvent('activate');
+				this.activeKB = instance;
+				if (instance.active) instance.fireEvent('activate');
 			} else if (this.manager) {
 				//else we're enabling ourselves, we must ask our parent to do it for us
 				this.manager.enable(this);
