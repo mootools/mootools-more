@@ -43,6 +43,19 @@ Array.implement({
 
 	unique: function(){
 		return [].combine(this);
+	},
+
+	shuffle: function(){
+		var i = this.length;
+		if (i == 0) return;
+		while (--i){
+			var j = Math.floor(Math.random() * ( i + 1 ));
+			var tempi = this[i];
+			var tempj = this[j];
+			this[i] = tempj;
+			this[j] = tempi;
+		}
+		return this;
 	}
 
 });
