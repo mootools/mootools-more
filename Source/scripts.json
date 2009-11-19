@@ -227,7 +227,7 @@
 		},
 
 		"Sortables": {
-			"deps": ["More", "Drag.Move"],
+			"deps": ["More", "Drag.Move", "Selectors"],
 			"desc": "Class for creating a drag and drop sorting interface for lists of items."
 		}
 
