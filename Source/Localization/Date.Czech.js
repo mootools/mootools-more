@@ -1,13 +1,22 @@
 /*
-Script: Date.Czech.js
-	Date messages for Czech.
+---
 
-	License:
-		MIT-style license.
+script: Date.Czech.js
 
-	Authors:
-		Jan Černý chemiX
+description: Date messages for Czech.
 
+license: MIT-style license
+
+authors:
+- Jan Černý chemiX
+
+requires:
+- /Lang
+- /Date
+
+provides: [Date.Czech]
+
+...
 */
 
 MooTools.lang.set('cs-CZ', 'Date', {
@@ -40,6 +49,12 @@ MooTools.lang.set('cs-CZ', 'Date', {
 	hourUntil: 'asi před hodinou',
 	hoursUntil: 'před {delta} hodinami',
 	dayUntil: 'před dnem',
-	daysUntil: 'před {delta} dni'
+	daysUntil: 'před {delta} dni',
+	weekUntil: 'před týdnem',
+	weeksUntil: 'před {delta} týdny',
+	monthUntil: 'před měsícem',
+	monthsUntil: 'před {delta} měsíci',
+	yearUntil: 'před rokem',
+	yearsUntil: 'před {delta} lety'
 
 });
