@@ -41,6 +41,9 @@ describe('Array.shuffle', {
 		});
 		value_of(toShuffle.shuffle()).should_not_be(toShuffle2.shuffle());
 		value_of(toShuffle.shuffle().length).should_be(100);
+		toShuffle.sort();
+		toShuffle2.sort();
+		value_of(toShuffle).should_be(toShuffle2);
 	}
 
 });
