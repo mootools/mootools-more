@@ -46,14 +46,10 @@ Array.implement({
 	},
 
 	shuffle: function(){
-		var i = this.length;
-		if (i == 0) return;
-		while (--i){
-			var j = Math.floor(Math.random() * ( i + 1 ));
-			var tempi = this[i];
-			var tempj = this[j];
-			this[i] = tempj;
-			this[j] = tempi;
+		for (var i = this.length; i && --i;){
+			var temp = this[i], r = Math.floor(Math.random() * ( i + 1 ));
+			this[i] = this[r];
+			this[r] = temp;
 		}
 		return this;
 	}
