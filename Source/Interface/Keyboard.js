@@ -146,13 +146,7 @@ provides: [Keyboard]
 		instances: [],
 
 		trace: function(){
-			this.enableLog();
-			var item = this;
-			this.log('the following items have focus: ');
-			while (item) {
-				this.log(document.id(item.widget) || item.widget || item, 'active: ' + this.active);
-				item = item.activeKB;
-			}
+			Keyboard.trace(this);
 		},
 
 		each: function(fn){
@@ -202,8 +196,13 @@ provides: [Keyboard]
 		active: true
 	});
 	
-	Keyboard.trace = function(){
-		Keyboard.manager.trace();
+	Keyboard.trace = function(keyboard){
+		keyboard = keyboard || Keyboard.manager;
+		keyboard.enableLog();
+		keyboard.log('the following items have focus: ');
+		Keyboard.each(keyboard, function(current){
+				keyboard.log(document.id(current.widget) || current.wiget || current);
+		});
 	};
 	
 	var handler = function(event){
