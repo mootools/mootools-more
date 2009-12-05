@@ -6,6 +6,7 @@ Keyboard = Class.refactor(Keyboard, {
 
 	addEvent: function(type, fn, internal) {
 		if($type(fn) === 'object') {
+			type = 
 			var descripObj = { keys: type, description: fn.description, keyboard: this, fn: fn.fn };
 			if(fn.lookup) this.descriptorIndex[fn.lookup] = descripObj;
 			this.descriptors.push(descripObj);
@@ -13,9 +14,6 @@ Keyboard = Class.refactor(Keyboard, {
 		}
 		else this.previous.apply(this, arguments);
 	},
-
-	//Need to do the same for removal... 
-	//Also may want to move this into the Keyboard file so can use the parsed type....
 
 	getDescriptors: function(){
 		return this.descriptors;
@@ -36,14 +34,6 @@ Keyboard.rebind = function(newKeys, descriptors){
 		});
 };
 
-
-Keyboard.activeKeyboards = function(fn, keyboard) {
-	var current = keyboard || Keyboard.manager;
-	while(current){
-		fn.run(current);
-		current = current.activeKB;
-	}
-};
 
 Keyboard.activeShortcuts = function(keyboard) {
 	var activeKBS = [], activeSCS = [];

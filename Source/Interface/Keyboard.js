@@ -153,6 +153,10 @@ provides: [Keyboard]
 				this.log(document.id(item.widget) || item.widget || item, 'active: ' + this.active);
 				item = item.activeKB;
 			}
+		},
+
+		each: function(fn){
+			Keyboard.each(this, fn);
 		}
 
 	});
@@ -180,6 +184,14 @@ provides: [Keyboard]
 		}
 
 		return eventType + ':' + parsed[type];
+	};
+
+	Keyboard.each = function(keyboard, fn) {
+		var current = keyboard || Keyboard.manager;
+		while(current){
+			fn.run(current);
+			current = current.activeKB;
+		}
 	};
 
 	Keyboard.stop = function(event) {
