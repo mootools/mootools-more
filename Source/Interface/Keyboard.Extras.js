@@ -6,7 +6,6 @@ Keyboard = Class.refactor(Keyboard, {
 
 	addEvent: function(type, fn, internal) {
 		if($type(fn) === 'object') {
-			type = 
 			var descripObj = { keys: type, description: fn.description, keyboard: this, fn: fn.fn };
 			if(fn.lookup) this.descriptorIndex[fn.lookup] = descripObj;
 			this.descriptors.push(descripObj);
@@ -37,7 +36,7 @@ Keyboard.rebind = function(newKeys, descriptors){
 
 Keyboard.activeShortcuts = function(keyboard) {
 	var activeKBS = [], activeSCS = [];
-	Keyboard.activeKeyboards([].push.bind(activeKBS), keyboard);
+	Keyboard.each(keyboard, [].push.bind(activeKBS));
 	activeKBS.each(function(kb){ activeSCS.extend(kb.getDescriptors()); });
 	return activeSCS;
 };
@@ -51,7 +50,7 @@ Keyboard.getDescriptor = function(lookup, opts){
 			} : function(kb) { 
 				if(!descriptors) descriptors = kb.getDescriptor(lookup);
 			};
-	Keyboard.activeKeyboards(set, opts.keyboard);
+	Keyboard.each(opts.keyboard, set);
 	return descriptors;
 };
 
