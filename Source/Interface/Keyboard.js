@@ -29,30 +29,6 @@ provides: [Keyboard]
 	var modifiers = ['shift', 'control', 'alt', 'meta'];
 	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
 	
-	var parse = function(type, eventType){
-		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
-			eventType = $1;
-			return '';
-		});
-		
-		if (!parsed[type]){
-			var key = '', mods = {};
-			type.split('+').each(function(part){
-				if (regex.test(part)) mods[part] = true;
-				else key = part;
-			});
-		
-			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
-			var match = '';
-			modifiers.each(function(mod){
-				if (mods[mod]) match += mod + '+';
-			});
-			
-			parsed[type] = match + key;
-		}
-		
-		return eventType + ':' + parsed[type];
-	};
 
 	this.Keyboard = new Class({
 
@@ -180,6 +156,31 @@ provides: [Keyboard]
 		}
 
 	});
+
+	var parse = function(type, eventType){
+		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
+			eventType = $1;
+			return '';
+		});
+
+		if (!parsed[type]){
+			var key = '', mods = {};
+			type.split('+').each(function(part){
+				if (regex.test(part)) mods[part] = true;
+				else key = part;
+			});
+
+			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
+			var match = '';
+			modifiers.each(function(mod){
+				if (mods[mod]) match += mod + '+';
+			});
+
+			parsed[type] = match + key;
+		}
+
+		return eventType + ':' + parsed[type];
+	};
 
 	Keyboard.stop = function(event) {
 		event.preventKeyboardPropagation = true;
