@@ -73,11 +73,11 @@ provides: [Keyboard]
 		},
 
 		addEvent: function(type, fn, internal) {
-			return this.parent(parse(type, this.options.defaultEventType), fn, internal);
+			return this.parent(Keyboard.parse(type, this.options.defaultEventType), fn, internal);
 		},
 
 		removeEvent: function(type, fn) {
-			return this.parent(parse(type, this.options.defaultEventType), fn);
+			return this.parent(Keyboard.parse(type, this.options.defaultEventType), fn);
 		},
 
 		activate: function(){
@@ -157,7 +157,7 @@ provides: [Keyboard]
 
 	});
 
-	var parse = function(type, eventType){
+	Keyboard.parse = function(type, eventType){
 		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
 			eventType = $1;
 			return '';
