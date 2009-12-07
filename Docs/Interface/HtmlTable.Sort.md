@@ -36,6 +36,10 @@ Makes headers of HtmlTable clickable to sort the rows.
 ### Events
 
 * onSort - callback executed when a column is sorted; passed the *tbody* and the index of the column sorted.
+
+### Note
+
+Your Table must have a *thead* with *th* elements for each column (these are what the user clicks on to sort stuff). If your table doesn't have headers already, you can specify them with the *headers* option or use the *setHeaders* method.
 	
 
 HtmlTable Method: sort {#HtmlTable:sort}
