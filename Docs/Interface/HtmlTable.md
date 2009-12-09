@@ -25,18 +25,20 @@ Builds table elements with methods to add rows quickly.
 
 * properties - (*object*) a set of properties for the Table element; defaults to *{cellpadding:0, cellspacing:0, border:0}*
 * rows - (*array*) an array of row objects (see [HtmlTable.push][])
+* headers - (*array*) a row that is injected in the *thead*; required for sorting.
 
 ### Example
 
 	var myTable = new HtmlTable({
-	  properties: {
-	    border: 1,
-	    cellspacing: 3
-	  },
-	  rows: [
-	    ['apple', 'red'],
-	    ['lemon', 'yellow']
-	  ]
+		properties: {
+			border: 1,
+			cellspacing: 3
+		},
+		headers: ['fruits', 'colors'],
+		rows: [
+			['apple', 'red'],
+			['lemon', 'yellow']
+		]
 	});
 	myTable.inject($('someContainer'));
 	
