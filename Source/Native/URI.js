@@ -121,8 +121,9 @@ var URI = new Class({
 
 	setData: function(values, merge, part){
 		if (typeof values == 'string'){
-			values = this.getData();
-			values[arguments[0]] = arguments[1];
+			data = this.getData();
+			data[arguments[0]] = arguments[1];
+			values = data;
 		} else if (merge) {
 			values = $merge(this.getData(), values);
 		}
