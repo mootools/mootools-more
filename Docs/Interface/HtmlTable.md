@@ -81,7 +81,7 @@ Row data can be in either of two formats. Note that they can be mixed and matche
 			content: 'value 4',
 			properties: {
 				colspan: 2,
-				className: 'doubleWide',
+				'class': 'doubleWide',
 				style: '1px solid blue'
 		},
 		'value 5' //can just be data; mixing and the two in the same row is fine
@@ -120,39 +120,24 @@ Empties the *tbody* of the table.
 
 * (*object*) This instance of HtmlTable.
 
-HtmlTable method: setHeaders {#HtmlTable:setHeaders}
+HtmlTable method: set {#HtmlTable:set}
 ----------------------------------------------------
 
-Sets the contents of the *thead* with *th* tags.
+Sets the contents of the header or footer.
 
 ### Syntax
 
-	myTable.setHeaders(headers);
+	myTable.set(what, rowArray);
 
 ### Arguments
 
-1. headers - (*array*) an array of header information; same as the row data sent to [HtmlTable.push][]
+1. what - (*string*) either 'headers' or 'footers'
+2. rowArray - (*array*) an array of header information; same as the row data sent to [HtmlTable.push][]
 
 ### Returns
 
-* (*object*) This instance of HtmlTable.
+* (*object*) The row data (same as returned by the *push* method).
 
-HtmlTable method: setFooters {#HtmlTable:setFooters}
-----------------------------------------------------
-
-Sets the contents of the *tfoot* with *td* tags.
-
-### Syntax
-
-	myTable.setFooters(footers);
-
-### Arguments
-
-1. footers - (*array*) an array of footer information; same as the row data sent to [HtmlTable.push][]
-
-### Returns
-
-* (*object*) This instance of HtmlTable.
 
 HtmlTable response: $ {#HtmlTable:Dollar}
 -----------------------------------------
