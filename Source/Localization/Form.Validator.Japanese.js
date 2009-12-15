@@ -49,4 +49,3 @@ MooTools.lang.set("ja-JP", "Form.Validator", {
 	sameMonth: '日付が同一です。どちらかを変更してください。'
 
 });
-
