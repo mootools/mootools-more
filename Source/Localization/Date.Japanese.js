@@ -56,4 +56,3 @@ MooTools.lang.set('ja-JP', 'Date', {
 	yearsUntil: '今から{delta}年'
 
 });
-
