@@ -145,10 +145,12 @@ var OverText = new Class({
 			this.text.hide();
 			this.fireEvent('textHide', [this.text, this.element]);
 			this.pollingPaused = true;
-			try {
-				if (!suppressFocus) this.element.fireEvent('focus');
-				this.element.focus();
-			} catch(e){} //IE barfs if you call focus on hidden elements
+			if (!suppressFocus){
+				try {
+					this.element.fireEvent('focus');
+					this.element.focus();
+				} catch(e){} //IE barfs if you call focus on hidden elements
+			}
 		}
 		return this;
 	},
