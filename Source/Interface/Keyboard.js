@@ -43,18 +43,15 @@ provides: [Keyboard]
 			*/
 			defaultEventType: 'keydown',
 			active: false,
-			events: {}
+			events: {},
+			nonParsedEvents: ["activate", "deactivate", "onactivate", "ondeactivate"]
 		},
 
 		initialize: function(options){
 			this.setOptions(options);
-			//if this is the root manager, nothing manages it
-			this.setup();
-			if (Keyboard.manager) Keyboard.manager.manage(this);
-		},
-
-		setup: function(){
 			this.addEvents(this.options.events);
+			//if this is the root manager, nothing manages it
+			if (Keyboard.manager) Keyboard.manager.manage(this);
 			if (this.options.active) this.activate();
 		},
 
@@ -73,11 +70,11 @@ provides: [Keyboard]
 		},
 
 		addEvent: function(type, fn, internal) {
-			return this.parent(Keyboard.parse(type, this.options.defaultEventType), fn, internal);
+			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn, internal);
 		},
 
 		removeEvent: function(type, fn) {
-			return this.parent(Keyboard.parse(type, this.options.defaultEventType), fn);
+			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn);
 		},
 
 		activate: function(){
@@ -99,7 +96,7 @@ provides: [Keyboard]
 				//if we're enabling a child, assign it so that events are now passed to it
 				var e = { keyboard: instance };
 				this.activeKB = instance;
-				Keyboard.manager.handle(e, this.options.defaultEventType + ':activate');
+				Keyboard.manager.handle(e, 'activate');
 			} else if (this.manager) {
 				//else we're enabling ourselves, we must ask our parent to do it for us
 				this.manager.enable(this);
@@ -112,7 +109,7 @@ provides: [Keyboard]
 				if(instance === this.activeKB) {
 					this.activeKB = null;
 					var e = { keyboard: instance };
-					instance.handle(e, this.options.defaultEventType + ':deactivate');
+					instance.handle(e, 'deactivate');
 				}
 			}
 			else if (this.manager) {
@@ -155,7 +152,8 @@ provides: [Keyboard]
 
 	});
 
-	Keyboard.parse = function(type, eventType){
+	Keyboard.parse = function(type, eventType, ignore){
+		if (ignore && ignore.contains(type.toLowerCase())) return type;
 		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
 			eventType = $1;
 			return '';
