@@ -44,7 +44,7 @@ provides: [Keyboard]
 			defaultEventType: 'keydown',
 			active: false,
 			events: {},
-			nonParsedEvents: ["activate", "deactivate", "onactivate", "ondeactivate"]
+			nonParsedEvents: ["activate", "deactivate", "onactivate", "ondeactivate", "changed", "onchanged"]
 		},
 
 		initialize: function(options){
@@ -94,9 +94,8 @@ provides: [Keyboard]
 				//if we're stealing focus, store the last keyboard to have it so the relenquish command works
 				if (instance != this.activeKB) this.previous = this.activeKB;
 				//if we're enabling a child, assign it so that events are now passed to it
-				var e = { keyboard: instance };
-				this.activeKB = instance;
-				Keyboard.manager.handle(e, 'activate');
+				this.activeKB = instance.fireEvent('activate');
+				Keyboard.manager.fireEvent('changed');
 			} else if (this.manager) {
 				//else we're enabling ourselves, we must ask our parent to do it for us
 				this.manager.enable(this);
@@ -108,8 +107,8 @@ provides: [Keyboard]
 			if (instance) {
 				if(instance === this.activeKB) {
 					this.activeKB = null;
-					var e = { keyboard: instance };
-					instance.handle(e, 'deactivate');
+					instance.fireEvent('deactivate');
+					Keyboard.manager.fireEvent('changed');
 				}
 			}
 			else if (this.manager) {
