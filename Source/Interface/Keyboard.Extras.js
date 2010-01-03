@@ -1,17 +1,29 @@
-Keyboard = Class.refactor(Keyboard, {
+Keyboard.implement({
 
 	descriptors: [],
 
 	descriptorIndex: {},
 
-	addEvent: function(type, fn, internal) {
-		if($type(fn) === 'object') {
-			var descripObj = { keys: type, description: fn.description, keyboard: this, fn: fn.fn };
-			if(fn.lookup) this.descriptorIndex[fn.lookup] = descripObj;
-			this.descriptors.push(descripObj);
-			this.previous(type, fn.fn, internal);
+	/*
+		Descriptor should be in the format of:
+		{
+			'keys': 'shift+s', // the default to add as an event.
+			'description': 'blah blah blah', // a brief description of the functionality.
+			'handler': function(){} // the event handler to run when keys are pressed.
 		}
-		else this.previous.apply(this, arguments);
+	*/
+	addDescriptor: function(lookup, descriptor) {
+		descriptor.keyboard = this;
+		descriptor.lookup = lookup;
+		this.descriptorIndex[lookup] = descriptor;
+		this.descriptors.push(descriptor);
+		if(descriptor.keys) this.addEvent(descriptor.keys, descriptor.handler);
+		return this;
+	},
+
+	addDescriptors: function(obj){
+		for(var lookup in obj) this.addDescriptor(lookup, obj[lookup]);
+		return this;
 	},
 
 	getDescriptors: function(){
@@ -26,8 +38,8 @@ Keyboard = Class.refactor(Keyboard, {
 
 Keyboard.rebind = function(newKeys, descriptors){
 		$splat(descriptors).each(function(descriptor){
-			descriptor.keyboard.removeEvent(descriptor.keys, descriptor.fn);
-			descriptor.keyboard.addEvent(newKeys, descriptor.fn);
+			descriptor.keyboard.removeEvent(descriptor.keys, descriptor.handler);
+			descriptor.keyboard.addEvent(newKeys, descriptor.handler);
 			descriptor.keys = newKeys;
 			Keyboard.manager.handle({keyboard: descriptor.keyboard}, descriptor.keyboard.options.defaultEventType + ':rebound');
 		});
@@ -56,4 +68,4 @@ Keyboard.getDescriptor = function(lookup, opts){
 
 Keyboard.getDescriptors = function(lookup, opts) {
 	return Keyboard.getDescriptor(lookup, $merge(opts, { many: true }));
-}
+};
