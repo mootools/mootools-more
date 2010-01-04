@@ -171,7 +171,7 @@ Adds drag-to-resize behavior to an Element using supplied options.
 
 ### Arguments:
 
-1. options - (*object*, optional) See [Drag][] for acceptable options.
+1. options - (*object*, optional) See [Drag][#Drag] for acceptable options.
 
 ### Returns:
 
