@@ -25,13 +25,17 @@ Delegates the methods of an element's children to the parent element for greater
 ### Arguments
 
 2. typeSelector - (*string*) An event name (click, mouseover, mouseenter, etc) that should be monitored paired with a selector (see example) to limit functionality to child elements.
-3. fn - (*function*) The callback to execute when the event occurs (passed the event just like any other [addEvent][] usage).
+3. fn - (*function*) The callback to execute when the event occurs (passed the event just like any other [addEvent][] usage and a second argument, the element that matches your selector that was clicked).
 
 
 ### Example
 
-	$(element).addEvent('click:relay(a)', function(){
+	$(element).addEvent('click:relay(a)', function(event, clicked){
+		event.preventDefault(); //don't follow the link
 		alert('you clicked a link!');
+		//you can reference the element clicked with the second
+		//argument passed to your callback
+		clicked.setStyle('color', '#777'); 
 	});
 
 ### Returns
@@ -44,6 +48,9 @@ Delegates the methods of an element's children to the parent element for greater
 * Include [Selectors.js][] to use more complex selectors.
 * You can use any selector in combination with any event
 * You cannot delegate the *blur* or *focus* events for elements. This is a limitation in how MooTools manages events internally (and prevents memory leaks) and these two events cannot be delegated until this code is refactored. Look for it in MooTools 2.0.
+* Be wary of the cost of delegation; for example, mouseover/mouseout delegation on an entire document can cause your page to run the selector constantly as the user moves his or her mouse around the page. Delegation is not always the best solution.
+* Delegation is especially useful if you are using AJAX to load content into your pages dynamically, as the contents of an element can change with new elements added or others removed and your delegated events need not change.
+* In general it is always better to delegate to the closest parent to your elements as possible; delegate to an element in the page rather than the document body for example.
 
 Element method: addEvents {#Element:addEvents}
 ------------------------------------------------
@@ -84,7 +91,7 @@ Removes a method from an element as [removeEvent][] always does. Provided here j
 
 ### Example
 
-	var monitor = function(){ alert('you clicked a link!')};
+	var monitor = function(event, element){ alert('you clicked a link!')};
 	$(element).addEvent('click:relay(a)', monitor);
 	//link clicks are delegated to element
 	//...now we remove the delegation:
