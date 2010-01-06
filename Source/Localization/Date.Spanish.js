@@ -22,7 +22,7 @@ provides: [Date.Spanish]
 MooTools.lang.set('es-ES', 'Date', {
 
 	months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-	days: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+	days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
 	//culture's date order: MM/DD/YYYY
 	dateOrder: ['date', 'month', 'year'],
 	AM: 'AM',
@@ -39,8 +39,8 @@ MooTools.lang.set('es-ES', 'Date', {
 	minutesAgo: 'hace {delta} minutos',
 	hourAgo: 'hace una hora',
 	hoursAgo: 'hace unas {delta} horas',
-	dayAgo: 'hace un dia',
-	daysAgo: 'hace {delta} dias',
+	dayAgo: 'hace un día',
+	daysAgo: 'hace {delta} días',
 	weekAgo: 'hace una semana',
 	weeksAgo: 'hace unas {delta} semanas',
 	monthAgo: 'hace un mes',
@@ -52,8 +52,8 @@ MooTools.lang.set('es-ES', 'Date', {
 	minutesUntil: '{delta} minutos desde ahora',
 	hourUntil: 'una hora desde ahora',
 	hoursUntil: 'unas {delta} horas desde ahora',
-	dayUntil: 'un dia desde ahora',
-	daysUntil: '{delta} dias desde ahora',
+	dayUntil: 'un día desde ahora',
+	daysUntil: '{delta} días desde ahora',
 	weekUntil: 'una semana desde ahora',
 	weeksUntil: 'unas {delta} semanas desde ahora',
 	monthUntil: 'un mes desde ahora',
