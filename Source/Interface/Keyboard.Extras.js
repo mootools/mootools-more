@@ -13,9 +13,7 @@ Keyboard.implement({
 		}
 	*/
 	addDescriptor: function(name, descriptor) {
-		descriptor.getKeyboard = function(){
-			this;
-		}.bind(this);
+		descriptor.getKeyboard = $lambda(this);
 		descriptor.name = name;
 		this.descriptorIndex[name] = descriptor;
 		this.descriptors.push(descriptor);
