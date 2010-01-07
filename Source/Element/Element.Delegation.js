@@ -81,14 +81,13 @@ provides: [Element.Delegation]
 				else oldRemoveEvent.apply(this, type);
 
 				events = this.retrieve('events');
-				if (events && events[type] && events[type].length == 0){
+				if (events && events[type] && events[type].keys.length == 0){
 					var monitors = this.retrieve('$moo:delegateMonitors', {});
 					oldRemoveEvent.apply(this, [splitted.event, monitors[type]]);
 					delete monitors[type];
 				}
 				return this;
 			}
-
 			return oldRemoveEvent.apply(this, arguments);
 		},
 

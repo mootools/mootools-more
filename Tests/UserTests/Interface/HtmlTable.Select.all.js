@@ -24,7 +24,7 @@
 			before: function(){
 				var t = new HtmlTable({
 					headers: ['fruit', 'colors'],
-					allowMultiSelect: false,
+					allowMultiSelect: true,
 					selectable: true,
 					sortable: true,
 					zebra: true

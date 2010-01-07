@@ -46,7 +46,7 @@ Adds a semi-transparent overlay over a DOM element.
 
 ### Styles
 
-The mask element is not styled, so if you don't add a css rule in your style sheets, it will be invisible. You can download the default styles here: [mask.css](http://mootools.net/releases/mootools-more-1.2.4.1/Styles/Interface/Mask/mask.css)
+The mask element is not styled, so if you don't add a css rule in your style sheets, it will be invisible. You can download the default styles here: [mask.css](http://github.com/mootools/mootools-more/raw/master/Styles/Interface/Mask/mask.css)
 
 Mask Method: toggle {#Mask:toggle}
 --------------------------------------
@@ -125,7 +125,7 @@ Reasserts the dimensions of the overlay layer. Note that this method is called w
 
 ### Syntax
 
-	myMask.destroy()
+	myMask.resize()
 
 ### Returns
 

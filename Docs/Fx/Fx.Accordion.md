@@ -20,8 +20,7 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 
 1. togglers  - (*array*) The collection of Elements which will be clickable and trigger the opening of sections of the *Fx.Accordion*.
 2. elements  - (*array*) The collection of Elements the transitions will be applied to.
-3. container - (*element*, optional) A container Element for the *Fx.Accordion*, to which new Elements will be added when using addSection.
-4. options   - (*object*, optional) All the [Fx][] options in addition to options below.
+3. options   - (*object*, optional) All the [Fx][] options in addition to options below.
 
 #### Options:
 

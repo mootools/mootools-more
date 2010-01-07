@@ -88,10 +88,6 @@ Element.implement({
 				calc = rel == document.body ? window.getScroll() : rel.getPosition(),
 				top = calc.y, left = calc.x;
 
-		var scrolls = rel.getScrolls();
-		top += scrolls.y;
-		left += scrolls.x;
-
 		var dim = this.getDimensions({computeSize: true, styles:['padding', 'border','margin']});
 		var pos = {},
 				prefY = options.offset.y,

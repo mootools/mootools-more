@@ -122,8 +122,7 @@ var Mask = new Class({
 
 	show: function(){
 		if (!this.hidden) return this;
-		this.target.addEvent('resize', this.resize);
-		if (this.target != document.body) document.id(document.body).addEvent('resize', this.resize);
+		window.addEvent('resize', this.resize);
 		this.position();
 		this.showMask.apply(this, arguments);
 		return this;

@@ -5,7 +5,7 @@
 # Full:
 # ./build.rb
 # 
-# Fx.Accordion, DomReady including all dependencies:
+# Fx.Tween, DomReady including all dependencies:
 # ./build.rb Fx.Tween DomReady
 
 require 'rubygems'

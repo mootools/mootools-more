@@ -76,6 +76,8 @@ License:
 		},
 		
 		'URI.setData({ keyName: \'my value\' }) should return ?keyName=my%20value as the query': function(){
+			uri.setData('keyName', 'myOtherValue');
+			value_of(uri.get('query')).should_be('keyName=myOtherValue');
 			uri.setData({ keyName: 'my value' });
 			value_of(uri.get('query')).should_be('keyName=my%20value');
 		},

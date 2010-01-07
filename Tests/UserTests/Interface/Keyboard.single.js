@@ -26,6 +26,12 @@
 							$('escape').toggleClass('active');
 						}
 					},
+					onActivate: function(){
+						console.log('activated keyboard');
+					},
+					onDeactivate: function(){
+						console.log('deactivated keyboard');
+					},
 					active: true
 				});
 				$(document.body).store('kb', kb);

@@ -49,8 +49,11 @@ provides: [Keyboard]
 
 		initialize: function(options){
 			this.setOptions(options);
-			this.addEvents(this.options.events);
 			//if this is the root manager, nothing manages it
+			this.setup();
+		}, 
+		setup: function(){
+			this.addEvents(this.options.events);
 			if (Keyboard.manager) Keyboard.manager.manage(this);
 			if (this.options.active) this.activate();
 		},

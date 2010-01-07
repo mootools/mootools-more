@@ -16,7 +16,7 @@
 		"Element.Forms":['all'],
 		"Element.Shortcuts":['all'],
 		"Element.Pin":['all'],
-		"Element.Position":['all']
+		"Element.Position":['basic','scrolling']
 	},
 	"Forms": {
 		"Form.Validator.Inline":['all'],

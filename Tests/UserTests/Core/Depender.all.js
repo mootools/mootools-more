@@ -12,6 +12,14 @@
 					callback: function(scripts){
 						$('foo').reveal();
 					}
+				}).require({
+					scripts: 'Drag.Move',
+					callback: function(scripts) {
+						$('foo').get('reveal').chain(function(){
+							$('foo').adopt(new Element('p', {html: 'this is now draggable!'}));
+							$('foo').makeDraggable();
+						});
+					}
 				});
 			}
 		}
