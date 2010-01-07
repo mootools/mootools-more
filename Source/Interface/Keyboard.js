@@ -220,6 +220,4 @@ provides: [Keyboard]
 		'scrolllock': 145
 	});
 
-	Keyboard.alias({ enable: 'activate',  disable: 'deactivate' });
-
 })();
