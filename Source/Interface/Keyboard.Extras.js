@@ -12,17 +12,17 @@ Keyboard.implement({
 			'handler': function(){} // the event handler to run when keys are pressed.
 		}
 	*/
-	addDescriptor: function(lookup, descriptor) {
+	addDescriptor: function(name, descriptor) {
 		descriptor.keyboard = this;
-		descriptor.lookup = lookup;
-		this.descriptorIndex[lookup] = descriptor;
+		descriptor.name = name;
+		this.descriptorIndex[name] = descriptor;
 		this.descriptors.push(descriptor);
 		if(descriptor.keys) this.addEvent(descriptor.keys, descriptor.handler);
 		return this;
 	},
 
 	addDescriptors: function(obj){
-		for(var lookup in obj) this.addDescriptor(lookup, obj[lookup]);
+		for(var name in obj) this.addDescriptor(name, obj[name]);
 		return this;
 	},
 
@@ -30,42 +30,42 @@ Keyboard.implement({
 		return this.descriptors;
 	},
 
-	getDescriptor: function(lookup){
-		return this.descriptorIndex[lookup];
+	getDescriptor: function(name){
+		return this.descriptorIndex[name];
 	}
 
 });
 
 Keyboard.rebind = function(newKeys, descriptors){
-		$splat(descriptors).each(function(descriptor){
-			descriptor.keyboard.removeEvent(descriptor.keys, descriptor.handler);
-			descriptor.keyboard.addEvent(newKeys, descriptor.handler);
-			descriptor.keys = newKeys;
-			Keyboard.manager.handle({keyboard: descriptor.keyboard}, descriptor.keyboard.options.defaultEventType + ':rebound');
-		});
+	$splat(descriptors).each(function(descriptor){
+		descriptor.keyboard.removeEvent(descriptor.keys, descriptor.handler);
+		descriptor.keyboard.addEvent(newKeys, descriptor.handler);
+		descriptor.keys = newKeys;
+		Keyboard.manager.handle({keyboard: descriptor.keyboard}, descriptor.keyboard.options.defaultEventType + ':rebound');
+	});
 };
 
 
-Keyboard.activeShortcuts = function(keyboard) {
+Keyboard.getActiveShortcuts = function(keyboard) {
 	var activeKBS = [], activeSCS = [];
 	Keyboard.each(keyboard, [].push.bind(activeKBS));
 	activeKBS.each(function(kb){ activeSCS.extend(kb.getDescriptors()); });
 	return activeSCS;
 };
 
-Keyboard.getDescriptor = function(lookup, opts){
+Keyboard.getDescriptor = function(name, opts){
 	opts = opts || {};
 	var descriptors = opts.many ? [] : null,
 		set = opts.many ? function(kb){ 
-				var descriptor = kb.getDescriptor(lookup);
+				var descriptor = kb.getDescriptor(name);
 				if(descriptor) descriptors.push(descriptor);
 			} : function(kb) { 
-				if(!descriptors) descriptors = kb.getDescriptor(lookup);
+				if(!descriptors) descriptors = kb.getDescriptor(name);
 			};
 	Keyboard.each(opts.keyboard, set);
 	return descriptors;
 };
 
-Keyboard.getDescriptors = function(lookup, opts) {
-	return Keyboard.getDescriptor(lookup, $merge(opts, { many: true }));
+Keyboard.getDescriptors = function(name, opts) {
+	return Keyboard.getDescriptor(name, $merge(opts, { many: true }));
 };
