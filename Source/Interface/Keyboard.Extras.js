@@ -13,7 +13,9 @@ Keyboard.implement({
 		}
 	*/
 	addDescriptor: function(name, descriptor) {
-		descriptor.keyboard = this;
+		descriptor.getKeyboard = function(){
+			this;
+		}.bind(this);
 		descriptor.name = name;
 		this.descriptorIndex[name] = descriptor;
 		this.descriptors.push(descriptor);
@@ -38,10 +40,10 @@ Keyboard.implement({
 
 Keyboard.rebind = function(newKeys, descriptors){
 	$splat(descriptors).each(function(descriptor){
-		descriptor.keyboard.removeEvent(descriptor.keys, descriptor.handler);
-		descriptor.keyboard.addEvent(newKeys, descriptor.handler);
+		descriptor.getKeyboard().removeEvent(descriptor.keys, descriptor.handler);
+		descriptor.getKeyboard().addEvent(newKeys, descriptor.handler);
 		descriptor.keys = newKeys;
-		Keyboard.manager.handle({keyboard: descriptor.keyboard}, descriptor.keyboard.options.defaultEventType + ':rebound');
+		Keyboard.manager.handle({keyboard: descriptor.getKeyboard()}, descriptor.getKeyboard().options.defaultEventType + ':rebound');
 	});
 };
 
@@ -62,7 +64,7 @@ Keyboard.getDescriptor = function(name, opts){
 			} : function(kb) { 
 				if(!descriptors) descriptors = kb.getDescriptor(name);
 			};
-	Keyboard.each(opts.keyboard, set);
+	Keyboard.each(opts.getKeyboard(), set);
 	return descriptors;
 };
 
