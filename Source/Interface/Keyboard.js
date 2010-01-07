@@ -54,7 +54,7 @@ provides: [Keyboard]
 		setup: function(){
 			this.addEvents(this.options.events);
 			//if this is the root manager, nothing manages it
-			if (Keyboard.manager) Keyboard.manager.manage(this);
+			if (Keyboard.manager && !this.manager) Keyboard.manager.manage(this);
 			if (this.options.active) this.activate();
 		},
 
