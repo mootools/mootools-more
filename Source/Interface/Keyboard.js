@@ -49,11 +49,11 @@ provides: [Keyboard]
 
 		initialize: function(options){
 			this.setOptions(options);
-			//if this is the root manager, nothing manages it
 			this.setup();
 		}, 
 		setup: function(){
 			this.addEvents(this.options.events);
+			//if this is the root manager, nothing manages it
 			if (Keyboard.manager) Keyboard.manager.manage(this);
 			if (this.options.active) this.activate();
 		},
@@ -80,19 +80,11 @@ provides: [Keyboard]
 			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn);
 		},
 
-		activate: function(){
-			return this.enable();
-		},
-
-		deactivate: function(){
-			return this.disable();
-		},
-
 		toggleActive: function(){
 			return this[this.active ? 'deactivate' : 'activate']();
 		},
 
-		enable: function(instance){
+		activate: function(instance){
 			if (instance) {
 				//if we're stealing focus, store the last keyboard to have it so the relenquish command works
 				if (instance != this.activeKB) this.previous = this.activeKB;
@@ -101,12 +93,12 @@ provides: [Keyboard]
 				Keyboard.manager.fireEvent('changed');
 			} else if (this.manager) {
 				//else we're enabling ourselves, we must ask our parent to do it for us
-				this.manager.enable(this);
+				this.manager.activate(this);
 			}
 			return this;
 		},
 
-		disable: function(instance) {
+		deactivate: function(instance) {
 			if (instance) {
 				if(instance === this.activeKB) {
 					this.activeKB = null;
@@ -115,13 +107,13 @@ provides: [Keyboard]
 				}
 			}
 			else if (this.manager) {
-				this.manager.disable(this);
+				this.manager.deactivate(this);
 			}
 			return this;
 		},
 
 		relenquish: function(){
-			if (this.previous) this.enable(this.previous);
+			if (this.previous) this.activate(this.previous);
 		},
 
 		//management logic
@@ -129,7 +121,7 @@ provides: [Keyboard]
 			if (instance.manager) instance.manager.drop(instance);
 			this.instances.push(instance);
 			instance.manager = this;
-			if (!this.activeKB) this.enable(instance);
+			if (!this.activeKB) this.activate(instance);
 			else this._disable(instance);
 		},
 
@@ -201,7 +193,7 @@ provides: [Keyboard]
 		keyboard.enableLog();
 		keyboard.log('the following items have focus: ');
 		Keyboard.each(keyboard, function(current){
-				keyboard.log(document.id(current.widget) || current.wiget || current);
+			keyboard.log(document.id(current.widget) || current.wiget || current);
 		});
 	};
 	
@@ -227,5 +219,7 @@ provides: [Keyboard]
 		'numlock': 144,
 		'scrolllock': 145
 	});
+
+	Keyboard.alias({ enable: 'activate',  disable: 'deactivate' });
 
 })();
