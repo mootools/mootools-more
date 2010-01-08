@@ -217,7 +217,18 @@ provides: [Keyboard]
 		'home': 36,
 		'capslock': 20,
 		'numlock': 144,
-		'scrolllock': 145
+		'scrolllock': 145,
+		';': 186,
+		'=': 187,
+		',': 188,
+		'-': Browser.Engine.Gecko ? 109 : 189,
+		'.': 190,
+		'/': 191,
+		'`': 192,
+		'[': 219,
+		'\\': 220,
+		']': 221,
+		"'": 222
 	});
 
 })();
