@@ -1,3 +1,5 @@
+Keyboard.prototype.options.nonParsedEvents.combine(['rebound', 'onrebound']);
+
 Keyboard.implement({
 
 	descriptors: [],
@@ -41,7 +43,7 @@ Keyboard.rebind = function(newKeys, descriptors){
 		descriptor.getKeyboard().removeEvent(descriptor.keys, descriptor.handler);
 		descriptor.getKeyboard().addEvent(newKeys, descriptor.handler);
 		descriptor.keys = newKeys;
-		Keyboard.manager.handle({keyboard: descriptor.getKeyboard()}, descriptor.getKeyboard().options.defaultEventType + ':rebound');
+		descriptor.getKeyboard().fireEvent('rebound');
 	});
 };
 
