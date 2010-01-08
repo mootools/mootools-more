@@ -53,7 +53,7 @@ Keyboard.getActiveShortcuts = function(keyboard) {
 	return activeSCS;
 };
 
-Keyboard.getDescriptor = function(name, opts){
+Keyboard.getDescriptor = function(name, keyboard, opts){
 	opts = opts || {};
 	var descriptors = opts.many ? [] : null,
 		set = opts.many ? function(kb){ 
@@ -62,10 +62,10 @@ Keyboard.getDescriptor = function(name, opts){
 			} : function(kb) { 
 				if(!descriptors) descriptors = kb.getDescriptor(name);
 			};
-	Keyboard.each(opts.getKeyboard(), set);
+	Keyboard.each(keyboard, set);
 	return descriptors;
 };
 
-Keyboard.getDescriptors = function(name, opts) {
-	return Keyboard.getDescriptor(name, $merge(opts, { many: true }));
+Keyboard.getDescriptors = function(name, keyboard) {
+	return Keyboard.getDescriptor(name, keyboard, { many: true });
 };
