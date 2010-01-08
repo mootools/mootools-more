@@ -154,19 +154,21 @@ provides: [Keyboard]
 		});
 
 		if (!parsed[type]){
-			var key = '', mods = {};
+			var key, mods = {};
 			type.split('+').each(function(part){
 				if (regex.test(part)) mods[part] = true;
 				else key = part;
 			});
 
 			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
-			var match = '';
+			
+			var keys = [];
 			modifiers.each(function(mod){
-				if (mods[mod]) match += mod + '+';
+				if (mods[mod]) keys.push(mod);
 			});
-
-			parsed[type] = match + key;
+			
+			if (key) keys.push(key);
+			parsed[type] = keys.join('+');
 		}
 
 		return eventType + ':' + parsed[type];
@@ -198,11 +200,13 @@ provides: [Keyboard]
 	};
 	
 	var handler = function(event){
-		var mods = '';
+		var keys = [];
 		modifiers.each(function(mod){
-			if (event[mod]) mods += mod + '+';
+			if (event[mod]) keys.push(mod);
 		});
-		Keyboard.manager.handle(event, event.type + ':' + mods + event.key);
+		
+		if (!regex.test(event.key)) keys.push(event.key);
+		Keyboard.manager.handle(event, event.type + ':' + keys.join('+'));
 	};
 	
 	document.addEvents({
@@ -211,11 +215,14 @@ provides: [Keyboard]
 	});
 
 	Event.Keys.extend({
+		'shift': 16,
+		'control': 17,
+		'alt': 18,
+		'capslock': 20,
 		'pageup': 33,
 		'pagedown': 34,
 		'end': 35,
 		'home': 36,
-		'capslock': 20,
 		'numlock': 144,
 		'scrolllock': 145,
 		';': 186,
