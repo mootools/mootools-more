@@ -99,7 +99,7 @@ provides: [Element.Delegation]
 			var relatedTo = e.toElement || e.relatedTarget;
 			var typeSplit = type.split(':')[0];
 			
-			if(typeSplit == 'mouseover' && !$$(el.getAllNext(), el.getAllPrevious(), el.getParents()).flatten().contains(relatedFrom)) return this;
+			if(typeSplit == 'mouseover' && el.hasChild(relatedFrom)) return this;
 			if(typeSplit == 'mouseout' && relatedTo && $$(relatedTo.getParents(), relatedTo).contains(el)) return this;  			
 			
 			events[type].keys.each(function(fn){
