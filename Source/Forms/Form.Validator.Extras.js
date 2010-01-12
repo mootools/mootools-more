@@ -171,7 +171,7 @@ Form.Validator.addAllThese([
 
 	['validate-cc-num', {
 		errorMsg: function(element){
-			var ccNum = element.get('value').ccNum.replace(/[^0-9]/g, '');
+			var ccNum = element.get('value').replace(/[^0-9]/g, '');
 			return Form.Validator.getMsg('creditcard').substitute({length: ccNum.length});
 		},
 		test: function(element){
