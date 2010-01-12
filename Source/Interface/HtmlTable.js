@@ -80,7 +80,7 @@ var HtmlTable = new Class({
 	set: function(what, items) {
 		var target = (what == 'headers') ? 'tHead' : 'tFoot';
 		this[target.toLowerCase()] = (document.id(this.element[target]) || new Element(target.toLowerCase()).inject(this.element, 'top')).empty();
-		var data = this.push(items, {}, this[target], what == 'headers' ? 'th' : 'td');
+		var data = this.push(items, {}, this[target.toLowerCase()], what == 'headers' ? 'th' : 'td');
 		if (what == 'headers') this.head = document.id(this.thead.rows[0]);
 		else this.foot = document.id(this.thead.rows[0]);
 		return data;
