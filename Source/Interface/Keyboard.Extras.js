@@ -2,48 +2,48 @@ Keyboard.prototype.options.nonParsedEvents.combine(['rebound', 'onrebound']);
 
 Keyboard.implement({
 
-	descriptors: [],
+	shortcuts: [],
 
-	descriptorIndex: {},
+	shortcutIndex: {},
 
 	/*
-		Descriptor should be in the format of:
+		shortcut should be in the format of:
 		{
 			'keys': 'shift+s', // the default to add as an event.
 			'description': 'blah blah blah', // a brief description of the functionality.
 			'handler': function(){} // the event handler to run when keys are pressed.
 		}
 	*/
-	addDescriptor: function(name, descriptor) {
-		descriptor.getKeyboard = $lambda(this);
-		descriptor.name = name;
-		this.descriptorIndex[name] = descriptor;
-		this.descriptors.push(descriptor);
-		if(descriptor.keys) this.addEvent(descriptor.keys, descriptor.handler);
+	addShortcut: function(name, shortcut) {
+		shortcut.getKeyboard = $lambda(this);
+		shortcut.name = name;
+		this.shortcutIndex[name] = shortcut;
+		this.shortcuts.push(shortcut);
+		if(shortcut.keys) this.addEvent(shortcut.keys, shortcut.handler);
 		return this;
 	},
 
-	addDescriptors: function(obj){
-		for(var name in obj) this.addDescriptor(name, obj[name]);
+	addShortcuts: function(obj){
+		for(var name in obj) this.addShortcut(name, obj[name]);
 		return this;
 	},
 
-	getDescriptors: function(){
-		return this.descriptors;
+	getShortcuts: function(){
+		return this.shortcuts;
 	},
 
-	getDescriptor: function(name){
-		return this.descriptorIndex[name];
+	getShortcut: function(name){
+		return this.shortcutIndex[name];
 	}
 
 });
 
-Keyboard.rebind = function(newKeys, descriptors){
-	$splat(descriptors).each(function(descriptor){
-		descriptor.getKeyboard().removeEvent(descriptor.keys, descriptor.handler);
-		descriptor.getKeyboard().addEvent(newKeys, descriptor.handler);
-		descriptor.keys = newKeys;
-		descriptor.getKeyboard().fireEvent('rebound');
+Keyboard.rebind = function(newKeys, shortcuts){
+	$splat(shortcuts).each(function(shortcut){
+		shortcut.getKeyboard().removeEvent(shortcut.keys, shortcut.handler);
+		shortcut.getKeyboard().addEvent(newKeys, shortcut.handler);
+		shortcut.keys = newKeys;
+		shortcut.getKeyboard().fireEvent('rebound');
 	});
 };
 
@@ -51,23 +51,23 @@ Keyboard.rebind = function(newKeys, descriptors){
 Keyboard.getActiveShortcuts = function(keyboard) {
 	var activeKBS = [], activeSCS = [];
 	Keyboard.each(keyboard, [].push.bind(activeKBS));
-	activeKBS.each(function(kb){ activeSCS.extend(kb.getDescriptors()); });
+	activeKBS.each(function(kb){ activeSCS.extend(kb.getShortcuts()); });
 	return activeSCS;
 };
 
-Keyboard.getDescriptor = function(name, keyboard, opts){
+Keyboard.getShortcut = function(name, keyboard, opts){
 	opts = opts || {};
-	var descriptors = opts.many ? [] : null,
+	var shortcuts = opts.many ? [] : null,
 		set = opts.many ? function(kb){ 
-				var descriptor = kb.getDescriptor(name);
-				if(descriptor) descriptors.push(descriptor);
+				var shortcut = kb.getShortcut(name);
+				if(shortcut) shortcuts.push(shortcut);
 			} : function(kb) { 
-				if(!descriptors) descriptors = kb.getDescriptor(name);
+				if(!shortcuts) shortcuts = kb.getShortcut(name);
 			};
 	Keyboard.each(keyboard, set);
-	return descriptors;
+	return shortcuts;
 };
 
-Keyboard.getDescriptors = function(name, keyboard) {
-	return Keyboard.getDescriptor(name, keyboard, { many: true });
+Keyboard.getShortcuts = function(name, keyboard) {
+	return Keyboard.getShortcut(name, keyboard, { many: true });
 };
