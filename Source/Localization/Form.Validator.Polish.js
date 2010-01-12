@@ -22,8 +22,8 @@ provides: [Form.Validator.Polish]
 MooTools.lang.set('pl-PL', 'Form.Validator', {
 
 	required:'To pole jest wymagane.',
-	minLength:'Wymagane jest przynajmniej {minLenght} znaków (wpisanych zostało tylko {length}).',
-	maxLength:'Dozwolone jest nie więcej niż {maxLenght} znaków (wpisanych zostało {length})',
+	minLength:'Wymagane jest przynajmniej {minLength} znaków (wpisanych zostało tylko {length}).',
+	maxLength:'Dozwolone jest nie więcej niż {maxLength} znaków (wpisanych zostało {length})',
 	integer:'To pole wymaga liczb całych. Liczby dziesiętne (np. 1.25) są niedozwolone.',
 	numeric:'Prosimy używać tylko numerycznych wartości w tym polu (np. "1", "1.1", "-1" lub "-1.1").',
 	digits:'Prosimy używać liczb oraz zankow punktuacyjnych w typ polu (dla przykładu, przy numerze telefonu myślniki i kropki są dozwolone).',
