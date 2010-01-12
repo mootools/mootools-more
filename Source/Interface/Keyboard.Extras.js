@@ -2,10 +2,6 @@ Keyboard.prototype.options.nonParsedEvents.combine(['rebound', 'onrebound']);
 
 Keyboard.implement({
 
-	shortcuts: [],
-
-	shortcutIndex: {},
-
 	/*
 		shortcut should be in the format of:
 		{
@@ -15,6 +11,9 @@ Keyboard.implement({
 		}
 	*/
 	addShortcut: function(name, shortcut) {
+		this.shortcuts = this.shortcuts || [];
+		this.shortcutIndex = this.shortcutIndex || {};
+		
 		shortcut.getKeyboard = $lambda(this);
 		shortcut.name = name;
 		this.shortcutIndex[name] = shortcut;
@@ -29,11 +28,11 @@ Keyboard.implement({
 	},
 
 	getShortcuts: function(){
-		return this.shortcuts;
+		return this.shortcuts || [];
 	},
 
 	getShortcut: function(name){
-		return this.shortcutIndex[name];
+		return (this.shortcutIndex || {})[name];
 	}
 
 });
@@ -58,7 +57,7 @@ Keyboard.getActiveShortcuts = function(keyboard) {
 Keyboard.getShortcut = function(name, keyboard, opts){
 	opts = opts || {};
 	var shortcuts = opts.many ? [] : null,
-		set = opts.many ? function(kb){ 
+		set = opts.many ? function(kb){
 				var shortcut = kb.getShortcut(name);
 				if(shortcut) shortcuts.push(shortcut);
 			} : function(kb) { 
