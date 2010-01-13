@@ -1,3 +1,23 @@
+/*
+---
+
+script: Keyboard.js
+
+description: Enhances Keyboard by adding the ability to name and describe keyboard shortcuts, and the ability to grab shortcuts by name and bind the shortcut to different keys.
+
+license: MIT-style license
+
+authors:
+- Perrin Westrich
+
+requires:
+- core:1.2.4/Function
+- /Keyboard.Extras
+
+provides: [Keyboard.Extras]
+
+...
+*/
 Keyboard.prototype.options.nonParsedEvents.combine(['rebound', 'onrebound']);
 
 Keyboard.implement({
