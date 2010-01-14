@@ -50,7 +50,7 @@ var Mask = new Class({
 
 	initialize: function(target, options){
 		this.target = document.id(target) || document.body;
-		this.target.store('mask', this);
+		this.target.store('Mask', this);
 		this.setOptions(options);
 		this.render();
 		this.inject();
