@@ -35,12 +35,12 @@ Drag Method: constructor {#Drag:constructor}
 
 ### Events:
 
-* onBeforeStart - Executed before the Drag instance attaches the events. Receives the dragged element as an argument.
-* onStart       - Executed when the user starts to drag (on mousedown). Receives the dragged element as an argument.
-* onSnap        - Executed when the user has dragged past the snap option. Receives the dragged element as an argument.
-* onDrag        - Executed on every step of the drag. Receives the dragged element and the event as arguments.
-* onComplete    - Executed when the user completes the drag. Receives the dragged element and the event as arguments.
-* onCancel      - Executed when the user has cancelled the drag. Receives the dragged element as an argument.
+* beforeStart - Executed before the Drag instance attaches the events. Receives the dragged element as an argument.
+* start       - Executed when the user starts to drag (on mousedown). Receives the dragged element as an argument.
+* snap        - Executed when the user has dragged past the snap option. Receives the dragged element as an argument.
+* drag        - Executed on every step of the drag. Receives the dragged element and the event as arguments.
+* complete    - Executed when the user completes the drag. Receives the dragged element and the event as arguments.
+* cancel      - Executed when the user has cancelled the drag. Receives the dragged element as an argument.
 
 ### Examples:
 
