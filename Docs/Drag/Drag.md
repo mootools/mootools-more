@@ -30,17 +30,17 @@ Drag Method: constructor {#Drag:constructor}
 * snap            - (*integer*: defaults to 6) The distance to drag before the Element starts to respond to the drag.
 * style           - (*boolean*: defaults to true) Whether or not to set the modifier as a style property of the element.
 * unit            - (*string*: defaults to 'px') A string indicating the CSS unit to append to all integer values.
-* prevenDefault   - (*boolean*: defaults to false) Calls preventDefault on the event while dragging. See [Event:preventDefault]
-* stopPropagation - (*boolean*: defaults to false) Prevents the event from "bubbling" up in the DOM tree. See [Event:stopPropagation]
+* preventDefault   - (*boolean*: defaults to false) Calls preventDefault on the event while dragging. See [Event:preventDefault][]
+* stopPropagation - (*boolean*: defaults to false) Prevents the event from "bubbling" up in the DOM tree. See [Event:stopPropagation][]
 
 ### Events:
 
-* beforeStart - Executed before the Drag instance attaches the events. Receives the dragged element as an argument.
-* start       - Executed when the user starts to drag (on mousedown). Receives the dragged element as an argument.
-* snap        - Executed when the user has dragged past the snap option. Receives the dragged element as an argument.
-* drag        - Executed on every step of the drag. Receives the dragged element and the event as arguments.
-* complete    - Executed when the user completes the drag. Receives the dragged element and the event as arguments.
-* cancel      - Executed when the user has cancelled the drag. Receives the dragged element as an argument.
+* onBeforeStart - Executed before the Drag instance attaches the events. Receives the dragged element as an argument.
+* onStart       - Executed when the user starts to drag (on mousedown). Receives the dragged element as an argument.
+* onSnap        - Executed when the user has dragged past the snap option. Receives the dragged element as an argument.
+* onDrag        - Executed on every step of the drag. Receives the dragged element and the event as arguments.
+* onComplete    - Executed when the user completes the drag. Receives the dragged element and the event as arguments.
+* onCancel      - Executed when the user has cancelled the drag. Receives the dragged element as an argument.
 
 ### Examples:
 
@@ -171,7 +171,7 @@ Adds drag-to-resize behavior to an Element using supplied options.
 
 ### Arguments:
 
-1. options - (*object*, optional) See [Drag][] for acceptable options.
+1. options - (*object*, optional) See [Drag][#Drag] for acceptable options.
 
 ### Returns:
 
