@@ -23,7 +23,8 @@ provides: [Element.Delegation]
 
 ...
 */
-(function(){
+
+(function(addEvent, removeEvent){
 	
 	var match = /(.*?):relay\(([^)]+)\)$/,
 		combinators = /[+>~\s]/,
@@ -50,9 +51,6 @@ provides: [Element.Delegation]
 			return null;
 		};
 
-	var oldAddEvent = Element.prototype.addEvent,
-		oldRemoveEvent = Element.prototype.removeEvent;
-		
 	Element.implement({
 
 		addEvent: function(type, fn){
@@ -65,10 +63,10 @@ provides: [Element.Delegation]
 						if (el) this.fireEvent(type, [e, el], 0, el);
 					}.bind(this);
 					monitors[type] = monitor;
-					oldAddEvent.call(this, splitted.event, monitor);
+					addEvent.call(this, splitted.event, monitor);
 				}
 			}
-			return oldAddEvent.apply(this, arguments);
+			return addEvent.apply(this, arguments);
 		},
 
 		removeEvent: function(type, fn){
@@ -77,18 +75,18 @@ provides: [Element.Delegation]
 				var events = this.retrieve('events');
 				if (!events || !events[type] || (fn && !events[type].keys.contains(fn))) return this;
 
-				if (fn) oldRemoveEvent.apply(this, [type, fn]);
-				else oldRemoveEvent.apply(this, type);
+				if (fn) removeEvent.apply(this, [type, fn]);
+				else removeEvent.apply(this, type);
 
 				events = this.retrieve('events');
 				if (events && events[type] && events[type].keys.length == 0){
 					var monitors = this.retrieve('$moo:delegateMonitors', {});
-					oldRemoveEvent.apply(this, [splitted.event, monitors[type]]);
+					removeEvent.apply(this, [splitted.event, monitors[type]]);
 					delete monitors[type];
 				}
 				return this;
 			}
-			return oldRemoveEvent.apply(this, arguments);
+			return removeEvent.apply(this, arguments);
 		},
 
 		fireEvent: function(type, args, delay, bind){
@@ -102,4 +100,4 @@ provides: [Element.Delegation]
 
 	});
 
-})();
+})(Element.prototype.addEvent, Element.prototype.removeEvent);
