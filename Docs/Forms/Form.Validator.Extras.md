@@ -6,7 +6,7 @@ Additional InputValidators: {#Validators}
 * [Online Tutorial/Demo][]
 [Online Tutorial/Demo]:
 
-Here are the validators that are included in this libary. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
+Here are the validators that are included in this library. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
 
 Validator: validate-no-space {#Validators:validate-no-space}
 ------------------------------------------
@@ -125,7 +125,7 @@ Takes another input's id and makes sure both ranges are within the same month. P
 Validator: validate-match {#Validators:validate-match}
 --------------------------------------------------------
 
-Takes in an id of a field and matches them together. Can also take *matchName* that is used in the error message (ie: password confirmations). *matchName* defaults to the name of the other field, which isn't always very helpful, so you should specify it.
+Takes in an id of a field and matches them together. Can also take *matchName* that is used in the error message (i.e.: password confirmations). *matchName* defaults to the name of the other field, which isn't always very helpful, so you should specify it.
 
 	<input type="input" class="validate-match matchInput:'password' matchName:'password'"/>
 	//error msg: This field needs to match the password field.
@@ -133,7 +133,7 @@ Takes in an id of a field and matches them together. Can also take *matchName* t
 Validator: validate-cc-num {#Validators:validate-cc-num}
 --------------------------------------------------------
 
-Validates that an input is a valid credit card number (Visa, Mastercard, Amex, Discover). Note that it replaces all non-numeric characters to the value (but not to the input's displayed value) before it applies validation, so the user could put in dashes, letters, punctuation, whatever, but if the numbers in the value without those things makes a valid CC number, it will pass.
+Validates that an input is a valid credit card number (Visa, MasterCard, Amex, Discover). Note that it replaces all non-numeric characters to the value (but not to the input's displayed value) before it applies validation, so the user could put in dashes, letters, punctuation, whatever, but if the numbers in the value without those things makes a valid CC number, it will pass.
 
 	<input type="input" class="validate-cc-num"/>
 
