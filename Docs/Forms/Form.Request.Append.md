@@ -28,8 +28,8 @@ Form.Request.Append Method: constructor {#Form-Request-Append:constructor}
 
 ### Events
 
-* onBeforeEffect - (*function*) callback executed before the new element begins its reveal; passed as arguments the container that is revealing.
-* onSuccess - (*function*) callback executed after the new element is visible. Passed container of the new content, the container into which it is injected, and (passed along from Request.HTML's onSuccess method) the response tree, the response elements, the response html, and the response javascript
+* beforeEffect - (*function*) callback executed before the new element begins its reveal; passed as arguments the container that is revealing.
+* success - (*function*) callback executed after the new element is visible. Passed container of the new content, the container into which it is injected, and (passed along from Request.HTML's onSuccess method) the response tree, the response elements, the response html, and the response javascript
 
 [Form.Request]: /more/Forms/Form.Request
 [Fx.Reveal]: /more/Fx/Fx.Reveal
