@@ -70,7 +70,6 @@ if (!window.Form) window.Form = {};
 
 		makeRequest: function(){
 			this.request = new Request.HTML($merge({
-					url: this.element.get('action'),
 					update: this.update,
 					emulation: false,
 					spinnerTarget: this.element,
@@ -137,7 +136,7 @@ if (!window.Form) window.Form = {};
 			if (str) str += "&" + data;
 			else str = data;
 			this.fireEvent('send', [this.element, str.parseQueryString()]);
-			this.request.send({data: str});
+			this.request.send({data: str, url: this.element.get("action")});
 			return this;
 		}
 
