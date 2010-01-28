@@ -24,13 +24,8 @@ provides: [Keyboard]
 */
 
 (function(){
-
-	var parsed = {};
-	var modifiers = ['shift', 'control', 'alt', 'meta'];
-	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
 	
-
-	this.Keyboard = new Class({
+	var Keyboard = this.Keyboard = new Class({
 
 		Extends: Events,
 
@@ -44,7 +39,7 @@ provides: [Keyboard]
 			defaultEventType: 'keydown',
 			active: false,
 			events: {},
-			nonParsedEvents: ["activate", "deactivate", "onactivate", "ondeactivate", "changed", "onchanged"]
+			nonParsedEvents: ['activate', 'deactivate', 'onactivate', 'ondeactivate', 'changed', 'onchanged']
 		},
 
 		initialize: function(options){
@@ -72,11 +67,11 @@ provides: [Keyboard]
 			if (!bubbles && this.activeKB) this.activeKB.handle(event, type);
 		},
 
-		addEvent: function(type, fn, internal) {
+		addEvent: function(type, fn, internal){
 			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn, internal);
 		},
 
-		removeEvent: function(type, fn) {
+		removeEvent: function(type, fn){
 			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn);
 		},
 
@@ -98,7 +93,7 @@ provides: [Keyboard]
 			return this;
 		},
 
-		deactivate: function(instance) {
+		deactivate: function(instance){
 			if (instance) {
 				if(instance === this.activeKB) {
 					this.activeKB = null;
@@ -117,7 +112,7 @@ provides: [Keyboard]
 		},
 
 		//management logic
-		manage: function(instance) {
+		manage: function(instance){
 			if (instance.manager) instance.manager.drop(instance);
 			this.instances.push(instance);
 			instance.manager = this;
@@ -125,11 +120,11 @@ provides: [Keyboard]
 			else this._disable(instance);
 		},
 
-		_disable: function(instance) {
+		_disable: function(instance){
 			if (this.activeKB == instance) this.activeKB = null;
 		},
 
-		drop: function(instance) {
+		drop: function(instance){
 			this._disable(instance);
 			this.instances.erase(instance);
 		},
@@ -145,46 +140,53 @@ provides: [Keyboard]
 		}
 
 	});
-
+	
+	var parsed = {};
+	var modifiers = ['shift', 'control', 'alt', 'meta'];
+	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
+	
 	Keyboard.parse = function(type, eventType, ignore){
 		if (ignore && ignore.contains(type.toLowerCase())) return type;
+		
 		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
 			eventType = $1;
 			return '';
 		});
 
 		if (!parsed[type]){
-			var key = '', mods = {};
+			var key, mods = {};
 			type.split('+').each(function(part){
 				if (regex.test(part)) mods[part] = true;
 				else key = part;
 			});
 
 			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
-			var match = '';
+			
+			var keys = [];
 			modifiers.each(function(mod){
-				if (mods[mod]) match += mod + '+';
+				if (mods[mod]) keys.push(mod);
 			});
-
-			parsed[type] = match + key;
+			
+			if (key) keys.push(key);
+			parsed[type] = keys.join('+');
 		}
 
 		return eventType + ':' + parsed[type];
 	};
 
-	Keyboard.each = function(keyboard, fn) {
+	Keyboard.each = function(keyboard, fn){
 		var current = keyboard || Keyboard.manager;
-		while(current){
+		while (current){
 			fn.run(current);
 			current = current.activeKB;
 		}
 	};
 
-	Keyboard.stop = function(event) {
+	Keyboard.stop = function(event){
 		event.preventKeyboardPropagation = true;
 	};
 
-	Keyboard.manager = new this.Keyboard({
+	Keyboard.manager = new Keyboard({
 		active: true
 	});
 	
@@ -198,11 +200,13 @@ provides: [Keyboard]
 	};
 	
 	var handler = function(event){
-		var mods = '';
+		var keys = [];
 		modifiers.each(function(mod){
-			if (event[mod]) mods += mod + '+';
+			if (event[mod]) keys.push(mod);
 		});
-		Keyboard.manager.handle(event, event.type + ':' + mods + event.key);
+		
+		if (!regex.test(event.key)) keys.push(event.key);
+		Keyboard.manager.handle(event, event.type + ':' + keys.join('+'));
 	};
 	
 	document.addEvents({
@@ -211,13 +215,27 @@ provides: [Keyboard]
 	});
 
 	Event.Keys.extend({
+		'shift': 16,
+		'control': 17,
+		'alt': 18,
+		'capslock': 20,
 		'pageup': 33,
 		'pagedown': 34,
 		'end': 35,
 		'home': 36,
-		'capslock': 20,
 		'numlock': 144,
-		'scrolllock': 145
+		'scrolllock': 145,
+		';': 186,
+		'=': 187,
+		',': 188,
+		'-': Browser.Engine.Gecko ? 109 : 189,
+		'.': 190,
+		'/': 191,
+		'`': 192,
+		'[': 219,
+		'\\': 220,
+		']': 221,
+		"'": 222
 	});
 
 })();
