@@ -229,7 +229,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	disableSort: function(){
-		this.element.remove(this.options.classSortable);
+		this.element.removeClass(this.options.classSortable);
 		this.attachSorts(false);
 		this.sortSpans.each(function(span) { span.destroy(); });
 		this.sortSpans.empty();
