@@ -124,7 +124,6 @@ if (!window.Form) window.Form = {};
 			if (this.element.retrieve('validator')) {
 				//form validator was created after Form.Request
 				this.detach();
-				this.addFormEvent();
 				return;
 			}
 			e.stop();
