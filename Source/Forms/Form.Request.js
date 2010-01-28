@@ -136,7 +136,7 @@ if (!window.Form) window.Form = {};
 			var data = $H(this.options.extraData).toQueryString();
 			if (str) str += "&" + data;
 			else str = data;
-			this.fireEvent('send', [this.element, str]);
+			this.fireEvent('send', [this.element, str.parseQueryString()]);
 			this.request.send({data: str});
 			return this;
 		}
