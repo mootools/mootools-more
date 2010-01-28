@@ -114,7 +114,8 @@ if (!window.Form) window.Form = {};
 		},
 
 		onFormValidate: function(valid, form, e) {
-			if (valid || !fv.options.stopOnFailure) {
+			var fv = this.element.retrieve('validator');
+			if (valid || (fv && !fv.options.stopOnFailure)) {
 				if (e && e.stop) e.stop();
 				this.send();
 			}
