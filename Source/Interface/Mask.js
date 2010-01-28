@@ -27,7 +27,7 @@ var Mask = new Class({
 
 	Implements: [Options, Events],
 
-	Binds: ['resize'],
+	Binds: ['position'],
 
 	options: {
 		// onShow: $empty,
@@ -50,7 +50,7 @@ var Mask = new Class({
 
 	initialize: function(target, options){
 		this.target = document.id(target) || document.id(document.body);
-		this.target.store('mask', this);
+		this.target.store('Mask', this);
 		this.setOptions(options);
 		this.render();
 		this.inject();
@@ -122,7 +122,7 @@ var Mask = new Class({
 
 	show: function(){
 		if (!this.hidden) return this;
-		window.addEvent('resize', this.position.bind(this));
+		window.addEvent('resize', this.position);
 		this.position();
 		this.showMask.apply(this, arguments);
 		return this;
@@ -136,7 +136,7 @@ var Mask = new Class({
 
 	hide: function(){
 		if (this.hidden) return this;
-		this.target.removeEvent('resize', this.resize);
+		window.removeEvent('resize', this.position);
 		this.hideMask.apply(this, arguments);
 		if (this.options.destroyOnHide) return this.destroy();
 		return this;
