@@ -81,14 +81,8 @@ var Depender = {
 			this.fireEvent('require', options);
 			this.loadScripts(options.scripts);
 		};
-		if (this.mapLoaded){
-			loaded.call(this);
-		} else {
-			this.addEvent('mapLoaded', function(){
-				loaded.call(this);
-				this.removeEvent('mapLoaded', arguments.callee);
-			});
-		}
+		if (this.mapLoaded) loaded.call(this);
+		else this.addEvent('mapLoaded', loaded.bind(this));
 		return this;
 	},
 
@@ -135,6 +129,7 @@ var Depender = {
 			this.calculateLoaded();
 			this.lastLoaded = this.getLoadedScripts().getLength();
 			this.fireEvent('mapLoaded');
+			this.removeEvents('mapLoaded');
 		}
 	},
 

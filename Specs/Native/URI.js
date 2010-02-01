@@ -61,6 +61,10 @@ License:
 
 		'\'http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html\' + \'..\' == http://www.calyptus.eu/mydirectory/': function(){
 			value_of(new URI('..', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory/');
+		},
+		
+		'Query String can contain @ symbol': function(){
+			value_of(new URI('http://www.calyptus.eu/myfile.html?email=somebody@gmail.com').get('host')).should_be('www.calyptus.eu');
 		}
 
 	});
@@ -76,6 +80,8 @@ License:
 		},
 		
 		'URI.setData({ keyName: \'my value\' }) should return ?keyName=my%20value as the query': function(){
+			uri.setData('keyName', 'myOtherValue');
+			value_of(uri.get('query')).should_be('keyName=myOtherValue');
 			uri.setData({ keyName: 'my value' });
 			value_of(uri.get('query')).should_be('keyName=my%20value');
 		},

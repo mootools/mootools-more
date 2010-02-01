@@ -27,7 +27,9 @@ var Asset = {
 			document: document,
 			check: $lambda(true)
 		}, properties);
-
+		
+		if (properties.onLoad) properties.onload = properties.onLoad;
+		
 		var script = new Element('script', {src: source, type: 'text/javascript'});
 
 		var load = properties.onload.bind(script), 
@@ -72,6 +74,8 @@ var Asset = {
 		var element = document.id(image) || new Element('img');
 		['load', 'abort', 'error'].each(function(name){
 			var type = 'on' + name;
+			var cap = name.capitalize();
+			if (properties['on' + cap]) properties[type] = properties['on' + cap];
 			var event = properties[type];
 			delete properties[type];
 			image[type] = function(){

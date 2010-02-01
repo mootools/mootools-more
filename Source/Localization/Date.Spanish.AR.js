@@ -1,25 +1,25 @@
 /*
 ---
 
-script: Date.Spanish.US.js
+script: Date.Spanish.AR.js
 
-description: Date messages for Spanish.
+description: Date messages for Spanish (Argentinean variation).
 
 license: MIT-style license
 
 authors:
-- Ãlfons Sanchez
+- Ãlfons Sanchez & Diego Massanti
 
 requires:
 - /Lang
 - /Date
 
-provides: [Date.Spanish]
+provides: [Date.Spanish.AR]
 
 ...
 */
 
-MooTools.lang.set('es-ES', 'Date', {
+MooTools.lang.set('es-AR', 'Date', {
 
 	months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 	days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],

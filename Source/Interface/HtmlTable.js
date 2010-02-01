@@ -77,17 +77,22 @@ var HtmlTable = new Class({
 		return this;
 	},
 
+	set: function(what, items) {
+		var target = (what == 'headers') ? 'tHead' : 'tFoot';
+		this[target.toLowerCase()] = (document.id(this.element[target]) || new Element(target.toLowerCase()).inject(this.element, 'top')).empty();
+		var data = this.push(items, {}, this[target.toLowerCase()], what == 'headers' ? 'th' : 'td');
+		if (what == 'headers') this.head = document.id(this.thead.rows[0]);
+		else this.foot = document.id(this.thead.rows[0]);
+		return data;
+	},
+
 	setHeaders: function(headers){
-		this.thead = (document.id(this.element.tHead) || new Element('thead').inject(this.element, 'top')).empty();
-		this.push(headers, {}, this.thead, 'th');
-		this.head = document.id(this.thead.rows[0]);
+		this.set('headers', headers);
 		return this;
 	},
 
 	setFooters: function(footers){
-		this.tfoot = (document.id(this.element.tFoot) || new Element('tfoot').inject(this.element, 'top')).empty();
-		this.push(footers, {}, this.tfoot);
-		this.foot = document.id(this.thead.rows[0]);
+		this.set('footers', footers);
 		return this;
 	},
 

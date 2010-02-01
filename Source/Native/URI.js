@@ -28,7 +28,7 @@ var URI = new Class({
 		/*base: false*/
 	},
 
-	regex: /^(?:(\w+):)?(?:\/\/(?:(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?/,
+	regex: /^(?:(\w+):)?(?:\/\/(?:(?:([^:@\/]*):?([^:@\/]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?/,
 	parts: ['scheme', 'user', 'password', 'host', 'port', 'directory', 'file', 'query', 'fragment'],
 	schemes: {http: 80, https: 443, ftp: 21, rtsp: 554, mms: 1755, file: 0},
 
@@ -121,8 +121,9 @@ var URI = new Class({
 
 	setData: function(values, merge, part){
 		if (typeof values == 'string'){
-			values = this.getData();
-			values[arguments[0]] = arguments[1];
+			data = this.getData();
+			data[arguments[0]] = arguments[1];
+			values = data;
 		} else if (merge) {
 			values = $merge(this.getData(), values);
 		}

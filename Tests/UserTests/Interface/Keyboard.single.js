@@ -24,6 +24,12 @@
 						},
 						'esc': function(){
 							$('escape').toggleClass('active');
+						},
+						'shift+;': function(){
+							$('colon').toggleClass('active');
+						},
+						']': function(){
+							$('bracket').toggleClass('active');
 						}
 					},
 					onActivate: function(){

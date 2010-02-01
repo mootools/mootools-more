@@ -72,7 +72,8 @@ Fx.Accordion = new Class({
 				for (var fx in this.effects) el.setStyle(fx, 0);
 			}
 		}, this);
-		if ($chk(this.options.display)) this.display(this.options.display, this.options.initialDisplayFx);
+		if ($chk(this.options.display) || this.options.initialDisplayFx === false) this.display(this.options.display, this.options.initialDisplayFx);
+		if (this.options.fixedHeight !== false) this.options.returnHeightToAuto = false;
 		this.addEvent('complete', this.internalChain.callChain.bind(this.internalChain));
 	},
 

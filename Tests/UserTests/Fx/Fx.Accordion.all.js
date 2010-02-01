@@ -62,6 +62,33 @@
 				});
 				$('accordionExample').store('acc', acc);
 			}
+		},
+		{
+			title: "Fx.Accordion:initial display",
+			description: "Displays the 2nd item on instantiation w/o animation",
+			verify: "Is the second item visible? Was there NO transition to that state? Can you click on other sections to open them as expected?",
+			before: function(){
+				var acc = $('accordionExample').retrieve('acc');
+				if (acc) acc.detach();
+				acc = new Fx.Accordion($$('dt'), $$('dd'),{
+					display: 1,
+					initialDisplayFx: false
+				});
+				$('accordionExample').store('acc', acc);
+			}
+		},
+		{
+			title: "Fx.Accordion:initial display w/ effects",
+			description: "Displays the 2nd item on instantiation WITH animation",
+			verify: "Is the second item visible? Was there a transition to that state? Can you click on other sections to open them as expected?",
+			before: function(){
+				var acc = $('accordionExample').retrieve('acc');
+				if (acc) acc.detach();
+				acc = new Fx.Accordion($$('dt'), $$('dd'),{
+					display: 1
+				});
+				$('accordionExample').store('acc', acc);
+			}
 		}
 	]
 }

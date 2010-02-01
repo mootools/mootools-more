@@ -53,14 +53,13 @@ this.Tips = new Class({
 		hideDelay: 100,
 		className: 'tip-wrap',
 		offset: {x: 16, y: 16},
+		windowPadding: {x:0, y:0},
 		fixed: false
 	},
 
 	initialize: function(){
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
 		this.setOptions(params.options);
-		document.id(this);
-		
 		if (params.elements) this.attach(params.elements);
 	},
 
@@ -131,8 +130,10 @@ this.Tips = new Class({
 		}, this);
 		
 		$clear(this.timer);
-		this.timer = this.show.delay(this.options.showDelay, this, element);
-		this.position((this.options.fixed) ? {page: element.getPosition()} : event);
+		this.timer = (function(){
+			this.show(this, element);
+			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
+		}).delay(this.options.showDelay, this);
 	},
 
 	elementLeave: function(event, element){
@@ -153,6 +154,8 @@ this.Tips = new Class({
 	},
 
 	position: function(event){
+		if (!this.tip) document.id(this);
+
 		var size = window.getSize(), scroll = window.getScroll(),
 			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
 			props = {x: 'left', y: 'top'},
@@ -160,7 +163,7 @@ this.Tips = new Class({
 		
 		for (var z in props){
 			obj[props[z]] = event.page[z] + this.options.offset[z];
-			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z]) obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
+			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]) obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
 		}
 		
 		this.tip.setStyles(obj);
@@ -172,10 +175,12 @@ this.Tips = new Class({
 	},
 
 	show: function(element){
+		if (!this.tip) document.id(this);
 		this.fireEvent('show', [this.tip, element]);
 	},
 
 	hide: function(element){
+		if (!this.tip) document.id(this);
 		this.fireEvent('hide', [this.tip, element]);
 	}
 

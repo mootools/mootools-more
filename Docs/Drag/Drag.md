@@ -30,8 +30,8 @@ Drag Method: constructor {#Drag:constructor}
 * snap            - (*integer*: defaults to 6) The distance to drag before the Element starts to respond to the drag.
 * style           - (*boolean*: defaults to true) Whether or not to set the modifier as a style property of the element.
 * unit            - (*string*: defaults to 'px') A string indicating the CSS unit to append to all integer values.
-* prevenDefault   - (*boolean*: defaults to false) Calls preventDefault on the event while dragging. See [Event:preventDefault]
-* stopPropagation - (*boolean*: defaults to false) Prevents the event from "bubbling" up in the DOM tree. See [Event:stopPropagation]
+* preventDefault   - (*boolean*: defaults to false) Calls preventDefault on the event while dragging. See [Event:preventDefault][]
+* stopPropagation - (*boolean*: defaults to false) Prevents the event from "bubbling" up in the DOM tree. See [Event:stopPropagation][]
 
 ### Events:
 
@@ -171,7 +171,7 @@ Adds drag-to-resize behavior to an Element using supplied options.
 
 ### Arguments:
 
-1. options - (*object*, optional) See [Drag][] for acceptable options.
+1. options - (*object*, optional) See [Drag][#Drag] for acceptable options.
 
 ### Returns:
 
