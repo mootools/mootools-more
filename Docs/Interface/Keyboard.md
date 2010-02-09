@@ -52,7 +52,7 @@ Keyboard Method: constructor {#Keyboard:constructor}
 
 #### Options
 
-* defaultEventType: - (*string*; defaults to 'keyup') The event type that should trigger the subevents (this can be changed per key rule, so this is only the default).
+* defaultEventType: - (*string*; defaults to 'keydown') The event type that should trigger the subevents (this can be changed per key rule, so this is only the default).
 * active: - (*boolean*; defaults to *false*) When not active the events will be suppressed.
 * events: - (*object*; defaults to *{}*) object keys are event names, values should be the function to fire. Same as calling addEvents({...}) on the instance after creation
 
