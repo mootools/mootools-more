@@ -58,6 +58,13 @@ var Asset = {
 	},
 
 	css: function(source, properties){
+		var onload = properties.onload || properties.onLoad;
+		if (onload) {
+			properties.events = properties.events || {};
+			properties.events.load = onload;
+			delete properties.onload;
+			delete properties.onLoad;
+		}
 		return new Element('link', $merge({
 			rel: 'stylesheet',
 			media: 'screen',
