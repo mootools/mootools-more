@@ -3,28 +3,28 @@ Class: Hash.Cookie {#Hash-Cookie}
 
 Stores and loads a Hash as a Cookie using JSON format.
 
-### Extends:
+### Extends
 
 - [Hash][]
 
-### Syntax:
+### Syntax
 
 	var myHashCookie = new Hash.Cookie(name[, options]);
 
-### Arguments:
+### Arguments
 
 1. name    - (*string*) The key (name) for the cookie
 2. options - (*object*) All of [Cookie][] options in addition an autoSave option.
 
-#### Options:
+#### Options
 
 1. autoSave - (*boolean*: defaults to true) An option to save the cookie at every operation.
 
-### Returns:
+### Returns
 
 * (*object*) A new Hash.Cookie instance.
 
-### Examples:
+### Examples
 
 	var fruits = new Hash.Cookie('myCookieName', {duration: 3600});
 	fruits.extend({
@@ -41,7 +41,7 @@ Stores and loads a Hash as a Cookie using JSON format.
 
 	fruits.erase(); // delete cookie
 
-### Notes:
+### Notes
 
 - All Hash methods are available in your Hash.Cookie instance. if autoSave options is set, every method call will result in your Cookie being saved.
 - Cookies have a limit of 4kb (4096 bytes). Therefore, be careful with your Hash size.
@@ -49,7 +49,7 @@ Stores and loads a Hash as a Cookie using JSON format.
 - If you plan to use large Cookies consider turning autoSave to off, and check the status of .save() everytime.
 - Creating a new instance automatically loads the data from the Cookie into the Hash. Cool Huh?
 
-### See Also:
+### See Also
 
 - [Hash][]
 
@@ -60,15 +60,15 @@ Hash.Cookie Method: save {#Hash-Cookie:save}
 
 Saves the Hash to the cookie. If the hash is empty, removes the cookie.
 
-### Syntax:
+### Syntax
 
 	myHashCookie.save();
 
-### Returns:
+### Returns
 
 * (*boolean*) Returns false when the JSON string cookie is too long (4kb), otherwise true.
 
-### Examples:
+### Examples
 
 	var login = new Hash.Cookie('userstatus', {autoSave: false});
 
@@ -87,15 +87,15 @@ Hash.Cookie Method: load {#Hash-Cookie:load}
 
 Loads the cookie and assigns it to the Hash.
 
-### Syntax:
+### Syntax
 
 	myHashCookie.load();
 
-### Returns:
+### Returns
 
 * (*object*) This Hash.Cookie instance.
 
-### Examples:
+### Examples
 
 	var myHashCookie = new Hash.Cookie('myCookie');
 
@@ -104,7 +104,7 @@ Loads the cookie and assigns it to the Hash.
 		if (!myHashCookie.length) alert('Cookie Monster must of eaten it!');
 	}).periodical(5000);
 
-### Notes:
+### Notes
 
 - Useful when polling.
 

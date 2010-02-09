@@ -3,19 +3,19 @@ Class: Group {#Group}
 
 This class is for grouping Classes or Events. The Event added to the Group will fire when all of the events of the items of the group are fired.
 
-### Syntax:
+### Syntax
 
 	var myGroup = new Group(class[, arrays[, class2[, ... ]]]);
 
-### Arguments:
+### Arguments
 
 Any number of Class instances, or arrays containing class instances.
 
-### Returns:
+### Returns
 
 * (*object*) A new Group instance.
 
-### Examples:
+### Examples
 
 	var xhr1 = new Ajax('data.js', {evalScript: true});
 	var xhr2 = new Ajax('abstraction.js', {evalScript: true});
@@ -37,20 +37,20 @@ Group Method: addEvent {#Group:addEvent}
 
 Adds an Event to the stack of Events of the Class instances.
 
-### Syntax:
+### Syntax
 
 	myGroup.addEvent(type, fn);
 
-### Arguments:
+### Arguments
 
 1. type - (*string*) The event name (e.g. 'complete') to add.
 2. fn   - (*function*) The callback function to execute when all instances fired this event.
 
-### Returns:
+### Returns
 
 * (*object*) This Group instance.
 
-### Examples:
+### Examples
 
 	var myElements = $('myForm').getElements('input, textarea, select');
 	myElements.addEvent('click', function(){
@@ -64,6 +64,6 @@ Adds an Event to the stack of Events of the Class instances.
 
 
 
-### See Also:
+### See Also
 
 [Element.addEvent]: /core/Element/Element.Event#Element:addEvent

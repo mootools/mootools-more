@@ -88,7 +88,7 @@ Keyboard Method: constructor {#Keyboard:constructor}
 		'h': fn4
 	});
 
-### Notes:
+### Notes
 
 * In Example both myKeyboardEvents and myKeyboardEvents1 achieve the same ends.
 * The order of key modifiers does not matter. ctrl+shift+h and shift+ctrl+h are the same.

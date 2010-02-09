@@ -194,7 +194,7 @@ Element Property: spinner {#Element-Properties:spinner}
 
 Sets a default [Spinner][] instance for an Element.
 
-#### Syntax:
+#### Syntax
 
 	el.set('spinner'[, options]);
 
