@@ -58,7 +58,9 @@ Injects a css file in the page.
 
 	var myCSS = new Asset.css('/css/myStyle.css', {id: 'myStyle', title: 'myStyle'});
 
+### Notes
 
+- WARNING: DO NOT use addEvent for load on the returned element, give it as onLoad in the properties argument.
 
 Asset Method: image {#Asset:image}
 ------------------------------------
