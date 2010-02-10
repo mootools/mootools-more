@@ -61,13 +61,13 @@ this.Tips = new Class({
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
 		this.setOptions(params.options);
 		if (params.elements) this.attach(params.elements);
-		this.container = new Element('div', {'class': 'tip'});
 		this.toElement();
 	},
 
 	toElement: function(){
 		if (this.tip) return this.tip;
 		
+		this.container = new Element('div', {'class': 'tip'});
 		return this.tip = new Element('div', {
 			'class': this.options.className,
 			styles: {
