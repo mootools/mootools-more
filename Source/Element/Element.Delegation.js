@@ -25,7 +25,6 @@ provides: [Element.Delegation]
 */
 
 (function(){
-	
 	var match = /(.*?):relay\(([^)]+)\)$/,
 		combinators = /[+>~\s]/,
 		splitType = function(type){
@@ -58,19 +57,22 @@ provides: [Element.Delegation]
 
 		addEvent: function(type, fn){
 			var splitted = splitType(type);
-			var delegate = splitted.event;
 			if (splitted.selector){
-			splitted.event = (delegate == 'mouseenter') ? 'mouseover' : (delegate == 'mouseleave') ? 'mouseout' : splitted.event;
 				var monitors = this.retrieve('$moo:delegateMonitors', {});
 				if (!monitors[type]){
+					var delegate = splitted.event;
+					switch(delegate){
+						case 'mouseenter': splitted.event = 'mouseover'; break;
+						case 'mouseleave': splitted.event = 'mouseout'; break;
+					}
 					var monitor = function(e){
 						e.delegate = delegate;
-						e.selector = splitted.selector;
 						var el = check.call(this, e, splitted.selector);
 						if (el) this.fireEvent(type, [e, el], 0, el);
 					}.bind(this);
 					monitors[type] = monitor;
-					oldAddEvent.call(this, splitted.event, monitor);
+					($type(splitted.event) == 'array') ? splitted.event.each(function(event){ oldAddEvent.call(this, event, monitor); }) : oldAddEvent.call(this, splitted.event, monitor);
+					
 				}
 			}
 			return oldAddEvent.apply(this, arguments);
@@ -98,17 +100,21 @@ provides: [Element.Delegation]
 		},
 
 		fireEvent: function(type, args, delay, bind){
-			var events = this.retrieve('events');
+			var events = this.retrieve('events'),
+				e = args[0],
+				el = args[1];
 			if (!events || !events[type]) return this;
 			
-			var e = args[0],
-				el = args[1],
-				relatedFrom = e.fromElement || e.relatedTarget,
-				relatedTo = e.toElement || e.relatedTarget,
-				typeSplit = type.split(':')[0];
-
-			if(e.delegate == 'mouseenter' && el.hasChild(relatedFrom)) return this;
-			if(e.delegate == 'mouseleave' && relatedTo && $$(relatedTo.getParents(), relatedTo).contains(el)) return this;  			
+			switch(e.delegate){
+				case 'mouseenter':
+					var related = e.fromElement || e.relatedTarget;
+					if(el.hasChild(related)) return this;
+					break;
+				case 'mouseleave':
+					var related = e.toElement || e.relatedTarget;
+					if(related && $$(related.getParents(), related).contains(el)) return this;
+					break;
+			}
 			
 			events[type].keys.each(function(fn){
 				fn.create({bind: bind || this, delay: delay, arguments: args})();
