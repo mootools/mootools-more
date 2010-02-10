@@ -83,6 +83,7 @@ Row data can be in either of two formats. Note that they can be mixed and matche
 				colspan: 2,
 				'class': 'doubleWide',
 				style: '1px solid blue'
+			}
 		},
 		'value 5' //can just be data; mixing and the two in the same row is fine
 	]);
