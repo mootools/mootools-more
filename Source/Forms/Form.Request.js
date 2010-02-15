@@ -81,10 +81,10 @@ if (!window.Form) window.Form = {};
 					}, this);
 				}.bind(this),
 				failure: function(xhr){
-					this.fireEvent('complete').fireEvent('failure', xhr);
+					this.fireEvent('complete', arguments).fireEvent('failure', arguments);
 				}.bind(this),
 				exception: function(){
-					this.fireEvent('failure', xhr);
+					this.fireEvent('failure', arguments);
 				}.bind(this)
 			});
 		},
