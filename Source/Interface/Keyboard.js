@@ -38,11 +38,16 @@ provides: [Keyboard]
 			*/
 			defaultEventType: 'keydown',
 			active: false,
+			manager: null,
 			events: {},
 			nonParsedEvents: ['activate', 'deactivate', 'onactivate', 'ondeactivate', 'changed', 'onchanged']
 		},
 
 		initialize: function(options){
+			if (options.manager) {
+				this.manager = options.manager;
+				delete options.manager;
+			}
 			this.setOptions(options);
 			this.setup();
 		}, 
@@ -228,7 +233,7 @@ provides: [Keyboard]
 		';': 186,
 		'=': 187,
 		',': 188,
-		'-': Browser.Engine.Gecko ? 109 : 189,
+		'-': Browser.Engine.gecko ? 109 : 189,
 		'.': 190,
 		'/': 191,
 		'`': 192,
