@@ -28,8 +28,10 @@ var Asset = {
 			check: $lambda(true)
 		}, properties);
 		
-		if (properties.onLoad) properties.onload = properties.onLoad;
-		
+		if (properties.onLoad) {
+			properties.onload = properties.onLoad;
+			delete properties.onLoad;
+		}
 		var script = new Element('script', {src: source, type: 'text/javascript'});
 
 		var load = properties.onload.bind(script), 

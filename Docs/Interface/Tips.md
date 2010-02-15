@@ -3,27 +3,27 @@ Class: Tips {#Tips}
 
 Display a tip on any element with a title and/or href.
 
-### Credits:
+### Credits
 
 - The idea behind Tips.js is based on [Bubble Tooltips](http://web-graphics.com/mtarchive/001717.php) by [Alessandro Fulcitiniti](http://web-graphics.com/)
 
-### Note:
+### Note
 
 - Tips requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 
-### Implements:
+### Implements
 
 - [Events][], [Options][]
 
 Tips Method: constructor {#Tips:constructor}
 --------------------------------------------
 
-### Arguments:
+### Arguments
 
 * elements - (*mixed*: optional) A collection of elements, a string Selector, or an Element to apply the tooltips to.
 * options  - (*object*) An object to customize this Tips instance.
 
-### Options:
+### Options
 
 * showDelay - (*number*: defaults to 100) The delay the show event is fired.
 * hideDelay - (*number*: defaults to 100) The delay the hide hide is fired.
@@ -37,16 +37,16 @@ Tips Method: constructor {#Tips:constructor}
 * fixed - (*boolean*: defaults to false) If set to true, the toolTip will not follow the mouse.
 * windowPadding - (*object*; defaults to {'x':0, 'y': 0}) Allows you to reduce or expand the virtual size of the window for tip positioning. The tips will not be allowed to approach the edge of the window on any side based on this offset.
 
-### Events:
+### Events
 
 * onShow - (*function*: defaults to `function(tip, hovered){ tip.setStyle('display', 'block'); }`) The default function for the show event, passes the tip element and the currently hovered element.
 * onHide - (*function*: defaults to `function(tip, hovered){ tip.setStyle('display', 'none'); }`)  The default function for the hide event, passes the currently hovered element.
 * onAttach - (*function*) Fires when an element gets added to the tips instance. Passes the element as argument.
 * onDetach - (*function*) Fires when the event listeners get removed from an element. Passes the element as argument.
 
-### Example:
+### Example
 
-#### HTML:
+#### HTML
 
 	<a href="http://mootools.net" title="mootools homepage" class="thisisatooltip" />
 
@@ -61,16 +61,16 @@ Tips Event: show {#Tips:show}
 
 * (*function*) Fires when the Tip is starting to show and by default sets the tip visible.
 
-### Signature:
+### Signature
 
 	onShow(tip)
 
-### Arguments:
+### Arguments
 
 1. tip - (*element*) The tip element. Useful if you want to apply effects to it.
 2. el - (*element*) The element on which the tip is based on.
 
-### Example:
+### Example
 
 	myTips.addEvent('show', function(tip, el){
 		tip.fade('in');
@@ -81,16 +81,16 @@ Tips Event: hide {#Tips:hide}
 
 * (*function*) Fires when the Tip is starting to hide and by default sets the tip hidden.
 
-### Signature:
+### Signature
 
 	onHide(tip)
 
-### Arguments:
+### Arguments
 
 1. tip - (*element*) The tip element. Useful if you want to apply effects to it.
 2. el - (*element*) The element on which the tip is based on.
 
-### Example:
+### Example
 
 	myTips.addEvent('hide', function(tip, el){
 		tip.fade('out');
@@ -103,19 +103,19 @@ Tips Method: attach {#Tips:attach}
 
 Attaches tooltips to elements. Useful to add more elements to a tips instance.
 
-### Syntax:
+### Syntax
 
 	myTips.attach(elements);
 
-### Arguments:
+### Arguments
 
 1. elements - (*mixed*) A collection of elements, a string Selector, or an Element to apply the tooltips to.
 
-### Returns:
+### Returns
 
 * (*object*) This Tips instance.
 
-### Example:
+### Example
 
 	myTips.attach('a.thisisatip');
 
@@ -125,19 +125,19 @@ Tips Method: detach {#Tips:detach}
 
 Detaches tooltips from elements. Useful to remove elements from a tips instance.
 
-### Syntax:
+### Syntax
 
 	myTips.detach(elements);
 
-### Arguments:
+### Arguments
 
 1. elements - (*mixed*) A collection of elements, a string Selector, or an Element to apply the tooltips to.
 
-### Returns:
+### Returns
 
 * (*object*) This Tips instance.
 
-### Example:
+### Example
 
 	myTips.detach('a.thisisatip');
 
@@ -165,9 +165,9 @@ Tips with storage {#Tips:Storage}
 
 You can also assign tips titles and contents via [Element Storage](/Element/Element/#ElementStorage).
 
-### Example:
+### Example
 
-#### HTML:
+#### HTML
 
 	<a id="tip1" href="http://mootools.net" title="mootools homepage" class="thisisatooltip" />
 
@@ -177,7 +177,7 @@ You can also assign tips titles and contents via [Element Storage](/Element/Elem
 
 	$('tip1').store('tip:text', 'custom text for tip 1');
 
-### Note:
+### Note
 
 If you use tips storage you can use elements and / or html as tips title and text.
 

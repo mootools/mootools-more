@@ -51,7 +51,7 @@ Fx.Move Method: constructor {#Fx-Move:constructor}
 		offset: {x:0,y:0}
 	}); //move it to the center of the window
 
-### See Also:
+### See Also
 
 - [Fx.Morph][]
 
@@ -126,7 +126,7 @@ Gets the default [Fx.Move][] instance for the Element.
 
 * (*object*) The Element's internal [Fx.Move][] instance.
 
-#### Examples:
+#### Examples
 
 	el.set('move', {duration: 'long', transition: 'bounce:out'});
 	el.move({relativeTo:$('myDiv'));

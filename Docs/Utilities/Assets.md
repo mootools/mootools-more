@@ -10,25 +10,27 @@ Asset Method: javascript {#Asset:javascript}
 
 Injects a script tag into the head section of the document, pointing to the src specified.
 
-### Syntax:
+### Syntax
 
 	var myScript = Asset.javascript(source[, properties]);
 
-### Arguments:
+### Arguments
 
 1. source     - (*string*) The location of the JavaScript file to load.
-2. properties - (*object*, optional) Additional attributes to be included into the script Element; this is the same as the second argument you might pass to  including the Element constructor. For instance you might specify an onload event or perhaps an id.
+2. properties - (*object*, optional) Additional attributes to be included into the script Element; this is the same as the second argument you might pass to including the Element constructor with the exception of Events (see note)
 
-### Returns:
+### Returns
 
 * (*element*) A new script Element.
 
-### Examples:
+### Examples
 
 	var myScript = new Asset.javascript('/scripts/myScript.js', {
-		id: 'myScript', 
-		onload: function(){
-			alert('myScript.js is loaded!'); 
+		id: 'myScript',
+		events: {
+			load: function(){
+				alert('myScript.js is loaded!'); 
+			}
 		}
 	});
 
@@ -39,48 +41,54 @@ Asset Method: css {#Asset:css}
 
 Injects a css file in the page.
 
-### Syntax:
+### Syntax
 
 	var myCSS = new Asset.css(source[, properties]);
 
-### Arguments:
+### Arguments
 
 1. source     - (*string*) The path of the CSS file.
 2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to  including the Element constructor. For instance you might specify an onLoad event or perhaps an id.
 
-### Returns:
+### Returns
 
 * (*element*) A new link Element.
 
-### Examples:
+### Examples
 
 	var myCSS = new Asset.css('/css/myStyle.css', {id: 'myStyle', title: 'myStyle'});
 
+### Notes
 
+- WARNING: DO NOT use addEvent for load on the returned element, give it as onLoad in the properties argument.
 
 Asset Method: image {#Asset:image}
 ------------------------------------
 
 Preloads an image and returns the img element.
 
-### Syntax:
+### Syntax
 
 	var myImage = new Asset.image(source[, properties]);
 
-### Arguments:
+### Arguments
 
 1. source     - (*string*) The path of the image file.
 2. properties - (*object*) Some additional attributes you might want to add to the img Element including the onLoad/onError/onAbort events.
 
-### Returns:
+### Returns
 
 * (*element*) A new HTML img Element.
 
-### Examples:
+### Examples
 
-	var myImage = new Asset.image('/images/myImage.png', {id: 'myImage', title: 'myImage', onLoad: myFunction});
+	var myImage = new Asset.image('/images/myImage.png', {
+		id: 'myImage',
+		title: 'myImage',
+		onLoad: myFunction
+	});
 
-### Notes:
+### Notes
 
 - Does not inject the image into the page.
 - WARNING: DO NOT use addEvent for load/error/abort on the returned element, give them as onLoad/onError/onAbort in the properties argument.
@@ -92,16 +100,16 @@ Asset Method: images {#Asset:images}
 
 Preloads an array of images (as strings) and returns an array of img elements. does not inject them to the page.
 
-### Syntax:
+### Syntax
 
 	var myImages = new Asset.images(source[, options]);
 
-### Arguments:
+### Arguments
 
 1. sources - (*mixed*) An array or a string, of the paths of the image files.
 2. options - (*object*, optional) See below.
 
-## Options:
+## Options
 
 * properties - (*object*) Some additional attributes for all the images (same as the second argument you might pass to *Asset.image*).
 * onComplete/onProgress/onError - (*functions*) See events below.
@@ -110,7 +118,7 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 
 * (*function*) Executes when all image files are loaded.
 
-#### Signature:
+#### Signature
 
 	onComplete()
 
@@ -118,11 +126,11 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 
 * (*function*) Executes when one image file is loaded.
 
-#### Signature:
+#### Signature
 
 	onProgress(counter, index)
 
-#### Arguments:
+#### Arguments
 
 1. counter - (*number*) The number of loaded images.
 2. index   - (*number*) The index of the loaded image.
@@ -131,15 +139,15 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 
 * (*function*) Executes when one image file fails to load.
 
-#### Signature:
+#### Signature
 
 	onError(counter, index)
 
-#### Returns:
+#### Returns
 
 * (*array*) An [Elements][] collection.
 
-#### Examples:
+#### Examples
 
 	var myImages = new Asset.images(['/images/myImage.png', '/images/myImage2.gif'], {
 		onComplete: function(){
