@@ -47,6 +47,17 @@ Keyboard.implement({
 		return this;
 	},
 
+	removeShortcut: function(name) {
+		var shortcut = this.getShortcut(name);
+		if (shortcut && shortcut.keys) this.removeEvent(shortcut.keys, shortcut.handler);
+		return this;
+	},
+
+	removeShortcuts: function(names) {
+		names.each(this.removeShortcut, this);
+		return this;
+	},
+
 	getShortcuts: function(){
 		return this.shortcuts || [];
 	},
