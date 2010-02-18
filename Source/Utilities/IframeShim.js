@@ -13,7 +13,8 @@ authors:
 requires:
 - core:1.2.4/Element.Event
 - core:1.2.4/Element.Style
-- core:1.2.4/Options Events
+- core:1.2.4/Options 
+- core:1.2.4/Events
 - /Element.Position
 - /Class.Occlude
 

@@ -17,8 +17,8 @@ requires:
 - core:1.2.4/Array
 - core:1.2.4/String
 - core:1.2.4/Number
-- core:1.2.4/Lang
-- core:1.2.4/Date.English.US
+- /Lang
+- /Date.English.US
 - /MooTools.More
 
 provides: [Date]

@@ -14,7 +14,7 @@ requires:
 - core:1.2.4/Element.Dimensions
 - /Element.Measure
 
-provides: [Elements.Position]
+provides: [Element.Position]
 
 ...
 */

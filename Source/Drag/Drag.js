@@ -20,6 +20,7 @@ requires:
 - /MooTools.More
 
 provides: [Drag]
+...
 
 */
 
