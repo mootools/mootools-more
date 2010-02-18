@@ -1,7 +1,7 @@
 /*
 ---
 
-script: Keyboard.js
+script: Keyboard.Extras.js
 
 description: Enhances Keyboard by adding the ability to name and describe keyboard shortcuts, and the ability to grab shortcuts by name and bind the shortcut to different keys.
 
@@ -11,8 +11,8 @@ authors:
 - Perrin Westrich
 
 requires:
-- core:1.2.4/Function
-- /Keyboard.Extras
+- /Keyboard
+- /MooTools.More
 
 provides: [Keyboard.Extras]
 
@@ -44,6 +44,17 @@ Keyboard.implement({
 
 	addShortcuts: function(obj){
 		for(var name in obj) this.addShortcut(name, obj[name]);
+		return this;
+	},
+
+	removeShortcut: function(name) {
+		var shortcut = this.getShortcut(name);
+		if (shortcut && shortcut.keys) this.removeEvent(shortcut.keys, shortcut.handler);
+		return this;
+	},
+
+	removeShortcuts: function(names) {
+		names.each(this.removeShortcut, this);
 		return this;
 	},
 

@@ -14,7 +14,8 @@ requires:
 - core:1.2.4/Class
 - /MooTools.More
 
-provides: [Class.refactor]
+# Some modules declare themselves dependent on Class.Refactor
+provides: [Class.refactor, Class.Refactor]
 
 ...
 */

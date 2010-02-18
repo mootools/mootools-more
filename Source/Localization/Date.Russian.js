@@ -1,13 +1,25 @@
 /*
-Script: Date.Russian.js
-	Date messages for Russian.
 
-	License:
-		MIT-style license.
+---
 
-	Authors:
-		Evstigneev Pavel
+script: Date.Russian.js
+
+description: Date messages in Russian.
+
+license: MIT-style license
+
+authors:
+- Evstigneev Pavel
+
+requires:
+- /Lang
+- /Date
+
+provides: [Date.Russian]
+
+...
 */
+
 
 MooTools.lang.set('ru-RU-unicode', 'Date', {
 

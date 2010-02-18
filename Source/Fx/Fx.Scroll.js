@@ -52,7 +52,7 @@ Fx.Scroll = new Class({
 	set: function(){
 		var now = Array.flatten(arguments);
 		if (Browser.Engine.gecko) now = [Math.round(now[0]), Math.round(now[1])];
-		this.element.scrollTo(now[0], now[1]);
+		this.element.scrollTo(now[0] + this.options.offset.x, now[1] + this.options.offset.y);
 	},
 
 	compute: function(from, to, delta){

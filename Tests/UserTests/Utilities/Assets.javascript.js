@@ -14,9 +14,10 @@
 			verify: "Did the message change to 'JavaScript onLoad fired successfully!' ?",
 			before: function(){
 				$('msg').set('html', 'testing...');
-				Asset.javascript('UserTests/Utilities/Assets.javascript.test.js')
-				.addEvent('load',function(){
-					$('msg').set('html', 'JavaScript onLoad fired successfully!');
+				Asset.javascript('UserTests/Utilities/Assets.javascript.test.js', {
+					onLoad: function(){
+						$('msg').set('html', 'JavaScript onLoad fired successfully!');
+					}
 				});
 			}
 		}
