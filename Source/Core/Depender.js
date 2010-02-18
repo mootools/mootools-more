@@ -11,12 +11,12 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Element.Events
+- core:1.2.4/Element.Event
 - core:1.2.4/Request.JSON
 - /MooTools.More
 - /Log
 
-provides: Depender
+provides: [ Depender ]
 
 ...
 */

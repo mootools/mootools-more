@@ -17,8 +17,10 @@ requires:
 - core:1.2.4/Element.Event
 - core:1.2.4/Element.Style
 - core:1.2.4/JSON
-- /Lang- /Class.Binds
-- /Date Element.Forms
+- /Lang
+- /Class.Binds
+- /Date 
+- /Element.Forms
 - /Form.Validator.English
 - /Element.Shortcuts
 

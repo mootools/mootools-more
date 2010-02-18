@@ -14,7 +14,7 @@ requires:
 - core:1.2.4/Events
 - /MooTools.More
 
-provides: [MooTools.Lang]
+provides: [Lang]
 
 ...
 */

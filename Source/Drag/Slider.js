@@ -14,7 +14,6 @@ requires:
 - core:1.2.4/Element.Dimensions
 - /Class.Binds
 - /Drag
-- /Element.Dimensions
 - /Element.Measure
 
 provides: [Slider]
