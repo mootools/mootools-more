@@ -49,7 +49,11 @@ Keyboard.implement({
 
 	removeShortcut: function(name) {
 		var shortcut = this.getShortcut(name);
-		if (shortcut && shortcut.keys) this.removeEvent(shortcut.keys, shortcut.handler);
+		if (shortcut && shortcut.keys) {
+			this.removeEvent(shortcut.keys, shortcut.handler);
+			delete this.shortcutIndex[name];
+			this.shortcuts.erase(shortcut);
+		}
 		return this;
 	},
 

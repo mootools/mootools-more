@@ -86,7 +86,8 @@ provides: [Keyboard]
 
 		activate: function(instance){
 			if (instance) {
-				//if we're stealing focus, store the last keyboard to have it so the relenquish command works
+				if (this.isActive()) return this;
+				//if we're stealing focus, store the last keyboard to have it so the relinquish command works
 				if (instance != this.activeKB) this.previous = this.activeKB;
 				//if we're enabling a child, assign it so that events are now passed to it
 				this.activeKB = instance.fireEvent('activate');
@@ -98,6 +99,10 @@ provides: [Keyboard]
 			return this;
 		},
 
+		isActive: function(){
+			return this.manager ? this.manager.activeKB == this : true;
+		},
+
 		deactivate: function(instance){
 			if (instance) {
 				if(instance === this.activeKB) {
@@ -105,15 +110,14 @@ provides: [Keyboard]
 					instance.fireEvent('deactivate');
 					Keyboard.manager.fireEvent('changed');
 				}
-			}
-			else if (this.manager) {
+			} else if (this.manager) {
 				this.manager.deactivate(this);
 			}
 			return this;
 		},
 
-		relenquish: function(){
-			if (this.previous) this.activate(this.previous);
+		relinquish: function(){
+			if (this.isActive() && this.manager && this.manager.previous) this.manager.activate(this.manager.previous);
 		},
 
 		//management logic
@@ -122,7 +126,6 @@ provides: [Keyboard]
 			this.instances.push(instance);
 			instance.manager = this;
 			if (!this.activeKB) this.activate(instance);
-			else this._disable(instance);
 		},
 
 		_disable: function(instance){
@@ -132,6 +135,7 @@ provides: [Keyboard]
 		drop: function(instance){
 			this._disable(instance);
 			this.instances.erase(instance);
+			if (this.activeKB == instance && this.previous && this.instances.contains(this.previous)) this.activate(this.previous);
 		},
 
 		instances: [],
