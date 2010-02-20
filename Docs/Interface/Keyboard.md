@@ -143,6 +143,15 @@ Attempts to give control to the previously active keyboard. Will not do anything
 
 	myKeyboard.relinquish()
 
+Keyboard Method: isActive {#Keyboard:isActive}
+------------------------------------
+
+Returns *true* if the instance is active.
+
+### Syntax
+
+	myKeyboard.isActive()
+
 
 Keyboard Method: manage {#Keyboard:manage}
 ------------------------------------

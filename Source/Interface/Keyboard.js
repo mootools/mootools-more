@@ -99,6 +99,10 @@ provides: [Keyboard]
 			return this;
 		},
 
+		isActive: function(){
+			return this.manager ? this.manager.activeKB == this : true;
+		},
+
 		deactivate: function(instance){
 			if (instance) {
 				if(instance === this.activeKB) {
