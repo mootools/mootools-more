@@ -110,8 +110,7 @@ provides: [Keyboard]
 					instance.fireEvent('deactivate');
 					Keyboard.manager.fireEvent('changed');
 				}
-			}
-			else if (this.manager) {
+			} else if (this.manager) {
 				this.manager.deactivate(this);
 			}
 			return this;
@@ -127,7 +126,6 @@ provides: [Keyboard]
 			this.instances.push(instance);
 			instance.manager = this;
 			if (!this.activeKB) this.activate(instance);
-			else this._disable(instance);
 		},
 
 		_disable: function(instance){
@@ -137,6 +135,7 @@ provides: [Keyboard]
 		drop: function(instance){
 			this._disable(instance);
 			this.instances.erase(instance);
+			if (this.activeKB == instance && this.previous && this.instances.contains(this.previous)) this.activate(this.previous);
 		},
 
 		instances: [],
