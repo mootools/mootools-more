@@ -112,8 +112,8 @@ provides: [Keyboard]
 			return this;
 		},
 
-		relenquish: function(){
-			if (this.previous) this.activate(this.previous);
+		relinquish: function(){
+			if (this.isActive() && this.manager && this.manager.previous) this.manager.activate(this.manager.previous);
 		},
 
 		//management logic
