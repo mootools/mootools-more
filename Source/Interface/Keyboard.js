@@ -86,7 +86,7 @@ provides: [Keyboard]
 
 		activate: function(instance){
 			if (instance) {
-				if (this.isActive()) return this;
+				if (instance.isActive()) return this;
 				//if we're stealing focus, store the last keyboard to have it so the relinquish command works
 				if (instance != this.activeKB) this.previous = this.activeKB;
 				//if we're enabling a child, assign it so that events are now passed to it
@@ -100,7 +100,7 @@ provides: [Keyboard]
 		},
 
 		isActive: function(){
-			return this.manager ? this.manager.activeKB == this : true;
+			return this.manager ? this.manager.activeKB == this :  Keyboard.manager == this;
 		},
 
 		deactivate: function(instance){
