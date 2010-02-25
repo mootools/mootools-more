@@ -43,6 +43,7 @@ if (!window.Form) window.Form = {};
 				emulation: false,
 				link: 'ignore'
 			},
+			sendButtonClicked: true,
 			extraData: {},
 			resetForm: true
 		},
@@ -95,7 +96,10 @@ if (!window.Form) window.Form = {};
 			
 			var fv = this.element.retrieve('validator');
 			if (fv) fv[method]('onFormValidate', this.onFormValidate);
-			if (!fv || !attach) this.element[method]('submit', this.onSubmit);
+			if (!fv || !attach) {
+				this.element[method]('click:relay(input[type=button], input[type=submit])', this.saveClickedButton.bind(this));
+				this.element[method]('submit', this.onSubmit);
+			}
 		},
 
 		detach: function(){
@@ -130,6 +134,19 @@ if (!window.Form) window.Form = {};
 			this.send();
 		},
 
+		saveClickedButton: function(event) {
+			if (!this.options.sendButtonClicked) return;
+			target = $(event.target);
+			if (!target.get('name')) return;
+			this.options.extraData[target.get('name')] = target.get('value') || true;
+			this.clickedCleaner = function(){
+				delete this.options.extraData[target.get('name')];
+				this.clickedCleaner = $empty;
+			}.bind(this);
+		},
+
+		clickedCleaner: $empty,
+
 		send: function(){
 			var str = this.element.toQueryString().trim();
 			var data = $H(this.options.extraData).toQueryString();
@@ -137,6 +154,7 @@ if (!window.Form) window.Form = {};
 			else str = data;
 			this.fireEvent('send', [this.element, str.parseQueryString()]);
 			this.request.send({data: str, url: this.element.get("action")});
+			this.clickedCleaner();
 			return this;
 		}
 
