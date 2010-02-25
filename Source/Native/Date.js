@@ -43,7 +43,7 @@ Date.Methods = {
 
 ['Date', 'Day', 'FullYear', 'Hours', 'Milliseconds', 'Minutes', 'Month', 'Seconds', 'Time', 'TimezoneOffset',
 	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'LastDayOfMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
-	'AMPM', 'Ordinal', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds'].each(function(method){
+	'AMPM', 'Ordinal', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds', 'UTCMilliseconds'].each(function(method){
 	Date.Methods[method.toLowerCase()] = method;
 });
 
@@ -197,6 +197,7 @@ Date.implement({
 					case 'Y': return d.get('year');
 					case 'T': return d.get('GMTOffset');
 					case 'Z': return d.get('Timezone');
+					case 'z': return pad(d.get('ms'));
 				}
 				return $1;
 			}
@@ -311,7 +312,8 @@ Date.extend({
 			localDate.get('date'),
 			localDate.get('hr'),
 			localDate.get('min'),
-			localDate.get('sec')
+			localDate.get('sec'),
+			localDate.get('ms')
 		);
 		return new Date(utcSeconds);
 	},
