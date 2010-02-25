@@ -227,14 +227,13 @@ var nativeParse = Date.parse;
 var parseWord = function(type, word, num){
 	var ret = -1;
 	var translated = Date.getMsg(type + 's');
-
 	switch ($type(word)){
 		case 'object':
 			ret = translated[word.get(type)];
 			break;
 		case 'number':
-			ret = translated[month - 1];
-			if (!ret) throw new Error('Invalid ' + type + ' index: ' + index);
+			ret = translated[word];
+			if (!ret) throw new Error('Invalid ' + type + ' index: ' + word);
 			break;
 		case 'string':
 			var match = translated.filter(function(name){
@@ -419,8 +418,9 @@ var build = function(format){
 		handler: function(bits){
 			bits = bits.slice(1).associate(parsed);
 			var date = new Date().clearTime();
-			if ('d' in bits) handle.call(date, 'd', 1);
-			if ('m' in bits || 'b' in bits || 'B' in bits) handle.call(date, 'm', 1);
+			['d', 'm', 'b', 'B'].each(function(letter){
+				if (letter in bits) handle.call(date, letter, 1);
+			});
 			for (var key in bits) handle.call(date, key, bits[key]);
 			return date;
 		}
