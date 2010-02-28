@@ -73,6 +73,33 @@ Focuses the input and hides the overtext.
 
 * (*object*) - This instance of [OverText][]
 
+OverText Method: enable {#OverText:enable}
+--------------------------------------------------------
+
+Enables the behavior of the class. Displays the text hint if the input is empty.
+
+### Returns
+
+* (*object*) - This instance of [OverText][]
+
+OverText Method: disable {#OverText:disable}
+--------------------------------------------------------
+
+Disables the behavior of the class. Hides the text hint.
+
+### Returns
+
+* (*object*) - This instance of [OverText][]
+
+OverText Method: destroy {#OverText:destroy}
+--------------------------------------------------------
+
+Destroys the class, removing the behavior from the input as well as any DOM elements created (the hint text label and the wrapper element if the options called for it).
+
+### Returns
+
+* (*object*) - This instance of [OverText][]
+
 OverText Method: reposition {#OverText:reposition}
 ----------------------------------------------------------------
 
