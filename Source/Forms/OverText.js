@@ -95,14 +95,38 @@ var OverText = new Class({
 			}).adopt(this.text).inject(this.element, 'before');
 		}
 
+		return this.enable();
+	},
+
+	destroy: function(){
+		this.element.eliminate('OverTextDiv');
+		this.disable();
+		this.text.destroy();
+		if (this.textHolder) this.textHolder.destroy();
+		return this;
+	},
+
+	disable: function(){
+		this.element.removeEvents({
+			focus: this.focus,
+			blur: this.assert,
+			change: this.assert
+		});
+		window.removeEvent('resize', this.reposition);
+		this.hide(true, true);
+		return this;
+	},
+
+	enable: function(){
 		this.element.addEvents({
 			focus: this.focus,
 			blur: this.assert,
 			change: this.assert
-		}).store('OverTextDiv', this.text);
-		window.addEvent('resize', this.reposition.bind(this));
+		});
+		window.addEvent('resize', this.reposition);
 		this.assert(true);
 		this.reposition();
+		return this;
 	},
 
 	wrap: function(){
