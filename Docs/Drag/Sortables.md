@@ -3,14 +3,14 @@ Class: Sortables {#Sortables}
 
 Creates an interface for drag and drop sorting of a list or lists.
 
-### Arguments:
+### Arguments
 
 1. list - (*mixed*) required, the list or lists that will become sortable.
  * This argument can be an [Element][], an array of [Elements][], or a selector. When a single list (or id) is passed, that list will be sortable only with itself.
  * To enable sorting between lists, one or more lists or id's must be passed using an array or a selector. See Examples below.
 2. options - (*object*) See options and events below.
 
-### Options:
+### Options
 
 * constrain - (*boolean*: defaults to false) Whether or not to constrain the element being dragged to its parent element.
 * clone     - (*mixed*: defaults to false) Whether or not to display a copy of the actual element under the cursor while dragging. May also be used as a function which will return an element to be used as the clone.  The function will receive the mousedown event, the element, and the list as arguments.
@@ -19,17 +19,17 @@ Creates an interface for drag and drop sorting of a list or lists.
 * revert    - (*mixed*: defaults to false) Whether or not to use an effect to slide the element into its final location after sorting. If you pass an object it will be used as additional options for the revert effect.
 * snap      - (*integer*: defaults to 4) The number of pixels the element must be dragged for sorting to begin.
 
-### Events:
+### Events
 
 #### start
 
 Fired when the item starts dragging.
 
-##### Signature:
+##### Signature
 
 	onStart(element, clone)
 
-##### Arguments:
+##### Arguments
 
 1. element - (*element*) The Element being sorted.
 2. clone   - (*element*) The clone of the Element.
@@ -38,11 +38,11 @@ Fired when the item starts dragging.
 
 Fired when the item is inserted into a new place in one of the lists.
 
-##### Signature:
+##### Signature
 
 	onSort(element, clone)
 
-##### Arguments:
+##### Arguments
 
 1. element - (*element*) The Element being sorted.
 2. clone   - (*element*) The clone of the Element.
@@ -51,15 +51,15 @@ Fired when the item is inserted into a new place in one of the lists.
 
 Fired when the item ends dragging. Note: fires even if the sort has not changed.
 
-##### Signature:
+##### Signature
 
 	onComplete(element)
 
-##### Arguments:
+##### Arguments
 
 1. element - (*element*) The Element being sorted.
 
-### Examples:
+### Examples
 
 	var mySortables = new Sortables('list-1', {
 		revert: { duration: 500, transition: 'elastic:out' }
@@ -87,11 +87,11 @@ Sortables Method: attach {#Sortables:attach}
 
 Attaches the mouse listener to all the handles, enabling sorting.
 
-### Syntax:
+### Syntax
 
 	mySortables.attach();
 
-### Returns:
+### Returns
 
 * (*object*) This Sortables instance.
 
@@ -102,11 +102,11 @@ Sortables Method: detach {#Sortables:detach}
 
 Detaches the mouse listener from all the handles, disabling sorting.
 
-### Syntax:
+### Syntax
 
 	mySortables.detach();
 
-### Returns:
+### Returns
 
 * (*object*) This Sortables instance.
 
@@ -117,19 +117,19 @@ Sortables Method: addItems {#Sortables:addItems}
 
 Allows one or more items to be added to an existing Sortables instance.
 
-### Syntax:
+### Syntax
 
 	mySortables.addItems(item1[, item2[, item3[, ...]]]);
 
-### Arguments:
+### Arguments
 
 1. items - (*mixed*) Since Array.flatten is used on the arguments, a single element, several elements, an array of elements, or any combination thereof may be passed to this method.
 
-### Returns:
+### Returns
 
 * (*object*) This Sortables instance.
 
-### Examples:
+### Examples
 
 	var mySortables = new Sortables('#list1, #list2');
 
@@ -141,12 +141,12 @@ Allows one or more items to be added to an existing Sortables instance.
 	$('list2').adopt(element2, element3);
 	mySortables.addItems(element1, element2, element3);
 
-### Notes:
+### Notes
 
 - The items will not be injected into the list automatically as the sortable instance could have many lists.
 - First inject the elements into the proper list, then call addItems on them.
 
-### See Also:
+### See Also
 
 - [Sortables:removeItems](#Sortables:removeItems), [Sortables:addLists](#Sortables:addLists)
 
@@ -157,19 +157,19 @@ Sortables Method: removeItems {#Sortables:removeItems}
 
 Allows one or more items to be removed from an existing Sortables instance.
 
-### Syntax:
+### Syntax
 
 	mySortables.removeItems(item1[, item2[, item3[, ...]]]);
 
-### Arguments:
+### Arguments
 
 1. items - (*mixed*) Since Array.flatten is used on the arguments, a single element, several elements, an array of elements, or any combination thereof may be passed to this method.
 
-### Returns:
+### Returns
 
 * (*Elements*) An Elements collection of all the elements that were removed.
 
-### Examples:
+### Examples
 
 	var mySortables = new Sortables('#list1, #list2');
 
@@ -178,12 +178,12 @@ Allows one or more items to be removed from an existing Sortables instance.
 
 	mySortables.removeItems(element1, element2).destroy(); //the elements will be removed and destroyed
 
-### Notes:
+### Notes
 
 - The items will not be removed from the list automatically, they will just no longer be sortable.
 - First call removeItems on the items, and then remove them from their list containers, or destroy them.
 
-### See Also:
+### See Also
 
 - [Sortables:addItems](#Sortables:addItems), [Sortables:removeLists](#Sortables:removeLists)
 
@@ -194,28 +194,28 @@ Sortables Method: addLists {#Sortables:addLists}
 
 Allows one or more entire lists to be added to an existing Sortables instance, allowing sorting between the new and old lists.
 
-### Syntax:
+### Syntax
 
 	mySortables.addLists(list1[, list2[, list3[, ...]]]);
 
-### Arguments:
+### Arguments
 
 1. lists - (*mixed*) Since Array.flatten is used on the arguments, a single element, several elements, an array of elements, or any combination thereof may be passed to this method.
 
-### Returns:
+### Returns
 
 * (*object*) This Sortables instance.
 
-### Examples:
+### Examples
 
 	var mySortables = new Sortables('list1');
 	mySortables.addLists($('list2'));
 
-### Notes:
+### Notes
 
 - More complicated usage of this method will allow you to do things like one-directional sorting.
 
-### See Also:
+### See Also
 
 - [Sortables:removeLists](#Sortables:removeLists), [Sortables:addItems](#Sortables:addItems)
 
@@ -226,24 +226,24 @@ Sortables Method: removeLists {#Sortables:removeLists}
 
 Allows one or more entire lists to be removed from an existing Sortables instance, preventing sorting between the lists.
 
-### Syntax:
+### Syntax
 
 	mySortables.removeLists(list1[, list2[, list3[, ...]]]);
 
-### Arguments:
+### Arguments
 
 1. lists - (*mixed*) Since Array.flatten is used on the arguments, a single element, several elements, an array of elements, or any combination thereof may be passed to this method.
 
-### Returns:
+### Returns
 
 * (*Elements*) An Elements collection of all the lists that were removed.
 
-### Examples:
+### Examples
 
 	var mySortables = new Sortables('#list1, #list2');
 	mySortables.removeLists($('list2'));
 
-### See Also:
+### See Also
 
 - [Sortables:addLists](#Sortables:addLists), [Sortables:removeItems](#Sortables:removeItems)
 
@@ -256,12 +256,12 @@ Function to get the order of the elements in the lists of this sortables instanc
 For each list, an array containing the order of the elements will be returned.
 If more than one list is being used, all lists will be serialized and returned in an array.
 
-### Arguments:
+### Arguments
 
 1. index    - (*mixed*, optional) An integer or boolean false. index of the list to serialize. Omit or pass false to serialize all lists.
 2. modifier - (*function*, optional) A function to override the default output of the sortables.  See Examples below
 
-### Examples:
+### Examples
 
 	mySortables.serialize(1);
 	//returns the second list serialized (remember, arrays are 0 based...);

@@ -8,7 +8,7 @@ A collection of the String Object prototype methods.
 * [Online Tutorial/Demo][]
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/03-native/03-string.extras
 
-### See Also:
+### See Also
 
 - [String][]
 

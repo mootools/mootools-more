@@ -9,7 +9,7 @@ A collection of Hash methods.
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/03-native/02-hash.extras
 
 
-### See Also:
+### See Also
 
 - [Mootools:Hash][]
 
