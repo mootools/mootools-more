@@ -39,7 +39,7 @@
 					}
 				}).set(0);
 				$('setRange').addEvent('click',function(){
-					mySlide.setRange([200,50], 100);
+					mySlide.setRange([200,50]);
 				});
 			}
 		}

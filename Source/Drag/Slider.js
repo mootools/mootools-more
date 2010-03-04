@@ -133,7 +133,7 @@ var Slider = new Class({
 		this.steps = this.options.steps || this.full;
 		this.stepSize = Math.abs(this.range) / this.steps;
 		this.stepWidth = this.stepSize * this.full / Math.abs(this.range);
-		(pos) ? this.set(pos) : this.set(range[0]); // not sure what to do w/ the else here ...
+		this.set($pick(pos, this.step).floor(this.min).max(this.max));
 		return this;
 	},
 
