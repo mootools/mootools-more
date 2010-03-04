@@ -127,8 +127,8 @@ var Slider = new Class({
 	},
 	
 	setRange: function(range, pos){
-		this.min = $chk(range[0]) ? range[0] : 0;
-		this.max = $chk(range[1]) ? range[1] : this.options.steps;
+		this.min = $pick(range[0], 0);
+		this.max = $pick(range[1], this.options.steps);
 		this.range = this.max - this.min;
 		this.steps = this.options.steps || this.full;
 		this.stepSize = Math.abs(this.range) / this.steps;
