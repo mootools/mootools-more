@@ -67,12 +67,7 @@ var Slider = new Class({
 			return this.element[offset] - this.knob[offset] + (this.options.offset * 2); 
 		}.bind(this));
 		
-		this.min = $chk(this.options.range[0]) ? this.options.range[0] : 0;
-		this.max = $chk(this.options.range[1]) ? this.options.range[1] : this.options.steps;
-		this.range = this.max - this.min;
-		this.steps = this.options.steps || this.full;
-		this.stepSize = Math.abs(this.range) / this.steps;
-		this.stepWidth = this.stepSize * this.full / Math.abs(this.range) ;
+		this.setRange(this.options.range);
 
 		this.knob.setStyle('position', 'relative').setStyle(this.property, this.options.initialStep ? this.toPosition(this.options.initialStep) : - this.options.offset);
 		modifiers[this.axis] = this.property;
@@ -127,6 +122,17 @@ var Slider = new Class({
 		this.checkStep();
 		this.fireEvent('tick', this.toPosition(this.step));
 		this.end();
+		return this;
+	},
+	
+	setRange: function(range, pos){
+		this.min = $pick(range[0], 0);
+		this.max = $pick(range[1], this.options.steps);
+		this.range = this.max - this.min;
+		this.steps = this.options.steps || this.full;
+		this.stepSize = Math.abs(this.range) / this.steps;
+		this.stepWidth = this.stepSize * this.full / Math.abs(this.range);
+		this.set($pick(pos, this.step).floor(this.min).max(this.max));
 		return this;
 	},
 

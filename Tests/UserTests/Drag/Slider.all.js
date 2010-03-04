@@ -25,6 +25,23 @@
 					}
 				}).set(0);
 			}
+		},
+		{
+			title: "Slider (setRange)",
+			description: "Allows you to set the range dynamically",
+			verify: "When you click the setRange button does the slider continue to work properly with a range of 200-50?",
+			before: function(){
+				var mySlide = new Slider($('area3'), $('knob3'), {
+					steps: 100,
+					range: [0,100],
+					onChange: function(pos){
+						$('upd3').set('html', pos);
+					}
+				}).set(0);
+				$('setRange').addEvent('click',function(){
+					mySlide.setRange([200,50]);
+				});
+			}
 		}
 	]
 }
