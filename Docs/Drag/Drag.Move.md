@@ -4,7 +4,7 @@ Class: Drag.Move {#Drag-Move}
 An extension to the base Drag class with additional functionality for dragging an Element.  Supports snapping and droppables.
 Inherits methods, properties, options and events from [Drag][].
 
-### Note:
+### Note
 
 Drag.Move requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 
@@ -12,16 +12,16 @@ Drag.Move requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doc
 Drag.Move Method: constructor {#Drag-Move:constructor}
 -------------------------------------------------
 
-### Syntax:
+### Syntax
 
 	var myMove = new Drag.Move(myElement[, options]);
 
-### Arguments:
+### Arguments
 
 1. el      - (*element*) The Element to apply the drag to.
 2. options - (*object*, optional) The options object. See below.
 
-### Options:
+### Options
 
 All the base Drag options, plus:
 
@@ -31,13 +31,13 @@ All the base Drag options, plus:
 * includeMargins - (*boolean*; defaults to *true*) This option only applies when the container option is set. If *true* (the default) the margins are included in the calculations for the bounding box of the draggable item. This means that if you have a margin on your draggable then the border of the draggable can never touch the edge of the container. Setting it to false ignores this margin.
 * checkDroppables - (*boolean*; defaults to *true*) Checks against the droppables on drag if *true*.
 
-### Events:
+### Events
 
 * drop  - Executed when the element drops. Passes as argument the element and the element dropped on and the event. If dropped on nothing, the second argument is null.
 * leave - Executed when the element leaves one of the droppables.
 * enter - Executed when the element enters one of the droppables.
 
-### Example:
+### Example
 
 	var myDrag = new Drag.Move('draggable', {
 
@@ -58,18 +58,18 @@ All the base Drag options, plus:
 
 	});
 
-### Notes:
+### Notes
 
 - Drag.Move requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 - Drag.Move supports either position absolute or relative. If no position is found, absolute will be set.
 
-### Demos:
+### Demos
 
 * Drag.Cart - <http://demos.mootools.net/Drag.Cart>
 * Drag.Absolutely - <http://demos.mootools.net/Drag.Absolutely>
 * DragDrop - <http://demos.mootools.net/DragDrop>
 
-### See Also:
+### See Also
 
 - [Drag][]
 
@@ -80,11 +80,11 @@ Drag.Move Method: stop {#Drag-Move:stop}
 
 Fires the 'drop' event and calls the Drag Class stop method.
 
-### Syntax:
+### Syntax
 
 	myMove.stop();
 
-### Example:
+### Example
 
 	var myMove = new Drag.Move(myElement, {
 		onSnap: function(){ // due to MooTool's inheritance, all [Drag][]'s Events are also available.
@@ -97,7 +97,7 @@ Fires the 'drop' event and calls the Drag Class stop method.
 		}
 	});
 
-### See Also:
+### See Also
 
 - [Drag:stop][]
 
@@ -115,19 +115,19 @@ Element Method: makeDraggable {#Element:makeDraggable}
 
 Adds drag-to-move behavior to an Element using supplied options.
 
-### Syntax:
+### Syntax
 
 	var myDrag = myElement.makeDraggable([options]);
 
-### Arguments:
+### Arguments
 
 1. options - (*object*, optional) See [Drag][] and [Drag.Move](#Drag-Move) for acceptable options.
 
-### Returns:
+### Returns
 
 * (*object*) The Drag.Move instance that was created.
 
-### Example:
+### Example
 
 	var myDrag = $('myElement').makeDraggable({
 		onComplete: function(){
@@ -135,7 +135,7 @@ Adds drag-to-move behavior to an Element using supplied options.
 		}
 	});
 
-### See Also:
+### See Also
 
 - [Drag][], [Drag.Move](#Drag-Move)
 

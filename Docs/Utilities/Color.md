@@ -3,42 +3,41 @@ Class: Color {#Color}
 
 Creates a new Color Class, which is an array with some color specific methods.
 
-### Syntax:
+### Syntax
 
 	var myColor = new Color(color[, type]);
 
-### Arguments:
+### Arguments
 
 1. color - (*mixed*) A string or an array representation of a color.
 2. type  - (*string*, optional) A string representing the type of the color to create.
 
-### Color:
+### Color
 
 There are three typical representations of color: String, RGB, and HSB. For String representation see [Element:setStyle][] for more information.
 
-### Examples:
+### Examples
 
-##### String Representation:
+##### String Representation
 
 	'#fff'
 
-##### RGB and HSB Representation:
+##### RGB and HSB Representation
 
 	[255, 255, 255]
 	//Or:
 	[255, 255, 255, 1] //(For transparency.)
 
-
-### Returns:
+### Returns
 
 * (*array*) A new Color instance.
 
-### Examples:
+### Examples
 
 	var black = new Color('#000');
 	var purple = new Color([255,0,255]);
 
-### Notes:
+### Notes
 
 - For HSB colors, you need to specify the second argument.
 
@@ -49,20 +48,20 @@ Color Method: mix {#Color:mix}
 
 Mixes two or more colors with the Color.
 
-### Syntax:
+### Syntax
 
 	var myMix = myColor.mix(color[, color2[, color3[, ...][, alpha]);
 
-### Arguments:
+### Arguments
 
 1. color - (*mixed*) A single or many colors, in hex or rgb representation, to mix with this Color.
 2. alpha - (*number*, optional) If the last argument is a number, it will be treated as the amount of the color to mix.
 
-### Returns:
+### Returns
 
 * (*array*) A new Color instance.
 
-### Examples:
+### Examples
 
 	// mix black with white and purple, each time at 10% of the new color
 	var darkpurple = new Color('#000').mix('#fff', [255, 0, 255], 10);
@@ -76,15 +75,15 @@ Color Method: invert {#Color:Invert}
 
 Inverts the Color.
 
-### Syntax:
+### Syntax
 
 	var myInvert = myColor.invert();
 
-### Returns:
+### Returns
 
 * (*array*) A new Color instance.
 
-### Examples:
+### Examples
 
 	var white = new Color('#fff');
 	var black = white.invert();
@@ -96,19 +95,19 @@ Color Method: setHue {#Color:setHue}
 
 Modifies the hue of the Color, and returns a new one.
 
-### Syntax:
+### Syntax
 
 	var hue = myColor.setHue(value);
 
-### Arguments:
+### Arguments
 
 1. value - (*number*) The hue to set.
 
-### Returns:
+### Returns
 
 * (arrays) A new Color instance.
 
-### Example:
+### Example
 
 	var myColor = new Color('#f00');
 	var myElement = $('myElement');
@@ -124,19 +123,19 @@ Color Method: setSaturation {#Color:setSaturation}
 
 Changes the saturation of the Color, and returns a new one.
 
-### Syntax:
+### Syntax
 
 	var saturate = myColor.setSaturation(percent);
 
-### Arguments:
+### Arguments
 
 1. percent - (*number*) The percentage of the saturation to set.
 
-### Returns:
+### Returns
 
 * (*array*) A new Color instance.
 
-### Examples:
+### Examples
 
 	var myColor = new Color('#f00');
 	$('myElement').addEvent('mouseenter', function(){
@@ -150,19 +149,19 @@ Color Method: setBrightness {#Color:setBrightness}
 
 Changes the brightness of the Color, and returns a new one.
 
-### Syntax:
+### Syntax
 
 	var brighten = myColor.setBrightness(percent);
 
-### Arguments:
+### Arguments
 
 1. percent - (*number*) The percentage of the brightness to set.
 
-### Returns:
+### Returns
 
 * (*array*) A new Color instance.
 
-### Examples:
+### Examples
 
 	var myColor = new Color('#000');
 	$('myElement').addEvent('mouseenter', function(){
@@ -176,21 +175,21 @@ Function: $RGB {#RGB}
 
 Shortcut to create a new color, based on red, green, blue values.
 
-### Syntax:
+### Syntax
 
 	var myColor = $RGB(r, g, b);
 
-### Arguments:
+### Arguments
 
 1. r - (*number*) A red value from 0 to 255.
 2. g - (*number*) A green value from 0 to 255.
 3. b - (*number*) A blue value from 0 to 255.
 
-### Returns:
+### Returns
 
 * (*array*) A new Color instance.
 
-### Examples:
+### Examples
 
 	var myColor = $RGB($random(0,255), $random(0,255), $random(0,255));
 
@@ -201,21 +200,21 @@ Function: $HSB {#HSB}
 
 Shortcut to create a new color, based on: hue, saturation, brightness values.
 
-### Syntax:
+### Syntax
 
 	var myColor = $HSB(h, s, b);
 
-### Arguments:
+### Arguments
 
 1. h - (*number*) A hue value from 0 to 359.
 2. s - (*number*) A saturation value from 0 to 100.
 3. b - (*number*) A brightness value from 0 to 100.
 
-### Returns:
+### Returns
 
 * (*array*) A new Color instance.
 
-### Examples:
+### Examples
 
 	var myColor = $HSB(50, 50, 100);
 
@@ -226,7 +225,7 @@ Native: Array {#Array}
 
 Contains Array prototypes.
 
-### See Also:
+### See Also
 
 - [MDC Array][]
 
@@ -237,15 +236,15 @@ Array Method: rgbToHsb {#Array:rgbToHsb}
 
 Converts a RGB array to an HSB array.
 
-### Syntax:
+### Syntax
 
 	var myHSB = myRGBArray.rgbToHsb();
 
-### Returns:
+### Returns
 
 * (*array*) An array with HSB values.
 
-### Example:
+### Example
 
 	var myHSB = [255, 0, 0].rgbToHsb(); //Returns [0, 100, 100].
 
@@ -256,15 +255,15 @@ Array Method: hsbToRgb {#Array:hsbToRgb}
 
 Converts an HSB array to a RGB array.
 
-### Syntax:
+### Syntax
 
 	var myHSB = myRGBArray.hsbToRgb();
 
-### Returns:
+### Returns
 
 * (*array*) An array with RGB values.
 
-### Examples:
+### Examples
 
 	var myRGB = [0, 100, 100].hsbToRgb(); //myRGB = [255, 0, 0]
 
