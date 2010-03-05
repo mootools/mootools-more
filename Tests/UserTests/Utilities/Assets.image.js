@@ -6,10 +6,8 @@
 			verify: "Did the image appear?",
 			before: function(){
 				Asset.image('UserTests/Utilities/mootools.png', {
-					events: {
-						load: function(){
-							this.inject(document.body);
-						}
+					onLoad: function(){
+						this.inject(document.body);
 					}
 				});
 			}

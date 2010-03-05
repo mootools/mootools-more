@@ -84,7 +84,10 @@ var Asset = {
 		['load', 'abort', 'error'].each(function(name){
 			var type = 'on' + name;
 			var cap = name.capitalize();
-			if (properties['on' + cap]) properties[type] = properties['on' + cap];
+			if (properties['on' + cap]) {
+				properties[type] = properties['on' + cap];
+				delete properties['on' + cap];
+			}
 			var event = properties[type];
 			delete properties[type];
 			image[type] = function(){
