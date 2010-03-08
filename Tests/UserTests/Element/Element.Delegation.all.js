@@ -79,6 +79,40 @@
 					'mousedown:relay(.item)': tests[2]
 				});
 			}
+		},
+		{
+			title       : "Element.AddEvents with :not()",
+			description : "Adds hover events to the first and third list items only",
+			verify      : "Do ONLY the first and third items change color when you mouseover/out?",
+			before: function(){
+				
+				$('someListing')
+					.removeEvents('mouseover:relay(:not(.item2):not(.item4))')
+					.removeEvents( 'mouseout:relay(:not(.item2):not(.item4))')
+				;
+				
+				var over = function(){ this.morph({ backgroundColor: '#222' }); };
+				var out  = function(){ this.morph({ backgroundColor: '#2D5E4C' }); };
+				
+				$('someListing').store('delegateTests', [over, out]);
+				$('someListing').addEvents({
+					'mouseover:relay(:not(.item2):not(.item4))': over,
+					 'mouseout:relay(:not(.item2):not(.item4))': out
+				});
+				
+			}
+		},
+		{
+			title       : "Element.removeEvents",
+			description : "Removes the behavior added in the above test.",
+			verify      : "Did the colors stop changing on mouseover/out? When you click does the text remain unchanged?",
+			before: function(){
+				var tests = $('someListing').retrieve('delegateTests');
+				$('someListing')
+					.removeEvents('mouseover:relay(:not(.item2):not(.item4))')
+					.removeEvents( 'mouseout:relay(:not(.item2):not(.item4))')
+				;
+			}
 		}
 	],
 	otherScripts: ['Selectors', 'Fx.Morph']
