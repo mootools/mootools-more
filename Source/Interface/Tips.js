@@ -131,7 +131,7 @@ this.Tips = new Class({
 		
 		$clear(this.timer);
 		this.timer = (function(){
-			this.show(this, element);
+			this.show(element);
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 		}).delay(this.options.showDelay, this);
 	},
