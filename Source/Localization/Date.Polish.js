@@ -12,7 +12,6 @@ authors:
 
 requires:
 - /Lang
-- /Date
 
 provides: [Date.Polish]
 

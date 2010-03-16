@@ -13,7 +13,6 @@ authors:
 
 requires:
 - /Lang
-- /Date
 
 provides: [Date.Russian]
 
