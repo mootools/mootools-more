@@ -11,8 +11,7 @@ authors:
 - Aaron Newton
 
 requires:
-- /Lang
-- /Date
+- /Lang`
 
 provides: [Date.English.US]
 

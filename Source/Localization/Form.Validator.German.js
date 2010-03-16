@@ -14,7 +14,6 @@ authors:
 
 requires:
 - /Lang
-- /Form.Validator
 
 provides: [Form.Validator.German]
 

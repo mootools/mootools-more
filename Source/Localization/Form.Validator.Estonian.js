@@ -12,7 +12,6 @@ authors:
 
 requires:
 - /Lang
-- /Form.Validator
 
 provides: [Form.Validator.Estonian]
 
