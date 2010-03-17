@@ -94,12 +94,11 @@ if (!window.Form) window.Form = {};
 			attach = $pick(attach, true);
 			method = attach ? 'addEvent' : 'removeEvent';
 			
+			this.element[method]('click:relay(button, input[type=submit])', this.saveClickedButton.bind(this));
+			
 			var fv = this.element.retrieve('validator');
 			if (fv) fv[method]('onFormValidate', this.onFormValidate);
-			if (!fv || !attach) {
-				this.element[method]('click:relay(input[type=button], input[type=submit])', this.saveClickedButton.bind(this));
-				this.element[method]('submit', this.onSubmit);
-			}
+			else this.element[method]('submit', this.onSubmit);
 		},
 
 		detach: function(){
@@ -117,6 +116,8 @@ if (!window.Form) window.Form = {};
 		},
 
 		onFormValidate: function(valid, form, e) {
+			//if there's no event, then this wasn't a submit event
+			if (!e) return;
 			var fv = this.element.retrieve('validator');
 			if (valid || (fv && !fv.options.stopOnFailure)) {
 				if (e && e.stop) e.stop();
@@ -134,9 +135,8 @@ if (!window.Form) window.Form = {};
 			this.send();
 		},
 
-		saveClickedButton: function(event) {
+		saveClickedButton: function(event, target) {
 			if (!this.options.sendButtonClicked) return;
-			target = $(event.target);
 			if (!target.get('name')) return;
 			this.options.extraData[target.get('name')] = target.get('value') || true;
 			this.clickedCleaner = function(){
