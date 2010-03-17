@@ -226,10 +226,9 @@ Form.Validator = new Class({
 		field = document.id(field);
 		if((this.options.ignoreHidden && !field.isVisible()) || (this.options.ignoreDisabled && field.get('disabled'))) return true;
 		var validator = this.getValidator(className);
-		if (field.hasClass('ignoreValidation')) return true;
 		warn = $pick(warn, false);
 		if (field.hasClass('warnOnly')) warn = true;
-		var isValid = validator ? validator.test(field) : true;
+		var isValid = field.hasClass('ignoreValidation') || (validator ? validator.test(field) : true);
 		if (validator && field.isVisible()) this.fireEvent('elementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
@@ -453,7 +452,7 @@ Form.Validator.addAllThese([
 	['validate-one-required', {
 		errorMsg: Form.Validator.getMsg.pass('oneRequired'),
 		test: function(element, props){
-			var p = document.id(props['validate-one-required']) || element.getParent();
+			var p = document.id(props['validate-one-required']) || element.getParent(props['validate-one-required']);
 			return p.getElements('input').some(function(el){
 				if (['checkbox', 'radio'].contains(el.get('type'))) return el.get('checked');
 				return el.get('value');
