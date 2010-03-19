@@ -108,6 +108,8 @@ Fx.Accordion = new Class({
 	display: function(index, useFx){
 		if (!this.check(index, useFx)) return this;
 		useFx = $pick(useFx, true);
+		index = ($type(index) == 'element') ? this.elements.indexOf(index) : index;
+		if (index == this.previous) return this;
 		if (this.options.returnHeightToAuto){
 			var prev = this.elements[this.previous];
 			if (prev && !this.selfHidden){
@@ -116,7 +118,6 @@ Fx.Accordion = new Class({
 				}
 			}
 		}
-		index = ($type(index) == 'element') ? this.elements.indexOf(index) : index;
 		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
 		var obj = {};
