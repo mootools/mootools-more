@@ -12,7 +12,7 @@ authors:
 
 requires:
 - /Lang
-- /Date.German.German
+- /Date.German
 
 provides: [Date.German.CH]
 
