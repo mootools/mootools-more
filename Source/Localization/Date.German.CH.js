@@ -11,7 +11,8 @@ authors:
 - Michael van der Weg
 
 requires:
-- /Lang.German
+- /Lang
+- /Date.German.German
 
 provides: [Date.German.CH]
 

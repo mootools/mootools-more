@@ -11,7 +11,8 @@ authors:
 - Fábio Miranda Costa
 
 requires:
-- /Lang.Portuguese
+- /Lang
+- /Form.Validator.Portuguese
 
 provides: [Form.Validator.Portuguese.BR]
 
