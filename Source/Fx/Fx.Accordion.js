@@ -99,10 +99,26 @@ Fx.Accordion = new Class({
 		return this;
 	},
 
-	detach: function(){
-		this.togglers.each(function(toggler) {
+	removeSection: function(toggler, displayIndex) {
+		var idx = this.togglers.indexOf(toggler);
+		var element = this.elements[idx];
+		var remover = function(){
+			this.togglers.erase(toggler);
+			this.elements.erase(element);
+			this.detach(toggler);
+		}.bind(this);
+		if (this.now == idx || displayIndex != undefined) this.display($pick(displayIndex, idx - 1 >= 0 ? idx - 1 : 0)).chain(remover);
+		else remover();
+		return this;
+	},
+
+	detach: function(toggler){
+		var remove = function(toggler) {
 			toggler.removeEvent(this.options.trigger, toggler.retrieve('accordion:display'));
-		}, this);
+		}.bind(this);
+		if (!toggler) this.togglers.each(remove);
+		else remove(toggler);
+		return this;
 	},
 
 	display: function(index, useFx){
