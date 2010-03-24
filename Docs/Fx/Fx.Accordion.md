@@ -104,6 +104,23 @@ Dynamically adds a new section into the *Fx.Accordion* at the specified position
 	myAccordion.addSection('myToggler1', 'myElement1'); // add the section at the end sections.
 	myAccordion.addSection('myToggler2', 'myElement2', 0); //add the section at the beginning of the sections.
 
+Fx.Accordion Method: removeSection {#Fx-Accordion:removeSection}
+----------------------------------------------
+
+Detaches the toggle behavior from the DOM specified elements. If that element is expanded, it shows another (either the previous item, the next item if there is no previous one, or one you specify). Does not remove the elements from the DOM.
+
+### Syntax
+
+	myAccordion.removeSection(toggler, [displayIndex]);
+
+### Arguments
+
+1. toggler - (*element*) The toggler element to detach the behavior from.
+2. displayIndex - (*integer*; optional) The section to display next (note that this index is based on the exclusion of the removed section, so if you remove the first section at index zero, then want to show the third one, you would specify index 1 - the second item in the accordion after the removal of the first).
+
+### Returns
+
+* (*object*) This *Fx.Accordion* instance.
 
 
 Fx.Accordion Method: display {#Fx-Accordion:display}
@@ -131,6 +148,24 @@ Shows a specific section and hides all others. Useful when triggering an accordi
 			this.display.delay(2500, this, (this.previous + 1) % this.togglers.length);
 		}
 	});
+
+
+Fx.Accordion Method: detach {#Fx-Accordion:detach}
+----------------------------------------------
+
+Detaches the toggle behavior from the DOM element(s). If a single element is specified, it detaches only the toggle behavior, but the accordion still works for that element (if, for example it is expanded, clicking on another section will shrink as the other grows). If no element is specified, this method disables the accordion.
+
+### Syntax
+
+	myAccordion.detach([toggler]);
+
+### Arguments
+
+1. toggler - (*element*; optional) The toggler element to detach the behavior from; if not specified, detaches all togglers.
+
+### Returns
+
+* (*object*) This *Fx.Accordion* instance.
 
 
 
