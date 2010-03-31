@@ -11,8 +11,8 @@ authors:
 - Valerio Proietti
 
 requires:
-- core:1.2.4/Fx 
-- core:1.2.4/Element.Style
+- Core:1.2.4/Fx 
+- Core:1.2.4/Element.Style
 - /MooTools.More
 
 provides: [Fx.Slide]
