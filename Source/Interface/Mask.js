@@ -11,9 +11,9 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Options
-- core:1.2.4/Events
-- core:1.2.4/Element.Event
+- Core:1.2.4/Options
+- Core:1.2.4/Events
+- Core:1.2.4/Element.Event
 - /Class.Binds
 - /Element.Position
 - /IframeShim

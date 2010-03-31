@@ -12,7 +12,7 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Hash
+- Core:1.2.4/Hash
 - /HtmlTable
 - /Class.refactor
 - /Element.Delegation

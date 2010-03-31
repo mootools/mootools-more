@@ -11,8 +11,8 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Options
-- core:1.2.4/Events
+- Core:1.2.4/Options
+- Core:1.2.4/Events
 - /Class.Occlude
 
 provides: [HtmlTable]

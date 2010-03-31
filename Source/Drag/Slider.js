@@ -11,7 +11,7 @@ authors:
 - Valerio Proietti
 
 requires:
-- core:1.2.4/Element.Dimensions
+- Core:1.2.4/Element.Dimensions
 - /Class.Binds
 - /Drag
 - /Element.Measure
