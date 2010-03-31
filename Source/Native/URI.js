@@ -12,7 +12,7 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Selectors
+- Core:1.2.4/Selectors
 - /String.QueryString
 
 provides: [URI]

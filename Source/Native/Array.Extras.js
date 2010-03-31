@@ -11,7 +11,7 @@ authors:
 - Christoph Pojer
 
 requires:
-- core:1.2.4/Array
+- Core:1.2.4/Array
 
 provides: [Array.Extras]
 

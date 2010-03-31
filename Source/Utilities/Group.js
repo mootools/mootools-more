@@ -11,7 +11,7 @@ authors:
 - Valerio Proietti
 
 requires:
-- core:1.2.4/Events
+- Core:1.2.4/Events
 - /MooTools.More
 
 provides: [Group]

@@ -11,7 +11,7 @@ authors:
 - Valerio Proietti
 
 requires:
-- core:1.2.4/Fx.CSS
+- Core:1.2.4/Fx.CSS
 - /MooTools.More
 
 provides: [Fx.Elements]

@@ -11,9 +11,9 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Element.Event
-- core:1.2.4/Element.Dimensions
-- core:1.2.4/Element.Style
+- Core:1.2.4/Element.Event
+- Core:1.2.4/Element.Dimensions
+- Core:1.2.4/Element.Style
 - /MooTools.More
 
 provides: [Element.Pin]

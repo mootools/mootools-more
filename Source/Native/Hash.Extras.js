@@ -11,7 +11,7 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Hash.base
+- Core:1.2.4/Hash.base
 - /MooTools.More
 
 provides: [Hash.Extras]

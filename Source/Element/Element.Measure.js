@@ -13,8 +13,8 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Element.Style
-- core:1.2.4/Element.Dimensions
+- Core:1.2.4/Element.Style
+- Core:1.2.4/Element.Dimensions
 - /MooTools.More
 
 provides: [Element.Measure]
