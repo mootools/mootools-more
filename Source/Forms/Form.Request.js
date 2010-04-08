@@ -76,12 +76,12 @@ if (!window.Form) window.Form = {};
 					spinnerTarget: this.element,
 					method: this.element.get('method') || 'post'
 			}, this.options.requestOptions)).addEvents({
-				success: function(text, xml){
+				success: function(tree, elements, html, javascript){
 					['complete', 'success'].each(function(evt){
-						this.fireEvent(evt, [this.update, text, xml]);
+						this.fireEvent(evt, [this.update, tree, elements, html, javascript]);
 					}, this);
 				}.bind(this),
-				failure: function(xhr){
+				failure: function(){
 					this.fireEvent('complete', arguments).fireEvent('failure', arguments);
 				}.bind(this),
 				exception: function(){
