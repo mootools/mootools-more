@@ -134,7 +134,7 @@
 	"Forms": {
 
 		"Form.Request":{
-			"deps":["More", "Element.Event",  "Request.HTML", "Class.Binds", "Class.Occlude", "Spinner", "String.QueryString", "Element.Delegation"],
+			"deps":["More",  "Request.HTML", "Class.Binds", "Class.Occlude", "Spinner", "String.QueryString", "Element.Delegation"],
 			"desc":"Handles the basic functionality of submitting a form via ajax and updating a DOM element with the result."
 		},
 
