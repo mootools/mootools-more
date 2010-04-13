@@ -193,7 +193,7 @@ if (!window.Form) window.Form = {};
 	Element.implement({
 
 		formUpdate: function(update, options){
-			this.get('form.request', update, options).send();
+			this.get('formRequest', update, options).send();
 			return this;
 		}
 
