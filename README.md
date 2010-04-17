@@ -22,6 +22,10 @@ MooTools Plugins and Enhancements Repository
 
 NOTE: none of the changes below are breaking changes.
 
+#### Changes in MooTools More 1.2.4.4
+
+* Fixed Tips. Again.
+
 #### Changes in MooTools More 1.2.4.3
 
 * Nearly 50 bug fixes ([see the milestone for 1.2.4.3 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057/milestones/54424-1243)).
