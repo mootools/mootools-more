@@ -26,7 +26,7 @@ provides: [Element.Delegation]
 
 (function(addEvent, removeEvent){
 	
-	var match = /(.*?):relay\(([^)]+)\)$/,
+	var match = /(.*?):relay\(((?:\(.*?\)|.)+)\)$/,
 		combinators = /[+>~\s]/,
 		splitType = function(type){
 			var bits = type.match(match);
