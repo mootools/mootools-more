@@ -74,7 +74,7 @@ Removes non-ascii characters and converts them to their most appropriate ascii c
 ### Example
 
 	var bjorkProper = "Björk";
-	var bjorkAscii = bjorkProper.standarize();
+	var bjorkAscii = bjorkProper.standardize();
 	//returns "Bjork"
 
 ### Returns
