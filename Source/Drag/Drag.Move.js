@@ -73,7 +73,7 @@ Drag.Move = new Class({
 	},
 	
 	calculateLimit: function(){
-		var offsetParent = this.element.getOffsetParent(),
+		var offsetParent = document.id(this.element.getOffsetParent()),
 			containerCoordinates = this.container.getCoordinates(offsetParent),
 			containerBorder = {},
 			elementMargin = {},
