@@ -40,9 +40,7 @@ The slide effect slides an Element in horizontally or vertically.  The contents 
 
 ### Notes
 
-- To create the slide effect an additional Element (a "div" by default) is wrapped around the given Element. This wrapper adapts the margin from the Element.
-
-
+- To create the slide effect an additional Element (a "div" by default) is wrapped around the given Element. This wrapper adapts the margin from the Element. It's overflow is set to hidden and it has a fixed height.
 
 Fx.Slide Method: slideIn {#Fx-Slide:slideIn}
 --------------------------------------------

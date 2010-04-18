@@ -93,9 +93,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 				HtmlTable.Parsers.some(function(current) {
 					var match = current.match;
 					if (!match) return false;
-					if (Browser.Engine.trident) return false;
 					for (var i = 0, j = rows.length; i < j; i++) {
-						var text = rows[i].cells[index].get('html').clean();
+						var text = $(rows[i].cells[index]).get('html').clean();
 						if (text && match.test(text)) {
 							parser = current;
 							return true;
@@ -111,7 +110,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	headClick: function(event, el) {
-		console.log(el);
 		if (!this.head || el.hasClass(this.options.classNoSort)) return;
 		var index = Array.indexOf(this.head.cells, el);
 		this.sort(index);

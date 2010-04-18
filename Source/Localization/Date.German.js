@@ -15,7 +15,6 @@ authors:
 
 requires:
 - /Lang
-- /Date
 
 provides: [Date.German]
 

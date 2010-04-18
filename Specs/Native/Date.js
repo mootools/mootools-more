@@ -240,6 +240,7 @@ describe('Date.format', {
 
 	'should format a Date instance as a string': function(){
 		var d = new Date('Thu Nov 20 1997 01:02:03');
+		var d2 = new Date('Thu Nov 2 1997 01:02:03');
 		value_of(d.format('%a')).should_be(Date.getMsg('days')[4].substr(0,3));
 		value_of(d.format('%a')).should_be('Thu');
 
@@ -260,6 +261,8 @@ describe('Date.format', {
 		 * The timezone the browser is in changes the offset/timezone parts! */
 
 		value_of(d.format('%d')).should_be('20');
+		value_of(d2.format('%d')).should_be('02');
+		value_of(d2.format('%e')).should_be('2');
 		value_of(d.format('%H')).should_be('01');
 		value_of(d.format('%I')).should_be('1');
 		value_of(d.format('%j')).should_be('324');

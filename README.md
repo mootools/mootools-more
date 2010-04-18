@@ -22,9 +22,55 @@ MooTools Plugins and Enhancements Repository
 
 NOTE: none of the changes below are breaking changes.
 
+#### Changes in MooTools More 1.2.4.4
+
+* Fixed Tips. Again.
+
+#### Changes in MooTools More 1.2.4.3
+
+* Nearly 50 bug fixes ([see the milestone for 1.2.4.3 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057/milestones/54424-1243)).
+* Keyboard:
+  * Added some support for just pressing 'shift', 'control', or 'alt'
+  * Added a bunch of keycodes for Mac compatibility
+* Keyboard.Extras:
+  * Support for "shortcuts" which are keyboard entries that have names and descriptions.
+  * Also provides methods for listing all the active shortcuts as well as allowing a shortcut to be rebound (for instance, if you were to allow the user to choose a key for a shortcut).
+  * Added a change event to Keyboard.manager whenever any keyboard is activated.
+* Tips:
+  * They work again (I know, that's not really a feature).
+  * NEW Tips option "windowPadding" allows you to reduce or expand the virtual size of the window for tip positioning. Defaults to `{x:0, y:0}`. You can use that is a workaround for the scrollbars not being considered when calculating tip positions.
+* HtmlTable:
+  * fixed numerous bugs filed in Lighthouse
+  * ensuring that HtmlTable doesn't apply it's click behavior more than once...
+  * fixing a bug where HtmlTable couldn't push headers defined in the options.
+  * reworking HtmlTable's dom a bit to allow for positioning of the sort icon
+  * adding new set method for headers and footers.
+  * Fixed error in HtmlTable.Parsers when sorting by date. format('db') was being applied to the text and not the date object.
+* Array: 
+  * Added Array.shuffle
+* Request.JSONP:
+  * making JSONP pass all arguments, not just the first, to its complete/success methods; [see this discussion on the google group](http://groups.google.com/group/mootools-users/browse_thread/thread/9cfa52bf0cf05bac).
+* Fx.Slide:
+  * Added an option to specify the wrapper element for Fx.Slide. Was already present in the docs but could not be passed as an option.
+* Mask:
+  * adding options for the IframeShim for Mask
+
 #### Changes in MooTools More 1.2.4.2
 
-* 
+* Per the change in -core, $ is no longer used (uses document.id instead)
+* Element.Measure: trying cssText solution for Element.expose (again).
+* Element.Forms: swapping feature detection for browser support per
+* Date: Massive refactoring of Date.js and Date.Extras.js
+* Drag.Move: Fixing drag with grid issues
+* IframeShim: altering zindex assignment in IframeShim to better ensure that it’s always underneath the shimmed element, updating Iframeshim’s empty document creation; fixes https issues in IE6
+* FormValidator: reworking formvalidator scroll-to logic to be a little more efficient
+* OverText: preventing overtext from focusing on inputs except when they are interacted with (so OverText.update() does not focus an input);now stops polling when elements are hidden (when polling is enabled)
+* Fx.Scroll: adding scrollIntoView method - scrolls an element so that it is completely visible; if below the view, scrolls down until it is at the bottom of the screen, if above, scrolls up until it is at the top.
+* JSONP: was calling (the deprecated) this.request instead of this.send during retries
+* URI: Adding set(‘data’, obj) to set
+* Assets: adding error callback for Assets.images
+* Tips: removing dependency for Element.Measure for Tips; updating CSS class name in OverText
+* Numerous small fixes, speed improvements, documentation tweaks, etc.
 
 #### Changes in MooTools More 1.2.4.1
 
