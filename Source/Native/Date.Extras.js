@@ -82,7 +82,7 @@ Date.extend({
 			msg = unit + 's';
 		}
 		
-		return Date.getMsg(msg + suffix).substitute({delta: delta.round()});
+		return Date.getMsg(msg + suffix, delta).substitute({delta: delta.round()});
 	}
 
 });
