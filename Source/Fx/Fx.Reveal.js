@@ -35,7 +35,8 @@ Fx.Reveal = new Class({
 		transitionOpacity: !Browser.Engine.trident4,
 		mode: 'vertical',
 		display: 'block',
-		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed' : false
+		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed' : false,
+		opacity: 1
 	},
 
 	dissolve: function(){
@@ -51,7 +52,7 @@ Fx.Reveal = new Class({
 						mode: this.options.mode
 					});
 					this.element.setStyle('display', this.options.display);
-					if (this.options.transitionOpacity) startStyles.opacity = 1;
+					if (this.options.transitionOpacity) startStyles.opacity = this.options.opacity;
 					var zero = {};
 					$each(startStyles, function(style, name){
 						zero[name] = [style, 0];
@@ -120,7 +121,7 @@ Fx.Reveal = new Class({
 					if ($chk(this.options.widthOverride)) startStyles.width = this.options.widthOverride.toInt();
 					if (this.options.transitionOpacity) {
 						this.element.setStyle('opacity', 0);
-						startStyles.opacity = 1;
+						startStyles.opacity = this.options.opacity;
 					}
 					//create the zero state for the beginning of the transition
 					var zero = {
@@ -158,7 +159,7 @@ Fx.Reveal = new Class({
 			this.element.setStyles({
 				display: this.options.display,
 				visiblity: 'visible',
-				opacity: 1
+				opacity: this.options.opacity
 			});
 			this.showing = false;
 			this.callChain.delay(10, this);
