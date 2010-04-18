@@ -74,7 +74,7 @@ Calculates the size of an element including the width, border, padding, etc.
 
 ### Syntax
 
-	element.getDimensions([options]);
+	element.getComputedSize([options]);
 
 ### Arguments
 
