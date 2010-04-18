@@ -26,9 +26,9 @@ Fx.Accordion = new Class({
 	options: {/*
 		onActive: $empty(toggler, section),
 		onBackground: $empty(toggler, section),
+		*/
 		fixedHeight: false,
 		fixedWidth: false,
-		*/
 		display: 0,
 		show: false,
 		height: true,
