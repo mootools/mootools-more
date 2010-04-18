@@ -9,7 +9,6 @@ authors:
 
 requires:
 - /Lang
-- /Form.Validator
 
 provides: [Form.Validator.Japanese]
 

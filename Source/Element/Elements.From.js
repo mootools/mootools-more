@@ -14,7 +14,7 @@ requires:
 - core:1.2.4/Element
 - /MooTools.More
 
-provides: [Elements.from]
+provides: [Elements.from, Elements.From]
 
 ...
 */
