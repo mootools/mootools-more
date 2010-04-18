@@ -98,7 +98,7 @@ Element Property: reveal {#Element-Properties:reveal}
 
 Sets a default [Fx.Reveal][] instance for an Element.
 
-#### Syntax:
+#### Syntax
 
 	el.set('reveal'[, options]);
 

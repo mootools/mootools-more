@@ -164,7 +164,7 @@ This class implements the following element methods:
 
 These will execute these methods on the table element.
 
-### Example:
+### Example
 
 	myHtmlTable.table.inject(document.body);
 	//same as:

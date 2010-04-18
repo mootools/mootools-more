@@ -443,45 +443,45 @@ Element Property: validator {#Element-Properties:validator}
 
 Sets and gets default options for the Form.Validator instance of an Element.
 
-### Setter:
+### Setter
 
-#### Syntax:
+#### Syntax
 
 	el.set('validator'[, options]);
 
-#### Arguments:
+#### Arguments
 
 * options - (*object*) the Form.Validator options.
 
-#### Returns:
+#### Returns
 
 * (*element*) This Element.
 
-#### Examples:
+#### Examples
 
 	el.set('validator', {serial: true});
 	el.validate();
 
-### Getter:
+### Getter
 
-#### Syntax:
+#### Syntax
 
 	el.get('validator', [options]);
 
-#### Arguments:
+#### Arguments
 
 1. property - (*string*) the Form.Validator property argument.
 2. options  - (*object*) the Form.Validator options.
 
-#### Returns:
+#### Returns
 
 * (*object*) The Element's internal Form.Validator instance.
 
-#### Examples:
+#### Examples
 
 	el.get('validator', {serial: true, evaluateFieldsOnBlur: false}).reset();
 
-### Notes:
+### Notes
 
 - When options are passed to either the setter or the getter, the instance will NOT be recreated. Its existing instance will have its options set with the new values.
 - As with the other Element shortcuts, the difference between a setter and a getter is that the getter returns the instance, while the setter returns the element (for chaining and initialization).

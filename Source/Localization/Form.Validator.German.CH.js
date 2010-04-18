@@ -11,8 +11,7 @@ authors:
 - Michael van der Weg
 
 requires:
-- /Lang
-- /Form.Validator.German
+- /Lang.German
 
 provides: [Form.Validator.German.CH]
 

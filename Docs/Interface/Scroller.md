@@ -5,19 +5,19 @@ Class: Scroller {#Scroller}
 
 **You must call its start method to start listening to mouse movements.**
 
-### Note:
+### Note
 
 - Scroller requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 
-### Syntax:
+### Syntax
 
 	new Scroller(element[, options]);
 
-### Implements:
+### Implements
 
 [Events][], [Options][]
 
-### Arguments:
+### Arguments
 
 1. element - (*element*) The element to scroll.
 2. options - (*object*, optional) An object for the Scroller instance's options.
@@ -28,20 +28,20 @@ Class: Scroller {#Scroller}
 * velocity - (*number*: defaults to 1) The modifier for the window scrolling speed.
 * fps      - (*number*: defaults to 50) The frames per second that the scroller updates and scrolls.
 
-### Events:
+### Events
 
 * change - (*function*) When the mouse reaches some boundaries, you can choose to alter some other values, instead of the scrolling offsets.
 
-#### Signature:
+#### Signature
 
 	onChange(x, y);
 
-#### Arguments:
+#### Arguments
 
 1. x - (*number*) Current x-mouse position.
 2. y - (*number*) Current y-mouse position.
 
-#### Examples:
+#### Examples
 
 	var myScroller = new Scroller(window, {
 		area: Math.round(window.getWidth() / 5)
@@ -59,11 +59,11 @@ Scroller Method: start {#Scroller:start}
 
 **The scroller starts listening to mouse movements.**
 
-### Syntax:
+### Syntax
 
 	myScroller.start();
 
-### Examples:
+### Examples
 
 	var myScroller = new Scroller('myElement');
 	myScroller.start();
@@ -75,11 +75,11 @@ Scroller Method: stop {#Scroller:stop}
 
 **The scroller stops listening to mouse movements.**
 
-### Syntax:
+### Syntax
 
 	myScroller.start();
 
-### Examples:
+### Examples
 
 	var myElement = $('myElement');
 	var myScroller = new Scroller(myElement);

@@ -3,21 +3,21 @@ Class: Slider {#Slider}
 
 Creates a slider with two elements: a knob and a container.
 
-### Note:
+### Note
 
 - Slider requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 
-### Syntax:
+### Syntax
 
 	var mySlider = new Slider(element, knob[, options]);
 
-### Arguments:
+### Arguments
 
 1. element - (*element*) The knob element for the slider.
 2. knob    - (*element*) The handle element for the slider.
 3. options - (*object*) An optional object for customizing the Slider.
 
-#### Options:
+#### Options
 
 1. snap   - (*boolean*: defaults to false) True if you want the knob to snap to the nearest value.
 2. offset - (*number*: defaults to 0) Relative offset for knob position at start.
@@ -27,7 +27,7 @@ Creates a slider with two elements: a knob and a container.
 6. mode   - (*string*: defaults to horizontal) The type of Slider can be either 'horizontal' or 'vertical' in movement.
 6. initialStep   - (*number*: defaults to 0) The step the slider will start at.
 
-### Notes:
+### Notes
 
 - Range option allows an array of numbers. Numbers can be negative and positive.
 - If snap is enabled, the width of the bar in which the slider resides must fit an equation for the steps to line up just right at it's end value. The equation is:
@@ -43,11 +43,11 @@ Slider Event: change {#Slider:change}
 
 * (*function*) Fires when the Slider's value changes.
 
-### Signature:
+### Signature
 
 	onChange(step)
 
-### Arguments:
+### Arguments
 
 1. step - (*number*) The current step that the Slider is on.
 
@@ -58,11 +58,11 @@ Slider Event: onComplete {#Slider:complete}
 
 * (*function*) Fire when you're done dragging.
 
-### Signature:
+### Signature
 
 	onComplete(step)
 
-### Arguments:
+### Arguments
 
 1. step - (*string*) The current step that the Slider is on as a string.
 
@@ -73,23 +73,23 @@ Slider Event: tick {#Slider:tick}
 
 * (*function*) Fires when the user drags the knob. This Event can be overriden to alter the tick behavior.
 
-### Signature:
+### Signature
 
 	onTick(pos)
 
-### Arguments:
+### Arguments
 
 1. pos - (*number*) The current position that slider moved to.
 
-### Notes:
+### Notes
 
 - Slider originally uses the 'tick' event to set the style of the knob to a new position.
 
-### Returns:
+### Returns
 
 * (*object*) A new Slider instance.
 
-### Examples:
+### Examples
 
 	var mySlider = new Slider('myElement', 'myKnob', {
 		range: [-50, 50],
@@ -111,19 +111,19 @@ Slider Method: set {#Slider:set}
 
 The slider will move to the passed position.
 
-### Syntax:
+### Syntax
 
 	mySlider.set(step);
 
-### Arguments:
+### Arguments
 
 1. step - (*number*) A number to position the Slider to.
 
-### Returns:
+### Returns
 
 * (*object*) This Slider instance.
 
-### Examples:
+### Examples
 
 	var mySlider = new Slider('myElement', 'myKnob');
 	mySlider.set(0);
@@ -133,7 +133,7 @@ The slider will move to the passed position.
 			this.set(this.step++);
 	}).periodical(1000, mySlider);
 
-### Notes:
+### Notes
 
 - Step will automatically be limited between 0 and the optional steps value.
 
@@ -144,15 +144,15 @@ Slider Method: attach {#Slider:attach}
 
 Attaches the mouse listeners to the Slider making the Slider draggable
 
-### Syntax:
+### Syntax
 
 	mySlider.attach();
 
-### Returns:
+### Returns
 
 * (*object*) This Slider instance.
 
-### Examples:
+### Examples
 
 	var mySlider = new Slider('myElement', 'myKnob');
 	mySlider.detach();
@@ -161,11 +161,11 @@ Attaches the mouse listeners to the Slider making the Slider draggable
 		alert('Slider enabled!');
 	});
 
-### Notes:
+### Notes
 
 - You only need to use this method when you manually detached the mouse listeners before.
 
-### See Also:
+### See Also
 
 - [Slider:detach](#Slider:detach), [Element:addEvent][]
 
@@ -176,15 +176,15 @@ Slider Method: detach {#Slider:detach}
 
 Detaches the mouse listeners from the Slider so its value can't be changed any longer
 
-### Syntax:
+### Syntax
 
 	mySlider.detach();
 
-### Returns:
+### Returns
 
 * (*object*) This Slider instance.
 
-### Examples:
+### Examples
 
 	var mySlider = new Slider('myElement', 'myKnob');
 	myElement.addEvent('click', function(){
@@ -192,6 +192,6 @@ Detaches the mouse listeners from the Slider so its value can't be changed any l
 		alert('Slider disabled!');
 	});
 
-### See Also:
+### See Also
 
 - [Slider:attach](#Slider:attach), [Element:removeEvent][]
