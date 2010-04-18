@@ -98,8 +98,8 @@ var HtmlTable = new Class({
 
 	push: function(row, rowProperties, target, tag){
 		var tds = row.map(function(data){
-			var td = new Element(tag || 'td', data.properties),
-				type = data.content || data || '',
+			var td = new Element(tag || 'td', data ? data.properties : {}),
+				type = (data ? data.content : '') || data,
 				element = document.id(type);
 			if($type(type) != 'string' && element) td.adopt(element);
 			else td.set('html', type);

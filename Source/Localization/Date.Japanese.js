@@ -10,7 +10,6 @@ authors:
 
 requires:
 - /Lang
-- /Date
 
 provides: [Date.Japanese]
 

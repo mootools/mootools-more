@@ -3,7 +3,7 @@ Singleton: Depender {#Depender}
 
 Loads dependencies from MooTools script repositories.
 
-### Implements:
+### Implements
 
 * [Events][], [Options][]
 
@@ -57,7 +57,7 @@ Includes a collection of scripts.
 
 1. libs - (*mixed*) either a string (a url to fetch a json object) or an object (the data itself - see below).
 
-### Returns:
+### Returns
 
 * *object* - the *Depender* object.
 

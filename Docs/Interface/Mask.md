@@ -143,7 +143,7 @@ Element Property: mask {#Element-Properties:mask}
 
 Sets a default [Mask][] instance for an Element.
 
-#### Syntax:
+#### Syntax
 
 	el.set('mask'[, options]);
 

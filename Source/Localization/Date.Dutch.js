@@ -12,7 +12,6 @@ authors:
 
 requires:
 - /Lang
-- /Date
 
 provides: [Date.Dutch]
 
@@ -29,7 +28,7 @@ MooTools.lang.set('nl-NL', 'Date', {
 	AM: 'AM',
 	PM: 'PM',
 
-	shortDate: '%d/%m/%Y',
+	shortDate: '%d-%m-%Y',
 	shortTime: '%H:%M',
 
 	/* Date.Extras */

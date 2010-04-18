@@ -3,7 +3,7 @@ Native: Array {#Array}
 
 A collection of useful methods to extend Arrays.
 
-### See Also:
+### See Also
 
 * [Array][]
 

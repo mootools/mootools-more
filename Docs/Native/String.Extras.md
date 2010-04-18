@@ -8,7 +8,7 @@ A collection of the String Object prototype methods.
 * [Online Tutorial/Demo][]
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/03-native/03-string.extras
 
-### See Also:
+### See Also
 
 - [String][]
 
@@ -74,7 +74,7 @@ Removes non-ascii characters and converts them to their most appropriate ascii c
 ### Example
 
 	var bjorkProper = "Björk";
-	var bjorkAscii = bjorkProper.standarize();
+	var bjorkAscii = bjorkProper.standardize();
 	//returns "Bjork"
 
 ### Returns
