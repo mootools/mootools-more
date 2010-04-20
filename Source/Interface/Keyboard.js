@@ -135,6 +135,7 @@ provides: [Keyboard]
 		drop: function(instance){
 			this._disable(instance);
 			this.instances.erase(instance);
+			Keyboard.manager.manage(instance);
 			if (this.activeKB == instance && this.previous && this.instances.contains(this.previous)) this.activate(this.previous);
 		},
 
