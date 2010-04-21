@@ -44,7 +44,7 @@ provides: [Keyboard]
 		},
 
 		initialize: function(options){
-			if (options.manager) {
+			if (options && options.manager) {
 				this.manager = options.manager;
 				delete options.manager;
 			}
@@ -122,7 +122,7 @@ provides: [Keyboard]
 
 		//management logic
 		manage: function(instance){
-			if (instance.manager) instance.manager.drop(instance);
+			if (instance.manager && instance.manager != Keyboard.manager) instance.manager.drop(instance);
 			this.instances.push(instance);
 			instance.manager = this;
 			if (!this.activeKB) this.activate(instance);
