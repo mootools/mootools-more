@@ -195,3 +195,31 @@ Detaches the mouse listeners from the Slider so its value can't be changed any l
 ### See Also
 
 - [Slider:attach](#Slider:attach), [Element:removeEvent][]
+
+Slider Method: setRange {#Slider:setRange}
+--------------------------------
+
+Dynamically sets the range for the slider.
+
+### Syntax
+
+	mySlider.setRange(range);
+
+### Arguments
+
+1. range - (*array*) Same as the `range` option array.
+
+### Returns
+
+* (*object*) This Slider instance.
+
+### Examples
+
+	var mySlider = new Slider('myElement', 'myKnob',{
+	  range: [100,1000]
+	});
+	mySlider.setRange([500,5000]);
+
+### Notes
+
+- If the current step is now out of the new range it will automatically adjust.
