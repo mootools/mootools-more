@@ -144,7 +144,7 @@ if (window.Request) {
 			this._send = this.send;
 			this.send = function(options){
 				var spinner = this.getSpinner();
-				if (this.spinner) this.spinner.chain(this._send.bind(this, options)).show();
+				if (spinner) spinner.chain(this._send.bind(this, options)).show();
 				else this._send(options);
 				return this;
 			};
