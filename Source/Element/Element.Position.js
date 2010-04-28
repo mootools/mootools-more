@@ -68,12 +68,15 @@ Element.implement({
 			if ($type(option) != 'string') return option;
 			option = option.toLowerCase();
 			var val = {};
+			
 			if (option.test('left')) val.x = 'left';
 			else if (option.test('right')) val.x = 'right';
 			else val.x = 'center';
+			
 			if (option.test('upper') || option.test('top')) val.y = 'top';
 			else if (option.test('bottom')) val.y = 'bottom';
 			else val.y = 'center';
+			
 			return val;
 		};
 		options.edge = fixValue(options.edge);
