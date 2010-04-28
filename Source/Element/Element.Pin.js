@@ -38,30 +38,31 @@ provides: [Element.Pin]
 		pin: function(enable){
 			if (this.getStyle('display') == 'none') return null;
 			
-			var p,
-					scroll = window.getScroll();
+			var pinnedPosition,
+				scroll = window.getScroll();
+				
 			if (enable !== false){
-				p = this.getPosition();
+				pinToPosition = this.getPosition();
 				if (!this.retrieve('pinned')){
-					var pos = {
-						top: p.y - scroll.y,
-						left: p.x - scroll.x
+					var currentPosition = {
+						top: pinnedPosition.y - scroll.y,
+						left: pinnedPosition.x - scroll.x
 					};
 					if (supportsPositionFixed){
-						this.setStyle('position', 'fixed').setStyles(pos);
+						this.setStyle('position', 'fixed').setStyles(currentPosition);
 					} else {
 						this.store('pinnedByJS', true);
 						this.setStyles({
 							position: 'absolute',
-							top: p.y,
-							left: p.x
+							top: pinnedPosition.y,
+							left: pinnedPosition.x
 						}).addClass('isPinned');
 						this.store('scrollFixer', (function(){
 							if (this.retrieve('pinned'))
 								var scroll = window.getScroll();
 								this.setStyles({
-									top: pos.top.toInt() + scroll.y,
-									left: pos.left.toInt() + scroll.x
+									top: currentPosition.top.toInt() + scroll.y,
+									left: currentPosition.left.toInt() + scroll.x
 								});
 						}).bind(this));
 						window.addEvent('scroll', this.retrieve('scrollFixer'));
@@ -74,20 +75,20 @@ provides: [Element.Pin]
 					var parent = this.getParent();
 					op = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 				}
-				p = this.getPosition(op);
+				pinnedPosition = this.getPosition(op);
 				this.store('pinned', false);
 				var reposition;
 				if (supportsPositionFixed && !this.retrieve('pinnedByJS')){
 					reposition = {
-						top: p.y + scroll.y,
-						left: p.x + scroll.x
+						top: pinnedPosition.y + scroll.y,
+						left: pinnedPosition.x + scroll.x
 					};
 				} else {
 					this.store('pinnedByJS', false);
 					window.removeEvent('scroll', this.retrieve('scrollFixer'));
 					reposition = {
-						top: p.y,
-						left: p.x
+						top: pinnedPosition.y,
+						left: pinnedPosition.x
 					};
 				}
 				this.setStyles($merge(reposition, {position: 'absolute'})).removeClass('isPinned');
