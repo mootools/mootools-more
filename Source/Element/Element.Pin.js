@@ -43,7 +43,7 @@ provides: [Element.Pin]
 				
 			if (enable !== false){
 				pinToPosition = this.getPosition();
-				if (!this.retrieve('pinned')){
+				if (!this.retrieve('pin:_pinned')){
 					var currentPosition = {
 						top: pinnedPosition.y - scroll.y,
 						left: pinnedPosition.x - scroll.x
@@ -51,23 +51,23 @@ provides: [Element.Pin]
 					if (supportsPositionFixed){
 						this.setStyle('position', 'fixed').setStyles(currentPosition);
 					} else {
-						this.store('pinnedByJS', true);
+						this.store('pin:_pinnedByJS', true);
 						this.setStyles({
 							position: 'absolute',
 							top: pinnedPosition.y,
 							left: pinnedPosition.x
 						}).addClass('isPinned');
-						this.store('scrollFixer', (function(){
-							if (this.retrieve('pinned'))
+						this.store('pin:_scrollFixer', (function(){
+							if (this.retrieve('pin:_pinned'))
 								var scroll = window.getScroll();
 								this.setStyles({
 									top: currentPosition.top.toInt() + scroll.y,
 									left: currentPosition.left.toInt() + scroll.x
 								});
 						}).bind(this));
-						window.addEvent('scroll', this.retrieve('scrollFixer'));
+						window.addEvent('scroll', this.retrieve('pin:_scrollFixer'));
 					}
-					this.store('pinned', true);
+					this.store('pin:_pinned', true);
 				}
 			} else {
 				var op;
@@ -76,16 +76,16 @@ provides: [Element.Pin]
 					op = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 				}
 				pinnedPosition = this.getPosition(op);
-				this.store('pinned', false);
+				this.store('pin:_pinned', false);
 				var reposition;
-				if (supportsPositionFixed && !this.retrieve('pinnedByJS')){
+				if (supportsPositionFixed && !this.retrieve('pin:_pinnedByJS')){
 					reposition = {
 						top: pinnedPosition.y + scroll.y,
 						left: pinnedPosition.x + scroll.x
 					};
 				} else {
-					this.store('pinnedByJS', false);
-					window.removeEvent('scroll', this.retrieve('scrollFixer'));
+					this.store('pin:_pinnedByJS', false);
+					window.removeEvent('scroll', this.retrieve('pin:_scrollFixer'));
 					reposition = {
 						top: pinnedPosition.y,
 						left: pinnedPosition.x
@@ -101,7 +101,7 @@ provides: [Element.Pin]
 		},
 
 		togglepin: function(){
-			this.pin(!this.retrieve('pinned'));
+			this.pin(!this.retrieve('pin:_pinned'));
 		}
 
 	});
