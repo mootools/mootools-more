@@ -78,18 +78,17 @@ tidy = {
 	'&raquo;': '[\uFFFD]'
 };
 
-function walk(string, replacements)
-{
+function walk(string, replacements) {
 	var result = string;
 
-	Hash.each(replacements, function(value, key) {
-		result = result.replace(new RegExp(value, 'g'), key);
-	});
+	for (key in replacements)
+		if (replacements.hasOwnProperty(key))
+			result = result.replace(new RegExp(replacements[key], 'g'), key);
 
 	return result;
 }
 
-var getRegForTag = function(tag, contents) {
+function getRegForTag(tag, contents) {
 	tag = tag || '';
 	var regstr = contents ? "<" + tag + "[^>]*>([\\s\\S]*?)<\/" + tag + ">" : "<\/?" + tag + "([^>]+)?>";
 	reg = new RegExp(regstr, "gi");
