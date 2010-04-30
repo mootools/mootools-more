@@ -22,21 +22,72 @@ provides: [String.Extras]
 */
 
 (function(){
-  
-var special = ['À','à','Á','á','Â','â','Ã','ã','Ä','ä','Å','å','Ă','ă','Ą','ą','Ć','ć','Č','č','Ç','ç', 'Ď','ď','Đ','đ', 'È','è','É','é','Ê','ê','Ë','ë','Ě','ě','Ę','ę', 'Ğ','ğ','Ì','ì','Í','í','Î','î','Ï','ï', 'Ĺ','ĺ','Ľ','ľ','Ł','ł', 'Ñ','ñ','Ň','ň','Ń','ń','Ò','ò','Ó','ó','Ô','ô','Õ','õ','Ö','ö','Ø','ø','ő','Ř','ř','Ŕ','ŕ','Š','š','Ş','ş','Ś','ś', 'Ť','ť','Ť','ť','Ţ','ţ','Ù','ù','Ú','ú','Û','û','Ü','ü','Ů','ů', 'Ÿ','ÿ','ý','Ý','Ž','ž','Ź','ź','Ż','ż', 'Þ','þ','Ð','ð','ß','Œ','œ','Æ','æ','µ'];
 
-var standard = ['A','a','A','a','A','a','A','a','Ae','ae','A','a','A','a','A','a','C','c','C','c','C','c','D','d','D','d', 'E','e','E','e','E','e','E','e','E','e','E','e','G','g','I','i','I','i','I','i','I','i','L','l','L','l','L','l', 'N','n','N','n','N','n', 'O','o','O','o','O','o','O','o','Oe','oe','O','o','o', 'R','r','R','r', 'S','s','S','s','S','s','T','t','T','t','T','t', 'U','u','U','u','U','u','Ue','ue','U','u','Y','y','Y','y','Z','z','Z','z','Z','z','TH','th','DH','dh','ss','OE','oe','AE','ae','u'];
+var special = {
+	'a': ['à', 'á', 'â', 'ã', 'ä', 'å', 'a', 'a'],
+	'A': ['À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'A', 'A'],
+	'c': ['c', 'c', 'ç'],
+	'C': ['C', 'C', 'Ç'],
+	'd': ['d', 'd'],
+	'D': ['D', 'Ð'],
+	'e': ['è', 'é', 'ê', 'ë', 'e', 'e'],
+	'E': ['È', 'É', 'Ê', 'Ë', 'E', 'E'],
+	'g': ['g'],
+	'G': ['G'],
+	'i': ['ì', 'í', 'î', 'ï'],
+	'I': ['Ì', 'Í', 'Î', 'Ï'],
+	'l': ['l', 'l', 'l'],
+	'L': ['L', 'L', 'L'],
+	'n': ['ñ', 'n', 'n'],
+	'N': ['Ñ', 'N', 'N'],
+	'o': ['ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'o'],
+	'O': ['Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø'],
+	'r': ['r', 'r'],
+	'R': ['R', 'R'],
+	's': ['š', 's', 's'],
+	'S': ['Š', 'S', 'S'],
+	't': ['t', 't', 't'],
+	'T': ['T', 'T', 'T'],
+	'u': ['ù', 'ú', 'û', 'ü', 'u', 'µ'],
+	'U': ['Ù', 'Ú', 'Û', 'Ü', 'U'],
+	'y': ['ÿ', 'ý'],
+	'Y': ['Ÿ', 'Ý'],
+	'z': ['ž', 'z', 'z'],
+	'Z': ['Ž', 'Z', 'Z'],
+	'th': ['þ'],
+	'TH': ['Þ'],
+	'dh': ['ð'],
+	'DH': ['Ð'],
+	'ss': ['ß'],
+	'oe': ['œ'],
+	'OE': ['Œ'],
+	'ae': ['æ'],
+	'AE': ['Æ']
+},
 
-var tidymap = {
-	"[\xa0\u2002\u2003\u2009]": " ",
-	"\xb7": "*",
-	"[\u2018\u2019]": "'",
-	"[\u201c\u201d]": '"',
-	"\u2026": "...",
-	"\u2013": "-",
-	"\u2014": "--",
-	"\uFFFD": "&raquo;"
+tidy = {
+	' ': ['[\xa0\u2002\u2003\u2009]'],
+	'*': ['\xb7'],
+	'\'': ['[\u2018\u2019]'],
+	'"': ['[\u201c\u201d]'],
+	'...': ['\u2026'],
+	'-': ['\u2013'],
+	'--': ['\u2014'],
+	'&raquo;': ['\uFFFD']
 };
+
+function walk(string, replacements)
+{
+	var result = string;
+
+	Hash.each(replacements, function(value, key) {
+		Array.each(value, function(check) {
+			result = result.replace(new RegExp(check, 'g'), key);
+		});
+	});
+
+	return result;
+}
 
 var getRegForTag = function(tag, contents) {
 	tag = tag || '';
@@ -48,11 +99,7 @@ var getRegForTag = function(tag, contents) {
 String.implement({
 
 	standardize: function(){
-		var text = this;
-		special.each(function(ch, i){
-			text = text.replace(new RegExp(ch, 'g'), standard[i]);
-		});
-		return text;
+		return walk(this, special);
 	},
 
 	repeat: function(times){
@@ -76,11 +123,7 @@ String.implement({
 	},
 
 	tidy: function(){
-		var txt = this.toString();
-		$each(tidymap, function(value, key){
-			txt = txt.replace(new RegExp(key, 'g'), value);
-		});
-		return txt;
+		return walk(this, tidy);
 	}
 
 });
