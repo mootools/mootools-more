@@ -54,24 +54,24 @@ provides: [Element.Delegation]
 	Element.implement({
 
 		addEvent: function(type, fn){
-			var splitted = splitType(type);
-			if (splitted.selector){
-				var monitors = this.retrieve('$moo:delegateMonitors', {});
+			var split = splitType(type);
+			if (split.selector){
+				var monitors = this.retrieve('delegation:_delegateMonitors', {});
 				if (!monitors[type]){
 					var monitor = function(e){
-						var el = check.call(this, e, splitted.selector);
+						var el = check.call(this, e, split.selector);
 						if (el) this.fireEvent(type, [e, el], 0, el);
 					}.bind(this);
 					monitors[type] = monitor;
-					addEvent.call(this, splitted.event, monitor);
+					addEvent.call(this, split.event, monitor);
 				}
 			}
 			return addEvent.apply(this, arguments);
 		},
 
 		removeEvent: function(type, fn){
-			var splitted = splitType(type);
-			if (splitted.selector){
+			var split = splitType(type);
+			if (split.selector){
 				var events = this.retrieve('events');
 				if (!events || !events[type] || (fn && !events[type].keys.contains(fn))) return this;
 
@@ -80,8 +80,8 @@ provides: [Element.Delegation]
 
 				events = this.retrieve('events');
 				if (events && events[type] && events[type].keys.length == 0){
-					var monitors = this.retrieve('$moo:delegateMonitors', {});
-					removeEvent.apply(this, [splitted.event, monitors[type]]);
+					var monitors = this.retrieve('delegation:_delegateMonitors', {});
+					removeEvent.apply(this, [split.event, monitors[type]]);
 					delete monitors[type];
 				}
 				return this;
