@@ -41,11 +41,11 @@ Element.implement({
 			//IE fails here if the element is not in the dom
 			d = this.getStyle('display');
 		} catch(e){}
-		return this.store('originalDisplay', d || '').setStyle('display', 'none');
+		return this.store('element:_originalDisplay', d || '').setStyle('display', 'none');
 	},
 
 	show: function(display){
-		display = display || this.retrieve('originalDisplay') || 'block';
+		display = display || this.retrieve('element:_originalDisplay') || 'block';
 		return this.setStyle('display', (display == 'none') ? 'block' : display);
 	},
 
