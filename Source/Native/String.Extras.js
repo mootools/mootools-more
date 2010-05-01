@@ -81,9 +81,9 @@ tidy = {
 function walk(string, replacements) {
 	var result = string;
 
-	for (key in replacements)
-		if (replacements.hasOwnProperty(key))
-			result = result.replace(new RegExp(replacements[key], 'g'), key);
+	for (key in replacements) {
+		result = result.replace(new RegExp(replacements[key], 'g'), key);
+	}
 
 	return result;
 }
