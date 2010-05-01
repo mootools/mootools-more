@@ -82,7 +82,7 @@ Element.implement({
 	getComputedSize: function(options){
 		options = $merge({
 			styles: ['padding','border'],
-			plains: {
+			planes: {
 				height: ['top','bottom'],
 				width: ['left','right']
 			},
@@ -92,17 +92,17 @@ Element.implement({
 		switch (options.mode){
 			case 'vertical':
 				delete size.width;
-				delete options.plains.width;
+				delete options.planes.width;
 				break;
 			case 'horizontal':
 				delete size.height;
-				delete options.plains.height;
+				delete options.planes.height;
 				break;
 		}
 		var getStyles = [];
 		//this function might be useful in other places; perhaps it should be outside this function?
-		$each(options.plains, function(plain, key){
-			plain.each(function(edge){
+		$each(options.planes, function(plane, key){
+			plane.each(function(edge){
 				options.styles.each(function(style){
 					getStyles.push((style == 'border') ? style + '-' + edge + '-' + 'width' : style + '-' + edge);
 				});
@@ -111,10 +111,10 @@ Element.implement({
 		var styles = {};
 		getStyles.each(function(style){ styles[style] = this.getComputedStyle(style); }, this);
 		var subtracted = [];
-		$each(options.plains, function(plain, key){ //keys: width, height, plains: ['left', 'right'], ['top','bottom']
+		$each(options.planes, function(plane, key){ //keys: width, height, planes: ['left', 'right'], ['top','bottom']
 			var capitalized = key.capitalize();
 			size['total' + capitalized] = size['computed' + capitalized] = 0;
-			plain.each(function(edge){ //top, left, right, bottom
+			plane.each(function(edge){ //top, left, right, bottom
 				size['computed' + edge.capitalize()] = 0;
 				getStyles.each(function(style, i){ //padding, border, etc.
 					//'padding-left'.test('left') size['totalWidth'] = size['width'] + [padding-left]
