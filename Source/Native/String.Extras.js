@@ -10,6 +10,7 @@ license: MIT-style license
 authors:
 - Aaron Newton
 - Guillermo Rauch
+- Christopher Pitt
 
 requires:
 - core:1.2.4/String
