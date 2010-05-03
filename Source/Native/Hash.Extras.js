@@ -9,6 +9,7 @@ license: MIT-style license
 
 authors:
 - Aaron Newton
+- Christopher Pitt
 
 requires:
 - core:1.2.4/Hash.base
@@ -33,17 +34,20 @@ Hash.implement({
 	},
 
 	cleanValues: function(method){
-		method = method || $defined;
-		this.each(function(v, k){
-			if (!method(v)) this.erase(k);
-		}, this);
+		for (key in this)
+		{
+			if (this.has(key) && !(method || nil)(value))
+			{
+				this.erase(key);
+			}
+		}
 		return this;
 	},
 
 	run: function(){
 		var args = arguments;
 		this.each(function(v, k){
-			if ($type(v) == 'function') v.run(args);
+			if (typeOf(v) == 'function') v.run(args);
 		});
 	}
 
