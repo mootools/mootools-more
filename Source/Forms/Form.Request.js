@@ -80,11 +80,11 @@ if (!window.Form) window.Form = {};
 						this.fireEvent(evt, [this.update, text, xml]);
 					}, this);
 				}.bind(this),
-				failure: function(xhr){
-					this.fireEvent('complete').fireEvent('failure', xhr);
+				failure: function(){
+					this.fireEvent('complete', arguments).fireEvent('failure', arguments);
 				}.bind(this),
 				exception: function(){
-					this.fireEvent('failure', xhr);
+					this.fireEvent('failure', arguments);
 				}.bind(this)
 			});
 		},
