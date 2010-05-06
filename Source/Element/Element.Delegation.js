@@ -97,21 +97,25 @@ provides: [Element.Delegation]
 		},
 
 		fireEvent: function(type, args, delay, bind){
-			var events = this.retrieve('events'),
-				e = args[0],
+			var events = this.retrieve('events');
+			var e, el;
+			if (args) {
+				e = args[0];
 				el = args[1];
+			}
 			if (!events || !events[type]) return this;
-
-			var related;
-			switch(e.delegate){
-				case 'mouseenter':
-					var related = e.fromElement || e.relatedTarget;
-					if(el.hasChild(related)) return this;
-					break;
-				case 'mouseleave':
-					related = e.toElement || e.relatedTarget;
-					if(related && (related == el || related.getParents().contains(el))) return this;
-					break;
+			if (e && el) {
+				var related;
+				switch(e.delegate){
+					case 'mouseenter':
+						related = e.fromElement || e.relatedTarget;
+						if(el.hasChild(related)) return this;
+						break;
+					case 'mouseleave':
+						related = e.toElement || e.relatedTarget;
+						if(related && (related == el || related.getParents().contains(el))) return this;
+						break;
+				}
 			}
 			
 			events[type].keys.each(function(fn){
