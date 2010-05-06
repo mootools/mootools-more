@@ -1,125 +1,3 @@
-Class: InputValidator {#InputValidator}
-=======================================
-
-This class contains functionality to test a field for various criteria and also to generate an error message when that test fails.
-
-### Tutorial/Demo
-
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/09-forms/04-Form.Validator
-
-### Authors
-
-* Aaron Newton
-* Based on [validation.js by Andrew Tetlaw][]
-
-### Implements
-
-* [Options][]
-
-### Syntax
-
-	new InputValidator(className, options);
-
-### Arguments
-
-1. className - (*string*) a className that this field will be related to (see example below)
-2. options - (*object*) a key/value set of options
-
-### Options
-
-* errorMsg - (*mixed*) a message to display; see section below for details.
-* test - (*function*) a function that returns *true* or *false*
-
-### Option: errorMsg
-
-The errorMsg option can be any of the following:
-
-* *string* - the message to display if the field fails validation
-* *boolean:false* - do not display a message at all
-* *function* - a function to evaluate that returns either a *string* or *false*. This function will be passed two parameters: the field being evaluated and	any properties defined for the validator as a className (see examples below)
-
-### Option: test
-
-The test option is a function that will be passed the field being evaluated and any properties defined for the validator as a className (see example below); this function **must** return *true* or *false*.
-
-### Examples
-
-	//html code
-	<input type="text" name="firstName" class="required" id="firstName"/>
-
-	//simple validator
-	var isEmpty = new InputValidator('required', {
-		errorMsg: 'This field is required.',
-		test: function(field){
-			return ((field.get('value') == null) || (field.get('value').length == 0));
-		}
-	});
-	isEmpty.test($("firstName")); //true if empty
-	isEmpty.getError($("firstName")) //returns "This field is required."
-
-	//two complex validators
-	<input type="text" name="username" class="minLength:10 maxLength:100" id="username"/>
-
-	var minLength = new InputValidator ('minLength', {
-		errorMsg: function(element, props){
-			//props is {minLength:10, maxLength:100}
-			if ($type(props.minLength))
-				return 'Please enter at least ' + props.minLength + ' characters' +
-					' (you entered ' + element.value.length + ' characters).';
-			else return '';
-		},
-		test: function(element, props){
-			//if the value is >= than the minLength value, element passes test
-			return (element.value.length >= $pick(props.minLength, 0));
-		}
-	});
-	minLength.test($('username'));
-	var maxLength = new InputValidator ('maxLength', {
-		errorMsg: function(element, props){
-			//props is {minLength:10, maxLength:100}
-			if ($type(props.maxLength))
-				return 'Please enter no more than ' + props.maxLength + ' characters' +
-					'(you entered ' + element.value.length + ' characters).';
-			else return '';
-		},
-		test: function(element, props){
-			//if the value is <= than the maxLength value, element passes test
-			return (element.value.length <= $pick(props.maxLength, 10000));
-		}
-	});
-
-InputValidator Method: test {#InputValidator:test}
---------------------------------------------------
-
-Tests a field against the validator's rule(s).
-
-### Syntax
-
-	myInputValidator.test(field);
-
-### Arguments
-
-1. field - (*mixed*) A string of the id for an Element or an Element reference of the form input to test
-
-### Returns
-
-* (*boolean*) - *true* if the field passes the test; *false* if it does not pass the test
-
-InputValidator Method: getError {#InputValidator:getError}
-----------------------------------------------------------
-
-Retrieves the error message for the validator.
-
-### Arguments
-
-1. field - (*mixed*) A string of the id for an Element or an Element reference of the form input to test
-
-### Returns
-
-* (*mixed*) - The error message (*string*) or *boolean false* if no message is meant to be returned.
-
-
 Class: Form.Validator {#Form-Validator}
 ====================================
 
@@ -636,6 +514,128 @@ Error Msg: "Please enter something for at least one of the above options."
 		<input ..../>
 		<input .... className="validate-one-required"/>
 	</div>
+
+
+Class: InputValidator {#InputValidator}
+=======================================
+
+This class contains functionality to test a field for various criteria and also to generate an error message when that test fails.
+
+### Tutorial/Demo
+
+* [Online Tutorial/Demo][]
+[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/09-forms/04-Form.Validator
+
+### Authors
+
+* Aaron Newton
+* Based on [validation.js by Andrew Tetlaw][]
+
+### Implements
+
+* [Options][]
+
+### Syntax
+
+	new InputValidator(className, options);
+
+### Arguments
+
+1. className - (*string*) a className that this field will be related to (see example below)
+2. options - (*object*) a key/value set of options
+
+### Options
+
+* errorMsg - (*mixed*) a message to display; see section below for details.
+* test - (*function*) a function that returns *true* or *false*
+
+### Option: errorMsg
+
+The errorMsg option can be any of the following:
+
+* *string* - the message to display if the field fails validation
+* *boolean:false* - do not display a message at all
+* *function* - a function to evaluate that returns either a *string* or *false*. This function will be passed two parameters: the field being evaluated and	any properties defined for the validator as a className (see examples below)
+
+### Option: test
+
+The test option is a function that will be passed the field being evaluated and any properties defined for the validator as a className (see example below); this function **must** return *true* or *false*.
+
+### Examples
+
+	//html code
+	<input type="text" name="firstName" class="required" id="firstName"/>
+
+	//simple validator
+	var isEmpty = new InputValidator('required', {
+		errorMsg: 'This field is required.',
+		test: function(field){
+			return ((field.get('value') == null) || (field.get('value').length == 0));
+		}
+	});
+	isEmpty.test($("firstName")); //true if empty
+	isEmpty.getError($("firstName")) //returns "This field is required."
+
+	//two complex validators
+	<input type="text" name="username" class="minLength:10 maxLength:100" id="username"/>
+
+	var minLength = new InputValidator ('minLength', {
+		errorMsg: function(element, props){
+			//props is {minLength:10, maxLength:100}
+			if ($type(props.minLength))
+				return 'Please enter at least ' + props.minLength + ' characters' +
+					' (you entered ' + element.value.length + ' characters).';
+			else return '';
+		},
+		test: function(element, props){
+			//if the value is >= than the minLength value, element passes test
+			return (element.value.length >= $pick(props.minLength, 0));
+		}
+	});
+	minLength.test($('username'));
+	var maxLength = new InputValidator ('maxLength', {
+		errorMsg: function(element, props){
+			//props is {minLength:10, maxLength:100}
+			if ($type(props.maxLength))
+				return 'Please enter no more than ' + props.maxLength + ' characters' +
+					'(you entered ' + element.value.length + ' characters).';
+			else return '';
+		},
+		test: function(element, props){
+			//if the value is <= than the maxLength value, element passes test
+			return (element.value.length <= $pick(props.maxLength, 10000));
+		}
+	});
+
+InputValidator Method: test {#InputValidator:test}
+--------------------------------------------------
+
+Tests a field against the validator's rule(s).
+
+### Syntax
+
+	myInputValidator.test(field);
+
+### Arguments
+
+1. field - (*mixed*) A string of the id for an Element or an Element reference of the form input to test
+
+### Returns
+
+* (*boolean*) - *true* if the field passes the test; *false* if it does not pass the test
+
+InputValidator Method: getError {#InputValidator:getError}
+----------------------------------------------------------
+
+Retrieves the error message for the validator.
+
+### Arguments
+
+1. field - (*mixed*) A string of the id for an Element or an Element reference of the form input to test
+
+### Returns
+
+* (*mixed*) - The error message (*string*) or *boolean false* if no message is meant to be returned.
 
 
 Form.Validator Language Localization {#Localization}
