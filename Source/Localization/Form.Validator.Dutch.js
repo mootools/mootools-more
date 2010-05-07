@@ -9,6 +9,7 @@ license: MIT-style license
 
 authors:
 - Lennart Pilon
+- Arian Stolwijk
 
 requires:
 - /Lang
@@ -35,4 +36,21 @@ MooTools.lang.set('nl-NL', 'Form.Validator', {
 	oneRequired: 'Vul iets in bij minimaal een van de invoervelden.',
 	warningPrefix: 'Waarschuwing: ',
 	errorPrefix: 'Fout: '
+
+	//Form.Validator.Extras
+
+	noSpace: 'Er is geen spatie toegestaan in dit veld.',
+	reqChkByNode: 'Er zijn geen items geselecteerd.',
+	requiredChk: 'Dit veld is verplicht.',
+	reqChkByName: 'Selecteer een  {label}.',
+	match: 'Dit veld moet overeen komen met het {matchName} veld',
+	startDate: 'de begin datum',
+	endDate: 'de eind datum',
+	currendDate: 'de huidige datum',
+	afterDate: 'De datum moet hetzelfde zijn of na {label}.',
+	beforeDate: 'De datum moet hetzelfde zijn of voor {label}.',
+	startMonth: 'Selecteer een begin maand',
+	sameMonth: 'Deze twee datums moeten in dezelfde maand zijn - u moet een van beide aanpassen.',
+	creditcard: 'Het ingevulde credit kaart nummer is niet geldig. Controleer het nummer en probeer opnieuw. {length} getallen ingevuld.'
+
 });
