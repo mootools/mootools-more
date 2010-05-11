@@ -13,7 +13,7 @@ authors:
 requires:
 - /Drag.Move
 
-provides: [Slider]
+provides: [Sortables]
 
 ...
 */

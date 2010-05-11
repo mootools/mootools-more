@@ -14,11 +14,11 @@ authors:
 - Scott Kyle - scott [at] appden.com; http://appden.com
 
 requires:
-- core:1.2.4/Array
-- core:1.2.4/String
-- core:1.2.4/Number
-- core:1.2.4/Lang
-- core:1.2.4/Date.English.US
+- Core:1.2.4/Array
+- Core:1.2.4/String
+- Core:1.2.4/Number
+- /Lang
+- /Date.English.US
 - /MooTools.More
 
 provides: [Date]

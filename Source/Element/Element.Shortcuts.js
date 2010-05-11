@@ -11,7 +11,7 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Element.Style
+- Core:1.2.4/Element.Style
 - /MooTools.More
 
 provides: [Element.Shortcuts]

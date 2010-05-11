@@ -11,14 +11,16 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Options
-- core:1.2.4/Events
-- core:1.2.4/Selectors
-- core:1.2.4/Element.Event
-- core:1.2.4/Element.Style
-- core:1.2.4/JSON
-- /Lang- /Class.Binds
-- /Date Element.Forms
+- Core:1.2.4/Options
+- Core:1.2.4/Events
+- Core:1.2.4/Selectors
+- Core:1.2.4/Element.Event
+- Core:1.2.4/Element.Style
+- Core:1.2.4/JSON
+- /Lang
+- /Class.Binds
+- /Date 
+- /Element.Forms
 - /Form.Validator.English
 - /Element.Shortcuts
 

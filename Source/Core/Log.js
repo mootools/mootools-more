@@ -13,7 +13,7 @@ authors:
 - Scott Kyle
 
 requires:
-- core:1.2.4/Class
+- Core:1.2.4/Class
 - /MooTools.More
 
 provides: [Log]

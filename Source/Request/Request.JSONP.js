@@ -12,8 +12,8 @@ authors:
 - Guillermo Rauch
 
 requires:
-- core:1.2.4/Element
-- core:1.2.4/Request
+- Core:1.2.4/Element
+- Core:1.2.4/Request
 - /Log
 
 provides: [Request.JSONP]

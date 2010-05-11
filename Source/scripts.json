@@ -3,7 +3,7 @@
 	"Core": {
 
 		"More": {
-			"deps": ["Core"],
+			"deps": [],
 			"desc": "Defines MooTools.More.version."
 		},
 

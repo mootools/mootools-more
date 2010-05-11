@@ -12,9 +12,9 @@ authors:
 - Guillermo Rauch
 
 requires:
-- core:1.2.4/String
-- core:1.2.4/$util
-- core:1.2.4/Array
+- Core:1.2.4/String
+- Core:1.2.4/$util
+- Core:1.2.4/Array
 
 provides: [String.Extras]
 

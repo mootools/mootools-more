@@ -11,6 +11,7 @@ authors:
 - Aaron Newton
 
 requires:
+- Core:1.2.4/Element.Event
 - Core:1.2.4/Request.HTML
 - /Class.Binds
 - /Class.Occlude

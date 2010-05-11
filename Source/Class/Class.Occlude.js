@@ -11,8 +11,8 @@ authors:
 - Aaron Newton
 
 requires: 
-- core/1.2.4/Class
-- core:1.2.4/Element
+- Core:1.2.4/Class
+- Core:1.2.4/Element
 - /MooTools.More
 
 provides: [Class.Occlude]

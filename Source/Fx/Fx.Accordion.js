@@ -11,7 +11,7 @@ authors:
 - Valerio Proietti
 
 requires:
-- core:1.2.4/Element.Event
+- Core:1.2.4/Element.Event
 - /Fx.Elements
 
 provides: [Fx.Accordion]
