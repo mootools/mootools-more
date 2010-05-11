@@ -67,10 +67,10 @@ Fx.Sort = new Class({
 				};
 				left += val.width;
 			}
-			var plain = vert ? 'top' : 'left';
+			var plane = vert ? 'top' : 'left';
 			zero[index] = {};
-			var start = el.getStyle(plain).toInt();
-			zero[index][plain] = start || 0;
+			var start = el.getStyle(plane).toInt();
+			zero[index][plane] = start || 0;
 			return val;
 		}, this);
 		this.set(zero);

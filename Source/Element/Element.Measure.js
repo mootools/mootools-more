@@ -80,6 +80,9 @@ Element.implement({
 	},
 
 	getComputedSize: function(options){
+		//legacy support for my stupid spelling error
+		if (options && options.plains) options.planes = options.plains;
+		
 		options = $merge({
 			styles: ['padding','border'],
 			planes: {
@@ -88,6 +91,7 @@ Element.implement({
 			},
 			mode: 'both'
 		}, options);
+		
 		var size = {width: 0,height: 0};
 		switch (options.mode){
 			case 'vertical':

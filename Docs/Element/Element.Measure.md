@@ -54,7 +54,7 @@ Returns width and height for element even if the element is not visible.
 
 1. computeSize - (*boolean*) use [Element:getComputedSize][] or not; defaults to *false*
 2. styles - (*array*) see [Element:getComputedSize][]
-3. plains - (*array*) see [Element:getComputedSize][]
+3. planes - (*array*) see [Element:getComputedSize][]
 
 ###	Returns
 
@@ -83,8 +83,8 @@ Calculates the size of an element including the width, border, padding, etc.
 ### Options
 
 1. styles - (*array*) the styles to include in the calculation; defaults to ['padding','border']
-2. plains - (*object*) an object with height and width properties, each of which is an array including the edges to include in that plain. defaults to *{height: ['top','bottom'], width: ['left','right']}*
-3. mode - (*string*) limit the plain to 'vertical' or 'horizontal'; defaults to 'both'
+2. planes - (*object*) an object with height and width properties, each of which is an array including the edges to include in that plane. defaults to *{height: ['top','bottom'], width: ['left','right']}*
+3. mode - (*string*) limit the plane to 'vertical' or 'horizontal'; defaults to 'both'
 
 ### Returns
 
