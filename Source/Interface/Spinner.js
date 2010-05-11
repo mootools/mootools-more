@@ -11,7 +11,7 @@ authors:
 - Aaron Newton
 
 requires:
-- core:1.2.4/Fx.Tween
+- Core:1.2.4/Fx.Tween
 - /Class.refactor
 - /Mask
 
@@ -143,21 +143,24 @@ if (window.Request) {
 		initialize: function(options){
 			this._send = this.send;
 			this.send = function(options){
-				if (this.spinner) this.spinner.chain(this._send.bind(this, options)).show();
+				var spinner = this.getSpinner();
+				if (spinner) spinner.chain(this._send.bind(this, options)).show();
 				else this._send(options);
 				return this;
 			};
 			this.previous(options);
-			var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
-			if (this.options.useSpinner && update) {
-				this.spinner = update.get('spinner', this.options.spinnerOptions);
-				['onComplete', 'onException', 'onCancel'].each(function(event){
-					this.addEvent(event, this.spinner.hide.bind(this.spinner));
-				}, this);
-			}
 		},
 		
 		getSpinner: function(){
+			if (!this.spinner) {
+				var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
+				if (this.options.useSpinner && update) {
+					this.spinner = update.get('spinner', this.options.spinnerOptions);
+					['onComplete', 'onException', 'onCancel'].each(function(event){
+						this.addEvent(event, this.spinner.hide.bind(this.spinner));
+					}, this);
+				}
+			}
 			return this.spinner;
 		}
 		
