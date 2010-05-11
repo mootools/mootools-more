@@ -29,6 +29,7 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 * heightOverride - (*integer*) height to open to; overrides the default offsetHeight
 * widthOverride - (*integer*) width to open to; overrides the default offsetWidth
 * display - (*string*) the property for the display style when your reveal the element. Defaults to *block* but could be, for instance, *list-style*, *inline-block*, etc.
+* opacity - (*float*) the opacity value for fading in an element; defaults to *1* but can be set to a number between zero and one to have the element fade in to a partially transparent state.
 
 ### Events
 
