@@ -19,15 +19,3 @@ describe('Hash.getFromPath', {
 		value_of(h.getFromPath('animal.human.most_deadly')).should_be('ninja');
 	}
 });
-
-describe('Hash.cleanValues', {
-
-	'should remove null values from hash': function(){
-		var h = new Hash({
-			'one': 1,
-			'two': null,
-			'three': 3
-		});
-		value_of(h.cleanValues().getKeys()).should_be(['one, three']);
-	}
-});
