@@ -99,15 +99,33 @@ Fx.Accordion = new Class({
 		return this;
 	},
 
-	detach: function(){
-		this.togglers.each(function(toggler) {
+	removeSection: function(toggler, displayIndex) {
+		var idx = this.togglers.indexOf(toggler);
+		var element = this.elements[idx];
+		var remover = function(){
+			this.togglers.erase(toggler);
+			this.elements.erase(element);
+			this.detach(toggler);
+		}.bind(this);
+		if (this.now == idx || displayIndex != undefined) this.display($pick(displayIndex, idx - 1 >= 0 ? idx - 1 : 0)).chain(remover);
+		else remover();
+		return this;
+	},
+
+	detach: function(toggler){
+		var remove = function(toggler) {
 			toggler.removeEvent(this.options.trigger, toggler.retrieve('accordion:display'));
-		}, this);
+		}.bind(this);
+		if (!toggler) this.togglers.each(remove);
+		else remove(toggler);
+		return this;
 	},
 
 	display: function(index, useFx){
 		if (!this.check(index, useFx)) return this;
 		useFx = $pick(useFx, true);
+		index = ($type(index) == 'element') ? this.elements.indexOf(index) : index;
+		if (index == this.previous) return this;
 		if (this.options.returnHeightToAuto){
 			var prev = this.elements[this.previous];
 			if (prev && !this.selfHidden){
@@ -116,7 +134,6 @@ Fx.Accordion = new Class({
 				}
 			}
 		}
-		index = ($type(index) == 'element') ? this.elements.indexOf(index) : index;
 		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
 		var obj = {};
