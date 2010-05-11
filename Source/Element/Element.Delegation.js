@@ -97,20 +97,9 @@ provides: [Element.Delegation]
 				el = args[1];
 			}
 			if (!events || !events[type]) return this;
-			
-			var e = args[0];
-			var el = args[1];
-			var relatedFrom = e.fromElement || e.relatedTarget;
-			var relatedTo = e.toElement || e.relatedTarget;
-			var typeSplit = type.split(':')[0];
-			
-			if(typeSplit == 'mouseover' && el.hasChild(relatedFrom)) return this;
-			if(typeSplit == 'mouseout' && relatedTo && $$(relatedTo.getParents(), relatedTo).contains(el)) return this;  			
-			
 			events[type].keys.each(function(fn){
 				fn.create({bind: bind || this, delay: delay, arguments: args})();
 			}, this);
-				
 			return this;
 		}
 
