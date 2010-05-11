@@ -58,12 +58,19 @@ provides: [Element.Delegation]
 			if (splitted.selector){
 				var monitors = this.retrieve('$moo:delegateMonitors', {});
 				if (!monitors[type]){
+					var delegate = splitted.event;
+					switch(delegate){
+						case 'mouseenter': splitted.event = 'mouseover'; break;
+						case 'mouseleave': splitted.event = 'mouseout'; break;
+					}
 					var monitor = function(e){
+						e.delegate = delegate;
 						var el = check.call(this, e, splitted.selector);
 						if (el) this.fireEvent(type, [e, el], 0, el);
 					}.bind(this);
 					monitors[type] = monitor;
-					addEvent.call(this, splitted.event, monitor);
+					($type(splitted.event) == 'array') ? splitted.event.each(function(event){ addEvent.call(this, event, monitor); }) : addEvent.call(this, splitted.event, monitor);
+					
 				}
 			}
 			return addEvent.apply(this, arguments);
@@ -90,11 +97,27 @@ provides: [Element.Delegation]
 		},
 
 		fireEvent: function(type, args, delay, bind){
-			var events = this.retrieve('events');
+			var events = this.retrieve('events'),
+				e = args[0],
+				el = args[1];
 			if (!events || !events[type]) return this;
+
+			var related;
+			switch(e.delegate){
+				case 'mouseenter':
+					var related = e.fromElement || e.relatedTarget;
+					if(el.hasChild(related)) return this;
+					break;
+				case 'mouseleave':
+					related = e.toElement || e.relatedTarget;
+					if(related && (related == el || related.getParents().contains(el))) return this;
+					break;
+			}
+			
 			events[type].keys.each(function(fn){
 				fn.create({bind: bind || this, delay: delay, arguments: args})();
 			}, this);
+				
 			return this;
 		}
 
