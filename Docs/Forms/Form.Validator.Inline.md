@@ -28,7 +28,9 @@ Evaluates an entire form against all the validators that are set up *displaying 
 
 ### Events
 
-* all the events defined for [Form.Validator][]
+* all the events defined for [Form.Validator][], plus
+* onShowAdvice - (*function*) callback executed when advice is shown. Passed three arguments: an Element reference for the input being validated, an Element reference to the advice element, and the failed validator's name.
+* onHideAdvice - (*function*) callback exectued when advice is shown. Passed three arguments: an Element reference for the input being validated, an Element reference to the advice element, and the failed validator's name.
 
 ### Note
 

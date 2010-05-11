@@ -78,6 +78,7 @@ Form.Validator.Inline = new Class({
 			field.store(this.getPropName(className), true);
 			if (advice.reveal) advice.reveal();
 			else advice.setStyle('display', 'block');
+			this.fireEvent('showAdvice', [field, advice, className]);
 		}
 	},
 
@@ -88,6 +89,7 @@ Form.Validator.Inline = new Class({
 			//if Fx.Reveal.js is present, transition the advice out
 			if (advice.dissolve) advice.dissolve();
 			else advice.setStyle('display', 'none');
+			this.fireEvent('hideAdvice', [field, advice, className]);
 		}
 	},
 
