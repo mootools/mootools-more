@@ -82,12 +82,14 @@ var Scroller = new Class({
 			scroll = this.element.getScroll(), 
 			pos = this.element != this.docBody ? this.element.getOffsets() : {x: 0, y:0}, 
 			scrollSize = this.element.getScrollSize(), 
-			change = {x: 0, y: 0};
+			change = {x: 0, y: 0},
+			top = this.options.area.top || this.options.area,
+		  bottom = this.options.area.bottom || this.options.area;
 		for (var z in this.page){
-			if (this.page[z] < (this.options.area + pos[z]) && scroll[z] != 0) {
-				change[z] = (this.page[z] - this.options.area - pos[z]) * this.options.velocity;
-			} else if (this.page[z] + this.options.area > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z]) {
-				change[z] = (this.page[z] - size[z] + this.options.area - pos[z]) * this.options.velocity;
+			if (this.page[z] < (top + pos[z]) && scroll[z] != 0) {
+				change[z] = (this.page[z] - top - pos[z]) * this.options.velocity;
+			} else if (this.page[z] + bottom > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z]) {
+				change[z] = (this.page[z] - size[z] + bottom - pos[z]) * this.options.velocity;
 			}
 		}
 		if (change.y || change.x) this.fireEvent('change', [scroll.x + change.x, scroll.y + change.y]);
