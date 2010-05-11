@@ -12,12 +12,13 @@ Creates an interface for drag and drop sorting of a list or lists.
 
 ### Options
 
-* constrain - (*boolean*: defaults to false) Whether or not to constrain the element being dragged to its parent element.
-* clone     - (*mixed*: defaults to false) Whether or not to display a copy of the actual element under the cursor while dragging. May also be used as a function which will return an element to be used as the clone.  The function will receive the mousedown event, the element, and the list as arguments.
-* handle    - (*string*: defaults to false) A selector to select an element inside each sortable item to be used as the handle for sorting that item.  If no match is found, the element is used as its own handle.
-* opacity   - (*integer*: defaults to 1) Opacity of the place holding element
-* revert    - (*mixed*: defaults to false) Whether or not to use an effect to slide the element into its final location after sorting. If you pass an object it will be used as additional options for the revert effect.
-* snap      - (*integer*: defaults to 4) The number of pixels the element must be dragged for sorting to begin.
+* constrain - (*boolean*: defaults to *false*) Whether or not to constrain the element being dragged to its parent element.
+* clone - (*mixed*: defaults to *false*) Whether or not to display a copy of the actual element under the cursor while dragging. May also be used as a function which will return an element to be used as the clone.  The function will receive the mousedown event, the element, and the list as arguments.
+* handle - (*string*: defaults to *false*) A selector to select an element inside each sortable item to be used as the handle for sorting that item.  If no match is found, the element is used as its own handle.
+* opacity - (*integer*: defaults to *1*) Opacity of the place holding element
+* revert - (*mixed*: defaults to *false*) Whether or not to use an effect to slide the element into its final location after sorting. If you pass an object it will be used as additional options for the revert effect.
+* snap - (*integer*; defaults to *4*) The number of pixels the element must be dragged for sorting to begin.
+* preventDefault - (*boolean*; defaults to *false*) if true, then dragging a link or image that is in a sortable element will work (otherwise the browser may attempt to drag the element out of the browser - to your desktop or bookmark bar for example).
 
 ### Events
 
@@ -32,7 +33,7 @@ Fired when the item starts dragging.
 ##### Arguments
 
 1. element - (*element*) The Element being sorted.
-2. clone   - (*element*) The clone of the Element.
+2. clone - (*element*) The clone of the Element.
 
 #### sort
 
@@ -45,7 +46,7 @@ Fired when the item is inserted into a new place in one of the lists.
 ##### Arguments
 
 1. element - (*element*) The Element being sorted.
-2. clone   - (*element*) The clone of the Element.
+2. clone - (*element*) The clone of the Element.
 
 #### complete
 
@@ -80,8 +81,6 @@ Fired when the item ends dragging. Note: fires even if the sort has not changed.
 	//creates a new Sortable instance allowing sorting between the lists with
 	//ids 'list-1', 'list-2, and 'list-3'
 
-
-
 Sortables Method: attach {#Sortables:attach}
 --------------------------------------------
 
@@ -95,8 +94,6 @@ Attaches the mouse listener to all the handles, enabling sorting.
 
 * (*object*) This Sortables instance.
 
-
-
 Sortables Method: detach {#Sortables:detach}
 --------------------------------------------
 
@@ -109,8 +106,6 @@ Detaches the mouse listener from all the handles, disabling sorting.
 ### Returns
 
 * (*object*) This Sortables instance.
-
-
 
 Sortables Method: addItems {#Sortables:addItems}
 ------------------------------------------------
@@ -150,8 +145,6 @@ Allows one or more items to be added to an existing Sortables instance.
 
 - [Sortables:removeItems](#Sortables:removeItems), [Sortables:addLists](#Sortables:addLists)
 
-
-
 Sortables Method: removeItems {#Sortables:removeItems}
 ------------------------------------------------------
 
@@ -187,8 +180,6 @@ Allows one or more items to be removed from an existing Sortables instance.
 
 - [Sortables:addItems](#Sortables:addItems), [Sortables:removeLists](#Sortables:removeLists)
 
-
-
 Sortables Method: addLists {#Sortables:addLists}
 ------------------------------------------------
 
@@ -219,8 +210,6 @@ Allows one or more entire lists to be added to an existing Sortables instance, a
 
 - [Sortables:removeLists](#Sortables:removeLists), [Sortables:addItems](#Sortables:addItems)
 
-
-
 Sortables Method: removeLists {#Sortables:removeLists}
 ------------------------------------------------------
 
@@ -246,8 +235,6 @@ Allows one or more entire lists to be removed from an existing Sortables instanc
 ### See Also
 
 - [Sortables:addLists](#Sortables:addLists), [Sortables:removeItems](#Sortables:removeItems)
-
-
 
 Sortables Method: serialize {#Sortables:serialize}
 --------------------------------------------------
