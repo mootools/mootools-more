@@ -34,6 +34,8 @@ Injects a script tag into the head section of the document, pointing to the src 
 		}
 	});
 
+### Note
+- WARNING: DO NOT use addEvent for load on the returned element, give it as onLoad in the properties argument.
 
 
 Asset Method: css {#Asset:css}
@@ -58,7 +60,9 @@ Injects a css file in the page.
 
 	var myCSS = new Asset.css('/css/myStyle.css', {id: 'myStyle', title: 'myStyle'});
 
+### Notes
 
+- WARNING: DO NOT use addEvent for load on the returned element, give it as onLoad in the properties argument.
 
 Asset Method: image {#Asset:image}
 ------------------------------------
@@ -90,8 +94,6 @@ Preloads an image and returns the img element.
 
 - Does not inject the image into the page.
 - WARNING: DO NOT use addEvent for load/error/abort on the returned element, give them as onLoad/onError/onAbort in the properties argument.
-
-
 
 Asset Method: images {#Asset:images}
 --------------------------------------
