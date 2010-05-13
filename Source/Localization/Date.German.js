@@ -3,6 +3,8 @@
 
 script: Date.German.js
 
+name: Date.German
+
 description: Date messages for German.
 
 license: MIT-style license

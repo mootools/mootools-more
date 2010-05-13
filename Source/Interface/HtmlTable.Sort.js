@@ -3,6 +3,8 @@
 
 script: HtmlTable.Sort.js
 
+name: HtmlTable.Sort
+
 description: Builds a stripy, sortable table with methods to add rows.
 
 license: MIT-style license

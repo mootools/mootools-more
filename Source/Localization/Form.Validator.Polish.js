@@ -3,6 +3,8 @@
 
 script: Form.Validator.Polish.js
 
+name: Form.Validator.Polish
+
 description: Date messages for Polish.
 
 license: MIT-style license

@@ -3,6 +3,8 @@
 
 script: Request.JSONP.js
 
+name: Request.JSONP
+
 description: Defines Request.JSONP, a class for cross domain javascript via script injection.
 
 license: MIT-style license

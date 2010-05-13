@@ -3,6 +3,8 @@
 
 script: Fx.Reveal.js
 
+name: Fx.Reveal
+
 description: Defines Fx.Reveal, a class that shows and hides elements with a transition.
 
 license: MIT-style license

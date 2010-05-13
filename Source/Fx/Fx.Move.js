@@ -3,6 +3,8 @@
 
 script: Fx.Move.js
 
+name: Fx.Move
+
 description: Defines Fx.Move, a class that works with Element.Position.js to transition an element from one location to another.
 
 license: MIT-style license

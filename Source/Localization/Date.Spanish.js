@@ -3,6 +3,8 @@
 
 script: Date.Spanish.US.js
 
+name: Date.Spanish.US
+
 description: Date messages for Spanish.
 
 license: MIT-style license

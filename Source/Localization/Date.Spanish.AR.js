@@ -3,6 +3,8 @@
 
 script: Date.Spanish.AR.js
 
+name: Date.Spanish.AR
+
 description: Date messages for Spanish (Argentinean variation).
 
 license: MIT-style license

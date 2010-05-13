@@ -3,6 +3,8 @@
 
 script: String.QueryString.js
 
+name: String.QueryString
+
 description: Methods for dealing with URI query strings.
 
 license: MIT-style license

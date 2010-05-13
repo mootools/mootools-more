@@ -3,6 +3,8 @@
 
 script: Tips.js
 
+name: Tips
+
 description: Class for creating nice tips that follow the mouse cursor when hovering an element.
 
 license: MIT-style license

@@ -3,6 +3,8 @@
 
 script: Date.Swedish.js
 
+name: Date.Swedish
+
 description: Date messages for Swedish (SE).
 
 license: MIT-style license

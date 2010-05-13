@@ -3,6 +3,8 @@
 
 script: Mask.js
 
+name: Mask
+
 description: Creates a mask element to cover another.
 
 license: MIT-style license

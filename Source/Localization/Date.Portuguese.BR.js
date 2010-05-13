@@ -3,6 +3,8 @@
 
 script: Date.Portuguese.BR.js
 
+name: Date.Portuguese.BR
+
 description: Date messages in Portuguese-BR (Brazil).
 
 license: MIT-style license

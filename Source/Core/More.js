@@ -3,6 +3,8 @@
 
 script: More.js
 
+name: More
+
 description: MooTools More
 
 license: MIT-style license

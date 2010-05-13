@@ -3,6 +3,8 @@
 
 script: Date.js
 
+name: Date
+
 description: Extends the Date native object to include methods useful in managing dates.
 
 license: MIT-style license

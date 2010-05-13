@@ -3,6 +3,8 @@
 
 script: Date.Italian.js
 
+name: Date.Italian
+
 description: Date messages for Italian.
 
 license: MIT-style license.

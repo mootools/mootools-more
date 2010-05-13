@@ -3,6 +3,8 @@
 
 script: Date.Estonian.js
 
+name: Date.Estonian
+
 description: Date messages for Estonian.
 
 license: MIT-style license

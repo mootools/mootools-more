@@ -3,6 +3,8 @@
 
 script: Hash.Extras.js
 
+name: Hash.Extras
+
 description: Extends the Hash native object to include getFromPath which allows a path notation to child elements.
 
 license: MIT-style license

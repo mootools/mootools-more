@@ -3,6 +3,8 @@
 
 script: Form.Validator.German.js
 
+name: Form.Validator.German
+
 description: Date messages for German.
 
 license: MIT-style license

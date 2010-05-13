@@ -3,6 +3,8 @@
 
 script: Form.Validator.Danish.js
 
+name: Form.Validator.Danish
+
 description: Form.Validator messages for Danish.
 
 license: MIT-style license

@@ -3,6 +3,8 @@
 
 script: Date.Danish.js
 
+name: Date.Danish
+
 description: Date messages for Danish.
 
 license: MIT-style license

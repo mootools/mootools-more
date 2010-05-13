@@ -3,6 +3,8 @@
 
 script: Element.Measure.js
 
+name: Element.Measure
+
 description: Extends the Element native object to include methods useful in measuring dimensions.
 
 credits: "Element.measure / .expose methods by Daniel Steigerwald License: MIT-style license. Copyright: Copyright (c) 2008 Daniel Steigerwald, daniel.steigerwald.cz"

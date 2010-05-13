@@ -3,6 +3,8 @@
 
 script: Form.Validator.Chinese.js
 
+name: Form.Validator.Chinese
+
 description: Form.Validator messages in chinese (both simplified and traditional).
 
 license: MIT-style license

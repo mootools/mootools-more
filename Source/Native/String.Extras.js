@@ -3,6 +3,8 @@
 
 script: String.Extras.js
 
+name: String.Extras
+
 description: Extends the String native object to include methods useful in managing various kinds of strings (query strings, urls, html, etc).
 
 license: MIT-style license

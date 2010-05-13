@@ -3,6 +3,8 @@
 
 script: Log.js
 
+name: Log
+
 description: Provides basic logging functionality for plugins to implement.
 
 license: MIT-style license

@@ -3,6 +3,8 @@
 
 script: Elements.From.js
 
+name: Elements.From
+
 description: Returns a collection of elements from a string of html.
 
 license: MIT-style license

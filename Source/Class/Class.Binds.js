@@ -3,6 +3,8 @@
 
 script: Class.Binds.js
 
+name: Class.Binds
+
 description: Automagically binds specified methods in a class to the instance of the class.
 
 license: MIT-style license

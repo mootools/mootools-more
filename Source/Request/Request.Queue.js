@@ -3,6 +3,8 @@
 
 script: Request.Queue.js
 
+name: Request.Queue
+
 description: Controls several instances of Request and its variants to run only one request at a time.
 
 license: MIT-style license

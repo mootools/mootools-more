@@ -3,6 +3,8 @@
 
 script: Spinner.js
 
+name: Spinner
+
 description: Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.
 
 license: MIT-style license

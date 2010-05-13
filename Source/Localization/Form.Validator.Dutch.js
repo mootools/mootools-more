@@ -3,6 +3,8 @@
 
 script: Form.Validator.Dutch.js
 
+name: Form.Validator.Dutch
+
 description: Form.Validator messages in Dutch.
 
 license: MIT-style license

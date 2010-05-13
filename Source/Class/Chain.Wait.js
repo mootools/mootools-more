@@ -3,6 +3,8 @@
 
 script: Chain.Wait.js
 
+name: Chain.Wait
+
 description: value, Adds a method to inject pauses between chained events.
 
 license: MIT-style license.

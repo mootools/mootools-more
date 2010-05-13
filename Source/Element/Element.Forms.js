@@ -3,6 +3,8 @@
 
 script: Element.Forms.js
 
+name: Element.Forms
+
 description: Extends the Element native object to include methods useful in managing inputs.
 
 license: MIT-style license

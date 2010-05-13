@@ -3,6 +3,8 @@
 
 script: Depender.js
 
+name: Depender
+
 description: A stand alone dependency loader for the MooTools library.
 
 license: MIT-style license

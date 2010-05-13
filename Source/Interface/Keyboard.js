@@ -3,6 +3,8 @@
 
 script: Keyboard.js
 
+name: Keyboard
+
 description: KeyboardEvents used to intercept events on a class for keyboard and format modifiers in a specific order so as to make alt+shift+c the same as shift+alt+c.
 
 license: MIT-style license

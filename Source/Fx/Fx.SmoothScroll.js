@@ -3,6 +3,8 @@
 
 script: Fx.SmoothScroll.js
 
+name: Fx.SmoothScroll
+
 description: Class for creating a smooth scrolling effect to all internal links on the page.
 
 license: MIT-style license

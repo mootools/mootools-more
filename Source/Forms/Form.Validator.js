@@ -3,6 +3,8 @@
 
 script: Form.Validator.js
 
+name: Form.Validator
+
 description: A css-class based form validation system.
 
 license: MIT-style license

@@ -3,6 +3,8 @@
 
 script: Form.Validator.Arabic.js
 
+name: Form.Validator.Arabic
+
 description: Form.Validator messages in Arabic.
 
 license: MIT-style license

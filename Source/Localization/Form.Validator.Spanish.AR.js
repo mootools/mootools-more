@@ -3,6 +3,8 @@
 
 script: Form.Validator.Spanish.AR.js
 
+name: Form.Validator.Spanish.AR
+
 description: Date messages for Spanish (Argentina).
 
 license: MIT-style license

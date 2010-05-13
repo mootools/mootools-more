@@ -3,6 +3,8 @@
 
 script: URI.js
 
+name: URI
+
 description: Provides methods useful in managing the window location and uris.
 
 license: MIT-style license

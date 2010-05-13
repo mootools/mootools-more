@@ -3,6 +3,8 @@
 
 script: Class.Refactor.js
 
+name: Class.Refactor
+
 description: Extends a class onto itself with new property, preserving any items attached to the class's namespace.
 
 license: MIT-style license

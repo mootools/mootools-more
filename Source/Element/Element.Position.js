@@ -3,6 +3,8 @@
 
 script: Element.Position.js
 
+name: Element.Position
+
 description: Extends the Element native object to include methods useful positioning elements relative to others.
 
 license: MIT-style license

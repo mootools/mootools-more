@@ -3,6 +3,8 @@
 
 script: Form.Validator.Extras.js
 
+name: Form.Validator.Extras
+
 description: Additional validators for the Form.Validator class.
 
 license: MIT-style license

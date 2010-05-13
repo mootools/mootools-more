@@ -3,6 +3,8 @@
 
 script: Fx.Accordion.js
 
+name: Fx.Accordion
+
 description: An Fx.Elements extension which allows you to easily create accordion type controls.
 
 license: MIT-style license

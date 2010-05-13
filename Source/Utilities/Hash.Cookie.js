@@ -3,6 +3,8 @@
 
 script: Hash.Cookie.js
 
+name: Hash.Cookie
+
 description: Class for creating, reading, and deleting Cookies in JSON format.
 
 license: MIT-style license

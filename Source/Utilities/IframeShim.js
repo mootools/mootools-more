@@ -3,6 +3,8 @@
 
 script: IframeShim.js
 
+name: IframeShim
+
 description: Defines IframeShim, a class for obscuring select lists and flash objects in IE.
 
 license: MIT-style license

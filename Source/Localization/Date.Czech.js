@@ -3,6 +3,8 @@
 
 script: Date.Czech.js
 
+name: Date.Czech
+
 description: Date messages for Czech.
 
 license: MIT-style license

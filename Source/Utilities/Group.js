@@ -3,6 +3,8 @@
 
 script: Group.js
 
+name: Group
+
 description: Class for monitoring collections of events
 
 license: MIT-style license

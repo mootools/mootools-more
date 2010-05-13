@@ -3,6 +3,8 @@
 
 script: Request.Periodical.js
 
+name: Request.Periodical
+
 description: Requests the same URL to pull data from a server but increases the intervals if no data is returned to reduce the load
 
 license: MIT-style license

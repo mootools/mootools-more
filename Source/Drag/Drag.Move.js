@@ -3,6 +3,8 @@
 
 script: Drag.Move.js
 
+name: Drag.Move
+
 description: A Drag extension that provides support for the constraining of draggables to containers and droppables.
 
 license: MIT-style license

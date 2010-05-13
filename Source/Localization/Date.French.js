@@ -3,6 +3,8 @@
 
 script: Date.French.js
 
+name: Date.French
+
 description: Date messages in French.
 
 license: MIT-style license

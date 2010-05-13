@@ -3,6 +3,8 @@
 
 script: Assets.js
 
+name: Assets
+
 description: Provides methods to dynamically load JavaScript, CSS, and Image files into the document.
 
 license: MIT-style license

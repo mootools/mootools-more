@@ -3,6 +3,8 @@
 
 script: Form.Request.js
 
+name: Form.Request
+
 description: Handles the basic functionality of submitting a form and updating a dom element with the result.
 
 license: MIT-style license

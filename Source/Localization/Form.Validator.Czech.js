@@ -3,6 +3,8 @@
 
 script: Form.Validator.Czech.js
 
+name: Form.Validator.Czech
+
 description: Form Validator messages for Czech.
 
 license: MIT-style license

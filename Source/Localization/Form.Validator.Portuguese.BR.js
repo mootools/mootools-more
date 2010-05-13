@@ -3,6 +3,8 @@
 
 script: Form.Validator.Portuguese.BR.js
 
+name: Form.Validator.Portuguese.BR
+
 description: Form.Validator messages in Portuguese-BR.
 
 license: MIT-style license

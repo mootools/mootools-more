@@ -3,6 +3,8 @@
 
 script: MooTools.Lang.js
 
+name: MooTools.Lang
+
 description: Provides methods for localization.
 
 license: MIT-style license

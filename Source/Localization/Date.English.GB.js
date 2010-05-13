@@ -3,6 +3,8 @@
 
 script: Date.English.GB.js
 
+name: Date.English.GB
+
 description: Date messages for British English.
 
 license: MIT-style license

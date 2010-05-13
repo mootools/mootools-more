@@ -3,6 +3,8 @@
 
 script: Date.Norwegian.js
 
+name: Date.Norwegian
+
 description: Date messages in Norwegian.
 
 license: MIT-style license

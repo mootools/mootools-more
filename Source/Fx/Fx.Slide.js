@@ -3,6 +3,8 @@
 
 script: Fx.Slide.js
 
+name: Fx.Slide
+
 description: Effect to slide an element in and out of view.
 
 license: MIT-style license

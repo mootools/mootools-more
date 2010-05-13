@@ -3,6 +3,8 @@
 
 script: Element.Delegation.js
 
+name: Element.Delegation
+
 description: Extends the Element native object to include the delegate method for more efficient event management.
 
 credits:

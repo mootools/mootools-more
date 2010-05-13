@@ -3,6 +3,8 @@
 
 script: Class.Occlude.js
 
+name: Class.Occlude
+
 description: Prevents a class from being applied to a DOM element twice.
 
 license: MIT-style license.

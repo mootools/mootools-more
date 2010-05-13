@@ -3,6 +3,8 @@
 
 script: Sortables.js
 
+name: Sortables
+
 description: Class for creating a drag and drop sorting interface for lists of items.
 
 license: MIT-style license

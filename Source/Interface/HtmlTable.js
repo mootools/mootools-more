@@ -3,6 +3,8 @@
 
 script: HtmlTable.js
 
+name: HtmlTable
+
 description: Builds table elements with methods to add rows.
 
 license: MIT-style license

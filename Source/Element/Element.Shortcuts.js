@@ -3,6 +3,8 @@
 
 script: Element.Shortcuts.js
 
+name: Element.Shortcuts
+
 description: Extends the Element native object to include some shortcut methods.
 
 license: MIT-style license

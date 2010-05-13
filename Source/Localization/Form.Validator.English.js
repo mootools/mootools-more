@@ -3,6 +3,8 @@
 
 script: Form.Validator.English.js
 
+name: Form.Validator.English
+
 description: Form Validator messages for English.
 
 license: MIT-style license

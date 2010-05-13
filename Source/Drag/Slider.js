@@ -3,6 +3,8 @@
 
 script: Slider.js
 
+name: Slider
+
 description: Class for creating horizontal and vertical slider controls.
 
 license: MIT-style license

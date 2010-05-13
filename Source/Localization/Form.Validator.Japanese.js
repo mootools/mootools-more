@@ -3,6 +3,8 @@
 
 script: Form.Validator.Japanese.js
 
+name: Form.Validator.Japanese
+
 description: Form.Validator messages in Japanese.
 
 license: MIT-style

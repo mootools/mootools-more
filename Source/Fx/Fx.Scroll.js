@@ -3,6 +3,8 @@
 
 script: Fx.Scroll.js
 
+name: Fx.Scroll
+
 description: Effect to smoothly scroll any element, including the window.
 
 license: MIT-style license

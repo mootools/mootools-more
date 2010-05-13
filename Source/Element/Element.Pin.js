@@ -3,6 +3,8 @@
 
 script: Element.Pin.js
 
+name: Element.Pin
+
 description: Extends the Element native object to include the pin method useful for fixed positioning for elements.
 
 license: MIT-style license

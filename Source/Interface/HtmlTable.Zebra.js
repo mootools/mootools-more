@@ -3,6 +3,8 @@
 
 script: HtmlTable.Zebra.js
 
+name: HtmlTable.Zebra
+
 description: Builds a stripy table with methods to add rows.
 
 license: MIT-style license

@@ -3,6 +3,8 @@
 
 script: Fx.Sort.js
 
+name: Fx.Sort
+
 description: Defines Fx.Sort, a class that reorders lists with a transition.
 
 license: MIT-style license

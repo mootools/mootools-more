@@ -3,6 +3,8 @@
 
 script: Form.Validator.Persian.js
 
+name: Form.Validator.Persian
+
 description: Date messages for Persian.
 
 license: MIT-style license

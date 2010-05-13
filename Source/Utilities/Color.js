@@ -3,6 +3,8 @@
 
 script: Color.js
 
+name: Color
+
 description: Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa.
 
 license: MIT-style license

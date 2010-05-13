@@ -3,6 +3,8 @@
 
 script: Form.Validator.Russian.js
 
+name: Form.Validator.Russian
+
 description: Form.Validator messages in Russian (utf-8 and cp1251).
 
 license: MIT-style license
