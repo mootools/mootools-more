@@ -1,5 +1,8 @@
 /*
 ---
+
+script: Form.Validator.Japanese.js
+
 description: Form.Validator messages in Japanese.
 
 license: MIT-style

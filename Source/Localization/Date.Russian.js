@@ -1,5 +1,4 @@
 /*
-
 ---
 
 script: Date.Russian.js

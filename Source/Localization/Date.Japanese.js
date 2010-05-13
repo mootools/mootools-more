@@ -1,6 +1,8 @@
 /*
 ---
 
+script: Date.Japanese.js
+
 description: Date messages for Japanese.
 
 license: MIT-style license
