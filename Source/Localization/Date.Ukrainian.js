@@ -10,10 +10,10 @@ description: Date messages for Ukrainian.
 license: MIT-style license
 
 authors:
-- Slik
+  - Slik
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Ukrainian]
 

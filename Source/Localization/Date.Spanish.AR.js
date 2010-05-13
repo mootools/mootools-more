@@ -10,10 +10,10 @@ description: Date messages for Spanish (Argentinean variation).
 license: MIT-style license
 
 authors:
-- Ãlfons Sanchez & Diego Massanti
+  - Ãlfons Sanchez & Diego Massanti
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Spanish.AR]
 

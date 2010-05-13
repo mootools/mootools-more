@@ -10,12 +10,12 @@ description: Defines Fx.Reveal, a class that shows and hides elements with a tra
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Fx.Morph
-- /Element.Shortcuts
-- /Element.Measure
+  - Core:1.2.4/Fx.Morph
+  - /Element.Shortcuts
+  - /Element.Measure
 
 provides: [Fx.Reveal]
 

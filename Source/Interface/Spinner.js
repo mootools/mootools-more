@@ -10,12 +10,12 @@ description: Adds a semi-transparent overlay over a dom element with a spinnin a
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Fx.Tween
-- /Class.refactor
-- /Mask
+  - Core:1.2.4/Fx.Tween
+  - /Class.refactor
+  - /Mask
 
 provides: [Spinner]
 

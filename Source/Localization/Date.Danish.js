@@ -10,11 +10,11 @@ description: Date messages for Danish.
 license: MIT-style license
 
 authors:
-- Martin Overgaard
-- Henrik Hansen
+  - Martin Overgaard
+  - Henrik Hansen
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Danish]
 

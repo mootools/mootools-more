@@ -10,11 +10,11 @@ description: Defines Fx.Move, a class that works with Element.Position.js to tra
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Fx.Morph
-- /Element.Position
+  - Core:1.2.4/Fx.Morph
+  - /Element.Position
 
 provides: [Fx.Move]
 

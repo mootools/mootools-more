@@ -10,11 +10,11 @@ description: Enhances Keyboard by adding the ability to name and describe keyboa
 license: MIT-style license
 
 authors:
-- Perrin Westrich
+  - Perrin Westrich
 
 requires:
-- /Keyboard
-- /MooTools.More
+  - /Keyboard
+  - /MooTools.More
 
 provides: [Keyboard.Extras]
 

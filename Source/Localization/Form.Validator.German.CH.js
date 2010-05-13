@@ -10,11 +10,11 @@ description: Date messages for German (Switzerland).
 license: MIT-style license
  
 authors:
-- Michael van der Weg
+  - Michael van der Weg
 
 requires:
-- /Lang
-- /Form.Validator.German
+  - /Lang
+  - /Form.Validator.German
 
 provides: [Form.Validator.German.CH]
 

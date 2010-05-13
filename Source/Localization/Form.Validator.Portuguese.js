@@ -10,10 +10,10 @@ description: Form.Validator messages in Portuguese.
 license: MIT-style license
 
 authors:
-- Miquel Hudin
+  - Miquel Hudin
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Portuguese]
 

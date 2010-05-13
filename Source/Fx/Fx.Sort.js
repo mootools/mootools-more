@@ -10,12 +10,12 @@ description: Defines Fx.Sort, a class that reorders lists with a transition.
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Element.Dimensions
-- /Fx.Elements
-- /Element.Measure
+  - Core:1.2.4/Element.Dimensions
+  - /Fx.Elements
+  - /Element.Measure
 
 provides: [Fx.Sort]
 

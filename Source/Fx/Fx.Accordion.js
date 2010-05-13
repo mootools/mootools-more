@@ -10,11 +10,11 @@ description: An Fx.Elements extension which allows you to easily create accordio
 license: MIT-style license
 
 authors:
-- Valerio Proietti
+  - Valerio Proietti
 
 requires:
-- Core:1.2.4/Element.Event
-- /Fx.Elements
+  - Core:1.2.4/Element.Event
+  - /Fx.Elements
 
 provides: [Fx.Accordion]
 

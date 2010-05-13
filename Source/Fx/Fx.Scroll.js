@@ -10,13 +10,13 @@ description: Effect to smoothly scroll any element, including the window.
 license: MIT-style license
 
 authors:
-- Valerio Proietti
+  - Valerio Proietti
 
 requires:
-- Core:1.2.4/Fx
-- Core:1.2.4/Element.Event
-- Core:1.2.4/Element.Dimensions
-- /MooTools.More
+  - Core:1.2.4/Fx
+  - Core:1.2.4/Element.Event
+  - Core:1.2.4/Element.Dimensions
+  - /MooTools.More
 
 provides: [Fx.Scroll]
 

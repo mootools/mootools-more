@@ -10,10 +10,10 @@ description: Date messages for Swedish (SE).
 license: MIT-style license
 
 authors:
-- Martin Lundgren
+  - Martin Lundgren
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Swedish]
 

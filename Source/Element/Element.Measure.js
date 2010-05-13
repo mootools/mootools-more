@@ -12,12 +12,12 @@ credits: "Element.measure / .expose methods by Daniel Steigerwald License: MIT-s
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Element.Style
-- Core:1.2.4/Element.Dimensions
-- /MooTools.More
+  - Core:1.2.4/Element.Style
+  - Core:1.2.4/Element.Dimensions
+  - /MooTools.More
 
 provides: [Element.Measure]
 

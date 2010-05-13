@@ -10,10 +10,10 @@ description: Form.Validator messages in chinese (both simplified and traditional
 license: MIT-style license
 
 authors:
-- 陈桂军 - guidy <at> ixuer [dot] net
+  - 陈桂军 - guidy <at> ixuer [dot] net
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Chinese]
 

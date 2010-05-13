@@ -10,13 +10,13 @@ description: Defines Request.JSONP, a class for cross domain javascript via scri
 license: MIT-style license
 
 authors:
-- Aaron Newton
-- Guillermo Rauch
+  - Aaron Newton
+  - Guillermo Rauch
 
 requires:
-- Core:1.2.4/Element
-- Core:1.2.4/Request
-- /Log
+  - Core:1.2.4/Element
+  - Core:1.2.4/Request
+  - /Log
 
 provides: [Request.JSONP]
 

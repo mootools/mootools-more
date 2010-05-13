@@ -10,11 +10,11 @@ description: Date messages in French.
 license: MIT-style license
 
 authors:
-- Nicolas Sorosac
-- Antoine Abt
+  - Nicolas Sorosac
+  - Antoine Abt
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.French]
 

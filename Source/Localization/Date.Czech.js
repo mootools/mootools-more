@@ -10,10 +10,10 @@ description: Date messages for Czech.
 license: MIT-style license
 
 authors:
-- Jan Černý chemiX
+  - Jan Černý chemiX
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Czech]
 

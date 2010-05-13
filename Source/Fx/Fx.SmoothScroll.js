@@ -10,11 +10,11 @@ description: Class for creating a smooth scrolling effect to all internal links 
 license: MIT-style license
 
 authors:
-- Valerio Proietti
+  - Valerio Proietti
 
 requires:
-- Core:1.2.4/Selectors
-- /Fx.Scroll
+  - Core:1.2.4/Selectors
+  - /Fx.Scroll
 
 provides: [Fx.SmoothScroll]
 

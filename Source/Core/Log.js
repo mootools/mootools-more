@@ -10,13 +10,13 @@ description: Provides basic logging functionality for plugins to implement.
 license: MIT-style license
 
 authors:
-- Guillermo Rauch
-- Thomas Aylott
-- Scott Kyle
+  - Guillermo Rauch
+  - Thomas Aylott
+  - Scott Kyle
 
 requires:
-- Core:1.2.4/Class
-- /MooTools.More
+  - Core:1.2.4/Class
+  - /MooTools.More
 
 provides: [Log]
 

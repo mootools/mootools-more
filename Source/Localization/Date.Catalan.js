@@ -10,10 +10,10 @@ description: Date messages for Catalan.
 license: MIT-style license
 
 authors:
-- Alfons Sanchez
+  - Alfons Sanchez
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Catalan]
 

@@ -10,10 +10,10 @@ description: Form Validator messages for English.
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.English]
 

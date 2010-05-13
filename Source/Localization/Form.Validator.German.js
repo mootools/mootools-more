@@ -10,12 +10,12 @@ description: Date messages for German.
 license: MIT-style license
 
 authors: 
-- Frank Rossi
-- Ulrich Petri
-- Fabian Beiner
+  - Frank Rossi
+  - Ulrich Petri
+  - Fabian Beiner
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.German]
 

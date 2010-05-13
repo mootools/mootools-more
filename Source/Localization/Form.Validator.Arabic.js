@@ -10,10 +10,10 @@ description: Form.Validator messages in Arabic.
 license: MIT-style license
 
 authors:
-- Chafik Barbar
+  - Chafik Barbar
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Arabic]
 

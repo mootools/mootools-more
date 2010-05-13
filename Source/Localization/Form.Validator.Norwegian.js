@@ -10,10 +10,10 @@ description: Form.Validator messages in Norwegian.
 license: MIT-style license
 
 authors:
-- Espen 'Rexxars' Hovlandsdal
+  - Espen 'Rexxars' Hovlandsdal
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Norwegian]
 

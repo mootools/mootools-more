@@ -10,10 +10,10 @@ description: Form.Validator messages for Danish.
 license: MIT-style license
 
 authors:
-- Martin Overgaard
+  - Martin Overgaard
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Danish]
 

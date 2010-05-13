@@ -10,10 +10,10 @@ description: Class for creating a drag and drop sorting interface for lists of i
 license: MIT-style license
 
 authors:
-- Tom Occhino
+  - Tom Occhino
 
 requires:
-- /Drag.Move
+  - /Drag.Move
 
 provides: [Sortables]
 

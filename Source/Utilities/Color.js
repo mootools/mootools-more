@@ -10,15 +10,15 @@ description: Class for creating and manipulating colors in JavaScript. Supports 
 license: MIT-style license
 
 authors:
-- Valerio Proietti
+  - Valerio Proietti
 
 requires:
-- Core:1.2.4/Array
-- Core:1.2.4/String
-- Core:1.2.4/Number
-- Core:1.2.4/Hash
-- Core:1.2.4/Function
-- Core:1.2.4/$util
+  - Core:1.2.4/Array
+  - Core:1.2.4/String
+  - Core:1.2.4/Number
+  - Core:1.2.4/Hash
+  - Core:1.2.4/Function
+  - Core:1.2.4/$util
 
 provides: [Color]
 

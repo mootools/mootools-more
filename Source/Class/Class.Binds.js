@@ -10,11 +10,11 @@ description: Automagically binds specified methods in a class to the instance of
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Class
-- /MooTools.More
+  - Core:1.2.4/Class
+  - /MooTools.More
 
 provides: [Class.Binds]
 

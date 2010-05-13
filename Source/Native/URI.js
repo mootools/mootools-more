@@ -10,12 +10,12 @@ description: Provides methods useful in managing the window location and uris.
 license: MIT-style license
 
 authors:
-- Sebastian Markbåge
-- Aaron Newton
+  - Sebastian MarkbÃ¥ge
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Selectors
-- /String.QueryString
+  - Core:1.2.4/Selectors
+  - /String.QueryString
 
 provides: [URI]
 

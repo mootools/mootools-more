@@ -10,12 +10,12 @@ description: Controls several instances of Request and its variants to run only 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Element
-- Core:1.2.4/Request
-- /Log
+  - Core:1.2.4/Element
+  - Core:1.2.4/Request
+  - /Log
 
 provides: [Request.Queue]
 

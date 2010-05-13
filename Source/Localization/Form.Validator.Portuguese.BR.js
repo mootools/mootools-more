@@ -10,11 +10,11 @@ description: Form.Validator messages in Portuguese-BR.
 license: MIT-style license
 
 authors:
-- Fábio Miranda Costa
+  - Fábio Miranda Costa
 
 requires:
-- /Lang
-- /Form.Validator.Portuguese
+  - /Lang
+  - /Form.Validator.Portuguese
 
 provides: [Form.Validator.Portuguese.BR]
 

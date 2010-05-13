@@ -10,13 +10,13 @@ description: Date messages for German.
 license: MIT-style license
 
 authors:
-- Christoph Pojer
-- Frank Rossi
-- Ulrich Petri
-- Fabian Beiner
+  - Christoph Pojer
+  - Frank Rossi
+  - Ulrich Petri
+  - Fabian Beiner
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.German]
 

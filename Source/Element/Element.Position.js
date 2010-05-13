@@ -10,11 +10,11 @@ description: Extends the Element native object to include methods useful positio
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Element.Dimensions
-- /Element.Measure
+  - Core:1.2.4/Element.Dimensions
+  - /Element.Measure
 
 provides: [Element.Position]
 

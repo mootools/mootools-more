@@ -10,14 +10,14 @@ description: Extends the String native object to include methods useful in manag
 license: MIT-style license
 
 authors:
-- Aaron Newton
-- Guillermo Rauch
-- Christopher Pitt
+  - Aaron Newton
+  - Guillermo Rauch
+  - Christopher Pitt
 
 requires:
-- Core:1.2.4/String
-- Core:1.2.4/$util
-- Core:1.2.4/Array
+  - Core:1.2.4/String
+  - Core:1.2.4/$util
+  - Core:1.2.4/Array
 
 provides: [String.Extras]
 
