@@ -84,7 +84,7 @@ Form.Validator.Inline = new Class({
 				|| advice.getStyle('visiblity') == 'hidden'
 				|| advice.getStyle('opacity') == 0)){
 			field.store(this.getPropName(className), true);
-			this.options.showAdvice(advice);
+			this.options.showError(advice);
 			this.fireEvent('showAdvice', [field, advice, className]);
 		}
 	},
@@ -93,7 +93,7 @@ Form.Validator.Inline = new Class({
 		var advice = this.getAdvice(className, field);
 		if (advice && field.retrieve(this.getPropName(className))){
 			field.store(this.getPropName(className), false);
-			this.options.hideAdvice(advice);
+			this.options.hideError(advice);
 			this.fireEvent('hideAdvice', [field, advice, className]);
 		}
 	},
