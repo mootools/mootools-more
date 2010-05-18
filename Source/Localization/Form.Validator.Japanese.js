@@ -1,14 +1,19 @@
 /*
 ---
+
+script: Form.Validator.Japanese.js
+
+name: Form.Validator.Japanese
+
 description: Form.Validator messages in Japanese.
 
 license: MIT-style
 
 authors:
-- Noritaka Horio
+  - Noritaka Horio
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Japanese]
 

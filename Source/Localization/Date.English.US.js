@@ -3,15 +3,17 @@
 
 script: Date.English.US.js
 
+name: Date.English.US
+
 description: Date messages for US English.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.English.US]
 

@@ -3,16 +3,18 @@
 
 script: Form.Validator.Catalan.js
 
+name: Form.Validator.Catalan
+
 description: Date messages for Catalan.
 
 license: MIT-style license
 
 authors:
-- Miquel Hudin
-- Alfons Sanchez
+  - Miquel Hudin
+  - Alfons Sanchez
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Catalan]
 

@@ -3,16 +3,18 @@
 
 script: MooTools.Lang.js
 
+name: MooTools.Lang
+
 description: Provides methods for localization.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Events
-- /MooTools.More
+  - Core:1.2.4/Events
+  - /MooTools.More
 
 provides: [Lang]
 

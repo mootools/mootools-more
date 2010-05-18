@@ -1,15 +1,19 @@
 /*
 ---
 
+script: Date.Japanese.js
+
+name: Date.Japanese
+
 description: Date messages for Japanese.
 
 license: MIT-style license
 
 authors:
-- Noritaka Horio
+  - Noritaka Horio
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Japanese]
 

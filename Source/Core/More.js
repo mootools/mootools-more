@@ -3,17 +3,19 @@
 
 script: More.js
 
+name: More
+
 description: MooTools More
 
 license: MIT-style license
 
 authors:
-- Guillermo Rauch
-- Thomas Aylott
-- Scott Kyle
+  - Guillermo Rauch
+  - Thomas Aylott
+  - Scott Kyle
 
 requires:
-- Core:1.2.4/MooTools
+  - Core:1.2.4/MooTools
 
 provides: [MooTools.More]
 

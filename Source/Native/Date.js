@@ -3,23 +3,25 @@
 
 script: Date.js
 
+name: Date
+
 description: Extends the Date native object to include methods useful in managing dates.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
-- Nicholas Barthelemy - https://svn.nbarthelemy.com/date-js/
-- Harald Kirshner - mail [at] digitarald.de; http://digitarald.de
-- Scott Kyle - scott [at] appden.com; http://appden.com
+  - Aaron Newton
+  - Nicholas Barthelemy - https://svn.nbarthelemy.com/date-js/
+  - Harald Kirshner - mail [at] digitarald.de; http://digitarald.de
+  - Scott Kyle - scott [at] appden.com; http://appden.com
 
 requires:
-- Core:1.2.4/Array
-- Core:1.2.4/String
-- Core:1.2.4/Number
-- /Lang
-- /Date.English.US
-- /MooTools.More
+  - Core:1.2.4/Array
+  - Core:1.2.4/String
+  - Core:1.2.4/Number
+  - /Lang
+  - /Date.English.US
+  - /MooTools.More
 
 provides: [Date]
 

@@ -3,15 +3,17 @@
 
 script: Date.Dutch.js
 
+name: Date.Dutch
+
 description: Date messages in Dutch.
 
 license: MIT-style license
 
 authors:
-- Lennart Pilon
+  - Lennart Pilon
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Dutch]
 

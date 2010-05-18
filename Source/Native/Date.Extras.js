@@ -3,16 +3,18 @@
 
 script: Date.Extras.js
 
+name: Date.Extras
+
 description: Extends the Date native object to include extra methods (on top of those in Date.js).
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
-- Scott Kyle
+  - Aaron Newton
+  - Scott Kyle
 
 requires:
-- /Date
+  - /Date
 
 provides: [Date.Extras]
 

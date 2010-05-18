@@ -3,16 +3,18 @@
 
 script: Keyboard.Extras.js
 
+name: Keyboard.Extras
+
 description: Enhances Keyboard by adding the ability to name and describe keyboard shortcuts, and the ability to grab shortcuts by name and bind the shortcut to different keys.
 
 license: MIT-style license
 
 authors:
-- Perrin Westrich
+  - Perrin Westrich
 
 requires:
-- /Keyboard
-- /MooTools.More
+  - /Keyboard
+  - /MooTools.More
 
 provides: [Keyboard.Extras]
 

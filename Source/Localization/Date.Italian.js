@@ -3,16 +3,18 @@
 
 script: Date.Italian.js
 
+name: Date.Italian
+
 description: Date messages for Italian.
 
 license: MIT-style license.
 
 authors:
-- Andrea Novero
-- Valerio Proietti
+  - Andrea Novero
+  - Valerio Proietti
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Italian]
 

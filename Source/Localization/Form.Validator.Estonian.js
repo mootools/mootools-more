@@ -3,15 +3,17 @@
 
 script: Form.Validator.Estonian.js
 
+name: Form.Validator.Estonian
+
 description: Date messages for Estonian.
 
 license: MIT-style license
 
 authors:
-- Kevin Valdek
+  - Kevin Valdek
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Estonian]
 

@@ -3,16 +3,18 @@
 
 script: Class.Binds.js
 
+name: Class.Binds
+
 description: Automagically binds specified methods in a class to the instance of the class.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Class
-- /MooTools.More
+  - Core:1.2.4/Class
+  - /MooTools.More
 
 provides: [Class.Binds]
 

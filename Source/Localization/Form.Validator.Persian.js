@@ -3,15 +3,17 @@
 
 script: Form.Validator.Persian.js
 
+name: Form.Validator.Persian
+
 description: Date messages for Persian.
 
 license: MIT-style license
 
 authors:
-- Amir Hossein Hodjaty Pour
+  - Amir Hossein Hodjaty Pour
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Persian]
 

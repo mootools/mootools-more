@@ -3,17 +3,19 @@
 
 script: String.QueryString.js
 
+name: String.QueryString
+
 description: Methods for dealing with URI query strings.
 
 license: MIT-style license
 
 authors:
-- Sebastian Markbåge, Aaron Newton, Lennart Pilon, Valerio Proietti
+  - Sebastian Markbåge, Aaron Newton, Lennart Pilon, Valerio Proietti
 
 requires:
-- Core:1.2.4/Array
-- Core:1.2.4/String
-- /MooTools.More
+  - Core:1.2.4/Array
+  - Core:1.2.4/String
+  - /MooTools.More
 
 provides: [String.QueryString]
 

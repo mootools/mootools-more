@@ -3,17 +3,19 @@
 
 script: URI.Relative.js
 
+name: URI.Relative
+
 description: Extends the URI class to add methods for computing relative and absolute urls.
 
 license: MIT-style license
 
 authors:
-- Sebastian Markbåge
+  - Sebastian Markbåge
 
 
 requires:
-- /Class.refactor
-- /URI
+  - /Class.refactor
+  - /URI
 
 provides: [URI.Relative]
 
