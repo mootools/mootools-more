@@ -3,16 +3,18 @@
 
 script: Form.Validator.German.CH.js
 
+name: Form.Validator.German.CH
+
 description: Date messages for German (Switzerland).
  
 license: MIT-style license
  
 authors:
-- Michael van der Weg
+  - Michael van der Weg
 
 requires:
-- /Lang
-- /Form.Validator.German
+  - /Lang
+  - /Form.Validator.German
 
 provides: [Form.Validator.German.CH]
 

@@ -3,16 +3,18 @@
 
 script: Request.Periodical.js
 
+name: Request.Periodical
+
 description: Requests the same URL to pull data from a server but increases the intervals if no data is returned to reduce the load
 
 license: MIT-style license
 
 authors:
-- Christoph Pojer
+  - Christoph Pojer
 
 requires:
-- Core:1.2.4/Request
-- /MooTools.More
+  - Core:1.2.4/Request
+  - /MooTools.More
 
 provides: [Request.Periodical]
 

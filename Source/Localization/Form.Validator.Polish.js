@@ -3,15 +3,17 @@
 
 script: Form.Validator.Polish.js
 
+name: Form.Validator.Polish
+
 description: Date messages for Polish.
 
 license: MIT-style license
 
 authors:
-- Oskar Krawczyk
+  - Oskar Krawczyk
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Polish]
 

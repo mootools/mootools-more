@@ -3,16 +3,18 @@
 
 script: Elements.From.js
 
+name: Elements.From
+
 description: Returns a collection of elements from a string of html.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Element
-- /MooTools.More
+  - Core:1.2.4/Element
+  - /MooTools.More
 
 provides: [Elements.from, Elements.From]
 

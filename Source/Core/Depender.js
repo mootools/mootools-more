@@ -3,18 +3,20 @@
 
 script: Depender.js
 
+name: Depender
+
 description: A stand alone dependency loader for the MooTools library.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Element.Event
-- Core:1.2.4/Request.JSON
-- /MooTools.More
-- /Log
+  - Core:1.2.4/Element.Event
+  - Core:1.2.4/Request.JSON
+  - /MooTools.More
+  - /Log
 
 provides: [ Depender ]
 

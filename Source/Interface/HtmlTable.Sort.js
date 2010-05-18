@@ -3,20 +3,22 @@
 
 script: HtmlTable.Sort.js
 
+name: HtmlTable.Sort
+
 description: Builds a stripy, sortable table with methods to add rows.
 
 license: MIT-style license
 
 authors:
-- Harald Kirschner
-- Aaron Newton
+  - Harald Kirschner
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Hash
-- /HtmlTable
-- /Class.refactor
-- /Element.Delegation
-- /Date
+  - Core:1.2.4/Hash
+  - /HtmlTable
+  - /Class.refactor
+  - /Element.Delegation
+  - /Date
 
 provides: [HtmlTable.Sort]
 

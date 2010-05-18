@@ -3,15 +3,17 @@
 
 script: Date.Spanish.US.js
 
+name: Date.Spanish.US
+
 description: Date messages for Spanish.
 
 license: MIT-style license
 
 authors:
-- Ãlfons Sanchez
+  - Ãlfons Sanchez
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Spanish]
 

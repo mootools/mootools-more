@@ -3,17 +3,19 @@
 
 script: Class.Occlude.js
 
+name: Class.Occlude
+
 description: Prevents a class from being applied to a DOM element twice.
 
 license: MIT-style license.
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires: 
-- Core:1.2.4/Class
-- Core:1.2.4/Element
-- /MooTools.More
+  - Core:1.2.4/Class
+  - Core:1.2.4/Element
+  - /MooTools.More
 
 provides: [Class.Occlude]
 

@@ -3,15 +3,17 @@
 
 script: Form.Validator.Swedish.js
 
+name: Form.Validator.Swedish
+
 description: Date messages for Swedish.
 
 license: MIT-style license
 
 authors:
-- Martin Lundgren
+  - Martin Lundgren
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Swedish]
 

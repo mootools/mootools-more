@@ -3,19 +3,21 @@
 
 script: HtmlTable.Select.js
 
+name: HtmlTable.Select
+
 description: Builds a stripy, sortable table with methods to add rows. Rows can be selected with the mouse or keyboard navigation.
 
 license: MIT-style license
 
 authors:
-- Harald Kirschner
-- Aaron Newton
+  - Harald Kirschner
+  - Aaron Newton
 
 requires:
-- /Keyboard
-- /HtmlTable
-- /Class.refactor
-- /Element.Delegation
+  - /Keyboard
+  - /HtmlTable
+  - /Class.refactor
+  - /Element.Delegation
 
 provides: [HtmlTable.Select]
 

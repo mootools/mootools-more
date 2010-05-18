@@ -3,21 +3,23 @@
 
 script: Tips.js
 
+name: Tips
+
 description: Class for creating nice tips that follow the mouse cursor when hovering an element.
 
 license: MIT-style license
 
 authors:
-- Valerio Proietti
-- Christoph Pojer
+  - Valerio Proietti
+  - Christoph Pojer
 
 requires:
-- Core:1.2.4/Options
-- Core:1.2.4/Events
-- Core:1.2.4/Element.Event
-- Core:1.2.4/Element.Style
-- Core:1.2.4/Element.Dimensions
-- /MooTools.More
+  - Core:1.2.4/Options
+  - Core:1.2.4/Events
+  - Core:1.2.4/Element.Event
+  - Core:1.2.4/Element.Style
+  - Core:1.2.4/Element.Dimensions
+  - /MooTools.More
 
 provides: [Tips]
 

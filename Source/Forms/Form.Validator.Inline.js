@@ -3,15 +3,17 @@
 
 script: Form.Validator.Inline.js
 
+name: Form.Validator.Inline
+
 description: Extends Form.Validator to add inline messages.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- /Form.Validator
+  - /Form.Validator
 
 provides: [Form.Validator.Inline]
 

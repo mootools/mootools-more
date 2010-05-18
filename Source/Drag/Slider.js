@@ -3,18 +3,20 @@
 
 script: Slider.js
 
+name: Slider
+
 description: Class for creating horizontal and vertical slider controls.
 
 license: MIT-style license
 
 authors:
-- Valerio Proietti
+  - Valerio Proietti
 
 requires:
-- Core:1.2.4/Element.Dimensions
-- /Class.Binds
-- /Drag
-- /Element.Measure
+  - Core:1.2.4/Element.Dimensions
+  - /Class.Binds
+  - /Drag
+  - /Element.Measure
 
 provides: [Slider]
 

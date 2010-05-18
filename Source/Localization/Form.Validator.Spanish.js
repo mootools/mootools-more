@@ -3,15 +3,17 @@
 
 script: Form.Validator.Spanish.js
 
+name: Form.Validator.Spanish
+
 description: Date messages for Spanish.
 
 license: MIT-style license
 
 authors:
-- Ãlfons Sanchez
+  - Ãlfons Sanchez
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Spanish]
 

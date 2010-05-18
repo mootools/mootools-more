@@ -3,21 +3,23 @@
 
 script: OverText.js
 
+name: OverText
+
 description: Shows text over an input that disappears when the user clicks into it. The text remains hidden if the user adds a value.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Options
-- Core:1.2.4/Events
-- Core:1.2.4/Element.Event
-- /Class.Binds
-- /Class.Occlude
-- /Element.Position
-- /Element.Shortcuts
+  - Core:1.2.4/Options
+  - Core:1.2.4/Events
+  - Core:1.2.4/Element.Event
+  - /Class.Binds
+  - /Class.Occlude
+  - /Element.Position
+  - /Element.Shortcuts
 
 provides: [OverText]
 

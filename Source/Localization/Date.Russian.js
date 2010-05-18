@@ -1,18 +1,19 @@
 /*
-
 ---
 
 script: Date.Russian.js
+
+name: Date.Russian
 
 description: Date messages in Russian.
 
 license: MIT-style license
 
 authors:
-- Evstigneev Pavel
+  - Evstigneev Pavel
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Russian]
 

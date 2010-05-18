@@ -3,15 +3,17 @@
 
 script: Form.Validator.Dutch.js
 
+name: Form.Validator.Dutch
+
 description: Form.Validator messages in Dutch.
 
 license: MIT-style license
 
 authors:
-- Lennart Pilon
+  - Lennart Pilon
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Dutch]
 

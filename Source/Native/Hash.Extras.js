@@ -3,16 +3,18 @@
 
 script: Hash.Extras.js
 
+name: Hash.Extras
+
 description: Extends the Hash native object to include getFromPath which allows a path notation to child elements.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- Core:1.2.4/Hash.base
-- /MooTools.More
+  - Core:1.2.4/Hash.base
+  - /MooTools.More
 
 provides: [Hash.Extras]
 

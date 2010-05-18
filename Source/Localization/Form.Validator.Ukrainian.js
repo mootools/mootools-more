@@ -3,15 +3,17 @@
 
 script: Form.Validator.Ukrainian.js
 
+name: Form.Validator.Ukrainian
+
 description: Form.Validator messages in Ukrainian (utf-8).
 
 license: MIT-style license
 
 authors:
-- Slik
+  - Slik
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Ukrainian]
 

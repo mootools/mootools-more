@@ -3,17 +3,19 @@
 
 script: Form.Request.Append.js
 
+name: Form.Request.Append
+
 description: Handles the basic functionality of submitting a form and updating a dom element with the result. The result is appended to the DOM element instead of replacing its contents.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
+  - Aaron Newton
 
 requires:
-- /Form.Request
-- /Fx.Reveal
-- /Elements.from
+  - /Form.Request
+  - /Fx.Reveal
+  - /Elements.from
 
 provides: [Form.Request.Append]
 
