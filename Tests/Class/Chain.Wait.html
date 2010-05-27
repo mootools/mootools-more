@@ -1,0 +1,22 @@
+<p>
+	In the grey box below you should see 3 time stamps appear roughly 1 every second.
+</p>
+<div id="foo" style="width: 400px; border: 1px solid black; height: 100px; overflow:hidden;background:silver;">
+</div>
+<script src="/depender/build?require=Element,Chain.Wait"></script>
+<script>
+var chain = new Chain();
+var stamp = function(){
+	$('foo').adopt(new Element('p').appendText(new Date()));
+	chain.callChain();
+};
+
+
+chain.chain(stamp);
+chain.wait(1000);
+chain.chain(stamp);
+chain.wait(1000);
+chain.chain(stamp);
+chain.wait(1000);
+chain.callChain();
+</script>
