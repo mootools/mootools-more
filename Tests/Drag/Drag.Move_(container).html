@@ -1,0 +1,73 @@
+<style>
+	.box {
+		width: 30px;
+		height: 30px;
+		background-color: #900;
+		border: 2px solid #fff;
+		padding: 5px;
+		margin: 7px;
+	}
+	.container {
+		width: 150px;
+		height: 150px;
+		border: 4px solid black;
+		background: #ccc;
+		padding: 6px;
+		margin: 9px;
+	}
+	h3.h3_test {
+		border-bottom: 1px solid #999;
+		font-weight: bold;
+		font-size: 14px;
+		margin-top: 8px;
+	}
+</style>
+<div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
+<h3 class="h3_test">Drag limited to a container (with margins)</h3>
+<p>You should be able to drag red the box around within the grey box, but the margins prevent their edges from meeting.</p>
+<div style="position: relative; padding: 2px;">
+	<div id="container" class="container">
+
+		<div id="box" class="box"></div>
+
+	</div>
+</div>
+
+<script src="/depender/build?require=Drag.Move"></script>
+<script>
+var dragger = $('box').makeDraggable({
+	container: $('container')
+});
+
+$('enable').addEvent('click', function(){
+	dragger.attach();
+});
+$('disable').addEvent('click', function(){
+	dragger.detach();
+});
+</script>
+
+
+<h3 class="h3_test">Drag limited to a container (ignore margins)</h3>
+<p>You should be able to drag red the box around within the grey box, but the margins are ignored, allowing their edges to meet.</p>
+<div style="position: relative; padding: 2px;">
+	<div id="container2" class="container">
+
+		<div id="box2" class="box"></div>
+
+	</div>
+</div>
+
+<script>
+var dragger2 = $('box2').makeDraggable({
+	container: $('container2'),
+	includeMargins: false
+});
+
+$('enable').addEvent('click', function(){
+	dragger2.attach();
+});
+$('disable').addEvent('click', function(){
+	dragger2.detach();
+});
+</script>
