@@ -1,0 +1,68 @@
+<p>The items change color when you mouseover/out. When you click an item, some text about it should appear. The links below allow you to alter the behavior.</p>
+
+<style type="text/css">
+	#someListing { cursor: default; border: solid 1px #333; background-color: #B89C76; padding: 20px; width: 300px; }
+	.item { border: solid 1px #333; background-color: #2D5E4C; color: White; padding: 7px 12px; margin: 2px 7px; }
+</style>
+
+<div id='someListing'>
+	<div class='item item1'>Apples are <em>red</em></div>
+	<div class='item item2'>Violets are <em>blue</em></div>
+	<div class='item item3'>This is a  <em>code example</em></div>
+	<div class='item item4'>That isn't <em>very interesting</em></div>
+</div>
+<label>&nbsp;</label>
+
+<hr/>
+<p>
+	<a id="add">add events</a> | 
+	<a id="remove">remove events</a> |
+	<a id="nots">add to only mouseover behavior to 1st and 3rd items</a>
+</p>
+<script src="/depender/build?require=More/Element.Delegation,Core/Fx.Morph"></script>
+<script>
+var tests;
+var add = function(){
+	remove();
+	var over = function(){
+		this.morph({ backgroundColor: '#222' });
+	};
+	var out = function(){
+		this.morph({ backgroundColor: '#2D5E4C' });
+	};
+	var down = function(e, el){ // el == this, that's important, event when child is clicked
+		var text = this.get('text') +
+			' this.tagName: ' + this.tagName +
+			' e.target.tagName: ' + e.target.tagName +
+			' el.tagName: ' + el.tagName;
+		$$('label')[0].set('text', text);
+	};
+	tests = {
+		'mouseover:relay(.item)': over,
+		'mouseout:relay(.item)': out,
+		'mousedown:relay(.item)': down
+	};
+	$('someListing').addEvents(tests);
+};
+var remove = function(){
+	if (!tests) return;
+	$('someListing').removeEvents(tests);
+	tests = null;
+};
+var nots = function(){
+	remove();
+	
+	var over = function(){ this.morph({ backgroundColor: '#222' }); };
+	var out  = function(){ this.morph({ backgroundColor: '#2D5E4C' }); };
+	
+	tests = {
+		'mouseover:relay(div:not(.item2):not(.item4))': over,
+		 'mouseout:relay(div:not(.item2):not(.item4))': out
+	};
+	$('someListing').addEvents(tests);
+};
+add();
+$('add').addEvent('click', add);
+$('remove').addEvent('click', remove);
+$('nots').addEvent('click', nots);
+</script>
