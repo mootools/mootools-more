@@ -3,9 +3,9 @@ Native: Element {#Element}
 
 Extends the [Element][] native object to include delegations in the addEvent and addEvents methods.
 
-### Note
+### Important
 
-This library recreates in portion the functionality coming in MooTools 2.0 that supports event delegation and mirrors 2.0's syntax. Also note that this library does not support all custom events nor does it support *focus* and *blur* events.
+This library recreates in portion the functionality coming in MooTools 2.0 that supports event delegation and mirrors 2.0's syntax. Also note that this library does not support all custom events nor does it support *focus* and *blur* events. Also note that *mouseenter* and *mouseleave* aren't supported as delegation obviates the need for these custom events. Use *mouseover* and *mouseout* and specify your selector to get the same effect.
 
 ### Credits
 
@@ -24,7 +24,7 @@ Delegates the methods of an element's children to the parent element for greater
 
 ### Arguments
 
-2. typeSelector - (*string*) An event name (click, mouseover, mouseenter, etc) that should be monitored paired with a selector (see example) to limit functionality to child elements.
+2. typeSelector - (*string*) An event name (click, mouseover, etc) that should be monitored paired with a selector (see example) to limit functionality to child elements.
 3. fn - (*function*) The callback to execute when the event occurs (passed the event just like any other [addEvent][] usage and a second argument, the element that matches your selector that was clicked).
 
 
