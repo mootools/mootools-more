@@ -35,7 +35,7 @@ provides: [Lang]
 
 	MooTools.lang = new Events();
 
-	$extend(MooTools.lang, {
+	Object.append(MooTools.lang, {
 
 		setLanguage: function(lang){
 			if (!data.languages[lang]) return this;
@@ -48,7 +48,7 @@ provides: [Lang]
 		load: function() {
 			var langs = this.cascade(this.getCurrentLanguage());
 			cascaded = {};
-			$each(langs, function(set, setName){
+			Object.each(langs, function(set, setName){
 				cascaded[setName] = this.lambda(set);
 			}, this);
 		},
@@ -69,12 +69,12 @@ provides: [Lang]
 			var langs = cascades.map(function(lng){
 				return data.languages[lng];
 			}, this);
-			return $merge.apply(this, langs);
+			return Object.merge.apply(this, langs);
 		},
 
 		lambda: function(set) {
 			(set || {}).get = function(key, args){
-				return $lambda(set[key]).apply(this, $splat(args));
+				return Function.from(set[key]).apply(this, Array.from(args));
 			};
 			return set;
 		},
@@ -87,7 +87,7 @@ provides: [Lang]
 			this.addLanguage(lang);
 			langData = data.languages[lang];
 			if (!langData[set]) langData[set] = {};
-			$extend(langData[set], members);
+			Object.append(langData[set], members);
 			if (lang == this.getCurrentLanguage()){
 				this.load();
 				this.fireEvent('langChange', lang);

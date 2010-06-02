@@ -30,9 +30,9 @@ var Slider = new Class({
 	Binds: ['clickedElement', 'draggedKnob', 'scrolledElement'],
 
 	options: {/*
-		onTick: $empty(intPosition),
-		onChange: $empty(intStep),
-		onComplete: $empty(strStep),*/
+		onTick: function(intPosition){},
+		onChange: function(intStep){},
+		onComplete: function(strStep){},*/
 		onTick: function(position){
 			if (this.options.snap) position = this.toPosition(this.step);
 			this.knob.setStyle(this.property, position);
@@ -128,13 +128,13 @@ var Slider = new Class({
 	},
 	
 	setRange: function(range, pos){
-		this.min = $pick(range[0], 0);
-		this.max = $pick(range[1], this.options.steps);
+		this.min = Array.pick([range[0], 0]);
+		this.max = Array.pick([range[1], this.options.steps]);
 		this.range = this.max - this.min;
 		this.steps = this.options.steps || this.full;
 		this.stepSize = Math.abs(this.range) / this.steps;
 		this.stepWidth = this.stepSize * this.full / Math.abs(this.range);
-		this.set($pick(pos, this.step).floor(this.min).max(this.max));
+		this.set(Array.pick([pos, this.step]).floor(this.min).max(this.max));
 		return this;
 	},
 

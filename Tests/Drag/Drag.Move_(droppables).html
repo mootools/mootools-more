@@ -1,0 +1,56 @@
+<style>
+	.box {
+		width: 30px;
+		height: 30px;
+		background-color: #900;
+		border: 2px solid #fff;
+		padding: 5px;
+		margin: 7px;
+	}
+	.container {
+		width: 150px;
+		height: 150px;
+		border: 4px solid black;
+		background: #ccc;
+		padding: 6px;
+		margin: 9px;
+	}
+</style>
+<div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
+<h3 class="h3_test">Drag and Drop to a container</h3>
+<p>You should be able to drag red the box around and drop it in the container.</p>
+
+<p id="msg">&nbsp;</p>
+
+<div style="position: relative; padding: 2px;">
+	<div id="container" class="container">
+
+	</div>
+</div>
+
+<div id="box" class="box"></div>
+
+
+
+<script src="/depender/build?require=More/Drag.Move"></script>
+<script>
+var dragger = $('box').makeDraggable({
+	droppables: '#container',
+	onDrop: function(){
+		$('msg').set('text','onDrop');
+	},
+	onEnter: function(){
+		$('msg').set('text','onEnter');
+	}
+});
+
+$('enable').addEvent('click', function(){
+	dragger.attach();
+});
+$('disable').addEvent('click', function(){
+	dragger.detach();
+});
+
+</script>
+
+

@@ -30,9 +30,9 @@ Drag.Move = new Class({
 	Extends: Drag,
 
 	options: {/*
-		onEnter: $empty(thisElement, overed),
-		onLeave: $empty(thisElement, overed),
-		onDrop: $empty(thisElement, overed, event),*/
+		onEnter: function(thisElement, overed){},
+		onLeave: function(thisElement, overed){},
+		onDrop: function(thisElement, overed, event){},*/
 		droppables: [],
 		container: false,
 		precalculate: false,
@@ -47,7 +47,7 @@ Drag.Move = new Class({
 		this.droppables = $$(this.options.droppables);
 		this.container = document.id(this.options.container);
 		
-		if (this.container && $type(this.container) != 'element')
+		if (this.container && typeOf(this.container) != 'element')
 			this.container = document.id(this.container.getDocument().body);
 		
 		var styles = element.getStyles('left', 'top', 'position');
@@ -146,7 +146,7 @@ Drag.Move = new Class({
 	},
 
 	checkDroppables: function(){
-		var overed = this.droppables.filter(this.checkAgainst, this).getLast();
+		var overed = Array.from(this.droppables).filter(this.checkAgainst, this).getLast();
 		if (this.overed != overed){
 			if (this.overed) this.fireEvent('leave', [this.element, this.overed]);
 			if (overed) this.fireEvent('enter', [this.element, overed]);

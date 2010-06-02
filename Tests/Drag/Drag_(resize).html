@@ -9,9 +9,9 @@
 	border-right: 1px solid #333;
 	border-bottom: 1px solid #333;
 	height: 4px;
+	clear: both;
 	cursor: s-resize;
 	margin-bottom: 10px;
-	clear:both;
 	float: left;
 }
 textarea#comment {
@@ -19,13 +19,23 @@ textarea#comment {
 	float: left;
 	height: 100px;
 }
+
 #togglers {
-	clear:both;
+	clear: both;
 }
+
+.wrapper {
+	width: 300px;
+	height: 300px;
+	float: left;
+}
+
 </style>
-<textarea tabindex="4" id="comment" class="resizable" rows="15" cols="50" name="comment"></textarea>
-<div id="textresizer"></div>
-<div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
+<div class="wrapper">
+	<textarea tabindex="4" id="comment" class="resizable" rows="15" cols="50" name="comment"></textarea>
+	<div id="textresizer"></div>
+	<div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
+</div>
 <script src="/depender/build?require=More/Drag"></script>
 <script>
 var dragger = $('comment').makeResizable({

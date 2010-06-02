@@ -13,6 +13,7 @@ authors:
   - Tom Occhino
 
 requires:
+  - Core/Fx.Morph
   - /Drag.Move
 
 provides: [Sortables]
@@ -25,9 +26,9 @@ var Sortables = new Class({
 	Implements: [Events, Options],
 
 	options: {/*
-		onSort: $empty(element, clone),
-		onStart: $empty(element, clone),
-		onComplete: $empty(element),*/
+		onSort: function(element, clone){},
+		onStart: function(element, clone){},
+		onComplete: function(element){},*/
 		snap: 4,
 		opacity: 1,
 		clone: false,
@@ -45,7 +46,7 @@ var Sortables = new Class({
 
 		this.addLists($$(document.id(lists) || lists));
 		if (!this.options.clone) this.options.revert = false;
-		if (this.options.revert) this.effect = new Fx.Morph(null, $merge({duration: 250, link: 'cancel'}, this.options.revert));
+		if (this.options.revert) this.effect = new Fx.Morph(null, Object.merge({duration: 250, link: 'cancel'}, this.options.revert));
 	},
 
 	attach: function(){
@@ -61,7 +62,9 @@ var Sortables = new Class({
 	addItems: function(){
 		Array.flatten(arguments).each(function(element){
 			this.elements.push(element);
-			var start = element.retrieve('sortables:start', this.start.bindWithEvent(this, element));
+			var start = element.retrieve('sortables:start', function(event){
+				this.start(event, element);
+			}.bind(this));
 			(this.options.handle ? element.getElement(this.options.handle) || element : element).addEvent('mousedown', start);
 		}, this);
 		return this;
@@ -96,7 +99,7 @@ var Sortables = new Class({
 
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
-		if ($type(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
+		if (typeOf(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
 		var clone = element.clone(true).setStyles({
 			margin: '0px',
 			position: 'absolute',
@@ -138,7 +141,6 @@ var Sortables = new Class({
 		this.opacity = element.get('opacity');
 		this.list = element.getParent();
 		this.clone = this.getClone(event, element);
-
 		this.drag = new Drag.Move(this.clone, {
 			preventDefault: this.options.preventDefault,
 			snap: this.options.snap,
@@ -185,7 +187,14 @@ var Sortables = new Class({
 	},
 
 	serialize: function(){
-		var params = Array.link(arguments, {modifier: Function.type, index: $defined});
+		var params = Array.link(arguments, {
+			modifier: function(obj){
+				return typeOf(obj) == 'function'
+			},
+			index: function(obj){
+				return obj != null;
+			}
+		});
 		var serial = this.lists.map(function(list){
 			return list.getChildren().map(params.modifier || function(element){
 				return element.get('id');
@@ -194,7 +203,7 @@ var Sortables = new Class({
 
 		var index = params.index;
 		if (this.lists.length == 1) index = 0;
-		return $chk(index) && index >= 0 && index < this.lists.length ? serial[index] : serial;
+		return (index || index === 0) && index >= 0 && index < this.lists.length ? serial[index] : serial;
 	}
 
 });

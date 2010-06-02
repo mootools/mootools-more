@@ -31,12 +31,12 @@ var Drag = new Class({
 	Implements: [Events, Options],
 
 	options: {/*
-		onBeforeStart: $empty(thisElement),
-		onStart: $empty(thisElement, event),
-		onSnap: $empty(thisElement)
-		onDrag: $empty(thisElement, event),
-		onCancel: $empty(thisElement),
-		onComplete: $empty(thisElement, event),*/
+		onBeforeStart: function(thisElement){},
+		onStart: function(thisElement, event){},
+		onSnap: function(thisElement){},
+		onDrag: function(thisElement, event){},
+		onCancel: function(thisElement){},
+		onComplete: function(thisElement, event){},*/
 		snap: 6,
 		unit: 'px',
 		grid: false,
@@ -50,16 +50,23 @@ var Drag = new Class({
 	},
 
 	initialize: function(){
-		var params = Array.link(arguments, {'options': Object.type, 'element': $defined});
+		var params = Array.link(arguments, {
+			'options': function(obj){
+				return typeOf(obj) == 'object'
+			}, 
+			'element': function(obj){
+				return obj != null;
+			}
+		});
 		this.element = document.id(params.element);
 		this.document = this.element.getDocument();
 		this.setOptions(params.options || {});
-		var htype = $type(this.options.handle);
+		var htype = typeOf(this.options.handle);
 		this.handles = ((htype == 'array' || htype == 'collection') ? $$(this.options.handle) : document.id(this.options.handle)) || this.element;
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
 
-		this.selection = (Browser.Engine.trident) ? 'selectstart' : 'mousedown';
+		this.selection = (Browser.ie) ? 'selectstart' : 'mousedown';
 
 		this.bound = {
 			start: this.start.bind(this),
@@ -67,7 +74,7 @@ var Drag = new Class({
 			drag: this.drag.bind(this),
 			stop: this.stop.bind(this),
 			cancel: this.cancel.bind(this),
-			eventStop: $lambda(false)
+			eventStop: Function.from(false)
 		};
 		this.attach();
 	},
@@ -98,11 +105,11 @@ var Drag = new Class({
 			this.mouse.pos[z] = event.page[z] - this.value.now[z];
 			if (limit && limit[z]){
 				for (var i = 2; i--; i){
-					if ($chk(limit[z][i])) this.limit[z][i] = $lambda(limit[z][i])();
+					if ((limit[z][i] || limit[z][i] === 0)) this.limit[z][i] = Function.from(limit[z][i])();
 				}
 			}
 		}
-		if ($type(this.options.grid) == 'number') this.options.grid = {x: this.options.grid, y: this.options.grid};
+		if (typeOf(this.options.grid) == 'number') this.options.grid = {x: this.options.grid, y: this.options.grid};
 		this.document.addEvents({mousemove: this.bound.check, mouseup: this.bound.cancel});
 		this.document.addEvent(this.selection, this.bound.eventStop);
 	},
@@ -128,9 +135,9 @@ var Drag = new Class({
 			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z];
 			if (this.options.invert) this.value.now[z] *= -1;
 			if (this.options.limit && this.limit[z]){
-				if ($chk(this.limit[z][1]) && (this.value.now[z] > this.limit[z][1])){
+				if ((this.limit[z][1] || this.limit[z][1] === 0) && (this.value.now[z] > this.limit[z][1])){
 					this.value.now[z] = this.limit[z][1];
-				} else if ($chk(this.limit[z][0]) && (this.value.now[z] < this.limit[z][0])){
+				} else if ((this.limit[z][0] || this.limit[z][0] === 0) && (this.value.now[z] < this.limit[z][0])){
 					this.value.now[z] = this.limit[z][0];
 				}
 			}
@@ -165,7 +172,7 @@ var Drag = new Class({
 Element.implement({
 
 	makeResizable: function(options){
-		var drag = new Drag(this, $merge({modifiers: {x: 'width', y: 'height'}}, options));
+		var drag = new Drag(this, Object.merge({modifiers: {x: 'width', y: 'height'}}, options));
 		this.store('resizer', drag);
 		return drag.addEvent('drag', function(){
 			this.fireEvent('resize', drag);
