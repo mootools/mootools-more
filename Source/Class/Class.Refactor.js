@@ -24,15 +24,19 @@ provides: [Class.refactor, Class.Refactor]
 
 Class.refactor = function(original, refactors){
 
-	$each(refactors, function(item, name){
+	Object.each(refactors, function(item, name){
 		var origin = original.prototype[name];
-		if (origin && (origin = origin._origin) && typeof item == 'function') original.implement(name, function(){
-			var old = this.previous;
-			this.previous = origin;
-			var value = item.apply(this, arguments);
-			this.previous = old;
-			return value;
-		}); else original.implement(name, item);
+		if (origin && typeof item == 'function') {
+			original.implement(name, function(){
+				var old = this.previous;
+				this.previous = origin;
+				var value = item.apply(this, arguments);
+				this.previous = old;
+				return value;
+			});
+		} else {
+			original.implement(name, item);
+		}
 	});
 
 	return original;

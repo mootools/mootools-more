@@ -28,7 +28,7 @@ provides: [Chain.Wait]
 	var wait = {
 		wait: function(duration){
 			return this.chain(function(){
-				this.callChain.delay($pick(duration, 500), this);
+				this.callChain.delay(duration == null ? 500 : duration, this);
 			}.bind(this));
 		}
 	};
@@ -44,7 +44,7 @@ provides: [Chain.Wait]
 
 	Element.implement({
 		chains: function(effects){
-			$splat($pick(effects, ['tween', 'morph', 'reveal'])).each(function(effect){
+			Array.from(effects != null ? effects : ['tween', 'morph', 'reveal']).each(function(effect){
 				effect = this.get(effect);
 				if (!effect) return;
 				effect.setOptions({
@@ -54,7 +54,7 @@ provides: [Chain.Wait]
 			return this;
 		},
 		pauseFx: function(duration, effect){
-			this.chains(effect).get($pick(effect, 'tween')).wait(duration);
+			this.chains(effect).get(effect != null ? effects : 'tween').wait(duration);
 			return this;
 		}
 	});

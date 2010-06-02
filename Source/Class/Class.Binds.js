@@ -27,7 +27,7 @@ Class.Mutators.Binds = function(binds){
 
 Class.Mutators.initialize = function(initialize){
 	return function(){
-		$splat(this.Binds).each(function(name){
+		Array.from(this.Binds).each(function(name){
 			var original = this[name];
 			if (original) this[name] = original.bind(this);
 		}, this);

@@ -27,7 +27,7 @@ Class.Occlude = new Class({
 	occlude: function(property, element){
 		element = document.id(element || this.element);
 		var instance = element.retrieve(property || this.property);
-		if (instance && !$defined(this.occluded))
+		if (instance && !this.occluded != null)
 			return this.occluded = instance;
 
 		this.occluded = false;

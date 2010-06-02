@@ -1,0 +1,23 @@
+<div id="foo" style="width: 400px; border: 1px solid black; height: 100px; overflow:hidden;background:silver;">
+</div>
+<script src="/depender/build?require=More/Class.Occlude"></script>
+<script>
+
+var Widget = new Class({
+	Implements: Class.Occlude,
+	initialize: function(element) {
+		this.element = $(element);
+		if (this.occlude('widget', element)) return this.occluded;
+	}
+});
+
+var widget1 = new Widget('foo');
+var widget2 = new Widget('foo');
+
+if(widget1 == widget2){
+	$('foo').set('text','The Occlude works, Widget1 and Widget2 are the same');
+}else{
+	$('foo').set('text','Something has gone terribly wrong');
+}
+
+</script>
