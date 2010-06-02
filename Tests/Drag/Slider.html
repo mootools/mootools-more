@@ -1,0 +1,61 @@
+<h3 class="h3_test">100 steps, snap off</h3>
+<p>When you drag the black box horizontally the number below should change to reflect the position.</p>
+<div id="area">
+	<div id="knob"></div>
+</div>
+<p id="upd">XX</p>
+
+<h3 class="h3_test">10 steps, snap on</h3>
+<p>When you drag the black box horizontally does the number below should change to reflect the position in 10 steps that "snap".</p>
+<div id="area2">
+	<div id="knob2"></div>
+</div>
+<p id="upd2">XX</p>
+
+<h3 class="h3_test">setRange</h3>
+<p>When you click the setRange button does slider should continue to work properly with a range of 200-50.</p>
+<div id="area3">
+	<div id="knob3"></div>
+</div>
+<button id="setRange">setRange</button>
+<p id="upd3">XX</p>
+
+<style type="text/css" media="screen">
+	#area, #area2, #area3 {
+		background: #ccc;
+		height: 20px;
+		width: 200px;
+	}
+	#knob, #knob2, #knob3 {
+		height: 20px;
+		width: 20px;
+		background: #000;
+		cursor:col-resize !important;
+		cursor:pointer;
+	}
+</style>
+<script src="/depender/build?require=More/Slider"></script>
+<script>
+var mySlide = new Slider($('area'), $('knob'), {
+	onChange: function(pos){
+		$('upd').set('html', pos);
+	}
+}).set(0);
+var mySlide2 = new Slider($('area2'), $('knob2'), {
+	steps: 10,
+	snap: true,
+	onChange: function(pos){
+		$('upd2').set('html', pos);
+	}
+}).set(0);
+var mySlide3 = new Slider($('area3'), $('knob3'), {
+	steps: 100,
+	range: [0,100],
+	onChange: function(pos){
+		$('upd3').set('html', pos);
+	}
+}).set(0);
+$('setRange').addEvent('click',function(){
+	mySlide3.setRange([200,50]);
+});
+</script>

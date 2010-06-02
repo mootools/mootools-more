@@ -1,0 +1,157 @@
+<style>
+
+	#foo-container {
+		top: 50px;
+		left: 450px;
+		position: absolute;
+	}
+	#foo {
+		width: 200px;
+		height: 200px;
+		border: 2px solid black;
+		padding: 10px;
+	}
+	#actions {
+		width: 400px;
+	}
+	#actions dt {
+		font-weight: bold;
+	}
+	#actions dt a {
+		display: block;
+		background: #AABCF2;
+		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		padding: 4px;
+	}
+	#actions dt a:hover {
+		background: #CACEE8;
+	}
+	#actions dd {
+		padding: 4px;
+	}
+	
+	.blackText {
+		color: #000;
+	}
+	.blueText {
+		color: #00f;
+	}
+</style>
+<dl id="actions"></dl>
+<div id="foo-container">
+	<div id="foo" class="blackText">
+	This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text.
+	</div>
+</div>
+<div id="logContaner" class="blueText"></div>
+<script src="/depender/build?require=More/Element.Shortcuts,Core/Element.Event"></script>
+<script>
+var log = function(msg){
+	$('logContaner').adopt(new Element('p', {text: msg}));
+};
+var tests = [
+	{
+		title: "Element.hide",
+		description: "Switches an element from display:block|inline|etc to display:none",
+		fn: function(){
+			$('foo').setStyle('display','block');
+			$('foo').hide();
+		}
+	},
+	{
+		title: "Element.show",
+		description: "Switches an element from display:none to display:block",
+		fn: function(){
+			$('foo').setStyle('display','none');
+			$('foo').show();
+		}
+	},
+	{
+		title: "Element.show(type)",
+		description: "Switches an element from display:none to display:inline. (It switches back after a second.)",
+		fn: function(){
+			$('foo').hide();
+			$('foo').show('inline');
+			(function(){
+				$('foo').setStyle('display', 'block');
+			}).delay(1000);
+		}
+	},
+	{
+		title: "Element.toggle",
+		description: "Toggles between display:none and block.",
+		fn: function(){
+			$('foo').toggle();
+		}
+	},
+	{
+		title: "Element.isDisplayed",
+		description: "Returns true if the element's display is not = none. (See log message displayed below after you click).",
+		fn: function(){
+			$('foo').hide();
+			if (!$('foo').isDisplayed()){
+				log('hide successful; foo is not visible');
+			} else {
+				log('either hide or isDisplayed failed');
+				$('foo').visTest = false;
+			}
+			$('foo').show();
+			$('foo').visTest = false;
+			if ($('foo').isDisplayed()){
+				log('show successful; foo is visible');
+				$('foo').visTest = true;
+			} else {
+				log('either show or isDisplayed failed');
+				$('foo').visTest = false;
+			}
+		}
+	},
+	{
+		title: "Element.isVisible",
+		description: "Returns true if the element is visible. (See log message displayed below after you click).",
+		fn: function(){
+			$('foo-container').hide();
+			if (!$('foo').isVisible()){
+				log('hide successful; foo is not visible');
+			} else {
+				log('either hide or isDisplayed failed');
+			}
+			$('foo-container').show();
+			if ($('foo').isVisible()){
+				log('show successful; foo is visible');
+			} else {
+				log('either show or isDisplayed failed');
+			}
+		}
+	},
+	{
+		title: 'Element.swapClass (blue)',
+		description: "Changes the text from black to blue.",
+		fn: function(){
+			$('foo').show();
+			$('foo').swapClass('blackText', 'blueText');
+		}
+	},
+	{
+		title: 'Element.swapClass (black)',
+		description: "Changes the text from blue to black.",
+		fn: function(){
+			$('foo').show();
+			$('foo').swapClass('blueText', 'blackText');
+		}
+	}
+];
+tests.each(function(test) {
+	new Element('dt').adopt(
+		new Element('a', {
+			text: test.title,
+			events: {
+				click: test.fn
+			}
+		})
+	).inject('actions');
+	new Element('dd', { text: test.description }).inject('actions');
+});
+</script>
