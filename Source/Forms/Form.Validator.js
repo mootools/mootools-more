@@ -13,12 +13,12 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Options
-  - Core:1.2.4/Events
-  - Core:1.2.4/Selectors
-  - Core:1.2.4/Element.Event
-  - Core:1.2.4/Element.Style
-  - Core:1.2.4/JSON
+  - Core/Options
+  - Core/Events
+  - Core/Selectors
+  - Core/Element.Event
+  - Core/Element.Style
+  - Core/JSON
   - /Lang
   - /Class.Binds
   - /Date 

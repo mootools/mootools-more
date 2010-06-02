@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Element
+  - Core/Element
   - /MooTools.More
 
 provides: [Elements.from, Elements.From]

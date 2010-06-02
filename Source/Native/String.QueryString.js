@@ -13,8 +13,8 @@ authors:
   - Sebastian Markbåge, Aaron Newton, Lennart Pilon, Valerio Proietti
 
 requires:
-  - Core:1.2.4/Array
-  - Core:1.2.4/String
+  - Core/Array
+  - Core/String
   - /MooTools.More
 
 provides: [String.QueryString]

@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Fx.Morph
+  - Core/Fx.Morph
   - /Element.Shortcuts
   - /Element.Measure
 

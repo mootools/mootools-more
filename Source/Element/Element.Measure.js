@@ -15,8 +15,8 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Element.Style
-  - Core:1.2.4/Element.Dimensions
+  - Core/Element.Style
+  - Core/Element.Dimensions
   - /MooTools.More
 
 provides: [Element.Measure]

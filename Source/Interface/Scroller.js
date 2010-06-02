@@ -13,10 +13,10 @@ authors:
   - Valerio Proietti
 
 requires:
-  - Core:1.2.4/Events
-  - Core:1.2.4/Options
-  - Core:1.2.4/Element.Event
-  - Core:1.2.4/Element.Dimensions
+  - Core/Events
+  - Core/Options
+  - Core/Element.Event
+  - Core/Element.Dimensions
 
 provides: [Scroller]
 

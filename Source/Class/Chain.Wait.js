@@ -13,9 +13,9 @@ authors:
   - Aaron Newton
 
 requires: 
-  - Core:1.2.4/Chain
-  - Core:1.2.4/Element
-  - Core:1.2.4/Fx
+  - Core/Chain
+  - Core/Element
+  - Core/Fx
   - /MooTools.More
 
 provides: [Chain.Wait]

@@ -15,9 +15,9 @@ authors:
   - Christopher Pitt
 
 requires:
-  - Core:1.2.4/String
-  - Core:1.2.4/$util
-  - Core:1.2.4/Array
+  - Core/String
+  - Core/$util
+  - Core/Array
 
 provides: [String.Extras]
 

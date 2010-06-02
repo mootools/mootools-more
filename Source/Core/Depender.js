@@ -13,8 +13,8 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Element.Event
-  - Core:1.2.4/Request.JSON
+  - Core/Element.Event
+  - Core/Request.JSON
   - /MooTools.More
   - /Log
 
