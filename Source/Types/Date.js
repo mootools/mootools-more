@@ -32,8 +32,6 @@ provides: [Date]
 
 var Date = this.Date;
 
-if (!Date.now) Date.now = $time;
-
 Date.Methods = {
 	ms: 'Milliseconds',
 	year: 'FullYear',
@@ -56,7 +54,7 @@ var pad = function(what, length){
 Date.implement({
 
 	set: function(prop, value){
-		switch ($type(prop)){
+		switch (typeOf(prop)){
 			case 'object':
 				for (var p in prop) this.set(p, prop[p]);
 				break;
@@ -81,7 +79,7 @@ Date.implement({
 
 	increment: function(interval, times){
 		interval = interval || 'day';
-		times = $pick(times, 1);
+		times = times != null ? times : 1;
 
 		switch (interval){
 			case 'year':
@@ -102,7 +100,7 @@ Date.implement({
 	},
 
 	decrement: function(interval, times){
-		return this.increment(interval, -1 * $pick(times, 1));
+		return this.increment(interval, -1 * (times != null ? times : 1));
 	},
 
 	isLeapYear: function(){
@@ -114,7 +112,7 @@ Date.implement({
 	},
 
 	diff: function(date, resolution){
-		if ($type(date) == 'string') date = Date.parse(date);
+		if (typeOf(date) == 'string') date = Date.parse(date);
 		
 		return ((date - this) / Date.units[resolution || 'day'](3, 3)).toInt(); // non-leap year, 30-day month
 	},
@@ -231,7 +229,7 @@ var nativeParse = Date.parse;
 var parseWord = function(type, word, num){
 	var ret = -1;
 	var translated = Date.getMsg(type + 's');
-	switch ($type(word)){
+	switch (typeOf(word)){
 		case 'object':
 			ret = translated[word.get(type)];
 			break;
@@ -258,15 +256,15 @@ Date.extend({
 	},
 
 	units: {
-		ms: $lambda(1),
-		second: $lambda(1000),
-		minute: $lambda(60000),
-		hour: $lambda(3600000),
-		day: $lambda(86400000),
-		week: $lambda(608400000),
+		ms: Function.from(1),
+		second: Function.from(1000),
+		minute: Function.from(60000),
+		hour: Function.from(3600000),
+		day: Function.from(86400000),
+		week: Function.from(608400000),
 		month: function(month, year){
 			var d = new Date;
-			return Date.daysInMonth($pick(month, d.get('mo')), $pick(year, d.get('year'))) * 86400000;
+			return Date.daysInMonth(month != null ? month : d.get('mo'), year != null ? year : d.get('year')) * 86400000;
 		},
 		year: function(year){
 			year = year || new Date().get('year');
@@ -283,7 +281,7 @@ Date.extend({
 	},
 
 	parse: function(from){
-		var t = $type(from);
+		var t = typeOf(from);
 		if (t == 'number') return new Date(from);
 		if (t != 'string') return from;
 		from = from.clean();
@@ -332,7 +330,9 @@ Date.extend({
 		for (var name in formats) Date.defineFormat(name, formats[name]);
 	},
 
+//<1.2compat>
 	parsePatterns: parsePatterns, // this is deprecated
+//</1.2compat>
 	
 	defineParser: function(pattern){
 		parsePatterns.push((pattern.re && pattern.handler) ? pattern : build(pattern));
