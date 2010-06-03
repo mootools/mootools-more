@@ -271,7 +271,7 @@ var Depender = {
 		}
 	},
 
-	scriptsState: $H(),
+	scriptsState: {},
 	
 	getLoadedScripts: function(){
 		return this.scriptsState.filter(function(state){
@@ -319,9 +319,9 @@ var Depender = {
 
 };
 
-$extend(Depender, new Events);
-$extend(Depender, new Options);
-$extend(Depender, new Log);
+Object.append(Depender, new Events);
+Object.append(Depender, new Options);
+Object.append(Depender, new Log);
 
 Depender._setOptions = Depender.setOptions;
 Depender.setOptions = function(){
