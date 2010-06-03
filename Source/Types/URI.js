@@ -14,7 +14,9 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Selectors
+  - Core/Class
+  - Core/Class.Extras
+  - Core/Element
   - /String.QueryString
 
 provides: [URI]
@@ -38,8 +40,8 @@ var URI = new Class({
 		this.setOptions(options);
 		var base = this.options.base || URI.base;
 		if(!uri) uri = base;
-		
-		if (uri && uri.parsed) this.parsed = $unlink(uri.parsed);
+
+		if (uri && uri.parsed) this.parsed = Object.clone(uri.parsed);
 		else this.set('value', uri.href || uri.toString(), base ? new URI(base) : false);
 	},
 
@@ -88,7 +90,7 @@ var URI = new Class({
 		if (part == 'value'){
 			var scheme = value.match(URI.regs.scheme);
 			if (scheme) scheme = scheme[1];
-			if (scheme && !$defined(this.schemes[scheme.toLowerCase()])) this.parsed = { scheme: scheme, value: value };
+			if (scheme && this.schemes[scheme.toLowerCase()] != null) this.parsed = { scheme: scheme, value: value };
 			else this.parsed = this.parse(value, (base || this).parsed) || (scheme ? { scheme: scheme, value: value } : { value: value });
 		} else if (part == 'data') {
 			this.setData(value);
@@ -116,7 +118,7 @@ var URI = new Class({
 
 	getData: function(key, part){
 		var qs = this.get(part || 'query');
-		if (!$chk(qs)) return key ? null : {};
+		if (!(qs || qs === 0)) return key ? null : {};
 		var obj = qs.parseQueryString();
 		return key ? obj[key] : obj;
 	},
@@ -127,7 +129,7 @@ var URI = new Class({
 			data[arguments[0]] = arguments[1];
 			values = data;
 		} else if (merge) {
-			values = $merge(this.getData(), values);
+			values = Object.merge(this.getData(), values);
 		}
 		return this.set(part || 'query', Hash.toQueryString(values));
 	},
@@ -148,7 +150,7 @@ URI.regs = {
 	directoryDot: /\.\/|\.$/
 };
 
-URI.base = new URI(document.getElements('base[href]', true).getLast(), {base: document.location});
+URI.base = new URI(Array.from(document.getElements('base[href]', true)).getLast(), {base: document.location});
 
 String.implement({
 

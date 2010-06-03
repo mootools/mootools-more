@@ -35,10 +35,10 @@ String.implement({
 				var current = obj[key];
 				if(i < keys.length - 1)
 					obj = obj[key] = current || {};
-				else if($type(current) == 'array')
+				else if(typeOf(current) == 'array')
 					current.push(value);
 				else
-					obj[key] = $defined(current) ? [current, value] : value;
+					obj[key] = current != null ? [current, value] : value;
 			});
 		});
 		return res;
@@ -49,7 +49,7 @@ String.implement({
 			var index = val.indexOf('='),
 			key = index < 0 ? '' : val.substr(0, index),
 			value = val.substr(index + 1);
-			return method ? method.run([key, value]) : $chk(value);
+			return method ? method.run([key, value]) : (value || value === 0);
 		}).join('&');
 	}
 
