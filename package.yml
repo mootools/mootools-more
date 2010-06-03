@@ -26,7 +26,7 @@ sources:
   - "Source/Native/Array.Extras.js"
   - "Source/Native/Date.js"
   - "Source/Native/Date.Extras.js"
-  - "Source/Native/Hash.Extras.js"
+  - "Source/Native/Object.Extras.js"
   - "Source/Native/String.Extras.js"
   - "Source/Native/String.QueryString.js"
   - "Source/Native/URI.js"
