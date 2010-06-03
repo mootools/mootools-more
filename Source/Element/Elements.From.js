@@ -13,6 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
+  - Core/String
   - Core/Element
   - /MooTools.More
 
@@ -22,7 +23,7 @@ provides: [Elements.from, Elements.From]
 */
 
 Elements.from = function(text, excludeScripts){
-	if ($pick(excludeScripts, true)) text = text.stripScripts();
+	if (excludeScripts || excludeScripts == null) text = text.stripScripts();
 
 	var container, match = text.match(/^\s*<(t[dhr]|tbody|tfoot|thead)/i);
 
