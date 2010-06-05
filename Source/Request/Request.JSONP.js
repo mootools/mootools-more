@@ -28,11 +28,11 @@ Request.JSONP = new Class({
 	Implements: [Chain, Events, Options, Log],
 
 	options: {/*
-		onRetry: $empty(intRetries),
-		onRequest: $empty(scriptElement),
-		onComplete: $empty(data),
-		onSuccess: $empty(data),
-		onCancel: $empty(),
+		onRetry: function(intRetries){},
+		onRequest: function(scriptElement){},
+		onComplete: function(data){},
+		onSuccess: function(data){},
+		onCancel: function(){},
 		log: false,
 		*/
 		url: '',
@@ -62,16 +62,16 @@ Request.JSONP = new Class({
 	},
 
 	send: function(options){
-		if (!$chk(arguments[1]) && !this.check(options)) return this;
+		if (!(arguments[1] || arguments[1] === 0) && !this.check(options)) return this;
 
-		var type = $type(options), 
+		var type = typeOf(options), 
 				old = this.options, 
-				index = $chk(arguments[1]) ? arguments[1] : this.requests++;
+				index = (arguments[1] || arguments[1] === 0) ? arguments[1] : this.requests++;
 		if (type == 'string' || type == 'element') options = {data: options};
 
-		options = $extend({data: old.data, url: old.url}, options);
+		options = Object.extend({data: old.data, url: old.url}, options);
 
-		if (!$chk(this.triesRemaining[index])) this.triesRemaining[index] = this.options.retries;
+		if (!(this.triesRemaining[index] || this.triesRemaining[index] === 0)) this.triesRemaining[index] = this.options.retries;
 		var remaining = this.triesRemaining[index];
 
 		(function(){
@@ -92,7 +92,7 @@ Request.JSONP = new Class({
 					this.cancel().fireEvent('failure');
 				}
 			}).delay(this.options.timeout, this);
-		}).delay(Browser.Engine.trident ? 50 : 0, this);
+		}).delay(Browser.ie ? 50 : 0, this);
 		return this;
 	},
 
@@ -108,9 +108,9 @@ Request.JSONP = new Class({
 				data;
 		Request.JSONP.counter++;
 
-		switch ($type(options.data)){
+		switch (typeOf(options.data)){
 			case 'element': data = document.id(options.data).toQueryString(); break;
-			case 'object': case 'hash': data = Hash.toQueryString(options.data);
+			case 'object': case 'hash': data = Object.toQueryString(options.data);
 		}
 
 		var src = options.url + 
