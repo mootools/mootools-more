@@ -1,4 +1,4 @@
-Class: HtmlTable.Zebra {#HtmlTable.Zebra}
+Class: HtmlTable.Zebra {#HtmlTable:Zebra}
 =============================
 
 Adds stripes to an instance of HtmlTable.

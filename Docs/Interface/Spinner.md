@@ -208,7 +208,7 @@ Sets a default [Spinner][] instance for an Element.
 
 #### Examples
 
-	el.set('spinner', {msg: 'one moment...'});
+	el.set('spinner', {message: 'one moment...'});
 	el.spin(); //obscure the element with the spinner
 	el.unspin(); //hide the spinner
 
@@ -231,7 +231,7 @@ Gets the default [Spinner][] instance for the Element.
 
 #### Examples
 
-	el.set('spinner', {msg: 'one moment...'});
+	el.set('spinner', {message: 'one moment...'});
 	el.spin(); //show the spinner
 	el.get('spinner'); //The Spinner instance.
 

@@ -46,7 +46,7 @@ Injects a css file in the page.
 ### Arguments:
 
 1. source     - (*string*) The path of the CSS file.
-2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to  including the Element constructor. For instance you might specify an onload event or perhaps an id.
+2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to  including the Element constructor. For instance you might specify an onLoad event or perhaps an id.
 
 ### Returns:
 
@@ -70,7 +70,7 @@ Preloads an image and returns the img element.
 ### Arguments:
 
 1. source     - (*string*) The path of the image file.
-2. properties - (*object*) Some additional attributes you might want to add to the img Element including the onload/onerror/onabort events.
+2. properties - (*object*) Some additional attributes you might want to add to the img Element including the onLoad/onError/onAbort events.
 
 ### Returns:
 
@@ -78,12 +78,12 @@ Preloads an image and returns the img element.
 
 ### Examples:
 
-	var myImage = new Asset.image('/images/myImage.png', {id: 'myImage', title: 'myImage', onload: myFunction});
+	var myImage = new Asset.image('/images/myImage.png', {id: 'myImage', title: 'myImage', onLoad: myFunction});
 
 ### Notes:
 
 - Does not inject the image into the page.
-- WARNING: DO NOT use addEvent for load/error/abort on the returned element, give them as onload/onerror/onabort in the properties argument.
+- WARNING: DO NOT use addEvent for load/error/abort on the returned element, give them as onLoad/onError/onAbort in the properties argument.
 
 
 

@@ -70,19 +70,18 @@ if (!window.Form) window.Form = {};
 
 		makeRequest: function(){
 			this.request = new Request.HTML($merge({
-					url: this.element.get('action'),
 					update: this.update,
 					emulation: false,
 					spinnerTarget: this.element,
 					method: this.element.get('method') || 'post'
 			}, this.options.requestOptions)).addEvents({
 				success: function(text, xml){
-					['success', 'complete'].each(function(evt){
+					['complete', 'success'].each(function(evt){
 						this.fireEvent(evt, [this.update, text, xml]);
 					}, this);
 				}.bind(this),
 				failure: function(xhr){
-					this.fireEvent('failure', xhr);
+					this.fireEvent('complete').fireEvent('failure', xhr);
 				}.bind(this),
 				exception: function(){
 					this.fireEvent('failure', xhr);
@@ -114,7 +113,8 @@ if (!window.Form) window.Form = {};
 		},
 
 		onFormValidate: function(valid, form, e) {
-			if (valid || !fv.options.stopOnFailure) {
+			var fv = this.element.retrieve('validator');
+			if (valid || (fv && !fv.options.stopOnFailure)) {
 				if (e && e.stop) e.stop();
 				this.send();
 			}
@@ -124,7 +124,6 @@ if (!window.Form) window.Form = {};
 			if (this.element.retrieve('validator')) {
 				//form validator was created after Form.Request
 				this.detach();
-				this.addFormEvent();
 				return;
 			}
 			e.stop();
@@ -136,8 +135,8 @@ if (!window.Form) window.Form = {};
 			var data = $H(this.options.extraData).toQueryString();
 			if (str) str += "&" + data;
 			else str = data;
-			this.fireEvent('send', [this.element, str]);
-			this.request.send({data: str});
+			this.fireEvent('send', [this.element, str.parseQueryString()]);
+			this.request.send({data: str, url: this.element.get("action")});
 			return this;
 		}
 

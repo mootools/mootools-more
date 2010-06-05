@@ -48,7 +48,7 @@ Drag.Move = new Class({
 		if (this.container && $type(this.container) != 'element')
 			this.container = document.id(this.container.getDocument().body);
 		
-		var styles = element.getStyles('left', 'right', 'position');
+		var styles = element.getStyles('left', 'top', 'position');
 		if (styles.left == 'auto' || styles.top == 'auto')
 			element.setPosition(element.getPosition(element.getOffsetParent()));
 		
@@ -73,7 +73,7 @@ Drag.Move = new Class({
 	},
 	
 	calculateLimit: function(){
-		var offsetParent = this.element.getOffsetParent(),
+		var offsetParent = document.id(this.element.getOffsetParent()),
 			containerCoordinates = this.container.getCoordinates(offsetParent),
 			containerBorder = {},
 			elementMargin = {},

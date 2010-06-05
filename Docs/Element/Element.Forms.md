@@ -97,7 +97,7 @@ Returns the range of what is selected within the element.
 
 ### Syntax
 
-	$('myInput').getSelectionRange();
+	$('myInput').getSelectedRange();
 
 ###	Returns
 

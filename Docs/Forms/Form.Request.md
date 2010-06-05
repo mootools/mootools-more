@@ -62,7 +62,7 @@ Detaches the Form.Request from the form (disabling the ajax).
 
 * (*object*) - This instance of [Form.Request][]
 
-Form.Request Method: disable {#Form-Request:enable}
+Form.Request Method: enable {#Form-Request:enable}
 --------------------------------------
 
 Attaches the Form.Request to the form (enabling the ajax). Note that this is done on instantiation, so you only need to use this method if you disable the [Form.Request][] instance and want to re-enable it.

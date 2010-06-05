@@ -185,9 +185,14 @@ Evaluates an entire form against all the validators that are set up, firing even
 
 		//here we validate the date, but the validator gets access to
 		//the property defined for dateFormat (and any other property defined this way)
-		<input class="validate-date dateFormat:'%d/%m/%Y">
+		<input class="validate-date dateFormat:'%d/%m/%Y'">
 
 * Note that the property must be decodable by [JSON.decode][], so strings must have quotes, for example (single quotes are fine).
+* Note that string values that require spaces should use URL encoding, as spaces are the delimiters for css class names. Then your validator should url decode them from the validatorProps object when it uses them. Alternately, you can store this data directly on the input using element storage:
+
+		$('myinput').store('validatorProps', {
+			someValue: "I'm a string with spaces!"
+		});
 
 ### Using Warnings
 
