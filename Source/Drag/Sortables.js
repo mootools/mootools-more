@@ -44,7 +44,9 @@ var Sortables = new Class({
 		this.lists = [];
 		this.idle = true;
 
-		this.addLists($$(document.id(lists) || lists));
+		var list = document.id(lists);
+		this.addLists(!list && typeOf(lists) == 'string' ? $$(lists) : [list]);
+		
 		if (!this.options.clone) this.options.revert = false;
 		if (this.options.revert) this.effect = new Fx.Morph(null, Object.merge({duration: 250, link: 'cancel'}, this.options.revert));
 	},
@@ -79,7 +81,7 @@ var Sortables = new Class({
 	},
 
 	removeItems: function(){
-		return $$(Array.flatten(arguments).map(function(element){
+		return new Elements(Array.flatten(arguments).map(function(element){
 			this.elements.erase(element);
 			var start = element.retrieve('sortables:start');
 			(this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
@@ -89,7 +91,7 @@ var Sortables = new Class({
 	},
 
 	removeLists: function(){
-		return $$(Array.flatten(arguments).map(function(list){
+		return new Elements(Array.flatten(arguments).map(function(list){
 			this.lists.erase(list);
 			this.removeItems(list.getChildren());
 			

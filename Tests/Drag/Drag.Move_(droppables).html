@@ -41,6 +41,9 @@ var dragger = $('box').makeDraggable({
 	},
 	onEnter: function(){
 		$('msg').set('text','onEnter');
+	},
+	onLeave: function(element, droppable){
+		$('msg').set('text','onLeave');
 	}
 });
 
