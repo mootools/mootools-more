@@ -24,10 +24,10 @@ provides: [Assets]
 var Asset = {
 
 	javascript: function(source, properties){
-		properties = $extend({
-			onload: $empty,
+		properties = Object.append({
+			onload: function(){},
 			document: document,
-			check: $lambda(true)
+			check: Function.from(true)
 		}, properties);
 		
 		if (properties.onLoad) {
@@ -50,11 +50,13 @@ var Asset = {
 			}
 		}).set(properties);
 
-		if (Browser.Engine.webkit419) var checker = (function(){
-			if (!$try(check)) return;
-			$clear(checker);
-			load();
-		}).periodical(50);
+		if ((Browser.safari || Browser.chrome) && Browser.version == 2) {
+			var checker = (function(){
+				if (!Function.attempt(check)) return;
+				clearInterval(checker);
+				load();
+			}).periodical(50);
+		}
 
 		return script.inject(doc.head);
 	},
@@ -67,7 +69,7 @@ var Asset = {
 			delete properties.onload;
 			delete properties.onLoad;
 		}
-		return new Element('link', $merge({
+		return new Element('link', Object.merge({
 			rel: 'stylesheet',
 			media: 'screen',
 			type: 'text/css',
@@ -76,10 +78,10 @@ var Asset = {
 	},
 
 	image: function(source, properties){
-		properties = $merge({
-			onload: $empty,
-			onabort: $empty,
-			onerror: $empty
+		properties = Object.merge({
+			onload: function(){},
+			onabort: function(){},
+			onerror: function(){}
 		}, properties);
 		var image = new Image();
 		var element = document.id(image) || new Element('img');
@@ -109,17 +111,17 @@ var Asset = {
 	},
 
 	images: function(sources, options){
-		options = $merge({
-			onComplete: $empty,
-			onProgress: $empty,
-			onError: $empty,
+		options = Object.merge({
+			onComplete: function(){},
+			onProgress: function(){},
+			onError: function(){},
 			properties: {}
 		}, options);
-		sources = $splat(sources);
+		sources = Array.from(sources);
 		var images = [];
 		var counter = 0;
 		return new Elements(sources.map(function(source){
-			return Asset.image(source, $extend(options.properties, {
+			return Asset.image(source, Object.append(options.properties, {
 				onload: function(){
 					options.onProgress.call(this, counter, sources.indexOf(source));
 					counter++;
