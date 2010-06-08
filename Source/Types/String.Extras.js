@@ -1,4 +1,4 @@
-﻿/*
+/*
 ---
 
 script: String.Extras.js
