@@ -44,9 +44,7 @@ Drag.Move = new Class({
 		this.parent(element, options);
 		element = this.element;
 		
-		this.droppables = typeOf(this.options.droppables) == 'string' ? 
-			$$(this.options.droppables) : new Elements(this.options.droppables);
-		
+		this.droppables = $$(this.options.droppables);
 		this.container = document.id(this.options.container);
 		
 		if (this.container && typeOf(this.container) != 'element')

@@ -44,8 +44,7 @@ var Sortables = new Class({
 		this.lists = [];
 		this.idle = true;
 
-		var list = document.id(lists);
-		this.addLists(!list && typeOf(lists) == 'string' ? $$(lists) : [list]);
+		this.addLists($$(document.id(lists) || lists));
 		
 		if (!this.options.clone) this.options.revert = false;
 		if (this.options.revert) this.effect = new Fx.Morph(null, Object.merge({duration: 250, link: 'cancel'}, this.options.revert));
