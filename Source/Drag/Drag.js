@@ -51,9 +51,7 @@ var Drag = new Class({
 
 	initialize: function(){
 		var params = Array.link(arguments, {
-			'options': function(obj){
-				return typeOf(obj) == 'object'
-			}, 
+			'options': Type.isObject, 
 			'element': function(obj){
 				return obj != null;
 			}
