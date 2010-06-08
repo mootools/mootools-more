@@ -100,8 +100,11 @@ provides: [Element.Delegation]
 			}
 			if (!events || !events[type]) return this;
 			events[type].keys.each(function(fn){
-				if(delay) fn.delay(delay, bind || this, args);
-				fn.apply(bind || this, args);
+				if (delay) {
+					fn.delay(delay, bind || this, args);
+				} else {
+					fn.apply(bind || this, args);
+				}
 			}, this);
 			return this;
 		}
