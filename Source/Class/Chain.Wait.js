@@ -44,7 +44,7 @@ provides: [Chain.Wait]
 
 	Element.implement({
 		chains: function(effects){
-			Array.from(effects != null ? effects : ['tween', 'morph', 'reveal']).each(function(effect){
+			Array.from(effects || ['tween', 'morph', 'reveal']).each(function(effect){
 				effect = this.get(effect);
 				if (!effect) return;
 				effect.setOptions({
@@ -54,7 +54,7 @@ provides: [Chain.Wait]
 			return this;
 		},
 		pauseFx: function(duration, effect){
-			this.chains(effect).get(effect != null ? effects : 'tween').wait(duration);
+			this.chains(effect).get(effect || 'tween').wait(duration);
 			return this;
 		}
 	});
