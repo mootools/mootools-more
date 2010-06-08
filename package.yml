@@ -18,7 +18,6 @@ sources:
   - "Source/Core/More.js"
   - "Source/Core/Lang.js"
   - "Source/Core/Log.js"
-  - "Source/Core/Depender.js"
   - "Source/Class/Class.Refactor.js"
   - "Source/Class/Class.Binds.js"
   - "Source/Class/Class.Occlude.js"
