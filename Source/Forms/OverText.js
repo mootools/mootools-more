@@ -211,7 +211,7 @@ var OverText = new Class({
 
 OverText.instances = [];
 
-OverText.implement({
+Object.append(OverText, {
 
 	each: function(fn) {
 		return OverText.instances.map(function(ot, i){
