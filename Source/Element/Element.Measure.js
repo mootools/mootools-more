@@ -48,7 +48,7 @@ Element.implement({
 	},
 
 	expose: function(){
-		if (this.getStyle('display') != 'none') return $empty;
+		if (this.getStyle('display') != 'none') return function(){};
 		var before = this.style.cssText;
 		this.setStyles({
 			display: 'block',
@@ -61,7 +61,7 @@ Element.implement({
 	},
 
 	getDimensions: function(options){
-		options = $merge({computeSize: false},options);
+		options = Object.merge({computeSize: false}, options);
 		var dim = {};
 		var getSize = function(el, options){
 			return (options.computeSize)?el.getComputedSize(options):el.getSize();
@@ -78,14 +78,14 @@ Element.implement({
 		} else {
 			dim = {x: 0, y: 0};
 		}
-		return $chk(dim.x) ? $extend(dim, {width: dim.x, height: dim.y}) : $extend(dim, {x: dim.width, y: dim.height});
+		return (dim.x || dim.x === 0) ? Object.append(dim, {width: dim.x, height: dim.y}) : Object.append(dim, {x: dim.width, y: dim.height});
 	},
 
 	getComputedSize: function(options){
 		//legacy support for my stupid spelling error
 		if (options && options.plains) options.planes = options.plains;
 		
-		options = $merge({
+		options = Object.merge({
 			styles: ['padding','border'],
 			planes: {
 				height: ['top','bottom'],
@@ -107,7 +107,7 @@ Element.implement({
 		}
 		var getStyles = [];
 		//this function might be useful in other places; perhaps it should be outside this function?
-		$each(options.planes, function(plane, key){
+		Object.each(options.planes, function(plane, key){
 			plane.each(function(edge){
 				options.styles.each(function(style){
 					getStyles.push((style == 'border') ? style + '-' + edge + '-' + 'width' : style + '-' + edge);
@@ -117,7 +117,7 @@ Element.implement({
 		var styles = {};
 		getStyles.each(function(style){ styles[style] = this.getComputedStyle(style); }, this);
 		var subtracted = [];
-		$each(options.planes, function(plane, key){ //keys: width, height, planes: ['left', 'right'], ['top','bottom']
+		Object.each(options.planes, function(plane, key){ //keys: width, height, planes: ['left', 'right'], ['top','bottom']
 			var capitalized = key.capitalize();
 			size['total' + capitalized] = size['computed' + capitalized] = 0;
 			plane.each(function(edge){ //top, left, right, bottom
@@ -141,14 +141,14 @@ Element.implement({
 
 		['Width', 'Height'].each(function(value){
 			var lower = value.toLowerCase();
-			if(!$chk(size[lower])) return;
+			if(!(size[lower] || size[lower] === 0)) return;
 
 			size[lower] = size[lower] + this['offset' + value] + size['computed' + value];
 			size['total' + value] = size[lower] + size['total' + value];
 			delete size['computed' + value];
 		}, this);
 
-		return $extend(styles, size);
+		return Object.append(styles, size);
 	}
 
 });

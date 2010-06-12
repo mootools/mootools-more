@@ -29,9 +29,9 @@ Element.implement({
 
 	position: function(options){
 		//call original position if the options are x/y values
-		if (options && ($defined(options.x) || $defined(options.y))) return original ? original.apply(this, arguments) : this;
-		$each(options||{}, function(v, k){ if (!$defined(v)) delete options[k]; });
-		options = $merge({
+		if (options && (options.x != null || options.y != null)) return original ? original.apply(this, arguments) : this;
+		Object.each(options || {}, function(v, k){ if (v == null) delete options[k]; });
+		options = Object.merge({
 			// minimum: { x: 0, y: 0 },
 			// maximum: { x: 0, y: 0},
 			relativeTo: document.body,
@@ -67,7 +67,7 @@ Element.implement({
 		//upperRight, bottomRight, centerRight, upperLeft, bottomLeft, centerLeft
 		//topRight, topLeft, centerTop, centerBottom, center
 		var fixValue = function(option){
-			if ($type(option) != 'string') return option;
+			if (typeOf(option) != 'string') return option;
 			option = option.toLowerCase();
 			var val = {};
 			
