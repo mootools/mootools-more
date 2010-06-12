@@ -34,9 +34,9 @@ var OverText = new Class({
 
 	options: {/*
 		textOverride: null,
-		onFocus: $empty()
-		onTextHide: $empty(textEl, inputEl),
-		onTextShow: $empty(textEl, inputEl), */
+		onFocus: function(){},
+		onTextHide: function(textEl, inputEl){},
+		onTextShow: function(textEl, inputEl){}, */
 		element: 'label',
 		positionOptions: {
 			position: 'upperLeft',
@@ -151,7 +151,7 @@ var OverText = new Class({
 		var test = function(){
 			if (!this.pollingPaused) this.assert(true);
 		}.bind(this);
-		if (stop) $clear(this.poller);
+		if (stop) clearInterval(this.poller);
 		else this.poller = test.periodical(this.options.pollInterval, this);
 		return this;
 	},
@@ -203,7 +203,7 @@ var OverText = new Class({
 	reposition: function(){
 		this.assert(true);
 		if (!this.element.isVisible()) return this.stopPolling().hide();
-		if (this.text && this.test()) this.text.position($merge(this.options.positionOptions, {relativeTo: this.element}));
+		if (this.text && this.test()) this.text.position(Object.merge(this.options.positionOptions, {relativeTo: this.element}));
 		return this;
 	}
 
@@ -211,7 +211,7 @@ var OverText = new Class({
 
 OverText.instances = [];
 
-$extend(OverText, {
+OverText.extend({
 
 	each: function(fn) {
 		return OverText.instances.map(function(ot, i){
@@ -246,6 +246,6 @@ $extend(OverText, {
 
 if (window.Fx && Fx.Reveal) {
 	Fx.Reveal.implement({
-		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed, .overTxtLabel' : false
+		hideInputs: Browser.ie ? 'select, input, textarea, object, embed, .overTxtLabel' : false
 	});
 }
