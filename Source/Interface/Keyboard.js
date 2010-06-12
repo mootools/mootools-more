@@ -35,8 +35,8 @@ provides: [Keyboard]
 
 		options: {
 			/*
-			onActivate: $empty,
-			onDeactivate: $empty,
+			onActivate: function(){},
+			onDeactivate: function(){},
 			*/
 			defaultEventType: 'keydown',
 			active: false,
