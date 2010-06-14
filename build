@@ -13,6 +13,15 @@ $pkg = new Packager($package);
 fwrite($stderr, "Packager is building MooTools More\n\n");
 fwrite($stderr, "Included Components:\n");
 
+$no_compat = false;
+
+foreach ($argv as $arg){
+	if ($arg == '-1.2compat'){
+		array_erase($argv, $arg);
+		$no_compat = true;
+		break;
+	}
+}
 
 $files = (empty($argv)) ? $pkg->get_all_files() : $pkg->components_to_files($argv);
 
@@ -22,7 +31,7 @@ foreach ($files as $file){
 	fwrite($stderr, "- $file: [" . implode(", ", $pkg->get_file_provides($file)) . "]\n");
 }
 
-$output = $pkg->build($files);
+$output = $pkg->build($files, array(), array(), ($no_compat) ? array("1.2compat") : array());
 
 echo $output;
 
