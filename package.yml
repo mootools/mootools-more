@@ -12,7 +12,7 @@ copyright: "&copy; [MooTools](http://mootools.net)"
 
 authors: "[The MooTools development team](http://mootools.net/developers)"
 
-version: "1.2.5-dev"
+version: "1.3-wip"
 
 sources:
   - "Source/Core/More.js"
@@ -30,6 +30,7 @@ sources:
   - "Source/Types/String.QueryString.js"
   - "Source/Types/URI.js"
   - "Source/Types/URI.Relative.js"
+  - "Source/Types/Hash.js"
   - "Source/Element/Element.Forms.js"
   - "Source/Element/Elements.From.js"
   - "Source/Element/Element.Delegation.js"

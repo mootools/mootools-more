@@ -17,6 +17,7 @@ requires:
   - Core/Cookie
   - Core/JSON
   - /MooTools.More
+  - /Hash
 
 provides: [Hash.Cookie]
 
