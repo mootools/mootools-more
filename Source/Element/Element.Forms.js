@@ -14,6 +14,7 @@ authors:
 
 requires:
   - Core/Element
+  - /String.Extras
   - /MooTools.More
 
 provides: [Element.Forms]
@@ -37,7 +38,7 @@ Element.implement({
 	},
 
 	getSelectedRange: function() {
-		if ($defined(this.selectionStart)) return {start: this.selectionStart, end: this.selectionEnd};
+		if (this.selectionStart != null) return {start: this.selectionStart, end: this.selectionEnd};
 		var pos = {start: 0, end: 0};
 		var range = this.getDocument().selection.createRange();
 		if (!range || range.parentElement() != this) return pos;
@@ -97,13 +98,13 @@ Element.implement({
 		var pos = this.getSelectedRange();
 		var text = this.get('value');
 		this.set('value', text.substring(0, pos.start) + value + text.substring(pos.end, text.length));
-		if ($pick(select, true)) this.selectRange(pos.start, pos.start + value.length);
+		if (select !== false) this.selectRange(pos.start, pos.start + value.length);
 		else this.setCaretPosition(pos.start + value.length);
 		return this;
 	},
 
 	insertAroundCursor: function(options, select){
-		options = $extend({
+		options = Object.append({
 			before: '',
 			defaultMiddle: '',
 			after: ''
@@ -118,7 +119,7 @@ Element.implement({
 			var current = text.substring(pos.start, pos.end);
 			this.set('value', text.substring(0, pos.start) + options.before + current + options.after + text.substring(pos.end, text.length));
 			var selStart = pos.start + options.before.length;
-			if ($pick(select, true)) this.selectRange(selStart, selStart + current.length);
+			if (select !== false) this.selectRange(selStart, selStart + current.length);
 			else this.setCaretPosition(selStart + text.length);
 		}
 		return this;
