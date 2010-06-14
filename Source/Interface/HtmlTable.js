@@ -40,7 +40,7 @@ var HtmlTable = new Class({
 	property: 'HtmlTable',
 
 	initialize: function(){
-		var params = Array.link(arguments, {options: Object.type, table: Element.type});
+		var params = Array.link(arguments, {options: Type.isObject, table: Type.isElement});
 		this.setOptions(params.options);
 		this.element = params.table || new Element('table', this.options.properties);
 		if (this.occlude()) return this.occluded;
@@ -103,7 +103,7 @@ var HtmlTable = new Class({
 			var td = new Element(tag || 'td', data ? data.properties : {}),
 				type = (data ? data.content : '') || data,
 				element = document.id(type);
-			if($type(type) != 'string' && element) td.adopt(element);
+			if(typeOf(type) != 'string' && element) td.adopt(element);
 			else td.set('html', type);
 
 			return td;
