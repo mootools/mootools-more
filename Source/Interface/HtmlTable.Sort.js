@@ -302,4 +302,3 @@ HtmlTable.Parsers = new Hash({
 	}
 
 });
-

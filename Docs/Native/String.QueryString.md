@@ -54,4 +54,3 @@ Removes from a query string any keys that have empty values.
 ### Returns
 
 * (*string*) the string appropriate key/values removed
-  
