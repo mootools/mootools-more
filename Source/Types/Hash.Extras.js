@@ -14,6 +14,7 @@ authors:
 
 requires:
   - /Hash
+  - /Object.Extras
 
 provides: [Hash.Extras]
 
