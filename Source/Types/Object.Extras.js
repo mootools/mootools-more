@@ -3,9 +3,9 @@
 
 script: Object.Extras.js
 
-name: Hash.Extras
+name: Object.Extras
 
-description: Extends the Hash native object to include getFromPath which allows a path notation to child elements.
+description: Extra Object generics, like getFromPath which allows a path notation to child elements.
 
 license: MIT-style license
 
@@ -16,7 +16,7 @@ requires:
   - Core/Object
   - /MooTools.More
 
-provides: [Object.Extras, Hash.Extras]
+provides: [Object.Extras]
 
 ...
 */
@@ -42,7 +42,7 @@ Object.extend({
 		}
 		return object;
 	},
-	
+
 	erase: function(object, key){
 		if(object.hasOwnProperty(key)) delete object[key];
 		return object;
@@ -56,24 +56,3 @@ Object.extend({
 	}
 
 });
-
-
-//<1.2compat>
-
-Hash.implement({
-	
-	getFromPath: function(notation){
-		return Object.getFromPath(this, notation);
-	},
-	
-	cleanValues: function(method){
-		return new Hash(Object.cleanValues(this, method));
-	},
-	
-	run: function(){
-		Object.run(arguments);
-	}
-		
-});
-
-//</1.2compat>

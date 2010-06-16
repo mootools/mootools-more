@@ -31,6 +31,7 @@ sources:
   - "Source/Types/URI.js"
   - "Source/Types/URI.Relative.js"
   - "Source/Types/Hash.js"
+  - "Source/Types/Hash.Extras.js"
   - "Source/Element/Element.Forms.js"
   - "Source/Element/Elements.From.js"
   - "Source/Element/Element.Delegation.js"
