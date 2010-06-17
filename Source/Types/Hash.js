@@ -8,6 +8,7 @@ description: Contains Hash Prototypes. Provides a means for overcoming the JavaS
 license: MIT-style license.
 
 requires:
+  - Core/Object
   - /MooTools.More
 
 provides: [Hash]
