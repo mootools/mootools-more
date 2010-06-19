@@ -53,7 +53,7 @@ var InputValidator = new Class({
 
 	getError: function(field, props){
 		var err = this.options.errorMsg;
-		if ($type(err) == 'function') err = err(document.id(field), props||this.getProps(field));
+		if (typeOf(err) == 'function') err = err(document.id(field), props||this.getProps(field));
 		return err;
 	},
 
@@ -110,10 +110,10 @@ Form.Validator = new Class({
 	Binds: ['onSubmit'],
 
 	options: {/*
-		onFormValidate: $empty(isValid, form, event),
-		onElementValidate: $empty(isValid, field, className, warn),
-		onElementPass: $empty(field),
-		onElementFail: $empty(field, validatorsFailed) */
+		onFormValidate: function(isValid, form, event){},
+		onElementValidate: function(isValid, field, className, warn){},
+		onElementPass: function(field){},
+		onElementFail: function(field, validatorsFailed){}, */
 		fieldSelectors: 'input, select, textarea',
 		ignoreHidden: true,
 		ignoreDisabled: true,
@@ -135,8 +135,8 @@ Form.Validator = new Class({
 		this.setOptions(options);
 		this.element = document.id(form);
 		this.element.store('validator', this);
-		this.warningPrefix = $lambda(this.options.warningPrefix)();
-		this.errorPrefix = $lambda(this.options.errorPrefix)();
+		this.warningPrefix = Function.from(this.options.warningPrefix)();
+		this.errorPrefix = Function.from(this.options.errorPrefix)();
 		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this.onSubmit);
 		if (this.options.evaluateFieldsOnBlur || this.options.evaluateFieldsOnChange) this.watchFields(this.getFields());
 	},
@@ -159,7 +159,7 @@ Form.Validator = new Class({
 	},
 
 	validationMonitor: function(){
-		$clear(this.timer);
+		clearTimeout(this.timer);
 		this.timer = this.validateField.delay(50, this, arguments);
 	},
 
@@ -230,7 +230,7 @@ Form.Validator = new Class({
 		field = document.id(field);
 		if((this.options.ignoreHidden && !field.isVisible()) || (this.options.ignoreDisabled && field.get('disabled'))) return true;
 		var validator = this.getValidator(className);
-		warn = $pick(warn, false);
+		warn = warn != null ? warn : false;
 		if (field.hasClass('warnOnly')) warn = true;
 		var isValid = field.hasClass('ignoreValidation') || (validator ? validator.test(field) : true);
 		if (validator && field.isVisible()) this.fireEvent('elementValidate', [isValid, field, className, warn]);
@@ -300,7 +300,7 @@ Form.Validator.adders = {
 	},
 
 	addAllThese : function(validators){
-		$A(validators).each(function(validator){
+		Array.from(validators).each(function(validator){
 			this.add(validator[0], validator[1]);
 		}, this);
 	},
@@ -311,7 +311,7 @@ Form.Validator.adders = {
 
 };
 
-$extend(Form.Validator, Form.Validator.adders);
+Object.append(Form.Validator, Form.Validator.adders);
 
 Form.Validator.implement(Form.Validator.adders);
 
@@ -340,12 +340,12 @@ Form.Validator.addAllThese([
 
 	['minLength', {
 		errorMsg: function(element, props){
-			if ($type(props.minLength))
+			if (typeOf(props.minLength))
 				return Form.Validator.getMsg('minLength').substitute({minLength:props.minLength,length:element.get('value').length });
 			else return '';
 		},
 		test: function(element, props){
-			if ($type(props.minLength)) return (element.get('value').length >= $pick(props.minLength, 0));
+			if (typeOf(props.minLength)) return (element.get('value').length >= props.minLength || 0);
 			else return true;
 		}
 	}],
@@ -353,13 +353,13 @@ Form.Validator.addAllThese([
 	['maxLength', {
 		errorMsg: function(element, props){
 			//props is {maxLength:10}
-			if ($type(props.maxLength))
+			if (typeOf(props.maxLength))
 				return Form.Validator.getMsg('maxLength').substitute({maxLength:props.maxLength,length:element.get('value').length });
 			else return '';
 		},
 		test: function(element, props){
 			//if the value is <= than the maxLength value, element passes test
-			return (element.get('value').length <= $pick(props.maxLength, 10000));
+			return (element.get('value').length <= props.maxLength || 10000);
 		}
 	}],
 
