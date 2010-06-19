@@ -83,7 +83,7 @@ var Builder = {
 
 	initialize: function(root){
 		if (root) this.root = root;
-		this.includeType('core');
+		this.includeType('more');
 		return this;
 	},
 

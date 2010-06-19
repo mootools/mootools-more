@@ -10,12 +10,19 @@ description: Class for creating a drag and drop sorting interface for lists of i
 license: MIT-style license
 
 authors:
+<<<<<<< HEAD
+  - Tom Occhino
+
+requires:
+  - /Drag.Move
+=======
 - Tom Occhino
 - Jacob Thornton
 
 requires:
 - /Drag.Move
-- /Element.Delegation
+- /MooTools.More/Element.Delegation
+>>>>>>> updates sortables to use event delegation model -- items no longer have to be manually added to and removed from sortable lists
 
 provides: [Sortables]
 
@@ -34,9 +41,14 @@ var Sortables = new Class({
 		opacity: 1,
 		clone: false,
 		revert: false,
+<<<<<<< HEAD
 		handle: false,
 		constrain: false,
 		preventDefault: false
+=======
+		constrain: false,
+		handle: ''
+>>>>>>> updates sortables to use event delegation model -- items no longer have to be manually added to and removed from sortable lists
 	},
 
 	initialize: function(lists, options){
@@ -63,20 +75,18 @@ var Sortables = new Class({
 	addItems: function(){
 		Array.flatten(arguments).each(function(element){
 			this.elements.push(element);
-		}, this);
+			}, this);
 		return this;
 	},
 
 	addLists: function() {
-		Array.flatten(arguments).each(function(list) {
-			this.lists.push(list);
-			this.elements.extend(list.getChildren());
-			var start = !this.options.handle ? this.start.bindWithEvent(this) : function(event, element) {
-				this.start(event, element.getParent('li'));
-			}.bind(this);
-			var relay = 'li';
-			if (this.options.handle) relay += ' ' + this.options.handle;
-			list.addEvent('mousedown:relay(' + relay + ')', start);
+  	Array.flatten(arguments).each(function(list) {
+  		this.lists.push(list);
+      this.elements.extend(list.getChildren());
+  		var start = !this.options.handle ? this.start.bindWithEvent(this) : function(event, element) {
+  			this.start(event, element.getParent('li'));
+  		}.bind(this);
+			list.addEvent('mousedown:relay(li ' + this.options.handle + ')', start);
 		}, this);
 		return this;
 	},
