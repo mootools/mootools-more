@@ -26,12 +26,12 @@ Fx.Reveal = new Class({
 
 	Extends: Fx.Morph,
 
-	options: {/*	  
+	options: {/*
 		onShow: $empty(thisElement),
 		onHide: $empty(thisElement),
 		onComplete: $empty(thisElement),
 		heightOverride: null,
-		widthOverride: null, */
+		widthOverride: null,*/
 		link: 'cancel',
 		styles: ['padding', 'border', 'margin'],
 		transitionOpacity: !Browser.Engine.trident4,
@@ -91,15 +91,13 @@ Fx.Reveal = new Class({
 	reveal: function(){
 		if (!this.showing && !this.hiding){
 			if (this.element.getStyle('display') == 'none' ||
-				 this.element.getStyle('visiblity') == 'hidden' ||
-				 this.element.getStyle('opacity') == 0){
+				this.element.getStyle('visiblity') == 'hidden' ||
+				this.element.getStyle('opacity') == 0){
 				this.showing = true;
 				this.hiding = this.hidden =  false;
 				var startStyles;
 				this.cssText = this.element.style.cssText;
-				//toggle display, but hide it
 				this.element.measure(function(){
-					//create the styles for the opened/visible state
 					startStyles = this.element.getComputedSize({
 						styles: this.options.styles,
 						mode: this.options.mode
@@ -108,25 +106,22 @@ Fx.Reveal = new Class({
 				$each(startStyles, function(style, name){
 					startStyles[name] = style;
 				});
-				//if we're overridding height/width
 				if ($chk(this.options.heightOverride)) startStyles.height = this.options.heightOverride.toInt();
 				if ($chk(this.options.widthOverride)) startStyles.width = this.options.widthOverride.toInt();
-				if (this.options.transitionOpacity) {
+				if (this.options.transitionOpacity){
 					this.element.setStyle('opacity', 0);
 					startStyles.opacity = 1;
 				}
-				//create the zero state for the beginning of the transition
 				var zero = {
 					height: 0,
 					display: this.options.display
 				};
-				$each(startStyles, function(style, name){ zero[name] = 0; });
-				//set to zero
+				$each(startStyles, function(style, name){
+					zero[name] = 0;
+				});
 				this.element.setStyles($merge(zero, {overflow: 'hidden'}));
-				//hide inputs
 				var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
 				if (hideThese) hideThese.setStyle('visibility', 'hidden');
-				//start the effect
 				this.start(startStyles);
 				this.$chain.unshift(function(){
 					this.element.style.cssText = this.cssText;
@@ -152,8 +147,8 @@ Fx.Reveal = new Class({
 
 	toggle: function(){
 		if (this.element.getStyle('display') == 'none' ||
-			 this.element.getStyle('visiblity') == 'hidden' ||
-			 this.element.getStyle('opacity') == 0){
+			this.element.getStyle('visiblity') == 'hidden' ||
+			this.element.getStyle('opacity') == 0){
 			this.reveal();
 		} else {
 			this.dissolve();
@@ -219,6 +214,5 @@ Element.implement({
 			}).delay(params.duration || 2000);
 		});
 	}
-
 
 });
