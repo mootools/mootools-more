@@ -59,21 +59,22 @@ provides: [Element.Pin]
 							top: pinnedPosition.y,
 							left: pinnedPosition.x
 						}).addClass('isPinned');
-						this.store('pin:_scrollFixer', (function(){
+						var scrollFixer = function(){
 							if (this.retrieve('pin:_pinned'))
 								var scroll = window.getScroll();
 								this.setStyles({
 									top: currentPosition.top.toInt() + scroll.y,
 									left: currentPosition.left.toInt() + scroll.x
 								});
-						}).bind(this));
-						window.addEvent('scroll', this.retrieve('pin:_scrollFixer'));
+						}.bind(this);
+						this.store('pin:_scrollFixer', scrollFixer);
+						window.addEvent('scroll', scrollFixer);
 					}
 					this.store('pin:_pinned', true);
 				}
 			} else {
 				var op;
-				if (!Browser.Engine.trident){
+				if (!Browser.ie){
 					var parent = this.getParent();
 					op = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 				}
@@ -93,7 +94,7 @@ provides: [Element.Pin]
 						left: pinnedPosition.x
 					};
 				}
-				this.setStyles($merge(reposition, {position: 'absolute'})).removeClass('isPinned');
+				this.setStyles(Object.merge(reposition, {position: 'absolute'})).removeClass('isPinned');
 			}
 			return this;
 		},
