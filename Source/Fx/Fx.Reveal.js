@@ -37,6 +37,7 @@ Fx.Reveal = new Class({
 		transitionOpacity: !Browser.Engine.trident4,
 		mode: 'vertical',
 		display: 'block',
+		opacity: 1,
 		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed' : null
 	},
 
@@ -52,7 +53,7 @@ Fx.Reveal = new Class({
 					styles: this.options.styles,
 					mode: this.options.mode
 				});
-				if (this.options.transitionOpacity) startStyles.opacity = 1;
+				if (this.options.transitionOpacity) startStyles.opacity = this.options.opacity;
 
 				var zero = {};
 				$each(startStyles, function(style, name){
@@ -119,7 +120,7 @@ Fx.Reveal = new Class({
 				if ($chk(this.options.widthOverride)) startStyles.width = this.options.widthOverride.toInt();
 				if (this.options.transitionOpacity){
 					this.element.setStyle('opacity', 0);
-					startStyles.opacity = 1;
+					startStyles.opacity = this.options.opacity;
 				}
 
 				var zero = {
