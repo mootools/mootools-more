@@ -27,9 +27,9 @@ Fx.Reveal = new Class({
 	Extends: Fx.Morph,
 
 	options: {/*
-		onShow: $empty(thisElement),
-		onHide: $empty(thisElement),
-		onComplete: $empty(thisElement),
+		onShow: function(thisElement){},
+		onHide: function(thisElement){},
+		onComplete: function(thisElement){},
 		heightOverride: null,
 		widthOverride: null,*/
 		link: 'cancel',
@@ -56,7 +56,7 @@ Fx.Reveal = new Class({
 				if (this.options.transitionOpacity) startStyles.opacity = this.options.opacity;
 
 				var zero = {};
-				$each(startStyles, function(style, name){
+				Object.each(startStyles, function(style, name){
 					zero[name] = [style, 0];
 				});
 
@@ -71,9 +71,6 @@ Fx.Reveal = new Class({
 				this.$chain.unshift(function(){
 					if (this.hidden){
 						this.hiding = false;
-						$each(startStyles, function(style, name){
-							startStyles[name] = style;
-						}, this);
 						this.element.style.cssText = this.cssText;
 						this.element.setStyle('display', 'none');
 						if (hideThese) hideThese.setStyle('visibility', 'visible');
@@ -102,8 +99,9 @@ Fx.Reveal = new Class({
 			if (this.element.getStyle('display') == 'none' ||
 				this.element.getStyle('visiblity') == 'hidden' ||
 				this.element.getStyle('opacity') == 0){
+				this.hiding = false;
 				this.showing = true;
-				this.hiding = this.hidden =  false;
+				this.hidden = false;
 				this.cssText = this.element.style.cssText;
 
 				var startStyles;
@@ -113,11 +111,8 @@ Fx.Reveal = new Class({
 						mode: this.options.mode
 					});
 				}.bind(this));
-				$each(startStyles, function(style, name){
-					startStyles[name] = style;
-				});
-				if ($chk(this.options.heightOverride)) startStyles.height = this.options.heightOverride.toInt();
-				if ($chk(this.options.widthOverride)) startStyles.width = this.options.widthOverride.toInt();
+				if (this.options.heightOverride != null) startStyles.height = this.options.heightOverride.toInt();
+				if (this.options.widthOverride != null) startStyles.width = this.options.widthOverride.toInt();
 				if (this.options.transitionOpacity){
 					this.element.setStyle('opacity', 0);
 					startStyles.opacity = this.options.opacity;
@@ -127,7 +122,7 @@ Fx.Reveal = new Class({
 					height: 0,
 					display: this.options.display
 				};
-				$each(startStyles, function(style, name){
+				Object.each(startStyles, function(style, name){
 					zero[name] = 0;
 				});
 				zero.overflow = 'hidden';
