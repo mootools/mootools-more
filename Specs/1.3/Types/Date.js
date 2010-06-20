@@ -21,13 +21,14 @@ describe('Date.clone', {
 		var dc = d.clone();
 		dc.set('date', 1);
 		value_of(d.get('time')).should_not_be(dc.get('time'));
-  }
+	}
 
 });
 
 describe('Date.increment', {
-  /* All these tests avoid leap years and daylight savings dates.
-   * Other tests may be needed. */
+
+	// All these tests avoid leap years and daylight savings dates.
+	// Other tests may be needed.
 	'should increment a Date instance using milliseconds': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 1, 1, 1, 2));
@@ -81,8 +82,8 @@ describe('Date.increment', {
 
 describe('Date.decrement', {
 
-  /* All these tests avoid leap years and daylight savings dates.
-   * Other tests may be needed. */
+	// All these tests avoid leap years and daylight savings dates.
+	// Other tests may be needed.
 	'should decrement a Date instance using milliseconds': function(){
 		var d =  new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 2));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 1));
@@ -145,10 +146,10 @@ describe('Date.isLeapYear', {
 		/* better mut messy error output! */
 		/*
 		var years = $H({'1600':true, '1900':false, '2000':true, '2002':false, '2004':true});
-			var result = new Hash(), year, d;
-			years.each(function(bool, year){
-		  d = new Date(Date.UTC(Number(year),0,1));
-			  result.set(year, d.isLeapYear());
+		var result = new Hash(), year, d;
+		years.each(function(bool, year){
+			d = new Date(Date.UTC(Number(year),0,1));
+			result.set(year, d.isLeapYear());
 		});
 		expect(result).should_be(years);
 		)
@@ -169,9 +170,9 @@ describe('Date.clearTime', {
 });
 
 describe('Date.diff', {
-  /* All these tests avoid leap years and daylight savings dates.
-   * Other tests may be needed. */
 
+	// All these tests avoid leap years and daylight savings dates.
+	// Other tests may be needed.
 	'should compare two Date instances (milliseconds)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 0));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 999));
@@ -251,15 +252,16 @@ describe('Date.getWeek', {
 describe('Date.format', {
 
 	'should format a Date instance as a string': function(){
+		Locale.use('en-US');
 		var d = new Date('Thu Nov 20 1997 01:02:03');
 		var d2 = new Date('Thu Nov 2 1997 20:02:03');
-		value_of(d.format('%a')).should_be(Date.getMsg('days')[4].substr(0,3));
+		value_of(d.format('%a')).should_be(Date.getMsg('days_abbr')[4]);
 		value_of(d.format('%a')).should_be('Thu');
 
 		value_of(d.format('%A')).should_be(Date.getMsg('days')[4]);
 		value_of(d.format('%A')).should_be('Thursday');
 
-		value_of(d.format('%b')).should_be(Date.getMsg('months')[10].substr(0,3));
+		value_of(d.format('%b')).should_be(Date.getMsg('months_abbr')[10]);
 		value_of(d.format('%b')).should_be('Nov');
 
 		value_of(d.format('%B')).should_be(Date.getMsg('months')[10]);
@@ -316,7 +318,15 @@ describe('Date.format', {
 		value_of(d.format('long')).should_be(d.format('%B') + ' ' + d.format('%d') + ', ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M'));
 		value_of(d.format('long')).should_be('November 20, 1997 01:02');
 
+	},
+
+	'should return accented dates in correct abbreviated form': function(){
+		Locale.use('fr-FR');
+		d = new Date('Thu Feb 20 1997 01:02:03');
+		value_of(d.format('%b')).should_be('Fév');
+		Locale.use('en-US');
 	}
+
 });
 
 describe('Date.getOrdinal', {
@@ -386,7 +396,7 @@ describe('Date.parse', {
 
 	'should parse a string value into a date': function(){
 		Locale.list().each(function(lang){
-			MooTools.lang.setLanguage(lang);
+			Locale.use(lang);
 
 			var d = new Date(2000, 11, 2, 0, 0, 0, 0);
 			value_of(Date.parse(d.format('%x'))).should_be(d);
@@ -413,12 +423,13 @@ describe('Date.parse', {
 			value_of(Date.parse('2000')).should_be(d);
 
 			d = new Date().clearTime();
-			value_of(Date.parse(d.set({date: 1, mo: 11}).format('%B'))).should_be(d);
+			value_of(Date.parse(d.set({date: 1, mo: d.getMonth()}).format('%B'))).should_be(d);
 		});
+		Locale.use('en-US');
 	},
 
 	'should consistently parse dates on any day/month/year': function(){
-		// monkey patch clearTime so parsing starts on Jan 1, 2001
+		// Monkey patch clearTime so parsing starts on Jan 1, 2001
 		var clearTime = Date.prototype.clearTime;
 		Date.prototype.clearTime = function(){
 			return clearTime.call(this.set({mo: 0, date: 30, year: 2001}));

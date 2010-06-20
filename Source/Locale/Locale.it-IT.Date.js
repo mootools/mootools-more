@@ -22,7 +22,9 @@ provides: [Locale.it-IT.Date]
 Locale.define('it-IT', 'Date', {
 
 	months: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
-	days: ['Domenica', 'Luned&igrave;', 'Marted&igrave;', 'Mercoled&igrave;', 'Gioved&igrave;', 'Venerd&igrave;', 'Sabato'],
+	months_abbr: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
+	days: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+	days_abbr: ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
 
 	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
@@ -32,7 +34,7 @@ Locale.define('it-IT', 'Date', {
 	PM: 'PM',
 
 	// Date.Extras
-	ordinal: '&ordm;',
+	ordinal: 'º',
 
 	lessThanMinuteAgo: 'meno di un minuto fa',
 	minuteAgo: 'circa un minuto fa',

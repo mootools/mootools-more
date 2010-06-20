@@ -21,7 +21,9 @@ provides: [Locale.pl-PL.Date]
 Locale.define('pl-PL', 'Date', {
 
 	months: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
+	months_abbr: ['Sty', 'Lu', 'Mar', 'Kw', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Pa', 'Lis', 'Gru'],
 	days: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+	days_abbr: ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So'],
 
 	// Culture's date order: YYYY-MM-DD
 	dateOrder: ['year', 'month', 'date'],

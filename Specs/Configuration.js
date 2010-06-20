@@ -141,6 +141,7 @@ Configuration.source = {
 			'Locale/Locale',
 			'Locale/Locale.en-US.Form.Validator',
 			'Locale/Locale.en-US.Date',
+			'Locale/Locale.fr-FR.Date',
 			'Locale/Locale.en-US.Number',
 
 			'Class/Class.Binds',
