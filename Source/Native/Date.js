@@ -176,9 +176,9 @@ Date.implement({
 		return f.replace(/%([a-z%])/gi,
 			function($0, $1){
 				switch ($1){
-					case 'a': return Date.getMsg('days')[d.get('day')].substr(0, 3);
+					case 'a': return Date.getMsg('days_abbr')[d.get('day')];
 					case 'A': return Date.getMsg('days')[d.get('day')];
-					case 'b': return Date.getMsg('months')[d.get('month')].substr(0, 3);
+					case 'b': return Date.getMsg('months_abbr')[d.get('month')];
 					case 'B': return Date.getMsg('months')[d.get('month')];
 					case 'c': return d.toString();
 					case 'd': return pad(d.get('date'), 2);
@@ -417,7 +417,7 @@ var build = function(format){
 			parsed.push($1);
 			return '(' + p.source + ')';
 		}
-	).replace(/\[a-z\]/gi, '[a-z\\u00c0-\\uffff]'); // handle unicode words
+	).replace(/\[a-z\]/gi, '[a-z\\u00c0-\\uffff;\&]'); // handle unicode words
 
 	return {
 		format: format,

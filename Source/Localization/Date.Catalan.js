@@ -23,7 +23,9 @@ provides: [Date.Catalan]
 MooTools.lang.set('ca-CA', 'Date', {
 
 	months: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juli', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
+	months_abbr: ['Gen', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Des'],
 	days: ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'],
+	days_abbr: ['Dmg', 'Dll', 'Dmt', 'Dmc', 'Dj', 'Dv', 'Ds'],
 
 	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],

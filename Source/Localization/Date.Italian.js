@@ -21,14 +21,17 @@ provides: [Date.Italian]
 ...
 */
 
+
 MooTools.lang.set('it-IT', 'Date', {
 
 	months: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+	months_abbr: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
 	days: ['Domenica', 'Luned&igrave;', 'Marted&igrave;', 'Mercoled&igrave;', 'Gioved&igrave;', 'Venerd&igrave;', 'Sabato'],
-
+	days_abbr: ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
+	
 	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
-	shortDate: '%d/%m/%Y',
+  shortDate: '%d/%m/%Y',
 	shortTime: '%H.%M',
 	AM: 'AM',
 	PM: 'PM',

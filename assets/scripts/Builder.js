@@ -56,7 +56,7 @@ var Builder = {
 		},
 
 		lang: {
-			'Localization':['Date.Italian', 'Date.Swedish', 'Date.Norwegian', 'Form.Validator.French']
+			'Localization':['Date.Italian', 'Date.French', 'Date.Swedish', 'Date.Norwegian', 'Form.Validator.French']
 		},
 
 		specs: {

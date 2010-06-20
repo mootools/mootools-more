@@ -24,7 +24,9 @@ provides: [Date.French]
 MooTools.lang.set('fr-FR', 'Date', {
 
 	months: ['Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Ao&ucirc;t', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre'],
-	days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+	months_abbr: ['Jan', 'F&eacute;v', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Ao&ucirc;', 'Sep', 'Oct', 'Nov', 'D&eacute;c'],
+  days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+  days_abbr: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
 
 	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
@@ -34,9 +36,7 @@ MooTools.lang.set('fr-FR', 'Date', {
 	PM: 'PM',
 
 	// Date.Extras
-	ordinal: function(dayOfMonth){
-		return (dayOfMonth > 1) ? '' : 'er';
-	},
+	ordinal: 'er',
 
 	lessThanMinuteAgo: "il y a moins d'une minute",
 	minuteAgo: 'il y a une minute',

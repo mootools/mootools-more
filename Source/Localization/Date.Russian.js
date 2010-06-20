@@ -45,9 +45,11 @@ var pluralize = function (n, one, few, many, other){
 MooTools.lang.set('ru-RU-unicode', 'Date', {
 
 	months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+	months_abbr: ['янв', 'февр', 'март', 'апр', 'май','июнь','июль','авг','сент','окт','нояб','дек'],
 	days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-
-	// Culture's date order: DD.MM.YYYY
+	days_abbr: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+	
+  //Culture's date order: MM/DD/YYYY
 	dateOrder: ['date', 'month', 'year'],
 	shortDate: '%d.%m.%Y',
 	shortTime: '%H:%M',
