@@ -25,10 +25,10 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 
 * all the options passed along to [Fx.Morph][] (transition, duration, etc.); (optional); PLUS
 * styles - (*array*) css properties to transition in addition to width/height;  defaults to *['padding','border','margin']*
-* mode - (*string*) "vertical", 2horizontal", or "both" to describe how the element should slide in; defaults to *"vertical"*
+* mode - (*string*) "vertical", "horizontal", or "both" to describe how the element should slide in; defaults to *"vertical"*
 * heightOverride - (*integer*) height to open to; overrides the default offsetHeight
 * widthOverride - (*integer*) width to open to; overrides the default offsetWidth
-* display - (*string*) the property for the display style when your reveal the element. Defaults to *block* but could be, for instance, *list-style*, *inline-block*, etc.
+* display - (*string*) the property for the display style when your reveal the element. Defaults to *block* but could be, for instance, *list-item*, *inline-block*, etc.
 * opacity - (*float*) the opacity value for fading in an element; defaults to *1* but can be set to a number between zero and one to have the element fade in to a partially transparent state.
 
 ### Events
