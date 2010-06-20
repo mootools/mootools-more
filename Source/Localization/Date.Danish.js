@@ -24,7 +24,9 @@ provides: [Date.Danish]
 MooTools.lang.set('da-DK', 'Date', {
 
 	months: ['Januar', 'Februa', 'Marts', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December'],
-	days: ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'],
+	months_abbr: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+  days: ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'],
+	days_abbr: ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'],
 
 	// Culture's date order: DD-MM-YYYY
 	dateOrder: ['date', 'month', 'year'],

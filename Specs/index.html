@@ -16,15 +16,16 @@
 		Builder.includeType('core');
 
 		Builder.root = "../";
-		Builder.includeType('more');
-	
-		Builder.root = "../";
+    Builder.includeType('more');
+    Builder.root = "../";
+    Builder.includeType('lang');
+    Builder.root = "../";
 		Builder.scripts.specs = {
 			'Core' : ['Lang', 'Log'],
 			'Class' : ['Class.Refactor', 'Class.Binds', 'Class.Occlude'],
 			'Native' : ['Date', 'Date.Extras', 'Hash.Extras', 'String.Extras', 'Array.Extras', 'String.QueryString', 'URI', 'URI.Relative'],
 			'Element' : ['Element.Forms', 'Element.Measure', 'Elements.From'],
-			'Utilities' : ['Color', 'Hash.Cookie']
+      'Utilities' : ['Color', 'Hash.Cookie']
 		};
 
 		if (!Builder.includeRequest('specs')) Builder.includeType('specs');

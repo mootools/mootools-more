@@ -26,8 +26,10 @@ provides: [Date.German]
 MooTools.lang.set('de-DE', 'Date', {
 
 	months: ['Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+	months_abbr: ['Jan', 'Feb', 'M&auml;r', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
 	days: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
-
+	days_abbr: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+	
 	// Culture's date order: DD.MM.YYYY
 	dateOrder: ['date', 'month', 'year'],
 	shortDate: '%d.%m.%Y',

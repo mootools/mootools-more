@@ -23,7 +23,9 @@ provides: [Date.Polish]
 MooTools.lang.set('pl-PL', 'Date', {
 
 	months: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
+	months_abbr: ['Sty', 'Lu', 'Mar', 'Kw', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Pa', 'Lis', 'Gru'],
 	days: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+	days_abbr: ['Nie', 'Pn', 'Wt', 'Åšr', 'Czw', 'Pt', 'So'],
 
 	// Culture's date order: YYYY-MM-DD
 	dateOrder: ['year', 'month', 'date'],
@@ -52,5 +54,4 @@ MooTools.lang.set('pl-PL', 'Date', {
 	hoursUntil: 'za około {delta} godzin',
 	dayUntil: 'za 1 dzień',
 	daysUntil: 'za {delta} dni'
-
 });

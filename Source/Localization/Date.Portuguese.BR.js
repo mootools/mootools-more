@@ -23,9 +23,11 @@ provides: [Date.Portuguese.BR]
 MooTools.lang.set('pt-BR', 'Date', {
 
 	months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+	months_abbr: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
 	days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
-
-	// Culture's date order: DD/MM/YYYY
+	days_abbr: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+  
+  //Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
 	shortDate: '%d/%m/%Y',
 	shortTime: '%H:%M',

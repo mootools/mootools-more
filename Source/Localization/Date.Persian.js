@@ -23,9 +23,11 @@ provides: [Date.Persian]
 MooTools.lang.set('fa', 'Date', {
 
 	months: ['ژانویه', 'فوریه', 'مارس', 'آپریل', 'مه', 'ژوئن', 'ژوئیه', 'آگوست', 'سپتامبر', 'اکتبر', 'نوامبر', 'دسامبر'],
+	months_abbr: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
 	days: ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'],
-
-	// Culture's date order: MM/DD/YYYY
+  days_abbr: ['ي', 'د', 'س', 'چ', 'پ', 'ج', 'ش'],
+	
+  // Culture's date order: MM/DD/YYYY
 	dateOrder: ['month', 'date', 'year'],
 	shortDate: '%m/%d/%Y',
 	shortTime: '%I:%M%p',

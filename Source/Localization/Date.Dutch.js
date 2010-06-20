@@ -24,7 +24,9 @@ provides: [Date.Dutch]
 MooTools.lang.set('nl-NL', 'Date', {
 
 	months: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
-	days: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
+  months_abbr: ['jan', 'feb', 'maa', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
+  days: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
+  days_abbr: ['zon', 'maa', 'din', 'woe', 'don', 'vri', 'zat'],
 
 	// Culture's date order: DD-MM-YYYY
 	dateOrder: ['date', 'month', 'year'],
