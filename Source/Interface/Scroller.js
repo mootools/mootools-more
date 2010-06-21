@@ -40,7 +40,7 @@ var Scroller = new Class({
 		this.setOptions(options);
 		this.element = document.id(element);
 		this.docBody = document.id(this.element.getDocument().body);
-		this.listener = ($type(this.element) != 'element') ?  this.docBody : this.element;
+		this.listener = (typeOf(this.element) != 'element') ?  this.docBody : this.element;
 		this.timer = null;
 		this.bound = {
 			attach: this.attach.bind(this),
@@ -54,6 +54,7 @@ var Scroller = new Class({
 			mouseover: this.bound.attach,
 			mouseout: this.bound.detach
 		});
+		return this;
 	},
 
 	stop: function(){
@@ -62,7 +63,8 @@ var Scroller = new Class({
 			mouseout: this.bound.detach
 		});
 		this.detach();
-		this.timer = $clear(this.timer);
+		this.timer = clearInterval(this.timer);
+		return this;
 	},
 
 	attach: function(){
@@ -71,7 +73,7 @@ var Scroller = new Class({
 
 	detach: function(){
 		this.listener.removeEvent('mousemove', this.bound.getCoords);
-		this.timer = $clear(this.timer);
+		this.timer = clearInterval(this.timer);
 	},
 
 	getCoords: function(event){
@@ -80,17 +82,17 @@ var Scroller = new Class({
 	},
 
 	scroll: function(){
-		var size = this.element.getSize(), 
-			scroll = this.element.getScroll(), 
-			pos = this.element != this.docBody ? this.element.getOffsets() : {x: 0, y:0}, 
-			scrollSize = this.element.getScrollSize(), 
+		var size = this.element.getSize(),
+			scroll = this.element.getScroll(),
+			pos = this.element != this.docBody ? this.element.getOffsets() : {x: 0, y:0},
+			scrollSize = this.element.getScrollSize(),
 			change = {x: 0, y: 0},
 			top = this.options.area.top || this.options.area,
-		  bottom = this.options.area.bottom || this.options.area;
+			bottom = this.options.area.bottom || this.options.area;
 		for (var z in this.page){
-			if (this.page[z] < (top + pos[z]) && scroll[z] != 0) {
+			if (this.page[z] < (top + pos[z]) && scroll[z] != 0){
 				change[z] = (this.page[z] - top - pos[z]) * this.options.velocity;
-			} else if (this.page[z] + bottom > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z]) {
+			} else if (this.page[z] + bottom > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z]){
 				change[z] = (this.page[z] - size[z] + bottom - pos[z]) * this.options.velocity;
 			}
 		}
