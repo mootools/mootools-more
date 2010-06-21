@@ -34,11 +34,11 @@ Fx.Reveal = new Class({
 		widthOverride: null,*/
 		link: 'cancel',
 		styles: ['padding', 'border', 'margin'],
-		transitionOpacity: !Browser.Engine.trident4,
+		transitionOpacity: !Browser.ie6,
 		mode: 'vertical',
 		display: 'block',
 		opacity: 1,
-		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed' : null
+		hideInputs: Browser.ie ? 'select, input, textarea, object, embed' : null
 	},
 
 	dissolve: function(){
