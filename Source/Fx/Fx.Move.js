@@ -33,7 +33,7 @@ Fx.Move = new Class({
 	},
 
 	start: function(destination){
-		return this.parent(this.element.position($merge(this.options, destination, {returnPos: true})));
+		return this.parent(this.element.position(Object.merge(this.options, destination, {returnPos: true})));
 	}
 
 });
@@ -43,7 +43,7 @@ Element.Properties.move = {
 	set: function(options){
 		var morph = this.retrieve('move');
 		if (morph) morph.cancel();
-		return this.eliminate('move').store('move:options', $extend({link: 'cancel'}, options));
+		return this.eliminate('move').store('move:options', Object.append({link: 'cancel'}, options));
 	},
 
 	get: function(options){
