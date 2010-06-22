@@ -36,17 +36,21 @@ Fx.Slide = new Class({
 		this.addEvent('complete', function(){
 			this.open = (this.wrapper['offset' + this.layout.capitalize()] != 0);
 			if (this.open) this.wrapper.setStyle('height', '');
-			if (this.open && Browser.Engine.webkit419) this.element.dispose().inject(this.wrapper);
+			if (this.open && Browser.safari && Browser.version == 2) this.element.dispose().inject(this.wrapper);
 		}, true);
+		
 		this.element = this.subject = document.id(element);
 		this.parent(options);
 		var wrapper = this.element.retrieve('wrapper');
 		var styles = this.element.getStyles('margin', 'position', 'overflow');
-		if (this.options.hideOverflow) styles = $extend(styles, {overflow: 'hidden'});
+		
+		if (this.options.hideOverflow) styles = Object.append(styles, {overflow: 'hidden'});
 		if (this.options.wrapper) wrapper = document.id(this.options.wrapper).setStyles(styles);
+		
 		this.wrapper = wrapper || new Element('div', {
 			styles: styles
 		}).wraps(this.element);
+		
 		this.element.store('wrapper', this.wrapper).setStyle('margin', 0);
 		this.now = [];
 		this.open = true;
@@ -123,7 +127,7 @@ Element.Properties.slide = {
 	set: function(options){
 		var slide = this.retrieve('slide');
 		if (slide) slide.cancel();
-		return this.eliminate('slide').store('slide:options', $extend({link: 'cancel'}, options));
+		return this.eliminate('slide').store('slide:options', Object.append({link: 'cancel'}, options));
 	},
 
 	get: function(options){
