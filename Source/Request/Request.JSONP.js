@@ -12,11 +12,11 @@ license: MIT-style license
 authors:
   - Aaron Newton
   - Guillermo Rauch
+  - Arian Stolwijk
 
 requires:
   - Core/Element
   - Core/Request
-  - /Log
 
 provides: [Request.JSONP]
 
@@ -24,115 +24,90 @@ provides: [Request.JSONP]
 */
 
 Request.JSONP = new Class({
-
-	Implements: [Chain, Events, Options, Log],
-
+	
+	Implements: [Chain, Events, Options],
+	
 	options: {/*
-		onRetry: function(intRetries){},
 		onRequest: function(scriptElement){},
 		onComplete: function(data){},
 		onSuccess: function(data){},
-		onCancel: function(){},
-		log: false,
-		*/
+		onCancel: function(){}, */
 		url: '',
-		data: {},
-		retries: 0,
-		timeout: 0,
-		link: 'ignore',
 		callbackKey: 'callback',
-		injectScript: document.head
+		injectScript: document.head,
+		data: {},
+		link: 'ignore',
+		timeout: 0,
+		retries: 0
 	},
-
+	
 	initialize: function(options){
 		this.setOptions(options);
-		if (this.options.log) this.enableLog();
-		this.running = false;
-		this.requests = 0;
-		this.triesRemaining = [];
 	},
 
-	check: function(){
-		if (!this.running) return true;
-		switch (this.options.link){
-			case 'cancel': this.cancel(); return true;
-			case 'chain': this.chain(this.caller.bind(this, arguments)); return false;
-		}
-		return false;
-	},
-
+	check: Request.prototype.check,
+	
 	send: function(options){
-		if (!(arguments[1] || arguments[1] === 0) && !this.check(options)) return this;
-
-		var type = typeOf(options), 
-				old = this.options, 
-				index = (arguments[1] || arguments[1] === 0) ? arguments[1] : this.requests++;
+		if (!this.check(options)) return this;
+		this.running = true;
+		
+		var type = typeOf(options);
 		if (type == 'string' || type == 'element') options = {data: options};
+		if(typeOf(options) == 'object') options = Object.merge(this.options, options);
+		if(options == null) options = this.options;
 
-		options = Object.extend({data: old.data, url: old.url}, options);
+		var data = options.data;
+		switch (typeOf(data)){
+			case 'element': data = document.id(data).toQueryString(); break;
+			case 'object': case 'hash': data = Object.toQueryString(data);
+		}
 
-		if (!(this.triesRemaining[index] || this.triesRemaining[index] === 0)) this.triesRemaining[index] = this.options.retries;
-		var remaining = this.triesRemaining[index];
+		var index = this.index = Request.JSONP.counter++;
 
-		(function(){
-			var script = this.getScript(options);
-			this.log('JSONP retrieving script with url: ' + script.get('src'));
+		var src = options.url + 
+			(options.url.test('\\?') ? '&' :'?') + 
+			(options.callbackKey) + 
+			'=Request.JSONP.request_map.request_'+ index + 
+			(data ? '&' + data : '');		
+		
+		var script = this.script = new Element('script', {
+			type: 'text/javascript',
+			src: src
+		});
+		
+		var request = function(){
+			script.inject(options.injectScript);
 			this.fireEvent('request', script);
-			this.running = true;
-
-			(function(){
-				if (remaining){
-					this.triesRemaining[index] = remaining - 1;
-					if (script){
-						script.destroy();
-						this.send(options, index).fireEvent('retry', this.triesRemaining[index]);
-					}
-				} else if(script && this.options.timeout){
-					script.destroy();
-					this.cancel().fireEvent('failure');
-				}
-			}).delay(this.options.timeout, this);
-		}).delay(Browser.ie ? 50 : 0, this);
+		}.bind(this);
+		
+		if(options.timeout) request.delay(options.timeout);
+		else request();
+		
+		Request.JSONP.request_map['request_' + index] = function(){
+			this.success(arguments, index);
+		}.bind(this);
+		
 		return this;
 	},
-
+	
+	success: function(args, index){
+		this.clear();
+		this.fireEvent('complete', args).fireEvent('success', args).callChain();
+	},
+	
 	cancel: function(){
-		if (!this.running) return this;
-		this.running = false;
+		this.clear();
 		this.fireEvent('cancel');
 		return this;
 	},
-
-	getScript: function(options){
-		var index = Request.JSONP.counter,
-				data;
-		Request.JSONP.counter++;
-
-		switch (typeOf(options.data)){
-			case 'element': data = document.id(options.data).toQueryString(); break;
-			case 'object': case 'hash': data = Object.toQueryString(options.data);
-		}
-
-		var src = options.url + 
-			 (options.url.test('\\?') ? '&' :'?') + 
-			 (options.callbackKey || this.options.callbackKey) + 
-			 '=Request.JSONP.request_map.request_'+ index + 
-			 (data ? '&' + data : '');
-		if (src.length > 2083) this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
-
-		var script = new Element('script', {type: 'text/javascript', src: src});
-		Request.JSONP.request_map['request_' + index] = function(){ this.success(arguments, script); }.bind(this);
-		return script.inject(this.options.injectScript);
-	},
-
-	success: function(args, script){
-		if (script) script.destroy();
+	
+	clear: function(){
+		if (this.script) this.script.destroy();
 		this.running = false;
-		this.log('JSONP successfully retrieved: ', args);
-		this.fireEvent('complete', args).fireEvent('success', args).callChain();
 	}
-
+	
 });
 
 Request.JSONP.counter = 0;
 Request.JSONP.request_map = {};
+
