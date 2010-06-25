@@ -36,9 +36,7 @@ Request.JSONP = new Class({
 		callbackKey: 'callback',
 		injectScript: document.head,
 		data: {},
-		link: 'ignore',
-		timeout: 0,
-		retries: 0
+		link: 'ignore'
 	},
 	
 	initialize: function(options){
@@ -73,15 +71,9 @@ Request.JSONP = new Class({
 		var script = this.script = new Element('script', {
 			type: 'text/javascript',
 			src: src
-		});
+		}).inject(options.injectScript);
 		
-		var request = function(){
-			script.inject(options.injectScript);
-			this.fireEvent('request', script);
-		}.bind(this);
-		
-		if(options.timeout) request.delay(options.timeout);
-		else request();
+		this.fireEvent('request', script);
 		
 		Request.JSONP.request_map['request_' + index] = function(){
 			this.success(arguments, index);
@@ -110,4 +102,3 @@ Request.JSONP = new Class({
 
 Request.JSONP.counter = 0;
 Request.JSONP.request_map = {};
-
