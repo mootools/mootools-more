@@ -139,7 +139,7 @@ if (!window.Form) window.Form = {};
 				this.element.validate();
 				return;
 			}
-			e.stop();
+			if (e) e.stop();
 			this.send();
 		},
 

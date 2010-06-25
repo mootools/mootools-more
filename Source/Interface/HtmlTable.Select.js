@@ -67,7 +67,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 			mouseleave: this.bound.mouseleave
 		});
 		this.body[method]({
-			'click:relay(tr)': this.bound.focusRow
+			'click:relay(tr)': this.bound.focusRow,
+			'contextmenu:relay(tr)': this.bound.focusRow
 		});
 		if (this.options.useKeyboard || this.keyboard){
 			if (!this.keyboard) this.keyboard = new Keyboard({
