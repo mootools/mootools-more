@@ -53,8 +53,7 @@ Request.JSONP = new Class({
 		
 		var type = typeOf(options);
 		if (type == 'string' || type == 'element') options = {data: options};
-		if(typeOf(options) == 'object') options = Object.merge(this.options, options);
-		if(options == null) options = this.options;
+		options = Object.merge(this.options, options || {});
 
 		var data = options.data;
 		switch (typeOf(data)){
