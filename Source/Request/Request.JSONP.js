@@ -72,7 +72,7 @@ Request.JSONP = new Class({
 		
 		var script = this.getScript(src).inject(options.injectScript);
 		
-		this.fireEvent('request', script);
+		this.fireEvent('request', [script.get('src'), script]);
 		
 		Request.JSONP.request_map['request_' + index] = function(){
 			this.success(arguments, index);
@@ -80,7 +80,7 @@ Request.JSONP = new Class({
 		
 		if(options.timeout){
 			(function(){
-				this.cancel().fireEvent('timeout', [script.src, script])
+				this.cancel().fireEvent('timeout', [script.get('src'), script])
 			}).delay(options.timeout, this);
 		}
 		
