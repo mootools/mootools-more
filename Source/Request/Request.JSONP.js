@@ -31,12 +31,14 @@ Request.JSONP = new Class({
 		onRequest: function(scriptElement){},
 		onComplete: function(data){},
 		onSuccess: function(data){},
-		onCancel: function(){}, */
+		onCancel: function(){},
+		onTimeout: function(){}, */
 		url: '',
 		callbackKey: 'callback',
 		injectScript: document.head,
 		data: {},
-		link: 'ignore'
+		link: 'ignore',
+		timeout: 0
 	},
 	
 	initialize: function(options){
@@ -75,6 +77,12 @@ Request.JSONP = new Class({
 		Request.JSONP.request_map['request_' + index] = function(){
 			this.success(arguments, index);
 		}.bind(this);
+		
+		if(options.timeout){
+			(function(){
+				this.cancel().fireEvent('timeout', [script.src, script])
+			}).delay(options.timeout, this);
+		}
 		
 		return this;
 	},
