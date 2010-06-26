@@ -16,12 +16,13 @@ authors:
 
 requires:
   - Core/Element
-  - Core/Request
 
 provides: [Request.JSONP]
 
 ...
 */
+
+var Request = Request || {};
 
 Request.JSONP = new Class({
 	
@@ -46,7 +47,14 @@ Request.JSONP = new Class({
 		this.setOptions(options);
 	},
 
-	check: Request.prototype.check,
+	check: function(){
+		if (!this.running) return true;
+		switch (this.options.link){
+			case 'cancel': this.cancel(); return true;
+			case 'chain': this.chain(this.caller.bind(this, arguments)); return false;
+		}
+		return false;
+	},
 	
 	send: function(options){
 		if (!this.check(options)) return this;
