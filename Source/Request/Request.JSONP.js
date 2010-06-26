@@ -68,10 +68,7 @@ Request.JSONP = new Class({
 			'=Request.JSONP.request_map.request_'+ index + 
 			(data ? '&' + data : '');		
 		
-		var script = this.script = new Element('script', {
-			type: 'text/javascript',
-			src: src
-		}).inject(options.injectScript);
+		var script = this.getScript(src).inject(options.injectScript);
 		
 		this.fireEvent('request', script);
 		
@@ -82,20 +79,28 @@ Request.JSONP = new Class({
 		return this;
 	},
 	
+	getScript: function(src){
+		return this.script = this.script = new Element('script', {
+			type: 'text/javascript',
+			src: src
+		});
+	},
+	
 	success: function(args, index){
-		this.clear();
-		this.fireEvent('complete', args).fireEvent('success', args).callChain();
+		this.clear()
+			.fireEvent('complete', args)
+			.fireEvent('success', args)
+			.callChain();
 	},
 	
 	cancel: function(){
-		this.clear();
-		this.fireEvent('cancel');
-		return this;
+		return this.clear().fireEvent('cancel');
 	},
 	
 	clear: function(){
 		if (this.script) this.script.destroy();
 		this.running = false;
+		return this;
 	}
 	
 });
