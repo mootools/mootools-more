@@ -27,14 +27,14 @@ provides: [Element.Measure]
 Element.implement({
 
 	measure: function(fn){
-		var vis = function(el) {
+		var visibility = function(el) {
 			return !!(!el || el.offsetHeight || el.offsetWidth);
 		};
-		if (vis(this)) return fn.apply(this);
+		if (visibility(this)) return fn.apply(this);
 		var parent = this.getParent(),
 			restorers = [],
-			toMeasure = []; 
-		while (!vis(parent) && parent != document.body) {
+			toMeasure = [];
+		while (!visibility(parent) && parent != document.body) {
 			toMeasure.push(parent.expose());
 			parent = parent.getParent();
 		}
@@ -63,10 +63,13 @@ Element.implement({
 	getDimensions: function(options){
 		options = Object.merge({computeSize: false}, options);
 		var dim = {};
+		
 		var getSize = function(el, options){
 			return (options.computeSize)?el.getComputedSize(options):el.getSize();
 		};
+		
 		var parent = this.getParent('body');
+		
 		if (parent && this.getStyle('display') == 'none'){
 			dim = this.measure(function(){
 				return getSize(this, options);
@@ -78,12 +81,22 @@ Element.implement({
 		} else {
 			dim = {x: 0, y: 0};
 		}
-		return (dim.x || dim.x === 0) ? Object.append(dim, {width: dim.x, height: dim.y}) : Object.append(dim, {x: dim.width, y: dim.height});
+		
+		return Object.append(dim, (dim.x || dim.x === 0) ?  {
+				width: dim.x,
+				height: dim.y
+			} : {
+				x: dim.width,
+				y: dim.height
+			}
+		);
 	},
 
 	getComputedSize: function(options){
+		//<1.2compat>
 		//legacy support for my stupid spelling error
 		if (options && options.plains) options.planes = options.plains;
+		//</1.2compat>
 		
 		options = Object.merge({
 			styles: ['padding','border'],
@@ -105,6 +118,7 @@ Element.implement({
 				delete options.planes.height;
 				break;
 		}
+		
 		var getStyles = [];
 		//this function might be useful in other places; perhaps it should be outside this function?
 		Object.each(options.planes, function(plane, key){
@@ -114,6 +128,7 @@ Element.implement({
 				});
 			});
 		});
+		
 		var styles = {};
 		getStyles.each(function(style){ styles[style] = this.getComputedStyle(style); }, this);
 		var subtracted = [];

@@ -38,16 +38,16 @@ provides: [Element.Delegation]
 			};
 		},
 		check = function(e, selector){
-			var t = e.target;
+			var target = e.target;
 			if (combinators.test(selector = selector.trim())){
 				var els = this.getElements(selector);
 				for (var i = els.length; i--; ){
 					var el = els[i];
-					if (t == el || el.hasChild(t)) return el;
+					if (target == el || el.hasChild(t)) return el;
 				}
 			} else {
-				for ( ; t && t != this; t = t.parentNode){
-					if (Element.match(t, selector)) return document.id(t);
+				for ( ; target && target != this; target = target.parentNode){
+					if (Element.match(target, selector)) return document.id(target);
 				}
 			}
 			return null;

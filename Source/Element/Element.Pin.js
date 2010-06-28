@@ -24,6 +24,7 @@ provides: [Element.Pin]
 */
 
 (function(){
+	
 	var supportsPositionFixed = false;
 	window.addEvent('domready', function(){
 		var test = new Element('div').setStyles({
@@ -45,20 +46,24 @@ provides: [Element.Pin]
 				
 			if (enable !== false){
 				pinnedPosition = this.getPosition();
+				
 				if (!this.retrieve('pin:_pinned')){
 					var currentPosition = {
 						top: pinnedPosition.y - scroll.y,
 						left: pinnedPosition.x - scroll.x
 					};
+					
 					if (supportsPositionFixed){
 						this.setStyle('position', 'fixed').setStyles(currentPosition);
 					} else {
+						
 						this.store('pin:_pinnedByJS', true);
 						this.setStyles({
 							position: 'absolute',
 							top: pinnedPosition.y,
 							left: pinnedPosition.x
 						}).addClass('isPinned');
+						
 						var scrollFixer = function(){
 							if (this.retrieve('pin:_pinned'))
 								var scroll = window.getScroll();
@@ -67,18 +72,20 @@ provides: [Element.Pin]
 									left: currentPosition.left.toInt() + scroll.x
 								});
 						}.bind(this);
+						
 						this.store('pin:_scrollFixer', scrollFixer);
 						window.addEvent('scroll', scrollFixer);
 					}
 					this.store('pin:_pinned', true);
 				}
+				
 			} else {
-				var op;
+				var offsetParent;
 				if (!Browser.ie){
 					var parent = this.getParent();
-					op = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
+					offsetParent = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 				}
-				pinnedPosition = this.getPosition(op);
+				pinnedPosition = this.getPosition(offsetParent);
 				this.store('pin:_pinned', false);
 				var reposition;
 				if (supportsPositionFixed && !this.retrieve('pin:_pinnedByJS')){

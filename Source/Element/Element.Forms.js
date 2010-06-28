@@ -38,23 +38,33 @@ Element.implement({
 	},
 
 	getSelectedRange: function() {
-		if (this.selectionStart != null) return {start: this.selectionStart, end: this.selectionEnd};
-		var pos = {start: 0, end: 0};
+		if (this.selectionStart != null){
+			return {
+				start: this.selectionStart, 
+				end: this.selectionEnd
+			};
+		}
+		
+		var pos = {
+			start: 0,
+			end: 0
+		};
 		var range = this.getDocument().selection.createRange();
 		if (!range || range.parentElement() != this) return pos;
-		var dup = range.duplicate();
+		var duplicate = range.duplicate();
+		
 		if (this.type == 'text') {
-			pos.start = 0 - dup.moveStart('character', -100000);
+			pos.start = 0 - duplicate.moveStart('character', -100000);
 			pos.end = pos.start + range.text.length;
 		} else {
 			var value = this.get('value');
 			var offset = value.length;
-			dup.moveToElementText(this);
-			dup.setEndPoint('StartToEnd', range);
-			if(dup.text.length) offset -= value.match(/[\n\r]*$/)[0].length;
-			pos.end = offset - dup.text.length;
-			dup.setEndPoint('StartToStart', range);
-			pos.start = offset - dup.text.length;
+			duplicate.moveToElementText(this);
+			duplicate.setEndPoint('StartToEnd', range);
+			if(duplicate.text.length) offset -= value.match(/[\n\r]*$/)[0].length;
+			pos.end = offset - duplicate.text.length;
+			duplicate.setEndPoint('StartToStart', range);
+			pos.start = offset - duplicate.text.length;
 		}
 		return pos;
 	},
@@ -109,9 +119,11 @@ Element.implement({
 			defaultMiddle: '',
 			after: ''
 		}, options);
+		
 		var value = this.getSelectedText() || options.defaultMiddle;
 		var pos = this.getSelectedRange();
 		var text = this.get('value');
+		
 		if (pos.start == pos.end){
 			this.set('value', text.substring(0, pos.start) + options.before + value + options.after + text.substring(pos.end, text.length));
 			this.selectRange(pos.start + options.before.length, pos.end + options.before.length + value.length);
