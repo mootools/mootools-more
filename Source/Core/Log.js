@@ -23,9 +23,7 @@ provides: [Log]
 ...
 */
 
-(function(){
-
-var global = this;
+(function(global){
 
 var log = function(){
 	if (global.console && console.log){
@@ -73,9 +71,10 @@ this.Log = new Class({
 
 Log.extend(new Log).enableLog();
 
-// legacy
+//<1.2compat>
 Log.logger = function(){
 	return this.log.apply(this, arguments);
 };
+//</1.2compat>
 
-})();
+})(this);
