@@ -16,7 +16,6 @@ authors:
 
 requires:
   - Core/String
-  - Core/$util
   - Core/Array
 
 provides: [String.Extras]
@@ -91,7 +90,7 @@ function walk(string, replacements) {
 	return result;
 }
 
-function getRegForTag(tag, contents) {
+function getRegexForTag(tag, contents) {
 	tag = tag || '';
 	var regstr = contents ? "<" + tag + "[^>]*>([\\s\\S]*?)<\/" + tag + ">" : "<\/?" + tag + "([^>]+)?>";
 	reg = new RegExp(regstr, "gi");
@@ -108,20 +107,25 @@ String.implement({
 		return new Array(times + 1).join(this);
 	},
 
-	pad: function(length, str, dir){
+	pad: function(length, str, direction){
 		if (this.length >= length) return this;
-		var pad = (str == null ? ' ' : '' + str).repeat(length - this.length).substr(0, length - this.length);
-		if (!dir || dir == 'right') return this + pad;
-		if (dir == 'left') return pad + this;
+		
+		var pad = (str == null ? ' ' : '' + str)
+			.repeat(length - this.length)
+			.substr(0, length - this.length);
+	
+		if (!direction || direction == 'right') return this + pad;
+		if (direction == 'left') return pad + this;
+	
 		return pad.substr(0, (pad.length / 2).floor()) + this + pad.substr(0, (pad.length / 2).ceil());
 	},
 
 	getTags: function(tag, contents){
-		return this.match(getRegForTag(tag, contents)) || [];
+		return this.match(getRegexForTag(tag, contents)) || [];
 	},
 
 	stripTags: function(tag, contents){
-		return this.replace(getRegForTag(tag, contents), '');
+		return this.replace(getRegexForTag(tag, contents), '');
 	},
 
 	tidy: function(){

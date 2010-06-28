@@ -80,7 +80,9 @@ provides: [Lang]
 		},
 
 		get: function(set, key, args){
-			if (cascaded && cascaded[set]) return (key ? cascaded[set].get(key, args) : cascaded[set]);
+			if (cascaded && cascaded[set]){
+				return (key ? cascaded[set].get(key, args) : cascaded[set]);
+			}
 		},
 
 		set: function(lang, set, members){
