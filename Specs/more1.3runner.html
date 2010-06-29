@@ -5,12 +5,12 @@
 
 <!-- JSSpec -->
 
-<link rel="stylesheet" type="text/css" href="SlickSpec/slickspec.css" />
-<script type="text/javascript" charset="utf-8" src="SlickSpec/diff_match_patch.js"></script>
-<script type="text/javascript" charset="utf-8" src="SlickSpec/JSSpec.js"></script>
-<script type="text/javascript" charset="utf-8" src="SlickSpec/JSSpecHelpers.js"></script>
-<script type="text/javascript" charset="utf-8" src="SlickSpec/simple_request.js"></script>
-<script type="text/javascript" charset="utf-8" src="SlickSpec/Loader.js"></script>
+<link rel="stylesheet" type="text/css" href="SlickSpec/SlickSpec/slickspec.css" />
+<script type="text/javascript" charset="utf-8" src="SlickSpec/SlickSpec/diff_match_patch.js"></script>
+<script type="text/javascript" charset="utf-8" src="SlickSpec/SlickSpec/JSSpec.js"></script>
+<script type="text/javascript" charset="utf-8" src="SlickSpec/SlickSpec/JSSpecHelpers.js"></script>
+<script type="text/javascript" charset="utf-8" src="SlickSpec/SlickSpec/simple_request.js"></script>
+<script type="text/javascript" charset="utf-8" src="SlickSpec/SlickSpec/Loader.js"></script>
 
 <!-- MooTools Core -->
 <script src="mootools-core/Source/Core/Core.js" type="text/javascript"></script>
@@ -50,6 +50,36 @@
 <script src="mootools-core/Source/Request/Request.HTML.js" type="text/javascript"></script>
 <script src="mootools-core/Source/Request/Request.JSON.js" type="text/javascript"></script>
 
+<!-- MooTools More -->
+
+<script src="../Source/Core/More.js" type="text/javascript"></script>
+<script src="../Source/Core/Log.js" type="text/javascript"></script>
+<script src="../Source/Core/Lang.js" type="text/javascript"></script>
+<script src="../Source/Localization/Form.Validator.English.js" type="text/javascript"></script>
+
+<script src="../Source/Class/Class.Binds.js" type="text/javascript"></script>
+<script src="../Source/Class/Class.Occlude.js" type="text/javascript"></script>
+<script src="../Source/Class/Class.Refactor.js" type="text/javascript"></script>
+
+<script src="../Source/Element/Element.Forms.js" type="text/javascript"></script>
+<script src="../Source/Element/Element.Measure.js" type="text/javascript"></script>
+<script src="../Source/Element/Elements.From.js" type="text/javascript"></script>
+
+<script src="../Source/Types/Array.Extras.js" type="text/javascript"></script>
+<script src="../Source/Types/Date.js" type="text/javascript"></script>
+<script src="../Source/Types/Date.Extras.js" type="text/javascript"></script>
+<script src="../Source/Types/Object.Extras.js" type="text/javascript"></script>
+<script src="../Source/Types/Hash.js" type="text/javascript"></script>
+<script src="../Source/Types/Hash.Extras.js" type="text/javascript"></script>
+<script src="../Source/Types/String.Extras.js" type="text/javascript"></script>
+<script src="../Source/Types/String.QueryString.js" type="text/javascript"></script>
+<script src="../Source/Types/URI.js" type="text/javascript"></script>
+<script src="../Source/Types/URI.Relative.js" type="text/javascript"></script>
+
+<script src="../Source/Utilities/Color.js" type="text/javascript"></script>
+<script src="../Source/Utilities/Hash.Cookie.js" type="text/javascript"></script>
+
+
 <!-- Specs -->
 
 <script type="text/javascript" charset="utf-8" src="Sets.js"></script>
@@ -66,6 +96,8 @@ runSpecs();
 <body><h1 id="slickspec_logo"><a href="../">Slick<strong>Spec</strong></a></h1>
 <p id="copyright">SlickSpec&mdash;Copyright &copy; MooTools 2009&mdash;MIT License</p>
 <h1 id="framework_name"><script>document.write(Name + ' [' + SpecNames.join(', ') + ']')</script></h1>
+
+<div id="log"></div>
 
 </body>
 </html>
