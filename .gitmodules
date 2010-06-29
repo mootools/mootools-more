@@ -10,3 +10,9 @@
 [submodule "Packager"]
 	path = Packager
 	url = git://github.com/kamicane/packager.git
+[submodule "Specs/SlickSpec"]
+	path = Specs/SlickSpec
+	url = http://github.com/mootools/mootools-core-specs.git
+[submodule "Specs/mootools-core"]
+	path = Specs/mootools-core
+	url = http://github.com/mootools/mootools-core.git
