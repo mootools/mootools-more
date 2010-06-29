@@ -90,7 +90,7 @@ var URI = new Class({
 		if (part == 'value'){
 			var scheme = value.match(URI.regs.scheme);
 			if (scheme) scheme = scheme[1];
-			if (scheme && this.schemes[scheme.toLowerCase()] != null) this.parsed = { scheme: scheme, value: value };
+			if (scheme && this.schemes[scheme.toLowerCase()] == null) this.parsed = { scheme: scheme, value: value };
 			else this.parsed = this.parse(value, (base || this).parsed) || (scheme ? { scheme: scheme, value: value } : { value: value });
 		} else if (part == 'data') {
 			this.setData(value);
