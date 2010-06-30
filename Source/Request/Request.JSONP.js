@@ -34,7 +34,7 @@ Request.JSONP = new Class({
 		onSuccess: function(data){},
 		onCancel: function(){},
 		onTimeout: function(){},
-		onToLongURL: function(){}, */
+		onTooLongURL: function(){}, */
 		url: '',
 		callbackKey: 'callback',
 		injectScript: document.head,
@@ -78,7 +78,7 @@ Request.JSONP = new Class({
 			'=Request.JSONP.request_map.request_'+ index + 
 			(data ? '&' + data : '');		
 				
-		if(src.length > 2083) this.fireEvent('toLongURL', src);
+		if(src.length > 2083) this.fireEvent('tooLongURL', src);
 		
 		var script = this.getScript(src).inject(options.injectScript);
 		
