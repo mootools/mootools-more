@@ -37,7 +37,7 @@ MooTools.lang.set('nl-NL', 'Form.Validator', {
 	currencyDollar: 'Vul een geldig $ bedrag in. Bijvoorbeeld $100.00 .',
 	oneRequired: 'Vul iets in bij minimaal een van de invoervelden.',
 	warningPrefix: 'Waarschuwing: ',
-	errorPrefix: 'Fout: '
+	errorPrefix: 'Fout: ',
 
 	//Form.Validator.Extras
 
