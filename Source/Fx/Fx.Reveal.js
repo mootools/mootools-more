@@ -179,17 +179,18 @@ Fx.Reveal = new Class({
 Element.Properties.reveal = {
 
 	set: function(options){
-		var reveal = this.retrieve('reveal');
-		if (reveal) reveal.cancel();
-		return this.eliminate('reveal').store('reveal:options', options);
+		var reveal = this.get('reveal').cancel();
+		reveal.setOptions(options);
+		return this;
 	},
 
-	get: function(options){
-		if (options || !this.retrieve('reveal')){
-			if (options || !this.retrieve('reveal:options')) this.set('reveal', options);
-			this.store('reveal', new Fx.Reveal(this, this.retrieve('reveal:options')));
+	get: function(){
+		var reveal = this.retrieve('reveal');
+		if (!reveal){
+			reveal = new Fx.Reveal(this, {link: 'cancel'});
+			this.store('reveal', reveal);
 		}
-		return this.retrieve('reveal');
+		return reveal;
 	}
 
 };
@@ -199,18 +200,18 @@ Element.Properties.dissolve = Element.Properties.reveal;
 Element.implement({
 
 	reveal: function(options){
-		this.get('reveal', options).reveal();
+		this.get('reveal').setOptions(options).reveal();
 		return this;
 	},
 
 	dissolve: function(options){
-		this.get('reveal', options).dissolve();
+		this.get('reveal').setOptions(options).dissolve();
 		return this;
 	},
 
 	nix: function(){
 		var params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
-		this.get('reveal', params.options).dissolve().chain(function(){
+		this.get('reveal').setOptions(options).dissolve().chain(function(){
 			this[params.destroy ? 'destroy' : 'dispose']();
 		}.bind(this));
 		return this;
@@ -218,7 +219,7 @@ Element.implement({
 
 	wink: function(){
 		var params = Array.link(arguments, {duration: Number.type, options: Object.type});
-		var reveal = this.get('reveal', params.options);
+		var reveal = this.get('reveal').setOptions(params.options);
 		reveal.reveal().chain(function(){
 			(function(){
 				reveal.dissolve();
