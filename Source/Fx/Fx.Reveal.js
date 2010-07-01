@@ -187,7 +187,7 @@ Element.Properties.reveal = {
 	get: function(){
 		var reveal = this.retrieve('reveal');
 		if (!reveal){
-			reveal = new Fx.Reveal(this, {link: 'cancel'});
+			reveal = new Fx.Reveal(this);
 			this.store('reveal', reveal);
 		}
 		return reveal;
