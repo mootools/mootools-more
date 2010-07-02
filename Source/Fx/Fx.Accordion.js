@@ -130,9 +130,9 @@ Fx.Accordion = new Class({
 			this.detach(toggler);
 		}.bind(this);
 		
-		if (this.now == idx || displayIndex != null){
+		if (this.now == idx || displayIndex != null) {
 			this.display(displayIndex != null ? displayIndex : (idx - 1 >= 0 ? idx - 1 : 0)).chain(remover);
-		}else{
+		} else {
 			remover();
 		}
 		return this;
