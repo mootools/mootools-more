@@ -36,9 +36,7 @@ Array.implement({
 	sum: function(){
 		var result = 0, l = this.length;
 		if (l){
-			do {
-				result += this[--l];
-			} while (l);
+			while(l--) result += this[l];
 		}
 		return result;
 	},
