@@ -37,7 +37,7 @@ Fx.Scroll = new Class({
 		this.parent(options);
 		var cancel = this.cancel.bind(this, false);
 
-		if ($type(this.element) != 'element') this.element = document.id(this.element.getDocument().body);
+		if (typeOf(this.element) != 'element') this.element = document.id(this.element.getDocument().body);
 
 		var stopper = this.element;
 
@@ -53,7 +53,7 @@ Fx.Scroll = new Class({
 
 	set: function(){
 		var now = Array.flatten(arguments);
-		if (Browser.Engine.gecko) now = [Math.round(now[0]), Math.round(now[1])];
+		if (Browser.firefox) now = [Math.round(now[0]), Math.round(now[1])];
 		this.element.scrollTo(now[0] + this.options.offset.x, now[1] + this.options.offset.y);
 	},
 
@@ -70,7 +70,7 @@ Fx.Scroll = new Class({
 			values = {x: x, y: y};
 		for (var z in values){
 			var max = scrollSize[z];
-			if ($chk(values[z])) values[z] = ($type(values[z]) == 'number') ? values[z] : max;
+			if (values[z] != null || values[z] === 0) values[z] = (typeOf(values[z]) == 'number') ? values[z] : max;
 			else values[z] = scroll[z];
 			values[z] += this.options.offset[z];
 		}
@@ -99,7 +99,7 @@ Fx.Scroll = new Class({
 	},
 
 	scrollIntoView: function(el, axes, offset){
-		axes = axes ? $splat(axes) : ['x','y'];
+		axes = axes ? Array.from(axes) : ['x','y'];
 		var to = {};
 		el = document.id(el);
 		var pos = el.getPosition(this.element);
@@ -123,8 +123,8 @@ Fx.Scroll = new Class({
 	},
 
 	scrollToCenter: function(el, axes, offset){
-		axes = axes ? $splat(axes) : ['x', 'y'];
-		el = $(el);
+		axes = axes ? Array.from(axes) : ['x', 'y'];
+		el = document.id(el);
 		var to = {},
 			pos = el.getPosition(this.element),
 			size = el.getSize(),
