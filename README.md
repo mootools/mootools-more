@@ -3,7 +3,7 @@ MooTools Plugins and Enhancements Repository
 ### Wiki
 
 * [See the wiki for how to get involved](http://wiki.github.com/mootools/mootools-more).
-* See also [MooTools-Core](https://github.com/mootools/mootools-core/tree) and [MooTools-Lang](http://github.com/anutron/mootools-lang/tree/master)
+* See also [MooTools-Core](https://github.com/mootools/mootools-core/tree)
 
 ### TO DO
 
@@ -19,6 +19,15 @@ MooTools Plugins and Enhancements Repository
 
 
 ### Changes
+
+#### Changese in MooTools More 1.3
+
+* All the code of MooTools More uses MooTools Core 1.3
+* Revised Fx.Reveal. Element.get('reveal', options) is not possible anymore (just like Fx.Tween and Fx.Morph in Core)
+* Moved Hash.js from Core to MooTools More which is not part of MooTools Core 1.3 (without compatibily layer) anymore.
+* Changed Hash.Extras to Object.Extras. Hash.Extras however still exist for compatibility.
+* Removed Depender.
+
 
 NOTE: none of the changes below are breaking changes.
 
