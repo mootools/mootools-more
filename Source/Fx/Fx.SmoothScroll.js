@@ -21,7 +21,7 @@ provides: [Fx.SmoothScroll]
 ...
 */
 
-var SmoothScroll = Fx.SmoothScroll = new Class({
+/*<1.2compat>*/var SmoothScroll = /*</1.2compat>*/Fx.SmoothScroll = new Class({
 
 	Extends: Fx.Scroll,
 
@@ -37,7 +37,7 @@ var SmoothScroll = Fx.SmoothScroll = new Class({
 			var anchor = link.href.substr(location.length);
 			if (anchor) this.useLink(link, anchor);
 		}, this);
-		if (!Browser.Engine.webkit419) {
+		if (!(Browser.safari && Browser.version == 2)) {
 			this.addEvent('complete', function(){
 				win.location.hash = this.anchor;
 			}, true);
