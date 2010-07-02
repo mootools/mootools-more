@@ -41,17 +41,18 @@ Fx.Move = new Class({
 Element.Properties.move = {
 
 	set: function(options){
-		var morph = this.retrieve('move');
-		if (morph) morph.cancel();
-		return this.eliminate('move').store('move:options', Object.append({link: 'cancel'}, options));
+		var morph = this.retrieve('move').cancel();
+		morph.setOptions(options);
+		return this;
 	},
 
-	get: function(options){
-		if (options || !this.retrieve('move')){
-			if (options || !this.retrieve('move:options')) this.set('move', options);
-			this.store('move', new Fx.Move(this, this.retrieve('move:options')));
+	get: function(){
+		var move = this.retrieve('move');
+		if (!move){
+			move = new Fx.Move(this, {link: 'cancel'});
+			this.store('move', move);
 		}
-		return this.retrieve('move');
+		return move;
 	}
 
 };

@@ -123,19 +123,20 @@ Fx.Slide = new Class({
 });
 
 Element.Properties.slide = {
-
+	
 	set: function(options){
-		var slide = this.retrieve('slide');
-		if (slide) slide.cancel();
-		return this.eliminate('slide').store('slide:options', Object.append({link: 'cancel'}, options));
+		var slide = this.get('slide').cancel();
+		slide.setOptions(options);
+		return this;
 	},
 
-	get: function(options){
-		if (options || !this.retrieve('slide')){
-			if (options || !this.retrieve('slide:options')) this.set('slide', options);
-			this.store('slide', new Fx.Slide(this, this.retrieve('slide:options')));
+	get: function(){
+		var slide = this.retrieve('slide');
+		if (!slide){
+			slide = new Fx.Slide(this, {link: 'cancel'});
+			this.store('slide', slide);
 		}
-		return this.retrieve('slide');
+		return slide;
 	}
 
 };
