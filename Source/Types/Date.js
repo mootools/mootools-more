@@ -210,9 +210,10 @@ Date.implement({
 
 });
 
-Date.alias('toISOString', 'toJSON');
-Date.alias('diff', 'compare');
-Date.alias('format', 'strftime');
+
+Date.alias('toJSON', 'toISOString');
+Date.alias('compare', 'diff');
+Date.alias('strftime', 'format');
 
 var formats = {
 	db: '%Y-%m-%d %H:%M:%S',

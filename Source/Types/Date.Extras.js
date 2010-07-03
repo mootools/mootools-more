@@ -50,7 +50,7 @@ Date.implement({
 
 });
 
-Date.alias('timeDiffInWords', 'timeAgoInWords');
+Date.alias('timeAgoInWords', 'timeDiffInWords');
 
 Date.extend({
 
