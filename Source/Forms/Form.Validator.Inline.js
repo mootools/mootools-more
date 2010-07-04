@@ -58,7 +58,7 @@ Form.Validator.Inline = new Class({
 	},
 
 	makeAdvice: function(className, field, error, warn){
-		var errorMsg = (warn)?this.warningPrefix:this.errorPrefix;
+		var errorMsg = (warn) ? this.warningPrefix : this.errorPrefix;
 			errorMsg += (this.options.useTitles) ? field.title || error:error;
 		var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
 		var advice = this.getAdvice(className, field);
@@ -71,7 +71,7 @@ Form.Validator.Inline = new Class({
 				id: 'advice-' + className + '-' + this.getFieldId(field)
 			}).addClass(cssClass);
 		}
-		field.store('advice-' + className, advice);
+		field.store('$moo:advice-' + className, advice);
 		return advice;
 	},
 
@@ -81,11 +81,11 @@ Form.Validator.Inline = new Class({
 
 	showAdvice: function(className, field){
 		var advice = this.getAdvice(className, field);
-		if (advice && !field.retrieve(this.getPropName(className))
+		if (advice && !field.retrieve('$moo:' + this.getPropName(className))
 				&& (advice.getStyle('display') == 'none'
 				|| advice.getStyle('visiblity') == 'hidden'
 				|| advice.getStyle('opacity') == 0)){
-			field.store(this.getPropName(className), true);
+			field.store('$moo:' + this.getPropName(className), true);
 			this.options.showError(advice);
 			this.fireEvent('showAdvice', [field, advice, className]);
 		}
@@ -93,8 +93,8 @@ Form.Validator.Inline = new Class({
 
 	hideAdvice: function(className, field){
 		var advice = this.getAdvice(className, field);
-		if (advice && field.retrieve(this.getPropName(className))){
-			field.store(this.getPropName(className), false);
+		if (advice && field.retrieve('$moo:' + this.getPropName(className))){
+			field.store('$moo:' + this.getPropName(className), false);
 			this.options.hideError(advice);
 			this.fireEvent('hideAdvice', [field, advice, className]);
 		}
@@ -133,7 +133,7 @@ Form.Validator.Inline = new Class({
 	},
 
 	getAdvice: function(className, field){
-		return field.retrieve('advice-' + className);
+		return field.retrieve('$moo:advice-' + className);
 	},
 
 	insertAdvice: function(advice, field){
@@ -156,10 +156,10 @@ Form.Validator.Inline = new Class({
 			while (par != document.body && par.getScrollSize().y == par.getSize().y){
 				par = par.getParent();
 			}
-			var fx = par.retrieve('fvScroller');
+			var fx = par.retrieve('$moo:fvScroller');
 			if (!fx && window.Fx && Fx.Scroll){
 				fx = new Fx.Scroll(par, this.options.scrollFxOptions);
-				par.store('fvScroller', fx);
+				par.store('$moo:fvScroller', fx);
 			}
 			if (failed){
 				if (fx) fx.toElement(failed);

@@ -24,7 +24,7 @@ Form.Validator.addAllThese([
 	['validate-enforce-oncheck', {
 		test: function(element, props){
 			if (element.checked){
-				var fv = element.getParent('form').retrieve('validator');
+				var fv = element.getParent('form').retrieve('$moo:validator');
 				if (!fv) return true;
 				(props.toEnforce || document.id(props.enforceChildrenOf).getElements('input, select, textarea')).map(function(item){
 					fv.enforceField(item);
@@ -37,7 +37,7 @@ Form.Validator.addAllThese([
 	['validate-ignore-oncheck', {
 		test: function(element, props){
 			if (element.checked){
-				var fv = element.getParent('form').retrieve('validator');
+				var fv = element.getParent('form').retrieve('$moo:validator');
 				if (!fv) return true;
 				(props.toIgnore || document.id(props.ignoreChildrenOf).getElements('input, select, textarea')).each(function(item){
 					fv.ignoreField(item);
@@ -59,7 +59,7 @@ Form.Validator.addAllThese([
 
 	['validate-toggle-oncheck', {
 		test: function(element, props){
-			var fv = element.getParent('form').retrieve('validator');
+			var fv = element.getParent('form').retrieve('$moo:validator');
 			if (!fv) return true;
 			var eleArr = props.toToggle || document.id(props.toToggleChildrenOf).getElements('input, select, textarea');
 			if (!element.checked){
@@ -105,7 +105,7 @@ Form.Validator.addAllThese([
 			var oneCheckedItem = $$(document.getElementsByName(grpName)).some(function(item, index){
 				return item.checked;
 			});
-			var fv = element.getParent('form').retrieve('validator');
+			var fv = element.getParent('form').retrieve('$moo:validator');
 			if (oneCheckedItem && fv) fv.resetField(element);
 			return oneCheckedItem;
 		}
@@ -213,9 +213,9 @@ Form.Validator.addAllThese([
 				ccNum = ccNum.substr(4);
 			}
 
-			element.getParent('form').retrieve('validator').ignoreField(element);
+			element.getParent('form').retrieve('$moo:validator').ignoreField(element);
 			element.set('value', chunks.clean());
-			element.getParent('form').retrieve('validator').enforceField(element);
+			element.getParent('form').retrieve('$moo:validator').enforceField(element);
 			return false;
 		}
 	}]

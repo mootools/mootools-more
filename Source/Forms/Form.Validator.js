@@ -47,13 +47,13 @@ var InputValidator = new Class({
 	},
 
 	test: function(field, props){
-		if (document.id(field)) return this.options.test(document.id(field), props||this.getProps(field));
+		if (document.id(field)) return this.options.test(document.id(field), props || this.getProps(field));
 		else return false;
 	},
 
 	getError: function(field, props){
 		var err = this.options.errorMsg;
-		if (typeOf(err) == 'function') err = err(document.id(field), props||this.getProps(field));
+		if (typeOf(err) == 'function') err = err(document.id(field), props || this.getProps(field));
 		return err;
 	},
 
@@ -67,15 +67,15 @@ var InputValidator = new Class({
 Element.Properties.validatorProps = {
 
 	set: function(props){
-		return this.eliminate('validatorProps').store('validatorProps', props);
+		return this.eliminate('validatorProps').store('$moo:validatorProps', props);
 	},
 
 	get: function(props){
 		if (props) this.set(props);
-		if (this.retrieve('validatorProps')) return this.retrieve('validatorProps');
+		if (this.retrieve('$moo:validatorProps')) return this.retrieve('$moo:validatorProps');
 		if (this.getProperty('validatorProps')){
 			try {
-				this.store('validatorProps', JSON.decode(this.getProperty('validatorProps')));
+				this.store('$moo:validatorProps', JSON.decode(this.getProperty('validatorProps')));
 			}catch(e){
 				return {};
 			}
@@ -84,7 +84,7 @@ Element.Properties.validatorProps = {
 				return cls.test(':');
 			});
 			if (!vals.length){
-				this.store('validatorProps', {});
+				this.store('$moo:validatorProps', {});
 			} else {
 				props = {};
 				vals.each(function(cls){
@@ -95,10 +95,10 @@ Element.Properties.validatorProps = {
 						} catch(e) {}
 					}
 				});
-				this.store('validatorProps', props);
+				this.store('$moo:validatorProps', props);
 			}
 		}
-		return this.retrieve('validatorProps');
+		return this.retrieve('$moo:validatorProps');
 	}
 
 };
@@ -134,7 +134,7 @@ Form.Validator = new Class({
 	initialize: function(form, options){
 		this.setOptions(options);
 		this.element = document.id(form);
-		this.element.store('validator', this);
+		this.element.store('$moo:validator', this);
 		this.warningPrefix = Function.from(this.options.warningPrefix)();
 		this.errorPrefix = Function.from(this.options.errorPrefix)();
 		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this.onSubmit);
@@ -469,17 +469,17 @@ Form.Validator.addAllThese([
 Element.Properties.validator = {
 
 	set: function(options){
-		var validator = this.retrieve('validator');
+		var validator = this.retrieve('$moo:validator');
 		if (validator) validator.setOptions(options);
-		return this.store('validator:options');
+		return this.store('$moo:validator:options');
 	},
 
 	get: function(options){
-		if (options || !this.retrieve('validator')){
-			if (options || !this.retrieve('validator:options')) this.set('validator', options);
-			this.store('validator', new Form.Validator(this, this.retrieve('validator:options')));
+		if (options || !this.retrieve('$moo:validator')){
+			if (options || !this.retrieve('$moo:validator:options')) this.set('validator', options);
+			this.store('$moo:validator', new Form.Validator(this, this.retrieve('$moo:validator:options')));
 		}
-		return this.retrieve('validator');
+		return this.retrieve('$moo:validator');
 	}
 
 };
@@ -492,5 +492,7 @@ Element.implement({
 	}
 
 });
+//<1.2compat>
 //legacy
 var FormValidator = Form.Validator;
+//</1.2compat>
