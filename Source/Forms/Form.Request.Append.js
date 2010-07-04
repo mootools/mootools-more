@@ -27,14 +27,14 @@ Form.Request.Append = new Class({
 	Extends: Form.Request,
 
 	options: {
-		//onBeforeEffect: $empty,
+		//onBeforeEffect: function(){},
 		useReveal: true,
 		revealOptions: {},
 		inject: 'bottom'
 	},
 
 	makeRequest: function(){
-		this.request = new Request.HTML($merge({
+		this.request = new Request.HTML(Object.merge({
 				url: this.element.get('action'),
 				method: this.element.get('method') || 'post',
 				spinnerTarget: this.element
@@ -55,7 +55,7 @@ Form.Request.Append = new Class({
 					}).adopt(kids);
 				}
 				container.inject(this.update, this.options.inject);
-				if (this.options.requestOptions.evalScripts) $exec(javascript);
+				if (this.options.requestOptions.evalScripts) Browser.exec(javascript);
 				this.fireEvent('beforeEffect', container);
 				var finish = function(){
 					this.fireEvent('success', [container, this.update, tree, elements, html, javascript]);

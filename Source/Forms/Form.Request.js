@@ -36,9 +36,9 @@ if (!window.Form) window.Form = {};
 		Implements: [Options, Events, Class.Occlude],
 
 		options: {
-			//onFailure: $empty,
-			//onSuccess: #empty, //aliased to onComplete,
-			//onSend: $empty
+			//onFailure: function(){},
+			//onSuccess: #function(){}, //aliased to onComplete,
+			//onSend: function(){}
 			requestOptions: {
 				evalScripts: true,
 				useSpinner: true,
@@ -60,7 +60,7 @@ if (!window.Form) window.Form = {};
 			this.makeRequest();
 			if (this.options.resetForm) {
 				this.request.addEvent('success', function(){
-					$try(function(){ this.element.reset(); }.bind(this));
+					Function.attempt(function(){ this.element.reset(); }.bind(this));
 					if (window.OverText) OverText.update();
 				}.bind(this));
 			}
@@ -93,7 +93,7 @@ if (!window.Form) window.Form = {};
 		},
 
 		attach: function(attach){
-			attach = $pick(attach, true);
+			attach = attach != null ? attach : true;
 			method = attach ? 'addEvent' : 'removeEvent';
 			
 			this.element[method]('click:relay(button, input[type=submit])', this.saveClickedButton.bind(this));
@@ -149,15 +149,15 @@ if (!window.Form) window.Form = {};
 			this.options.extraData[target.get('name')] = target.get('value') || true;
 			this.clickedCleaner = function(){
 				delete this.options.extraData[target.get('name')];
-				this.clickedCleaner = $empty;
+				this.clickedCleaner = function(){};
 			}.bind(this);
 		},
 
-		clickedCleaner: $empty,
+		clickedCleaner: function(){},
 
 		send: function(){
 			var str = this.element.toQueryString().trim();
-			var data = $H(this.options.extraData).toQueryString();
+			var data = Object.toQueryString(this.options.extraData);
 			if (str) str += "&" + data;
 			else str = data;
 			this.fireEvent('send', [this.element, str.parseQueryString()]);
@@ -171,7 +171,7 @@ if (!window.Form) window.Form = {};
 	Element.Properties.formRequest = {
 
 		set: function(){
-			var opt = Array.link(arguments, {options: Object.type, update: Element.type, updateId: String.type});
+			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString});
 			var update = opt.update || opt.updateId;
 			var updater = this.retrieve('form.request');
 			if (update) {
@@ -186,7 +186,7 @@ if (!window.Form) window.Form = {};
 		},
 
 		get: function(){
-			var opt = Array.link(arguments, {options: Object.type, update: Element.type, updateId: String.type});
+			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString});
 			var update = opt.update || opt.updateId;
 			if (opt.options || update || !this.retrieve('form.request')){
 				if (opt.options || !this.retrieve('form.request:options')) this.set('form.request', opt.options);
