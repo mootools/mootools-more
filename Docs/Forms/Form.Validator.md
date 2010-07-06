@@ -32,10 +32,10 @@ Evaluates an entire form against all the validators that are set up, firing even
 
 ### Events
 
-* onFormValidate - (*function*) callback to execute when the form validation completes; this function is passed three arguments: a *boolean* (*true* if the form passed validation); the form *element*; and the onsubmit *event* object if there was one (otherwise, passed *undefined*)
-* onElementValidate - (*function*) callback to execute when an input element is tested. This function is passed four arguments: a *boolean* (*true* if the form passed validation), the input *element* that was tested, the name of the validator that failed, and a *boolean* that denotes if it was configured as a warning or not (*true* means warn). Note that this callback is executed for each validator.
-* onElementPass - (*function*) callback to execute when an input element passes *all* of it's validators. Passed one argument: the *element* that was tested.
-* onElementFail - (*function*) callback to execute when an element *fails one or more* of its validators. Passed two arguments: the *element* that was tested and an *array* of all the validator names that failed.
+* formValidate - (*function*) callback to execute when the form validation completes; this function is passed three arguments: a *boolean* (*true* if the form passed validation); the form *element*; and the onsubmit *event* object if there was one (otherwise, passed *undefined*)
+* elementValidate - (*function*) callback to execute when an input element is tested. This function is passed four arguments: a *boolean* (*true* if the form passed validation), the input *element* that was tested, the name of the validator that failed, and a *boolean* that denotes if it was configured as a warning or not (*true* means warn). Note that this callback is executed for each validator.
+* elementPass - (*function*) callback to execute when an input element passes *all* of it's validators. Passed one argument: the *element* that was tested.
+* elementFail - (*function*) callback to execute when an element *fails one or more* of its validators. Passed two arguments: the *element* that was tested and an *array* of all the validator names that failed.
 
 ### Example
 
@@ -384,12 +384,12 @@ Calls the *validate* method on the specified element.
 Included InputValidators: {#Validators}
 =======================================
 
-Here are the validators that are included in this libary. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
+Here are the validators that are included in this library. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
 
 Validator: IsEmpty {#Validators:IsEmpty}
 ----------------------------------------
 
-Evalutes if the input is empty; this is a utility validator, see [Form.Validator.required][].
+Evaluates if the input is empty; this is a utility validator, see [Form.Validator.required][].
 
 Validator: required {#Validators:required}
 ------------------------------------------

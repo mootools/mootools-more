@@ -35,7 +35,7 @@ Makes headers of HtmlTable clickable to sort the rows.
 
 ### Events
 
-* onSort - callback executed when a column is sorted; passed the *tbody* and the index of the column sorted.
+* sort - callback executed when a column is sorted; passed the *tbody* and the index of the column sorted.
 
 ### Note
 

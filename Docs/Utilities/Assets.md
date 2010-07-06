@@ -114,7 +114,7 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 * properties - (*object*) Some additional attributes for all the images (same as the second argument you might pass to *Asset.image*).
 * onComplete/onProgress/onError - (*functions*) See events below.
 
-### onComplete
+### complete
 
 * (*function*) Executes when all image files are loaded.
 
@@ -122,7 +122,7 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 
 	onComplete()
 
-### onProgress
+### progress
 
 * (*function*) Executes when one image file is loaded.
 
@@ -135,7 +135,7 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 1. counter - (*number*) The number of loaded images.
 2. index   - (*number*) The index of the loaded image.
 
-### onError
+### error
 
 * (*function*) Executes when one image file fails to load.
 

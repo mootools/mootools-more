@@ -53,7 +53,7 @@ Set's a portion of the URI to the specified value.
 
 ### Arguments
 
-1. type - (*string*, optional) url with a querystring to parse; defaults to *window.location*
+1. type - (*string*, optional) url with a query string to parse; defaults to *window.location*
 
 ### Example
 

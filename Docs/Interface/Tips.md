@@ -39,10 +39,10 @@ Tips Method: constructor {#Tips:constructor}
 
 ### Events
 
-* onShow - (*function*: defaults to `function(tip, hovered){ tip.setStyle('display', 'block'); }`) The default function for the show event, passes the tip element and the currently hovered element.
-* onHide - (*function*: defaults to `function(tip, hovered){ tip.setStyle('display', 'none'); }`)  The default function for the hide event, passes the currently hovered element.
-* onAttach - (*function*) Fires when an element gets added to the tips instance. Passes the element as argument.
-* onDetach - (*function*) Fires when the event listeners get removed from an element. Passes the element as argument.
+* show - (*function*: defaults to `function(tip, hovered){ tip.setStyle('display', 'block'); }`) The default function for the show event, passes the tip element and the currently hovered element.
+* hide - (*function*: defaults to `function(tip, hovered){ tip.setStyle('display', 'none'); }`)  The default function for the hide event, passes the currently hovered element.
+* attach - (*function*) Fires when an element gets added to the tips instance. Passes the element as argument.
+* detach - (*function*) Fires when the event listeners get removed from an element. Passes the element as argument.
 
 ### Example
 
