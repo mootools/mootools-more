@@ -18,6 +18,7 @@ requires:
   - /HtmlTable
   - /Class.refactor
   - /Element.Delegation
+  - /String.Extras
   - /Date
 
 provides: [HtmlTable.Sort]
@@ -96,7 +97,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 					var match = current.match;
 					if (!match) return false;
 					for (var i = 0, j = rows.length; i < j; i++) {
-						var text = $(rows[i].cells[index]).get('html').clean();
+						var text = $(rows[i].cells[index]).get('html').stripTags().clean();
+						console.log(text);
 						if (text && match.test(text)) {
 							parser = current;
 							return true;
