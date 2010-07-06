@@ -25,6 +25,8 @@ Evaluates an entire form against all the validators that are set up *displaying 
 * all the options defined for [Form.Validator][], plus
 * scrollToErrorsOnSubmit - (*boolean*) if *true* (the default), when the user submits the form the window (or overflown parent) will scroll up to that element so it is in view. Will use [Fx.Scroll][] if it's available, otherwise it will jump to the element.
 * scrollFxOptions - (*object*) options for [Fx.Scroll][] if it's available; used for scrolling to errors if *scrollToErrorsOnSubmit* is *true*.
+* showAdvice - (*function*) the function used to show messages. Passed the message element which is injected into the document already and needs to have its display set to *block*. By default, this method uses [Fx.Reveal][] to smoothly show the message (if it is loaded), otherwise it just sets the display style to block.
+* hideAdvice - (*function*) the function used to hide messages. Works exactly like the *showAdvice* option above, but instead is meant to hide the message. Uses [Fx.Reveal][] if possible, otherwise sets display to *none*.
 
 ### Events
 

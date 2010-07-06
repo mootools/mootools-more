@@ -30,7 +30,7 @@ MooTools.lang.set('ru-RU-unicode', 'Date', {
 	AM: 'AM',
 	PM: 'PM',
 
-	shortDate: '%d/%m/%Y',
+	shortDate: '%d.%m.%Y',
 	shortTime: '%H:%M',
 
 

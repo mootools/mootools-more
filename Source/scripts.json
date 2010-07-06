@@ -388,6 +388,11 @@
 			"deps": ["Lang", "Date.German"],
 			"desc": "Date messages for Swiss German."
 		},
+		
+		"Date.Hungarian": {
+			"deps": ["Lang"],
+			"desc": "Date messages in Hungarian."
+		},
 
 		"Date.French": {
 			"deps": ["Lang"],
@@ -472,6 +477,11 @@
 		"Form.Validator.German.CH": {
 			"deps": ["Lang", "Form.Validator.German"],
 			"desc": "Form.Validator messages in Swiss German."
+		},
+		
+		"Form.Validator.Hungarian": {
+			"deps": ["Lang"],
+			"desc": "Form.Validator messages in Hungarian."
 		},
 
 		"Form.Validator.French": {

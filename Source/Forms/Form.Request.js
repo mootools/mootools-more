@@ -105,16 +105,19 @@ if (!window.Form) window.Form = {};
 
 		detach: function(){
 			this.attach(false);
+			return this;
 		},
 
 		//public method
 		enable: function(){
 			this.attach();
+			return this;
 		},
 
 		//public method
 		disable: function(){
 			this.detach();
+			return this;
 		},
 
 		onFormValidate: function(valid, form, e) {
@@ -128,12 +131,15 @@ if (!window.Form) window.Form = {};
 		},
 
 		onSubmit: function(e){
-			if (this.element.retrieve('validator')) {
+			var fv = this.element.retrieve('validator');
+			if (fv) {
 				//form validator was created after Form.Request
-				this.detach();
+				this.element.removeEvent('submit', this.onSubmit);
+				fv.addEvent('onFormValidate', this.onFormValidate);
+				this.element.validate();
 				return;
 			}
-			e.stop();
+			if (e) e.stop();
 			this.send();
 		},
 

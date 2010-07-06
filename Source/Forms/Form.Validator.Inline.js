@@ -25,6 +25,14 @@ Form.Validator.Inline = new Class({
 	Extends: Form.Validator,
 
 	options: {
+		showError: function(errorElement){
+			if (errorElement.reveal) errorElement.reveal();
+			else errorElement.setStyle('display', 'block');
+		},
+		hideError: function(errorElement){
+			if (errorElement.dissolve) errorElement.dissolve();
+			else errorElement.setStyle('display', 'none');
+		},
 		scrollToErrorsOnSubmit: true,
 		scrollFxOptions: {
 			transition: 'quad:out',
@@ -78,8 +86,7 @@ Form.Validator.Inline = new Class({
 				|| advice.getStyle('visiblity') == 'hidden'
 				|| advice.getStyle('opacity') == 0)){
 			field.store(this.getPropName(className), true);
-			if (advice.reveal) advice.reveal();
-			else advice.setStyle('display', 'block');
+			this.options.showError(advice);
 			this.fireEvent('showAdvice', [field, advice, className]);
 		}
 	},
@@ -88,9 +95,7 @@ Form.Validator.Inline = new Class({
 		var advice = this.getAdvice(className, field);
 		if (advice && field.retrieve(this.getPropName(className))){
 			field.store(this.getPropName(className), false);
-			//if Fx.Reveal.js is present, transition the advice out
-			if (advice.dissolve) advice.dissolve();
-			else advice.setStyle('display', 'none');
+			this.options.hideError(advice);
 			this.fireEvent('hideAdvice', [field, advice, className]);
 		}
 	},
