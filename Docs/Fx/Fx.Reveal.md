@@ -34,8 +34,8 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 ### Events
 
 * All the events found in [Fx.Morph][], PLUS
-* onShow - (*function*) The function to apply when the element is displayed.
-* onHide - (*function*) The function to apply when the element is hidden. NOTE: the *onComplete* event occurs when the effect is complete, but before the element is set to *display:none*.
+* show - (*function*) The function to apply when the element is displayed.
+* hide - (*function*) The function to apply when the element is hidden. NOTE: the *onComplete* event occurs when the effect is complete, but before the element is set to *display:none*.
 
 ### Returns
 

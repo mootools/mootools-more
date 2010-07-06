@@ -34,10 +34,10 @@ Adds a semi-transparent overlay over a DOM element.
 
 ### Events
 
-* onShow - (*function*) callback to execute when the layer is shown; passed the target element to which the [Mask][] was attached.
-* onHide - (*function*) callback to execute when the layer is hidden; passed the target element to which the [Mask][] was attached.
-* onDestroy - (*function*) callback to execute when the layer is destroyed.
-* onClick - (*function*) callback to execute when the layer is clicked.
+* show - (*function*) callback to execute when the layer is shown; passed the target element to which the [Mask][] was attached.
+* hide - (*function*) callback to execute when the layer is hidden; passed the target element to which the [Mask][] was attached.
+* destroy - (*function*) callback to execute when the layer is destroyed.
+* click - (*function*) callback to execute when the layer is clicked.
 
 ### Examples
 

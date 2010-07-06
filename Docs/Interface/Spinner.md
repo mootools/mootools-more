@@ -35,8 +35,8 @@ You can style the layer and its contents by just defining a css style for the cl
 
 ### Events
 
-* onShow - (*function*) callback to execute when the spinning layer is shown; passed the target element to which the [Spinner][] was attached
-* onHide - (*function*) callback to execute when the spinning layer is hidden; passed the target element to which the [Spinner][] was attached
+* show - (*function*) callback to execute when the spinning layer is shown; passed the target element to which the [Spinner][] was attached
+* hide - (*function*) callback to execute when the spinning layer is hidden; passed the target element to which the [Spinner][] was attached
 
 ### Example
 

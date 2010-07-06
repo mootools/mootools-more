@@ -306,8 +306,8 @@ Outputs the date into a specific format.
 * S - the seconds to two digits (01, 40, 59)
 * U - the week to two digits (01 is the week of Jan 1, 52 is the week of Dec 31)
 * w - the numerical day of the week, one digit (0 is Sunday, 1 is Monday)
-* x - the date in the current language prefered format. en-US: %m/%d/%Y (12/10/2007)
-* X - the time in the current language prefered format. en-US: %I:%M%p (02:45PM)
+* x - the date in the current language preferred format. en-US: %m/%d/%Y (12/10/2007)
+* X - the time in the current language preferred format. en-US: %I:%M%p (02:45PM)
 * y - the short year (two digits; "07")
 * Y - the full year (four digits; "2007")
 * T - the GMT offset ("-0800")
@@ -459,7 +459,7 @@ A pattern string is somewhat of a hybrid between regular expressions and the for
 
 	Date.defineParser('%d%o( %b( %Y)?)?( %X)?');
 	
-As you can see, the above pattern (already included in *Date.js*) uses parantheses for grouping with a question mark to denote the preceding item or group as being optional, just as in a regular expression.  It parsers strings such as:
+As you can see, the above pattern (already included in *Date.js*) uses parentheses for grouping with a question mark to denote the preceding item or group as being optional, just as in a regular expression.  It parsers strings such as:
 
 * 14th
 * 31st October

@@ -101,7 +101,7 @@
 
 		"Elements.From": {
 			"deps": ["More", "Element"],
-			"desc": "Adds a static method to Element to parse html."
+			"desc": "Adds a static method to Element to parse HTML."
 		},
 
 		"Element.Delegation": {
@@ -237,7 +237,7 @@
 
 		"Request.JSONP": {
 			"deps": ["More", "Log", "Element", "Request"],
-			"desc": "Creates a Json request using a script tag include and handles the callbacks for you."
+			"desc": "Creates a JSON request using a script tag include and handles the callbacks for you."
 		},
 
 		"Request.Queue": {
@@ -276,7 +276,7 @@
 
 		"IframeShim": {
 			"deps": ["More", "Element.Position", "Element.Event", "Element.Style", "Class.Extras", "Class.Occlude"],
-			"desc": "Creates a transparent iframe to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
+			"desc": "Creates a transparent IFrame to mask out items not drawn by the browser (flash, select lists, etc) for IE6."
 		}
 
 	},
@@ -331,7 +331,7 @@
 
 		"Spinner":{
 			"deps": ["More", "Class.Refactor", "Fx.Tween", "Mask"],
-			"desc": "Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.",
+			"desc": "Adds a semi-transparent overlay over a DOM element with a spinning ajax icon.",
 			"styles": true
 		}
 

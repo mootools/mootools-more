@@ -27,9 +27,9 @@ Form.Request Method: constructor {#Form-Request:constructor}
 
 ### Events
 
-* onSend - (*function*) The function to execute when the request is sent. Passed the form being submitted and the data (an *object*) being submited.
-* onFailure - (*function*) The function to execute when the request fails. Passed the xhr that is returned by *Request* on failure.
-* onSuccess - (*function*) The function to execute when the request succeeds. Passed the target being updated, the response tree, the response elements, the html (with any inline JavaScript removed), and any JavaScript that was in that html. These are the same arguments passed to *Request.HTML* on success, with the updated element prepended to that arguments list.
+* send - (*function*) The function to execute when the request is sent. Passed the form being submitted and the data (an *object*) being submitted.
+* failure - (*function*) The function to execute when the request fails. Passed the XHR that is returned by *Request* on failure.
+* success - (*function*) The function to execute when the request succeeds. Passed the target being updated, the request text, and the request xml.
 
 Form.Request and Form.Validator {#Form-Request:Form-Validator}
 -------------------------------------------------
