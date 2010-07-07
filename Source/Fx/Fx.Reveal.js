@@ -209,7 +209,7 @@ Element.implement({
 		return this;
 	},
 
-	nix: function(){
+	nix: function(options){
 		var params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
 		this.get('reveal').setOptions(options).dissolve().chain(function(){
 			this[params.destroy ? 'destroy' : 'dispose']();
