@@ -58,7 +58,7 @@ var Spinner = new Class({
 
 	render: function(){
 		this.parent();
-		this.element.set('id', this.options.id || 'spinner-'+$time());
+		this.element.set('id', this.options.id || 'spinner-'+Date.now());
 		this.content = document.id(this.options.content) || new Element('div', this.options.content);
 		this.content.inject(this.element);
 		if (this.options.message) {
@@ -84,10 +84,11 @@ var Spinner = new Class({
 
 	showMask: function(noFx){
 		var pos = function(){
-			this.content.position($merge({
+			this.content.position(Object.merge({
 				relativeTo: this.element
 			}, this.options.containerPosition));
 		}.bind(this);
+		
 		if (noFx) {
 			this.parent();
 			pos();
@@ -173,16 +174,17 @@ Element.Properties.spinner = {
 
 	set: function(options){
 		var spinner = this.retrieve('spinner');
-		return this.eliminate('spinner').store('spinner:options', options);
+		spinner.setOptions(options);
+		return this;
 	},
 
-	get: function(options){
-		if (options || !this.retrieve('spinner')){
-			if (this.retrieve('spinner')) this.retrieve('spinner').destroy();
-			if (options || !this.retrieve('spinner:options')) this.set('spinner', options);
-			new Spinner(this, this.retrieve('spinner:options'));
+	get: function(){
+		var spinner = this.retrieve('spinner')
+		if (!spinner){
+			spinner = new Spinner(this);
+			this.store('spinner', spinner);
 		}
-		return this.retrieve('spinner');
+		return spinner;
 	}
 
 };
@@ -195,7 +197,7 @@ Element.implement({
 	},
 
 	unspin: function(){
-		var opt = Array.link(arguments, {options: Object.type, callback: Function.type});
+		var opt = Array.link(arguments, {options: Type.isObject, callback: Type.isFunction});
 		this.get('spinner', opt.options).hide(opt.callback);
 		return this;
 	}
