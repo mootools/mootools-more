@@ -59,10 +59,8 @@ Request.JSONP = new Class({
 		}
 	},
 
-	check: Request.prototype.check,
-	
 	send: function(options){
-		if (!this.check(options)) return this;
+		if (!Request.prototype.check.call(this, options)) return this;
 		this.running = true;
 		
 		var type = typeOf(options);
