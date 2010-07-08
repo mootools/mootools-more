@@ -47,7 +47,7 @@ var Color = new Native({
 		color.rgb = color.slice(0, 3);
 		color.hsb = color.hsb || color.rgbToHsb();
 		color.hex = color.rgbToHex();
-		return $extend(color, this);
+		return Object.append(color, this);
 	}
 
 });
@@ -56,7 +56,7 @@ Color.implement({
 
 	mix: function(){
 		var colors = Array.slice(arguments);
-		var alpha = ($type(colors.getLast()) == 'number') ? colors.pop() : 50;
+		var alpha = (typeOf(colors.getLast()) == 'number') ? colors.pop() : 50;
 		var rgb = this.slice();
 		colors.each(function(color){
 			color = new Color(color);
