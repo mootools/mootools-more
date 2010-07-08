@@ -28,7 +28,7 @@ Request.JSONP = new Class({
 	Implements: [Chain, Events, Options],
 	
 	options: {/*
-		onRequest: function(scriptElement){},
+		onRequest: function(src, scriptElement){},
 		onComplete: function(data){},
 		onSuccess: function(data){},
 		onCancel: function(){},
@@ -39,21 +39,33 @@ Request.JSONP = new Class({
 		injectScript: document.head,
 		data: {},
 		link: 'ignore',
-		timeout: 0
+		timeout: 0,
+		log: false
 	},
 	
 	initialize: function(options){
 		this.setOptions(options);
+
+		if (this.options.log && window.Log){
+			Object.append(this, new Log);
+			this.enableLog().addEvents({
+				request: function(src){
+					this.log('JSONP retrieving script with url: ' + src);
+				}.bind(this),
+				tooLongURL: function(src){
+					this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
+				}.bind(this),
+				succes: function(args){
+					this.log('JSONP successfully retrieved: ', args);
+				}.bind(this),
+				timeout: function(src){
+					this.log('JSONP request timed out with url: ' + src)
+				}.bind(this)
+			});
+		}
 	},
 
-	check: function(){
-		if (!this.running) return true;
-		switch (this.options.link){
-			case 'cancel': this.cancel(); return true;
-			case 'chain': this.chain(this.caller.bind(this, arguments)); return false;
-		}
-		return false;
-	},
+	check: Request.prototype.check,
 	
 	send: function(options){
 		if (!this.check(options)) return this;
@@ -105,8 +117,7 @@ Request.JSONP = new Class({
 	
 	success: function(args, index){
 		this.clear()
-			.fireEvent('complete', args)
-			.fireEvent('success', args)
+			.fireEvent('complete', args).fireEvent('success', args)
 			.callChain();
 	},
 	
