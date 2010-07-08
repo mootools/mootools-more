@@ -54,12 +54,6 @@ Request.JSONP = new Class({
 				}.bind(this),
 				tooLongURL: function(src){
 					this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
-				}.bind(this),
-				succes: function(args){
-					this.log('JSONP successfully retrieved: ', args);
-				}.bind(this),
-				timeout: function(src){
-					this.log('JSONP request timed out with url: ' + src)
 				}.bind(this)
 			});
 		}
