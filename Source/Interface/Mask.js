@@ -31,18 +31,18 @@ var Mask = new Class({
 
 	Binds: ['position'],
 
-	options: {
-		// onShow: $empty,
-		// onHide: $empty,
-		// onDestroy: $empty,
-		// onClick: $empty,
-		//inject: {
-		//  where: 'after',
-		//  target: null,
-		//},
-		// hideOnClick: false,
-		// id: null,
-		// destroyOnHide: false,
+	options: {/*
+		onShow: function(){},
+		onHide: function(){},
+		onDestroy: function(){},
+		onClick: function(){},
+		inject: {
+			where: 'after',
+			target: null,
+		},
+		hideOnClick: false,
+		id: null,
+		destroyOnHide: false,*/
 		style: {},
 		'class': 'mask',
 		maskMargins: false,
@@ -61,8 +61,8 @@ var Mask = new Class({
 	render: function() {
 		this.element = new Element('div', {
 			'class': this.options['class'],
-			id: this.options.id || 'mask-' + $time(),
-			styles: $merge(this.options.style, {
+			id: this.options.id || 'mask-' + Date.now(),
+			styles: Object.merge(this.options.style, {
 				display: 'none'
 			}),
 			events: {
@@ -116,8 +116,8 @@ var Mask = new Class({
 			if (dim.totalWidth < win.x) dim.totalWidth = win.x;
 		}
 		this.element.setStyles({
-			width: $pick(x, dim.totalWidth, dim.x),
-			height: $pick(y, dim.totalHeight, dim.y)
+			width: Array.pick([x, dim.totalWidth, dim.x]),
+			height: Array.pick([y, dim.totalHeight, dim.y])
 		});
 		return this;
 	},
