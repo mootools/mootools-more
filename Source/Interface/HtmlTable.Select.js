@@ -27,8 +27,8 @@ provides: [HtmlTable.Select]
 HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {
-		/*onRowFocus: $empty,
-		onRowUnfocus: $empty,*/
+		/*onRowFocus: function(){},
+		onRowUnfocus: function(){},*/
 		useKeyboard: true,
 		classRowSelected: 'table-tr-selected',
 		classRowHovered: 'table-tr-hovered',
@@ -61,7 +61,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	attachSelects: function(attach){
-		attach = $pick(attach, true);
+		attach = attach != null ? attach : true;
 		var method = attach ? 'addEvents' : 'removeEvents';
 		this.element[method]({
 			mouseleave: this.bound.mouseleave
@@ -165,7 +165,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	selectAll: function(status){
-		status = $pick(status, true);
+		status = status != null ? status : true;
 		if (!this.options.allowMultiSelect && status) return;
 		if (!status) this.selectedRows.removeClass(this.options.classRowSelected).empty();
 		else this.selectedRows.combine(this.body.rows).addClass(this.options.classRowSelected);

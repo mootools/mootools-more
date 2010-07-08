@@ -29,7 +29,7 @@ provides: [HtmlTable.Sort]
 HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {/*
-		onSort: $empty, */
+		onSort: function(){}, */
 		sortIndex: 0,
 		sortReverse: false,
 		parsers: [],
@@ -61,7 +61,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	attachSorts: function(attach){
 		this.element.removeEvents('click:relay(th)');
-		this.element[$pick(attach, true) ? 'addEvent' : 'removeEvent']('click:relay(th)', this.bound.headClick);
+		this.element[attach !== false ? 'addEvent' : 'removeEvent']('click:relay(th)', this.bound.headClick);
 	},
 
 	setHeaders: function(){
@@ -72,13 +72,13 @@ HtmlTable = Class.refactor(HtmlTable, {
 	detectParsers: function(force){
 		if (!this.head) return;
 		var parsers = this.options.parsers, 
-				rows = this.body.rows;
+			rows = this.body.rows;
 
 		// auto-detect
 		this.parsers = $$(this.head.cells).map(function(cell, index) {
 			if (!force && (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser'))) return cell.retrieve('htmltable-parser');
 			var thDiv = new Element('div');
-			$each(cell.childNodes, function(node) {
+			Array.each(cell.childNodes, function(node) {
 				thDiv.adopt(node);
 			});
 			thDiv.inject(cell);
@@ -88,7 +88,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 			var parser = parsers[index], 
 					cancel;
-			switch ($type(parser)) {
+			switch (typeOf(parser)) {
 				case 'function': parser = {convert: parser}; cancel = true; break;
 				case 'string': parser = parser; cancel = true; break;
 			}
@@ -121,10 +121,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	sort: function(index, reverse, pre) {
 		if (!this.head) return;
-		pre = !!(pre);
 		var classCellSort = this.options.classCellSort;
 		var classGroup = this.options.classGroup, 
-				classGroupHead = this.options.classGroupHead;
+			classGroupHead = this.options.classGroupHead;
 
 		if (!pre) {
 			if (index != null) {
@@ -156,10 +155,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 		}
 
 		var parser = this.parsers[index];
-		if ($type(parser) == 'string') parser = HtmlTable.Parsers.get(parser);
+		if (typeOf(parser) == 'string') parser = HtmlTable.Parsers.get(parser);
 		if (!parser) return;
 
-		if (!Browser.Engine.trident) {
+		if (!Browser.ie) {
 			var rel = this.body.getParent();
 			this.body.dispose();
 		}
