@@ -1,0 +1,95 @@
+<script src="/depender/build?require=Core/Element.Event,More/Fx.Move"></script>
+
+<style>
+#foo {
+	width: 200px;
+	height: 200px;
+	border: 1px solid black;
+	top: 50px;
+	left: 50px;
+	margin: 70px;
+}
+#box {
+	width: 30px;
+	height: 30px;
+	background-color: #900;
+}
+</style>
+
+
+<div id="foo" class="blackText">
+	This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text.
+</div>
+
+<div id="box"></div>
+
+
+
+<h2>Center</h2>
+
+<p>Centers the red box over the text box.<br />Is the red box centered over the text box?</p>
+
+<a href="#" id="runCenter">Run Test</a>
+
+<script type="text/javascript">
+$('runCenter').addEvent('click', function(e){
+	e.stop();
+	new Fx.Move($('box'), {relativeTo: $('foo')}).start();
+
+});
+</script>
+
+<h2>UpperLeft to UpperLeft</h2>
+
+<p>Puts the UL corner of the red box to the UL corner of the text box.<br />Is the upper left corner of the red box over the upper left corner of the text box?</p>
+
+<a href="#" id="runUpperLeft">Run Test</a>
+
+<script type="text/javascript">
+$('runUpperLeft').addEvent('click', function(e){
+	e.stop();
+	new Fx.Move($('box'), {relativeTo: $('foo'), position: 'upperLeft'}).start();
+});
+</script>
+
+
+<h2>BottomRight to BottomRight</h2>
+
+<p>Puts the BR corner of the red box to the BR corner of the text box.<br />Is the lower right corner of the red box over the lower right corner of the text box?</p>
+
+<a href="#" id="runBottomRight">Run Test</a>
+
+<script type="text/javascript">
+$('runBottomRight').addEvent('click', function(e){
+	e.stop();
+	new Fx.Move($('box'), {relativeTo: $('foo'), position: 'bottomRight', edge: 'bottomRight'}).start();
+});
+</script>
+
+
+<h2>Center to BottomRight</h2>
+
+<p>Puts the center of the red box to the BR corner of the text box.<br />Is the center of the red box over the lower right corner of the text box?</p>
+
+<a href="#" id="runCenterBottomRight">Run Test</a>
+
+<script type="text/javascript">
+$('runCenterBottomRight').addEvent('click', function(e){
+	e.stop();
+	new Fx.Move($('box'), {relativeTo: $('foo'), position: 'bottomRight', edge: 'center'}).start();
+});
+</script>
+
+
+<h2>Right edge to Right edge</h2>
+
+<p>Puts the right edge (center) of the red box to the right edge (center) of the text box.<br />Is the right edge (center) of the red box touching the right edge (center) of the text box?</p>
+
+<a href="#" id="runRightEdge">Run Test</a>
+
+<script type="text/javascript">
+$('runRightEdge').addEvent('click', function(e){
+	e.stop();
+	new Fx.Move($('box'), {relativeTo: $('foo'), position: 'centerRight', edge: 'centerRight'}).start();
+});
+</script>
