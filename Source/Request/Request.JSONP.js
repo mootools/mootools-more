@@ -12,11 +12,11 @@ license: MIT-style license
 authors:
   - Aaron Newton
   - Guillermo Rauch
+  - Arian Stolwijk
 
 requires:
   - Core/Element
   - Core/Request
-  - /Log
 
 provides: [Request.JSONP]
 
@@ -24,114 +24,105 @@ provides: [Request.JSONP]
 */
 
 Request.JSONP = new Class({
-
-	Implements: [Chain, Events, Options, Log],
-
+	
+	Implements: [Chain, Events, Options],
+	
 	options: {/*
-		onRetry: function(intRetries){},
-		onRequest: function(scriptElement){},
+		onRequest: function(src, scriptElement){},
 		onComplete: function(data){},
 		onSuccess: function(data){},
 		onCancel: function(){},
-		log: false,
-		*/
+		onTimeout: function(){},
+		onTooLongURL: function(){}, */
 		url: '',
-		data: {},
-		retries: 0,
-		timeout: 0,
-		link: 'ignore',
 		callbackKey: 'callback',
-		injectScript: document.head
+		injectScript: document.head,
+		data: {},
+		link: 'ignore',
+		timeout: 0,
+		log: false
 	},
-
+	
 	initialize: function(options){
 		this.setOptions(options);
-		if (this.options.log) this.enableLog();
-		this.running = false;
-		this.requests = 0;
-		this.triesRemaining = [];
-	},
 
-	check: function(){
-		if (!this.running) return true;
-		switch (this.options.link){
-			case 'cancel': this.cancel(); return true;
-			case 'chain': this.chain(this.caller.bind(this, arguments)); return false;
+		if (this.options.log && window.Log){
+			Object.append(this, new Log);
+			this.enableLog().addEvents({
+				request: function(src){
+					this.log('JSONP retrieving script with url: ' + src);
+				}.bind(this),
+				tooLongURL: function(src){
+					this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
+				}.bind(this)
+			});
 		}
-		return false;
 	},
 
 	send: function(options){
-		if (!(arguments[1] || arguments[1] === 0) && !this.check(options)) return this;
-
-		var type = typeOf(options), 
-				old = this.options, 
-				index = (arguments[1] || arguments[1] === 0) ? arguments[1] : this.requests++;
+		if (!Request.prototype.check.call(this, options)) return this;
+		this.running = true;
+		
+		var type = typeOf(options);
 		if (type == 'string' || type == 'element') options = {data: options};
+		options = Object.merge(this.options, options || {});
 
-		options = Object.extend({data: old.data, url: old.url}, options);
-
-		if (!(this.triesRemaining[index] || this.triesRemaining[index] === 0)) this.triesRemaining[index] = this.options.retries;
-		var remaining = this.triesRemaining[index];
-
-		(function(){
-			var script = this.getScript(options);
-			this.log('JSONP retrieving script with url: ' + script.get('src'));
-			this.fireEvent('request', script);
-			this.running = true;
-
-			(function(){
-				if (remaining){
-					this.triesRemaining[index] = remaining - 1;
-					if (script){
-						script.destroy();
-						this.send(options, index).fireEvent('retry', this.triesRemaining[index]);
-					}
-				} else if(script && this.options.timeout){
-					script.destroy();
-					this.cancel().fireEvent('failure');
-				}
-			}).delay(this.options.timeout, this);
-		}).delay(Browser.ie ? 50 : 0, this);
-		return this;
-	},
-
-	cancel: function(){
-		if (!this.running) return this;
-		this.running = false;
-		this.fireEvent('cancel');
-		return this;
-	},
-
-	getScript: function(options){
-		var index = Request.JSONP.counter,
-				data;
-		Request.JSONP.counter++;
-
-		switch (typeOf(options.data)){
-			case 'element': data = document.id(options.data).toQueryString(); break;
-			case 'object': case 'hash': data = Object.toQueryString(options.data);
+		var data = options.data;
+		switch (typeOf(data)){
+			case 'element': data = document.id(data).toQueryString(); break;
+			case 'object': case 'hash': data = Object.toQueryString(data);
 		}
 
+		var index = this.index = Request.JSONP.counter++;
+
 		var src = options.url + 
-			 (options.url.test('\\?') ? '&' :'?') + 
-			 (options.callbackKey || this.options.callbackKey) + 
-			 '=Request.JSONP.request_map.request_'+ index + 
-			 (data ? '&' + data : '');
-		if (src.length > 2083) this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
-
-		var script = new Element('script', {type: 'text/javascript', src: src});
-		Request.JSONP.request_map['request_' + index] = function(){ this.success(arguments, script); }.bind(this);
-		return script.inject(this.options.injectScript);
+			(options.url.test('\\?') ? '&' :'?') + 
+			(options.callbackKey) + 
+			'=Request.JSONP.request_map.request_'+ index + 
+			(data ? '&' + data : '');		
+				
+		if(src.length > 2083) this.fireEvent('tooLongURL', src);
+		
+		var script = this.getScript(src).inject(options.injectScript);
+		
+		this.fireEvent('request', [script.get('src'), script]);
+		
+		Request.JSONP.request_map['request_' + index] = function(){
+			this.success(arguments, index);
+		}.bind(this);
+		
+		if(options.timeout){
+			(function(){
+				this.cancel().fireEvent('timeout', [script.get('src'), script])
+			}).delay(options.timeout, this);
+		}
+		
+		return this;
 	},
-
-	success: function(args, script){
-		if (script) script.destroy();
+	
+	getScript: function(src){
+		return this.script = new Element('script', {
+			type: 'text/javascript',
+			src: src
+		});
+	},
+	
+	success: function(args, index){
+		this.clear()
+			.fireEvent('complete', args).fireEvent('success', args)
+			.callChain();
+	},
+	
+	cancel: function(){
+		return this.clear().fireEvent('cancel');
+	},
+	
+	clear: function(){
+		if (this.script) this.script.destroy();
 		this.running = false;
-		this.log('JSONP successfully retrieved: ', args);
-		this.fireEvent('complete', args).fireEvent('success', args).callChain();
+		return this;
 	}
-
+	
 });
 
 Request.JSONP.counter = 0;
