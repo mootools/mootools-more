@@ -1,0 +1,37 @@
+<script src="/depender/build?require=More/Fx.Elements"></script>
+
+
+<h2>Fx.Elements</h2>
+
+<p>Animates several elements at once.<br />Did the elements change shape smoothly at the same time?</p>
+
+<style>
+.exampleBar {
+	background-color:#BAEEB5;
+	border:1px solid #000000;
+	height:10px;
+	margin:2px 0;
+}
+</style>
+<div class="exampleBar"></div>
+<div class="exampleBar"></div>
+<div class="exampleBar"></div>
+<script type="text/javascript">
+
+	var myElementsEffects = new Fx.Elements($$('div.exampleBar'), {
+		duration: 2000
+	});
+	myElementsEffects.start({
+		'0': { /*	let's change the first element's opacity and width	*/
+			'opacity': [0,1],
+			'width': [100,200]
+		},
+		'1': { /*	and the second one's opacity	*/
+			'opacity': [0.2, 0.7]
+		},
+		'2': { /*	and the third's height	*/
+		'height': 100 /*	from whatever it's at now to 40	*/
+		}
+	});
+			
+</script>
