@@ -16,13 +16,12 @@ authors:
 
 requires:
   - Core/Element
+  - Core/Request
 
 provides: [Request.JSONP]
 
 ...
 */
-
-var Request = Request || {};
 
 Request.JSONP = new Class({
 	
