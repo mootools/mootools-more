@@ -29,18 +29,16 @@ provides: [Tips]
 (function(){
 
 var read = function(option, element){
-	return (option) ? ($type(option) == 'function' ? option(element) : element.get(option)) : '';
+	return (option) ? (typeOf(option) == 'function' ? option(element) : element.get(option)) : '';
 };
 
 this.Tips = new Class({
 
 	Implements: [Events, Options],
 
-	options: {
-		/*
-		onAttach: $empty(element),
-		onDetach: $empty(element),
-		*/
+	options: {/*
+		onAttach: function(element){},
+		onDetach: function(element){},*/
 		onShow: function(){
 			this.tip.setStyle('display', 'block');
 		},
@@ -60,7 +58,12 @@ this.Tips = new Class({
 	},
 
 	initialize: function(){
-		var params = Array.link(arguments, {options: Object.type, elements: $defined});
+		var params = Array.link(arguments, {
+			options: Type.isObject, 
+			elements: function(obj){
+				return obj != null;
+			}
+		});
 		this.setOptions(params.options);
 		if (params.elements) this.attach(params.elements);
 		this.container = new Element('div', {'class': 'tip'});
@@ -97,7 +100,11 @@ this.Tips = new Class({
 			
 			events.each(function(value){
 				var event = element.retrieve('tip:' + value);
-				if (!event) event = this['element' + value.capitalize()].bindWithEvent(this, element);
+				if (!event){
+					event = function(event){
+						this['element' + value.capitalize()].apply(this, [event, element]);
+					}.bind(this);
+				}
 				
 				element.store('tip:' + value, event).addEvent('mouse' + value, event);
 			}, this);
@@ -131,7 +138,7 @@ this.Tips = new Class({
 			if (content) this.fill(new Element('div', {'class': 'tip-' + value}).inject(this.container), content);
 		}, this);
 		
-		$clear(this.timer);
+		clearTimeout(this.timer);
 		this.timer = (function(){
 			this.show(element);
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
@@ -139,7 +146,7 @@ this.Tips = new Class({
 	},
 
 	elementLeave: function(event, element){
-		$clear(this.timer);
+		clearTimeout(this.timer);
 		this.timer = this.hide.delay(this.options.hideDelay, this, element);
 		this.fireForParent(event, element);
 	},
