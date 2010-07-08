@@ -44,7 +44,7 @@ provides: [Element.Pin]
 				scroll = window.getScroll();
 				
 			if (enable !== false){
-				pinToPosition = this.getPosition();
+				pinnedPosition = this.getPosition();
 				if (!this.retrieve('pin:_pinned')){
 					var currentPosition = {
 						top: pinnedPosition.y - scroll.y,
