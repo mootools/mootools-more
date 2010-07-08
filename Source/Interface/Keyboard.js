@@ -33,11 +33,9 @@ provides: [Keyboard]
 
 		Implements: [Options, Log],
 
-		options: {
-			/*
+		options: {/*
 			onActivate: function(){},
-			onDeactivate: function(){},
-			*/
+			onDeactivate: function(){},*/
 			defaultEventType: 'keydown',
 			active: false,
 			manager: null,

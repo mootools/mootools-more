@@ -36,7 +36,7 @@ Keyboard.implement({
 		this.shortcuts = this.shortcuts || [];
 		this.shortcutIndex = this.shortcutIndex || {};
 		
-		shortcut.getKeyboard = $lambda(this);
+		shortcut.getKeyboard = Function.from(this);
 		shortcut.name = name;
 		this.shortcutIndex[name] = shortcut;
 		this.shortcuts.push(shortcut);
@@ -75,7 +75,7 @@ Keyboard.implement({
 });
 
 Keyboard.rebind = function(newKeys, shortcuts){
-	$splat(shortcuts).each(function(shortcut){
+	Array.from(shortcuts).each(function(shortcut){
 		shortcut.getKeyboard().removeEvent(shortcut.keys, shortcut.handler);
 		shortcut.getKeyboard().addEvent(newKeys, shortcut.handler);
 		shortcut.keys = newKeys;
