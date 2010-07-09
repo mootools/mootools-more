@@ -147,13 +147,13 @@ Element.implement({
 
 
 		getStylesList(options.styles, options.planes).each(function(style){
-			styles[style] = this.getComputedStyle(style).toInt();
+			styles[style] = this.getStyle(style).toInt();
 		}, this);
 
 		Object.each(options.planes, function(edges, plane){
 
 			var capitalized = plane.capitalize();
-			styles[plane] = this.getComputedStyle(plane).toInt();
+			styles[plane] = this.getStyle(plane).toInt();
 			size['total' + capitalized] = styles[plane];
 
 			edges.each(function(edge){
