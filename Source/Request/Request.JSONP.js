@@ -27,13 +27,24 @@ Request.JSONP = new Class({
 	
 	Implements: [Chain, Events, Options],
 	
-	options: {/*
+	options: {
+	/*
 		onRequest: function(src, scriptElement){},
 		onComplete: function(data){},
 		onSuccess: function(data){},
 		onCancel: function(){},
 		onTimeout: function(){},
 		onTooLongURL: function(){}, */
+		onRequest: function(){
+			if (this.options.log && window.console && console.log) {
+				console.log('JSONP retrieving script with url:' + src);
+			}
+		},
+		onTooLongURL: function(){
+			if (this.options.log && window.console && console.warn) {
+				console.warn('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
+			}
+		},
 		url: '',
 		callbackKey: 'callback',
 		injectScript: document.head,
@@ -45,18 +56,6 @@ Request.JSONP = new Class({
 	
 	initialize: function(options){
 		this.setOptions(options);
-
-		if (this.options.log && window.Log){
-			Object.append(this, new Log);
-			this.enableLog().addEvents({
-				request: function(src){
-					this.log('JSONP retrieving script with url: ' + src);
-				}.bind(this),
-				tooLongURL: function(src){
-					this.log('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
-				}.bind(this)
-			});
-		}
 	},
 
 	send: function(options){
@@ -75,11 +74,11 @@ Request.JSONP = new Class({
 
 		var index = this.index = Request.JSONP.counter++;
 
-		var src = options.url + 
+		var src = options.url +
 			(options.url.test('\\?') ? '&' :'?') + 
 			(options.callbackKey) + 
 			'=Request.JSONP.request_map.request_'+ index + 
-			(data ? '&' + data : '');		
+			(data ? '&' + data : '');
 				
 		if(src.length > 2083) this.fireEvent('tooLongURL', src);
 		
@@ -93,7 +92,7 @@ Request.JSONP = new Class({
 		
 		if(options.timeout){
 			(function(){
-				this.cancel().fireEvent('timeout', [script.get('src'), script])
+				this.cancel().fireEvent('timeout', [script.get('src'), script]);
 			}).delay(options.timeout, this);
 		}
 		
