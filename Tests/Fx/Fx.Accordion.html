@@ -35,15 +35,11 @@ var acc = new Fx.Accordion($$('#accordionExample dt'), $$('#accordionExample dd'
 <p>Detaches an instance of Fx.Accordion<br />Is the accordion no longer functional?</p>
 
 <a id="accDetachRun" href="#">Run .detach</a>
-<a id="accAttachRun" href="#">Run .attach</a>
 
 <script type="text/javascript">
 
 $('accDetachRun').addEvent('click',function(){
-	acc.detach();	
-});
-$('accAttachRun').addEvent('click',function(){
-	acc.attach();	
+	acc.detach();
 });
 
 </script>

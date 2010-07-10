@@ -1,0 +1,136 @@
+<script src="/depender/build?require=More/Fx.Scroll"></script>
+<script type="text/javascript">
+fx = new Fx.Scroll($(document.body), {duration: 500});
+</script>
+
+<div style="position: absolute; right: -500px; width: 100px; height: 100px; background: red">
+	We've got horizontal scrollbars!
+</div>
+
+<h2>Fx.Scroll:toBottom</h2>
+
+<p>Scrolls the box to the bottom<br />Did the box scroll to the bottom?</p>
+
+<a href="#" id="runToBottom">Run</a>
+<script type="text/javascript">
+$('runToBottom').addEvent('click', function(e){
+	e.stop();
+	fx.toBottom();
+});
+	
+</script>
+
+
+
+<h2>Fx.Scroll:toRight</h2>
+
+<p>Scrolls the box to the right<br />Did the box scroll to the right?</p>
+
+<a href="#" id="runToRight">Run</a>
+<script type="text/javascript">
+$('runToRight').addEvent('click', function(e){
+	e.stop();
+	fx.toRight();
+});
+</script>
+
+
+
+<h2>Fx.Scroll:toTop</h2>
+
+<p>Scrolls the box to the top<br />Did the box scroll to the top?</p>
+
+<a href="#" id="runToTop">Run</a>
+<script type="text/javascript">
+$('runToTop').addEvent('click', function(e){
+	e.stop();
+	fx.toTop();
+});
+</script>
+
+
+
+<h2>Fx.Scroll:toLeft</h2>
+
+<p>Scrolls the box to the left<br />Did the box scroll to the left?</p>
+
+<a href="#" id="runToLeft">Run</a>
+<script type="text/javascript">
+$('runToLeft').addEvent('click', function(e){
+	e.stop();
+	fx.toLeft();
+});
+</script>
+
+
+<h2>Fx.Scroll:toElement</h2>
+
+<p>Scrolls the box to the red item<br />Did the box scroll to the red item?</p>
+
+<a href="#" id="runToElement">Run</a>
+<script type="text/javascript">
+$('runToElement').addEvent('click', function(e){
+	e.stop();
+	fx.toElement('red');
+});
+</script>
+
+
+
+<h2>Fx.Scroll:scrollIntoView (bottom)</h2>
+
+<p>Scrolls the box so that the blue item is in the view at the bottom.<br />Did the box scroll so that the blue item is at the bottom?</p>
+
+<a href="#" id="scrollIntoView1">Run</a>
+<script type="text/javascript">
+$('scrollIntoView1').addEvent('click', function(e){
+	e.stop();
+
+	fx.set(0,0);
+	fx.scrollIntoView('blue', 'y');
+});
+</script>
+
+
+
+<h2>Fx.Scroll:scrollIntoView (top)</h2>
+
+<p>Scrolls the box so that the yellow item is in the view at the top.<br />Did the box scroll so that the yellow item is at the top?</p>
+
+<a href="#" id="scrollIntoView2">Run</a>
+<script type="text/javascript">
+$('scrollIntoView2').addEvent('click', function(e){
+	e.stop();
+
+	fx.set(0,500);
+	fx.scrollIntoView('yellow', 'y');
+});
+</script>
+
+
+<ul style="width: 500px;">
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li id="yellow" style="color: yellow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li id="red" style="color:red">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li id="blue" style="color:blue">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+</ul>
