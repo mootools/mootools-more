@@ -34,13 +34,13 @@ Request.JSONP = new Class({
 		onSuccess: function(data){},
 		onCancel: function(){},
 		onTimeout: function(){},
-		onTooLongURL: function(){}, */
-		onRequest: function(){
+		onError: function(){}, */
+		onRequest: function(src){
 			if (this.options.log && window.console && console.log) {
 				console.log('JSONP retrieving script with url:' + src);
 			}
 		},
-		onTooLongURL: function(){
+		onError: function(src){
 			if (this.options.log && window.console && console.warn) {
 				console.warn('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
 			}
@@ -80,7 +80,7 @@ Request.JSONP = new Class({
 			'=Request.JSONP.request_map.request_'+ index + 
 			(data ? '&' + data : '');
 				
-		if(src.length > 2083) this.fireEvent('tooLongURL', src);
+		if(src.length > 2083) this.fireEvent('error', src);
 		
 		var script = this.getScript(src).inject(options.injectScript);
 		
