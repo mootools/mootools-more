@@ -25,31 +25,27 @@ provides: [Color]
 ...
 */
 
-var Color = new Native({
-
-	initialize: function(color, type){
-		if (arguments.length >= 3){
-			type = 'rgb'; color = Array.slice(arguments, 0, 3);
-		} else if (typeof color == 'string'){
-			if (color.match(/rgb/)) color = color.rgbToHex().hexToRgb(true);
-			else if (color.match(/hsb/)) color = color.hsbToRgb();
-			else color = color.hexToRgb(true);
-		}
-		type = type || 'rgb';
-		switch (type){
-			case 'hsb':
-				var old = color;
-				color = color.hsbToRgb();
-				color.hsb = old;
-			break;
-			case 'hex': color = color.hexToRgb(true); break;
-		}
-		color.rgb = color.slice(0, 3);
-		color.hsb = color.hsb || color.rgbToHsb();
-		color.hex = color.rgbToHex();
-		return Object.append(color, this);
+var Color = new Type('Color', function(color, type){
+	if (arguments.length >= 3){
+		type = 'rgb'; color = Array.slice(arguments, 0, 3);
+	} else if (typeof color == 'string'){
+		if (color.match(/rgb/)) color = color.rgbToHex().hexToRgb(true);
+		else if (color.match(/hsb/)) color = color.hsbToRgb();
+		else color = color.hexToRgb(true);
 	}
-
+	type = type || 'rgb';
+	switch (type){
+		case 'hsb':
+			var old = color;
+			color = color.hsbToRgb();
+			color.hsb = old;
+		break;
+		case 'hex': color = color.hexToRgb(true); break;
+	}
+	color.rgb = color.slice(0, 3);
+	color.hsb = color.hsb || color.rgbToHsb();
+	color.hex = color.rgbToHex();
+	return Object.append(color, this);
 });
 
 Color.implement({
