@@ -43,7 +43,7 @@ provides: [Element.Delegation]
 				var els = this.getElements(selector);
 				for (var i = els.length; i--; ){
 					var el = els[i];
-					if (target == el || el.hasChild(t)) return el;
+					if (target == el || el.contains(target)) return el;
 				}
 			} else {
 				for ( ; target && target != this; target = target.parentNode){
