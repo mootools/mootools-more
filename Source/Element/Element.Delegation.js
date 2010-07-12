@@ -28,8 +28,7 @@ provides: [Element.Delegation]
 
 (function(addEvent, removeEvent){
 	
-	var combinators = /[+>~\s]/,
-		splitType = function(type){
+	var splitType = function(type){
 			var parsed = Slick.parse(type).expressions[0][0];
 			return parsed.pseudos ? {
 				event: parsed.tag,
