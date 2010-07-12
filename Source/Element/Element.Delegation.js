@@ -28,15 +28,19 @@ provides: [Element.Delegation]
 
 (function(addEvent, removeEvent){
 	
-	var match = /(.*?):relay\(((?:\(.*?\)|.)+)\)$/,
-		combinators = /[+>~\s]/,
+	var combinators = /[+>~\s]/,
 		splitType = function(type){
-			var bits = type.match(match);
-			return !bits ? {event: type} : {
-				event: bits[1],
-				selector: bits[2]
-			};
+			var parsed = Slick.parse(type).expressions[0][0];
+			if(parsed.pseudos){
+				parsed = parsed;
+				return {
+					event: parsed.tag,
+					selector: parsed.pseudos[0].value
+				};
+			}
+			return {event: type};
 		},
+		
 		check = function(e, selector){
 			var target = e.target;
 			if (combinators.test(selector = selector.trim())){
