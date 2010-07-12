@@ -31,29 +31,15 @@ provides: [Element.Delegation]
 	var combinators = /[+>~\s]/,
 		splitType = function(type){
 			var parsed = Slick.parse(type).expressions[0][0];
-			if(parsed.pseudos){
-				parsed = parsed;
-				return {
-					event: parsed.tag,
-					selector: parsed.pseudos[0].value
-				};
-			}
-			return {event: type};
+			return parsed.pseudos ? {
+				event: parsed.tag,
+				selector: parsed.pseudos[0].value
+			} : {event: type};
 		},
 		
 		check = function(e, selector){
-			var target = e.target;
-			if (combinators.test(selector = selector.trim())){
-				var els = this.getElements(selector);
-				for (var i = els.length; i--; ){
-					var el = els[i];
-					if (target == el || el.contains(target)) return el;
-				}
-			} else {
-				for ( ; target && target != this; target = target.parentNode){
-					if (Element.match(target, selector)) return document.id(target);
-				}
-			}
+			for (var target = e.target; target && target != this; target = target.parentNode)
+				if (Slick.match(target, selector)) return document.id(target);
 			return null;
 		};
 
