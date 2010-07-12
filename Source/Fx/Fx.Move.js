@@ -41,7 +41,7 @@ Fx.Move = new Class({
 Element.Properties.move = {
 
 	set: function(options){
-		var morph = this.retrieve('move').cancel();
+		var morph = this.get('move').cancel();
 		morph.setOptions(options);
 		return this;
 	},
