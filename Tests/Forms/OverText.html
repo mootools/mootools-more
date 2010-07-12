@@ -1,0 +1,69 @@
+<style>
+label {
+	color: #999;
+}
+</style>
+
+<div style="position: relative">
+<p>The input below should have some hint text. The links below can be used to disable and enable this text. If you destroy the text, the DOM should no longer have the label anywhere (look in Firebug). After destruction, the Enable link should not work.</p>
+<input alt="Enter some text" id="ot" class="ot">
+<p><a id="disable">Disable</a> |
+<a id="enable">Enable</a> |
+<a id="destroy">Destroy</a></p>
+
+<hr/>
+
+<p>In this example, the input starts off with a value. The input should not receive focus by default. To indicate this, you should see the background is green.</p>
+<input alt="OverText Label" value="Default Value" id="ot_default" class="ot"/>
+
+<hr/>
+
+<p>In this example you should see the overtext disappear when the password field is filled in. Enter a value and remove focus from the first input (but don't focus the second one - click out, not tab).</p>
+<input alt="Enter your username" id="un" name="user">
+<input alt="Enter your password" id="pw" name="password">
+
+<hr/>
+Finally, this link will remove all the inputs on the page. You should see all their text hints go away, too.
+<a id="clean">Clean</a>
+</div>
+
+<script src="/depender/build?require=More/OverText,Core/Selectors"></script>
+
+<script type="text/javascript">
+var el = $('ot_default');
+el.setStyle('background-color', '#0f0');
+el.addEvent('focus', function(){
+	this.setStyle('background-color', '#f00');
+});
+
+$$('.ot').each(function(el) {
+	new OverText(el);
+});
+$('disable').addEvent('click', function(e){
+	e.stop();
+	$('ot').retrieve('OverText').disable();
+});
+$('enable').addEvent('click', function(e){
+	e.stop();
+	$('ot').retrieve('OverText').enable();
+});
+$('destroy').addEvent('click', function(e){
+	e.stop();
+	$('ot').retrieve('OverText').destroy();
+});
+
+$$('#pw, #un').each(function(el) {
+	new OverText(el, {
+		poll: true
+	});
+});
+$('un').addEvent('change', function(){
+	$('pw').set('value', 'asdfasdf');
+});
+$('clean').addEvent('click', function(e) {
+	e.stop();
+	$$('input').dispose();
+	OverText.update();
+});
+</script>
+
