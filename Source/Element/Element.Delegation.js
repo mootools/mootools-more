@@ -29,10 +29,11 @@ provides: [Element.Delegation]
 (function(addEvent, removeEvent){
 	
 	var splitType = function(type){
-			var parsed = Slick.parse(type).expressions[0][0];
-			return parsed.pseudos ? {
+			var parsed = Slick.parse(type).expressions[0][0],
+				pseudos = parsed.pseudos;
+			return pseudos && pseudos[0].key == 'relay' ? {
 				event: parsed.tag,
-				selector: parsed.pseudos[0].value
+				selector: pseudos[0].value
 			} : {event: type};
 		},
 		
