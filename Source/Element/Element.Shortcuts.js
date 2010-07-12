@@ -28,7 +28,6 @@ Element.implement({
 	},
 
 	isVisible: function(){
-		if(this.getStyle('visibility') == 'hidden') return false;
 		var w = this.offsetWidth,
 			h = this.offsetHeight;
 		return (w == 0 && h == 0) ? false : (w > 0 && h > 0) ? true : this.isDisplayed();

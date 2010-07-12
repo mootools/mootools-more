@@ -91,7 +91,7 @@ this.Tips = new Class({
 			var title = read(this.options.title, element),
 				text = read(this.options.text, element);
 			
-			element.erase('title').store('tip:native', title).retrieve('tip:title', title);
+			element.set('title', '').store('tip:native', title).retrieve('tip:title', title);
 			element.retrieve('tip:text', text);
 			this.fireEvent('attach', [element]);
 			
@@ -100,11 +100,9 @@ this.Tips = new Class({
 			
 			events.each(function(value){
 				var event = element.retrieve('tip:' + value);
-				if (!event){
-					event = function(event){
-						this['element' + value.capitalize()].apply(this, [event, element]);
-					}.bind(this);
-				}
+				if (!event) event = function(event){
+					this['element' + value.capitalize()].apply(this, [event, element]);
+				}.bind(this);
 				
 				element.store('tip:' + value, event).addEvent('mouse' + value, event);
 			}, this);

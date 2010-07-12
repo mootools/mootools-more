@@ -224,7 +224,7 @@ provides: [Keyboard]
 		'keydown': handler
 	});
 
-	Event.Keys.extend({
+	Object.append(Event.Keys, {
 		'shift': 16,
 		'control': 17,
 		'alt': 18,
@@ -238,7 +238,7 @@ provides: [Keyboard]
 		';': 186,
 		'=': 187,
 		',': 188,
-		'-': Browser.Engine.gecko ? 109 : 189,
+		'-': Browser.firefox ? 109 : 189,
 		'.': 190,
 		'/': 191,
 		'`': 192,
