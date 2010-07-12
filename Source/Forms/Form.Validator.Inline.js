@@ -156,10 +156,10 @@ Form.Validator.Inline = new Class({
 			while (par != document.body && par.getScrollSize().y == par.getSize().y){
 				par = par.getParent();
 			}
-			var fx = par.retrieve('$moo:fvScroller');
+			var fx = par.retrieve('fvScroller');
 			if (!fx && window.Fx && Fx.Scroll){
 				fx = new Fx.Scroll(par, this.options.scrollFxOptions);
-				par.store('$moo:fvScroller', fx);
+				par.store('fvScroller', fx);
 			}
 			if (failed){
 				if (fx) fx.toElement(failed);

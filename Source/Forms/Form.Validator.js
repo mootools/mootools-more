@@ -67,15 +67,15 @@ var InputValidator = new Class({
 Element.Properties.validatorProps = {
 
 	set: function(props){
-		return this.eliminate('validatorProps').store('$moo:validatorProps', props);
+		return this.eliminate('validatorProps').store('validatorProps', props);
 	},
 
 	get: function(props){
 		if (props) this.set(props);
-		if (this.retrieve('$moo:validatorProps')) return this.retrieve('$moo:validatorProps');
+		if (this.retrieve('validatorProps')) return this.retrieve('validatorProps');
 		if (this.getProperty('validatorProps')){
 			try {
-				this.store('$moo:validatorProps', JSON.decode(this.getProperty('validatorProps')));
+				this.store('validatorProps', JSON.decode(this.getProperty('validatorProps')));
 			}catch(e){
 				return {};
 			}
@@ -84,7 +84,7 @@ Element.Properties.validatorProps = {
 				return cls.test(':');
 			});
 			if (!vals.length){
-				this.store('$moo:validatorProps', {});
+				this.store('validatorProps', {});
 			} else {
 				props = {};
 				vals.each(function(cls){
@@ -95,10 +95,10 @@ Element.Properties.validatorProps = {
 						} catch(e) {}
 					}
 				});
-				this.store('$moo:validatorProps', props);
+				this.store('validatorProps', props);
 			}
 		}
-		return this.retrieve('$moo:validatorProps');
+		return this.retrieve('validatorProps');
 	}
 
 };
@@ -134,7 +134,7 @@ Form.Validator = new Class({
 	initialize: function(form, options){
 		this.setOptions(options);
 		this.element = document.id(form);
-		this.element.store('$moo:validator', this);
+		this.element.store('validator', this);
 		this.warningPrefix = Function.from(this.options.warningPrefix)();
 		this.errorPrefix = Function.from(this.options.errorPrefix)();
 		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this.onSubmit);
@@ -469,17 +469,17 @@ Form.Validator.addAllThese([
 Element.Properties.validator = {
 
 	set: function(options){
-		var validator = this.retrieve('$moo:validator');
+		var validator = this.retrieve('validator');
 		if (validator) validator.setOptions(options);
-		return this.store('$moo:validator:options');
+		return this.store('validator:options');
 	},
 
 	get: function(options){
-		if (options || !this.retrieve('$moo:validator')){
-			if (options || !this.retrieve('$moo:validator:options')) this.set('validator', options);
-			this.store('$moo:validator', new Form.Validator(this, this.retrieve('$moo:validator:options')));
+		if (options || !this.retrieve('validator')){
+			if (options || !this.retrieve('validator:options')) this.set('validator', options);
+			this.store('validator', new Form.Validator(this, this.retrieve('validator:options')));
 		}
-		return this.retrieve('$moo:validator');
+		return this.retrieve('validator');
 	}
 
 };
