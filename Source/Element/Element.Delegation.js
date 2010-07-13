@@ -28,18 +28,21 @@ provides: [Element.Delegation]
 
 (function(addEvent, removeEvent){
 	
-	var splitType = function(type){
+	var key = 'delegation:_delegateMonitors',
+		splitType = function(type){
 			var parsed = Slick.parse(type).expressions[0][0],
 				pseudos = parsed.pseudos;
-			return pseudos && pseudos[0].key == 'relay' ? {
+			
+			return (pseudos && pseudos[0].key == 'relay') ? {
 				event: parsed.tag,
 				selector: pseudos[0].value
-			} : {event: type};
+			} : null;
 		},
 		
-		check = function(e, selector){
-			for (var target = e.target; target && target != this; target = target.parentNode)
+		check = function(element, event, selector){
+			for (var target = event.target; target && target != element; target = target.parentNode)
 				if (Slick.match(target, selector)) return document.id(target);
+			
 			return null;
 		};
 
@@ -48,54 +51,47 @@ provides: [Element.Delegation]
 		addEvent: function(type, fn){
 			var split = splitType(type);
 			if (split.selector){
-				var monitors = this.retrieve('delegation:_delegateMonitors', {});
+				var monitors = this.retrieve(key, {});
 				if (!monitors[type]){
-					var monitor = function(e){
-						var el = check.call(this, e, split.selector);
-						if (el) this.fireEvent(type, [e, el], 0, el);
+					var monitor = function(event){
+						var element = check(this, event, split.selector);
+						if (element) this.fireEvent(type, [event, element], 0, element);
 					}.bind(this);
 					monitors[type] = monitor;
 					addEvent.call(this, split.event, monitor);
 				}
 			}
-			return addEvent.apply(this, arguments);
+			return addEvent.call(this, type, fn);
 		},
 
 		removeEvent: function(type, fn){
 			var split = splitType(type);
-			if (split.selector){
-				var events = this.retrieve('events');
-				if (!events || !events[type] || (fn && !events[type].keys.contains(fn))) return this;
+			if (!split.selector) return removeEvent.apply(this, arguments);
 
-				if (fn) removeEvent.apply(this, [type, fn]);
-				else removeEvent.apply(this, type);
+			var events = this.retrieve('events');
+			if (!events || !events[type] || (fn && !events[type].keys.contains(fn))) return this;
 
-				events = this.retrieve('events');
-				if (events && events[type] && events[type].keys.length == 0){
-					var monitors = this.retrieve('delegation:_delegateMonitors', {});
-					removeEvent.apply(this, [split.event, monitors[type]]);
-					delete monitors[type];
-				}
-				return this;
+			if (fn) removeEvent.call(this, type, fn);
+			else removeEvent.call(this, type);
+
+			events = this.retrieve('events');
+			if (events && events[type] && !events[type].keys.length){
+				var monitors = this.retrieve(key, {});
+				removeEvent.call(this, split.event, monitors[type]);
+				delete monitors[type];
 			}
-			return removeEvent.apply(this, arguments);
+			return this;
 		},
 
 		fireEvent: function(type, args, delay, bind){
 			var events = this.retrieve('events');
-			var e, el;
-			if (args) {
-				e = args[0];
-				el = args[1];
-			}
 			if (!events || !events[type]) return this;
+			if (!bind) bind = this;
+
 			events[type].keys.each(function(fn){
-				if (delay) {
-					fn.delay(delay, bind || this, args);
-				} else {
-					fn.apply(bind || this, args);
-				}
-			}, this);
+				if (delay) fn.delay(delay, bind, args);
+				else fn.apply(bind, args);
+			});
 			return this;
 		}
 
