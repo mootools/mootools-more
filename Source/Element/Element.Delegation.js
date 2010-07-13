@@ -74,7 +74,6 @@ provides: [Element.Delegation]
 			if (fn) removeEvent.call(this, type, fn);
 			else removeEvent.call(this, type);
 
-			events = this.retrieve('events');
 			if (events && events[type] && !events[type].keys.length){
 				var monitors = this.retrieve(key, {});
 				removeEvent.call(this, split.event, monitors[type]);
