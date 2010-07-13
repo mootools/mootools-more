@@ -50,7 +50,7 @@ provides: [Element.Delegation]
 
 		addEvent: function(type, fn){
 			var split = splitType(type);
-			if (split.selector){
+			if (split){
 				var monitors = this.retrieve(key, {});
 				if (!monitors[type]){
 					var monitor = function(event){
@@ -66,7 +66,7 @@ provides: [Element.Delegation]
 
 		removeEvent: function(type, fn){
 			var split = splitType(type);
-			if (!split.selector) return removeEvent.apply(this, arguments);
+			if (!split) return removeEvent.apply(this, arguments);
 
 			var events = this.retrieve('events');
 			if (!events || !events[type] || (fn && !events[type].keys.contains(fn))) return this;
