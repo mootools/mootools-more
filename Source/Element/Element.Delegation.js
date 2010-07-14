@@ -37,7 +37,7 @@ provides: [Element.Delegation]
 				event: parsed.tag,
 				selector: pseudos[0].value,
 				speudo: pseudos[0].key,
-				origional: type
+				original: type
 			} : null;
 		};
 
@@ -99,15 +99,15 @@ Event.Pseudos = {
 		for (var target = event.target; target && target != element; target = target.parentNode){
 			if (Slick.match(target, split.selector)){
 				var finalTarget = document.id(target);
-				if (finalTarget) element.fireEvent(split.origional, [event, finalTarget], 0, finalTarget);
+				if (finalTarget) element.fireEvent(split.original, [event, finalTarget], 0, finalTarget);
 				return;
 			}
 		}
 	},
 	
 	flash: function(element, event, split, fn){
-		element.fireEvent(split.origional, [event])
-			.removeEvent(split.origional, fn);
+		element.fireEvent(split.original, [event])
+			.removeEvent(split.original, fn);
 	}
 	
 };
