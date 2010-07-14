@@ -33,17 +33,12 @@ provides: [Element.Delegation]
 			var parsed = Slick.parse(type).expressions[0][0],
 				pseudos = parsed.pseudos;
 			
-			return (pseudos && pseudos[0].key == 'relay') ? {
+			return (pseudos && typeof Event.Pseudos[pseudos[0].key] == 'function') ? {
 				event: parsed.tag,
-				selector: pseudos[0].value
+				selector: pseudos[0].value,
+				speudo: pseudos[0].key,
+				origional: type
 			} : null;
-		},
-		
-		check = function(element, event, selector){
-			for (var target = event.target; target && target != element; target = target.parentNode)
-				if (Slick.match(target, selector)) return document.id(target);
-			
-			return null;
 		};
 
 	Element.implement({
@@ -53,10 +48,10 @@ provides: [Element.Delegation]
 			if (split){
 				var monitors = this.retrieve(key, {});
 				if (!monitors[type]){
+					var element = this;
 					var monitor = function(event){
-						var element = check(this, event, split.selector);
-						if (element) this.fireEvent(type, [event, element], 0, element);
-					}.bind(this);
+						Event.Pseudos[split.speudo](element, event, split, fn);
+					};
 					monitors[type] = monitor;
 					addEvent.call(this, split.event, monitor);
 				}
@@ -97,3 +92,24 @@ provides: [Element.Delegation]
 	});
 
 })(Element.prototype.addEvent, Element.prototype.removeEvent);
+
+Event.Pseudos = {
+	
+	relay: function(element, event, split){
+		for (var target = event.target; target && target != element; target = target.parentNode){
+			if (Slick.match(target, split.selector)){
+				var finalTarget = document.id(target);
+				if (finalTarget) element.fireEvent(split.origional, [event, finalTarget], 0, finalTarget);
+				return;
+			}
+		}
+	},
+	
+	flash: function(element, event, split, fn){
+		element.fireEvent(split.origional, [event])
+			.removeEvent(split.origional, fn);
+	}
+	
+};
+
+
