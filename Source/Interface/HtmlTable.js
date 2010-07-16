@@ -99,7 +99,7 @@ var HtmlTable = new Class({
 	},
 
 	push: function(row, rowProperties, target, tag){
-		if ($type(row) == "element" && row.get('tag') == 'tr') {
+		if (typeOf(row) == "element" && row.get('tag') == 'tr') {
 			row.inject(target || this.body);
 			return {
 				tr: row,
