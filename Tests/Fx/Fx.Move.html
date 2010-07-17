@@ -1,0 +1,124 @@
+<style>
+	#foo {
+		width: 200px;
+		height: 200px;
+		border: 2px solid black;
+		top: 50px;
+		left: 450px;
+		padding: 10px;
+		position: absolute;
+	}
+	#box {
+		width: 50px;
+		height: 50px;
+		background-color: #900;
+		border: 2px solid #700;
+		margin: 10px 20px 30px 40px;
+		padding: 0px;
+		z-index:10;
+		position: absolute;
+	}
+	div.container {
+		height: 800px;
+	}
+	#actions {
+		width: 400px;
+	}
+	#actions dt {
+		font-weight: bold;
+	}
+	#actions dt a {
+		display: block;
+		background: #AABCF2;
+		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		padding: 4px;
+	}
+	#actions dt a:hover {
+		background: #CACEE8;
+	}
+	#actions dd {
+		padding: 4px;
+	}
+</style>
+<dl id="actions"></dl>
+
+<div class="container">
+	<div id="foo" class="blackText">
+	This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text.
+	</div>
+
+	<div id="box"></div>
+</div>
+<script src="/depender/build?require=More/Fx.Move,Core/Element.Event"></script>
+<script>
+var pos = {
+	center: {
+		fn: function(){
+			//center
+			$('box').move({ignoreMargins: true, relativeTo: $('foo')});
+		},
+		name: 'center',
+		msg: 'centers the red box on the larger box.'
+	},
+	ul2ul: {
+		fn: function(){
+			//upper left to upper left
+			$('box').move({ignoreMargins: true, relativeTo: $('foo'), position: 'upperLeft'});
+		},
+		name: 'upper left to upper left',
+		msg: 'puts the upper left of the red box against the upper left of the larger box.'
+	},
+	br2br: {
+		fn: function(){
+			//bottom right to bottom right
+			$('box').move({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'bottomRight'});
+		},
+		name: 'bottom right to bottom right',
+		msg: 'puts the bottom right of the red box against the bottom right of the larger box'
+	},
+	c2br: {
+		fn: function(){
+			//center to bottom right
+			$('box').move({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'center'});
+		},
+		name: 'center to bottom right',
+		msg: 'puts the center of the red box on the bottom right corner of the larger box.'
+	},
+	re2re: {
+		fn: function(){
+			//right edge to right edge
+			$('box').move({ignoreMargins: true, relativeTo: $('foo'), position: 'centerRight', edge: 'centerRight'});
+		},
+		name: 'right center to right center',
+		msg: 'puts the center right of the red box on the center right of the larger box.'
+	},
+	ul2db: {
+		fn: function(){
+			//document.body position: upper left",
+			$(document.body).scrollTo(0, 100);
+			$('box').move({
+				ignoreMargins: true, relativeTo: document.body, 
+				position: 'upperLeft', 
+				edge: 'upperLeft',
+				ignoreScroll: true
+			});
+		},
+		name: 'upper left to document body\'s upper left corner',
+		msg: 'puts the upper left corner to document body\'s upper left corner; it scrolls down a bit to test that this works even if the body is scrolled (you\'ll need to scroll back up to see).'
+	}
+};
+
+['center', 'ul2ul', 'br2br', 'c2br', 're2re', 'ul2db'].each(function(fn) {
+	var obj = pos[fn];
+	var dt = new Element('dt').inject('actions');
+	var dd = new Element('dd', {text: obj.msg}).inject('actions');
+	new Element('a', {
+		events: {
+			click: obj.fn
+		},
+		text: obj.name
+	}).inject(dt);
+});
+</script>
