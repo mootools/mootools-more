@@ -36,7 +36,7 @@ provides: [Element.Delegation]
 			return (pseudos && typeof Event.Pseudos[pseudos[0].key] == 'function') ? {
 				event: parsed.tag,
 				selector: pseudos[0].value,
-				speudo: pseudos[0].key,
+				pseudo: pseudos[0].key,
 				original: type
 			} : null;
 		};
@@ -50,7 +50,7 @@ provides: [Element.Delegation]
 				if (!monitors[type]){
 					var element = this;
 					var monitor = function(event){
-						Event.Pseudos[split.speudo](element, event, split, fn);
+						Event.Pseudos[split.pseudo](element, event, split, fn);
 					};
 					monitors[type] = monitor;
 					addEvent.call(this, split.event, monitor);
