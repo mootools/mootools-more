@@ -24,11 +24,24 @@ provides: Events.Extras
 
 (function(addEvent, removeEvent){
 
+var EventsPseudos = {
+	
+	flash: function(split, fn, args){
+		fn.apply(this, args)
+		this.removeEvent(split.original, fn);
+	}
+	
+};
+
+Events.definePseudo = function(key, fn){
+	EventsPseudos[key] = fn;
+};
+
 var splitType = function(type){
 	var parsed = Slick.parse(type).expressions[0][0],
 		pseudos = parsed.pseudos;
 	
-	return (pseudos && typeof Events.Pseudos[pseudos[0].key] == 'function') ? {
+	return (pseudos && typeof EventsPseudos[pseudos[0].key] == 'function') ? {
 		event: parsed.tag,
 		selector: pseudos[0].value,
 		pseudo: pseudos[0].key,
@@ -36,8 +49,6 @@ var splitType = function(type){
 	} : null;
 };
 	
-
-
 Events.implement({
 	
 	$eventMonitors: {},
@@ -49,7 +60,7 @@ Events.implement({
 		var monitor = this.$eventMonitors[type];
 		if (!monitor){
 			monitor = function(){
-				Events.Pseudos[split.pseudo].apply(this, [split, fn, arguments]);
+				EventsPseudos[split.pseudo].apply(this, [split, fn, arguments]);
 			};
 			this.$eventMonitors[type] = monitor;
 			return addEvent.call(this, split.event, monitor, internal);
@@ -67,12 +78,3 @@ Events.implement({
 });
 
 })(Events.prototype.addEvent, Events.prototype.removeEvent);
-
-Events.Pseudos = {
-	
-	flash: function(split, fn, args){
-		fn.apply(this, args)
-		this.removeEvent(split.original, fn);
-	}
-	
-};
