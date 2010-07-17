@@ -15,11 +15,6 @@
 		"Log": {
 			"deps": ["More", "Class"],
 			"desc": "A default logger for MooTools. Logs to Firebug or a similar console unless it is not present."
-		},
-
-		"Depender": {
-			"deps": ["More", "Class.Extras", "Element.Event", "Request.JSON", "Log"],
-			"desc": "A stand alone dependency loader for the MooTools library."
 		}
 
 	},
