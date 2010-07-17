@@ -1,0 +1,130 @@
+<style>
+#actions {
+	width: 400px;
+}
+#actions dt {
+	font-weight: bold;
+	margin: 8px;
+}
+#actions dt a {
+	display: block;
+	background: #AABCF2;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	padding: 4px;
+}
+#actions dt a:hover {
+	background: #CACEE8;
+}
+#actions dd {
+	padding: 0px 4px;
+	margin: 0px 8px;
+	position: relative;
+	top: -8px;
+}
+
+</style>
+
+<dl id="actions"></dl>
+
+<style type="text/css">
+ #sorter {
+		padding-left: 15px;
+ }
+ #sorter li {
+		border: 1px solid #666;
+		margin: 8px;
+		padding: 4px;
+ }
+ div.spanner {
+  float: left;
+  margin: 4px;
+	padding: 2px;
+	border: 1px solid #000;
+ }
+
+</style>
+<ol id="sorter">
+  <li id="li0">(0) stuff</li>
+  <li id="li1">(1) more stuff<br />
+  really</li>
+
+  <li id="li2">(2) still more stuff</li>
+  <li id="li3">(3) loads o stuff</li>
+  <li id="li4">(4) blah<br />
+  blah<br />
+  blah</li>
+</ol>
+<div class="spanner">one</div>
+<div class="spanner">two</div>
+<div class="spanner">three</div>
+<div class="spanner">four</div>
+<div class="spanner">five</div>
+
+
+<script src="/depender/build?require=More/Fx.Sort,Core/Element.Event,Core/Selectors,Core/Fx.Transitions"></script>
+
+<script type="text/javascript">
+var vert = new Fx.Sort($$('#sorter li'), {transition: Fx.Transitions.Back.easeInOut, duration: 1000});
+var horz = new Fx.Sort($$('.spanner'), {mode: "horizontal", transition: Fx.Transitions.Back.easeInOut, duration: 1000});
+
+var methods = {
+	backward: {
+		name: "Reverses the order of the lists to 5,4,3,2,1",
+		fn: function(){
+			vert.backward();
+			(function(){horz.backward();}).delay(1000);
+		}
+	},
+	forward: {
+		name: "Resets the order of the lists to 1,2,3,4,5",
+		fn: function(){
+			vert.forward();
+			(function(){horz.forward();}).delay(1000);
+		}
+	},
+	explicit: {
+		name: "Sets the order of the lists to 5,2,4,3,1",
+		fn: function(){
+			vert.sort([4,1,3,2,0]);
+			(function(){horz.sort([4,1,3,2,0]);}).delay(1000);
+		}
+	},
+	swap: {
+		name: "Swaps the position of 1 and 5",
+		fn: function(){
+			vert.swap(0,4);
+			(function(){horz.swap(0,4);}).delay(1000);
+		}
+	},
+	reverse: {
+		name: "Reverses the order of the lists",
+		fn: function(){
+			vert.reverse();
+			(function(){horz.reverse();}).delay(1000);
+		}
+	},
+	dom: {
+		name: "Reorders the DOM to match the current sort order.",
+		msg: "(No visible effect; inspect in firebug.)", 
+		fn: function(){
+			vert.rearrangeDOM();
+		}
+	}
+};
+
+for (name in methods) {
+	var method = methods[name];
+	var dt = new Element('dt').inject('actions');
+	new Element('a', {
+		events: {
+			click: method.fn
+		},
+		text: method.name
+	}).inject(dt);
+	if (method.msg) {
+		var dd = new Element('dd', {text: method.msg}).inject('actions');
+	}
+}
+</script>
