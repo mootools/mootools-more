@@ -1,0 +1,113 @@
+<style>
+#actions {
+	width: 400px;
+	top: 10px;
+	left: 10px;
+	position: fixed;
+	background: #fff;
+	z-index: 10;
+}
+#actions dt {
+	font-weight: bold;
+	margin: 8px;
+}
+#actions dt a {
+	display: block;
+	background: #AABCF2;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	padding: 4px;
+}
+#actions dt a:hover {
+	background: #CACEE8;
+}
+#scrollExample li {
+	margin: 20px 0px;
+}
+
+</style>
+
+<dl id="actions"></dl>
+<div id="scrollExample" style="position: absolute; left: 420px; top: 10px">
+	<ul style="width: 150%;">
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li id="yellow" style="color: yellow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li id="red" style="color:red">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li id="blue" style="color:blue">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	</ul>
+
+
+</div>
+
+<script src="/depender/build?require=More/Fx.Scroll,Core/Element.Event,More/Element.Pin"></script>
+<script>
+var fx = new Fx.Scroll(document.body, {duration: 500});
+var methods = {
+	toBottom: {
+		name: 'Scroll the window to the bottom.',
+		fn: fx.toBottom.bind(fx)
+	},
+	toRight: {
+		name: 'Scroll the window to the right.',
+		fn: fx.toRight.bind(fx)
+	},
+	toTop: {
+		name: 'Scroll the window to the top.',
+		fn: fx.toTop.bind(fx)
+	},
+	toLeft: {
+		name: 'Scroll the window to the left.',
+		fn: fx.toLeft.bind(fx)
+	},
+	toRed: {
+		name: 'Scroll to the red item.',
+		fn: fx.toElement.bind(fx, 'red')
+	},
+	toView: {
+		name: 'Scroll the blue item into view.',
+		fn: function(){
+			fx.set(0,0);
+			fx.scrollIntoView('blue', 'y');
+		}
+	},
+	toViewTop: {
+		name: 'Scroll the yellow item into view (from below).',
+		fn: function(){
+			fx.set(0,500);
+			fx.scrollIntoView('yellow', 'y');
+		}
+	}
+};
+$('actions').pin();
+for (name in methods) {
+	var method = methods[name];
+	var dt = new Element('dt').inject('actions');
+	new Element('a', {
+		events: {
+			click: method.fn
+		},
+		text: method.name
+	}).inject(dt);
+}
+</script>
