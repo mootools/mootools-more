@@ -27,13 +27,36 @@ provides: [Element.Delegation]
 */
 
 (function(addEvent, removeEvent){
+
+	var EventPseudos = {
+		
+		relay: function(element, event, split){
+			for (var target = event.target; target && target != element; target = target.parentNode){
+				if (Slick.match(target, split.selector)){
+					var finalTarget = document.id(target);
+					if (finalTarget) element.fireEvent(split.original, [event, finalTarget], 0, finalTarget);
+					return;
+				}
+			}
+		},
+		
+		flash: function(element, event, split, fn){
+			element.fireEvent(split.original, [event])
+				.removeEvent(split.original, fn);
+		}
+		
+	};
 	
+	Event.definePseudo = function(key, fn){
+		EventPseudos[key] = fn;
+	};
+
 	var key = 'delegation:_delegateMonitors',
 		splitType = function(type){
 			var parsed = Slick.parse(type).expressions[0][0],
 				pseudos = parsed.pseudos;
 			
-			return (pseudos && typeof Event.Pseudos[pseudos[0].key] == 'function') ? {
+			return (pseudos && typeof EventPseudos[pseudos[0].key] == 'function') ? {
 				event: parsed.tag,
 				selector: pseudos[0].value,
 				pseudo: pseudos[0].key,
@@ -50,7 +73,7 @@ provides: [Element.Delegation]
 				if (!monitors[type]){
 					var element = this;
 					var monitor = function(event){
-						Event.Pseudos[split.pseudo](element, event, split, fn);
+						EventPseudos[split.pseudo](element, event, split, fn);
 					};
 					monitors[type] = monitor;
 					addEvent.call(this, split.event, monitor);
@@ -90,26 +113,6 @@ provides: [Element.Delegation]
 		}
 
 	});
-
+	
 })(Element.prototype.addEvent, Element.prototype.removeEvent);
-
-Event.Pseudos = {
-	
-	relay: function(element, event, split){
-		for (var target = event.target; target && target != element; target = target.parentNode){
-			if (Slick.match(target, split.selector)){
-				var finalTarget = document.id(target);
-				if (finalTarget) element.fireEvent(split.original, [event, finalTarget], 0, finalTarget);
-				return;
-			}
-		}
-	},
-	
-	flash: function(element, event, split, fn){
-		element.fireEvent(split.original, [event])
-			.removeEvent(split.original, fn);
-	}
-	
-};
-
 
