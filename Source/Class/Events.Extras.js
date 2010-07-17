@@ -14,7 +14,7 @@ authors:
 
 requires: 
   - Core/Class.Extras
-  - Core/Element.Event
+  - Core/Slick.Parser
   - More/MooTools.More
 
 provides: Events.Extras
