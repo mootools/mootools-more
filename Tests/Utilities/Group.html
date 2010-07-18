@@ -1,0 +1,39 @@
+<p>
+	The three green bars below should expand one after the other, followed by a message that all the effects have completed.
+</p>
+
+<style>
+.exampleBar {
+	background-color:#BAEEB5;
+	border:1px solid #000000;
+	height:10px;
+	margin:2px 0;
+}
+</style>
+<div class="exampleBar"></div>
+<div class="exampleBar"></div>
+<div class="exampleBar"></div>
+
+<script src="/depender/build?require=More/Group,Core/Fx.Tween"></script>
+
+<script>
+
+var fx = $$('.exampleBar').map(function(el) {
+	return el.get('tween');
+});
+
+new Group(fx).addEvent('onComplete', function(){
+	$('mt-content').adopt(new Element('p', {text: 'all effects have finished!'}));
+});
+
+var run = function(i){
+	return fx[i].start('height', 100);
+};
+
+run(0).chain(function(){
+	run(1).chain(function(){
+		run(2);
+	});
+});
+
+</script>
