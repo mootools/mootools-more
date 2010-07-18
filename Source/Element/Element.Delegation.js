@@ -40,7 +40,7 @@ provides: [Element.Delegation]
 			}
 		},
 		
-		flash: function(element, event, split, fn){
+		once: function(element, event, split, fn){
 			element.fireEvent(split.original, [event])
 				.removeEvent(split.original, fn);
 		}
