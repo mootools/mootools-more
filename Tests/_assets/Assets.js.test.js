@@ -1,0 +1,1 @@
+$('msg').adopt(new Element('li', {text: 'JavaScript loaded successfully!'}));
