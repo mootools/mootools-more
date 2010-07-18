@@ -1,0 +1,130 @@
+<style>
+#actions {
+	width: 400px;
+}
+#actions dt {
+	font-weight: bold;
+	margin: 8px;
+}
+#actions dt a {
+	display: block;
+	background: #AABCF2;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	padding: 4px;
+}
+#actions dt a:hover {
+	background: #CACEE8;
+}
+#actions dd {
+	padding: 0px 4px;
+	margin: 0px 8px;
+	position: relative;
+	top: -8px;
+}
+
+#mt-content div {
+	border: 1px solid white;
+	color: #fff;
+	background: #000;
+}
+.group div {
+	padding: 4px;
+}
+#mt-content .active {
+	border: 1px solid black;
+	color: #000;
+	background: #fff;
+}
+#mt-content .group {
+	opacity: 0.5;
+}
+#mt-content .activeGroup {
+	opacity: 1;
+}
+
+</style>
+
+<p>
+	Use the links to enable/disable the keyboards controlling the section below. Using the keys will toggle each example from black to white.
+</p>
+
+<dl id="actions"></dl>
+<div id="group" class="group">
+	<div id="sa">shift + a</div>
+	<div id="enter">enter</div>
+	<div id="up">up</div>
+	<div id="ctrld">ctrl+d</div>
+	<div id="space">space</div>
+	<div id="escape">escape</div>
+	<div id="colon">shift+;</div>
+	<div id="bracket">]</div>
+</div>
+
+<script src="/depender/build?require=More/Keyboard,Core/Element.Event,Core/Selectors"></script>
+<script>
+var kb = new Keyboard({
+	events: {
+		'shift+a': function(){
+			$('sa').toggleClass('active');
+		},
+		'enter': function(){
+			$('enter').toggleClass('active');
+		},
+		'up': function(){
+			$('up').toggleClass('active');
+		},
+		'control+d': function(){
+			$('ctrld').toggleClass('active');
+		},
+		'space': function(){
+			$('space').toggleClass('active');
+		},
+		'esc': function(){
+			$('escape').toggleClass('active');
+		},
+		'shift+;': function(){
+			$('colon').toggleClass('active');
+		},
+		']': function(){
+			$('bracket').toggleClass('active');
+		}
+	},
+	onActivate: function(){
+		$('group').addClass('activeGroup');
+	},
+	onDeactivate: function(){
+		$('group').removeClass('activeGroup');
+	},
+	active: true
+});
+var methods = {
+	activate1: {
+		name: 'Activate keyboard.',
+		fn: function(){
+			kb.activate();
+		}
+	},
+	deactivate: {
+		name: 'Deactivate keyboard.',
+		fn: function(){
+			kb.deactivate();
+		}
+	}
+};
+
+for (name in methods) {
+	var method = methods[name];
+	var dt = new Element('dt').inject('actions');
+	new Element('a', {
+		events: {
+			click: method.fn
+		},
+		text: method.name
+	}).inject(dt);
+	if (method.msg) {
+		var dd = new Element('dd', {text: method.msg}).inject('actions');
+	}
+}
+</script>
