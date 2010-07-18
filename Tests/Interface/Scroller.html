@@ -1,0 +1,52 @@
+<style>
+	#box {
+		width: 30px;
+		height: 30px;
+		background-color: #900;
+		position: absolute;
+	}
+</style>
+
+<p>
+	Drag the red box to the edge of the scrollable area, which should scroll in that direction.
+</p>
+
+<div id="scrollExample" style="height: 300px; overflow: auto; width: 300px;">
+
+	<div id="box">
+	</div>
+
+
+	<ul style="width: 500px;">
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
+	</ul>
+
+</div>
+
+<script src="/depender/build?require=More/Drag.Move,More/Scroller"></script>
+<script>
+var scr = new Scroller('scrollExample');
+$('box').makeDraggable({
+	onStart: function(){
+		scr.start();
+	},
+	onComplete: function(){
+		scr.stop();
+	}
+});
+</script>
