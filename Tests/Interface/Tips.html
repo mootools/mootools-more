@@ -1,0 +1,82 @@
+<style>
+.tip {
+	color: #fff;
+	width: 172px;
+	z-index: 13000;
+}
+ 
+.tip-title {
+	font-weight: bold;
+	font-size: 11px;
+	margin: 0;
+	padding: 8px 8px 4px;
+	background: #777;
+}
+ 
+.tip-text {
+	font-size: 11px;
+	padding: 4px 8px 8px;
+	background: #777;
+}
+img {
+	background: #444;
+	padding: 4px;
+}
+.toolTipElement3 {
+	padding: 20px;
+	border: 1px solid #000;
+	float: left;
+}
+#mt-content h1 {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 8px 0px;
+}
+</style>
+<h1>Mouseover this image to have a tip that follows your mouse</h1>
+<img border="0" alt="MooTools" 
+src="/asset/more/mootools.png" title="MooTools" 
+rel="The best damn JS framework on Earth." 
+class="toolTipElement"/>
+
+<h1>Mouseover this image to show a tip that is in a fixed location</h1>
+<img border="0" alt="MooTools" 
+src="/asset/more/mootools.png" title="MooTools" 
+rel="The best damn JS framework on Earth." 
+class="toolTipElement2"/>
+
+<h1>The tips on these elements are different for the container and the child</h1>
+<div class="toolTipElement3" alt="Container Tip" rel="A container with a tip">
+	<img border="0" alt="MooTools" 
+	src="/asset/more/mootools.png" title="MooTools" 
+	rel="The best damn JS framework on Earth." 
+	class="toolTipElement3"/>
+</div>
+
+<script src="/depender/build?require=More/Tips,Core/Selectors"></script>
+<script>
+new Tips($$('.toolTipElement'), {
+	timeOut: 700,
+	maxTitleChars: 50, /*I like my captions a little long*/
+	maxOpacity: .9 /*let's leave a little transparancy in there */
+});
+new Tips($$('.toolTipElement2'), {
+	timeOut: 700,
+	maxTitleChars: 50, /*I like my captions a little long*/
+	maxOpacity: .9, /*let's leave a little transparancy in there */
+	fixed: true,
+	offset: {
+		x: 10,
+		y: 70
+	}
+});
+new Tips($$('.toolTipElement3'), {
+	timeOut: 700,
+	maxTitleChars: 50, /*I like my captions a little long*/
+	maxOpacity: .9, /*let's leave a little transparancy in there */
+	offset: {
+		x: 10,
+		y: 70
+	}
+});
+</script>
