@@ -26,7 +26,7 @@ provides: Events.Extras
 
 var EventsPseudos = {
 	
-	flash: function(split, fn, args){
+	once: function(split, fn, args){
 		fn.apply(this, args)
 		this.removeEvent(split.original, fn);
 	}
