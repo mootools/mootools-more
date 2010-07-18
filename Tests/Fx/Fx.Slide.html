@@ -1,27 +1,3 @@
-<style>
-#actions {
-	width: 400px;
-}
-#actions dt {
-	font-weight: bold;
-	margin: 8px;
-}
-#actions dt a {
-	display: block;
-	background: #AABCF2;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	padding: 4px;
-}
-#actions dt a:hover {
-	background: #CACEE8;
-}
-
-</style>
-
-<dl id="actions"></dl>
-
 <div id="sliderExampleWrapper" style="width: 300px; height: 200px; border: 1px solid black;margin-left: 10px">
 	<div id="sliderButton" style="width: 100px; height: 100px; background-color: #baeeb5; border: 1px solid black"></div>
 </div>
@@ -29,34 +5,25 @@
 
 <script>
 var fx = new Fx.Slide('sliderButton', {duration: 500});
-var methods = {
-	out: {
-		name: 'Show the element and slide out.',
+makeActions([
+	{
+		title: 'Show the element and slide out.',
 		fn: function(){
 			fx.show().slideOut();
 		}
 	},
-	in: {
-		name: 'Hide the element and slide in.',
+	{
+		title: 'Hide the element and slide in.',
 		fn: function(){
 			fx.hide().slideIn();
 		}
 	},
-	toggle: {
-		name: 'Toggle the state - sliding in or out.',
+	{
+		title: 'Toggle the state - sliding in or out.',
 		fn: function(){
 			fx.toggle();
 		}
 	}
-};
-for (name in methods) {
-	var method = methods[name];
-	var dt = new Element('dt').inject('actions');
-	new Element('a', {
-		events: {
-			click: method.fn
-		},
-		text: method.name
-	}).inject(dt);
-}
+]);
+
 </script>

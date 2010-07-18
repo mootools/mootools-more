@@ -1,36 +1,10 @@
 <style>
 #actions {
-	width: 400px;
-	position: relative;
-	z-index: 1000;
-	background: #fff;
-	padding: 4px 0px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
-#actions dt {
-	font-weight: bold;
-	margin: 8px;
-}
-#actions dt a {
-	display: block;
-	background: #AABCF2;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	padding: 4px;
-}
-#actions dt a:hover {
-	background: #CACEE8;
-}
-#actions dd {
-	padding: 0px 4px;
-	margin: 0px 8px;
-	position: relative;
-	top: -8px;
-}
-
 </style>
-
-<dl id="actions"></dl>
 
 <link rel="stylesheet" href="/asset/more/mask.css" type="text/css" media="screen" name="no name" charset="utf-8">
 <div style="border: 2px solid #777; background: #fbb; padding: 20px; height: 700px; clear:both">
@@ -46,24 +20,24 @@
 <script src="/depender/build?require=More/Mask,Core/Element.Event,Core/Selectors"></script>
 
 <script>
-var methods = {
-	mask: {
-		name: "Mask:element",
-		msg: "Overlays a target element with a semi-transparent layer.",
+makeActions([
+	{
+		title: "Mask:element",
+		description: "Overlays a target element with a semi-transparent layer.",
 		fn: function(){
 			$('foo').mask();
 		}
 	},
-	unmask: {
-		name: "Unmask:element",
-		msg: "Hides the overlay layer.",
+	{
+		title: "Unmask:element",
+		description: "Hides the overlay layer.",
 		fn: function(){
 			$('foo').unmask();
 		}
 	},
-	docMask: {
-		name: "Document:mask",
-		msg: "Overlays the window with a semi-transparent layer.",
+	{
+		title: "Document:mask",
+		description: "Overlays the window with a semi-transparent layer. Scroll down to verify it covers the whole document. Clicking the mask will remove it.",
 		fn: function(){
 			$(document.body).mask({
 				style: {
@@ -74,26 +48,14 @@ var methods = {
 			});
 		}
 	},
-	docUnmask: {
-		name: "Document:unmask",
-		msg: "Hides the document's overlay.",
+	{
+		title: "Document:unmask",
+		description: "Hides the document's overlay.",
 		fn: function(){
 			$(document.body).unmask();
 		}
 	}
-};
-for (name in methods) {
-	var method = methods[name];
-	var dt = new Element('dt').inject('actions');
-	new Element('a', {
-		events: {
-			click: method.fn
-		},
-		text: method.name
-	}).inject(dt);
-	if (method.msg) {
-		var dd = new Element('dd', {text: method.msg}).inject('actions');
-	}
-}
+]);
+
 </script>
 

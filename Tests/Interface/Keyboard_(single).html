@@ -1,29 +1,4 @@
 <style>
-#actions {
-	width: 400px;
-}
-#actions dt {
-	font-weight: bold;
-	margin: 8px;
-}
-#actions dt a {
-	display: block;
-	background: #AABCF2;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	padding: 4px;
-}
-#actions dt a:hover {
-	background: #CACEE8;
-}
-#actions dd {
-	padding: 0px 4px;
-	margin: 0px 8px;
-	position: relative;
-	top: -8px;
-}
-
 #mt-content div {
 	border: 1px solid white;
 	color: #fff;
@@ -99,32 +74,20 @@ var kb = new Keyboard({
 	},
 	active: true
 });
-var methods = {
-	activate1: {
-		name: 'Activate keyboard.',
+makeActions([
+	{
+		title: 'Activate keyboard.',
 		fn: function(){
 			kb.activate();
 		}
 	},
-	deactivate: {
-		name: 'Deactivate keyboard.',
+	{
+		title: 'Deactivate keyboard.',
 		fn: function(){
 			kb.deactivate();
 		}
 	}
-};
+]);
 
-for (name in methods) {
-	var method = methods[name];
-	var dt = new Element('dt').inject('actions');
-	new Element('a', {
-		events: {
-			click: method.fn
-		},
-		text: method.name
-	}).inject(dt);
-	if (method.msg) {
-		var dd = new Element('dd', {text: method.msg}).inject('actions');
-	}
-}
+
 </script>
