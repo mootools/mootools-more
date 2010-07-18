@@ -1,31 +1,6 @@
 
 <style>
 
-#actions {
-	width: 400px;
-}
-#actions dt {
-	font-weight: bold;
-	margin: 8px;
-}
-#actions dt a {
-	display: block;
-	background: #AABCF2;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	padding: 4px;
-}
-#actions dt a:hover {
-	background: #CACEE8;
-}
-#actions dd {
-	padding: 0px 4px;
-	margin: 0px 8px;
-	position: relative;
-	top: -8px;
-}
-
 #mt-content div {
 	border: 1px solid white;
 	color: #fff;
@@ -71,13 +46,9 @@
 <script>
 	
 var kbs = {
-	
-	kb: new Keyboard({
-		name: 'kb'
-	}),
-	
+	kb: new Keyboard({title: 'kb'}),
 	kb1: new Keyboard({
-		name: 'kb1',
+		title: 'kb1',
 		onActivate: function(){
 			$('group1').addClass('activeGroup');
 		},
@@ -98,7 +69,7 @@ var kbs = {
 	}),
 	
 	kb2: new Keyboard({
-		name: 'kb2',
+		title: 'kb2',
 		onActivate: function(){
 			$('group2').addClass('activeGroup');
 		},
@@ -124,50 +95,33 @@ kbs.kb.manage(kbs.kb1);
 kbs.kb.manage(kbs.kb2);
 kbs.kb.activate();
 kbs.kb1.activate();
-
-var methods = {
-	activate1: {
-		name: 'Activate Keyboard 1',
+makeActions([
+	{
+		title: 'Activate Keyboard 1',
 		fn: function(){
 			kbs.kb1.activate();
 		}
 	},
-	activate2: {
-		name: 'Activate Keyboard 2',
+	{
+		title: 'Activate Keyboard 2',
 		fn: function(){
 			kbs.kb2.activate();
 		}
 	},
-	deactivate: {
-		name: 'Deactivate all keyboards.',
+	{
+		title: 'Deactivate all keyboards.',
 		fn: function(){
 			kbs.kb.deactivate();
 		}
 	},
-	activate: {
-		name: 'Reactivate deactivated keyboard.',
-		msg: 'Reactivates the keyboard that was active last when all were deactivated.',
+	{
+		title: 'Reactivate deactivated keyboard.',
+		description: 'Reactivates the keyboard that was active last when all were deactivated.',
 		fn: function(){
 			kbs.kb.activate();
 		}
 	}
-};
+]);
 
-for (name in methods) {
-	
-	var method = methods[name];
-	var dt = new Element('dt').inject('actions');
-	
-	new Element('a', {
-		events: {
-			click: method.fn
-		},
-		text: method.name
-	}).inject(dt);
-	
-	if (method.msg) {
-		var dd = new Element('dd', {text: method.msg}).inject('actions');
-	}
-}
 
 </script>

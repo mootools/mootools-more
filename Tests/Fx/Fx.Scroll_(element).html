@@ -1,26 +1,3 @@
-<style>
-#actions {
-	width: 400px;
-}
-#actions dt {
-	font-weight: bold;
-	margin: 8px;
-}
-#actions dt a {
-	display: block;
-	background: #AABCF2;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	padding: 4px;
-}
-#actions dt a:hover {
-	background: #CACEE8;
-}
-
-</style>
-
-<dl id="actions"></dl>
 <div id="scrollExample" style="height: 300px; overflow: auto; width: 300px; position: absolute; left: 420px; top: 10px">
 	<ul style="width: 500px;">
 		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget sem eget enim rhoncus pharetra. Cras est eros, suscipit eget, molestie nec, commodo quis, justo. Mauris at tellus luctus mauris.</li>
@@ -55,71 +32,61 @@
 <script src="/depender/build?require=More/Fx.Scroll,Core/Element.Event"></script>
 <script>
 var fx = new Fx.Scroll('scrollExample', {duration: 500});
-var methods = {
-	toBottom: {
-		name: 'Scroll the box to the bottom.',
+makeActions([
+	{
+		title: 'Scroll the box to the bottom.',
 		fn: fx.toBottom.bind(fx)
 	},
-	toRight: {
-		name: 'Scroll the box to the right.',
+	{
+		title: 'Scroll the box to the right.',
 		fn: fx.toRight.bind(fx)
 	},
-	toTop: {
-		name: 'Scroll the box to the top.',
+	{
+		title: 'Scroll the box to the top.',
 		fn: fx.toTop.bind(fx)
 	},
-	toLeft: {
-		name: 'Scroll the box to the left.',
+	{
+		title: 'Scroll the box to the left.',
 		fn: fx.toLeft.bind(fx)
 	},
-	toRed: {
-		name: 'Scroll to the red item.',
+	{
+		title: 'Scroll to the red item.',
 		fn: fx.toElement.bind(fx, 'red')
 	},
-	toView: {
-		name: 'Scroll the blue item into view.',
+	{
+		title: 'Scroll the blue item into view.',
 		fn: function(){
 			fx.set(0,0);
 			fx.scrollIntoView('blue', 'y');
 		}
 	},
-	toViewTop: {
-		name: 'Scroll the yellow item into view (from below).',
+	{
+		title: 'Scroll the yellow item into view (from below).',
 		fn: function(){
 			fx.set(0,500);
 			fx.scrollIntoView('yellow', 'y');
 		}
 	},
-	toCenter: {
-		name: 'Scroll to the center of the green item.',
+	{
+		title: 'Scroll to the center of the green item.',
 		fn: function(){
 			fx.set(0,0);
 			fx.scrollToCenter('green');
 		}
 	},
-	toCenterx: {
-		name: 'Scroll to the center of the green item\'s x axis.',
+	{
+		title: 'Scroll to the center of the green item\'s x axis.',
 		fn: function(){
 			fx.set(0,0);
 			fx.scrollToCenter('green','x');
 		}
 	},
-	toCentery: {
-		name: 'Scroll to the center of the green item\'s y axis.',
+	{
+		title: 'Scroll to the center of the green item\'s y axis.',
 		fn: function(){
 			fx.set(0,0);
 			fx.scrollToCenter('green','y');
 		}
 	}
-};
-for (name in methods) {
-	var method = methods[name];
-	var dt = new Element('dt').inject('actions');
-	new Element('a', {
-		events: {
-			click: method.fn
-		},
-		text: method.name
-	}).inject(dt);
-}
+]);
 </script>
