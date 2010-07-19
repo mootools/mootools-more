@@ -30,7 +30,7 @@ provides: [Element.Delegation]
 
 	var EventPseudos = {
 		
-		relay: function(element, event, split){
+		relay: function(element, split, fn, event){
 			for (var target = event.target; target && target != element; target = target.parentNode){
 				if (Slick.match(target, split.selector)){
 					var finalTarget = document.id(target);
@@ -40,7 +40,7 @@ provides: [Element.Delegation]
 			}
 		},
 		
-		once: function(element, event, split, fn){
+		once: function(element, split, fn, event){
 			element.fireEvent(split.original, [event])
 				.removeEvent(split.original, fn);
 		}
@@ -73,7 +73,7 @@ provides: [Element.Delegation]
 				if (!monitors[type]){
 					var element = this;
 					var monitor = function(event){
-						EventPseudos[split.pseudo](element, event, split, fn);
+						EventPseudos[split.pseudo](element, split, fn, event);
 					};
 					monitors[type] = monitor;
 					addEvent.call(this, split.event, monitor);
