@@ -72,3 +72,4 @@ The event will only fire once.
 
 [Events]: /core/Class/Class.Extras#Events
 [Element.Delegation]: /more/Element/Element.Delegation
+
