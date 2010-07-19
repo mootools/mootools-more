@@ -32,48 +32,48 @@
 </div>
 <script src="/depender/build?require=More/Element.Position,Core/Element.Event"></script>
 <script>
-var pos = {
-	center: {
+makeActions([
+	{
 		fn: function(){
 			//center
 			$('box').position({ignoreMargins: true, relativeTo: $('foo')});
 		},
-		name: 'center',
-		msg: 'centers the red box on the larger box.'
+		title: 'center',
+		description: 'centers the red box on the larger box.'
 	},
-	ul2ul: {
+	{
 		fn: function(){
 			//upper left to upper left
 			$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'upperLeft'});
 		},
-		name: 'upper left to upper left',
-		msg: 'puts the upper left of the red box against the upper left of the larger box.'
+		title: 'upper left to upper left',
+		description: 'puts the upper left of the red box against the upper left of the larger box.'
 	},
-	br2br: {
+	{
 		fn: function(){
 			//bottom right to bottom right
 			$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'bottomRight'});
 		},
-		name: 'bottom right to bottom right',
-		msg: 'puts the bottom right of the red box against the bottom right of the larger box'
+		title: 'bottom right to bottom right',
+		description: 'puts the bottom right of the red box against the bottom right of the larger box'
 	},
-	c2br: {
+	{
 		fn: function(){
 			//center to bottom right
 			$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'center'});
 		},
-		name: 'center to bottom right',
-		msg: 'puts the center of the red box on the bottom right corner of the larger box.'
+		title: 'center to bottom right',
+		description: 'puts the center of the red box on the bottom right corner of the larger box.'
 	},
-	re2re: {
+	{
 		fn: function(){
 			//right edge to right edge
 			$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'centerRight', edge: 'centerRight'});
 		},
-		name: 'right center to right center',
-		msg: 'puts the center right of the red box on the center right of the larger box.'
+		title: 'right center to right center',
+		description: 'puts the center right of the red box on the center right of the larger box.'
 	},
-	ul2db: {
+	{
 		fn: function(){
 			//document.body position: upper left",
 			$(document.body).scrollTo(0, 100);
@@ -84,20 +84,9 @@ var pos = {
 				ignoreScroll: true
 			});
 		},
-		name: 'upper left to document body\'s upper left corner',
-		msg: 'puts the upper left corner to document body\'s upper left corner; it scrolls down a bit to test that this works even if the body is scrolled (you\'ll need to scroll back up to see).'
+		title: 'upper left to document body\'s upper left corner',
+		description: 'puts the upper left corner to document body\'s upper left corner; it scrolls down a bit to test that this works even if the body is scrolled (you\'ll need to scroll back up to see).'
 	}
-};
+]);
 
-['center', 'ul2ul', 'br2br', 'c2br', 're2re', 'ul2db'].each(function(fn) {
-	var obj = pos[fn];
-	var dt = new Element('dt').inject('actions');
-	var dd = new Element('dd', {text: obj.msg}).inject('actions');
-	new Element('a', {
-		events: {
-			click: obj.fn
-		},
-		text: obj.name
-	}).inject(dt);
-});
 </script>
