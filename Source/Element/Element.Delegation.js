@@ -27,23 +27,41 @@ provides: [Element.Delegation]
 */
 
 (function(addEvent, removeEvent){
+
+	var EventPseudos = {
+		
+		relay: function(element, event, split){
+			for (var target = event.target; target && target != element; target = target.parentNode){
+				if (Slick.match(target, split.selector)){
+					var finalTarget = document.id(target);
+					if (finalTarget) element.fireEvent(split.original, [event, finalTarget], 0, finalTarget);
+					return;
+				}
+			}
+		},
+		
+		once: function(element, event, split, fn){
+			element.fireEvent(split.original, [event])
+				.removeEvent(split.original, fn);
+		}
+		
+	};
 	
+	Event.definePseudo = function(key, fn){
+		EventPseudos[key] = fn;
+	};
+
 	var key = 'delegation:_delegateMonitors',
 		splitType = function(type){
 			var parsed = Slick.parse(type).expressions[0][0],
 				pseudos = parsed.pseudos;
 			
-			return (pseudos && pseudos[0].key == 'relay') ? {
+			return (pseudos && typeof EventPseudos[pseudos[0].key] == 'function') ? {
 				event: parsed.tag,
-				selector: pseudos[0].value
+				selector: pseudos[0].value,
+				pseudo: pseudos[0].key,
+				original: type
 			} : null;
-		},
-		
-		check = function(element, event, selector){
-			for (var target = event.target; target && target != element; target = target.parentNode)
-				if (Slick.match(target, selector)) return document.id(target);
-			
-			return null;
 		};
 
 	Element.implement({
@@ -53,10 +71,10 @@ provides: [Element.Delegation]
 			if (split){
 				var monitors = this.retrieve(key, {});
 				if (!monitors[type]){
+					var element = this;
 					var monitor = function(event){
-						var element = check(this, event, split.selector);
-						if (element) this.fireEvent(type, [event, element], 0, element);
-					}.bind(this);
+						EventPseudos[split.pseudo](element, event, split, fn);
+					};
 					monitors[type] = monitor;
 					addEvent.call(this, split.event, monitor);
 				}
@@ -95,5 +113,6 @@ provides: [Element.Delegation]
 		}
 
 	});
-
+	
 })(Element.prototype.addEvent, Element.prototype.removeEvent);
+
