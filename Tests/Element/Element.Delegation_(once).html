@@ -1,0 +1,18 @@
+<p>The event should only fired once</p>
+
+<a href="clickme">Click me</a>
+
+<p>The event is fired <span id="result">0</span> times</p>
+
+<script src="/depender/build?require=More/Element.Delegation"></script>
+
+<script>
+
+var result = $('result'),
+	click = $('clickme');
+
+click.addEvent('click:once', function(){
+	result.set('text', result.get('text').toInt() + 1);
+});
+
+</script>
