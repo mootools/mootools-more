@@ -1,15 +1,14 @@
 /*
 ---
 
-name: Element.Delegation
+name: Element.Pseudos
 
-description: Extends the Element native object to include the delegate method for more efficient event management.
+description: Adds the functionallity to add pseudo events for Elements
 
 license: MIT-style license
 
 authors:
-  - Aaron Newton
-  - Daniel Steigerwald
+  - Arian Stolwijk
 
 requires: [Core/Element.Event, Event.Pseudos]
 provides: [Element.Pseudos]
