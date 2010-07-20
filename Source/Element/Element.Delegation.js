@@ -25,7 +25,7 @@ provides: [Element.Delegation]
 Event.definePseudo('relay', function(split, fn, args){
 	var event = args[0];
 	for (var target = event.target; target && target != this; target = target.parentNode){
-		if (Slick.match(target, split.selector)){
+		if (Slick.match(target, split.value)){
 			var finalTarget = document.id(target);
 			if (finalTarget) fn.apply(finalTarget, [event, finalTarget]);
 			return;

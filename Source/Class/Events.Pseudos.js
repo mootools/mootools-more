@@ -16,36 +16,39 @@ provides: [Events.Pseudos]
 ...
 */
 
-Events.Pseudos = function(pseudosObj, addEvent, removeEvent){
+Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
-	var getStorage = function(obj){
-		
-		var storeKey = 'monitorEvents:';
-		obj.$monitorEvents = obj.$monitorEvents || {};
-		
+	var storeKey = 'monitorEvents:';
+
+	var getStorage = function(object){
+				
 		return {
-			store: obj.store ? function(key, value){
-				obj.store(storeKey + key, value);
+			store: object.store ? function(key, value){
+				object.store(storeKey + key, value);
 			} : function(key, value){
-				obj.$monitorEvents[key] = value;
+				if (!object.$monitorEvents) object.$monitorEvents = {};
+				object.$monitorEvents[key] = value;
 			},
-			retrieve: obj.retrieve ? function(key, dflt){
-				return obj.retrieve(storeKey + key, dflt);
+			retrieve: object.retrieve ? function(key, dflt){
+				return object.retrieve(storeKey + key, dflt);
 			} : function(key, dflt){
-				return obj.$monitorEvents[key] || dflt;
+				if (!object.$monitorEvents) return dflt;
+				return object.$monitorEvents[key] || dflt;
 			}
 		};
 	};
 
 	
-	splitType = function(type){
-		var parsed = Slick.parse(type).expressions[0][0],
-			pseudos = parsed.pseudos;
+	var splitType = function(type){
+		if (type.indexOf(':') == -1) return null;
 		
-		return (pseudos && typeof pseudosObj[pseudos[0].key] == 'function') ? {
+		var parsed = Slick.parse(type).expressions[0][0],
+			parsedPseudos = parsed.pseudos;
+		
+		return (pseudos && pseudos[parsedPseudos[0].key]) ? {
 			event: parsed.tag,
-			selector: pseudos[0].value,
-			pseudo: pseudos[0].key,
+			value: parsedPseudos[0].value,
+			pseudo: parsedPseudos[0].key,
 			original: type
 		} : null;
 	};
@@ -54,7 +57,7 @@ Events.Pseudos = function(pseudosObj, addEvent, removeEvent){
 	return {
 		
 		addEvent: function(type, fn, internal){
-			var split = type.indexOf(':') != -1 ? splitType(type) : false;
+			var split = splitType(type);
 			if (!split || !fn) return addEvent.call(this, type, fn, internal);
 			
 			var storage = getStorage(this);
@@ -62,7 +65,7 @@ Events.Pseudos = function(pseudosObj, addEvent, removeEvent){
 					
 			var self = this;
 			var monitor = function(){
-				pseudosObj[split.pseudo].call(self, split, fn, arguments);
+				pseudos[split.pseudo].call(self, split, fn, arguments);
 			};
 			
 			events.include({event: fn, monitor: monitor});
@@ -72,7 +75,7 @@ Events.Pseudos = function(pseudosObj, addEvent, removeEvent){
 		},
 		
 		removeEvent: function(type, fn){
-			var split = type.indexOf(':') != -1 ? splitType(type) : false;
+			var split = splitType(type);
 			if (!split) return removeEvent.call(this, type, fn);
 
 			var storage = getStorage(this);
