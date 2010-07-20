@@ -26,8 +26,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			store: object.store ? function(key, value){
 				object.store(storeKey + key, value);
 			} : function(key, value){
-				if (!object.$monitorEvents) object.$monitorEvents = {};
-				object.$monitorEvents[key] = value;
+				(object.$monitorEvents || (object.$monitorEvents = {}))[key] = value;
 			},
 			retrieve: object.retrieve ? function(key, dflt){
 				return object.retrieve(storeKey + key, dflt);
@@ -58,7 +57,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		
 		addEvent: function(type, fn, internal){
 			var split = splitType(type);
-			if (!split || !fn) return addEvent.call(this, type, fn, internal);
+			if (!split) return addEvent.call(this, type, fn, internal);
 			
 			var storage = getStorage(this);
 			var events = storage.retrieve(type, []);
