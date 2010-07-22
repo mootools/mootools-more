@@ -125,8 +125,7 @@ Fx.Slide = new Class({
 Element.Properties.slide = {
 	
 	set: function(options){
-		var slide = this.get('slide').cancel();
-		slide.setOptions(options);
+		this.get('slide').cancel().setOptions(options);
 		return this;
 	},
 

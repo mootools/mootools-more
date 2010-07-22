@@ -136,7 +136,7 @@ var Sortables = new Class({
 	},
 
 	start: function(event, element){
-		if (!this.idle) return;
+		if (!this.idle || event.rightClick) return;
 		this.idle = false;
 		this.element = element;
 		this.opacity = element.get('opacity');

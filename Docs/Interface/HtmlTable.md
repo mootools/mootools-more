@@ -58,7 +58,7 @@ Inserts a new table row.
 
 ### Arguments
 
-1. row - (*array*) the data for the row.
+1. row - (*array* or *element*) the data for the row or *TR* element.
 2. rowProperties - (*object*) the properties for the row (class, id, styles, etc)
 
 ### Row data
@@ -70,6 +70,8 @@ Row data can be in either of two formats. Note that they can be mixed and matche
 **OR**
 
 * detailed - (*array*) an array of objects with definitions for content and properties for each table data
+
+Note that it can also be an actual *TR* element.
 
 ### Examples
 

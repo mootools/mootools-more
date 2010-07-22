@@ -179,8 +179,7 @@ Fx.Reveal = new Class({
 Element.Properties.reveal = {
 
 	set: function(options){
-		var reveal = this.get('reveal').cancel();
-		reveal.setOptions(options);
+		this.get('reveal').cancel().setOptions(options);
 		return this;
 	},
 

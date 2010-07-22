@@ -97,7 +97,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 					var match = current.match;
 					if (!match) return false;
 					for (var i = 0, j = rows.length; i < j; i++) {
-						var text = document.id(rows[i].cells[index]).get('html').stripTags().clean();
+						var text = document.id(rows[i].cells[index]).get('html').clean();
 						if (text && match.test(text)) {
 							parser = current;
 							return true;
@@ -199,7 +199,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 					group = item.value;
 					row.removeClass(classGroup).addClass(classGroupHead);
 				}
-				if (this.zebra) this.zebra(row, i);
+				if (this.options.zebra) this.zebra(row, i);
 
 				row.cells[index].addClass(classCellSort);
 			}
@@ -244,7 +244,7 @@ HtmlTable.Parsers = new Hash({
 	'date': {
 		match: /^\d{2}[-\/ ]\d{2}[-\/ ]\d{2,4}$/,
 		convert: function() {
-			return Date.parse(this.get('text')).format('db');
+			return Date.parse(this.get('text').stripTags()).format('db');
 		},
 		type: 'date'
 	},
@@ -263,35 +263,35 @@ HtmlTable.Parsers = new Hash({
 	'number': {
 		match: /^\d+[^\d.,]*$/,
 		convert: function() {
-			return this.get('text').toInt();
+			return this.get('text').stripTags().toInt();
 		},
 		number: true
 	},
 	'numberLax': {
 		match: /^[^\d]+\d+$/,
 		convert: function() {
-			return this.get('text').replace(/[^-?^0-9]/, '').toInt();
+			return this.get('text').replace(/[^-?^0-9]/, '').stripTags().toInt();
 		},
 		number: true
 	},
 	'float': {
 		match: /^[\d]+\.[\d]+/,
 		convert: function() {
-			return this.get('text').replace(/[^-?^\d.]/, '').toFloat();
+			return this.get('text').replace(/[^-?^\d.]/, '').stripTags().toFloat();
 		},
 		number: true
 	},
 	'floatLax': {
 		match: /^[^\d]+[\d]+\.[\d]+$/,
 		convert: function() {
-			return this.get('text').replace(/[^-?^\d.]/, '');
+			return this.get('text').replace(/[^-?^\d.]/, '').stripTags();
 		},
 		number: true
 	},
 	'string': {
 		match: null,
 		convert: function() {
-			return this.get('text');
+			return this.get('text').stripTags();
 		}
 	},
 	'title': {
