@@ -62,6 +62,7 @@ var Asset = {
 	},
 
 	css: function(source, properties){
+		properties = properties || {};
 		var onload = properties.onload || properties.onLoad;
 		if (onload) {
 			properties.events = properties.events || {};
