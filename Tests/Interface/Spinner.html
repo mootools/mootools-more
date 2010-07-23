@@ -1,0 +1,122 @@
+
+<style>
+
+#foo, #foo2 {
+	width: 350px;
+	min-height: 100px;
+	border: 1px solid black;
+	background-color: #aaa;
+	margin-bottom: 10px;
+}
+
+#foo3 {
+	width: 350px;
+	height: 200px;
+	overflow: auto;
+	border: 1px solid black;
+	background-color:	 #aaa;
+	margin-bottom: 10px;
+}
+
+#foo3_content {
+	height: 600px;
+}
+
+input, select, embed {
+	margin: 10px;
+	clear:both;
+}
+#actions {
+	float: right;
+}
+
+</style>
+<link rel="stylesheet" href="/asset/more/spinner.css" type="text/css" media="screen" name="no name" charset="utf-8">
+
+<div id="foo">
+	<input type="text" value="this is a text input">
+	
+	<select>
+		<option>one</option>
+		<option>two</option>
+		<option>three</option>
+		<option>four</option>
+	</select>
+	
+	<object width="320" height="220">
+		<param name="movie" value="UserTests/Interface/mediaplayer.swf">
+		<param name="wmode" value="transparent">
+			<embed id="mediaplayer" width="320" height="220" flashvars="width=320&height=220&file=/asset/more/video.flv" allowfullscreen="true" quality="high" name="mediaplayer" style="" src="/asset/more/mediaplayer.swf" type="application/x-shockwave-flash" wmode="transparent"/>
+	</embed>
+	</object>
+	
+</div>
+
+<div id="foo2">
+	This content will be replaced w/ ajax
+</div>
+<div id="foo3">
+	<div id="foo3_content">spinner positioned on a container with overflow:auto and scrollbar offsets</div>
+</div>
+
+<script src="/depender/build?require=Core/Request.HTML,More/Spinner,Core/Element.Event"></script>
+<script>
+
+makeActions([
+	{
+		title: "Test Spinner",
+		description: "Creates a semi-transparent layer that obscures an element and has a 'spinning' icon and message ovelaid upon that.",
+		fn: function() {
+			$('foo').spin({message: 'testing....'});
+		}
+	}, {
+		title: "Tests Spinner start and stop",
+		description: "Shows and Hides a Spinner",
+		fn: function() {
+			var w = $('foo').retrieve('spinner');
+			w.hide();
+			w.show();
+			w.hide.delay(2000, w);
+		}
+	}, {
+		title: "Toggle a Spinner",
+		description: "Toggles the Spinner's visibility",
+		fn: function() {
+			var w = $('foo').retrieve('spinner');
+			w.hide();
+			w.toggle();
+			w.toggle.delay(2000, w);
+		}
+	}, {
+		title: "Spinner with Request",
+		description: "Retrieves content via ajax and automatically applies the Spinner to it.",
+		fn: function(){
+			var req = new Request.HTML({
+				url: '/ajax_html_echo/?html=<p>This+was+fetched+via+AJAX</p>',
+				method: 'get',
+				useSpinner: true,
+				update: $('foo2')
+			});
+			req.send();
+		}
+	}, {
+		title: "Spinner with Request (Element.load)",
+		description: "Retrieves content via ajax and automatically applies the Spinner to it.",
+		fn: function(){
+			$('foo2').set('html', 'This content will be replaced w/ ajax').set('load', {
+				url: '/ajax_html_echo/?html=<p>This+was+fetched+via+AJAX</p>',
+				method: 'get',
+				useSpinner: true
+			}).load();
+		}
+	}, {
+		title: "Spinner with Scroll Offsets",
+		description: "Positions Spinner correctly based on scroll offsets",
+		fn: function(){
+			$('foo3').scrollTo(0,300);
+			$('foo3').spin({message: 'testing....'});
+		}
+	}
+]);
+
+</script>

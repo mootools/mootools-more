@@ -99,6 +99,13 @@ var HtmlTable = new Class({
 	},
 
 	push: function(row, rowProperties, target, tag){
+		if (typeOf(row) == "element" && row.get('tag') == 'tr') {
+			row.inject(target || this.body);
+			return {
+				tr: row,
+				tds: row.getChildren('td')
+			};
+		}
 		var tds = row.map(function(data){
 			var td = new Element(tag || 'td', data ? data.properties : {}),
 				type = (data ? data.content : '') || data,

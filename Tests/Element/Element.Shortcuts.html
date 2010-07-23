@@ -11,26 +11,6 @@
 		border: 2px solid black;
 		padding: 10px;
 	}
-	#actions {
-		width: 400px;
-	}
-	#actions dt {
-		font-weight: bold;
-	}
-	#actions dt a {
-		display: block;
-		background: #AABCF2;
-		border-radius: 4px;
-		-moz-border-radius: 4px;
-		-webkit-border-radius: 4px;
-		padding: 4px;
-	}
-	#actions dt a:hover {
-		background: #CACEE8;
-	}
-	#actions dd {
-		padding: 4px;
-	}
 	
 	.blackText {
 		color: #000;
@@ -38,8 +18,13 @@
 	.blueText {
 		color: #00f;
 	}
+	#logContaner {
+		position: absolute;
+		left: 450px;
+		top: 280px;
+	}
 </style>
-<dl id="actions"></dl>
+
 <div id="foo-container">
 	<div id="foo" class="blackText">
 	This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text.
@@ -51,7 +36,7 @@
 var log = function(msg){
 	$('logContaner').adopt(new Element('p', {text: msg}));
 };
-var tests = [
+makeActions([
 	{
 		title: "Element.hide",
 		description: "Switches an element from display:block|inline|etc to display:none",
@@ -142,16 +127,6 @@ var tests = [
 			$('foo').swapClass('blueText', 'blackText');
 		}
 	}
-];
-tests.each(function(test) {
-	new Element('dt').adopt(
-		new Element('a', {
-			text: test.title,
-			events: {
-				click: test.fn
-			}
-		})
-	).inject('actions');
-	new Element('dd', { text: test.description }).inject('actions');
-});
+]);
+
 </script>

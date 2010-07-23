@@ -1,0 +1,37 @@
+<p>
+	You should see the log below fill up with requests to get HTML from the server for roughly 12 seconds.
+</p>
+<div id="log"></div>
+
+<script src="/depender/build?require=More/Request.Periodical,Core/Element"></script>
+<script>
+
+var i = 0;
+var r = new Request({
+	url: '/ajax_html_echo/?html=<p>This+was+fetched+via+AJAX</p>',
+	method: 'get',
+	initialDelay: 100,
+	delay: 100,
+	limit: 15000,
+	onRequest: function(){
+		$('log').adopt(new Element('li', {
+			html: 'attempt: ' + (i++)
+		}));
+	},
+	onSuccess: function(r){
+		$('log').adopt(new Element('li', {
+			html: 'success: ' + r
+		}));
+	}
+}).startTimer({
+	sleep: 2
+});
+
+(function(){
+	r.stopTimer();
+	$('log').adopt(new Element('li', {
+		html: 'test complete.'
+	}));
+}).delay(12000);
+
+</script>

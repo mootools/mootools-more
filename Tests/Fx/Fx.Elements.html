@@ -1,10 +1,3 @@
-<script src="/depender/build?require=More/Fx.Elements"></script>
-
-
-<h2>Fx.Elements</h2>
-
-<p>Animates several elements at once.<br />Did the elements change shape smoothly at the same time?</p>
-
 <style>
 .exampleBar {
 	background-color:#BAEEB5;
@@ -13,25 +6,29 @@
 	margin:2px 0;
 }
 </style>
-<div class="exampleBar"></div>
-<div class="exampleBar"></div>
-<div class="exampleBar"></div>
-<script type="text/javascript">
 
-	var myElementsEffects = new Fx.Elements($$('div.exampleBar'), {
-		duration: 2000
-	});
-	myElementsEffects.start({
-		'0': { /*	let's change the first element's opacity and width	*/
-			'opacity': [0,1],
-			'width': [100,200]
-		},
-		'1': { /*	and the second one's opacity	*/
-			'opacity': [0.2, 0.7]
-		},
-		'2': { /*	and the third's height	*/
-		'height': 100 /*	from whatever it's at now to 40	*/
-		}
-	});
-			
+<p>
+	The boxes below should all resize together: the first one fades in and sizes from 100px to 200px, the second fades from 20% to 50%, and the last sizes to a height of 40px.
+</p>
+
+
+<div class="exampleBar"></div>
+<div class="exampleBar"></div>
+<div class="exampleBar"></div>
+
+<script src="/depender/build?require=More/Fx.Elements"></script>
+<script>
+var myElementsEffects = new Fx.Elements($$('div.exampleBar'));
+myElementsEffects.start({
+	'0': { /*	let's change the first element's opacity and width	*/
+		'opacity': [0,1],
+		'width': [100,200]
+	},
+	'1': { /*	and the second one's opacity	*/
+		'opacity': [0.2, 0.5]
+	},
+	'2': { /*	and the third's height	*/
+	'height': 40 /*	from whatever it's at now to 40	*/
+	}
+});
 </script>

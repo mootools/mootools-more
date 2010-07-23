@@ -1,0 +1,33 @@
+<div id="sliderExampleWrapper" style="width: 300px; height: 200px; border: 1px solid black;margin-left: 10px">
+	<div id="sliderButton" style="width: 100px; height: 100px; background-color: #baeeb5; border: 1px solid black"></div>
+</div>
+<script src="/depender/build?require=More/Fx.Slide,Core/Element.Event"></script>
+
+<script>
+
+var fx = new Fx.Slide('sliderButton', {duration: 500});
+
+makeActions([
+	{
+		title: 'Show the element and slide out.',
+		fn: function(){
+			fx.show().slideOut();
+		}
+	},
+	{
+		title: 'Hide the element and slide in.',
+		fn: function(){
+			fx.hide().slideIn();
+		}
+	},
+	{
+		title: 'Toggle the state - sliding in or out.',
+		fn: function(){
+			fx.toggle();
+		}
+	}
+
+]);
+
+</script>
+

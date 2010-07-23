@@ -72,7 +72,7 @@ if (!window.Form) window.Form = {};
 		},
 
 		makeRequest: function(){
-			this.request = new Request.HTML($merge({
+			this.request = new Request.HTML(Object.merge({
 					update: this.update,
 					emulation: false,
 					spinnerTarget: this.element,

@@ -1,0 +1,72 @@
+<p>
+	The image below should have a pink 4px border around it.
+</p>
+
+<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." id="moologo"/>
+
+<hr/>
+<p>
+	A MooTools logo should load in the box below.
+</p>
+<div id="imgtest" style="background: #999; float: left; padding: 10px; margin: 8px;"></div>
+
+<hr style="clear:both"/>
+
+<p>
+	Three MooTools images should load in the box below.
+</p>
+
+<style>
+	
+#imgtest2 img {
+	background: #999;
+	float: left;
+	padding: 10px;
+	margin: 8px;
+}
+
+#msg li {
+	margin-left: 20px;
+	list-style: disc;
+}
+
+</style>
+
+<div id="imgtest2"></div>
+
+<hr style="clear:both"/>
+
+<p>
+	You should see confirmation that some JS loaded in the box below, as well as confirmation that the onload event fired successfully.
+</p>
+<ul id="msg"></ul>
+
+<script src="/depender/build?require=More/Assets"></script>
+<script>
+
+	Asset.css('/asset/more/Assets.css.test.css');
+	Asset.image('/asset/more/mootools.png', {
+		onLoad: function(){
+			this.inject('imgtest');
+		}
+	});
+	
+	var imgs = Asset.images([
+		'/asset/more/mootools.png',
+		'/asset/more/mootools.png',
+		'/asset/more/mootools.png'
+		], {
+		onComplete: function(){
+			imgs.inject('imgtest2');
+		}
+	});
+	
+	
+	$('msg').adopt(new Element('li', {text: 'testing onload event...'}));
+	Asset.javascript('/asset/more/Assets.js.test.js', {
+		onLoad: function(){
+			$('msg').adopt(new Element('li', {text: 'JavaScript onLoad fired successfully!'}));
+		}
+	});
+	
+</script>
