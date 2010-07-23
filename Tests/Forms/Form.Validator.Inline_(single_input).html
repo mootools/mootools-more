@@ -1,0 +1,33 @@
+<style>
+.validation-advice {
+	color: red;
+	padding: 10px 0px;
+}
+input {
+	margin: 5px 0px;
+}
+</style>
+
+
+<p>When you focus and then blur the input below, if you leave it empty you should see an error. If you try and submit it without entering a value, you should see an error.</p>
+
+<form id="foo2">
+	<dl>
+		<dt>this cannot be empty</dt>
+		<dd><input name="a" class="required"></dd>
+	</dl>
+	<input type="submit">
+</form>
+<script src="/depender/build?require=More/Form.Validator.Inline,More/Fx.Reveal,More/Fx.Scroll"></script>
+
+<script type="text/javascript">
+	new Form.Validator.Inline('foo2', {
+		serial: false,
+		onFormValidate: function(passed, form, event){
+			event.stop();
+			if (passed) alert('form validated');
+			else alert('form did NOT validate');
+		}
+	});
+</script>
+

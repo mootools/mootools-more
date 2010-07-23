@@ -1,0 +1,104 @@
+<style>
+textarea {
+	display:block;
+}
+</style>
+
+<h3 class="h3_test"><a name="element.gettextinrange" id="element.gettextinrange">Element.getTextInRange</a></h3>
+
+<div class="level2">
+
+<p>
+Returns the value of the text within a given range in the input.
+</p>
+
+<p>
+
+<style>input.example {clear: both;width: 500px;display: block;}</style>
+text in range (click the input to execute):
+<input class="example" value="0123456789" id="ip1" onclick="EFexample(this, 'getTextInRange(2,5)', $(this).getTextInRange(2,5))" /><input class="example" />
+</p>
+
+</div>
+
+<h3 class="h3_test"><a name="element.getselectedtext" id="element.getselectedtext">Element.getSelectedText</a></h3>
+
+<div class="level2">
+
+<p>
+Gets the text that is currently selected.
+</p>
+
+<p>
+selected text (select some text to execute):
+<input class="example" value="0123456789" id="ip2" onclick="EFexample(this, 'getSelectedText', $(this).getSelectedText())" /><input class="example" />
+</p>
+
+</div>
+<h3 class="h3_test"><a name="element.getselectedrange" id="element.getselectedrange">Element.getSelectedRange</a></h3>
+<div class="level2">
+
+<p>
+Gets the range that is selected.
+</p>
+
+<p>
+getSelectedRange: (select some text to execute)
+<textarea class="example" value="0123456789" id="ip3" onclick="EFexample(this, 'getSelectedRange', JSON.encode($(this).getSelectedRange()))">
+0123456789 0123456789 0123456789
+</textarea>
+<input class="example" />
+</p>
+
+</div>
+<h3 class="h3_test"><a name="element.selectrange" id="element.selectrange">Element.selectRange</a></h3>
+<div class="level2">
+
+<p>
+Selects a range of text.
+
+</p>
+
+<p>
+selectRange (click to execute; this example passes in an array [2,5]):
+<textarea class="example" id="ip4" onclick="EFexample(this, 'selectRange(2,5)', ''); $(this).selectRange(2,5)">
+0123456789 0123456789 0123456789
+</textarea>
+	<input class="example" />
+</p>
+
+</div>
+<h3 class="h3_test"><a name="element.insertatcursor" id="element.insertatcursor">Element.insertAtCursor</a></h3>
+<div class="level2">
+
+<p>
+Insert text at the cursor location.
+</p>
+
+<p>
+insertAtCursor (click anywhere to insert the example):
+<input class="example" value="0123456789" id="ip6" onclick="EFexample(this, 'insertAtCursor(\'!!!INSERTED!!!\')', $(this).insertAtCursor('!!!INSERTED!!!'))" /><input class="example" />
+</p>
+
+</div>
+<h3 class="h3_test"><a name="element.insertaroundcursor" id="element.insertaroundcursor">Element.insertAroundCursor</a></h3>
+<div class="level2">
+
+<p>
+Wraps text with the given strings.
+</p>
+
+<p>
+insertAroundCursor (select some text or click anywhere to insert "<" and ">" around the text, test multiple lines):
+
+<textarea class="example" cols="20" rows="3" id="ip7" onmouseup="EFexample(this, 'insertAroundCursor({before: \'<\', after: \'>\'})', $(this).insertAroundCursor({before: '<', after: '>'}))">0123456789
+second line
+third line</textarea><input class="example" />
+</p>
+</div>
+<script src="/depender/build?require=More/Element.Forms,Core/JSON"></script>
+<script>function EFexample(input, txt, value){
+	try {
+		input.getNext().value = txt + ": " + value;
+	}catch(e){dbug.log(e)}
+}</script>

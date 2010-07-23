@@ -1,0 +1,29 @@
+<p>Click the submit button to load a new list item to the list below.</p>
+
+<link rel="stylesheet" href="/asset/more/spinner.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+<style>
+#update li {
+	list-style: circle; 
+	margin-left: 20px;
+}
+</style>
+
+<div id="update" style="width: 200px; border: 1px solid #444;padding: 10px; margin: 10px 0px;">
+	<p>this box should get new text <i>appended</i> when you click the input below.</p>
+</div>
+
+<form id="test" action="/ajax_html_echo/" method="post">
+	<input type="hidden" name="html" value='<p style="display:none">this is new text!</p>'>
+	<input type="submit" value="fetch html">
+</form>
+
+<script src="/depender/build?require=More/Fx.Reveal,More/Form.Request.Append,More/Spinner"></script>
+<script type="text/javascript">
+	new Form.Request.Append($('test'), $('update'), {
+		requestOptions: {
+			spinnerTarget: $('update')
+		}
+	});
+</script>
+

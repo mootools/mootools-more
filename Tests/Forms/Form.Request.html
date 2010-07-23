@@ -1,0 +1,24 @@
+<p>Click either submit button to update the box below. The box should have an ajax spinner and then update with the content in the button.</p>
+
+<link rel="stylesheet" href="/asset/more/spinner.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+<form id="test" action="/ajax_html_echo/" method="post">
+	<input type="submit" name="html" value="fetch html (button 1)"/>
+	<input type="submit" name="html" value="fetch html (button 2)"/>
+</form>
+
+<div style="position: relative; margin-top: 10px">
+	<div id="update" style="padding: 10px; width: 200px; border: 1px solid black; height: 100px; overflow:hidden;">
+		this box should get new text when you click the input above.
+	</div>
+</div>
+
+<script src="/depender/build?require=More/Form.Request,More/Spinner"></script>
+<script type="text/javascript">
+	new Form.Request($('test'), $('update'), {
+		requestOptions: {
+			spinnerTarget: $('update')
+		}
+	});
+</script>
+

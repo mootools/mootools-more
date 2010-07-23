@@ -1,8 +1,0 @@
-{
-	"core": {
-		"scripts": "../assets/core/Source"
-	},
-	"more": {
-		"scripts": "../Source"
-	}
-}

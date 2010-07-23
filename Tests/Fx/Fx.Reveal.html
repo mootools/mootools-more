@@ -1,0 +1,31 @@
+<style>
+#success {
+	width: 200px;
+	height: 64px;
+	border: 1px solid #000;
+	background: #fff;
+	font-size: 16px;
+	line-height: 16px;
+	padding: 80px 0px 40px;
+	text-align: center;
+	display: none;
+}
+</style>
+<p>When the JavaScript on this page finishes loading, a box with a message of success should appear.</p>
+
+<hr/>
+<p>The links below should let you hide and show the box.</p>
+<p>
+	<a id="reveal">reveal</a> | <a id="dissolve">dissolve</a>
+</p>
+<div id="success">
+	Woot! It works!
+</div>
+<p>This text is after the box and moves as it appears</p>
+<script src="/depender/build?require=More/Fx.Reveal,Core/Element.Event"></script>
+<script>
+var rev = $('success').get('reveal').reveal();
+
+$('reveal').addEvent('click', rev.reveal.bind(rev));
+$('dissolve').addEvent('click', rev.dissolve.bind(rev));
+</script>

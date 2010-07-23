@@ -1,0 +1,98 @@
+<style>
+	#foo {
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+		position: absolute;
+		top: 50px;
+		left: 50px;
+	}
+</style>
+<p>
+	When pinned, the element should remain stationary when you scroll. Unpinning should fix the element in place.
+</p>
+<p>
+	<a id="pin">pin</a> | <a id="unpin">unpin</a>
+</p>
+<div id="foo" class="blackText">
+This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text.
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<script src="/depender/build?require=More/Element.Pin,Core/DomReady"></script>
+<script>
+var pin = function(){
+	$('foo').pin();
+};
+var unpin = function(){
+	$('foo').unpin();
+};
+window.addEvent('domready', pin);
+$('pin').addEvent('click', pin);
+$('unpin').addEvent('click', unpin);
+</script>

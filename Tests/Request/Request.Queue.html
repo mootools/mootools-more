@@ -1,0 +1,34 @@
+<p>
+	You should see request responses log below in order from 1 through 5.
+</p>
+
+<ul id="responses"></ul>
+<script src="/depender/build?require=More/Request.Queue,Core/Element"></script>
+
+<script>
+	var events = {};
+	['onSuccess', 'onFailure', 'onException'].each(function(evt){
+		events[evt] = function(a){
+			$('responses').adopt(new Element('li', {
+					html: evt + ': ' + a
+				})
+			);
+		};
+	});
+	var q = new Request.Queue();
+	var reqs = [];
+	var sleep = 4;
+	(5).times(function(num){
+		var r = new Request({
+			url: '/ajax_html_echo/?html=<p>Success for request ' + (num + 1) + '</p>',
+			method: 'get'
+		});
+		sleep = sleep - 1;
+		reqs.push(r);
+		r.addEvents(events);
+		q.addRequest(num.toString(), r);
+	});
+	reqs.each(function(r){
+		r.send();
+	});
+</script>

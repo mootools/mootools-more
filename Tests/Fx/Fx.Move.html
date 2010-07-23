@@ -1,0 +1,91 @@
+<style>
+	#foo {
+		width: 200px;
+		height: 200px;
+		border: 2px solid black;
+		top: 50px;
+		left: 450px;
+		padding: 10px;
+		position: absolute;
+	}
+	#box {
+		width: 50px;
+		height: 50px;
+		background-color: #900;
+		border: 2px solid #700;
+		margin: 10px 20px 30px 40px;
+		padding: 0px;
+		z-index:10;
+		position: absolute;
+	}
+	div.container {
+		height: 800px;
+	}
+</style>
+
+<div class="container">
+	<div id="foo" class="blackText">
+	This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text.
+	</div>
+
+	<div id="box"></div>
+</div>
+<script src="/depender/build?require=More/Fx.Move,Core/Element.Event"></script>
+<script>
+makeActions([
+	{
+		fn: function(){
+			//center
+			$('box').move({ignoreMargins: true, relativeTo: $('foo')});
+		},
+		title: 'center',
+		description: 'centers the red box on the larger box.'
+	},
+	{
+		fn: function(){
+			//upper left to upper left
+			$('box').move({ignoreMargins: true, relativeTo: $('foo'), position: 'upperLeft'});
+		},
+		title: 'upper left to upper left',
+		description: 'puts the upper left of the red box against the upper left of the larger box.'
+	},
+	{
+		fn: function(){
+			//bottom right to bottom right
+			$('box').move({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'bottomRight'});
+		},
+		title: 'bottom right to bottom right',
+		description: 'puts the bottom right of the red box against the bottom right of the larger box'
+	},
+	{
+		fn: function(){
+			//center to bottom right
+			$('box').move({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'center'});
+		},
+		title: 'center to bottom right',
+		description: 'puts the center of the red box on the bottom right corner of the larger box.'
+	},
+	{
+		fn: function(){
+			//right edge to right edge
+			$('box').move({ignoreMargins: true, relativeTo: $('foo'), position: 'centerRight', edge: 'centerRight'});
+		},
+		title: 'right center to right center',
+		description: 'puts the center right of the red box on the center right of the larger box.'
+	},
+	{
+		fn: function(){
+			//document.body position: upper left",
+			$(document.body).scrollTo(0, 100);
+			$('box').move({
+				ignoreMargins: true, relativeTo: document.body, 
+				position: 'upperLeft', 
+				edge: 'upperLeft',
+				ignoreScroll: true
+			});
+		},
+		title: 'upper left to document body\'s upper left corner',
+		description: 'puts the upper left corner to document body\'s upper left corner; it scrolls down a bit to test that this works even if the body is scrolled (you\'ll need to scroll back up to see).'
+	}
+]);
+</script>

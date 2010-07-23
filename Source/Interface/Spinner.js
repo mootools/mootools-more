@@ -14,6 +14,7 @@ authors:
 
 requires:
   - Core:1.2.4/Fx.Tween
+  - Core/Request
   - /Class.refactor
   - /Mask
 
@@ -133,41 +134,39 @@ var Spinner = new Class({
 
 Spinner.implement(new Chain);
 
-if (window.Request) {
-	Request = Class.refactor(Request, {
-		
-		options: {
-			useSpinner: false,
-			spinnerOptions: {},
-			spinnerTarget: false
-		},
-		
-		initialize: function(options){
-			this._send = this.send;
-			this.send = function(options){
-				var spinner = this.getSpinner();
-				if (spinner) spinner.chain(this._send.bind(this, options)).show();
-				else this._send(options);
-				return this;
-			};
-			this.previous(options);
-		},
-		
-		getSpinner: function(){
-			if (!this.spinner) {
-				var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
-				if (this.options.useSpinner && update) {
-					this.spinner = update.get('spinner', this.options.spinnerOptions);
-					['onComplete', 'onException', 'onCancel'].each(function(event){
-						this.addEvent(event, this.spinner.hide.bind(this.spinner));
-					}, this);
-				}
+Request = Class.refactor(Request, {
+	
+	options: {
+		useSpinner: false,
+		spinnerOptions: {},
+		spinnerTarget: false
+	},
+	
+	initialize: function(options){
+		this._send = this.send;
+		this.send = function(options){
+			var spinner = this.getSpinner();
+			if (spinner) spinner.chain(this._send.bind(this, options)).show();
+			else this._send(options);
+			return this;
+		};
+		this.previous(options);
+	},
+	
+	getSpinner: function(){
+		if (!this.spinner) {
+			var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
+			if (this.options.useSpinner && update) {
+				this.spinner = update.get('spinner', this.options.spinnerOptions);
+				['onComplete', 'onException', 'onCancel'].each(function(event){
+					this.addEvent(event, this.spinner.hide.bind(this.spinner));
+				}, this);
 			}
-			return this.spinner;
 		}
-		
-	});
-}
+		return this.spinner;
+	}
+	
+});
 
 Element.Properties.spinner = {
 

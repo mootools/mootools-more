@@ -1,0 +1,14 @@
+<p>
+	The element below should shrink and expand with brief, half second pauses between each event.
+</p>
+<div id="foo" style="width: 200px; border: 1px solid black; height: 200px; overflow:hidden;background:silver;">
+</div>
+<script src="/depender/build?require=Core/Fx.Tween,More/Chain.Wait"></script>
+<script>
+	$('foo').chains().tween('height', 100).pauseFx(500)
+		.tween('height', 200).pauseFx(500)
+		.tween('height', 100).pauseFx(500)
+		.tween('height', 200).pauseFx(500);
+</script>
+
+
