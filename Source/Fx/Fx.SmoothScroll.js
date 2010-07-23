@@ -13,7 +13,7 @@ authors:
   - Valerio Proietti
 
 requires:
-  - Core/Selectors
+  - Core/Slick.Finder
   - /Fx.Scroll
 
 provides: [Fx.SmoothScroll]

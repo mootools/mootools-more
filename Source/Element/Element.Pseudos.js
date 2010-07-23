@@ -10,7 +10,7 @@ license: MIT-style license
 authors:
   - Arian Stolwijk
 
-requires: [Core/Element.Event, Event.Pseudos]
+requires: [Core/Element.Event, Events.Pseudos]
 provides: [Element.Pseudos]
 
 ...
