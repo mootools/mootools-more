@@ -304,3 +304,7 @@ HtmlTable.Parsers = new Hash({
 
 });
 
+
+HtmlTable.defineParsers = function(parsers){
+	HtmlTable.Parsers = new Hash(parsers).combine(HtmlTable.Parsers);
+};
