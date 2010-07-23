@@ -18,7 +18,6 @@ requires:
   - Core/Number
   - Core/Hash
   - Core/Function
-  - Core/$util
 
 provides: [Color]
 

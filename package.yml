@@ -35,7 +35,7 @@ sources:
   - "Source/Types/Hash.Extras.js"
   - "Source/Element/Element.Forms.js"
   - "Source/Element/Elements.From.js"
-  - "Source/Element/Event.Pseudos.js"
+  - "Source/Element/Element.Pseudos.js"
   - "Source/Element/Element.Delegation.js"
   - "Source/Element/Element.Measure.js"
   - "Source/Element/Element.Pin.js"
