@@ -15,7 +15,7 @@ authors:
 requires:
   - Core/Options
   - Core/Events
-  - Core/Selectors
+  - Core/Slick.Finder
   - Core/Element.Event
   - Core/Element.Style
   - Core/JSON
