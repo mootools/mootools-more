@@ -34,7 +34,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		classRowSelected: 'table-tr-selected',
 		classRowHovered: 'table-tr-hovered',
 		classSelectable: 'table-selectable',
-		shiftForMultiSelect: false,
+		shiftForMultiSelect: true,
 		allowMultiSelect: true,
 		selectable: false
 	},
@@ -230,8 +230,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 				
 				this.keyboard = new Keyboard({
 					events: {
-						'down': move(1),
-						'up': move(-1),
 						'keydown:shift+up': move(-1),
 						'keydown:shift+down': move(1),
 						'keyup:shift+up': clear,
@@ -240,6 +238,26 @@ HtmlTable = Class.refactor(HtmlTable, {
 						'keyup:down': clear
 					},
 					active: true
+				});
+				
+				var shiftHint = '';
+				if (this.options.allowMultiSelect && this.options.shiftForMultiSelect && this.options.useKeyboard) {
+					shiftHint = " (Shift multi-selects).";
+				}
+				
+				this.keyboard.addShortcuts({
+					'Select Previous Row': {
+						keys: 'up',
+						shortcut: 'up arrow',
+						handler: move(-1),
+						description: 'Select the previous row in the table.' + shiftHint
+					},
+					'Select Next Row': {
+						keys: 'down',
+						shortcut: 'down arrow',
+						handler: move(1),
+						description: 'Select the next row in the table.' + shiftHint
+					}
 				});
 			}
 			this.keyboard[attach ? 'activate' : 'deactivate']();
