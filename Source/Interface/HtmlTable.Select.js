@@ -73,6 +73,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	selectRow: function(row, _nocheck){
+		console.log('select: ', row);
 		//private variable _nocheck: boolean whether or not to confirm the row is in the table body
 		//added here for optimization when selecting ranges
 		if (!_nocheck && !this.body.getChildren().contains(row)) return;
@@ -168,8 +169,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	_clickRow: function(event, row){
 		var selecting = (event.shift || event.meta || event.control) && this.options.shiftForMultiSelect;
-		if (!selecting) this.selectNone();
-		this.toggleRow(row);
+		if (!selecting && !(event.rightClick && this.isSelected(row) && this.options.allowMultiSelect)) this.selectNone();
+		if (event.rightClick) this.selectRow(row);
+		else this.toggleRow(row);
 		if (event.shift) {
 			this.selectRange(this._rangeStart || this.body.rows[0], row, this._rangeStart ? !this.isSelected(row) : true);
 		}
