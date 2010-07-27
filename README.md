@@ -27,6 +27,8 @@ MooTools Plugins and Enhancements Repository
 * Moved Hash.js from Core to MooTools More which is not part of MooTools Core 1.3 (without compatibily layer) anymore.
 * Changed Hash.Extras to Object.Extras. Hash.Extras however still exist for compatibility.
 * Removed Depender.
+* Added Events.Pseudos and Event.Pseudos to abstract Element.Delegation :relay and add :once events with Event(s).definePseudo
+* Rewritten Request.JSPONP - the retries option has been removed.
 
 
 NOTE: none of the changes below are breaking changes.
