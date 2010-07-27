@@ -73,7 +73,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	selectRow: function(row, _nocheck){
-		console.log('select: ', row);
 		//private variable _nocheck: boolean whether or not to confirm the row is in the table body
 		//added here for optimization when selecting ranges
 		if (!_nocheck && !this.body.getChildren().contains(row)) return;
