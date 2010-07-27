@@ -1,7 +1,7 @@
-Class: Events.Extras {#Events}
-=====================
+Events.Pseudos {#Events}
+======================
 
-Extends the [Events][] class.
+Gives the possibility to add pseudo events to Classes that have implemented the [Events][] class.
 
 Function: Events.definePseudo {#Events:Events-definePseudo}
 ---------------------------------------------------------
@@ -19,11 +19,11 @@ This function defines a new pseudo.
 
 	fn(split, fn, args)
 
-1. split - (*object*)
+1. split - (*object*) A parsed object of the string passed in addEvent: `event:pseudo(value)`
 	- event - (*string*) the part before the `:`
-	- selector - (*string*) between `(` and `)` if the event name looks like `event:pseudo(selector)`
+	- value - (*string*) between `(` and `)`
 	- pseudo - (*string*) between the `:` and `(` 
-	- original - (*string*) the original event name, thus `event:pseudo(selector)`
+	- original - (*string*) the original event name, thus `event:pseudo(value)`
 2. fn - (*function*) This is the function that has been passed in the `addEvent` method. So it is the 'fn' in `myClass.addEvent('event:pseudo', fn)`
 3. args - (*array*) The arguments that are passed into the 'fireEvent' method.
 
@@ -39,9 +39,9 @@ This is how the :once pseudo is implemented
 Event Pseudos {#Pseudos}
 ========================
 
-Like [Element.Delegation][] you can use pseudos for Class Events.
-An event pseudo looks the same as a CSS pseudo: `event:pseudoName`
-event is the event name you used to use, and pseudoName is the name
+Like [Element.Pseudos][] for Elements, you can use pseudos for Class Events.
+An event pseudo looks the same as a CSS pseudo: `event:pseudo(value)`.
+`event` is the eventname you used to use, and `pseudo` is the name
 of the pseudo.
 
 Pseudo: once {#Pseudos:once}
@@ -67,9 +67,9 @@ The event will only fire once.
 	});
 	
 	db.connect(); // will alert 'i am connected'
-	db.connect(); // the event won't be fired
+	db.connect(); // nothing will happen
 	
 
 [Events]: /core/Class/Class.Extras#Events
-[Element.Delegation]: /more/Element/Element.Delegation
+[Element.Pseudos]: /more/Element/Element.Pseudos
 
