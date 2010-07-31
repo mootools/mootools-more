@@ -6,50 +6,61 @@ License:
 	MIT-style license.
 */
 (function(){
+	
+	
 	var input, selectList, multiselect, radio, radio2, checkbox, textarea;
+
 	window.addEvent('domready', function(){
-		(function(){
-			var container = new Element('div', {
-				styles: {
-					height: 1,
-					overflow: "hidden"
-				}
-			}).inject($('log'));
-			input = new Element('input', {
-				type: 'text',
-				value: '0123456789'
-			}).inject(container);
-			textarea = new Element('textarea', {
-				value: '0123456789'
-			}).inject(container);
-			selectList = new Element('select', {
-			}).inject(container);
-			(3).times(function(i){
-				var opt = new Element('option', {
-					text: i + '_txt'
-				}).inject(selectList);
-				if (i>0) opt.set('value', i+'_val');
-			});
-			multiselect = selectList.clone(true).inject(container);
-			multiselect.set('multiple', true);
-			radio = new Element('input', {
-				type: 'radio',
-				name: 'radio',
-				value: 'radioValue1'
-			}).inject(container);
-			radio2 = new Element('input', {
-				type: 'radio',
-				name: 'radio',
-				checked: true,
-				value: 'radioValue2'
-			}).inject(container);
-			checkbox = new Element('input', {
-				type: 'checkbox',
-				name: 'checkbox',
-				value: 'checkboxValue'
-			}).inject(container);
-		}).delay(10);
+		
+		var container = new Element('div', {
+			styles: {
+				height: 1,
+				overflow: "hidden"
+			}
+		}).inject($(document.body));
+		
+		input = new Element('input', {
+			type: 'text',
+			value: '0123456789'
+		}).inject(container);
+		
+		textarea = new Element('textarea', {
+			value: '0123456789'
+		}).inject(container);
+		
+		selectList = new Element('select', {
+		}).inject(container);
+		(3).times(function(i){
+			var opt = new Element('option', {
+				text: i + '_txt'
+			}).inject(selectList);
+			if (i>0) opt.set('value', i+'_val');
+		});
+		
+		multiselect = selectList.clone(true).inject(container);
+		multiselect.set('multiple', true);
+		
+		radio = new Element('input', {
+			type: 'radio',
+			name: 'radio',
+			value: 'radioValue1'
+		}).inject(container);
+		
+		radio2 = new Element('input', {
+			type: 'radio',
+			name: 'radio',
+			checked: true,
+			value: 'radioValue2'
+		}).inject(container);
+		
+		checkbox = new Element('input', {
+			type: 'checkbox',
+			name: 'checkbox',
+			value: 'checkboxValue'
+		}).inject(container);
+
 	});
+
 	describe('Element.getTextInRange', {
 
 		'should get text in a specific range from an input': function(){

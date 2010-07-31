@@ -25,7 +25,7 @@ var uri;
 			value_of(uri.get('user')).should_be('myuser');
 			value_of(uri.get('password')).should_be('mypass');
 			value_of(uri.get('host')).should_be('www.calyptus.eu');
-			value_of(uri.get('port')).should_be(8080);
+			value_of(uri.get('port')).should_be('8080');
 			value_of(uri.get('directory')).should_be('/mydirectory/');
 			value_of(uri.get('file')).should_be('myfile.html');
 			value_of(uri.get('query')).should_be('myquery=true');

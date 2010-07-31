@@ -12,55 +12,55 @@ License:
 	describe('URI initialize', {
 
 		'new URI() should return the current location': function(){
-			value_of(new URI()).should_be(window.location.href.replace(/#$|\?$|\?(?=#)/, ''));
+			value_of(new URI().toString()).should_be(window.location.href.replace(/#$|\?$|\?(?=#)/, ''));
 		},
 
 		'new URI(\'http://www.calyptus.eu\') should return itself with a trailing slash': function(){
-			value_of(new URI('http://www.calyptus.eu')).should_be('http://www.calyptus.eu/');
+			value_of(new URI('http://www.calyptus.eu').toString()).should_be('http://www.calyptus.eu/');
 		},
 
 		'new URI(\'http://www.calyptus.eu/\') should return itself': function(){
-			value_of(new URI('http://www.calyptus.eu/')).should_be('http://www.calyptus.eu/');
+			value_of(new URI('http://www.calyptus.eu/').toString()).should_be('http://www.calyptus.eu/');
 		},
 		
 		'\'http://www.calyptus.eu/\' + \'./mydirectory/myfile.html\' == http://www.calyptus.eu/mydirectory/myfile.html': function(){
-			value_of(new URI('./mydirectory/myfile.html', { base: 'http://www.calyptus.eu/' })).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
+			value_of(new URI('./mydirectory/myfile.html', { base: 'http://www.calyptus.eu/' }).toString()).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
 		},
 
 		'\'http://www.calyptus.eu\' + \'mydirectory/myfile.html\' == http://www.calyptus.eu/mydirectory/myfile.html': function(){
-			value_of(new URI('mydirectory/myfile.html', { base: 'http://www.calyptus.eu' })).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
+			value_of(new URI('mydirectory/myfile.html', { base: 'http://www.calyptus.eu' }).toString()).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
 		},
 		
 		'\'http://www.calyptus.eu/mydirectory/#\' + \'../myfile.html\' == http://www.calyptus.eu/myfile.html': function(){
-			value_of(new URI('../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/#' })).should_be('http://www.calyptus.eu/myfile.html');
+			value_of(new URI('../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/#' }).toString()).should_be('http://www.calyptus.eu/myfile.html');
 		},
 		
 		'\'http://www.calyptus.eu/mydirectory/mydirectory2/\' + \'../../myfile.html\' == http://www.calyptus.eu/myfile.html': function(){
-			value_of(new URI('../../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/' })).should_be('http://www.calyptus.eu/myfile.html');
+			value_of(new URI('../../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/' }).toString()).should_be('http://www.calyptus.eu/myfile.html');
 		},
 
 		'\'http://www.calyptus.eu/mydirectory/mydirectory2/\' + \'../test/../myfile.html\' == http://www.calyptus.eu/mydirectory/myfile.html': function(){
-			value_of(new URI('../test/../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/' })).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
+			value_of(new URI('../test/../myfile.html', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/' }).toString()).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
 		},
 		
 		'\'http://www.calyptus.eu/\' + \'http://otherdomain/mydirectory/myfile.html\' == http://otherdomain/mydirectory/myfile.html': function(){
-			value_of(new URI('http://otherdomain/mydirectory/myfile.html', { base: 'http://www.calyptus.eu/' })).should_be('http://otherdomain/mydirectory/myfile.html');
+			value_of(new URI('http://otherdomain/mydirectory/myfile.html', { base: 'http://www.calyptus.eu/' }).toString()).should_be('http://otherdomain/mydirectory/myfile.html');
 		},
 		
 		'\'http://www.calyptus.eu/mydirectory2/myfile.html\' + \'/mydirectory/myfile.html\' == http://www.calyptus.eu/mydirectory/myfile.html': function(){
-			value_of(new URI('/mydirectory/myfile.html', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
+			value_of(new URI('/mydirectory/myfile.html', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' }).toString()).should_be('http://www.calyptus.eu/mydirectory/myfile.html');
 		},
 
 		'\'http://www.calyptus.eu/mydirectory2/\' + \'mydirectory/myfile.html\' == http://www.calyptus.eu/mydirectory2/mydirectory/myfile.html': function(){
-			value_of(new URI('mydirectory/myfile.html', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory2/mydirectory/myfile.html');
+			value_of(new URI('mydirectory/myfile.html', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' }).toString()).should_be('http://www.calyptus.eu/mydirectory2/mydirectory/myfile.html');
 		},
 
 		'\'http://www.calyptus.eu/mydirectory2/\' + \'mydirectory\' == http://www.calyptus.eu/mydirectory2/mydirectory': function(){
-			value_of(new URI('mydirectory', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory2/mydirectory');
+			value_of(new URI('mydirectory', { base: 'http://www.calyptus.eu/mydirectory2/myfile.html' }).toString()).should_be('http://www.calyptus.eu/mydirectory2/mydirectory');
 		},
 
 		'\'http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html\' + \'..\' == http://www.calyptus.eu/mydirectory/': function(){
-			value_of(new URI('..', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html' })).should_be('http://www.calyptus.eu/mydirectory/');
+			value_of(new URI('..', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html' }).toString()).should_be('http://www.calyptus.eu/mydirectory/');
 		},
 		
 		'Query String can contain @ symbol': function(){
