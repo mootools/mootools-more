@@ -120,6 +120,74 @@ Returns a new array without duplicate values.
 
 * (*array*) a new array without duplicates.
 
+Array Method: reduce {#Array:reduce}
+-------------------------------------
+
+Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value.
+
+### Syntax
+
+	result = myArray.reduce(fn[, value]);
+
+### Arguments
+1. fn - (*function*) Function to execute on each value in the array.
+2. value - (*mixed*) Value to use as the first argument to the first call of the `fn`
+
+#### Signature:
+
+	fn(previousValue, currentValue, index, array)
+
+
+### Example
+
+	[0, 1, 2, 3, 4].reduce(function(a, b){
+		return a + b;
+	}); // returns 10
+
+	[0, 1, 2, 3, 4].reduce(function(a, b){
+		return a + b;
+	}, 20); // returns 20
+
+### Returns
+
+* (*mixed*) Returns the reduced single value of the array.
+
+### See also:
+- [MDC Array.reduce][]
+
+Array Method: unique {#Array:reduceRight}
+-------------------------------------
+
+Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value.
+
+### Syntax
+
+	result = myArray.reduceRight();
+
+### Arguments
+1. fn - (*function*) Function to execute on each value in the array.
+2. value - (*mixed*) Value to use as the first argument to the first call of the `fn`
+
+#### Signature:
+
+	fn(previousValue, currentValue, index, array)
+
+
+### Example
+
+	var flattened = [[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b) {  
+		return a.concat(b);  
+	}, []);
+	// flattened is [4, 5, 2, 3, 0, 1]
+
+### Returns
+
+* (*mixed*) Returns the reduced single value of the array.
+
+### See also:
+- [MDC Array.reduceRight][]
 
 
 [Array]: /core/Native/Array
+[MDC Array.reduce]: https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array/Reduce
+[MDC Array.reduceRight]: https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array/ReduceRight
