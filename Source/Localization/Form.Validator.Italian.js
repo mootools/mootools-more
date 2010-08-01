@@ -5,7 +5,7 @@ script: Form.Validator.Italian.js
 
 name: Form.Validator.Italian
 
-description: Form Validator messages in Italian.
+description: Form Validator messages for Italian.
 
 license: MIT-style license
 

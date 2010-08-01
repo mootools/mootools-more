@@ -5,7 +5,7 @@ script: Form.Validator.Norwegian.js
 
 name: Form.Validator.Norwegian
 
-description: Form Validator messages in Norwegian.
+description: Form Validator messages for Norwegian.
 
 license: MIT-style license
 

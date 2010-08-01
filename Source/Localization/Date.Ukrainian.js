@@ -5,7 +5,7 @@ script: Date.Ukrainian.js
 
 name: Date.Ukrainian
 
-description: Date messages for Ukrainian.
+description: Date messages for Ukrainian (utf-8).
 
 license: MIT-style license
 

@@ -5,7 +5,7 @@ script: Form.Validator.French.js
 
 name: Form.Validator.French
 
-description: Form Validator messages in French.
+description: Form Validator messages for French.
 
 license: MIT-style license
 

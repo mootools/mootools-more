@@ -5,7 +5,7 @@ script: Date.Spanish.AR.js
 
 name: Date.Spanish.AR
 
-description: Date messages for Spanish (Argentinean).
+description: Date messages for Spanish (Argentina).
 
 license: MIT-style license
 

@@ -5,7 +5,7 @@ script: Form.Validator.Portuguese.js
 
 name: Form.Validator.Portuguese
 
-description: Form Validator messages in Portuguese.
+description: Form Validator messages for Portuguese.
 
 license: MIT-style license
 

@@ -5,7 +5,7 @@ script: Form.Validator.Spanish.AR.js
 
 name: Form.Validator.Spanish.AR
 
-description: Form Validator messages for Spanish (Argentinean).
+description: Form Validator messages for Spanish (Argentina).
 
 license: MIT-style license
 
