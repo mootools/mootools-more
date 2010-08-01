@@ -27,16 +27,15 @@ MooTools.lang.set('de-DE', 'Date', {
 
 	months: ['Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
 	days: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
-	//culture's date order: MM/DD/YYYY
-	dateOrder: [ 'date', 'month', 'year', '.'],
 
+	// Culture's date order: DD.MM.YYYY
+	dateOrder: ['date', 'month', 'year'],
+	shortDate: '%d.%m.%Y',
+	shortTime: '%H:%M',
 	AM: 'vormittags',
 	PM: 'nachmittags',
 
-	shortDate: '%d.%m.%Y',
-	shortTime: '%H:%M',
-
-	/* Date.Extras */
+	// Date.Extras
 	ordinal: '.',
 
 	lessThanMinuteAgo: 'Vor weniger als einer Minute',
@@ -52,6 +51,7 @@ MooTools.lang.set('de-DE', 'Date', {
 	monthsAgo: 'Vor {delta} Monaten',
 	yearAgo: 'Vor einem Jahr',
 	yearsAgo: 'Vor {delta} Jahren',
+
 	lessThanMinuteUntil: 'In weniger als einer Minute',
 	minuteUntil: 'In einer Minute',
 	minutesUntil: 'In {delta} Minuten',
@@ -65,4 +65,5 @@ MooTools.lang.set('de-DE', 'Date', {
 	monthsUntil: 'In {delta} Monaten',
 	yearUntil: 'In einem Jahr',
 	yearsUntil: 'In {delta} Jahren'
+
 });

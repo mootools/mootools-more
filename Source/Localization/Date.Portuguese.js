@@ -1,11 +1,11 @@
 /*
 ---
 
-script: Date.Portuguese.BR.js
+script: Date.Portuguese.js
 
-name: Date.Portuguese.BR
+name: Date.Portuguese
 
-description: Date messages for Portuguese (Brazil).
+description: Date messages for Portuguese.
 
 license: MIT-style license
 
@@ -15,19 +15,19 @@ authors:
 requires:
   - /Lang
 
-provides: [Date.Portuguese.BR]
+provides: [Date.Portuguese]
 
 ...
 */
 
-MooTools.lang.set('pt-BR', 'Date', {
+MooTools.lang.set('pt-PT', 'Date', {
 
 	months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
 	days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
 
-	// Culture's date order: DD/MM/YYYY
+	// Culture's date order: DD-MM-YYYY
 	dateOrder: ['date', 'month', 'year'],
-	shortDate: '%d/%m/%Y',
+	shortDate: '%d-%m-%Y',
 	shortTime: '%H:%M',
 	AM: 'AM',
 	PM: 'PM',

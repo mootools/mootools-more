@@ -5,11 +5,11 @@ script: Form.Validator.German.js
 
 name: Form.Validator.German
 
-description: Date messages for German.
+description: Form Validator messages for German.
 
 license: MIT-style license
 
-authors: 
+authors:
   - Frank Rossi
   - Ulrich Petri
   - Fabian Beiner
@@ -41,8 +41,7 @@ MooTools.lang.set('de-DE', 'Form.Validator', {
 	errorPrefix: 'Fehler: ',
 	warningPrefix: 'Warnung: ',
 
-	//Form.Validator.Extras
-
+	// Form.Validator.Extras
 	noSpace: 'Es darf kein Leerzeichen in diesem Eingabefeld sein.',
 	reqChkByNode: 'Es wurden keine Elemente gew&auml;hlt.',
 	requiredChk: 'Dieses Feld muss ausgef&uuml;llt werden.',
@@ -56,4 +55,5 @@ MooTools.lang.set('de-DE', 'Form.Validator', {
 	startMonth: 'W&auml;hlen Sie bitte einen Anfangsmonat',
 	sameMonth: 'Diese zwei Datumsangaben m&uuml;ssen im selben Monat sein - Sie m&uuml;ssen eines von beiden ver&auml;ndern.',
 	creditcard: 'Die eingegebene Kreditkartennummer ist ung&uuml;ltig. Bitte &uuml;berpr&uuml;fen Sie diese und versuchen Sie es erneut. {length} Zahlen eingegeben.'
+
 });
