@@ -72,3 +72,22 @@ describe('Array.unique', {
 	}
 
 });
+
+describe('Array.reduce', function(){
+	
+	it('should have been implemented according ES5', function(){
+		// Need Specs
+		expect(true).toBeFalsy();
+	});
+	
+});
+
+describe('Array.reduceRight', function(){
+	
+	it('should have been implemented according ES5', function(){
+		// Need Specs
+		expect(true).toBeFalsy();
+	});
+	
+});
+

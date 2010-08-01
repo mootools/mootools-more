@@ -52,6 +52,21 @@ Array.implement({
 			this[r] = temp;
 		}
 		return this;
+	},
+	
+	reduce: function(fn, value){
+		for (var i = 0, l = this.length; i < l; i++)
+			if (i in this)
+				value = value === undefined ? this[i] : fn.call(null, value, this[i], i, this);
+		return value;
+	},
+	
+	reduceRight: function(fn, value){
+		var i = this.length;
+		while (i--)
+			if (i in this)
+				value = value === undefined ? this[i] : fn.call(null, value, this[i], i, this);
+		return value;
 	}
 
 });
