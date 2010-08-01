@@ -1,7 +1,7 @@
 /*
 ---
 
-script: Dat.Arabic.js
+script: Date.Arabic.js
 
 name: Date.Arabic
 
