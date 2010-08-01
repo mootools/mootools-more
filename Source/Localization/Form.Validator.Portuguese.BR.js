@@ -5,7 +5,7 @@ script: Form.Validator.Portuguese.BR.js
 
 name: Form.Validator.Portuguese.BR
 
-description: Form.Validator messages in Portuguese-BR.
+description: Form Validator messages for Portuguese (Brazil).
 
 license: MIT-style license
 
@@ -14,7 +14,6 @@ authors:
 
 requires:
   - /Lang
-  - /Form.Validator.Portuguese
 
 provides: [Form.Validator.Portuguese.BR]
 
@@ -40,8 +39,7 @@ MooTools.lang.set('pt-BR', 'Form.Validator', {
 	errorPrefix: 'Erro: ',
 	warningPrefix: 'Aviso: ',
 
-	//Form.Validator.Extras
-
+	// Form.Validator.Extras
 	noSpace: 'Não é possível digitar espaços neste campo.',
 	reqChkByNode: 'Não foi selecionado nenhum item.',
 	requiredChk: 'Este campo é obrigatório.',

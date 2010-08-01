@@ -3,15 +3,17 @@
 
 script: Form.Validator.Slovenian.js
 
+name: Form.Validator.Slovenian
+
 description: Form Validator messages for Slovenian.
 
 license: MIT-style license
 
 authors:
-- Radovan Lozej
+  - Radovan Lozej
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Slovenian]
 
@@ -37,8 +39,7 @@ MooTools.lang.set('si-SI', 'Form.Validator', {
 	errorPrefix: 'Napaka: ',
 	warningPrefix: 'Opozorilo: ',
 
-	//Form.Validator.Extras
-
+	// Form.Validator.Extras
 	noSpace: 'To vnosno polje ne dopušča presledkov.',
 	reqChkByNode: 'Nič niste izbrali.',
 	requiredChk: 'To polje je obvezno',
