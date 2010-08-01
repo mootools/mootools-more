@@ -10,9 +10,14 @@ Configuration.name = 'MooTools More';
 // Presets - combine the sets and the source to a preset to easily run a test
 Configuration.presets = {
 	
+	'more-base': {
+		sets: ['1.3-base'],
+		source: ['core-1.3-base', 'more-1.3-base']
+	},
+
 	'more-all': {
-		sets: ['1.3-all'],
-		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-all']
+		sets: ['1.3-base', '1.3-client'],
+		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']
 	}
 	
 };
@@ -25,16 +30,26 @@ Configuration.presets = {
  */
 Configuration.sets = {
 
-	'1.3-all': {
+	'1.3-base': {
 		path: '1.3/',
 		files: [
-			'Core/Lang', /* 'Core/Log',*/
-			'Class/Class.Binds', 'Class/Class.Occlude', 'Class/Class.Refactor', 'Class/Events.Pseudos',
+			'Core/Lang',
+			'Class/Class.Binds', 'Class/Class.Refactor', 'Class/Events.Pseudos',
+			'Types/Array.Extras', 'Types/Object.Extras', 'Types/Hash.Extras',
+			'Types/String.Extras', 'Types/String.QueryString', 
+			'Utilities/Color'
+		]
+	},
+
+	'1.3-client': {
+		path: '1.3/',
+		files: [
+			'Core/Log',
+			'Class/Class.Occlude',
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
 			'Element/Element.Pseudos',
-			'Types/Array.Extras', 'Types/Date.Extras', 'Types/Date', 'Types/Object.Extras', 'Types/Hash.Extras',
-			'Types/String.Extras', 'Types/String.QueryString', 'Types/URI', 'Types/URI.Relative',
-			'Utilities/Color', 'Utilities/Hash.Cookie'
+			'Types/Date.Extras', 'Types/Date', 'Types/URI', 'Types/URI.Relative',
+			'Utilities/Hash.Cookie'
 		]
 	}
 
@@ -52,6 +67,8 @@ Configuration.source = {
 		path: 'mootools-core/Source/',
 		files: [
 			'Core/Core',
+			
+			'Slick/Slick.Parser',
 
 			'Types/Array',
 			'Types/Function',
@@ -95,38 +112,47 @@ Configuration.source = {
 		]
 	},
 	
-	'more-1.3-all': {
+	'more-1.3-base': {
 		path: '../Source/',
 		files: [
 			'Core/More',
-			'Core/Log',
 			'Core/Lang',
 			'Localization/Form.Validator.English',
 			'Localization/Date.English.US',
 	
 			'Class/Class.Binds',
-			'Class/Class.Occlude',
 			'Class/Class.Refactor',
 			'Class/Events.Pseudos',
+	
+			'Types/Array.Extras',
+			'Types/Object.Extras',
+			'Types/Hash',
+			'Types/Hash.Extras',
+			'Types/String.Extras',
+			'Types/String.QueryString',
+	
+			'Utilities/Color'
+		]
+	},
+
+	'more-1.3-client': {
+		path: '../Source/',
+		files: [
+			'Core/Log',
+
+			'Class/Class.Occlude',
 	
 			'Element/Element.Forms',
 			'Element/Element.Measure',
 			'Element/Element.Shortcuts',
 			'Element/Elements.From',
 			'Element/Element.Pseudos',
-	
-			'Types/Array.Extras',
+
 			'Types/Date',
 			'Types/Date.Extras',
-			'Types/Object.Extras',
-			'Types/Hash',
-			'Types/Hash.Extras',
-			'Types/String.Extras',
-			'Types/String.QueryString',
 			'Types/URI',
 			'Types/URI.Relative',
 	
-			'Utilities/Color',
 			'Utilities/Hash.Cookie'
 		]
 	}

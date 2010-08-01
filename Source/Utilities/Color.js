@@ -24,7 +24,9 @@ provides: [Color]
 ...
 */
 
-var Color = new Type('Color', function(color, type){
+(function(){
+
+var Color = this.Color = new Type('Color', function(color, type){
 	if (arguments.length >= 3){
 		type = 'rgb'; color = Array.slice(arguments, 0, 3);
 	} else if (typeof color == 'string'){
@@ -154,3 +156,6 @@ String.implement({
 	}
 
 });
+
+})();
+
