@@ -22,6 +22,11 @@ Configuration.presets = {
 	
 };
 
+Configuration.defaultPresets = {
+	browser: 'more-all',
+	nodejs: 'more-base',
+	jsdt: 'more-all'
+};
 
 /*
  * An object with sets. Each item in the object should have an path key, 
