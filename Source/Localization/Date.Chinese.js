@@ -1,18 +1,19 @@
-﻿/*
+/*
 ---
 
 script: Date.Chinese.js
 
-description: Date messages for US English.
+name: Date.Chinese
+
+description: Date messages for Chinese (simplified and traditional).
 
 license: MIT-style license
 
 authors:
-- YMind Chan
+  - YMind Chan
 
 requires:
-- /Lang
-- /Date
+  - /Lang
 
 provides: [Date.Chinese]
 
@@ -24,17 +25,16 @@ MooTools.lang.set('zh-CHS', 'Date', {
 
 	months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
 	days: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-	//culture's date order: MM/DD/YYYY
+
+	// Culture's date order: YYYY-MM-DD
 	dateOrder: ['year', 'month', 'date'],
 	shortDate: '%Y-%m-%d',
 	shortTime: '%I:%M%p',
 	AM: 'AM',
 	PM: 'PM',
 
-	/* Date.Extras */
-	ordinal: function(dayOfMonth){
-		return dayOfMonth;
-	},
+	// Date.Extras
+	ordinal: '',
 
 	lessThanMinuteAgo: '不到1分钟前',
 	minuteAgo: '大约1分钟前',
@@ -49,6 +49,7 @@ MooTools.lang.set('zh-CHS', 'Date', {
 	monthsAgo: '{delta}个月前',
 	yearAgo: '1年前',
 	yearsAgo: '{delta}年前',
+
 	lessThanMinuteUntil: '从现在开始不到1分钟',
 	minuteUntil: '从现在开始約1分钟',
 	minutesUntil: '从现在开始约{delta}分钟',
@@ -70,17 +71,16 @@ MooTools.lang.set('zh-CHT', 'Date', {
 
 	months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
 	days: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-	//culture's date order: MM/DD/YYYY
+
+	// Culture's date order: YYYY-MM-DD
 	dateOrder: ['year', 'month', 'date'],
 	shortDate: '%Y-%m-%d',
 	shortTime: '%I:%M%p',
 	AM: 'AM',
 	PM: 'PM',
 
-	/* Date.Extras */
-	ordinal: function(dayOfMonth){
-		return dayOfMonth;
-	},
+	// Date.Extras
+	ordinal: '',
 
 	lessThanMinuteAgo: '不到1分鐘前',
 	minuteAgo: '大約1分鐘前',
@@ -95,6 +95,7 @@ MooTools.lang.set('zh-CHT', 'Date', {
 	monthsAgo: '{delta}个月前',
 	yearAgo: '1年前',
 	yearsAgo: '{delta}年前',
+
 	lessThanMinuteUntil: '從現在開始不到1分鐘',
 	minuteUntil: '從現在開始約1分鐘',
 	minutesUntil: '從現在開始約{delta}分鐘',

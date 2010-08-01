@@ -24,18 +24,16 @@ MooTools.lang.set('fa', 'Date', {
 
 	months: ['ژانویه', 'فوریه', 'مارس', 'آپریل', 'مه', 'ژوئن', 'ژوئیه', 'آگوست', 'سپتامبر', 'اکتبر', 'نوامبر', 'دسامبر'],
 	days: ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'],
-	//culture's date order: MM/DD/YYYY
-	dateOrder: ['ماه', 'روز', 'سال'],
+
+	// Culture's date order: MM/DD/YYYY
+	dateOrder: ['month', 'date', 'year'],
 	shortDate: '%m/%d/%Y',
 	shortTime: '%I:%M%p',
 	AM: 'ق.ظ',
 	PM: 'ب.ظ',
 
-	/* Date.Extras */
-	ordinal: function(dayOfMonth){
-		//1st, 2nd, 3rd, etc.
-		return 'ام';
-	},
+	// Date.Extras
+	ordinal: 'ام',
 
 	lessThanMinuteAgo: 'کمتر از یک دقیقه پیش',
 	minuteAgo: 'حدود یک دقیقه پیش',
@@ -50,6 +48,7 @@ MooTools.lang.set('fa', 'Date', {
 	monthsAgo: '{delta} ماه پیش',
 	yearAgo: '1 سال پیش',
 	yearsAgo: '{delta} سال پیش',
+
 	lessThanMinuteUntil: 'کمتر از یک دقیقه از حالا',
 	minuteUntil: 'حدود یک دقیقه از حالا',
 	minutesUntil: '{delta} دقیقه از حالا',

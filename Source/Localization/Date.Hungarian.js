@@ -10,10 +10,10 @@ description: Date messages for Hungarian.
 license: MIT-style license
 
 authors:
-- Zsolt Szegheő
+  - Zsolt Szegheő
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Date.Hungarian]
 
@@ -24,14 +24,15 @@ MooTools.lang.set('hu-HU', 'Date', {
 
 	months: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
 	days: ['Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'],
-	//culture's date order: YYYY.MM.DD.
-	dateOrder: ['year', 'month', 'date', '.'],
+
+	// Culture's date order: YYYY.MM.DD.
+	dateOrder: ['year', 'month', 'date'],
 	shortDate: '%Y.%m.%d.',
 	shortTime: '%I:%M',
 	AM: 'de.',
 	PM: 'du.',
 
-	/* Date.Extras */
+	// Date.Extras
 	ordinal: '.',
 
 	lessThanMinuteAgo: 'alig egy perce',
@@ -47,6 +48,7 @@ MooTools.lang.set('hu-HU', 'Date', {
 	monthsAgo: '{delta} hónapja',
 	yearAgo: '1 éve',
 	yearsAgo: '{delta} éve',
+
 	lessThanMinuteUntil: 'alig egy perc múlva',
 	minuteUntil: 'egy perc múlva',
 	minutesUntil: '{delta} perc múlva',

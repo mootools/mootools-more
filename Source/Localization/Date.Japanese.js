@@ -17,20 +17,24 @@ requires:
 
 provides: [Date.Japanese]
 
+...
 */
+
 MooTools.lang.set('ja-JP', 'Date', {
 
 	months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
 	days: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
-	dateOrder: ['年', '月', '日'],
+
+	// Culture's date order: YYYY/MM/DD
+	dateOrder: ['year', 'month', 'date'],
 	shortDate: '%Y/%m/%d',
 	shortTime: '%H:%M',
 	AM: '午前',
 	PM: '午後',
 
-	/* Date.Extras */
+	// Date.Extras
 	ordinal: '',
- 
+
 	lessThanMinuteAgo: '1分以内前',
 	minuteAgo: '約1分前',
 	minutesAgo: '約{delta}分前',
@@ -44,6 +48,7 @@ MooTools.lang.set('ja-JP', 'Date', {
 	monthsAgo: '{delta}ヶ月前',
 	yearAgo: '1年前',
 	yearsAgo: '{delta}年前',
+
 	lessThanMinuteUntil: '今から約1分以内',
 	minuteUntil: '今から約1分',
 	minutesUntil: '今から約{delta}分',

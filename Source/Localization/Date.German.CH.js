@@ -9,7 +9,7 @@ description: Date messages for German (Switzerland).
 
 license: MIT-style license
 
-authors: 
+authors:
   - Michael van der Weg
 
 requires:
