@@ -5,7 +5,7 @@ script: Date.French.js
 
 name: Date.French
 
-description: Date messages in French.
+description: Date messages for French.
 
 license: MIT-style license
 
@@ -20,25 +20,25 @@ provides: [Date.French]
 
 ...
 */
- 
+
 MooTools.lang.set('fr-FR', 'Date', {
 
 	months: ['Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Ao&ucirc;t', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre'],
 	days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-	dateOrder: ['date', 'month', 'year'],
 
+	// Culture's date order: DD/MM/YYYY
+	dateOrder: ['date', 'month', 'year'],
+	shortDate: '%d/%m/%Y',
+	shortTime: '%H:%M',
 	AM: 'AM',
 	PM: 'PM',
 
-	shortDate: '%d/%m/%Y',
-	shortTime: '%H:%M',
-
-	/* Date.Extras */
-	getOrdinal: function(dayOfMonth){
-	  return (dayOfMonth > 1) ? '' : 'er';
+	// Date.Extras
+	ordinal: function(dayOfMonth){
+		return (dayOfMonth > 1) ? '' : 'er';
 	},
 
-	lessThanMinuteAgo: 'il y a moins d\'une minute',
+	lessThanMinuteAgo: "il y a moins d'une minute",
 	minuteAgo: 'il y a une minute',
 	minutesAgo: 'il y a {delta} minutes',
 	hourAgo: 'il y a une heure',
@@ -51,7 +51,8 @@ MooTools.lang.set('fr-FR', 'Date', {
 	monthsAgo: 'il y a {delta} mois',
 	yearthAgo: 'il y a 1 an',
 	yearsAgo: 'il y a {delta} ans',
-	lessThanMinuteUntil: 'dans moins d\'une minute',
+
+	lessThanMinuteUntil: "dans moins d'une minute",
 	minuteUntil: 'dans une minute',
 	minutesUntil: 'dans {delta} minutes',
 	hourUntil: 'dans une heure',

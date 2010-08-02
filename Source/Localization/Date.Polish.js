@@ -21,16 +21,18 @@ provides: [Date.Polish]
 */
 
 MooTools.lang.set('pl-PL', 'Date', {
+
 	months: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
 	days: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+
+	// Culture's date order: YYYY-MM-DD
 	dateOrder: ['year', 'month', 'date'],
+	shortDate: '%Y-%m-%d',
+	shortTime: '%H:%M',
 	AM: 'nad ranem',
 	PM: 'po południu',
 
-	shortDate: '%Y-%m-%d',
-	shortTime: '%H:%M',
-
-	/* Date.Extras */
+	// Date.Extras
 	ordinal: function(dayOfMonth){
 		return (dayOfMonth > 3 && dayOfMonth < 21) ? 'ty' : ['ty', 'szy', 'gi', 'ci', 'ty'][Math.min(dayOfMonth % 10, 4)];
 	},
@@ -42,6 +44,7 @@ MooTools.lang.set('pl-PL', 'Date', {
 	hoursAgo: 'około {delta} godzin temu',
 	dayAgo: 'Wczoraj',
 	daysAgo: '{delta} dni temu',
+
 	lessThanMinuteUntil: 'za niecałą minutę',
 	minuteUntil: 'za około minutę',
 	minutesUntil: 'za {delta} minut',
@@ -49,4 +52,5 @@ MooTools.lang.set('pl-PL', 'Date', {
 	hoursUntil: 'za około {delta} godzin',
 	dayUntil: 'za 1 dzień',
 	daysUntil: 'za {delta} dni'
+
 });

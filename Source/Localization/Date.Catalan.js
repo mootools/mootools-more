@@ -10,7 +10,7 @@ description: Date messages for Catalan.
 license: MIT-style license
 
 authors:
-  - Alfons Sanchez
+  - Ãlfons Sanchez
 
 requires:
   - /Lang
@@ -24,16 +24,15 @@ MooTools.lang.set('ca-CA', 'Date', {
 
 	months: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juli', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
 	days: ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'],
-	//culture's date order: MM/DD/YYYY
-	dateOrder: ['date', 'month', 'year'],
 
+	// Culture's date order: DD/MM/YYYY
+	dateOrder: ['date', 'month', 'year'],
 	shortDate: '%d/%m/%Y',
 	shortTime: '%H:%M',
-
 	AM: 'AM',
 	PM: 'PM',
 
-	/* Date.Extras */
+	// Date.Extras
 	ordinal: '',
 
 	lessThanMinuteAgo: 'fa menys d`un minut',
@@ -43,6 +42,7 @@ MooTools.lang.set('ca-CA', 'Date', {
 	hoursAgo: 'fa unes {delta} hores',
 	dayAgo: 'fa un dia',
 	daysAgo: 'fa {delta} dies',
+
 	lessThanMinuteUntil: 'menys d`un minut des d`ara',
 	minuteUntil: 'un minut des d`ara',
 	minutesUntil: '{delta} minuts des d`ara',

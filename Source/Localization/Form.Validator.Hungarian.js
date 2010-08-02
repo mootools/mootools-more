@@ -10,10 +10,10 @@ description: Form Validator messages for Hungarian.
 license: MIT-style license
 
 authors:
-- Zsolt Szegheő
+  - Zsolt Szegheő
 
 requires:
-- /Lang
+  - /Lang
 
 provides: [Form.Validator.Hungarian]
 
@@ -39,8 +39,7 @@ MooTools.lang.set('hu-HU', 'Form.Validator', {
 	errorPrefix: 'Hiba: ',
 	warningPrefix: 'Figyelem: ',
 
-	//Form.Validator.Extras
-
+	// Form.Validator.Extras
 	noSpace: 'A mező nem tartalmazhat szóközöket.',
 	reqChkByNode: 'Nincs egyetlen kijelölt elem sem.',
 	requiredChk: 'A mező kitöltése kötelező.',
