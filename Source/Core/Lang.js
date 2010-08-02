@@ -23,84 +23,87 @@ provides: [Lang]
 
 (function(){
 
-	var data = {
-		language: 'en-US',
-		languages: {
-			'en-US': {}
-		},
-		cascades: ['en-US']
-	};
+	var currentLanguage = 'en-US',
 	
-	var cascaded;
+	languagesData = {
+		'en-US': {}
+	};
 
-	MooTools.lang = new Events();
-
-	Object.append(MooTools.lang, {
-
-		setLanguage: function(lang){
-			if (!data.languages[lang]) return this;
-			data.language = lang;
-			this.load();
+	var MooLanguage = MooTools.lang = {
+		
+		// Everything should be define
+		defineLanguageSet: function(lang, name, data){
+			languagesData[lang] = languagesData[lang] || {};
+			languagesData[lang][name] = Object.merge(languagesData[lang][name] || {}, data);
+		},
+		
+		// setCurrentLanguage makes more sense than setLanguage imo
+		setCurrentLanguage: function(lang){
+			if (languagesData[lang]) currentLanguage = lang;
 			this.fireEvent('langChange', lang);
-			return this;
 		},
-
-		load: function() {
-			var langs = this.cascade(this.getCurrentLanguage());
-			cascaded = {};
-			Object.each(langs, function(set, setName){
-				cascaded[setName] = this.lambda(set);
-			}, this);
-		},
-
+		
 		getCurrentLanguage: function(){
-			return data.language;
+			return currentLanguage;
 		},
-
-		addLanguage: function(lang){
-			data.languages[lang] = data.languages[lang] || {};
-			return this;
-		},
-
-		cascade: function(lang){
-			var cascades = (data.languages[lang] || {}).cascades || [];
-			cascades.combine(data.cascades);
-			cascades.erase(lang).push(lang);
-			var langs = cascades.map(function(lng){
-				return data.languages[lng];
-			}, this);
-			return Object.merge.apply(this, langs);
-		},
-
-		lambda: function(set) {
-			(set || {}).get = function(key, args){
-				return Function.from(set[key]).apply(this, Array.from(args));
-			};
-			return set;
-		},
-
+		
 		get: function(set, key, args){
-			if (cascaded && cascaded[set]){
-				return (key ? cascaded[set].get(key, args) : cascaded[set]);
+			/*<1.2compat>*/ // this method should only get the strings/functions and not whole sets. 
+			if (!key) return this.getLanguageSet(set);
+			/*<1.2compat>*/
+			var currentLanguageData = languagesData[currentLanguage],
+				languageData, value,
+				languages = [currentLanguage];
+				
+			if (currentLanguageData.cascade) languages.extend(currentLanguageData.cascades);
+			languages.include('en-US'); // default fallback
+			
+			for(var i = 0; i < languages.length; i++){
+				languageData = languagesData[languages[i]];
+				if (languageData[set] && languageData[set][key]){
+					value = languageData[set][key];
+					return typeof value == 'function' ? value.apply(null, Array.from(args)) : value; 
+				}
 			}
+			
+			return null;			
 		},
-
-		set: function(lang, set, members){
-			this.addLanguage(lang);
-			langData = data.languages[lang];
-			if (!langData[set]) langData[set] = {};
-			Object.append(langData[set], members);
-			if (lang == this.getCurrentLanguage()){
-				this.load();
-				this.fireEvent('langChange', lang);
-			}
-			return this;
+		
+		set: function(lang, name, key){
+			if (typeOf(key) == 'object') return this.defineLanguageSet(lang, name, key);
+			if (languageData[lang]) languageData[lang][name] = key;
 		},
-
-		list: function(){
-			return Hash.getKeys(data.languages);
+		
+		getLanguageSet: function(set){
+			return languagesData[currentLanguage][set];
 		}
+		
+	};
 
-	});
+	// easy way to 'mess' with the cascades... i would see another name for 'cascades'. 
+	// makes less sense to me (A Dutch person)
+	var getCascadeMethods = function(){
+		var cascadeMethods = {}, 
+			currentCascades = languagesData[currentLanguage].cascades || [];
+			
+		['slice', 'erase', 'include', 'reverse', 'sort'].each(function(method){
+			cascadeMethods[method] = function(){
+				languagesData[currentLanguage].cascades = Array[method].apply(currentCascades, arguments);
+			};
+		});
+		
+		return cascadeMethods;
+	};
+
+	MooLanguage.cascades = function(){
+		return getCascadeMethods();
+	};
+
+	// for the one fireEvent
+	Object.append(MooLanguage, new Events());
+	
+	/*<1.2compat>*/
+	MooLanguage.setLanguage = MooLanguage.setCurrentLanguage;
+	/*</1.2compat>*/
 
 })();
