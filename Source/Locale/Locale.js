@@ -65,6 +65,7 @@ provides: [Locale]
 		setCurrent: function(name){
 			if (data[name]) current = name;
 			this.fireEvent('change', name)/*<1.2compat>*/.fireEvent('langChange', name)/*</1.2compat>*/;
+			return this;
 		},
 		
 		getCurrent: function(){
@@ -91,6 +92,7 @@ provides: [Locale]
 		
 		setCascades: function(value){
 			cascades = Array.from(value);
+			return this;
 		},
 		
 		getCascades: function(){
