@@ -13,7 +13,7 @@ authors:
   - Evstigneev Pavel
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Russian]
 

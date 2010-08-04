@@ -18,7 +18,7 @@ provides: [Hash]
 
 (function(){
 
-if(this.Hash) return;
+if (this.Hash) return;
 
 var Hash = this.Hash = new Type('Hash', function(object){
 	if (typeOf(object) == 'hash') object = Object.clone(object.getClean());

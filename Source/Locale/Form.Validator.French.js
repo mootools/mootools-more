@@ -14,7 +14,7 @@ authors:
   - Nicolas Sorosac
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.French]
 

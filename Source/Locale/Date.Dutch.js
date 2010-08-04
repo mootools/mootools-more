@@ -14,7 +14,7 @@ authors:
   - Tim Wienk
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Dutch]
 

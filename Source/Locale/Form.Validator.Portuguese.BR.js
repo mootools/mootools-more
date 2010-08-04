@@ -13,7 +13,7 @@ authors:
   - Fábio Miranda Costa
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Portuguese.BR]
 

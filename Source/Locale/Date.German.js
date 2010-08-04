@@ -16,7 +16,7 @@ authors:
   - Fabian Beiner
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.German]
 

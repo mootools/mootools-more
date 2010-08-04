@@ -13,7 +13,7 @@ authors:
   - Espen 'Rexxars' Hovlandsdal
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Norwegian]
 

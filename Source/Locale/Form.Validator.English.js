@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.English]
 

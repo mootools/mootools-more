@@ -14,7 +14,7 @@ authors:
   - Ãlfons Sanchez
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Catalan]
 

@@ -13,7 +13,7 @@ authors:
   - Zsolt Szegheő
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Hungarian]
 

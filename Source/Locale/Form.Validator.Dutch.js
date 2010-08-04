@@ -15,7 +15,7 @@ authors:
   - Tim Wienk
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Dutch]
 

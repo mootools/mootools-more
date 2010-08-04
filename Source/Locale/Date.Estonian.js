@@ -13,7 +13,7 @@ authors:
   - Kevin Valdek
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Estonian]
 

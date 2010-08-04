@@ -37,9 +37,9 @@ URI = Class.refactor(URI, {
 			offset;
 
 		var i = 0;
-		for(offset = 0; offset < baseDir.length && offset < relDir.length && baseDir[offset] == relDir[offset]; offset++);
-		for(i = 0; i < baseDir.length - offset - 1; i++) path += '../';
-		for(i = offset; i < relDir.length - 1; i++) path += relDir[i] + '/';
+		for (offset = 0; offset < baseDir.length && offset < relDir.length && baseDir[offset] == relDir[offset]; offset++);
+		for (i = 0; i < baseDir.length - offset - 1; i++) path += '../';
+		for (i = offset; i < relDir.length - 1; i++) path += relDir[i] + '/';
 
 		return (path || (bits.file ? '' : './')) + end;
 	},

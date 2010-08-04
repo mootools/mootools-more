@@ -13,7 +13,7 @@ authors:
   - Michael van der Weg
 
 requires:
-  - /Lang
+  - /Locale
   - /Date.German
 
 provides: [Date.German.CH]

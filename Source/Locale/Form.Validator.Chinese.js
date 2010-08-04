@@ -13,7 +13,7 @@ authors:
   - YMind Chan
 
 requires:
-  - /Lang
+  - /Locale
   - /Form.Validator
 
 provides: [Form.Validator.Chinese, Form.Validator.CurrencyYuanValidator]

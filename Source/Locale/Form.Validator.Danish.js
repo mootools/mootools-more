@@ -13,7 +13,7 @@ authors:
   - Martin Overgaard
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Danish]
 

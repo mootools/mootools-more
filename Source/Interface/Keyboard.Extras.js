@@ -40,12 +40,12 @@ Keyboard.implement({
 		shortcut.name = name;
 		this.shortcutIndex[name] = shortcut;
 		this.shortcuts.push(shortcut);
-		if(shortcut.keys) this.addEvent(shortcut.keys, shortcut.handler);
+		if (shortcut.keys) this.addEvent(shortcut.keys, shortcut.handler);
 		return this;
 	},
 
 	addShortcuts: function(obj){
-		for(var name in obj) this.addShortcut(name, obj[name]);
+		for (var name in obj) this.addShortcut(name, obj[name]);
 		return this;
 	},
 
@@ -96,9 +96,9 @@ Keyboard.getShortcut = function(name, keyboard, opts){
 	var shortcuts = opts.many ? [] : null,
 		set = opts.many ? function(kb){
 				var shortcut = kb.getShortcut(name);
-				if(shortcut) shortcuts.push(shortcut);
+				if (shortcut) shortcuts.push(shortcut);
 			} : function(kb) { 
-				if(!shortcuts) shortcuts = kb.getShortcut(name);
+				if (!shortcuts) shortcuts = kb.getShortcut(name);
 			};
 	Keyboard.each(keyboard, set);
 	return shortcuts;

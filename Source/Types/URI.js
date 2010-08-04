@@ -39,7 +39,7 @@ var URI = new Class({
 	initialize: function(uri, options){
 		this.setOptions(options);
 		var base = this.options.base || URI.base;
-		if(!uri) uri = base;
+		if (!uri) uri = base;
 
 		if (uri && uri.parsed) this.parsed = Object.clone(uri.parsed);
 		else this.set('value', uri.href || uri.toString(), base ? new URI(base) : false);

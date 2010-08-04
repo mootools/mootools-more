@@ -61,7 +61,7 @@ Element.implement({
 			var offset = value.length;
 			duplicate.moveToElementText(this);
 			duplicate.setEndPoint('StartToEnd', range);
-			if(duplicate.text.length) offset -= value.match(/[\n\r]*$/)[0].length;
+			if (duplicate.text.length) offset -= value.match(/[\n\r]*$/)[0].length;
 			pos.end = offset - duplicate.text.length;
 			duplicate.setEndPoint('StartToStart', range);
 			pos.start = offset - duplicate.text.length;

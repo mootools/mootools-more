@@ -50,7 +50,7 @@ var IframeShim = new Class({
 	},
 
 	makeShim: function(){
-		if(this.options.browsers){
+		if (this.options.browsers){
 			var zIndex = this.element.getStyle('zIndex').toInt();
 
 			if (!zIndex){

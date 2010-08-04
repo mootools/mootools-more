@@ -14,7 +14,7 @@ authors:
   - Andrea Novero
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Italian]
 

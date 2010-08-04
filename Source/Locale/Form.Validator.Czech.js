@@ -13,7 +13,7 @@ authors:
   - Jan Černý chemiX
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Czech]
 

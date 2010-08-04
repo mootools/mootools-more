@@ -177,7 +177,7 @@ this.Tips = new Class({
 	},
 
 	fill: function(element, contents){
-		if(typeof contents == 'string') element.set('html', contents);
+		if (typeof contents == 'string') element.set('html', contents);
 		else element.adopt(contents);
 	},
 

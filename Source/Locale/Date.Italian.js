@@ -14,7 +14,7 @@ authors:
   - Valerio Proietti
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Italian]
 

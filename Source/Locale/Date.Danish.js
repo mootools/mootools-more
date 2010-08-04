@@ -14,7 +14,7 @@ authors:
   - Henrik Hansen
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Danish]
 

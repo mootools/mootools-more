@@ -13,7 +13,7 @@ authors:
   - Martin Lundgren
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Swedish]
 
