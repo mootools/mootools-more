@@ -24,13 +24,14 @@ provides: [Object.Extras]
 Object.extend({
 
 	getFromPath: function(source, notation){
-		notation.replace(/\[([^\]]+)\]|\.([^.[]+)|[^[.]+/g, function(match){
-			if (!source) return null;
-			var prop = arguments[2] || arguments[1] || arguments[0];
-			source = (prop in source && source.hasOwnProperty(prop)) ? source[prop] : null;
-			return match;
-		});
+
+		var parts = key.split('.');
+		for(var i = 0; i < parts.length; i++){
+			if (source.hasOwnProperty(parts[i])) source = source[parts[i]];
+			else return null;
+		}
 		return source;
+
 	},
 
 	cleanValues: function(object, method){
