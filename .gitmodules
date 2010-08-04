@@ -4,6 +4,3 @@
 [submodule "Specs/mootools-core"]
 	path = Specs/mootools-core
 	url = http://github.com/mootools/mootools-core.git
-[submodule "Specs/Runner"]
-	path = Specs/Runner
-	url = http://github.com/mootools/mootools-runner.git
