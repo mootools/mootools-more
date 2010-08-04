@@ -13,7 +13,7 @@ authors:
   - Chafik Barbar
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Arabic]
 

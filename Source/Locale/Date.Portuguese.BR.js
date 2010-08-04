@@ -13,7 +13,7 @@ authors:
   - Fabio Miranda Costa
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Portuguese.BR]
 

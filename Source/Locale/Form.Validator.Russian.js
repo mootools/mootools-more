@@ -13,7 +13,7 @@ authors:
   - Chernodarov Egor
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Russian]
 

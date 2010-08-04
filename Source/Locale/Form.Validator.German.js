@@ -15,7 +15,7 @@ authors:
   - Fabian Beiner
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.German]
 

@@ -13,7 +13,7 @@ authors:
   - Slik
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Ukrainian]
 

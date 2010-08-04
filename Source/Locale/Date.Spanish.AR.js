@@ -14,7 +14,7 @@ authors:
   - Diego Massanti
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Spanish.AR]
 

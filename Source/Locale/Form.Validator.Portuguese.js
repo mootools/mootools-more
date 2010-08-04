@@ -13,7 +13,7 @@ authors:
   - Miquel Hudin
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Portuguese]
 

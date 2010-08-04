@@ -13,7 +13,7 @@ authors:
   - Michael van der Weg
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.German.CH]
 

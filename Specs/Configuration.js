@@ -38,10 +38,10 @@ Configuration.sets = {
 	'1.3-base': {
 		path: '1.3/',
 		files: [
-			'Core/Lang',
 			'Class/Class.Binds', 'Class/Class.Refactor', 'Class/Events.Pseudos',
 			'Types/Array.Extras', 'Types/Object.Extras', 'Types/Hash.Extras',
 			'Types/String.Extras', 'Types/String.QueryString', 
+			'Locale/Locale',
 			'Utilities/Color'
 		]
 	},

@@ -13,7 +13,7 @@ authors:
   - Noritaka Horio
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Japanese]
 

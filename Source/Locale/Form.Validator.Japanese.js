@@ -13,7 +13,7 @@ authors:
   - Noritaka Horio
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Japanese]
 

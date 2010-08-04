@@ -13,7 +13,7 @@ authors:
   - Oskar Krawczyk
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Polish]
 

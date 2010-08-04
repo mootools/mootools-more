@@ -14,7 +14,7 @@ authors:
   - Antoine Abt
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.French]
 

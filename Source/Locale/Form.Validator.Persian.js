@@ -13,7 +13,7 @@ authors:
   - Amir Hossein Hodjaty Pour
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Persian]
 

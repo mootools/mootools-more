@@ -13,7 +13,7 @@ authors:
   - YMind Chan
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Chinese]
 

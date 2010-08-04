@@ -13,7 +13,7 @@ authors:
   - Diego Massanti
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Form.Validator.Spanish.AR]
 

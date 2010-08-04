@@ -13,7 +13,7 @@ authors:
   - Radovan Lozej
 
 requires:
-  - /Lang
+  - /Locale
 
 provides: [Date.Slovenian]
 
