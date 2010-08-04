@@ -23,15 +23,15 @@ provides: [Object.Extras]
 
 Object.extend({
 
-	getFromPath: function(source, notation){
+	getFromPath: function(source, key){
 
 		var parts = key.split('.');
-		for(var i = 0; i < parts.length; i++){
+		for (var i = 0, l = parts.length; i < l; i++){
 			if (source.hasOwnProperty(parts[i])) source = source[parts[i]];
 			else return null;
 		}
 		return source;
-
+		
 	},
 
 	cleanValues: function(object, method){
