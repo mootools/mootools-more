@@ -16,8 +16,8 @@ version: "1.3-wip"
 
 sources:
   - "Source/Core/More.js"
-  - "Source/Core/Lang.js"
   - "Source/Core/Log.js"
+  - "Source/Locale/Locale.js"
   - "Source/Class/Events.Pseudos.js"
   - "Source/Class/Class.Refactor.js"
   - "Source/Class/Class.Binds.js"

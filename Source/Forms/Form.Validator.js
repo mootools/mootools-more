@@ -19,7 +19,7 @@ requires:
   - Core/Element.Event
   - Core/Element.Style
   - Core/JSON
-  - /Lang
+  - /Locale
   - /Class.Binds
   - /Date 
   - /Element.Forms

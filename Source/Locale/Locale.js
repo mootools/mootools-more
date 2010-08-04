@@ -1,9 +1,9 @@
 /*
 ---
 
-script: MooTools.Lang.js
+script: Locale.js
 
-name: MooTools.Lang
+name: Locale
 
 description: Provides methods for localization.
 
@@ -18,7 +18,7 @@ requires:
   - /Object.Extras
   - /MooTools.More
 
-provides: [Lang, Locale]
+provides: [Locale]
 
 ...
 */
@@ -45,7 +45,10 @@ provides: [Lang, Locale]
 		
 		define: function(name, set, key, value){
 			/*<1.2compat>*/
-			if (name == 'cascades') return this.setCascades(set);
+			if (name == 'cascades'){
+				this.setCascades(set);
+				return this;
+			}
 			/*</1.2compat>*/
 
 			data[name] = data[name] || {};
@@ -55,6 +58,8 @@ provides: [Lang, Locale]
 			} else {
 				data[name][set][key] = value;
 			}
+			
+			return this;
 		},
 		
 		setCurrent: function(name){
@@ -67,7 +72,6 @@ provides: [Lang, Locale]
 		},
 		
 		get: function(set, key, args){
-			
 			var value, localeData,
 				locales = cascades.clone().include('en-US');
 			locales.unshift(current);
