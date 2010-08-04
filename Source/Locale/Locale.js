@@ -35,7 +35,7 @@ provides: [Lang, Locale]
 
 	cascadeMethods = {};
 	
-	['erase', 'include', 'reverse', 'sort', 'unshift', 'push', 'extend', 'include'].each(function(method){
+	['erase', 'include', 'reverse', 'sort', 'unshift', 'push', 'append', 'include'].each(function(method){
 		cascadeMethods[method] = function(){
 			cascades[method].apply(cascades, arguments);
 		};
@@ -45,7 +45,7 @@ provides: [Lang, Locale]
 		
 		define: function(name, set, key, value){
 			/*<1.2compat>*/
-			if(set == 'cascades') return this.setCascades(key);
+			if (name == 'cascades') return this.setCascades(set);
 			/*</1.2compat>*/
 
 			data[name] = data[name] || {set: {}};
@@ -67,7 +67,7 @@ provides: [Lang, Locale]
 		
 		get: function(set, key, args){
 			
-			key = (set.indexOf('.') < 0 && key) ? (set + '.' + key) : set;
+			key = (key && set.indexOf('.') < 0) ? (set + '.' + key) : set;
 					
 			var value, localeData,
 				locales = Array.clone(cascades).include('en-US');
@@ -76,7 +76,7 @@ provides: [Lang, Locale]
 			for(var i = 0; i < locales.length; i++){
 				var currentData = data[locales[i]];
 				value = currentData ? Object.getFromPath(currentData, key) : null;
-				if (value != null || value == 0) return typeof value == 'function' ? value.apply(null, Array.from(args)) : value;
+				if (value != null || value == 0) return (typeof value == 'function') ? value.apply(null, Array.from(args)) : value;
 			}
 			
 			return null;			
