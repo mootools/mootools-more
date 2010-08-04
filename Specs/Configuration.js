@@ -121,9 +121,9 @@ Configuration.source = {
 		path: '../Source/',
 		files: [
 			'Core/More',
-			'Core/Lang',
-			'Localization/Form.Validator.English',
-			'Localization/Date.English.US',
+			'Locale/Locale',
+			'Locale/Form.Validator.English',
+			'Locale/Date.English.US',
 	
 			'Class/Class.Binds',
 			'Class/Class.Refactor',
