@@ -48,7 +48,8 @@ provides: [Lang, Locale]
 			if (name == 'cascades') return this.setCascades(set);
 			/*</1.2compat>*/
 
-			data[name] = data[name] || {set: {}};
+			data[name] = data[name] || {};
+			data[name][set] = data[name][set] || {};
 			if (typeOf(key) == 'object'){
 				data[name][set] = Object.merge(data[name][set] || {}, key);
 			} else {
@@ -67,16 +68,18 @@ provides: [Lang, Locale]
 		
 		get: function(set, key, args){
 			
-			key = (key && set.indexOf('.') < 0) ? (set + '.' + key) : set;
-					
 			var value, localeData,
-				locales = Array.clone(cascades).include('en-US');
+				locales = cascades.clone().include('en-US');
 			locales.unshift(current);
 			
 			for(var i = 0; i < locales.length; i++){
 				var currentData = data[locales[i]];
-				value = currentData ? Object.getFromPath(currentData, key) : null;
-				if (value != null || value == 0) return (typeof value == 'function') ? value.apply(null, Array.from(args)) : value;
+				if (key && currentData[set]){
+					value = currentData ? Object.getFromPath(currentData[set], key) : null;
+					if (value != null || value == 0) return (typeof value == 'function') ? value.apply(null, Array.from(args)) : value;
+				} else if (currentData[set]){
+					return currentData[set];
+				}
 			}
 			
 			return null;			
@@ -84,6 +87,10 @@ provides: [Lang, Locale]
 		
 		setCascades: function(value){
 			cascades = Array.from(value);
+		},
+		
+		getCascades: function(){
+			return cascades;
 		},
 		
 		cascades: function(){
@@ -99,9 +106,9 @@ provides: [Lang, Locale]
 	Object.append(Locale, new Events());	
 	
 	/*<1.2compat>*/
-	Locale.setLanguage = Locale.setCurrentLocale;
+	Locale.setLanguage = Locale.setCurrent;
+	Locale.getCurrentLanguage = Locale.getCurrent;
 	Locale.set = Locale.define;
-	Locale.setlanguage = Locale.setCurrent;
 	MooTools.lang = Locale;
 	/*</1.2compat>*/
 
