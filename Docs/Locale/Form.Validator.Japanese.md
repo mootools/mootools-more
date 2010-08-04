@@ -11,9 +11,9 @@ Contains the messages for [Form.Validator][] in Japanese.
 
 Simply change the language property to *ja-JP*.
 
-	MooTools.lang.setLanguage("ja-JP");
+	Locale.setCurrent("ja-JP");
 
-See also: [Form.Validator][] and [Lang][]
+See also: [Form.Validator][] and [Locale][]
 
 [Form.Validator]: /more/Forms/Form.Validator#Form-Validator
 [Lang]: /more/Core/Lang

@@ -11,11 +11,11 @@ Contains the messages for [Form.Validator][] in Swedish.
 
 Simply change the language property to *sv-SE*.
 
-	MooTools.lang.setLanguage("sv-SE");
+	Locale.setCurrent("sv-SE");
 
-See also: [Form.Validator][] and [Lang][]
+See also: [Form.Validator][] and [Locale][]
 
 [See the wiki for how to get involved](http://wiki.github.com/mootools/mootools-more)
 
-[Form.Validator]: http://www.mootools.net/docs/more/Forms/Form.Validator#Form-Validator
-[Lang]: http://www.mootools.net/docs/more/Core/Lang
+[Form.Validator]: /more/Forms/Form.Validator#Form-Validator
+[Locale]: /more/Locale/Locale

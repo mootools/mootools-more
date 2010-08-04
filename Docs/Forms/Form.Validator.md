@@ -81,7 +81,7 @@ Each [InputValidator][] can also be used to generate warnings. Warnings still sh
 
 ### Internationalization
 
-Form.Validator comes with numerous built-in validators (see below), each of which presents a validation error to the user when they trip it. These can be altered for different languages. See [Lang][]
+Form.Validator comes with numerous built-in validators (see below), each of which presents a validation error to the user when they trip it. These can be altered for different languages. See [Locale][]
 
 If you do translate these, please [send them back to us][] so we can add them to our repository.
 
@@ -671,4 +671,4 @@ Form.Validator Language Localization {#Localization}
 [Events]: /core/Class/Class.Extras#Events
 [send them back to us]: http://groups.google.com/group/mootools-lang
 [JSON.decode]: /core/Utilities/JSON#decode
-[Lang]: /lang/
+[Locale]: docs/more/Locale/Locale/

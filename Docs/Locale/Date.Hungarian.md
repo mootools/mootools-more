@@ -11,11 +11,11 @@ Contains the messages for [Date.Extras][] in Hungarian.
 
 Simply change the language property to *hu-HU*.
 
-	MooTools.lang.setLanguage("hu-HU");
+	Locale.setCurrent("hu-HU");
 
-See also: [Date.Extras][] and [Lang][]
+See also: [Date.Extras][] and [Locale][]
 
 [See the wiki for how to get involved](http://wiki.github.com/mootools/mootools-more)
 
-[Lang]: http://www.mootools.net/docs/more/Core/Lang 
-[Date.Extras]: http://www.mootools.net/docs/more/Native/Date.Extras
+[Locale]: /more/Locale/Locale 
+[Date.Extras]: /more/Types/Date.Extras

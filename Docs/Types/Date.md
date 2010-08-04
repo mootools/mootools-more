@@ -522,7 +522,7 @@ Define the first year of the 100-year period that 2-digit years will be fall wit
 Date Language Localization {#Localization}
 ==========================================
 
-*Date.js* includes the following key/values for localization. See [Lang][].
+*Date.js* includes the following key/values for localization. See [Locale][].
 
 * months - (*array*) An array of month names for the language (January, February, etc)
 * days - (*array*) An array of names for the days of the week (Monday, Tuesday, etc)
@@ -538,4 +538,4 @@ Date Language Localization {#Localization}
 [Date:defineParser]: #Date:defineParser
 [Date:parsePatterns]: #Date:CustomParsers
 [Date.Extras.js]: /more/Native/Date.Extras
-[Lang]: /more/Core/Lang
+[Locale]: /more/Locale/Locale

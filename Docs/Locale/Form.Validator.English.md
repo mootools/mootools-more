@@ -11,9 +11,9 @@ Contains the messages for [Form.Validator][] in English.
 
 Simply change the language property to *en-US*.
 
-	MooTools.lang.setLanguage("en-US");
+	Locale.setCurrent("en-US");
 
-See also: [Form.Validator][] and [Lang][]
+See also: [Form.Validator][] and [Locale][]
 
 [Form.Validator]: /more/Forms/Form.Validator#Form-Validator
 [Lang]: /more/Core/Lang

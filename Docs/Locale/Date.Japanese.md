@@ -11,9 +11,9 @@ Contains the messages for [Date.Extras][] in Japanese.
 
 Simply change the language property to *ja-JP*.
 
-	MooTools.lang.setLanguage("ja-JP");
+	Locale.setCurrent("ja-JP");
 
-See also: [Date.Extras][] and [Lang][]
+See also: [Date.Extras][] and [Locale][]
 
 [Form.Validator]: /more/Forms/Form.Validator#Form-Validator
 [Date.Extras]: /more/Native/Date.Extras
