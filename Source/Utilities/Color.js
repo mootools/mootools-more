@@ -106,7 +106,7 @@ Array.implement({
 		var delta = max - min;
 		var brightness = max / 255,
 				saturation = (max != 0) ? delta / max : 0;
-		if(saturation != 0) {
+		if (saturation != 0) {
 			var rr = (max - red) / delta;
 			var gr = (max - green) / delta;
 			var br = (max - blue) / delta;

@@ -76,7 +76,7 @@ provides: [Locale]
 				locales = cascades.clone().include('en-US');
 			locales.unshift(current);
 			
-			for(var i = 0; i < locales.length; i++){
+			for (var i = 0; i < locales.length; i++){
 				var currentData = data[locales[i]];
 				if (key && currentData[set]){
 					value = currentData ? Object.getFromPath(currentData[set], key) : null;
