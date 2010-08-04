@@ -57,6 +57,12 @@ var Mask = new Class({
 		this.inject();
 	},
 	
+	setOptions: function(options){
+		Options.prototype.setOptions.call(this, options);
+		if (this.element) this.element.setStyles(this.options.style);
+		return this;
+	},
+	
 	render: function() {
 		this.element = new Element('div', {
 			'class': this.options['class'],
@@ -162,13 +168,7 @@ var Mask = new Class({
 Element.Properties.mask = {
 
 	set: function(options){
-		var mask = this.retrieve('mask');
-		if (!mask){
-			mask = new Mask(this, options);
-			this.store('mask', mask);
-		} else {
-			mask.setOptions(options);
-		}
+		this.retrieve('mask').setOptions(options);
 		return this;
 	},
 
@@ -186,13 +186,12 @@ Element.Properties.mask = {
 Element.implement({
 
 	mask: function(options){
-		this.set('mask', options).get('mask').show();
+		this.get('mask').setOptions(options).show();
 		return this;
 	},
 
 	unmask: function(){
-		var mask = this.retrieve('mask');
-		if (mask) mask.hide();
+		this.get('mask').hide();
 		return this;
 	}
 
