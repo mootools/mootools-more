@@ -20,7 +20,7 @@ provides: [Date.Estonian]
 ...
 */
 
-MooTools.lang.set('et-EE', 'Date', {
+Locale.define('et-EE', 'Date', {
 
 	months: ['jaanuar', 'veebruar', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'],
 	days: ['pühapäev', 'esmaspäev', 'teisipäev', 'kolmapäev', 'neljapäev', 'reede', 'laupäev'],

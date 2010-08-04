@@ -21,7 +21,7 @@ provides: [Date.French]
 ...
 */
 
-MooTools.lang.set('fr-FR', 'Date', {
+Locale.define('fr-FR', 'Date', {
 
 	months: ['Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Ao&ucirc;t', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre'],
 	days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],

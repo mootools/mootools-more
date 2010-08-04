@@ -20,7 +20,7 @@ provides: [Date.Czech]
 ...
 */
 
-MooTools.lang.set('cs-CZ', 'Date', {
+Locale.define('cs-CZ', 'Date', {
 
 	months: ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'],
 	days: ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'],

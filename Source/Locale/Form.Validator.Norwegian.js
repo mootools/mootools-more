@@ -20,7 +20,7 @@ provides: [Form.Validator.Norwegian]
 ...
 */
 
-MooTools.lang.set('no-NO', 'Form.Validator', {
+Locale.define('no-NO', 'Form.Validator', {
 
 	required: 'Dette feltet er pÃ¥krevd.',
 	minLength: 'Vennligst skriv inn minst {minLength} tegn (du skrev {length} tegn).',

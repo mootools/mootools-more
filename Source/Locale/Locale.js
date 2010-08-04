@@ -31,13 +31,13 @@ provides: [Locale]
 		'en-US': {}
 	},
 	
-	cascades = [],
+	cascades = {},
 
 	cascadeMethods = {};
 	
 	['erase', 'include', 'reverse', 'sort', 'unshift', 'push', 'append', 'include'].each(function(method){
 		cascadeMethods[method] = function(){
-			cascades[method].apply(cascades, arguments);
+			cascades[current][method].apply(cascades[current], arguments);
 		};
 	});
 
@@ -46,8 +46,9 @@ provides: [Locale]
 		define: function(name, set, key, value){
 			/*<1.2compat>*/
 			if (name == 'cascades'){
-				this.setCascades(set);
-				return this;
+				return this.setCascades(current, set);
+			} else if (set == 'cascades'){
+				return this.setCascades(name, key);
 			}
 			/*</1.2compat>*/
 
@@ -74,7 +75,7 @@ provides: [Locale]
 		
 		get: function(set, key, args){
 			var value, localeData,
-				locales = cascades.clone().include('en-US');
+				locales = this.getCascades().clone().include('en-US');
 			locales.unshift(current);
 			
 			for (var i = 0; i < locales.length; i++){
@@ -90,16 +91,17 @@ provides: [Locale]
 			return null;			
 		},
 		
-		setCascades: function(value){
-			cascades = Array.from(value);
+		setCascades: function(name, value){
+			cascades[name] = Array.from(value);
 			return this;
 		},
 		
-		getCascades: function(){
-			return cascades;
+		getCascades: function(name){
+			return cascades[name || current] || [];
 		},
 		
 		cascades: function(){
+			cascades[current] = cascades[current] || [];
 			return cascadeMethods;
 		},
 		

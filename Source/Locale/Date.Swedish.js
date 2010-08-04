@@ -20,7 +20,7 @@ provides: [Date.Swedish]
 ...
 */
 
-MooTools.lang.set('sv-SE', 'Date', {
+Locale.define('sv-SE', 'Date', {
 
 	months: ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'],
 	days: ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'],

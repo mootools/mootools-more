@@ -26,7 +26,7 @@ var pluralize = function(n, one, two, three, other){
 	return (n >= 1 && n <= 3) ? arguments[n] : other;
 };
 
-MooTools.lang.set('si-SI', 'Date', {
+Locale.define('si-SI', 'Date', {
 
 	months: ['januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'september', 'oktober', 'november', 'december'],
 	days: ['nedelja', 'ponedeljek', 'torek', 'sreda', 'četrtek', 'petek', 'sobota'],

@@ -20,7 +20,7 @@ provides: [Form.Validator.Persian]
 ...
 */
 
-MooTools.lang.set('fa', 'Form.Validator', {
+Locale.define('fa', 'Form.Validator', {
 
 	required: 'این فیلد الزامی است.',
 	minLength: 'شما باید حداقل {minLength} حرف وارد کنید ({length} حرف وارد کرده اید).',

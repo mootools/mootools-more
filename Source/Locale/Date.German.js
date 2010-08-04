@@ -23,7 +23,7 @@ provides: [Date.German]
 ...
 */
 
-MooTools.lang.set('de-DE', 'Date', {
+Locale.define('de-DE', 'Date', {
 
 	months: ['Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
 	days: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],

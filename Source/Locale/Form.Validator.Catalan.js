@@ -21,7 +21,7 @@ provides: [Form.Validator.Catalan]
 ...
 */
 
-MooTools.lang.set('ca-CA', 'Form.Validator', {
+Locale.define('ca-CA', 'Form.Validator', {
 
 	required: 'Aquest camp es obligatori.',
 	minLength: 'Per favor introdueix al menys {minLength} caracters (has introduit {length} caracters).',

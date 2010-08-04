@@ -21,7 +21,7 @@ provides: [Date.Danish]
 ...
 */
 
-MooTools.lang.set('da-DK', 'Date', {
+Locale.define('da-DK', 'Date', {
 
 	months: ['Januar', 'Februa', 'Marts', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December'],
 	days: ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'],

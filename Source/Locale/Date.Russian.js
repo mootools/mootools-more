@@ -42,7 +42,7 @@ var pluralize = function (n, one, few, many, other){
 	}
 };
 
-MooTools.lang.set('ru-RU-unicode', 'Date', {
+Locale.define('ru-RU-unicode', 'Date', {
 
 	months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
 	days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],

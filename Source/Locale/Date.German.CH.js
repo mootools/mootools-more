@@ -21,4 +21,4 @@ provides: [Date.German.CH]
 ...
 */
 
-MooTools.lang.set('de-CH', 'cascade', ['de-DE']);
+Locale.setCascades('de-CH', ['de-DE']);

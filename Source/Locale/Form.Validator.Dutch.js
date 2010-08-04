@@ -22,7 +22,7 @@ provides: [Form.Validator.Dutch]
 ...
 */
 
-MooTools.lang.set('nl-NL', 'Form.Validator', {
+Locale.define('nl-NL', 'Form.Validator', {
 
 	required: 'Dit veld is verplicht.',
 	minLength: 'Vul minimaal {minLength} karakters in (je hebt {length} karakters ingevoerd).',

@@ -20,7 +20,7 @@ provides: [Form.Validator.Danish]
 ...
 */
 
-MooTools.lang.set('da-DK', 'Form.Validator', {
+Locale.define('da-DK', 'Form.Validator', {
 
 	required: 'Feltet skal udfyldes.',
 	minLength: 'Skriv mindst {minLength} tegn (du skrev {length} tegn).',

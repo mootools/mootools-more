@@ -20,7 +20,7 @@ provides: [Form.Validator.Arabic]
 ...
 */
 
-MooTools.lang.set('ar', 'Form.Validator', {
+Locale.define('ar', 'Form.Validator', {
 
 	required: 'هذا الحقل مطلوب.',
 	minLength: 'رجاءً إدخال {minLength}  أحرف على الأقل (تم إدخال {length} أحرف).',

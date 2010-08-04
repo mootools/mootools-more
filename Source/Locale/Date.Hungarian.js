@@ -20,7 +20,7 @@ provides: [Date.Hungarian]
 ...
 */
 
-MooTools.lang.set('hu-HU', 'Date', {
+Locale.define('hu-HU', 'Date', {
 
 	months: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
 	days: ['Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'],

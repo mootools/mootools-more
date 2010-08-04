@@ -20,7 +20,7 @@ provides: [Form.Validator.Spanish.AR]
 ...
 */
 
-MooTools.lang.set('es-AR', 'Form.Validator', {
+Locale.define('es-AR', 'Form.Validator', {
 
 	required: 'Este campo es obligatorio.',
 	minLength: 'Por favor ingrese al menos {minLength} caracteres (ha ingresado {length} caracteres).',

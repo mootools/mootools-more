@@ -20,7 +20,7 @@ provides: [Date.Arabic]
 ...
 */
 
-MooTools.lang.set('ar', 'Date', {
+Locale.define('ar', 'Date', {
 
 	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],

@@ -20,7 +20,7 @@ provides: [Form.Validator.Russian]
 ...
 */
 
-MooTools.lang.set('ru-RU-unicode', 'Form.Validator', {
+Locale.define('ru-RU-unicode', 'Form.Validator', {
 
 	required: 'Это поле обязательно к заполнению.',
 	minLength: 'Пожалуйста, введите хотя бы {minLength} символов (Вы ввели {length}).',
@@ -42,7 +42,7 @@ MooTools.lang.set('ru-RU-unicode', 'Form.Validator', {
 });
 
 // Translated to windows-1251 codepage
-MooTools.lang.set('ru-RU', 'Form.Validator', {
+Locale.define('ru-RU', 'Form.Validator', {
 
 	required: 'Ýòî ïîëå îáÿçàòåëüíî ê çàïîëíåíèþ.',
 	minLength: 'Ïîæàëóéñòà, ââåäèòå õîòÿ áû {minLength} ñèìâîëîâ (Âû ââåëè {length}).',
