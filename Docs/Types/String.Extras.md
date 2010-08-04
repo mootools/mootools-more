@@ -1,4 +1,4 @@
-Native: String {#String}
+Type: String {#String}
 ========================
 
 A collection of the String Object prototype methods.
@@ -6,6 +6,7 @@ A collection of the String Object prototype methods.
 ### Tutorial/Demo
 
 * [Online Tutorial/Demo][]
+
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/03-native/03-string.extras
 
 ### See Also
@@ -155,6 +156,6 @@ Replaces common special characters with their ASCII counterparts (smart quotes, 
 
 * (*string*) the string with the non-ASCII characters replaced
 
-[String]: /core/Native/String
-[Array.filter]: /core/Native/Array#Array:filter
+[String]: /core/Types/String
+[Array.filter]: /core/Types/Array#Array:filter
 [encodeURIComponent]: http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Functions:encodeURIComponent

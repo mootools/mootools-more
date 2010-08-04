@@ -1,4 +1,4 @@
-Native: URI {#URI}
+Type: URI {#URI}
 ==================
 
 Provides numerous methods useful for managing URIs.
@@ -194,7 +194,7 @@ Returns the current instance of *URI*. Useful when a parameter type is known to 
 		this.filename = uri.toURI().get('file');
 	}
 
-Native: String {#String}
+Type: String {#String}
 ========================
 
 Adds a method to instantiate a *URI* instance from a string.

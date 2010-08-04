@@ -220,7 +220,7 @@ Shortcut to create a new color, based on: hue, saturation, brightness values.
 
 
 
-Native: Array {#Array}
+Type: Array {#Array}
 ======================
 
 Contains Array prototypes.

@@ -1,7 +1,7 @@
-Native Date {#Date}
+Type Date {#Date}
 ===================
 
-Extends the *Date* native to include more powerful parsing and formatting functions; this is a further extention and depends on *[Date.js][]*.
+Extends the *Date* Type to include more powerful parsing and formatting functions; this is a further extention and depends on *[Date.js][]*.
 
 ### Authors
 
@@ -13,7 +13,8 @@ Extends the *Date* native to include more powerful parsing and formatting functi
 ### Tutorial/Demo
 
 * [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/03-native/01-date.extras
+
+[Online Tutorial/Demo]: http://www.clientcide.com/wiki/cnet-libraries/03-native/01-date.extras
 
 ### License
 
@@ -124,5 +125,5 @@ Date.Extras Language Localization {#Localization}
 * yearUntil - (*string*) '1 year from now'
 * yearsUntil - (*string*) '{delta} years from now' where {delta} is the number of years
 
-[Date.js]: /more/Native/Date
-[Date:parse]: /more/Native/Date#Date:parse
+[Date.js]: /more/Types/Date
+[Date:parse]: /more/Types/Date#Date:parse

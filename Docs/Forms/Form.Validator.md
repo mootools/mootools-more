@@ -313,7 +313,7 @@ An array of [InputValidator][] configurations (see [Form.Validator:add][] above)
 		// etc..
 	]);
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Element Property: validator {#Element-Properties:validator}

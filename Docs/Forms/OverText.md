@@ -210,7 +210,7 @@ This method is NOT a method on the instance. Rather it is on the namespace. So:
 
 * *array* - an array of all the running instances of the class.
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the native Element object with a reference to its [OverText][] instance.
@@ -225,7 +225,7 @@ Element property: OverText {#Element:overtext}
 
 [Overtext]: #OverText
 [OverText.reposition]: #OverText:reposition
-[Element.position]: /more/Native/Element.Position#Element:position
+[Element.position]: /more/Types/Element.Position#Element:position
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 [Class.Binds]: /more/Class/Class.Binds

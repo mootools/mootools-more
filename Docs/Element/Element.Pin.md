@@ -1,4 +1,4 @@
-Native: Element {#Element}
+Type: Element {#Element}
 ========================
 Extends the [Element][] native object to include the *pin* method useful for fixed positioning for elements.
 

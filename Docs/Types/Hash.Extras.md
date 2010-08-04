@@ -1,4 +1,4 @@
-Native: Hash {#Hash}
+Type: Hash {#Hash}
 ========================
 
 A collection of Hash methods.
@@ -6,6 +6,7 @@ A collection of Hash methods.
 ### Tutorial/Demo
 
 * [Online Tutorial/Demo][]
+
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/03-native/02-hash.extras
 
 
@@ -103,5 +104,5 @@ Runs all the methods that are values of the hash.
 	};
 	window.addEvent('domready', myPage.init.run.bind(myPage.init));
 
-[Mootools:Hash]: /core/Native/Hash
+[Mootools:Hash]: /more/Types/Hash
 [$defined]: /core/Core/Core#defined

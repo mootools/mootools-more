@@ -1,4 +1,4 @@
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 Extends the [Element][] native object with the method *position* which sets the location of an element relative to another.
 

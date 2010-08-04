@@ -1,4 +1,4 @@
-Native: String {#String}
+Type: String {#String}
 ========================
 
 A collection of the String Object prototype methods.

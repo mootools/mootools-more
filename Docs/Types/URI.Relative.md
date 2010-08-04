@@ -1,4 +1,4 @@
-Native: URI {#URI}
+Type: URI {#URI}
 ==================
 
 Extends the [URI][] class to add methods for computing relative and absolute urls.

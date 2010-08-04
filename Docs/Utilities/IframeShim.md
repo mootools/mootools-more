@@ -115,7 +115,7 @@ This will remove the iframe from memory.
 
 * (*object*) This instance of [IframeShim][]
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the native Element object with a reference to its [IframeShim][] instance.

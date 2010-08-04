@@ -184,7 +184,7 @@ Gets the default [Mask][] instance for the Element.
 	el.mask(); //show the mask
 	el.get('mask'); //The Mask instance.
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Adds [Mask][] shortcuts to the [Element][] class.

@@ -174,7 +174,7 @@ These will execute these methods on the table element.
 	//same as:
 	$(myHtmlTable).inject(document.body);
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the native Element object with a reference to its [HtmlTable][] instance.

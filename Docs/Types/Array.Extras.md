@@ -1,4 +1,4 @@
-Native: Array {#Array}
+Type: Array {#Array}
 ======================
 
 A collection of useful methods to extend Arrays.
@@ -188,6 +188,6 @@ Apply a function simultaneously against two values of the array (from right-to-l
 - [MDC Array.reduceRight][]
 
 
-[Array]: /core/Native/Array
+[Array]: /core/Types/Array
 [MDC Array.reduce]: https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array/Reduce
 [MDC Array.reduceRight]: https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array/ReduceRight

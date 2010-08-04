@@ -1,11 +1,12 @@
-Native: Date {#Date}
+Type: Date {#Date}
 ====================
 
-Extends the Date native to include more powerful parsing and formatting functions.
+Extends the Date Type to include more powerful parsing and formatting functions.
 
 ### Tutorial/Demo
 
 * [Online Tutorial/Demo][]
+
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/03-native/00-date
 
 ### Authors
@@ -537,5 +538,5 @@ Date Language Localization {#Localization}
 [Date:defineFormat]: #Date:defineFormat
 [Date:defineParser]: #Date:defineParser
 [Date:parsePatterns]: #Date:CustomParsers
-[Date.Extras.js]: /more/Native/Date.Extras
+[Date.Extras.js]: /more/Types/Date.Extras
 [Locale]: /more/Locale/Locale
