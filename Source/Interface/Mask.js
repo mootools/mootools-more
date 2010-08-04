@@ -127,7 +127,6 @@ var Mask = new Class({
 		if (!this.hidden) return this;
 		window.addEvent('resize', this.position);
 		this.position();
-		this.element.setStyles(this.options.styles);
 		
 		this.element.setStyle('display', 'block');
 		this.hidden = false;
