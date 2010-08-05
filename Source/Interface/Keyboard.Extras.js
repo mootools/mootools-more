@@ -32,7 +32,7 @@ Keyboard.implement({
 			'handler': function(){} // the event handler to run when keys are pressed.
 		}
 	*/
-	addShortcut: function(name, shortcut) {
+	addShortcut: function(name, shortcut){
 		this.shortcuts = this.shortcuts || [];
 		this.shortcutIndex = this.shortcutIndex || {};
 		
@@ -49,9 +49,9 @@ Keyboard.implement({
 		return this;
 	},
 
-	removeShortcut: function(name) {
+	removeShortcut: function(name){
 		var shortcut = this.getShortcut(name);
-		if (shortcut && shortcut.keys) {
+		if (shortcut && shortcut.keys){
 			this.removeEvent(shortcut.keys, shortcut.handler);
 			delete this.shortcutIndex[name];
 			this.shortcuts.erase(shortcut);
@@ -59,7 +59,7 @@ Keyboard.implement({
 		return this;
 	},
 
-	removeShortcuts: function(names) {
+	removeShortcuts: function(names){
 		names.each(this.removeShortcut, this);
 		return this;
 	},
@@ -84,7 +84,7 @@ Keyboard.rebind = function(newKeys, shortcuts){
 };
 
 
-Keyboard.getActiveShortcuts = function(keyboard) {
+Keyboard.getActiveShortcuts = function(keyboard){
 	var activeKBS = [], activeSCS = [];
 	Keyboard.each(keyboard, [].push.bind(activeKBS));
 	activeKBS.each(function(kb){ activeSCS.extend(kb.getShortcuts()); });
@@ -97,13 +97,13 @@ Keyboard.getShortcut = function(name, keyboard, opts){
 		set = opts.many ? function(kb){
 				var shortcut = kb.getShortcut(name);
 				if (shortcut) shortcuts.push(shortcut);
-			} : function(kb) { 
+			} : function(kb){
 				if (!shortcuts) shortcuts = kb.getShortcut(name);
 			};
 	Keyboard.each(keyboard, set);
 	return shortcuts;
 };
 
-Keyboard.getShortcuts = function(name, keyboard) {
+Keyboard.getShortcuts = function(name, keyboard){
 	return Keyboard.getShortcut(name, keyboard, { many: true });
 };

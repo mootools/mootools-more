@@ -80,17 +80,17 @@ tidy = {
 	'&raquo;': '[\uFFFD]'
 };
 
-function walk(string, replacements) {
+function walk(string, replacements){
 	var result = string;
 
-	for (key in replacements) {
+	for (key in replacements){
 		result = result.replace(new RegExp(replacements[key], 'g'), key);
 	}
 
 	return result;
 }
 
-function getRegexForTag(tag, contents) {
+function getRegexForTag(tag, contents){
 	tag = tag || '';
 	var regstr = contents ? "<" + tag + "[^>]*>([\\s\\S]*?)<\/" + tag + ">" : "<\/?" + tag + "([^>]+)?>";
 	reg = new RegExp(regstr, "gi");

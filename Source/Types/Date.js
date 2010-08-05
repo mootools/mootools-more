@@ -162,7 +162,7 @@ Date.implement({
 		return this;
 	},
 
-	isValid: function(date) {
+	isValid: function(date){
 		return !!(date || this).valueOf();
 	},
 
@@ -252,7 +252,7 @@ var parseWord = function(type, word, num){
 
 Date.extend({
 
-	getMsg: function(key, args) {
+	getMsg: function(key, args){
 		return MooTools.lang.get('Date', key, args);
 	},
 

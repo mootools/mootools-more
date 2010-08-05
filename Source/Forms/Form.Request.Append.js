@@ -45,7 +45,7 @@ Form.Request.Append = new Class({
 			success: function(tree, elements, html, javascript){
 				var container;
 				var kids = Elements.from(html);
-				if (kids.length == 1) {
+				if (kids.length == 1){
 					container = kids[0];
 				} else {
 					 container = new Element('div', {
@@ -60,7 +60,7 @@ Form.Request.Append = new Class({
 				var finish = function(){
 					this.fireEvent('success', [container, this.update, tree, elements, html, javascript]);
 				}.bind(this);
-				if (this.options.useReveal) {
+				if (this.options.useReveal){
 					container.get('reveal', this.options.revealOptions).chain(finish);
 					container.reveal();
 				} else {

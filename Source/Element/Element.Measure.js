@@ -51,14 +51,14 @@ var calculateEdgeSize = function(edge, styles){
 Element.implement({
 
 	measure: function(fn){
-		var visibility = function(el) {
+		var visibility = function(el){
 			return !!(!el || el.offsetHeight || el.offsetWidth);
 		};
 		if (visibility(this)) return fn.apply(this);
 		var parent = this.getParent(),
 			restorers = [],
 			toMeasure = [];
-		while (!visibility(parent) && parent != document.body) {
+		while (!visibility(parent) && parent != document.body){
 			toMeasure.push(parent.expose());
 			parent = parent.getParent();
 		}

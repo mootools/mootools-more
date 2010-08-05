@@ -90,7 +90,7 @@ Element.implement({
 				
 			if (option.test('upper') || option.test('top')){
 				val.y = 'top';
-			} else if (option.test('bottom')) {
+			} else if (option.test('bottom')){
 				val.y = 'bottom';
 			} else {
 				val.y = 'center';
@@ -183,8 +183,8 @@ Element.implement({
 		
 		var xy = {left: 'x', top: 'y'};
 		
-		['minimum', 'maximum'].each(function(minmax) {
-			['left', 'top'].each(function(lr) {
+		['minimum', 'maximum'].each(function(minmax){
+			['left', 'top'].each(function(lr){
 				var val = options[minmax] ? options[minmax][xy[lr]] : null;
 				if (val != null && pos[lr] < val) pos[lr] = val;
 			});
@@ -196,7 +196,7 @@ Element.implement({
 			pos.left+= winScroll.x;
 		}
 		var relScroll = rel.getScroll();
-		if (options.ignoreScroll) {
+		if (options.ignoreScroll){
 			pos.top -= relScroll.y;
 			pos.left -= relScroll.x;
 		} else {
@@ -204,7 +204,7 @@ Element.implement({
 			pos.left += relScroll.x;
 		}
 		
-		if (options.ignoreMargins) {
+		if (options.ignoreMargins){
 			pos.left += (
 				options.edge.x == 'right' ? dim['margin-right'] :
 				options.edge.x == 'center' ? -dim['margin-left'] + ((dim['margin-right'] + dim['margin-left'])/2) : 

@@ -84,7 +84,7 @@ var Slider = new Class({
 			onBeforeStart: (function(){
 				this.isDragging = true;
 			}).bind(this),
-			onCancel: function() {
+			onCancel: function(){
 				this.isDragging = false;
 			}.bind(this),
 			onComplete: function(){

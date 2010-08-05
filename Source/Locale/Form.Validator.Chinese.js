@@ -101,7 +101,7 @@ Form.Validator.add('validate-currency-yuan', {
 		return Form.Validator.getMsg('currencyYuan');
 	},
 
-	test: function(element) {
+	test: function(element){
 		// [￥]1[##][,###]+[.##]
 		// [￥]1###+[.##]
 		// [￥]0.##

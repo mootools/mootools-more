@@ -89,10 +89,10 @@ Element.Properties.validatorProps = {
 				props = {};
 				vals.each(function(cls){
 					var split = cls.split(':');
-					if (split[1]) {
+					if (split[1]){
 						try {
 							props[split[0]] = JSON.decode(split[1]);
-						} catch(e) {}
+						} catch(e){}
 					}
 				});
 				this.store('$moo:validatorProps', props);

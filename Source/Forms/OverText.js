@@ -82,12 +82,12 @@ var OverText = new Class({
 				click: this.hide.pass(this.options.element == 'label', this)
 			}
 		}).inject(this.element, 'after');
-		if (this.options.element == 'label') {
+		if (this.options.element == 'label'){
 			if (!this.element.get('id')) this.element.set('id', 'input_' + new Date().getTime());
 			this.text.set('for', this.element.get('id'));
 		}
 
-		if (this.options.wrap) {
+		if (this.options.wrap){
 			this.textHolder = new Element('div', {
 				styles: {
 					lineHeight: 'normal',
@@ -132,7 +132,7 @@ var OverText = new Class({
 	},
 
 	wrap: function(){
-		if (this.options.element == 'label') {
+		if (this.options.element == 'label'){
 			if (!this.element.get('id')) this.element.set('id', 'input_' + new Date().getTime());
 			this.text.set('for', this.element.get('id'));
 		}
@@ -213,7 +213,7 @@ OverText.instances = [];
 
 Object.append(OverText, {
 
-	each: function(fn) {
+	each: function(fn){
 		return OverText.instances.map(function(ot, i){
 			if (ot.element && ot.text) return fn.apply(OverText, [ot, i]);
 			return null; //the input or the text was destroyed
@@ -237,14 +237,14 @@ Object.append(OverText, {
 	},
 
 	showAll: function(){
-		return OverText.each(function(ot) {
+		return OverText.each(function(ot){
 			return ot.show();
 		});
 	}
 
 });
 
-if (window.Fx && Fx.Reveal) {
+if (window.Fx && Fx.Reveal){
 	Fx.Reveal.implement({
 		hideInputs: Browser.ie ? 'select, input, textarea, object, embed, .overTxtLabel' : false
 	});

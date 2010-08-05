@@ -44,7 +44,7 @@ provides: [Keyboard]
 		},
 
 		initialize: function(options){
-			if (options && options.manager) {
+			if (options && options.manager){
 				this.manager = options.manager;
 				delete options.manager;
 			}
@@ -85,7 +85,7 @@ provides: [Keyboard]
 		},
 
 		activate: function(instance){
-			if (instance) {
+			if (instance){
 				if (instance.isActive()) return this;
 				//if we're stealing focus, store the last keyboard to have it so the relinquish command works
 				if (this.activeKB && instance != this.activeKB) {
@@ -95,7 +95,7 @@ provides: [Keyboard]
 				//if we're enabling a child, assign it so that events are now passed to it
 				this.activeKB = instance.fireEvent('activate');
 				Keyboard.manager.fireEvent('changed');
-			} else if (this.manager) {
+			} else if (this.manager){
 				//else we're enabling ourselves, we must ask our parent to do it for us
 				this.manager.activate(this);
 			}
@@ -107,13 +107,13 @@ provides: [Keyboard]
 		},
 
 		deactivate: function(instance){
-			if (instance) {
-				if (instance === this.activeKB) {
+			if (instance){
+				if (instance === this.activeKB){
 					this.activeKB = null;
 					instance.fireEvent('deactivate');
 					Keyboard.manager.fireEvent('changed');
 				}
-			} else if (this.manager) {
+			} else if (this.manager){
 				this.manager.deactivate(this);
 			}
 			return this;

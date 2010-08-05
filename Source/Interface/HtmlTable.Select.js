@@ -73,15 +73,15 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (this.options.useKeyboard || this.keyboard){
 			if (!this.keyboard) this.keyboard = new Keyboard({
 				events: {
-					down: function(e) {
+					down: function(e){
 						e.preventDefault();
 						this.shiftFocus(1);
 					}.bind(this),
-					up: function(e) {
+					up: function(e){
 						e.preventDefault();
 						this.shiftFocus(-1);
 					}.bind(this),
-					enter: function(e) {
+					enter: function(e){
 						e.preventDefault();
 						if (this.hover) this.focusRow(this.hover);
 					}.bind(this)
@@ -154,7 +154,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			this.fireEvent('rowUnfocus', [row, this.selectedRows]);
 		}.bind(this);
 		if (!this.options.allowMultiSelect) this.selectedRows.each(unfocus);
-		if (!this.selectedRows.contains(row)) {
+		if (!this.selectedRows.contains(row)){
 			this.selectedRows.push(row);
 			row.addClass(this.options.classRowSelected);
 			this.fireEvent('rowFocus', [row, this.selectedRows]);

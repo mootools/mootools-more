@@ -58,7 +58,7 @@ var Mask = new Class({
 		this.inject();
 	},
 	
-	render: function() {
+	render: function(){
 		this.element = new Element('div', {
 			'class': this.options['class'],
 			id: this.options.id || 'mask-' + Date.now(),
@@ -83,7 +83,7 @@ var Mask = new Class({
 		where = where || this.options.inject ? this.options.inject.where : '' || this.target == document.body ? 'inside' : 'after';
 		target = target || this.options.inject ? this.options.inject.target : '' || this.target;
 		this.element.inject(target, where);
-		if (this.options.useIframeShim) {
+		if (this.options.useIframeShim){
 			this.shim = new IframeShim(this.element, this.options.iframeShimOptions);
 			this.addEvents({
 				show: this.shim.show.bind(this.shim),
@@ -110,7 +110,7 @@ var Mask = new Class({
 		};
 		if (this.options.maskMargins) opt.styles.push('margin');
 		var dim = this.target.getComputedSize(opt);
-		if (this.target == document.body) {
+		if (this.target == document.body){
 			var win = window.getScrollSize();
 			if (dim.totalHeight < win.y) dim.totalHeight = win.y;
 			if (dim.totalWidth < win.x) dim.totalWidth = win.x;

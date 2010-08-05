@@ -30,7 +30,7 @@ var Asset = {
 			check: Function.from(true)
 		}, properties);
 		
-		if (properties.onLoad) {
+		if (properties.onLoad){
 			properties.onload = properties.onLoad;
 			delete properties.onLoad;
 		}
@@ -50,7 +50,7 @@ var Asset = {
 			}
 		}).set(properties);
 
-		if ((Browser.safari || Browser.chrome) && Browser.version == 2) {
+		if ((Browser.safari || Browser.chrome) && Browser.version == 2){
 			var checker = (function(){
 				if (!Function.attempt(check)) return;
 				clearInterval(checker);
@@ -64,7 +64,7 @@ var Asset = {
 	css: function(source, properties){
 		properties = properties || {};
 		var onload = properties.onload || properties.onLoad;
-		if (onload) {
+		if (onload){
 			properties.events = properties.events || {};
 			properties.events.load = onload;
 			delete properties.onload;
@@ -89,7 +89,7 @@ var Asset = {
 		['load', 'abort', 'error'].each(function(name){
 			var type = 'on' + name;
 			var cap = name.capitalize();
-			if (properties['on' + cap]) {
+			if (properties['on' + cap]){
 				properties[type] = properties['on' + cap];
 				delete properties['on' + cap];
 			}
