@@ -88,7 +88,7 @@ provides: [Keyboard]
 			if (instance){
 				if (instance.isActive()) return this;
 				//if we're stealing focus, store the last keyboard to have it so the relinquish command works
-				if (this.activeKB && instance != this.activeKB) {
+				if (this.activeKB && instance != this.activeKB){
 					this.previous = this.activeKB;
 					this.previous.fireEvent('deactivate');
 				}
