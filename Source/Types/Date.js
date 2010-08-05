@@ -253,7 +253,7 @@ var parseWord = function(type, word, num){
 Date.extend({
 
 	getMsg: function(key, args) {
-		return MooTools.lang.get('Date', key, args);
+		return Locale.get('Date', key, args);
 	},
 
 	units: {
@@ -472,8 +472,8 @@ Date.defineParsers(
 	'%o %b %d %X %T %Y' // "Thu Oct 22 08:11:23 +0000 2009"
 );
 
-MooTools.lang.addEvent('langChange', function(language){
-	if (MooTools.lang.get('Date')) recompile(language);
-}).fireEvent('langChange', Locale.getCurrent());
+Locale.addEvent('change', function(language){
+	if (Locale.get('Date')) recompile(language);
+}).fireEvent('change', Locale.getCurrent());
 
 })();

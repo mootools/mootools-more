@@ -185,7 +185,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	_attachSelects: function(attach){
-		attach = $pick(attach, true);
+		attach = attach != null ? attach : true;
 		var method = attach ? 'addEvents' : 'removeEvents';
 		this.element[method]({
 			mouseleave: this._bound.mouseleave
@@ -199,7 +199,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 				var timer, held;
 				var move = function(offset){
 					var mover = function(e){
-						$clear(timer);
+						clearTimeout(timer);
 						e.preventDefault();
 						var to = this.body.rows[this._getRowByOffset(offset)];
 						if (e.shift && to && this.isSelected(to)) {
@@ -224,7 +224,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 				}.bind(this);
 				
 				var clear = function(){
-					$clear(timer);
+					clearTimeout(timer);
 					held = false;
 				};
 				

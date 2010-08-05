@@ -93,7 +93,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 				case 'string': parser = parser; cancel = true; break;
 			}
 			if (!cancel) {
-				HtmlTable.Parsers.some(function(current) {
+				Object.some(HtmlTable.Parsers, function(current) {
 					var match = current.match;
 					if (!match) return false;
 					for (var i = 0, j = rows.length; i < j; i++) {
@@ -155,7 +155,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		}
 
 		var parser = this.parsers[index];
-		if (typeOf(parser) == 'string') parser = HtmlTable.Parsers.get(parser);
+		if (typeOf(parser) == 'string') parser = HtmlTable.Parsers[parser];
 		if (!parser) return;
 
 		if (!Browser.ie) {
@@ -239,7 +239,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 });
 
-HtmlTable.Parsers = new Hash({
+HtmlTable.Parsers = {
 
 	'date': {
 		match: /^\d{2}[-\/ ]\d{2}[-\/ ]\d{2,4}$/,
@@ -301,9 +301,12 @@ HtmlTable.Parsers = new Hash({
 		}
 	}
 
-});
+};
 
+//<1.2compat>
+HtmlTable.Parsers = new Hash(HtmlTable.Parsers);
+//</1.2compat>
 
 HtmlTable.defineParsers = function(parsers){
-	HtmlTable.Parsers = new Hash(parsers).combine(HtmlTable.Parsers);
+	HtmlTable.Parsers = Object.append(HtmlTable.Parsers, parsers);
 };
