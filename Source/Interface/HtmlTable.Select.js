@@ -34,7 +34,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		classRowSelected: 'table-tr-selected',
 		classRowHovered: 'table-tr-hovered',
 		classSelectable: 'table-selectable',
-		shiftForMultiSelect: false,
+		shiftForMultiSelect: true,
 		allowMultiSelect: true,
 		selectable: false
 	},
@@ -168,8 +168,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	_clickRow: function(event, row){
 		var selecting = (event.shift || event.meta || event.control) && this.options.shiftForMultiSelect;
-		if (!selecting) this.selectNone();
-		this.toggleRow(row);
+		if (!selecting && !(event.rightClick && this.isSelected(row) && this.options.allowMultiSelect)) this.selectNone();
+		if (event.rightClick) this.selectRow(row);
+		else this.toggleRow(row);
 		if (event.shift) {
 			this.selectRange(this._rangeStart || this.body.rows[0], row, this._rangeStart ? !this.isSelected(row) : true);
 		}
@@ -230,8 +231,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 				
 				this.keyboard = new Keyboard({
 					events: {
-						'down': move(1),
-						'up': move(-1),
 						'keydown:shift+up': move(-1),
 						'keydown:shift+down': move(1),
 						'keyup:shift+up': clear,
@@ -240,6 +239,26 @@ HtmlTable = Class.refactor(HtmlTable, {
 						'keyup:down': clear
 					},
 					active: true
+				});
+				
+				var shiftHint = '';
+				if (this.options.allowMultiSelect && this.options.shiftForMultiSelect && this.options.useKeyboard) {
+					shiftHint = " (Shift multi-selects).";
+				}
+				
+				this.keyboard.addShortcuts({
+					'Select Previous Row': {
+						keys: 'up',
+						shortcut: 'up arrow',
+						handler: move(-1),
+						description: 'Select the previous row in the table.' + shiftHint
+					},
+					'Select Next Row': {
+						keys: 'down',
+						shortcut: 'down arrow',
+						handler: move(1),
+						description: 'Select the next row in the table.' + shiftHint
+					}
 				});
 			}
 			this.keyboard[attach ? 'activate' : 'deactivate']();

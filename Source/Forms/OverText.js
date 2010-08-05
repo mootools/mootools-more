@@ -103,7 +103,7 @@ var OverText = new Class({
 	destroy: function(){
 		this.element.eliminate('OverTextDiv').eliminate('OverText');
 		this.disable();
-		this.text.destroy();
+		if (this.text) this.text.destroy();
 		if (this.textHolder) this.textHolder.destroy();
 		return this;
 	},
