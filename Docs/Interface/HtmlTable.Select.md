@@ -24,8 +24,9 @@ Adds the ability to select rows in a table.
 * classRowSelected - (*string*) the class to add to the tr that is selected; defaults to 'table-tr-selected'
 * classRowHovered - (*string*) the class to add to the tr that is hovered over by the mouse or has focus with the keyboard; defaults to 'table-tr-hovered'
 * classSelectable - (*string*) the class to add to the table when selection is enabled; defaults to 'table-selectable'
-* allowMultiSelect - (*boolean*) if *true* (the default) the user can select more than one row at a time.
 * selectable - (*boolean*) if *true* the rows will be selectable. Defaults to *false*.
+* allowMultiSelect - (*boolean*) if *true* (the default) the user can select more than one row at a time.
+* shiftForMultiSelect - (*boolean*) enables support for holding shift to multi-select files (defaults to *false*). If *false* (and `allowMultiSelect` is *true*), clicking any row selects it.
 
 ### Events
 
@@ -46,6 +47,116 @@ Adds the ability to select rows in a table.
 		selectable: true
 	});
 	myTable.inject($('someContainer'));
+
+HtmlTable method: enableSelect {#HtmlTable:enableSelect}
+------------------------------------------
+
+Enables selection of rows.
+
+### Syntax
+
+	myTable.enableSelect();
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
+HtmlTable method: toggleRow {#HtmlTable:toggleRow}
+------------------------------------------
+
+Toggles the selected state of a row.
+
+### Syntax
+
+	myTable.toggleRow(trElement);
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
+HtmlTable method: selectRow {#HtmlTable:selectRow}
+------------------------------------------
+
+Selects a row.
+
+### Syntax
+
+	myTable.selectRow(trElement);
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
+HtmlTable method: deselectRow {#HtmlTable:deslectRow}
+------------------------------------------
+
+Selects a row.
+
+### Syntax
+
+	myTable.deselectRow(trElement);
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
+HtmlTable method: isSelected {#HtmlTable:isSelected}
+------------------------------------------
+
+Returns the selected state of a row element.
+
+### Syntax
+
+	myTable.isSelected(trElement);
+
+### Returns
+
+* (*boolean*) *true* if the row is selected.
+
+
+HtmlTable method: selectRange {#HtmlTable:selectRange}
+------------------------------------------
+
+Selects a group of rows.
+
+### Syntax
+
+	myTable.selectRange(startRow, endRow);
+
+### Arguments
+
+* startRow - (*element*) the TR element that starts the selection.
+* endRow - (*element*) the TR element that ends the selection.
+
+### Note
+
+The actual order of the start and end rows doesn't matter. The range is selected even if the end row is before the start row.
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
+HtmlTable method: deselectRange {#HtmlTable:deselectRange}
+------------------------------------------
+
+Deselects a group of rows.
+
+### Syntax
+
+	myTable.deselectRange(startRow, endRow);
+
+### Arguments
+
+* startRow - (*element*) the TR element that starts the deselection.
+* endRow - (*element*) the TR element that ends the deselection.
+
+### Note
+
+The actual order of the start and end rows doesn't matter. The range is deselected even if the end row is before the start row.
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
 
 HtmlTable Method: selectAll {#HtmlTable:selectAll}
 --------------------------------------------------
@@ -73,30 +184,5 @@ Deselects all rows
 
 * (*object*) This instance of HtmlTable.
 
-HtmlTable method: enableSelect {#HtmlTable:enableSelect}
-------------------------------------------
-
-Enables selection of rows.
-
-### Syntax
-
-	myTable.enableSelect();
-
-### Returns
-
-* (*object*) This instance of HtmlTable.
-
-HtmlTable method: disableSelect {#HtmlTable:disableSelect}
-------------------------------------------
-
-Disables selection of rows.
-
-### Syntax
-
-	myTable.disableSelect();
-
-### Returns
-
-* (*object*) This instance of HtmlTable.
 
 [HtmlTable]: /more/Interface/HtmlTable

@@ -54,5 +54,15 @@ Element.implement({
 	swapClass: function(remove, add){
 		return this.removeClass(remove).addClass(add);
 	}
+});
 
+Document.implement({
+	clearSelection: function(){
+		if (document.selection && document.selection.empty) {
+			document.selection.empty();
+		} else if (window.getSelection) {
+			var selection = window.getSelection();
+			if (selection && selection.removeAllRanges) selection.removeAllRanges();
+		}
+	}
 });

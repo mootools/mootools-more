@@ -128,5 +128,18 @@ Included Parsers
 * string - an alpha sort
 * title - sorts on the *title* property of the table data element
 
+Static Method: HtmlTable.defineParsers {#HtmlTable:defineParsers}
+-----------------------------------------------------------
+
+Because these parsers in the list above are run in order, adding a custom parser is likely to produce no results, as your table contents will eventually match one of the items above. Therefore there is a static method for adding your own parsers that will put your parser at the top of this list. Example:
+
+	HtmlTable.defineParsers({
+		foo: {
+			match: /foo/,
+			convert: function(){...},
+			number: false
+		}
+	});
+
 [HtmlTable]: /more/Interface/HtmlTable
 [Date.parse]: /more/Types/Date#Date:parse
