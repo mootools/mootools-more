@@ -110,7 +110,7 @@ var HtmlTable = new Class({
 			var td = new Element(tag || 'td', data ? data.properties : {}),
 				type = (data ? data.content : '') || data,
 				element = document.id(type);
-			if(typeOf(type) != 'string' && element) td.adopt(element);
+			if (typeOf(type) != 'string' && element) td.adopt(element);
 			else td.set('html', type);
 
 			return td;

@@ -182,7 +182,7 @@ Retrieves the "build-in" instance of [Spinner][].
 
 * (*object*) This instance of [Spinner][]
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the native Element object with [Spinner][] methods.
@@ -235,7 +235,7 @@ Gets the default [Spinner][] instance for the Element.
 	el.spin(); //show the spinner
 	el.get('spinner'); //The Spinner instance.
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Adds [Spinner][] shortcuts to the [Element][] class.

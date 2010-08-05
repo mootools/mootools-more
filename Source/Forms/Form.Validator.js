@@ -19,7 +19,7 @@ requires:
   - Core/Element.Event
   - Core/Element.Style
   - Core/JSON
-  - /Lang
+  - /Locale
   - /Class.Binds
   - /Date 
   - /Element.Forms
@@ -228,7 +228,7 @@ Form.Validator = new Class({
 
 	test: function(className, field, warn){
 		field = document.id(field);
-		if((this.options.ignoreHidden && !field.isVisible()) || (this.options.ignoreDisabled && field.get('disabled'))) return true;
+		if ((this.options.ignoreHidden && !field.isVisible()) || (this.options.ignoreDisabled && field.get('disabled'))) return true;
 		var validator = this.getValidator(className);
 		warn = warn != null ? warn : false;
 		if (field.hasClass('warnOnly')) warn = true;

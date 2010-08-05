@@ -87,7 +87,7 @@ Toggles the element from shown to hidden.
 
 * (*object*) This [Fx.Reveal][] instance.
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the native Element object with [Fx.Reveal][] methods.
@@ -140,7 +140,7 @@ Gets the default [Fx.Reveal][] instance for the Element.
 	el.reveal(); //show the element
 	el.get('reveal'); //The Fx.Reveal instance.
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Adds [Fx.Reveal][] shortcuts to the [Element][] class.

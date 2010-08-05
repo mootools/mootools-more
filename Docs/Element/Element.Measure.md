@@ -1,4 +1,4 @@
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 The following functions are treated as [Element][] methods.
 

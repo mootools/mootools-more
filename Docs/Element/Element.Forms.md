@@ -1,4 +1,4 @@
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the [Element][] native object to include methods useful in managing inputs.
@@ -222,11 +222,11 @@ Inserts two strings around the selected text.
 
 
 
-[String:tidy]: /more/Native/String.Extras#String:tidy
+[String:tidy]: /more/Types/String.Extras#String:tidy
 [Element:getTextInRange]: #Element:getTextInRange
 [Element:getSelectionStart]: #Element:getSelectionStart
 [Element]: /core/Element/Element
 [Element:get]: /core/Element/Element#Element:get
 [Element:set]: /core/Element/Element#Element:set
 [Element:erase]: /core/Element/Element#Element:erase
-[Hash]: /core/Native/Hash
+[Hash]: /more/Native/Hash

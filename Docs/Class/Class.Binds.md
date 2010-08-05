@@ -1,6 +1,6 @@
 Class: Class.Binds {#Class-Binds}
 =================================
-Extends the [Class][] native, this is a mutator.
+Extends [Class][], this is a mutator.
 
 ### Tutorial/Demo
 

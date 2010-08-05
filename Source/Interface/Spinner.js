@@ -173,7 +173,8 @@ if (window.Request) {
 Element.Properties.spinner = {
 
 	set: function(options){
-		this.retrieve('spinner').setOptions(options);
+		var spinner = this.retrieve('spinner');
+		spinner.setOptions(options);
 		return this;
 	},
 
@@ -191,7 +192,7 @@ Element.Properties.spinner = {
 Element.implement({
 
 	spin: function(options){
-		this.get('spinner').setOptions(options).show();
+		this.get('spinner', options).show();
 		return this;
 	},
 

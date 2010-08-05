@@ -108,7 +108,7 @@ provides: [Keyboard]
 
 		deactivate: function(instance){
 			if (instance) {
-				if(instance === this.activeKB) {
+				if (instance === this.activeKB) {
 					this.activeKB = null;
 					instance.fireEvent('deactivate');
 					Keyboard.manager.fireEvent('changed');

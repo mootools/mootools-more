@@ -195,7 +195,7 @@ Form.Validator.addAllThese([
 				var sum = 0;
 				var cur = 0;
 
-				for(var i=ccNum.length-1; i>=0; --i) {
+				for (var i=ccNum.length-1; i>=0; --i) {
 					cur = ccNum.charAt(i).toInt();
 					if (cur == 0) { continue; }
 

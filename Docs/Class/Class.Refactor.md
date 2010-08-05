@@ -1,7 +1,7 @@
 Native: Class {#Class}
 =====================
 
-Extends the [Class][] native.
+Extends [Class][].
 
 ### Tutorial/Demo
 

@@ -1,4 +1,4 @@
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the [Element][] native object with some basic shortcuts (like .hide and .show).

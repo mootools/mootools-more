@@ -234,10 +234,10 @@ Gets the previously setted Fx.Slide instance or a new one with default options.
 	el.get('slide'); //the Fx.Slide instance
 
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
-Custom Native to allow all of its methods to be used with any DOM element via the dollar function [$][].
+Custom Type to allow all of its methods to be used with any DOM element via the dollar function [$][].
 
 
 Element Method: slide {#Element:slide}

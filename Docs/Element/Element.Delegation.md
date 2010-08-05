@@ -1,7 +1,7 @@
 Type: Element {#Element}
 ==========================
 
-Extends the [Element][] type to include delegations in the addEvent and addEvents methods.
+Extends the [Element][] type to include delegations in the addEvent and addEvents methods. It adds the `:relay` pseudo using [Element.Pseudos][].
 
 ### Important
 
@@ -102,81 +102,11 @@ Removes a series of methods from delegation if the functions were used for deleg
 	$(element).removeEvents('click:relay(a)');
 
 
-Pseudos {#Pseudos}
-==================
-
-`:relay` is called a pseudo. Because :relay needed to be implemented, there was the opportunity to add other useful pseudos as well.
-
-Pseudo: once {#Pseudos:once}
-----------------------------
-
-The event will only fire once. The once pseudo will remove itself after the first excecution.
-
-### Example
-
-	var myElement = document.id('myElement');
-	myElement.addEvent('click:once', function(){
-		alert('you clicked me');
-	});
-	
-	// If the user clicks the element twice, it will only once alert 'you clicked me'
-
-
-Pseudo: relay {#Pseudos:relay}
-------------------------------
-
-:relay has been extensively discussed above already. This pseudo function will
-look if the target element (the clicked element in most cases) satisfies the 
-given selector.
-
-### Example
-
-	var myElement = document.id('myElement');
-	myElement.addEvent('click:relay(a)', function(){
-		alert("clicked a child element of myElement that's an 'a' element");
-	});
-
-
-Event {#Event}
-=============
-
-Function: Event.definePseudo {#Event:Event-definePseudo}
-----------------------------------------------------------
-
-It's possible to define your own pseudos with Event.definePseudo
-
-### Syntax
-	Event.definePseudo(name, fn);
-
-### Arguments:
-1. name - (*string*) The pseudo name, for example `once` will become `click:once`
-2. fn - (*function*) The function that will get fired when the event is fired. This function should decide what will happen with the event, for example execute the event and remove the event
-
-#### Signature:
-
-	fn(element, split, fn, event){
-
-1. element - (*element*) The element the event is added to
-2. split - (*object*) a parsed object of the `event:pseudo(selector)` string
-	- event - (*string*) the part before the `:`
-	- selector - (*string*) between `(` and `)` if the event name looks like `event:pseudo(selector)`
-	- pseudo - (*string*) between the `:` and `(` 
-	- original - (*string*) the original event name, thus `event:pseudo(selector)`
-3. fn - (*function*) This is the function that has been passed in the `addEvent` method. So it is the 'fn' in `myEvent.addEvent('event:pseudo', fn)`
-3. event - (*array*) The [Event][] object
-
-### Example
-
-This is how the :once pseudo is implemented
-
-	Event.definePseudo('once', function(element, split, fn, event){
-		element.fireEvent(split.original, [event])
-			.removeEvent(split.original, fn);
-	});
 
 [Element]: /core/Element/Element
 [addEvent]: /core/Element/Element.Event#Element:addEvent
 [addEvents]: /core/Element/Element.Event#Element:addEvents
 [removeEvent]: /core/Element/Element.Event#Element:removeEvent
 [removeEvents]: /core/Element/Element.Event#Element:removeEvents
-[Event]: /core/Types/Event
+[Element.Pseudos]: /more/Element/Element.Pseudos
+

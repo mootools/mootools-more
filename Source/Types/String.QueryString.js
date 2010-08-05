@@ -38,11 +38,11 @@ String.implement({
 					
 				keys.each(function(key, i){
 					var current = obj[key];
-					if(i < keys.length - 1){
+					if (i < keys.length - 1){
 						obj = obj[key] = current || {};
-					}else if(typeOf(current) == 'array'){
+					} else if (typeOf(current) == 'array'){
 						current.push(value);
-					}else{
+					} else {
 						obj[key] = current != null ? [current, value] : value;
 					}
 				});

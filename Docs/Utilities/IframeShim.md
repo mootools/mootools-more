@@ -115,7 +115,7 @@ This will remove the iframe from memory.
 
 * (*object*) This instance of [IframeShim][]
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the native Element object with a reference to its [IframeShim][] instance.
@@ -131,4 +131,4 @@ Element property: IframeShim {#Element:IframeShim}
 [http://www.macridesweb.com/oltest/IframeShim.html]: http://www.macridesweb.com/oltest/IframeShim.html
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
-[Class.Occlude]: http://mootools.net/docs/more/Class/Class.Occlude
+[Class.Occlude]: /more/Class/Class.Occlude

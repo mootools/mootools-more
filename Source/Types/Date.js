@@ -19,7 +19,7 @@ requires:
   - Core/Array
   - Core/String
   - Core/Number
-  - /Lang
+  - /Locale
   - /Date.English.US
   - /MooTools.More
 
@@ -474,6 +474,6 @@ Date.defineParsers(
 
 MooTools.lang.addEvent('langChange', function(language){
 	if (MooTools.lang.get('Date')) recompile(language);
-}).fireEvent('langChange', MooTools.lang.getCurrentLanguage());
+}).fireEvent('langChange', Locale.getCurrent());
 
 })();

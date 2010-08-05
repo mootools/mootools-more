@@ -45,7 +45,7 @@ Fx.Sort = new Class({
 	},
 
 	sort: function(){
-		if(!this.check(arguments)) return this;
+		if (!this.check(arguments)) return this;
 		var newOrder = Array.flatten(arguments);
 		
 		var top = 0,

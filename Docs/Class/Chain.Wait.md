@@ -31,7 +31,7 @@ Injects pauses between chained events.
 
 * (*object*) - This instance of the class.
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the native Element object with methods to delay effect chains.

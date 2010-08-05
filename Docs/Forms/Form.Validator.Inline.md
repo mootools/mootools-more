@@ -88,7 +88,7 @@ Retrieves the advice message for a field and a given validator name.
 
 * (*element*) A DOM element containing the message for the user.
 
-[Form.Validator]: http://mootools.net/docs/more/Forms/Form.Validator
-[Options]: http://mootools.net/docs/core/Class/Class.Extras#Options
-[Events]: http://mootools.net/docs/core/Class/Class.Extras#Events
-[Fx.Scroll]: http://mootools.net/docs/more/Fx/Fx.Scroll
+[Form.Validator]: /more/Forms/Form.Validator
+[Options]: /core/Class/Class.Extras#Options
+[Events]: /core/Class/Class.Extras#Events
+[Fx.Scroll]: /more/Fx/Fx.Scroll

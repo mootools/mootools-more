@@ -129,4 +129,4 @@ Included Parsers
 * title - sorts on the *title* property of the table data element
 
 [HtmlTable]: /more/Interface/HtmlTable
-[Date.parse]: /more/Native/Date#Date:parse
+[Date.parse]: /more/Types/Date#Date:parse

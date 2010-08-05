@@ -44,7 +44,7 @@ Request.Queue = new Class({
 	},
 
 	initialize: function(options){
-		if(options){
+		if (options){
 			var requests = options.requests;
 			delete options.requests;	
 		}
@@ -53,7 +53,7 @@ Request.Queue = new Class({
 		this.queue = [];
 		this.reqBinders = {};
 		
-		if(requests) this.addRequests(requests);
+		if (requests) this.addRequests(requests);
 	},
 
 	addRequest: function(name, request){
@@ -76,7 +76,7 @@ Request.Queue = new Class({
 	attach: function(name, req){
 		if (req._groupSend) return this;
 		['request', 'complete', 'cancel', 'success', 'failure', 'exception'].each(function(evt){
-			if(!this.reqBinders[name]) this.reqBinders[name] = {};
+			if (!this.reqBinders[name]) this.reqBinders[name] = {};
 			this.reqBinders[name][evt] = function(){
 				this['on' + evt.capitalize()].apply(this, [name, req].append(arguments));
 			}.bind(this);

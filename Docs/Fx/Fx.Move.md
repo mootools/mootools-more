@@ -81,7 +81,7 @@ Moves the element to provided destination or the destination specified in the op
 - If you want to pass in a destination, you must pass in ALL of the options (relativeTo, position, edge, and offset x & y) unless you want to use those already defined in the options at initialization. In other words, if you only pass in one of these options, the rest will be filled in from the options defined at initialization.
 - You can always set new defaults using *setOptions*.
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
 Extends the native Element object with [Fx.Move][] methods.
@@ -132,7 +132,7 @@ Gets the default [Fx.Move][] instance for the Element.
 	el.move({relativeTo:$('myDiv'));
 	el.get('move'); //The Fx.Move instance.
 
-Native: Element {#Element1}
+Type: Element {#Element1}
 ==========================
 
 Adds [Fx.Move][] shortcuts to the [Element][] class.

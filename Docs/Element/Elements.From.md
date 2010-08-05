@@ -1,4 +1,4 @@
-Native: Elements {#Elements}
+Type: Elements {#Elements}
 ==========================
 
 Extends the [Elements][] object to add a static method that returns a collection of elements from a string of html.

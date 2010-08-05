@@ -52,6 +52,7 @@ var Mask = new Class({
 
 	initialize: function(target, options){
 		this.target = document.id(target) || document.id(document.body);
+		this.target.store('Mask', this);
 		this.setOptions(options);
 		this.render();
 		this.inject();
@@ -61,7 +62,7 @@ var Mask = new Class({
 		this.element = new Element('div', {
 			'class': this.options['class'],
 			id: this.options.id || 'mask-' + Date.now(),
-			styles: Object.merge(Object.clone(this.options.style), {
+			styles: Object.merge(this.options.style, {
 				display: 'none'
 			}),
 			events: {
@@ -79,10 +80,8 @@ var Mask = new Class({
 	},
 
 	inject: function(target, where){
-		if (!where) where = this.options.inject ? this.options.inject.where : '';
-		if (!where) where = this.target == document.body ? 'inside' : 'after';
-		if (!target) target = this.options.inject ? this.options.inject.target : '' || this.target;
-		
+		where = where || this.options.inject ? this.options.inject.where : '' || this.target == document.body ? 'inside' : 'after';
+		target = target || this.options.inject ? this.options.inject.target : '' || this.target;
 		this.element.inject(target, where);
 		if (this.options.useIframeShim) {
 			this.shim = new IframeShim(this.element, this.options.iframeShimOptions);
@@ -127,24 +126,28 @@ var Mask = new Class({
 		if (!this.hidden) return this;
 		window.addEvent('resize', this.position);
 		this.position();
-		
+		this.showMask.apply(this, arguments);
+		return this;
+	},
+
+	showMask: function(){
 		this.element.setStyle('display', 'block');
 		this.hidden = false;
 		this.fireEvent('show');
-		
-		return this;
 	},
 
 	hide: function(){
 		if (this.hidden) return this;
 		window.removeEvent('resize', this.position);
-		
+		this.hideMask.apply(this, arguments);
+		if (this.options.destroyOnHide) return this.destroy();
+		return this;
+	},
+
+	hideMask: function(){
 		this.element.setStyle('display', 'none');
 		this.hidden = true;
 		this.fireEvent('hide');
-		
-		if (this.options.destroyOnHide) return this.destroy();
-		return this;
 	},
 
 	toggle: function(){
@@ -152,6 +155,7 @@ var Mask = new Class({
 	},
 
 	destroy: function(){
+		this.hide();
 		this.element.destroy();
 		this.fireEvent('destroy');
 		this.target.eliminate('mask');
@@ -163,22 +167,16 @@ Element.Properties.mask = {
 
 	set: function(options){
 		var mask = this.retrieve('mask');
-		if (!mask){
-			mask = new Mask(this, options);
-			this.store('mask', mask);
-		} else {
-			mask.setOptions(options);
-		}
-		return this;
+		return this.eliminate('mask').store('mask:options', options);
 	},
 
-	get: function(){
-		var mask = this.retrieve('mask')
-		if (!mask){
-			mask = new Mask(this);
-			this.store('mask', mask);
+	get: function(options){
+		if (options || !this.retrieve('mask')){
+			if (this.retrieve('mask')) this.retrieve('mask').destroy();
+			if (options || !this.retrieve('mask:options')) this.set('mask', options);
+			this.store('mask', new Mask(this, this.retrieve('mask:options')));
 		}
-		return mask;
+		return this.retrieve('mask');
 	}
 
 };
@@ -186,13 +184,12 @@ Element.Properties.mask = {
 Element.implement({
 
 	mask: function(options){
-		this.set('mask', options).get('mask').show();
+		this.get('mask', options).show();
 		return this;
 	},
 
 	unmask: function(){
-		var mask = this.retrieve('mask');
-		if (mask) mask.hide();
+		this.get('mask').hide();
 		return this;
 	}
 

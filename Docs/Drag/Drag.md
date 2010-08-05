@@ -153,10 +153,10 @@ Stops (removes) all attached events from the Drag instance. If the event is pass
 
 
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
-Custom Native to allow all of its methods to be used with any DOM element via the dollar function [$][].
+Custom Type to allow all of its methods to be used with any DOM element via the document.id function [document.id][].
 
 
 
@@ -191,12 +191,12 @@ Adds drag-to-resize behavior to an Element using supplied options.
 
 
 
-[$]: /core/Element/Element/#dollar
+[document.id]: /core/Element/Element#Window:document-id
 [Element:addEvent]: /core/Element/Element.Event/#Element:addEvent
 [Element:makeDraggable]: /more/Drag/Drag.Move/#Element:makeDraggable
 [Events]: /core/Class/Class.Extras#Events
-[Event:preventDefault]: /core/Native/Event#Event:prevenDefault
-[Event:stopPropagation]: /core/Native/Event#Event:stopPropagation
+[Event:preventDefault]: /core/Types/Event#Event:prevenDefault
+[Event:stopPropagation]: /core/Types/Event#Event:stopPropagation
 [Chain]: /core/Class/Class.Extras#Chain
 [Options]: /core/Class/Class.Extras#Options
 [W3Schools: CSS Units]: http://www.w3schools.com/css/css_units.asp
