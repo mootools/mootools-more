@@ -22,7 +22,7 @@ provides: [Form.Validator.German]
 ...
 */
 
-MooTools.lang.set('de-DE', 'Form.Validator', {
+ Locale.define('de-DE', 'Form.Validator', {
 
 	required: 'Dieses Eingabefeld muss ausgef&uuml;llt werden.',
 	minLength: 'Geben Sie bitte mindestens {minLength} Zeichen ein (Sie haben nur {length} Zeichen eingegeben).',

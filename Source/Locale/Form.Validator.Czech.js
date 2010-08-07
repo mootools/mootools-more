@@ -20,7 +20,7 @@ provides: [Form.Validator.Czech]
 ...
 */
 
-MooTools.lang.set('cs-CZ', 'Form.Validator', {
+ Locale.define('cs-CZ', 'Form.Validator', {
 
 	required: 'Tato položka je povinná.',
 	minLength: 'Zadejte prosím alespoň {minLength} znaků (napsáno {length} znaků).',

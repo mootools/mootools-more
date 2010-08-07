@@ -20,7 +20,7 @@ provides: [Date.Portuguese]
 ...
 */
 
-MooTools.lang.set('pt-PT', 'Date', {
+ Locale.define('pt-PT', 'Date', {
 
 	months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
 	days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],

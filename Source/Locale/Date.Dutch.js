@@ -21,7 +21,7 @@ provides: [Date.Dutch]
 ...
 */
 
-MooTools.lang.set('nl-NL', 'Date', {
+ Locale.define('nl-NL', 'Date', {
 
 	months: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
 	days: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],

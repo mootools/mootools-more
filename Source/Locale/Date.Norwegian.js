@@ -20,7 +20,7 @@ provides: [Date.Norwegian]
 ...
 */
 
-MooTools.lang.set('no-NO', 'Date', {
+ Locale.define('no-NO', 'Date', {
 
 	// Culture's date order: DD.MM.YYYY
 	dateOrder: ['date', 'month', 'year'],

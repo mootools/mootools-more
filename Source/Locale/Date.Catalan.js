@@ -20,7 +20,7 @@ provides: [Date.Catalan]
 ...
 */
 
-MooTools.lang.set('ca-CA', 'Date', {
+ Locale.define('ca-CA', 'Date', {
 
 	months: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juli', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
 	days: ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'],

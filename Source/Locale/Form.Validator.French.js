@@ -21,7 +21,7 @@ provides: [Form.Validator.French]
 ...
 */
 
-MooTools.lang.set('fr-FR', 'Form.Validator', {
+ Locale.define('fr-FR', 'Form.Validator', {
 
 	required: 'Ce champ est obligatoire.',
 	minLength: 'Veuillez saisir un minimum de {minLength} caract&egrave;re(s) (vous avez saisi {length} caract&egrave;re(s)).',

@@ -20,7 +20,7 @@ provides: [Form.Validator.Slovenian]
 ...
 */
 
-MooTools.lang.set('si-SI', 'Form.Validator', {
+ Locale.define('si-SI', 'Form.Validator', {
 
 	required: 'To polje je obvezno',
 	minLength: 'Prosim, vnesite vsaj {minLength} znakov (vnesli ste {length} znakov).',

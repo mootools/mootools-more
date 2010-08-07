@@ -20,7 +20,7 @@ provides: [Form.Validator.German.CH]
 ...
 */
 
-MooTools.lang.set('de-CH', 'Form.Validator', {
+ Locale.define('de-CH', 'Form.Validator', {
 
 	required: 'Dieses Feld ist obligatorisch.',
 	minLength: 'Geben Sie bitte mindestens {minLength} Zeichen ein (Sie haben {length} Zeichen eingegeben).',

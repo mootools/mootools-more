@@ -21,7 +21,7 @@ provides: [Date.Spanish.AR]
 ...
 */
 
-MooTools.lang.set('es-AR', 'Date', {
+ Locale.define('es-AR', 'Date', {
 
 	months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 	days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],

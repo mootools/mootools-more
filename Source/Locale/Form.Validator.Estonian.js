@@ -20,7 +20,7 @@ provides: [Form.Validator.Estonian]
 ...
 */
 
-MooTools.lang.set('et-EE', 'Form.Validator', {
+ Locale.define('et-EE', 'Form.Validator', {
 
 	required: 'Väli peab olema täidetud.',
 	minLength: 'Palun sisestage vähemalt {minLength} tähte (te sisestasite {length} tähte).',
