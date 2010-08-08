@@ -20,7 +20,7 @@ provides: [Form.Validator.Hungarian]
 ...
 */
 
- Locale.define('hu-HU', 'Form.Validator', {
+ Locale.define('hu-HU', 'FormValidator', {
 
 	required: 'A mező kitöltése kötelező.',
 	minLength: 'Legalább {minLength} karakter megadása szükséges (megadva {length} karakter).',

@@ -20,7 +20,7 @@ provides: [Form.Validator.Arabic]
 ...
 */
 
- Locale.define('ar', 'Form.Validator', {
+ Locale.define('ar', 'FormValidator', {
 
 	required: 'هذا الحقل مطلوب.',
 	minLength: 'رجاءً إدخال {minLength}  أحرف على الأقل (تم إدخال {length} أحرف).',

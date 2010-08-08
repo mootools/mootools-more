@@ -20,7 +20,7 @@ provides: [Form.Validator.Czech]
 ...
 */
 
- Locale.define('cs-CZ', 'Form.Validator', {
+ Locale.define('cs-CZ', 'FormValidator', {
 
 	required: 'Tato položka je povinná.',
 	minLength: 'Zadejte prosím alespoň {minLength} znaků (napsáno {length} znaků).',

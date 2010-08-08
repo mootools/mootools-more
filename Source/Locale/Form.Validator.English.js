@@ -20,7 +20,7 @@ provides: [Form.Validator.English]
 ...
 */
 
- Locale.define('en-US', 'Form.Validator', {
+ Locale.define('en-US', 'FormValidator', {
 
 	required: 'This field is required.',
 	minLength: 'Please enter at least {minLength} characters (you entered {length} characters).',

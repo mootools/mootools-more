@@ -21,7 +21,7 @@ provides: [Form.Validator.Italian]
 ...
 */
 
- Locale.define('it-IT', 'Form.Validator', {
+ Locale.define('it-IT', 'FormValidator', {
 
 	required: 'Il campo &egrave; obbligatorio.',
 	minLength: 'Inserire almeno {minLength} caratteri (ne sono stati inseriti {length}).',

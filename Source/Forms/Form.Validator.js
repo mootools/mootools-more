@@ -280,7 +280,7 @@ Form.Validator = new Class({
 });
 
 Form.Validator.getMsg = function(key){
-	return Locale.get('Form.Validator', key);
+	return Locale.get('FormValidator.' + key);
 };
 
 Form.Validator.adders = {

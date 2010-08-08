@@ -22,7 +22,7 @@ provides: [Form.Validator.German]
 ...
 */
 
- Locale.define('de-DE', 'Form.Validator', {
+ Locale.define('de-DE', 'FormValidator', {
 
 	required: 'Dieses Eingabefeld muss ausgef&uuml;llt werden.',
 	minLength: 'Geben Sie bitte mindestens {minLength} Zeichen ein (Sie haben nur {length} Zeichen eingegeben).',

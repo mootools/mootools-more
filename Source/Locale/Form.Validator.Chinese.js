@@ -22,7 +22,7 @@ provides: [Form.Validator.Chinese, Form.Validator.CurrencyYuanValidator]
 */
 
 // Simplified Chinese
- Locale.define('zh-CHS', 'Form.Validator', {
+ Locale.define('zh-CHS', 'FormValidator', {
 
 	required: '此项必填。',
 	minLength: '请至少输入 {minLength} 个字符 (已输入 {length} 个)。',
@@ -59,7 +59,7 @@ provides: [Form.Validator.Chinese, Form.Validator.CurrencyYuanValidator]
 });
 
 // Traditional Chinese
- Locale.define('zh-CHT', 'Form.Validator', {
+ Locale.define('zh-CHT', 'FormValidator', {
 
 	required: '此項必填。 ',
 	minLength: '請至少輸入{minLength} 個字符(已輸入{length} 個)。 ',

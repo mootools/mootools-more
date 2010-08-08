@@ -21,7 +21,7 @@ provides: [Form.Validator.Catalan]
 ...
 */
 
- Locale.define('ca-CA', 'Form.Validator', {
+ Locale.define('ca-CA', 'FormValidator', {
 
 	required: 'Aquest camp es obligatori.',
 	minLength: 'Per favor introdueix al menys {minLength} caracters (has introduit {length} caracters).',

@@ -20,7 +20,7 @@ provides: [Form.Validator.Swedish]
 ...
 */
 
- Locale.define('sv-SE', 'Form.Validator', {
+ Locale.define('sv-SE', 'FormValidator', {
 
 	required: 'Fältet är obligatoriskt.',
 	minLength: 'Ange minst {minLength} tecken (du angav {length} tecken).',

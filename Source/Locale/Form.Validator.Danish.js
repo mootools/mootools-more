@@ -20,7 +20,7 @@ provides: [Form.Validator.Danish]
 ...
 */
 
- Locale.define('da-DK', 'Form.Validator', {
+ Locale.define('da-DK', 'FormValidator', {
 
 	required: 'Feltet skal udfyldes.',
 	minLength: 'Skriv mindst {minLength} tegn (du skrev {length} tegn).',
