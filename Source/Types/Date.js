@@ -253,7 +253,7 @@ var parseWord = function(type, word, num){
 Date.extend({
 
 	getMsg: function(key, args){
-		return Locale.get('Date', key, args);
+		return Locale.get('Date.' + key, args);
 	},
 
 	units: {
