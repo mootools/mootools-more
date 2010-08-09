@@ -107,6 +107,7 @@ var Sortables = new Class({
 		if (clone.get('html').test('radio')) {
 			clone.getElements('input[type=radio]').each(function(input, i) {
 				input.set('name', 'clone_' + i);
+				if (input.get('checked')) element.getElements('input[type=radio]')[i].set('checked', true);
 			});
 		}
 		
