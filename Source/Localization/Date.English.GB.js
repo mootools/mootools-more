@@ -22,8 +22,8 @@ provides: [Date.English.GB]
 
 MooTools.lang.set('en-GB', 'Date', {
 
+	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
-	
 	shortDate: '%d/%m/%Y',
 	shortTime: '%H:%M'
 

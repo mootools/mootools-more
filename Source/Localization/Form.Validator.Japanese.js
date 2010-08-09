@@ -5,9 +5,9 @@ script: Form.Validator.Japanese.js
 
 name: Form.Validator.Japanese
 
-description: Form.Validator messages in Japanese.
+description: Form Validator messages for Japanese.
 
-license: MIT-style
+license: MIT-style license
 
 authors:
   - Noritaka Horio
@@ -17,28 +17,29 @@ requires:
 
 provides: [Form.Validator.Japanese]
 
+...
 */
 
 MooTools.lang.set("ja-JP", "Form.Validator", {
 
-	required:'入力は必須です。',
-	minLength:'入力文字数は{minLength}以上にしてください。({length}文字)',
-	maxLength:'入力文字数は{maxLength}以下にしてください。({length}文字)',
-	integer:'整数を入力してください。',
-	numeric:'入力できるのは数値だけです。(例: "1", "1.1", "-1", "-1.1"....)',
-	digits:'入力できるのは数値と句読記号です。 (例: -や+を含む電話番号など).',
-	alpha:'入力できるのは半角英字だけです。それ以外の文字は入力できません。',
-	alphanum:'入力できるのは半角英数字だけです。それ以外の文字は入力できません。',
-	dateSuchAs:'有効な日付を入力してください。{date}',
-	dateInFormatMDY:'日付の書式に誤りがあります。YYYY/MM/DD (i.e. "1999/12/31")',
-	email:'メールアドレスに誤りがあります。',
-	url:'URLアドレスに誤りがあります。',
-	currencyDollar:'金額に誤りがあります。',
-	oneRequired:'ひとつ以上入力してください。',
+	required: '入力は必須です。',
+	minLength: '入力文字数は{minLength}以上にしてください。({length}文字)',
+	maxLength: '入力文字数は{maxLength}以下にしてください。({length}文字)',
+	integer: '整数を入力してください。',
+	numeric: '入力できるのは数値だけです。(例: "1", "1.1", "-1", "-1.1"....)',
+	digits: '入力できるのは数値と句読記号です。 (例: -や+を含む電話番号など).',
+	alpha: '入力できるのは半角英字だけです。それ以外の文字は入力できません。',
+	alphanum: '入力できるのは半角英数字だけです。それ以外の文字は入力できません。',
+	dateSuchAs: '有効な日付を入力してください。{date}',
+	dateInFormatMDY: '日付の書式に誤りがあります。YYYY/MM/DD (i.e. "1999/12/31")',
+	email: 'メールアドレスに誤りがあります。',
+	url: 'URLアドレスに誤りがあります。',
+	currencyDollar: '金額に誤りがあります。',
+	oneRequired: 'ひとつ以上入力してください。',
 	errorPrefix: 'エラー: ',
 	warningPrefix: '警告: ',
 
-	//FormValidator.Extras
+	// FormValidator.Extras
 	noSpace: 'スペースは入力できません。',
 	reqChkByNode: '選択されていません。',
 	requiredChk: 'この項目は必須です。',

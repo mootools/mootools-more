@@ -22,25 +22,24 @@ provides: [Form.Validator.Czech]
 
 MooTools.lang.set('cs-CZ', 'Form.Validator', {
 
-	required:'Tato položka je povinná.',
-	minLength:'Zadejte prosím alespoň {minLength} znaků (napsáno {length} znaků).',
-	maxLength:'Zadejte prosím méně než {maxLength} znaků (nápsáno {length} znaků).',
-	integer:'Zadejte prosím celé číslo. Desetinná čísla (např. 1.25) nejsou povolena.',
-	numeric:'Zadejte jen číselné hodnoty  (tj. "1" nebo "1.1" nebo "-1" nebo "-1.1").',
-	digits:'Zadejte prosím pouze čísla a interpunkční znaménka(například telefonní číslo s pomlčkami nebo tečkami je povoleno).',
-	alpha:'Zadejte prosím pouze písmena (a-z). Mezery nebo jiné znaky nejsou povoleny.',
-	alphanum:'Zadejte prosím pouze písmena (a-z) nebo číslice (0-9). Mezery nebo jiné znaky nejsou povoleny.',
-	dateSuchAs:'Zadejte prosím platné datum jako {date}',
-	dateInFormatMDY:'Zadejte prosím platné datum jako MM / DD / RRRR (tj. "12/31/1999")',
-	email:'Zadejte prosím platnou e-mailovou adresu. Například "fred@domain.com".',
-	url:'Zadejte prosím platnou URL adresu jako http://www.google.com.',
-	currencyDollar:'Zadejte prosím platnou částku. Například $100.00.',
-	oneRequired:'Zadejte prosím alespoň jednu hodnotu pro tyto položky.',
+	required: 'Tato položka je povinná.',
+	minLength: 'Zadejte prosím alespoň {minLength} znaků (napsáno {length} znaků).',
+	maxLength: 'Zadejte prosím méně než {maxLength} znaků (nápsáno {length} znaků).',
+	integer: 'Zadejte prosím celé číslo. Desetinná čísla (např. 1.25) nejsou povolena.',
+	numeric: 'Zadejte jen číselné hodnoty  (tj. "1" nebo "1.1" nebo "-1" nebo "-1.1").',
+	digits: 'Zadejte prosím pouze čísla a interpunkční znaménka(například telefonní číslo s pomlčkami nebo tečkami je povoleno).',
+	alpha: 'Zadejte prosím pouze písmena (a-z). Mezery nebo jiné znaky nejsou povoleny.',
+	alphanum: 'Zadejte prosím pouze písmena (a-z) nebo číslice (0-9). Mezery nebo jiné znaky nejsou povoleny.',
+	dateSuchAs: 'Zadejte prosím platné datum jako {date}',
+	dateInFormatMDY: 'Zadejte prosím platné datum jako MM / DD / RRRR (tj. "12/31/1999")',
+	email: 'Zadejte prosím platnou e-mailovou adresu. Například "fred@domain.com".',
+	url: 'Zadejte prosím platnou URL adresu jako http://www.google.com.',
+	currencyDollar: 'Zadejte prosím platnou částku. Například $100.00.',
+	oneRequired: 'Zadejte prosím alespoň jednu hodnotu pro tyto položky.',
 	errorPrefix: 'Chyba: ',
 	warningPrefix: 'Upozornění: ',
 
-	//Form.Validator.Extras
-
+	// Form.Validator.Extras
 	noSpace: 'V této položce nejsou povoleny mezery',
 	reqChkByNode: 'Nejsou vybrány žádné položky.',
 	requiredChk: 'Tato položka je vyžadována.',
@@ -53,6 +52,6 @@ MooTools.lang.set('cs-CZ', 'Form.Validator', {
 	beforeDate: 'Datum by mělo být stejné nebo menší než {label}.',
 	startMonth: 'Vyberte počáteční měsíc.',
 	sameMonth: 'Tyto dva datumy musí být ve stejném měsíci - změňte jeden z nich.',
-    creditcard: 'Zadané číslo kreditní karty je neplatné. Prosím opravte ho. Bylo zadáno {length} čísel.'
+	creditcard: 'Zadané číslo kreditní karty je neplatné. Prosím opravte ho. Bylo zadáno {length} čísel.'
 
 });

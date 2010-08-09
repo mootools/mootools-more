@@ -24,19 +24,17 @@ MooTools.lang.set('cs-CZ', 'Date', {
 
 	months: ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'],
 	days: ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'],
-	//culture's date order: MM/DD/YYYY
+
+	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
 	shortDate: '%d/%m/%Y',
 	shortTime: '%H:%M',
 	AM: 'dop.',
 	PM: 'odp.',
 
-	/* Date.Extras */
-	ordinal: function(dayOfMonth){
-		return '.';
-	},
+	// Date.Extras
+	ordinal: '.',
 
-    // TODO : in examples use and fix it
 	lessThanMinuteAgo: 'méně než minutou',
 	minuteAgo: 'přibližně před minutou',
 	minutesAgo: 'před {delta} minutami',
@@ -44,6 +42,7 @@ MooTools.lang.set('cs-CZ', 'Date', {
 	hoursAgo: 'před {delta} hodinami',
 	dayAgo: 'před dnem',
 	daysAgo: 'před {delta} dni',
+
 	lessThanMinuteUntil: 'před méně než minutou',
 	minuteUntil: 'asi před minutou',
 	minutesUntil: ' asi před {delta} minutami',

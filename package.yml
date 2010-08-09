@@ -75,6 +75,7 @@ sources:
   - "Source/Interface/Spinner.js"
   - "Source/Localization/Date.English.US.js"
   - "Source/Localization/Form.Validator.English.js"
+  - "Source/Localization/Date.Arabic.js"
   - "Source/Localization/Date.Catalan.js"
   - "Source/Localization/Date.Czech.js"
   - "Source/Localization/Date.Danish.js"
@@ -82,15 +83,25 @@ sources:
   - "Source/Localization/Date.English.GB.js"
   - "Source/Localization/Date.Estonian.js"
   - "Source/Localization/Date.French.js"
-  - "Source/Localization/Date.German.CH.js"
   - "Source/Localization/Date.German.js"
+<<<<<<< HEAD
+=======
+  - "Source/Localization/Date.German.CH.js"
+  - "Source/Localization/Date.Hungarian.js"
+>>>>>>> f6871cf... Localization madness.
   - "Source/Localization/Date.Italian.js"
   - "Source/Localization/Date.Norwegian.js"
   - "Source/Localization/Date.Persian.js"
   - "Source/Localization/Date.Polish.js"
+  - "Source/Localization/Date.Portuguese.js"
   - "Source/Localization/Date.Portuguese.BR.js"
   - "Source/Localization/Date.Russian.js"
+<<<<<<< HEAD
+=======
+  - "Source/Localization/Date.Slovenian.js"
+>>>>>>> f6871cf... Localization madness.
   - "Source/Localization/Date.Spanish.js"
+  - "Source/Localization/Date.Spanish.AR.js"
   - "Source/Localization/Date.Swedish.js"
   - "Source/Localization/Date.Ukrainian.js"
   - "Source/Localization/Form.Validator.Arabic.js"
@@ -107,9 +118,14 @@ sources:
   - "Source/Localization/Form.Validator.Norwegian.js"
   - "Source/Localization/Form.Validator.Persian.js"
   - "Source/Localization/Form.Validator.Polish.js"
-  - "Source/Localization/Form.Validator.Portuguese.BR.js"
   - "Source/Localization/Form.Validator.Portuguese.js"
+  - "Source/Localization/Form.Validator.Portuguese.BR.js"
   - "Source/Localization/Form.Validator.Russian.js"
+<<<<<<< HEAD
+=======
+  - "Source/Localization/Form.Validator.Slovenian.js"
+>>>>>>> f6871cf... Localization madness.
   - "Source/Localization/Form.Validator.Spanish.js"
+  - "Source/Localization/Form.Validator.Spanish.AR.js"
   - "Source/Localization/Form.Validator.Swedish.js"
   - "Source/Localization/Form.Validator.Ukrainian.js"

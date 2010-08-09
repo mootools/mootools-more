@@ -5,12 +5,13 @@ script: Date.Spanish.AR.js
 
 name: Date.Spanish.AR
 
-description: Date messages for Spanish (Argentinean variation).
+description: Date messages for Spanish (Argentinean).
 
 license: MIT-style license
 
 authors:
-  - Ãlfons Sanchez & Diego Massanti
+  - Ãlfons Sanchez
+  - Diego Massanti
 
 requires:
   - /Lang
@@ -24,15 +25,15 @@ MooTools.lang.set('es-AR', 'Date', {
 
 	months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 	days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-	//culture's date order: MM/DD/YYYY
+
+	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
+	shortDate: '%d/%m/%Y',
+	shortTime: '%H:%M',
 	AM: 'AM',
 	PM: 'PM',
 
-	shortDate: '%d/%m/%Y',
-	shortTime: '%H:%M',
-
-	/* Date.Extras */
+	// Date.Extras
 	ordinal: '',
 
 	lessThanMinuteAgo: 'hace menos de un minuto',
@@ -48,6 +49,7 @@ MooTools.lang.set('es-AR', 'Date', {
 	monthsAgo: 'hace {delta} meses',
 	yearAgo: 'hace un año',
 	yearsAgo: 'hace {delta} años',
+
 	lessThanMinuteUntil: 'menos de un minuto desde ahora',
 	minuteUntil: 'un minuto desde ahora',
 	minutesUntil: '{delta} minutos desde ahora',
