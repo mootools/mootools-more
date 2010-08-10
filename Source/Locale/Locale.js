@@ -45,11 +45,8 @@ provides: [Locale]
 		
 		define: function(name, set, key, value){
 			/*<1.2compat>*/
-			if (name == 'cascades'){
-				return this.setCascades(current, set);
-			} else if (set == 'cascades'){
-				return this.setCascades(name, key);
-			}
+			if (name == 'cascades') return this.setCascades(current, set);
+			if (set == 'cascades') return this.setCascades(name, key);
 			/*</1.2compat>*/
 
 			data[name] = data[name] || {};
@@ -98,7 +95,7 @@ provides: [Locale]
 		},
 		
 		cascades: function(){
-			cascades[current] = cascades[current] || [];
+			if (!cascades[current]) cascades[current] = [];
 			return cascadeMethods;
 		},
 		
