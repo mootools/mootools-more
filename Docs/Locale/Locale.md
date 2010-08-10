@@ -7,7 +7,7 @@ Contains methods and data necessary to provide localization.
 
 * The locale sets are protected in a private variable that can only be altered using methods in *Locale* documented below. Though you can retrieve locale sets which are objects, you should not alter these through assignment but instead use the *.define* method.
 * Locale sets can contain any type of object, so, for instance, a language item could be an *array*, a *function*, a *string*, or even another *class*. Classes that make use of these items must be aware of the types of objects in the language file.
-* Objects that are functions are executed and their results are returned. So if you execute *Locale.get('Date', 'ordinal', 4)*, then the ordinal member will be executed and passed *4* as its argument. If *ordinal* is not a function, then its value will simply be returned.
+* Objects that are functions are executed and their results are returned. So if you execute *Locale.get('Date.ordinal', 4)*, then the ordinal member will be executed and passed *4* as its argument. If *ordinal* is not a function, then its value will simply be returned.
 * Users are encouraged to send in updates and additions to the MooTools team to help us grow this collection of translations.
 
 Example language file
@@ -132,21 +132,20 @@ Retrieves a set of locale properties for the current language or the whole set.
 
 ### Syntax
 
-	Locale.get(set[, key, args]);
+	Locale.get(key[, args]);
 
 ### Arguments
 
-1. set - (*string*) The set you wish to retrieve.
-2. key - (*string*: optional) The member of the set you wish to retrieve. Dots `.` can be used to find nested properties.
-3. args - (*mixed*: optional) A single value or an array of values that are passed to the language value (if it is not a function, these are ignored; if it is a function, these are passed);
+1. key - (*string*: optional) The member you wish to retrieve. This should look like `Set.key`.
+2. args - (*mixed*: optional) A single value or an array of values that are passed to the language value (if it is not a function, these are ignored; if it is a function, these are passed);
 
 
 ### Example
 
-	Locale.get('Date', 'dayAgo'); //"1 day ago"
-	Locale.get('Date', 'nested.property'); // the get method is using [Object.getFromPath][] to find properties
-	Locale.get('Date', 'ordinal', 1); //"st" > as in "1st"
-	Locale.get('Date', 'dayAgo', 'foo'); //foo is ignored
+	Locale.get('Date.dayAgo'); //"1 day ago"
+	Locale.get('Date.nested.property'); // the get method is using [Object.getFromPath][] to find properties
+	Locale.get('Date.ordinal', 1); //"st" > as in "1st"
+	Locale.get('Date.dayAgo', 'foo'); //foo is ignored
 	Locale.get('Date'); //returns the object of key/values for Date in the current language
 
 ### Returns
@@ -155,6 +154,9 @@ Retrieves a set of locale properties for the current language or the whole set.
 * If passed a valid set and no key, returns an object containing all the key/values in the translation.
 * If passed a valid set, key, and arguments, passes the arguments to the value if it is a function and returns what it returns, otherwise returns the value.
 
+### Notes:
+
+1. Dots '`.`' in the key argument can be used to find nested properties.
 
 Locale method: setCascades {#Locale:setCascades}
 ------------------------------------------------
