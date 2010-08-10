@@ -10,7 +10,7 @@ License:
 describe('Locale', function(){
 
 	// In the specs there is only english available
-	Locale.define('fr-FR', 'Form.Validator', {
+	Locale.define('fr-FR', 'FormValidator', {
 		required: 'Ce champ est obligatoire.'
 	});
 
@@ -18,19 +18,19 @@ describe('Locale', function(){
 	it('should return english form validator message', function(){
 		if (MooTools.lang) expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
 		
-		expect(Locale.get('FormValidator', 'required')).toEqual('This field is required.');
+		expect(Locale.get('FormValidator.required')).toEqual('This field is required.');
 	});
 	
 	it('should cascade through to english', function(){
 		Locale.setCurrent('en-GB');
-		expect(Locale.get('Form.Validator', 'required')).toEqual('This field is required.');
+		expect(Locale.get('FormValidator.required')).toEqual('This field is required.');
 	});
 	
 	it('should return french form validator message', function(){
 		var old = Locale.getCurrent();
 		Locale.setCurrent('fr-FR');
 	
-		expect(Locale.get('Form.Validator', 'required')).toEqual('Ce champ est obligatoire.');
+		expect(Locale.get('FormValidator.required')).toEqual('Ce champ est obligatoire.');
 	
 		Locale.setCurrent(old);
 	});
