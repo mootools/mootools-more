@@ -111,8 +111,7 @@ provides: [Locale]
 	lang.setLanguage = Locale.setCurrent;
 	lang.getCurrentLanguage = Locale.getCurrent;
 	lang.set = Locale.define;
-	for (var key in Locale)
-		lang[key] = Locale[key];
+	for (var key in Locale) lang[key] = Locale[key];
 	
 	lang.get = function(set, key, args){
 		if (key) set += '.' + key;
