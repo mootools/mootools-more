@@ -6,17 +6,19 @@
 <script src="/depender/build?require=Core/Element,More/Chain.Wait"></script>
 <script>
 var chain = new Chain();
-var stamp = function(){
-	$('foo').adopt(new Element('p').appendText(new Date()));
-	chain.callChain();
+var stamp = function(id){
+	return function(){
+		$('foo').adopt(new Element('p', {id: id}).appendText(new Date()));
+		chain.callChain();
+	};
 };
 
 
-chain.chain(stamp);
+chain.chain(stamp('first'));
 chain.wait(1000);
-chain.chain(stamp);
+chain.chain(stamp('second'));
 chain.wait(1000);
-chain.chain(stamp);
+chain.chain(stamp('third'));
 chain.wait(1000);
 chain.callChain();
 </script>
