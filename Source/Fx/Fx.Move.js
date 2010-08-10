@@ -36,7 +36,7 @@ Fx.Move = new Class({
 		var topLeft = this.element.getStyles('top', 'left');
 		if (topLeft.top == 'auto' || topLeft.left == 'auto') {
 			var op;
-			if (!Browser.Engine.trident){
+			if (!Browser.ie){
 				var parent = this.element.getParent();
 				op = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 			}
@@ -45,7 +45,7 @@ Fx.Move = new Class({
 			if (topLeft.top == 'auto') this.element.setStyle('top', current.y - margin['margin-top'].toInt());
 			if (topLeft.left == 'auto') this.element.setStyle('left', current.x - margin['margin-left'].toInt());
 		}
-		return this.parent(this.element.position($merge(this.options, destination, {returnPos: true})));
+		return this.parent(this.element.position(Object.merge(this.options, destination, {returnPos: true})));
 	}
 
 });
