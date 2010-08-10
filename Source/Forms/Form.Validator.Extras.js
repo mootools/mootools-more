@@ -178,7 +178,7 @@ Form.Validator.addAllThese([
 		},
 		test: function(element){
 			// required is a different test
-			if (Form.Validator.getValidator('IsEmpty').test(element)) { return true; }
+			if (Form.Validator.getValidator('IsEmpty').test(element)) return true;
 
 			// Clean number value
 			var ccNum = element.get('value');
@@ -191,24 +191,26 @@ Form.Validator.addAllThese([
 			else if (ccNum.test(/^3[47][0-9]{13}$/)) valid_type = 'American Express';
 			else if (ccNum.test(/^6011[0-9]{12}$/)) valid_type = 'Discover';
 
-			if (valid_type) {
+			if (valid_type){
 				var sum = 0;
 				var cur = 0;
 
-				for (var i=ccNum.length-1; i>=0; --i) {
+				for (var i=ccNum.length-1; i>=0; --i){
 					cur = ccNum.charAt(i).toInt();
-					if (cur == 0) { continue; }
+					if (cur == 0) continue;
 
-					if ((ccNum.length-i) % 2 == 0) { cur += cur; }
-					if (cur > 9) { cur = cur.toString().charAt(0).toInt() + cur.toString().charAt(1).toInt(); }
+					if ((ccNum.length-i) % 2 == 0) cur += cur;
+					if (cur > 9){
+						cur = cur.toString().charAt(0).toInt() + cur.toString().charAt(1).toInt();
+					}
 
 					sum += cur;
 				}
-				if ((sum % 10) == 0) { return true; }
+				if ((sum % 10) == 0) return true;
 			}
 
 			var chunks = '';
-			while (ccNum != '') {
+			while (ccNum != ''){
 				chunks += ' ' + ccNum.substr(0,4);
 				ccNum = ccNum.substr(4);
 			}

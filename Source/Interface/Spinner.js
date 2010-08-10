@@ -62,11 +62,11 @@ var Spinner = new Class({
 		this.element.set('id', this.options.id || 'spinner-'+Date.now());
 		this.content = document.id(this.options.content) || new Element('div', this.options.content);
 		this.content.inject(this.element);
-		if (this.options.message) {
+		if (this.options.message){
 			this.msg = document.id(this.options.message) || new Element('p', this.options.messageContainer).appendText(this.options.message);
 			this.msg.inject(this.content);
 		}
-		if (this.options.img) {
+		if (this.options.img){
 			this.img = document.id(this.options.img) || new Element('div', this.options.img);
 			this.img.inject(this.content);
 		}
@@ -75,7 +75,7 @@ var Spinner = new Class({
 
 	show: function(noFx){
 		if (this.active) return this.chain(this.show.bind(this));
-		if (!this.hidden) {
+		if (!this.hidden){
 			this.callChain.delay(20, this);
 			return this;
 		}
@@ -90,7 +90,7 @@ var Spinner = new Class({
 			}, this.options.containerPosition));
 		}.bind(this);
 		
-		if (noFx) {
+		if (noFx){
 			this.parent();
 			pos();
 		} else {
@@ -107,7 +107,7 @@ var Spinner = new Class({
 
 	hide: function(noFx){
 		if (this.active) return this.chain(this.hide.bind(this));
-		if (this.hidden) {
+		if (this.hidden){
 			this.callChain.delay(20, this);
 			return this;
 		}

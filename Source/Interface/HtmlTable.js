@@ -79,7 +79,7 @@ var HtmlTable = new Class({
 		return this;
 	},
 
-	set: function(what, items) {
+	set: function(what, items){
 		var target = (what == 'headers') ? 'tHead' : 'tFoot';
 		this[target.toLowerCase()] = (document.id(this.element[target]) || new Element(target.toLowerCase()).inject(this.element, 'top')).empty();
 		var data = this.push(items, {}, this[target.toLowerCase()], what == 'headers' ? 'th' : 'td');
@@ -99,7 +99,7 @@ var HtmlTable = new Class({
 	},
 
 	push: function(row, rowProperties, target, tag){
-		if (typeOf(row) == "element" && row.get('tag') == 'tr') {
+		if (typeOf(row) == "element" && row.get('tag') == 'tr'){
 			row.inject(target || this.body);
 			return {
 				tr: row,

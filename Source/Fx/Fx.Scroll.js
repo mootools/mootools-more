@@ -110,8 +110,8 @@ Fx.Scroll = new Class({
 			x: pos.x + size.x,
 			y: pos.y + size.y
 		};
-		['x','y'].each(function(axis) {
-			if (axes.contains(axis)) {
+		['x','y'].each(function(axis){
+			if (axes.contains(axis)){
 				if (edge[axis] > scroll[axis] + containerSize[axis]) to[axis] = edge[axis] - containerSize[axis];
 				if (pos[axis] < scroll[axis]) to[axis] = pos[axis];
 			}

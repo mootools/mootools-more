@@ -140,7 +140,7 @@ var Drag = new Class({
 				}
 			}
 			if (this.options.grid[z]) this.value.now[z] -= ((this.value.now[z] - (this.limit[z][0]||0)) % this.options.grid[z]);
-			if (this.options.style) {
+			if (this.options.style){
 				this.element.setStyle(this.options.modifiers[z], this.value.now[z] + this.options.unit);
 			} else {
 				this.element[this.options.modifiers[z]] = this.value.now[z];

@@ -36,12 +36,12 @@ Request.JSONP = new Class({
 		onTimeout: function(){},
 		onError: function(){}, */
 		onRequest: function(src){
-			if (this.options.log && window.console && console.log) {
+			if (this.options.log && window.console && console.log){
 				console.log('JSONP retrieving script with url:' + src);
 			}
 		},
 		onError: function(src){
-			if (this.options.log && window.console && console.warn) {
+			if (this.options.log && window.console && console.warn){
 				console.warn('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
 			}
 		},

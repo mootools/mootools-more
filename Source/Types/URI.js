@@ -66,7 +66,7 @@ var URI = new Class({
 		return bits;
 	},
 
-	parseDirectory: function(directory, baseDirectory) {
+	parseDirectory: function(directory, baseDirectory){
 		directory = (directory.substr(0, 1) == '/' ? '' : (baseDirectory || '/')) + directory;
 		if (!directory.test(URI.regs.directoryDot)) return directory;
 		var result = [];
@@ -92,7 +92,7 @@ var URI = new Class({
 			if (scheme) scheme = scheme[1];
 			if (scheme && this.schemes[scheme.toLowerCase()] == null) this.parsed = { scheme: scheme, value: value };
 			else this.parsed = this.parse(value, (base || this).parsed) || (scheme ? { scheme: scheme, value: value } : { value: value });
-		} else if (part == 'data') {
+		} else if (part == 'data'){
 			this.setData(value);
 		} else {
 			this.parsed[part] = value;
@@ -128,7 +128,7 @@ var URI = new Class({
 			data = this.getData();
 			data[arguments[0]] = arguments[1];
 			values = data;
-		} else if (merge) {
+		} else if (merge){
 			values = Object.merge(this.getData(), values);
 		}
 		return this.set(part || 'query', Hash.toQueryString(values));

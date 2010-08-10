@@ -11,6 +11,7 @@ license: MIT-style license
 
 authors:
   - Christoph Pojer
+  - Sebastian Markbåge
 
 requires:
   - Core/Array

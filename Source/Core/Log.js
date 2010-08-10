@@ -29,7 +29,7 @@ var log = function(){
 	if (global.console && console.log){
 		try {
 			console.log.apply(console, arguments);
-		} catch(e) {
+		} catch(e){
 			console.log(Array.slice(arguments));
 		}
 	} else {

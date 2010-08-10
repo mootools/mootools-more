@@ -52,13 +52,13 @@ if (!window.Form) window.Form = {};
 
 		property: 'form.request',
 
-		initialize: function(form, update, options) {
+		initialize: function(form, update, options){
 			this.element = document.id(form);
 			if (this.occlude()) return this.occluded;
 			this.update = document.id(update);
 			this.setOptions(options);
 			this.makeRequest();
-			if (this.options.resetForm) {
+			if (this.options.resetForm){
 				this.request.addEvent('success', function(){
 					Function.attempt(function(){ this.element.reset(); }.bind(this));
 					if (window.OverText) OverText.update();
@@ -67,7 +67,7 @@ if (!window.Form) window.Form = {};
 			this.attach();
 		},
 
-		toElement: function() {
+		toElement: function(){
 			return this.element;
 		},
 
@@ -120,11 +120,11 @@ if (!window.Form) window.Form = {};
 			return this;
 		},
 
-		onFormValidate: function(valid, form, e) {
+		onFormValidate: function(valid, form, e){
 			//if there's no event, then this wasn't a submit event
 			if (!e) return;
 			var fv = this.element.retrieve('validator');
-			if (valid || (fv && !fv.options.stopOnFailure)) {
+			if (valid || (fv && !fv.options.stopOnFailure)){
 				if (e && e.stop) e.stop();
 				this.send();
 			}
@@ -132,7 +132,7 @@ if (!window.Form) window.Form = {};
 
 		onSubmit: function(e){
 			var fv = this.element.retrieve('validator');
-			if (fv) {
+			if (fv){
 				//form validator was created after Form.Request
 				this.element.removeEvent('submit', this.onSubmit);
 				fv.addEvent('onFormValidate', this.onFormValidate);
@@ -143,7 +143,7 @@ if (!window.Form) window.Form = {};
 			this.send();
 		},
 
-		saveClickedButton: function(event, target) {
+		saveClickedButton: function(event, target){
 			if (!this.options.sendButtonClicked) return;
 			if (!target.get('name')) return;
 			this.options.extraData[target.get('name')] = target.get('value') || true;
@@ -174,11 +174,11 @@ if (!window.Form) window.Form = {};
 			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString});
 			var update = opt.update || opt.updateId;
 			var updater = this.retrieve('form.request');
-			if (update) {
+			if (update){
 				if (updater) updater.update = document.id(update);
 				this.store('form.request:update', update);
 			}
-			if (opt.options) {
+			if (opt.options){
 				if (updater) updater.setOptions(opt.options);
 				this.store('form.request:options', opt.options);
 			}

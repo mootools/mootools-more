@@ -16,7 +16,9 @@ describe('Locale', function(){
 
 
 	it('should return english form validator message', function(){
-		expect(Locale.get('Form.Validator', 'required')).toEqual('This field is required.');
+		if (MooTools.lang) expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
+		
+		expect(Locale.get('FormValidator', 'required')).toEqual('This field is required.');
 	});
 	
 	it('should cascade through to english', function(){

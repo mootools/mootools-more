@@ -22,7 +22,7 @@ provides: [Form.Validator.Dutch]
 ...
 */
 
-Locale.define('nl-NL', 'Form.Validator', {
+Locale.define('nl-NL', 'FormValidator', {
 
 	required: 'Dit veld is verplicht.',
 	minLength: 'Vul minimaal {minLength} karakters in (je hebt {length} karakters ingevoerd).',

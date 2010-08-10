@@ -45,7 +45,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		sortable: false
 	},
 
-	initialize: function () {
+	initialize: function (){
 		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
 		this.sorted = {index: null, dir: 1};
@@ -53,7 +53,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			headClick: this.headClick.bind(this)
 		};
 		this.sortSpans = new Elements();
-		if (this.options.sortable) {
+		if (this.options.sortable){
 			this.enableSort();
 			if (this.options.sortIndex != null) this.sort(this.options.sortIndex, this.options.sortReverse);
 		}
@@ -75,10 +75,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 			rows = this.body.rows;
 
 		// auto-detect
-		this.parsers = $$(this.head.cells).map(function(cell, index) {
+		this.parsers = $$(this.head.cells).map(function(cell, index){
 			if (!force && (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser'))) return cell.retrieve('htmltable-parser');
 			var thDiv = new Element('div');
-			Array.each(cell.childNodes, function(node) {
+			Array.each(cell.childNodes, function(node){
 				thDiv.adopt(node);
 			});
 			thDiv.inject(cell);
@@ -88,18 +88,18 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 			var parser = parsers[index], 
 					cancel;
-			switch (typeOf(parser)) {
+			switch (typeOf(parser)){
 				case 'function': parser = {convert: parser}; cancel = true; break;
 				case 'string': parser = parser; cancel = true; break;
 			}
-			if (!cancel) {
+			if (!cancel){
 				Object.some(HtmlTable.Parsers, function(current) {
 					var match = current.match;
 					if (!match) return false;
-					for (var i = 0, j = rows.length; i < j; i++) {
+					for (var i = 0, j = rows.length; i < j; i++){
 						var cell = document.id(rows[i].cells[index]);
 						var text = cell ? cell.get('html').clean() : '';
-						if (text && match.test(text)) {
+						if (text && match.test(text)){
 							parser = current;
 							return true;
 						}
@@ -113,25 +113,25 @@ HtmlTable = Class.refactor(HtmlTable, {
 		}, this);
 	},
 
-	headClick: function(event, el) {
+	headClick: function(event, el){
 		if (!this.head || el.hasClass(this.options.classNoSort)) return;
 		var index = Array.indexOf(this.head.cells, el);
 		this.sort(index);
 		return false;
 	},
 
-	sort: function(index, reverse, pre) {
+	sort: function(index, reverse, pre){
 		if (!this.head) return;
 		var classCellSort = this.options.classCellSort;
 		var classGroup = this.options.classGroup, 
 			classGroupHead = this.options.classGroupHead;
 
-		if (!pre) {
-			if (index != null) {
-				if (this.sorted.index == index) {
+		if (!pre){
+			if (index != null){
+				if (this.sorted.index == index){
 					this.sorted.reverse = !(this.sorted.reverse);
 				} else {
-					if (this.sorted.index != null) {
+					if (this.sorted.index != null){
 						this.sorted.reverse = false;
 						this.head.cells[this.sorted.index].removeClass(this.options.classHeadSort).removeClass(this.options.classHeadSortRev);
 					} else {
@@ -146,7 +146,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			if (reverse != null) this.sorted.reverse = reverse;
 
 			var head = document.id(this.head.cells[index]);
-			if (head) {
+			if (head){
 				head.addClass(this.options.classHeadSort);
 				if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
 				else head.removeClass(this.options.classHeadSortRev);
@@ -159,18 +159,18 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (typeOf(parser) == 'string') parser = HtmlTable.Parsers[parser];
 		if (!parser) return;
 
-		if (!Browser.ie) {
+		if (!Browser.ie){
 			var rel = this.body.getParent();
 			this.body.dispose();
 		}
 
-		var data = Array.map(this.body.rows, function(row, i) {
+		var data = Array.map(this.body.rows, function(row, i){
 			var value = parser.convert.call(document.id(row.cells[index]));
 
 			return {
 				position: i,
 				value: value,
-				toString:  function() {
+				toString:  function(){
 					return value.toString();
 				}
 			};
@@ -187,14 +187,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 		var i = data.length, body = this.body;
 		var j, position, entry, group;
 
-		while (i) {
+		while (i){
 			var item = data[--i];
 			position = item.position;
 			var row = body.rows[position];
 			if (row.disabled) continue;
 
-			if (!pre) {
-				if (group === item.value) {
+			if (!pre){
+				if (group === item.value){
 					row.removeClass(classGroupHead).addClass(classGroup);
 				} else {
 					group = item.value;
@@ -206,7 +206,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			}
 
 			body.appendChild(row);
-			for (j = 0; j < i; j++) {
+			for (j = 0; j < i; j++){
 				if (data[j].position > position) data[j].position--;
 			}
 		};
@@ -232,7 +232,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	disableSort: function(){
 		this.element.removeClass(this.options.classSortable);
 		this.attachSorts(false);
-		this.sortSpans.each(function(span) { span.destroy(); });
+		this.sortSpans.each(function(span){ span.destroy(); });
 		this.sortSpans.empty();
 		this.sortEnabled = false;
 		return this;
@@ -244,60 +244,60 @@ HtmlTable.Parsers = {
 
 	'date': {
 		match: /^\d{2}[-\/ ]\d{2}[-\/ ]\d{2,4}$/,
-		convert: function() {
+		convert: function(){
 			return Date.parse(this.get('text').stripTags()).format('db');
 		},
 		type: 'date'
 	},
 	'input-checked': {
 		match: / type="(radio|checkbox)" /,
-		convert: function() {
+		convert: function(){
 			return this.getElement('input').checked;
 		}
 	},
 	'input-value': {
 		match: /<input/,
-		convert: function() {
+		convert: function(){
 			return this.getElement('input').value;
 		}
 	},
 	'number': {
 		match: /^\d+[^\d.,]*$/,
-		convert: function() {
+		convert: function(){
 			return this.get('text').stripTags().toInt();
 		},
 		number: true
 	},
 	'numberLax': {
 		match: /^[^\d]+\d+$/,
-		convert: function() {
+		convert: function(){
 			return this.get('text').replace(/[^-?^0-9]/, '').stripTags().toInt();
 		},
 		number: true
 	},
 	'float': {
 		match: /^[\d]+\.[\d]+/,
-		convert: function() {
+		convert: function(){
 			return this.get('text').replace(/[^-?^\d.]/, '').stripTags().toFloat();
 		},
 		number: true
 	},
 	'floatLax': {
 		match: /^[^\d]+[\d]+\.[\d]+$/,
-		convert: function() {
+		convert: function(){
 			return this.get('text').replace(/[^-?^\d.]/, '').stripTags();
 		},
 		number: true
 	},
 	'string': {
 		match: null,
-		convert: function() {
+		convert: function(){
 			return this.get('text').stripTags();
 		}
 	},
 	'title': {
 		match: null,
-		convert: function() {
+		convert: function(){
 			return this.title;
 		}
 	}

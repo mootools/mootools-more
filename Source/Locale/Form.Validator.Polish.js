@@ -20,7 +20,7 @@ provides: [Form.Validator.Polish]
 ...
 */
 
-Locale.define('pl-PL', 'Form.Validator', {
+Locale.define('pl-PL', 'FormValidator', {
 
 	required: 'To pole jest wymagane.',
 	minLength: 'Wymagane jest przynajmniej {minLength} znaków (wpisanych zostało tylko {length}).',

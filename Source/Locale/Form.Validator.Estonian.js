@@ -20,7 +20,7 @@ provides: [Form.Validator.Estonian]
 ...
 */
 
-Locale.define('et-EE', 'Form.Validator', {
+Locale.define('et-EE', 'FormValidator', {
 
 	required: 'Väli peab olema täidetud.',
 	minLength: 'Palun sisestage vähemalt {minLength} tähte (te sisestasite {length} tähte).',

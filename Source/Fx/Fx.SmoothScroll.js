@@ -33,11 +33,11 @@ provides: [Fx.SmoothScroll]
 		this.links = $$(this.options.links || this.doc.links);
 		var location = win.location.href.match(/^[^#]*/)[0] + '#';
 		this.links.each(function(link){
-			if (link.href.indexOf(location) != 0) {return;}
+			if (link.href.indexOf(location) != 0) return;
 			var anchor = link.href.substr(location.length);
 			if (anchor) this.useLink(link, anchor);
 		}, this);
-		if (!(Browser.safari && Browser.version == 2)) {
+		if (!(Browser.safari && Browser.version == 2)){
 			this.addEvent('complete', function(){
 				win.location.hash = this.anchor;
 			}, true);
@@ -48,7 +48,7 @@ provides: [Fx.SmoothScroll]
 		var el;
 		link.addEvent('click', function(event){
 			if (el !== false && !el) el = document.id(anchor) || this.doc.getElement('a[name=' + anchor + ']');
-			if (el) {
+			if (el){
 				event.preventDefault();
 				this.anchor = anchor;
 				this.toElement(el).chain(function(){

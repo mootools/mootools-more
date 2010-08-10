@@ -20,7 +20,7 @@ provides: [Form.Validator.Ukrainian]
 ...
 */
 
-Locale.define('uk-UA', 'Form.Validator', {
+Locale.define('uk-UA', 'FormValidator', {
 
 	required: 'Це поле повинне бути заповненим.',
 	minLength: 'Введіть хоча б {minLength} символів (Ви ввели {length}).',

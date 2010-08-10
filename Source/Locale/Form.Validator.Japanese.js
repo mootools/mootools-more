@@ -20,7 +20,7 @@ provides: [Form.Validator.Japanese]
 ...
 */
 
-Locale.define("ja-JP", "Form.Validator", {
+Locale.define("ja-JP", "FormValidator", {
 
 	required: '入力は必須です。',
 	minLength: '入力文字数は{minLength}以上にしてください。({length}文字)',

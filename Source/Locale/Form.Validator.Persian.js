@@ -20,7 +20,7 @@ provides: [Form.Validator.Persian]
 ...
 */
 
-Locale.define('fa', 'Form.Validator', {
+Locale.define('fa', 'FormValidator', {
 
 	required: 'این فیلد الزامی است.',
 	minLength: 'شما باید حداقل {minLength} حرف وارد کنید ({length} حرف وارد کرده اید).',

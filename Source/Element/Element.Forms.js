@@ -37,7 +37,7 @@ Element.implement({
 		return document.selection.createRange().text;
 	},
 
-	getSelectedRange: function() {
+	getSelectedRange: function(){
 		if (this.selectionStart != null){
 			return {
 				start: this.selectionStart, 
@@ -53,7 +53,7 @@ Element.implement({
 		if (!range || range.parentElement() != this) return pos;
 		var duplicate = range.duplicate();
 		
-		if (this.type == 'text') {
+		if (this.type == 'text'){
 			pos.start = 0 - duplicate.moveStart('character', -100000);
 			pos.end = pos.start + range.text.length;
 		} else {
@@ -88,7 +88,7 @@ Element.implement({
 	},
 
 	selectRange: function(start, end){
-		if (this.setSelectionRange) {
+		if (this.setSelectionRange){
 			this.focus();
 			this.setSelectionRange(start, end);
 		} else {

@@ -20,7 +20,7 @@ provides: [Form.Validator.Norwegian]
 ...
 */
 
-Locale.define('no-NO', 'Form.Validator', {
+Locale.define('no-NO', 'FormValidator', {
 
 	required: 'Dette feltet er pÃ¥krevd.',
 	minLength: 'Vennligst skriv inn minst {minLength} tegn (du skrev {length} tegn).',

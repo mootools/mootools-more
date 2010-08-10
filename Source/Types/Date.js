@@ -162,7 +162,7 @@ Date.implement({
 		return this;
 	},
 
-	isValid: function(date) {
+	isValid: function(date){
 		return !!(date || this).valueOf();
 	},
 
@@ -252,8 +252,8 @@ var parseWord = function(type, word, num){
 
 Date.extend({
 
-	getMsg: function(key, args) {
-		return Locale.get('Date', key, args);
+	getMsg: function(key, args){
+		return Locale.get('Date.' + key, args);
 	},
 
 	units: {

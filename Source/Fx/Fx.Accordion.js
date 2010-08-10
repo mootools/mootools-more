@@ -86,7 +86,7 @@ Fx.Accordion = new Class({
 			}
 		}, this);
 		
-		if (this.options.display || this.options.display === 0 || this.options.initialDisplayFx === false) {
+		if (this.options.display || this.options.display === 0 || this.options.initialDisplayFx === false){
 			this.display(this.options.display, this.options.initialDisplayFx);
 		}
 		
@@ -121,7 +121,7 @@ Fx.Accordion = new Class({
 		return this;
 	},
 
-	removeSection: function(toggler, displayIndex) {
+	removeSection: function(toggler, displayIndex){
 		var idx = this.togglers.indexOf(toggler);
 		var element = this.elements[idx];
 		var remover = function(){
@@ -130,7 +130,7 @@ Fx.Accordion = new Class({
 			this.detach(toggler);
 		}.bind(this);
 		
-		if (this.now == idx || displayIndex != null) {
+		if (this.now == idx || displayIndex != null){
 			this.display(displayIndex != null ? displayIndex : (idx - 1 >= 0 ? idx - 1 : 0)).chain(remover);
 		} else {
 			remover();
@@ -139,7 +139,7 @@ Fx.Accordion = new Class({
 	},
 
 	detach: function(toggler){
-		var remove = function(toggler) {
+		var remove = function(toggler){
 			toggler.removeEvent(this.options.trigger, toggler.retrieve('accordion:display'));
 		}.bind(this);
 		

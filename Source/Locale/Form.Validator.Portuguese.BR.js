@@ -20,7 +20,7 @@ provides: [Form.Validator.Portuguese.BR]
 ...
 */
 
-Locale.define('pt-BR', 'Form.Validator', {
+Locale.define('pt-BR', 'FormValidator', {
 
 	required: 'Este campo é obrigatório.',
 	minLength: 'Digite pelo menos {minLength} caracteres (tamanho atual: {length}).',
