@@ -11,10 +11,11 @@ license: MIT-style license
 
 authors:
   - Tom Occhino
+  - Jacob Thornton
 
 requires:
-  - Core/Fx.Morph
   - /Drag.Move
+  - /Element.Delegation
 
 provides: [Sortables]
 
@@ -34,12 +35,14 @@ var Sortables = new Class({
 		clone: false,
 		revert: false,
 		handle: false,
+		selector: 'li',
 		constrain: false,
 		preventDefault: false
 	},
 
 	initialize: function(lists, options){
 		this.setOptions(options);
+		
 		this.elements = [];
 		this.lists = [];
 		this.idle = true;
@@ -47,7 +50,10 @@ var Sortables = new Class({
 		this.addLists($$(document.id(lists) || lists));
 		
 		if (!this.options.clone) this.options.revert = false;
-		if (this.options.revert) this.effect = new Fx.Morph(null, Object.merge({duration: 250, link: 'cancel'}, this.options.revert));
+		if (this.options.revert) this.effect = new Fx.Morph(null, Object.merge({
+			duration: 250, 
+			link: 'cancel'
+		}, this.options.revert));
 	},
 
 	attach: function(){
@@ -63,54 +69,58 @@ var Sortables = new Class({
 	addItems: function(){
 		Array.flatten(arguments).each(function(element){
 			this.elements.push(element);
-			var start = element.retrieve('sortables:start', function(event){
-				this.start(event, element);
-			}.bind(this));
-			(this.options.handle ? element.getElement(this.options.handle) || element : element).addEvent('mousedown', start);
 		}, this);
 		return this;
 	},
 
-	addLists: function(){
-		Array.flatten(arguments).each(function(list){
+	addLists: function() {
+		var selector = this.options.selector;
+		Array.flatten(arguments).each(function(list) {
+			
 			this.lists.push(list);
-			this.addItems(list.getChildren());
+			this.elements.append(Array.from(list.getChildren(selector)));
+			
+			var start = !this.options.handle ? this.start.bind(this) : function(event, element) {
+				this.start(event, element.getParent(selector));
+			}.bind(this);
+			
+			
+			if (this.options.handle) selector += ' ' + this.options.handle;
+			list.addEvent('mousedown:relay(' + selector + ')', start);
+			
 		}, this);
 		return this;
 	},
 
 	removeItems: function(){
-		return new Elements(Array.flatten(arguments).map(function(element){
+		return $$(Array.flatten(arguments).map(function(element){
 			this.elements.erase(element);
-			var start = element.retrieve('sortables:start');
-			(this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
-			
 			return element;
 		}, this));
 	},
 
 	removeLists: function(){
-		return new Elements(Array.flatten(arguments).map(function(list){
+		return $$(Array.flatten(arguments).map(function(list){
 			this.lists.erase(list);
-			this.removeItems(list.getChildren());
-			
 			return list;
 		}, this));
 	},
 
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
-		if (typeOf(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
+		if (typeof this.options.clone == 'function') return this.options.clone.call(this, event, element, this.list);
 		var clone = element.clone(true).setStyles({
-			margin: '0px',
+			margin: 0,
 			position: 'absolute',
 			visibility: 'hidden',
-			'width': element.getStyle('width')
+			width: element.getStyle('width')
 		});
+		
 		//prevent the duplicated radio inputs from unchecking the real one
 		if (clone.get('html').test('radio')){
 			clone.getElements('input[type=radio]').each(function(input, i){
 				input.set('name', 'clone_' + i);
+				if (input.get('checked')) element.getElements('input[type=radio]')[i].set('checked', true);
 			});
 		}
 		
@@ -137,11 +147,13 @@ var Sortables = new Class({
 
 	start: function(event, element){
 		if (!this.idle || event.rightClick) return;
+		
 		this.idle = false;
 		this.element = element;
 		this.opacity = element.get('opacity');
 		this.list = element.getParent();
 		this.clone = this.getClone(event, element);
+	
 		this.drag = new Drag.Move(this.clone, {
 			preventDefault: this.options.preventDefault,
 			snap: this.options.snap,
@@ -189,9 +201,7 @@ var Sortables = new Class({
 
 	serialize: function(){
 		var params = Array.link(arguments, {
-			modifier: function(obj){
-				return typeOf(obj) == 'function'
-			},
+			modifier: Type.isFunction, 
 			index: function(obj){
 				return obj != null;
 			}
