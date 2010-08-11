@@ -121,7 +121,7 @@ Drag.Move = new Class({
 			
 			if (container != offsetParent){
 				left += containerMargin.left + offsetParentPadding.left;
-				top += (Browser.Engine.trident4 ? 0 : containerMargin.top) + offsetParentPadding.top;
+				top += (Browser.ie6 ? 0 : containerMargin.top) + offsetParentPadding.top;
 			}
 		} else {
 			left -= elementMargin.left;
