@@ -1,4 +1,4 @@
-	/*
+/*
 ---
 
 script: Drag.Move.js
@@ -47,15 +47,16 @@ Drag.Move = new Class({
 		this.droppables = $$(this.options.droppables);
 		this.container = document.id(this.options.container);
 		
-		if (this.container && typeOf(this.container) != 'element')
+		if (this.container && typeOf(this.container) != 'element'){
 			this.container = document.id(this.container.getDocument().body);
+		}
 		
 		var styles = element.getStyles('left', 'top', 'position');
-		if (styles.left == 'auto' || styles.top == 'auto')
+		if (styles.left == 'auto' || styles.top == 'auto'){
 			element.setPosition(element.getPosition(element.getOffsetParent()));
+		}
 		
-		if (styles.position == 'static')
-			element.setStyle('position', 'absolute');
+		if (styles.position == 'static') element.setStyle('position', 'absolute');
 
 		this.addEvent('start', this.checkDroppables, true);
 
@@ -75,8 +76,10 @@ Drag.Move = new Class({
 	},
 	
 	calculateLimit: function(){
-		var offsetParent = document.id(this.element.getOffsetParent() || this.element.parentNode),
-			containerCoordinates = this.container.getCoordinates(offsetParent),
+		var element = this.element,
+			container = this.container,
+			offsetParent = document.id(element.getOffsetParent() || element.parentNode),
+			containerCoordinates = container.getCoordinates(offsetParent),
 			containerBorder = {},
 			elementMargin = {},
 			elementBorder = {},
@@ -84,15 +87,15 @@ Drag.Move = new Class({
 			offsetParentPadding = {};
 
 		['top', 'right', 'bottom', 'left'].each(function(pad){
-			containerBorder[pad] = this.container.getStyle('border-' + pad).toInt();
-			elementBorder[pad] = this.element.getStyle('border-' + pad).toInt();
-			elementMargin[pad] = this.element.getStyle('margin-' + pad).toInt();
-			containerMargin[pad] = this.container.getStyle('margin-' + pad).toInt();
+			containerBorder[pad] = container.getStyle('border-' + pad).toInt();
+			elementBorder[pad] = element.getStyle('border-' + pad).toInt();
+			elementMargin[pad] = element.getStyle('margin-' + pad).toInt();
+			containerMargin[pad] = container.getStyle('margin-' + pad).toInt();
 			offsetParentPadding[pad] = offsetParent.getStyle('padding-' + pad).toInt();
 		}, this);
 
-		var width = this.element.offsetWidth + elementMargin.left + elementMargin.right,
-			height = this.element.offsetHeight + elementMargin.top + elementMargin.bottom,
+		var width = element.offsetWidth + elementMargin.left + elementMargin.right,
+			height = element.offsetHeight + elementMargin.top + elementMargin.bottom,
 			left = 0,
 			top = 0,
 			right = containerCoordinates.right - containerBorder.right - width,
@@ -106,17 +109,17 @@ Drag.Move = new Class({
 			bottom += elementMargin.bottom;
 		}
 		
-		if (this.element.getStyle('position') == 'relative'){
-			var coords = this.element.getCoordinates(offsetParent);
-			coords.left -= this.element.getStyle('left').toInt();
-			coords.top -= this.element.getStyle('top').toInt();
+		if (element.getStyle('position') == 'relative'){
+			var coords = element.getCoordinates(offsetParent);
+			coords.left -= element.getStyle('left').toInt();
+			coords.top -= element.getStyle('top').toInt();
 			
 			left += containerBorder.left - coords.left;
 			top += containerBorder.top - coords.top;
 			right += elementMargin.left - coords.left;
 			bottom += elementMargin.top - coords.top;
 			
-			if (this.container != offsetParent){
+			if (container != offsetParent){
 				left += containerMargin.left + offsetParentPadding.left;
 				top += (Browser.Engine.trident4 ? 0 : containerMargin.top) + offsetParentPadding.top;
 			}
@@ -139,14 +142,13 @@ Drag.Move = new Class({
 		};
 	},
 
-	checkAgainst: function(el, i){
-		el = (this.positions) ? this.positions[i] : el.getCoordinates();
-		var now = this.mouse.now;
-		return (now.x > el.left && now.x < el.right && now.y < el.bottom && now.y > el.top);
-	},
-
 	checkDroppables: function(){
-		var overed = Array.from(this.droppables).filter(this.checkAgainst, this).getLast();
+		var overed = Array.from(this.droppables).filter(function(el, i){
+			el = this.positions ? this.positions[i] : el.getCoordinates();
+			var now = this.mouse.now;
+			return (now.x > el.left && now.x < el.right && now.y < el.bottom && now.y > el.top);
+		}, this).getLast();
+		
 		if (this.overed != overed){
 			if (this.overed) this.fireEvent('leave', [this.element, this.overed]);
 			if (overed) this.fireEvent('enter', [this.element, overed]);

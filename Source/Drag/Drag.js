@@ -56,6 +56,7 @@ var Drag = new Class({
 				return obj != null;
 			}
 		});
+		
 		this.element = document.id(params.element);
 		this.document = this.element.getDocument();
 		this.setOptions(params.options || {});
@@ -88,28 +89,47 @@ var Drag = new Class({
 	},
 
 	start: function(event){
+		var options = this.options;
+		
 		if (event.rightClick) return;
-		if (this.options.preventDefault) event.preventDefault();
-		if (this.options.stopPropagation) event.stopPropagation();
+		
+		if (options.preventDefault) event.preventDefault();
+		if (options.stopPropagation) event.stopPropagation();
 		this.mouse.start = event.page;
+		
 		this.fireEvent('beforeStart', this.element);
-		var limit = this.options.limit;
+		
+		var limit = options.limit;
 		this.limit = {x: [], y: []};
-		for (var z in this.options.modifiers){
-			if (!this.options.modifiers[z]) continue;
-			if (this.options.style) this.value.now[z] = this.element.getStyle(this.options.modifiers[z]).toInt();
-			else this.value.now[z] = this.element[this.options.modifiers[z]];
-			if (this.options.invert) this.value.now[z] *= -1;
+		for (var z in options.modifiers){
+			if (!options.modifiers[z]) continue;
+			
+			if (options.style) this.value.now[z] = this.element.getStyle(options.modifiers[z]).toInt();
+			else this.value.now[z] = this.element[options.modifiers[z]];
+			
+			if (options.invert) this.value.now[z] *= -1;
 			this.mouse.pos[z] = event.page[z] - this.value.now[z];
+			
 			if (limit && limit[z]){
-				for (var i = 2; i--; i){
-					if ((limit[z][i] || limit[z][i] === 0)) this.limit[z][i] = Function.from(limit[z][i])();
+				var i = 2;
+				while (i--){
+					var limitZI = limit[z][i];
+					if (limitZI || limitZI === 0) this.limit[z][i] = (typeof limitZI == 'function') ? limitZI() : limitZI;
 				}
 			}
 		}
-		if (typeOf(this.options.grid) == 'number') this.options.grid = {x: this.options.grid, y: this.options.grid};
-		this.document.addEvents({mousemove: this.bound.check, mouseup: this.bound.cancel});
-		this.document.addEvent(this.selection, this.bound.eventStop);
+		
+		if (typeOf(this.options.grid) == 'number') this.options.grid = {
+			x: this.options.grid, 
+			y: this.options.grid
+		};
+		
+		var events = {
+			mousemove: this.bound.check, 
+			mouseup: this.bound.cancel
+		};
+		events[this.selection] = this.bound.eventStop;
+		this.document.addEvents(events);
 	},
 
 	check: function(event){
@@ -126,32 +146,40 @@ var Drag = new Class({
 	},
 
 	drag: function(event){
-		if (this.options.preventDefault) event.preventDefault();
+		var options = this.options;
+		
+		if (options.preventDefault) event.preventDefault();
 		this.mouse.now = event.page;
-		for (var z in this.options.modifiers){
-			if (!this.options.modifiers[z]) continue;
+		
+		for (var z in options.modifiers){
+			if (!options.modifiers[z]) continue;
 			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z];
-			if (this.options.invert) this.value.now[z] *= -1;
-			if (this.options.limit && this.limit[z]){
+			if (options.invert) this.value.now[z] *= -1;
+			
+			if (options.limit && this.limit[z]){
 				if ((this.limit[z][1] || this.limit[z][1] === 0) && (this.value.now[z] > this.limit[z][1])){
 					this.value.now[z] = this.limit[z][1];
 				} else if ((this.limit[z][0] || this.limit[z][0] === 0) && (this.value.now[z] < this.limit[z][0])){
 					this.value.now[z] = this.limit[z][0];
 				}
 			}
-			if (this.options.grid[z]) this.value.now[z] -= ((this.value.now[z] - (this.limit[z][0]||0)) % this.options.grid[z]);
-			if (this.options.style){
-				this.element.setStyle(this.options.modifiers[z], this.value.now[z] + this.options.unit);
+			
+			if (options.grid[z]) this.value.now[z] -= ((this.value.now[z] - (this.limit[z][0]||0)) % options.grid[z]);
+			if (options.style) {
+				this.element.setStyle(options.modifiers[z], this.value.now[z] + options.unit);
 			} else {
-				this.element[this.options.modifiers[z]] = this.value.now[z];
+				this.element[options.modifiers[z]] = this.value.now[z];
 			}
 		}
+		
 		this.fireEvent('drag', [this.element, event]);
 	},
 
 	cancel: function(event){
-		this.document.removeEvent('mousemove', this.bound.check);
-		this.document.removeEvent('mouseup', this.bound.cancel);
+		this.document.removeEvents({
+			mousemove: this.bound.check,
+			mouseup: this.bound.cancel
+		});
 		if (event){
 			this.document.removeEvent(this.selection, this.bound.eventStop);
 			this.fireEvent('cancel', this.element);
@@ -159,9 +187,12 @@ var Drag = new Class({
 	},
 
 	stop: function(event){
-		this.document.removeEvent(this.selection, this.bound.eventStop);
-		this.document.removeEvent('mousemove', this.bound.drag);
-		this.document.removeEvent('mouseup', this.bound.stop);
+		var events = {
+			mousemove: this.bound.drag,
+			mouseup: this.bound.stop
+		};
+		events[this.selection] = this.bound.eventStop;
+		this.document.removeEvents(events);
 		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
@@ -170,7 +201,13 @@ var Drag = new Class({
 Element.implement({
 
 	makeResizable: function(options){
-		var drag = new Drag(this, Object.merge({modifiers: {x: 'width', y: 'height'}}, options));
+		var drag = new Drag(this, Object.merge({
+			modifiers: {
+				x: 'width', 
+				y: 'height'
+			}
+		}, options));
+		
 		this.store('resizer', drag);
 		return drag.addEvent('drag', function(){
 			this.fireEvent('resize', drag);
