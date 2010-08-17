@@ -59,7 +59,7 @@ var HtmlTable = new Class({
 
 		if (this.options.footers.length) this.setFooters(this.options.footers);
 		this.tfoot = document.id(this.element.tFoot);
-		if (this.tfoot) this.foot = document.id(this.thead.rows[0]);
+		if (this.tfoot) this.foot = document.id(this.tfoot.rows[0]);
 
 		this.options.rows.each(function(row){
 			this.push(row);
