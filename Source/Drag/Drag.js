@@ -90,11 +90,19 @@ var Drag = new Class({
 		this.fireEvent('beforeStart', this.element);
 		var limit = this.options.limit;
 		this.limit = {x: [], y: []};
+		var styles = this.element.getStyles('left', 'right', 'top', 'bottom');
+		this._invert = {
+			x: this.options.modifiers.x == 'left' && styles.left == 'auto' &&
+			   !isNaN(styles.right.toInt()) && (this.options.modifiers.x = 'right'),
+			y: this.options.modifiers.y == 'top' && styles.top == 'auto' &&
+			   !isNaN(styles.bottom.toInt()) && (this.options.modifiers.y = 'bottom')
+		};
 		for (var z in this.options.modifiers){
 			if (!this.options.modifiers[z]) continue;
 			if (this.options.style) this.value.now[z] = this.element.getStyle(this.options.modifiers[z]).toInt();
 			else this.value.now[z] = this.element[this.options.modifiers[z]];
 			if (this.options.invert) this.value.now[z] *= -1;
+			if (this._invert[z]) this.value.now[z] *= -1;
 			this.mouse.pos[z] = event.page[z] - this.value.now[z];
 			if (limit && limit[z]){
 				for (var i = 2; i--; i){
@@ -127,6 +135,7 @@ var Drag = new Class({
 			if (!this.options.modifiers[z]) continue;
 			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z];
 			if (this.options.invert) this.value.now[z] *= -1;
+			if (this._invert[z]) this.value.now[z] *= -1;
 			if (this.options.limit && this.limit[z]){
 				if ($chk(this.limit[z][1]) && (this.value.now[z] > this.limit[z][1])){
 					this.value.now[z] = this.limit[z][1];
