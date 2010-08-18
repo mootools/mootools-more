@@ -165,7 +165,7 @@ Date.implement({
 	},
 
 	isValid: function(date) {
-		return !!(date || this).valueOf();
+		return !isNaN((date || this).valueOf());
 	},
 
 	format: function(f){
