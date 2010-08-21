@@ -98,9 +98,10 @@ var HtmlTable = new Class({
 		return this;
 	},
 
-	push: function(row, rowProperties, target, tag){
+	push: function(row, rowProperties, target, tag, where){
+		where = where || 'bottom';
 		if ($type(row) == "element" && row.get('tag') == 'tr') {
-			row.inject(target || this.body);
+			row.inject(target || this.body, where);
 			return {
 				tr: row,
 				tds: row.getChildren('td')
@@ -117,7 +118,7 @@ var HtmlTable = new Class({
 		});
 
 		return {
-			tr: new Element('tr', rowProperties).inject(target || this.body).adopt(tds),
+			tr: new Element('tr', rowProperties).inject(target || this.body, where).adopt(tds),
 			tds: tds
 		};
 	}
