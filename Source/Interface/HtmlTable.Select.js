@@ -14,7 +14,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Keyboard
+  - /Keyboard.Extras
   - /HtmlTable
   - /Class.refactor
   - /Element.Delegation
@@ -75,7 +75,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	selectRow: function(row, _nocheck){
 		//private variable _nocheck: boolean whether or not to confirm the row is in the table body
 		//added here for optimization when selecting ranges
-		if (!_nocheck && !this.body.getChildren().contains(row)) return;
+		if (this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 		if (!this.options.allowMultiSelect) this.selectNone();
 
 		if (!this.isSelected(row)) {
@@ -93,7 +93,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 	
 	deselectRow: function(row, _nocheck){
-		if (!_nocheck && !this.body.getChildren().contains(row)) return;
+		if (!this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 		this._selectedRows.erase(row);
 		row.removeClass(this.options.classRowSelected);
 		this.fireEvent('rowUnfocus', [row, this._selectedRows]);
@@ -101,12 +101,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	selectAll: function(selectNone){
-		if (!this.options.allowMultiSelect && !selectNone) return;
-		if (selectNone) {
-			this._selectedRows = this._selectedRows.removeClass(this.options.classRowSelected).empty();
-		} else {
-			this._selectedRows.combine(this.body.rows).addClass(this.options.classRowSelected);
-		}
+		if (!selectNone && !this.options.allowMultiSelect) return;
+		this.selectRange(0, this.body.rows.length, selectNone);
 		return this;
 	},
 
@@ -115,20 +111,27 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	selectRange: function(startRow, endRow, _deselect){
-		if (!this.options.allowMultiSelect) return;
-		var started,
-		    method = _deselect ? 'deselectRow' : 'selectRow';
+		if (!this.options.allowMultiSelect && !_deselect) return;
+		var method = _deselect ? 'deselectRow' : 'selectRow',
+		    rows = $A(this.body.rows);
 
-		$$(this.body.rows).each(function(row) {
-			if (row == startRow || row == endRow) started = !started;
-			if (started || row == startRow || row == endRow) this[_deselect ? 'deselectRow' : 'selectRow'](row, true);
-		}, this);
+		if ($type(startRow) == 'element') startRow = rows.indexOf(startRow);
+		if ($type(endRow) == 'element') endRow = rows.indexOf(endRow);
+		endRow = endRow < rows.length - 1 ? endRow : rows.length - 1; 
+
+		if (endRow < startRow) {
+			var tmp = startRow;
+			startRow = endRow;
+			endRow = tmp;
+		}
+
+		for(var i = startRow; i <= endRow; i++) this[method](rows[i], true);
 
 		return this;
 	},
 
-	deselectRange: function(startRow, endRow, _nocheck){
-		this.selectRange(startRow, endRow, _nocheck);
+	deselectRange: function(startRow, endRow){
+		this.selectRange(startRow, endRow, true);
 	},
 /*
 	Private methods:
@@ -173,6 +176,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		else this.toggleRow(row);
 		if (event.shift) {
 			this.selectRange(this._rangeStart || this.body.rows[0], row, this._rangeStart ? !this.isSelected(row) : true);
+			this._focused = row;
 		}
 		this._rangeStart = row;
 	},

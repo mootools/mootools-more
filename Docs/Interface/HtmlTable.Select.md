@@ -125,8 +125,8 @@ Selects a group of rows.
 
 ### Arguments
 
-* startRow - (*element*) the TR element that starts the selection.
-* endRow - (*element*) the TR element that ends the selection.
+* startRow - (*mixed*) the TR element that starts the selection or an integer of its index in the rows in the table body.
+* endRow - (*mixed*) the TR element that ends the selection or an integer of its index in the rows in the table body.
 
 ### Note
 
