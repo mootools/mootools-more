@@ -24,7 +24,6 @@
 		}
 		.op {
 			position: absolute; 
-			padding: 40px; 
 			top: 0px
 		}
 		.mt-container p {
@@ -32,88 +31,89 @@
 		}
 	</style>
 	<p>All of the boxes below should behave the same. You can only drag the smaller, inner box around and not escape the larger box. For the examples that include margins (the right column), the box should approach the black border of the container box, but not touch it.</p>
+	<div style="position: relative">
+		<div class="op">
+			<div class="container" id="container1">
+				container: not relative<br/>
+				box: absolute<br/>
+				includeMargins: false<br/>
 
-	<div class="op">
-		<div class="container">
-			container: not relative<br/>
-			box: absolute<br/>
-			includeMargins: false<br/>
+				<div class="box" id="box1"></div>
 
-			<div class="box"></div>
-
+			</div>
 		</div>
-	</div>
-	<div class="op" style="left: 330px;">
-		<div class="container">
-			container: not relative<br/>
-			box: absolute<br/>
-			includeMargins: true<br/>
+		<div class="op" style="left: 330px;">
+			<div class="container" id="container2">
+				container: not relative<br/>
+				box: absolute<br/>
+				includeMargins: true<br/>
 
-			<div class="box includeMargins"></div>
+				<div class="box includeMargins" id="box2"></div>
 
+			</div>
 		</div>
-	</div>
-	<div class="op" style="top: 300px" class="op">
-		<div class="container" style="position: relative">
-			container: relative<br/>
-			box: absolute<br/>
-			includeMargins: false<br/>
+		<div class="op" style="top: 300px" class="op">
+			<div class="container" id="container3" style="position: relative">
+				container: relative<br/>
+				box: absolute<br/>
+				includeMargins: false<br/>
 
-			<div class="box"></div>
+				<div class="box" id="box3"></div>
 
+			</div>
 		</div>
-	</div>
-	<div style="left: 330px; top: 300px" class="op">
-		<div class="container" style="position: relative">
-			container: relative<br/>
-			box: absolute<br/>
-			includeMargins: true<br/>
+		<div style="left: 330px; top: 300px" class="op">
+			<div class="container" id="container4" style="position: relative">
+				container: relative<br/>
+				box: absolute<br/>
+				includeMargins: true<br/>
 
-			<div class="box includeMargins"></div>
+				<div class="box includeMargins" id="box4"></div>
 
+			</div>
 		</div>
-	</div>
 
-<div style="position: relative; top: 550px">
-	<div style="top: 0px" class="op">
-		<div class="container">
-			container: not relative<br/>
-			box: relative<br/>
-			includeMargins: false<br/>
+	<div style="position: relative; top: 590px">
+		<div style="top: 0px" class="op">
+			<div class="container" id="container5">
+				container: not relative<br/>
+				box: relative<br/>
+				includeMargins: false<br/>
 
-			<div class="box" style="position: relative"></div>
+				<div class="box" id="box5" style="position: relative"></div>
 
+			</div>
 		</div>
-	</div>
-	<div style="left: 330px;" class="op">
-		<div class="container">
-			container: not relative<br/>
-			box: relative<br/>
-			includeMargins: true<br/>
+		<div style="left: 330px;" class="op">
+			<div class="container" id="container6">
+				container: not relative<br/>
+				box: relative<br/>
+				includeMargins: true<br/>
 
-			<div class="box includeMargins" style="position: relative"></div>
+				<div class="box includeMargins" id="box6" style="position: relative"></div>
 
+			</div>
 		</div>
-	</div>
 
-	<div style="top: 300px;" class="op">
-		<div class="container" style="position: relative">
-			container: relative<br/>
-			box: relative<br/>
-			includeMargins: false<br/>
+		<div style="top: 300px;" class="op">
+			<div class="container" id="container7" style="position: relative">
+				container: relative<br/>
+				box: relative<br/>
+				includeMargins: false<br/>
 
-			<div class="box" style="position: relative"></div>
+				<div class="box" id="box7" style="position: relative"></div>
 
+			</div>
 		</div>
-	</div>
-	<div style="left: 330px; top: 300px" class="op">
-		<div class="container" style="position: relative">
-			container: relative<br/>
-			box: relative<br/>
-			includeMargins: true<br/>
+		<div style="left: 330px; top: 300px" class="op">
+			<div class="container" id="container8" style="position: relative">
+				container: relative<br/>
+				box: relative<br/>
+				includeMargins: true<br/>
 
-			<div class="box includeMargins" style="position: relative"></div>
+				<div class="box includeMargins" id="box8" style="position: relative"></div>
 
+			</div>
 		</div>
 	</div>
 </div>

@@ -18,6 +18,8 @@ textarea#comment {
 	width: 250px;
 	float: left;
 	height: 100px;
+	margin: 0;
+	padding: 0;
 }
 #togglers {
 	clear:both;
@@ -26,7 +28,7 @@ textarea#comment {
 <textarea tabindex="4" id="comment" class="resizable" rows="15" cols="50" name="comment"></textarea>
 <div id="textresizer"></div>
 <div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
-<script src="/depender/build?require=More/Drag"></script>
+<script src="/depender/build?require=More/Drag,Core/Element.Dimensions"></script>
 <script>
 var dragger = $('comment').makeResizable({
 	handle: $('textresizer'),
