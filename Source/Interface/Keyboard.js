@@ -13,242 +13,166 @@ authors:
   - Perrin Westrich
   - Aaron Newton
   - Scott Kyle
+  - Arian Stolwijk
 
 requires:
   - Core/Events
   - Core/Options
   - Core/Element.Event
-  - /Log
 
 provides: [Keyboard]
 
 ...
 */
 
+
 (function(){
+
+var active = null,
+previous = null
+
+Keyboard = this.Keyboard = new Class({
 	
-	var Keyboard = this.Keyboard = new Class({
+	Extends: Events,
 
-		Extends: Events,
+	Implements: Options,
 
-		Implements: [Options, Log],
+	events: {},
 
-		options: {/*
-			onActivate: function(){},
-			onDeactivate: function(){},*/
-			defaultEventType: 'keydown',
-			active: false,
-			manager: null,
-			events: {},
-			nonParsedEvents: ['activate', 'deactivate', 'onactivate', 'ondeactivate', 'changed', 'onchanged']
-		},
+	options: {/*
+		onActivate: function(){},
+		onDeactivate: function(){},*/
+		active: false,
+		events: {},
+		parent: null,
+		nonParsedEvents: ['activate', 'deactivate', 'onactivate', 'ondeactivate']
+	},
 
-		initialize: function(options){
-			if (options && options.manager){
-				this.manager = options.manager;
-				delete options.manager;
-			}
-			this.setOptions(options);
-			this.setup();
-		}, 
-		setup: function(){
-			this.addEvents(this.options.events);
-			//if this is the root manager, nothing manages it
-			if (Keyboard.manager && !this.manager) Keyboard.manager.manage(this);
-			if (this.options.active) this.activate();
-		},
-
-		handle: function(event, type){
-			//Keyboard.stop(event) prevents key propagation
-			if (event.preventKeyboardPropagation) return;
-			
-			var bubbles = !!this.manager;
-			if (bubbles && this.activeKB){
-				this.activeKB.handle(event, type);
-				if (event.preventKeyboardPropagation) return;
-			}
-			this.fireEvent(type, event);
-			
-			if (!bubbles && this.activeKB) this.activeKB.handle(event, type);
-		},
-
-		addEvent: function(type, fn, internal){
-			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn, internal);
-		},
-
-		removeEvent: function(type, fn){
-			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn);
-		},
-
-		toggleActive: function(){
-			return this[this.active ? 'deactivate' : 'activate']();
-		},
-
-		activate: function(instance){
-			if (instance){
-				if (instance.isActive()) return this;
-				//if we're stealing focus, store the last keyboard to have it so the relinquish command works
-				if (this.activeKB && instance != this.activeKB){
-					this.previous = this.activeKB;
-					this.previous.fireEvent('deactivate');
-				}
-				//if we're enabling a child, assign it so that events are now passed to it
-				this.activeKB = instance.fireEvent('activate');
-				Keyboard.manager.fireEvent('changed');
-			} else if (this.manager){
-				//else we're enabling ourselves, we must ask our parent to do it for us
-				this.manager.activate(this);
-			}
-			return this;
-		},
-
-		isActive: function(){
-			return this.manager ? this.manager.activeKB == this :  Keyboard.manager == this;
-		},
-
-		deactivate: function(instance){
-			if (instance){
-				if (instance === this.activeKB){
-					this.activeKB = null;
-					instance.fireEvent('deactivate');
-					Keyboard.manager.fireEvent('changed');
-				}
-			} else if (this.manager){
-				this.manager.deactivate(this);
-			}
-			return this;
-		},
-
-		relinquish: function(){
-			if (this.isActive() && this.manager && this.manager.previous) this.manager.activate(this.manager.previous);
-		},
-
-		//management logic
-		manage: function(instance){
-			if (instance.manager && instance.manager != Keyboard.manager && this != Keyboard.manager) instance.manager.drop(instance);
-			this.instances.push(instance);
-			instance.manager = this;
-			if (!this.activeKB) this.activate(instance);
-		},
-
-		_disable: function(instance){
-			if (this.activeKB == instance) this.activeKB = null;
-		},
-
-		drop: function(instance){
-			this._disable(instance);
-			this.instances.erase(instance);
-			Keyboard.manager.manage(instance);
-			if (this.activeKB == instance && this.previous && this.instances.contains(this.previous)) this.activate(this.previous);
-		},
-
-		instances: [],
-
-		trace: function(){
-			Keyboard.trace(this);
-		},
-
-		each: function(fn){
-			Keyboard.each(this, fn);
-		}
-
-	});
+	initialize: function(options){
+		this.uid = Keyboard.uniqueID();
+		this.setOptions(options);
+		this.setParent(this.options.parent);
+		this.addEvents(this.options.events);
+		if (this.options.active) this.activate();
+	},
 	
-	var parsed = {};
-	var modifiers = ['shift', 'control', 'alt', 'meta'];
-	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
-	
-	Keyboard.parse = function(type, eventType, ignore){
-		if (ignore && ignore.contains(type.toLowerCase())) return type;
+	addEvent: function(name, fn){
+		if (this.options.nonParsedEvents.contains(name.toLowerCase())) return this.parent.apply(this, arguments);
 		
-		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
-			eventType = $1;
-			return '';
-		});
-
-		if (!parsed[type]){
-			var key, mods = {};
-			type.split('+').each(function(part){
-				if (regex.test(part)) mods[part] = true;
-				else key = part;
-			});
-
-			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
-			
-			var keys = [];
-			modifiers.each(function(mod){
-				if (mods[mod]) keys.push(mod);
-			});
-			
-			if (key) keys.push(key);
-			parsed[type] = keys.join('+');
-		}
-
-		return eventType + ':' + parsed[type];
-	};
-
-	Keyboard.each = function(keyboard, fn){
-		var current = keyboard || Keyboard.manager;
-		while (current){
-			fn.run(current);
-			current = current.activeKB;
-		}
-	};
-
-	Keyboard.stop = function(event){
-		event.preventKeyboardPropagation = true;
-	};
-
-	Keyboard.manager = new Keyboard({
-		active: true
-	});
-	
-	Keyboard.trace = function(keyboard){
-		keyboard = keyboard || Keyboard.manager;
-		keyboard.enableLog();
-		keyboard.log('the following items have focus: ');
-		Keyboard.each(keyboard, function(current){
-			keyboard.log(document.id(current.widget) || current.wiget || current);
-		});
-	};
-	
-	var handler = function(event){
-		var keys = [];
-		modifiers.each(function(mod){
-			if (event[mod]) keys.push(mod);
-		});
+		var event = this.events[name] = function(){
+			if (this.isActive() || this.inActiveTrace()) fn.apply(this, arguments);
+		}.bind(this);
 		
-		if (!regex.test(event.key)) keys.push(event.key);
-		Keyboard.manager.handle(event, event.type + ':' + keys.join('+'));
-	};
+		document.body.addEvent('keydown:keys(' + name + ')', event);
+		
+		return this;
+	},
 	
-	document.addEvents({
-		'keyup': handler,
-		'keydown': handler
-	});
+	removeEvent: function(name, fn){
+		if (this.options.nonParsedEvents.contains(name)) return this.parent.apply(this, arguments);
+		
+		var event = this.events[name];
+		if (event) document.body.removeEvent(this.options.eventType + ':keys(' + name + ')', event);
+		
+		return this;		
+	},
+	
+	// Instances management
+	
+	activate: function(){
+		Keyboard.activate(this);
+	},
+	
+	deactivate: function(){
+		Keyboard.activate(this.parent);
+		this.fireEvent('deactivate');
+	},
+	
+	toggleActive: function(){
+		return this[this.isActive() ? 'deactivate' : 'activate']();
+	},
 
-	Object.append(Event.Keys, {
-		'shift': 16,
-		'control': 17,
-		'alt': 18,
-		'capslock': 20,
-		'pageup': 33,
-		'pagedown': 34,
-		'end': 35,
-		'home': 36,
-		'numlock': 144,
-		'scrolllock': 145,
-		';': 186,
-		'=': 187,
-		',': 188,
-		'-': Browser.firefox ? 109 : 189,
-		'.': 190,
-		'/': 191,
-		'`': 192,
-		'[': 219,
-		'\\': 220,
-		']': 221,
-		"'": 222
-	});
+	isActive: function(){
+		return active == this;
+	},
+	
+	setParent: function(parent){
+		this.parent = parent;
+	},
+	
+	//<1.2compat>
+	manage: function(child){
+		child.parent = this;
+	},
+	//</1.2compat>
+
+	relinquish: function(){
+		Keyboard.activate(previous);
+	},
+	
+	trace: function(){
+		return Keyboard.trace(this);
+	},
+	
+	inActiveTrace: function(){
+		return Keyboard.trace().some(function(instance){
+			return instance.uid == this.uid; 
+		}, this);
+	}
+
+});
+
+// Instance Activation
+
+Keyboard.activate = function(kb){
+	previous = active;
+	active = kb;
+	if (kb) kb.fireEvent('activate');		
+};
+
+Keyboard.trace = function(kb){
+	if (!kb) kb = active;
+	var trace = [], parent = kb.parent;
+	while (parent){
+		trace.push(parent);
+		parent = parent.parent;
+	}
+	return trace;
+};
+
+Keyboard.getActive = function(){
+	return active;
+};
+
+Object.append(Event.Keys, {
+	'shift': 16,
+	'control': 17,
+	'alt': 18,
+	'capslock': 20,
+	'pageup': 33,
+	'pagedown': 34,
+	'end': 35,
+	'home': 36,
+	'numlock': 144,
+	'scrolllock': 145,
+	';': 186,
+	'=': 187,
+	',': 188,
+	'-': Browser.firefox ? 109 : 189,
+	'.': 190,
+	'/': 191,
+	'`': 192,
+	'[': 219,
+	'\\': 220,
+	']': 221,
+	"'": 222
+});
+
+var UID = Math.floor(Math.random() * 10e12);
+
+Keyboard.uniqueID = function(){
+	return (UID++).toString(36);
+};
+
 
 })();
