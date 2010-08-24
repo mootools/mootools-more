@@ -20,7 +20,7 @@ provides: [Number.German]
 ...
 */
 
-Locale.define('nl-NL', 'Number', {
+Locale.define('de-DE', 'Number', {
 
 	decimal: ',',
 	group: '.',
