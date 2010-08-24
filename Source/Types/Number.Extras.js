@@ -35,7 +35,8 @@ Number.implement({
 		// Thanks dojo and YUI for some inspiration
 		var value = this,
 			locale = Object.clone(Locale.get('Number'));
-		var options = Object.merge(locale, options || {});
+		
+		options = Object.merge(locale, options || {});
 		var negative = value < 0,
 			decimal = options.decimal,
 			precision = options.precision,
@@ -45,7 +46,7 @@ Number.implement({
 		if (negative){
 			if (options.prefix) options.negative.prefix = options.prefix + options.negative.prefix;
 			options = Object.merge(options, options.negative);
-			value *= -1;
+			value = -value;
 		}
 		
 		if (decimals > 0 && decimals <= 20) value = value.toFixed(decimals);
@@ -53,28 +54,28 @@ Number.implement({
 		
 		value += '';
 
-		var regex = /^(.+)e\+(\d)$/i;
-		if (options.scientific === false ){
-			var match = value.match(regex);
+		if (options.scientific === false){
+			var match = value.match(/^(.+)e\+(\d)$/i);
 			if (match){
 				value = match[1].replace('.', '');
-				times = match[2] - match[1].split('.').getLast().length;
-				while (times--) value += '0';
+
+				var length = match[2] - match[1].split('.').getLast().length;
+				while (length--) value += '0';
 			}
 		}
 		
 		if (decimal != '.') value = value.replace('.', decimal);
 		
 		if (options.group){
-			var decIndex = value.lastIndexOf(decimal);
-			decIndex = (decIndex > -1) ? decIndex : value.length;
-			var newOutput = value.substring(decIndex),
-				i = decIndex;
+			var index = value.lastIndexOf(decimal);
+			index = (index > -1) ? index : value.length;
+			var newOutput = value.substring(index),
+				i = index;
 				
 			while (i--){
-				if ((decIndex - i - 1) % 3 == 0 && i != (decIndex - 1)){
+				if ((index - i - 1) % 3 == 0 && i != (index - 1))
 					newOutput = group + newOutput;
-				}
+				
 				newOutput = value.charAt(i) + newOutput;
 			}
 
