@@ -11,6 +11,7 @@ license: MIT-style license
 
 authors:
   - Evstigneev Pavel
+  - Kuryanovich Egor
 
 requires:
   - /Locale
@@ -58,20 +59,32 @@ Locale.define('ru-RU-unicode', 'Date', {
 	ordinal: '',
 
 	lessThanMinuteAgo: 'меньше минуты назад',
-	minuteAgo: 'минута назад',
+	minuteAgo: 'минуту назад',
 	minutesAgo: function(delta){ return '{delta} ' + pluralize(delta, 'минута', 'минуты', 'минут') + ' назад'; },
 	hourAgo: 'час назад',
 	hoursAgo: function(delta){ return '{delta} ' + pluralize(delta, 'час', 'часа', 'часов') + ' назад'; },
 	dayAgo: 'вчера',
 	daysAgo: function(delta){ return '{delta} ' + pluralize(delta, 'день', 'дня', 'дней') + ' назад'; },
+	weekAgo: 'неделю назад',
+	weeksAgo: function(delta){ return '{delta} ' + pluralize(delta, 'неделя', 'недели', 'недель') + ' назад'; },
+	monthAgo: 'месяц назад',
+	monthsAgo: function(delta){ return '{delta} ' + pluralize(delta, 'месяц', 'месяца', 'месецев') + ' назад'; },
+	yearAgo: 'год назад',
+	yearsAgo: function(delta){ return '{delta} ' + pluralize(delta, 'год', 'года', 'лет') + ' назад'; },
 
-	lessThanMinuteUntil: 'меньше минуты назад',
+	lessThanMinuteUntil: 'меньше чем через минуту',
 	minuteUntil: 'через минуту',
 	minutesUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'час', 'часа', 'часов') + ''; },
 	hourUntil: 'через час',
 	hoursUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'час', 'часа', 'часов') + ''; },
 	dayUntil: 'завтра',
-	daysUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'день', 'дня', 'дней') + ''; }
+	daysUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'день', 'дня', 'дней') + ''; },
+	weekUntil: 'через неделю',
+	weeksUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'неделю', 'недели', 'недель') + ''; },
+	monthUntil: 'через месяц',
+	monthsUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'месяц', 'месяца', 'месецев') + ''; },
+	yearUntil: 'через',
+	yearsUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'год', 'года', 'лет') + ''; }
 
 });
 
