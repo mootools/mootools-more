@@ -35,8 +35,8 @@ Number.implement({
 		// Thanks dojo and YUI for some inspiration
 		var value = this,
 			locale = Object.clone(Locale.get('Number'));
-			options = Object.merge(locale, options || {}),
-			negative = value < 0,
+		var options = Object.merge(locale, options || {});
+		var negative = value < 0,
 			decimal = options.decimal,
 			precision = options.precision,
 			group = options.group,
@@ -48,10 +48,21 @@ Number.implement({
 			value *= -1;
 		}
 		
-		if (decimals > 0) value = value.toFixed(decimals);
-		if (precision > 0) value = value.toPrecision(toPrecision);
+		if (decimals > 0 && decimals <= 20) value = value.toFixed(decimals);
+		if (precision >= 1 && precision <= 21) value = value.toPrecision(precision);
 		
 		value += '';
+
+		var regex = /^(.+)e\+(\d)$/i;
+		if (options.scientific === false ){
+			var match = value.match(regex);
+			if (match){
+				value = match[1].replace('.', '');
+				times = match[2] - match[1].split('.').getLast().length;
+				while (times--) value += '0';
+			}
+		}
+		
 		if (decimal != '.') value = value.replace('.', decimal);
 		
 		if (options.group){

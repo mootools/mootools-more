@@ -34,6 +34,20 @@ describe('Number.Extras', function(){
 			expect((-20000).format()).toEqual('-20,000');
 		});
 		
+		it('should change precision', function(){
+			expect((123456789).format({
+				precision: 4,
+				scientific: false
+			})).toEqual('123,500,000');
+		});
+
+		it('should change precision', function(){
+			expect((12).format({
+				precision: 4,
+				scientific: false
+			})).toEqual('12.00');
+		});
+
 		it('should format a currency', function(){
 			expect((2000).formatCurrency()).toEqual('$ 2,000.00');
 		});
