@@ -8,14 +8,6 @@ License:
 
 describe('Number.Extras', function(){
 
-	describe('Number.uniqueID', function(){
-	
-		it('should return unique ids', function(){
-			expect(Number.uniqueID()).not.toEqual(Number.uniqueID());
-		});
-	
-	});
-
 	describe('Number.format', function(){
 		
 		it('should format the number', function(){

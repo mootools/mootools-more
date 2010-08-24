@@ -52,3 +52,12 @@ describe('String.stripTags', {
 	}
 
 });
+
+describe('String.uniqueID', function(){
+
+	it('should return unique ids', function(){
+		expect(String.uniqueID()).not.toEqual(String.uniqueID());
+	});
+
+});
+

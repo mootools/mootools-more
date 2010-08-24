@@ -21,13 +21,6 @@ provides: [Number.Extras]
 ...
 */
 
-(function(){
-
-var UID = Math.floor(Math.random() * 10e12);
-
-Number.uniqueID = function(){
-	return (UID++).toString(36);
-};
 
 Number.implement({
 	
@@ -97,6 +90,3 @@ Number.implement({
 	}
 	
 });
-
-
-})();
