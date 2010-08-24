@@ -93,37 +93,5 @@ Date Method: timeDiffInWords {#Date:timeDiffInWords}
 
 This method is now an alias for the old *Date.timeAgoInWords*.
 
-Date.Extras Language Localization {#Localization}
-==========================================
-
-*Date.Extras.js* includes the following key/values for localization.
-
-* lessThanMinuteAgo - (*string*) 'less than a minute ago'
-* minuteAgo - (*string*) 'about a minute ago'
-* minutesAgo - (*string*) '{delta} minutes ago' where {delta} is the number of minutes
-* hourAgo - (*string*) 'about an hour ago'
-* hoursAgo - (*string*) 'about {delta} hours ago' where {delta} is the number of hours
-* dayAgo - (*string*) '1 day ago'
-* daysAgo - (*string*) '{delta} days ago' where {delta} is the number of days
-* weekAgo - (*string*) '1 week ago'
-* weeksAgo - (*string*) '{delta} weeks ago' where {delta} is the number of weeks
-* monthAgo - (*string*) '1 month ago'
-* monthsAgo - (*string*) '{delta} months ago' where {delta} is the number of months
-* yearAgo - (*string*) '1 year ago'
-* yearsAgo - (*string*) '{delta} years ago' where {delta} is the number of years
-* lessThanMinuteUntil - (*string*) 'less than a minute from now'
-* minuteUntil - (*string*) 'about a minute from now'
-* minutesUntil - (*string*) '{delta} minutes from now' where {delta} is the number of minutes
-* hourUntil - (*string*) 'about an hour from now'
-* hoursUntil - (*string*) 'about {delta} hours from now' where {delta} is the number of hours
-* dayUntil - (*string*) '1 day from now'
-* daysUntil - (*string*) '{delta} days from now' where {delta} is the number of days
-* weekUntil - (*string*) '1 week from now'
-* weeksUntil - (*string*) '{delta} weeks from now' where {delta} is the number of weeks
-* monthUntil - (*string*) '1 month from now'
-* monthsUntil - (*string*) '{delta} months from now' where {delta} is the number of months
-* yearUntil - (*string*) '1 year from now'
-* yearsUntil - (*string*) '{delta} years from now' where {delta} is the number of years
-
 [Date.js]: /more/Types/Date
 [Date:parse]: /more/Types/Date#Date:parse

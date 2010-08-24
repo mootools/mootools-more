@@ -1,9 +1,10 @@
 Locale: Date {#Date}
 =====================================
 
-Contains the messages for [Date.Extras][].
+Contains the messages for [Date][] and [Date.Extras][].
 
-## Usage
+Usage
+-----
 
 Simply change the language property to the locale code, for example *en-US*.
 
@@ -11,10 +12,12 @@ Simply change the language property to the locale code, for example *en-US*.
 
 ### See also:
 
+* [Date][]
 * [Date.Extras][]
 * [Locale][]
 
-## Available Languages
+Available Languages
+-------------------
 
 <table>
 	<tr>
@@ -159,6 +162,48 @@ Simply change the language property to the locale code, for example *en-US*.
 	</tr>
 </table>
 
+Keys/Values
+-----------
+
+### Used by [Date][]
+
+* months - (*array*) An array of month names for the language (January, February, etc)
+* days - (*array*) An array of names for the days of the week (Monday, Tuesday, etc)
+* dateOrder - (*array*) An array specifying the order for date expression followed by a default delimiter (usually /). US english is *['month', 'date', 'year', '/']*, for instance.
+* AM - (*string*) the string that denotes morning in 12 hour time
+* PM - (*string*) the string that denotes evening in 12 hour time
+* ordinal - (*function*) A method that returns the proper ordinal ("th", "st", "nd", etc) given a day of the month.
+
+### Used by [Date.Extras][]
+
+* lessThanMinuteAgo - (*string*) 'less than a minute ago'
+* minuteAgo - (*string*) 'about a minute ago'
+* minutesAgo - (*string*) '{delta} minutes ago' where {delta} is the number of minutes
+* hourAgo - (*string*) 'about an hour ago'
+* hoursAgo - (*string*) 'about {delta} hours ago' where {delta} is the number of hours
+* dayAgo - (*string*) '1 day ago'
+* daysAgo - (*string*) '{delta} days ago' where {delta} is the number of days
+* weekAgo - (*string*) '1 week ago'
+* weeksAgo - (*string*) '{delta} weeks ago' where {delta} is the number of weeks
+* monthAgo - (*string*) '1 month ago'
+* monthsAgo - (*string*) '{delta} months ago' where {delta} is the number of months
+* yearAgo - (*string*) '1 year ago'
+* yearsAgo - (*string*) '{delta} years ago' where {delta} is the number of years
+* lessThanMinuteUntil - (*string*) 'less than a minute from now'
+* minuteUntil - (*string*) 'about a minute from now'
+* minutesUntil - (*string*) '{delta} minutes from now' where {delta} is the number of minutes
+* hourUntil - (*string*) 'about an hour from now'
+* hoursUntil - (*string*) 'about {delta} hours from now' where {delta} is the number of hours
+* dayUntil - (*string*) '1 day from now'
+* daysUntil - (*string*) '{delta} days from now' where {delta} is the number of days
+* weekUntil - (*string*) '1 week from now'
+* weeksUntil - (*string*) '{delta} weeks from now' where {delta} is the number of weeks
+* monthUntil - (*string*) '1 month from now'
+* monthsUntil - (*string*) '{delta} months from now' where {delta} is the number of months
+* yearUntil - (*string*) '1 year from now'
+* yearsUntil - (*string*) '{delta} years from now' where {delta} is the number of years
+
 
 [Locale]: /more/Locale/Locale
+[Date]: /more/Types/Date
 [Date.Extras]: /more/Types/Date.Extras

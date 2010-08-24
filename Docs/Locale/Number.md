@@ -3,7 +3,8 @@ Locale: Number {#Number}
 
 Contains the messages for [Number.Extras][].
 
-## Usage
+Usage
+-----
 
 Simply change the language property to the locale code, for example *en-US*.
 
@@ -14,7 +15,8 @@ Simply change the language property to the locale code, for example *en-US*.
 * [Number.Extras][]
 * [Locale][]
 
-## Available Languages
+Available Languages
+-------------------
 
 <table>
 	<tr>

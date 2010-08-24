@@ -27,6 +27,10 @@ Locale.define('en-US', 'Number', {
 /*	
 	decimals: 0,
 	precision: 0,
+	scientific: null,
+	
+	prefix: null,
+	suffic: null,
 */	
 	// Negative/Currency/percentage will mixin Number
 	negative: {

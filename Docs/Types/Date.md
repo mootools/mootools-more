@@ -520,17 +520,6 @@ Define the first year of the 100-year period that 2-digit years will be fall wit
 	Date.parse('01/01/00');  //Jan 1, 2000
 	Date.parse('12/31/99');  //Dec 31, 2099
 
-Date Language Localization {#Localization}
-==========================================
-
-*Date.js* includes the following key/values for localization. See [Locale][].
-
-* months - (*array*) An array of month names for the language (January, February, etc)
-* days - (*array*) An array of names for the days of the week (Monday, Tuesday, etc)
-* dateOrder - (*array*) An array specifying the order for date expression followed by a default delimiter (usually /). US english is *['month', 'date', 'year', '/']*, for instance.
-* AM - (*string*) the string that denotes morning in 12 hour time
-* PM - (*string*) the string that denotes evening in 12 hour time
-* ordinal - (*function*) A method that returns the proper ordinal ("th", "st", "nd", etc) given a day of the month.
 
 [Date:increment]: #Date:increment
 [Date:parse]: #Date:parse

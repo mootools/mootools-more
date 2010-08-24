@@ -638,28 +638,6 @@ Retrieves the error message for the validator.
 * (*mixed*) - The error message (*string*) or *boolean false* if no message is meant to be returned.
 
 
-Form.Validator Language Localization {#Localization}
-==========================================
-
-*Form.Validator.js* includes the following key/values for localization.
-
-* required - (*string*) 'This field is required.'
-* minLength - (*string*) 'Please enter at least {minLength} characters (you entered {length} characters).' where *minLength* and *length* are variables for the minimum length and the length the user entered.
-* maxLength - (*string*) 'Please enter no more than {maxLength} characters (you entered {length} characters).' where *maxLength* and *length* are variables for the maximum length and the length the user entered.
-* integer - (*string*) 'Please enter an integer in this field. Numbers with decimals (e.g. 1.25) are not permitted.'
-* numeric - (*string*) 'Please enter only numeric values in this field (i.e. "1" or "1.1" or "-1" or "-1.1").'
-* digits - (*string*) 'Please use numbers and punctuation only in this field (for example, a phone number with dashes or dots is permitted).'
-* alpha - (*string*) 'Please use letters only (a-z) with in this field. No spaces or other characters are allowed.'
-* alphanum - (*string*) 'Please use only letters (a-z) or numbers (0-9) only in this field. No spaces or other characters are allowed.'
-* dateSuchAs - (*string*) 'Please enter a valid date such as {date}' where *date* is an example of a valid date entry
-* dateInFormatMDY - (*string*) 'Please enter a valid date such as MM/DD/YYYY (i.e. "12/31/1999")'
-* email - (*string*) 'Please enter a valid email address. For example "fred@domain.com".'
-* url - (*string*) 'Please enter a valid URL such as http://www.google.com.'
-* currencyDollar - (*string*) 'Please enter a valid $ amount. For example $100.00 .'
-* oneRequired - (*string*) 'Please enter something for at least one of these inputs.'
-* errorPrefix - (*string*)  'Error: '
-* warningPrefix - (*string*)  'Warning: '
-
 [InputValidator]: #InputValidator
 [Form.Validator]: #Form-Validator
 [Form.Validator:ignoreField]: #Form-Validator:ignoreField
@@ -671,4 +649,4 @@ Form.Validator Language Localization {#Localization}
 [Events]: /core/Class/Class.Extras#Events
 [send them back to us]: http://groups.google.com/group/mootools-lang
 [JSON.decode]: /core/Utilities/JSON#decode
-[Locale]: docs/more/Locale/Locale/
+[Locale]: /more/Locale/Locale/
