@@ -40,7 +40,7 @@ Configuration.sets = {
 		files: [
 			'Class/Class.Binds', 'Class/Class.Refactor', 'Class/Events.Pseudos',
 			'Types/Array.Extras', 'Types/Object.Extras', 'Types/Hash.Extras',
-			'Types/String.Extras', 'Types/String.QueryString', 
+			'Types/String.Extras', 'Types/String.QueryString', 'Types/Number.Extras',
 			'Locale/Locale',
 			'Utilities/Color'
 		]
@@ -124,6 +124,7 @@ Configuration.source = {
 			'Locale/Locale',
 			'Locale/Form.Validator.English',
 			'Locale/Date.English.US',
+			'Locale/Number.English.US',
 	
 			'Class/Class.Binds',
 			'Class/Class.Refactor',
@@ -135,6 +136,8 @@ Configuration.source = {
 			'Types/Hash.Extras',
 			'Types/String.Extras',
 			'Types/String.QueryString',
+
+			'Types/Number.Extras',
 	
 			'Utilities/Color'
 		]
