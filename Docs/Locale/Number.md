@@ -1,4 +1,4 @@
-Locale: Date {#Date}
+Locale: Number {#Number}
 =====================================
 
 Contains the messages for [Number.Extras][].
