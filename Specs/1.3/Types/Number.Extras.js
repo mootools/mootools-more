@@ -31,7 +31,7 @@ describe('Number.Extras', function(){
 		});
 		
 		it('should format a negative number', function(){
-			expect((-20000).format()).toEqual('-20,000.00');
+			expect((-20000).format()).toEqual('-20,000');
 		});
 		
 		it('should format a currency', function(){
@@ -43,7 +43,7 @@ describe('Number.Extras', function(){
 		});
 		
 		it('should format percentage', function(){
-			expect((50).formatCurrency()).toEqual('50.00%');
+			expect((50).formatPercentage()).toEqual('50.00%');
 		});
 		
 	});

@@ -1,11 +1,11 @@
 /*
 ---
 
-script: Number.English.US.js
+script: Number.Dutch.js
 
-name: Number.English.US
+name: Number.Dutch
 
-description: Number messages for US English.
+description: Number messages for Dutch.
 
 license: MIT-style license
 
@@ -15,29 +15,31 @@ authors:
 requires:
   - /Locale
 
-provides: [Number.English.US]
+provides: [Number.Dutch]
 
 ...
 */
 
-Locale.define('en-US', 'Number', {
+Locale.define('nl-NL', 'Number', {
 	
 	decimal: ',',
 	group: '.',
-	
-	decimals: 2,
+/*	
+	decimals: 0,
 	precision: 0,
-	
+*/	
 	// Negative/Currency/percentage will mixin Number
 	negative: {
 		prefix: '-'
 	},
 	
 	currency: {
+		decimals: 2,
 		prefix: '€ '	
 	},
 	
 	percentage: {
+		decimals: 2,
 		suffix: '%'		
 	}
 

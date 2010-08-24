@@ -24,20 +24,22 @@ Locale.define('en-US', 'Number', {
 	
 	decimal: '.',
 	group: ',',
-	
-	decimals: 2,
+/*	
+	decimals: 0,
 	precision: 0,
-	
+*/	
 	// Negative/Currency/percentage will mixin Number
 	negative: {
 		prefix: '-'
 	},
 	
 	currency: {
+		decimals: 2,
 		prefix: '$ '	
 	},
 	
 	percentage: {
+		decimals: 2,
 		suffix: '%'		
 	}
 

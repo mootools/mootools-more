@@ -5,7 +5,7 @@ script: Number.Extras.js
 
 name: Number.Extras
 
-description: Extends the Number type object to include useful methods to work with arrays.
+description: Extends the Number type object to include useful methods to work with numbers.
 
 license: MIT-style license
 
@@ -16,7 +16,7 @@ requires:
   - Core/Number
   - /Locale/Number.English.US
 
-provides: [Array.Number]
+provides: [Number.Extras]
 
 ...
 */
