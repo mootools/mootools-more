@@ -18,6 +18,11 @@ Configuration.presets = {
 	'more-all': {
 		sets: ['1.3-base', '1.3-client'],
 		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']
+	},
+	
+	'keyboard': {
+		sets: ['keyboard'],
+		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']		
 	}
 	
 };
@@ -54,7 +59,16 @@ Configuration.sets = {
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
 			'Element/Element.Pseudos',
 			'Types/Date.Extras', 'Types/Date', 'Types/URI', 'Types/URI.Relative',
+			'Interface/Keyboard',
 			'Utilities/Hash.Cookie'
+		]
+	},
+	
+	'keyboard': {
+		path: '1.3/',
+		files: [
+			'Element/Element.Pseudos',
+			'Interface/Keyboard'
 		]
 	}
 
@@ -160,6 +174,8 @@ Configuration.source = {
 			'Types/Date.Extras',
 			'Types/URI',
 			'Types/URI.Relative',
+	
+			'Interface/Keyboard',
 	
 			'Utilities/Hash.Cookie'
 		]
