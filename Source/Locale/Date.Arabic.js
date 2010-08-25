@@ -25,6 +25,6 @@ Locale.define('ar', 'Date', {
 	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
 	shortDate: '%d/%m/%Y',
-	shortTime: '%H:%M',
+	shortTime: '%H:%M'
 
 });
