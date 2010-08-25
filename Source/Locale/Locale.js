@@ -25,100 +25,136 @@ provides: [Locale]
 
 (function(){
 
-	var current = 'en-US',
-	
-	data = {
-		'en-US': {}
-	},
-	
-	cascades = {},
+var current = 'en-US',
 
-	cascadeMethods = {};
-	
-	['erase', 'include', 'reverse', 'sort', 'unshift', 'push', 'append', 'include'].each(function(method){
-		cascadeMethods[method] = function(){
-			cascades[current][method].apply(cascades[current], arguments);
-		};
-	});
+data = {},
+locales = {},
+inherits = {};
 
-	var Locale = this.Locale = {
+var Locale = this.Locale = {
+	
+	define: function(name, set, key, value){
 		
-		define: function(name, set, key, value){
-			/*<1.2compat>*/
-			if (name == 'cascades') return this.setCascades(current, set);
-			if (set == 'cascades') return this.setCascades(name, key);
-			/*</1.2compat>*/
-
-			data[name] = data[name] || {};
-			data[name][set] = data[name][set] || {};
-			if (typeOf(key) == 'object'){
-				data[name][set] = Object.merge(data[name][set] || {}, key);
-			} else {
-				data[name][set][key] = value;
+		if (!locales[name]) locales[name] = {
+			
+			define: function(set, key, value){
+				if (!data[name]) data[name] = {};
+				
+				if (key){
+					var defineData = data[name][set];
+					
+					if (typeOf(key) == 'object'){
+						defineData = defineData ? Object.merge(defineData, key) : key;
+					} else {
+						defineData[key] = value;
+					}
+					data[name][set] = defineData;
+				}
+				
+				return this;
+			},
+			
+			get: function(key, args){
+				var index = key.indexOf('.'),
+					set = index < 0 ? key : key.substr(0, index),
+					locales = getInheritedList(name, set).include('en-US');
+				locales.unshift(name);
+				
+				for (var i = 0, l = locales.length; i < l; i++){
+					var dataSet = data[locales[i]];
+					if (!dataSet) continue;
+	
+					var value = Object.getFromPath(dataSet, key);
+					if (value != null) return (typeof value == 'function') ? value.apply(null, Array.from(args)) : value;
+				}
+				return null;
+			},
+			
+			inherit: function(locales, set){
+				locales = Array.from(locales);
+				
+				if (!inherits[name]) inherits[name] = {
+					locales: [],
+					sets: {}
+				};
+				
+				if (set && !data[name][set]) set = false;
+				if (set && !inherits[name].sets[set]) inherits[name].sets[set] = [];
+				
+				var l = locales.length;
+				while (l--) (set ? inherits[name].sets[set] : inherits[name].locales).unshift(locales[l]);
+				
+				return this;
 			}
 			
-			return this;
-		},
-		
-		setCurrent: function(name){
-			if (data[name]) current = name;
-			this.fireEvent('change', name)/*<1.2compat>*/.fireEvent('langChange', name)/*</1.2compat>*/;
-			return this;
-		},
-		
-		getCurrent: function(){
-			return current;
-		},
-		
-		get: function(key, args){
-			var locales = this.getCascades().clone().include('en-US');
-			locales.unshift(current);
+		};
 
-			for (var i = 0; i < locales.length; i++){
-				var dataSet = data[locales[i]];
-				if (!dataSet) continue;
-
-				var value = Object.getFromPath(dataSet, key);
-				if (value != null) return (typeof value == 'function') ? value.apply(null, Array.from(args)) : value;
-			}
-
-			return null;
-		},
+		/*<1.2compat>*/
+		if (set == 'cascade') return Locale.inherit(name, key);
+		/*</1.2compat>*/
 		
-		setCascades: function(name, value){
-			cascades[name] = Array.from(value);
-			return this;
-		},
+		if (set) locales[name].define(set, key, value);
 		
-		getCascades: function(name){
-			return cascades[name || current] || [];
-		},
-		
-		cascades: function(){
-			if (!cascades[current]) cascades[current] = [];
-			return cascadeMethods;
-		},
-		
-		list: function(){
-			return Object.keys(data);
-		}
-		
-	};
-
-	Object.append(Locale, new Events());	
+		return locales[name];
+	},
 	
-	/*<1.2compat>*/
-	var lang = MooTools.lang = {};
-	lang.setLanguage = Locale.setCurrent;
-	lang.getCurrentLanguage = Locale.getCurrent;
-	lang.set = Locale.define;
-	for (var key in Locale) lang[key] = Locale[key];
+	use: function(name){
+		if (locales[name]) current = name;
+		this.fireEvent('change', name)/*<1.2compat>*/.fireEvent('langChange', name)/*</1.2compat>*/;
+		return this;
+	},
 	
-	lang.get = function(set, key, args){
-		if (key) set += '.' + key;
+	getCurrent: function(){
+		return current;
+	},
+	
+	get: function(key, args){
+		var locale = locales[current];
+		if (locale) return locale.get(key, args);
+		return null;
+	},
+	
+	inherit: function(name, inherits, set){
+		var locale = locales[name];
+		if (locale) return locale.inherit(inherits, set);
+	},
+	
+	list: function(){
+		return Object.keys(data);
+	}
+	
+};
 
-		return Locale.get(set, args);
-	};
-	/*</1.2compat>*/
+Object.append(Locale, new Events());	
+
+var getInheritedList = Locale._getInheritedList = function(name, set, _base){
+	if (!_base) _base = [];
+	var locales = Array.clone(_base), inherit = inherits[name];
+	
+	if (inherit){
+		if (inherit.sets[set]) locales.combine(inherit.sets[set])
+		locales.combine(inherit.locales);			
+	}
+	
+	for (var i = 0, l = locales.length; i < l; i++) if(!_base.contains(locales[i])){
+		locales.combine(getInheritedList(locales[i], set, locales));
+	}
+	
+	return locales;		
+};
+
+/*<1.2compat>*/
+var lang = MooTools.lang = {};
+lang.setLanguage = Locale.use;
+lang.getCurrentLanguage = Locale.getCurrent;
+lang.set = Locale.define;
+for (var key in Locale) lang[key] = Locale[key];
+
+lang.get = function(set, key, args){
+	if (key) set += '.' + key;
+
+	return Locale.get(set, args);
+};
+/*</1.2compat>*/
 
 })();

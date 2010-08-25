@@ -22,47 +22,77 @@ describe('Locale', function(){
 	});
 	
 	it('should cascade through to english', function(){
-		Locale.setCurrent('en-GB');
+		Locale.use('en-US');
 		expect(Locale.get('FormValidator.required')).toEqual('This field is required.');
 	});
 	
 	it('should return french form validator message', function(){
-		var old = Locale.getCurrent();
-		Locale.setCurrent('fr-FR');
+		Locale.use('fr-FR');
 	
 		expect(Locale.get('FormValidator.required')).toEqual('Ce champ est obligatoire.');
-	
-		Locale.setCurrent(old);
 	});
-	
-	it('should test cascades set/get and cascades().* methods', function(){
-	
-		Locale.setCascades('fr-FR', ['nl-NL', 'en-GB']);
 		
-		var old = Locale.getCurrent();
-		Locale.setCurrent('fr-FR');
-	
-		expect(Locale.getCascades()).toEqual(['nl-NL', 'en-GB']);
-		
-		Locale.cascades().push('ca-CA');
-		expect(Locale.getCascades()).toEqual(['nl-NL', 'en-GB', 'ca-CA']);
-	
-		Locale.cascades().unshift('da-DK');
-		expect(Locale.getCascades()).toEqual(['da-DK', 'nl-NL', 'en-GB', 'ca-CA']);
-
-		Locale.setCurrent(old);
-		
-	});
-	
 	it('should return the right locale name', function(){
-		var old = Locale.getCurrent();
+		Locale.use('fr-FR');
 		
-		Locale.setCurrent('fr-FR');
 		expect(Locale.getCurrent()).toEqual('fr-FR');
-		Locale.setCurrent('non-existsing');
+		Locale.use('non-existsing');
 		expect(Locale.getCurrent()).toEqual('fr-FR');
+	});
+	
+	it('should inherit from other locales', function(){
 		
-		Locale.getCurrent(old);
+		Locale.define('nl-NL').inherit('en-US');
+		
+		Locale.use('nl-NL');
+		
+		Locale.define('nl-NL', 'Number', {
+			'foo': 'bar'
+		});
+		
+		Locale.define('EU').inherit('World');
+		Locale.define('World', 'Number', {
+			'bar': 'foo'
+		}).inherit('EU'); // test for recursion
+				
+		Locale.inherit('nl-NL', 'EU', 'Number');
+
+		expect(Locale._getInheritedList('nl-NL', 'Number')).toEqual(["EU", "en-US", "World"]);
+		expect(Locale.get('Number.foo')).toEqual('bar');
+		expect(Locale.get('Number.bar')).toEqual('foo');
+
+	});
+	
+	it('should return a object when no key is specified', function(){
+		var obj = {
+			'guten': 'tag'
+		};
+		
+		Locale.define('de-DE', 'Date', obj);
+		Locale.use('de-DE');
+		
+		expect(Locale.get('Date')).toEqual(obj);
+	});
+	
+	describe('MooTools.lang 1.2 specs', function(){
+		
+		it('should return english form validator message', function(){
+			MooTools.lang.setLanguage('en-US');
+			expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
+		});
+	
+		it('should cascade through to english', function(){
+			MooTools.lang.set('en-GB', 'cascade', ['IT', 'ESP', 'gbENG']);
+			MooTools.lang.setLanguage('en-GB');
+			expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
+		});
+	
+		it('should return french form validator message', function(){
+			MooTools.lang.setLanguage('fr-FR');
+			expect(MooTools.lang.get('FormValidator', 'required')).toEqual('Ce champ est obligatoire.');
+		});
+		
+		
 	});
 
 });
