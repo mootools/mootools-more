@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Estonian.js
-
-name: Date.Estonian
+name: Locale.et-EE.Date
 
 description: Date messages for Estonian.
 

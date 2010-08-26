@@ -20,7 +20,7 @@ requires:
   - Core/String
   - Core/Number
   - /Locale
-  - /Date.English.US
+  - /Locale.en-US.Date
   - /MooTools.More
 
 provides: [Date]

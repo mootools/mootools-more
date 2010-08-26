@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Catalan.js
-
-name: Form.Validator.Catalan
+name: Locale.ca-CA.Form.Validator
 
 description: Form Validator messages for Catalan.
 

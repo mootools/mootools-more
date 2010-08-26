@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Arabic.js
-
-name: Form.Validator.Arabic
+name: Locale.ar.Form.Validator
 
 description: Form Validator messages for Arabic.
 

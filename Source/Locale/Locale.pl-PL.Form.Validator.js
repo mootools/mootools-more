@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Polish.js
-
-name: Form.Validator.Polish
+name: Locale.pl-PL.Form.Validator
 
 description: Form Validator messages for Polish.
 

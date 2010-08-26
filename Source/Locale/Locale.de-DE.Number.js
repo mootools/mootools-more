@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Number.German.js
-
-name: Number.German
+name: Locale.de-DE.Number
 
 description: Number messages for German.
 

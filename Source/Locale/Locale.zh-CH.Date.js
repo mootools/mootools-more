@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Chinese.js
-
-name: Date.Chinese
+name: Locale.zh-CH.Date
 
 description: Date messages for Chinese (simplified and traditional).
 

@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Spanish.AR.js
-
-name: Form.Validator.Spanish.AR
+name: Locale.es-AR.Form.Validator
 
 description: Form Validator messages for Spanish (Argentina).
 

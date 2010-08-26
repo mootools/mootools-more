@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Polish.js
-
-name: Date.Polish
+name: Locale.pl-PL.Date
 
 description: Date messages for Polish.
 

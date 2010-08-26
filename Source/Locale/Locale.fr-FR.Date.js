@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.French.js
-
-name: Date.French
+name: Locale.fr-FR.Date
 
 description: Date messages for French.
 

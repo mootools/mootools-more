@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Number.English.US.js
-
-name: Number.English.US
+name: Locale.en-US.Number
 
 description: Number messages for US English.
 

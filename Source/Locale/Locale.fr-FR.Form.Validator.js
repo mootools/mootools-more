@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.French.js
-
-name: Form.Validator.French
+name: Locale.fr-FR.Form.Validator
 
 description: Form Validator messages for French.
 

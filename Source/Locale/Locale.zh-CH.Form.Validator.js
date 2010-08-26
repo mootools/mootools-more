@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Chinese.js
-
-name: Form.Validator.Chinese
+name: Form.zh-CH.Form.Validator
 
 description: Form Validator messages for Chinese (simplified and traditional).
 
@@ -16,7 +14,7 @@ requires:
   - /Locale
   - /Form.Validator
 
-provides: [Form.Validator.Chinese, Form.Validator.CurrencyYuanValidator]
+provides: [Form.zh-CH.Form.Validator, Form.Validator.CurrencyYuanValidator]
 
 ...
 */

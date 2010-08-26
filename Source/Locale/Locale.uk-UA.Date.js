@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Ukrainian.js
-
-name: Date.Ukrainian
+name: Locale-uk-UA.Date
 
 description: Date messages for Ukrainian (utf-8).
 

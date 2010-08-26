@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Japanese.js
-
-name: Date.Japanese
+name: Locale.ja-JP.Date
 
 description: Date messages for Japanese.
 

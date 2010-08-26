@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.English.js
-
-name: Form.Validator.English
+name: Locale.en-US.Form.Validator
 
 description: Form Validator messages for English.
 

@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Norwegian.js
-
-name: Form.Validator.Norwegian
+name: Locale.no-NO.Form.Validator
 
 description: Form Validator messages for Norwegian.
 

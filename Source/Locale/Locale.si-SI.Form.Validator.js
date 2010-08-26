@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Slovenian.js
-
-name: Form.Validator.Slovenian
+name: FLocale.si-SI.Form.Validator
 
 description: Form Validator messages for Slovenian.
 

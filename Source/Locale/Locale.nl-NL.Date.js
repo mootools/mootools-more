@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Dutch.js
-
-name: Date.Dutch
+name: Locale.nl-NL.Date
 
 description: Date messages for Dutch.
 

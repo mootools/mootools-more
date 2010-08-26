@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Japanese.js
-
-name: Form.Validator.Japanese
+name: Locale.ja-JP.Form.Validator
 
 description: Form Validator messages for Japanese.
 

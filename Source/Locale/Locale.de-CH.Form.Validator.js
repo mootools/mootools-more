@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.German.CH.js
-
-name: Form.Validator.German.CH
+name: Locale.de-CH.Form.Validator
 
 description: Form Validator messages for German (Switzerland).
 

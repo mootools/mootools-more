@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Italian.js
-
-name: Form.Validator.Italian
+name: Locale.it-IT.Form.Validator
 
 description: Form Validator messages for Italian.
 

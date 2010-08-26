@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Persian.js
-
-name: Form.Validator.Persian
+name: Locale.fa.Form.Validator
 
 description: Form Validator messages for Persian.
 

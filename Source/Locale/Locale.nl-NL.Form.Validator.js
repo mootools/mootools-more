@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Dutch.js
-
-name: Form.Validator.Dutch
+name: Locale.nl-NL.Form.Validator
 
 description: Form Validator messages for Dutch.
 

@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Russian.js
-
-name: Form.Validator.Russian
+name: Locale.ru-RU-unicode.Form.Validator
 
 description: Form Validator messages for Russian (utf-8 and cp1251).
 

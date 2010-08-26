@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.English.US.js
-
-name: Date.English.US
+name: Locale.en-US.Date
 
 description: Date messages for US English.
 

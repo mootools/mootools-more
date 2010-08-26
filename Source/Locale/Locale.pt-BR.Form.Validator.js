@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Portuguese.BR.js
-
-name: Form.Validator.Portuguese.BR
+name: Locale.pt-BR.Form.Validator
 
 description: Form Validator messages for Portuguese (Brazil).
 

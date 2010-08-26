@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Danish.js
-
-name: Date.Danish
+name: Locale.da-DK.Date
 
 description: Date messages for Danish.
 

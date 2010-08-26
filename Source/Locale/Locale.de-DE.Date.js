@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.German.js
-
-name: Date.German
+name: Locale.de-DE.Date
 
 description: Date messages for German.
 

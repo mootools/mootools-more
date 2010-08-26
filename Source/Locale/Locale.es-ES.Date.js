@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Spanish.js
-
-name: Date.Spanish
+name: Locale.es-ES.Date
 
 description: Date messages for Spanish.
 

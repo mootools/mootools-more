@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Hungarian.js
-
-name: Date.Hungarian
+name: Locale.hu-HU.Date
 
 description: Date messages for Hungarian.
 

@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Swedish.js
-
-name: Form.Validator.Swedish
+name: Locale.sv-SE.Form.Validator
 
 description: Form Validator messages for Swedish.
 

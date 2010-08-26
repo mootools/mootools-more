@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Ukrainian.js
-
-name: Form.Validator.Ukrainian
+name: Locale.uk-UA.Form.Validator
 
 description: Form Validator messages for Ukrainian (utf-8).
 

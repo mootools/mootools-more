@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Slovenian.js
-
-name: Date.Slovenian
+name: Locale.si-SI.Date
 
 description: Date messages for Slovenian.
 

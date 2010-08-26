@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Danish.js
-
-name: Form.Validator.Danish
+name: Locale.da-DK.Form.Validator
 
 description: Form Validator messages for Danish.
 

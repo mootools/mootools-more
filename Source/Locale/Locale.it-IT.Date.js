@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Italian.js
-
-name: Date.Italian
+name: Locale.it-IT.Date
 
 description: Date messages for Italian.
 

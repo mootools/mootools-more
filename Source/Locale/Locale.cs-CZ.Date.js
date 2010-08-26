@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Czech.js
-
-name: Date.Czech
+name: Locale.cs-CZ.Date
 
 description: Date messages for Czech.
 

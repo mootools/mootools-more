@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Catalan.js
-
-name: Date.Catalan
+name: Locale.ca-CA.Date
 
 description: Date messages for Catalan.
 

@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.German.CH.js
-
-name: Date.German.CH
+name: Locale.de-CH.Date
 
 description: Date messages for German (Switzerland).
 

@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Estonian.js
-
-name: Form.Validator.Estonian
+name: Locale.et-EE.Form.Validator
 
 description: Form Validator messages for Estonian.
 

@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Arabic.js
-
-name: Date.Arabic
+name: Locale.ar.Date
 
 description: Date messages for Arabic.
 

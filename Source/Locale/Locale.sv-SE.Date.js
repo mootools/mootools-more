@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Swedish.js
-
-name: Date.Swedish
+name: Locale.sv-SE.Date
 
 description: Date messages for Swedish.
 

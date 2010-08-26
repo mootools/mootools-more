@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Spanish.AR.js
-
-name: Date.Spanish.AR
+name: Locale.es-AR.Date
 
 description: Date messages for Spanish (Argentina).
 

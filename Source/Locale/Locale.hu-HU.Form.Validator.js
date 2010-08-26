@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Hungarian.js
-
-name: Form.Validator.Hungarian
+name: Locale.hu-HU.Form.Validator
 
 description: Form Validator messages for Hungarian.
 

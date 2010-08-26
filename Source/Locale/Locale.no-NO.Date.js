@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Norwegian.js
-
-name: Date.Norwegian
+name: Locale.no-NO.Date
 
 description: Date messages for Norwegian.
 

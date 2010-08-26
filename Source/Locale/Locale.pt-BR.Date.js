@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Portuguese.BR.js
-
-name: Date.Portuguese.BR
+name: Locale.pt-BR.Date
 
 description: Date messages for Portuguese (Brazil).
 

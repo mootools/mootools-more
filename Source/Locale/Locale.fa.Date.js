@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Persian.js
-
-name: Date.Persian
+name: Locale.fa.Date
 
 description: Date messages for Persian.
 

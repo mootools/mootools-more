@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Form.Validator.Czech.js
-
-name: Form.Validator.Czech
+name: Locale.cs-CZ.Form.Validator
 
 description: Form Validator messages for Czech.
 

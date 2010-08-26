@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Number.Dutch.js
-
-name: Number.Dutch
+name: Locale.nl-NL.Number
 
 description: Number messages for Dutch.
 

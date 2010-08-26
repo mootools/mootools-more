@@ -1,9 +1,7 @@
 /*
 ---
 
-script: Date.Russian.js
-
-name: Date.Russian
+name: Locale.ru-RU-unicode.Date
 
 description: Date messages for Russian (utf-8).
 
