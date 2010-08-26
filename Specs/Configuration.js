@@ -135,10 +135,11 @@ Configuration.source = {
 		path: '../Source/',
 		files: [
 			'Core/More',
+			
 			'Locale/Locale',
-			'Locale/Form.Validator.English',
-			'Locale/Date.English.US',
-			'Locale/Number.English.US',
+			'Locale/Locale.en-US.Form.Validator',
+			'Locale/Locale.en-US.Date',
+			'Locale/Locale.en-US.Number',
 	
 			'Class/Class.Binds',
 			'Class/Class.Refactor',
