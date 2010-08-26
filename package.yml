@@ -101,6 +101,7 @@ sources:
   - "Source/Locale/Locale.es-ES.Form.Validator.js"
   - "Source/Locale/Locale.et-EE.Date.js"
   - "Source/Locale/Locale.et-EE.Form.Validator.js"
+  - "Source/Locale/Locale.EU.Number.js"
   - "Source/Locale/Locale.fa.Date.js"
   - "Source/Locale/Locale.fa.Form.Validator.js"
   - "Source/Locale/Locale.fr-FR.Date.js"

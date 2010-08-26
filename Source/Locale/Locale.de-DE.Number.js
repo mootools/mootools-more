@@ -14,33 +14,11 @@ authors:
 
 requires:
   - /Locale
+  - /Locale.EU.Number
 
 provides: [Locale.de-DE.Number]
 
 ...
 */
 
-Locale.define('de-DE', 'Number', {
-
-	decimal: ',',
-	group: '.',
-/*
-	decimals: 0,
-	precision: 0,
-*/
-	// Negative/Currency/percentage will mixin Number
-	negative: {
-		prefix: '-'
-	},
-
-	currency: {
-		decimals: 2,
-		prefix: '€ '
-	},
-
-	percentage: {
-		decimals: 2,
-		suffix: '%'
-	}
-
-});
+Locale.define('de-DE').inherit('EU', 'Number');
