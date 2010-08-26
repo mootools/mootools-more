@@ -13,7 +13,11 @@ Contains methods and data necessary to provide localization.
 Example language file
 ---------------------
 
-Below is an example language file from *Date.English.US.js*. Note that some members are arrays (months and days), others are strings, and one is even a function. Also note that some of the strings contain notation for variable substitution. Each class establishes it's own conventions for the language file that is required and is therefor required to document those conventions. Look for these at the bottom of the class's documentation.
+Below is an example language file from *Locale.en-US.Date.js*. Note that some members are 
+arrays (months and days), others are strings, and one is even a function. Also note that 
+some of the strings contain notation for variable substitution. Each class establishes it's 
+own conventions for the language file that is required and is therefor required to document 
+those conventions. Look for these at the bottom of the class's Locale documentation.
 
 	Locale.define('en-US', 'Date', {
 
@@ -26,30 +30,16 @@ Below is an example language file from *Date.English.US.js*. Note that some memb
 		ordinal: function(dayOfMonth){
 			return (dayOfMonth > 3 && dayOfMonth < 21) ? 'th' : ['th', 'st', 'nd', 'rd', 'th'][Math.min(dayOfMonth % 10, 4)];
 		},
-		lessThanMinuteAgo: 'less than a minute ago',
-		minuteAgo: 'about a minute ago',
-		minutesAgo: '{delta} minutes ago',
-		hourAgo: 'about an hour ago',
-		hoursAgo: 'about {delta} hours ago',
-		dayAgo: '1 day ago',
-		daysAgo: '{delta} days ago',
-		lessThanMinuteUntil: 'less than a minute from now',
-		minuteUntil: 'about a minute from now',
-		minutesUntil: '{delta} minutes from now',
-		hourUntil: 'about an hour from now',
-		hoursUntil: 'about {delta} hours from now',
-		dayUntil: '1 day from now',
-		daysUntil: '{delta} days from now'
+		lessThanMinuteAgo: 'less than a minute ago'
 
 	});
-
-All the above code does is register these values for the 'en-US' language for 'Date'. *Date* has attached an event to *Locale* in order to monitor these changes and update it's local store of this data. See below.
 
 
 Locale event: onChange {#Locale:onChange}
 ---------------------------------------------------------------
 
-This event is fired whenever the current locale is changed for the user (for instance, from "en-US" to "es-ES") or whenever the current selected locale is updated with new data.
+This event is fired whenever the current locale is changed for the user (for instance, 
+from "en-US" to "es-ES") or whenever the current selected locale is updated with new data.
 
 ### Example:
 
@@ -93,23 +83,26 @@ Defines properties for a given set in a given language.
 * *object* - Locale (the instance)
 
 
-Locale method: setCurrent {#Locale:setCurrent}
+Locale method: use {#Locale:setCurrent}
 --------------------------------------------------------------
 
 Sets the current locale for the user.
 
 ### Syntax
 
-	Locale.setCurrent(name);
+	Locale.use(name);
 
 ### Arguments
 
-1. name - (*string*) the new locale name for classes to use.
+1. name - (*string*) the new locale name to use.
 
 ### Returns
 
 * *object* - Locale (the instance)
 
+### Example
+
+	Locale.use('nl-NL');
 
 Locale method: getCurrent {#Locale:getCurrent}
 --------------------------------------------------------------
@@ -158,28 +151,26 @@ Retrieves a set of locale properties for the current language or the whole set.
 
 1. Dots '`.`' in the key argument can be used to find nested properties.
 
-Locale method: setCascades {#Locale:setCascades}
+Locale method: inherit {#Locale:inherit}
 ------------------------------------------------
 
-Locale cascade. If there are members in the locale set for a given key, 
-it will be returned, but if not, the next locale set in the specified 
-cascade will be inspected for that key and so on. This way if there 
-are new locale properties added for a given set but not every locale 
-set has a translation yet, the set will at least have a value, though 
-not in the right language.
-
-By default, all locale sets cascade to US English, as this is the only 
-locale set that we can guarantee is complete for the plugins in the 
-MooTools repository. Any specific locale set can specify it's own 
-cascade with this method.
+It often occurs that localization data is based on a other language.
+For example Spanish in Argentina has many similarities with Spanish 
+or Number formatting in Europe is the same for lots of Europe countries.
+Therefore it is impossible to inherit another locale data from another
+language. `Locale.get` will search trough the inherited locale names
+until a property is set. The en-US locale set is always used as last 
+option because that is the only set that is garanteed to be complete.
 
 ### Syntax: 
 
-	Locale.setCascades(value);
+	Locale.inherit(name, parent[, set]);
 
 ### Arguments: 
 
-1. value - (*array*) An array with the locale names in the order the get method should search for.
+1. name - (*string*) The locale name
+2. parent - (*string*) The locale name to inherit from
+3. set - (*string*, optional) If the locale data should only inherit for specific data sets, set this argument
 
 ### Returns
 
@@ -188,42 +179,10 @@ cascade with this method.
 
 ### Example: 
 
-	// Italian cascades to Spanish, then to British English
-	//(this is just an example of how to do it - not a suggestion!)
-	Locale.setCascades(['it-IT', 'es-ES', 'en-GB']);
-
-
-Locale method: getCascades {#Locale:getCascades}
-------------------------------------------------
-
-Get the current list of cascades.
-
-### Syntax:
-
-	Locale.getCascades();
-
-### Return:
-
-* *array* - an array with the locale names
-
-
-Locale method: cascades {#Locale:cascades}
-------------------------------------------
-
-This method returns an object with methods so you can modify the cascades array.
-
-### Syntax:
-
-	Locale.cascades();
-
-### Returns:
-
-* *object* An object with the following Array methods to modify the cascades array: 'erase', 'include', 'reverse', 'sort', 'unshift', 'push', 'append' and 'include'
-
-### Examples:
-
-	Locale.cascades().push('nl-NL'); // adds 'nl-NL' at the and of the array
-	Locale.cascades().unshift('nl-NL'); // adds 'nl-NL' at the beginning of the array 
+	Locale.inherit('es-AR', 'es-ES');
+	
+	// Only inherit for a specific data set
+	Locale.inherit('de-CH', 'de-DE', 'Number');
 
 
 Locale method: list {#Locale:list}

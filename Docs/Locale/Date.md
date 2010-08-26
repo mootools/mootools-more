@@ -8,7 +8,7 @@ Usage
 
 Simply change the language property to the locale code, for example *en-US*.
 
-	Locale.setCurrent('en-US');
+	Locale.use('en-US');
 
 ### See also:
 
