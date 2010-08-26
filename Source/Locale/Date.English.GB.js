@@ -27,4 +27,4 @@ Locale.define('en-GB', 'Date', {
 	shortDate: '%d/%m/%Y',
 	shortTime: '%H:%M'
 
-}).setCascades('en-GB', ['en-US']);
+}).inherit('en-US', 'Date');

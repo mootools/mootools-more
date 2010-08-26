@@ -35,21 +35,22 @@ var Locale = this.Locale = {
 	
 	define: function(name, set, key, value){
 		
+		if (!data[name]) data[name] = {};
+		
 		if (!locales[name]) locales[name] = {
 			
 			define: function(set, key, value){
-				if (!data[name]) data[name] = {};
+				var defineData = data[name][set];
+				if (!defineData) defineData = {};
 				
 				if (key){
-					var defineData = data[name][set];
-					
 					if (typeOf(key) == 'object'){
-						defineData = defineData ? Object.merge(defineData, key) : key;
+						defineData = Object.merge(defineData, key);
 					} else {
 						defineData[key] = value;
 					}
-					data[name][set] = defineData;
 				}
+				data[name][set] = defineData;
 				
 				return this;
 			},
@@ -78,7 +79,6 @@ var Locale = this.Locale = {
 					sets: {}
 				};
 				
-				if (set && !data[name][set]) set = false;
 				if (set && !inherits[name].sets[set]) inherits[name].sets[set] = [];
 				
 				var l = locales.length;

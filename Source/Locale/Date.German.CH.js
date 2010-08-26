@@ -21,4 +21,4 @@ provides: [Date.German.CH]
 ...
 */
 
-Locale.setCascades('de-CH', ['de-DE']);
+Locale.define('de-CH').inherit('de-DE', 'Date');
