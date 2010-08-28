@@ -47,5 +47,3 @@ Locale.define('he-IL', 'Number', {
 	}
 
 });
-
-
