@@ -161,22 +161,23 @@ Locale.Set = new Class({
 });
 
 /*<1.2compat>*/
-var lang = MooTools.lang = {
-	set: Locale.define,
+var lang = MooTools.lang = {};
+
+Object.append(lang, Locale, {
 	setLanguage: Locale.use,
 	getCurrentLanguage: function(){
 		var current = Locale.getCurrent();
 		return (current) ? current.name : null
+	},
+	set: function(){
+		Locale.define.apply(this, arguments);
+		return this;
+	},
+	get: function(set, key, args){
+		if (key) set += '.' + key;
+		return Locale.get(set, args);
 	}
-};
-
-Object.append(lang, Locale);
-
-lang.get = function(set, key, args){
-	if (key) set += '.' + key;
-
-	return Locale.get(set, args);
-};
+});
 /*</1.2compat>*/
 
 })();
