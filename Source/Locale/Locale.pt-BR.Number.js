@@ -38,8 +38,7 @@ Locale.define('pt-BR', 'Number', {
 
 	currency: {
 		decimals: 2,
-		prefix: 'R$ ',
-		'scientific': false
+		prefix: 'R$ '
 	},
 
 	percentage: {

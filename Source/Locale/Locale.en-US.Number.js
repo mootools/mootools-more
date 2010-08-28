@@ -37,8 +37,7 @@ Locale.define('en-US', 'Number', {
 
 	currency: {
 		decimals: 2,
-		prefix: '$ ',
-		'scientific': false
+		prefix: '$ '
 	},
 
 	percentage: {
