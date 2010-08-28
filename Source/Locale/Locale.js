@@ -66,7 +66,7 @@ var Locale = this.Locale = {
 					var value = Object.getFromPath(dataSet, key);
 					if (value != null) return Type.isFunction(value) ? value.apply(null, Array.from(args)) : value;
 				}
-				return null;
+				return '';
 			},
 			
 			inherit: function(locales, set){
@@ -113,7 +113,7 @@ var Locale = this.Locale = {
 	
 	get: function(key, args){
 		var locale = locales[current];
-		return (locale) ? locale.get(key, args) : null;
+		return (locale) ? locale.get(key, args) : '';
 	},
 	
 	inherit: function(name, inherits, set){
