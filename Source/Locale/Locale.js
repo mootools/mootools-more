@@ -150,11 +150,13 @@ Locale.Set = new Class({
 });
 
 /*<1.2compat>*/
-var lang = MooTools.lang = {};
-lang.setLanguage = Locale.use;
-lang.getCurrentLanguage = Locale.getCurrent;
-lang.set = Locale.define;
-for (var key in Locale) lang[key] = Locale[key];
+var lang = MooTools.lang = {
+	setLanguage: Locale.use,
+	getCurrentLanguage: Locale.getCurrent,
+	set: Locale.define
+};
+
+Object.append(lang, Locale);
 
 lang.get = function(set, key, args){
 	if (key) set += '.' + key;
