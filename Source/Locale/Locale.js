@@ -25,9 +25,14 @@ provides: [Locale]
 
 (function(){
 
-var current = 'en-US',
+var current = null,
 	locales = {},
 	inherits = {};
+
+var getSet = function(set){
+	if (instanceOf(set, Locale.Set)) return set
+	else return locales[set];
+}
 
 var Locale = this.Locale = {
 
@@ -35,26 +40,30 @@ var Locale = this.Locale = {
 
 		if (instanceOf(locale, Locale.Set)){
 			var name = locale.name;
-			locales[name] = locale;
+			if (name) locales[name] = locale;
 		} else {
 			var name = locale;
 			if (!locales[name]) locale = locales[name] = new Locale.Set(name);
-			if (set) locales[name].define(set, key, value);
 		}
+
+		if (set) locale.define(set, key, value);
 
 		/*<1.2compat>*/
 		if (set == 'cascade') return Locale.inherit(name, key);
 		/*</1.2compat>*/
 
-		return locale;
+		if (!current) current = locale;
+
+		return this;
 	},
 
-	use: function(name){
-		if (locales[name]) current = name;
-		this.fireEvent('change', name);
+	use: function(locale){
+		locale = current = getSet(locale);
+
+		this.fireEvent('change', locale);
 
 		/*<1.2compat>*/
-		this.fireEvent('langChange', name);
+		this.fireEvent('langChange', locale.name);
 		/*</1.2compat>*/
 
 		return this;
@@ -65,22 +74,18 @@ var Locale = this.Locale = {
 	},
 
 	get: function(key, args){
-		var locale = locales[current];
-		return (locale) ? locale.get(key, args) : '';
+		return (current) ? current.get(key, args) : '';
 	},
 
-	getSet: function(){
-		return locales[current];
-	},
+	inherit: function(locale, inherits, set){
+		locale = getSet(locale);
 
-	inherit: function(name, inherits, set){
-		var locale = locales[name];
 		if (locale) locale.inherit(inherits, set);
-		return Locale;
+		return this;
 	},
 
 	list: function(){
-		return Object.keys(data);
+		return Object.keys(locales);
 	}
 
 };
@@ -97,7 +102,7 @@ Locale.Set = new Class({
 	},
 
 	initialize: function(name){
-		this.name = name;
+		this.name = name || '';
 	},
 
 	define: function(set, key, value){
@@ -151,9 +156,12 @@ Locale.Set = new Class({
 
 /*<1.2compat>*/
 var lang = MooTools.lang = {
+	set: Locale.define,
 	setLanguage: Locale.use,
-	getCurrentLanguage: Locale.getCurrent,
-	set: Locale.define
+	getCurrentLanguage: function(){
+		var current = Locale.getCurrent();
+		return (current) ? current.name : null
+	}
 };
 
 Object.append(lang, Locale);
