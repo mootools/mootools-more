@@ -129,7 +129,7 @@ var Locale = this.Locale = {
 
 Object.append(Locale, new Events);	
 
-var getInheritedList = Locale._getInheritedList = function(name, set, _base){
+var getInheritedList = function(name, set, _base){
 	if (!_base) _base = [];
 	var locales = Array.clone(_base),
 		inherit = inherits[name];
