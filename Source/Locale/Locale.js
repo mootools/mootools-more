@@ -26,10 +26,9 @@ provides: [Locale]
 (function(){
 
 var current = 'en-US',
-
-data = {},
-locales = {},
-inherits = {};
+	data = {},
+	locales = {},
+	inherits = {};
 
 var Locale = this.Locale = {
 	
@@ -44,11 +43,10 @@ var Locale = this.Locale = {
 				if (!defineData) defineData = {};
 				
 				if (key){
-					if (typeOf(key) == 'object'){
+					if (typeOf(key) == 'object')
 						defineData = Object.merge(defineData, key);
-					} else {
+					else
 						defineData[key] = value;
-					}
 				}
 				data[name][set] = defineData;
 				
@@ -66,7 +64,7 @@ var Locale = this.Locale = {
 					if (!dataSet) continue;
 	
 					var value = Object.getFromPath(dataSet, key);
-					if (value != null) return (typeof value == 'function') ? value.apply(null, Array.from(args)) : value;
+					if (value != null) return Type.isFunction(value) ? value.apply(null, Array.from(args)) : value;
 				}
 				return null;
 			},
@@ -100,7 +98,12 @@ var Locale = this.Locale = {
 	
 	use: function(name){
 		if (locales[name]) current = name;
-		this.fireEvent('change', name)/*<1.2compat>*/.fireEvent('langChange', name)/*</1.2compat>*/;
+		this.fireEvent('change', name);
+
+		/*<1.2compat>*/
+		this.fireEvent('langChange', name);
+		/*</1.2compat>*/
+		
 		return this;
 	},
 	
@@ -110,13 +113,12 @@ var Locale = this.Locale = {
 	
 	get: function(key, args){
 		var locale = locales[current];
-		if (locale) return locale.get(key, args);
-		return null;
+		return (locale) ? locale.get(key, args) : null;
 	},
 	
 	inherit: function(name, inherits, set){
 		var locale = locales[name];
-		if (locale) return locale.inherit(inherits, set);
+		return (locale) ? locale.inherit(inherits, set) : null;
 	},
 	
 	list: function(){
@@ -125,11 +127,12 @@ var Locale = this.Locale = {
 	
 };
 
-Object.append(Locale, new Events());	
+Object.append(Locale, new Events);	
 
 var getInheritedList = Locale._getInheritedList = function(name, set, _base){
 	if (!_base) _base = [];
-	var locales = Array.clone(_base), inherit = inherits[name];
+	var locales = Array.clone(_base),
+		inherit = inherits[name];
 	
 	if (inherit){
 		if (inherit.sets[set]) locales.combine(inherit.sets[set])
