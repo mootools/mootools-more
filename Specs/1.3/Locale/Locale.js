@@ -32,12 +32,12 @@ describe('Locale', function(){
 		expect(Locale.get('FormValidator.required')).toEqual('Ce champ est obligatoire.');
 	});
 		
-	it('should return the right locale name', function(){
+	it('should return the correct locale name', function(){
 		Locale.use('fr-FR');
-		
-		expect(Locale.getCurrent()).toEqual('fr-FR');
+		expect(Locale.getCurrent().name).toEqual('fr-FR');
 		Locale.use('non-existsing');
-		expect(Locale.getCurrent()).toEqual('fr-FR');
+		console.log(Locale.getCurrent());
+		expect(Locale.getCurrent().name).toEqual('fr-FR');
 	});
 	
 	it('should inherit from other locales', function(){

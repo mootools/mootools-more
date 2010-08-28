@@ -43,7 +43,8 @@ var Locale = this.Locale = {
 			if (name) locales[name] = locale;
 		} else {
 			var name = locale;
-			if (!locales[name]) locale = locales[name] = new Locale.Set(name);
+			if (!locales[name]) locales[name] = new Locale.Set(name);
+			locale = locales[name];
 		}
 
 		if (set) locale.define(set, key, value);
@@ -58,13 +59,17 @@ var Locale = this.Locale = {
 	},
 
 	use: function(locale){
-		locale = current = getSet(locale);
+		locale = getSet(locale);
+		
+		if (locale){
+			current = locale;
 
-		this.fireEvent('change', locale);
+			this.fireEvent('change', locale);
 
-		/*<1.2compat>*/
-		this.fireEvent('langChange', locale.name);
-		/*</1.2compat>*/
+			/*<1.2compat>*/
+			this.fireEvent('langChange', locale.name);
+			/*</1.2compat>*/
+		}
 
 		return this;
 	},
