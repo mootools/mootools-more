@@ -21,10 +21,21 @@ provides: Locale.Set.From
 ...
 */
 
-Locale.Set.from = function(set){
+(function(){
+
+var parsers = {
+	'json': JSON.decode
+};
+
+Locale.Set.defineParser = function(name, fn){
+	parsers[name] = fn;
+};
+
+Locale.Set.from = function(set, type){
 	if (instanceOf(set, Locale.Set)) return set;
 
-	if (typeOf(set) == 'string') set = JSON.decode(set);
+	if (!type && typeOf(set) == 'string') type = 'json';
+	if (parsers[type]) set = parsers[type](set);
 
 	locale = new Locale.Set;
 
@@ -37,3 +48,5 @@ Locale.Set.from = function(set){
 
 	return locale;
 }
+
+})();
