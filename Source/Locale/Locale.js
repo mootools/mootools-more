@@ -25,133 +25,152 @@ provides: [Locale]
 
 (function(){
 
-var current = 'en-US',
-	data = {},
+var current = null,
 	locales = {},
 	inherits = {};
 
+var getSet = function(set){
+	if (instanceOf(set, Locale.Set)) return set
+	else return locales[set];
+}
+
 var Locale = this.Locale = {
-	
-	define: function(name, set, key, value){
-		
-		if (!data[name]) data[name] = {};
-		
-		if (!locales[name]) locales[name] = {
-			
-			define: function(set, key, value){
-				var defineData = data[name][set];
-				if (!defineData) defineData = {};
-				
-				if (key){
-					if (typeOf(key) == 'object')
-						defineData = Object.merge(defineData, key);
-					else
-						defineData[key] = value;
-				}
-				data[name][set] = defineData;
-				
-				return this;
-			},
-			
-			get: function(key, args){
-				var index = key.indexOf('.'),
-					set = index < 0 ? key : key.substr(0, index),
-					locales = getInheritedList(name, set).include('en-US');
-				locales.unshift(name);
-				
-				for (var i = 0, l = locales.length; i < l; i++){
-					var dataSet = data[locales[i]];
-					if (!dataSet) continue;
-	
-					var value = Object.getFromPath(dataSet, key);
-					if (value != null) return Type.isFunction(value) ? value.apply(null, Array.from(args)) : value;
-				}
-				return '';
-			},
-			
-			inherit: function(locales, set){
-				locales = Array.from(locales);
-				
-				if (!inherits[name]) inherits[name] = {
-					locales: [],
-					sets: {}
-				};
-				
-				if (set && !inherits[name].sets[set]) inherits[name].sets[set] = [];
-				
-				var l = locales.length;
-				while (l--) (set ? inherits[name].sets[set] : inherits[name].locales).unshift(locales[l]);
-				
-				return this;
-			}
-			
-		};
+
+	define: function(locale, set, key, value){
+
+		if (instanceOf(locale, Locale.Set)){
+			var name = locale.name;
+			if (name) locales[name] = locale;
+		} else {
+			var name = locale;
+			if (!locales[name]) locales[name] = new Locale.Set(name);
+			locale = locales[name];
+		}
+
+		if (set) locale.define(set, key, value);
 
 		/*<1.2compat>*/
 		if (set == 'cascade') return Locale.inherit(name, key);
 		/*</1.2compat>*/
-		
-		if (set) locales[name].define(set, key, value);
-		
-		return locales[name];
-	},
-	
-	use: function(name){
-		if (locales[name]) current = name;
-		this.fireEvent('change', name);
 
-		/*<1.2compat>*/
-		this.fireEvent('langChange', name);
-		/*</1.2compat>*/
-		
+		if (!current) current = locale;
+
 		return this;
 	},
-	
+
+	use: function(locale){
+		locale = getSet(locale);
+		
+		if (locale){
+			current = locale;
+
+			this.fireEvent('change', locale);
+
+			/*<1.2compat>*/
+			this.fireEvent('langChange', locale.name);
+			/*</1.2compat>*/
+		}
+
+		return this;
+	},
+
 	getCurrent: function(){
 		return current;
 	},
-	
+
 	get: function(key, args){
-		var locale = locales[current];
-		return (locale) ? locale.get(key, args) : '';
+		return (current) ? current.get(key, args) : '';
 	},
-	
-	inherit: function(name, inherits, set){
-		var locale = locales[name];
-		return (locale) ? locale.inherit(inherits, set) : null;
+
+	inherit: function(locale, inherits, set){
+		locale = getSet(locale);
+
+		if (locale) locale.inherit(inherits, set);
+		return this;
 	},
-	
+
 	list: function(){
-		return Object.keys(data);
+		return Object.keys(locales);
 	}
-	
+
 };
 
-Object.append(Locale, new Events);	
+Object.append(Locale, new Events);
 
-var getInheritedList = function(name, set, _base){
-	if (!_base) _base = [];
-	var locales = Array.clone(_base),
-		inherit = inherits[name];
-	
-	if (inherit){
-		if (inherit.sets[set]) locales.combine(inherit.sets[set])
-		locales.combine(inherit.locales);			
+Locale.Set = new Class({
+
+	sets: {},
+
+	inherits: {
+		locales: [],
+		sets: {}
+	},
+
+	initialize: function(name){
+		this.name = name || '';
+	},
+
+	define: function(set, key, value){
+		var defineData = this.sets[set];
+		if (!defineData) defineData = {};
+
+		if (key){
+			if (typeOf(key) == 'object') defineData = Object.merge(defineData, key);
+			else defineData[key] = value;
+		}
+		this.sets[set] = defineData;
+
+		return this;
+	},
+
+	get: function(key, args, _base){
+		var value = Object.getFromPath(this.sets, key);
+		if (value != null) return Type.isFunction(value) ? value.apply(null, Array.from(args)) : value;
+
+		// get value of inherited locales
+		var index = key.indexOf('.'),
+			set = index < 0 ? key : key.substr(0, index),
+			names = (this.inherits.sets[set] || []).combine(this.inherits.locales).include('en-US');
+		if (!_base) _base = [];
+
+		for (var i = 0, l = names.length; i < l; i++){
+			if (_base.contains(names[i])) continue;
+			_base.include(names[i]);
+
+			var locale = locales[names[i]];
+			if (!locale) continue;
+
+			var value = locale.get(key, args, _base);
+			if (value != null) return value;
+		}
+
+		return '';
+	},
+
+	inherit: function(names, set){
+		names = Array.from(names);
+
+		if (set && !this.inherits.sets[set]) this.inherits.sets[set] = [];
+
+		var l = names.length;
+		while (l--) (set ? this.inherits.sets[set] : this.inherits.locales).unshift(names[l]);
+
+		return this;
 	}
-	
-	for (var i = 0, l = locales.length; i < l; i++) if(!_base.contains(locales[i])){
-		locales.combine(getInheritedList(locales[i], set, locales));
-	}
-	
-	return locales;		
-};
+
+});
 
 /*<1.2compat>*/
-var lang = MooTools.lang = {};
-lang.setLanguage = Locale.use;
-lang.getCurrentLanguage = Locale.getCurrent;
-lang.set = Locale.define;
-for (var key in Locale) lang[key] = Locale[key];
+var lang = MooTools.lang = {
+	set: Locale.define,
+	setLanguage: Locale.use,
+	getCurrentLanguage: function(){
+		var current = Locale.getCurrent();
+		return (current) ? current.name : null
+	}
+};
+
+Object.append(lang, Locale);
 
 lang.get = function(set, key, args){
 	if (key) set += '.' + key;
