@@ -80,7 +80,7 @@ var Locale = this.Locale = {
 	},
 	
 	list: function(){
-		return Object.keys(data);
+		return Object.keys(locales);
 	}
 	
 };
@@ -121,6 +121,7 @@ Locale.Set = new Class({
 		var index = key.indexOf('.'),
 			set = index < 0 ? key : key.substr(0, index),
 			names = (this.inherits.sets[set] || []).combine(this.inherits.locales).include('en-US');
+		if (!_base) _base = [];
 		
 		for (var i = 0, l = names.length; i < l; i++){
 			if (_base.contains(names[i])) continue;

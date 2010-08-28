@@ -57,7 +57,6 @@ describe('Locale', function(){
 				
 		Locale.inherit('nl-NL', 'EU', 'Number');
 
-		expect(Locale._getInheritedList('nl-NL', 'Number')).toEqual(["EU", "en-US", "World"]);
 		expect(Locale.get('Number.foo')).toEqual('bar');
 		expect(Locale.get('Number.bar')).toEqual('foo');
 
