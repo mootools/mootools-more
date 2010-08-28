@@ -34,4 +34,6 @@ Locale.Set.from = function(set){
 		locale.inherits.locales = Array.from(set.inherits.locales);
 		locale.inherits.sets = set.inherits.sets || {};
 	}
+
+	return locale;
 }
