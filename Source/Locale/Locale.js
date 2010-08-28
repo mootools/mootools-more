@@ -55,7 +55,7 @@ var Locale = this.Locale = {
 
 		if (!current) current = locale;
 
-		return this;
+		return locale;
 	},
 
 	use: function(locale){
