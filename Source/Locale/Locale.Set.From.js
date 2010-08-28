@@ -1,9 +1,9 @@
 /*
 ---
 
-script: Locale.From.js
+script: Locale.Set.From.js
 
-name: Locale.From
+name: Locale.Set.From
 
 description: Provides an alternative way to create Locale.Set objects.
 
