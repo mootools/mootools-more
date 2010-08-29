@@ -3,7 +3,7 @@
 
 name: Locale.EU.Number
 
-description: Number messages for German.
+description: Number messages for Europe.
 
 license: MIT-style license
 
