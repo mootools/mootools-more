@@ -82,7 +82,10 @@ Number.implement({
 	},
 	
 	formatCurrency: function(){
-		return this.format(Locale.get('Number.currency'));
+		var locale = Locale.get('Number.currency');
+		if (locale.scientific == null) locale.scientific = false;
+
+		return this.format(locale);
 	},
 	
 	formatPercentage: function(){
