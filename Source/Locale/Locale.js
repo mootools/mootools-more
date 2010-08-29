@@ -60,7 +60,7 @@ var Locale = this.Locale = {
 
 	use: function(locale){
 		locale = getSet(locale);
-		
+
 		if (locale){
 			current = locale;
 

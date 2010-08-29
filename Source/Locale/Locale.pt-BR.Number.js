@@ -1,30 +1,35 @@
 /*
 ---
 
-name: Locale.EU.Number
+name: Locale.pt-BR.Number
 
-description: Number messages for Europe.
+description: Number messages for PT Brazilian.
 
 license: MIT-style license
 
 authors:
   - Arian Stolwijk
+  - Danillo César
 
 requires:
   - /Locale
 
-provides: [Locale.EU.Number]
+provides: [Locale.pt-BR.Number]
 
 ...
 */
 
-Locale.define('EU', 'Number', {
+Locale.define('pt-BR', 'Number', {
 
 	decimal: ',',
 	group: '.',
 /*
 	decimals: 0,
 	precision: 0,
+	scientific: null,
+
+	prefix: null,
+	suffic: null,
 */
 	// Negative/Currency/percentage will mixin Number
 	negative: {
@@ -33,7 +38,7 @@ Locale.define('EU', 'Number', {
 
 	currency: {
 		decimals: 2,
-		prefix: '€ '
+		prefix: 'R$ '
 	},
 
 	percentage: {
@@ -42,3 +47,5 @@ Locale.define('EU', 'Number', {
 	}
 
 });
+
+

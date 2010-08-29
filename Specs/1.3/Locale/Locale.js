@@ -36,7 +36,6 @@ describe('Locale', function(){
 		Locale.use('fr-FR');
 		expect(Locale.getCurrent().name).toEqual('fr-FR');
 		Locale.use('non-existsing');
-		console.log(Locale.getCurrent());
 		expect(Locale.getCurrent().name).toEqual('fr-FR');
 	});
 	

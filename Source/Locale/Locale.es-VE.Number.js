@@ -1,24 +1,24 @@
 /*
 ---
 
-name: Locale.EU.Number
+name: Locale.es-VE.Number
 
-description: Number messages for Europe.
+description: Number messages for Spanish (Venezuela).
 
 license: MIT-style license
 
 authors:
-  - Arian Stolwijk
+  - Daniel Barreto
 
 requires:
   - /Locale
 
-provides: [Locale.EU.Number]
+provides: [Locale.es-VE.Number]
 
 ...
 */
 
-Locale.define('EU', 'Number', {
+Locale.define('es-VE', 'Number', {
 
 	decimal: ',',
 	group: '.',
@@ -33,7 +33,7 @@ Locale.define('EU', 'Number', {
 
 	currency: {
 		decimals: 2,
-		prefix: '€ '
+		prefix: 'Bs. '
 	},
 
 	percentage: {

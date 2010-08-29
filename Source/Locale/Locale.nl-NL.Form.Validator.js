@@ -52,6 +52,6 @@ Locale.define('nl-NL', 'FormValidator', {
 	beforeDate: 'De datum moet hetzelfde of voor {label} zijn.',
 	startMonth: 'Selecteer een begin maand',
 	sameMonth: 'Deze twee data moeten in dezelfde maand zijn - u moet een van beide aanpassen.',
-	creditcard: 'Het ingevulde creditcard nummer is niet geldig. Controleer het nummer en probeer opnieuw. {length} getallen ingevuld.'
+	creditcard: 'Het ingevulde creditcardnummer is niet geldig. Controleer het nummer en probeer opnieuw. {length} getallen ingevuld.'
 
 });

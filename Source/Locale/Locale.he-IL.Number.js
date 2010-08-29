@@ -1,30 +1,34 @@
 /*
 ---
 
-name: Locale.EU.Number
+name: Locale.he-IL.Number
 
-description: Number messages for Europe.
+description: Number messages for Hebrew.
 
 license: MIT-style license
 
 authors:
-  - Arian Stolwijk
+  - Elad Ossadon
 
 requires:
   - /Locale
 
-provides: [Locale.EU.Number]
+provides: [Locale.he-IL.Number]
 
 ...
 */
 
-Locale.define('EU', 'Number', {
+Locale.define('he-IL', 'Number', {
 
-	decimal: ',',
-	group: '.',
+	decimal: '.',
+	group: ',',
 /*
 	decimals: 0,
 	precision: 0,
+	scientific: null,
+
+	prefix: null,
+	suffic: null,
 */
 	// Negative/Currency/percentage will mixin Number
 	negative: {
@@ -33,7 +37,8 @@ Locale.define('EU', 'Number', {
 
 	currency: {
 		decimals: 2,
-		prefix: '€ '
+		suffix: ' ₪',
+		'scientific': false
 	},
 
 	percentage: {
