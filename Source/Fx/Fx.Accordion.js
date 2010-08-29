@@ -102,7 +102,7 @@ Fx.Accordion = new Class({
 		
 		var test = this.togglers.contains(toggler);
 		var idx = this.togglers.indexOf(toggler);
-		var displayer = this.display.bind(this, idx);
+		var displayer = this.display.pass(idx, this);
 
 		toggler.store('accordion:display', displayer)
 			.addEvent(this.options.trigger, displayer);
