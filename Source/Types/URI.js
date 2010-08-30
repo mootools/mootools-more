@@ -14,6 +14,7 @@ authors:
   - Aaron Newton
 
 requires:
+  - Core/Object
   - Core/Class
   - Core/Class.Extras
   - Core/Element
@@ -131,7 +132,7 @@ var URI = new Class({
 		} else if (merge){
 			values = Object.merge(this.getData(), values);
 		}
-		return this.set(part || 'query', Hash.toQueryString(values));
+		return this.set(part || 'query', Object.toQueryString(values));
 	},
 
 	clearData: function(part){

@@ -1,7 +1,7 @@
 /* 
 ---
 
-name: Locale.nl-NL.Number
+name: Locale.sv-SE.Number
 
 description: Number messages for Swedish.
 
@@ -20,10 +20,10 @@ provides: [Locale.sv-SE.Number]
 ...
 */
 
-Locale.define('sv-SE', 'Number', { 
+Locale.define('sv-SE', 'Number', {
 
-	currency: { 
-		prefix: 'SEK ' 
+	currency: {
+		prefix: 'SEK '
 	}
 
 }).inherit('EU', 'Number');

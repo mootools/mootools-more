@@ -35,7 +35,7 @@ Fx.Scroll = new Class({
 	initialize: function(element, options){
 		this.element = this.subject = document.id(element);
 		this.parent(options);
-		var cancel = this.cancel.bind(this, false);
+		var cancel = this.cancel.pass(false, this);
 
 		if (typeOf(this.element) != 'element') this.element = document.id(this.element.getDocument().body);
 
