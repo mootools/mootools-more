@@ -25,7 +25,7 @@ sources:
   - "Source/Types/Array.Extras.js"
   - "Source/Types/Date.js"
   - "Source/Types/Date.Extras.js"
-  - "Source/Types/Number.Extras.js"
+  - "Source/Types/Number.Format.js"
   - "Source/Types/Object.Extras.js"
   - "Source/Types/String.Extras.js"
   - "Source/Types/String.QueryString.js"
