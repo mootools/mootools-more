@@ -45,7 +45,7 @@ Configuration.sets = {
 		files: [
 			'Class/Class.Binds', 'Class/Class.Refactor', 'Class/Events.Pseudos',
 			'Types/Array.Extras', 'Types/Object.Extras', 'Types/Hash.Extras',
-			'Types/String.Extras', 'Types/String.QueryString', 'Types/Number.Extras',
+			'Types/String.Extras', 'Types/String.QueryString', 'Types/Number.Format',
 			'Locale/Locale',
 			'Utilities/Color'
 		]
@@ -152,7 +152,7 @@ Configuration.source = {
 			'Types/String.Extras',
 			'Types/String.QueryString',
 
-			'Types/Number.Extras',
+			'Types/Number.Format',
 	
 			'Utilities/Color'
 		]

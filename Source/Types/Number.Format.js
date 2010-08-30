@@ -59,7 +59,7 @@ Number.implement({
 				zeros = +match[1];
 			value = match[0].replace('.', '');
 			
-			if (match[1].substr(0, 1) == '-'){
+			if (zeros < 0){
 				zeros = -zeros - 1;
 				var index = match[0].indexOf('.');
 				if (index > -1) zeros -= index - 1;
