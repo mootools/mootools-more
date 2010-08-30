@@ -26,45 +26,60 @@ Number.implement({
 	
 	format: function(options){
 		// Thanks dojo and YUI for some inspiration
-		var value = this,
-			locale = Object.clone(Locale.get('Number'));
-		
-		options = Object.merge(locale, options || {});
+		var value = this;
+		if (!options) options = {};
+		var getOption = function(key){
+			if (options[key] != null) return options[key];
+			return Locale.get('Number.' + key);
+		};
+
 		var negative = value < 0,
-			decimal = options.decimal,
-			precision = options.precision,
-			group = options.group,
-			decimals = options.decimals;
-		
+			decimal = getOption('decimal'),
+			precision = getOption('precision'),
+			group = getOption('group'),
+			decimals = getOption('decimals');
+
 		if (negative){
-			if (options.prefix) options.negative.prefix = options.prefix + options.negative.prefix;
-			options = Object.merge(options, options.negative);
+			Object.each(Locale.get('Number.negative'), function(value, key){
+				options[key] = (key == 'prefix' || key == 'suffix') ? (getOption(key) + value) : value;
+			});
 			value = -value;
 		}
-		
+
+		var prefix = getOption('prefix'),
+			suffix = getOption('suffix');
+
 		if (decimals > 0 && decimals <= 20) value = value.toFixed(decimals);
 		if (precision >= 1 && precision <= 21) value = value.toPrecision(precision);
-		
+
 		value += '';
 
-		if (options.scientific === false){
-			var match = value.match(/^(.+)e\+(\d)$/i);
-			if (match){
-				value = match[1].replace('.', '');
-
-				var length = match[2] - match[1].split('.').getLast().length;
-				while (length--) value += '0';
+		if (getOption('scientific') === false && value.indexOf('e') > -1){
+			var match = value.split('e'),
+				zeros = +match[1];
+			value = match[0].replace('.', '');
+			
+			if (match[1].substr(0, 1) == '-'){
+				zeros = -zeros - 1;
+				var index = match[0].indexOf('.');
+				if (index > -1) zeros -= index - 1;
+				while (zeros--) value = '0' + value;
+				value = '0.' + value;
+			} else {
+				var index = match[0].lastIndexOf('.');
+				if (index > -1) zeros -= match[0].length - index - 1;
+				while (zeros--) value += '0';
 			}
 		}
-		
+
 		if (decimal != '.') value = value.replace('.', decimal);
-		
-		if (options.group){
+
+		if (group){
 			var index = value.lastIndexOf(decimal);
 			index = (index > -1) ? index : value.length;
 			var newOutput = value.substring(index),
 				i = index;
-				
+	
 			while (i--){
 				if ((index - i - 1) % 3 == 0 && i != (index - 1))
 					newOutput = group + newOutput;
@@ -74,10 +89,10 @@ Number.implement({
 
 			value = newOutput;
 		}
-		
-		if (options.prefix) value = options.prefix + value;
-		if (options.suffix) value += options.suffix;
-		
+
+		if (prefix) value = prefix + value;
+		if (suffix) value += suffix;
+
 		return value;
 	},
 	
@@ -87,9 +102,9 @@ Number.implement({
 
 		return this.format(locale);
 	},
-	
+
 	formatPercentage: function(){
 		return this.format(Locale.get('Number.percentage'));
 	}
-	
+
 });
