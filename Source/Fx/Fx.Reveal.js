@@ -187,6 +187,7 @@ Fx.Reveal = new Class({
 		this.element.style.cssText = this.cssText;
 		this.hidding = false;
 		this.showing = false;
+		return this;
 	}
 
 });
