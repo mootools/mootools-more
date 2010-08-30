@@ -31,13 +31,22 @@ describe('Number.Extras', function(){
 				precision: 4,
 				scientific: false
 			})).toEqual('123,500,000');
-		});
 
-		it('should change precision', function(){
 			expect((12).format({
 				precision: 4,
 				scientific: false
 			})).toEqual('12.00');
+		});
+		
+		it('should have the right amouth of zeros', function(){
+			expect((1e+30).format({scientific: false}))			.toEqual('1,000,000,000,000,000,000,000,000,000,000');
+
+			expect((1.2345e+30).format({scientific: false}))	.toEqual('1,234,500,000,000,000,000,000,000,000,000');
+
+
+			expect((1e-30).format({scientific: false}))			.toEqual('0.000000000000000000000000000001');
+			
+			expect((1.234345e-30).format({scientific: false}))	.toEqual('0.000000000000000000000000000001234345');
 		});
 
 		it('should format a currency', function(){

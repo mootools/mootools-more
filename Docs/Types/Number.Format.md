@@ -1,7 +1,7 @@
 Type: Number {#Number}
 ======================
 
-A collection of useful methods to extend Number.
+A collection of useful methods to format Numbers.
 
 ### See Also
 
