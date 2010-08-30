@@ -54,17 +54,11 @@ var pad = function(what, length){
 Date.implement({
 
 	set: function(prop, value){
-		switch (typeOf(prop)){
-			case 'object':
-				for (var p in prop) this.set(p, prop[p]);
-				break;
-			case 'string':
-				prop = prop.toLowerCase();
-				var m = Date.Methods;
-				if (m[prop]) this['set' + m[prop]](value);
-		}
+		prop = prop.toLowerCase();
+			var m = Date.Methods;
+			if (m[prop]) this['set' + m[prop]](value);
 		return this;
-	},
+	}.overloadSetter(),
 
 	get: function(prop){
 		prop = prop.toLowerCase();
