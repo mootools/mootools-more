@@ -40,9 +40,12 @@ Number.implement({
 			decimals = getOption('decimals');
 
 		if (negative){
-			Object.each(Locale.get('Number.negative'), function(value, key){
+			var negativeLocale = Locale.get('Number.negative') || {};
+			if (negativeLocale.prefix == null && negativeLocale.suffix == null) negativeLocale.prefix = '-';
+			Object.each(negativeLocale, function(value, key){
 				options[key] = (key == 'prefix' || key == 'suffix') ? (getOption(key) + value) : value;
 			});
+
 			value = -value;
 		}
 
@@ -99,12 +102,17 @@ Number.implement({
 	formatCurrency: function(){
 		var locale = Locale.get('Number.currency');
 		if (locale.scientific == null) locale.scientific = false;
+		if (locale.decimals == null) locale.decimals = 2;
 
 		return this.format(locale);
 	},
 
 	formatPercentage: function(){
-		return this.format(Locale.get('Number.percentage'));
+		var locale = Locale.get('Number.percentage') || {};
+		if (locale.suffix == null) locale.suffix = '%';
+		if (locale.decimals == null) locale.decimals = 2;
+		
+		return this.format(locale);
 	}
 
 });
