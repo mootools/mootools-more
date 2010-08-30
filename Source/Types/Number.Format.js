@@ -100,7 +100,7 @@ Number.implement({
 	},
 	
 	formatCurrency: function(){
-		var locale = Locale.get('Number.currency');
+		var locale = Locale.get('Number.currency') || {};
 		if (locale.scientific == null) locale.scientific = false;
 		if (locale.decimals == null) locale.decimals = 2;
 

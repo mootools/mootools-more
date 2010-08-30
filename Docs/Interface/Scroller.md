@@ -77,7 +77,7 @@ Scroller Method: stop {#Scroller:stop}
 
 ### Syntax
 
-	myScroller.start();
+	myScroller.stop();
 
 ### Examples
 
