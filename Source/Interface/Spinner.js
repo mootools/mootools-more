@@ -147,7 +147,7 @@ Request = Class.refactor(Request, {
 		this._send = this.send;
 		this.send = function(options){
 			var spinner = this.getSpinner();
-			if (spinner) spinner.chain(this._send.bind(this, options)).show();
+			if (spinner) spinner.chain(this._send.pass(options, this)).show();
 			else this._send(options);
 			return this;
 		};

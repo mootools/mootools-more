@@ -155,8 +155,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 			if ((binders && this._selectEnabled) || (!binders && !this._selectEnabled)) return;
 			if (!binders){
 				binders = {
-					mouseenter: this._enterRow.bind(this, [row]),
-					mouseleave: this._leaveRow.bind(this, [row])
+					mouseenter: this._enterRow.pass([row], this),
+					mouseleave: this._leaveRow.pass([row], this)
 				};
 				row.store('binders', binders).addEvents(binders);
 			} else {

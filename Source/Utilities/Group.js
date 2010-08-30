@@ -35,7 +35,7 @@ var Group = new Class({
 		if (this.events[type].contains(fn)) return false;
 		else this.events[type].push(fn);
 		this.instances.each(function(instance, i){
-			instance.addEvent(type, this.check.bind(this, [type, instance, i]));
+			instance.addEvent(type, this.check.pass([type, instance, i], this));
 		}, this);
 		return this;
 	},
