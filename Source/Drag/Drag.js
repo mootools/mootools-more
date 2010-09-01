@@ -99,7 +99,7 @@ var Drag = new Class({
 		};
 		for (var z in this.options.modifiers){
 			if (!this.options.modifiers[z]) continue;
-			if (this.options.style) this.value.now[z] = this.element.getStyle(this.options.modifiers[z]).toInt();
+			if (this.options.style) this.value.now[z] = (this.element.getStyle(this.options.modifiers[z]) || 0).toInt();
 			else this.value.now[z] = this.element[this.options.modifiers[z]];
 			if (this.options.invert) this.value.now[z] *= -1;
 			if (this._invert[z]) this.value.now[z] *= -1;
