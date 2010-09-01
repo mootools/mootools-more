@@ -361,6 +361,10 @@ describe('Date.getLastDayOfMonth', {
 
 describe('Date.parse', {
 
+	'should parse zero into a date': function(){
+		value_of(Date.parse(0)).should_be(new Date(0));
+	},
+
 	'should parse a millisecond value into a date': function(){
 		var d = new Date(Date.UTC(2000, 0, 1, 1, 1, 1));
 		value_of(Date.parse(d.getTime())).should_be(d);
@@ -390,8 +394,6 @@ describe('Date.parse', {
 			value_of(Date.parse('2000')).should_be(d);
 			
 			d = new Date().clearTime();
-			value_of(Date.parse(d.set('date', 3).format('%d'))).should_be(d);
-			value_of(Date.parse(d.set('date', 25).format('%d%o'))).should_be(d);
 			value_of(Date.parse(d.set({date: 1, mo: 11}).format('%B'))).should_be(d);
 		});
 	}
