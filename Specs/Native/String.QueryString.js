@@ -18,7 +18,11 @@ License:
 		},
 
 		'should parse an encoded querystring to an object': function(){
-			value_of('this%20should%20be%20encoded=yes'.parseQueryString()).should_be({'this should be encoded': 'yes'});
+			value_of('this%20should%20be%20decoded=yes'.parseQueryString()).should_be({'this should be decoded': 'yes'});
+		},
+
+		'should parse a querystring without decoding': function(){
+			value_of('this%20should%20be%20encoded=oh%20dear'.parseQueryString(false, false)).should_be({'this%20should%20be%20encoded': 'oh%20dear'});
 		}
 
 	});
