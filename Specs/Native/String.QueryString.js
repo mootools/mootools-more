@@ -15,6 +15,10 @@ License:
 
 		'should parse a plain string to a key': function(){
 			value_of('appleyellow'.parseQueryString()['']).should_be('appleyellow');
+		},
+
+		'should parse an encoded querystring to an object': function(){
+			value_of('this%20should%20be%20encoded=yes'.parseQueryString()).should_be({'this should be encoded': 'yes'});
 		}
 
 	});
