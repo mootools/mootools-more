@@ -63,13 +63,12 @@ this.Tips = new Class({
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
 		this.setOptions(params.options);
 		if (params.elements) this.attach(params.elements);
+		this.container = new Element('div', {'class': 'tip'});
 	},
 
 	toElement: function(){
 		if (this.tip) return this.tip;
 
-		this._injected = false;
-		this.container = new Element('div', {'class': 'tip'});
 		return this.tip = new Element('div', {
 			'class': this.options.className,
 			styles: {
@@ -81,7 +80,7 @@ this.Tips = new Class({
 			new Element('div', {'class': 'tip-top'}),
 			this.container,
 			new Element('div', {'class': 'tip-bottom'})
-		);
+		).inject(document.body);
 	},
 
 	attach: function(elements){
@@ -125,7 +124,6 @@ this.Tips = new Class({
 	},
 
 	elementEnter: function(event, element){
-		if (!this.tip) document.id(this);
 		this.container.empty();
 		
 		['title', 'text'].each(function(value){
@@ -135,11 +133,7 @@ this.Tips = new Class({
 		
 		$clear(this.timer);
 		this.timer = (function(){
-			if (!this._injected){
-				this.tip.inject(document.body);
-				this._injected = true;
-			}
-			this.show(this, element);
+			this.show(element);
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 		}).delay(this.options.showDelay, this);
 	},
