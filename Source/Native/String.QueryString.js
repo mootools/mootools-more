@@ -23,8 +23,8 @@ provides: [String.QueryString]
 String.implement({
 
 	parseQueryString: function(decodeKeys, decodeValues){
-		var decodeKeys = typeof decodeKeys == 'undefined' ? true : decodeKeys;
-		var decodeValues = typeof decodeValues == 'undefined' ? true : decodeValues;
+		if (decodeKeys == null) decodeKeys = true;
+		if (decodeValues == null) decodeValues = true;
 		var vars = this.split(/[&;]/), res = {};
 		if (vars.length) vars.each(function(val){
 			var index = val.indexOf('='),
@@ -32,7 +32,7 @@ String.implement({
 				value = decodeValues ? decodeURIComponent(val.substr(index + 1)) : val.substr(index + 1),
 				obj = res;
 			keys.each(function(key, i){
-				var key = decodeKeys ? decodeURIComponent(key) : key;
+				if (decodeKeys) key = decodeURIComponent(key);
 				var current = obj[key];
 				if(i < keys.length - 1)
 					obj = obj[key] = current || {};
