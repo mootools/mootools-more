@@ -23,6 +23,10 @@ License:
 
 		'should parse a querystring without decoding': function(){
 			value_of('this%20should%20be%20encoded=oh%20dear'.parseQueryString(false, false)).should_be({'this%20should%20be%20encoded': 'oh%20dear'});
+		},
+
+		'should parse a collection correctly': function(){
+			value_of(Hash.toQueryString('f[28][]=110&order=pv'.parseQueryString())).should_be('f[28][]=110&order=pv');
 		}
 
 	});

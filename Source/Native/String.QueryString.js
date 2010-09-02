@@ -28,7 +28,7 @@ String.implement({
 		var vars = this.split(/[&;]/), res = {};
 		if (vars.length) vars.each(function(val){
 			var index = val.indexOf('='),
-				keys = index < 0 ? [''] : val.substr(0, index).match(/[^\]\[]+/g),
+				keys = index < 0 ? [''] : val.substr(0, index).match(/([^\]\[]+|(\B)(?=\]))/g),
 				value = decodeValues ? decodeURIComponent(val.substr(index + 1)) : val.substr(index + 1),
 				obj = res;
 			keys.each(function(key, i){
