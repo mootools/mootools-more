@@ -12,7 +12,7 @@ authors:
 
 requires:
   - /Locale
-  - /Date.Portuguese
+  - /Locale.pt-PT.Date
 
 provides: [Locale.pt-BR.Date]
 

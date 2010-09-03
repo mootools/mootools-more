@@ -23,7 +23,7 @@ requires:
   - /Class.Binds
   - /Date 
   - /Element.Forms
-  - /Form.Validator.English
+  - /Locale.en-US.Form.Validator
   - /Element.Shortcuts
 
 provides: [Form.Validator, InputValidator, FormValidator.BaseValidators]
