@@ -143,7 +143,7 @@ Drag.Move = new Class({
 	},
 
 	checkDroppables: function(){
-		var overed = Array.from(this.droppables).filter(function(el, i){
+		var overed = this.droppables.filter(function(el, i){
 			el = this.positions ? this.positions[i] : el.getCoordinates();
 			var now = this.mouse.now;
 			return (now.x > el.left && now.x < el.right && now.y < el.bottom && now.y > el.top);
