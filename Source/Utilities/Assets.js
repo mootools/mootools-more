@@ -104,15 +104,15 @@ var Asset = {
 		sources = $splat(sources);
 		var images = [];
 		var counter = 0;
-		return new Elements(sources.map(function(source){
+		return new Elements(sources.map(function(source, index){
 			return Asset.image(source, $extend(options.properties, {
 				onload: function(){
-					options.onProgress.call(this, counter, sources.indexOf(source));
+					options.onProgress.call(this, counter, index);
 					counter++;
 					if (counter == sources.length) options.onComplete();
 				},
 				onerror: function(){
-					options.onError.call(this, counter, sources.indexOf(source));
+					options.onError.call(this, counter, index);
 					counter++;
 					if (counter == sources.length) options.onComplete();
 				}
