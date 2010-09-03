@@ -54,17 +54,11 @@ var pad = function(what, length){
 Date.implement({
 
 	set: function(prop, value){
-		switch (typeOf(prop)){
-			case 'object':
-				for (var p in prop) this.set(p, prop[p]);
-				break;
-			case 'string':
-				prop = prop.toLowerCase();
-				var m = Date.Methods;
-				if (m[prop]) this['set' + m[prop]](value);
-		}
+		prop = prop.toLowerCase();
+		var m = Date.Methods;
+		if (m[prop]) this['set' + m[prop]](value);
 		return this;
-	},
+	}.overloadSetter(),
 
 	get: function(prop){
 		prop = prop.toLowerCase();
@@ -293,7 +287,6 @@ Date.extend({
 			var bits = pattern.re.exec(from);
 			return (bits) ? (parsed = pattern.handler(bits)) : false;
 		});
-
 		return parsed || new Date(nativeParse(from));
 	},
 
@@ -425,7 +418,7 @@ var build = function(format){
 			bits = bits.slice(1).associate(parsed);
 			var date = new Date().clearTime();
 			['d', 'm', 'b', 'B'].each(function(letter){
-				if (letter in bits) handle.call(date, letter, 1);
+				if (bits[letter]) handle.call(date, letter, 1);
 			});
 			for (var key in bits) handle.call(date, key, bits[key]);
 			return date;

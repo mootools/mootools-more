@@ -1,7 +1,7 @@
 <p>The items change color when you mouseover/out. When you click an item, some text about it should appear. The links below allow you to alter the behavior.</p>
 
 <style type="text/css">
-	#someListing { cursor: default; border: solid 1px #333; background-color: #B89C76; padding: 20px; width: 300px; }
+	#someListing, #mouseenter_mouseleave { cursor: default; border: solid 1px #333; background-color: #B89C76; padding: 20px; width: 300px; }
 	.item { border: solid 1px #333; background-color: #2D5E4C; color: White; padding: 7px 12px; margin: 2px 7px; }
 </style>
 
@@ -19,8 +19,17 @@
 	<a id="remove">remove events</a> |
 	<a id="nots">add to only mouseover behavior to 1st and 3rd items</a>
 </p>
+
+<hr />
+
+<div id="mouseenter_mouseleave">
+	<div class="item mouse">Enter or leave this element with your mouse. The event should only fire once.</div>
+	<div id="enter_leave_results"></div>
+</div>
+
 <script src="/depender/build?require=More/Element.Delegation,Core/Fx.Morph"></script>
 <script>
+
 var tests;
 var add = function(){
 	remove();
@@ -65,4 +74,15 @@ add();
 $('add').addEvent('click', add);
 $('remove').addEvent('click', remove);
 $('nots').addEvent('click', nots);
+
+var enter_leave = $('mouseenter_mouseleave');
+enter_leave.addEvents({
+	'mouseenter:relay(.mouse)': function(){
+		enter_leave.adopt(new Element('div', {text: 'enter'}));
+	},
+	'mouseleave:relay(.mouse)': function(){
+		enter_leave.adopt(new Element('div', {text: 'leave'}));
+	}
+});
+
 </script>

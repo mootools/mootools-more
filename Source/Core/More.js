@@ -13,6 +13,8 @@ authors:
   - Guillermo Rauch
   - Thomas Aylott
   - Scott Kyle
+  - Arian Stolwijk
+  - Tim Wienk
 
 requires:
   - Core/MooTools

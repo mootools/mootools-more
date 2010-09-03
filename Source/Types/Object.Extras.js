@@ -24,18 +24,16 @@ provides: [Object.Extras]
 Object.extend({
 
 	getFromPath: function(source, key){
-
 		var parts = key.split('.');
 		for (var i = 0, l = parts.length; i < l; i++){
 			if (source.hasOwnProperty(parts[i])) source = source[parts[i]];
 			else return null;
 		}
 		return source;
-		
 	},
 
 	cleanValues: function(object, method){
-		method = method || function(obj){
+		if (!method) method = function(obj){
 			return obj != null;
 		};
 		for (key in object){
@@ -54,6 +52,7 @@ Object.extend({
 		for (key in object){
 			if (typeOf(object[key]) == 'function') object[key].apply(object,  args);
 		}
+		return object;
 	}
 
 });
