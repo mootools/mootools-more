@@ -15,6 +15,7 @@ authors:
   - Scott Kyle
   - Arian Stolwijk
   - Tim Wienk
+  - Christoph Pojer
 
 requires:
   - Core/MooTools
