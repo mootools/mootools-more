@@ -22,14 +22,26 @@ provides: [Element.Delegation]
 ...
 */
 
-Event.definePseudo('relay', function(split, fn, args){
+
+Event.definePseudo('relay', function(split, fn, args, proxy){
 	var event = args[0];
+	var check = proxy ? proxy.check : null;
+
 	for (var target = event.target; target && target != this; target = target.parentNode){
-		if (Slick.match(target, split.value)){
-			var finalTarget = document.id(target);
-			if (finalTarget) fn.apply(finalTarget, [event, finalTarget]);
+		var finalTarget = document.id(target);
+		if (Slick.match(target, split.value) && (!check || check.call(finalTarget, event))){
+			if (finalTarget) fn.call(finalTarget, event, finalTarget);
 			return;
 		}
 	}
 	
+}, {
+	mouseenter: {
+		base: 'mouseover',
+		condition: Element.Events.mouseenter.condition
+	},
+	mouseleave: {
+		base: 'mouseout',
+		check: Element.Events.mouseleave.condition
+	}
 });

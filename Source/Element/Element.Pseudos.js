@@ -56,10 +56,10 @@ provides: [Element.Pseudos]
 		
 	};
 	
-	Event.definePseudo = function(key, fn){
-		pseudos[key] = fn;
+	Event.definePseudo = function(key, fn, proxy){
+		pseudos[key] = [fn, proxy];
 	};
 	
-	Element.implement(Events.Pseudos(pseudos, Element.prototype.addEvent, Element.prototype.removeEvent)); 
+	Element.implement(Events.Pseudos(pseudos, Element.prototype.addEvent, Element.prototype.removeEvent));
 
 })();

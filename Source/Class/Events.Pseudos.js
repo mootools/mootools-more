@@ -54,25 +54,29 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 	
 	return {
-		
+
 		addEvent: function(type, fn, internal){
 			var split = splitType(type);
 			if (!split) return addEvent.call(this, type, fn, internal);
-			
-			var storage = getStorage(this);
-			var events = storage.retrieve(type, []);
-					
+
+			var storage = getStorage(this),
+				events = storage.retrieve(type, []),
+				pseudoArgs = Array.from(pseudos[split.pseudo]);
+
 			var self = this;
 			var monitor = function(){
-				pseudos[split.pseudo].call(self, split, fn, arguments);
+				pseudoArgs[0].call(self, split, fn, arguments, pseudoArgs[1]);
 			};
-			
+
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
-			
-			return addEvent.call(this, split.event, monitor, internal);
+
+			var eventType = split.event;
+			if (pseudoArgs[1] && pseudoArgs[1][eventType]) eventType = pseudoArgs[1][eventType].base;
+
+			return addEvent.call(this, eventType, monitor, internal);
 		},
-		
+
 		removeEvent: function(type, fn){
 			var split = splitType(type);
 			if (!split) return removeEvent.call(this, type, fn);
@@ -81,11 +85,14 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var events = storage.retrieve(type);
 
 			if (!events) return this;
-			
+
+			var eventType = split.event;
+			if (pseudoArgs[1] && pseudoArgs[1][eventType]) eventType = pseudoArgs[1][eventType].base;
+
 			events.each(function(monitor, i){
-				if (!fn || monitor.event == fn) removeEvent.call(this, split.event, monitor.monitor);
+				if (!fn || monitor.event == fn) removeEvent.call(this, eventType, monitor.monitor);
 				delete events[i];
-			}, this);				
+			}, this);
 
 			storage.store(type, events);
 			return this;
