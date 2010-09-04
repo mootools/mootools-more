@@ -395,9 +395,7 @@ describe('Date.parse', {
 			value_of(Date.parse('2000')).should_be(d);
 			
 			d = new Date().clearTime();
-			value_of(Date.parse(d.set('date', 3).format('%d'))).should_be(d);
-			value_of(Date.parse(d.set('date', 25).format('%d%o'))).should_be(d);
-			value_of(Date.parse(d.set({date: 3, mo: 11}).format('%B'))).should_be(d);
+			value_of(Date.parse(d.set({mo: 11}).format('%B'))).should_be(d);
 		});
 	}
 
