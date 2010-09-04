@@ -19,6 +19,7 @@ requires:
   - Core/Events
   - Core/Options
   - Core/Element.Event
+  - Element.Pseudos.Keys
 
 provides: [Keyboard]
 

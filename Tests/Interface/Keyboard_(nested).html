@@ -93,8 +93,8 @@ var kbs = {
 	})
 };
 
-kbs.kb.manage(kbs.kb1);
-kbs.kb.manage(kbs.kb2);
+kbs.kb1.setParent(kbs.kb);
+kbs.kb2.setParent(kbs.kb);
 kbs.kb.activate();
 kbs.kb1.activate();
 makeActions([
