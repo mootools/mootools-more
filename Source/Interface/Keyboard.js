@@ -50,7 +50,7 @@ Keyboard = this.Keyboard = new Class({
 	},
 
 	initialize: function(options){
-		this.uid = Keyboard.uniqueID();
+		this.uid = String.generateUID();
 		this.setOptions(options);
 		this.setParent(this.options.parent);
 		this.addEvents(this.options.events);
@@ -144,12 +144,5 @@ Keyboard.trace = function(kb){
 Keyboard.getActive = function(){
 	return active;
 };
-
-var UID = Math.floor(Math.random() * 10e12);
-
-Keyboard.uniqueID = function(){
-	return (UID++).toString(36);
-};
-
 
 })();
