@@ -17,6 +17,11 @@ provides: [Element.Pseudos.Keys]
 ...
 */
 
+(function(){
+
+var keysStoreKey = '$moo:keys-pressed',
+	keysKeyupStoreKey = '$moo:keys-keyup';
+
 Event.definePseudo('keys', function(split, fn, args){
 
 	if (split.event != 'keydown') return;
@@ -42,3 +47,6 @@ Event.definePseudo('keys', function(split, fn, args){
 	}
 		
 });
+
+})();
+

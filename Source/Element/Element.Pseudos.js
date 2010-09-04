@@ -19,9 +19,6 @@ provides: [Element.Pseudos]
 
 (function(){
 
-	var keysStoreKey = '$moo:keys-pressed',
-		keysKeyupStoreKey = '$moo:keys-keyup';
-
 	var pseudos = {
 		
 		once: function(split, fn, args){
