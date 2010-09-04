@@ -44,6 +44,10 @@ Tips Method: constructor {#Tips:constructor}
 * onAttach - (*function*) Fires when an element gets added to the tips instance. Passes the element as argument.
 * onDetach - (*function*) Fires when the event listeners get removed from an element. Passes the element as argument.
 
+### Notes
+
+To override the default show/hide behavior (for example, to add fading in and out of tips) you must remove the default show/hide event with .removeEvents() before adding your own - this is only neccesary if you do not want the default show/hide to fire along with your own.
+
 ### Example
 
 #### HTML
