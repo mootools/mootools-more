@@ -44,9 +44,9 @@ Configuration.sets = {
 		path: '1.3/',
 		files: [
 			'Class/Class.Binds', 'Class/Class.Refactor', 'Class/Events.Pseudos',
-			'Types/Array.Extras', 'Types/Object.Extras', 'Types/Hash.Extras',
+			'Types/Array.Extras', 'Types/Object.Extras',
 			'Types/String.Extras', 'Types/String.QueryString', 'Types/Number.Format',
-			'Locale/Locale',
+			'Types/Hash', 'Types/Hash.Extras', 'Locale/Locale',
 			'Utilities/Color'
 		]
 	},
