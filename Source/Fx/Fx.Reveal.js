@@ -36,7 +36,9 @@ Fx.Reveal = new Class({
 		styles: ['padding', 'border', 'margin'],
 		transitionOpacity: !Browser.ie6,
 		mode: 'vertical',
-		display: 'block',
+		display: function(){
+			return this.element.get('tag') != 'tr' ? 'block' : 'table-row';
+		},
 		opacity: 1,
 		hideInputs: Browser.ie ? 'select, input, textarea, object, embed' : null
 	},
@@ -61,7 +63,7 @@ Fx.Reveal = new Class({
 				});
 
 				this.element.setStyles({
-					display: this.options.display,
+					display: Function.from(this.options.display).call(this),
 					overflow: 'hidden'
 				});
 
@@ -96,9 +98,7 @@ Fx.Reveal = new Class({
 
 	reveal: function(){
 		if (!this.showing && !this.hiding){
-			if (this.element.getStyle('display') == 'none' ||
-				this.element.getStyle('visiblity') == 'hidden' ||
-				this.element.getStyle('opacity') == 0){
+			if (this.element.getStyle('display') == 'none'){
 				this.hiding = false;
 				this.showing = true;
 				this.hidden = false;
@@ -120,7 +120,7 @@ Fx.Reveal = new Class({
 
 				var zero = {
 					height: 0,
-					display: this.options.display
+					display: Function.from(this.options.display).call(this)
 				};
 				Object.each(startStyles, function(style, name){
 					zero[name] = 0;
@@ -134,7 +134,7 @@ Fx.Reveal = new Class({
 
 				this.$chain.unshift(function(){
 					this.element.style.cssText = this.cssText;
-					this.element.setStyle('display', this.options.display);
+					this.element.setStyle('display', Function.from(this.options.display).call(this));
 					if (!this.hidden) this.showing = false;
 					if (hideThese) hideThese.setStyle('visibility', 'visible');
 					this.callChain();

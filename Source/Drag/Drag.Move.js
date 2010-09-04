@@ -50,16 +50,21 @@ Drag.Move = new Class({
 		if (this.container && typeOf(this.container) != 'element'){
 			this.container = document.id(this.container.getDocument().body);
 		}
-		
+
+		var parent = element.getOffsetParent();
+		var parentStyles = parent.getStyles('border-top-width', 'border-left-width');
 		var styles = element.getStyles('left', 'top', 'position');
+
 		if (styles.left == 'auto' || styles.top == 'auto'){
-			element.setPosition(element.getPosition(element.getOffsetParent()));
+			var parentPosition = element.getPosition(parent);
+			parentPosition.x = parentPosition.x - (parentStyles['border-left-width'] ? parentStyles['border-left-width'].toInt() : 0);
+			parentPosition.y = parentPosition.y - (parentStyles['border-top-width'] ? parentStyles['border-top-width'].toInt() : 0);
+			element.setPosition(parentPosition);
 		}
-		
+
 		if (styles.position == 'static') element.setStyle('position', 'absolute');
 
 		this.addEvent('start', this.checkDroppables, true);
-
 		this.overed = null;
 	},
 
@@ -84,6 +89,7 @@ Drag.Move = new Class({
 			elementMargin = {},
 			elementBorder = {},
 			containerMargin = {},
+			offsetParentBorder = {},
 			offsetParentPadding = {};
 
 		['top', 'right', 'bottom', 'left'].each(function(pad){
@@ -92,6 +98,7 @@ Drag.Move = new Class({
 			elementMargin[pad] = element.getStyle('margin-' + pad).toInt();
 			containerMargin[pad] = container.getStyle('margin-' + pad).toInt();
 			offsetParentPadding[pad] = offsetParent.getStyle('padding-' + pad).toInt();
+			offsetParentBorder[pad] = offsetParent.getStyle('border-' + pad).toInt();
 		}, this);
 
 		var width = element.offsetWidth + elementMargin.left + elementMargin.right,
@@ -126,13 +133,14 @@ Drag.Move = new Class({
 		} else {
 			left -= elementMargin.left;
 			top -= elementMargin.top;
-			
 			if (this.container == offsetParent){
 				right -= containerBorder.left;
 				bottom -= containerBorder.top;
 			} else {
-				left += containerCoordinates.left + containerBorder.left;
-				top += containerCoordinates.top + containerBorder.top;
+				left += containerCoordinates.left + containerBorder.left - offsetParentBorder.left;
+				top += containerCoordinates.top + containerBorder.top - offsetParentBorder.top;
+				right -= offsetParentBorder.left;
+				bottom -= offsetParentBorder.top;
 			}
 		}
 		
