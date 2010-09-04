@@ -73,7 +73,7 @@ makeActions([
 		title: "Tests Spinner start and stop",
 		description: "Shows and Hides a Spinner",
 		fn: function() {
-			var w = $('foo').retrieve('spinner');
+			var w = $('foo').get('spinner');
 			w.hide();
 			w.show();
 			w.hide.delay(2000, w);
@@ -82,7 +82,7 @@ makeActions([
 		title: "Toggle a Spinner",
 		description: "Toggles the Spinner's visibility",
 		fn: function() {
-			var w = $('foo').retrieve('spinner');
+			var w = $('foo').get('spinner');
 			w.hide();
 			w.toggle();
 			w.toggle.delay(2000, w);

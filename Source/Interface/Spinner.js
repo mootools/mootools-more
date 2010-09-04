@@ -27,8 +27,10 @@ var Spinner = new Class({
 
 	Extends: Mask,
 
-	options: {
-		/*message: false,*/
+	Implements: Chain,
+
+	options: {/*
+		message: false,*/
 		'class':'spinner',
 		containerPosition: {},
 		content: {
@@ -45,11 +47,14 @@ var Spinner = new Class({
 		}
 	},
 
-	initialize: function(){
-		this.parent.apply(this, arguments);
+	initialize: function(target, options){
+		this.target = document.id(target) || document.id(document.body);
 		this.target.store('spinner', this);
+		this.setOptions(options);
+		this.render();
+		this.inject();
 
-		//add this to events for when noFx is true; parent methods handle hide/show
+		// Add this to events for when noFx is true; parent methods handle hide/show.
 		var deactivate = function(){ this.active = false; }.bind(this);
 		this.addEvents({
 			hide: deactivate,
@@ -59,17 +64,22 @@ var Spinner = new Class({
 
 	render: function(){
 		this.parent();
-		this.element.set('id', this.options.id || 'spinner-'+Date.now());
+
+		this.element.set('id', this.options.id || 'spinner-' + Date.now());
+
 		this.content = document.id(this.options.content) || new Element('div', this.options.content);
 		this.content.inject(this.element);
+
 		if (this.options.message){
 			this.msg = document.id(this.options.message) || new Element('p', this.options.messageContainer).appendText(this.options.message);
 			this.msg.inject(this.content);
 		}
+
 		if (this.options.img){
 			this.img = document.id(this.options.img) || new Element('div', this.options.img);
 			this.img.inject(this.content);
 		}
+
 		this.element.set('tween', this.options.fxOptions);
 	},
 
@@ -79,7 +89,9 @@ var Spinner = new Class({
 			this.callChain.delay(20, this);
 			return this;
 		}
+
 		this.active = true;
+
 		return this.parent(noFx);
 	},
 
@@ -89,7 +101,7 @@ var Spinner = new Class({
 				relativeTo: this.element
 			}, this.options.containerPosition));
 		}.bind(this);
-		
+
 		if (noFx){
 			this.parent();
 			pos();
@@ -133,16 +145,14 @@ var Spinner = new Class({
 
 });
 
-Spinner.implement(new Chain);
-
 Request = Class.refactor(Request, {
-	
+
 	options: {
 		useSpinner: false,
 		spinnerOptions: {},
 		spinnerTarget: false
 	},
-	
+
 	initialize: function(options){
 		this._send = this.send;
 		this.send = function(options){
@@ -153,34 +163,35 @@ Request = Class.refactor(Request, {
 		};
 		this.previous(options);
 	},
-	
+
 	getSpinner: function(){
 		if (!this.spinner) {
 			var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
 			if (this.options.useSpinner && update) {
-				this.spinner = update.get('spinner', this.options.spinnerOptions);
-				['onComplete', 'onException', 'onCancel'].each(function(event){
-					this.addEvent(event, this.spinner.hide.bind(this.spinner));
+				var spinner = this.spinner = update.get('spinner');
+				spinner.setOptions(this.options.spinnerOptions);
+				['complete', 'exception', 'cancel'].each(function(event){
+					this.addEvent(event, spinner.hide.bind(spinner));
 				}, this);
 			}
 		}
 		return this.spinner;
 	}
-	
+
 });
 
 Element.Properties.spinner = {
 
 	set: function(options){
 		var spinner = this.retrieve('spinner');
-		spinner.setOptions(options);
-		return this;
+		if (spinner) spinner.destroy();
+		return this.eliminate('spinner').store('spinner:options', options);
 	},
 
 	get: function(){
-		var spinner = this.retrieve('spinner')
+		var spinner = this.retrieve('spinner');
 		if (!spinner){
-			spinner = new Spinner(this);
+			spinner = new Spinner(this, this.retrieve('spinner:options'));
 			this.store('spinner', spinner);
 		}
 		return spinner;
@@ -191,13 +202,13 @@ Element.Properties.spinner = {
 Element.implement({
 
 	spin: function(options){
-		this.get('spinner', options).show();
+		if (options) this.set('spinner', options);
+		this.get('spinner').show();
 		return this;
 	},
 
 	unspin: function(){
-		var opt = Array.link(arguments, {options: Type.isObject, callback: Type.isFunction});
-		this.get('spinner', opt.options).hide(opt.callback);
+		this.get('spinner').hide();
 		return this;
 	}
 
