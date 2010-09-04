@@ -80,7 +80,7 @@ Fx.Accordion = new Class({
 		
 		this.elements.each(function(el, i){
 			if (this.options.show === i){
-				this.fireEvent('active', [this.togglers[i], el]);
+				this.triggerEvent('active', [this.togglers[i], el]);
 			} else {
 				for (var fx in this.effects) el.setStyle(fx, 0);
 			}
@@ -174,7 +174,7 @@ Fx.Accordion = new Class({
 				hide = true;
 				this.selfHidden = true;
 			}
-			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
+			this.triggerEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
 		}, this);
 

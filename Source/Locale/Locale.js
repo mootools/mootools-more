@@ -64,10 +64,10 @@ var Locale = this.Locale = {
 		if (locale){
 			current = locale;
 
-			this.fireEvent('change', locale);
+			this.triggerEvent('change', locale);
 
 			/*<1.2compat>*/
-			this.fireEvent('langChange', locale.name);
+			this.triggerEvent('langChange', locale.name);
 			/*</1.2compat>*/
 		}
 

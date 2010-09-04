@@ -56,9 +56,9 @@ Form.Request.Append = new Class({
 				}
 				container.inject(this.update, this.options.inject);
 				if (this.options.requestOptions.evalScripts) Browser.exec(javascript);
-				this.fireEvent('beforeEffect', container);
+				this.triggerEvent('beforeEffect', container);
 				var finish = function(){
-					this.fireEvent('success', [container, this.update, tree, elements, html, javascript]);
+					this.triggerEvent('success', [container, this.update, tree, elements, html, javascript]);
 				}.bind(this);
 				if (this.options.useReveal){
 					container.get('reveal', this.options.revealOptions).chain(finish);
@@ -68,7 +68,7 @@ Form.Request.Append = new Class({
 				}
 			}.bind(this),
 			failure: function(xhr){
-				this.fireEvent('failure', xhr);
+				this.triggerEvent('failure', xhr);
 			}.bind(this)
 		});
 	}

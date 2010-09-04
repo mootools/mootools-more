@@ -177,7 +177,7 @@ Form.Validator = new Class({
 		var result = this.getFields().map(function(field){
 			return this.validateField(field, true);
 		}, this).every(function(v){ return v;});
-		this.fireEvent('formValidate', [result, this.element, event]);
+		this.triggerEvent('formValidate', [result, this.element, event]);
 		if (this.options.stopOnFailure && !result && event) event.preventDefault();
 		return result;
 	},
@@ -203,10 +203,10 @@ Form.Validator = new Class({
 			if (validators && !field.hasClass('warnOnly')){
 				if (passed){
 					field.addClass('validation-passed').removeClass('validation-failed');
-					this.fireEvent('elementPass', field);
+					this.triggerEvent('elementPass', field);
 				} else {
 					field.addClass('validation-failed').removeClass('validation-passed');
-					this.fireEvent('elementFail', [field, validatorsFailed]);
+					this.triggerEvent('elementFail', [field, validatorsFailed]);
 				}
 			}
 			if (!warned){
@@ -233,7 +233,7 @@ Form.Validator = new Class({
 		warn = warn != null ? warn : false;
 		if (field.hasClass('warnOnly')) warn = true;
 		var isValid = field.hasClass('ignoreValidation') || (validator ? validator.test(field) : true);
-		if (validator && field.isVisible()) this.fireEvent('elementValidate', [isValid, field, className, warn]);
+		if (validator && field.isVisible()) this.triggerEvent('elementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
 	},

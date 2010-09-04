@@ -87,7 +87,7 @@ Form.Validator.Inline = new Class({
 				|| advice.getStyle('opacity') == 0)){
 			field.store('$moo:' + this.getPropName(className), true);
 			this.options.showError(advice);
-			this.fireEvent('showAdvice', [field, advice, className]);
+			this.triggerEvent('showAdvice', [field, advice, className]);
 		}
 	},
 
@@ -96,7 +96,7 @@ Form.Validator.Inline = new Class({
 		if (advice && field.retrieve('$moo:' + this.getPropName(className))){
 			field.store('$moo:' + this.getPropName(className), false);
 			this.options.hideError(advice);
-			this.fireEvent('hideAdvice', [field, advice, className]);
+			this.triggerEvent('hideAdvice', [field, advice, className]);
 		}
 	},
 

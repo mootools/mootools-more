@@ -67,7 +67,7 @@ var Mask = new Class({
 			}),
 			events: {
 				click: function(){
-					this.fireEvent('click');
+					this.triggerEvent('click');
 					if (this.options.hideOnClick) this.hide();
 				}.bind(this)
 			}
@@ -143,7 +143,7 @@ var Mask = new Class({
 	showMask: function(){
 		this.element.setStyle('display', 'block');
 		this.hidden = false;
-		this.fireEvent('show');
+		this.triggerEvent('show');
 	},
 
 	hide: function(){
@@ -159,7 +159,7 @@ var Mask = new Class({
 	hideMask: function(){
 		this.element.setStyle('display', 'none');
 		this.hidden = true;
-		this.fireEvent('hide');
+		this.triggerEvent('hide');
 	},
 
 	toggle: function(){
@@ -169,7 +169,7 @@ var Mask = new Class({
 	destroy: function(){
 		this.hide();
 		this.element.destroy();
-		this.fireEvent('destroy');
+		this.triggerEvent('destroy');
 		this.target.eliminate('mask');
 	}
 

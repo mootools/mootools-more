@@ -52,7 +52,7 @@ provides: [Fx.SmoothScroll]
 				event.preventDefault();
 				this.anchor = anchor;
 				this.toElement(el).chain(function(){
-					this.fireEvent('scrolledTo', [link, el]);
+					this.triggerEvent('scrolledTo', [link, el]);
 				}.bind(this));
 				link.blur();
 			}

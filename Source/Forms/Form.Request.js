@@ -80,14 +80,14 @@ if (!window.Form) window.Form = {};
 			}, this.options.requestOptions)).addEvents({
 				success: function(tree, elements, html, javascript){
 					['complete', 'success'].each(function(evt){
-						this.fireEvent(evt, [this.update, tree, elements, html, javascript]);
+						this.triggerEvent(evt, [this.update, tree, elements, html, javascript]);
 					}, this);
 				}.bind(this),
 				failure: function(){
-					this.fireEvent('complete', arguments).fireEvent('failure', arguments);
+					this.triggerEvent('complete', arguments).triggerEvent('failure', arguments);
 				}.bind(this),
 				exception: function(){
-					this.fireEvent('failure', arguments);
+					this.triggerEvent('failure', arguments);
 				}.bind(this)
 			});
 		},
@@ -160,7 +160,7 @@ if (!window.Form) window.Form = {};
 			var data = Object.toQueryString(this.options.extraData);
 			if (str) str += "&" + data;
 			else str = data;
-			this.fireEvent('send', [this.element, str.parseQueryString()]);
+			this.triggerEvent('send', [this.element, str.parseQueryString()]);
 			this.request.send({data: str, url: this.element.get("action")});
 			this.clickedCleaner();
 			return this;

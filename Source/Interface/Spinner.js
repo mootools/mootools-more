@@ -112,7 +112,7 @@ var Spinner = new Class({
 			}).tween('opacity', this.options.style.opacity || 0.9);
 			pos();
 			this.hidden = false;
-			this.fireEvent('show');
+			this.triggerEvent('show');
 			this.callChain();
 		}
 	},
@@ -132,7 +132,7 @@ var Spinner = new Class({
 		this.element.tween('opacity', 0).get('tween').chain(function(){
 			this.element.setStyle('display', 'none');
 			this.hidden = true;
-			this.fireEvent('hide');
+			this.triggerEvent('hide');
 			this.callChain();
 		}.bind(this));
 	},

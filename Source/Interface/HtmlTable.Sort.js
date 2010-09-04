@@ -213,7 +213,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		data = null;
 		if (rel) rel.grab(body);
 
-		return this.fireEvent('sort', [body, index]);
+		return this.triggerEvent('sort', [body, index]);
 	},
 
 	reSort: function(){

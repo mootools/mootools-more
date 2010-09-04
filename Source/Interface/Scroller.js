@@ -96,7 +96,7 @@ var Scroller = new Class({
 				change[z] = (this.page[z] - size[z] + bottom - pos[z]) * this.options.velocity;
 			}
 		}
-		if (change.y || change.x) this.fireEvent('change', [scroll.x + change.x, scroll.y + change.y]);
+		if (change.y || change.x) this.triggerEvent('change', [scroll.x + change.x, scroll.y + change.y]);
 	}
 
 });

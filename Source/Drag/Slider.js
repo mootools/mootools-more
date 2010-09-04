@@ -122,7 +122,7 @@ var Slider = new Class({
 
 		this.step = Math.round(step);
 		this.checkStep();
-		this.fireEvent('tick', this.toPosition(this.step));
+		this.triggerEvent('tick', this.toPosition(this.step));
 		this.end();
 		return this;
 	},
@@ -147,7 +147,7 @@ var Slider = new Class({
 
 		this.step = Math.round(this.min + dir * this.toStep(position));
 		this.checkStep();
-		this.fireEvent('tick', position);
+		this.triggerEvent('tick', position);
 		this.end();
 	},
 
@@ -168,14 +168,14 @@ var Slider = new Class({
 	checkStep: function(){
 		if (this.previousChange != this.step){
 			this.previousChange = this.step;
-			this.fireEvent('change', this.step);
+			this.triggerEvent('change', this.step);
 		}
 	},
 
 	end: function(){
 		if (this.previousEnd !== this.step){
 			this.previousEnd = this.step;
-			this.fireEvent('complete', this.step + '');
+			this.triggerEvent('complete', this.step + '');
 		}
 	},
 

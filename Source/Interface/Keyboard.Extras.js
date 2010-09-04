@@ -79,7 +79,7 @@ Keyboard.rebind = function(newKeys, shortcuts){
 		shortcut.getKeyboard().removeEvent(shortcut.keys, shortcut.handler);
 		shortcut.getKeyboard().addEvent(newKeys, shortcut.handler);
 		shortcut.keys = newKeys;
-		shortcut.getKeyboard().fireEvent('rebound');
+		shortcut.getKeyboard().triggerEvent('rebound');
 	});
 };
 

@@ -142,7 +142,7 @@ var Sortables = new Class({
 			where = this.element.getAllPrevious().contains(element) ? 'before' : 'after';
 		}
 		this.element.inject(element, where);
-		this.fireEvent('sort', [this.element, this.clone]);
+		this.triggerEvent('sort', [this.element, this.clone]);
 	},
 
 	start: function(event, element){
@@ -163,7 +163,7 @@ var Sortables = new Class({
 				event.stop();
 				this.clone.setStyle('visibility', 'visible');
 				this.element.set('opacity', this.options.opacity || 0);
-				this.fireEvent('start', [this.element, this.clone]);
+				this.triggerEvent('start', [this.element, this.clone]);
 			}.bind(this),
 			onEnter: this.insert.bind(this),
 			onCancel: this.reset.bind(this),
@@ -196,7 +196,7 @@ var Sortables = new Class({
 	reset: function(){
 		this.idle = true;
 		this.clone.destroy();
-		this.fireEvent('complete', this.element);
+		this.triggerEvent('complete', this.element);
 	},
 
 	serialize: function(){

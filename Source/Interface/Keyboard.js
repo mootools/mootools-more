@@ -86,7 +86,7 @@ Keyboard = this.Keyboard = new Class({
 	
 	deactivate: function(){
 		Keyboard.activate(this.parent);
-		this.fireEvent('deactivate');
+		this.triggerEvent('deactivate');
 	},
 	
 	toggleActive: function(){
@@ -128,7 +128,7 @@ Keyboard = this.Keyboard = new Class({
 Keyboard.activate = function(kb){
 	previous = active;
 	active = kb;
-	if (kb) kb.fireEvent('activate');		
+	if (kb) kb.triggerEvent('activate');		
 };
 
 Keyboard.trace = function(kb){

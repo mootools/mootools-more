@@ -150,8 +150,8 @@ Drag.Move = new Class({
 		}, this).getLast();
 		
 		if (this.overed != overed){
-			if (this.overed) this.fireEvent('leave', [this.element, this.overed]);
-			if (overed) this.fireEvent('enter', [this.element, overed]);
+			if (this.overed) this.triggerEvent('leave', [this.element, this.overed]);
+			if (overed) this.triggerEvent('enter', [this.element, overed]);
 			this.overed = overed;
 		}
 	},
@@ -163,7 +163,7 @@ Drag.Move = new Class({
 
 	stop: function(event){
 		this.checkDroppables();
-		this.fireEvent('drop', [this.element, this.overed, event]);
+		this.triggerEvent('drop', [this.element, this.overed, event]);
 		this.overed = null;
 		return this.parent(event);
 	}

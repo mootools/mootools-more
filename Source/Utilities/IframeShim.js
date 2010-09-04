@@ -76,7 +76,7 @@ var IframeShim = new Class({
 			var inject = (function(){
 				this.shim.inject(this.element, 'after');
 				this[this.options.display ? 'show' : 'hide']();
-				this.fireEvent('inject');
+				this.triggerEvent('inject');
 			}).bind(this);
 			if (!IframeShim.ready) window.addEvent('load', inject);
 			else inject();
