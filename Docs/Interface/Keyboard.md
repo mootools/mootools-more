@@ -9,7 +9,7 @@ Keyboard takes out the need to have logic in key events to check which buttons a
 
 ### Implements
 
-* [Options][], [Log][]
+* [Options][]
 
 ### Simple Usage
 
@@ -21,13 +21,13 @@ Keyboard instances are nodes of a tree based hierarchy (similar to the DOM) that
 
 For example. Let's say you have the following application:
 
-  Desktop UI = Keyboard.manager*
-  |------------------------------|
-  v                              v
-  Window 1 w/ hotkeys*           Window 2 w/ hotkeys
-  |                              |--------------------------------|
-  v                              v                                v
-  HTML Editor w/ hotkeys*        Slideshow w/ hotkeys*    Tagging UI w/ hotkeys
+	Desktop UI = Keyboard.manager*
+	|------------------------------|
+	v                              v
+	Window 1 w/ hotkeys*           Window 2 w/ hotkeys
+	|                              |--------------------------------|
+	v                              v                                v
+	HTML Editor w/ hotkeys*        Slideshow w/ hotkeys*    Tagging UI w/ hotkeys
 
 (* = active)
 
@@ -153,14 +153,14 @@ Returns *true* if the instance is active.
 	myKeyboard.isActive()
 
 
-Keyboard Method: manage {#Keyboard:manage}
+Keyboard Method: setParent {#Keyboard:setParent}
 ------------------------------------
 
-The keyboard will become the parent of the passed in keyboard. By default the manager is the Keybard.manager instance.
+Sets the parent keyboard of the passed in keyboard.
 
 ### Syntax
 
-	myKeyboard.manage(childKeyboard)
+	myKeyboard.manage(parentKeyboard)
 
 ### Note
 
@@ -184,4 +184,3 @@ Stops propagation of the passed in event to other keyboard instances. Note this 
 [Keyboard]: #Keyboard
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
-[Log]: /more/Core/Log

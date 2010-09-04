@@ -132,7 +132,7 @@ Gets the default [Fx.Move][] instance for the Element.
 	el.move({relativeTo:$('myDiv'));
 	el.get('move'); //The Fx.Move instance.
 
-Type: Element {#Element1}
+Type: Element {#Element}
 ==========================
 
 Adds [Fx.Move][] shortcuts to the [Element][] class.
