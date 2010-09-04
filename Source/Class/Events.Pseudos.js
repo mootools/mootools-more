@@ -81,8 +81,9 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var split = splitType(type);
 			if (!split) return removeEvent.call(this, type, fn);
 
-			var storage = getStorage(this);
-			var events = storage.retrieve(type);
+			var storage = getStorage(this),
+				events = storage.retrieve(type),
+				pseudoArgs = Array.from(pseudos[split.pseudo]);
 
 			if (!events) return this;
 

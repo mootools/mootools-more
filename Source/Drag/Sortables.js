@@ -128,9 +128,9 @@ var Sortables = new Class({
 	},
 
 	getDroppables: function(){
-		var droppables = this.list.getChildren();
-		if (!this.options.constrain) droppables = this.lists.concat(droppables).erase(this.list);
-		return droppables.erase(this.clone).erase(this.element);
+		var droppables = this.list.getChildren().erase(this.clone).erase(this.element);
+		if (!this.options.constrain) droppables.append(this.lists).erase(this.list);
+		return droppables;
 	},
 
 	insert: function(dragging, element){

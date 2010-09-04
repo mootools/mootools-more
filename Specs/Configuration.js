@@ -54,10 +54,9 @@ Configuration.sets = {
 	'1.3-client': {
 		path: '1.3/',
 		files: [
-			'Core/Log',
 			'Class/Class.Occlude',
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
-			'Element/Element.Pseudos',
+			'Element/Element.Pseudos', 'Element/Element.Pseudos.Keys',
 			'Types/Date.Extras', 'Types/Date', 'Types/URI', 'Types/URI.Relative',
 			'Interface/Keyboard',
 			'Utilities/Hash.Cookie'
@@ -161,8 +160,6 @@ Configuration.source = {
 	'more-1.3-client': {
 		path: '../Source/',
 		files: [
-			'Core/Log',
-
 			'Class/Class.Occlude',
 	
 			'Element/Element.Forms',
@@ -170,6 +167,7 @@ Configuration.source = {
 			'Element/Element.Shortcuts',
 			'Element/Elements.From',
 			'Element/Element.Pseudos',
+			'Element/Element.Pseudos.Keys',
 
 			'Types/Date',
 			'Types/Date.Extras',
