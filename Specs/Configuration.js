@@ -133,7 +133,7 @@ Configuration.source = {
 	'more-1.3-base': {
 		path: '../Source/',
 		files: [
-			'Core/More',
+			'More/More',
 			
 			'Locale/Locale',
 			'Locale/Locale.en-US.Form.Validator',
