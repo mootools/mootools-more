@@ -10,12 +10,12 @@ Turns a querystring into an object of key/value pairs.
 
 ### Syntax
 
-	myString.parseQueryString(encodeKeys, encodeValues);
+	myString.parseQueryString(decodeKeys, decodeValues);
 
 ### Arguments
 
-1. encodeKeys - (*boolean*, optional) if set to *false*, keys are passed through [encodeURIComponent][]; defaults to *true*
-1. encodeValues - (*boolean*, optional) if set to *false*, values are passed through [encodeURIComponent][]; defaults to *true*
+1. decodeKeys - (*boolean*, optional) if set to *false*, keys are passed through [decodeURIComponent][]; defaults to *true*
+1. decodeValues - (*boolean*, optional) if set to *false*, values are passed through [decodeURIComponent][]; defaults to *true*
 
 ### Example
 

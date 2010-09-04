@@ -74,7 +74,7 @@ this.Tips = new Class({
 	toElement: function(){
 		if (this.tip) return this.tip;
 
-		return this.tip = new Element('div', {
+		this.tip = new Element('div', {
 			'class': this.options.className,
 			styles: {
 				position: 'absolute',
@@ -85,7 +85,9 @@ this.Tips = new Class({
 			new Element('div', {'class': 'tip-top'}),
 			this.container,
 			new Element('div', {'class': 'tip-bottom'})
-		).inject(document.body);
+		);
+
+		return this.tip;
 	},
 
 	attach: function(elements){
@@ -191,6 +193,7 @@ this.Tips = new Class({
 
 	show: function(element){
 		if (!this.tip) document.id(this);
+		if (!this.tip.parentNode) this.tip.inject(document.body);
 		this.triggerEvent('show', [this.tip, element]);
 	},
 

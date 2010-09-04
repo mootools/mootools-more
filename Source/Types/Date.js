@@ -157,7 +157,7 @@ Date.implement({
 	},
 
 	isValid: function(date){
-		return !!(date || this).valueOf();
+		return !isNaN((date || this).valueOf());
 	},
 
 	format: function(f){
@@ -174,6 +174,7 @@ Date.implement({
 					case 'B': return Date.getMsg('months')[d.get('month')];
 					case 'c': return d.toString();
 					case 'd': return pad(d.get('date'), 2);
+					case 'D': return d.get('date');
 					case 'e': return d.get('date');
 					case 'H': return pad(d.get('hr'), 2);
 					case 'I': return ((d.get('hr') % 12) || 12);
