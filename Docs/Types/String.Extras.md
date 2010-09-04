@@ -27,11 +27,11 @@ Pads a string with the specified character(s) either before or after the current
 
 1. length - (*number*) the number of characters to pad.
 2. string - (*string*) the string to use for padding; defaults to a space.
-3. direction - (*string*) either "left" or "right" (defaults to "right"); the side to add the padding.
+3. direction - (*string*) either "left", "right" or "both" (defaults to "right"); the side to add the padding.
 
 ### Example
 
-	var tonyTheTigerSez = "They're gr".pad(5, 'r') + 'eat!';
+	var tonyTheTigerSez = "They're gr".pad(15, 'r') + 'eat!';
 	//returns "They're grrrrrreat!"
 
 ### Returns
