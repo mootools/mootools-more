@@ -18,6 +18,14 @@ dt {
 <form id="foo" >
 <dl>
 	<dt>If you uncheck this checkbox, form validator will not enforce the next input.</dt>
+	<dd><input type="checkbox" class="validate-enforce-oncheck toEnforce:['a','b','c']"/><br/>
+		these inputs will be required if the checkbox above is checked:
+		<input id="a" class="required"/>
+		<input id="b" class="required"/>
+		<input id="c" class="required"/>
+		
+		</dd>
+	<dt>If you uncheck this checkbox, form validator will not enforce the next input.</dt>
 	<dd><input name="a" type="checkbox" checked="true" class="validate-toggle-oncheck toToggle:['nospaces']"></dd>
 	<dt>This input cannot have spaces.</dt>
 	<dd><input name="b" class="validate-nospace" id="nospaces"/></dd>
