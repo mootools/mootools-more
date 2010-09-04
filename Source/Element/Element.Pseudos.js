@@ -3,7 +3,7 @@
 
 name: Element.Pseudos
 
-description: Adds the functionallity to add pseudo events for Elements
+description: Adds the functionality to add pseudo events for Elements
 
 license: MIT-style license
 

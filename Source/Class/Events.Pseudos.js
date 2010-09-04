@@ -11,6 +11,7 @@ authors:
   - Arian Stolwijk
 
 requires: [Core/Class.Extras, Core/Slick.Parser, More/MooTools.More]
+
 provides: [Events.Pseudos]
 
 ...
