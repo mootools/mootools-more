@@ -56,7 +56,7 @@ Configuration.sets = {
 		files: [
 			'Class/Class.Occlude',
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
-			'Element/Element.Pseudos',
+			'Element/Element.Pseudos', 'Element/Element.Pseudos.Keys',
 			'Types/Date.Extras', 'Types/Date', 'Types/URI', 'Types/URI.Relative',
 			'Interface/Keyboard',
 			'Utilities/Hash.Cookie'
@@ -167,6 +167,7 @@ Configuration.source = {
 			'Element/Element.Shortcuts',
 			'Element/Elements.From',
 			'Element/Element.Pseudos',
+			'Element/Element.Pseudos.Keys',
 
 			'Types/Date',
 			'Types/Date.Extras',
