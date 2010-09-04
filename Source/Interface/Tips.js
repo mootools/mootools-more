@@ -39,10 +39,8 @@ this.Tips = new Class({
 
 	options: {/*
 		onAttach: function(element){},
-		onDetach: function(element){},*/
-		onBound: function(coords){
-			console.log(coords);
-		},
+		onDetach: function(element){},
+		onBound: function(coords){},*/
 		onShow: function(){
 			this.tip.setStyle('display', 'block');
 		},
@@ -166,7 +164,7 @@ this.Tips = new Class({
 
 	position: function(event){
 		if (!this.tip) document.id(this);
-		
+
 		var size = window.getSize(), scroll = window.getScroll(),
 			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
 			props = {x: 'left', y: 'top'},
