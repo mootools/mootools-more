@@ -27,7 +27,7 @@ provides: [String.QueryString]
 
 String.implement({
 
-	parseQueryString: function(){
+	parseQueryString: function(decodeKeys, decodeValues){
 		if (decodeKeys == null) decodeKeys = true;
 		if (decodeValues == null) decodeValues = true;
 
