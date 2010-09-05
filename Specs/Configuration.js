@@ -44,6 +44,7 @@ Configuration.sets = {
 		path: '1.3/',
 		files: [
 			'Class/Class.Binds', 'Class/Class.Refactor', 'Class/Events.Pseudos',
+			'Class/Chain.Wait',
 			'Types/Array.Extras', 'Types/Object.Extras',
 			'Types/String.Extras', 'Types/String.QueryString', 'Types/Number.Format',
 			'Types/Hash', 'Types/Hash.Extras', 'Locale/Locale',
@@ -143,6 +144,7 @@ Configuration.source = {
 			'Class/Class.Binds',
 			'Class/Class.Refactor',
 			'Class/Events.Pseudos',
+			'Class/Chain.Wait',
 	
 			'Types/Array.Extras',
 			'Types/Object.Extras',
