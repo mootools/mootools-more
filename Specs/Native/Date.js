@@ -396,6 +396,19 @@ describe('Date.parse', {
 			d = new Date().clearTime();
 			value_of(Date.parse(d.set({date: 1, mo: 11}).format('%B'))).should_be(d);
 		});
+	},
+	
+	'should consistently parse dates on any day/month/year': function(){
+		// monkey patch clearTime so parsing starts on Jan 1, 2001
+		var clearTime = Date.prototype.clearTime;
+		Date.prototype.clearTime = function(){
+			return clearTime.call(this.set({mo: 0, date: 30, year: 2001}));
+		};
+		
+		var d = new Date(2000, 1, 29, 0, 0, 0, 0);
+		value_of(Date.parse(d.format('%B %d %Y'))).should_be(d);
+		
+		Date.prototype.clearTime = clearTime;
 	}
 
 });
