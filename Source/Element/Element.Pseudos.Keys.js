@@ -29,7 +29,7 @@ Event.definePseudo('keys', function(split, fn, args){
 		pressed = this.retrieve(keysStoreKey, []);
 
 	keys.append(split.value.replace('++', function(){
-		keys.push('+'); // // shift++ and shift+++a
+		keys.push('+'); // shift++ and shift+++a
 		return '';
 	}).split('+'));
 
@@ -43,7 +43,7 @@ Event.definePseudo('keys', function(split, fn, args){
 
 	if (!this.retrieve(keysKeyupStoreKey)){
 		var keyup = function(event){
-			pressed = this.retrieve(keysStoreKey).erase(event.key);
+			pressed = this.retrieve(keysStoreKey, []).erase(event.key);
 			this.store(keysStoreKey, pressed);
 		};
 		this.store(keysKeyupStoreKey, keyup).addEvent('keyup', keyup);
@@ -72,7 +72,8 @@ Object.append(Event.Keys, {
 	'[': 219,
 	'\\': 220,
 	']': 221,
-	"'": 222
+	"'": 222,
+	'+': 107
 });
 
 })();

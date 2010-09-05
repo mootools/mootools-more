@@ -14,7 +14,6 @@ describe('Request.JSONP', function(){
 			url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
 			timeout: 20000,
 			onComplete: function(){
-				console.log(arguments);
 				onComplete.apply(this, arguments);
 				complete = true;
 			},

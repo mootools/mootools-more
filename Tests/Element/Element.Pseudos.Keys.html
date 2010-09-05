@@ -2,7 +2,7 @@
 	Press shift+a and there should appear some text below
 </p>
 
-<div id="result"><h3>Keydown - press shift+a and the event should fire on keydown</h3></div>
+<div id="result"><h3>Keydown - press shift+a or shift+++a and the event should fire on keydown</h3></div>
 <div id="result2"><h3>Keyup - press shift+b and the event should fire on keyup</h3></div>
 
 <script src="/depender/build?require=More/Element.Pseudos.Keys"></script>
@@ -11,14 +11,19 @@
 
 var result = $('result');
 document.body.addEvent('keydown:keys(shift+a)', function(){
-	result.set('html', result.get('html') + 'succes!<br>');
+	result.set('html', result.get('html') + 'succes keydown:keys(shift+a)!<br>');
 });
 
 
 var result2 = $('result2');
 document.body.addEvent('keyup:keys(shift+b)', function(){
-	result2.set('html', result2.get('html') + 'succes!<br>');
+	result2.set('html', result2.get('html') + 'succes keyup:keys(shift+b)!<br>');
 });
+
+document.body.addEvent('keydown:keys(shift+++a)', function(e){
+	result.set('html', result.get('html') + 'succes keydown:keys(shift+++a)!<br>');
+});
+
 
 </script>
 
