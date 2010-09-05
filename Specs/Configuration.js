@@ -60,6 +60,7 @@ Configuration.sets = {
 			'Element/Element.Pseudos', 'Element/Element.Pseudos.Keys',
 			'Types/Date.Extras', 'Types/Date', 'Types/URI', 'Types/URI.Relative',
 			'Interface/Keyboard',
+			'Request/Request.JSONP',
 			'Utilities/Hash.Cookie'
 		]
 	},
@@ -178,6 +179,8 @@ Configuration.source = {
 	
 			'Interface/Keyboard',
 	
+			'Request/Request.JSONP',
+
 			'Utilities/Hash.Cookie'
 		]
 	}

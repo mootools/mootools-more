@@ -7,6 +7,7 @@
 
 <a id="fetch">Fetch an image from Flickr.</a>
 <hr/>
+<div id="loading"></div>
 <div id="imgs"></div>
 
 <script src="/depender/build?require=More/Request.JSONP,Core/Element.Event"></script>
@@ -20,6 +21,10 @@ $('fetch').addEvent('click', function(){
 			new Element('img', {
 				src: data.items[0].media.m
 			}).inject('imgs');
+			$('loading').set('text', '');
+		},
+		onRequest: function(){
+			$('loading').set('text', 'Loading...');
 		}
 	}).send();
 });
