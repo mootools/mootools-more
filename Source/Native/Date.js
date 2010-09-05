@@ -116,7 +116,7 @@ Date.implement({
 	diff: function(date, resolution){
 		if ($type(date) == 'string') date = Date.parse(date);
 		
-		return ((date - this) / Date.units[resolution || 'day'](3, 3)).toInt(); // non-leap year, 30-day month
+		return ((date - this) / Date.units[resolution || 'day'](3, 3)).round(); // non-leap year, 30-day month
 	},
 
 	getLastDayOfMonth: function(){

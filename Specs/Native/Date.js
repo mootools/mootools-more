@@ -204,11 +204,21 @@ describe('Date.diff', {
 		var d  = new Date(Date.UTC(1997,  9, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 11, 20, 1, 1, 1));
 		value_of(d.diff(d2, 'month')).should_be(2);
+		
+		// February bug
+		d  = new Date(Date.UTC(1997, 1, 1, 1, 1, 1));
+		d2 = new Date(Date.UTC(1997, 2, 1, 1, 1, 1));
+		value_of(d.diff(d2, 'month')).should_be(1);
 	},
 	'should compare two Date instances (years)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1999, 10, 20, 1, 1, 1));
 		value_of(d.diff(d2, 'year')).should_be(2);
+		
+		// parseInt bug with anything less than 1e-6
+		d = new Date(1277244682000);
+		d2 = new Date(1277244682237);
+		value_of(d.diff(d2, 'year')).should_be(0);
 	}
 
 });
