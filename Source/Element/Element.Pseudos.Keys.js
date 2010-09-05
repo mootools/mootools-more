@@ -25,8 +25,13 @@ var keysStoreKey = '$moo:keys-pressed',
 Event.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
-		keys = split.value.split('+'),
+		keys = [],
 		pressed = this.retrieve(keysStoreKey, []);
+
+	keys.append(split.value.replace('++', function(){
+		keys.push('+'); // // shift++ and shift+++a
+		return '';
+	}).split('+'));
 
 	pressed.include(event.key);
 
