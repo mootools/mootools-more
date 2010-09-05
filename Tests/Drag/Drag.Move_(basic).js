@@ -24,27 +24,14 @@ var test_drag_basic = new function() {
 			pixels: '(100,100)'
 		}
 	};
-	this.test_wait_sleep_after = {
-		method: 'waits.sleep',
-		params: {
-			milliseconds: 2000
-		}
-	};
 	this.test_measure = function(){
 		var end = $('box').getPosition($('box').getOffsetParent());
 		jum.assertEquals(100, end.x);
 		jum.assertEquals(100, end.y);
 	};
-	this.test_wait_sleep_after2 = {
-		method: 'waits.sleep',
-		params: {
-			milliseconds: 100
-		}
-	};
-	
 };
 
-var test_disabled = new function(){
+var test_disabled_drag = new function(){
 	this.test_disable_drag = {
 		method: 'click',
 		params: {
@@ -62,22 +49,10 @@ var test_disabled = new function(){
 			pixels: '(100,100)'
 		}
 	};
-	this.test_wait_sleep_after = {
-		method: 'waits.sleep',
-		params: {
-			milliseconds: 2000
-		}
-	};
 	this.test_measure = function(){
 		var end = $('box').getPosition($('box').getOffsetParent());
 		jum.assertEquals(0, end.x);
 		jum.assertEquals(0, end.y);
-	};
-	this.test_wait_sleep_after2 = {
-		method: 'waits.sleep',
-		params: {
-			milliseconds: 100
-		}
 	};
 	
 };
@@ -98,12 +73,6 @@ var test_enable_drag = new function(){
 		params: {
 			id: 'box',
 			pixels: '(100,100)'
-		}
-	};
-	this.test_wait_sleep_after = {
-		method: 'waits.sleep',
-		params: {
-			milliseconds: 2000
 		}
 	};
 	this.test_measure = function(){

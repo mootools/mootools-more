@@ -31,18 +31,18 @@ dt {
 	<dd><input name="b" class="validate-nospace" id="nospaces"/></dd>
 	<dt>One item in this group must be selected (on submit).</dt>
 	<dd id="rads">
-		<input type="checkbox" name="rads" value="1"/>
-		<input type="checkbox" name="rads" value="2"/>
-		<input type="checkbox" name="rads" value="3" class="validate-reqchk-bynode" validatorProps="{nodeId:'rads'}"/>
+		<input type="checkbox" id="c" name="rads" value="1"/>
+		<input type="checkbox" id="d" name="rads" value="2"/>
+		<input type="checkbox" id="e" name="rads" value="3" class="validate-reqchk-bynode" validatorProps="{nodeId:'rads'}"/>
 	</dd>
 	<dt>One item in this group must also be selected (on submit).</dt>
 	<dd>
-		<input type="checkbox" name="rads2" value="1"/>
-		<input type="checkbox" name="rads2" value="2"/>
-		<input type="checkbox" name="rads2" value="3" class="validate-reqchk-byname"/>
+		<input type="checkbox" id="f" name="rads2" value="1"/>
+		<input type="checkbox" id="g" name="rads2" value="2"/>
+		<input type="checkbox" id="h" name="rads2" value="3" class="validate-reqchk-byname"/>
 	</dd>
 	<dt>This checkbox must be checked.</dt>
-	<dd><input type="checkbox" class="validate-required-check"/></dd>
+	<dd><input type="checkbox" id="j" class="validate-required-check"/></dd>
 	<dt>The date/time in the second input must be after the first.</dt>
 	<dd>
 		<input type="input" id="before1"/>
@@ -60,7 +60,7 @@ dt {
 	</dd>
 	<dt>The first item in the select list should be invalid.</dt>
 	<dd>
-		<select class="validate-custom-required" validatorProps="{emptyValue: 'null'}">
+		<select id="k" class="validate-custom-required" validatorProps="{emptyValue: 'null'}">
 			<option value="null">this should be invalid</option>
 			<option value="">this should not be</option>
 		</select>
@@ -68,10 +68,10 @@ dt {
 	<dt>The dates you enter here must be in the same month.</dt>
 	<dd>
 		<input type="text" id="sameMo"/>
-		<input type="text" class="validate-same-month" validatorProps="{sameMonthAs: 'sameMo'}"/>
+		<input type="text" id="sameMo2" class="validate-same-month" validatorProps="{sameMonthAs: 'sameMo'}"/>
 	</dd>
 </dl>
-<input type="submit">
+<input type="submit" id="validatorSubmit">
 </form>
 
 <script src="/depender/build?require=More/Form.Validator.Inline,More/Form.Validator.Extras,More/Fx.Reveal,More/Fx.Scroll"></script>
