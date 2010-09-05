@@ -108,7 +108,7 @@ Date.implement({
 	diff: function(date, resolution){
 		if (typeOf(date) == 'string') date = Date.parse(date);
 		
-		return ((date - this) / Date.units[resolution || 'day'](3, 3)).toInt(); // non-leap year, 30-day month
+		return ((date - this) / Date.units[resolution || 'day'](3, 3)).round(); // non-leap year, 30-day month
 	},
 
 	getLastDayOfMonth: function(){
@@ -417,10 +417,13 @@ var build = function(format){
 		re: new RegExp('^' + re + '$', 'i'),
 		handler: function(bits){
 			bits = bits.slice(1).associate(parsed);
-			var date = new Date().clearTime();
-			['d', 'm', 'b', 'B'].each(function(letter){
-				if (bits[letter]) handle.call(date, letter, 1);
-			});
+			var date = new Date().clearTime(),
+				year = bits.y || bits.Y;
+			
+			if (year != null) handle.call(date, 'y', year); // need to start in the right year
+			if ('d' in bits) handle.call(date, 'd', 1);
+			if ('m' in bits || 'b' in bits || 'B' in bits) handle.call(date, 'm', 1);
+			
 			for (var key in bits) handle.call(date, key, bits[key]);
 			return date;
 		}
