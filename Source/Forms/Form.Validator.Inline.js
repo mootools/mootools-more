@@ -68,7 +68,7 @@ Form.Validator.Inline = new Class({
 			advice = new Element('div', {
 				html: errorMsg,
 				styles: { display: 'none' },
-				id: 'advice-' + className + '-' + this.getFieldId(field)
+				id: 'advice-' + className.split(':')[0] + '-' + this.getFieldId(field)
 			}).addClass(cssClass);
 		}
 		field.store('$moo:advice-' + className, advice);

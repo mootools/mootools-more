@@ -152,7 +152,7 @@ Fx.Accordion = new Class({
 		if (!this.check(index, useFx)) return this;
 		useFx = useFx != null ? useFx : true;
 		index = (typeOf(index) == 'element') ? this.elements.indexOf(index) : index;
-		if (index == this.previous) return this;
+		if (index == this.previous && !this.options.alwaysHide) return this;
 		if (this.options.returnHeightToAuto){
 			var prev = this.elements[this.previous];
 			if (prev && !this.selfHidden){
