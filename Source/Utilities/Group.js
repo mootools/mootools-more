@@ -21,7 +21,9 @@ provides: [Group]
 ...
 */
 
-var Group = new Class({
+(function(){
+
+this.Group = new Class({
 
 	initialize: function(){
 		this.instances = Array.flatten(arguments);
@@ -53,3 +55,6 @@ var Group = new Class({
 	}
 
 });
+
+})();
+

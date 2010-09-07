@@ -35,31 +35,33 @@ provides: [Chain.Wait]
 
 	Chain.implement(wait);
 
-	if (window.Fx){
+	if (this.Fx){
 		Fx.implement(wait);
 		['Css', 'Tween', 'Elements'].each(function(cls){
 			if (Fx[cls]) Fx[cls].implement(wait);
 		});
 	}
 
-	Element.implement({
+	if (this.Element){
+		Element.implement({
 
-		chains: function(effects){
-			Array.from(effects || ['tween', 'morph', 'reveal']).each(function(effect){
-				effect = this.get(effect);
-				if (!effect) return;
-				effect.setOptions({
-					link:'chain'
-				});
-			}, this);
-			return this;
-		},
+			chains: function(effects){
+				Array.from(effects || ['tween', 'morph', 'reveal']).each(function(effect){
+					effect = this.get(effect);
+					if (!effect) return;
+					effect.setOptions({
+						link:'chain'
+					});
+				}, this);
+				return this;
+			},
 
-		pauseFx: function(duration, effect){
-			this.chains(effect).get(effect || 'tween').wait(duration);
-			return this;
-		}
+			pauseFx: function(duration, effect){
+				this.chains(effect).get(effect || 'tween').wait(duration);
+				return this;
+			}
 
-	});
+		});
+	}
 
 })();
