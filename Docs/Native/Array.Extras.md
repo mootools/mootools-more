@@ -48,7 +48,7 @@ Calls Math.max on the array and returns its highest value.
 Array Method: average {#Array:average}
 -------------------------------------
 
-Calculates the average value of the array
+Calculates the average value of the array.
 
 ### Syntax
 
@@ -61,7 +61,7 @@ Calculates the average value of the array
 
 ### Returns
 
-* (*number*) the highest number in the array
+* (*number*) the average value of the array
 
 Array Method: shuffle {#Array:shuffle}
 -------------------------------------
@@ -78,7 +78,7 @@ Randomizes the array (altering it).
 
 ### Returns
 
-* (*number*) the array.
+* (*array*) the array.
 
 ### Note
 
