@@ -68,10 +68,10 @@ Keyboard Method: constructor {#Keyboard:constructor}
 ### Examples
 
 	var myKeyboardEvents = new Keyboard({
-		defaultEventType: 'keyup', 
-		events: { 
-			'shift+h': fn1, 
-			'ctrl+shift+h': fn2, 
+		defaultEventType: 'keyup',
+		events: {
+			'shift+h': fn1,
+			'ctrl+shift+h': fn2,
 			'shift+ctrl+h': fn3,
 			'h': fn4,
 			'keydown:shift+d': fn5
@@ -153,14 +153,14 @@ Returns *true* if the instance is active.
 	myKeyboard.isActive()
 
 
-Keyboard Method: setParent {#Keyboard:setParent}
+Keyboard Method: manage {#Keyboard:manage}
 ------------------------------------
 
-Sets the parent keyboard of the passed in keyboard.
+The keyboard will become the parent of the passed in keyboard. By default the manager is the Keybard.manager instance.
 
 ### Syntax
 
-	myKeyboard.manage(parentKeyboard)
+	myKeyboard.manage(childKeyboard)
 
 ### Note
 
