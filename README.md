@@ -28,7 +28,10 @@ MooTools Plugins and Enhancements Repository
 * Changed Hash.Extras to Object.Extras. Hash.Extras however still exist for compatibility.
 * Removed Depender.
 * Added Events.Pseudos and Event.Pseudos to abstract Element.Delegation :relay and add :once events with Event(s).definePseudo
+* Element.Delegation will support the `mouseenter` and `mouseleave` events
 * Rewritten Request.JSPONP - the retries option has been removed.
+* Log has been removed. Might be added to the force sometime.
+* Renamed MooTools.lang to Locale and rewrote it completely
 
 
 NOTE: none of the changes below are breaking changes.
@@ -57,7 +60,7 @@ NOTE: none of the changes below are breaking changes.
   * reworking HtmlTable's dom a bit to allow for positioning of the sort icon
   * adding new set method for headers and footers.
   * Fixed error in HtmlTable.Parsers when sorting by date. format('db') was being applied to the text and not the date object.
-* Array: 
+* Array:
   * Added Array.shuffle
 * Request.JSONP:
   * making JSONP pass all arguments, not just the first, to its complete/success methods; [see this discussion on the google group](http://groups.google.com/group/mootools-users/browse_thread/thread/9cfa52bf0cf05bac).

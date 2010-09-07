@@ -1,5 +1,5 @@
 Type: Element {#Element}
-==========================
+========================
 
 Extends the [Element][] type to include delegations in the addEvent and addEvents methods. It adds the `:relay` pseudo using [Element.Pseudos][].
 
@@ -33,7 +33,7 @@ Delegates the methods of an element's children to the parent element for greater
 		alert('you clicked a link!');
 		//you can reference the element clicked with the second
 		//argument passed to your callback
-		clicked.setStyle('color', '#777'); 
+		clicked.setStyle('color', '#777');
 	});
 
 ### Returns
@@ -49,8 +49,8 @@ Delegates the methods of an element's children to the parent element for greater
 * Delegation is especially useful if you are using AJAX to load content into your pages dynamically, as the contents of an element can change with new elements added or others removed and your delegated events need not change.
 * In general it is always better to delegate to the closest parent to your elements as possible; delegate to an element in the page rather than the document body for example.
 
-Element methods: addEvents {#Element:addEvents}
------------------------------------------------------------------------------------------------------------------------
+Element method: addEvents {#Element:addEvents}
+----------------------------------------------
 
 Delegates the events to the parent just as with addEvent above. Works as [addEvents][] does.
 
@@ -65,7 +65,7 @@ Delegates the events to the parent just as with addEvent above. Works as [addEve
 
 
 Element method: removeEvent {#Element:removeEvent}
-------------------------------------------------
+--------------------------------------------------
 
 Removes a method from an element as [removeEvent][] always does.
 
@@ -79,9 +79,9 @@ Removes a method from an element as [removeEvent][] always does.
 
 
 Element method: removeEvents {#Element:removeEvents}
-------------------------------------------------
+---------------------------------------------------
 
-Removes a series of methods from delegation if the functions were used for delegation or else works as [removeEvents][] always does. 
+Removes a series of methods from delegation if the functions were used for delegation or else works as [removeEvents][] always does.
 
 ### Example
 

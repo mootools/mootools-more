@@ -37,7 +37,7 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 ### Example
 
 	new Request.JSONP({
-	  url: 'http://api.cnet.com/restApi/v1.0/techProductSearch',
+	  url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
 		data: {
 			partTag: 'mtvo',
 			iod: 'hlPrice',
@@ -50,7 +50,7 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 
 The above example would generate this url:
 
-	http://api.cnet.com/restApi/v1.0/techProductSearch?partTag=mtvo&iod=hlPrice&viewType=json&results=100&query=ipod&callback=Request.JSONP.request_map.requests_0
+	http://www.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=Request.JSONP.request_map.request_0
 
 It would embed a script tag (in the head of the document) with this url and, when it loaded, execute the "myFunction" callback defined.
 

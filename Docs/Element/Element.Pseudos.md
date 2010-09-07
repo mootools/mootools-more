@@ -1,7 +1,8 @@
 Element.Pseudos {#Pseudos}
 ==========================
 
-`:relay` is called a pseudo. Because :relay needed to be implemented for [Element.Delegation][], there was the opportunity to add other useful pseudos as well.
+Defines a useful pseudo event: `:once` as well as the `definePseudo` method to create your own. See also the `:relay` pseudo in [Element.Delegation][].
+
 
 Pseudo: once {#Pseudos:once}
 ----------------------------
@@ -14,7 +15,7 @@ The event will only fire once. The once pseudo will remove itself after the firs
 	myElement.addEvent('click:once', function(){
 		alert('you clicked me');
 	});
-	
+
 	// If the user clicks the element twice, it will only once alert 'you clicked me'
 
 
@@ -40,7 +41,7 @@ It's possible to define your own pseudos with Event.definePseudo
 1. split - (*object*) a parsed object of the `event:pseudo(value)` string
 	- event - (*string*) the part before the `:`
 	- value - (*string*) between `(` and `)`
-	- pseudo - (*string*) between the `:` and `(` 
+	- pseudo - (*string*) between the `:` and `(`
 	- original - (*string*) the original event name, thus `event:pseudo(selector)`
 2. fn - (*function*) This is the function that has been passed in the `addEvent` method. So it is the 'fn' in `myEvent.addEvent('event:pseudo', fn)`
 3. args - (*array*) An array with arguments. The [Event][] object is in most cases the first element.
