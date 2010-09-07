@@ -157,9 +157,7 @@ Fx.Reveal = new Class({
 	},
 
 	toggle: function(){
-		if (this.element.getStyle('display') == 'none' ||
-			this.element.getStyle('visiblity') == 'hidden' ||
-			this.element.getStyle('opacity') == 0){
+		if (this.element.getStyle('display') == 'none'){
 			this.reveal();
 		} else {
 			this.dissolve();

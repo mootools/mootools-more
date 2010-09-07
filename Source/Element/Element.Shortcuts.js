@@ -43,6 +43,7 @@ Element.implement({
 			//IE fails here if the element is not in the dom
 			d = this.getStyle('display');
 		} catch(e){}
+		if (d == "none") return this;
 		return this.store('element:_originalDisplay', d || '').setStyle('display', 'none');
 	},
 

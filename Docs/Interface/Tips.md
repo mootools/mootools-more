@@ -73,8 +73,28 @@ Tips Event: show {#Tips:show}
 ### Example
 
 	myTips.addEvent('show', function(tip, el){
-		tip.fade('in');
+		tip.addClass('someCustomClassBecauseTheTipIsVisible');
 	});
+
+### Note
+
+To override the default tip show behavior, you must either declare the onShow event in the options on initialization or remove the onShow event from the class yourself. Example:
+
+		var myTips = new Tips('.thisisatooltip', {
+			onShow: function(tip, el){
+				tip.setStyles({
+					visibility: 'hidden'
+					display: 'block'
+				}).fade('in');
+			}
+		});
+		//if you want to add this after init
+		myTips.removeEvents('show').addEvent('show', function(tip, el){
+			tip.setStyles({
+				visibility: 'hidden'
+				display: 'block'
+			}).fade('in');
+		});
 
 Tips Event: hide {#Tips:hide}
 ---------------------------------
@@ -93,10 +113,26 @@ Tips Event: hide {#Tips:hide}
 ### Example
 
 	myTips.addEvent('hide', function(tip, el){
-		tip.fade('out');
+		tip.removeClass('someCustomClassBecauseTheTipIsVisible');
 	});
 
+### Note
 
+To override the default tip hide behavior, you must either declare the onHide event in the options on initialization or remove the onHide event from the class yourself. Example:
+
+		var myTips = new Tips('.thisisatooltip', {
+			onHide: function(tip, el){
+				tip.fade('out').get('tween').chain(function(){
+					tip.setStyle('display', 'none');
+				}
+			}
+		});
+		//if you want to add this after init
+		myTips.removeEvents('hide').addEvent('hide', function(tip, el){
+			tip.fade('out').get('tween').chain(function(){
+				tip.setStyle('display', 'none');
+			}
+		});
 
 Tips Method: attach {#Tips:attach}
 ----------------------------------
