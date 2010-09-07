@@ -29,15 +29,15 @@ var Asset = {
 			document: document,
 			check: Function.from(true)
 		}, properties);
-		
+
 		if (properties.onLoad){
 			properties.onload = properties.onLoad;
 			delete properties.onLoad;
 		}
 		var script = new Element('script', {src: source, type: 'text/javascript'});
 
-		var load = properties.onload.bind(script), 
-			check = properties.check, 
+		var load = properties.onload.bind(script),
+			check = properties.check,
 			doc = properties.document;
 		delete properties.onload;
 		delete properties.check;

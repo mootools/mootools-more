@@ -51,12 +51,12 @@ var Drag = new Class({
 
 	initialize: function(){
 		var params = Array.link(arguments, {
-			'options': Type.isObject, 
+			'options': Type.isObject,
 			'element': function(obj){
 				return obj != null;
 			}
 		});
-		
+
 		this.element = document.id(params.element);
 		this.document = this.element.getDocument();
 		this.setOptions(params.options || {});
@@ -90,15 +90,15 @@ var Drag = new Class({
 
 	start: function(event){
 		var options = this.options;
-		
+
 		if (event.rightClick) return;
-		
+
 		if (options.preventDefault) event.preventDefault();
 		if (options.stopPropagation) event.stopPropagation();
 		this.mouse.start = event.page;
-		
+
 		this.triggerEvent('beforeStart', this.element);
-		
+
 		var limit = options.limit;
 		this.limit = {x: [], y: []};
 
@@ -112,15 +112,15 @@ var Drag = new Class({
 
 		for (var z in options.modifiers){
 			if (!options.modifiers[z]) continue;
-			
+
 			if (options.style) this.value.now[z] = this.element.getStyle(options.modifiers[z]).toInt();
 			else this.value.now[z] = this.element[options.modifiers[z]];
-			
+
 			if (options.invert) this.value.now[z] *= -1;
 			if (this._invert[z]) this.value.now[z] *= -1;
 
 			this.mouse.pos[z] = event.page[z] - this.value.now[z];
-			
+
 			if (limit && limit[z]){
 				var i = 2;
 				while (i--){
@@ -129,14 +129,14 @@ var Drag = new Class({
 				}
 			}
 		}
-		
+
 		if (typeOf(this.options.grid) == 'number') this.options.grid = {
-			x: this.options.grid, 
+			x: this.options.grid,
 			y: this.options.grid
 		};
-		
+
 		var events = {
-			mousemove: this.bound.check, 
+			mousemove: this.bound.check,
 			mouseup: this.bound.cancel
 		};
 		events[this.selection] = this.bound.eventStop;
@@ -158,17 +158,17 @@ var Drag = new Class({
 
 	drag: function(event){
 		var options = this.options;
-		
+
 		if (options.preventDefault) event.preventDefault();
 		this.mouse.now = event.page;
-		
+
 		for (var z in options.modifiers){
 			if (!options.modifiers[z]) continue;
 			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z];
 
 			if (options.invert) this.value.now[z] *= -1;
 			if (this._invert[z]) this.value.now[z] *= -1;
-			
+
 			if (options.limit && this.limit[z]){
 				if ((this.limit[z][1] || this.limit[z][1] === 0) && (this.value.now[z] > this.limit[z][1])){
 					this.value.now[z] = this.limit[z][1];
@@ -176,7 +176,7 @@ var Drag = new Class({
 					this.value.now[z] = this.limit[z][0];
 				}
 			}
-			
+
 			if (options.grid[z]) this.value.now[z] -= ((this.value.now[z] - (this.limit[z][0]||0)) % options.grid[z]);
 			if (options.style) {
 				this.element.setStyle(options.modifiers[z], this.value.now[z] + options.unit);
@@ -184,7 +184,7 @@ var Drag = new Class({
 				this.element[options.modifiers[z]] = this.value.now[z];
 			}
 		}
-		
+
 		this.triggerEvent('drag', [this.element, event]);
 	},
 
@@ -216,11 +216,11 @@ Element.implement({
 	makeResizable: function(options){
 		var drag = new Drag(this, Object.merge({
 			modifiers: {
-				x: 'width', 
+				x: 'width',
 				y: 'height'
 			}
 		}, options));
-		
+
 		this.store('resizer', drag);
 		return drag.addEvent('drag', function(){
 			this.triggerEvent('resize', drag);

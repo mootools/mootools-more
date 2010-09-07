@@ -24,7 +24,7 @@ Returns the state of the display of the element.
 Element Method: isVisible {#Element:isVisible}
 ----------------------------------------------
 
-Determines if an element is displayed using offset height/width. If both of these are zero it usually means the element is not displayed or one of its parent's is not. 
+Determines if an element is displayed using offset height/width. If both of these are zero it usually means the element is not displayed or one of its parent's is not.
 
 ### Syntax
 

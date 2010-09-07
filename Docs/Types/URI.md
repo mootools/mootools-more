@@ -6,7 +6,7 @@ Provides numerous methods useful for managing URIs.
 Usage {#Usage}
 --------------
 
-Pass a *string* to the URI subclass and it will extend it, returning a new string-like object with new methods useful for managing that URI. 
+Pass a *string* to the URI subclass and it will extend it, returning a new string-like object with new methods useful for managing that URI.
 
 ### Syntax
 
@@ -144,7 +144,7 @@ Sets the query string from an *object* (much like *myURI.set('data', obj)*) but 
 	myURI.setData(myObject, true); //merges myObject w/ existing query values
 	myURI.setData('foo', 'bar'); //sets foo=bar in the query string
 	myURI.setData({foo: 'bar'}, false, 'fragment'); //adds #foo=bar to the url fragment
-	
+
 
 URI Method: getData {#URI:getData}
 ----------------------------------

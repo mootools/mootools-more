@@ -13,10 +13,10 @@ Contains methods and data necessary to provide localization.
 Example language file
 ---------------------
 
-Below is an example language file from *Locale.en-US.Date.js*. Note that some members are 
-arrays (months and days), others are strings, and one is even a function. Also note that 
-some of the strings contain notation for variable substitution. Each class establishes it's 
-own conventions for the language file that is required and is therefor required to document 
+Below is an example language file from *Locale.en-US.Date.js*. Note that some members are
+arrays (months and days), others are strings, and one is even a function. Also note that
+some of the strings contain notation for variable substitution. Each class establishes it's
+own conventions for the language file that is required and is therefor required to document
 those conventions. Look for these at the bottom of the class's Locale documentation.
 
 	Locale.define('en-US', 'Date', {
@@ -38,7 +38,7 @@ those conventions. Look for these at the bottom of the class's Locale documentat
 Locale event: onChange {#Locale:onChange}
 ---------------------------------------------------------------
 
-This event is fired whenever the current locale is changed for the user (for instance, 
+This event is fired whenever the current locale is changed for the user (for instance,
 from "en-US" to "es-ES") or whenever the current selected locale is updated with new data.
 
 ### Example:
@@ -58,7 +58,7 @@ Defines properties for a given set in a given language.
 	Locale.define(name, set, data);
 	// or
 	Locale.define(name, set, key, value);
-	
+
 
 ### Arguments
 
@@ -155,18 +155,18 @@ Locale method: inherit {#Locale:inherit}
 ------------------------------------------------
 
 It often occurs that localization data is based on a other language.
-For example Spanish in Argentina has many similarities with Spanish 
+For example Spanish in Argentina has many similarities with Spanish
 or Number formatting in Europe is the same for lots of Europe countries.
 Therefore it is impossible to inherit another locale data from another
 language. `Locale.get` will search trough the inherited locale names
-until a property is set. The en-US locale set is always used as last 
+until a property is set. The en-US locale set is always used as last
 option because that is the only set that is garanteed to be complete.
 
-### Syntax: 
+### Syntax:
 
 	Locale.inherit(name, parent[, set]);
 
-### Arguments: 
+### Arguments:
 
 1. name - (*string*) The locale name
 2. parent - (*string*) The locale name to inherit from
@@ -177,10 +177,10 @@ option because that is the only set that is garanteed to be complete.
 * *object* - Locale (the instance)
 
 
-### Example: 
+### Example:
 
 	Locale.inherit('es-AR', 'es-ES');
-	
+
 	// Only inherit for a specific data set
 	Locale.inherit('de-CH', 'de-DE', 'Number');
 

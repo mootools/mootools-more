@@ -42,16 +42,16 @@ var Sortables = new Class({
 
 	initialize: function(lists, options){
 		this.setOptions(options);
-		
+
 		this.elements = [];
 		this.lists = [];
 		this.idle = true;
 
 		this.addLists($$(document.id(lists) || lists));
-		
+
 		if (!this.options.clone) this.options.revert = false;
 		if (this.options.revert) this.effect = new Fx.Morph(null, Object.merge({
-			duration: 250, 
+			duration: 250,
 			link: 'cancel'
 		}, this.options.revert));
 	},
@@ -76,18 +76,18 @@ var Sortables = new Class({
 	addLists: function() {
 		var selector = this.options.selector;
 		Array.flatten(arguments).each(function(list) {
-			
+
 			this.lists.push(list);
 			this.elements.append(Array.from(list.getChildren(selector)));
-			
+
 			var start = !this.options.handle ? this.start.bind(this) : function(event, element) {
 				this.start(event, element.getParent(selector));
 			}.bind(this);
-			
-			
+
+
 			if (this.options.handle) selector += ' ' + this.options.handle;
 			list.addEvent('mousedown:relay(' + selector + ')', start);
-			
+
 		}, this);
 		return this;
 	},
@@ -115,7 +115,7 @@ var Sortables = new Class({
 			visibility: 'hidden',
 			width: element.getStyle('width')
 		});
-		
+
 		//prevent the duplicated radio inputs from unchecking the real one
 		if (clone.get('html').test('radio')){
 			clone.getElements('input[type=radio]').each(function(input, i){
@@ -123,7 +123,7 @@ var Sortables = new Class({
 				if (input.get('checked')) element.getElements('input[type=radio]')[i].set('checked', true);
 			});
 		}
-		
+
 		return clone.inject(this.list).setPosition(element.getPosition(element.getOffsetParent()));
 	},
 
@@ -147,13 +147,13 @@ var Sortables = new Class({
 
 	start: function(event, element){
 		if (!this.idle || event.rightClick) return;
-		
+
 		this.idle = false;
 		this.element = element;
 		this.opacity = element.get('opacity');
 		this.list = element.getParent();
 		this.clone = this.getClone(event, element);
-	
+
 		this.drag = new Drag.Move(this.clone, {
 			preventDefault: this.options.preventDefault,
 			snap: this.options.snap,
@@ -201,7 +201,7 @@ var Sortables = new Class({
 
 	serialize: function(){
 		var params = Array.link(arguments, {
-			modifier: Type.isFunction, 
+			modifier: Type.isFunction,
 			index: function(obj){
 				return obj != null;
 			}

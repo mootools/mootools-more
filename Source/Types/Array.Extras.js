@@ -54,7 +54,7 @@ Array.implement({
 		}
 		return this;
 	},
-	
+
 	reduce: function(fn, value){
 		var undefined;
 		for (var i = 0, l = this.length; i < l; i++)
@@ -62,7 +62,7 @@ Array.implement({
 				value = value === undefined ? this[i] : fn.call(null, value, this[i], i, this);
 		return value;
 	},
-	
+
 	reduceRight: function(fn, value){
 		var i = this.length, undefined;
 		while (i--)

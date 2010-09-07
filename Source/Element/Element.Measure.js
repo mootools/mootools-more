@@ -87,13 +87,13 @@ Element.implement({
 	getDimensions: function(options){
 		options = Object.merge({computeSize: false}, options);
 		var dim = {};
-		
+
 		var getSize = function(el, options){
 			return (options.computeSize) ? el.getComputedSize(options) : el.getSize();
 		};
-		
+
 		var parent = this.getParent('body');
-		
+
 		if (parent && this.getStyle('display') == 'none'){
 			dim = this.measure(function(){
 				return getSize(this, options);
@@ -105,7 +105,7 @@ Element.implement({
 		} else {
 			dim = {x: 0, y: 0};
 		}
-		
+
 		return Object.append(dim, (dim.x || dim.x === 0) ?  {
 				width: dim.x,
 				height: dim.y
@@ -121,7 +121,7 @@ Element.implement({
 		//legacy support for my stupid spelling error
 		if (options && options.plains) options.planes = options.plains;
 		//</1.2compat>
-		
+
 		options = Object.merge({
 			styles: ['padding','border'],
 			planes: {
@@ -161,9 +161,9 @@ Element.implement({
 				size['computed' + edge.capitalize()] = edgesize;
 				size['total' + capitalized] += edgesize;
 			});
-			
+
 		}, this);
-		
+
 		return Object.append(size, styles);
 	}
 

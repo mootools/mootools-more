@@ -347,7 +347,7 @@ Outputs the date in the ISO-8601 standard format (i.e. 1999-12-31T11:59:59-0800)
 ### Syntax
 
 	new Date().toISOString();  //equivalent to format('iso8601')
-	
+
 ### Returns
 
 * (*string*) the date in ISO-8601 format.
@@ -374,7 +374,7 @@ Parses a string to a date. In the examples below, parsing works with dates using
 	Date.parse('2007-06-08 16:34:52') //"Fri Jun 08 2007 16:34:52 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('2007-06-08T16:34:52+0200') //"Fri Jun 08 2007 07:34:52 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('Thu Oct 22 08:11:23 +0000 2009') //Thu Oct 12 2009 08:11:23 GMT (Greenwich Mean Time)
-	
+
 	Date.parse('1st') //"Sat Dec 01 2007 00:00:00 GMT-0800 (Pacific Standard Time)"
 	Date.parse('14th October') //"Sun Oct 14 2007 00:00:00 GMT-0700 (Pacific Daylight Time)"
 	Date.parse('24th May, 2007') //"Thu May 24 2007 00:00:00 GMT-0700 (Pacific Daylight Time)"
@@ -460,7 +460,7 @@ Additional parsers can be authored than those already outlined by default in *Da
 A pattern string is somewhat of a hybrid between regular expressions and the format strings passed into [Date:format][]. First, an example:
 
 	Date.defineParser('%d%o( %b( %Y)?)?( %X)?');
-	
+
 As you can see, the above pattern (already included in *Date.js*) uses parentheses for grouping with a question mark to denote the preceding item or group as being optional, just as in a regular expression.  It parsers strings such as:
 
 * 14th
@@ -494,7 +494,7 @@ Plural form of [Date:defineParser][].
 ### Syntax
 
 	Date.defineParsers(pattern, pattern, etc.);
-	
+
 ### Arguments
 
 1. format - can be multiple format arguments or an array of formats.
@@ -507,16 +507,16 @@ Define the first year of the 100-year period that 2-digit years will be fall wit
 ### Syntax
 
 	Date.define2DigitYearStart(year)
-	
+
 ### Arguments
 
 1. year - (*integer*) first year of the 100-year period
 
 ### Example
-	
+
 	Date.parse('01/01/00');  //Jan 1, 2000
 	Date.parse('12/31/99');  //Dec 31, 1999
-	
+
 	Date.define2DigitYearStart(2000);
 	Date.parse('01/01/00');  //Jan 1, 2000
 	Date.parse('12/31/99');  //Dec 31, 2099

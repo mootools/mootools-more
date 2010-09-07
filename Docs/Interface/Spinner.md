@@ -41,7 +41,7 @@ You can style the layer and its contents by just defining a css style for the cl
 ### Example
 
 	<div id="myElement">...</div>
-	
+
 	new Spinner('myElement');
 
 

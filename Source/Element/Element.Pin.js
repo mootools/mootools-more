@@ -24,7 +24,7 @@ provides: [Element.Pin]
 */
 
 (function(){
-	
+
 	var supportsPositionFixed = false;
 	window.addEvent('domready', function(){
 		var test = new Element('div').setStyles({
@@ -40,10 +40,10 @@ provides: [Element.Pin]
 
 		pin: function(enable){
 			if (this.getStyle('display') == 'none') return null;
-			
+
 			var pinnedPosition,
 				scroll = window.getScroll();
-				
+
 			if (enable !== false){
 				pinnedPosition = this.getPosition(this.getOffsetParent());
 				if (!this.retrieve('pin:_pinned')){
@@ -51,18 +51,18 @@ provides: [Element.Pin]
 						top: pinnedPosition.y - scroll.y,
 						left: pinnedPosition.x - scroll.x
 					};
-					
+
 					if (supportsPositionFixed){
 						this.setStyle('position', 'fixed').setStyles(currentPosition);
 					} else {
-						
+
 						this.store('pin:_pinnedByJS', true);
 						this.setStyles({
 							position: 'absolute',
 							top: pinnedPosition.y,
 							left: pinnedPosition.x
 						}).addClass('isPinned');
-						
+
 						var scrollFixer = function(){
 							if (this.retrieve('pin:_pinned'))
 								var scroll = window.getScroll();
@@ -71,13 +71,13 @@ provides: [Element.Pin]
 									left: currentPosition.left.toInt() + scroll.x
 								});
 						}.bind(this);
-						
+
 						this.store('pin:_scrollFixer', scrollFixer);
 						window.addEvent('scroll', scrollFixer);
 					}
 					this.store('pin:_pinned', true);
 				}
-				
+
 			} else {
 				var offsetParent;
 				if (!Browser.ie){

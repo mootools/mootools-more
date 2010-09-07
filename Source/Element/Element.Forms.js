@@ -40,11 +40,11 @@ Element.implement({
 	getSelectedRange: function(){
 		if (this.selectionStart != null){
 			return {
-				start: this.selectionStart, 
+				start: this.selectionStart,
 				end: this.selectionEnd
 			};
 		}
-		
+
 		var pos = {
 			start: 0,
 			end: 0
@@ -52,7 +52,7 @@ Element.implement({
 		var range = this.getDocument().selection.createRange();
 		if (!range || range.parentElement() != this) return pos;
 		var duplicate = range.duplicate();
-		
+
 		if (this.type == 'text'){
 			pos.start = 0 - duplicate.moveStart('character', -100000);
 			pos.end = pos.start + range.text.length;
@@ -119,11 +119,11 @@ Element.implement({
 			defaultMiddle: '',
 			after: ''
 		}, options);
-		
+
 		var value = this.getSelectedText() || options.defaultMiddle;
 		var pos = this.getSelectedRange();
 		var text = this.get('value');
-		
+
 		if (pos.start == pos.end){
 			this.set('value', text.substring(0, pos.start) + options.before + value + options.after + text.substring(pos.end, text.length));
 			this.selectRange(pos.start + options.before.length, pos.end + options.before.length + value.length);

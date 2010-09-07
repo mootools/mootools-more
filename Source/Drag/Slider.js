@@ -63,12 +63,12 @@ var Slider = new Class({
 				this.property = 'left';
 				offset = 'offsetWidth';
 		}
-		
-		this.full = this.element.measure(function(){ 
-			this.half = this.knob[offset] / 2; 
-			return this.element[offset] - this.knob[offset] + (this.options.offset * 2); 
+
+		this.full = this.element.measure(function(){
+			this.half = this.knob[offset] / 2;
+			return this.element[offset] - this.knob[offset] + (this.options.offset * 2);
 		}.bind(this));
-		
+
 		this.setRange(this.options.range);
 
 		this.knob.setStyle('position', 'relative').setStyle(this.property, this.options.initialStep ? this.toPosition(this.options.initialStep) : - this.options.offset);
@@ -126,7 +126,7 @@ var Slider = new Class({
 		this.end();
 		return this;
 	},
-	
+
 	setRange: function(range, pos){
 		this.min = Array.pick([range[0], 0]);
 		this.max = Array.pick([range[1], this.options.steps]);

@@ -95,9 +95,9 @@ if (!window.Form) window.Form = {};
 		attach: function(attach){
 			attach = attach != null ? attach : true;
 			method = attach ? 'addEvent' : 'removeEvent';
-			
+
 			this.element[method]('click:relay(button, input[type=submit])', this.saveClickedButton.bind(this));
-			
+
 			var fv = this.element.retrieve('validator');
 			if (fv) fv[method]('onFormValidate', this.onFormValidate);
 			else this.element[method]('submit', this.onSubmit);

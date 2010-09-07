@@ -31,10 +31,10 @@ Date.implement({
 		if (to == null) to = new Date;
 		var delta = ((to - this) / 1000).toInt();
 		if (!delta) return '0s';
-		
+
 		var durations = {s: 60, m: 60, h: 24, d: 365, y: 0};
 		var duration, vals = [];
-		
+
 		for (var step in durations){
 			if (!delta) break;
 			if ((duration = durations[step])){
@@ -44,7 +44,7 @@ Date.implement({
 				vals.unshift(delta + step);
 			}
 		}
-		
+
 		return vals.join(joiner || ':');
 	}
 
@@ -61,7 +61,7 @@ Date.extend({
 	getTimePhrase: function(delta){
 		var suffix = (delta < 0) ? 'Until' : 'Ago';
 		if (delta < 0) delta *= -1;
-		
+
 		var units = {
 			minute: 60,
 			hour: 60,
@@ -71,9 +71,9 @@ Date.extend({
 			year: 12,
 			eon: Infinity
 		};
-		
+
 		var msg = 'lessThanMinute';
-		
+
 		for (var unit in units){
 			var interval = units[unit];
 			if (delta < 1.5 * interval){

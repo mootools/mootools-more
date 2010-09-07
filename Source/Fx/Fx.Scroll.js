@@ -66,7 +66,7 @@ Fx.Scroll = new Class({
 	start: function(x, y){
 		if (!this.check(x, y)) return this;
 		var scrollSize = this.element.getScrollSize(),
-			scroll = this.element.getScroll(), 
+			scroll = this.element.getScroll(),
 			values = {x: x, y: y};
 		for (var z in values){
 			var max = scrollSize[z];

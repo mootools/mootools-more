@@ -47,13 +47,13 @@ Fx.Sort = new Class({
 	sort: function(){
 		if (!this.check(arguments)) return this;
 		var newOrder = Array.flatten(arguments);
-		
+
 		var top = 0,
 			left = 0,
 			next = {},
 			zero = {},
 			vert = this.options.mode == 'vertical';
-		
+
 		var current = this.elements.map(function(el, index){
 			var size = el.getComputedSize({styles: ['border', 'padding', 'margin']});
 			var val;
@@ -78,7 +78,7 @@ Fx.Sort = new Class({
 			zero[index][plane] = start || 0;
 			return val;
 		}, this);
-		
+
 		this.set(zero);
 		newOrder = newOrder.map(function(i){ return i.toInt(); });
 		if (newOrder.length != this.elements.length){
@@ -107,7 +107,7 @@ Fx.Sort = new Class({
 		});
 		this.start(mapped);
 		this.currentOrder = newOrder;
-		
+
 		return this;
 	},
 

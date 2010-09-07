@@ -105,14 +105,14 @@ String.implement({
 
 	pad: function(length, str, direction){
 		if (this.length >= length) return this;
-		
+
 		var pad = (str == null ? ' ' : '' + str)
 			.repeat(length - this.length)
 			.substr(0, length - this.length);
-	
+
 		if (!direction || direction == 'right') return this + pad;
 		if (direction == 'left') return pad + this;
-	
+
 		return pad.substr(0, (pad.length / 2).floor()) + this + pad.substr(0, (pad.length / 2).ceil());
 	},
 

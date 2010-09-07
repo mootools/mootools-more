@@ -46,13 +46,13 @@ Request.Queue = new Class({
 	initialize: function(options){
 		if (options){
 			var requests = options.requests;
-			delete options.requests;	
+			delete options.requests;
 		}
 		this.setOptions(options);
 		this.requests = {};
 		this.queue = [];
 		this.reqBinders = {};
-		
+
 		if (requests) this.addRequests(requests);
 	},
 
@@ -118,7 +118,7 @@ Request.Queue = new Class({
 			this.requests[name]._groupSend(options);
 			this.queue.erase(q);
 		}.bind(this);
-		
+
 		q.name = name;
 		if (Object.keys(this.getRunning()).length >= this.options.concurrent || (this.error && this.options.stopOnFailure)) this.queue.push(q);
 		else q();

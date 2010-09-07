@@ -12,7 +12,7 @@ license: MIT-style license.
 authors:
   - Aaron Newton
 
-requires: 
+requires:
   - Core/Chain
   - Core/Element
   - Core/Fx
@@ -43,7 +43,7 @@ provides: [Chain.Wait]
 	}
 
 	Element.implement({
-		
+
 		chains: function(effects){
 			Array.from(effects || ['tween', 'morph', 'reveal']).each(function(effect){
 				effect = this.get(effect);
@@ -54,12 +54,12 @@ provides: [Chain.Wait]
 			}, this);
 			return this;
 		},
-		
+
 		pauseFx: function(duration, effect){
 			this.chains(effect).get(effect || 'tween').wait(duration);
 			return this;
 		}
-		
+
 	});
 
 })();

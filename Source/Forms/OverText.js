@@ -219,7 +219,7 @@ Object.append(OverText, {
 			return null; //the input or the text was destroyed
 		});
 	},
-	
+
 	update: function(){
 
 		return OverText.each(function(ot){

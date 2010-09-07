@@ -1,4 +1,4 @@
-/* 
+/*
 ---
 
 name: Locale.sv-SE.Number

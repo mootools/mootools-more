@@ -22,7 +22,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 	var storeKey = 'monitorEvents:';
 
 	var getStorage = function(object){
-				
+
 		return {
 			store: object.store ? function(key, value){
 				object.store(storeKey + key, value);
@@ -38,13 +38,13 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		};
 	};
 
-	
+
 	var splitType = function(type){
 		if (type.indexOf(':') == -1) return null;
-		
+
 		var parsed = Slick.parse(type).expressions[0][0],
 			parsedPseudos = parsed.pseudos;
-		
+
 		return (pseudos && pseudos[parsedPseudos[0].key]) ? {
 			event: parsed.tag,
 			value: parsedPseudos[0].value,
@@ -53,7 +53,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		} : null;
 	};
 
-	
+
 	return {
 
 		addEvent: function(type, fn, internal){
@@ -99,26 +99,26 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			storage.store(type, events);
 			return this;
 		}
-		
+
 	};
-	
+
 };
 
 (function(){
 
 	var pseudos = {
-		
+
 		once: function(split, fn, args){
 			fn.apply(this, args)
 			this.removeEvent(split.original, fn);
 		}
-		
+
 	};
-	
+
 	Events.definePseudo = function(key, fn){
 		pseudos[key] = fn;
 	};
-	
-	Events.implement(Events.Pseudos(pseudos, Events.prototype.addEvent, Events.prototype.removeEvent)); 
+
+	Events.implement(Events.Pseudos(pseudos, Events.prototype.addEvent, Events.prototype.removeEvent));
 
 })();

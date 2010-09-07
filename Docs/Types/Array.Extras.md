@@ -175,8 +175,8 @@ Apply a function simultaneously against two values of the array (from right-to-l
 
 ### Example
 
-	var flattened = [[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b) {  
-		return a.concat(b);  
+	var flattened = [[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b) {
+		return a.concat(b);
 	}, []);
 	// flattened is [4, 5, 2, 3, 0, 1]
 

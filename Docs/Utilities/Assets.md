@@ -29,7 +29,7 @@ Injects a script tag into the head section of the document, pointing to the src 
 		id: 'myScript',
 		events: {
 			load: function(){
-				alert('myScript.js is loaded!'); 
+				alert('myScript.js is loaded!');
 			}
 		}
 	});

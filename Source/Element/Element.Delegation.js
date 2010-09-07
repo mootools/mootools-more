@@ -34,7 +34,7 @@ Event.definePseudo('relay', function(split, fn, args, proxy){
 			return;
 		}
 	}
-	
+
 }, {
 	mouseenter: {
 		base: 'mouseover',

@@ -43,14 +43,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 	initialize: function(){
 		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
-		
+
 		this._selectedRows = new Elements();
-		
+
 		this._bound = {
 			mouseleave: this._mouseleave.bind(this),
 			clickRow: this._clickRow.bind(this)
 		};
-		
+
 		if (this.options.selectable) this.enableSelect();
 	},
 
@@ -91,20 +91,20 @@ HtmlTable = Class.refactor(HtmlTable, {
 			row.addClass(this.options.classRowSelected);
 			this.triggerEvent('rowFocus', [row, this._selectedRows]);
 		}
-		
+
 		this._focused = row;
 		document.clearSelection();
-		
+
 		return this;
 	},
-		
+
 	deselectRow: function(row, _nocheck){
 		if (!_nocheck && !this.body.getChildren().contains(row)) return;
-		
+
 		this._selectedRows = new Elements(Array.from(this._selectedRows).erase(row));
 		row.removeClass(this.options.classRowSelected);
 		this.triggerEvent('rowUnfocus', [row, this._selectedRows]);
-		
+
 		return this;
 	},
 
@@ -125,7 +125,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		if (typeOf(startRow) == 'element') startRow = rows.indexOf(startRow);
 		if (typeOf(endRow) == 'element') endRow = rows.indexOf(endRow);
-		endRow = endRow < rows.length - 1 ? endRow : rows.length - 1; 
+		endRow = endRow < rows.length - 1 ? endRow : rows.length - 1;
 
 		for(var i = startRow; i <= endRow; i++) this[method](rows[i], true);
 
@@ -175,10 +175,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 	_clickRow: function(event, row){
 		var selecting = (event.shift || event.meta || event.control) && this.options.shiftForMultiSelect;
 		if (!selecting && !(event.rightClick && this.isSelected(row) && this.options.allowMultiSelect)) this.selectNone();
-		
+
 		if (event.rightClick) this.selectRow(row);
 		else this.toggleRow(row);
-		
+
 		if (event.shift) {
 			this.selectRange(this._rangeStart || this.body.rows[0], row, this._rangeStart ? !this.isSelected(row) : true);
 		}
@@ -189,35 +189,35 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (!this._focused) return 0;
 		var rows = Array.clone(this.body.rows),
 			index = rows.indexOf(this._focused) + offset;
-		
+
 		if (index < 0) index = null;
 		if (index >= rows.length) index = null;
-		
+
 		return index;
 	},
 
 	_attachSelects: function(attach){
 		attach = attach != null ? attach : true;
-		
+
 		var method = attach ? 'addEvents' : 'removeEvents';
 		this.element[method]({
 			mouseleave: this._bound.mouseleave
 		});
-		
+
 		this.body[method]({
 			'click:relay(tr)': this._bound.clickRow,
 			'contextmenu:relay(tr)': this._bound.clickRow
 		});
-		
+
 		if (this.options.useKeyboard || this.keyboard){
 			if (!this.keyboard) {
 				var timer, held;
-				
+
 				var move = function(offset){
 					var mover = function(e){
 						clearTimeout(timer);
 						e.preventDefault();
-						
+
 						var to = this.body.rows[this._getRowByOffset(offset)];
 						if (e.shift && to && this.isSelected(to)) {
 							this.deselectRow(this._focused);
@@ -228,7 +228,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 							}
 							this._shiftFocus(offset, e);
 						}
-						
+
 						if (held) {
 							timer = mover.delay(100, this, e);
 						} else {
@@ -240,12 +240,12 @@ HtmlTable = Class.refactor(HtmlTable, {
 					}.bind(this);
 					return mover;
 				}.bind(this);
-				
+
 				var clear = function(){
 					clearTimeout(timer);
 					held = false;
 				};
-				
+
 				this.keyboard = new Keyboard({
 					events: {
 						'keydown:shift+up': move(-1),
@@ -257,12 +257,12 @@ HtmlTable = Class.refactor(HtmlTable, {
 					},
 					active: true
 				});
-				
+
 				var shiftHint = '';
 				if (this.options.allowMultiSelect && this.options.shiftForMultiSelect && this.options.useKeyboard) {
 					shiftHint = " (Shift multi-selects).";
 				}
-				
+
 				this.keyboard.addShortcuts({
 					'Select Previous Row': {
 						keys: 'up',
@@ -277,7 +277,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 						description: 'Select the next row in the table.' + shiftHint
 					}
 				});
-			
+
 			}
 			this.keyboard[attach ? 'activate' : 'deactivate']();
 		}

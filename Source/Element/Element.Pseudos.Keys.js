@@ -38,7 +38,7 @@ Event.definePseudo('keys', function(split, fn, args){
 	if (keys.every(function(key){
 		return pressed.contains(key);
 	})) fn.apply(this, args);
-	
+
 	this.store(keysStoreKey, pressed);
 
 	if (!this.retrieve(keysKeyupStoreKey)){

@@ -24,9 +24,9 @@ provides: [Request.JSONP]
 */
 
 Request.JSONP = new Class({
-	
+
 	Implements: [Chain, Events, Options],
-	
+
 	options: {
 	/*
 		onRequest: function(src, scriptElement){},
@@ -53,7 +53,7 @@ Request.JSONP = new Class({
 		timeout: 0,
 		log: false
 	},
-	
+
 	initialize: function(options){
 		this.setOptions(options);
 	},
@@ -61,7 +61,7 @@ Request.JSONP = new Class({
 	send: function(options){
 		if (!Request.prototype.check.call(this, options)) return this;
 		this.running = true;
-		
+
 		var type = typeOf(options);
 		if (type == 'string' || type == 'element') options = {data: options};
 		options = Object.merge(this.options, options || {});
@@ -75,53 +75,53 @@ Request.JSONP = new Class({
 		var index = this.index = Request.JSONP.counter++;
 
 		var src = options.url +
-			(options.url.test('\\?') ? '&' :'?') + 
-			(options.callbackKey) + 
-			'=Request.JSONP.request_map.request_'+ index + 
+			(options.url.test('\\?') ? '&' :'?') +
+			(options.callbackKey) +
+			'=Request.JSONP.request_map.request_'+ index +
 			(data ? '&' + data : '');
-				
+
 		if (src.length > 2083) this.triggerEvent('error', src);
-		
+
 		var script = this.getScript(src).inject(options.injectScript);
-		
+
 		this.triggerEvent('request', [script.get('src'), script]);
-		
+
 		Request.JSONP.request_map['request_' + index] = function(){
 			this.success(arguments, index);
 		}.bind(this);
-		
+
 		if (options.timeout){
 			(function(){
 				this.cancel().triggerEvent('timeout', [script.get('src'), script]);
 			}).delay(options.timeout, this);
 		}
-		
+
 		return this;
 	},
-	
+
 	getScript: function(src){
 		return this.script = new Element('script', {
 			type: 'text/javascript',
 			src: src
 		});
 	},
-	
+
 	success: function(args, index){
 		this.clear()
 			.triggerEvent('complete', args).triggerEvent('success', args)
 			.callChain();
 	},
-	
+
 	cancel: function(){
 		return this.clear().triggerEvent('cancel');
 	},
-	
+
 	clear: function(){
 		if (this.script) this.script.destroy();
 		this.running = false;
 		return this;
 	}
-	
+
 });
 
 Request.JSONP.counter = 0;

@@ -43,10 +43,10 @@ Drag.Move = new Class({
 	initialize: function(element, options){
 		this.parent(element, options);
 		element = this.element;
-		
+
 		this.droppables = $$(this.options.droppables);
 		this.container = document.id(this.options.container);
-		
+
 		if (this.container && typeOf(this.container) != 'element'){
 			this.container = document.id(this.container.getDocument().body);
 		}
@@ -70,16 +70,16 @@ Drag.Move = new Class({
 
 	start: function(event){
 		if (this.container) this.options.limit = this.calculateLimit();
-		
+
 		if (this.options.precalculate){
 			this.positions = this.droppables.map(function(el){
 				return el.getCoordinates();
 			});
 		}
-		
+
 		this.parent(event);
 	},
-	
+
 	calculateLimit: function(){
 		var element = this.element,
 			container = this.container,
@@ -115,17 +115,17 @@ Drag.Move = new Class({
 			right += elementMargin.right;
 			bottom += elementMargin.bottom;
 		}
-		
+
 		if (element.getStyle('position') == 'relative'){
 			var coords = element.getCoordinates(offsetParent);
 			coords.left -= element.getStyle('left').toInt();
 			coords.top -= element.getStyle('top').toInt();
-			
+
 			left += containerBorder.left - coords.left;
 			top += containerBorder.top - coords.top;
 			right += elementMargin.left - coords.left;
 			bottom += elementMargin.top - coords.top;
-			
+
 			if (container != offsetParent){
 				left += containerMargin.left + offsetParentPadding.left;
 				top += (Browser.ie6 ? 0 : containerMargin.top) + offsetParentPadding.top;
@@ -143,7 +143,7 @@ Drag.Move = new Class({
 				bottom -= offsetParentBorder.top;
 			}
 		}
-		
+
 		return {
 			x: [left, right],
 			y: [top, bottom]
@@ -156,7 +156,7 @@ Drag.Move = new Class({
 			var now = this.mouse.now;
 			return (now.x > el.left && now.x < el.right && now.y < el.bottom && now.y > el.top);
 		}, this).getLast();
-		
+
 		if (this.overed != overed){
 			if (this.overed) this.triggerEvent('leave', [this.element, this.overed]);
 			if (overed) this.triggerEvent('enter', [this.element, overed]);

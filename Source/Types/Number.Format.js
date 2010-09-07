@@ -11,7 +11,7 @@ license: MIT-style license
 
 authors:
   - Arian Stolwijk
- 
+
 requires:
   - Core/Number
   - /Locale/Number.English.US
@@ -23,7 +23,7 @@ provides: [Number.Extras]
 
 
 Number.implement({
-	
+
 	format: function(options){
 		// Thanks dojo and YUI for some inspiration
 		var value = this;
@@ -61,7 +61,7 @@ Number.implement({
 			var match = value.split('e'),
 				zeros = +match[1];
 			value = match[0].replace('.', '');
-			
+
 			if (zeros < 0){
 				zeros = -zeros - 1;
 				var index = match[0].indexOf('.');
@@ -82,11 +82,11 @@ Number.implement({
 			index = (index > -1) ? index : value.length;
 			var newOutput = value.substring(index),
 				i = index;
-	
+
 			while (i--){
 				if ((index - i - 1) % 3 == 0 && i != (index - 1))
 					newOutput = group + newOutput;
-				
+
 				newOutput = value.charAt(i) + newOutput;
 			}
 
@@ -98,7 +98,7 @@ Number.implement({
 
 		return value;
 	},
-	
+
 	formatCurrency: function(){
 		var locale = Locale.get('Number.currency') || {};
 		if (locale.scientific == null) locale.scientific = false;
@@ -111,7 +111,7 @@ Number.implement({
 		var locale = Locale.get('Number.percentage') || {};
 		if (locale.suffix == null) locale.suffix = '%';
 		if (locale.decimals == null) locale.decimals = 2;
-		
+
 		return this.format(locale);
 	}
 

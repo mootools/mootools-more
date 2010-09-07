@@ -21,7 +21,7 @@ requires:
   - Core/JSON
   - /Locale
   - /Class.Binds
-  - /Date 
+  - /Date
   - /Element.Forms
   - /Locale.en-US.Form.Validator
   - /Element.Shortcuts

@@ -1,13 +1,13 @@
 Class: Keyboard {#Keyboard}
 =============================
- 
+
 
 ### Added Methods
 
 Keyboard Method: addShortcut {#Keyboard:addShortcut}
 ----------------------------------------
 
-Associates a event handler with a name and description. 
+Associates a event handler with a name and description.
 
 ### Syntax
 

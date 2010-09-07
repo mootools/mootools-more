@@ -61,7 +61,7 @@ this.Tips = new Class({
 
 	initialize: function(){
 		var params = Array.link(arguments, {
-			options: Type.isObject, 
+			options: Type.isObject,
 			elements: function(obj){
 				return obj != null;
 			}
@@ -94,24 +94,24 @@ this.Tips = new Class({
 		$$(elements).each(function(element){
 			var title = read(this.options.title, element),
 				text = read(this.options.text, element);
-			
+
 			element.set('title', '').store('tip:native', title).retrieve('tip:title', title);
 			element.retrieve('tip:text', text);
 			this.triggerEvent('attach', [element]);
-			
+
 			var events = ['enter', 'leave'];
 			if (!this.options.fixed) events.push('move');
-			
+
 			events.each(function(value){
 				var event = element.retrieve('tip:' + value);
 				if (!event) event = function(event){
 					this['element' + value.capitalize()].apply(this, [event, element]);
 				}.bind(this);
-				
+
 				element.store('tip:' + value, event).addEvent('mouse' + value, event);
 			}, this);
 		}, this);
-		
+
 		return this;
 	},
 
@@ -120,26 +120,26 @@ this.Tips = new Class({
 			['enter', 'leave', 'move'].each(function(value){
 				element.removeEvent('mouse' + value, element.retrieve('tip:' + value)).eliminate('tip:' + value);
 			});
-			
+
 			this.triggerEvent('detach', [element]);
-			
+
 			if (this.options.title == 'title'){ // This is necessary to check if we can revert the title
 				var original = element.retrieve('tip:native');
 				if (original) element.set('title', original);
 			}
 		}, this);
-		
+
 		return this;
 	},
 
 	elementEnter: function(event, element){
 		this.container.empty();
-		
+
 		['title', 'text'].each(function(value){
 			var content = element.retrieve('tip:' + value);
 			if (content) this.fill(new Element('div', {'class': 'tip-' + value}).inject(this.container), content);
 		}, this);
-		
+
 		clearTimeout(this.timer);
 		this.timer = (function(){
 			this.show(element);
@@ -172,7 +172,7 @@ this.Tips = new Class({
 			props = {x: 'left', y: 'top'},
 			bounds = {y: false, x2: false, y2: false, x: false},
 			obj = {};
-		
+
 		for (var z in props){
 			obj[props[z]] = event.page[z] + this.options.offset[z];
 			if (obj[props[z]] < 0) bounds[z] = true;
@@ -181,7 +181,7 @@ this.Tips = new Class({
 				bounds[z+'2'] = true;
 			}
 		}
-		
+
 		this.triggerEvent('bound', bounds);
 		this.tip.setStyles(obj);
 	},

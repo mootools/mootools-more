@@ -38,19 +38,19 @@ Fx.Slide = new Class({
 			if (this.open) this.wrapper.setStyle('height', '');
 			if (this.open && Browser.safari && Browser.version == 2) this.element.dispose().inject(this.wrapper);
 		}, true);
-		
+
 		this.element = this.subject = document.id(element);
 		this.parent(options);
 		var wrapper = this.element.retrieve('wrapper');
 		var styles = this.element.getStyles('margin', 'position', 'overflow');
-		
+
 		if (this.options.hideOverflow) styles = Object.append(styles, {overflow: 'hidden'});
 		if (this.options.wrapper) wrapper = document.id(this.options.wrapper).setStyles(styles);
-		
+
 		this.wrapper = wrapper || new Element('div', {
 			styles: styles
 		}).wraps(this.element);
-		
+
 		this.element.store('wrapper', this.wrapper).setStyle('margin', 0);
 		this.now = [];
 		this.open = true;
@@ -123,7 +123,7 @@ Fx.Slide = new Class({
 });
 
 Element.Properties.slide = {
-	
+
 	set: function(options){
 		this.get('slide').cancel().setOptions(options);
 		return this;

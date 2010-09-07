@@ -87,8 +87,8 @@ var IframeShim = new Class({
 
 	position: function(){
 		if (!IframeShim.ready || !this.shim) return this;
-		var size = this.element.measure(function(){ 
-			return this.getSize(); 
+		var size = this.element.measure(function(){
+			return this.getSize();
 		});
 		if (this.options.margin != undefined){
 			size.x = size.x - (this.options.margin * 2);

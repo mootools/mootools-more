@@ -12,7 +12,7 @@ license: MIT-style license.
 authors:
   - Aaron Newton
 
-requires: 
+requires:
   - Core/Class
   - Core/Element
   - /MooTools.More

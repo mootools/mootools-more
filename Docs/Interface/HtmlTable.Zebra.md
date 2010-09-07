@@ -20,7 +20,7 @@ Adds stripes to an instance of HtmlTable.
 
 * all options defined by [HtmlTable][], plus:
 * classZebra - (*string*) the class added to odd numbered rows; defaults to 'table-tr-odd'
-* zebra - (*boolean*) if *true* adds the *classZebra* value to odd numbered rows. 
+* zebra - (*boolean*) if *true* adds the *classZebra* value to odd numbered rows.
 
 ### Example
 

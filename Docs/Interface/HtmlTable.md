@@ -41,9 +41,9 @@ Builds table elements with methods to add rows quickly.
 		]
 	});
 	myTable.inject($('someContainer'));
-	
+
 	//ALSO
-	
+
 	var myTable = new HtmlTable($('existingTable'));
 	myTable.push(['data','goes','here']);
 
