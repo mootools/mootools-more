@@ -1,0 +1,448 @@
+<style>
+table {
+	border: solid #777;
+	border-width: 0px 0px 1px 1px;
+	margin: 10px 0px;
+}
+thead {
+	background: #777;
+	border-bottom: 1px solid #333;
+	color: #fff;
+}
+tr.table-tr-odd {
+	background: #ccc;
+}
+td, th {
+	padding: 4px;
+	border-right: 1px solid #777;
+	border-top: 1px solid #777;
+}
+th, th:hover {
+	cursor: pointer;
+	width: 100px;
+}
+th.table-th-sort {
+	color: #000;
+	background: #fff url(/asset/widgets/bullet_arrow_down.png) no-repeat right 3px;
+}
+th.table-th-sort-rev {
+	background: #fff url(/asset/widgets/bullet_arrow_up.png) no-repeat right 3px;
+}
+span.table-th-resizer  {
+        cursor:col-resize;
+        display:block;
+        height:100%;
+        position:absolute;
+        right:0px;
+        top:0;
+        width:6px;
+        z-index:1;
+}
+table.table-resizable th div {
+  padding-right: 0;
+  position: relative;
+}
+</style>
+
+<h3>resize: 'table' setting</h3>
+
+<table class="resizeTable" cellpadding="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th>
+							ID
+				</th>
+				<th>
+							TimeZone
+				</th>
+				<th>
+							Name
+				</th>
+				<th>
+							GEO Latitude
+				</th>
+				<th>
+							GEO Longitude
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					22
+				</td>
+				<td>
+					New York City
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					40.7255
+				</td>
+				<td>
+					-73.9983
+				</td>
+			</tr>
+			<tr>
+				<td>
+					23
+				</td>
+				<td>
+					San Francisco
+				</td>
+				<td>
+					America/Los_Angeles
+				</td>
+				<td>
+					37.7587
+				</td>
+				<td>
+					-122.433
+				</td>
+			</tr>
+			<tr>
+				<td>
+					24
+				</td>
+				<td>
+					Boston
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					42.3583
+				</td>
+				<td>
+					-71.0603
+				</td>
+			</tr>
+			<tr>
+				<td>
+					25
+				</td>
+				<td>
+					Denver
+				</td>
+				<td>
+					America/Denver
+				</td>
+				<td>
+					39.734
+				</td>
+				<td>
+					-105.026
+				</td>
+			</tr>
+			<tr>
+				<td>
+					31
+				</td>
+				<td>
+					Washington, DC
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					38.8964
+				</td>
+				<td>
+					-77.0447
+				</td>
+			</tr>
+			<tr>
+				<td>
+					32
+				</td>
+				<td>
+					Chicago
+				</td>
+				<td>
+					America/Chicago
+				</td>
+				<td>
+					41.8858
+				</td>
+				<td>
+					-87.6181
+				</td>
+			</tr>
+		  </tbody>
+	</table>
+<h3>resize: 'neighbor' setting</h3>
+<table class="resizeNeighbor" cellpadding="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th>
+							ID
+				</th>
+				<th>
+							TimeZone
+				</th>
+				<th>
+							Name
+				</th>
+				<th>
+							GEO Latitude
+				</th>
+				<th>
+							GEO Longitude
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					22
+				</td>
+				<td>
+					New York City
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					40.7255
+				</td>
+				<td>
+					-73.9983
+				</td>
+			</tr>
+			<tr>
+				<td>
+					23
+				</td>
+				<td>
+					San Francisco
+				</td>
+				<td>
+					America/Los_Angeles
+				</td>
+				<td>
+					37.7587
+				</td>
+				<td>
+					-122.433
+				</td>
+			</tr>
+			<tr>
+				<td>
+					24
+				</td>
+				<td>
+					Boston
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					42.3583
+				</td>
+				<td>
+					-71.0603
+				</td>
+			</tr>
+			<tr>
+				<td>
+					25
+				</td>
+				<td>
+					Denver
+				</td>
+				<td>
+					America/Denver
+				</td>
+				<td>
+					39.734
+				</td>
+				<td>
+					-105.026
+				</td>
+			</tr>
+			<tr>
+				<td>
+					31
+				</td>
+				<td>
+					Washington, DC
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					38.8964
+				</td>
+				<td>
+					-77.0447
+				</td>
+			</tr>
+			<tr>
+				<td>
+					32
+				</td>
+				<td>
+					Chicago
+				</td>
+				<td>
+					America/Chicago
+				</td>
+				<td>
+					41.8858
+				</td>
+				<td>
+					-87.6181
+				</td>
+			</tr>
+		  </tbody>
+	</table>
+<h3>resize: 'maintainChanges' setting</h3>
+<table class="maintainChanges" cellpadding="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th>
+							ID
+				</th>
+				<th>
+							TimeZone
+				</th>
+				<th>
+							Name
+				</th>
+				<th>
+							GEO Latitude
+				</th>
+				<th>
+							GEO Longitude
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					22
+				</td>
+				<td>
+					New York City
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					40.7255
+				</td>
+				<td>
+					-73.9983
+				</td>
+			</tr>
+			<tr>
+				<td>
+					23
+				</td>
+				<td>
+					San Francisco
+				</td>
+				<td>
+					America/Los_Angeles
+				</td>
+				<td>
+					37.7587
+				</td>
+				<td>
+					-122.433
+				</td>
+			</tr>
+			<tr>
+				<td>
+					24
+				</td>
+				<td>
+					Boston
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					42.3583
+				</td>
+				<td>
+					-71.0603
+				</td>
+			</tr>
+			<tr>
+				<td>
+					25
+				</td>
+				<td>
+					Denver
+				</td>
+				<td>
+					America/Denver
+				</td>
+				<td>
+					39.734
+				</td>
+				<td>
+					-105.026
+				</td>
+			</tr>
+			<tr>
+				<td>
+					31
+				</td>
+				<td>
+					Washington, DC
+				</td>
+				<td>
+					America/New_York
+				</td>
+				<td>
+					38.8964
+				</td>
+				<td>
+					-77.0447
+				</td>
+			</tr>
+			<tr>
+				<td>
+					32
+				</td>
+				<td>
+					Chicago
+				</td>
+				<td>
+					America/Chicago
+				</td>
+				<td>
+					41.8858
+				</td>
+				<td>
+					-87.6181
+				</td>
+			</tr>
+		  </tbody>
+	</table>
+
+
+<script src="/depender/build?require=More/HtmlTable.Resize,More/HtmlTable.Select,More/HtmlTable.Sort,Core/DomReady"></script>
+<script>
+var resizeTable = new HtmlTable($$('.resizeTable')[0],{
+	resizable : true,
+        sortable: true,
+        selectable: true,
+        resize: 'table'
+});
+var resizeNeighbor = new HtmlTable($$('.resizeNeighbor')[0],{
+        resizable: true,
+        sortable: true,
+        selectable: true,
+        resize: 'neighbor'
+});
+var maintainChanges = new HtmlTable($$('.maintainChanges')[0], {
+        resizable: true,
+        sortable: true,
+        selectable: true,
+        resize: 'maintainChanges'
+});
+</script>
