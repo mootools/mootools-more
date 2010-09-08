@@ -72,18 +72,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 	detectParsers: function(force){
 		if (!this.head) return;
 		var parsers = this.options.parsers, 
-				rows = this.body.rows;
+		rows = this.body.rows;
 
 		// auto-detect
-		this.parsers = $$(this.head.cells).map(function(cell, index) {
+		this.wrapTableHeadersForPositioning();
+                this.parsers = $$(this.head.cells).map(function(cell, index) {
 			if (!force && (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser'))) return cell.retrieve('htmltable-parser');
-			var thDiv = new Element('div');
-			$each(cell.childNodes, function(node) {
-				thDiv.adopt(node);
-			});
-			thDiv.inject(cell);
-			var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
-			
+			var headerWrapper = this.headerWrappers[index];
+			var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(headerWrapper, 'top');
 			this.sortSpans.push(sortSpan);
 
 			var parser = parsers[index], 

@@ -120,6 +120,19 @@ var HtmlTable = new Class({
 			tr: new Element('tr', rowProperties).inject(target || this.body).adopt(tds),
 			tds: tds
 		};
-	}
+	},
 
+        wrapTableHeadersForPositioning: function() {
+                if(!this.headerWrappers) {
+                        this.headerWrappers = $$(this.head.cells).map(function(cell) {
+                                var thDiv = new Element('div');
+                                $each(cell.childNodes, function(node) {
+                                        thDiv.adopt(node);
+                                });
+                                thDiv.inject(cell);
+                                return thDiv;
+                        });
+                }
+                return this.headerWrappers;
+        }
 });
