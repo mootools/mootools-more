@@ -3,10 +3,7 @@ Additional InputValidators: {#Validators}
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:
-
-Here are the validators that are included in this libary. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
+Here are the validators that are included in this libary. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied.
 
 Validator: validate-no-space {#Validators:validate-no-space}
 ------------------------------------------
@@ -73,7 +70,7 @@ At least one checkbox/radio is required to be checked in this node. *nodeId* nee
 	//you can also specify a selector for the parent
 	<input type="checkbox" class="validate-reqchk-bynode nodeId:'someParent' selector:'input.foo[type=checkbox]'"/>
 
-Validator: validate-reqchk-byname {#Validators:validate-reqchk-bynode}
+Validator: validate-reqchk-byname {#Validators:validate-reqchk-byname}
 ----------------------------------------------------
 
 At least one checkbox/radio is required to be checked in this name group. You can specify an optional label that completes the error message: "Please select a *label*." - it defaults to either "checkbox" or "radio" - the type of the input. By default it uses the name of the input to find all inputs with the same name but you can specify the optional *validatorProps* name *groupName* if you prefer.
