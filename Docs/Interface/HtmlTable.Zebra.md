@@ -86,3 +86,5 @@ Sets the contents of the *thead* with *th* tags.
 * (*object*) This instance of HtmlTable.
 
 [HtmlTable]: /more/Interface/HtmlTable
+[HtmlTable.push]: /more/Interface/HtmlTable#HtmlTable:push
+

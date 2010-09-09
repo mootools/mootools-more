@@ -42,3 +42,5 @@ Returns the relative path for a given url (i.e. a path that might include '../' 
 ### Returns
 
 * *string* - the relative path.
+
+[URI]: /more/Types/URI

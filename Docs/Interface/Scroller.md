@@ -1,9 +1,9 @@
 Class: Scroller {#Scroller}
 ===========================
 
-**The Scroller is a Class to scroll any element with an overflow (including the window) when the mouse cursor reaches certain boundaries of that element.**
+The Scroller is a Class to scroll any element with an overflow (including the window) when the mouse cursor reaches certain boundaries of that element.
 
-**You must call its start method to start listening to mouse movements.**
+You must call its start method to start listening to mouse movements.
 
 ### Note
 
@@ -57,7 +57,7 @@ Class: Scroller {#Scroller}
 Scroller Method: start {#Scroller:start}
 ----------------------------------------
 
-**The scroller starts listening to mouse movements.**
+The scroller starts listening to mouse movements.
 
 ### Syntax
 
@@ -73,7 +73,7 @@ Scroller Method: start {#Scroller:start}
 Scroller Method: stop {#Scroller:stop}
 --------------------------------------
 
-**The scroller stops listening to mouse movements.**
+The scroller stops listening to mouse movements.
 
 ### Syntax
 

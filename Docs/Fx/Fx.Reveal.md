@@ -123,12 +123,11 @@ Gets the default [Fx.Reveal][] instance for the Element.
 
 #### Syntax
 
-	el.get('reveal'[, options]);
+	el.get('reveal');
 
 #### Arguments
 
 1. name - (*string*) - this should always be "reveal".
-2. options - (*object*, optional) The [Fx.Reveal][] options. If these are passed in, a new instance will be generated.
 
 #### Returns
 

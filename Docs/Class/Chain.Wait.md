@@ -34,7 +34,7 @@ Injects pauses between chained events.
 Type: Element {#Element}
 ==========================
 
-Extends the native Element object with methods to delay effect chains.
+Extends the native Element object (if present) with methods to delay effect chains.
 
 Element Method: chains {#Element:chains}
 ----------------------------------------

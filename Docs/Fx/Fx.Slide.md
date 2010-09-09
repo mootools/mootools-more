@@ -218,10 +218,6 @@ Gets the previously setted Fx.Slide instance or a new one with default options.
 
 	el.get('slide');
 
-### Arguments
-
-1. options - (*object*, optional) the Fx.Slide options. if passed in will generate a new instance.
-
 ### Returns
 
 * (*object*) the Fx.Slide instance

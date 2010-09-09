@@ -76,7 +76,11 @@ Note that it can also be an actual *TR* element.
 ### Examples
 
 	//example of 'simple' rows
-	myTable.push(['value 1', 'value 2', 'value 3'], {'class': 'tableRowClass'}); //new row
+	myTable.push(['value 1', 'value 2', 'value 3'], {
+		'class': 'tableRowClass'
+	}); //new row
+
+
 	//detailed rows
 	myTable.push([
 		{ //can specify data AND properties
@@ -89,6 +93,8 @@ Note that it can also be an actual *TR* element.
 		},
 		'value 5' //can just be data; mixing and the two in the same row is fine
 	]);
+
+
 	//RESULT:
 	<table cellpadding="0" cellspacing="0" border="0">
 		<tr class="tableRowClass">
@@ -142,14 +148,17 @@ Sets the contents of the header or footer.
 * (*object*) The row data (same as returned by the *push* method).
 
 
-HtmlTable response: $ {#HtmlTable:Dollar}
+HtmlTable method: toElement {#HtmlTable:toElement}
 -----------------------------------------
 
-When *$* is called on this class the table is returned.
+If you pass an instance of HtmlTable into the `$` or `document.id` function
+it will return the actual table Element.
 
-### Example
+### Examples
 
-	$(myHtmlTable) == myHtmlTable.table
+	document.id(myHtmlTalbe).setStyle('color', 'blue');
+
+	$(myHtmlTable) == myHtmlTable.table; // true
 
 HtmlTable methods: Element methods {#HtmlTable:Element-Methods}
 ---------------------------------------------------------------
@@ -168,11 +177,9 @@ These will execute these methods on the table element.
 
 ### Example
 
-	myHtmlTable.table.inject(document.body);
-	//same as:
 	myHtmlTable.inject(document.body);
 	//same as:
-	$(myHtmlTable).inject(document.body);
+	document.id(myHtmlTable).inject(document.body);
 
 Type: Element {#Element}
 ==========================

@@ -218,12 +218,11 @@ Gets the default [Spinner][] instance for the Element.
 
 #### Syntax
 
-	el.get('spinner'[, options]);
+	el.get('spinner');
 
 #### Arguments
 
 1. name - (*string*) This should always be 'spinner'.
-1. options - (*object*, optional) The [Spinner][] options. If these are passed in, a new instance will always be generated.
 
 #### Returns
 
@@ -274,6 +273,7 @@ Retrieves the "build-in"  instance of [Spinner][] and calls its *hide* method.
 [Spinner]: #Spinner
 [Mask]: /more/Interface/Mask
 [IframeShim]: /more/Browser/IframeShim
+[Element]: /core/Element/Element
 [Element:position]: /more/Element/Element.Position#Element:position
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events

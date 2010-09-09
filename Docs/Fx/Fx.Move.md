@@ -118,10 +118,6 @@ Gets the default [Fx.Move][] instance for the Element.
 
 	el.get('move');
 
-#### Arguments
-
-1. options - (*object*, optional) The [Fx.Move][] options. If these are passed in, a new instance will be generated.
-
 #### Returns
 
 * (*object*) The Element's internal [Fx.Move][] instance.
@@ -137,7 +133,7 @@ Type: Element {#Element}
 
 Adds [Fx.Move][] shortcuts to the [Element][] class.
 
-Element Method: move {#Element1:move}
+Element Method: move {#Element:move}
 -------------------------------------
 
 Creates a new instance of [Fx.Move][] and calls its *start* method.

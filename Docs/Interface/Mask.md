@@ -167,12 +167,11 @@ Gets the default [Mask][] instance for the Element.
 
 #### Syntax
 
-	el.get('mask'[, options]);
+	el.get('mask');
 
 #### Arguments
 
 1. name - (*string*) This should always be 'mask'.
-1. options - (*object*, optional) The [Mask][] options. If these are passed in, a new instance will always be generated.
 
 #### Returns
 
@@ -224,5 +223,6 @@ Retrieves the "build-in"  instance of [Mask][] and calls its *hide* method.
 [Spinner]: /more/Interface/Spinner
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
+[Element]: /core/Element/Element
 [Element.setStyles]: /core/Element/Element.Style
 [IframeShim]: /more/Browser/IframeShim

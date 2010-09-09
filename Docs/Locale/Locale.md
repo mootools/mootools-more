@@ -80,7 +80,7 @@ Defines properties for a given set in a given language.
 
 ### Returns
 
-* *object* - Locale (the instance)
+* *object* - Locale Set instance
 
 
 Locale method: use {#Locale:setCurrent}
@@ -129,14 +129,14 @@ Retrieves a set of locale properties for the current language or the whole set.
 
 ### Arguments
 
-1. key - (*string*: optional) The member you wish to retrieve. This should look like `Set.key`.
+1. key - (*string*: optional) The member you wish to retrieve. This should look like `Set.key`. This will use [Object.getFromPath][] for nested properties.
 2. args - (*mixed*: optional) A single value or an array of values that are passed to the language value (if it is not a function, these are ignored; if it is a function, these are passed);
 
 
 ### Example
 
 	Locale.get('Date.dayAgo'); //"1 day ago"
-	Locale.get('Date.nested.property'); // the get method is using [Object.getFromPath][] to find properties
+	Locale.get('Date.nested.property'); // the get method is using Object.getFromPath to find properties
 	Locale.get('Date.ordinal', 1); //"st" > as in "1st"
 	Locale.get('Date.dayAgo', 'foo'); //foo is ignored
 	Locale.get('Date'); //returns the object of key/values for Date in the current language
@@ -159,9 +159,7 @@ For example Spanish in Argentina has many similarities with Spanish
 or Number formatting in Europe is the same for lots of Europe countries.
 Therefore it is impossible to inherit another locale data from another
 language. `Locale.get` will search trough the inherited locale names
-until a property is set. The en-US locale set is always used as last
-option because that is the only set that is garanteed to be complete.
-
+until a property is set.
 ### Syntax:
 
 	Locale.inherit(name, parent[, set]);
@@ -197,3 +195,5 @@ Returns an array of languages currently supported.
 ### Returns
 
 * *array* an array of locale names (*strings*)
+
+[Object.getFromPath]: /more/Types/Object.Extras#Object:Object-getFromPath

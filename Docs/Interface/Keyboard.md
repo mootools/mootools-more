@@ -134,7 +134,7 @@ Toggles the active state of the events managed by the keyboard.
 
 * (*object*) This instance of [Keyboard][]
 
-Keyboard Method: relinquish {#Keyboard:relinquish }
+Keyboard Method: relinquish {#Keyboard:relinquish}
 ------------------------------------
 
 Attempts to give control to the previously active keyboard. Will not do anything if there is no previously active keyboard.

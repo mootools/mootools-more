@@ -3,6 +3,10 @@ Type: Hash {#Hash}
 
 A collection of Hash methods.
 
+### Note
+
+Hash Extras is kept for compatibility reasons. It is expected to be removed with the MooTools 2.0 release. It is encouraged to use [Object.Extras][] instead.
+
 ### Tutorial/Demo
 
 * [Online Tutorial/Demo][]
@@ -104,5 +108,4 @@ Runs all the methods that are values of the hash.
 	};
 	window.addEvent('domready', myPage.init.run.bind(myPage.init));
 
-[Mootools:Hash]: /more/Types/Hash
-[$defined]: /core/Core/Core#defined
+[Object.Extras]: /more/Types/Object.Extras

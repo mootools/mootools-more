@@ -19,7 +19,7 @@ Returns the state of the display of the element.
 
 ### Returns
 
-* (*boolean*) true = display != "none", false = display == "none".
+* (*boolean*) true if display != "none", false if display == "none".
 
 Element Method: isVisible {#Element:isVisible}
 ----------------------------------------------
@@ -32,7 +32,7 @@ Determines if an element is displayed using offset height/width. If both of thes
 
 ### Returns
 
-* (*boolean*) true = visible, false = not visible.
+* (*boolean*) true if visible, false if not visible.
 
 Element Method: toggle {#Element:toggle}
 ----------------------------------------
