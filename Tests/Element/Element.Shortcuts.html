@@ -23,18 +23,30 @@
 		left: 450px;
 		top: 280px;
 	}
+	#hidden_foo {
+		display: none;
+		width: 200px;
+		height: 40px;
+		border: 2px solid black;
+		padding: 10px;
+		margin-top: 10px;
+	}
 </style>
 
 <div id="foo-container">
 	<div id="foo" class="blackText">
 	This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text.
 	</div>
+	<div id="hidden_foo">I am hidden by CSS.</div>
 </div>
 <div id="logContaner" class="blueText"></div>
 <script src="/depender/build?require=More/Element.Shortcuts,Core/Element.Event"></script>
 <script>
 var log = function(msg){
 	$('logContaner').adopt(new Element('p', {text: msg}));
+};
+var reset = function(element){
+	element.eliminate('element:_originalDisplay');
 };
 makeActions([
 	{
@@ -51,6 +63,26 @@ makeActions([
 		fn: function(){
 			$('foo').setStyle('display','none');
 			$('foo').show();
+		}
+	},
+	{
+		title: "Element.hide twice",
+		description: "Hides an element twice and then shows it after a pause",
+		fn: function(){
+			$('foo').show();
+			reset($('foo'));
+			$('foo').hide();
+			$('foo').hide();
+			(function(){
+				$('foo').show();
+			}).delay(250);
+		}
+	},
+	{
+		title: "Element.show: show an element hidden by css",
+		description: "Takes an element with a css class that has a display:none definition and shows it to display:block.",
+		fn: function(){
+			$('hidden_foo').show();
 		}
 	},
 	{

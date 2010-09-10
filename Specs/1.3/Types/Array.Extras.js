@@ -25,7 +25,7 @@ describe('Array.max', {
 describe('Array.average', {
 
 	'should return the average number of the values in the array': function(){
-		value_of([1, 2, 3, 4, 5].max()).should_be(5);
+		value_of([1, 2, 3, 4, 5].average()).should_be(3);
 	}
 
 });
