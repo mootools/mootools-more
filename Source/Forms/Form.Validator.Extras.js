@@ -23,27 +23,32 @@ Form.Validator.addAllThese([
 
 	['validate-enforce-oncheck', {
 		test: function(element, props){
-			if (element.checked){
-				var fv = element.getParent('form').retrieve('validator');
-				if (!fv) return true;
-				(props.toEnforce || document.id(props.enforceChildrenOf).getElements('input, select, textarea')).map(function(item){
+			var fv = element.getParent('form').retrieve('validator');
+			if (!fv) return true;
+			(props.toEnforce || document.id(props.enforceChildrenOf).getElements('input, select, textarea')).map(function(item){
+				if (element.checked) {
 					fv.enforceField(item);
-				});
-			}
+				} else {
+					fv.ignoreField(item);
+					fv.resetField(item);
+				}
+			});
 			return true;
 		}
 	}],
 
 	['validate-ignore-oncheck', {
 		test: function(element, props){
-			if (element.checked){
-				var fv = element.getParent('form').retrieve('validator');
-				if (!fv) return true;
-				(props.toIgnore || document.id(props.ignoreChildrenOf).getElements('input, select, textarea')).each(function(item){
+			var fv = element.getParent('form').retrieve('validator');
+			if (!fv) return true;
+			(props.toIgnore || document.id(props.ignoreChildrenOf).getElements('input, select, textarea')).each(function(item){
+				if (element.checked) {
 					fv.ignoreField(item);
 					fv.resetField(item);
-				});
-			}
+				} else {
+					fv.enforceField(item);
+				}
+			});
 			return true;
 		}
 	}],

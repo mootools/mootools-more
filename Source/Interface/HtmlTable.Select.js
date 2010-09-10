@@ -83,7 +83,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	selectRow: function(row, _nocheck){
 		//private variable _nocheck: boolean whether or not to confirm the row is in the table body
 		//added here for optimization when selecting ranges
-		if (!_nocheck && !this.body.getChildren().contains(row)) return;
+		if (this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 		if (!this.options.allowMultiSelect) this.selectNone();
 
 		if (!this.isSelected(row)) {
@@ -99,7 +99,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	deselectRow: function(row, _nocheck){
-		if (!_nocheck && !this.body.getChildren().contains(row)) return;
+		if (!this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 
 		this._selectedRows = new Elements(Array.from(this._selectedRows).erase(row));
 		row.removeClass(this.options.classRowSelected);
@@ -119,13 +119,19 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	selectRange: function(startRow, endRow, _deselect){
-		if (!this.options.allowMultiSelect) return;
+		if (!this.options.allowMultiSelect && !_deselect) return;
 		var method = _deselect ? 'deselectRow' : 'selectRow',
-			rows = Array.clone(this.body.rows);
+		    rows = Array.clone(this.body.rows);
 
 		if (typeOf(startRow) == 'element') startRow = rows.indexOf(startRow);
 		if (typeOf(endRow) == 'element') endRow = rows.indexOf(endRow);
-		endRow = endRow < rows.length - 1 ? endRow : rows.length - 1;
+		endRow = endRow < rows.length - 1 ? endRow : rows.length - 1; 
+
+		if (endRow < startRow) {
+			var tmp = startRow;
+			startRow = endRow;
+			endRow = tmp;
+		}
 
 		for(var i = startRow; i <= endRow; i++) this[method](rows[i], true);
 
@@ -181,6 +187,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		if (event.shift) {
 			this.selectRange(this._rangeStart || this.body.rows[0], row, this._rangeStart ? !this.isSelected(row) : true);
+			this._focused = row;
 		}
 		this._rangeStart = row;
 	},

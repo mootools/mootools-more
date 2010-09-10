@@ -113,6 +113,19 @@ Returns the selected state of a row element.
 
 * (*boolean*) *true* if the row is selected.
 
+HtmlTable method: getSelected {#HtmlTable:getSelected}
+------------------------------------------
+
+Returns an array of rows that are selected.
+
+### Syntax
+
+	myTable.getSelected();
+
+### Returns
+
+* (*array*) an array of TR elements that are selected.
+
 
 HtmlTable method: selectRange {#HtmlTable:selectRange}
 ------------------------------------------
@@ -125,8 +138,8 @@ Selects a group of rows.
 
 ### Arguments
 
-* startRow - (*element*) the TR element that starts the selection.
-* endRow - (*element*) the TR element that ends the selection.
+* startRow - (*mixed*) the TR element that starts the selection or an integer of its index in the rows in the table body.
+* endRow - (*mixed*) the TR element that ends the selection or an integer of its index in the rows in the table body.
 
 ### Note
 

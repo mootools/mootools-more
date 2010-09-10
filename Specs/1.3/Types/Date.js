@@ -391,6 +391,11 @@ describe('Date.parse', {
 			value_of(Date.parse(d.format('%Y %b %d'))).should_be(d);
 			value_of(Date.parse(d.format('%o %b %d %X %T %Y'))).should_be(d);
 			
+			['-', '.', '/'].each(function(punc){
+				value_of(Date.parse(d.format('%x').replace(/[-.\/]/g, punc))).should_be(d);
+				value_of(Date.parse(d.format('%Y' + punc + '%m' + punc + '%d'))).should_be(d);
+			});
+			
 			d = new Date(2000, 11, 2, 22, 45, 0, 0);
 			value_of(Date.parse(d.format('%x %X'))).should_be(d);
 			value_of(Date.parse(d.format('%B %d %Y %X'))).should_be(d);
