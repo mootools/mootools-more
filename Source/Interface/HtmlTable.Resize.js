@@ -98,7 +98,7 @@ HtmlTable = Class.refactor(HtmlTable, {
                                 var thDiv = new Element('div', {styles:{
                                         position: 'relative',
                                         width: '100%',
-                                        padding: '0 6px'
+                                        padding: '0 0px'
                                 }});
                                 resizeSpan.inject(thDiv);
                                 contentDiv.inject(thDiv);
@@ -152,9 +152,9 @@ HtmlTable = Class.refactor(HtmlTable, {
                                 cell.setStyle('width', cellWidth);
                                 this._widths.push({initial:cellWidth, curWidth:cellWidth});
                         }.bind(this)); 
+                        this.element.setStyle('width', this.element.getWidth());
                         this.element.setStyle('table-layout', 'fixed');
                         this._initialTableSize = this.element.getWidth();
-                        this.element.setStyle('width', this.element.getWidth());
                 }
                 this._dragStartHeaderSize = header.getComputedSize().width;
                 this._dragStartTableSize = this.element.getWidth();
@@ -276,10 +276,10 @@ HtmlTable = Class.refactor(HtmlTable, {
                                         width: newTableSize > 0 ? newTableSize : 1
                                 });
                         }
-                        //Reset all resized headers to their last measured width.  
+                        //Reset all resized headers to their last measured width if none of them have changed since they were last measured.  
                         this.headerCells.each(function(head, index) {
                                 var width = this._widths[index];
-                                if(head != header && width.resized) head.setStyle('width', width.curWidth);
+                                if(head != header  && headerDiff <= 0) head.setStyle('width', width.curWidth);
                         }.bind(this));
                         this._resizeHeader(header, newHeaderSize);
                         headerWidths.resized = true;

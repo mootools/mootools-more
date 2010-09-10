@@ -16,6 +16,8 @@ td, th {
 	padding: 4px;
 	border-right: 1px solid #777;
 	border-top: 1px solid #777;
+        white-space: nowrap;
+        overflow: hidden;
 }
 th, th:hover {
 	cursor: pointer;
@@ -33,7 +35,7 @@ span.table-th-resizer  {
         display:block;
         height:100%;
         position:absolute;
-        right:0px;
+        right:-3px;
         top:0;
         width:6px;
         z-index:1;
@@ -53,7 +55,7 @@ table.table-resizable th div {
 							ID
 				</th>
 				<th>
-							TimeZone
+							TimeZone 
 				</th>
 				<th>
 							Name
