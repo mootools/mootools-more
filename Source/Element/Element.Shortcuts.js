@@ -24,7 +24,7 @@ provides: [Element.Shortcuts]
 Element.implement({
 
 	isDisplayed: function(){
-		return this.style.display != 'none';
+		return this.getStyle('display') != 'none';
 	},
 
 	isVisible: function(){
@@ -48,6 +48,7 @@ Element.implement({
 	},
 
 	show: function(display){
+		if (!display && this.isDisplayed()) return this;
 		display = display || this.retrieve('element:_originalDisplay') || 'block';
 		return this.setStyle('display', (display == 'none') ? 'block' : display);
 	},
