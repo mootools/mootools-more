@@ -28,7 +28,7 @@ provides: [Chain.Wait]
 	var wait = {
 		wait: function(duration){
 			return this.chain(function(){
-				this.callChain.delay(duration || 500, this);
+				this.callChain.delay(duration == null ? 500 : duration, this);
 			}.bind(this));
 		}
 	};
