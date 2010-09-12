@@ -101,7 +101,7 @@ Loads the cookie and assigns it to the Hash.
 
 	(function(){
 		myHashCookie.load();
-		if (!myHashCookie.length) alert('Cookie Monster must of eaten it!');
+		if (!myHashCookie.getLength()) alert('Cookie Monster must of eaten it!');
 	}).periodical(5000);
 
 ### Notes
