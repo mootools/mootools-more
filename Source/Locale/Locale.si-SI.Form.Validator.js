@@ -1,7 +1,7 @@
 /*
 ---
 
-name: FLocale.si-SI.Form.Validator
+name: Locale.si-SI.Form.Validator
 
 description: Form Validator messages for Slovenian.
 

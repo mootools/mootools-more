@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Form.zh-CH.Form.Validator
+name: Locale.zh-CH.Form.Validator
 
 description: Form Validator messages for Chinese (simplified and traditional).
 
