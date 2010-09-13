@@ -80,7 +80,7 @@ provides: [Keyboard]
 		},
 
 		toggleActive: function(){
-			return this[this.active ? 'deactivate' : 'activate']();
+			return this[this.isActive() ? 'deactivate' : 'activate']();
 		},
 
 		activate: function(instance){

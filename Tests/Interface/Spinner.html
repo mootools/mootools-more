@@ -93,6 +93,9 @@ makeActions([
 		fn: function(){
 			var req = new Request.HTML({
 				url: '/ajax_html_echo/?html=<p>This+was+fetched+via+AJAX</p>',
+				spinnerOptions: {
+					message: 'testing....'
+				},
 				method: 'get',
 				useSpinner: true,
 				update: $('foo2')
