@@ -26,7 +26,7 @@ Class.refactor = function(original, refactors){
 
 	$each(refactors, function(item, name){
 		var origin = original.prototype[name];
-		if (origin && (origin = origin._origin) && typeof item == 'function') original.implement(name, function(){
+		if (origin && (origin = origin._origin ? origin._origin: origin) && typeof item == 'function') original.implement(name, function(){
 			var old = this.previous;
 			this.previous = origin;
 			var value = item.apply(this, arguments);
