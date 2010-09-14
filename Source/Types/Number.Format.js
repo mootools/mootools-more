@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Number
-  - /Locale/Number.English.US
+  - /Locale.en-US.Number
 
 provides: [Number.Extras]
 
@@ -59,17 +59,18 @@ Number.implement({
 
 		if (getOption('scientific') === false && value.indexOf('e') > -1){
 			var match = value.split('e'),
+				index,
 				zeros = +match[1];
 			value = match[0].replace('.', '');
 
 			if (zeros < 0){
 				zeros = -zeros - 1;
-				var index = match[0].indexOf('.');
+				index = match[0].indexOf('.');
 				if (index > -1) zeros -= index - 1;
 				while (zeros--) value = '0' + value;
 				value = '0.' + value;
 			} else {
-				var index = match[0].lastIndexOf('.');
+				index = match[0].lastIndexOf('.');
 				if (index > -1) zeros -= match[0].length - index - 1;
 				while (zeros--) value += '0';
 			}
@@ -78,15 +79,13 @@ Number.implement({
 		if (decimal != '.') value = value.replace('.', decimal);
 
 		if (group){
-			var index = value.lastIndexOf(decimal);
+			index = value.lastIndexOf(decimal);
 			index = (index > -1) ? index : value.length;
-			var newOutput = value.substring(index),
-				i = index;
+			newOutput = value.substring(index);
+			i = index;
 
 			while (i--){
-				if ((index - i - 1) % 3 == 0 && i != (index - 1))
-					newOutput = group + newOutput;
-
+				if ((index - i - 1) % 3 == 0 && i != (index - 1)) newOutput = group + newOutput;
 				newOutput = value.charAt(i) + newOutput;
 			}
 
