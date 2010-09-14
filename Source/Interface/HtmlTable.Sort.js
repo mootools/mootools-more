@@ -201,7 +201,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 					group = item.value;
 					row.removeClass(classGroup).addClass(classGroupHead);
 				}
-				if (this.options.zebra) this.zebra(row, i);
+				if (this.options.zebra) this.zebra(row, i - (data.length - 1) * -1); 
 
 				row.cells[index].addClass(classCellSort);
 			}
