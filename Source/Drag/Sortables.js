@@ -11,11 +11,9 @@ license: MIT-style license
 
 authors:
   - Tom Occhino
-  - Jacob Thornton
 
 requires:
   - /Drag.Move
-  - /Element.Delegation
 
 provides: [Sortables]
 
@@ -35,7 +33,6 @@ var Sortables = new Class({
 		clone: false,
 		revert: false,
 		handle: false,
-		selector: 'li',
 		constrain: false,
 		preventDefault: false
 	},
@@ -69,25 +66,18 @@ var Sortables = new Class({
 	addItems: function(){
 		Array.flatten(arguments).each(function(element){
 			this.elements.push(element);
+			var start = element.retrieve('sortables:start', function(event){
+				this.start.call(this, event, element);
+			}.bind(this));
+			(this.options.handle ? element.getElement(this.options.handle) || element : element).addEvent('mousedown', start);
 		}, this);
 		return this;
 	},
 
-	addLists: function() {
-		var selector = this.options.selector;
-		Array.flatten(arguments).each(function(list) {
-
+	addLists: function(){
+		Array.flatten(arguments).each(function(list){
 			this.lists.push(list);
-			this.elements.append(Array.from(list.getChildren(selector)));
-
-			var start = !this.options.handle ? this.start.bind(this) : function(event, element) {
-				this.start(event, element.getParent(selector));
-			}.bind(this);
-
-
-			if (this.options.handle) selector += ' ' + this.options.handle;
-			list.addEvent('mousedown:relay(' + selector + ')', start);
-
+			this.addItems(list.getChildren());
 		}, this);
 		return this;
 	},
@@ -95,6 +85,9 @@ var Sortables = new Class({
 	removeItems: function(){
 		return $$(Array.flatten(arguments).map(function(element){
 			this.elements.erase(element);
+			var start = element.retrieve('sortables:start');
+			(this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
+
 			return element;
 		}, this));
 	},
@@ -102,20 +95,21 @@ var Sortables = new Class({
 	removeLists: function(){
 		return $$(Array.flatten(arguments).map(function(list){
 			this.lists.erase(list);
+			this.removeItems(list.getChildren());
+
 			return list;
 		}, this));
 	},
 
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
-		if (typeof this.options.clone == 'function') return this.options.clone.call(this, event, element, this.list);
+		if (typeOf(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
 		var clone = element.clone(true).setStyles({
 			margin: 0,
 			position: 'absolute',
 			visibility: 'hidden',
 			width: element.getStyle('width')
 		});
-
 		//prevent the duplicated radio inputs from unchecking the real one
 		if (clone.get('html').test('radio')){
 			clone.getElements('input[type=radio]').each(function(input, i){
