@@ -41,6 +41,16 @@ License:
 			return this.previous() + ' for reals.';
 		}
 	});
+        var Test3 = new Class({
+        });
+        Test3.prototype.origin = function() {
+                return "original origin";
+        };
+        Test3 = Class.refactor(Test3, {
+                origin: function(){
+                        return "refactored origin " + this.previous();
+                }
+        });
 
 	describe('Class.Refactor', {
 
@@ -62,7 +72,11 @@ License:
 
 		'should return an unaltered property': function(){
 			value_of(new Test().options.something).should_be('else');
-		}
+		},
+
+                'should return the original origin': function(){
+                        value_of(new Test3().origin()).should_be('refactored origin original origin');
+                }
 
 	});
 })();
