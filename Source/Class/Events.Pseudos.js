@@ -109,7 +109,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 	var pseudos = {
 
 		once: function(split, fn, args){
-			fn.apply(this, args)
+			fn.apply(this, args);
 			this.removeEvent(split.original, fn);
 		}
 

@@ -18,7 +18,7 @@ requires:
   - /Object.Extras
   - /MooTools.More
 
-provides: [Locale]
+provides: [Locale, Lang]
 
 ...
 */
@@ -30,19 +30,19 @@ var current = null,
 	inherits = {};
 
 var getSet = function(set){
-	if (instanceOf(set, Locale.Set)) return set
+	if (instanceOf(set, Locale.Set)) return set;
 	else return locales[set];
-}
+};
 
 var Locale = this.Locale = {
 
 	define: function(locale, set, key, value){
-
+		var name;
 		if (instanceOf(locale, Locale.Set)){
-			var name = locale.name;
+			name = locale.name;
 			if (name) locales[name] = locale;
 		} else {
-			var name = locale;
+			name = locale;
 			if (!locales[name]) locales[name] = new Locale.Set(name);
 			locale = locales[name];
 		}
@@ -140,7 +140,7 @@ Locale.Set = new Class({
 			var locale = locales[names[i]];
 			if (!locale) continue;
 
-			var value = locale.get(key, args, _base);
+			value = locale.get(key, args, _base);
 			if (value != null) return value;
 		}
 
@@ -167,7 +167,7 @@ Object.append(lang, Locale, {
 	setLanguage: Locale.use,
 	getCurrentLanguage: function(){
 		var current = Locale.getCurrent();
-		return (current) ? current.name : null
+		return (current) ? current.name : null;
 	},
 	set: function(){
 		Locale.define.apply(this, arguments);
