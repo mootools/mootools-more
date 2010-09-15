@@ -471,7 +471,7 @@ Element.Properties.validator = {
 	set: function(options){
 		var validator = this.retrieve('validator');
 		if (validator) validator.setOptions(options);
-		return this.store('validator:options');
+		return this.store('validator:options', options);
 	},
 
 	get: function(options){
@@ -487,7 +487,7 @@ Element.Properties.validator = {
 Element.implement({
 
 	validate: function(options){
-		this.set('validator', options);
+		if (options) this.set('validator', options);
 		return this.get('validator', options).validate();
 	}
 

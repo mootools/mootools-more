@@ -93,7 +93,7 @@ function walk(string, replacements) {
 
 function getRegForTag(tag, contents) {
 	tag = tag || '';
-	var regstr = contents ? "<" + tag + "[^>]*>([\\s\\S]*?)<\/" + tag + ">" : "<\/?" + tag + "([^>]+)?>";
+	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "([^>]+)?>";
 	reg = new RegExp(regstr, "gi");
 	return reg;
 };

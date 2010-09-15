@@ -116,7 +116,7 @@ Date.implement({
 	diff: function(date, resolution){
 		if ($type(date) == 'string') date = Date.parse(date);
 		
-		return ((date - this) / Date.units[resolution || 'day'](3, 3)).toInt(); // non-leap year, 30-day month
+		return ((date - this) / Date.units[resolution || 'day'](3, 3)).round(); // non-leap year, 30-day month
 	},
 
 	getLastDayOfMonth: function(){
@@ -165,7 +165,7 @@ Date.implement({
 	},
 
 	isValid: function(date) {
-		return !!(date || this).valueOf();
+		return !isNaN((date || this).valueOf());
 	},
 
 	format: function(f){
@@ -182,6 +182,7 @@ Date.implement({
 					case 'B': return Date.getMsg('months')[d.get('month')];
 					case 'c': return d.toString();
 					case 'd': return pad(d.get('date'), 2);
+					case 'D': return d.get('date');
 					case 'e': return d.get('date');
 					case 'H': return pad(d.get('hr'), 2);
 					case 'I': return ((d.get('hr') % 12) || 12);
@@ -361,7 +362,7 @@ var regexOf = function(type){
 var replacers = function(key){
 	switch(key){
 		case 'x': // iso8601 covers yyyy-mm-dd, so just check if month is first
-			return ((Date.orderIndex('month') == 1) ? '%m[.-/]%d' : '%d[.-/]%m') + '([.-/]%y)?';
+			return ((Date.orderIndex('month') == 1) ? '%m[-./]%d' : '%d[-./]%m') + '([-./]%y)?';
 		case 'X':
 			return '%H([.:]%M)?([.:]%S([.:]%s)?)? ?%p? ?%T?';
 	}
@@ -422,10 +423,13 @@ var build = function(format){
 		re: new RegExp('^' + re + '$', 'i'),
 		handler: function(bits){
 			bits = bits.slice(1).associate(parsed);
-			var date = new Date().clearTime();
-			['d', 'm', 'b', 'B'].each(function(letter){
-				if (letter in bits) handle.call(date, letter, 1);
-			});
+			var date = new Date().clearTime(),
+				year = bits.y || bits.Y;
+			
+			if (year != null) handle.call(date, 'y', year); // need to start in the right year
+			if ('d' in bits) handle.call(date, 'd', 1);
+			if ('m' in bits || 'b' in bits || 'B' in bits) handle.call(date, 'm', 1);
+			
 			for (var key in bits) handle.call(date, key, bits[key]);
 			return date;
 		}

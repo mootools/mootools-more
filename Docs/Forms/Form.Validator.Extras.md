@@ -20,7 +20,7 @@ When added to a checkbox/radio button, and a list (*array*) of element id's can 
 
 ### Example
 
-	<input type="checkbox" class="validate-enforce-oncheck toEnforce:['name', 'email', 'phone']"/>
+	<input type="checkbox" class="validate-enforce-oncheck toEnforce:['name','email','phone']"/>
 	//when checked, the inputs with the ids 'name', 'email', and 'phone' will also be validated on change/submit
 
 	<input type="checkbox" class="validate-enforce-oncheck enforceChildrenOf:'someParent'"/>
@@ -33,7 +33,7 @@ When added to a checkbox/radio button, and a list (*array*) of element id's can 
 
 ### Example
 
-	<input type="checkbox" class="validate-ignore-oncheck toIgnore:['name', 'email', 'phone']"/>
+	<input type="checkbox" class="validate-ignore-oncheck toIgnore:['name','email','phone']"/>
 	//when checked, the inputs with the ids 'name', 'email', and 'phone' will NOT be validated on change/submit
 
 	<input type="checkbox" class="validate-ignore-oncheck ignoreChildrenOf:'someParent'"/>
@@ -48,7 +48,7 @@ When the input is checked or un-checked, the inputs defined will be toggled from
 
 ### Example
 
-	<input type="checkbox" class="validate-toggle-oncheck toToggle:['name', 'email', 'phone']"/>
+	<input type="checkbox" class="validate-toggle-oncheck toToggle:['name','email','phone']"/>
 	//when checked, the inputs with the ids 'name', 'email', and 'phone' will be validated on change/submit
 	//when unchecked, they will be ignored
 

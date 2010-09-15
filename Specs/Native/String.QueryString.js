@@ -15,6 +15,18 @@ License:
 
 		'should parse a plain string to a key': function(){
 			value_of('appleyellow'.parseQueryString()['']).should_be('appleyellow');
+		},
+
+		'should parse an encoded querystring to an object': function(){
+			value_of('this%20should%20be%20decoded=yes'.parseQueryString()).should_be({'this should be decoded': 'yes'});
+		},
+
+		'should parse a querystring without decoding': function(){
+			value_of('this%20should%20be%20encoded=oh%20dear'.parseQueryString(false, false)).should_be({'this%20should%20be%20encoded': 'oh%20dear'});
+		},
+
+		'should parse a collection correctly': function(){
+			value_of(Hash.toQueryString('f[28][]=110&order=pv'.parseQueryString())).should_be('f[28][]=110&order=pv');
 		}
 
 	});

@@ -296,6 +296,7 @@ Outputs the date into a specific format.
 * B - full month ("January")
 * c - the full date to string ("Mon Dec 10 2007 14:35:42 GMT-0800 (Pacific Standard Time)"; same as .toString() method.
 * d - the date to two digits (01, 05, etc)
+* D - the date as one digit (1, 5, 12, etc)
 * H - the hour to two digits in military time (24 hr mode) (01, 11, 14, etc)
 * I - the hour in 12 hour time (1, 11, 2, etc)
 * j - the day of the year to three digits (001 is Jan 1st)

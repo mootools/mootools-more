@@ -27,6 +27,7 @@ Adds the ability to select rows in a table.
 * selectable - (*boolean*) if *true* the rows will be selectable. Defaults to *false*.
 * allowMultiSelect - (*boolean*) if *true* (the default) the user can select more than one row at a time.
 * shiftForMultiSelect - (*boolean*) enables support for holding shift to multi-select files (defaults to *false*). If *false* (and `allowMultiSelect` is *true*), clicking any row selects it.
+* selectHiddenRows - (*boolean*) if *false* (the default), the selection logic ignores hidden rows, as if they were not in the DOM.
 
 ### Events
 
@@ -113,6 +114,19 @@ Returns the selected state of a row element.
 
 * (*boolean*) *true* if the row is selected.
 
+HtmlTable method: getSelected {#HtmlTable:getSelected}
+------------------------------------------
+
+Returns an array of rows that are selected.
+
+### Syntax
+
+	myTable.getSelected();
+
+### Returns
+
+* (*array*) an array of TR elements that are selected.
+
 
 HtmlTable method: selectRange {#HtmlTable:selectRange}
 ------------------------------------------
@@ -125,8 +139,8 @@ Selects a group of rows.
 
 ### Arguments
 
-* startRow - (*element*) the TR element that starts the selection.
-* endRow - (*element*) the TR element that ends the selection.
+* startRow - (*mixed*) the TR element that starts the selection or an integer of its index in the rows in the table body.
+* endRow - (*mixed*) the TR element that ends the selection or an integer of its index in the rows in the table body.
 
 ### Note
 

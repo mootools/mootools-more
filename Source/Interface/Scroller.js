@@ -93,6 +93,7 @@ var Scroller = new Class({
 			} else if (this.page[z] + bottom > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z]) {
 				change[z] = (this.page[z] - size[z] + bottom - pos[z]) * this.options.velocity;
 			}
+			change[z] = change[z].round();
 		}
 		if (change.y || change.x) this.fireEvent('change', [scroll.x + change.x, scroll.y + change.y]);
 	}

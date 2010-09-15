@@ -14,7 +14,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Keyboard
+  - /Keyboard.Extras
   - /HtmlTable
   - /Class.refactor
   - /Element.Delegation
@@ -36,7 +36,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 		classSelectable: 'table-selectable',
 		shiftForMultiSelect: true,
 		allowMultiSelect: true,
-		selectable: false
+		selectable: false,
+		selectHiddenRows: false
 	},
 
 	initialize: function(){
@@ -45,7 +46,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this._selectedRows = new Elements();
 		this._bound = {
 			mouseleave: this._mouseleave.bind(this),
-			clickRow: this._clickRow.bind(this)
+			clickRow: this._clickRow.bind(this),
+			activateKeyboard: function() {
+				if (this.keyboard && this._selectEnabled) this.keyboard.activate();
+			}.bind(this)
 		};
 		if (this.options.selectable) this.enableSelect();
 	},
@@ -75,7 +79,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	selectRow: function(row, _nocheck){
 		//private variable _nocheck: boolean whether or not to confirm the row is in the table body
 		//added here for optimization when selecting ranges
-		if (!_nocheck && !this.body.getChildren().contains(row)) return;
+		if (this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 		if (!this.options.allowMultiSelect) this.selectNone();
 
 		if (!this.isSelected(row)) {
@@ -91,9 +95,13 @@ HtmlTable = Class.refactor(HtmlTable, {
 	isSelected: function(row){
 		return this._selectedRows.contains(row);
 	},
-	
+
+	getSelected: function(){
+		return this._selectedRows;
+	},
+
 	deselectRow: function(row, _nocheck){
-		if (!_nocheck && !this.body.getChildren().contains(row)) return;
+		if (!this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 		this._selectedRows.erase(row);
 		row.removeClass(this.options.classRowSelected);
 		this.fireEvent('rowUnfocus', [row, this._selectedRows]);
@@ -101,12 +109,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	selectAll: function(selectNone){
-		if (!this.options.allowMultiSelect && !selectNone) return;
-		if (selectNone) {
-			this._selectedRows = this._selectedRows.removeClass(this.options.classRowSelected).empty();
-		} else {
-			this._selectedRows.combine(this.body.rows).addClass(this.options.classRowSelected);
-		}
+		if (!selectNone && !this.options.allowMultiSelect) return;
+		this.selectRange(0, this.body.rows.length, selectNone);
 		return this;
 	},
 
@@ -115,20 +119,29 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	selectRange: function(startRow, endRow, _deselect){
-		if (!this.options.allowMultiSelect) return;
-		var started,
-		    method = _deselect ? 'deselectRow' : 'selectRow';
+		if (!this.options.allowMultiSelect && !_deselect) return;
+		var method = _deselect ? 'deselectRow' : 'selectRow',
+		    rows = $A(this.body.rows);
 
-		$$(this.body.rows).each(function(row) {
-			if (row == startRow || row == endRow) started = !started;
-			if (started || row == startRow || row == endRow) this[_deselect ? 'deselectRow' : 'selectRow'](row, true);
-		}, this);
+		if ($type(startRow) == 'element') startRow = rows.indexOf(startRow);
+		if ($type(endRow) == 'element') endRow = rows.indexOf(endRow);
+		endRow = endRow < rows.length - 1 ? endRow : rows.length - 1; 
+
+		if (endRow < startRow) {
+			var tmp = startRow;
+			startRow = endRow;
+			endRow = tmp;
+		}
+
+		for(var i = startRow; i <= endRow; i++) {
+			if (this.options.selectHiddenRows || rows[i].isDisplayed()) this[method](rows[i], true);
+		}
 
 		return this;
 	},
 
-	deselectRange: function(startRow, endRow, _nocheck){
-		this.selectRange(startRow, endRow, _nocheck);
+	deselectRange: function(startRow, endRow){
+		this.selectRange(startRow, endRow, true);
 	},
 /*
 	Private methods:
@@ -161,7 +174,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	_shiftFocus: function(offset, event){
 		if (!this._focused) return this.selectRow(this.body.rows[0], event);
-		var to = this._getRowByOffset(offset);
+		var to = this._getRowByOffset(offset, this.options.selectHiddenRows);
 		if (to === null || this._focused == this.body.rows[to]) return this;
 		this.toggleRow(this.body.rows[to], event);
 	},
@@ -173,15 +186,32 @@ HtmlTable = Class.refactor(HtmlTable, {
 		else this.toggleRow(row);
 		if (event.shift) {
 			this.selectRange(this._rangeStart || this.body.rows[0], row, this._rangeStart ? !this.isSelected(row) : true);
+			this._focused = row;
 		}
 		this._rangeStart = row;
 	},
 
-	_getRowByOffset: function(offset){
+	_getRowByOffset: function(offset, includeHiddenRows){
 		if (!this._focused) return 0;
-		var index = Array.indexOf(this.body.rows, this._focused) + offset;
-		if (index < 0) index = null;
-		if (index >= this.body.rows.length) index = null;
+		var index = Array.indexOf(this.body.rows, this._focused);
+		if ((index == 0 && offset < 0) || (index == this.body.rows.length -1 && offset > 0)) return null;
+		if (includeHiddenRows) {
+			index += offset;
+		} else {
+			var limit = 0,
+			    count = 0;
+			if (offset > 0) {
+				while (count < offset && index < this.body.rows.length -1) {
+					index++;
+					if (this.body.rows[index].isDisplayed()) count++;
+				}
+			} else {
+				while (count > offset && index > 0) {
+					index--;
+					if (this.body.rows[index].isDisplayed()) count--;
+				}
+			}
+		}
 		return index;
 	},
 
@@ -189,20 +219,23 @@ HtmlTable = Class.refactor(HtmlTable, {
 		attach = $pick(attach, true);
 		var method = attach ? 'addEvents' : 'removeEvents';
 		this.element[method]({
-			mouseleave: this._bound.mouseleave
+			mouseleave: this._bound.mouseleave,
+			click: this._bound.activateKeyboard
 		});
 		this.body[method]({
 			'click:relay(tr)': this._bound.clickRow,
 			'contextmenu:relay(tr)': this._bound.clickRow
 		});
 		if (this.options.useKeyboard || this.keyboard){
-			if (!this.keyboard) {
+			if (!this.keyboard) this.keyboard = new Keyboard();
+			if (!this._selectKeysDefined) {
+				this._selectKeysDefined = true;
 				var timer, held;
 				var move = function(offset){
 					var mover = function(e){
 						$clear(timer);
 						e.preventDefault();
-						var to = this.body.rows[this._getRowByOffset(offset)];
+						var to = this.body.rows[this._getRowByOffset(offset, this.options.selectHiddenRows)];
 						if (e.shift && to && this.isSelected(to)) {
 							this.deselectRow(this._focused);
 							this._focused = to;
@@ -229,16 +262,13 @@ HtmlTable = Class.refactor(HtmlTable, {
 					held = false;
 				};
 				
-				this.keyboard = new Keyboard({
-					events: {
-						'keydown:shift+up': move(-1),
-						'keydown:shift+down': move(1),
-						'keyup:shift+up': clear,
-						'keyup:shift+down': clear,
-						'keyup:up': clear,
-						'keyup:down': clear
-					},
-					active: true
+				this.keyboard.addEvents({
+					'keydown:shift+up': move(-1),
+					'keydown:shift+down': move(1),
+					'keyup:shift+up': clear,
+					'keyup:shift+down': clear,
+					'keyup:up': clear,
+					'keyup:down': clear
 				});
 				
 				var shiftHint = '';

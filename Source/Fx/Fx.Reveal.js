@@ -36,7 +36,9 @@ Fx.Reveal = new Class({
 		styles: ['padding', 'border', 'margin'],
 		transitionOpacity: !Browser.Engine.trident4,
 		mode: 'vertical',
-		display: 'block',
+		display: function(){
+			return this.element.get('tag') != 'tr' ? 'block' : 'table-row';
+		},
 		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed' : false,
 		opacity: 1
 	},
@@ -53,7 +55,7 @@ Fx.Reveal = new Class({
 						styles: this.options.styles,
 						mode: this.options.mode
 					});
-					this.element.setStyle('display', this.options.display);
+					this.element.setStyle('display', $lambda(this.options.display).apply(this));
 					if (this.options.transitionOpacity) startStyles.opacity = this.options.opacity;
 					var zero = {};
 					$each(startStyles, function(style, name){
@@ -100,9 +102,7 @@ Fx.Reveal = new Class({
 	reveal: function(){
 		try {
 			if (!this.showing && !this.hiding){
-				if (this.element.getStyle('display') == 'none' ||
-					 this.element.getStyle('visiblity') == 'hidden' ||
-					 this.element.getStyle('opacity') == 0){
+				if (this.element.getStyle('display') == 'none'){
 					this.showing = true;
 					this.hiding = this.hidden =  false;
 					var startStyles;
@@ -128,7 +128,7 @@ Fx.Reveal = new Class({
 					//create the zero state for the beginning of the transition
 					var zero = {
 						height: 0,
-						display: this.options.display
+						display: $lambda(this.options.display).apply(this)
 					};
 					$each(startStyles, function(style, name){ zero[name] = 0; });
 					//set to zero
@@ -140,7 +140,7 @@ Fx.Reveal = new Class({
 					this.start(startStyles);
 					this.$chain.unshift(function(){
 						this.element.style.cssText = this.cssText;
-						this.element.setStyle('display', this.options.display);
+						this.element.setStyle('display', $lambda(this.options.display).apply(this));
 						if (!this.hidden) this.showing = false;
 						if (hideThese) hideThese.setStyle('visibility', 'visible');
 						this.callChain();
@@ -159,7 +159,7 @@ Fx.Reveal = new Class({
 			}
 		} catch(e){
 			this.element.setStyles({
-				display: this.options.display,
+				display: $lambda(this.options.display).apply(this),
 				visiblity: 'visible',
 				opacity: this.options.opacity
 			});
@@ -172,9 +172,7 @@ Fx.Reveal = new Class({
 	},
 
 	toggle: function(){
-		if (this.element.getStyle('display') == 'none' ||
-			 this.element.getStyle('visiblity') == 'hidden' ||
-			 this.element.getStyle('opacity') == 0){
+		if (this.element.getStyle('display') == 'none'){
 			this.reveal();
 		} else {
 			this.dissolve();
@@ -185,8 +183,9 @@ Fx.Reveal = new Class({
 	cancel: function(){
 		this.parent.apply(this, arguments);
 		this.element.style.cssText = this.cssText;
-		this.hidding = false;
+		this.hiding = false;
 		this.showing = false;
+		return this;
 	}
 
 });

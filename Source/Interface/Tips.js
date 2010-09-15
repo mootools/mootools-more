@@ -80,7 +80,7 @@ this.Tips = new Class({
 			new Element('div', {'class': 'tip-top'}),
 			this.container,
 			new Element('div', {'class': 'tip-bottom'})
-		).inject(document.body);
+		);
 	},
 
 	attach: function(elements){
@@ -178,6 +178,7 @@ this.Tips = new Class({
 
 	show: function(element){
 		if (!this.tip) document.id(this);
+		if (!this.tip.parentNode) this.tip.inject(document.body);
 		this.fireEvent('show', [this.tip, element]);
 	},
 
