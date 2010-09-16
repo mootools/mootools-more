@@ -1,0 +1,83 @@
+<style>
+.multisort {
+	float: left;
+	width: 20%;
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.multisort  li, .multisort div{
+	margin: 2px !important;
+	padding: 2px !important;
+	background: #ccc !important;
+	cursor: pointer;
+}
+</style>
+
+<p> A list can include any elements, not just li's. You should be able to reorder the list by dragging. The new order displays below the list. You should be able to move items from one list to another. Clicking new list should dynamically add include a new sortable list. Items from previous lists should be able to be dragged into these lists aswell.</p>
+
+<ul id="SortableExample1" class="multisort">
+		<li id="1">First</li>
+		<li id="2">Second</li>
+
+		<li id="3">Third</li>
+</ul>
+<div id="SortableExample2" class="multisort">
+		<div id="4">Four</div>
+		<div id="5">Five</div>
+		<div id="6">Six</div>
+</div>
+<ul id="SortableExample3" class="multisort">
+		<li id="7">Seven</li>
+
+		<li id="8">Eight</li>
+		<li id="9">Nine</li>
+</ul>
+<div id="order" style="clear:both"></div>
+
+<script src="/depender/build?require=More/Element.Delegation,More/Sortables"></script>
+<script>
+var mySort = new Sortables($$('.multisort'), {
+	clone: true,
+	opacity: 0.6,
+	delegation: true,
+	onComplete: function(){
+		$('order').set('html', 'order: ' + mySort.serialize())
+	}
+});
+
+var button = new Element('button', {
+	'events': {
+		'click': addList
+	},
+	'html': 'generate new list'
+}).inject(document.body.getElement('p'),'after');
+var ex = 3;
+function addList(e){
+	e.stop();
+	var i = ex * 3, j = i + 3, list;
+	ex++;
+	document.body.adopt(
+		list = new Element('ul', {
+			'id': 'SortableExample' + ex, 
+			'class': 'multisort'
+		}).adopt(
+			(function(){
+				var result = [];
+				while(i < j){
+					i++;
+					result.push(new Element('li', {
+						'id': i,
+						'html': i
+					}));
+				}
+				return result;
+			})()
+		)
+	);
+	mySort.addLists(list);
+}
+
+
+
+</script>
