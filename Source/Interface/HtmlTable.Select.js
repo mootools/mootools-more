@@ -24,6 +24,14 @@ provides: [HtmlTable.Select]
 
 ...
 */
+if(!HtmlTable.prototype.serialize) { 
+        HtmlTable.implement('serialize', function () {
+                return {};
+        });
+}
+if(!HtmlTable.prototype.restore) {
+        HtmlTable.implement('restore', $empty);
+}
 
 HtmlTable = Class.refactor(HtmlTable, {
 
@@ -36,8 +44,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		classSelectable: 'table-selectable',
 		shiftForMultiSelect: true,
 		allowMultiSelect: true,
-		selectable: false,
-		selectHiddenRows: false
+		selectable: false
 	},
 
 	initialize: function(){
@@ -46,10 +53,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this._selectedRows = new Elements();
 		this._bound = {
 			mouseleave: this._mouseleave.bind(this),
-			clickRow: this._clickRow.bind(this),
-			activateKeyboard: function() {
-				if (this.keyboard && this._selectEnabled) this.keyboard.activate();
-			}.bind(this)
+			clickRow: this._clickRow.bind(this)
 		};
 		if (this.options.selectable) this.enableSelect();
 	},
@@ -86,6 +90,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			this._selectedRows.push(row);
 			row.addClass(this.options.classRowSelected);
 			this.fireEvent('rowFocus', [row, this._selectedRows]);
+                        this.fireEvent('stateChanged');
 		}
 		this._focused = row;
 		document.clearSelection();
@@ -100,11 +105,31 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this._selectedRows;
 	},
 
+        serialize: function() {
+                var previousSerialization = this.previous.apply(this, arguments);
+                if (this.options.selectable) {
+                        previousSerialization.selectedRows = this._selectedRows.map(function(row) {
+                                return $A(this.body.rows).indexOf(row);
+                        }.bind(this));
+                }
+                return previousSerialization;
+        },
+
+        restore: function(tableState) {
+                if(this.options.selectable && tableState.selectedRows) {
+                        tableState.selectedRows.each(function(index) {
+                                this.selectRow(this.body.rows[index]);
+                        }.bind(this));
+                }
+                this.previous.apply(this, arguments);
+        },
+
 	deselectRow: function(row, _nocheck){
 		if (!this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 		this._selectedRows.erase(row);
 		row.removeClass(this.options.classRowSelected);
 		this.fireEvent('rowUnfocus', [row, this._selectedRows]);
+                this.fireEvent('stateChanged');
 		return this;
 	},
 
@@ -133,9 +158,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			endRow = tmp;
 		}
 
-		for(var i = startRow; i <= endRow; i++) {
-			if (this.options.selectHiddenRows || rows[i].isDisplayed()) this[method](rows[i], true);
-		}
+		for(var i = startRow; i <= endRow; i++) this[method](rows[i], true);
 
 		return this;
 	},
@@ -174,7 +197,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	_shiftFocus: function(offset, event){
 		if (!this._focused) return this.selectRow(this.body.rows[0], event);
-		var to = this._getRowByOffset(offset, this.options.selectHiddenRows);
+		var to = this._getRowByOffset(offset);
 		if (to === null || this._focused == this.body.rows[to]) return this;
 		this.toggleRow(this.body.rows[to], event);
 	},
@@ -191,25 +214,11 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this._rangeStart = row;
 	},
 
-	_getRowByOffset: function(offset, includeHiddenRows){
+	_getRowByOffset: function(offset){
 		if (!this._focused) return 0;
-		var index = Array.indexOf(this.body.rows, this._focused);
-		if ((index == 0 && offset < 0) || (index == this.body.rows.length -1 && offset > 0)) return null;
-		if (includeHiddenRows) {
-			index += offset;
-		} else {
-			var count = 0;
-			if (offset > 0) {
-				while (count < offset && index + count < this.body.rows.length) {
-					if (this.body.rows[index + count].isDisplayed()) count++;
-				}
-			} else {
-				while (count > offset && index + count >= 0) {
-					if (this.body.rows[index + count].isDisplayed()) count--;
-				}
-			}
-			index += count;
-		}
+		var index = Array.indexOf(this.body.rows, this._focused) + offset;
+		if (index < 0) index = null;
+		if (index >= this.body.rows.length) index = null;
 		return index;
 	},
 
@@ -217,17 +226,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 		attach = $pick(attach, true);
 		var method = attach ? 'addEvents' : 'removeEvents';
 		this.element[method]({
-			mouseleave: this._bound.mouseleave,
-			click: this._bound.activateKeyboard
+			mouseleave: this._bound.mouseleave
 		});
 		this.body[method]({
 			'click:relay(tr)': this._bound.clickRow,
 			'contextmenu:relay(tr)': this._bound.clickRow
 		});
 		if (this.options.useKeyboard || this.keyboard){
-			if (!this.keyboard) this.keyboard = new Keyboard();
-			if (!this._selectKeysDefined) {
-				this._selectKeysDefined = true;
+			if (!this.keyboard) {
 				var timer, held;
 				var move = function(offset){
 					var mover = function(e){
@@ -260,13 +266,16 @@ HtmlTable = Class.refactor(HtmlTable, {
 					held = false;
 				};
 				
-				this.keyboard.addEvents({
-					'keydown:shift+up': move(-1),
-					'keydown:shift+down': move(1),
-					'keyup:shift+up': clear,
-					'keyup:shift+down': clear,
-					'keyup:up': clear,
-					'keyup:down': clear
+				this.keyboard = new Keyboard({
+					events: {
+						'keydown:shift+up': move(-1),
+						'keydown:shift+down': move(1),
+						'keyup:shift+up': clear,
+						'keyup:shift+down': clear,
+						'keyup:up': clear,
+						'keyup:down': clear
+					},
+					active: true
 				});
 				
 				var shiftHint = '';

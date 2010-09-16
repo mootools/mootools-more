@@ -26,6 +26,15 @@ provides: [HtmlTable.Sort]
 ...
 */
 
+if(!HtmlTable.prototype.serialize) { 
+        HtmlTable.implement('serialize', function () {
+                return {};
+        });
+}
+if(!HtmlTable.prototype.restore) {
+        HtmlTable.implement('restore', $empty);
+}
+
 HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {/*
@@ -116,6 +125,22 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return false;
 	},
 
+        serialize: function() {
+                var previousSerialization = this.previous.apply(this, arguments);
+                if (this.options.sortable) {
+                        previousSerialization.sortIndex = this.sorted.index;
+                        previousSerialization.sortReverse = this.sorted.reverse;
+                }
+                return previousSerialization;
+        },
+
+        restore: function(tableState) {
+                if(this.options.sortable && tableState.sortIndex) {
+                        this.sort(tableState.sortIndex, tableState.sortReverse);
+                }
+                this.previous.apply(this, arguments);
+        },
+        
 	sort: function(index, reverse, pre) {
 		if (!this.head) return;
 		pre = !!(pre);
@@ -209,7 +234,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 		};
 		data = null;
 		if (rel) rel.grab(body);
-
+                
+                this.fireEvent('stateChanged');
 		return this.fireEvent('sort', [body, index]);
 	},
 

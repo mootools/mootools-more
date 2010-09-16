@@ -59,6 +59,35 @@ Disables the resizing features of the table.
 
 * (*object*) This instance of HtmlTable.
 
+
+HtmlTable Method: serialize {#HtmlTable:serialize}
+----------------------------------------
+
+Return an object storing the resize state of the table.
+
+### Syntax
+
+          myTable.serialize();
+
+### Returns
+
+* (*object*) Object containing resize state of the table. 
+
+
+HtmlTable Method: restore {#HtmlTable:restore}
+----------------------------------------
+
+Restores the resize state of the table from an object passed in.
+
+### Syntax
+
+          myTable.restore(tableState);
+
+### Arguments
+
+1. tableState - Object created by HtmlTable.serialize() which contains the resize state of the table.
+
+
 [HtmlTable]: /more/Interface/HtmlTable
 
 

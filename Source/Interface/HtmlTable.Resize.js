@@ -25,6 +25,15 @@ provides: [HtmlTable.Resize]
 ...
 */
 
+if(!HtmlTable.prototype.serialize) { 
+        HtmlTable.implement('serialize', function () {
+                return {};
+        });
+}
+if(!HtmlTable.prototype.restore) {
+        HtmlTable.implement('restore', $empty); 
+}
+
 HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {
@@ -72,6 +81,29 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this._resizeEnabled = false;
 		return this;
 	},
+
+        serialize: function() {
+                var previousSerialization = this.previous.apply(this, arguments);
+                if(this.options.resizable && this._resizeWidths) {
+                        previousSerialization.resizeWidths = this._resizeWidths;
+                        previousSerialization.initialTableSize = this._initialTableSize;
+                        previousSerialization.currentTableSize = this.element.getWidth();
+                }
+                return previousSerialization;
+        },
+
+        restore: function(tableState) {
+                if(this.options.resizable && tableState.resizeWidths) {
+                        this._resizeWidths = tableState.resizeWidths;
+                        this.headerCells.each( function(cell, index) {
+                                cell.setStyle('width', this._resizeWidths[index].curWidth);
+                        }.bind(this));
+                        this.element.setStyle('table-layout', 'fixed');
+                        this.element.setStyle('width', tableState.currentTableSize);
+                        this._initialTableSize = tableState.initialTableSize;
+                }
+                this.previous.apply(this, arguments);
+        },
 
         /** PRIVATE METHODS **/
 
@@ -146,17 +178,17 @@ HtmlTable = Class.refactor(HtmlTable, {
 
         _dragStart: function(header) {
                 if (!this._initialTableSize) {
-                        this._widths = [];
+                        if(!this._resizeWidths) this._resizeWidths = [];
                         this.headerCells.each(function(cell, index) {
                                 var cellWidth = cell.getComputedSize().width;
                                 cell.setStyle('width', cellWidth);
-                                this._widths.push({initial:cellWidth, curWidth:cellWidth});
+                                this._resizeWidths.push({initial:cellWidth, curWidth:cellWidth});
                         }.bind(this)); 
                         this.element.setStyle('table-layout', 'fixed');
                         this._initialTableSize = this.element.getWidth();
                         this.element.setStyle('width', this.element.getWidth());
                 }
-                this._dragStartHeaderSize = header.getComputedSize().width;
+                if(header) this._dragStartHeaderSize = header.getComputedSize().width;
                 this._dragStartTableSize = this.element.getWidth();
                 return;
         },
@@ -167,9 +199,10 @@ HtmlTable = Class.refactor(HtmlTable, {
                 this._currentMin = null;
                 this._resizingNeighbor = null;
                 this.headerCells.each(function(head, index) {
-                        this._widths[index].curWidth = head.getComputedSize().width;
+                        this._resizeWidths[index].curWidth = head.getComputedSize().width;
                 }.bind(this));
                 this.fireEvent('columnResized');
+                this.fireEvent('stateChanged');
                 return;
         },
 
@@ -264,7 +297,7 @@ HtmlTable = Class.refactor(HtmlTable, {
                 var resizableWidth = 0;
                 var headerDiff;
                 var newTableSize;
-                var headerWidths = this._widths[this._getHeaderIndex(header)];
+                var headerWidths = this._resizeWidths[this._getHeaderIndex(header)];
                 if(newHeaderSize > headerWidths.initial) {
                         headerDiff = headerWidths.initial - headerWidths.curWidth;
                         newTableSize = this._dragStartTableSize + dragDiff;
@@ -278,7 +311,7 @@ HtmlTable = Class.refactor(HtmlTable, {
                         }
                         //Reset all resized headers to their last measured width.  
                         this.headerCells.each(function(head, index) {
-                                var width = this._widths[index];
+                                var width = this._resizeWidths[index];
                                 if(head != header && width.resized) head.setStyle('width', width.curWidth);
                         }.bind(this));
                         this._resizeHeader(header, newHeaderSize);
@@ -293,14 +326,14 @@ HtmlTable = Class.refactor(HtmlTable, {
                         newTableSize = newTableSize >= this._initialTableSize ? newTableSize : this._initialTableSize; 
                         //Calculate the total width of the resizable columns.
                         this.headerCells.each(function(head, index) {
-                                var width = this._widths[index];
+                                var width = this._resizeWidths[index];
                                 if(!width.resized && head != header) {
                                         resizableWidth += width.curWidth;
                                 } 
                         }.bind(this));
                         //Resize every column.  If the column hasn't been resized, resize it by its proportion of the resizableWidth. Otherwise set it to its last measured width.
                         this.headerCells.each(function(head, index) {
-                                var width = this._widths[index];
+                                var width = this._resizeWidths[index];
                                 if(head != header) {
                                         if(!width.resized) {
                                                 var newWidth = cellShrinkage * (width.curWidth/resizableWidth) + width.curWidth;
