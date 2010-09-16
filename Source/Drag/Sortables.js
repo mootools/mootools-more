@@ -89,7 +89,7 @@ var Sortables = new Class({
         }.bind(this));
 			}
       else {
-        ems(list.getChildren());
+        this.addItems(list.getChildren());
       }
     }, this);
     return this;
