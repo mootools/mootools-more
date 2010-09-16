@@ -33,6 +33,7 @@ var Sortables = new Class({
 		snap: 4,
 		opacity: 1,
 		clone: false,
+		relay: '*',
 		revert: false,
 		handle: false,
 		constrain: false,
@@ -67,18 +68,21 @@ var Sortables = new Class({
 		return this;
 	},
 
-	addLists: function() {
-		Array.flatten(arguments).each(function(list) {
-			this.lists.push(list);
-			this.elements.extend(list.getChildren());
-			var start = !this.options.handle ? this.start.bindWithEvent(this) : function(event, element) {
-				this.start(event, element.getParent('li'));
-			}.bind(this);
-			var relay = 'li';
-			if (this.options.handle) relay += ' ' + this.options.handle;
-			list.addEvent('mousedown:relay(' + relay + ')', start);
-		}, this);
-		return this;
+	addLists: function(){
+                Array.flatten(arguments).each(function(list) {
+                        this.lists.push(list);
+                        this.elements.extend(list.getChildren());
+                        var relay = this.options.relay + (this.options.handle ? ' ' + this.options.handle : '');
+                        list.addEvent('mousedown:relay(' + relay + ')', function(event, element) {
+                                var match;
+                                while(!match){
+                                        match = this.lists.contains(element.getParent());
+                                        if(!match) element = element.getParent(this.options.relay);
+                                }
+                                this.start(event, element);
+                        }.bind(this));
+                }, this);
+                return this;
 	},
 
 	removeItems: function(){

@@ -28,13 +28,14 @@
 	</ul>
 </div>
 <div id="order"></div>
-<script src="/depender/build?require=More/Sortables"></script>
+<script src="/depender/build?require=More/Element.Delegation,More/Sortables"></script>
 <script>
+window.onload = function(){
 var mySort = new Sortables($('SortableExample'), {
 	clone: true,
 	opacity: 0.6,
 	onComplete: function(){
 		$('order').set('html', 'order: ' + mySort.serialize())
 	}
-});
+});};
 </script>
