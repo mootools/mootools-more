@@ -77,7 +77,7 @@ var Sortables = new Class({
     Array.flatten(arguments).each(function(list) {
       this.lists.push(list);
       if(this.options.delegation){
-			  this.elements.extend(list.getChildren());
+			  this.elements.extend(list.getChildren(this.options.relay));
         var relay = this.options.relay + (this.options.handle ? ' ' + this.options.handle : '');
         list.addEvent('mousedown:relay(' + relay + ')', function(event, element) {
         var match;
@@ -116,7 +116,7 @@ var Sortables = new Class({
 
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
-		if (typeof this.options.clone == 'function') return this.options.clone.call(this, event, element, this.list);
+		if ($type(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
 		var clone = element.clone(true).setStyles({
 			margin: '0px',
 			position: 'absolute',
