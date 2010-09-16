@@ -146,17 +146,20 @@ HtmlTable = Class.refactor(HtmlTable, {
 
         _dragStart: function(header) {
                 if (!this._initialTableSize) {
-                        this._widths = [];
+                        if(!this._widths) { 
+                                this._widths = [];
+                                this.headerCells.each(function(cell, index) {
+                                        var cellWidth = cell.getComputedSize().width;
+                                        this._widths.push({initial:cellWidth, curWidth:cellWidth});
+                                }.bind(this));
+                        }
                         this.headerCells.each(function(cell, index) {
-                                var cellWidth = cell.getComputedSize().width;
-                                cell.setStyle('width', cellWidth);
-                                this._widths.push({initial:cellWidth, curWidth:cellWidth});
-                        }.bind(this)); 
-                        this.element.setStyle('width', this.element.getWidth());
+                                cell.setStyle('width', this._widths[index].curWidth);
+                        }.bind(this));
                         this.element.setStyle('table-layout', 'fixed');
                         this._initialTableSize = this.element.getWidth();
                 }
-                this._dragStartHeaderSize = header.getComputedSize().width;
+                if(header) this._dragStartHeaderSize = header.getComputedSize().width;
                 this._dragStartTableSize = this.element.getWidth();
                 return;
         },
