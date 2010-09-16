@@ -200,7 +200,7 @@ Date.implement({
 					case 'Y': return d.get('year');
 					case 'T': return d.get('GMTOffset');
 					case 'Z': return d.get('Timezone');
-					case 'z': return pad(d.get('ms'));
+					case 'z': return pad(d.get('ms'), 3);
 				}
 				return $1;
 			}
