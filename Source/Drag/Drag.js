@@ -97,7 +97,7 @@ var Drag = new Class({
 		if (options.stopPropagation) event.stopPropagation();
 		this.mouse.start = event.page;
 
-		this.triggerEvent('beforeStart', this.element);
+		this.fireEvent('beforeStart', this.element);
 
 		var limit = options.limit;
 		this.limit = {x: [], y: []};
@@ -152,7 +152,7 @@ var Drag = new Class({
 				mousemove: this.bound.drag,
 				mouseup: this.bound.stop
 			});
-			this.triggerEvent('start', [this.element, event]).triggerEvent('snap', this.element);
+			this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
 		}
 	},
 
@@ -185,7 +185,7 @@ var Drag = new Class({
 			}
 		}
 
-		this.triggerEvent('drag', [this.element, event]);
+		this.fireEvent('drag', [this.element, event]);
 	},
 
 	cancel: function(event){
@@ -195,7 +195,7 @@ var Drag = new Class({
 		});
 		if (event){
 			this.document.removeEvent(this.selection, this.bound.eventStop);
-			this.triggerEvent('cancel', this.element);
+			this.fireEvent('cancel', this.element);
 		}
 	},
 
@@ -206,7 +206,7 @@ var Drag = new Class({
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
-		if (event) this.triggerEvent('complete', [this.element, event]);
+		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
 });
@@ -223,7 +223,7 @@ Element.implement({
 
 		this.store('resizer', drag);
 		return drag.addEvent('drag', function(){
-			this.triggerEvent('resize', drag);
+			this.fireEvent('resize', drag);
 		}.bind(this));
 	}
 

@@ -89,7 +89,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (!this.isSelected(row)) {
 			this._selectedRows.push(row);
 			row.addClass(this.options.classRowSelected);
-			this.triggerEvent('rowFocus', [row, this._selectedRows]);
+			this.fireEvent('rowFocus', [row, this._selectedRows]);
 		}
 
 		this._focused = row;
@@ -103,7 +103,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		this._selectedRows = new Elements(Array.from(this._selectedRows).erase(row));
 		row.removeClass(this.options.classRowSelected);
-		this.triggerEvent('rowUnfocus', [row, this._selectedRows]);
+		this.fireEvent('rowUnfocus', [row, this._selectedRows]);
 
 		return this;
 	},

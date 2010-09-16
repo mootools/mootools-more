@@ -97,7 +97,7 @@ this.Tips = new Class({
 
 			element.set('title', '').store('tip:native', title).retrieve('tip:title', title);
 			element.retrieve('tip:text', text);
-			this.triggerEvent('attach', [element]);
+			this.fireEvent('attach', [element]);
 
 			var events = ['enter', 'leave'];
 			if (!this.options.fixed) events.push('move');
@@ -121,7 +121,7 @@ this.Tips = new Class({
 				element.removeEvent('mouse' + value, element.retrieve('tip:' + value)).eliminate('tip:' + value);
 			});
 
-			this.triggerEvent('detach', [element]);
+			this.fireEvent('detach', [element]);
 
 			if (this.options.title == 'title'){ // This is necessary to check if we can revert the title
 				var original = element.retrieve('tip:native');
@@ -156,7 +156,7 @@ this.Tips = new Class({
 	fireForParent: function(event, element){
 		element = element.getParent();
 		if (!element || element == document.body) return;
-		if (element.retrieve('tip:enter')) element.triggerEvent('mouseenter', event);
+		if (element.retrieve('tip:enter')) element.fireEvent('mouseenter', event);
 		else this.fireForParent(event, element);
 	},
 
@@ -182,7 +182,7 @@ this.Tips = new Class({
 			}
 		}
 
-		this.triggerEvent('bound', bounds);
+		this.fireEvent('bound', bounds);
 		this.tip.setStyles(obj);
 	},
 
@@ -194,12 +194,12 @@ this.Tips = new Class({
 	show: function(element){
 		if (!this.tip) document.id(this);
 		if (!this.tip.parentNode) this.tip.inject(document.body);
-		this.triggerEvent('show', [this.tip, element]);
+		this.fireEvent('show', [this.tip, element]);
 	},
 
 	hide: function(element){
 		if (!this.tip) document.id(this);
-		this.triggerEvent('hide', [this.tip, element]);
+		this.fireEvent('hide', [this.tip, element]);
 	}
 
 });

@@ -97,7 +97,7 @@ var Scroller = new Class({
 			}
 			change[z] = change[z].round();
 		}
-		if (change.y || change.x) this.triggerEvent('change', [scroll.x + change.x, scroll.y + change.y]);
+		if (change.y || change.x) this.fireEvent('change', [scroll.x + change.x, scroll.y + change.y]);
 	}
 
 });

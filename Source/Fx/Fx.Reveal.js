@@ -77,15 +77,15 @@ Fx.Reveal = new Class({
 						this.element.setStyle('display', 'none');
 						if (hideThese) hideThese.setStyle('visibility', 'visible');
 					}
-					this.triggerEvent('hide', this.element);
+					this.fireEvent('hide', this.element);
 					this.callChain();
 				}.bind(this));
 
 				this.start(zero);
 			} else {
 				this.callChain.delay(10, this);
-				this.triggerEvent('complete', this.element);
-				this.triggerEvent('hide', this.element);
+				this.fireEvent('complete', this.element);
+				this.fireEvent('hide', this.element);
 			}
 		} else if (this.options.link == 'chain'){
 			this.chain(this.dissolve.bind(this));
@@ -138,14 +138,14 @@ Fx.Reveal = new Class({
 					if (!this.hidden) this.showing = false;
 					if (hideThese) hideThese.setStyle('visibility', 'visible');
 					this.callChain();
-					this.triggerEvent('show', this.element);
+					this.fireEvent('show', this.element);
 				}.bind(this));
 
 				this.start(startStyles);
 			} else {
 				this.callChain();
-				this.triggerEvent('complete', this.element);
-				this.triggerEvent('show', this.element);
+				this.fireEvent('complete', this.element);
+				this.fireEvent('show', this.element);
 			}
 		} else if (this.options.link == 'chain'){
 			this.chain(this.reveal.bind(this));

@@ -80,11 +80,11 @@ Request.JSONP = new Class({
 			'=Request.JSONP.request_map.request_'+ index +
 			(data ? '&' + data : '');
 
-		if (src.length > 2083) this.triggerEvent('error', src);
+		if (src.length > 2083) this.fireEvent('error', src);
 
 		var script = this.getScript(src).inject(options.injectScript);
 
-		this.triggerEvent('request', [script.get('src'), script]);
+		this.fireEvent('request', [script.get('src'), script]);
 
 		Request.JSONP.request_map['request_' + index] = function(){
 			this.success(arguments, index);
@@ -92,7 +92,7 @@ Request.JSONP = new Class({
 
 		if (options.timeout){
 			(function(){
-				this.cancel().triggerEvent('timeout', [script.get('src'), script]);
+				this.cancel().fireEvent('timeout', [script.get('src'), script]);
 			}).delay(options.timeout, this);
 		}
 
@@ -108,12 +108,12 @@ Request.JSONP = new Class({
 
 	success: function(args, index){
 		this.clear()
-			.triggerEvent('complete', args).triggerEvent('success', args)
+			.fireEvent('complete', args).fireEvent('success', args)
 			.callChain();
 	},
 
 	cancel: function(){
-		return this.clear().triggerEvent('cancel');
+		return this.clear().fireEvent('cancel');
 	},
 
 	clear: function(){

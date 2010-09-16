@@ -66,7 +66,7 @@ provides: [Keyboard]
 				this.activeKB.handle(event, type);
 				if (event.preventKeyboardPropagation) return;
 			}
-			this.triggerEvent(type, event);
+			this.fireEvent(type, event);
 
 			if (!bubbles && this.activeKB) this.activeKB.handle(event, type);
 		},
@@ -89,11 +89,11 @@ provides: [Keyboard]
 				//if we're stealing focus, store the last keyboard to have it so the relinquish command works
 				if (this.activeKB && instance != this.activeKB){
 					this.previous = this.activeKB;
-					this.previous.triggerEvent('deactivate');
+					this.previous.fireEvent('deactivate');
 				}
 				//if we're enabling a child, assign it so that events are now passed to it
-				this.activeKB = instance.triggerEvent('activate');
-				Keyboard.manager.triggerEvent('changed');
+				this.activeKB = instance.fireEvent('activate');
+				Keyboard.manager.fireEvent('changed');
 			} else if (this.manager){
 				//else we're enabling ourselves, we must ask our parent to do it for us
 				this.manager.activate(this);
@@ -109,8 +109,8 @@ provides: [Keyboard]
 			if (instance){
 				if (instance === this.activeKB){
 					this.activeKB = null;
-					instance.triggerEvent('deactivate');
-					Keyboard.manager.triggerEvent('changed');
+					instance.fireEvent('deactivate');
+					Keyboard.manager.fireEvent('changed');
 				}
 			} else if (this.manager){
 				this.manager.deactivate(this);

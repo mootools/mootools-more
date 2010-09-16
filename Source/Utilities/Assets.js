@@ -103,7 +103,7 @@ var Asset = {
 				}
 				image = image.onload = image.onabort = image.onerror = null;
 				event.delay(1, element, element);
-				element.triggerEvent(name, element, 1);
+				element.fireEvent(name, element, 1);
 			};
 		});
 		image.src = element.src = source;

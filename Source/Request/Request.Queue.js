@@ -178,34 +178,34 @@ Request.Queue = new Class({
 	},
 
 	onRequest: function(){
-		this.triggerEvent('request', arguments);
+		this.fireEvent('request', arguments);
 	},
 
 	onComplete: function(){
-		this.triggerEvent('complete', arguments);
-		if (!this.queue.length) this.triggerEvent('end');
+		this.fireEvent('complete', arguments);
+		if (!this.queue.length) this.fireEvent('end');
 	},
 
 	onCancel: function(){
 		if (this.options.autoAdvance && !this.error) this.runNext();
-		this.triggerEvent('cancel', arguments);
+		this.fireEvent('cancel', arguments);
 	},
 
 	onSuccess: function(){
 		if (this.options.autoAdvance && !this.error) this.runNext();
-		this.triggerEvent('success', arguments);
+		this.fireEvent('success', arguments);
 	},
 
 	onFailure: function(){
 		this.error = true;
 		if (!this.options.stopOnFailure && this.options.autoAdvance) this.runNext();
-		this.triggerEvent('failure', arguments);
+		this.fireEvent('failure', arguments);
 	},
 
 	onException: function(){
 		this.error = true;
 		if (!this.options.stopOnFailure && this.options.autoAdvance) this.runNext();
-		this.triggerEvent('exception', arguments);
+		this.fireEvent('exception', arguments);
 	}
 
 });

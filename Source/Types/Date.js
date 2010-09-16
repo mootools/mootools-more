@@ -471,6 +471,6 @@ Date.defineParsers(
 
 Locale.addEvent('change', function(language){
 	if (Locale.get('Date')) recompile(language);
-}).triggerEvent('change', Locale.getCurrent());
+}).fireEvent('change', Locale.getCurrent());
 
 })();
