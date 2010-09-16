@@ -208,7 +208,7 @@ Element.implement({
 	},
 
 	nix: function(options){
-		var params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
+		var params = Array.link(arguments, {destroy: Type.isBoolean, options: Type.isObject});
 		this.get('reveal').setOptions(options).dissolve().chain(function(){
 			this[params.destroy ? 'destroy' : 'dispose']();
 		}.bind(this));
@@ -216,7 +216,7 @@ Element.implement({
 	},
 
 	wink: function(){
-		var params = Array.link(arguments, {duration: Number.type, options: Object.type});
+		var params = Array.link(arguments, {duration: Type.isNumber, options: Type.isObject});
 		var reveal = this.get('reveal').setOptions(params.options);
 		reveal.reveal().chain(function(){
 			(function(){
