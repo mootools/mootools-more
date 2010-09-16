@@ -51,6 +51,7 @@
 var mySort = new Sortables($$('.multisort'), {
 	clone: true,
 	opacity: 0.6,
+//	delegation: false,
 	handle: '.handle',
 	onComplete: function(){
 		$('order').set('html', 'order: ' + mySort.serialize())

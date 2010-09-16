@@ -34,6 +34,7 @@ window.onload = function(){
 var mySort = new Sortables($('SortableExample'), {
 	clone: true,
 	opacity: 0.6,
+//	delegation: false,
 	onComplete: function(){
 		$('order').set('html', 'order: ' + mySort.serialize())
 	}

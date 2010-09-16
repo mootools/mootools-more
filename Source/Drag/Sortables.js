@@ -33,6 +33,7 @@ var Sortables = new Class({
 		snap: 4,
 		opacity: 1,
 		clone: false,
+		delegation: true,
 		relay: '*',
 		revert: false,
 		handle: false,
@@ -64,6 +65,12 @@ var Sortables = new Class({
 	addItems: function(){
 		Array.flatten(arguments).each(function(element){
 			this.elements.push(element);
+			if(!this.options.delegation){
+				var start = element.retrieve('sortables:start', function(event){
+					this.start.call(this, event, element);
+				}.bind(this));
+				(this.options.handle ? element.getElement(this.options.handle) || element : element).addEvent('mousedown', start);
+			}
 		}, this);
 		return this;
 	},
@@ -71,16 +78,21 @@ var Sortables = new Class({
 	addLists: function(){
                 Array.flatten(arguments).each(function(list) {
                         this.lists.push(list);
-                        this.elements.extend(list.getChildren());
-                        var relay = this.options.relay + (this.options.handle ? ' ' + this.options.handle : '');
-                        list.addEvent('mousedown:relay(' + relay + ')', function(event, element) {
-                                var match;
-                                while(!match){
-                                        match = this.lists.contains(element.getParent());
-                                        if(!match) element = element.getParent(this.options.relay);
-                                }
-                                this.start(event, element);
-                        }.bind(this));
+                        if(this.options.delegation){
+			        this.elements.extend(list.getChildren());
+                                var relay = this.options.relay + (this.options.handle ? ' ' + this.options.handle : '');
+                                list.addEvent('mousedown:relay(' + relay + ')', function(event, element) {
+                                	var match;
+                                	while(!match){
+                                        	match = this.lists.contains(element.getParent());
+                                        	if(!match) element = element.getParent(this.options.relay);
+                                	}
+                        		this.start(event, element);
+                        	}.bind(this));
+			}
+                        else {
+                                this.addItems(list.getChildren());
+                        }
                 }, this);
                 return this;
 	},
@@ -88,6 +100,10 @@ var Sortables = new Class({
 	removeItems: function(){
 		return $$(Array.flatten(arguments).map(function(element){
 			this.elements.erase(element);
+			if(!this.options.delegation){
+                                 var start = element.retrieve('sortables:start');
+                                 (this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
+                        }
 			return element;
 		}, this));
 	},
@@ -95,13 +111,14 @@ var Sortables = new Class({
 	removeLists: function(){
 		return $$(Array.flatten(arguments).map(function(list){
 			this.lists.erase(list);
+                        if(!this.options.delegation) this.removeItems(list.getChildren());
 			return list;
 		}, this));
 	},
 
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
-		if ($type(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
+		if (typeof this.options.clone == 'function') return this.options.clone.call(this, event, element, this.list);
 		var clone = element.clone(true).setStyles({
 			margin: '0px',
 			position: 'absolute',
