@@ -1,11 +1,9 @@
 /*
 ---
 
-script: Number.Extras.js
+name: Number.Format
 
-name: Number.Extras
-
-description: Extends the Number type object to include useful methods to work with numbers.
+description: Extends the Number Type object to include a number formatting method.
 
 license: MIT-style license
 
