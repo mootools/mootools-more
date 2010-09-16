@@ -191,6 +191,7 @@ Date.implement({
 					case 'M': return pad(d.get('min'), 2);
 					case 'o': return d.get('ordinal');
 					case 'p': return Date.getMsg(d.get('ampm'));
+					case 's': return Math.round(d / 1000);
 					case 'S': return pad(d.get('seconds'), 2);
 					case 'U': return pad(d.get('week'), 2);
 					case 'w': return d.get('day');
