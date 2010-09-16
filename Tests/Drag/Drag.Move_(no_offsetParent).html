@@ -1,0 +1,33 @@
+<style>
+	#box {
+		width: 30px;
+		height: 30px;
+		background-color: #900;
+		position: absolute;
+		top: 40px;
+	}
+</style>
+<p>you should be able to drag the red box around. The links should let you enable and disable dragging.</p>
+<div id="box"></div>
+<script src="/depender/build?require=More/Drag.Move"></script>
+<div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
+<script>
+//IE returns null when the offset parent is the document body
+//but other browsers return the body; force our test to return null
+Element.implement({
+	getOffsetParent: $lambda(null)
+});
+
+$('box').inject(document.body).setStyles({
+	zIndex: 100,
+	left: 200,
+	top: 200
+});
+var dragger = $('box').makeDraggable();
+$('enable').addEvent('click', function(){
+	dragger.attach();
+});
+$('disable').addEvent('click', function(){
+	dragger.detach();
+});
+</script>

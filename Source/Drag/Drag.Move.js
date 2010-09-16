@@ -49,10 +49,12 @@ Drag.Move = new Class({
 		
 		if (this.container && $type(this.container) != 'element')
 			this.container = document.id(this.container.getDocument().body);
-		var parent = element.getOffsetParent();
-		var parentStyles = parent.getStyles('border-top-width', 'border-left-width');
+
+		var parentStyles,
+		    parent = element.getOffsetParent();
+		if (parent) parentStyles = parent.getStyles('border-top-width', 'border-left-width');
 		var styles = element.getStyles('left', 'top', 'position');
-		if (styles.left == 'auto' || styles.top == 'auto') {
+		if (parent && styles.left == 'auto' || styles.top == 'auto') {
 			var parentPosition = element.getPosition(parent);
 			parentPosition.x = parentPosition.x - (parentStyles['border-left-width'] ? parentStyles['border-left-width'].toInt() : 0);
 			parentPosition.y = parentPosition.y - (parentStyles['border-top-width'] ? parentStyles['border-top-width'].toInt() : 0);
