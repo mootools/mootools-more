@@ -11,9 +11,11 @@ license: MIT-style license
 
 authors:
   - Tom Occhino
+  - Jacob Thornton
 
 requires:
   - /Drag.Move
+  - /Element.Delegation
 
 provides: [Sortables]
 
@@ -31,7 +33,7 @@ var Sortables = new Class({
 		snap: 4,
 		opacity: 1,
 		clone: false,
-		delegation: true,
+		delegation: false,
 		relay: '*',
 		revert: false,
 		handle: false,
