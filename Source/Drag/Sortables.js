@@ -74,34 +74,34 @@ var Sortables = new Class({
 	},
 
 	addLists: function(){
-                Array.flatten(arguments).each(function(list) {
-                        this.lists.push(list);
-                        if(this.options.delegation){
-			        this.elements.extend(list.getChildren());
-                                var relay = this.options.relay + (this.options.handle ? ' ' + this.options.handle : '');
-                                list.addEvent('mousedown:relay(' + relay + ')', function(event, element) {
-                                	var match;
-                                	while(!match){
-                                        	match = this.lists.contains(element.getParent());
-                                        	if(!match) element = element.getParent(this.options.relay);
-                                	}
-                        		this.start(event, element);
-                        	}.bind(this));
+    Array.flatten(arguments).each(function(list) {
+      this.lists.push(list);
+      if(this.options.delegation){
+			  this.elements.extend(list.getChildren());
+        var relay = this.options.relay + (this.options.handle ? ' ' + this.options.handle : '');
+        list.addEvent('mousedown:relay(' + relay + ')', function(event, element) {
+        var match;
+        while(!match){
+          match = this.lists.contains(element.getParent());
+         	if(!match) element = element.getParent(this.options.relay);
+        }
+        this.start(event, element);
+        }.bind(this));
 			}
-                        else {
-                                this.addItems(list.getChildren());
-                        }
-                }, this);
-                return this;
+      else {
+        ems(list.getChildren());
+      }
+    }, this);
+    return this;
 	},
 
 	removeItems: function(){
 		return $$(Array.flatten(arguments).map(function(element){
 			this.elements.erase(element);
 			if(!this.options.delegation){
-                                 var start = element.retrieve('sortables:start');
-                                 (this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
-                        }
+        var start = element.retrieve('sortables:start');
+        (this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
+      }
 			return element;
 		}, this));
 	},
@@ -109,7 +109,7 @@ var Sortables = new Class({
 	removeLists: function(){
 		return $$(Array.flatten(arguments).map(function(list){
 			this.lists.erase(list);
-                        if(!this.options.delegation) this.removeItems(list.getChildren());
+        if(!this.options.delegation) this.removeItems(list.getChildren());
 			return list;
 		}, this));
 	},
