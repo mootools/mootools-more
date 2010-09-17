@@ -17,8 +17,8 @@ authors:
   - Daniel Steigerwald
 
 requires:
-  - Core:1.2.4/Element.Event
-  - Core:1.2.4/Selectors
+  - Core/Element.Event
+  - Core/Selectors
   - /MooTools.More
 
 provides: [Element.Delegation]

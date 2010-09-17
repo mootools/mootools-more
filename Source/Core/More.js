@@ -15,7 +15,7 @@ authors:
   - Scott Kyle
 
 requires:
-  - Core:1.2.4/MooTools
+  - Core/MooTools
 
 provides: [MooTools.More]
 

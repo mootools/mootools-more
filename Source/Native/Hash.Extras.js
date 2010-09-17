@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Hash.base
+  - Core/Hash.base
   - /MooTools.More
 
 provides: [Hash.Extras]

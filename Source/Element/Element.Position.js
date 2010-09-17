@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Element.Dimensions
+  - Core/Element.Dimensions
   - /Element.Measure
 
 provides: [Element.Position]

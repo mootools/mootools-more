@@ -14,7 +14,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Selectors
+  - Core/Selectors
   - /String.QueryString
 
 provides: [URI]
