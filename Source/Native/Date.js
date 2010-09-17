@@ -16,9 +16,9 @@ authors:
   - Scott Kyle - scott [at] appden.com; http://appden.com
 
 requires:
-  - Core:1.2.4/Array
-  - Core:1.2.4/String
-  - Core:1.2.4/Number
+  - Core/Array
+  - Core/String
+  - Core/Number
   - /Lang
   - /Date.English.US
   - /MooTools.More

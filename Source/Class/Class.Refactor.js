@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Class
+  - Core/Class
   - /MooTools.More
 
 # Some modules declare themselves dependent on Class.Refactor

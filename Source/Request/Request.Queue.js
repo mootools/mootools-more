@@ -13,8 +13,8 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core:1.2.4/Element
-  - Core:1.2.4/Request
+  - Core/Element
+  - Core/Request
   - /Log
 
 provides: [Request.Queue]
