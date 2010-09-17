@@ -47,8 +47,9 @@ Date.Methods = {
 	Date.Methods[method.toLowerCase()] = method;
 });
 
-var pad = function(what, length){
-	return new Array(length - String(what).length + 1).join('0') + what;
+var pad = function(what, length, string){
+	if (!string) string = '0';
+	return new Array(length - String(what).length + 1).join(string) + what;
 };
 
 Date.implement({
@@ -172,13 +173,15 @@ Date.implement({
 					case 'A': return Date.getMsg('days')[d.get('day')];
 					case 'b': return Date.getMsg('months')[d.get('month')].substr(0, 3);
 					case 'B': return Date.getMsg('months')[d.get('month')];
-					case 'c': return d.toString();
+					case 'c': return d.format('%a %b %d %H:%m:%S %Y');
 					case 'd': return pad(d.get('date'), 2);
-					case 'D': return d.get('date');
-					case 'e': return d.get('date');
+					case 'e': return pad(d.get('date'), 2, ' ');
 					case 'H': return pad(d.get('hr'), 2);
-					case 'I': return ((d.get('hr') % 12) || 12);
+					case 'I': return pad((d.get('hr') % 12) || 12, 2);
 					case 'j': return pad(d.get('dayofyear'), 3);
+					case 'k': return pad(d.get('hr'), 2, ' ');
+					case 'l': return pad((d.get('hr') % 12) || 12, 2, ' ');
+					case 'L': return pad(d.get('ms'), 3);
 					case 'm': return pad((d.get('mo') + 1), 2);
 					case 'M': return pad(d.get('min'), 2);
 					case 'o': return d.get('ordinal');
@@ -191,9 +194,9 @@ Date.implement({
 					case 'X': return d.format(Date.getMsg('shortTime'));
 					case 'y': return d.get('year').toString().substr(2);
 					case 'Y': return d.get('year');
-					case 'T': return d.get('GMTOffset');
+					/*<1.2compat>*/case 'T': return d.get('GMTOffset');/*</1.2compat>*/
+					case 'z': return d.get('GMTOffset');
 					case 'Z': return d.get('Timezone');
-					case 'z': return pad(d.get('ms'), 3);
 				}
 				return $1;
 			}

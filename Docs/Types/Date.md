@@ -295,16 +295,20 @@ Outputs the date into a specific format.
 * A - full day ("Monday")
 * b - short month ("Jan", "Feb")
 * B - full month ("January")
-* c - the full date to string ("Mon Dec 10 2007 14:35:42 GMT-0800 (Pacific Standard Time)"; same as .toString() method.
+* c - the full date to string ("Mon Dec 10 14:35:42 2007"; %a %b %d %H:%m:%S %Y)
 * d - the date to two digits (01, 05, etc)
-* D - the date as one digit (1, 5, 12, etc)
-* H - the hour to two digits in military time (24 hr mode) (01, 11, 14, etc)
-* I - the hour in 12 hour time (1, 11, 2, etc)
-* j - the day of the year to three digits (001 is Jan 1st)
+* e - the date as one digit (1, 5, 12, etc)
+* H - the hour to two digits in military time (24 hr mode) (00, 11, 14, etc)
+* I - the hour as a decimal number using a 12-hour clock (range 01 to 12).
+* j - the day of the year to three digits (001 to 366, is Jan 1st)
+* k - the hour (24-hour clock) as a digit (range 0 to 23). Single digits are preceded by a blank space.
+* k - the hour (12-hour clock) as a digit (range 1 to 12). Single digits are preceded by a blank space.
+* L - the time in milliseconds (three digits; "081")
 * m - the numerical month to two digits (01 is Jan, 12 is Dec)
 * M - the minutes to two digits (01, 40, 59)
 * o - the ordinal of the day of the month in the current language ("st" for the 1st, "nd" for the 2nd, etc.)
-* p - The current language equivalent of either AM or PM
+* p - the current language equivalent of either AM or PM
+* s - the Unix Epoch Time timestamp
 * S - the seconds to two digits (01, 40, 59)
 * U - the week to two digits (01 is the week of Jan 1, 52 is the week of Dec 31)
 * w - the numerical day of the week, one digit (0 is Sunday, 1 is Monday)
@@ -312,7 +316,7 @@ Outputs the date into a specific format.
 * X - the time in the current language preferred format. en-US: %I:%M%p (02:45PM)
 * y - the short year (two digits; "07")
 * Y - the full year (four digits; "2007")
-* T - the GMT offset ("-0800")
+* z - the GMT offset ("-0800")
 * Z - the time zone ("GMT")
 * % - returns % (example: %y%% = 07%)
 

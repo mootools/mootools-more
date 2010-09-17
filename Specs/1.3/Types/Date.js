@@ -250,7 +250,7 @@ describe('Date.format', {
 
 	'should format a Date instance as a string': function(){
 		var d = new Date('Thu Nov 20 1997 01:02:03');
-		var d2 = new Date('Thu Nov 2 1997 01:02:03');
+		var d2 = new Date('Thu Nov 2 1997 20:02:03');
 		value_of(d.format('%a')).should_be(Date.getMsg('days')[4].substr(0,3));
 		value_of(d.format('%a')).should_be('Thu');
 
@@ -263,18 +263,20 @@ describe('Date.format', {
 		value_of(d.format('%B')).should_be(Date.getMsg('months')[10]);
 		value_of(d.format('%B')).should_be('November');
 
-		//value_of(d.format('%c')).should_be('Thu Nov 20 1997 01:02:03 GMT+0000 (GMT Standard Time)');
-		/* This is never going to work consistantly...
-		 * "Tue Apr 08 2008 17:55:39 GMT+0100 (GMT Daylight Time)"
-		 * "Tue Apr 08 2008 17:55:39 GMT+0100 (GMT Standard Time)"
-		 * "Tue Apr 08 2008 17:55:39 GMT+0100 (Pacific Standard Time)"
-		 * The timezone the browser is in changes the offset/timezone parts! */
+		value_of(d.format('%c')).should_be("Thu Nov 20 01:11:03 1997");
 
 		value_of(d.format('%d')).should_be('20');
 		value_of(d2.format('%d')).should_be('02');
-		value_of(d2.format('%e')).should_be('2');
+
+		value_of(d.format('%e')).should_be('20');
+		value_of(d2.format('%e')).should_be(' 2');
+
 		value_of(d.format('%H')).should_be('01');
-		value_of(d.format('%I')).should_be('1');
+		value_of(d.format('%I')).should_be('01');
+		value_of(d.format('%k')).should_be(' 1');
+		value_of(d2.format('%l')).should_be(' 8');
+		
+		
 		value_of(d.format('%j')).should_be('324');
 		value_of(d.format('%m')).should_be('11');
 		value_of(d.format('%M')).should_be('02');
@@ -284,10 +286,10 @@ describe('Date.format', {
 		//value_of(d.format('%W')).should_be(''); // not implemented
 		value_of(d.format('%w')).should_be('4');
 		value_of(d.format('%x')).should_be('11/20/1997');
-		value_of(d.format('%X')).should_be('1:02AM');
+		value_of(d.format('%X')).should_be('01:02AM');
 		value_of(d.format('%y')).should_be('97');
 		value_of(d.format('%Y')).should_be('1997');
-		//value_of(d.format('%T')).should_be('+0000');
+		//value_of(d.format('%z')).should_be('+0000');
 		if (Browser.Engine.trident) value_of(d.format('%Z')).should_be(new Date(Date.UTC()).get('timezone'));
 		else value_of(d.format('%Z')).should_be('GMT');
 		value_of(d.format('%y%')).should_be('97%');
