@@ -13,7 +13,7 @@ Creates a slider with two elements: a knob and a container.
 
 ### Arguments
 
-1. element - (*element*) The knob element for the slider.
+1. element - (*element*) The container element for the slider.
 2. knob    - (*element*) The handle element for the slider.
 3. options - (*object*) An optional object for customizing the Slider.
 
@@ -71,7 +71,7 @@ Slider Event: onComplete {#Slider:complete}
 Slider Event: tick {#Slider:tick}
 -------------------------------------
 
-* (*function*) Fires when the user drags the knob. This Event can be overriden to alter the tick behavior.
+* (*function*) Fires when the user scrolls or when the container element is clicked. This Event can be overridden to alter the default tick behavior.
 
 ### Signature
 
@@ -83,7 +83,7 @@ Slider Event: tick {#Slider:tick}
 
 ### Notes
 
-- Slider originally uses the 'tick' event to set the style of the knob to a new position.
+- By default Slider uses the 'tick' event to set the style of the knob to a new position.
 
 ### Returns
 
