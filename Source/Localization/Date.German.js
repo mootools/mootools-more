@@ -67,4 +67,5 @@ MooTools.lang.set('de-DE', 'Date', {
 	monthsUntil: 'In {delta} Monaten',
 	yearUntil: 'In einem Jahr',
 	yearsUntil: 'In {delta} Jahren'
+
 });
