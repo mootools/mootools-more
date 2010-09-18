@@ -1,0 +1,35 @@
+<style>
+#imgs img {
+	display: inline;
+	margin: 10px;
+}
+</style>
+
+When fetching, the failure alert should only fire on script timeout. Also, onSuccess should not fire on timeout.
+<br />
+<button id="a">7000 ms timeout</button>
+<button id="b">1 ms timeout</button>
+<hr/>
+<div id="imgs"></div>
+<script src="mootools-more.js"></script>
+<script>
+$('a').addEvent('click', request.bind(this,7000));
+$('b').addEvent('click', request.bind(this,1));
+  
+function request(timeout){  
+  new Request.JSONP({
+		log: true,
+    timeout: timeout,
+    callbackKey: 'jsoncallback',
+		url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
+    onFailure: function(){
+      alert("this request failed");
+    },
+    onSuccess: function(data){
+			new Element('img', {
+				src: data.items[0].media.m
+			}).inject('imgs');
+		}
+	}).send();
+}
+</script>
