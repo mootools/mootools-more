@@ -1,0 +1,68 @@
+<style>
+.validation-advice {
+	color: red;
+	padding: 10px 0px;
+}
+input {
+	margin: 5px 0px;
+}
+</style>
+
+<p>Validates that a form's inputs are correct. Fill out the form as described and submit it. Errors should be displayed as you enter invalid values. Should scroll to errors on change event (option field) .</p>
+
+<form id="foo">
+	<dl>
+		<dt>this cannot be empty</dt>
+		<dd><input name="a" class="required"></dd>
+		<dt>this must be an integer (-1,0,1,2,3, etc)</dt>
+		<dd><input name="b" class="required validate-integer"></dd>
+		<dt>this must be numeric (0, 1.3, -5.2, 10, etc) </dt>
+		<dd><input name="c" class="required validate-numeric"></dd>
+		<dt>this must be between 3 and 6 characters long</dt>
+		<dd><input name="d" class="required minLength:3 maxLength:6"></dd>
+		<dt>this must be numbers only, but punctuation and spaces are ok</dt>
+		<dd><input name="e" class="required validate-digits"></dd>
+		<dt>this must be only letters</dt>
+		<dd><input name="f" class="required validate-alpha"></dd>
+		<dt>this must be letters and/or numbers</dt>
+		<dd><input name="g" class="required validate-alphanum"></dd>
+		<dt>this must be a date; try lots of combos</dt>
+		<dd><input name="h" class="required validate-date"></dd>
+		<dt>this must be an email address</dt>
+		<dd><input name="i" class="required validate-email"></dd>
+		<dt>this must be a url</dt>
+		<dd><input name="j" class="required validate-url"></dd>
+		<dt>this must be a dollar currency ($1.00, $1,000.00, $100)</dt>
+		<dd><input name="k" class="required validate-currency-dollar"></dd>
+		<dt>this must have an integer selected from the dropdown</dt>
+		<dd>
+			<select name="l" class="required validate-integer">
+				<option>Volvo</option>
+				<option>1</option>
+				<option>2</option>
+			</select>
+		</dd>
+		<dt>this one of these must be checked</dt>
+		<dd>
+			a: <input name="l" type="checkbox" value="1">
+			b: <input name="m" type="checkbox" value="2">
+			c: <input type="checkbox" value="3" class="validate-one-required">
+		</dd>
+	</dl>
+	<input type="submit">
+</form>
+
+<script src="/depender/build?require=More/Form.Validator.Inline,More/Fx.Reveal,More/Fx.Scroll"></script>
+
+<script type="text/javascript">
+	new Form.Validator.Inline('foo', {
+		serial: false,
+		scrollToErrorsOnSubmit: false,
+		scrollToErrorsOnChange: true,
+		onFormValidate: function(passed, form, event){
+			event.stop();
+			if (passed) alert('form validated');
+			else alert('form did NOT validate');
+		}
+	});
+</script>

@@ -34,6 +34,8 @@ Form.Validator.Inline = new Class({
 			else errorElement.setStyle('display', 'none');
 		},
 		scrollToErrorsOnSubmit: true,
+		scrollToErrorsOnBlur: false,
+		scrollToErrorsOnChange: false,
 		scrollFxOptions: {
 			transition: 'quad:out',
 			offset: {
@@ -148,9 +150,9 @@ Form.Validator.Inline = new Class({
 		}
 	},
 
-	validateField: function(field, force){
+	validateField: function(field, force, scroll){
 		var result = this.parent(field, force);
-		if (this.options.scrollToErrorsOnSubmit && !result){
+		if (((this.options.scrollToErrorsOnSubmit && scroll == null) || scroll) && !result){
 			var failed = document.id(this).getElement('.validation-failed');
 			var par = document.id(this).getParent();
 			while (par != document.body && par.getScrollSize().y == par.getSize().y){
@@ -167,6 +169,17 @@ Form.Validator.Inline = new Class({
 			}
 		}
 		return result;
+	},
+
+	watchFields: function(fields){
+		fields.each(function(el){
+		if (this.options.evaluateFieldsOnBlur){
+			el.addEvent('blur', this.validationMonitor.pass([el, false, this.options.scrollToErrorsOnBlur], this));
+		}
+		if (this.options.evaluateFieldsOnChange){
+				el.addEvent('change', this.validationMonitor.pass([el, true, this.options.scrollToErrorsOnChange], this));
+			}
+		}, this);
 	}
 
 });

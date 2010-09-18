@@ -17,6 +17,7 @@ authors:
   - Daniel Steigerwald
 
 requires: [/MooTools.More, /Element.Pseudos]
+
 provides: [Element.Delegation]
 
 ...
