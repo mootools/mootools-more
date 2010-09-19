@@ -183,7 +183,7 @@ provides: [Keyboard]
 			parsed[type] = keys.join('+');
 		}
 
-		return eventType + ':' + parsed[type];
+		return eventType + ':keys(' + parsed[type] + ')';
 	};
 
 	Keyboard.each = function(keyboard, fn){
@@ -218,7 +218,7 @@ provides: [Keyboard]
 		});
 
 		if (!regex.test(event.key)) keys.push(event.key);
-		Keyboard.manager.handle(event, event.type + ':' + keys.join('+'));
+		Keyboard.manager.handle(event, event.type + ':keys(' + keys.join('+') + ')');
 	};
 
 	document.addEvents({
