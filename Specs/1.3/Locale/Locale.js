@@ -14,8 +14,8 @@ describe('Locale', function(){
 		required: 'Ce champ est obligatoire.'
 	});
 
-
 	it('should return english form validator message', function(){
+		Locale.use('en-US');
 		if (MooTools.lang) expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
 
 		expect(Locale.get('FormValidator.required')).toEqual('This field is required.');

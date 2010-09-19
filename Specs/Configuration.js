@@ -47,7 +47,8 @@ Configuration.sets = {
 			'Class/Chain.Wait',
 			'Types/Array.Extras', 'Types/Object.Extras',
 			'Types/String.Extras', 'Types/String.QueryString', 'Types/Number.Format',
-			'Types/Hash', 'Types/Hash.Extras', 'Locale/Locale',
+			'Types/Hash', 'Types/Hash.Extras', 'Types/Date',
+			'Types/Date.Extras', 'Locale/Locale',
 			'Utilities/Color', 'Utilities/Group'
 		]
 	},
@@ -58,7 +59,7 @@ Configuration.sets = {
 			'Class/Class.Occlude',
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
 			'Element/Element.Pseudos', 'Element/Element.Pseudos.Keys', 'Element/Element.Delegation',
-			'Types/Date.Extras', 'Types/Date', 'Types/URI', 'Types/URI.Relative',
+			'Types/URI', 'Types/URI.Relative',
 			'Interface/Keyboard',
 			'Request/Request.JSONP',
 			'Utilities/Hash.Cookie'
@@ -151,6 +152,8 @@ Configuration.source = {
 			'Types/Object.Extras',
 			'Types/Hash',
 			'Types/Hash.Extras',
+			'Types/Date',
+			'Types/Date.Extras',
 			'Types/String.Extras',
 			'Types/String.QueryString',
 
@@ -158,6 +161,7 @@ Configuration.source = {
 
 			'Utilities/Color',
 			'Utilities/Group'
+
 		]
 	},
 
@@ -174,8 +178,6 @@ Configuration.source = {
 			'Element/Element.Pseudos.Keys',
 			'Element/Element.Delegation',
 
-			'Types/Date',
-			'Types/Date.Extras',
 			'Types/URI',
 			'Types/URI.Relative',
 

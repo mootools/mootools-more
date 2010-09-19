@@ -6,6 +6,8 @@ License:
 	MIT-style license.
 */
 
+(function(global){
+
 describe('Date.clone', {
 
 	'should clone a Date instance': function(){
@@ -227,7 +229,7 @@ describe('Date.getTimezone', {
 
 	'should return the time zone of a Date instance': function(){
 		var d = new Date(Date.UTC(2000, 0, 1, 1, 1, 1));
-		if (Browser.Engine.trident) value_of(d.get('timezone')).should_be(new Date(Date.UTC()).get('timezone'));
+		if (global['Browser'] && Browser.ie) value_of(d.get('timezone')).should_be(new Date(Date.UTC()).get('timezone'));
 		else value_of(d.get('timezone')).should_be('GMT');
 	}
 
@@ -275,8 +277,8 @@ describe('Date.format', {
 		value_of(d.format('%I')).should_be('01');
 		value_of(d.format('%k')).should_be(' 1');
 		value_of(d2.format('%l')).should_be(' 8');
-		
-		
+
+
 		value_of(d.format('%j')).should_be('324');
 		value_of(d.format('%m')).should_be('11');
 		value_of(d.format('%M')).should_be('02');
@@ -290,7 +292,7 @@ describe('Date.format', {
 		value_of(d.format('%y')).should_be('97');
 		value_of(d.format('%Y')).should_be('1997');
 		//value_of(d.format('%z')).should_be('+0000');
-		if (Browser.Engine.trident) value_of(d.format('%Z')).should_be(new Date(Date.UTC()).get('timezone'));
+		if (global['Browser'] && Browser.ie) value_of(d.format('%Z')).should_be(new Date(Date.UTC()).get('timezone'));
 		else value_of(d.format('%Z')).should_be('GMT');
 		value_of(d.format('%y%')).should_be('97%');
 
@@ -305,7 +307,7 @@ describe('Date.format', {
 
 		value_of(d.format('rfc822')).should_be(d.format('%a') + ', ' + d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + ' ' + d.format('%Z'));
 
-		if (Browser.Engine.trident) value_of(d.format('rfc822')).should_be('Thu, 20 Nov 1997 01:02:03 ' + new Date(Date.UTC()).get('timezone'));
+		if (global['Browser'] && Browser.ie) value_of(d.format('rfc822')).should_be('Thu, 20 Nov 1997 01:02:03 ' + new Date(Date.UTC()).get('timezone'));
 		else value_of(d.format('rfc822')).should_be('Thu, 20 Nov 1997 01:02:03 GMT');
 
 		value_of(d.format('short')).should_be(d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%H') + ':' + d.format('%M'));
@@ -429,3 +431,5 @@ describe('Date.parse', {
 	}
 
 });
+
+})(this);
