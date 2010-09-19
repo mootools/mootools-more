@@ -5,13 +5,13 @@ Script: Color.js
 License:
 	MIT-style license.
 */
-	
+
 describe('Color initialize', function(){
 
 	it('Should initialize a color from a hex value', function(){
 		expect(new Color('#000').toString()).toEqual('0,0,0');
 	});
-	
+
 	it('Should initialize a color from a RGB array', function(){
 		value_of(new Color([255,0,255]).toString()).toEqual('255,0,255');
 	});
@@ -40,7 +40,7 @@ describe('Color mutation', function(){
 	it('Should invert a color', function(){
 		expect(new Color('#000').invert().toString()).toEqual('255,255,255');
 	});
-	
+
 	it('Should mix a color', function(){
 		value_of(new Color('#000').mix('#fff').toString()).should_be('127,127,127');
 	});
@@ -72,7 +72,7 @@ describe('Color $methods', function(){
 	it('Tests $HEX', function(){
 		value_of(Array.from($HEX('#700'))).should_be([281,0,0]);
 	});
-	
+
 });
 
 */

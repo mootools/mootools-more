@@ -38,7 +38,7 @@ describe('Chain.Wait', function(){
 		waitsFor(75, function(){
 			return (Date.now() - 60) > time;
 		});
-		
+
 		runs(function(){
 			expect(second).toHaveBeenCalled();
 		});
@@ -48,7 +48,7 @@ describe('Chain.Wait', function(){
 		waitsFor(125, function(){
 			return (Date.now() - 115) > time;
 		});
-		
+
 		runs(function(){
 			expect(third).toHaveBeenCalled();
 		});

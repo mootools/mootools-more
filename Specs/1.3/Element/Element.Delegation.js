@@ -7,7 +7,7 @@ describe('Elements.Delegation', function(){
 
 		var elements = {};
 
-		elements.wrapper = new Element('div').inject(document.body);		
+		elements.wrapper = new Element('div').inject(document.body);
 		elements.child = new Element('div').inject(elements.wrapper);
 
 		elements.wrapper.addEvent('click:relay(div)', function(event){

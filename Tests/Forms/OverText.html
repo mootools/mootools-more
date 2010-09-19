@@ -36,7 +36,7 @@ el.addEvent('focus', function(){
 	this.setStyle('background-color', '#f00');
 });
 
-$$('.ot').each(function(el) {
+$$('.ot').each(function(el){
 	new OverText(el);
 });
 $('disable').addEvent('click', function(e){
@@ -52,7 +52,7 @@ $('destroy').addEvent('click', function(e){
 	$('ot').retrieve('OverText').destroy();
 });
 
-$$('#pw, #un').each(function(el) {
+$$('#pw, #un').each(function(el){
 	new OverText(el, {
 		poll: true
 	});
@@ -60,7 +60,7 @@ $$('#pw, #un').each(function(el) {
 $('un').addEvent('change', function(){
 	$('pw').set('value', 'asdfasdf');
 });
-$('clean').addEvent('click', function(e) {
+$('clean').addEvent('click', function(e){
 	e.stop();
 	$$('input').dispose();
 	OverText.update();

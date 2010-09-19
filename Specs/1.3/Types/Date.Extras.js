@@ -29,7 +29,7 @@ describe('Date.getTimePhrase', {
 			'1 month from now': -60 * 60 * 24 * 28,
 			'2 months from now': -60 * 60 * 24 * 55
 		};
-		
+
 		for (var phrase in phrases)
 			value_of(Date.getTimePhrase(phrases[phrase])).should_be(phrase);
 	}
@@ -48,7 +48,7 @@ describe('Date.timeAgoInWords', {
 describe('Date.Extras.parse', {
 
 	'should parse a string value into a date': function(){
-		
+
 		value_of(Date.parse('today').get('date')).should_be(new Date().get('date'));
 		value_of(Date.parse('yesterday').get('date')).should_be(new Date().decrement().get('date'));
 		value_of(Date.parse('tomorrow').get('date')).should_be(new Date().increment().get('date'));

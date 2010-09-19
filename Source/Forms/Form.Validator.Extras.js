@@ -26,7 +26,7 @@ Form.Validator.addAllThese([
 			var fv = element.getParent('form').retrieve('validator');
 			if (!fv) return true;
 			(props.toEnforce || document.id(props.enforceChildrenOf).getElements('input, select, textarea')).map(function(item){
-				if (element.checked) {
+				if (element.checked){
 					fv.enforceField(item);
 				} else {
 					fv.ignoreField(item);
@@ -42,7 +42,7 @@ Form.Validator.addAllThese([
 			var fv = element.getParent('form').retrieve('validator');
 			if (!fv) return true;
 			(props.toIgnore || document.id(props.ignoreChildrenOf).getElements('input, select, textarea')).each(function(item){
-				if (element.checked) {
+				if (element.checked){
 					fv.ignoreField(item);
 					fv.resetField(item);
 				} else {

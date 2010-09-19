@@ -17,13 +17,13 @@
 			);
 		};
 	});
-	
+
 	var q = new Request.Queue();
 	var reqs = [];
 	var sleep = 4;
-	
+
 	(5).times(function(num){
-		
+
 		var r = new Request({
 			url: '/ajax_html_echo/?html=<p>Success for request ' + (num + 1) + '</p>',
 			method: 'get'
@@ -34,7 +34,7 @@
 		r.addEvents(events);
 		q.addRequest(num.toString(), r);
 	});
-	
+
 	reqs.each(function(r){
 		r.send();
 	});

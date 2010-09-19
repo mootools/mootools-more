@@ -30,7 +30,7 @@ Locale.define('es-AR', 'FormValidator', {
 	alphanum: 'Por favor, usa sólo letras (a-z) o números (0-9) en este campo. No se permiten espacios u otros caracteres.',
 	dateSuchAs: 'Por favor ingrese una fecha válida como {date}',
 	dateInFormatMDY: 'Por favor ingrese una fecha válida, utulizando el formato DD/MM/YYYY (p.e. "31/12/1999")',
-	email: 'Por favor, ingrese una dirección de e-mail válida. Por ejemplo,  "fred@dominio.com".',
+	email: 'Por favor, ingrese una dirección de e-mail válida. Por ejemplo, "fred@dominio.com".',
 	url: 'Por favor ingrese una URL válida como http://www.google.com.',
 	currencyDollar: 'Por favor ingrese una cantidad válida de pesos. Por ejemplo $100,00 .',
 	oneRequired: 'Por favor ingrese algo para por lo menos una de estas entradas.',

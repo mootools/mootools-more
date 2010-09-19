@@ -86,7 +86,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 		if (!this.options.allowMultiSelect) this.selectNone();
 
-		if (!this.isSelected(row)) {
+		if (!this.isSelected(row)){
 			this._selectedRows.push(row);
 			row.addClass(this.options.classRowSelected);
 			this.fireEvent('rowFocus', [row, this._selectedRows]);
@@ -121,13 +121,13 @@ HtmlTable = Class.refactor(HtmlTable, {
 	selectRange: function(startRow, endRow, _deselect){
 		if (!this.options.allowMultiSelect && !_deselect) return;
 		var method = _deselect ? 'deselectRow' : 'selectRow',
-		    rows = Array.clone(this.body.rows);
+			rows = Array.clone(this.body.rows);
 
 		if (typeOf(startRow) == 'element') startRow = rows.indexOf(startRow);
 		if (typeOf(endRow) == 'element') endRow = rows.indexOf(endRow);
-		endRow = endRow < rows.length - 1 ? endRow : rows.length - 1; 
+		endRow = endRow < rows.length - 1 ? endRow : rows.length - 1;
 
-		if (endRow < startRow) {
+		if (endRow < startRow){
 			var tmp = startRow;
 			startRow = endRow;
 			endRow = tmp;
@@ -185,7 +185,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (event.rightClick) this.selectRow(row);
 		else this.toggleRow(row);
 
-		if (event.shift) {
+		if (event.shift){
 			this.selectRange(this._rangeStart || this.body.rows[0], row, this._rangeStart ? !this.isSelected(row) : true);
 			this._focused = row;
 		}
@@ -217,7 +217,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		});
 
 		if (this.options.useKeyboard || this.keyboard){
-			if (!this.keyboard) {
+			if (!this.keyboard){
 				var timer, held;
 
 				var move = function(offset){
@@ -226,17 +226,17 @@ HtmlTable = Class.refactor(HtmlTable, {
 						e.preventDefault();
 
 						var to = this.body.rows[this._getRowByOffset(offset)];
-						if (e.shift && to && this.isSelected(to)) {
+						if (e.shift && to && this.isSelected(to)){
 							this.deselectRow(this._focused);
 							this._focused = to;
 						} else {
-							if (to && (!this.options.allowMultiSelect || !e.shift)) {
+							if (to && (!this.options.allowMultiSelect || !e.shift)){
 								this.selectNone();
 							}
 							this._shiftFocus(offset, e);
 						}
 
-						if (held) {
+						if (held){
 							timer = mover.delay(100, this, e);
 						} else {
 							timer = (function(){
@@ -266,7 +266,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 				});
 
 				var shiftHint = '';
-				if (this.options.allowMultiSelect && this.options.shiftForMultiSelect && this.options.useKeyboard) {
+				if (this.options.allowMultiSelect && this.options.shiftForMultiSelect && this.options.useKeyboard){
 					shiftHint = " (Shift multi-selects).";
 				}
 

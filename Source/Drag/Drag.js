@@ -104,10 +104,8 @@ var Drag = new Class({
 
 		var styles = this.element.getStyles('left', 'right', 'top', 'bottom');
 		this._invert = {
-			x: options.modifiers.x == 'left' && styles.left == 'auto' &&
-			   !isNaN(styles.right.toInt()) && (options.modifiers.x = 'right'),
-			y: options.modifiers.y == 'top' && styles.top == 'auto' &&
-			   !isNaN(styles.bottom.toInt()) && (options.modifiers.y = 'bottom')
+			x: options.modifiers.x == 'left' && styles.left == 'auto' && !isNaN(styles.right.toInt()) && (options.modifiers.x = 'right'),
+			y: options.modifiers.y == 'top' && styles.top == 'auto' && !isNaN(styles.bottom.toInt()) && (options.modifiers.y = 'bottom')
 		};
 
 		for (var z in options.modifiers){
@@ -178,11 +176,9 @@ var Drag = new Class({
 			}
 
 			if (options.grid[z]) this.value.now[z] -= ((this.value.now[z] - (this.limit[z][0]||0)) % options.grid[z]);
-			if (options.style) {
-				this.element.setStyle(options.modifiers[z], this.value.now[z] + options.unit);
-			} else {
-				this.element[options.modifiers[z]] = this.value.now[z];
-			}
+
+			if (options.style) this.element.setStyle(options.modifiers[z], this.value.now[z] + options.unit);
+			else this.element[options.modifiers[z]] = this.value.now[z];
 		}
 
 		this.fireEvent('drag', [this.element, event]);

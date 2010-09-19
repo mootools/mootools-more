@@ -15,7 +15,7 @@
 
 <hr/>
 <p>
-	<a id="add">add events</a> | 
+	<a id="add">add events</a> |
 	<a id="remove">remove events</a> |
 	<a id="nots">add to only mouseover behavior to 1st and 3rd items</a>
 </p>
@@ -60,10 +60,10 @@ var remove = function(){
 };
 var nots = function(){
 	remove();
-	
+
 	var over = function(){ this.morph({ backgroundColor: '#222' }); };
 	var out  = function(){ this.morph({ backgroundColor: '#2D5E4C' }); };
-	
+
 	tests = {
 		'mouseover:relay(div:not(.item2):not(.item4))': over,
 		 'mouseout:relay(div:not(.item2):not(.item4))': out

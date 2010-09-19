@@ -23,26 +23,26 @@ describe('Request.JSONP', function(){
 			onTimeout: function(){
 				timeout = true;
 			}
-			
+
 		});
-		
+
 		runs(function(){
 			request.send();
 		});
-		
+
 		runs(function(){
 			expect(onRequest).toHaveBeenCalled();
 		});
-		
+
 		waitsFor(800, function(){
 			return complete || timeout;
 		});
-		
+
 		runs(function(){
 			expect(onComplete).toHaveBeenCalled();
 		});
-		
-		
+
+
 
 
 	});

@@ -24,7 +24,7 @@ Locale.define('cs-CZ', 'FormValidator', {
 	minLength: 'Zadejte prosím alespoň {minLength} znaků (napsáno {length} znaků).',
 	maxLength: 'Zadejte prosím méně než {maxLength} znaků (nápsáno {length} znaků).',
 	integer: 'Zadejte prosím celé číslo. Desetinná čísla (např. 1.25) nejsou povolena.',
-	numeric: 'Zadejte jen číselné hodnoty  (tj. "1" nebo "1.1" nebo "-1" nebo "-1.1").',
+	numeric: 'Zadejte jen číselné hodnoty (tj. "1" nebo "1.1" nebo "-1" nebo "-1.1").',
 	digits: 'Zadejte prosím pouze čísla a interpunkční znaménka(například telefonní číslo s pomlčkami nebo tečkami je povoleno).',
 	alpha: 'Zadejte prosím pouze písmena (a-z). Mezery nebo jiné znaky nejsou povoleny.',
 	alphanum: 'Zadejte prosím pouze písmena (a-z) nebo číslice (0-9). Mezery nebo jiné znaky nejsou povoleny.',

@@ -80,7 +80,7 @@ Number.implement({
 			index = value.lastIndexOf(decimal);
 			index = (index > -1) ? index : value.length;
 			var newOutput = value.substring(index),
-			    i = index;
+				i = index;
 
 			while (i--){
 				if ((index - i - 1) % 3 == 0 && i != (index - 1)) newOutput = group + newOutput;

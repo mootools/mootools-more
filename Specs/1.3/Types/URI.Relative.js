@@ -19,7 +19,7 @@ var uri;
 		'URI.toString() should be same as input combined': function(){
 			value_of(uri.toString()).should_be('http://myuser:mypass@www.calyptus.eu:8080/mydirectory/myfile.html?myquery=true#myhash');
 		},
-		
+
 		'should have a all properties set': function(){
 			value_of(uri.get('scheme')).should_be('http');
 			value_of(uri.get('user')).should_be('myuser');
@@ -85,7 +85,7 @@ var uri;
 		'URI.toAbsolute(string) on different port': function(){
 			value_of(uri.toAbsolute('http://www.calyptus.eu:81/mydirectory/myfile.html')).should_be('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
 		},
-		
+
 		'URI.toRelative(string) with query': function(){
 			value_of(new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html?myquery=q').toRelative('http://www.calyptus.eu/mydirectory/myfile.html')).should_be('mydirectory2/myfile.html?myquery=q');
 		},
@@ -101,7 +101,7 @@ var uri;
 		'URI.toRelative(string) to same path': function(){
 			value_of(new URI('http://www.calyptus.eu').toRelative('http://www.calyptus.eu')).should_be('./');
 		},
-		
+
 		'new URI(\'../otherfolder\').toRelative() should return the same as input': function(){
 			value_of(new URI('../otherfolder').toRelative(window.location)).should_be('../otherfolder');
 		},
@@ -109,7 +109,7 @@ var uri;
 		'new URI(\'../otherfolder\').toRelative(window.location) should return the same as input': function(){
 			value_of(new URI('../otherfolder').toRelative(window.location)).should_be('../otherfolder');
 		}
-		
+
 	})
 
 })();

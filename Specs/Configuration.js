@@ -9,7 +9,7 @@ Configuration.name = 'MooTools More';
 
 // Presets - combine the sets and the source to a preset to easily run a test
 Configuration.presets = {
-	
+
 	'more-base': {
 		sets: ['1.3-base'],
 		source: ['core-1.3-base', 'more-1.3-base']
@@ -19,12 +19,12 @@ Configuration.presets = {
 		sets: ['1.3-base', '1.3-client'],
 		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']
 	},
-	
+
 	'keyboard': {
 		sets: ['keyboard'],
-		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']		
+		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']
 	}
-	
+
 };
 
 Configuration.defaultPresets = {
@@ -34,7 +34,7 @@ Configuration.defaultPresets = {
 };
 
 /*
- * An object with sets. Each item in the object should have an path key, 
+ * An object with sets. Each item in the object should have an path key,
  * that specifies where the spec files are and an array with all the files
  * without the .js extension relative to the given path
  */
@@ -64,7 +64,7 @@ Configuration.sets = {
 			'Utilities/Hash.Cookie'
 		]
 	},
-	
+
 	'keyboard': {
 		path: '1.3/',
 		files: [
@@ -87,7 +87,7 @@ Configuration.source = {
 		path: 'mootools-core/Source/',
 		files: [
 			'Core/Core',
-			
+
 			'Slick/Slick.Parser',
 
 			'Types/Array',
@@ -131,22 +131,22 @@ Configuration.source = {
 			'Request/Request.JSON'
 		]
 	},
-	
+
 	'more-1.3-base': {
 		path: '../Source/',
 		files: [
 			'More/More',
-			
+
 			'Locale/Locale',
 			'Locale/Locale.en-US.Form.Validator',
 			'Locale/Locale.en-US.Date',
 			'Locale/Locale.en-US.Number',
-	
+
 			'Class/Class.Binds',
 			'Class/Class.Refactor',
 			'Class/Events.Pseudos',
 			'Class/Chain.Wait',
-	
+
 			'Types/Array.Extras',
 			'Types/Object.Extras',
 			'Types/Hash',
@@ -155,7 +155,7 @@ Configuration.source = {
 			'Types/String.QueryString',
 
 			'Types/Number.Format',
-	
+
 			'Utilities/Color',
 			'Utilities/Group'
 		]
@@ -165,7 +165,7 @@ Configuration.source = {
 		path: '../Source/',
 		files: [
 			'Class/Class.Occlude',
-	
+
 			'Element/Element.Forms',
 			'Element/Element.Measure',
 			'Element/Element.Shortcuts',
@@ -178,9 +178,9 @@ Configuration.source = {
 			'Types/Date.Extras',
 			'Types/URI',
 			'Types/URI.Relative',
-	
+
 			'Interface/Keyboard',
-	
+
 			'Request/Request.JSONP',
 
 			'Utilities/Hash.Cookie'

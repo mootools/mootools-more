@@ -17,7 +17,7 @@
 </p>
 
 <style>
-	
+
 #imgtest2 img {
 	background: #999;
 	float: left;
@@ -51,7 +51,7 @@
 			this.inject('imgtest');
 		}
 	});
-	
+
 	var imgs = Asset.images([
 		'/asset/more/mootools.png',
 		'/asset/more/mootools.png',
@@ -61,13 +61,13 @@
 			imgs.inject('imgtest2');
 		}
 	});
-	
-	
+
+
 	$('msg').adopt(new Element('li', {text: 'testing onload event...'}));
 	Asset.javascript('/asset/more/Assets.js.test.js', {
 		onLoad: function(){
 			$('msg').adopt(new Element('li', {text: 'JavaScript onLoad fired successfully!'}));
 		}
 	});
-	
+
 </script>

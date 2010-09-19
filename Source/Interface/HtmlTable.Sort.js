@@ -93,7 +93,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 				case 'string': parser = parser; cancel = true; break;
 			}
 			if (!cancel){
-				Object.some(HtmlTable.Parsers, function(current) {
+				Object.some(HtmlTable.Parsers, function(current){
 					var match = current.match;
 					if (!match) return false;
 					for (var i = 0, j = rows.length; i < j; i++){
@@ -170,7 +170,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			return {
 				position: i,
 				value: value,
-				toString:  function(){
+				toString: function(){
 					return value.toString();
 				}
 			};

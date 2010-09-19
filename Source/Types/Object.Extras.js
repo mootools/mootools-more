@@ -50,7 +50,7 @@ Object.extend({
 	run: function(object){
 		var args = Array.slice(arguments, 1);
 		for (key in object){
-			if (typeOf(object[key]) == 'function') object[key].apply(object,  args);
+			if (typeOf(object[key]) == 'function') object[key].apply(object, args);
 		}
 		return object;
 	}

@@ -17,7 +17,7 @@ describe('Hash.Cookie', {
 		});
 		value_of(hc.get('apple')).should_be('red');
 	},
-	
+
 	'Retrieves a Hash.Cookie': function(){
 		var hc = new Hash.Cookie('HCtest');
 		value_of(hc.get('apple')).should_be('red');

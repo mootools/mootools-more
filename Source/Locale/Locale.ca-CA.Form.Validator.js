@@ -31,7 +31,7 @@ Locale.define('ca-CA', 'FormValidator', {
 	alphanum: 'Per favor, utilitza nomes lletres (a-z) o numeros (0-9) en aquest camp. No s´admiteixen espais ni altres caracters.',
 	dateSuchAs: 'Per favor introdueix una data valida com {date}',
 	dateInFormatMDY: 'Per favor introdueix una data valida com DD/MM/YYYY (p.e. "31/12/1999")',
-	email: 'Per favor, introdueix una adreça de correu electronic valida. Per exemple,  "fred@domain.com".',
+	email: 'Per favor, introdueix una adreça de correu electronic valida. Per exemple, "fred@domain.com".',
 	url: 'Per favor introdueix una URL valida com http://www.google.com.',
 	currencyDollar: 'Per favor introdueix una quantitat valida de €. Per exemple €100,00 .',
 	oneRequired: 'Per favor introdueix alguna cosa per al menys una d´aquestes entrades.',

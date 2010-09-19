@@ -102,7 +102,7 @@ provides: [Keyboard]
 		},
 
 		isActive: function(){
-			return this.manager ? this.manager.activeKB == this :  Keyboard.manager == this;
+			return this.manager ? (this.manager.activeKB == this) : (Keyboard.manager == this);
 		},
 
 		deactivate: function(instance){

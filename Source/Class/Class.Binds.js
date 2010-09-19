@@ -22,7 +22,7 @@ provides: [Class.Binds]
 */
 
 Class.Mutators.Binds = function(binds){
-    return binds;
+	return binds;
 };
 
 Class.Mutators.initialize = function(initialize){

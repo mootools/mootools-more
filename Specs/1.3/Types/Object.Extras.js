@@ -33,10 +33,10 @@ describe('Object.cleanValues', {
 		value_of(Object.cleanValues(obj)).should_be({
 			mootools: true,
 			test: 'ing',
-			no: false 
+			no: false
 		});
 	},
-	
+
 	'custom filter method': function(){
 		var obj = {
 			animal: null,
@@ -50,7 +50,7 @@ describe('Object.cleanValues', {
 			animal: null,
 			mootools: true,
 			test: 'ing'
-		});		
+		});
 	}
 });
 
@@ -66,7 +66,7 @@ describe('Object.erase', {
 		value_of(Object.cleanValues(obj)).should_be({
 			mootools: true,
 			test: 'ing',
-			no: false 
+			no: false
 		});
 	}
 });
@@ -80,7 +80,7 @@ describe('Object.run', {
 				value += arg;
 			},
 			moo: function(arg){
-				value += arg; 
+				value += arg;
 			}
 		};
 		value_of((function(){

@@ -238,7 +238,7 @@ var parseWord = function(type, word, num){
 			var match = translated.filter(function(name){
 				return this.test(name);
 			}, new RegExp('^' + word, 'i'));
-			if (!match.length)    throw new Error('Invalid ' + type + ' string');
+			if (!match.length) throw new Error('Invalid ' + type + ' string');
 			if (match.length > 1) throw new Error('Ambiguous ' + type);
 			ret = match[0];
 	}

@@ -66,13 +66,13 @@ makeActions([
 	{
 		title: "Test Spinner",
 		description: "Creates a semi-transparent layer that obscures an element and has a 'spinning' icon and message ovelaid upon that.",
-		fn: function() {
+		fn: function(){
 			$('foo').spin({message: 'testing....'});
 		}
 	}, {
 		title: "Tests Spinner start and stop",
 		description: "Shows and Hides a Spinner",
-		fn: function() {
+		fn: function(){
 			var w = $('foo').get('spinner');
 			w.hide();
 			w.show();
@@ -81,7 +81,7 @@ makeActions([
 	}, {
 		title: "Toggle a Spinner",
 		description: "Toggles the Spinner's visibility",
-		fn: function() {
+		fn: function(){
 			var w = $('foo').get('spinner');
 			w.hide();
 			w.toggle();

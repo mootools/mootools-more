@@ -106,7 +106,7 @@ Element.implement({
 			dim = {x: 0, y: 0};
 		}
 
-		return Object.append(dim, (dim.x || dim.x === 0) ?  {
+		return Object.append(dim, (dim.x || dim.x === 0) ? {
 				width: dim.x,
 				height: dim.y
 			} : {

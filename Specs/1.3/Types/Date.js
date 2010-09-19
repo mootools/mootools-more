@@ -204,7 +204,7 @@ describe('Date.diff', {
 		var d  = new Date(Date.UTC(1997,  9, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 11, 20, 1, 1, 1));
 		value_of(d.diff(d2, 'month')).should_be(2);
-		
+
 		// February bug
 		d  = new Date(Date.UTC(1997, 1, 1, 1, 1, 1));
 		d2 = new Date(Date.UTC(1997, 2, 1, 1, 1, 1));
@@ -214,7 +214,7 @@ describe('Date.diff', {
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1999, 10, 20, 1, 1, 1));
 		value_of(d.diff(d2, 'year')).should_be(2);
-		
+
 		// parseInt bug with anything less than 1e-6
 		d = new Date(1277244682000);
 		d2 = new Date(1277244682237);
@@ -383,19 +383,19 @@ describe('Date.parse', {
 	'should parse a string value into a date': function(){
 		Locale.list().each(function(lang){
 			MooTools.lang.setLanguage(lang);
-			
+
 			var d = new Date(2000, 11, 2, 0, 0, 0, 0);
 			value_of(Date.parse(d.format('%x'))).should_be(d);
 			value_of(Date.parse(d.format('%b %d %Y'))).should_be(d);
 			value_of(Date.parse(d.format('%d %B %Y'))).should_be(d);
 			value_of(Date.parse(d.format('%Y %b %d'))).should_be(d);
 			value_of(Date.parse(d.format('%o %b %d %X %T %Y'))).should_be(d);
-			
+
 			['-', '.', '/'].each(function(punc){
 				value_of(Date.parse(d.format('%x').replace(/[-.\/]/g, punc))).should_be(d);
 				value_of(Date.parse(d.format('%Y' + punc + '%m' + punc + '%d'))).should_be(d);
 			});
-			
+
 			d = new Date(2000, 11, 2, 22, 45, 0, 0);
 			value_of(Date.parse(d.format('%x %X'))).should_be(d);
 			value_of(Date.parse(d.format('%B %d %Y %X'))).should_be(d);
@@ -404,25 +404,25 @@ describe('Date.parse', {
 			value_of(Date.parse(d.format('compact'))).should_be(d);
 			value_of(Date.parse(d.format('db'))).should_be(d);
 			value_of(Date.parse(d.format('long'))).should_be(d);
-			
+
 			d = new Date(2000, 0, 1, 0, 0, 0, 0);
 			value_of(Date.parse('2000')).should_be(d);
-			
+
 			d = new Date().clearTime();
 			value_of(Date.parse(d.set({date: 1, mo: 11}).format('%B'))).should_be(d);
 		});
 	},
-	
+
 	'should consistently parse dates on any day/month/year': function(){
 		// monkey patch clearTime so parsing starts on Jan 1, 2001
 		var clearTime = Date.prototype.clearTime;
 		Date.prototype.clearTime = function(){
 			return clearTime.call(this.set({mo: 0, date: 30, year: 2001}));
 		};
-		
+
 		var d = new Date(2000, 1, 29, 0, 0, 0, 0);
 		value_of(Date.parse(d.format('%B %d %Y'))).should_be(d);
-		
+
 		Date.prototype.clearTime = clearTime;
 	}
 

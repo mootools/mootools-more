@@ -74,46 +74,46 @@ describe('Array.unique', {
 });
 
 describe('Array.reduce', function(){
-	
+
 	it('should have been implemented according ES5', function(){
 
 		// Examples from https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/reduce
 
-		expect([0,1,2,3,4].reduce(function(previousValue, currentValue, index, array){  
-			return previousValue + currentValue;  
+		expect([0,1,2,3,4].reduce(function(previousValue, currentValue, index, array){
+			return previousValue + currentValue;
 		})).toEqual(10);
 
-		expect([0,1,2,3,4].reduce(function(previousValue, currentValue, index, array){  
-			return previousValue + currentValue;  
+		expect([0,1,2,3,4].reduce(function(previousValue, currentValue, index, array){
+			return previousValue + currentValue;
 		}, 10)).toEqual(20);
-		
-		expect([[0,1], [2,3], [4,5]].reduce(function(a,b) {  
-			return a.concat(b);  
+
+		expect([[0,1], [2,3], [4,5]].reduce(function(a,b) {
+			return a.concat(b);
 		}, [])).toEqual([0, 1, 2, 3, 4, 5]);
-		
+
 	});
-	
+
 });
 
 describe('Array.reduceRight', function(){
-	
+
 	it('should have been implemented according ES5', function(){
-		
+
 		// Examples from https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array/ReduceRight
-		
-		expect([0,1,2,3,4].reduceRight(function(previousValue, currentValue, index, array){  
-			return previousValue + currentValue;  
+
+		expect([0,1,2,3,4].reduceRight(function(previousValue, currentValue, index, array){
+			return previousValue + currentValue;
 		})).toEqual(10);
-		
-		expect([0,1,2,3,4].reduceRight(function(previousValue, currentValue, index, array){  
-			return previousValue + currentValue;  
+
+		expect([0,1,2,3,4].reduceRight(function(previousValue, currentValue, index, array){
+			return previousValue + currentValue;
 		}, 10)).toEqual(20);
-		
-		expect([[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b) {  
-			return a.concat(b);  
+
+		expect([[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b) {
+			return a.concat(b);
 		}, [])).toEqual([4, 5, 2, 3, 0, 1]);
-		
+
 	});
-	
+
 });
 

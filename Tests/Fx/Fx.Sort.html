@@ -40,15 +40,15 @@ div.spanner {
 <script src="/depender/build?require=More/Fx.Sort,Core/Element.Event,Core/Fx.Transitions"></script>
 
 <script type="text/javascript">
-	
+
 var vert = new Fx.Sort($$('#sorter li'), {
 	transition: Fx.Transitions.Back.easeInOut,
 	duration: 1000
 });
 
 var horz = new Fx.Sort($$('.spanner'), {
-	mode: "horizontal", 
-	transition: Fx.Transitions.Back.easeInOut, 
+	mode: "horizontal",
+	transition: Fx.Transitions.Back.easeInOut,
 	duration: 1000
 });
 
@@ -90,7 +90,7 @@ makeActions([
 	},
 	{
 		title: "Reorders the DOM to match the current sort order.",
-		description: "(No visible effect; inspect in firebug.)", 
+		description: "(No visible effect; inspect in firebug.)",
 		fn: function(){
 			vert.rearrangeDOM();
 		}

@@ -40,7 +40,7 @@ var Scroller = new Class({
 		this.setOptions(options);
 		this.element = document.id(element);
 		this.docBody = document.id(this.element.getDocument().body);
-		this.listener = (typeOf(this.element) != 'element') ?  this.docBody : this.element;
+		this.listener = (typeOf(this.element) != 'element') ? this.docBody : this.element;
 		this.timer = null;
 		this.bound = {
 			attach: this.attach.bind(this),

@@ -34,7 +34,7 @@ Fx.Move = new Class({
 
 	start: function(destination){
 		var topLeft = this.element.getStyles('top', 'left');
-		if (topLeft.top == 'auto' || topLeft.left == 'auto') {
+		if (topLeft.top == 'auto' || topLeft.left == 'auto'){
 			var op;
 			if (!Browser.ie){
 				var parent = this.element.getParent();

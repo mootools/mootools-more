@@ -165,9 +165,9 @@ Request = Class.refactor(Request, {
 	},
 
 	getSpinner: function(){
-		if (!this.spinner) {
+		if (!this.spinner){
 			var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
-			if (this.options.useSpinner && update) {
+			if (this.options.useSpinner && update){
 				update.set('spinner', this.options.spinnerOptions);
 				var spinner = this.spinner = update.get('spinner');
 				['complete', 'exception', 'cancel'].each(function(event){

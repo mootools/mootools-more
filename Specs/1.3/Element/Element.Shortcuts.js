@@ -6,10 +6,10 @@ License:
 	MIT-style license.
 */
 (function(){
-	
+
 	var elements;
 	window.addEvent('domready', function(){
-		
+
 		elements = new Elements([
 			new Element('div', {
 				styles: {
@@ -30,9 +30,9 @@ License:
 				'class': 'testClass'
 			})
 		]);
-		
+
 		elements.inject(new Element('div').inject(document.body));
-		
+
 	});
 	describe('Element.isDisplayed', {
 

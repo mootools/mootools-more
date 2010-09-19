@@ -60,9 +60,9 @@ Element.implement({
 
 Document.implement({
 	clearSelection: function(){
-		if (document.selection && document.selection.empty) {
+		if (document.selection && document.selection.empty){
 			document.selection.empty();
-		} else if (window.getSelection) {
+		} else if (window.getSelection){
 			var selection = window.getSelection();
 			if (selection && selection.removeAllRanges) selection.removeAllRanges();
 		}
