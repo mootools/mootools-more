@@ -41,8 +41,8 @@ img {
 <img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement2" />
 
 <h1>The tips on these elements are different for the container and the child</h1>
-<div class="toolTipElement3" alt="Container Tip" rel="A container with a tip">
-	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement3" />
+<div class="toolTipElement3" alt="Container Tip">
+	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" class="toolTipElement3" />
 </div>
 
 <script src="/depender/build?require=More/Tips"></script>
@@ -65,7 +65,9 @@ new Tips($$('.toolTipElement2'), {
 	}
 });
 
-new Tips($$('.toolTipElement3'), {
+var toolTipElements3 = $$('.toolTipElement3').store('tip:text', 'The best damn JS framework on earth.<br /><img src="/asset/more/cow.png" />');
+
+new Tips(toolTipElements3, {
 	timeOut: 700,
 	maxTitleChars: 50, /* I like my captions a little long*/
 	maxOpacity: .9, /* let's leave a little transparancy in there */
