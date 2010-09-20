@@ -119,7 +119,6 @@ var Asset = {
 			properties: {}
 		}, options);
 		sources = Array.from(sources);
-		var images = [];
 		var counter = 0;
 		return new Elements(sources.map(function(source, index){
 			return Asset.image(source, Object.append(options.properties, {
