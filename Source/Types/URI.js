@@ -25,7 +25,13 @@ provides: [URI]
 ...
 */
 
-var URI = new Class({
+(function(){
+
+var toString = function(){
+	return this.get('value');
+};
+
+var URI = this.URI = new Class({
 
 	Implements: Options,
 
@@ -126,7 +132,7 @@ var URI = new Class({
 
 	setData: function(values, merge, part){
 		if (typeof values == 'string'){
-			data = this.getData();
+			var data = this.getData();
 			data[arguments[0]] = arguments[1];
 			values = data;
 		} else if (merge){
@@ -137,13 +143,12 @@ var URI = new Class({
 
 	clearData: function(part){
 		return this.set(part || 'query', '');
-	}
+	},
+
+	toString: toString,
+	valueOf: toString
 
 });
-
-URI.prototype.toString = URI.prototype.valueOf = function(){
-	return this.get('value');
-};
 
 URI.regs = {
 	endSlash: /\/$/,
@@ -160,3 +165,5 @@ String.implement({
 	}
 
 });
+
+})();
