@@ -25,40 +25,26 @@ var Asset = {
 
 	javascript: function(source, properties){
 		properties = Object.append({
-			onload: function(){},
-			document: document,
-			check: Function.from(true)
+			document: document
 		}, properties);
 
 		if (properties.onLoad){
 			properties.onload = properties.onLoad;
 			delete properties.onLoad;
 		}
-		var script = new Element('script', {src: source, type: 'text/javascript'});
 
-		var load = properties.onload.bind(script),
-			check = properties.check,
+		var script = new Element('script', {src: source, type: 'text/javascript'});
+		var load = properties.onload || function(){},
 			doc = properties.document;
 		delete properties.onload;
-		delete properties.check;
 		delete properties.document;
 
-		script.addEvents({
+		return script.addEvents({
 			load: load,
 			readystatechange: function(){
-				if (['loaded', 'complete'].contains(this.readyState)) load();
+				if (['loaded', 'complete'].contains(this.readyState)) load.call(this);
 			}
-		}).set(properties);
-
-		if ((Browser.safari || Browser.chrome) && Browser.version == 2){
-			var checker = (function(){
-				if (!Function.attempt(check)) return;
-				clearInterval(checker);
-				load();
-			}).periodical(50);
-		}
-
-		return script.inject(doc.head);
+		}).set(properties).inject(doc.head);
 	},
 
 	css: function(source, properties){
