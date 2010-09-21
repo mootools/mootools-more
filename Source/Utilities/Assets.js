@@ -109,13 +109,13 @@ var Asset = {
 		return new Elements(sources.map(function(source, index){
 			return Asset.image(source, Object.append(options.properties, {
 				onload: function(){
-					options.onProgress.call(this, counter, index);
 					counter++;
+					options.onProgress.call(this, counter, index, source);
 					if (counter == sources.length) options.onComplete();
 				},
 				onerror: function(){
-					options.onError.call(this, counter, index);
 					counter++;
+					options.onError.call(this, counter, index, source);
 					if (counter == sources.length) options.onComplete();
 				}
 			}));

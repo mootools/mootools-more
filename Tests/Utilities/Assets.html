@@ -4,13 +4,13 @@
 
 <img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." id="moologo"/>
 
-<hr/>
+<hr />
 <p>
 	A MooTools logo should load in the box below.
 </p>
-<div id="imgtest" style="background: #999; float: left; padding: 10px; margin: 8px;"></div>
+<div id="imgtest" style="background: #999; padding: 10px; margin: 8px;"></div>
 
-<hr style="clear:both"/>
+<hr />
 
 <p>
 	Three MooTools images should load in the box below.
@@ -20,7 +20,6 @@
 
 #imgtest2 img {
 	background: #999;
-	float: left;
 	padding: 10px;
 	margin: 8px;
 }
@@ -29,13 +28,12 @@
 	margin-left: 20px;
 	list-style: disc;
 }
-<<<<<<< HEAD:Tests/Utilities/Assets.html
 
 </style>
 
 <div id="imgtest2"></div>
 
-<hr style="clear:both"/>
+<hr />
 
 <p>
 	You should see confirmation that some JS loaded in the box below, as well as confirmation that the onload event fired successfully.
@@ -52,13 +50,20 @@
 		}
 	});
 
-	var imgs = Asset.images([
+	var images = [
 		'/asset/more/mootools.png',
 		'/asset/more/mootools.png',
 		'/asset/more/mootools.png'
-		], {
+	];
+	var imgs = Asset.images(images, {
 		onComplete: function(){
 			imgs.inject('imgtest2');
+		},
+		onProgress: function(counter, index, source){
+			$('msg').adopt(new Element('li', {text: 'Image ' + counter + '/'+ images.length + ' with index #' + index + ': ' + source + ' is loaded successfully!'}));
+		},
+		onError: function(counter, index, source){
+			$('msg').adopt(new Element('li', {text: 'Image ' + counter + '/'+ images.length + ' with index #' + index + ': ' + source + ' is errored!'}));
 		}
 	});
 
