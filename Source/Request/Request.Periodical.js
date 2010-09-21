@@ -13,7 +13,7 @@ authors:
   - Christoph Pojer
 
 requires:
-  - Core/Request
+  - Core:1.2.4/Request
   - /MooTools.More
 
 provides: [Request.Periodical]

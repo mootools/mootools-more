@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Fx.Tween
+  - Core:1.2.4/Fx.Tween
   - Core/Request
   - /Class.refactor
   - /Mask

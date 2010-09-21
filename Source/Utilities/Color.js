@@ -13,12 +13,12 @@ authors:
   - Valerio Proietti
 
 requires:
-  - Core/Array
-  - Core/String
-  - Core/Number
-  - Core/Hash
-  - Core/Function
-  - Core/$util
+  - Core:1.2.4/Array
+  - Core:1.2.4/String
+  - Core:1.2.4/Number
+  - Core:1.2.4/Hash
+  - Core:1.2.4/Function
+  - Core:1.2.4/$util
 
 provides: [Color]
 

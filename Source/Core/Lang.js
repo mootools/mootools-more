@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Events
+  - Core:1.2.4/Events
   - /MooTools.More
 
 provides: [Lang]

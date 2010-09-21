@@ -14,8 +14,8 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Cookie
-  - Core/JSON
+  - Core:1.2.4/Cookie
+  - Core:1.2.4/JSON
   - /MooTools.More
 
 provides: [Hash.Cookie]

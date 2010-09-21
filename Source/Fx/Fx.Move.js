@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Fx.Morph
+  - Core:1.2.4/Fx.Morph
   - /Element.Position
 
 provides: [Fx.Move]

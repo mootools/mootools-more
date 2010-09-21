@@ -15,9 +15,9 @@ authors:
   - Scott Kyle
 
 requires:
-  - Core/Events
-  - Core/Options
-  - Core/Element.Event
+  - Core:1.2.4/Events
+  - Core:1.2.4/Options
+  - Core:1.2.4/Element.Event
   - /Log
 
 provides: [Keyboard]

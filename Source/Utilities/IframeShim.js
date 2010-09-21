@@ -13,10 +13,10 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Element.Event
-  - Core/Element.Style
-  - Core/Options
-  - Core/Events
+  - Core:1.2.4/Element.Event
+  - Core:1.2.4/Element.Style
+  - Core:1.2.4/Options
+  - Core:1.2.4/Events
   - /Element.Position
   - /Class.Occlude
 

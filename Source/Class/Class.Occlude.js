@@ -13,8 +13,8 @@ authors:
   - Aaron Newton
 
 requires: 
-  - Core/Class
-  - Core/Element
+  - Core:1.2.4/Class
+  - Core:1.2.4/Element
   - /MooTools.More
 
 provides: [Class.Occlude]

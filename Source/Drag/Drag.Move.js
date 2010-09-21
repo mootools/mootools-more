@@ -17,7 +17,7 @@ authors:
   - Scott Kyle
 
 requires:
-  - Core/Element.Dimensions
+  - Core:1.2.4/Element.Dimensions
   - /Drag
 
 provides: [Drag.Move]

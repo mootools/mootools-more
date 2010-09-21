@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Request.HTML
+  - Core:1.2.4/Request.HTML
   - /Class.Binds
   - /Class.Occlude
   - /Spinner

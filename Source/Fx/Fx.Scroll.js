@@ -13,9 +13,9 @@ authors:
   - Valerio Proietti
 
 requires:
-  - Core/Fx
-  - Core/Element.Event
-  - Core/Element.Dimensions
+  - Core:1.2.4/Fx
+  - Core:1.2.4/Element.Event
+  - Core:1.2.4/Element.Dimensions
   - /MooTools.More
 
 provides: [Fx.Scroll]

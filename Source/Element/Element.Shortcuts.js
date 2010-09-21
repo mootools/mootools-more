@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Element.Style
+  - Core:1.2.4/Element.Style
   - /MooTools.More
 
 provides: [Element.Shortcuts]

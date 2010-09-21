@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - Core/Element
+  - Core:1.2.4/Element
   - /MooTools.More
 
 provides: [Element.Forms]
