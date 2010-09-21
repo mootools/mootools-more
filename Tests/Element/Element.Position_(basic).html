@@ -51,6 +51,32 @@ makeActions([
 	},
 	{
 		fn: function(){
+			// respects minimum option, upperleft to upperleft
+			$('box').position({
+				ignoreMargins: true,
+				relativeTo: $('foo'),
+				position: 'upperLeft',
+				minimum: {x: 460, y: 60}
+			});
+		},
+		title: 'upper left to upper left with minimum',
+		description: 'respects minimum option, puts the upper left of the red box close to the upper left of the larger box.'
+	},
+	{
+		fn: function(){
+			// respects maximum option, upperleft to upperleft
+			$('box').position({
+				ignoreMargins: true,
+				relativeTo: $('foo'),
+				position: 'upperLeft',
+				maximum: {x: 440, y: 40}
+			});
+		},
+		title: 'upper left to upper left with maximum',
+		description: 'respects maximum option, puts the upper left of the red box just outside of the the upper left of the larger box.'
+	},
+	{
+		fn: function(){
 			//bottom right to bottom right
 			$('box').position({ignoreMargins: true, relativeTo: $('foo'), position: 'bottomRight', edge: 'bottomRight'});
 		},
