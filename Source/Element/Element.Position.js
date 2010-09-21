@@ -186,7 +186,7 @@ Element.implement({
 		['minimum', 'maximum'].each(function(minmax){
 			['left', 'top'].each(function(lr){
 				var val = options[minmax] ? options[minmax][xy[lr]] : null;
-				if (val != null && pos[lr] < val) pos[lr] = val;
+				if (val != null && ((minmax == 'minimum') ? pos[lr] < val : pos[lr] > val)) pos[lr] = val;
 			});
 		});
 
