@@ -140,7 +140,11 @@ var Sortables = new Class({
 	},
 
 	start: function(event, element){
-		if (!this.idle || event.rightClick) return;
+		if (
+			!this.idle ||
+			event.rightClick ||
+			['button', 'input'].contains(event.target.get('tag'))
+		) return;
 
 		this.idle = false;
 		this.element = element;
