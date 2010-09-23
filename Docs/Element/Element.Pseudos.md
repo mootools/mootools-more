@@ -11,12 +11,23 @@ The event will only fire once. The once pseudo will remove itself after the firs
 
 ### Example
 
-	var myElement = document.id('myElement');
 	myElement.addEvent('click:once', function(){
 		alert('you clicked me');
 	});
 
 	// If the user clicks the element twice, it will only once alert 'you clicked me'
+
+
+Pseudo: keys {#Pseudos:keys}
+----------------------------
+
+The event will only fire when a key combination is pressed. This only works with the `keydown` and `keyup` events.
+
+### Example
+
+	myElement.addEvent('keydown:keys(shift+a+b)', function(){
+		alert('You pressed the following keys: shift, a and b');
+	});
 
 
 Event {#Event}
@@ -42,7 +53,7 @@ It's possible to define your own pseudos with Event.definePseudo
 	- event - (*string*) the part before the `:`
 	- value - (*string*) between `(` and `)`
 	- pseudo - (*string*) between the `:` and `(`
-	- original - (*string*) the original event name, thus `event:pseudo(selector)`
+	- original - (*string*) the original event name, thus `event:pseudo(value)`
 2. fn - (*function*) This is the function that has been passed in the `addEvent` method. So it is the 'fn' in `myEvent.addEvent('event:pseudo', fn)`
 3. args - (*array*) An array with arguments. The [Event][] object is in most cases the first element.
 
