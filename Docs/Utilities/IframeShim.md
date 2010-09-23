@@ -118,7 +118,7 @@ This will remove the iframe from memory.
 Type: Element {#Element}
 ==========================
 
-Extends the native Element object with a reference to its [IframeShim][] instance.
+Extends the Element Type with a reference to its [IframeShim][] instance.
 
 Element property: IframeShim {#Element:IframeShim}
 ------------------------------------------------

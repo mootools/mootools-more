@@ -1,15 +1,14 @@
 Class: Class.Occlude {#Class-Occlude}
-=======================
+=====================================
 
 Prevents a class from applying itself to an element that already has had the class applied.
 
 ### Tutorial/Demo
 
 * [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/01.1-class.extras/03-occlude
 
 Class.Occlude Method: occlude {#Class-Occlude:occlude}
-----------------------------------------
+------------------------------------------------------
 
 Determines if the class has already been applied to the element.
 
@@ -36,8 +35,8 @@ Determines if the class has already been applied to the element.
 
 See the two properties below for ideal usage.
 
-Class property: property {#Class:property}
-----------------------------------------------
+Class property: property {#Class-Occlude:property}
+--------------------------------------------------
 
 The string used to bind the instance of the class to the element.
 
@@ -53,8 +52,10 @@ The string used to bind the instance of the class to the element.
 		}
 	});
 
+
 ### Note
 
 In the example above, because we have a *this.element* property and because we define the *this.property* property in the class, the method *occlude* doesn't require any arguments as it uses these by default.
 
+[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/01.1-class.extras/03-occlude
 [Element.Storage]: http://mootools.net/docs/core/Element/Element#Element:store

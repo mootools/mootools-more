@@ -1,8 +1,7 @@
 Class: Keyboard {#Keyboard}
 =============================
 
-
-### Added Methods
+Adds some methods for creating shortcuts to the [Keyboard][] Class.
 
 Keyboard Method: addShortcut {#Keyboard:addShortcut}
 ----------------------------------------
@@ -39,16 +38,16 @@ Same as addShortcut but can send many as key, value pairs.
 
 	myKeyboard.addShortcut({
 		'save', {
-    	'keys': 'ctrl+s',
-    	'description': 'Save the current document',
-    	'handler': doSaveFunc
+	    	'keys': 'ctrl+s',
+	    	'description': 'Save the current document',
+	    	'handler': doSaveFunc
 		},
 		'open', {
 			'keys': 'ctrl+o',
 			'description': 'Open a document',
 			'handler': doOpenFunc
 		}
-  });
+	});
 
 ### Arguments
 
@@ -88,7 +87,7 @@ Get a shortcut with the name passed in.
 
 ### Returns
 
-* (*object | null *) The shortcut with the name if found.
+* (*object* or *null*) The shortcut with the name if found.
 
 
 Static Method: Keyboard.rebind {#Keyboard:rebind}
@@ -98,12 +97,12 @@ Unbinds the shortcuts passed in and rebinds them to the keys that are passed in.
 
 ### Syntax
 
-  myKeyboard.rebind('shift+s', shortcutObjs);
+	myKeyboard.rebind('shift+s', shortcutObjs);
 
 ### Arguments
 
 * keys - (*string*) The new shortcut for the shortcuts.
-* shortcuts - (*object | array[object]*) One or more shortcuts to rebind.
+* shortcuts - (*object* or *array[object]*) One or more shortcuts to rebind.
 
 
 Static Method: Keyboard.getActiveShortcuts {#Keyboard:getActiveShortcuts}
@@ -113,11 +112,11 @@ Gets all active shortcuts using the passed in Keyboard or Keyboard.manager as a 
 
 ### Syntax
 
-  myKeyboard.getActiveShortcuts();
+	myKeyboard.getActiveShortcuts();
 
 ### Arguments
 
-* keyboard - (*object (optional)*) The Keyboard object used to start looking. Keyboard.manager by default.
+* keyboard - (*object*: optional) The Keyboard object used to start looking. Keyboard.manager by default.
 
 ### Returns
 
@@ -131,7 +130,7 @@ Goes through all active keyboards using the passed in keyboard or Keyboard.manag
 
 ### Syntax
 
-  Keyboard.getShortcut('save');
+	Keyboard.getShortcut('save');
 
 ### Arguments
 
@@ -140,7 +139,7 @@ Goes through all active keyboards using the passed in keyboard or Keyboard.manag
 
 ### Returns
 
-* (*object | null *) The shortcut with the name if found.
+* (*object* or *null*) The shortcut with the name if found.
 
 
 Static Method: Keyboard.getShortcuts {#Keyboard:getShortcuts}
@@ -150,7 +149,7 @@ Same as Keyboard.getShortcut but gets all that match the name.
 
 ### Syntax
 
-  myKeyboard.getShortcuts('save');
+	myKeyboard.getShortcuts('save');
 
 ### Arguments
 
@@ -161,3 +160,4 @@ Same as Keyboard.getShortcut but gets all that match the name.
 
 * (*array*) An array of shortcuts with the name passed in.
 
+[Keyboard]: /more/Interface/Keyboard

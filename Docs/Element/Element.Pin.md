@@ -1,6 +1,6 @@
 Type: Element {#Element}
 ========================
-Extends the [Element][] native object to include the *pin* method useful for fixed positioning for elements.
+Extends the [Element][] Type to include the *pin* method useful for fixed positioning for elements.
 
 ### Tutorial/Demo
 

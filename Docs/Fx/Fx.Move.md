@@ -84,7 +84,7 @@ Moves the element to provided destination or the destination specified in the op
 Type: Element {#Element}
 ==========================
 
-Extends the native Element object with [Fx.Move][] methods.
+Extends the Element Type with [Fx.Move][] methods.
 
 Element Property: move {#Element:move}
 -------------------------------------------------

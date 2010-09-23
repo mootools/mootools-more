@@ -213,7 +213,7 @@ This method is NOT a method on the instance. Rather it is on the namespace. So:
 Type: Element {#Element}
 ==========================
 
-Extends the native Element object with a reference to its [OverText][] instance.
+Extends the Element Type with a reference to its [OverText][] instance.
 
 Element property: OverText {#Element:overtext}
 ------------------------------------------------

@@ -184,7 +184,7 @@ These will execute these methods on the table element.
 Type: Element {#Element}
 ==========================
 
-Extends the native Element object with a reference to its [HtmlTable][] instance.
+Extends the Element Type with a reference to its [HtmlTable][] instance.
 
 Element property: HtmlTable {#Element:HtmlTable}
 --------------------------------------

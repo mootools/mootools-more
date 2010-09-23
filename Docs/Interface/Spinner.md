@@ -185,7 +185,7 @@ Retrieves the "build-in" instance of [Spinner][].
 Type: Element {#Element}
 ==========================
 
-Extends the native Element object with [Spinner][] methods.
+Extends the Element Type with [Spinner][] methods.
 
 Element Property: spinner {#Element-Properties:spinner}
 -------------------------------------------------------

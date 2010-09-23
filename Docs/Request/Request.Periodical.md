@@ -1,5 +1,5 @@
-Class: Request {#Request-Periodical}
-=====================================
+Class: Request Periodical
+=========================
 
 *Request.Periodical.js* extends [Request][], [Request.HTML][], and [Request.JSON][] to add methods that periodically request the same
 URL but increase the interval if no data is returned from the server. This helps reducing load on a server and prevents pointless requests.
@@ -38,7 +38,7 @@ If any valid response data is returned it resets the interval and executes more 
 	// interval until the next request that returns data resets the interval.
 	// This example uses a limit so the maximum interval will be 15 seconds.
 
-Request Method: startTimer {#Request-Periodical:startTimer}
+Request Method: startTimer {#Request:startTimer}
 ------------------------------------------------------
 
 Starts requesting the URL given by the initial options

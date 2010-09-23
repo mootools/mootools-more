@@ -1,7 +1,7 @@
 Type: Element {#Element}
 ==========================
 
-Extends the [Element][] native object to include methods useful in managing inputs.
+Extends the [Element][] Type to include methods useful in managing inputs.
 
 ### Tutorial/Demo
 
@@ -229,4 +229,3 @@ Inserts two strings around the selected text.
 [Element:get]: /core/Element/Element#Element:get
 [Element:set]: /core/Element/Element#Element:set
 [Element:erase]: /core/Element/Element#Element:erase
-[Hash]: /more/Native/Hash

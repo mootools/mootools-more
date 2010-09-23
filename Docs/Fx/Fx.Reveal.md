@@ -90,7 +90,7 @@ Toggles the element from shown to hidden.
 Type: Element {#Element}
 ==========================
 
-Extends the native Element object with [Fx.Reveal][] methods.
+Extends the Element Type with [Fx.Reveal][] methods.
 
 Element Property: reveal {#Element-Properties:reveal}
 ---------------------------------------------------

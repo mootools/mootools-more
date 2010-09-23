@@ -1,5 +1,5 @@
-Class: HtmlTable.Select {#HtmlTable.Select}
-===========================================
+Class: HtmlTable.Select {#HtmlTable}
+=====================================
 
 Adds the ability to select rows in a table.
 

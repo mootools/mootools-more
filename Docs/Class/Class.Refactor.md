@@ -1,5 +1,5 @@
-Native: Class {#Class}
-=====================
+Class: Class.Refactor {#Class}
+==============================
 
 Extends [Class][].
 
@@ -8,7 +8,7 @@ Extends [Class][].
 * [Online Tutorial/Demo][]
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/01.1-class.extras/00-class.refactor
 
-Class Static Method: refactor {#Class-refactor}
+Class Static Method: refactor {#Class:Class-refactor}
 -----------------------------------------------
 
 Implements properties into a class preserving the previous state of methods so you can reference them..

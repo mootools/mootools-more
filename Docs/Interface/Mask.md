@@ -131,10 +131,10 @@ Reasserts the dimensions of the overlay layer. Note that this method is called w
 
 * (*object*) This instance of [Mask][]
 
-Native: Element {#Element}
+Type: Element {#Element}
 ==========================
 
-Extends the native Element object with [Mask][] methods.
+Extends the Element Type with [Mask][] methods.
 
 Element Property: mask {#Element-Properties:mask}
 ---------------------------------------------------

@@ -1,6 +1,6 @@
 Type: Element {#Element}
 ==========================
-Extends the [Element][] native object with the method *position* which sets the location of an element relative to another.
+Extends the [Element][] Type with the method *position* which sets the location of an element relative to another.
 
 ### Tutorial/Demo
 
