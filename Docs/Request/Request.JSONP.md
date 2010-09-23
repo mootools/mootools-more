@@ -1,12 +1,11 @@
 Class: Request.JSONP {#Request-JSONP}
-=====================
+=====================================
 
 Creates a JSON request using script tag injection and handles the callbacks for you.
 
 ### Tutorial/Demo
 
 * [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/06-request/00-jsonp
 
 ### Implements
 
@@ -23,21 +22,27 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 ### Options
 
 * url - (*url*) the url to get the JSON data
-* callbackKey - (*string*) the key in the url that the server uses to wrap the JSON results. So, for example, if you used *callbackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; defaults to "callback". This must be defined correctly.
+* callbackKey - (*string*: defaults to *callback*) the key in the url that the server uses to wrap the JSON results. So, for example, if you used *callbackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; This must be defined correctly.
 * data - (*object*) additional key/value data to append to the url
-* retries - (*integer*; defaults to *zero*) if this value is a positive integer, the JSONP request will abort after the duration specified in the *timeout* option and fire again until the number of retries has been exhausted.
-* timeout - (*integer*; defaults to *zero*) the duration to wait before aborting a request or retrying.
-* injectScript - (*mixed*; defaults to document head) where to inject the script elements used for the calls
-* log - (*boolean*) if *true*, sends logging messages to [Log][] (to console if it's defined). Defaults to *false*.
+* link       - (*string*: defaults to 'ignore') Can be 'ignore', 'cancel' and 'chain'.
+	* 'ignore' - Any calls made to start while the request is running will be ignored.
+	* 'cancel' - Any calls made to start while the request is running will take precedence over the currently running request. The new request will start immediately, canceling the one that is currently running.
+	* 'chain'  - Any calls made to start while the request is running will be chained up, and will take place as soon as the current request has finished, one after another.
+* timeout - (*integer*: defaults to *0*) timeout - (integer: defaults to 0) In conjunction with onTimeout event, it determines the amount of milliseconds before considering a connection timed out. (It's suggested to not use timeout with big files and only when knowing what's expected.)
+* injectScript - (*mixed*: defaults to document head) where to inject the script elements used for the calls
+* log - (*boolean*: defaults to *false*) if *true*, sends logging messages with `console.log` as default onRequest and onError events.
 
 ### Events
 
-* onComplete - (*function*, optional) callback to execute when the data returns; it will be passed the data and the instance of Request.JSONP that requested it.
+* onRequest - (*function*, optional) fired when the script tag is injected; it will pass the requested url and the script element.
+* onComplete - (*function*, optional) fired when the data returns; it will be passed the data and the instance of Request.JSONP that requested it.
+* onCancel - (*function*, optional) fired when the request is canceled.
+* onTimeout - (*function*, optional) fired when the timeout has been exceeded.
 
 ### Example
 
-	new Request.JSONP({
-	  url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
+	var myJSONP = new Request.JSONP({
+		url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
 		data: {
 			partTag: 'mtvo',
 			iod: 'hlPrice',
@@ -45,7 +50,12 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 			results: '100',
 			query: 'ipod'
 		},
-		onComplete: myFunction.bind(someObject)
+		onRequest: function(url){
+			// a script tag is created with a src attribute equal to url
+		},
+		onComplete: function(data){
+			// the request was completed.
+		}
 	}).send();
 
 The above example would generate this url:
@@ -54,24 +64,14 @@ The above example would generate this url:
 
 It would embed a script tag (in the head of the document) with this url and, when it loaded, execute the "myFunction" callback defined.
 
-### Logging
-
-*Request.JSONP* logs I/O operations to *MooTools.log*, which is a function that simply passes arguments into an array called *MooTools.logged*. You can redefine *MooTools.log* so that I/O operations show up in your preferred logger (like Firebug). Until you redefine it, log messages are cashed in the *MooTools.logged* array so that you can retrieve any messages already logged before you remap the method. For example, you might do this:
-
-		MooTools.log = console.log.bind(console);
-		//then dump any existing logs to the console:
-		MooTools.logged.each(function(log){
-			console.log.apply(console, log);
-		});
-
 Request.JSONP Method: send {#Request-JSONP:send}
---------------------------------------
+------------------------------------------------
 
 Executes the JSON request.
 
 ### Syntax
 
-	myJsonP.send([options]);
+	myJSONP.send([options]);
 
 ### Arguments
 
@@ -81,22 +81,41 @@ Executes the JSON request.
 
 * (*object*) This instance of [Request.JSONP][]
 
-Request.JSONP Method: send {#Request-JSONP:send}
---------------------------------------
 
-Executes the JSON request.
+Request.JSONP Method: cancel {#Request-JSONP:cancel}
+----------------------------------------------------
+
+Cancels the currently running request, if any.
 
 ### Syntax
 
-	myJsonP.send();
+	myJSONP.cancel();
 
 ### Returns
 
 * (*object*) This instance of [Request.JSONP][]
 
 
+Request.JSONP Method: isRunning {#Request-JSONP:isRunning}
+----------------------------------------------------------
+
+Returns true if the request is currently running
+
+### Syntax:
+
+	myRequest.isRunning()
+
+### Returns:
+
+* (*boolean*) True if the request is running
+
+### Example:
+
+	if (myJSONP.isRunning()) // It runs!
+
+
+[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/06-request/00-jsonp
 [Request.JSONP]: #Request-JSONP
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
-[Log]: /more/Core/Log
-[dbug]: /more/Core/dbug
+
