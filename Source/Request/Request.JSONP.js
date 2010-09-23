@@ -48,7 +48,7 @@ Request.JSONP = new Class({
 		url: '',
 		callbackKey: 'callback',
 		injectScript: document.head,
-		data: {},
+		data: '',
 		link: 'ignore',
 		timeout: 0,
 		log: false
@@ -92,7 +92,7 @@ Request.JSONP = new Class({
 
 		if (options.timeout){
 			(function(){
-				this.cancel().fireEvent('timeout', [script.get('src'), script]);
+				if (this.running) this.cancel().fireEvent('timeout', [script.get('src'), script]);
 			}).delay(options.timeout, this);
 		}
 
@@ -113,7 +113,11 @@ Request.JSONP = new Class({
 	},
 
 	cancel: function(){
-		return this.clear().fireEvent('cancel');
+		return this.running ? this.clear().fireEvent('cancel') : this;
+	},
+
+	isRunning: function(){
+		return !!this.running;
 	},
 
 	clear: function(){
