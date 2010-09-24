@@ -31,8 +31,7 @@ var getStylesList = function(styles, planes){
 	Object.each(planes, function(directions){
 		Object.each(directions, function(edge){
 			styles.each(function(style){
-				if (style == 'border') list.push(style + '-' + edge + '-width');
-				else list.push(style + '-' + edge);
+				list.push(style + '-' + edge + (style == 'border' ? '-width' : ''));
 			});
 		});
 	});
@@ -42,7 +41,7 @@ var getStylesList = function(styles, planes){
 var calculateEdgeSize = function(edge, styles){
 	var total = 0;
 	Object.each(styles, function(value, style){
-		if (style.test(edge)) total += value.toInt();
+		if (style.test(edge)) total = total + value.toInt();
 	});
 	return total;
 };
@@ -86,7 +85,7 @@ Element.implement({
 
 	getDimensions: function(options){
 		options = Object.merge({computeSize: false}, options);
-		var dim = {};
+		var dim = {x: 0, y: 0};
 
 		var getSize = function(el, options){
 			return (options.computeSize) ? el.getComputedSize(options) : el.getSize();
@@ -102,8 +101,6 @@ Element.implement({
 			try { //safari sometimes crashes here, so catch it
 				dim = getSize(this, options);
 			}catch(e){}
-		} else {
-			dim = {x: 0, y: 0};
 		}
 
 		return Object.append(dim, (dim.x || dim.x === 0) ? {
@@ -134,15 +131,12 @@ Element.implement({
 		var styles = {},
 			size = {width: 0, height: 0};
 
-		switch (options.mode){
-			case 'vertical':
-				delete size.width;
-				delete options.planes.width;
-				break;
-			case 'horizontal':
-				delete size.height;
-				delete options.planes.height;
-				break;
+		if (options.mode == 'vertical'){
+			delete size.width;
+			delete options.planes.width;
+		} else if (options.mode == 'horizontal'){
+			delete size.height;
+			delete options.planes.height;
 		}
 
 
