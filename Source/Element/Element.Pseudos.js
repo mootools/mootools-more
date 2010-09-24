@@ -33,13 +33,6 @@ Event.definePseudo = function(key, fn, proxy){
 };
 
 var proto = Element.prototype;
-Element.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent, proto.fireEvent));
-
-
-// IE9 fix
-try {
-	if (typeof HTMLElement != 'undefined')
-		HTMLElement.prototype.fireEvent = proto.fireEvent;
-} catch(e){}
+Element.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
 })();

@@ -6,24 +6,25 @@ License:
 	MIT-style license.
 */
 
-describe('Events.Pseudos', {
+describe('Events.Pseudos', function(){
 
-	'tests the :once pseudo': function(){
+	it('tests the :once pseudo', function(){
+
+		var fn = jasmine.createSpy('once pseudo');
 
 		var e = new Events();
-		var counter = 0;
-		e.addEvent('connect:once', function(){
-			counter++;
-		});
-		e.fireEvent('connect');
-		e.fireEvent('connect');
-		e.fireEvent('connect');
+		e.addEvent('connect:once', fn);
+		e.fireEvent('connect', 4);
+		e.fireEvent('connect', 3);
+		e.fireEvent('connect', 2);
 
-		value_of(counter).should_be(1);
+		expect(fn).toHaveBeenCalledWith(4);
+		expect(fn).not.toHaveBeenCalledWith(3);
+		expect(fn).not.toHaveBeenCalledWith(2);
 
-	},
+	});
 
-	'tests the Events.definePseudo function': function(){
+	it('tests the Events.definePseudo function', function(){
 
 		var eventFn =  function(){
 			return 'bar';
@@ -31,24 +32,32 @@ describe('Events.Pseudos', {
 		eventArgs = ['one', 'two', 'three'];
 
 		Events.definePseudo('test', function(split, fn, args){
-			value_of(split).should_be({
+			expect(split).toEqual({
 				event: 'e',
 				value: 'foo',
 				pseudo: 'test',
 				original: 'e:test(foo)'
 			});
-			value_of(fn).should_be(eventFn);
-			value_of(Array.from(args)).should_be(eventArgs);
+			expect(fn).toEqual(eventFn);
+			expect(Array.from(args)).toEqual(eventArgs);
 		});
 
 		var e = new Events();
 		e.addEvent('e:test(foo)', eventFn);
 		e.fireEvent('e', eventArgs);
 
-	}
+	});
 
+	it('test for the fireEvent of the originonal function', function(){
+
+		var fn = jasmine.createSpy('original event');
+
+		var e = new Events();
+		e.addEvent('click:once', fn);
+		e.fireEvent('click:once', 'foo');
+
+		expect(fn).toHaveBeenCalledWith('foo');
+
+	});
 
 });
-
-
-

@@ -17,7 +17,7 @@ provides: [Events.Pseudos]
 ...
 */
 
-Events.Pseudos = function(pseudos, addEvent, removeEvent, fireEvent){
+Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 	var storeKey = 'monitorEvents:';
 
@@ -65,17 +65,18 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent, fireEvent){
 				pseudoArgs = Array.from(pseudos[split.pseudo]);
 
 			var self = this;
-			var monitor = function(){
+			var monitorFn = function(){
 				pseudoArgs[0].call(self, split, fn, arguments, pseudoArgs[1]);
 			};
 
-			events.include({event: fn, monitor: monitor});
+			events.include({event: fn, monitor: monitorFn});
 			storage.store(type, events);
 
 			var eventType = split.event;
 			if (pseudoArgs[1] && pseudoArgs[1][eventType]) eventType = pseudoArgs[1][eventType].base;
 
-			return addEvent.call(this, eventType, monitor, internal);
+			addEvent.call(this, type, fn, internal);
+			return addEvent.call(this, eventType, monitorFn, internal);
 		},
 
 		removeEvent: function(type, fn){
@@ -91,36 +92,13 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent, fireEvent){
 			var eventType = split.event;
 			if (pseudoArgs[1] && pseudoArgs[1][eventType]) eventType = pseudoArgs[1][eventType].base;
 
+			removeEvent.call(this, type, fn);
 			events.each(function(monitor, i){
 				if (!fn || monitor.event == fn) removeEvent.call(this, eventType, monitor.monitor);
 				delete events[i];
 			}, this);
 
 			storage.store(type, events);
-			return this;
-		},
-
-		fireEvent: function(type, args, delay){
-			var split = splitType(type);
-			if (!split) return fireEvent.call(this, type, args, delay);
-
-			var storage = getStorage(this),
-				events = storage.retrieve(type),
-				pseudoArgs = Array.from(pseudos[split.pseudo]);
-
-			if (!events) return this;
-
-			var eventType = split.event;
-			if (pseudoArgs[1] && pseudoArgs[1][eventType]) eventType = pseudoArgs[1][eventType].base;
-
-			args = Array.from(args);
-
-			events.each(function(monitor, i){
-				var fn = monitor.event;
-				if (delay) fn.delay(delay, this, args);
-				else fn.apply(this, args);
-			}, this);
-
 			return this;
 		}
 
@@ -144,6 +122,6 @@ Events.definePseudo = function(key, fn){
 };
 
 var proto = Events.prototype;
-Events.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent,	proto.fireEvent));
+Events.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
 })();
