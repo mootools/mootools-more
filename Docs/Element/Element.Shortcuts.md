@@ -105,7 +105,7 @@ Removes one class and adds the other. If the one to remove is not found the one 
 	$(id).swapClass('green', 'blue'); // removes green, adds blue
 
 
-Static Method: document.clearSelection {#document:clearDocumentSelection}
+Static Method: document.clearSelection {#document:clearSelection}
 ----------------------------------------------
 
 Removes any document selection (text selection). **Can only be called on document**.
