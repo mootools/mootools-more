@@ -1,0 +1,47 @@
+<style>
+	div.container {
+		height: 800px;
+	}
+	#element {
+		width: 100px;
+		height: 100px;
+		background: black;
+		line-height: 30px;
+		text-align: center;
+		font-size: 16px;
+		color: white;
+	}
+	.padding {
+		height: 600px;
+	}
+</style>
+
+<div class="container">
+
+	<p>
+		The black box should always go to center when clicking each of the
+		three buttons -- important to test this relative to scrollPosition.
+		Scroll down for the other buttons.
+	</p>
+
+	<div id="element">Companion square</div>
+
+	<input type="button" value="Click here to position the element centered (1/3)" />
+
+	<div class="padding"></div>
+
+	<input type="button" value="Click here to position the element centered (2/3)" />
+
+	<div class="padding"></div>
+
+	<input type="button" value="Click here to position the element centered (3/3)" />
+
+</div>
+
+<script src="/depender/build?require=More/Element.Position,Core/Element.Event"></script>
+
+<script type="text/javascript">
+	$$('input').addEvent('click', function(){
+		document.id('element').position();
+	});
+</script>
