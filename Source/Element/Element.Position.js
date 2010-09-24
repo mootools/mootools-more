@@ -195,13 +195,10 @@ Element.implement({
 			pos.top+= winScroll.y;
 			pos.left+= winScroll.x;
 		}
-		var relScroll = rel.getScroll();
 		if (options.ignoreScroll){
+			var relScroll = rel.getScroll();
 			pos.top -= relScroll.y;
 			pos.left -= relScroll.x;
-		} else {
-			pos.top += relScroll.y;
-			pos.left += relScroll.x;
 		}
 
 		if (options.ignoreMargins){

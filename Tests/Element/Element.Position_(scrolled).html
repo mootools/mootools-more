@@ -1,0 +1,37 @@
+<style>
+	div.container {
+		height: 800px;
+  }
+  #element {
+    background: black;
+    color: white;
+    height: 100px;
+    width: 100px;
+  }
+</style>
+
+<div class="container">
+  <p> the black box should always go to center on clicking a button -- important to test this relative to scrollPosition`.
+  <div id="element">I'm an element</div>
+  <input type="button" value="Click here to position the element centered" />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <input type="button" value="Click here to position the element centered" />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <input type="button" value="Click here to position the element centered" />
+
+</div>
+<script src="/depender/build?require=More/Element.Position,Core/Element.Event"></script>
+<script>
+  $$('input').addEvent('click', function(){
+        $('element').position();
+   });
+
+</script>
