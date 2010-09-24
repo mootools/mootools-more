@@ -45,13 +45,13 @@ Element.implement({
 				x: 'center', //left, center, right
 				y: 'center' //top, center, bottom
 			},
+			offset: {x: 0, y: 0}/*,
 			edge: false,
-			offset: {x: 0, y: 0},
 			returnPos: false,
 			relFixedPosition: false,
 			ignoreMargins: false,
 			ignoreScroll: false,
-			allowNegative: false
+			allowNegative: false*/
 		}, options);
 
 		//compute the offset of the parent positioned element if this element is in one

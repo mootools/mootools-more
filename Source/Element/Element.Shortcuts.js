@@ -43,7 +43,7 @@ Element.implement({
 			//IE fails here if the element is not in the dom
 			d = this.getStyle('display');
 		} catch(e){}
-		if (d == "none") return this;
+		if (d == 'none') return this;
 		return this.store('element:_originalDisplay', d || '').setStyle('display', 'none');
 	},
 
@@ -56,9 +56,11 @@ Element.implement({
 	swapClass: function(remove, add){
 		return this.removeClass(remove).addClass(add);
 	}
+
 });
 
 Document.implement({
+
 	clearSelection: function(){
 		if (document.selection && document.selection.empty){
 			document.selection.empty();
@@ -67,4 +69,5 @@ Document.implement({
 			if (selection && selection.removeAllRanges) selection.removeAllRanges();
 		}
 	}
+
 });
