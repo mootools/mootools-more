@@ -1,5 +1,5 @@
 Class: Keyboard {#Keyboard}
-=================================
+===========================
 
 Keyboard takes out the need to have logic in key events to check which buttons are pressed.  The class fires individual events for keys (individual key events are referred to as sub-events in this documentation) and provides methodology to disable and enable the listeners assigned to a Keyboard instance. Modifiers are allowed.
 

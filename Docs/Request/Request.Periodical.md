@@ -1,5 +1,5 @@
-Class: Request Periodical
-=========================
+Class: Request Periodical {#Request}
+====================================
 
 *Request.Periodical.js* extends [Request][], [Request.HTML][], and [Request.JSON][] to add methods that periodically request the same
 URL but increase the interval if no data is returned from the server. This helps reducing load on a server and prevents pointless requests.

@@ -1,7 +1,7 @@
 Class: Class.Binds {#Class-Binds}
 =================================
 
-Extends [Class][]; this is a mutator. It binds methods to the class instance so it is easier to pass them as callbacks whithout loosing Class instance context (`this`).
+Extends [Class][]; this is a mutator. It binds methods to the class instance so it is easier to pass them as callbacks whithout losing Class instance context (`this`).
 
 ### Tutorial/Demo
 
@@ -18,7 +18,7 @@ Extends [Class][]; this is a mutator. It binds methods to the class instance so 
 		},
 
 		show: function(){
-			// this now always refers to the class instance context
+			// this now always refers to the class instance
 		}
 
 	});

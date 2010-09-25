@@ -43,6 +43,7 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 
 	var myJSONP = new Request.JSONP({
 		url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
+		callbackKey: 'jsoncallback',
 		data: {
 			partTag: 'mtvo',
 			iod: 'hlPrice',

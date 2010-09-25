@@ -1,5 +1,5 @@
 Class: HtmlTable.Sort {#HtmlTable}
-===================================
+==================================
 
 Makes headers of HtmlTable clickable to sort the rows.
 

@@ -1,5 +1,5 @@
 Class: Keyboard {#Keyboard}
-=============================
+===========================
 
 Adds some methods for creating shortcuts to the [Keyboard][] Class.
 
