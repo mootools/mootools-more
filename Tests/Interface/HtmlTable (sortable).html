@@ -55,10 +55,28 @@ th.table-th-sort-rev {
 		</tr>
 	</tbody>
 </table>
+<p>Date should support sorting with empty fields</p>
+<table id="date_sort_w_empty">
+	<thead>
+		<tr>
+			<th>col 1</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>1/10/2010</td></tr>
+		<tr><td>Jan 12, 2010</td></tr>
+		<tr><td></td></tr>
+		<tr><td>10-12-2010</td></tr>
+	</tbody>
+</table>
 <script src="/depender/build?require=More/HtmlTable.Sort"></script>
 <script>
 new HtmlTable($('hidden_sorts'), {
 	sortable: true
+});
+new HtmlTable($('date_sort_w_empty'), {
+	sortable: true,
+	parsers: ['date']
 });
 var t = new HtmlTable({
 	sortable: true,
