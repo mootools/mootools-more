@@ -395,8 +395,9 @@ describe('Date.parse', {
 	},
 
 	'should parse a string value into a date': function(){
-		Locale.list().each(function(lang){
-			Locale.use(lang);
+//		Reverse parsing localized date strings?
+//		Locale.list().each(function(lang){
+//			Locale.use(lang);
 
 			var d = new Date(2000, 11, 2, 0, 0, 0, 0);
 			value_of(Date.parse(d.format('%x'))).should_be(d);
@@ -424,8 +425,8 @@ describe('Date.parse', {
 
 			d = new Date().clearTime();
 			value_of(Date.parse(d.set({date: 1, mo: d.getMonth()}).format('%B'))).should_be(d);
-		});
-		Locale.use('en-US');
+//		});
+//		Locale.use('en-US');
 	},
 
 	'should consistently parse dates on any day/month/year': function(){
