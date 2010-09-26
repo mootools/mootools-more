@@ -48,7 +48,7 @@ describe('Events.Pseudos', function(){
 
 	});
 
-	it('test for the fireEvent of the originonal function', function(){
+	it('test for the fireEvent of the original function', function(){
 
 		var fn = jasmine.createSpy('original event');
 

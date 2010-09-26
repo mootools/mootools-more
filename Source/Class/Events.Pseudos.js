@@ -21,7 +21,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 	var storeKey = 'monitorEvents:';
 
-	var getStorage = function(object){
+	var storageOf = function(object){
 
 		return {
 			store: object.store ? function(key, value){
@@ -60,37 +60,39 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var split = splitType(type);
 			if (!split) return addEvent.call(this, type, fn, internal);
 
-			var storage = getStorage(this),
+			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
-				pseudoArgs = Array.from(pseudos[split.pseudo]);
+				pseudoArgs = Array.from(pseudos[split.pseudo]),
+				proxy = pseudoArgs[1];
 
 			var self = this;
-			var monitorFn = function(){
-				pseudoArgs[0].call(self, split, fn, arguments, pseudoArgs[1]);
+			var monitor = function(){
+				pseudoArgs[0].call(self, split, fn, arguments, proxy);
 			};
 
-			events.include({event: fn, monitor: monitorFn});
+			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
 
 			var eventType = split.event;
-			if (pseudoArgs[1] && pseudoArgs[1][eventType]) eventType = pseudoArgs[1][eventType].base;
+			if (proxy && proxy[eventType]) eventType = proxy[eventType].base;
 
 			addEvent.call(this, type, fn, internal);
-			return addEvent.call(this, eventType, monitorFn, internal);
+			return addEvent.call(this, eventType, monitor, internal);
 		},
 
 		removeEvent: function(type, fn){
 			var split = splitType(type);
 			if (!split) return removeEvent.call(this, type, fn);
 
-			var storage = getStorage(this),
+			var storage = storageOf(this),
 				events = storage.retrieve(type),
-				pseudoArgs = Array.from(pseudos[split.pseudo]);
+				pseudoArgs = Array.from(pseudos[split.pseudo]),
+				proxy = pseudoArgs[1];
 
 			if (!events) return this;
 
 			var eventType = split.event;
-			if (pseudoArgs[1] && pseudoArgs[1][eventType]) eventType = pseudoArgs[1][eventType].base;
+			if (proxy && proxy[eventType]) eventType = proxy[eventType].base;
 
 			removeEvent.call(this, type, fn);
 			events.each(function(monitor, i){
