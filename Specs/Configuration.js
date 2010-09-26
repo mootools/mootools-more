@@ -116,7 +116,7 @@ Configuration.source = {
 			'Element/Element.Style',
 			'Element/Element.Dimensions',
 
-			'Utilities/DomReady',
+			'Utilities/DOMReady',
 			'Utilities/JSON',
 			'Utilities/Cookie',
 			'Utilities/Swiff',
