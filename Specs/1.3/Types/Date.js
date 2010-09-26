@@ -456,6 +456,20 @@ describe('Date.parse', function(){
 		Date.prototype.clearTime = clearTime;
 	});
 
+
+	it('should parse 1st, Oct 31 and 31 Oct correctly', function(){
+
+		var now = new Date();
+		expect(Date.parse('1st').format('%m/%d')).toEqual(now.format('%m/01'));
+
+		expect(Date.parse('1st Oct').format('%m/%d')).toEqual('10/01');
+		expect(Date.parse('Oct 1st').format('%m/%d')).toEqual('10/01');
+
+		expect(Date.parse('31 Oct').format('%m/%d')).toEqual('10/31');
+		expect(Date.parse('Oct 31').format('%m/%d')).toEqual('10/31');
+
+	});
+
 });
 
 })(this);
