@@ -323,7 +323,7 @@ describe('Date.format', {
 	'should return accented dates in correct abbreviated form': function(){
 		Locale.use('fr-FR');
 		d = new Date('Thu Feb 20 1997 01:02:03');
-		value_of(d.format('%b')).should_be('Fév');
+		value_of(d.format('%b')).should_be('févr.');
 		Locale.use('en-US');
 	}
 

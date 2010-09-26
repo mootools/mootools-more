@@ -21,9 +21,9 @@ provides: [Locale.ca-CA.Date]
 Locale.define('ca-CA', 'Date', {
 
 	months: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juli', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
-	months_abbr: ['Gen', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Des'],
+	months_abbr: ['gen.', 'febr.', 'març', 'abr.', 'maig', 'juny', 'jul.', 'ag.', 'set.', 'oct.', 'nov.', 'des.'],
 	days: ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'],
-	days_abbr: ['Dmg', 'Dll', 'Dmt', 'Dmc', 'Dj', 'Dv', 'Ds'],
+	days_abbr: ['dg', 'dl', 'dt', 'dc', 'dj', 'dv', 'ds'],
 
 	// Culture's date order: DD/MM/YYYY
 	dateOrder: ['date', 'month', 'year'],
