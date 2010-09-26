@@ -1,0 +1,42 @@
+<style>
+.validation-advice {
+	color: red;
+	padding: 10px 0px;
+}
+dd{
+	margin:0;
+	padding:0;
+}
+input.text  {
+	border:1px solid #333333;
+	margin:5px 0;
+	padding:5px;
+	display:block;
+}
+
+input.warning{
+	background:#FFF1CE;
+	border:1px solid #F8B919;
+}
+
+</style>
+
+<p>Warnings should be added, but <em>also</em> removed...</p>
+
+<form id="foo2">
+This input should give a warning if left empty.
+	<input name="a" class="text warn-required">
+	<input type="submit">
+</form>
+<script src="/depender/build?require=More/Form.Validator.Inline,More/Fx.Reveal,More/Fx.Scroll"></script>
+<script type="text/javascript">
+	new Form.Validator.Inline('foo2', {
+		serial: false,
+		onFormValidate: function(passed, form, event){
+			event.stop();
+			if (passed) alert('form validated');
+			else alert('form did NOT validate');
+		}
+	});
+</script>
+

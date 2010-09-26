@@ -26,15 +26,6 @@ provides: [HtmlTable.Sort]
 ...
 */
 
-if(!HtmlTable.prototype.serialize) { 
-	HtmlTable.implement('serialize', function () {
-		return {};
-	});
-}
-if(!HtmlTable.prototype.restore) {
-	HtmlTable.implement('restore', $empty);
-}
-
 HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {/*
@@ -77,18 +68,22 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.previous.apply(this, arguments);
 		if (this.sortEnabled) this.detectParsers();
 	},
-
+	
 	detectParsers: function(force){
 		if (!this.head) return;
 		var parsers = this.options.parsers, 
-		rows = this.body.rows;
+				rows = this.body.rows;
 
 		// auto-detect
-		this.wrapTableHeadersForPositioning();
 		this.parsers = $$(this.head.cells).map(function(cell, index) {
 			if (!force && (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser'))) return cell.retrieve('htmltable-parser');
-			var headerWrapper = this.headerWrappers[index];
-			var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(headerWrapper, 'top');
+			var thDiv = new Element('div');
+			$each(cell.childNodes, function(node) {
+				thDiv.adopt(node);
+			});
+			thDiv.inject(cell);
+			var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
+			
 			this.sortSpans.push(sortSpan);
 
 			var parser = parsers[index], 
@@ -123,22 +118,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 		var index = Array.indexOf(this.head.cells, el);
 		this.sort(index);
 		return false;
-	},
-
-	serialize: function() {
-		var previousSerialization = this.previous.apply(this, arguments);
-		if (this.options.sortable) {
-			previousSerialization.sortIndex = this.sorted.index;
-			previousSerialization.sortReverse = this.sorted.reverse;
-		}
-		return previousSerialization;
-	},
-
-	restore: function(tableState) {
-		if(this.options.sortable && tableState.sortIndex) {
-			this.sort(tableState.sortIndex, tableState.sortReverse);
-		}
-		this.previous.apply(this, arguments);
 	},
 
 	sort: function(index, reverse, pre) {
@@ -222,7 +201,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 					group = item.value;
 					row.removeClass(classGroup).addClass(classGroupHead);
 				}
-				if (this.options.zebra) this.zebra(row, i - (data.length - 1) * -1); 
+				if (this.options.zebra) this.zebra(row, i);
 
 				row.cells[index].addClass(classCellSort);
 			}
@@ -235,7 +214,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 		data = null;
 		if (rel) rel.grab(body);
 
-		this.fireEvent('stateChanged');
 		return this.fireEvent('sort', [body, index]);
 	},
 
@@ -268,7 +246,8 @@ HtmlTable.Parsers = new Hash({
 	'date': {
 		match: /^\d{2}[-\/ ]\d{2}[-\/ ]\d{2,4}$/,
 		convert: function() {
-			return Date.parse(this.get('text').stripTags()).format('db');
+			var d = Date.parse(this.get('text').stripTags());
+			return $type(d) == 'date' ? d.format('db') : '';
 		},
 		type: 'date'
 	},

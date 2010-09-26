@@ -87,7 +87,7 @@ Request.JSONP = new Class({
 						script.destroy();
 						this.send(options, index).fireEvent('retry', this.triesRemaining[index]);
 					}
-				} else if(script && this.options.timeout){
+				} else if(this.running && script && this.options.timeout){
 					script.destroy();
 					this.cancel().fireEvent('failure');
 				}
@@ -126,6 +126,7 @@ Request.JSONP = new Class({
 	},
 
 	success: function(args, script){
+		if (!this.running) return false;
 		if (script) script.destroy();
 		this.running = false;
 		this.log('JSONP successfully retrieved: ', args);

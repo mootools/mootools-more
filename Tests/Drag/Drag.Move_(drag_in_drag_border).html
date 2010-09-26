@@ -1,0 +1,48 @@
+<style>
+
+#big_drag
+{
+	border-top: 5px solid black;
+	border-left: 2px solid black;
+	border-right: 8px solid black;
+	border-bottom: 1px solid black;
+	width: 150px;
+	padding: 5px;
+	padding-top: 30px;
+	position: relative;
+}
+
+#wrap
+{
+	width: 150px;
+	height: 150px;
+	background-color: #bcd;
+}
+
+#small_drag
+{
+	width: 30px;
+	height: 30px;
+	background-color: #567;
+	border: 4px solid red;
+}
+
+</style>
+
+	<p>you should be able to drag the dark blue box to be flush within the lighter blue box's edges. Should register correctly with inner border offset.</p>
+
+	<div id="big_drag">
+		<div id="wrap">
+			<div id="small_drag"></div>
+		</div>
+	</div>
+
+<script src="/depender/build?require=More/Drag.Move"></script>
+<script>
+
+
+new Drag.Move('small_drag', {
+		container: 'wrap',
+		stopPropagation: true});
+
+</script>

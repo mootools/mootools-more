@@ -71,7 +71,7 @@ var Slider = new Class({
 		
 		this.setRange(this.options.range);
 
-		this.knob.setStyle('position', 'relative').setStyle(this.property, this.options.initialStep ? this.toPosition(this.options.initialStep) : - this.options.offset);
+		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
 
@@ -100,6 +100,7 @@ var Slider = new Class({
 
 		this.drag = new Drag(this.knob, dragOptions);
 		this.attach();
+		if (this.options.initialStep) this.set(this.options.initialStep)
 	},
 
 	attach: function(){

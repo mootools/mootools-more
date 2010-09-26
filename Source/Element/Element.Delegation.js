@@ -108,3 +108,8 @@ provides: [Element.Delegation]
 	});
 
 })(Element.prototype.addEvent, Element.prototype.removeEvent);
+
+try {
+	if (typeof HTMLElement != 'undefined')
+		HTMLElement.prototype.fireEvent = Element.prototype.fireEvent;
+} catch(e){}
