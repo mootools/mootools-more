@@ -225,7 +225,7 @@ Element property: OverText {#Element:overtext}
 
 [Overtext]: #OverText
 [OverText.reposition]: #OverText:reposition
-[Element.position]: /more/Native/Element.Position#Element:position
+[Element.position]: /more/Element/Element.Position#Element:position
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 [Class.Binds]: /more/Class/Class.Binds
