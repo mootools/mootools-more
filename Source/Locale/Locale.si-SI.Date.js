@@ -27,7 +27,9 @@ var pluralize = function(n, one, two, three, other){
 Locale.define('si-SI', 'Date', {
 
 	months: ['januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'september', 'oktober', 'november', 'december'],
+	months_abbr: ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec'],
 	days: ['nedelja', 'ponedeljek', 'torek', 'sreda', 'četrtek', 'petek', 'sobota'],
+	days_abbr: ['ned', 'pon', 'tor', 'sre', 'čet', 'pet', 'sob'],
 
 	// Culture's date order: DD.MM.YYYY
 	dateOrder: ['date', 'month', 'year'],

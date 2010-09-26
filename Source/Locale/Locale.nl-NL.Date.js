@@ -22,7 +22,9 @@ provides: [Locale.nl-NL.Date]
 Locale.define('nl-NL', 'Date', {
 
 	months: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
+	months_abbr: ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
 	days: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
+	days_abbr: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
 
 	// Culture's date order: DD-MM-YYYY
 	dateOrder: ['date', 'month', 'year'],

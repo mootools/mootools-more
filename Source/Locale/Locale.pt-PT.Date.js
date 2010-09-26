@@ -21,7 +21,9 @@ provides: [Locale.pt-PT.Date]
 Locale.define('pt-PT', 'Date', {
 
 	months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+	months_abbr: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
 	days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+	days_abbr: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
 
 	// Culture's date order: DD-MM-YYYY
 	dateOrder: ['date', 'month', 'year'],
@@ -31,7 +33,7 @@ Locale.define('pt-PT', 'Date', {
 	PM: 'PM',
 
 	// Date.Extras
-	ordinal: '&ordm;',
+	ordinal: 'º',
 
 	lessThanMinuteAgo: 'há menos de um minuto',
 	minuteAgo: 'há cerca de um minuto',

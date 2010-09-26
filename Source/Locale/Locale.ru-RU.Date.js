@@ -14,7 +14,7 @@ authors:
 requires:
   - /Locale
 
-provides: [Locale.ru-RU-unicode.Date]
+provides: [Locale.ru-RU.Date]
 
 ...
 */
@@ -41,10 +41,12 @@ var pluralize = function (n, one, few, many, other){
 	}
 };
 
-Locale.define('ru-RU-unicode', 'Date', {
+Locale.define('ru-RU', 'Date', {
 
 	months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+	months_abbr: ['янв', 'февр', 'март', 'апр', 'май','июнь','июль','авг','сент','окт','нояб','дек'],
 	days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+	days_abbr: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
 
 	// Culture's date order: DD.MM.YYYY
 	dateOrder: ['date', 'month', 'year'],
@@ -85,5 +87,11 @@ Locale.define('ru-RU-unicode', 'Date', {
 	yearsUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'год', 'года', 'лет') + ''; }
 
 });
+
+//<1.2compat>
+
+Locale.define('ru-RU-unicode').inherit('ru-RU', 'Date');
+
+//</1.2compat>
 
 })();

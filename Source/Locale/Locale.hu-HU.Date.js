@@ -21,7 +21,9 @@ provides: [Locale.hu-HU.Date]
 Locale.define('hu-HU', 'Date', {
 
 	months: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
+	months_abbr: ['jan.', 'febr.', 'márc.', 'ápr.', 'máj.', 'jún.', 'júl.', 'aug.', 'szept.', 'okt.', 'nov.', 'dec.'],
 	days: ['Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'],
+	days_abbr: ['V', 'H', 'K', 'Sze', 'Cs', 'P', 'Szo'],
 
 	// Culture's date order: YYYY.MM.DD.
 	dateOrder: ['year', 'month', 'date'],

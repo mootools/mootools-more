@@ -21,7 +21,9 @@ provides: [Locale.sv-SE.Date]
 Locale.define('sv-SE', 'Date', {
 
 	months: ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'],
+	months_abbr: ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
 	days: ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'],
+	days_abbr: ['sön', 'mån', 'tis', 'ons', 'tor', 'fre', 'lör'],
 
 	// Culture's date order: YYYY-MM-DD
 	dateOrder: ['year', 'month', 'date'],

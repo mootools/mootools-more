@@ -21,7 +21,9 @@ provides: [Locale.ja-JP.Date]
 Locale.define('ja-JP', 'Date', {
 
 	months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+	months_abbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
 	days: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+	days_abbr: ['日', '月', '火', '水', '木', '金', '土'],
 
 	// Culture's date order: YYYY/MM/DD
 	dateOrder: ['year', 'month', 'date'],
