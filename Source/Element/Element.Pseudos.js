@@ -19,19 +19,20 @@ provides: [Element.Pseudos]
 
 (function(){
 
-	var pseudos = {
+var pseudos = {
 
-		once: function(split, fn, args){
-			fn.apply(this, args);
-			this.removeEvent(split.original, fn);
-		}
+	once: function(split, fn, args){
+		fn.apply(this, args);
+		this.removeEvent(split.original, fn);
+	}
 
-	};
+};
 
-	Event.definePseudo = function(key, fn, proxy){
-		pseudos[key] = [fn, proxy];
-	};
+Event.definePseudo = function(key, fn, proxy){
+	pseudos[key] = [fn, proxy];
+};
 
-	Element.implement(Events.Pseudos(pseudos, Element.prototype.addEvent, Element.prototype.removeEvent));
+var proto = Element.prototype;
+Element.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
 })();
