@@ -31,16 +31,16 @@ var Spinner = new Class({
 
 	options: {/*
 		message: false,*/
-		'class':'spinner',
+		'class': 'spinner',
 		containerPosition: {},
 		content: {
-			'class':'spinner-content'
+			'class': 'spinner-content'
 		},
 		messageContainer: {
-			'class':'spinner-msg'
+			'class': 'spinner-msg'
 		},
 		img: {
-			'class':'spinner-img'
+			'class': 'spinner-img'
 		},
 		fxOptions: {
 			link: 'chain'
@@ -106,10 +106,11 @@ var Spinner = new Class({
 			this.parent();
 			pos();
 		} else {
+			if (!this.options.style.opacity) this.options.style.opacity = this.element.getStyle('opacity').toFloat();
 			this.element.setStyles({
 				display: 'block',
 				opacity: 0
-			}).tween('opacity', this.options.style.opacity || 0.9);
+			}).tween('opacity', this.options.style.opacity);
 			pos();
 			this.hidden = false;
 			this.fireEvent('show');
