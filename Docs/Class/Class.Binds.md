@@ -14,7 +14,7 @@ Extends [Class][]; this is a mutator. It binds methods to the class instance so 
 		Binds: ['show'],
 
 		initialize: function(items){
-			ites.each(this.start);
+			items.each(this.start);
 		},
 
 		show: function(){
