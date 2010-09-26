@@ -1,22 +1,39 @@
 <style>
-	#box {
+	.box {
 		width: 30px;
 		height: 30px;
-		background-color: #900;
 		position: absolute;
-		top: 40px;
+	}
+	#box1 {
+		background-color: #900;
+		top: 60px;
+	}
+	#box2 {
+		background-color: #009;
+		right: 40px;
+		bottom: 100px;
+	}
+	#box3 {
+		top: 20em;
+		left: 20em;
+		background-color: #090;
 	}
 </style>
-<p>you should be able to drag the red box around. The links should let you enable and disable dragging.</p>
-<div id="box"></div>
-<script src="/depender/build?require=More/Drag.Move"></script>
+<p>you should be able to drag the colored boxes around. The links should let you enable and disable dragging.</p>
+<div id="box1" class="box"></div>
+<div id="box2" class="box"></div>
+<div id="box3" class="box"></div>
+<script src="/depender/build?require=More/Drag.Move,Core/Selectors"></script>
 <div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
 <script>
-var dragger = $('box').makeDraggable();
+var draggers = [$('box1').makeDraggable(), $('box2').makeDraggable({
+	modifiers: {x: 'right', y: 'bottom'},
+	invert: true
+}), $('box3').makeDraggable()];
 $('enable').addEvent('click', function(){
-	dragger.attach();
+	draggers.each(function(drag) { drag.attach(); });
 });
 $('disable').addEvent('click', function(){
-	dragger.detach();
+	draggers.each(function(drag) { drag.detach(); });
 });
 </script>
