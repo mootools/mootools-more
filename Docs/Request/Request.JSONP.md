@@ -23,7 +23,7 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 
 * url - (*url*) the url to get the JSON data
 * callbackKey - (*string*: defaults to *callback*) the key in the url that the server uses to wrap the JSON results. So, for example, if you used *callbackKey: 'callback'* then the server is expecting something like *http://..../?q=search+term&callback=myFunction*; This must be defined correctly.
-* data - (*object*) additional key/value data to append to the url
+* data - (*string*: defaults to '') The default data for [Request-JSONP:send][], used when no data is given.
 * link       - (*string*: defaults to 'ignore') Can be 'ignore', 'cancel' and 'chain'.
 	* 'ignore' - Any calls made to start while the request is running will be ignored.
 	* 'cancel' - Any calls made to start while the request is running will take precedence over the currently running request. The new request will start immediately, canceling the one that is currently running.
@@ -117,6 +117,7 @@ Returns true if the request is currently running
 
 [Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/06-request/00-jsonp
 [Request.JSONP]: #Request-JSONP
+[Request-JSONP:send]: #Request-JSONP:send
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 
