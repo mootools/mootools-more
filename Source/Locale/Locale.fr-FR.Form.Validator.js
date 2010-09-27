@@ -50,6 +50,7 @@ Locale.define('fr-FR', 'FormValidator', {
 	afterDate: 'La date doit &ecirc;tre identique ou post&eacute;rieure &agrave; {label}.',
 	beforeDate: 'La date doit &ecirc;tre identique ou ant&eacute;rieure &agrave; {label}.',
 	startMonth: 'Veuillez s&eacute;lectionner un mois de d&eacute;but.',
-	sameMonth: 'Ces deux dates doivent &ecirc;tre dans le m&ecirc;me mois - vous devez en modifier une.'
+	sameMonth: 'Ces deux dates doivent &ecirc;tre dans le m&ecirc;me mois - vous devez en modifier une.',
+	creditcard: 'Le num&eacute;ro de carte de cr&eacute;dit est invalide. Merci de v&eacute;rifier le num&eacute;ro et de r&eacute;essayer. Vous avez entr&eacute; {length} chiffre(s).'
 
 });
