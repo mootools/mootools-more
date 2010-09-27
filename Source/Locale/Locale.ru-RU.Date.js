@@ -60,7 +60,7 @@ Locale.define('ru-RU', 'Date', {
 
 	lessThanMinuteAgo: 'меньше минуты назад',
 	minuteAgo: 'минуту назад',
-	minutesAgo: function(delta){ return '{delta} ' + pluralize(delta, 'минута', 'минуты', 'минут') + ' назад'; },
+	minutesAgo: function(delta){ return '{delta} ' + pluralize(delta, 'минуту', 'минуты', 'минут') + ' назад'; },
 	hourAgo: 'час назад',
 	hoursAgo: function(delta){ return '{delta} ' + pluralize(delta, 'час', 'часа', 'часов') + ' назад'; },
 	dayAgo: 'вчера',
