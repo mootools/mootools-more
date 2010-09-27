@@ -67,6 +67,12 @@ var Drag = new Class({
 
 		this.selection = (Browser.ie) ? 'selectstart' : 'mousedown';
 
+
+		if (Browser.ie && !Drag.ondragstartFixed){
+			document.ondragstart = Function.from(false);
+			Drag.ondragstartFixed = true;
+		}
+
 		this.bound = {
 			start: this.start.bind(this),
 			check: this.check.bind(this),
