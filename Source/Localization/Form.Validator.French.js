@@ -53,6 +53,6 @@ MooTools.lang.set('fr-FR', 'Form.Validator', {
 	beforeDate: 'La date doit &ecirc;tre identique ou ant&eacute;rieure &agrave; {label}.',
 	startMonth: 'Veuillez s&eacute;lectionner un mois de d&eacute;but.',
 	sameMonth: 'Ces deux dates doivent &ecirc;tre dans le m&ecirc;me mois - vous devez en modifier une.',
-	creditcard: 'Le numéro de carte de crédit est invalide. Merci de vérifier le numéro et de réessayer. Vous avez entré {length} chiffre(s).'
+	creditcard: 'Le num&eacute;ro de carte de cr&eacute;dit est invalide. Merci de v&eacute;rifier le num&eacute;ro et de r&eacute;essayer. Vous avez entr&eacute; {length} chiffre(s).'
 
 });
