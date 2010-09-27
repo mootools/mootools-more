@@ -429,7 +429,7 @@ var build = function(format){
 			
 			if (year != null) handle.call(date, 'y', year); // need to start in the right year
 			if ('d' in bits) handle.call(date, 'd', 1);
-			if ('m' in bits) handle.call(date, 'm', 1);
+			if ('m' in bits || bits['b'] || bits['B']) handle.call(date, 'm', 1);
 			
 			for (var key in bits) handle.call(date, key, bits[key]);
 			return date;

@@ -429,7 +429,12 @@ describe('Date.parse', {
 	'should parse 1st into first day of month': function(){
 		var d = new Date();
 		value_of(Date.parse('1st')).should_be(new Date(d.getFullYear(), d.getMonth(), 1, 0, 0, 0));
-	}
+	},
 
+	'should parse 1st, Oct 31 and 31 Oct correctly': function(){
+		value_of(Date.parse('1st').set({month: 8, year: 2010}).format('%m/%d/%Y')).should_be('09/01/2010');
+		value_of(Date.parse('31 Oct').set('year', 2010).format('%m/%d/%Y')).should_be('10/31/2010');
+		value_of(Date.parse('Oct 31').set('year', 2010).format('%m/%d/%Y')).should_be('10/31/2010');
+	}
 
 });
