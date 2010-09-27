@@ -10,10 +10,10 @@ description: Extends Form.Validator to add inline messages.
 license: MIT-style license
 
 authors:
-  - Aaron Newton
+	- Aaron Newton
 
 requires:
-  - /Form.Validator
+	- /Form.Validator
 
 provides: [Form.Validator.Inline]
 
@@ -151,9 +151,9 @@ Form.Validator.Inline = new Class({
 	},
 
 	validateField: function(field, force, scroll){
-    var result = this.parent(field, force);
-    if (((this.options.scrollToErrorsOnSubmit && scroll === undefined) || scroll) && !result){
-      var failed = document.id(this).getElement('.validation-failed');
+		var result = this.parent(field, force);
+		if (((this.options.scrollToErrorsOnSubmit && scroll === undefined) || scroll) && !result){
+			var failed = document.id(this).getElement('.validation-failed');
 			var par = document.id(this).getParent();
 			while (par != document.body && par.getScrollSize().y == par.getSize().y){
 				par = par.getParent();
@@ -171,15 +171,15 @@ Form.Validator.Inline = new Class({
 		return result;
 	},
 
-  watchFields: function(fields){
-    fields.each(function(el){
-      if (this.options.evaluateFieldsOnBlur){
-        el.addEvent('blur', this.validationMonitor.pass([el, false, this.options.scrollToErrorsOnBlur], this));
-      }
-      if (this.options.evaluateFieldsOnChange){
-        el.addEvent('change', this.validationMonitor.pass([el, true, this.options.scrollToErrorsOnChange], this));
-      }
-    }, this);
+	watchFields: function(fields){
+		fields.each(function(el){
+			if (this.options.evaluateFieldsOnBlur){
+				el.addEvent('blur', this.validationMonitor.pass([el, false, this.options.scrollToErrorsOnBlur], this));
+			}
+			if (this.options.evaluateFieldsOnChange){
+				el.addEvent('change', this.validationMonitor.pass([el, true, this.options.scrollToErrorsOnChange], this));
+			}
+		}, this);
 	}
 
 });
