@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Element.Pseudos
+name: Element.Event.Pseudos
 
 description: Adds the functionality to add pseudo events for Elements
 
@@ -12,7 +12,7 @@ authors:
 
 requires: [Core/Element.Event, Events.Pseudos]
 
-provides: [Element.Pseudos]
+provides: [Element.Event.Pseudos]
 
 ...
 */

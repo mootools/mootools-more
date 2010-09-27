@@ -16,7 +16,7 @@ authors:
   - Aaron Newton
   - Daniel Steigerwald
 
-requires: [/MooTools.More, /Element.Pseudos]
+requires: [/MooTools.More, Element.Event.Pseudos]
 
 provides: [Element.Delegation]
 

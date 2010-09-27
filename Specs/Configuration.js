@@ -58,7 +58,7 @@ Configuration.sets = {
 		files: [
 			'Class/Class.Occlude',
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
-			'Element/Element.Pseudos', 'Element/Element.Pseudos.Keys', 'Element/Element.Delegation',
+			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation',
 			'Types/URI', 'Types/URI.Relative',
 			'Interface/Keyboard',
 			'Request/Request.JSONP',
@@ -69,7 +69,7 @@ Configuration.sets = {
 	'keyboard': {
 		path: '1.3/',
 		files: [
-			'Element/Element.Pseudos',
+			'Element/Element.Event.Pseudos',
 			'Interface/Keyboard'
 		]
 	}
@@ -175,8 +175,9 @@ Configuration.source = {
 			'Element/Element.Measure',
 			'Element/Element.Shortcuts',
 			'Element/Elements.From',
-			'Element/Element.Pseudos',
-			'Element/Element.Pseudos.Keys',
+
+			'Element/Element.Event.Pseudos',
+			'Element/Element.Event.Pseudos.Keys',
 			'Element/Element.Delegation',
 
 			'Types/URI',

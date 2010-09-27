@@ -6,7 +6,7 @@ Defines the `:once` pseudo event for classes that have implemented the [Events][
 Event Pseudos {#Pseudos}
 ========================
 
-Like [Element.Pseudos][] for Elements, you can use pseudos for Class Events.
+Like [Element.Event.Pseudos][] for Elements, you can use pseudos for Class Events.
 An event pseudo looks the same as a CSS pseudo: `event:pseudo(value)`.
 `event` is the eventname you used to use, and `pseudo` is the name
 of the pseudo.
@@ -75,5 +75,4 @@ This is how the :once pseudo is implemented
 
 
 [Events]: /core/Class/Class.Extras#Events
-[Element.Pseudos]: /more/Element/Element.Pseudos
-
+[Element.Event.Pseudos]: /more/Element/Element.Event.Pseudos

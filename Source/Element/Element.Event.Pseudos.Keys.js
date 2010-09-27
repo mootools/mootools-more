@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Element.Pseudos.Keys
+name: Element.Event.Pseudos.Keys
 
 description: Adds functionallity fire events if certain keycombinations are pressed
 
@@ -10,9 +10,9 @@ license: MIT-style license
 authors:
   - Arian Stolwijk
 
-requires: [Element.Pseudos]
+requires: [Element.Event.Pseudos]
 
-provides: [Element.Pseudos.Keys]
+provides: [Element.Event.Pseudos.Keys]
 
 ...
 */

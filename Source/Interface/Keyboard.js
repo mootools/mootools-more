@@ -18,7 +18,7 @@ requires:
   - Core/Events
   - Core/Options
   - Core/Element.Event
-  - Element.Pseudos.Keys
+  - Element.Event.Pseudos.Keys
 
 provides: [Keyboard]
 

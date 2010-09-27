@@ -1,7 +1,7 @@
 Type: Element {#Element}
 ========================
 
-Extends the [Element][] type to include delegations in the addEvent and addEvents methods. It adds the `:relay` pseudo using [Element.Pseudos][].
+Extends the [Element][] type to include delegations in the addEvent and addEvents methods. It adds the `:relay` pseudo using [Element.Event.Pseudos][].
 
 ### Notes
 
@@ -114,5 +114,4 @@ Removes a series of methods from delegation if the functions were used for deleg
 [addEvents]: /core/Element/Element.Event#Element:addEvents
 [removeEvent]: /core/Element/Element.Event#Element:removeEvent
 [removeEvents]: /core/Element/Element.Event#Element:removeEvents
-[Element.Pseudos]: /more/Element/Element.Pseudos
-
+[Element.Event.Pseudos]: /more/Element/Element.Event.Pseudos
