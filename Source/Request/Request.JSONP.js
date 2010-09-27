@@ -107,6 +107,7 @@ Request.JSONP = new Class({
 	},
 
 	success: function(args, index){
+		if (!this.running) return false;
 		this.clear()
 			.fireEvent('complete', args).fireEvent('success', args)
 			.callChain();

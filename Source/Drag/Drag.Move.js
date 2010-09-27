@@ -50,18 +50,20 @@ Drag.Move = new Class({
 		if (this.container && typeOf(this.container) != 'element')
 			this.container = document.id(this.container.getDocument().body);
 
-		var parentStyles,
-			parent = element.getOffsetParent();
-		if (parent) parentStyles = parent.getStyles('border-top-width', 'border-left-width');
-		var styles = element.getStyles('left', 'top', 'position');
-		if (parent && styles.left == 'auto' || styles.top == 'auto'){
-			var parentPosition = element.getPosition(parent);
-			parentPosition.x = parentPosition.x - (parentStyles['border-left-width'] ? parentStyles['border-left-width'].toInt() : 0);
-			parentPosition.y = parentPosition.y - (parentStyles['border-top-width'] ? parentStyles['border-top-width'].toInt() : 0);
-			element.setPosition(parentPosition);
+		if (this.options.modifiers.x == "left" && this.options.modifiers.y == "top"){
+			var parentStyles,
+				parent = element.getOffsetParent();
+			if (parent) parentStyles = parent.getStyles('border-top-width', 'border-left-width');
+			var styles = element.getStyles('left', 'top');
+			if (parent && styles.left == 'auto' || styles.top == 'auto'){
+				var parentPosition = element.getPosition(parent);
+				parentPosition.x = parentPosition.x - (parentStyles['border-left-width'] ? parentStyles['border-left-width'].toInt() : 0);
+				parentPosition.y = parentPosition.y - (parentStyles['border-top-width'] ? parentStyles['border-top-width'].toInt() : 0);
+				element.setPosition(parentPosition);
+			}
 		}
 
-		if (styles.position == 'static') element.setStyle('position', 'absolute');
+		if (element.getStyle('position') == 'static') element.setStyle('position', 'absolute');
 
 		this.addEvent('start', this.checkDroppables, true);
 		this.overed = null;
@@ -82,7 +84,7 @@ Drag.Move = new Class({
 	calculateLimit: function(){
 		var element = this.element,
 			container = this.container,
-			offsetParent = document.id(element.getOffsetParent() || element.parentNode),
+			offsetParent = document.id(element.getOffsetParent()) || document.body,
 			containerCoordinates = container.getCoordinates(offsetParent),
 			containerBorder = {},
 			elementMargin = {},

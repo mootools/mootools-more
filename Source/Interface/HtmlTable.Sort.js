@@ -245,7 +245,8 @@ HtmlTable.Parsers = {
 	'date': {
 		match: /^\d{2}[-\/ ]\d{2}[-\/ ]\d{2,4}$/,
 		convert: function(){
-			return Date.parse(this.get('text').stripTags()).format('db');
+			var d = Date.parse(this.get('text').stripTags());
+			return (typeOf(d) == 'date') ? d.format('db') : '';
 		},
 		type: 'date'
 	},

@@ -1,5 +1,5 @@
 <h3 class="h3_test">100 steps, snap off</h3>
-<p>When you drag the black box horizontally the number below should change to reflect the position.</p>
+<p>When you drag the black box horizontally the number below should change to reflect the position. The step indicator should reflect the initialPosition option of 50.</p>
 <div id="area">
 	<div id="knob"></div>
 </div>
@@ -37,13 +37,16 @@
 <script src="/depender/build?require=More/Slider"></script>
 <script>
 var mySlide = new Slider($('area'), $('knob'), {
+	initialStep: 50,
 	onChange: function(pos){
 		$('upd').set('html', pos);
 	}
-}).set(0);
+});
+
 var mySlide2 = new Slider($('area2'), $('knob2'), {
 	steps: 10,
 	snap: true,
+	initialStep: 5,
 	onChange: function(pos){
 		$('upd2').set('html', pos);
 	}

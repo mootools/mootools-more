@@ -25,6 +25,7 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 
 * all the options passed along to [Fx.Morph][] (transition, duration, etc.); (optional); PLUS
 * styles - (*array*) css properties to transition in addition to width/height;  defaults to *['padding','border','margin']*
+* transitionOpacity - (*boolean*) toggles the use of transitioning the opacity during the Reveal/Dissolve effect (this feature is not currently supported in IE)
 * mode - (*string*) "vertical", "horizontal", or "both" to describe how the element should slide in; defaults to *"vertical"*
 * heightOverride - (*integer*) height to open to; overrides the default offsetHeight
 * widthOverride - (*integer*) width to open to; overrides the default offsetWidth

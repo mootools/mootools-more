@@ -16,6 +16,7 @@ authors:
   - Arian Stolwijk
   - Tim Wienk
   - Christoph Pojer
+  - Aaron Newton
 
 requires:
   - Core/MooTools

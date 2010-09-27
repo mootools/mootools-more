@@ -143,7 +143,7 @@ var Sortables = new Class({
 		if (
 			!this.idle ||
 			event.rightClick ||
-			['button', 'input'].contains(event.target.get('tag'))
+			['button', 'input'].contains(document.id(event.target).get('tag'))
 		) return;
 
 		this.idle = false;
