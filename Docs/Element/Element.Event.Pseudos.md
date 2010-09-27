@@ -18,18 +18,6 @@ The event will only fire once. The once pseudo will remove itself after the firs
 	// If the user clicks the element twice, it will only once alert 'you clicked me'
 
 
-Pseudo: keys {#Pseudos:keys}
-----------------------------
-
-The event will only fire when a key combination is pressed. This only works with the `keydown` and `keyup` events.
-
-### Example
-
-	myElement.addEvent('keydown:keys(shift+a+b)', function(){
-		alert('You pressed the following keys: shift, a and b');
-	});
-
-
 Event {#Event}
 =============
 
