@@ -31,41 +31,37 @@ String.implement({
 		if (decodeKeys == null) decodeKeys = true;
 		if (decodeValues == null) decodeValues = true;
 
-		var vars = this.split(/[&;]/), res = {};
-		if (vars.length){
+		var vars = this.split(/[&;]/),
+			object = {};
+		if (!vars.length) return object;
 
-			vars.each(function(val){
+		vars.each(function(val){
+			var index = val.indexOf('='),
+				value = val.substr(index + 1),
+				keys = index < 0 ? [''] : val.substr(0, index).match(/([^\]\[]+|(\B)(?=\]))/g),
+				obj = object;
 
-				var index = val.indexOf('='),
-					keys = index < 0 ? [''] : val.substr(0, index).match(/([^\]\[]+|(\B)(?=\]))/g),
-					value = decodeValues ? decodeURIComponent(val.substr(index + 1)) : val.substr(index + 1),
-					obj = res;
+			if (decodeValues) value = decodeURIComponent(value);
+			keys.each(function(key, i){
+				if (decodeKeys) key = decodeURIComponent(key);
+				var current = obj[key];
 
-				keys.each(function(key, i){
-					if (decodeKeys) key = decodeURIComponent(key);
-					var current = obj[key];
-					if (i < keys.length - 1){
-						obj = obj[key] = current || {};
-					} else if (typeOf(current) == 'array'){
-						current.push(value);
-					} else {
-						obj[key] = current != null ? [current, value] : value;
-					}
-				});
+				if (i < keys.length - 1) obj = obj[key] = current || {};
+				else if (typeOf(current) == 'array') current.push(value);
+				else obj[key] = current != null ? [current, value] : value;
 			});
+		});
 
-		}
-		return res;
+		return object;
 	},
 
 	cleanQueryString: function(method){
 		return this.split('&').filter(function(val){
-
 			var index = val.indexOf('='),
 				key = index < 0 ? '' : val.substr(0, index),
 				value = val.substr(index + 1);
-			return method ? method.run([key, value]) : (value || value === 0);
 
+			return method ? method.call(null, key, value) : (value || value === 0);
 		}).join('&');
 	}
 
