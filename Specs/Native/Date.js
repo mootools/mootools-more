@@ -424,6 +424,12 @@ describe('Date.parse', {
 		value_of(Date.parse(d.format('%B %d %Y'))).should_be(d);
 		
 		Date.prototype.clearTime = clearTime;
+	},
+
+	'should parse 1st into first day of month': function(){
+		var d = new Date();
+		value_of(Date.parse('1st')).should_be(new Date(d.getFullYear(), d.getMonth(), 1, 0, 0, 0));
 	}
+
 
 });
