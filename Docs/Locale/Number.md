@@ -45,6 +45,11 @@ Available Languages
 		<td>Arian Stolwijk<td>
 	</tr>
 	<tr>
+		<td>Finnish</td>
+		<td>fi-FI</td>
+		<td>ksel<td>
+	</tr>
+	<tr>
 		<td>French</td>
 		<td>fr-FR</td>
 		<td>sv1l<td>
