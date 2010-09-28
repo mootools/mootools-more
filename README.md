@@ -20,18 +20,20 @@ MooTools Plugins and Enhancements Repository
 
 ### Changes
 
-#### Changese in MooTools More 1.3
+#### Changes in MooTools More 1.3
 
-* All the code of MooTools More uses MooTools Core 1.3
-* Revised Fx.Reveal. Element.get('reveal', options) is not possible anymore (just like Fx.Tween and Fx.Morph in Core)
-* Moved Hash.js from Core to MooTools More which is not part of MooTools Core 1.3 (without compatibily layer) anymore.
-* Changed Hash.Extras to Object.Extras. Hash.Extras however still exist for compatibility.
+* All the code of MooTools More now uses MooTools Core 1.3 internally.
+* Revised Fx.Reveal. Element getters don't accept options anymore, so Element.get('reveal', options) is not possible anymore (just like Fx.Tween and Fx.Morph in Core).
+* Moved Hash.js from MooTools Core to MooTools More which is not part of MooTools Core 1.3 (without compatibily layer) anymore.
+* Changed Hash.Extras to Object.Extras. However, Hash.Extras still exists for compatibility.
 * Removed Depender.
-* Added Events.Pseudos and Event.Pseudos to abstract Element.Delegation :relay and add :once events with Event(s).definePseudo
-* Element.Delegation will support the `mouseenter` and `mouseleave` events
-* Rewritten Request.JSPONP - the retries option has been removed.
-* Log has been removed. Might be added to the force sometime.
-* Renamed MooTools.lang to Locale and rewrote it completely
+* Added Events.Pseudos and Element.Event.Pseudos to abstract Element.Delegation :relay.
+* Element.Delegation will support the `mouseenter` and `mouseleave` events.
+* Added `:once` pseudo for Events and Element.Event and `:keys` to Element.Event, both through the new Event(s).definePseudo.
+* Rewritten Request.JSONP, the retries option has been removed.
+* Log has been removed. Might be added to the forge sometime.
+* Renamed MooTools.lang to Locale and rewrote it completely, plus a lot of translation additions and improvements.
+* There is built-in compatibility for all API improvements, except for Element.get not setting anymore. See [the Core wiki](http://github.com/mootools/mootools-core/wiki/Update-from-1.2-to-1.3) for compatibility for this.
 
 
 NOTE: none of the changes below are breaking changes.
