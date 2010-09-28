@@ -110,6 +110,7 @@ sources:
   - "Source/Locale/Locale.fi-FI.Number.js"
   - "Source/Locale/Locale.fr-FR.Date.js"
   - "Source/Locale/Locale.fr-FR.Form.Validator.js"
+  - "Source/Locale/Locale.fr-FR.Number.js"
   - "Source/Locale/Locale.he-IL.Date.js"
   - "Source/Locale/Locale.he-IL.Form.Validator.js"
   - "Source/Locale/Locale.he-IL.Number.js"
