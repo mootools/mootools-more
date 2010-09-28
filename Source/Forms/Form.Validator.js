@@ -233,7 +233,7 @@ Form.Validator = new Class({
 		warn = $pick(warn, false);
 		if (field.hasClass('warnOnly')) warn = true;
 		var isValid = field.hasClass('ignoreValidation') || (validator ? validator.test(field) : true);
-		if (validator && field.isVisible()) this.fireEvent('elementValidate', [isValid, field, className, warn]);
+		if (validator) this.fireEvent('elementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
 	},
