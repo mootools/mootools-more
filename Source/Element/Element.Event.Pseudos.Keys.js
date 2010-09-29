@@ -22,6 +22,7 @@ provides: [Element.Event.Pseudos.Keys]
 var keysStoreKey = '$moo:keys-pressed',
 	keysKeyupStoreKey = '$moo:keys-keyup';
 
+
 Event.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
@@ -43,8 +44,10 @@ Event.definePseudo('keys', function(split, fn, args){
 
 	if (!this.retrieve(keysKeyupStoreKey)){
 		var keyup = function(event){
-			pressed = this.retrieve(keysStoreKey, []).erase(event.key);
-			this.store(keysStoreKey, pressed);
+			(function(){
+				pressed = this.retrieve(keysStoreKey, []).erase(event.key);
+				this.store(keysStoreKey, pressed);
+			}).delay(0, this); // Fix for IE
 		};
 		this.store(keysKeyupStoreKey, keyup).addEvent('keyup', keyup);
 	}
