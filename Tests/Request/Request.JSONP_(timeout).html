@@ -5,14 +5,21 @@
 }
 </style>
 
-When fetching, the failure alert should only fire on script timeout. Also, onSuccess should not fire on timeout.
-<br />
+<p>
+	When fetching, the failure alert should only fire on script timeout. Also, onSuccess should not fire on timeout.
+</p>
+
 <button id="a">7000 ms timeout</button>
 <button id="b">1 ms timeout</button>
+
 <hr/>
+
 <div id="imgs"></div>
-<script src="mootools-more.js"></script>
+
+
+<script src="/depender/build?require=More/Request.JSONP,Core/Element.Event"></script>
 <script>
+
 $('a').addEvent('click', request.bind(this,7000));
 $('b').addEvent('click', request.bind(this,1));
 
@@ -25,6 +32,11 @@ function request(timeout){
 		onFailure: function(){
 			alert("this request failed");
 		},
+		onTimeout: function(){
+			new Element('div', {
+				text: 'Timed Out'
+			}).inject('imgs');
+		},
 		onSuccess: function(data){
 			new Element('img', {
 				src: data.items[0].media.m
@@ -32,4 +44,5 @@ function request(timeout){
 		}
 	}).send();
 }
+
 </script>
