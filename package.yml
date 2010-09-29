@@ -120,6 +120,7 @@ sources:
   - "Source/Locale/Locale.it-IT.Form.Validator.js"
   - "Source/Locale/Locale.ja-JP.Date.js"
   - "Source/Locale/Locale.ja-JP.Form.Validator.js"
+  - "Source/Locale/Locale.ja-JP.Number.js"
   - "Source/Locale/Locale.nl-NL.Date.js"
   - "Source/Locale/Locale.nl-NL.Form.Validator.js"
   - "Source/Locale/Locale.nl-NL.Number.js"
