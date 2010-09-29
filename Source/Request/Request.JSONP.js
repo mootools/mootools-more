@@ -92,7 +92,8 @@ Request.JSONP = new Class({
 
 		if (options.timeout){
 			(function(){
-				if (this.running) this.cancel().fireEvent('timeout', [script.get('src'), script]);
+				if (this.running)
+					this.cancel().fireEvent('timeout', [script.get('src'), script]).fireEvent('failure');
 			}).delay(options.timeout, this);
 		}
 
