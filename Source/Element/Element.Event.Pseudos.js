@@ -33,6 +33,6 @@ Event.definePseudo = function(key, fn, proxy){
 };
 
 var proto = Element.prototype;
-Element.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
+[Element, Window, Document].invoke('implement', Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
 })();
