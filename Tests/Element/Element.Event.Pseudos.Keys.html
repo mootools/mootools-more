@@ -10,20 +10,18 @@
 <script>
 
 var result = $('result');
-document.body.addEvent('keydown:keys(shift+a)', function(){
+
+document.addEvent('keydown:keys(shift+a)', function(){
 	result.set('html', result.get('html') + 'succes keydown:keys(shift+a)!<br>');
 });
 
-
 var result2 = $('result2');
-document.body.addEvent('keyup:keys(shift+b)', function(){
+document.addEvent('keyup:keys(shift+b)', function(){
 	result2.set('html', result2.get('html') + 'succes keyup:keys(shift+b)!<br>');
 });
 
-document.body.addEvent('keydown:keys(shift+++a)', function(e){
+document.addEvent('keydown:keys(shift+++a)', function(e){
 	result.set('html', result.get('html') + 'succes keydown:keys(shift+++a)!<br>');
 });
 
-
 </script>
-
