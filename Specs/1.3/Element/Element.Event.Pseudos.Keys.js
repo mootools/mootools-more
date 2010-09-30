@@ -1,7 +1,7 @@
 
-describe('Element.Pseudos.Keys', function(){
+describe('Element.Event.Pseudos.Keys', function(){
 
-	it('keys: should fire events for keyboard key cobinations', function(){
+	it('keys: should fire events for keyboard key combinations', function(){
 
 		var callback = jasmine.createSpy(), called = false,
 			callback2 = jasmine.createSpy(), called2 = false;
@@ -20,6 +20,7 @@ describe('Element.Pseudos.Keys', function(){
 			expect(callback2).toHaveBeenCalled();
 			document.body.eliminate('$moo:keys-pressed');
 		});
+
 	});
 
 });
