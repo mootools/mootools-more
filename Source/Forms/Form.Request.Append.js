@@ -61,7 +61,7 @@ Form.Request.Append = new Class({
 					this.fireEvent('success', [container, this.update, tree, elements, html, javascript]);
 				}.bind(this);
 				if (this.options.useReveal){
-					container.get('reveal', this.options.revealOptions).chain(finish);
+					container.set('reveal', this.options.revealOptions).get('reveal').chain(finish);
 					container.reveal();
 				} else {
 					finish();
