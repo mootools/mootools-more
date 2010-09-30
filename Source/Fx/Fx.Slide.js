@@ -36,7 +36,6 @@ Fx.Slide = new Class({
 		this.addEvent('complete', function(){
 			this.open = (this.wrapper['offset' + this.layout.capitalize()] != 0);
 			if (this.open) this.wrapper.setStyle('height', '');
-			if (this.open && Browser.safari && Browser.version == 2) this.element.dispose().inject(this.wrapper);
 		}, true);
 
 		this.element = this.subject = document.id(element);
