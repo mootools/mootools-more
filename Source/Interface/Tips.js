@@ -13,6 +13,7 @@ authors:
   - Valerio Proietti
   - Christoph Pojer
   - Luis Merino
+  - Jacob Thornton
 
 requires:
   - Core/Options
@@ -21,6 +22,7 @@ requires:
   - Core/Element.Style
   - Core/Element.Dimensions
   - /MooTools.More
+  - /Element.Delegation
 
 provides: [Tips]
 
@@ -56,7 +58,9 @@ this.Tips = new Class({
 		className: 'tip-wrap',
 		offset: {x: 16, y: 16},
 		windowPadding: {x:0, y:0},
-		fixed: false
+		fixed: false,
+		delegation: false,
+		relay: '*'
 	},
 
 	initialize: function(){
@@ -91,34 +95,32 @@ this.Tips = new Class({
 	},
 
 	attach: function(elements){
+		var events = this.options.delegation ? ['over', 'out'] : ['enter', 'leave'];     
+		if (!this.options.fixed) events.push('move');
 		$$(elements).each(function(element){
-			var title = read(this.options.title, element),
-				text = read(this.options.text, element);
-
-			element.set('title', '').store('tip:native', title).retrieve('tip:title', title);
-			element.retrieve('tip:text', text);
 			this.fireEvent('attach', [element]);
-
-			var events = ['enter', 'leave'];
-			if (!this.options.fixed) events.push('move');
-
-			events.each(function(value){
-				var event = element.retrieve('tip:' + value);
-				if (!event) event = function(event){
-					this['element' + value.capitalize()].apply(this, [event, element]);
+			events.each(function(value){ 
+				var call = function(event, el){
+					el = el || element;
+					if(value != 'move'){
+						var title = read(this.options.title, el);
+						el.set('title', '').store('tip:native', title).retrieve('tip:title', title);
+						el.retrieve('tip:text', read(this.options.text, el));
+					}
+					this['element' + value.capitalize()].apply(this, [event, el]);  
 				}.bind(this);
-
-				element.store('tip:' + value, event).addEvent('mouse' + value, event);
-			}, this);
-		}, this);
-
+				var event = element.retrieve('tip:' + value) || call;
+				if (!this.options.delegation) element.store('tip:' + value, event);
+				element.addEvent('mouse' + value + (this.options.delegation ? ':relay(' + this.options.relay + ')' : ''), event);
+			}.bind(this));
+		}.bind(this));
 		return this;
 	},
 
 	detach: function(elements){
 		$$(elements).each(function(element){
 			['enter', 'leave', 'move'].each(function(value){
-				element.removeEvent('mouse' + value, element.retrieve('tip:' + value)).eliminate('tip:' + value);
+				element.removeEvent('mouse' + value + (this.options.delegation ? ':relay(' + this.options.relay + ')' : ''), element.retrieve('tip:' + value)).eliminate('tip:' + value);
 			});
 
 			this.fireEvent('detach', [element]);
@@ -202,6 +204,11 @@ this.Tips = new Class({
 		this.fireEvent('hide', [this.tip, element]);
 	}
 
+});
+
+Tips.implement({
+	'elementOver': Tips.prototype.elementEnter,
+	'elementOut': Tips.prototype.elementLeave
 });
 
 })();

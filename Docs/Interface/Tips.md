@@ -20,7 +20,7 @@ Tips Method: constructor {#Tips:constructor}
 
 ### Arguments
 
-* elements - (*mixed*: optional) A collection of elements, a string Selector, or an Element to apply the tooltips to.
+* elements - (*mixed*: optional) A collection of elements, a string Selector, or an Element to apply the tooltips to. If delegation is true, argument is the parent element to which the delegation is applied.
 * options  - (*object*) An object to customize this Tips instance.
 
 ### Options
@@ -36,6 +36,8 @@ Tips Method: constructor {#Tips:constructor}
 * offset - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
 * fixed - (*boolean*: defaults to false) If set to true, the toolTip will not follow the mouse.
 * windowPadding - (*object*; defaults to {'x':0, 'y': 0}) Allows you to reduce or expand the virtual size of the window for tip positioning. The tips will not be allowed to approach the edge of the window on any side based on this offset.
+* delegation - (*boolean*: defaults to false) If set to true, tooltip functionality is delegated to relay option. (*warning!!* this will run selectors on all mouseover/mouseout events inside a container. Therfore it is recommended to only use the delegation option when the container is very controlled -- e.g. using document.body as your container is probably not wise.)
+* relay - (*string*: defaults to '*') A string selector to apply the tooltips to.
 
 ### Events
 

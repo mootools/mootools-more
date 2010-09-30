@@ -1,0 +1,135 @@
+<style>
+.tip {
+	color: #fff;
+	width: 172px;
+	z-index: 13000;
+}
+
+.tip-title {
+	font-weight: bold;
+	font-size: 11px;
+	margin: 0;
+	padding: 8px 8px 4px;
+	background: #777;
+}
+
+.tip-text {
+	font-size: 11px;
+	padding: 4px 8px 8px;
+	background: #777;
+}
+img {
+	background: #444;
+	padding: 4px;
+}
+.toolTipElement3, .itemContainers {
+	padding: 20px;
+	border: 1px solid #000;
+	float: left;
+}
+#mt-content h1 {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 8px 0px;
+}
+.clear {
+	clear:both;
+}
+</style>
+
+<h1>Mouseover this image to have a tip that follows your mouse</h1>
+<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement" />
+
+<h1>Mouseover this image to show a tip that is in a fixed location</h1>
+<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement2" />
+
+<h1>The tips on these elements are different for the container and the child</h1>
+<div class="toolTipElement3" alt="Container Tip">
+	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" class="toolTipElement3" />
+</div>
+
+<h1 class="clear">Should be able to dynamically add elements with tool tips<button id="addItem">Add item</button></h1>
+<div id="itemContainer">
+	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement4" />
+</div>
+
+<h1>Should accept multiple parent elements</h1>
+<div class="itemContainers">
+	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement5" />
+	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement5" />
+</div>
+<div class="itemContainers">
+	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement5" />
+	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement5" />
+</div>
+
+<script src="/depender/build?require=More/Element.Delegation,More/Tips"></script>
+<script>
+
+new Tips(document.body, {
+	timeOut: 700,
+	delegation: true,
+	relay: '.toolTipElement',
+	maxTitleChars: 50, /* I like my captions a little long*/
+	maxOpacity: .9 /* let's leave a little transparancy in there */
+});
+
+new Tips(document.body, {
+	timeOut: 700,
+	delegation: true,
+	relay: '.toolTipElement2',
+	maxTitleChars: 50, /* I like my captions a little long*/
+	maxOpacity: .9, /* let's leave a little transparancy in there */
+	fixed: true,
+	offset: {
+		x: 10,
+		y: 70
+	}
+});
+
+var toolTipElements3 = $$('.toolTipElement3').store('tip:text', 'The best damn JS framework on earth.<br /><img src="/asset/more/cow.png" />');
+
+new Tips(document.body, {
+	timeOut: 700,
+	delegation: true,
+	relay: '.toolTipElement3',
+	maxTitleChars: 50, /* I like my captions a little long*/
+	maxOpacity: .9, /* let's leave a little transparancy in there */
+	offset: {
+		x: 10,
+		y: 70
+	}
+});
+
+$('addItem').addEvent('click', function(){
+	$('itemContainer').adopt(new Element('img', {
+		'border': 0,
+		'alt': 'MooTools',
+		'src': '/asset/more/mootools.png',
+		'title': 'MooTools',
+		'rel': 'The best damn JS framework on Earth.',
+		'class': 'toolTipElement4'
+	}));
+});
+
+new Tips($('itemContainer'), {
+	timeOut: 700,
+	delegation: true,
+	relay: '.toolTipElement4',
+	maxTitleChars: 50,
+	maxOpacity: .9,
+	offset: {
+		x: 10,
+		y: 70
+	}
+});
+
+new Tips('.itemContainers', {
+	timeOut: 700,
+	delegation: true,
+	relay: '.toolTipElement5',
+	maxTitleChars: 50,
+	maxOpacity: .9
+});
+
+</script>
