@@ -53,13 +53,9 @@ Drag.Move = new Class({
 		if (this.options.modifiers.x == "left" && this.options.modifiers.y == "top"){
 			var parentStyles,
 				parent = element.getOffsetParent();
-			if (parent) parentStyles = parent.getStyles('border-top-width', 'border-left-width');
 			var styles = element.getStyles('left', 'top');
 			if (parent && styles.left == 'auto' || styles.top == 'auto'){
-				var parentPosition = element.getPosition(parent);
-				parentPosition.x = parentPosition.x - (parentStyles['border-left-width'] ? parentStyles['border-left-width'].toInt() : 0);
-				parentPosition.y = parentPosition.y - (parentStyles['border-top-width'] ? parentStyles['border-top-width'].toInt() : 0);
-				element.setPosition(parentPosition);
+				element.setPosition(element.getPosition(parent));
 			}
 		}
 
@@ -84,22 +80,21 @@ Drag.Move = new Class({
 	calculateLimit: function(){
 		var element = this.element,
 			container = this.container,
+
 			offsetParent = document.id(element.getOffsetParent()) || document.body,
 			containerCoordinates = container.getCoordinates(offsetParent),
-			containerBorder = {},
 			elementMargin = {},
 			elementBorder = {},
 			containerMargin = {},
-			offsetParentBorder = {},
+			containerBorder = {},
 			offsetParentPadding = {};
 
 		['top', 'right', 'bottom', 'left'].each(function(pad){
-			containerBorder[pad] = container.getStyle('border-' + pad).toInt();
-			elementBorder[pad] = element.getStyle('border-' + pad).toInt();
 			elementMargin[pad] = element.getStyle('margin-' + pad).toInt();
+			elementBorder[pad] = element.getStyle('border-' + pad).toInt();
 			containerMargin[pad] = container.getStyle('margin-' + pad).toInt();
+			containerBorder[pad] = container.getStyle('border-' + pad).toInt();
 			offsetParentPadding[pad] = offsetParent.getStyle('padding-' + pad).toInt();
-			offsetParentBorder[pad] = offsetParent.getStyle('border-' + pad).toInt();
 		}, this);
 
 		var width = element.offsetWidth + elementMargin.left + elementMargin.right,
@@ -122,8 +117,12 @@ Drag.Move = new Class({
 			coords.left -= element.getStyle('left').toInt();
 			coords.top -= element.getStyle('top').toInt();
 
-			left += containerBorder.left - coords.left;
-			top += containerBorder.top - coords.top;
+			left -= coords.left;
+			top -= coords.top;
+			if (container.getStyle('position') != 'relative'){
+				left += containerBorder.left;
+				top += containerBorder.top;
+			}
 			right += elementMargin.left - coords.left;
 			bottom += elementMargin.top - coords.top;
 
@@ -134,14 +133,9 @@ Drag.Move = new Class({
 		} else {
 			left -= elementMargin.left;
 			top -= elementMargin.top;
-			if (this.container == offsetParent){
-				right -= containerBorder.left;
-				bottom -= containerBorder.top;
-			} else {
-				left += containerCoordinates.left + containerBorder.left - offsetParentBorder.left;
-				top += containerCoordinates.top + containerBorder.top - offsetParentBorder.top;
-				right -= offsetParentBorder.left;
-				bottom -= offsetParentBorder.top;
+			if (container != offsetParent){
+				left += containerCoordinates.left + containerBorder.left;
+				top += containerCoordinates.top + containerBorder.top;
 			}
 		}
 
