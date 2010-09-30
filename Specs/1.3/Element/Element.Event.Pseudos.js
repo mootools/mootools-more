@@ -6,7 +6,7 @@ License:
 	MIT-style license.
 */
 
-describe('Element.Pseudos', function(){
+describe('Element.Event.Pseudos', function(){
 
 	it('tests the Event.definePseudo function', function(){
 
@@ -39,7 +39,7 @@ describe('Element.Pseudos', function(){
 			var i = 0;
 
 			var database = new Class({
-			    Implements: Events,
+				Implements: Events,
 
 				connect: function(){
 					return this.fireEvent('connect');
@@ -57,8 +57,6 @@ describe('Element.Pseudos', function(){
 		});
 
 	});
-
-
 
 });
 
