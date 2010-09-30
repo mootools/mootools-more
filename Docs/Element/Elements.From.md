@@ -1,9 +1,9 @@
 Type: Elements {#Elements}
 ==========================
 
-Extends the [Elements][] object to add a static method that returns a collection of elements from a string of html.
+Extends the [Elements][] object to add a function that returns a collection of elements from a string of html.
 
-Elements Static Method: from {#Elements:from}
+Function: Elements.from {#Elements:Elements-from}
 ----------------------------------------------
 
 Returns a collection of elements from a string of html.

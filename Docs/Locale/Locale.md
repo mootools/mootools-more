@@ -1,13 +1,13 @@
 Class Instance: Locale {#Locale}
-==============================================
+================================
 
 Contains methods and data necessary to provide localization.
 
 ### Notes
 
-* The locale sets are protected in a private variable that can only be altered using methods in *Locale* documented below. Though you can retrieve locale sets which are objects, you should not alter these through assignment but instead use the *.define* method.
+* The locale sets are protected in a private variable that can only be altered using methods in *Locale* documented below. Though you can retrieve locale sets, which are objects, you should not alter these through assignment but instead use the *.define* method.
 * Locale sets can contain any type of object, so, for instance, a language item could be an *array*, a *function*, a *string*, or even another *class*. Classes that make use of these items must be aware of the types of objects in the language file.
-* Objects that are functions are executed and their results are returned. So if you execute *Locale.get('Date.ordinal', 4)*, then the ordinal member will be executed and passed *4* as its argument. If *ordinal* is not a function, then its value will simply be returned.
+* Language items that are functions are executed and their results are returned. So if you execute *Locale.get('Date.ordinal', 4)*, then the ordinal member will be executed and passed *4* as its argument. If *ordinal* is not a function, then its value will simply be returned.
 * Users are encouraged to send in updates and additions to the MooTools team to help us grow this collection of translations.
 
 Example language file
@@ -36,7 +36,7 @@ those conventions. Look for these at the bottom of the class's Locale documentat
 
 
 Locale event: onChange {#Locale:onChange}
----------------------------------------------------------------
+-----------------------------------------
 
 This event is fired whenever the current locale is changed for the user (for instance,
 from "en-US" to "es-ES") or whenever the current selected locale is updated with new data.
@@ -49,7 +49,7 @@ from "en-US" to "es-ES") or whenever the current selected locale is updated with
 
 
 Locale method: define {#Locale:define}
-----------------------------------------------
+--------------------------------------
 
 Defines properties for a given set in a given language.
 
@@ -83,8 +83,8 @@ Defines properties for a given set in a given language.
 * *object* - Locale Set instance
 
 
-Locale method: use {#Locale:setCurrent}
---------------------------------------------------------------
+Locale method: use {#Locale:use}
+--------------------------------
 
 Sets the current locale for the user.
 
@@ -105,7 +105,7 @@ Sets the current locale for the user.
 	Locale.use('nl-NL');
 
 Locale method: getCurrent {#Locale:getCurrent}
---------------------------------------------------------------
+----------------------------------------------
 
 Returns the locale name currently in use.
 
@@ -119,7 +119,7 @@ Returns the locale name currently in use.
 
 
 Locale method: get {#Locale:get}
-----------------------------------------------
+--------------------------------
 
 Retrieves a set of locale properties for the current language or the whole set.
 
@@ -152,7 +152,7 @@ Retrieves a set of locale properties for the current language or the whole set.
 1. Dots '`.`' in the key argument can be used to find nested properties.
 
 Locale method: inherit {#Locale:inherit}
-------------------------------------------------
+----------------------------------------
 
 It often occurs that localization data is based on a other language.
 For example Spanish in Argentina has many similarities with Spanish
@@ -184,7 +184,7 @@ until a property is set.
 
 
 Locale method: list {#Locale:list}
-------------------------------------------------
+----------------------------------
 
 Returns an array of languages currently supported.
 
