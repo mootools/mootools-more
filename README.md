@@ -34,7 +34,7 @@ MooTools Plugins and Enhancements Repository
 * Log has been removed. Might be added to the forge sometime.
 * Renamed MooTools.lang to Locale and rewrote it completely, plus a lot of translation additions and improvements.
 * There is built-in compatibility for all API improvements, except for Element.get not setting anymore. See [the Core wiki](http://github.com/mootools/mootools-core/wiki/Update-from-1.2-to-1.3) for compatibility for this.
-
+* Added ES5 Array:reduce and Array:reduceRight methods to Array.Extras  
 
 NOTE: none of the changes below are breaking changes.
 
