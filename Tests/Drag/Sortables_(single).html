@@ -11,7 +11,7 @@
 		cursor: pointer;
 	}
 </style>
-<p>You should be able to reorder the list by dragging. The new order displays below the list when you release an item. If you scroll the list down a bit it should still let you sort correctly. (Note that it won't scroll for you as you drag; that's not part of this test). Dragging an element that contains a radio that is selected to a new location should keep the radio selected when it's dropped.</p>
+<p>You should be able to reorder the list by dragging. Drag movement should be limited to the y axis. The new order displays below the list when you release an item. If you scroll the list down a bit it should still let you sort correctly. (Note that it won't scroll for you as you drag; that's not part of this test). Dragging an element that contains a radio that is selected to a new location should keep the radio selected when it's dropped.</p>
 
 <div id="wrapper">
 	<ul id="SortableExample">
@@ -31,6 +31,7 @@
 <script src="/depender/build?require=More/Sortables"></script>
 <script>
 var mySort = new Sortables($('SortableExample'), {
+	axis: 'y',
 	clone: true,
 	opacity: 0.6,
 	onComplete: function(){

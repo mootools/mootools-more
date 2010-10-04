@@ -13,6 +13,7 @@ Creates an interface for drag and drop sorting of a list or lists.
 ### Options
 
 * constrain - (*boolean*: defaults to *false*) Whether or not to constrain the element being dragged to its parent element.
+* axis - (*string*: defaults to *false*) Limit sortable movement to 'x' or 'y' axis.
 * clone - (*mixed*: defaults to *false*) Whether or not to display a copy of the actual element under the cursor while dragging. May also be used as a function which will return an element to be used as the clone.  The function will receive the mousedown event, the element, and the list as arguments.
 * handle - (*string*: defaults to *false*) A selector to select an element inside each sortable item to be used as the handle for sorting that item.  If no match is found, the element is used as its own handle.
 * opacity - (*integer*: defaults to *1*) Opacity of the place holding element

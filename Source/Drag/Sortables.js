@@ -30,6 +30,7 @@ var Sortables = new Class({
 		onComplete: function(element){},*/
 		snap: 4,
 		opacity: 1,
+		axis: false,
 		clone: false,
 		revert: false,
 		handle: false,
@@ -153,6 +154,7 @@ var Sortables = new Class({
 		this.clone = this.getClone(event, element);
 
 		this.drag = new Drag.Move(this.clone, {
+			modifiers: this.options.axis == 'x' ? {'y': false} : {'x': false},
 			preventDefault: this.options.preventDefault,
 			snap: this.options.snap,
 			container: this.options.constrain && this.element.getParent(),
