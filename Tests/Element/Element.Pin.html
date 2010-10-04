@@ -1,98 +1,46 @@
 <style>
-	#foo {
-		width: 200px;
-		height: 200px;
-		border: 1px solid black;
-		position: absolute;
-		top: 150px;
-		left: 250px;
-	}
+#foo {
+	width: 150px;
+	height: 150px;
+	border: 5px solid black;
+	background: #fedcba;
+	padding: 20px;
+	position: absolute;
+	top: 150px;
+	left: 250px;
+}
 </style>
+
 <p>
 	When pinned, the element should remain stationary when you scroll. Unpinning should fix the element in place.
 </p>
+
 <p>
-	<a id="pin">pin</a> | <a id="unpin">unpin</a>
+	<a id="pin">pin</a> | 
+	<a id="pin_force">pin (force window scroll event)</a> | 
+	<a id="unpin">unpin</a>
 </p>
-<div id="foo" class="blackText">
-This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text.
+
+<div id="foo">
+	This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. 
+	This is a bunch of text. This is a bunch of text. This is a bunch of text. This is a bunch of text. 
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<script src="/depender/build?require=More/Element.Pin,Core/DOMReady"></script>
+
+<div style="height: 2000px"></div>
+
+
+<script src="/depender/build?require=More/Element.Pin"></script>
 <script>
-var pin = function(){
+
+
+$('pin').addEvent('click', function(){
 	$('foo').pin();
-};
-var unpin = function(){
+});
+$('pin_force').addEvent('click', function(){
+	$('foo').pin(null, true);
+});
+$('unpin').addEvent('click', function(){
 	$('foo').unpin();
-};
-window.addEvent('domready', pin);
-$('pin').addEvent('click', pin);
-$('unpin').addEvent('click', unpin);
+});
+
 </script>
