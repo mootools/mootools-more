@@ -14,53 +14,52 @@ dt {
 
 <p>If you enter invalid options in the inputs below you should see errors.</p>
 
-
 <form id="foo" >
 <dl>
 	<dt>If you uncheck this checkbox, form validator will not enforce the next input.</dt>
-	<dd><input type="checkbox" checked="true" class="validate-enforce-oncheck toEnforce:['a','b','c']"/><br/>
+	<dd><input type="checkbox" checked="true" data-validators="validate-enforce-oncheck toEnforce:['a','b','c']"/><br/>
 		these inputs will be required if the checkbox above is checked:
-		<input id="a" class="required"/>
-		<input id="b" class="required"/>
-		<input id="c" class="required"/>
+		<input id="a" data-validators="required" />
+		<input id="b" data-validators="required" />
+		<input id="c" data-validators="required" />
 
 		</dd>
 	<dt>If you uncheck this checkbox, form validator will not enforce the next input.</dt>
-	<dd><input name="a" type="checkbox" checked="true" class="validate-toggle-oncheck toToggle:['nospaces']"></dd>
+	<dd><input name="a" type="checkbox" checked="true" data-required="validate-toggle-oncheck toToggle:['nospaces']"></dd>
 	<dt>This input cannot have spaces.</dt>
-	<dd><input name="b" class="validate-nospace" id="nospaces"/></dd>
+	<dd><input name="b" data-validators="validate-nospace" id="nospaces"/></dd>
 	<dt>One item in this group must be selected (on submit).</dt>
 	<dd id="rads">
 		<input type="checkbox" name="rads" value="1"/>
 		<input type="checkbox" name="rads" value="2"/>
-		<input type="checkbox" name="rads" value="3" class="validate-reqchk-bynode" validatorProps="{nodeId:'rads'}"/>
+    <input type="checkbox" name="rads" value="3" data-validators="validate-reqchk-bynode" data-validator-properties="{nodeId:'rads'}"/>
 	</dd>
 	<dt>One item in this group must also be selected (on submit).</dt>
 	<dd>
 		<input type="checkbox" name="rads2" value="1"/>
 		<input type="checkbox" name="rads2" value="2"/>
-		<input type="checkbox" name="rads2" value="3" class="validate-reqchk-byname"/>
+		<input type="checkbox" name="rads2" value="3" data-validators="validate-reqchk-byname"/>
 	</dd>
 	<dt>This checkbox must be checked.</dt>
-	<dd><input type="checkbox" class="validate-required-check"/></dd>
+	<dd><input type="checkbox" data-validators="validate-required-check"/></dd>
 	<dt>The date/time in the second input must be after the first.</dt>
 	<dd>
 		<input type="input" id="before1"/>
-		<input type="input" id="after1" class="validate-after-date" validatorProps="{afterElement: 'before1'}"/>
+		<input type="input" id="after1" data-validators="validate-after-date" data-validator-properties="{afterElement: 'before1'}"/>
 	</dd>
 	<dt>The date/time in the second input must be after the first.</dt>
 	<dd>
-		<input type="input" id="before2" class="validate-before-date" validatorProps="{beforeElement: 'after2'}"/>
+		<input type="input" id="before2" data-validators="validate-before-date" data-validator-properties="{beforeElement: 'after2'}"/>
 		<input type="input" id="after2"/>
 	</dd>
 	<dt>The fist input must be before the current date; the second must be after.</dt>
 	<dd>
-		<input type="input" id="before3" class="validate-before-date"/>
-		<input type="input" id="after3" class="validate-after-date"/>
+		<input type="input" id="before3" data-validators="validate-before-date"/>
+		<input type="input" id="after3" data-validators="validate-after-date"/>
 	</dd>
 	<dt>The first item in the select list should be invalid.</dt>
 	<dd>
-		<select class="validate-custom-required" validatorProps="{emptyValue: 'null'}">
+		<select data-validators="validate-custom-required" data-validator-properties="{emptyValue: 'null'}">
 			<option value="null">this should be invalid</option>
 			<option value="">this should not be</option>
 		</select>
@@ -68,7 +67,7 @@ dt {
 	<dt>The dates you enter here must be in the same month.</dt>
 	<dd>
 		<input type="text" id="sameMo"/>
-		<input type="text" class="validate-same-month" validatorProps="{sameMonthAs: 'sameMo'}"/>
+		<input type="text" data-validators="validate-same-month" data-validator-properties="{sameMonthAs: 'sameMo'}"/>
 	</dd>
 </dl>
 <input type="submit">
