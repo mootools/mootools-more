@@ -150,6 +150,10 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 #### Examples
 
 	var myImages = new Asset.images(['/images/myImage.png', '/images/myImage2.gif'], {
+		properties: {
+			'class': 'myImage',
+			title: 'myImage'
+		},
 		onComplete: function(){
 			alert('All images loaded!');
 		}
