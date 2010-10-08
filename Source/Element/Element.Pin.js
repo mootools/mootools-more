@@ -85,13 +85,14 @@ provides: [Element.Pin]
 				}
 
 			} else {
-				parent = this.getParent();
-				offsetParent = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
-				var offsetParent;
+				if (!this.retrieve('pin:_pinned')) return this;
+
+				var parent = this.getParent(),
+					offsetParent = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 
 				pinnedPosition = this.getPosition(offsetParent);
+				
 				this.store('pin:_pinned', false);
-				var reposition;
 				if (!this.retrieve('pin:_pinnedByJS')){
 					this.setStyles({
 						position: 'absolute',
@@ -112,7 +113,7 @@ provides: [Element.Pin]
 		},
 
 		togglepin: function(){
-			this.pin(!this.retrieve('pin:_pinned'));
+			return this.pin(!this.retrieve('pin:_pinned'));
 		}
 
 	});
