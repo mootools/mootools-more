@@ -27,20 +27,21 @@ provides: [Element.Pin]
 	var supportsPositionFixed = false,
 		supportTested = false;
 
+	var testPositionFixed = function(){
+		var test = new Element('div').setStyles({
+			position: 'fixed',
+			top: 0,
+			right: 0
+		}).inject(document.body);
+		supportsPositionFixed = (test.offsetTop === 0);
+		test.dispose();
+		supportTested = true;
+	}
+
 	Element.implement({
 
 		pin: function(enable, forceScroll){
-			if (!supportTested){
-				var test = new Element('div').setStyles({
-					position: 'fixed',
-					top: 0,
-					right: 0
-				}).inject(document.body);
-				supportsPositionFixed = (test.offsetTop === 0);
-				test.dispose();
-				supportTested = true;
-			}
-
+			if (!supportTested) testPositionFixed();
 			if (this.getStyle('display') == 'none') return this;
 
 			var pinnedPosition,
