@@ -16,7 +16,6 @@ requires:
   - Core/Element.Event
   - Core/Element.Dimensions
   - Core/Element.Style
-  - Core/DOMReady
   - /MooTools.More
 
 provides: [Element.Pin]
@@ -25,20 +24,23 @@ provides: [Element.Pin]
 */
 
 (function(){
-	var supportsPositionFixed = false;
-	window.addEvent('domready', function(){
-		var test = new Element('div').setStyles({
-			position: 'fixed',
-			top: 0,
-			right: 0
-		}).inject(document.body);
-		supportsPositionFixed = (test.offsetTop === 0);
-		test.dispose();
-	});
+	var supportsPositionFixed = false,
+		supportTested = false;
 
 	Element.implement({
 
 		pin: function(enable, forceScroll){
+			if (!supportTested){
+				var test = new Element('div').setStyles({
+					position: 'fixed',
+					top: 0,
+					right: 0
+				}).inject(document.body);
+				supportsPositionFixed = (test.offsetTop === 0);
+				test.dispose();
+				supportTested = true;
+			}
+
 			if (this.getStyle('display') == 'none') return null;
 
 			var pinnedPosition,
@@ -91,7 +93,7 @@ provides: [Element.Pin]
 					offsetParent = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 
 				pinnedPosition = this.getPosition(offsetParent);
-				
+
 				this.store('pin:_pinned', false);
 				if (!this.retrieve('pin:_pinnedByJS')){
 					this.setStyles({
