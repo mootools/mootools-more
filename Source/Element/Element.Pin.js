@@ -41,7 +41,7 @@ provides: [Element.Pin]
 				supportTested = true;
 			}
 
-			if (this.getStyle('display') == 'none') return null;
+			if (this.getStyle('display') == 'none') return this;
 
 			var pinnedPosition,
 				scroll = window.getScroll();
@@ -79,7 +79,6 @@ provides: [Element.Pin]
 							});
 						}.bind(this);
 
-						this.store('pin:_pinnedByJS', true);
 						this.store('pin:_scrollFixer', scrollFixer);
 						window.addEvent('scroll', scrollFixer);
 					}
@@ -95,15 +94,16 @@ provides: [Element.Pin]
 				pinnedPosition = this.getPosition(offsetParent);
 
 				this.store('pin:_pinned', false);
-				if (!this.retrieve('pin:_pinnedByJS')){
+				var scrollFixer = this.retrieve('pin:_scrollFixer');
+				if (!scrollFixer){
 					this.setStyles({
 						position: 'absolute',
 						top: pinnedPosition.y + scroll.y,
 						left: pinnedPosition.x + scroll.x
 					});
 				} else {
-					this.store('pin:_pinnedByJS', false);
-					window.removeEvent('scroll', this.retrieve('pin:_scrollFixer'));
+					this.store('pin:_scrollFixer', null);
+					window.removeEvent('scroll', scrollFixer);
 				}
 				this.removeClass('isPinned');
 			}
