@@ -16,7 +16,6 @@ requires:
   - Core/Element.Event
   - Core/Element.Dimensions
   - Core/Element.Style
-  - Core/DOMReady
   - /MooTools.More
 
 provides: [Element.Pin]
@@ -25,8 +24,10 @@ provides: [Element.Pin]
 */
 
 (function(){
-	var supportsPositionFixed = false;
-	window.addEvent('domready', function(){
+	var supportsPositionFixed = false,
+		supportTested = false;
+
+	var testPositionFixed = function(){
 		var test = new Element('div').setStyles({
 			position: 'fixed',
 			top: 0,
@@ -34,12 +35,14 @@ provides: [Element.Pin]
 		}).inject(document.body);
 		supportsPositionFixed = (test.offsetTop === 0);
 		test.dispose();
-	});
+		supportTested = true;
+	}
 
 	Element.implement({
 
 		pin: function(enable, forceScroll){
-			if (this.getStyle('display') == 'none') return null;
+			if (!supportTested) testPositionFixed();
+			if (this.getStyle('display') == 'none') return this;
 
 			var pinnedPosition,
 				scroll = window.getScroll();
@@ -77,7 +80,6 @@ provides: [Element.Pin]
 							});
 						}.bind(this);
 
-						this.store('pin:_pinnedByJS', true);
 						this.store('pin:_scrollFixer', scrollFixer);
 						window.addEvent('scroll', scrollFixer);
 					}
@@ -85,22 +87,24 @@ provides: [Element.Pin]
 				}
 
 			} else {
-				parent = this.getParent();
-				offsetParent = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
-				var offsetParent;
+				if (!this.retrieve('pin:_pinned')) return this;
+
+				var parent = this.getParent(),
+					offsetParent = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 
 				pinnedPosition = this.getPosition(offsetParent);
+
 				this.store('pin:_pinned', false);
-				var reposition;
-				if (!this.retrieve('pin:_pinnedByJS')){
+				var scrollFixer = this.retrieve('pin:_scrollFixer');
+				if (!scrollFixer){
 					this.setStyles({
 						position: 'absolute',
 						top: pinnedPosition.y + scroll.y,
 						left: pinnedPosition.x + scroll.x
 					});
 				} else {
-					this.store('pin:_pinnedByJS', false);
-					window.removeEvent('scroll', this.retrieve('pin:_scrollFixer'));
+					this.store('pin:_scrollFixer', null);
+					window.removeEvent('scroll', scrollFixer);
 				}
 				this.removeClass('isPinned');
 			}
@@ -112,7 +116,7 @@ provides: [Element.Pin]
 		},
 
 		togglepin: function(){
-			this.pin(!this.retrieve('pin:_pinned'));
+			return this.pin(!this.retrieve('pin:_pinned'));
 		}
 
 	});
