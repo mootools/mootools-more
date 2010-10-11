@@ -157,9 +157,10 @@ Locale method: inherit {#Locale:inherit}
 It often occurs that localization data is based on a other language.
 For example Spanish in Argentina has many similarities with Spanish
 or Number formatting in Europe is the same for lots of Europe countries.
-Therefore it is impossible to inherit another locale data from another
+Therefore it is possible to inherit another locale data from another
 language. `Locale.get` will search trough the inherited locale names
 until a property is set.
+
 ### Syntax:
 
 	Locale.inherit(name, parent[, set]);
