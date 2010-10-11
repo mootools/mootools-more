@@ -13,14 +13,14 @@ describe('Date.clone', {
 	'should clone a Date instance': function(){
 		var d = new Date(Date.UTC(1999, 11, 31));
 		var dc = d.clone();
-		value_of(d.get('time')).should_be(dc.get('time'));
+		expect(d.get('time')).toEqual(dc.get('time'));
 	},
 
 	'the cloned Date should be a new instance of Date': function(){
 		var d = new Date(Date.UTC(1999, 11, 31));
 		var dc = d.clone();
 		dc.set('date', 1);
-		value_of(d.get('time')).should_not_be(dc.get('time'));
+		expect(d.get('time')).toNotEqual(dc.get('time'));
 	}
 
 });
@@ -33,49 +33,49 @@ describe('Date.increment', {
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 1, 1, 1, 2));
 		d.increment('ms');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should increment a Date instance using seconds': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 1, 1, 2));
 		d.increment('second');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should increment a Date instance using minutes': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 1, 2, 1));
 		d.increment('minute');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should increment a Date instance using hours': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 2, 1, 1));
 		d.increment('hour');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should increment a Date instance (default)': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 21, 1, 1, 1));
 		d.increment();
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should increment a Date instance using days': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 21, 1, 1, 1));
 		d.increment('day');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should increment a Date instance using months': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 11, 20, 1, 1, 1));
 		d.increment('month');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should increment a Date instance using years': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1999, 10, 20, 1, 1, 1));
 		d.increment('year');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	}
 
 });
@@ -88,49 +88,49 @@ describe('Date.decrement', {
 		var d =  new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 2));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 1));
 		d.decrement('ms');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should decrement a Date instance using seconds': function(){
 		var d =  new Date(Date.UTC(1997, 10, 20, 1, 1, 2));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('second');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should decrement a Date instance using minutes': function(){
 		var d =  new Date(Date.UTC(1997, 10, 20, 1, 2, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('minute');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should decrement a Date instance using hours': function(){
 		var d =  new Date(Date.UTC(1997, 10, 20, 2, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('hour');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should decrement a Date instance (default)': function(){
 		var d =  new Date(Date.UTC(1997, 10, 21, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement();
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should decrement a Date instance using days': function(){
 		var d =  new Date(Date.UTC(1997, 10, 21, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('day');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should decrement a Date instance using months': function(){
 		var d =  new Date(Date.UTC(1997, 11, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('month');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	},
 	'should decrement a Date instance using years': function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('year');
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	}
 
 });
@@ -142,7 +142,7 @@ describe('Date.isLeapYear', {
 		d2 = new Date(Date.UTC(2000,2,1));
 		d3 = new Date(Date.UTC(2002,2,1));
 		d4 = new Date(Date.UTC(2004,2,1));
-		expect([d1.isLeapYear(), d2.isLeapYear(), d3.isLeapYear(), d4.isLeapYear()]).should_be([false, true, false, true]);
+		expect([d1.isLeapYear(), d2.isLeapYear(), d3.isLeapYear(), d4.isLeapYear()]).toEqual([false, true, false, true]);
 		/* better mut messy error output! */
 		/*
 		var years = $H({'1600':true, '1900':false, '2000':true, '2002':false, '2004':true});
@@ -151,7 +151,7 @@ describe('Date.isLeapYear', {
 			d = new Date(Date.UTC(Number(year),0,1));
 			result.set(year, d.isLeapYear());
 		});
-		expect(result).should_be(years);
+		expect(result).toEqual(years);
 		)
 		*/
 	}
@@ -164,7 +164,7 @@ describe('Date.clearTime', {
 		var d =  new Date('Oct 01 1997 10:45:25');
 		var d2 = new Date('Oct 01 1997 00:00:00');
 		d.clearTime();
-		expect(d).should_be(d2);
+		expect(d).toEqual(d2);
 	}
 
 });
@@ -176,52 +176,52 @@ describe('Date.diff', {
 	'should compare two Date instances (milliseconds)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 0));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 999));
-		value_of(d.diff(d2, 'ms')).should_be(999);
+		expect(d.diff(d2, 'ms')).toEqual(999);
 	},
 	'should compare two Date instances (seconds)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1,  0));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 10));
-		value_of(d.diff(d2, 'second')).should_be(10);
+		expect(d.diff(d2, 'second')).toEqual(10);
 	},
 	'should compare two Date instances (minutes)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1,  0, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 10, 1));
-		value_of(d.diff(d2, 'minute')).should_be(10);
+		expect(d.diff(d2, 'minute')).toEqual(10);
 	},
 	'should compare two Date instances (hours)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20,  0, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 10, 1, 1));
-		value_of(d.diff(d2, 'hour')).should_be(10);
+		expect(d.diff(d2, 'hour')).toEqual(10);
 	},
 	'should compare two Date instances (default)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 30, 1, 1, 1));
-		value_of(d.diff(d2)).should_be(10);
+		expect(d.diff(d2)).toEqual(10);
 	},
 	'should compare two Date instances (days)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 30, 1, 1, 1));
-		value_of(d.diff(d2, 'day')).should_be(10);
+		expect(d.diff(d2, 'day')).toEqual(10);
 	},
 	'should compare two Date instances (months)': function(){
 		var d  = new Date(Date.UTC(1997,  9, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 11, 20, 1, 1, 1));
-		value_of(d.diff(d2, 'month')).should_be(2);
+		expect(d.diff(d2, 'month')).toEqual(2);
 
 		// February bug
 		d  = new Date(Date.UTC(1997, 1, 1, 1, 1, 1));
 		d2 = new Date(Date.UTC(1997, 2, 1, 1, 1, 1));
-		value_of(d.diff(d2, 'month')).should_be(1);
+		expect(d.diff(d2, 'month')).toEqual(1);
 	},
 	'should compare two Date instances (years)': function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1999, 10, 20, 1, 1, 1));
-		value_of(d.diff(d2, 'year')).should_be(2);
+		expect(d.diff(d2, 'year')).toEqual(2);
 
 		// parseInt bug with anything less than 1e-6
 		d = new Date(1277244682000);
 		d2 = new Date(1277244682237);
-		value_of(d.diff(d2, 'year')).should_be(0);
+		expect(d.diff(d2, 'year')).toEqual(0);
 	}
 
 });
@@ -230,8 +230,8 @@ describe('Date.getTimezone', {
 
 	'should return the time zone of a Date instance': function(){
 		var d = new Date(Date.UTC(2000, 0, 1, 1, 1, 1));
-		if (global['Browser'] && Browser.ie) value_of(d.get('timezone')).should_be(new Date(Date.UTC()).get('timezone'));
-		else value_of(d.get('timezone')).should_be('GMT');
+		if (global['Browser'] && Browser.ie) expect(d.get('timezone')).toEqual(new Date(Date.UTC()).get('timezone'));
+		else expect(d.get('timezone')).toEqual('GMT');
 	}
 
 });
@@ -240,11 +240,11 @@ describe('Date.getWeek', {
 
 	'should return the week of the year of a Date instance': function(){
 		var d = new Date(2000, 0, 1, 1, 1, 1);
-		value_of(d.get('week')).should_be(1);
+		expect(d.get('week')).toEqual(1);
 		d.increment('day', 7 * 10 + 2);
-		value_of(d.get('week')).should_be(11);
+		expect(d.get('week')).toEqual(11);
 		d.increment('week', 42);
-		value_of(d.get('week')).should_be(1);
+		expect(d.get('week')).toEqual(1);
 	}
 
 });
@@ -255,75 +255,75 @@ describe('Date.format', {
 		Locale.use('en-US');
 		var d = new Date('Thu Nov 20 1997 01:02:03');
 		var d2 = new Date('Thu Nov 2 1997 20:02:03');
-		value_of(d.format('%a')).should_be(Date.getMsg('days_abbr')[4]);
-		value_of(d.format('%a')).should_be('Thu');
+		expect(d.format('%a')).toEqual(Date.getMsg('days_abbr')[4]);
+		expect(d.format('%a')).toEqual('Thu');
 
-		value_of(d.format('%A')).should_be(Date.getMsg('days')[4]);
-		value_of(d.format('%A')).should_be('Thursday');
+		expect(d.format('%A')).toEqual(Date.getMsg('days')[4]);
+		expect(d.format('%A')).toEqual('Thursday');
 
-		value_of(d.format('%b')).should_be(Date.getMsg('months_abbr')[10]);
-		value_of(d.format('%b')).should_be('Nov');
+		expect(d.format('%b')).toEqual(Date.getMsg('months_abbr')[10]);
+		expect(d.format('%b')).toEqual('Nov');
 
-		value_of(d.format('%B')).should_be(Date.getMsg('months')[10]);
-		value_of(d.format('%B')).should_be('November');
+		expect(d.format('%B')).toEqual(Date.getMsg('months')[10]);
+		expect(d.format('%B')).toEqual('November');
 
-		value_of(d.format('%c')).should_be("Thu Nov 20 01:11:03 1997");
+		expect(d.format('%c')).toEqual("Thu Nov 20 01:11:03 1997");
 
-		value_of(d.format('%d')).should_be('20');
-		value_of(d2.format('%d')).should_be('02');
+		expect(d.format('%d')).toEqual('20');
+		expect(d2.format('%d')).toEqual('02');
 
-		value_of(d.format('%e')).should_be('20');
-		value_of(d2.format('%e')).should_be(' 2');
+		expect(d.format('%e')).toEqual('20');
+		expect(d2.format('%e')).toEqual(' 2');
 
-		value_of(d.format('%H')).should_be('01');
-		value_of(d.format('%I')).should_be('01');
-		value_of(d.format('%k')).should_be(' 1');
-		value_of(d2.format('%l')).should_be(' 8');
+		expect(d.format('%H')).toEqual('01');
+		expect(d.format('%I')).toEqual('01');
+		expect(d.format('%k')).toEqual(' 1');
+		expect(d2.format('%l')).toEqual(' 8');
 
 
-		value_of(d.format('%j')).should_be('324');
-		value_of(d.format('%m')).should_be('11');
-		value_of(d.format('%M')).should_be('02');
-		value_of(d.format('%p')).should_be('AM');
-		value_of(d.format('%S')).should_be('03');
-		value_of(d.format('%U')).should_be('47');
-		//value_of(d.format('%W')).should_be(''); // not implemented
-		value_of(d.format('%w')).should_be('4');
-		value_of(d.format('%x')).should_be('11/20/1997');
-		value_of(d.format('%X')).should_be('01:02AM');
-		value_of(d.format('%y')).should_be('97');
-		value_of(d.format('%Y')).should_be('1997');
-		//value_of(d.format('%z')).should_be('+0000');
-		if (global['Browser'] && Browser.ie) value_of(d.format('%Z')).should_be(new Date(Date.UTC()).get('timezone'));
-		else value_of(d.format('%Z')).should_be('GMT');
-		value_of(d.format('%y%')).should_be('97%');
+		expect(d.format('%j')).toEqual('324');
+		expect(d.format('%m')).toEqual('11');
+		expect(d.format('%M')).toEqual('02');
+		expect(d.format('%p')).toEqual('AM');
+		expect(d.format('%S')).toEqual('03');
+		expect(d.format('%U')).toEqual('47');
+		//expect(d.format('%W')).toEqual(''); // not implemented
+		expect(d.format('%w')).toEqual('4');
+		expect(d.format('%x')).toEqual('11/20/1997');
+		expect(d.format('%X')).toEqual('01:02AM');
+		expect(d.format('%y')).toEqual('97');
+		expect(d.format('%Y')).toEqual('1997');
+		//expect(d.format('%z')).toEqual('+0000');
+		if (global['Browser'] && Browser.ie) expect(d.format('%Z')).toEqual(new Date(Date.UTC()).get('timezone'));
+		else expect(d.format('%Z')).toEqual('GMT');
+		expect(d.format('%y%')).toEqual('97%');
 
-		value_of(d.format('db')).should_be(d.format('%Y') + '-' + d.format('%m') + '-' + d.format('%d') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S'));
-		value_of(d.format('db')).should_be('1997-11-20 01:02:03');
+		expect(d.format('db')).toEqual(d.format('%Y') + '-' + d.format('%m') + '-' + d.format('%d') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S'));
+		expect(d.format('db')).toEqual('1997-11-20 01:02:03');
 
-		value_of(d.format('compact')).should_be(d.format('%Y') + d.format('%m') + d.format('%d') + 'T' + d.format('%H') + d.format('%M') + d.format('%S')); // missing!
-		value_of(d.format('compact')).should_be('19971120T010203'); // missing!
+		expect(d.format('compact')).toEqual(d.format('%Y') + d.format('%m') + d.format('%d') + 'T' + d.format('%H') + d.format('%M') + d.format('%S')); // missing!
+		expect(d.format('compact')).toEqual('19971120T010203'); // missing!
 
-		value_of(d.format('iso8601')).should_be(d.format('%Y') + '-' + d.format('%m') + '-' + d.format('%d') + 'T' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + d.format('%T'));
-		//value_of(d.format('iso8601')).should_be('1997-11-20T01:02:03+0000');
+		expect(d.format('iso8601')).toEqual(d.format('%Y') + '-' + d.format('%m') + '-' + d.format('%d') + 'T' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + d.format('%T'));
+		//expect(d.format('iso8601')).toEqual('1997-11-20T01:02:03+0000');
 
-		value_of(d.format('rfc822')).should_be(d.format('%a') + ', ' + d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + ' ' + d.format('%Z'));
+		expect(d.format('rfc822')).toEqual(d.format('%a') + ', ' + d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + ' ' + d.format('%Z'));
 
-		if (global['Browser'] && Browser.ie) value_of(d.format('rfc822')).should_be('Thu, 20 Nov 1997 01:02:03 ' + new Date(Date.UTC()).get('timezone'));
-		else value_of(d.format('rfc822')).should_be('Thu, 20 Nov 1997 01:02:03 GMT');
+		if (global['Browser'] && Browser.ie) expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 ' + new Date(Date.UTC()).get('timezone'));
+		else expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 GMT');
 
-		value_of(d.format('short')).should_be(d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%H') + ':' + d.format('%M'));
-		value_of(d.format('short')).should_be('20 Nov 01:02');
+		expect(d.format('short')).toEqual(d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%H') + ':' + d.format('%M'));
+		expect(d.format('short')).toEqual('20 Nov 01:02');
 
-		value_of(d.format('long')).should_be(d.format('%B') + ' ' + d.format('%d') + ', ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M'));
-		value_of(d.format('long')).should_be('November 20, 1997 01:02');
+		expect(d.format('long')).toEqual(d.format('%B') + ' ' + d.format('%d') + ', ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M'));
+		expect(d.format('long')).toEqual('November 20, 1997 01:02');
 
 	},
 
 	'should return accented dates in correct abbreviated form': function(){
 		Locale.use('fr-FR');
 		d = new Date('Thu Feb 20 1997 01:02:03');
-		value_of(d.format('%b')).should_be('févr.');
+		expect(d.format('%b')).toEqual('févr.');
 		Locale.use('en-US');
 	}
 
@@ -334,23 +334,23 @@ describe('Date.getOrdinal', {
 	'should get the ordinal for a Date instance': function(){
 		Date.$culture = 'GB';
 		var d = new Date(1999, 11, 1);
-		value_of(d.get('ordinal')).should_be('st');
+		expect(d.get('ordinal')).toEqual('st');
 		d.increment();
-		value_of(d.get('ordinal')).should_be('nd');
+		expect(d.get('ordinal')).toEqual('nd');
 		d.increment();
-		value_of(d.get('ordinal')).should_be('rd');
+		expect(d.get('ordinal')).toEqual('rd');
 		d.increment();
-		value_of(d.get('ordinal')).should_be('th');
+		expect(d.get('ordinal')).toEqual('th');
 		d.increment('day', 17);
-		value_of(d.get('ordinal')).should_be('st');
+		expect(d.get('ordinal')).toEqual('st');
 		d.increment();
-		value_of(d.get('ordinal')).should_be('nd');
+		expect(d.get('ordinal')).toEqual('nd');
 		d.increment();
-		value_of(d.get('ordinal')).should_be('rd');
+		expect(d.get('ordinal')).toEqual('rd');
 		d.increment();
-		value_of(d.get('ordinal')).should_be('th');
+		expect(d.get('ordinal')).toEqual('th');
 		d.increment('day', 7);
-		value_of(d.get('ordinal')).should_be('st');
+		expect(d.get('ordinal')).toEqual('st');
 	}
 
 });
@@ -359,13 +359,13 @@ describe('Date.getDayOfYear', {
 
 	'should get the day of the year for a Date instance': function(){
 		var d = new Date(1999, 0, 1, 1, 1, 1, 1);
-		value_of(d.get('dayofyear')).should_be(1); // 1st jan 1999
+		expect(d.get('dayofyear')).toEqual(1); // 1st jan 1999
 		d.increment();
-		value_of(d.get('dayofyear')).should_be(2); //2nd jan 1999
+		expect(d.get('dayofyear')).toEqual(2); //2nd jan 1999
 		d.increment('day', 364);
-		value_of(d.get('dayofyear')).should_be(1); // 1st jan 2000 - a leap year
+		expect(d.get('dayofyear')).toEqual(1); // 1st jan 2000 - a leap year
 		d.increment('day', 365); // should stay in the same year!
-		value_of(d.get('dayofyear')).should_be(366);
+		expect(d.get('dayofyear')).toEqual(366);
 	}
 
 });
@@ -374,11 +374,11 @@ describe('Date.getLastDayOfMonth', {
 
 	'should get the last day of the month for a Date instance': function(){
 		var d = new Date(1999, 0, 1, 1, 1, 1, 1);
-		value_of(d.get('lastdayofmonth')).should_be(31); // 1st jan 1999
+		expect(d.get('lastdayofmonth')).toEqual(31); // 1st jan 1999
 		d.increment('day', 31);
-		value_of(d.get('lastdayofmonth')).should_be(28); // 1st Feb 1999
+		expect(d.get('lastdayofmonth')).toEqual(28); // 1st Feb 1999
 		d.increment('day', 365); // 29th feb 2000 - a leap year!
-		value_of(d.get('lastdayofmonth')).should_be(29);
+		expect(d.get('lastdayofmonth')).toEqual(29);
 	}
 
 });
@@ -386,12 +386,12 @@ describe('Date.getLastDayOfMonth', {
 describe('Date.parse', {
 
 	'should parse zero into a date': function(){
-		value_of(Date.parse(0)).should_be(new Date(0));
+		expect(Date.parse(0)).toEqual(new Date(0));
 	},
 
 	'should parse a millisecond value into a date': function(){
 		var d = new Date(Date.UTC(2000, 0, 1, 1, 1, 1));
-		value_of(Date.parse(d.getTime())).should_be(d);
+		expect(Date.parse(d.getTime())).toEqual(d);
 	},
 
 	'should parse a string value into a date': function(){
@@ -400,31 +400,31 @@ describe('Date.parse', {
 //			Locale.use(lang);
 
 			var d = new Date(2000, 11, 2, 0, 0, 0, 0);
-			value_of(Date.parse(d.format('%x'))).should_be(d);
-			value_of(Date.parse(d.format('%b %d %Y'))).should_be(d);
-			value_of(Date.parse(d.format('%d %B %Y'))).should_be(d);
-			value_of(Date.parse(d.format('%Y %b %d'))).should_be(d);
-			value_of(Date.parse(d.format('%o %b %d %X %T %Y'))).should_be(d);
+			expect(Date.parse(d.format('%x'))).toEqual(d);
+			expect(Date.parse(d.format('%b %d %Y'))).toEqual(d);
+			expect(Date.parse(d.format('%d %B %Y'))).toEqual(d);
+			expect(Date.parse(d.format('%Y %b %d'))).toEqual(d);
+			expect(Date.parse(d.format('%o %b %d %X %T %Y'))).toEqual(d);
 
 			['-', '.', '/'].each(function(punc){
-				value_of(Date.parse(d.format('%x').replace(/[-.\/]/g, punc))).should_be(d);
-				value_of(Date.parse(d.format('%Y' + punc + '%m' + punc + '%d'))).should_be(d);
+				expect(Date.parse(d.format('%x').replace(/[-.\/]/g, punc))).toEqual(d);
+				expect(Date.parse(d.format('%Y' + punc + '%m' + punc + '%d'))).toEqual(d);
 			});
 
 			d = new Date(2000, 11, 2, 22, 45, 0, 0);
-			value_of(Date.parse(d.format('%x %X'))).should_be(d);
-			value_of(Date.parse(d.format('%B %d %Y %X'))).should_be(d);
-			value_of(Date.parse(d.format('%d %b %Y %H:%M'))).should_be(d);
-			value_of(Date.parse(d.format('iso8601'))).should_be(d);
-			value_of(Date.parse(d.format('compact'))).should_be(d);
-			value_of(Date.parse(d.format('db'))).should_be(d);
-			value_of(Date.parse(d.format('long'))).should_be(d);
+			expect(Date.parse(d.format('%x %X'))).toEqual(d);
+			expect(Date.parse(d.format('%B %d %Y %X'))).toEqual(d);
+			expect(Date.parse(d.format('%d %b %Y %H:%M'))).toEqual(d);
+			expect(Date.parse(d.format('iso8601'))).toEqual(d);
+			expect(Date.parse(d.format('compact'))).toEqual(d);
+			expect(Date.parse(d.format('db'))).toEqual(d);
+			expect(Date.parse(d.format('long'))).toEqual(d);
 
 			d = new Date(2000, 0, 1, 0, 0, 0, 0);
-			value_of(Date.parse('2000')).should_be(d);
+			expect(Date.parse('2000')).toEqual(d);
 
 			d = new Date().clearTime();
-			value_of(Date.parse(d.set({date: 1, mo: d.getMonth()}).format('%B'))).should_be(d);
+			expect(Date.parse(d.set({date: 1, mo: d.getMonth()}).format('%B'))).toEqual(d);
 //		});
 //		Locale.use('en-US');
 	},
@@ -437,7 +437,7 @@ describe('Date.parse', {
 		};
 
 		var d = new Date(2000, 1, 29, 0, 0, 0, 0);
-		value_of(Date.parse(d.format('%B %d %Y'))).should_be(d);
+		expect(Date.parse(d.format('%B %d %Y'))).toEqual(d);
 
 		Date.prototype.clearTime = clearTime;
 	}

@@ -37,12 +37,12 @@ License:
 	describe('Element.isDisplayed', {
 
 		'element display should be false': function(){
-			value_of(elements[0].isDisplayed()).should_be_false();
+			expect(elements[0].isDisplayed()).toBeFalsy();
 		},
 
 
 		'element display should be true': function(){
-			value_of(elements[1].isDisplayed()).should_be_true();
+			expect(elements[1].isDisplayed()).toBeTruthy();
 		}
 
 	});
@@ -50,7 +50,7 @@ License:
 	describe('Element.isVisible', {
 
 		'is the element visible (width == 0 and height == 0)': function(){
-			value_of(elements[2].isVisible()).should_be_false();
+			expect(elements[2].isVisible()).toBeFalsy();
 		}
 
 	});
@@ -58,7 +58,7 @@ License:
 	describe('Element.toggle', {
 
 		'toggle the display of an element': function(){
-			value_of(elements[1].hide().toggle().isDisplayed()).should_be_true();
+			expect(elements[1].hide().toggle().isDisplayed()).toBeTruthy();
 		}
 
 	});
@@ -66,7 +66,7 @@ License:
 	describe('Element.hide', {
 
 		'hide an element': function(){
-			value_of(elements[1].hide().isDisplayed()).should_be_false();
+			expect(elements[1].hide().isDisplayed()).toBeFalsy();
 		}
 
 	});
@@ -74,7 +74,7 @@ License:
 	describe('Element.show', {
 
 		'show the element': function(){
-			value_of(elements[0].show().isDisplayed()).should_be_true();
+			expect(elements[0].show().isDisplayed()).toBeTruthy();
 		}
 
 	});
@@ -83,7 +83,7 @@ License:
 
 		'should add and remove a clas to the class attribute': function(){
 			var el = elements[3].swapClass('testClass', 'newClass');
-			value_of(el.hasClass('newClass') && !el.hasClass('testClass')).should_be_true();
+			expect(el.hasClass('newClass') && !el.hasClass('testClass')).toBeTruthy();
 		}
 
 	});

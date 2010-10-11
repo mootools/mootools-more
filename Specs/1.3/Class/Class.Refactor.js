@@ -55,27 +55,27 @@ License:
 	describe('Class.Refactor', {
 
 		'should return a method that has been altered twice': function(){
-			value_of(new Test2().altered()).should_be('this is altered for reals.');
+			expect(new Test2().altered()).toEqual('this is altered for reals.');
 		},
 
 		'should return an unaltered method': function(){
-			value_of(new Test().untouched()).should_be('untouched');
+			expect(new Test().untouched()).toEqual('untouched');
 		},
 
 		'should return an altred method': function(){
-			value_of(new Test().altered()).should_be('this is altered');
+			expect(new Test().altered()).toEqual('this is altered');
 		},
 
 		'should return an altered property': function(){
-			value_of(new Test().options.foo).should_be('rab');
+			expect(new Test().options.foo).toEqual('rab');
 		},
 
 		'should return an unaltered property': function(){
-			value_of(new Test().options.something).should_be('else');
+			expect(new Test().options.something).toEqual('else');
 		},
 
 		'should return the original origin': function(){
-			value_of(new Test3().origin()).should_be('refactored origin original origin');
+			expect(new Test3().origin()).toEqual('refactored origin original origin');
 		}
 
 	});

@@ -21,7 +21,7 @@ License:
 	describe('Class.Occlude', {
 
 		'verifies that occluded classes equate': function(){
-			value_of(t1).should_be(t2);
+			expect(t1).toEqual(t2);
 		}
 
 	});

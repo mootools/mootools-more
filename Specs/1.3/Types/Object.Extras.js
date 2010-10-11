@@ -16,7 +16,7 @@ describe('Object.getFromPath', {
 				}
 			}
 		};
-		value_of(Object.getFromPath(obj, 'animal.human.most_deadly')).should_be('ninja');
+		expect(Object.getFromPath(obj, 'animal.human.most_deadly')).toEqual('ninja');
 	}
 });
 
@@ -30,7 +30,7 @@ describe('Object.cleanValues', {
 			test: 'ing',
 			no: false
 		};
-		value_of(Object.cleanValues(obj)).should_be({
+		expect(Object.cleanValues(obj)).toEqual({
 			mootools: true,
 			test: 'ing',
 			no: false
@@ -44,9 +44,9 @@ describe('Object.cleanValues', {
 			test: 'ing',
 			no: false
 		};
-		value_of(Object.cleanValues(obj, function(obj){
+		expect(Object.cleanValues(obj, function(obj){
 			return obj !== false;
-		})).should_be({
+		})).toEqual({
 			animal: null,
 			mootools: true,
 			test: 'ing'
@@ -63,7 +63,7 @@ describe('Object.erase', {
 			test: 'ing',
 			no: false
 		};
-		value_of(Object.cleanValues(obj)).should_be({
+		expect(Object.cleanValues(obj)).toEqual({
 			mootools: true,
 			test: 'ing',
 			no: false
@@ -83,9 +83,9 @@ describe('Object.run', {
 				value += arg;
 			}
 		};
-		value_of((function(){
+		expect((function(){
 			Object.run(obj, 'running');
 			return value;
-		})()).should_be('runningrunning');
+		})()).toEqual('runningrunning');
 	}
 });

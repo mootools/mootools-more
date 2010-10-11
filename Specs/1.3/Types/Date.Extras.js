@@ -31,7 +31,7 @@ describe('Date.getTimePhrase', {
 		};
 
 		for (var phrase in phrases)
-			value_of(Date.getTimePhrase(phrases[phrase])).should_be(phrase);
+			expect(Date.getTimePhrase(phrases[phrase])).toEqual(phrase);
 	}
 
 });
@@ -40,7 +40,7 @@ describe('Date.timeAgoInWords', {
 
 	'should return a readable description of the age of a date': function(){
 		var d = new Date();
-		value_of(d.decrement('day', 2).timeAgoInWords()).should_be('2 days ago');
+		expect(d.decrement('day', 2).timeAgoInWords()).toEqual('2 days ago');
 	}
 
 });
@@ -49,9 +49,9 @@ describe('Date.Extras.parse', {
 
 	'should parse a string value into a date': function(){
 
-		value_of(Date.parse('today').get('date')).should_be(new Date().get('date'));
-		value_of(Date.parse('yesterday').get('date')).should_be(new Date().decrement().get('date'));
-		value_of(Date.parse('tomorrow').get('date')).should_be(new Date().increment().get('date'));
+		expect(Date.parse('today').get('date')).toEqual(new Date().get('date'));
+		expect(Date.parse('yesterday').get('date')).toEqual(new Date().decrement().get('date'));
+		expect(Date.parse('tomorrow').get('date')).toEqual(new Date().increment().get('date'));
 	}
 
 });

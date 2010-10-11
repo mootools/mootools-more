@@ -52,13 +52,13 @@ License:
 	describe('Class.Binds', {
 
 		'tests the autobinding functionality in the Binds Mutator': function(){
-			value_of(tester.test()).should_be(tester.foo);
+			expect(tester.test()).toEqual(tester.foo);
 		},
 		'verifies that the autobinding mutator is needed for the previous test to pass': function(){
-			value_of(tester2.test()).should_not_be(tester2.foo);
+			expect(tester2.test()).toNotEqual(tester2.foo);
 		},
 		'verfies that the setOptions invocation works properly': function(){
-			value_of(tester3.test()+tester3.options.a).should_be(tester3.foo+'b');
+			expect(tester3.test()+tester3.options.a).toEqual(tester3.foo+'b');
 		}
 
 

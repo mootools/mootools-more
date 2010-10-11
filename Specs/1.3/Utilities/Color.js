@@ -13,7 +13,7 @@ describe('Color initialize', function(){
 	});
 
 	it('Should initialize a color from a RGB array', function(){
-		value_of(new Color([255,0,255]).toString()).toEqual('255,0,255');
+		expect(new Color([255,0,255]).toString()).toEqual('255,0,255');
 	});
 
 });
@@ -21,15 +21,15 @@ describe('Color initialize', function(){
 describe('Color properties', function(){
 
 	it('Should define the rgb value for a color', function(){
-		value_of(new Color("#ff00ff").rgb).should_be([255,0,255]);
+		expect(new Color("#ff00ff").rgb).toEqual([255,0,255]);
 	});
 
 	it('Should define the hsb value for a color', function(){
-		value_of(new Color("#ff00ff").hsb).should_be([300, 100, 100]);
+		expect(new Color("#ff00ff").hsb).toEqual([300, 100, 100]);
 	})
 
 	it('Should define the hex value for a color', function(){
-		value_of(new Color([255,0,255]).hex).should_be("#ff00ff");
+		expect(new Color([255,0,255]).hex).toEqual("#ff00ff");
 	});
 
 
@@ -42,19 +42,19 @@ describe('Color mutation', function(){
 	});
 
 	it('Should mix a color', function(){
-		value_of(new Color('#000').mix('#fff').toString()).should_be('127,127,127');
+		expect(new Color('#000').mix('#fff').toString()).toEqual('127,127,127');
 	});
 
 	it('Should set the hue of a color', function(){
-		value_of(new Color('#700').setHue(300).toString()).should_be('120,0,120');
+		expect(new Color('#700').setHue(300).toString()).toEqual('120,0,120');
 	})
 
 	it('Should set the saturation of a color', function(){
-		value_of(new Color('#700').setSaturation(50).toString()).should_be('120,60,60');
+		expect(new Color('#700').setSaturation(50).toString()).toEqual('120,60,60');
 	});
 
 	it('Should set the brightness of a color', function(){
-		value_of(new Color('#700').setBrightness(70).toString()).should_be('179,0,0');
+		expect(new Color('#700').setBrightness(70).toString()).toEqual('179,0,0');
 	});
 
 });
@@ -62,15 +62,15 @@ describe('Color mutation', function(){
 describe('Color $methods', function(){
 
 	it('Tests $RGB', function(){
-		value_of(Array.from($RGB(127, 0, 0))).should_be([127,0,0]);
+		expect(Array.from($RGB(127, 0, 0))).toEqual([127,0,0]);
 	});
 
 	it('Tests $HSB', function(){
-		value_of(Array.from($HSB(50, 50, 100))).should_be([255,234,128]);
+		expect(Array.from($HSB(50, 50, 100))).toEqual([255,234,128]);
 	});
 
 	it('Tests $HEX', function(){
-		value_of(Array.from($HEX('#700'))).should_be([281,0,0]);
+		expect(Array.from($HEX('#700'))).toEqual([281,0,0]);
 	});
 
 });

@@ -37,11 +37,11 @@ License:
 	describe('Element.Measure', {
 
 		'should measure the width and height of the hidden element': function(){
-			value_of(div.getDimensions()).should_be({width: 108, height: 108, x: 108, y: 108});
+			expect(div.getDimensions()).toEqual({width: 108, height: 108, x: 108, y: 108});
 		},
 
 		'should measure the computed (total) size of an element': function(){
-			value_of(div.getDimensions({computeSize: true})).should_be({
+			expect(div.getDimensions({computeSize: true})).toEqual({
 				"padding-top":3,
 				"border-top-width":1,
 				"padding-bottom":3,
@@ -64,7 +64,7 @@ License:
 		},
 
 		'should measure the computed width of an element': function(){
-			value_of(div.getDimensions({computeSize: true, mode: 'horizontal'})).should_be({
+			expect(div.getDimensions({computeSize: true, mode: 'horizontal'})).toEqual({
 				"padding-left":3,
 				"border-left-width":1,
 				"padding-right":3,

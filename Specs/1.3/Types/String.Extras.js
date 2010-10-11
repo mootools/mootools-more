@@ -9,9 +9,9 @@ License:
 describe('String.standardize', {
 
 	'should map special characters into standard ones': function(){
-		value_of('También jugué al fútbol con Martín.'.standardize()).should_be('Tambien jugue al futbol con Martin.');
-		value_of('Enchanté. Très bien, merci.'.standardize()).should_be('Enchante. Tres bien, merci.');
-		value_of('Jak się masz?'.standardize()).should_be('Jak sie masz?');
+		expect('También jugué al fútbol con Martín.'.standardize()).toEqual('Tambien jugue al futbol con Martin.');
+		expect('Enchanté. Très bien, merci.'.standardize()).toEqual('Enchante. Tres bien, merci.');
+		expect('Jak się masz?'.standardize()).toEqual('Jak sie masz?');
 	}
 
 });
@@ -19,8 +19,8 @@ describe('String.standardize', {
 describe('String.repeat', {
 
 	'should repeat the given string a number of times': function(){
-		value_of('ha'.repeat(5)).should_be('hahahahaha');
-		value_of('ha'.repeat(0)).should_be('');
+		expect('ha'.repeat(5)).toEqual('hahahahaha');
+		expect('ha'.repeat(0)).toEqual('');
 	}
 
 });
@@ -28,15 +28,15 @@ describe('String.repeat', {
 describe('String.pad', {
 
 	'should work with both numbers and strings': function(){
-		value_of('1'.pad(2, 0, 'left')).should_be('01');
-		value_of('1'.pad(2, '0', 'left')).should_be('01');
+		expect('1'.pad(2, 0, 'left')).toEqual('01');
+		expect('1'.pad(2, '0', 'left')).toEqual('01');
 	},
 
 	'should fill the string with the supplied pad string to left, right or both to reach a given number of characters': function(){
-		value_of('Alien'.pad(10, ' ', 'right')).should_be('Alien     ');
-		value_of('Alien'.pad(10, '-=', 'left')).should_be('-=-=-Alien');
-		value_of('Alien'.pad(10, '_', 'both')).should_be('__Alien___');
-		value_of('Alien'.pad(6, '___', 'right')).should_be('Alien_');
+		expect('Alien'.pad(10, ' ', 'right')).toEqual('Alien     ');
+		expect('Alien'.pad(10, '-=', 'left')).toEqual('-=-=-Alien');
+		expect('Alien'.pad(10, '_', 'both')).toEqual('__Alien___');
+		expect('Alien'.pad(6, '___', 'right')).toEqual('Alien_');
 	}
 
 });
@@ -44,11 +44,11 @@ describe('String.pad', {
 describe('String.stripTags', {
 
 	'should remove all tags from an html string': function(){
-		value_of('<b>test<a>another</a><br><hr/><div>thing</div></b>'.stripTags()).should_be('testanotherthing');
+		expect('<b>test<a>another</a><br><hr/><div>thing</div></b>'.stripTags()).toEqual('testanotherthing');
 	},
 
 	'should leave a string w/o html alone': function(){
-		value_of('i like cookies'.stripTags()).should_be('i like cookies');
+		expect('i like cookies'.stripTags()).toEqual('i like cookies');
 	}
 
 });

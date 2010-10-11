@@ -16,6 +16,6 @@ describe('Hash.getFromPath', {
 				}
 			}
 		});
-		value_of(h.getFromPath('animal.human.most_deadly')).should_be('ninja');
+		expect(h.getFromPath('animal.human.most_deadly')).toEqual('ninja');
 	}
 });
