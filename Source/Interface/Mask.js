@@ -61,7 +61,7 @@ var Mask = new Class({
 	render: function(){
 		this.element = new Element('div', {
 			'class': this.options['class'],
-			id: this.options.id || 'mask-' + String.generateUID(),
+			id: this.options.id || 'mask-' + String.uniqueID(),
 			styles: Object.merge(this.options.style, {
 				display: 'none'
 			}),
