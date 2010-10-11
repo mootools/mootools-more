@@ -17,7 +17,7 @@ describe('Elements.Delegation', function(){
 		simulateEvent('click', [{}, elements.child], function(){
 			expect(callback).toHaveBeenCalled();
 
-			for (var i in elements) elements[i].destroy();
+			for (var i in elements) $(elements[i]).destroy();
 		});
 
 	});
