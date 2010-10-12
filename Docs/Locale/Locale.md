@@ -154,7 +154,7 @@ Retrieves a set of locale properties for the current language or the whole set.
 Locale method: inherit {#Locale:inherit}
 ----------------------------------------
 
-It often occurs that localization data is based on a other language.
+It often occurs that localization data is based on another language.
 For example Spanish in Argentina has many similarities with Spanish
 or Number formatting in Europe is the same for lots of Europe countries.
 Therefore it is possible to inherit another locale data from another
