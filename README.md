@@ -20,26 +20,32 @@ MooTools Plugins and Enhancements Repository
 
 ### Changes
 
-#### Changes in MooTools More 1.3
+#### Changes in MooTools More 1.3.0.1
 
-* All the code of MooTools More now uses MooTools Core 1.3 internally.
-* Revised Fx.Reveal. Element getters don't accept options anymore, so Element.get('reveal', options) is not possible anymore (just like Fx.Tween and Fx.Morph in Core).
-* Moved Hash.js from MooTools Core to MooTools More which is not part of MooTools Core 1.3 (without compatibily layer) anymore.
-* Changed Hash.Extras to Object.Extras. However, Hash.Extras still exists for compatibility.
-* Removed Depender.
-* Added Events.Pseudos and Element.Event.Pseudos to abstract Element.Delegation :relay.
-* Element.Delegation will support the `mouseenter` and `mouseleave` events.
-* Added `:once` pseudo for Events and Element.Event and `:keys` to Element.Event, both through the new Event(s).definePseudo.
-* Rewritten Request.JSONP, the retries option has been removed.
-* Log has been removed. Might be added to the forge sometime.
-* Renamed MooTools.lang to Locale and rewrote it completely, plus a lot of translation additions and improvements.
-* There is built-in compatibility for all API improvements, except for Element.get not setting anymore. See [the Core wiki](http://github.com/mootools/mootools-core/wiki/Update-from-1.2-to-1.3) for compatibility for this.
-* Added ES5 Array:reduce and Array:reduceRight methods to Array.Extras  
-
-NOTE: none of the changes below are breaking changes.
+* 28 bugs closed ([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057/milestones/83468-130-rc1))
+* Misc
+  * All the code of MooTools More now uses MooTools Core 1.3 internally.
+  * There is built-in compatibility for all API improvements, except for Element.get not setting anymore. See [the Core wiki](http://github.com/mootools/mootools-core/wiki/Update-from-1.2-to-1.3) for compatibility for this.
+  * Log.js is no more; [you can download it from source via github](http://github.com/mootools/mootools-more/blob/1.2.4.4/Source/Core/Log.js)
+* Fx.Reveal
+  * Revised Fx.Reveal. Element getters don't accept options anymore, so `Element.get('reveal', options)` is not possible anymore (just like Fx.Tween and Fx.Morph in Core).
+* Hash
+  * Moved Hash.js from MooTools Core to MooTools More which is not part of MooTools Core 1.3 (without compatibily layer) anymore.
+  * Changed Hash.Extras to Object.Extras. However, Hash.Extras still exists for compatibility.
+* Events
+  * Added Events.Pseudos and Element.Event.Pseudos to abstract Element.Delegation :relay.
+  * Added `:once` pseudo for Events and Element.Event and `:keys` to Element.Event, both through the new Event(s).definePseudo.
+* Element.Delegation
+  * now supports the `mouseenter` and `mouseleave` events.
+* Request.JSONP
+  * Rewritten - much more readable and manageable; the retries option has been removed.
+* Locale
+  * Renamed `MooTools.lang` to `Locale` and rewrote it completely; added a lot of translation additions and improvements.
+* Array.Extras
+  * Added ES5 Array:reduce and Array:reduceRight methods to Array.Extras  
 
 #### Changes in MooTools More 1.2.5.1
-* 65 bugs closed([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/milestones/77753-1245))
+* 65 bugs closed ([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/milestones/77753-1245))
 * Misc
   * New /Tests implementation; see the [mootools-test-runner](http://github.com/anutron/mootools-test-runner) if you'd like to use them.
   * New YAML package and dependency declarations
@@ -237,4 +243,4 @@ Assets
 * String.Extra query functions moved to URI.js
  - parseQuery > parseQueryString for consistency with cleanQueryString
 * Request.Queue
-	- event names all renamed; *onRequestStart* >> *onRequest*, *onRequestSuccess* >> *onSuccess*, etc
+  - event names all renamed; *onRequestStart* >> *onRequest*, *onRequestSuccess* >> *onSuccess*, etc
