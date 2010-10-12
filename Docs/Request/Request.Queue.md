@@ -62,9 +62,9 @@ In addition to these events there is an *onEnd* event that is fired when all the
 		}
 	});
 
-	r1.send();
-	r2.send(); //sends when above request completes
-	r1.send(); //sends when above request completes
+	myRequests.r1.send();
+	myRequests.r2.send(); //sends when above request completes
+	myRequests.r1.send(); //sends when above request completes
 	etc.
 
 In the above example, when each request completes, it will first log out the 'myRequests.rq: &lt;text&gt;, &lt;xml&gt;' message from the *onComplete* event specified in each request instance. Then it will log the 'queue: r1/r2 response: &lt;text&gt;, &lt;xml&gt;' message from the *onComplete* method in the [Request.Queue][] event specified in its options.
