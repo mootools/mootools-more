@@ -50,7 +50,7 @@ Drag.Move = new Class({
 		if (this.container && $type(this.container) != 'element')
 			this.container = document.id(this.container.getDocument().body);
 
-		if (this.options.modifiers.x == "left" && this.options.modifiers.y == "top") {
+		if (this.options.style && this.options.modifiers.x == "left" && this.options.modifiers.y == "top"){
 			var parentStyles,
 			    parent = element.getOffsetParent();
 			if (parent) parentStyles = parent.getStyles('border-top-width', 'border-left-width');
