@@ -97,7 +97,10 @@ Request.JSONP = new Class({
 	},
 
 	getScript: function(src){
-		if (!this.script) this.script = new Element('script[type=text/javascript]', {src: src});
+		if (!this.script) this.script = new Element('script[type=text/javascript]', {
+			async: 'async',
+			src: src
+		});
 		return this.script;
 	},
 
