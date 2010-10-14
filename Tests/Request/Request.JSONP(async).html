@@ -1,0 +1,34 @@
+<p>
+	Enter a twitter screen name into the text field. Then click fetch button. Each time you do this test, you must enter a new screen name because twitter caches requests. If screen name is not cached, flickr request should always return first.
+</p>
+<label>enter screenname:</label>
+<input type="text" id="screen_name" />
+<button id="fetch">fetch!</button>
+<hr/>
+<div id="returned"></div>
+
+<script src="/depender/build?require=More/Request.JSONP,Core/Element.Event"></script>
+<script>
+$('fetch').addEvent('click', function(){
+	$('returned').empty();
+	new Request.JSONP({
+		url: 'http://api.twitter.com/1/statuses/friends.json',
+		data: {
+			'screen_name': $('screen_name').value,
+			'include_entities': true
+		},
+		onComplete: function(){
+			$("returned").adopt(new Element('span', {'html': 'twitter returned!'}));
+		}
+	}).send();
+
+	new Request.JSONP({
+		callbackKey: 'jsoncallback',
+		url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
+		onComplete: function(data){
+			$("returned").adopt(new Element('span', {'html': 'flickr returned!'}));
+		}
+	}).send();
+});
+
+</script>
