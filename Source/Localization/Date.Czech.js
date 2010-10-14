@@ -11,6 +11,7 @@ license: MIT-style license
 
 authors:
   - Jan Černý chemiX
+  - Christopher Zukowski
 
 requires:
   - /Lang
@@ -19,15 +20,26 @@ provides: [Date.Czech]
 
 ...
 */
+(function(){
+
+// Czech language pluralization rules, see http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
+// one -> n is 1;            1
+// few -> n in 2..4;         2-4
+// other -> everything else  0, 5-999, 1.31, 2.31, 5.31...
+var pluralize = function (n, one, few, other) {
+	if (n == 1) return one;
+	else if (n == 2 || n == 3 || n == 4) return few;
+	else return other;
+};
 
 MooTools.lang.set('cs-CZ', 'Date', {
 
 	months: ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'],
 	days: ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'],
 
-	// Culture's date order: DD/MM/YYYY
+	// Culture's date order: DD.MM.YYYY
 	dateOrder: ['date', 'month', 'year'],
-	shortDate: '%d/%m/%Y',
+	shortDate: '%d.%m.%Y',
 	shortTime: '%H:%M',
 	AM: 'dop.',
 	PM: 'odp.',
@@ -35,26 +47,33 @@ MooTools.lang.set('cs-CZ', 'Date', {
 	// Date.Extras
 	ordinal: '.',
 
-	lessThanMinuteAgo: 'méně než minutou',
+	lessThanMinuteAgo: 'před chvílí',
 	minuteAgo: 'přibližně před minutou',
-	minutesAgo: 'před {delta} minutami',
+	minutesAgo: function(delta) { return 'před {delta} ' + pluralize(delta, 'minutou', 'minutami', 'minutami'); },
 	hourAgo: 'přibližně před hodinou',
-	hoursAgo: 'před {delta} hodinami',
+	hoursAgo: function(delta) { return 'před {delta} ' + pluralize(delta, 'hodinou', 'hodinami', 'hodinami'); },
 	dayAgo: 'před dnem',
-	daysAgo: 'před {delta} dni',
+	daysAgo: function(delta) { return 'před {delta} ' + pluralize(delta, 'dnem', 'dny', 'dny'); },
+	weekAgo: 'před týdnem',
+	weeksAgo: function(delta) { return 'před {delta} ' + pluralize(delta, 'týdnem', 'týdny', 'týdny'); },
+	monthAgo: 'před měsícem',
+	monthsAgo: function(delta) { return 'před {delta} ' + pluralize(delta, 'měsícem', 'měsíci', 'měsíci'); },
+	yearAgo: 'před rokem',
+	yearsAgo: function(delta) { return 'před {delta} ' + pluralize(delta, 'rokem', 'lety', 'lety'); },
 
-	lessThanMinuteUntil: 'před méně než minutou',
-	minuteUntil: 'asi před minutou',
-	minutesUntil: ' asi před {delta} minutami',
-	hourUntil: 'asi před hodinou',
-	hoursUntil: 'před {delta} hodinami',
-	dayUntil: 'před dnem',
-	daysUntil: 'před {delta} dni',
-	weekUntil: 'před týdnem',
-	weeksUntil: 'před {delta} týdny',
-	monthUntil: 'před měsícem',
-	monthsUntil: 'před {delta} měsíci',
-	yearUntil: 'před rokem',
-	yearsUntil: 'před {delta} lety'
-
+	lessThanMinuteUntil: 'za chvíli',
+	minuteUntil: 'přibližně za minutu',
+	minutesUntil: function(delta) { return 'za {delta} ' + pluralize(delta, 'minutu', 'minuty', 'minut'); },
+	hourUntil: 'přibližně za hodinu',
+	hoursUntil: function(delta) { return 'za {delta} ' + pluralize(delta, 'hodinu', 'hodiny', 'hodin'); },
+	dayUntil: 'za den',
+	daysUntil: function(delta) { return 'za {delta} ' + pluralize(delta, 'den', 'dny', 'dnů'); },
+	weekUntil: 'za týden',
+	weeksUntil: function(delta) { return 'za {delta} ' + pluralize(delta, 'týden', 'týdny', 'týdnů'); },
+	monthUntil: 'za měsíc',
+	monthsUntil: function(delta) { return 'za {delta} ' + pluralize(delta, 'měsíc', 'měsíce', 'měsíců'); },
+	yearUntil: 'za rok',
+	yearsUntil: function(delta) { return 'za {delta} ' + pluralize(delta, 'rok', 'roky', 'let'); }
 });
+
+})();
