@@ -340,12 +340,12 @@ Form.Validator.addAllThese([
 
 	['minLength', {
 		errorMsg: function(element, props){
-			if (typeOf(props.minLength) != 'undefined')
+			if (typeOf(props.minLength) != 'null')
 				return Form.Validator.getMsg('minLength').substitute({minLength:props.minLength,length:element.get('value').length });
 			else return '';
 		},
 		test: function(element, props){
-			if (typeOf(props.minLength) != 'undefined') return (element.get('value').length >= props.minLength || 0);
+			if (typeOf(props.minLength) != 'null') return (element.get('value').length >= props.minLength || 0);
 			else return true;
 		}
 	}],
@@ -353,7 +353,7 @@ Form.Validator.addAllThese([
 	['maxLength', {
 		errorMsg: function(element, props){
 			//props is {maxLength:10}
-			if (typeOf(props.maxLength) != 'undefined')
+			if (typeOf(props.maxLength) != 'null')
 				return Form.Validator.getMsg('maxLength').substitute({maxLength:props.maxLength,length:element.get('value').length });
 			else return '';
 		},
