@@ -49,32 +49,32 @@ NOTE: none of the changes below are breaking changes.
 * HtmlTable.Sort
   * added static method to allow users to add custom parsers *at the top* of the parser list (so their custom ones occur first)
   * now allows contents of table cells that are more than just text nodes.
-Document
+* Document
   * Added method to clear document selection
-Form.Request
+* Form.Request
   * now passes along the request arguments to `Form.Request`'s events.
   * now sends along which button was clicked (as regular forms do).
-Fx.Reveal
+* Fx.Reveal
   * Added an 'opacity' option to set the target opacity for `reveal()` or starting opacity for `dissolve()`.
-OverText
+* OverText
   * added `enable`, `disable`, and `destroy` methods.
-Date
+* Date
   * added millisecond support to UTC parsing and to formatting
   * added `%e` option to Date.format. Prints non padded day number.
-Fx.Accordion
+* Fx.Accordion
   * added `removeSection` method
-Tips
+* Tips
   * fixed a bug where tips was not passing along the proper arguments to the `onShow` event
-Slider
+* Slider
   * added `setRange` to dynamically set the range
-Keyboard / Keyboard.Extras
+* Keyboard / Keyboard.Extras
   * no longer calls `disable` when keyboard instances are managed.
   * reenabled the previous keyboard when the current one is dropped.
   * added an `isActive` method.
   * added `removeShortcut` method.
-Spinner
+* Spinner
   * (integration into Request) - make it so that spinner picks up details only no send, not on init.
-Assets
+* Assets
   * added onload support for `Assets.css`
 
 #### Changes in MooTools More 1.2.4.4
@@ -101,7 +101,7 @@ Assets
   * reworking HtmlTable's dom a bit to allow for positioning of the sort icon
   * adding new set method for headers and footers.
   * Fixed error in HtmlTable.Parsers when sorting by date. format('db') was being applied to the text and not the date object.
-* Array: 
+* Array:
   * Added Array.shuffle
 * Request.JSONP:
   * making JSONP pass all arguments, not just the first, to its complete/success methods; [see this discussion on the google group](http://groups.google.com/group/mootools-users/browse_thread/thread/9cfa52bf0cf05bac).
