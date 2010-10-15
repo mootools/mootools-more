@@ -1,0 +1,23 @@
+<style>
+	#box1 {
+		width: 100px;
+		height: 30px;
+		margin: 0 auto;
+		background-color: #090;
+		text-align: center;
+		line-height: 30px;
+	}
+</style>
+
+<p>When you drag the green box to the left and right, the number inside the box should change, showing how many pixels the element was dragged. The element itself should stay in place.</p>
+
+<div id="box1">0</div>
+
+<script src="/depender/build?require=More/Drag.Move"></script>
+
+<script type="text/javascript">
+var dragger = $('box1').makeDraggable({
+	modifiers: {x: 'innerHTML', y: null},
+	style: false
+});
+</script>
