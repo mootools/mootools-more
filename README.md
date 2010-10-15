@@ -42,7 +42,7 @@ MooTools Plugins and Enhancements Repository
 * Locale
   * Renamed `MooTools.lang` to `Locale` and rewrote it completely; added a lot of translation additions and improvements.
 * Array.Extras
-  * Added ES5 Array:reduce and Array:reduceRight methods to Array.Extras  
+  * Added ES5 Array:reduce and Array:reduceRight methods to Array.Extras
 
 #### Changes in MooTools More 1.2.5.1
 * 65 bugs closed ([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/milestones/77753-1245))
@@ -50,7 +50,6 @@ MooTools Plugins and Enhancements Repository
   * New /Tests implementation; see the [mootools-test-runner](http://github.com/anutron/mootools-test-runner) if you'd like to use them.
   * New YAML package and dependency declarations
   * Depender.js is no more; [use the server app](http://github.com/anutron/mootools-depender).
-  * Log.js is no more; [you can download it from source via github](http://github.com/mootools/mootools-more/blob/1.2.4.4/Source/Core/Log.js)
 * Drag
   * Drag now supports non-pixel values for position
 * Element.position
@@ -61,6 +60,8 @@ MooTools Plugins and Enhancements Repository
   * Sortables now deal with draggables that contain radio inputs to prevent them from being unchecked when you drag one that is.
 * Date
   * Dashes in `Date.parse` weren't always parsed right
+  * added millisecond support to UTC parsing and to formatting as `%s`
+  * added `%e` option to Date.format. Prints non padded day number.
 * HtmlTable
   * HtmlTable is now less likely to fail in tables w/ rowspan/colspan going on
   * HtmlTable.push now accepts an actual TR element.
@@ -72,32 +73,29 @@ MooTools Plugins and Enhancements Repository
 * HtmlTable.Sort
   * added static method to allow users to add custom parsers *at the top* of the parser list (so their custom ones occur first)
   * now allows contents of table cells that are more than just text nodes.
-Document
+* Document
   * Added method to clear document selection
-Form.Request
+* Form.Request
   * now passes along the request arguments to `Form.Request`'s events.
   * now sends along which button was clicked (as regular forms do).
-Fx.Reveal
+* Fx.Reveal
   * Added an 'opacity' option to set the target opacity for `reveal()` or starting opacity for `dissolve()`.
-OverText
+* OverText
   * added `enable`, `disable`, and `destroy` methods.
-Date
-  * added millisecond support to UTC parsing and to formatting
-  * added `%e` option to Date.format. Prints non padded day number.
-Fx.Accordion
+* Fx.Accordion
   * added `removeSection` method
-Tips
+* Tips
   * fixed a bug where tips was not passing along the proper arguments to the `onShow` event
-Slider
+* Slider
   * added `setRange` to dynamically set the range
-Keyboard / Keyboard.Extras
+* Keyboard / Keyboard.Extras
   * no longer calls `disable` when keyboard instances are managed.
   * reenabled the previous keyboard when the current one is dropped.
   * added an `isActive` method.
   * added `removeShortcut` method.
-Spinner
+* Spinner
   * (integration into Request) - make it so that spinner picks up details only no send, not on init.
-Assets
+* Assets
   * added onload support for `Assets.css`
 
 #### Changes in MooTools More 1.2.4.4
