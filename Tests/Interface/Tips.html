@@ -33,6 +33,10 @@ img {
 	margin: 8px 0px;
 }
 </style>
+
+<h1>These links should let you enable and disable the tips</h1>
+<div id="togglers"><a id="enable">attach tips</a> | <a id="disable">detach tips</a></div>
+
 <h1>Mouseover this image to have a tip that follows your mouse</h1>
 <img border="0" alt="MooTools" 
 src="/asset/more/mootools.png" title="MooTools" 
@@ -55,28 +59,43 @@ class="toolTipElement2"/>
 
 <script src="/depender/build?require=More/Tips,Core/Selectors"></script>
 <script>
-new Tips($$('.toolTipElement'), {
-	timeOut: 700,
-	maxTitleChars: 50, /*I like my captions a little long*/
-	maxOpacity: .9 /*let's leave a little transparancy in there */
+
+var elements = [
+	$$('.toolTipElement'),
+	$$('.toolTipElement2'),
+	$$('.toolTipElement3')
+];
+
+var instances = [
+
+	new Tips(elements[0]),
+
+	new Tips(elements[1], {
+		fixed: true,
+		offset: {
+			x: 10,
+			y: 70
+		}
+	}),
+
+	new Tips(elements[2], {
+		offset: {
+			x: 10,
+			y: 70
+		}
+	})
+
+];
+
+document.id('enable').addEvent('click', function(){
+	instances.each(function(tips, index){
+		tips.attach(elements[index]);
+	});
 });
-new Tips($$('.toolTipElement2'), {
-	timeOut: 700,
-	maxTitleChars: 50, /*I like my captions a little long*/
-	maxOpacity: .9, /*let's leave a little transparancy in there */
-	fixed: true,
-	offset: {
-		x: 10,
-		y: 70
-	}
+document.id('disable').addEvent('click', function(){
+	instances.each(function(tips, index){
+		tips.detach(elements[index]);
+	});
 });
-new Tips($$('.toolTipElement3'), {
-	timeOut: 700,
-	maxTitleChars: 50, /*I like my captions a little long*/
-	maxOpacity: .9, /*let's leave a little transparancy in there */
-	offset: {
-		x: 10,
-		y: 70
-	}
-});
+
 </script>
