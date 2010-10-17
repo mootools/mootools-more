@@ -72,6 +72,15 @@ describe('Locale', function(){
 		expect(Locale.get('Date')).toEqual(obj);
 	});
 
+	it('should return a cloned object without reference to the Locale.Set.data', function(){
+		Locale.define('de-DE', 'Ping', {
+			ping: 'w00fz, Stop mit Pingen'
+		});
+		Locale.use('de-DE');
+
+		expect(Locale.get('Ping') === Locale.get('Ping')).toBeFalsy();;
+	});
+
 	describe('MooTools.lang 1.2 specs', function(){
 
 		it('should return english form validator message', function(){

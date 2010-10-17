@@ -57,6 +57,10 @@ describe('Number.Extras', function(){
 			expect((-2000).formatCurrency()).toEqual('$ -2,000.00');
 		});
 
+		it('should still format a currency', function(){
+			expect((2000).formatCurrency()).toEqual('$ 2,000.00');
+		});
+
 		it('should format percentage', function(){
 			expect((50).formatPercentage()).toEqual('50.00%');
 		});

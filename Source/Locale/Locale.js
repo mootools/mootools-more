@@ -125,7 +125,12 @@ Locale.Set = new Class({
 
 	get: function(key, args, _base){
 		var value = Object.getFromPath(this.sets, key);
-		if (value != null) return Type.isFunction(value) ? value.apply(null, Array.from(args)) : value;
+		if (value != null){
+			var type = typeOf(value);
+			if (type == 'function') value = value.apply(null, Array.from(args));
+			else if (type == 'object') value = Object.clone(value);
+			return value;
+		}
 
 		// get value of inherited locales
 		var index = key.indexOf('.'),
