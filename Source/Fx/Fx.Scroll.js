@@ -23,6 +23,8 @@ provides: [Fx.Scroll]
 ...
 */
 
+(function(){
+
 Fx.Scroll = new Class({
 
 	Extends: Fx,
@@ -35,13 +37,12 @@ Fx.Scroll = new Class({
 	initialize: function(element, options){
 		this.element = this.subject = document.id(element);
 		this.parent(options);
-		var cancel = this.cancel.pass(false, this);
 
 		if (typeOf(this.element) != 'element') this.element = document.id(this.element.getDocument().body);
 
-		var stopper = this.element;
-
 		if (this.options.wheelStops){
+			var stopper = this.element,
+				cancel = this.cancel.pass(false, this);
 			this.addEvent('start', function(){
 				stopper.addEvent('mousewheel', cancel);
 			}, true);
@@ -97,8 +98,9 @@ Fx.Scroll = new Class({
 	},
 
 	toElement: function(el){
-		var position = document.id(el).getPosition(this.element);
-		return this.start(position.x, position.y);
+		var position = document.id(el).getPosition(this.element),
+			scroll = isBody(this.element) ? {x: 0, y: 0} : this.element.getScroll();
+		return this.start(position.x + scroll.x, position.y + scroll.y);
 	},
 
 	scrollIntoView: function(el, axes, offset){
@@ -149,3 +151,9 @@ Fx.Scroll = new Class({
 	}
 
 });
+
+function isBody(element){
+	return (/^(?:body|html)$/i).test(element.tagName);
+};
+
+})();
