@@ -153,7 +153,7 @@ Drag.Move = new Class({
 	checkAgainst: function(el, i){
 		el = (this.positions) ? this.positions[i] : el.getCoordinates();
 		var now = this.mouse.now;
-		return (now.x > el.left && now.x < el.right && now.y < el.bottom && now.y > el.top);
+		return (now.x >= el.left && now.x <= el.right && now.y <= el.bottom && now.y >= el.top);
 	},
 
 	checkDroppables: function(){
