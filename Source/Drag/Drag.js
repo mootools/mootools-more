@@ -19,6 +19,7 @@ requires:
   - Core/Options
   - Core/Element.Event
   - Core/Element.Style
+  - Core/Element.Dimensions
   - /MooTools.More
 
 provides: [Drag]
@@ -97,19 +98,34 @@ var Drag = new Class({
 			y: this.options.modifiers.y == 'top' && styles.top == 'auto' &&
 			   !isNaN(styles.bottom.toInt()) && (this.options.modifiers.y = 'bottom')
 		};
-		for (var z in this.options.modifiers){
+
+		var z, coordinates;
+		for (z in this.options.modifiers){
 			if (!this.options.modifiers[z]) continue;
-			if (this.options.style) this.value.now[z] = (this.element.getStyle(this.options.modifiers[z]) || 0).toInt();
+
+			var style = this.element.getStyle(this.options.modifiers[z]);
+
+			// Some browsers (IE and Opera) don't always return pixels.
+			if (style && !style.match(/px$/)){
+				if (!coordinates) coordinates = this.element.getCoordinates(this.element.getOffsetParent());
+				style = coordinates[this.options.modifiers[z]];
+			}
+
+			if (this.options.style) this.value.now[z] = (style || 0).toInt();
 			else this.value.now[z] = this.element[this.options.modifiers[z]];
+
 			if (this.options.invert) this.value.now[z] *= -1;
 			if (this._invert[z]) this.value.now[z] *= -1;
+
 			this.mouse.pos[z] = event.page[z] - this.value.now[z];
+
 			if (limit && limit[z]){
 				for (var i = 2; i--; i){
 					if ($chk(limit[z][i])) this.limit[z][i] = $lambda(limit[z][i])();
 				}
 			}
 		}
+
 		if ($type(this.options.grid) == 'number') this.options.grid = {x: this.options.grid, y: this.options.grid};
 		this.document.addEvents({mousemove: this.bound.check, mouseup: this.bound.cancel});
 		this.document.addEvent(this.selection, this.bound.eventStop);
