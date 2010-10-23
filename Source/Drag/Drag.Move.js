@@ -53,7 +53,7 @@ Drag.Move = new Class({
 		if (this.options.style){
 			if (this.options.modifiers.x == "left" && this.options.modifiers.y == "top"){
 				var parentStyles,
-					parent = element.getOffsetParent();
+					parent = document.id(element.getOffsetParent());
 				if (parent) parentStyles = parent.getStyles('border-top-width', 'border-left-width');
 				var styles = element.getStyles('left', 'top');
 				if (parent && styles.left == 'auto' || styles.top == 'auto') {
