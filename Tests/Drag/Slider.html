@@ -20,13 +20,22 @@
 <button id="setRange">setRange</button>
 <p id="upd3">XX</p>
 
+
+<h3 class="h3_test">A range of -20 to 20 whith a initial value of 0</h3>
+<p>The knob should be in the middle of the slider</p>
+<div id="area4">
+	<div id="knob4"></div>
+</div>
+<p id="upd4">XX</p>
+
+
 <style type="text/css" media="screen">
-	#area, #area2, #area3 {
+	#area, #area2, #area3, #area4 {
 		background: #ccc;
 		height: 20px;
 		width: 200px;
 	}
-	#knob, #knob2, #knob3 {
+	#knob, #knob2, #knob3, #knob4 {
 		height: 20px;
 		width: 20px;
 		background: #000;
@@ -36,6 +45,7 @@
 </style>
 <script src="/depender/build?require=More/Slider"></script>
 <script>
+
 var mySlide = new Slider($('area'), $('knob'), {
 	initialStep: 50,
 	onChange: function(pos){
@@ -51,6 +61,7 @@ var mySlide2 = new Slider($('area2'), $('knob2'), {
 		$('upd2').set('html', pos);
 	}
 }).set(0);
+
 var mySlide3 = new Slider($('area3'), $('knob3'), {
 	steps: 100,
 	range: [0,100],
@@ -58,7 +69,17 @@ var mySlide3 = new Slider($('area3'), $('knob3'), {
 		$('upd3').set('html', pos);
 	}
 }).set(0);
+
 $('setRange').addEvent('click',function(){
 	mySlide3.setRange([200,50]);
 });
+
+var mySlide4 = new Slider($('area4'), $('knob4'), {
+	range: [-20, 20],
+	initialStep: 0,
+	onChange: function(pos){
+		$('upd4').set('html', pos);
+	}
+});
+
 </script>
