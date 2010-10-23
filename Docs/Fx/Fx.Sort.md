@@ -162,6 +162,7 @@ Sort by the order specified in a collection of elements; elements must be an arr
 
 ### Example
 
+	var mySort = new Fx.Sort($$('ul li'));
 	var elements = ['li3', 'li2', 'li1', 'li0'].map(function(el){
 		return document.id(el);
 	});
