@@ -55,7 +55,7 @@ Drag.Move = new Class({
 				var parentStyles,
 					parent = element.getOffsetParent();
 				var styles = element.getStyles('left', 'top');
-				if (parent && styles.left == 'auto' || styles.top == 'auto'){
+				if (parent && (styles.left == 'auto' || styles.top == 'auto')){
 					element.setPosition(element.getPosition(parent));
 				}
 			}
