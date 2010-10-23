@@ -19,6 +19,7 @@ requires:
   - Core/Options
   - Core/Element.Event
   - Core/Element.Style
+  - Core/Element.Dimensions
   - /MooTools.More
 
 provides: [Drag]
@@ -114,10 +115,19 @@ var Drag = new Class({
 			y: options.modifiers.y == 'top' && styles.top == 'auto' && !isNaN(styles.bottom.toInt()) && (options.modifiers.y = 'bottom')
 		};
 
-		for (var z in options.modifiers){
+		var z, coordinates;
+		for (z in options.modifiers){
 			if (!options.modifiers[z]) continue;
 
-			if (options.style) this.value.now[z] = (this.element.getStyle(options.modifiers[z]) || 0).toInt();
+			var style = this.element.getStyle(options.modifiers[z]);
+
+			// Some browsers (IE and Opera) don't always return pixels.
+			if (style && !style.match(/px$/)){
+				if (!coordinates) coordinates = this.element.getCoordinates(this.element.getOffsetParent());
+				style = coordinates[options.modifiers[z]];
+			}
+
+			if (options.style) this.value.now[z] = (style || 0).toInt();
 			else this.value.now[z] = this.element[options.modifiers[z]];
 
 			if (options.invert) this.value.now[z] *= -1;
