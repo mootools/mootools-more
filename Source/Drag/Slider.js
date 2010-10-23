@@ -100,7 +100,7 @@ var Slider = new Class({
 
 		this.drag = new Drag(this.knob, dragOptions);
 		this.attach();
-		if (this.options.initialStep) this.set(this.options.initialStep)
+		if (this.options.initialStep != null) this.set(this.options.initialStep)
 	},
 
 	attach: function(){
