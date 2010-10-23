@@ -25,6 +25,7 @@ The slide effect slides an Element in horizontally or vertically.  The contents 
 * mode    - (*string*; defaults to 'vertical') String to indicate what type of sliding. Can be set to 'vertical' or 'horizontal'.
 * wrapper - (*element*; defaults to this.element) Allows to set another Element as wrapper.
 * hideOverflow - (*boolean*; defaults to *true*) automatically sets the overflow of the wrapper to overflow, otherwise it inherits from the element being wrapped.
+* resetHeight - (*boolean*; defaults to *false*) Automatically resets the height of the wrapper when the slide unfold animation is completed, allowying to manipulate the content keeping it adjusting naturally.
 
 #### Properties
 
