@@ -102,7 +102,7 @@ var Sortables = new Class({
 	},
 
 	getClone: function(event, element){
-		if (!this.options.clone) return new Element('div').inject(document.body);
+		if (!this.options.clone) return new Element(element.tagName).inject(document.body);
 		if (typeOf(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
 		var clone = element.clone(true).setStyles({
 			margin: 0,
@@ -177,7 +177,7 @@ var Sortables = new Class({
 		this.element.set('opacity', this.opacity);
 		if (this.effect){
 			var dim = this.element.getStyles('width', 'height');
-			var pos = this.clone.computePosition(this.element.getPosition(this.clone.offsetParent));
+			var pos = this.clone.computePosition(this.element.getPosition(this.clone.getOffsetParent()));
 			this.effect.element = this.clone;
 			this.effect.start({
 				top: pos.top,
