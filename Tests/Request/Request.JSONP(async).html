@@ -1,8 +1,6 @@
 <p>
-	Enter a twitter screen name into the text field. Then click fetch button. Each time you do this test, you must enter a new screen name because twitter caches requests. If screen name is not cached, flickr request should always return first.
+	One second request, though requested second, should return before the 5 second request.
 </p>
-<label>enter screenname:</label>
-<input type="text" id="screen_name" />
 <button id="fetch">fetch!</button>
 <hr/>
 <div id="returned"></div>
@@ -12,21 +10,22 @@
 $('fetch').addEvent('click', function(){
 	$('returned').empty();
 	new Request.JSONP({
-		url: 'http://api.twitter.com/1/statuses/friends.json',
+		url: '/echo/jsonp/',
 		data: {
-			'screen_name': $('screen_name').value,
-			'include_entities': true
+			'delay': 5
 		},
 		onComplete: function(){
-			$("returned").adopt(new Element('span', {'html': 'twitter returned!'}));
+			$("returned").adopt(new Element('span', {'html': 'Five second request returned.'}));
 		}
 	}).send();
 
 	new Request.JSONP({
-		callbackKey: 'jsoncallback',
-		url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
+    url: '/echo/jsonp/',
+    data: {
+      'delay': 1
+    },
 		onComplete: function(data){
-			$("returned").adopt(new Element('span', {'html': 'flickr returned!'}));
+			$("returned").adopt(new Element('span', {'html': 'One second request returned.'}));
 		}
 	}).send();
 });
