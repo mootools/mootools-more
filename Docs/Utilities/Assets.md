@@ -12,7 +12,7 @@ Injects a script tag into the head section of the document, pointing to the src 
 
 ### Syntax
 
-	var myScript = Asset.javascript(source[, properties]);
+	var myScript = new Asset.javascript(source[, properties]);
 
 ### Arguments
 
