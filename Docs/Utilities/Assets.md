@@ -25,7 +25,7 @@ Injects a script tag into the head section of the document, pointing to the src 
 
 ### Examples
 
-	var myScript = new Asset.javascript('/scripts/myScript.js', {
+	var myScript = Asset.javascript('/scripts/myScript.js', {
 		id: 'myScript',
 		events: {
 			load: function(){
@@ -45,7 +45,7 @@ Injects a css file in the page.
 
 ### Syntax
 
-	var myCSS = new Asset.css(source[, properties]);
+	var myCSS = Asset.css(source[, properties]);
 
 ### Arguments
 
@@ -58,7 +58,7 @@ Injects a css file in the page.
 
 ### Examples
 
-	var myCSS = new Asset.css('/css/myStyle.css', {id: 'myStyle', title: 'myStyle'});
+	var myCSS = Asset.css('/css/myStyle.css', {id: 'myStyle', title: 'myStyle'});
 
 ### Notes
 
@@ -71,7 +71,7 @@ Preloads an image and returns the img element.
 
 ### Syntax
 
-	var myImage = new Asset.image(source[, properties]);
+	var myImage = Asset.image(source[, properties]);
 
 ### Arguments
 
@@ -84,7 +84,7 @@ Preloads an image and returns the img element.
 
 ### Examples
 
-	var myImage = new Asset.image('/images/myImage.png', {
+	var myImage = Asset.image('/images/myImage.png', {
 		id: 'myImage',
 		title: 'myImage',
 		onLoad: myFunction
@@ -102,7 +102,7 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 
 ### Syntax
 
-	var myImages = new Asset.images(source[, options]);
+	var myImages = Asset.images(source[, options]);
 
 ### Arguments
 
@@ -149,7 +149,7 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 
 #### Examples
 
-	var myImages = new Asset.images(['/images/myImage.png', '/images/myImage2.gif'], {
+	var myImages = Asset.images(['/images/myImage.png', '/images/myImage2.gif'], {
 		onComplete: function(){
 			alert('All images loaded!');
 		}
