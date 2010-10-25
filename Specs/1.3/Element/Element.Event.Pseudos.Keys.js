@@ -1,5 +1,6 @@
 
-describe('Element.Event.Pseudos.Keys', function(){
+// Syn doesn't work really great in IE yet, needs a fix sometime
+if (!Browser.ie) describe('Element.Event.Pseudos.Keys', function(){
 
 	it('keys: should fire events for keyboard key combinations', function(){
 
@@ -12,13 +13,11 @@ describe('Element.Event.Pseudos.Keys', function(){
 		// shift+a
 		simulateEvent('type', ['[shift]a[shift-up]', document.body], function(){
 			expect(callback).toHaveBeenCalled();
-			document.body.eliminate('$moo:keys-pressed');
 		});
 
 		// shift++
 		simulateEvent('type', ['[shift]+[shift-up]', document.body], function(){
 			expect(callback2).toHaveBeenCalled();
-			document.body.eliminate('$moo:keys-pressed');
 		});
 
 	});

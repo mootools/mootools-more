@@ -1,7 +1,7 @@
 Element.Event.Pseudo :keys {#Pseudos}
 =====================================
 
-Defines the `:keys` Element Event Pseudo. It captures key combinations and fires an event when all keys are pressed.
+Defines the `:keys` Element Event Pseudo. It captures key combinations and fires an event when the keys are pressed.
 
 ### See Also
 
@@ -19,8 +19,8 @@ The event will only fire when a key combination is pressed. This only works with
 
 ### Example
 
-	myElement.addEvent('keydown:keys(shift+a+b)', function(){
-		alert('You pressed the following keys: shift, a and b');
+	myElement.addEvent('keydown:keys(shift+a)', function(){
+		alert('You pressed the following keys: shift and a');
 	});
 
 

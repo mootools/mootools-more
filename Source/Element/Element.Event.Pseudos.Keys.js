@@ -3,7 +3,7 @@
 
 name: Element.Event.Pseudos.Keys
 
-description: Adds functionallity fire events if certain keycombinations are pressed
+description: Adds functionality fire events if certain key combinations are pressed
 
 license: MIT-style license
 
@@ -19,40 +19,23 @@ provides: [Element.Event.Pseudos.Keys]
 
 (function(){
 
-var keysStoreKey = '$moo:keys-pressed',
-	keysKeyupStoreKey = '$moo:keys-keyup';
-
 
 Event.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
-		keys = [],
-		pressed = this.retrieve(keysStoreKey, []);
+		keys = [];
 
 	keys.append(split.value.replace('++', function(){
-		keys.push('+'); // shift++ and shift+++a
+		keys.push('+'); // shift++
 		return '';
-	}).split('+'));
+	}).replace('ctrl', 'control').split('+'));
 
-	pressed.include(event.key);
-
-	if (keys.every(function(key){
-		return pressed.contains(key);
+	if (keys.every(function(part){
+		return event.key == part || event[part];
 	})) fn.apply(this, args);
 
-	this.store(keysStoreKey, pressed);
-
-	if (!this.retrieve(keysKeyupStoreKey)){
-		var keyup = function(event){
-			(function(){
-				pressed = this.retrieve(keysStoreKey, []).erase(event.key);
-				this.store(keysStoreKey, pressed);
-			}).delay(0, this); // Fix for IE
-		};
-		this.store(keysKeyupStoreKey, keyup).addEvent('keyup', keyup);
-	}
-
 });
+
 
 Object.append(Event.Keys, {
 	'shift': 16,
