@@ -345,7 +345,7 @@ Form.Validator.addAllThese([
 			else return '';
 		},
 		test: function(element, props){
-			if (typeOf(props.minLength) != 'null') return (element.get('value').length >= props.minLength || 0);
+			if (typeOf(props.minLength) != 'null') return (element.get('value').length >= (props.minLength || 0));
 			else return true;
 		}
 	}],
@@ -359,7 +359,7 @@ Form.Validator.addAllThese([
 		},
 		test: function(element, props){
 			//if the value is <= than the maxLength value, element passes test
-			return (element.get('value').length <= props.maxLength || 10000);
+			return (element.get('value').length <= (props.maxLength || 10000));
 		}
 	}],
 
