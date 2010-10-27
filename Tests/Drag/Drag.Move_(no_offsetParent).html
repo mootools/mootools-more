@@ -12,6 +12,9 @@
 <script src="/depender/build?require=More/Drag.Move"></script>
 <div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
 <script>
+
+window.addEvent('load', function(){
+
 //IE returns null when the offset parent is the document body
 //but other browsers return the body; force our test to return null
 Element.implement({
@@ -23,11 +26,17 @@ $('box').inject(document.body).setStyles({
 	left: 200,
 	top: 200
 });
+
 var dragger = $('box').makeDraggable();
+
 $('enable').addEvent('click', function(){
 	dragger.attach();
 });
+
 $('disable').addEvent('click', function(){
 	dragger.detach();
 });
+
+});
+
 </script>
