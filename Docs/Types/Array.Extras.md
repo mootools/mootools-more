@@ -155,7 +155,7 @@ Apply a function against an accumulator and each value of the array (from left-t
 ### See also:
 - [MDC Array.reduce][]
 
-Array Method: unique {#Array:reduceRight}
+Array Method: reduceRight {#Array:reduceRight}
 -------------------------------------
 
 Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value.
