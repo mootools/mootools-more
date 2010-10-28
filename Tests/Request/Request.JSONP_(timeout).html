@@ -11,12 +11,14 @@ When fetching, the failure alert should only fire on script timeout. Also, onSuc
 <button id="b">1 ms timeout</button>
 <hr/>
 <div id="imgs"></div>
-<script src="mootools-more.js"></script>
+
+<script src="/depender/build?require=More/Request.JSONP,Core/Element.Event"></script>
+
 <script>
 $('a').addEvent('click', request.bind(this,7000));
 $('b').addEvent('click', request.bind(this,1));
-	
-function request(timeout){	
+
+function request(timeout){
 	new Request.JSONP({
 		log: true,
 		timeout: timeout,
