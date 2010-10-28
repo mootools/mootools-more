@@ -83,14 +83,31 @@ Removes values from the object.
 		return value > 0;
 	});
 
-Object Function: run {#Object:Object-run}
+Object Function: erase {#Object:Object-erase}
 -----------------------------------------
 
-Runs all the methods that are values of the object.
+Deletes a property from the object.
 
 ### Syntax
 
-	Object.run(object)
+	Object.erase(object, key)
+
+### Example
+
+	var alphabet = {a: 'a', b: 'b', c: 'c'};
+	Object.erase(alphabet, 'b');
+	// alphabet == {a: 'a', c: 'c'};
+
+[Object]: /more/Types/Object
+
+Object Function: run {#Object:Object-run}
+-----------------------------------------
+
+Runs all the methods that are values of the object while passing any additional arguments passed to this function.
+
+### Syntax
+
+	Object.run(object[, arg1[, arg2[, ...]]])
 
 ### Example
 
@@ -102,6 +119,9 @@ Runs all the methods that are values of the object.
 			//set up the search
 		}
 	};
-	window.addEvent('domready', Object.run(initMyPage));
+	
+	window.addEvent('domready', function(){
+		Object.run(initMyPage);
+	});
 
 [Object]: /more/Types/Object
