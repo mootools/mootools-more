@@ -35,7 +35,8 @@ thisSortables1 = new Sortables($('sortablesTable').getElement('tbody'), {
     revert: true
 });
 
-$$('#sortablesTable button').addEvent('click', function(e){
+
+$('sortablesTable').getElements('button').addEvent('click', function(e){
 	$('result').adopt(new Element('p', {text: 'Clicked:' + e.target.get('text')}));
 });
 
