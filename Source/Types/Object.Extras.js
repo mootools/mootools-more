@@ -21,6 +21,12 @@ provides: [Object.Extras]
 ...
 */
 
+(function(){
+
+var defined = function(value){
+	return value != null;
+};
+
 Object.extend({
 
 	getFromPath: function(source, key){
@@ -33,12 +39,7 @@ Object.extend({
 	},
 
 	cleanValues: function(object, method){
-		if (!method) method = function(obj){
-			return obj != null;
-		};
-		for (key in object){
-			if (!method(object[key])) delete object[key];
-		}
+		for (key in object) if (!(method || defined)(object[key])) delete object[key];
 		return object;
 	},
 
@@ -49,10 +50,10 @@ Object.extend({
 
 	run: function(object){
 		var args = Array.slice(arguments, 1);
-		for (key in object){
-			if (typeOf(object[key]) == 'function') object[key].apply(object, args);
-		}
+		for (key in object) if (object[key].apply) object[key].apply(object, args);
 		return object;
 	}
 
 });
+
+})();
