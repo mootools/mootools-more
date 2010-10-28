@@ -23,7 +23,7 @@ MooTools Plugins and Enhancements Repository
 NOTE: none of the changes below are breaking changes.
 
 #### Changes in MooTools More 1.2.5.1
-* 65 bugs closed([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/milestones/77753-1245))
+* 65 tickets closed ([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/milestones/77753))
 * Misc
   * New /Tests implementation; see the [mootools-test-runner](http://github.com/anutron/mootools-test-runner) if you'd like to use them.
   * New YAML package and dependency declarations
