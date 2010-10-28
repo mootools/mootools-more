@@ -15,12 +15,12 @@ describe('Chain.Wait', function(){
 			first();
 			chain.callChain();
 		});
-		chain.wait(50);
+		chain.wait(100);
 		chain.chain(function(){
 			second();
 			chain.callChain();
 		});
-		chain.wait(50);
+		chain.wait(100);
 		chain.chain(function(){
 			third();
 			chain.callChain();
@@ -35,8 +35,8 @@ describe('Chain.Wait', function(){
 
 
 		// second
-		waitsFor(75, function(){
-			return (Date.now() - 60) > time;
+		waitsFor(150, function(){
+			return (Date.now() - 120) > time;
 		});
 
 		runs(function(){
@@ -45,8 +45,8 @@ describe('Chain.Wait', function(){
 
 
 		// third
-		waitsFor(125, function(){
-			return (Date.now() - 115) > time;
+		waitsFor(250, function(){
+			return (Date.now() - 230) > time;
 		});
 
 		runs(function(){
