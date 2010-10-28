@@ -130,4 +130,4 @@ Runs all the methods that are values of the object while passing any additional 
 
 * (*object*) - The object.
 
-[Object]: /more/Types/Object
+[Object]: /core/Types/Object
