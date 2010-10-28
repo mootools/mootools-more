@@ -98,7 +98,9 @@ Deletes a property from the object.
 	Object.erase(alphabet, 'b');
 	// alphabet == {a: 'a', c: 'c'};
 
-[Object]: /more/Types/Object
+### Returns
+
+* (*object*) - The object.
 
 Object Function: run {#Object:Object-run}
 -----------------------------------------
@@ -119,9 +121,13 @@ Runs all the methods that are values of the object while passing any additional 
 			//set up the search
 		}
 	};
-	
+
 	window.addEvent('domready', function(){
 		Object.run(initMyPage);
 	});
+
+### Returns
+
+* (*object*) - The object.
 
 [Object]: /more/Types/Object
