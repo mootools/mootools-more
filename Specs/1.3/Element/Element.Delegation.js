@@ -1,7 +1,8 @@
 
 describe('Elements.Delegation', function(){
 
-	it('A parent Element should delegate a child element', function(){
+	// Only run this spec in browsers other than IE6-8 because they can't properly simulate bubbling events
+	if (window.addEventListener) it('A parent Element should delegate a child element', function(){
 
 		var callback = jasmine.createSpy();
 

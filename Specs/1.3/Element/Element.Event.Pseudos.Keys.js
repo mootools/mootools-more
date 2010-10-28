@@ -1,5 +1,6 @@
 
-describe('Element.Event.Pseudos.Keys', function(){
+// Only run this spec in browsers other than IE6-8 because they can't properly simulate key events
+if (window.addEventListener) describe('Element.Event.Pseudos.Keys', function(){
 
 	it('keys: should fire events for keyboard key combinations', function(){
 
