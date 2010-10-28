@@ -22,7 +22,7 @@ MooTools Plugins and Enhancements Repository
 
 #### Changes in MooTools More 1.3.0.1
 
-* 28 bugs closed ([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057/milestones/83468-130-rc1))
+* 40 tickets closed (see the milestones for [1.3.0.1rc1](https://mootools.lighthouseapp.com/projects/24057/milestones/83468) and [1.3.0.1](https://mootools.lighthouseapp.com/projects/24057/milestones/87438) in Lighthouse)
 * Misc
   * All the code of MooTools More now uses MooTools Core 1.3 internally.
   * There is built-in compatibility for all API improvements, except for Element.get not setting anymore. See [the Core wiki](http://github.com/mootools/mootools-core/wiki/Update-from-1.2-to-1.3) for compatibility for this.
@@ -45,7 +45,7 @@ MooTools Plugins and Enhancements Repository
   * Added ES5 Array:reduce and Array:reduceRight methods to Array.Extras
 
 #### Changes in MooTools More 1.2.5.1
-* 65 bugs closed ([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/milestones/77753-1245))
+* 65 tickets closed ([see the milestone for 1.2.5.1 in Lighthouse](https://mootools.lighthouseapp.com/projects/24057-mootoolsmore/milestones/77753))
 * Misc
   * New /Tests implementation; see the [mootools-test-runner](http://github.com/anutron/mootools-test-runner) if you'd like to use them.
   * New YAML package and dependency declarations
