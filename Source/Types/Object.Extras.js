@@ -39,7 +39,8 @@ Object.extend({
 	},
 
 	cleanValues: function(object, method){
-		for (key in object) if (!(method || defined)(object[key])) delete object[key];
+		method = method || defined;
+		for (key in object) if (!method(object[key])) delete object[key];
 		return object;
 	},
 
