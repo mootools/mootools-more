@@ -33,19 +33,12 @@ Fx.Move = new Class({
 	},
 
 	start: function(destination){
-		var topLeft = this.element.getStyles('top', 'left');
-		if (topLeft.top == 'auto' || topLeft.left == 'auto') {
-			var op;
-			if (!Browser.Engine.trident){
-				var parent = this.element.getParent();
-				op = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
-			}
-			var current = this.element.getPosition(op);
-			var margin = this.element.getStyles('margin-top', 'margin-left');
-			if (topLeft.top == 'auto') this.element.setStyle('top', current.y - margin['margin-top'].toInt());
-			if (topLeft.left == 'auto') this.element.setStyle('left', current.x - margin['margin-left'].toInt());
+		var element = this.element,
+			topLeft = element.getStyles('top', 'left');
+		if (topLeft.top == 'auto' || topLeft.left == 'auto'){
+			element.setPosition(element.getPosition(element.getOffsetParent()));
 		}
-		return this.parent(this.element.position($merge(this.options, destination, {returnPos: true})));
+		return this.parent(element.position($merge(this.options, destination, {returnPos: true})));
 	}
 
 });
