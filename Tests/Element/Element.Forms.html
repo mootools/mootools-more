@@ -96,9 +96,13 @@ second line
 third line</textarea><input class="example" />
 </p>
 </div>
+
 <script src="/depender/build?require=More/Element.Forms,Core/JSON"></script>
-<script>function EFexample(input, txt, value){
-	try {
-		input.getNext().value = txt + ": " + value;
-	}catch(e){dbug.log(e)}
-}</script>
+
+<script>
+
+function EFexample(input, txt, value){
+	$(input).getNext().value = txt + ": " + value;
+}
+
+</script>
