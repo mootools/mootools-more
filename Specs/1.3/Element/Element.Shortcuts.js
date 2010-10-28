@@ -23,7 +23,9 @@ License:
 			}),
 			new Element('div', {
 				styles: {
-					width: 0
+					width: 0,
+					height: 0,
+					overflow: 'hidden'
 				}
 			}),
 			new Element('div', {
