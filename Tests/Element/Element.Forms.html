@@ -10,10 +10,9 @@ textarea, input {
 <script type"text/javascript">
 
 function EFexample(input, txt, value){
-	try {
-		input.getNext().value = txt + ": " + value;
-	}catch(e){dbug.log(e)}
+	$(input).getNext().value = txt + ": " + value;
 }
+
 </script>
 
 
