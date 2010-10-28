@@ -1,31 +1,38 @@
+
 <p>You should be able to resize the box below by dragging the grey handle.</p>
 <p>The links below the box should allow you to enable or disable the drag behavior.</p>
+
 <style>
+
 #textresizer {
 	width: 250px;
 	background: #ddd;
-	border-top: 1px solid #eee;
-	border-left: 1px solid #eee;
-	border-right: 1px solid #333;
 	border-bottom: 1px solid #333;
 	height: 4px;
 	cursor: s-resize;
 	margin-bottom: 10px;
-	clear:both;
-	float: left;
 }
+
 textarea#comment {
 	width: 250px;
-	float: left;
 	height: 100px;
 }
-#togglers {
-	clear:both;
+
+#wrapper {
+	float: left;
 }
+
 </style>
-<textarea tabindex="4" id="comment" class="resizable" rows="15" cols="50" name="comment"></textarea>
-<div id="textresizer"></div>
-<div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
+
+
+<div class="wrapper">
+	<form>
+		<textarea id="comment"></textarea>
+		<div id="textresizer"></div>
+	</form>
+	<div id="togglers"><a id="enable">enable drag</a> | <a id="disable">disable drag</a></div>
+</div>
+
 <script src="/depender/build?require=More/Drag"></script>
 <script>
 var dragger = $('comment').makeResizable({
