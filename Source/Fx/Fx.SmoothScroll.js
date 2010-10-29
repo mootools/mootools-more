@@ -39,6 +39,11 @@ provides: [Fx.SmoothScroll]
 			var anchor = link.href.substr(location.length);
 			if (anchor) this.useLink(link, anchor);
 		}, this);
+
+		this.addEvent('complete', function(){
+			win.location.hash = this.anchor;
+			this.element.scrollTo(this.to[0] + this.options.offset.x, this.to[1] + this.options.offset.y);
+		}, true);
 	},
 
 	useLink: function(link, anchor){
@@ -51,6 +56,8 @@ provides: [Fx.SmoothScroll]
 			this.toElement(el).chain(function(){
 				this.fireEvent('scrolledTo', [link, el]);
 			}.bind(this));
+
+			this.anchor = anchor;
 
 		}.bind(this));
 

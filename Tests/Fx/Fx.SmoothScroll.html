@@ -1,4 +1,4 @@
-<p>All the links below should scroll smoothly to their sections.</p>
+<p>All the links below should scroll smoothly to their sections. It has a offset of -20 pixels</p>
 
 <a name="top" id="top"></a>
 
@@ -58,7 +58,10 @@ H
 
 <script src="/depender/build?require=More/Fx.SmoothScroll"></script>
 <script>
-
-new Fx.SmoothScroll();
-
+new Fx.SmoothScroll({
+	offset: {
+		x: 0,
+		y: -20
+	}
+});
 </script>
