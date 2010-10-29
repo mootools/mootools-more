@@ -5,7 +5,7 @@ Additional InputValidators: {#Validators}
 
 Here are the validators that are included in this libary. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied.
 
-Validator: validate-no-space {#Validators:validate-no-space}
+Validator: validate-nospace {#Validators:validate-nospace}
 ------------------------------------------
 
 Enforces that there are no spaces in the input value.
