@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Locale-uk-UA.Date
+name: Locale.uk-UA.Date
 
 description: Date messages for Ukrainian (utf-8).
 
@@ -13,7 +13,7 @@ authors:
 requires:
   - /Locale
 
-provides: [Locale-uk-UA.Date]
+provides: [Locale.uk-UA.Date]
 
 ...
 */
