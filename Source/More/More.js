@@ -27,6 +27,6 @@ provides: [MooTools.More]
 */
 
 MooTools.More = {
-	'version': '1.3.0.1dev',
-	'build': '%build%'
+	'version': '1.3.0.1',
+	'build': '6dce99bed2792dffcbbbb4ddc15a1fb9a41994b5'
 };
