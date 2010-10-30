@@ -146,7 +146,7 @@ Apply a function against an accumulator and each value of the array (from left-t
 
 	[0, 1, 2, 3, 4].reduce(function(a, b){
 		return a + b;
-	}, 20); // returns 20
+	}, 20); // returns 30
 
 ### Returns
 
