@@ -17,6 +17,7 @@ requires:
   - Core/Options
   - Core/Element.Event
   - Core/Element.Dimensions
+  - MooTools.More
 
 provides: [Scroller]
 

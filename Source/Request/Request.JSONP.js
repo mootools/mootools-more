@@ -17,6 +17,7 @@ authors:
 requires:
   - Core/Element
   - Core/Request
+  - MooTools.More
 
 provides: [Request.JSONP]
 

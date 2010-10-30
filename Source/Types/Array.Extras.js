@@ -15,6 +15,7 @@ authors:
 
 requires:
   - Core/Array
+  - MooTools.More
 
 provides: [Array.Extras]
 

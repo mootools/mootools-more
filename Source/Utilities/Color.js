@@ -18,6 +18,7 @@ requires:
   - Core/Number
   - Core/Hash
   - Core/Function
+  - MooTools.More
 
 provides: [Color]
 
