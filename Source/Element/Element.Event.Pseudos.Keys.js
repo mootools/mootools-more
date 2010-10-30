@@ -3,7 +3,7 @@
 
 name: Element.Event.Pseudos.Keys
 
-description: Adds functionallity fire events if certain keycombinations are pressed
+description: Adds functionality fire events if certain keycombinations are pressed
 
 license: MIT-style license
 
