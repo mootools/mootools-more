@@ -38,7 +38,7 @@ Formats a number into a formatted string for display to user. It respects locali
 		decimals: 2,
 		prefix: "&amp;#165;",
 		suffix: " (YEN)"
-	})); // returns "&#165;123.123.123,18 (YEN)"
+	}); // returns "&#165;123.123.123,18 (YEN)"
 
 	(123456789).format({
 		precision: 4,
