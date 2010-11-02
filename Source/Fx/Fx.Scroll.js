@@ -69,7 +69,7 @@ Fx.Scroll = new Class({
 		var element = this.element,
 			scrollSize = element.getScrollSize(),
 			scroll = element.getScroll(),
-			size = element.getSize();
+			size = element.getSize(),
 			values = {x: x, y: y};
 
 		for (var z in values){
