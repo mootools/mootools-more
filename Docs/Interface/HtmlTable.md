@@ -65,7 +65,7 @@ Inserts a new table row.
 
 Row data can be in either of two formats. Note that they can be mixed and matched.
 
-* simple - (*array*) an array of strings that will be inserted into each table data
+* simple - (*array*) an array of strings, elements and element collections that will be inserted into each table data
 
 **OR**
 
