@@ -302,7 +302,7 @@ Outputs the date into a specific format.
 * I - the hour as a decimal number using a 12-hour clock (range 01 to 12).
 * j - the day of the year to three digits (001 to 366, is Jan 1st)
 * k - the hour (24-hour clock) as a digit (range 0 to 23). Single digits are preceded by a blank space.
-* k - the hour (12-hour clock) as a digit (range 1 to 12). Single digits are preceded by a blank space.
+* l - the hour (12-hour clock) as a digit (range 1 to 12). Single digits are preceded by a blank space.
 * L - the time in milliseconds (three digits; "081")
 * m - the numerical month to two digits (01 is Jan, 12 is Dec)
 * M - the minutes to two digits (01, 40, 59)
