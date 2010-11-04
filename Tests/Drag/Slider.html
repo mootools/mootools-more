@@ -28,24 +28,33 @@
 </div>
 <p id="upd4">XX</p>
 
+<h3 class="h3_test">Monitor events</h3>
+<p>When the slider is initalized it should fire each event only once (change, tick and complete). </p>
+<div id="area5">
+	<div id="knob5"></div>
+</div>
+
+<br />
+<p>change events fired:<span id="upd5-change"></span><p>
+<p>tick events fired:<span id="upd5-tick"></span></p>
+<p>complete events fired:<span id="upd5-complete"></span></p>
 
 <style type="text/css" media="screen">
-	#area, #area2, #area3, #area4 {
+	#area, #area2, #area3, #area4, #area5 {
 		background: #ccc;
 		height: 20px;
 		width: 200px;
 	}
-	#knob, #knob2, #knob3, #knob4 {
+	#knob, #knob2, #knob3, #knob4, #knob5 {
 		height: 20px;
 		width: 20px;
 		background: #000;
 		cursor:col-resize !important;
 		cursor:pointer;
-	}
+  }
 </style>
 <script src="/depender/build?require=More/Slider"></script>
 <script>
-
 var mySlide = new Slider($('area'), $('knob'), {
 	initialStep: 50,
 	onChange: function(pos){
@@ -78,6 +87,25 @@ var mySlide4 = new Slider($('area4'), $('knob4'), {
 	initialStep: 0,
 	onChange: function(pos){
 		$('upd4').set('html', pos);
+	}
+});
+
+var change = 0, tick = 0, complete = 0;
+
+var mySlide5 = new Slider($('area5'), $('knob5'), {
+  onChange: function(step){
+    change++;
+    $('upd5-change').set('text', change);
+	},
+  onTick: function(position){
+    tick++;
+    $('upd5-tick').set('text', tick);
+    if (this.options.snap) position = this.toPosition(this.step);
+		this.knob.setStyle(this.property, position);
+	},
+  onComplete: function(step){
+    complete++;
+		$('upd5-complete').set('text', complete);
 	}
 });
 
