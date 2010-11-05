@@ -30,7 +30,7 @@ provides: [Tips]
 (function(){
 
 var read = function(option, element){
-	return (option) ? (typeOf(option) == 'function' ? option(element) : element.get(option)) : '';
+	return (option) ? ((typeOf(option) == 'function' ? option(element) : (element.get(option)) || element.get('data-tip-' + option))) : '';
 };
 
 this.Tips = new Class({
@@ -49,7 +49,7 @@ this.Tips = new Class({
 		},
 		title: 'title',
 		text: function(element){
-			return element.get('rel') || element.get('href');
+			return element.get('rel') || element.get('data-tip-text') ||element.get('href');
 		},
 		showDelay: 100,
 		hideDelay: 100,
@@ -68,7 +68,7 @@ this.Tips = new Class({
 		});
 		this.setOptions(params.options);
 		if (params.elements) this.attach(params.elements);
-		this.container = new Element('div', {'class': 'tip'});
+		this.container = new Element('div.tip');
 	},
 
 	toElement: function(){
@@ -82,9 +82,9 @@ this.Tips = new Class({
 				left: 0
 			}
 		}).adopt(
-			new Element('div', {'class': 'tip-top'}),
+			new Element('div.tip-top'),
 			this.container,
-			new Element('div', {'class': 'tip-bottom'})
+			new Element('div.tip-bottom')
 		);
 
 		return this.tip;
@@ -105,7 +105,7 @@ this.Tips = new Class({
 			events.each(function(value){
 				var event = element.retrieve('tip:' + value);
 				if (!event) event = function(event){
-					this['element' + value.capitalize()].apply(this, [event, element]);
+					this['element' + value.capitalize()].call(this, event, element);
 				}.bind(this);
 
 				element.store('tip:' + value, event).addEvent('mouse' + value, event);
