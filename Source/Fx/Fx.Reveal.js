@@ -22,6 +22,22 @@ provides: [Fx.Reveal]
 ...
 */
 
+(function(){
+
+
+var hideTheseOf = function(object){
+	var hideThese = object.options.hideInputs;
+	if (window.OverText){
+		var otClasses = [null];
+		OverText.each(function(ot){
+			otClasses.include('.' + ot.options.labelClass);
+		});
+		if (otClasses) hideThese += otClasses.join(', ');
+	}
+	return (hideThese) ? object.element.getElements(hideThese) : null;
+};
+
+
 Fx.Reveal = new Class({
 
 	Extends: Fx.Morph,
@@ -67,7 +83,7 @@ Fx.Reveal = new Class({
 					overflow: 'hidden'
 				});
 
-				var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
+				var hideThese = hideTheseOf(this);
 				if (hideThese) hideThese.setStyle('visibility', 'hidden');
 
 				this.$chain.unshift(function(){
@@ -129,7 +145,7 @@ Fx.Reveal = new Class({
 
 				this.element.setStyles(zero);
 
-				var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
+				var hideThese = hideTheseOf(this);
 				if (hideThese) hideThese.setStyle('visibility', 'hidden');
 
 				this.$chain.unshift(function(){
@@ -226,3 +242,5 @@ Element.implement({
 	}
 
 });
+
+})();
