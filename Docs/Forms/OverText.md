@@ -29,6 +29,7 @@ Shows text over an input that disappears when the user clicks into it. The text 
 * pollInterval - (*integer*) the duration between polling in milliseconds; defaults to *250*.
 * wrap - (*boolean*) if *true*, all inputs are wrapped with a div that is positioned relatively with the class "overTxtWrapper"
 * textOverride - (*string*) if defined, this will be the value of the over text rather than the input *alt* or *title*.
+* labelClass - (*string*, defaults to `overTxtLabel`) a css classname to style the input overtext
 
 ### Events
 
@@ -161,7 +162,7 @@ This method is NOT a method on the instance. Rather it is on the namespace. So:
 
 * *array* - an array of all the running instances of the class.
 
-OverText Static Method: update {#OverText:hideAll}
+OverText Static Method: hideAll {#OverText:hideAll}
 -------------------------------------------------
 
 This allows you to manually hide all the OverTexts on the page.
@@ -186,7 +187,7 @@ This method is NOT a method on the instance. Rather it is on the namespace. So:
 * *array* - an array of all the running instances of the class.
 
 
-OverText Static Method: update {#OverText:showAll}
+OverText Static Method: showAll {#OverText:showAll}
 -------------------------------------------------
 
 This allows you to manually show all the OverTexts on the page.
