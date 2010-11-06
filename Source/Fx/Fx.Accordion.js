@@ -58,7 +58,7 @@ Fx.Accordion = new Class({
 		this.previous = -1;
 		this.internalChain = new Chain();
 
-		if (this.options.alwaysHide) this.options.wait = true;
+		if (this.options.alwaysHide) this.options.link = 'chain';
 
 		if (this.options.show || this.options.show === 0){
 			this.options.display = false;
@@ -162,7 +162,7 @@ Fx.Accordion = new Class({
 			}
 		}
 
-		if ((this.timer && this.options.wait) || (index === this.previous && !this.options.alwaysHide)) return this;
+		if ((this.timer && this.options.link == 'chain') || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
 		var obj = {};
 		this.elements.each(function(el, i){
