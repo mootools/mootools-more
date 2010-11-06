@@ -94,6 +94,7 @@ var Asset = {
 		});
 		image.src = element.src = source;
 		if (image && image.complete) image.onload.delay(1);
+		if (!source) image.onerror.delay(1);
 		return element.set(properties);
 	},
 
