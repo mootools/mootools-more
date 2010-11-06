@@ -100,9 +100,9 @@ Fx.Accordion = new Class({
 		this.togglers.include(toggler);
 		this.elements.include(element);
 
-		var test = this.togglers.contains(toggler);
-		var idx = this.togglers.indexOf(toggler);
-		var displayer = this.display.pass(idx, this);
+		var test = this.togglers.contains(toggler),
+			idx = this.togglers.indexOf(toggler),
+			displayer = this.display.pass(idx, this);
 
 		toggler.store('accordion:display', displayer)
 			.addEvent(this.options.trigger, displayer);
@@ -150,8 +150,8 @@ Fx.Accordion = new Class({
 
 	display: function(index, useFx){
 		if (!this.check(index, useFx)) return this;
-		useFx = useFx != null ? useFx : true;
-		index = (typeOf(index) == 'element') ? this.elements.indexOf(index) : index;
+		if (useFx == null) useFx = true;
+		if (typeOf(index) == 'element') index = this.elements.indexOf(index);
 		if (index == this.previous && !this.options.alwaysHide) return this;
 		if (this.options.returnHeightToAuto){
 			var prev = this.elements[this.previous];
