@@ -18,11 +18,6 @@ Configuration.presets = {
 	'more-all': {
 		sets: ['1.3-base', '1.3-client'],
 		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']
-	},
-
-	'keyboard': {
-		sets: ['keyboard'],
-		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']
 	}
 
 };
@@ -62,15 +57,7 @@ Configuration.sets = {
 			'Types/URI', 'Types/URI.Relative',
 			'Interface/Keyboard',
 			'Request/Request.JSONP',
-			'Utilities/Hash.Cookie'
-		]
-	},
-
-	'keyboard': {
-		path: '1.3/',
-		files: [
-			'Element/Element.Event.Pseudos',
-			'Interface/Keyboard'
+			'Utilities/Hash.Cookie', 'Utilities/Assets'
 		]
 	}
 
@@ -189,7 +176,8 @@ Configuration.source = {
 
 			'Request/Request.JSONP',
 
-			'Utilities/Hash.Cookie'
+			'Utilities/Hash.Cookie',
+			'Utilities/Assets'
 		]
 	}
 
