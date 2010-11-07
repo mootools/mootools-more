@@ -91,20 +91,14 @@ Request.JSONP = new Class({
 			this.success(arguments, index);
 		}.bind(this);
 
-		if (options.timeout){
-			(function(){
-				if (this.running) this.fireEvent('timeout', [script.get('src'), script]).fireEvent('failure').cancel();
-			}).delay(options.timeout, this);
-		}
+		if (options.timeout) this.timeout.delay(options.timeout, this);
 
 		return this;
 	},
 
 	getScript: function(src){
-		return this.script = new Element('script', {
-			type: 'text/javascript',
-			src: src
-		});
+		if (!this.script) this.script = new Element('script[type=text/javascript]', {src: src});
+		return this.script;
 	},
 
 	success: function(args, index){
@@ -115,7 +109,8 @@ Request.JSONP = new Class({
 	},
 
 	cancel: function(){
-		return this.running ? this.clear().fireEvent('cancel') : this;
+		if (this.running) this.clear().fireEvent('cancel');
+		return this;
 	},
 
 	isRunning: function(){
@@ -123,8 +118,19 @@ Request.JSONP = new Class({
 	},
 
 	clear: function(){
-		if (this.script) this.script.destroy();
 		this.running = false;
+		if (this.script){
+			this.script.destroy();
+			this.script = null;
+		}
+		return this;
+	},
+
+	timeout: function(){
+		if (this.running) {
+			this.running = false;
+			this.fireEvent('timeout', [this.script.get('src'), this.script]).fireEvent('failure').cancel();
+		}
 		return this;
 	}
 
