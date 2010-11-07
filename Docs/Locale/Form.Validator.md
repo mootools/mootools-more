@@ -1,5 +1,5 @@
 Locale: Form.Validator {#Form-Validator}
-=====================================
+========================================
 
 Contains the messages for [Form.Validator][].
 
@@ -132,7 +132,7 @@ Available Languages
 	</tr>
 	<tr>
 		<td>Russian</td>
-		<td>ru-RU-unicode</td>
+		<td>ru-RU</td>
 		<td>Evstigneev Pavel<td>
 	</tr>
 	<tr>

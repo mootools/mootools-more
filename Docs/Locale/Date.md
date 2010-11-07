@@ -1,5 +1,5 @@
 Locale: Date {#Date}
-=====================================
+====================
 
 Contains the messages for [Date][] and [Date.Extras][].
 
@@ -137,7 +137,7 @@ Available Languages
 	</tr>
 	<tr>
 		<td>Russian</td>
-		<td>ru-RU-unicode</td>
+		<td>ru-RU</td>
 		<td>Evstigneev Pavel</td>
 	</tr>
 	<tr>
