@@ -34,7 +34,7 @@ There are two types of elements that (sometimes) prohibit you from positioning a
 * margin -  (*integer*) make the iframe smaller than the element to give a buffer (for things like shadows)
 * offset -  (*object: {x:#, y:#}*) move the iframe up/down, left/right relative to the element
 * className - (*string*) className for the shim; defaults to *"iframeShim"*
-* browsers - (*boolean*) allows you to specify the browsers that the iframe should show up for; defaults to ie6 or gecko on a mac (Browser.Engine.trident4 || (Browser.Engine.gecko && Browser.Platform.mac)). Example usage: *browsers: Browser.Engine.trident4 || Browser.Engine.presto* will show for opera and ie6
+* browsers - (*boolean*) allows you to specify the browsers that the iframe should show up for; defaults to ie6 or firefox on a mac `(Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac))`. Example usage: `browsers: Browser.ie6 || Browser.opera` will show for ie6 and opera
 * src - (*string*) this is the source of the Iframe. For the most part, you shouldn't mess with this option. We've tested it across numerous environments (particularly https environments), but if you need to, for some reason, alter it, we've exposed it as an option, as your environment may require you try an alternate string. The default is *'javascript:false;document.write("");'*.
 
 ### Events
