@@ -69,6 +69,7 @@ th.table-th-sort-rev {
 		<tr><td>10-12-2010</td></tr>
 	</tbody>
 </table>
+
 <script src="/depender/build?require=More/HtmlTable.Sort"></script>
 <script>
 new HtmlTable($('hidden_sorts'), {
@@ -147,5 +148,39 @@ var myTable = new HtmlTable({
 
 });
 $(myTable).inject($('mt-content'));
+
+
+headers = ["hostname","model","rack","expire"];
+
+rows = [
+["FTP1.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["FTP2.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["Kerberos1.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-06-21"],
+["Kerberos2.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-06-21"],
+["Mail1.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-06-21"],
+["Mail2.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-06-21"],
+["SSGUnix.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["Web1.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["Web2.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["XEN1.uits.uconn.edu", "IBM XSeries", "C3", "2010-10-08"],
+["XEN2.uits.uconn.edu", "IBM XSeries", "C3", "2010-10-08"],
+["bluet.uconn.edu", "Dell Desktop","D4","2010-08-23"],
+["hm1.uits.uconn.edu", "Dell PowerEdge 6500", "C4", "2009-12-12"],
+["hm2.uits.uconn.edu", "Dell PowerEdge 6500", "C4", "2009-12-12"],
+["hm3.uits.uconn.edu", "Dell PowerEdge 6500", "C4", "2009-12-20"],
+["nicky.uconn.edu", "Dell PowerEdge 1850", "A9", "2009-04-12"],
+];
+
+var myTable = new HtmlTable({
+	properties: {
+		border: 1,
+		cellspacing: 0,
+		cellpadding: 4
+	},
+	headers: headers,
+	rows: rows,
+	sortable: true,
+});
+myTable.inject($('mt-content'));
 
 </script>
