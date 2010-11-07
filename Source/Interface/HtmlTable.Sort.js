@@ -93,8 +93,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 				case 'string': parser = parser; cancel = true; break;
 			}
 			if (!cancel){
-				Object.some(HtmlTable.Parsers, function(current){
-					var match = current.match;
+				HtmlTable.ParserPriority.some(function(parserName){
+					var current = HtmlTable.Parsers[parserName],
+						match = current.match;
 					if (!match) return false;
 					for (var i = 0, j = rows.length; i < j; i++){
 						var cell = document.id(rows[i].cells[index]);
@@ -239,6 +240,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 	}
 
 });
+
+HtmlTable.ParserPriority = ['date', 'input-checked', 'input-value', 'number', 'float'];
 
 HtmlTable.Parsers = {
 
