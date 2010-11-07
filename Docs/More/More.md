@@ -13,3 +13,8 @@ MooTools.More {#MooTools-More:MooTools-More}
 
 Defines `MooTools.More.version`.
 
+Previous Versions Documentation
+-------------------------------
+
+- [MooTools More 1.2 Docs](http://www.mootools.net/docs/more125)
+
