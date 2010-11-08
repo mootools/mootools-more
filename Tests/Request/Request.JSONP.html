@@ -1,26 +1,16 @@
-<style>
-#imgs img {
-	display: inline;
-	margin: 10px;
-}
-</style>
-
-<a id="fetch">Fetch an image from Flickr.</a>
+<a id="fetch">Make a jsonp request.</a>
 <hr/>
 <div id="loading"></div>
-<div id="imgs"></div>
+<div id="response"></div>
 
 <script src="/depender/build?require=More/Request.JSONP,Core/Element.Event"></script>
 <script>
 $('fetch').addEvent('click', function(){
 	new Request.JSONP({
 		log: true,
-		callbackKey: 'jsoncallback',
-		url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
+		url: '/echo/jsonp',
 		onComplete: function(data){
-			new Element('img', {
-				src: data.items[0].media.m
-			}).inject('imgs');
+			$('response').set('text', 'success!');
 			$('loading').set('text', '');
 		},
 		onRequest: function(){
