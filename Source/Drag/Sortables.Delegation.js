@@ -38,19 +38,19 @@ Sortables.Delegation = new Class({
     Array.flatten(arguments).each(function(list){
       this.lists.push(list);
       this.relay = this.relay || this.options.relay + (this.options.handle ? ' ' + this.options.handle : '');
-      var start = list.retrieve('sortables:start', this.delegatedStart.bind(this));
+      var start = list.retrieve('sortables:start', this.start.bind(this));
       list.addEvent('mousedown:relay(' + this.relay + ')', start);
     }, this);
     return this;
   },
 
-  delegatedStart: function(event, element){
+  start: function(event, element){
     var match;
     while (!match) {
       match = this.lists.contains(element.getParent());
       if (!match) element = element.getParent(this.relay);
     }
-    this.start(event, element);
+    this.parent(event, element);
   },
 
   removeLists: function(){
