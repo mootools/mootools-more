@@ -217,7 +217,7 @@ Date.alias('strftime', 'format');
 var formats = {
 	db: '%Y-%m-%d %H:%M:%S',
 	compact: '%Y%m%dT%H%M%S',
-	iso8601: '%Y-%m-%dT%H:%M:%S%T',
+	iso8601: '%Y-%m-%dT%H:%M:%S%z',
 	rfc822: '%a, %d %b %Y %H:%M:%S %Z',
 	'short': '%d %b %H:%M',
 	'long': '%B %d, %Y %H:%M'

@@ -304,7 +304,7 @@ describe('Date.format', function(){
 		expect(d.format('compact')).toEqual(d.format('%Y') + d.format('%m') + d.format('%d') + 'T' + d.format('%H') + d.format('%M') + d.format('%S')); // missing!
 		expect(d.format('compact')).toEqual('19971120T010203'); // missing!
 
-		expect(d.format('iso8601')).toEqual(d.format('%Y') + '-' + d.format('%m') + '-' + d.format('%d') + 'T' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + d.format('%T'));
+		expect(d.format('iso8601')).toEqual(d.format('%Y') + '-' + d.format('%m') + '-' + d.format('%d') + 'T' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + d.format('%z'));
 		//expect(d.format('iso8601')).toEqual('1997-11-20T01:02:03+0000');
 
 		expect(d.format('rfc822')).toEqual(d.format('%a') + ', ' + d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + ' ' + d.format('%Z'));
@@ -404,7 +404,7 @@ describe('Date.parse', function(){
 			expect(Date.parse(d.format('%b %d %Y'))).toEqual(d);
 			expect(Date.parse(d.format('%d %B %Y'))).toEqual(d);
 			expect(Date.parse(d.format('%Y %b %d'))).toEqual(d);
-			expect(Date.parse(d.format('%o %b %d %X %T %Y'))).toEqual(d);
+			expect(Date.parse(d.format('%o %b %d %X %z %Y'))).toEqual(d);
 
 			['-', '.', '/'].each(function(punc){
 				expect(Date.parse(d.format('%x').replace(/[-.\/]/g, punc))).toEqual(d);
