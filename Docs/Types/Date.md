@@ -328,6 +328,7 @@ These shortcuts are NOT preceded by the percent sign.
 * compact - "%Y%m%dT%H%M%S",
 * iso8601 - "%Y-%m-%dT%H:%M:%S%z",
 * rfc822 - "%a, %d %b %Y %H:%M:%S %Z",
+* rfc2822 - "%a, %d %b %Y %H:%M:%S %z",
 * short - "%d %b %H:%M",
 * long - "%B %d, %Y %H:%M"
 
