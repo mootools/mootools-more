@@ -73,9 +73,9 @@ Element.Properties.validatorProps = {
 	get: function(props){
 		if (props) this.set(props);
 		if (this.retrieve('$moo:validatorProps')) return this.retrieve('$moo:validatorProps');
-		if (this.getProperty('$moo:validatorProps')){
+		if (this.getProperty('validatorProps')){
 			try {
-				this.store('$moo:validatorProps', JSON.decode(this.getProperty('$moo:validatorProps')));
+				this.store('$moo:validatorProps', JSON.decode(this.getProperty('validatorProps')));
 			}catch(e){
 				return {};
 			}
