@@ -8,136 +8,136 @@ License:
 
 (function(global){
 
-describe('Date.clone', {
+describe('Date.clone', function(){
 
-	'should clone a Date instance': function(){
+	it('should clone a Date instance', function(){
 		var d = new Date(Date.UTC(1999, 11, 31));
 		var dc = d.clone();
 		expect(d.get('time')).toEqual(dc.get('time'));
-	},
+	});
 
-	'the cloned Date should be a new instance of Date': function(){
+	it('the cloned Date should be a new instance of Date', function(){
 		var d = new Date(Date.UTC(1999, 11, 31));
 		var dc = d.clone();
 		dc.set('date', 1);
 		expect(d.get('time')).toNotEqual(dc.get('time'));
-	}
+	});
 
 });
 
-describe('Date.increment', {
+describe('Date.increment', function(){
 
 	// All these tests avoid leap years and daylight savings dates.
 	// Other tests may be needed.
-	'should increment a Date instance using milliseconds': function(){
+	it('should increment a Date instance using milliseconds', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 1, 1, 1, 2));
 		d.increment('ms');
 		expect(d).toEqual(d2);
-	},
-	'should increment a Date instance using seconds': function(){
+	});
+	it('should increment a Date instance using seconds', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 1, 1, 2));
 		d.increment('second');
 		expect(d).toEqual(d2);
-	},
-	'should increment a Date instance using minutes': function(){
+	});
+	it('should increment a Date instance using minutes', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 1, 2, 1));
 		d.increment('minute');
 		expect(d).toEqual(d2);
-	},
-	'should increment a Date instance using hours': function(){
+	});
+	it('should increment a Date instance using hours', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 20, 2, 1, 1));
 		d.increment('hour');
 		expect(d).toEqual(d2);
-	},
-	'should increment a Date instance (default)': function(){
+	});
+	it('should increment a Date instance (default)', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 21, 1, 1, 1));
 		d.increment();
 		expect(d).toEqual(d2);
-	},
-	'should increment a Date instance using days': function(){
+	});
+	it('should increment a Date instance using days', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 10, 21, 1, 1, 1));
 		d.increment('day');
 		expect(d).toEqual(d2);
-	},
-	'should increment a Date instance using months': function(){
+	});
+	it('should increment a Date instance using months', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1998, 11, 20, 1, 1, 1));
 		d.increment('month');
 		expect(d).toEqual(d2);
-	},
-	'should increment a Date instance using years': function(){
+	});
+	it('should increment a Date instance using years', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1999, 10, 20, 1, 1, 1));
 		d.increment('year');
 		expect(d).toEqual(d2);
-	}
+	});
 
 });
 
-describe('Date.decrement', {
+describe('Date.decrement', function(){
 
 	// All these tests avoid leap years and daylight savings dates.
 	// Other tests may be needed.
-	'should decrement a Date instance using milliseconds': function(){
+	it('should decrement a Date instance using milliseconds', function(){
 		var d =  new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 2));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 1));
 		d.decrement('ms');
 		expect(d).toEqual(d2);
-	},
-	'should decrement a Date instance using seconds': function(){
+	});
+	it('should decrement a Date instance using seconds', function(){
 		var d =  new Date(Date.UTC(1997, 10, 20, 1, 1, 2));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('second');
 		expect(d).toEqual(d2);
-	},
-	'should decrement a Date instance using minutes': function(){
+	});
+	it('should decrement a Date instance using minutes', function(){
 		var d =  new Date(Date.UTC(1997, 10, 20, 1, 2, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('minute');
 		expect(d).toEqual(d2);
-	},
-	'should decrement a Date instance using hours': function(){
+	});
+	it('should decrement a Date instance using hours', function(){
 		var d =  new Date(Date.UTC(1997, 10, 20, 2, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('hour');
 		expect(d).toEqual(d2);
-	},
-	'should decrement a Date instance (default)': function(){
+	});
+	it('should decrement a Date instance (default)', function(){
 		var d =  new Date(Date.UTC(1997, 10, 21, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement();
 		expect(d).toEqual(d2);
-	},
-	'should decrement a Date instance using days': function(){
+	});
+	it('should decrement a Date instance using days', function(){
 		var d =  new Date(Date.UTC(1997, 10, 21, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('day');
 		expect(d).toEqual(d2);
-	},
-	'should decrement a Date instance using months': function(){
+	});
+	it('should decrement a Date instance using months', function(){
 		var d =  new Date(Date.UTC(1997, 11, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('month');
 		expect(d).toEqual(d2);
-	},
-	'should decrement a Date instance using years': function(){
+	});
+	it('should decrement a Date instance using years', function(){
 		var d =  new Date(Date.UTC(1998, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		d.decrement('year');
 		expect(d).toEqual(d2);
-	}
+	});
 
 });
 
-describe('Date.isLeapYear', {
+describe('Date.isLeapYear', function(){
 
-	'should return whether a Date instance is in a leap year': function(){
+	it('should return whether a Date instance is in a leap year', function(){
 		var d1 = new Date(Date.UTC(1900, 2, 1));
 		d2 = new Date(Date.UTC(2000,2,1));
 		d3 = new Date(Date.UTC(2002,2,1));
@@ -154,56 +154,56 @@ describe('Date.isLeapYear', {
 		expect(result).toEqual(years);
 		)
 		*/
-	}
+	});
 
 });
 
-describe('Date.clearTime', {
+describe('Date.clearTime', function(){
 
-	'should clear the time portion of a Date instance': function(){
+	it('should clear the time portion of a Date instance', function(){
 		var d =  new Date('Oct 01 1997 10:45:25');
 		var d2 = new Date('Oct 01 1997 00:00:00');
 		d.clearTime();
 		expect(d).toEqual(d2);
-	}
+	});
 
 });
 
-describe('Date.diff', {
+describe('Date.diff', function(){
 
 	// All these tests avoid leap years and daylight savings dates.
 	// Other tests may be needed.
-	'should compare two Date instances (milliseconds)': function(){
+	it('should compare two Date instances (milliseconds)', function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 0));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 1, 999));
 		expect(d.diff(d2, 'ms')).toEqual(999);
-	},
-	'should compare two Date instances (seconds)': function(){
+	});
+	it('should compare two Date instances (seconds)', function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1,  0));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 1, 10));
 		expect(d.diff(d2, 'second')).toEqual(10);
-	},
-	'should compare two Date instances (minutes)': function(){
+	});
+	it('should compare two Date instances (minutes)', function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1,  0, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 1, 10, 1));
 		expect(d.diff(d2, 'minute')).toEqual(10);
-	},
-	'should compare two Date instances (hours)': function(){
+	});
+	it('should compare two Date instances (hours)', function(){
 		var d  = new Date(Date.UTC(1997, 10, 20,  0, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 20, 10, 1, 1));
 		expect(d.diff(d2, 'hour')).toEqual(10);
-	},
-	'should compare two Date instances (default)': function(){
+	});
+	it('should compare two Date instances (default)', function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 30, 1, 1, 1));
 		expect(d.diff(d2)).toEqual(10);
-	},
-	'should compare two Date instances (days)': function(){
+	});
+	it('should compare two Date instances (days)', function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 10, 30, 1, 1, 1));
 		expect(d.diff(d2, 'day')).toEqual(10);
-	},
-	'should compare two Date instances (months)': function(){
+	});
+	it('should compare two Date instances (months)', function(){
 		var d  = new Date(Date.UTC(1997,  9, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1997, 11, 20, 1, 1, 1));
 		expect(d.diff(d2, 'month')).toEqual(2);
@@ -212,8 +212,8 @@ describe('Date.diff', {
 		d  = new Date(Date.UTC(1997, 1, 1, 1, 1, 1));
 		d2 = new Date(Date.UTC(1997, 2, 1, 1, 1, 1));
 		expect(d.diff(d2, 'month')).toEqual(1);
-	},
-	'should compare two Date instances (years)': function(){
+	});
+	it('should compare two Date instances (years)', function(){
 		var d  = new Date(Date.UTC(1997, 10, 20, 1, 1, 1));
 		var d2 = new Date(Date.UTC(1999, 10, 20, 1, 1, 1));
 		expect(d.diff(d2, 'year')).toEqual(2);
@@ -222,36 +222,36 @@ describe('Date.diff', {
 		d = new Date(1277244682000);
 		d2 = new Date(1277244682237);
 		expect(d.diff(d2, 'year')).toEqual(0);
-	}
+	});
 
 });
 
-describe('Date.getTimezone', {
+describe('Date.getTimezone', function(){
 
-	'should return the time zone of a Date instance': function(){
+	it('should return the time zone of a Date instance', function(){
 		var d = new Date(Date.UTC(2000, 0, 1, 1, 1, 1));
 		if (global['Browser'] && Browser.ie) expect(d.get('timezone')).toEqual(new Date(Date.UTC()).get('timezone'));
 		else expect(d.get('timezone')).toEqual('GMT');
-	}
+	});
 
 });
 
-describe('Date.getWeek', {
+describe('Date.getWeek', function(){
 
-	'should return the week of the year of a Date instance': function(){
+	it('should return the week of the year of a Date instance', function(){
 		var d = new Date(2000, 0, 1, 1, 1, 1);
 		expect(d.get('week')).toEqual(1);
 		d.increment('day', 7 * 10 + 2);
 		expect(d.get('week')).toEqual(11);
 		d.increment('week', 42);
 		expect(d.get('week')).toEqual(1);
-	}
+	});
 
 });
 
-describe('Date.format', {
+describe('Date.format', function(){
 
-	'should format a Date instance as a string': function(){
+	it('should format a Date instance as a string', function(){
 		Locale.use('en-US');
 		var d = new Date('Thu Nov 20 1997 01:02:03');
 		var d2 = new Date('Thu Nov 2 1997 20:02:03');
@@ -318,20 +318,20 @@ describe('Date.format', {
 		expect(d.format('long')).toEqual(d.format('%B') + ' ' + d.format('%d') + ', ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M'));
 		expect(d.format('long')).toEqual('November 20, 1997 01:02');
 
-	},
+	});
 
-	'should return accented dates in correct abbreviated form': function(){
+	it('should return accented dates in correct abbreviated form', function(){
 		Locale.use('fr-FR');
 		d = new Date('Thu Feb 20 1997 01:02:03');
 		expect(d.format('%b')).toEqual('févr.');
 		Locale.use('en-US');
-	}
+	});
 
 });
 
-describe('Date.getOrdinal', {
+describe('Date.getOrdinal', function(){
 
-	'should get the ordinal for a Date instance': function(){
+	it('should get the ordinal for a Date instance', function(){
 		Date.$culture = 'GB';
 		var d = new Date(1999, 11, 1);
 		expect(d.get('ordinal')).toEqual('st');
@@ -351,13 +351,13 @@ describe('Date.getOrdinal', {
 		expect(d.get('ordinal')).toEqual('th');
 		d.increment('day', 7);
 		expect(d.get('ordinal')).toEqual('st');
-	}
+	});
 
 });
 
-describe('Date.getDayOfYear', {
+describe('Date.getDayOfYear', function(){
 
-	'should get the day of the year for a Date instance': function(){
+	it('should get the day of the year for a Date instance', function(){
 		var d = new Date(1999, 0, 1, 1, 1, 1, 1);
 		expect(d.get('dayofyear')).toEqual(1); // 1st jan 1999
 		d.increment();
@@ -366,35 +366,35 @@ describe('Date.getDayOfYear', {
 		expect(d.get('dayofyear')).toEqual(1); // 1st jan 2000 - a leap year
 		d.increment('day', 365); // should stay in the same year!
 		expect(d.get('dayofyear')).toEqual(366);
-	}
+	});
 
 });
 
-describe('Date.getLastDayOfMonth', {
+describe('Date.getLastDayOfMonth', function(){
 
-	'should get the last day of the month for a Date instance': function(){
+	it('should get the last day of the month for a Date instance', function(){
 		var d = new Date(1999, 0, 1, 1, 1, 1, 1);
 		expect(d.get('lastdayofmonth')).toEqual(31); // 1st jan 1999
 		d.increment('day', 31);
 		expect(d.get('lastdayofmonth')).toEqual(28); // 1st Feb 1999
 		d.increment('day', 365); // 29th feb 2000 - a leap year!
 		expect(d.get('lastdayofmonth')).toEqual(29);
-	}
+	});
 
 });
 
-describe('Date.parse', {
+describe('Date.parse', function(){
 
-	'should parse zero into a date': function(){
+	it('should parse zero into a date', function(){
 		expect(Date.parse(0)).toEqual(new Date(0));
-	},
+	});
 
-	'should parse a millisecond value into a date': function(){
+	it('should parse a millisecond value into a date', function(){
 		var d = new Date(Date.UTC(2000, 0, 1, 1, 1, 1));
 		expect(Date.parse(d.getTime())).toEqual(d);
-	},
+	});
 
-	'should parse a string value into a date': function(){
+	it('should parse a string value into a date', function(){
 //		Reverse parsing localized date strings?
 //		Locale.list().each(function(lang){
 //			Locale.use(lang);
@@ -427,9 +427,9 @@ describe('Date.parse', {
 			expect(Date.parse(d.set({date: 1, mo: d.getMonth()}).format('%B'))).toEqual(d);
 //		});
 //		Locale.use('en-US');
-	},
+	});
 
-	'should consistently parse dates on any day/month/year': function(){
+	it('should consistently parse dates on any day/month/year', function(){
 		// Monkey patch clearTime so parsing starts on Jan 1, 2001
 		var clearTime = Date.prototype.clearTime;
 		Date.prototype.clearTime = function(){
@@ -440,7 +440,7 @@ describe('Date.parse', {
 		expect(Date.parse(d.format('%B %d %Y'))).toEqual(d);
 
 		Date.prototype.clearTime = clearTime;
-	}
+	});
 
 });
 
