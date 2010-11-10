@@ -156,6 +156,33 @@ Replaces common special characters with their ASCII counterparts (smart quotes, 
 
 * (*string*) the string with the non-ASCII characters replaced
 
+String Method: truncate {#String:truncate}
+------------------------------------------
+
+Truncates a string after the given number of characters.
+
+### Syntax
+
+	myString.truncate(max, trail, atChar);
+
+### Arguments
+
+1. max - (*number*, optional) the maximum length of the string, defaults to `100`.
+2. trail - (*string*, optional) the trail which will be appended to the string when it is truncated, defaults to `...`
+3. atChar - (*string*, optional) a string which be truncated after. For example after a space.
+
+### Returns
+
+* (*string*) the truncated string
+
+### Examples
+
+	'This is some random text'.truncate(15); // This is some ra...
+	'This is some random text'.truncate(15, '--'); // This is some ra--
+	'This is some random text'.truncate(15, null, ' '); // This is some...
+
+
+ 
 [String]: /core/Types/String
 [Array.filter]: /core/Types/Array#Array:filter
 [encodeURIComponent]: http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Functions:encodeURIComponent

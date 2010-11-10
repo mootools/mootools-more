@@ -127,6 +127,22 @@ String.implement({
 
 	tidy: function(){
 		return walk(this, tidy);
+	},
+
+	truncate: function(max, trail, atChar){
+		var string = this;
+		if (string.length < 1) return '';
+		if (!max) max = 100;
+		if (trail == null) trail = '...';
+		if (string.length > max){
+			string = string.substring(0, max);
+			if (atChar){
+				var index = string.lastIndexOf(atChar);
+				if (index != -1) string = string.substr(0, index);
+			}
+			string += trail;
+		}
+		return string;
 	}
 
 });
