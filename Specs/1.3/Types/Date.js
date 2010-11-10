@@ -389,7 +389,22 @@ describe('Date.getLastDayOfMonth', function(){
 
 });
 
+describe('Date.isValid', function(){
+
+	it('should return a proper response for isValid', function(){
+		expect(new Date().isValid()).toEqual(true);
+		expect(Date.isValid(new Date())).toEqual(true);
+		expect(new Date('foo').isValid()).toEqual(false);
+		expect(Date.isValid(new Date('foo'))).toEqual(false);
+	});
+
+});
+
 describe('Date.parse', function(){
+
+	it('should parse a string datestamp', function(){
+		expect(Date.parse('1277244682000')).toEqual(new Date(1277244682000));
+	});
 
 	it('should parse zero into a date', function(){
 		expect(Date.parse(0)).toEqual(new Date(0));
