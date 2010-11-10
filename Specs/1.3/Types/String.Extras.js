@@ -52,3 +52,19 @@ describe('String.stripTags', {
 	}
 
 });
+
+describe('String.truncate', function(){
+
+	it('it should truncate a string at 10 chars and add ...', function(){
+		expect("Just MooTooling'".truncate(10)).toEqual('Just MooTo...');
+	});
+
+	it('it should another trail, instead of the usual dots', function(){
+		expect("Just MooTooling'".truncate(10, '--')).toEqual('Just MooTo--');
+	});
+
+	it('should truncate a string nicely after the last given char, for example a space', function(){
+		expect("Just MooTooling'".truncate(10, '--', ' ')).toEqual('Just--');
+	});
+
+});
