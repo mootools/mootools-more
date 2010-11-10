@@ -314,4 +314,7 @@ HtmlTable.Parsers = new Hash(HtmlTable.Parsers);
 
 HtmlTable.defineParsers = function(parsers){
 	HtmlTable.Parsers = Object.append(HtmlTable.Parsers, parsers);
+	for (parser in parsers){
+		HtmlTable.ParserPriority.unshift(parser);
+	}
 };
