@@ -397,7 +397,16 @@ Parses a string to a date. In the examples below, parsing works with dates using
 * You can write your own parsers - see [Date:defineParser][]
 * If you execute the *parse* method against an instance of *Date*, that instance will take on the parsed value
 * If you execute the *parse* method against the *Date* namespace a new *Date* object is created and returned
+* If the date was not able to be parsed, you'll still be returned a native Date object that is not a valid date. Use the [Date:isValid][] method to determine if the parse was successful.
 
+Date Method: isValid {#Date:isValid}
+------------------------------------------------
+
+Returns *true* if the date is a valid date object.
+
+### Syntax
+
+	new Date('foo').isValid();
 
 Static Methods {#Static}
 =========================
@@ -445,6 +454,16 @@ Static Method: parse {#Date:staticParse}
 ----------------------------------------
 
 See [Date:parse][] above.
+
+
+Static Method: isValid {#Date:isValid}
+------------------------------------------------
+
+See [Date:isValid][] above.
+
+### Syntax
+
+	Date.isValid(dateObj);
 
 Static Method: defineParser {#Date:defineParser}
 ------------------------------------------------
@@ -529,6 +548,7 @@ Define the first year of the 100-year period that 2-digit years will be fall wit
 [Date:increment]: #Date:increment
 [Date:parse]: #Date:parse
 [Date:format]: #Date:format
+[Date:isValid]: #Date:isValid
 [Date:defineFormat]: #Date:defineFormat
 [Date:defineParser]: #Date:defineParser
 [Date:parsePatterns]: #Date:CustomParsers

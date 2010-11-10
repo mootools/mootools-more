@@ -292,7 +292,12 @@ Date.extend({
 			var bits = pattern.re.exec(from);
 			return (bits) ? (parsed = pattern.handler(bits)) : false;
 		});
-		return parsed || new Date(nativeParse(from));
+		if (parsed && parsed.isValid()) return parsed;
+
+		parsed = new Date(nativeParse(from));
+		if (parsed && parsed.isValid()) return parsed;
+
+		return new Date(from.toInt());
 	},
 
 	parseDay: function(day, num){
