@@ -307,16 +307,21 @@ describe('Date.format', function(){
 		expect(d.format('iso8601')).toEqual(d.format('%Y') + '-' + d.format('%m') + '-' + d.format('%d') + 'T' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + d.format('%z'));
 		//expect(d.format('iso8601')).toEqual('1997-11-20T01:02:03+0000');
 
-		expect(d.format('rfc822')).toEqual(d.format('%a') + ', ' + d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + ' ' + d.format('%Z'));
-
-		if (global['Browser'] && Browser.ie) expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 ' + new Date(Date.UTC()).get('timezone'));
-		else expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 GMT');
-
 		expect(d.format('short')).toEqual(d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%H') + ':' + d.format('%M'));
 		expect(d.format('short')).toEqual('20 Nov 01:02');
 
 		expect(d.format('long')).toEqual(d.format('%B') + ' ' + d.format('%d') + ', ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M'));
 		expect(d.format('long')).toEqual('November 20, 1997 01:02');
+
+
+		// Thu, 20 Nov 1997 01:02:03 GMT
+		expect(d.format('rfc822')).toEqual(d.format('%a') + ', ' + d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + ' ' + d.format('%Z'));
+
+		if (global['Browser'] && Browser.ie) expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 ' + new Date(Date.UTC()).get('timezone'));
+		else expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 GMT');
+
+		//Thu, 20 Nov 1997 01:02:03 +0100
+		expect(d.format('rfc2822')).toEqual(d.format('%a') + ', ' + d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + ' ' + d.format('%z'));
 
 	});
 
