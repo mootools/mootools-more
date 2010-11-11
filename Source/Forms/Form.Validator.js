@@ -67,7 +67,7 @@ var InputValidator = new Class({
 Element.Properties.validators = {
 
 	get: function(){
-		return ((this.get('data-validators') || '') + ' '  + this.className).clean().split(' '); 
+		return (this.get('data-validators') || this.className).clean().split(' '); 
 	}
 
 };
@@ -81,7 +81,7 @@ Element.Properties.validatorProps = {
 	get: function(props){
 		if (props) this.set(props);
 		if (this.retrieve('$moo:validatorProps')) return this.retrieve('$moo:validatorProps');
-		if (this.getProperty('validatorProps') || this.getProperty('data-validator-properties')){
+		if (this.getProperty('data-validator-properties') || this.getProperty('validatorProps')){
 			try {
 				this.store('$moo:validatorProps', JSON.decode(this.getProperty('validatorProps') || this.getProperty('data-validator-properties')));
 			}catch(e){
@@ -209,7 +209,7 @@ Form.Validator = new Class({
 				if (className && !this.test(className, field)) validatorsFailed.include(className);
 			}, this);
 			passed = validatorsFailed.length === 0;
-			if (validators && this.testField(field,'warnOnly')){
+			if (validators && this.hasValidator(field,'warnOnly')){
 				if (passed){
 					field.addClass('validation-passed').removeClass('validation-failed');
 					this.fireEvent('elementPass', field);
@@ -240,14 +240,14 @@ Form.Validator = new Class({
 		if ((this.options.ignoreHidden && !field.isVisible()) || (this.options.ignoreDisabled && field.get('disabled'))) return true;
 		var validator = this.getValidator(className);
 		warn = warn != null ? warn : false;
-		if (this.testField(field, 'warnOnly')) warn = true;
-		var isValid = this.testField(field, 'ignoreValidation') || (validator ? validator.test(field) : true);
+		if (this.hasValidator(field, 'warnOnly')) warn = true;
+		var isValid = this.hasValidator(field, 'ignoreValidation') || (validator ? validator.test(field) : true);
 		if (validator && field.isVisible()) this.fireEvent('elementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
 	},
 
-	testField: function(field, value){
+	hasValidator: function(field, value){
 		return field.get('validators').contains(value);
 	},
 
