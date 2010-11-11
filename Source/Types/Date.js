@@ -163,8 +163,12 @@ Date.implement({
 
 	format: function(f){
 		if (!this.isValid()) return 'invalid date';
-		f = f || '%x %X';
-		f = formats[f.toLowerCase()] || f; // replace short-hand with actual format
+		if (!f) f = '%x %X';
+
+		var formatLower = f.toLowerCase();
+		if (formatters[formatLower]) return formatters[formatLower](this); // it's a formatter!
+		f = formats[formatLower] || f; // replace short-hand with actual format
+
 		var d = this;
 		return f.replace(/%([a-z%])/gi,
 			function($0, $1){
@@ -218,10 +222,23 @@ var formats = {
 	db: '%Y-%m-%d %H:%M:%S',
 	compact: '%Y%m%dT%H%M%S',
 	iso8601: '%Y-%m-%dT%H:%M:%S%z',
-	rfc822: '%a, %d %b %Y %H:%M:%S %Z',
 	'short': '%d %b %H:%M',
 	'long': '%B %d, %Y %H:%M'
 };
+
+// The day and month abbreviations are standardized, so we cannot use simply %a and %b because they will get localized
+var rfcDayAbbr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+	rfcMonthAbbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+var formatters = {
+	rfc822: function(date){
+		return rfcDayAbbr[date.get('day')] + date.format(', %d ') + rfcMonthAbbr[date.get('month')] + date.format(' %Y %H:%M:%S %Z');
+	},
+	rfc2822: function(date){
+		return rfcDayAbbr[date.get('day')] + date.format(', %d ') + rfcMonthAbbr[date.get('month')] + date.format(' %Y %H:%M:%S %z');
+	}
+};
+
 
 var parsePatterns = [];
 var nativeParse = Date.parse;
