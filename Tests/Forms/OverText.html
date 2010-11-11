@@ -1,57 +1,93 @@
 <style>
+
 label {
 	color: #999;
 }
+
+.customOverText {
+	font-weight: bold;
+}
+
 </style>
 
 <div style="position: relative">
-<p>The input below should have some hint text. The links below can be used to disable and enable this text. If you destroy the text, the DOM should no longer have the label anywhere (look in Firebug). After destruction, the Enable link should not work.</p>
-<input alt="Enter some text" id="ot" class="ot">
-<p><a id="disable">Disable</a> |
-<a id="enable">Enable</a> |
-<a id="destroy">Destroy</a></p>
 
-<hr/>
+	<p>
+		The input below should have some hint text. The links below can be used to disable and enable this text.
+		If you destroy the text, the DOM should no longer have the label anywhere (look in Firebug). After destruction,
+		the Enable link should not work.
+	</p>
+	<input alt="Enter some text" id="ot" />
+	<p>
+		<a id="disable">Disable</a> | <a id="enable" href="#">Enable</a> | <a id="destroy" href="#">Destroy</a>
+	</p>
 
-<p>In this example, the input starts off with a value. The input should not receive focus by default. To indicate this, you should see the background is green.</p>
-<input alt="OverText Label" value="Default Value" id="ot_default" class="ot"/>
+	<hr/>
 
-<hr/>
+	<p>
+		In this example, the input starts off with a value. The input should not receive focus by default. To indicate
+		this, you should see the background is green.
+	</p>
+	<input alt="OverText Label" value="Default Value" id="ot_default" />
 
-<p>In this example you should see the overtext disappear when the password field is filled in. Enter a value and remove focus from the first input (but don't focus the second one - click out, not tab).</p>
-<input alt="Enter your username" id="un" name="user">
-<input alt="Enter your password" id="pw" name="password">
+	<hr/>
 
-<hr/>
-Finally, this link will remove all the inputs on the page. You should see all their text hints go away, too.
-<a id="clean">Clean</a>
+	<p>
+		In this example you should see the overtext disappear when the password field is filled in. Enter a value and remove
+		focus from the first input (but don't focus the second one - click out, not tab).
+	</p>
+	<input alt="Enter your username" id="un" name="user">
+	<input alt="Enter your password" id="pw" name="password">
+
+	<hr/>
+
+	<p>
+		This overtext will have a other css class. The overtext should have a bold font
+	</p>
+	<input alt="Enter some text" id="ot_labelClass" />
+
+	<hr />
+
+	<p>
+		Finally, this link will remove all the inputs on the page. You should see all their text hints go away, too.<br />
+		<a id="clean">Clean</a>
+	</p>
+
 </div>
 
 <script src="/depender/build?require=More/OverText"></script>
 
 <script type="text/javascript">
-var el = $('ot_default');
-el.setStyle('background-color', '#0f0');
-el.addEvent('focus', function(){
-	this.setStyle('background-color', '#f00');
-});
 
-$$('.ot').each(function(el){
-	new OverText(el);
-});
+// First Input - with disable/enable/destroy methods
+var ot = $('ot'),
+	overtext1 = new OverText(ot);
+
 $('disable').addEvent('click', function(e){
 	e.stop();
-	$('ot').retrieve('OverText').disable();
+	overtext1.disable();
 });
 $('enable').addEvent('click', function(e){
 	e.stop();
-	$('ot').retrieve('OverText').enable();
+	overtext1.enable();
 });
 $('destroy').addEvent('click', function(e){
 	e.stop();
-	$('ot').retrieve('OverText').destroy();
+	overtext1.destroy();
 });
 
+
+// Second input - Should have the value of the input as OverText
+var ot_default = $('ot_default'),
+	overtext2 = new OverText(ot_default);
+
+ot_default.setStyle('background-color', 'green');
+ot_default.addEvent('focus', function(){
+	this.setStyle('background-color', 'red');
+});
+
+
+// Polling - Automatically update the overtext when the value changes
 $$('#pw, #un').each(function(el){
 	new OverText(el, {
 		poll: true
@@ -60,10 +96,21 @@ $$('#pw, #un').each(function(el){
 $('un').addEvent('change', function(){
 	$('pw').set('value', 'asdfasdf');
 });
+
+
+// A overtext with a custom label class
+var ot_labelClass = $('ot_labelClass'),
+	overtext3 = new OverText(ot_labelClass, {
+		labelClass: 'customOverText'
+	});
+
+
+// Disposes all elements and all OverTexts on the page.
 $('clean').addEvent('click', function(e){
 	e.stop();
 	$$('input').dispose();
 	OverText.update();
 });
+
 </script>
 
