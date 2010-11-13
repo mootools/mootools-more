@@ -29,10 +29,10 @@ You should be able to sort the TR elements of this table, though the input and b
 <script>
 
 thisSortables1 = new Sortables.Delegation($('sortablesTable').getElement('tbody'), {
-    constrain: true,
-    clone: false,
-    snap: 6,
-    revert: true
+	constrain: true,
+	clone: false,
+	snap: 6,
+	revert: true
 });
 
 $$('#sortablesTable button').addEvent('click', function(e){
