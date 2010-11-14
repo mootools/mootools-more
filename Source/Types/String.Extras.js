@@ -131,9 +131,7 @@ String.implement({
 
 	truncate: function(max, trail, atChar){
 		var string = this;
-		if (string.length < 1) return '';
-		if (!max) max = 100;
-		if (trail == null) trail = '...';
+		if (trail == null && atChar == null) trail = '…';
 		if (string.length > max){
 			string = string.substring(0, max);
 			if (atChar){

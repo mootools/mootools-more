@@ -167,9 +167,9 @@ Truncates a string after the given number of characters.
 
 ### Arguments
 
-1. max - (*number*, optional) the maximum length of the string, defaults to `100`.
-2. trail - (*string*, optional) the trail which will be appended to the string when it is truncated, defaults to `...`
-3. atChar - (*string*, optional) a string which be truncated after. For example after a space.
+1. max - (*number*) the maximum length of the string.
+2. trail - (*string*, optional) the trail which will be appended to the string when it is truncated, defaults to `…` when only the `max` argument is passed.
+3. atChar - (*string*, optional) a string which be truncated after. For example before a space.
 
 ### Returns
 
@@ -177,12 +177,12 @@ Truncates a string after the given number of characters.
 
 ### Examples
 
-	'This is some random text'.truncate(15); // This is some ra...
+	'This is some random text'.truncate(15); // This is some ra…
 	'This is some random text'.truncate(15, '--'); // This is some ra--
-	'This is some random text'.truncate(15, null, ' '); // This is some...
+	'This is some random text'.truncate(15, '…', ' '); // This is some…
 
 
- 
+
 [String]: /core/Types/String
 [Array.filter]: /core/Types/Array#Array:filter
 [encodeURIComponent]: http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Functions:encodeURIComponent
