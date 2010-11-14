@@ -1,0 +1,33 @@
+<p>
+	One second request, though requested second, should return before the 3 second request.<br />
+	<small>(Might not work in Opera because they do not support the async attribute at the moment)</small>
+</p>
+
+<button id="fetch">fetch!</button>
+<hr/>
+<pre id="returned"></pre>
+
+<script src="/depender/build?require=More/Request.JSONP,Core/Element.Event"></script>
+<script>
+
+var returned = document.id('returned');
+
+$('fetch').addEvent('click', function(){
+	new Request.JSONP({
+		url: '/echo/jsonp/',
+		data: {delay: 3},
+		onComplete: function(){
+			returned.appendText('Three second request returned.\n');
+		}
+	}).send();
+
+	new Request.JSONP({
+		url: '/echo/jsonp/',
+		data: {delay: 1},
+		onComplete: function(data){
+			returned.appendText('One second request returned.\n');
+		}
+	}).send();
+});
+
+</script>
