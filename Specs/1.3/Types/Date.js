@@ -267,7 +267,7 @@ describe('Date.format', function(){
 		expect(d.format('%B')).toEqual(Date.getMsg('months')[10]);
 		expect(d.format('%B')).toEqual('November');
 
-		expect(d.format('%c')).toEqual("Thu Nov 20 01:11:03 1997");
+		expect(d.format('%c')).toEqual("Thu Nov 20 01:02:03 1997");
 
 		expect(d.format('%d')).toEqual('20');
 		expect(d2.format('%d')).toEqual('02');
