@@ -310,6 +310,7 @@ Outputs the date into a specific format.
 * p - the current language equivalent of either AM or PM
 * s - the Unix Epoch Time timestamp
 * S - the seconds to two digits (01, 40, 59)
+* T - the time as %H:%M:%S
 * U - the week to two digits (01 is the week of Jan 1, 52 is the week of Dec 31)
 * w - the numerical day of the week, one digit (0 is Sunday, 1 is Monday)
 * x - the date in the current language preferred format. en-US: %m/%d/%Y (12/10/2007)
