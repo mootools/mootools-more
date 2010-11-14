@@ -121,8 +121,13 @@ Date.implement({
 			- Date.UTC(this.get('year'), 0, 1)) / Date.units.day();
 	},
 
-	getWeek: function(){
-		return (this.get('dayofyear') / 7).ceil();
+	getWeek: function(firstDOW){
+		firstDOW = (firstDOW != null ? firstDOW : (Date.getMsg('firstDayOfWeek') ? 1 : 0));
+
+		var date = new Date(this).increment('day', 3 + firstDOW - (this.get('day') || (firstDOW ? 7 : 0))),
+			firstDOY = new Date(date.get('year'), 0, 1).get('day') || (firstDOW ? 7 : 0);
+
+		return ((date.get('dayofyear') + firstDOY + 3 - firstDOW - (firstDOY > 3 + firstDOW ? 7 : 0)) / 7);
 	},
 
 	getOrdinal: function(day){
