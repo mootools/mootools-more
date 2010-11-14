@@ -131,14 +131,14 @@ String.implement({
 
 	truncate: function(max, trail, atChar){
 		var string = this;
-		if (trail == null && atChar == null) trail = '…';
+		if (trail == null && arguments.length == 1) trail = '…';
 		if (string.length > max){
 			string = string.substring(0, max);
 			if (atChar){
 				var index = string.lastIndexOf(atChar);
 				if (index != -1) string = string.substr(0, index);
 			}
-			string += trail;
+			if (trail) string += trail;
 		}
 		return string;
 	}

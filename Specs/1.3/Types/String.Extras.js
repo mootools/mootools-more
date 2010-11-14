@@ -61,10 +61,12 @@ describe('String.truncate', function(){
 
 	it('it should another trail, instead of the usual dots', function(){
 		expect("Just MooTooling'".truncate(10, '--')).toEqual('Just MooTo--');
+		expect("Just MooTooling'".truncate(10, null)).toEqual('Just MooTo');
 	});
 
 	it('should truncate a string nicely after the last given char, for example a space', function(){
 		expect("Just MooTooling'".truncate(10, '--', ' ')).toEqual('Just--');
+		expect("Just MooTooling'".truncate(10, null, ' ')).toEqual('Just');
 	});
 
 });
