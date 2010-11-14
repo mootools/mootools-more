@@ -50,7 +50,22 @@ makeActions([
 		fn: fx.toLeft.bind(fx)
 	},
 	{
-		title: 'Scroll to the red item.',
+		title: 'Scroll the box to the coordinates (20, 20).',
+		fn: function(){
+			fx.setOptions({offset: {x: 500, y: 500}});
+			fx.start(20, 20).chain(function(){ fx.setOptions({offset: {x: 0, y: 0}}); });
+		}
+	},
+	{
+		title: 'Scroll to the center of the red item, using the offset option.',
+		fn: function(){
+			var red = document.id('red');
+			fx.setOptions({offset: {y: red.getHeight() / 2}});
+			fx.toElement('red').chain(function(){ fx.setOptions({offset: {y: 0}}); });
+		}
+	},
+	{
+		title: 'Scroll to top of the red item.',
 		fn: fx.toElement.bind(fx, 'red')
 	},
 	{
