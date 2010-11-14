@@ -435,6 +435,10 @@ describe('Date.parse', function(){
 			d = new Date().set({hours: 22, minutes: 45, seconds: 15});
 			expect(Date.parse('22:45:15').format('iso8601')).toEqual(d.format('iso8601'));
 
+			expect(Date.parse('22:45').format('%H:%M')).toEqual('22:45');
+			expect(Date.parse('10:45pm').format('%H:%M')).toEqual('22:45');
+			expect(Date.parse('11:45 AM').format('%H:%M')).toEqual('11:45');
+
 //		});
 //		Locale.use('en-US');
 	});

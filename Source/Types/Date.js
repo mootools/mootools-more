@@ -490,7 +490,8 @@ Date.defineParsers(
 	'%b( %d%o)?( %Y)?( %X)?', // Same as above with month and day switched
 	'%Y %b( %d%o( %X)?)?', // Same as above with year coming first
 	'%o %b %d %X %z %Y', // "Thu Oct 22 08:11:23 +0000 2009"
-	'%T' // %H:%M:%S
+	'%T', // %H:%M:%S
+	'%H:%M( ?%p)?' // "11:05pm", "11:05 am" and "11:05"
 );
 
 Locale.addEvent('change', function(language){
