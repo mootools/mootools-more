@@ -83,13 +83,12 @@ Request.JSONP = new Class({
 
 		if (src.length > 2083) this.fireEvent('error', src);
 
-		var script = this.getScript(src).inject(options.injectScript);
-
-		this.fireEvent('request', [script.get('src'), script]);
-
 		Request.JSONP.request_map['request_' + index] = function(){
 			this.success(arguments, index);
 		}.bind(this);
+
+		var script = this.getScript(src).inject(options.injectScript);
+		this.fireEvent('request', [script.get('src'), script]);
 
 		if (options.timeout) this.timeout.delay(options.timeout, this);
 
