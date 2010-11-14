@@ -267,7 +267,7 @@ describe('Date.format', function(){
 		expect(d.format('%B')).toEqual(Date.getMsg('months')[10]);
 		expect(d.format('%B')).toEqual('November');
 
-		expect(d.format('%c')).toEqual("Thu Nov 20 01:11:03 1997");
+		expect(d.format('%c')).toEqual("Thu Nov 20 01:02:03 1997");
 
 		expect(d.format('%d')).toEqual('20');
 		expect(d2.format('%d')).toEqual('02');
@@ -286,6 +286,7 @@ describe('Date.format', function(){
 		expect(d.format('%M')).toEqual('02');
 		expect(d.format('%p')).toEqual('AM');
 		expect(d.format('%S')).toEqual('03');
+		expect(d.format('%T')).toEqual('01:02:03');
 		expect(d.format('%U')).toEqual('47');
 		//expect(d.format('%W')).toEqual(''); // not implemented
 		expect(d.format('%w')).toEqual('4');
@@ -430,6 +431,14 @@ describe('Date.parse', function(){
 
 			d = new Date().clearTime();
 			expect(Date.parse(d.set({date: 1, mo: d.getMonth()}).format('%B'))).toEqual(d);
+
+			d = new Date().set({hours: 22, minutes: 45, seconds: 15});
+			expect(Date.parse('22:45:15').format('iso8601')).toEqual(d.format('iso8601'));
+
+			expect(Date.parse('22:45').format('%H:%M')).toEqual('22:45');
+			expect(Date.parse('10:45pm').format('%H:%M')).toEqual('22:45');
+			expect(Date.parse('11:45 AM').format('%H:%M')).toEqual('11:45');
+
 //		});
 //		Locale.use('en-US');
 	});

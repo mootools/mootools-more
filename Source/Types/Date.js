@@ -19,9 +19,9 @@ requires:
   - Core/Array
   - Core/String
   - Core/Number
-  - /Locale
-  - /Locale.en-US.Date
-  - /MooTools.More
+  - MooTools.More
+  - Locale
+  - Locale.en-US.Date
 
 provides: [Date]
 
@@ -177,7 +177,7 @@ Date.implement({
 					case 'A': return Date.getMsg('days')[d.get('day')];
 					case 'b': return Date.getMsg('months_abbr')[d.get('month')];
 					case 'B': return Date.getMsg('months')[d.get('month')];
-					case 'c': return d.format('%a %b %d %H:%m:%S %Y');
+					case 'c': return d.format('%a %b %d %H:%M:%S %Y');
 					case 'd': return pad(d.get('date'), 2);
 					case 'e': return pad(d.get('date'), 2, ' ');
 					case 'H': return pad(d.get('hr'), 2);
@@ -198,7 +198,7 @@ Date.implement({
 					case 'X': return d.format(Date.getMsg('shortTime'));
 					case 'y': return d.get('year').toString().substr(2);
 					case 'Y': return d.get('year');
-					/*<1.2compat>*/case 'T': return d.get('GMTOffset');/*</1.2compat>*/
+					case 'T': return d.format('%H:%M:%S');
 					case 'z': return d.get('GMTOffset');
 					case 'Z': return d.get('Timezone');
 				}
@@ -376,10 +376,12 @@ var regexOf = function(type){
 
 var replacers = function(key){
 	switch(key){
+		case 'T':
+			return '%H:%M:%S';
 		case 'x': // iso8601 covers yyyy-mm-dd, so just check if month is first
 			return ((Date.orderIndex('month') == 1) ? '%m[-./]%d' : '%d[-./]%m') + '([-./]%y)?';
 		case 'X':
-			return '%H([.:]%M)?([.:]%S([.:]%s)?)? ?%p? ?%T?';
+			return '%H([.:]%M)?([.:]%S([.:]%s)?)? ?%p? ?%z?';
 	}
 	return null;
 };
@@ -394,7 +396,7 @@ var keys = {
 	p: /[ap]\.?m\.?/,
 	y: /\d{2}|\d{4}/,
 	Y: /\d{4}/,
-	T: /Z|[+-]\d{2}(?::?\d{2})?/
+	z: /Z|[+-]\d{2}(?::?\d{2})?/
 };
 
 keys.m = keys.I;
@@ -470,7 +472,7 @@ var handle = function(key, value){
 			value = +value;
 			if (value < 100) value += startCentury + (value < startYear ? 100 : 0);
 			return this.set('year', value);
-		case 'T':
+		case 'z':
 			if (value == 'Z') value = '+00';
 			var offset = value.match(/([+-])(\d{2}):?(\d{2})?/);
 			offset = (offset[1] + '1') * (offset[2] * 60 + (+offset[3] || 0)) + this.getTimezoneOffset();
@@ -487,7 +489,9 @@ Date.defineParsers(
 	'%d%o( %b( %Y)?)?( %X)?', // "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"
 	'%b( %d%o)?( %Y)?( %X)?', // Same as above with month and day switched
 	'%Y %b( %d%o( %X)?)?', // Same as above with year coming first
-	'%o %b %d %X %T %Y' // "Thu Oct 22 08:11:23 +0000 2009"
+	'%o %b %d %X %z %Y', // "Thu Oct 22 08:11:23 +0000 2009"
+	'%T', // %H:%M:%S
+	'%H:%M( ?%p)?' // "11:05pm", "11:05 am" and "11:05"
 );
 
 Locale.addEvent('change', function(language){
