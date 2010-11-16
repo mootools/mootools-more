@@ -121,13 +121,43 @@ Date.implement({
 			- Date.UTC(this.get('year'), 0, 1)) / Date.units.day();
 	},
 
-	getWeek: function(firstDOW){
-		firstDOW = (firstDOW != null ? firstDOW : (Date.getMsg('firstDayOfWeek') ? 1 : 0));
+	getWeek: function(firstDayOfWeek){
+		if (firstDayOfWeek == null){
+			firstDayOfWeek = Date.getMsg('firstDayOfWeek');
+			if (firstDayOfWeek === '') firstDayOfWeek = 1;
+		}
 
-		var date = new Date(this).increment('day', 3 + firstDOW - (this.get('day') || (firstDOW ? 7 : 0))),
-			firstDOY = new Date(date.get('year'), 0, 1).get('day') || (firstDOW ? 7 : 0);
+		var date = this,
+			dayOfWeek = (7 + date.get('day') - firstDayOfWeek) % 7,
+			dividend = 0,
+			firstDayOfYear;
 
-		return ((date.get('dayofyear') + firstDOY + 3 - firstDOW - (firstDOY > 3 + firstDOW ? 7 : 0)) / 7);
+		if (firstDayOfWeek == 1){
+			// ISO-8601, week belongs to year that has the most days of the week (i.e. has the thursday of the week)
+			var month = date.get('month'),
+				startOfWeek = date.get('date') - dayOfWeek;
+
+			if (month == 11 && startOfWeek > 28) return 1; // Week 1 of next year
+
+			if (month == 0 && startOfWeek < -2){
+				// Use a date from last year to determine the week
+				date = new Date(date).decrement('day', dayOfWeek);
+				dayOfWeek = 0;
+			}
+
+			firstDayOfYear = new Date(date.get('year'), 0, 1).get('day') || 7;
+			if (firstDayOfYear > 4) dividend = -7; // First week of the year is not week 1
+		} else {
+			// In other cultures the first week of the year is always week 1 and the last week always 53 or 54.
+			// Days in the same week can have a different weeknumber if the week spreads across two years.
+			firstDayOfYear = new Date(date.get('year'), 0, 1).get('day');
+		}
+
+		dividend += date.get('dayofyear');
+		dividend += 6 - dayOfWeek; // Add days so we calculate the current date's week as a full week
+		dividend += (7 + firstDayOfYear - firstDayOfWeek) % 7; // Make up for first week of the year not being a full week
+
+		return (dividend / 7);
 	},
 
 	getOrdinal: function(day){
