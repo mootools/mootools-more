@@ -121,6 +121,18 @@ Date.implement({
 			- Date.UTC(this.get('year'), 0, 1)) / Date.units.day();
 	},
 
+	setDay: function(day, firstDayOfWeek){
+		if (firstDayOfWeek == null){
+			firstDayOfWeek = Date.getMsg('firstDayOfWeek');
+			if (firstDayOfWeek === '') firstDayOfWeek = 1;
+		}
+
+		day = (7 + Date.parseDay(day, true) - firstDayOfWeek) % 7;
+		var currentDay = (7 + this.get('day') - firstDayOfWeek) % 7;
+
+		return this.increment('day', day - currentDay);
+	},
+
 	getWeek: function(firstDayOfWeek){
 		if (firstDayOfWeek == null){
 			firstDayOfWeek = Date.getMsg('firstDayOfWeek');
