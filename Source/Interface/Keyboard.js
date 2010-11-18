@@ -56,6 +56,7 @@ provides: [Keyboard]
 			//if this is the root manager, nothing manages it
 			if (Keyboard.manager && !this.manager) Keyboard.manager.manage(this);
 			if (this.options.active) this.activate();
+			else this.deactivate();
 		},
 
 		handle: function(event, type){
