@@ -55,9 +55,9 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
                 }) : null;
 	};
 
-        var stackPseudos = function(pseudo, fn, args, proxy){
+        var stackPseudos = function(pseudo, fn, args){
             return function(){
-                pseudos[pseudo.pseudo][0].call(this, pseudo, fn, args, proxy)
+                pseudos[pseudo.pseudo][0].call(this, pseudo, fn, args, pseudos[pseudo.pseudo][1])
             }
         }
 
@@ -76,8 +76,8 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
                             var stack = fn,
                                 last = split.getLast(),
                                 i = split.length;
-                            while (i--) stack = stackPseudos(split[i], stack, arguments, pseudos[split[i].pseudo][1]);
-                            stack.call(self, last, stack, arguments, pseudos[last.pseudo][1]);
+                            while (i--) stack = stackPseudos(split[i], stack, arguments);
+                            stack.call(self, last, stack, arguments);
 			};
 
 			events.include({event: fn, monitor: monitor});
