@@ -107,7 +107,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var eventType = split[0].event;
 			if (proxy && proxy[eventType]){ 
 				eventType = proxy[eventType].base;
-				internal = proxy[eventType].capture || internal;
+				internal = proxy[eventType].capture || false;
 			}
 
 			removeEvent.call(this, type, fn, internal);
