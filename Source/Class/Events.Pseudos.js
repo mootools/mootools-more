@@ -45,14 +45,21 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		var parsed = Slick.parse(type).expressions[0][0],
 			parsedPseudos = parsed.pseudos;
 
-		return (pseudos && pseudos[parsedPseudos[0].key]) ? {
-			event: parsed.tag,
-			value: parsedPseudos[0].value,
-			pseudo: parsedPseudos[0].key,
-			original: type
-		} : null;
+                return (pseudos && pseudos[parsedPseudos[0].key]) ? parsedPseudos.map(function(e, i){
+                    return {
+                        event: parsed.tag,
+                        value: parsedPseudos[i].value,
+                        pseudo: parsedPseudos[i].key,
+                        original: type
+                    }
+                }) : null;
 	};
 
+        var stackPseudos = function(pseudo, fn, args, proxy){
+            return function(){
+                pseudos[pseudo.pseudo][0].call(this, pseudo, fn, args, proxy)
+            }
+        }
 
 	return {
 
@@ -62,18 +69,20 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
-				pseudoArgs = Array.from(pseudos[split.pseudo]),
-				proxy = pseudoArgs[1];
+				proxy = Array.from(pseudos[split[0].pseudo])[1];
 
 			var self = this;
 			var monitor = function(){
-				pseudoArgs[0].call(self, split, fn, arguments, proxy);
+                            var stack = fn,
+                                i = split.length;
+                            while (i--) stack = stackPseudos(split[i], stack, arguments, proxy);
+                            stack.call(self, split.getLast(), stack, arguments, proxy);
 			};
 
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
 
-			var eventType = split.event;
+			var eventType = split[0].event;
 			if (proxy && proxy[eventType]) eventType = proxy[eventType].base;
 
 			addEvent.call(this, type, fn, internal);
@@ -86,12 +95,11 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type),
-				pseudoArgs = Array.from(pseudos[split.pseudo]),
-				proxy = pseudoArgs[1];
+				proxy = Array.from(pseudos[split[0].pseudo])[1];
 
 			if (!events) return this;
 
-			var eventType = split.event;
+			var eventType = split[0].event;
 			if (proxy && proxy[eventType]) eventType = proxy[eventType].base;
 
 			removeEvent.call(this, type, fn);
