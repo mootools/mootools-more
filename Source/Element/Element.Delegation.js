@@ -44,5 +44,20 @@ Event.definePseudo('relay', function(split, fn, args, proxy){
 	mouseleave: {
 		base: 'mouseout',
 		condition: Element.Events.mouseleave.condition
+	},
+	
+	focus: {
+		base: (Browser.ie) ? 'focusin' : 'focus',
+		capture: true
+	},
+	
+	blur: {
+		base: (Browser.ie) ? 'focusout' : 'blur',
+		capture: true
+	},
+	
+	change: {
+		base: (Browser.ie) ? 'onchange' : 'change',
+		capture: true
 	}
 });
