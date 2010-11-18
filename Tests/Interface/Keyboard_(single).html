@@ -22,7 +22,7 @@
 </style>
 
 <p>
-	Use the links to enable/disable the keyboards controlling the section below. Using the keys will toggle each example from black to white.
+	Use the links to enable/disable the keyboards controlling the section below. Using the keys will toggle each example from black to white. Keyboard by default should be disabled.
 </p>
 
 <dl id="actions"></dl>
@@ -71,8 +71,7 @@ var kb = new Keyboard({
 	},
 	onDeactivate: function(){
 		$('group').removeClass('activeGroup');
-	},
-	active: true
+	}
 });
 makeActions([
 	{

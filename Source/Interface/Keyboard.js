@@ -57,6 +57,7 @@ provides: [Keyboard]
 			//if this is the root manager, nothing manages it
 			if (Keyboard.manager && !this.manager) Keyboard.manager.manage(this);
 			if (this.options.active) this.activate();
+			else this.relinquish();
 		},
 
 		handle: function(event, type){
@@ -122,6 +123,7 @@ provides: [Keyboard]
 
 		relinquish: function(){
 			if (this.isActive() && this.manager && this.manager.previous) this.manager.activate(this.manager.previous);
+			else this.deactivate();
 		},
 
 		//management logic
