@@ -84,13 +84,17 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			storage.store(type, events);
 
 			var eventType = split[0].event;
-			if (proxy && proxy[eventType]) eventType = proxy[eventType].base;
+			if (proxy && proxy[eventType]){ 
+				eventType = proxy[eventType].base;
+				internal = proxy[eventType].capture || internal;
+			}
+
 
 			addEvent.call(this, type, fn, internal);
 			return addEvent.call(this, eventType, monitor, internal);
 		},
 
-		removeEvent: function(type, fn){
+		removeEvent: function(type, fn, internal){
 			var split = splitType(type);
 			if (!split) return removeEvent.call(this, type, fn);
 
@@ -101,11 +105,14 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			if (!events) return this;
 
 			var eventType = split[0].event;
-			if (proxy && proxy[eventType]) eventType = proxy[eventType].base;
+			if (proxy && proxy[eventType]){ 
+				eventType = proxy[eventType].base;
+				internal = proxy[eventType].capture || internal;
+			}
 
-			removeEvent.call(this, type, fn);
+			removeEvent.call(this, type, fn, internal);
 			events.each(function(monitor, i){
-				if (!fn || monitor.event == fn) removeEvent.call(this, eventType, monitor.monitor);
+				if (!fn || monitor.event == fn) removeEvent.call(this, eventType, monitor.monitor, internal);
 				delete events[i];
 			}, this);
 
