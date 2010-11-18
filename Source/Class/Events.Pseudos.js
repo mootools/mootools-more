@@ -74,9 +74,10 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var self = this;
 			var monitor = function(){
                             var stack = fn,
+                                last = split.getLast(),
                                 i = split.length;
-                            while (i--) stack = stackPseudos(split[i], stack, arguments, proxy);
-                            stack.call(self, split.getLast(), stack, arguments, proxy);
+                            while (i--) stack = stackPseudos(split[i], stack, arguments, pseudos[split[i].pseudo][1]);
+                            stack.call(self, last, stack, arguments, pseudos[last.pseudo][1]);
 			};
 
 			events.include({event: fn, monitor: monitor});
