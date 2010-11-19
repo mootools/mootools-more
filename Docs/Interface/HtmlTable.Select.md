@@ -30,8 +30,8 @@ Adds the ability to select rows in a table.
 
 ### Events
 
-* rowFocus - callback to execute when a row is selected.
-* rowUnfocus - callback to execute when a row is deselected.
+* rowFocus - callback to execute when a row is selected; passed the *tr* of the selected row, and the collection of selected rows
+* rowUnfocus - callback to execute when a row is deselected; passed the *tr* of the unselected row, and the collection of selected rows
 
 ### Example
 
