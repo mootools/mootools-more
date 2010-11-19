@@ -24,9 +24,9 @@ provides: [Element.Delegation]
 */
 
 
-Event.definePseudo('relay', function(split, fn, args, proxy){
+Event.definePseudo('relay', function(split, fn, args, options){
 	var event = args[0];
-	var check = proxy ? proxy.condition : null;
+	var check = options.condition || null;
 
 	for (var target = event.target; target && target != this; target = target.parentNode){
 		var finalTarget = document.id(target);

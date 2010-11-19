@@ -28,8 +28,8 @@ var pseudos = {
 
 };
 
-Event.definePseudo = function(key, fn, proxy){
-	pseudos[key] = [fn, proxy];
+Event.definePseudo = function(key, fn, options){
+	pseudos[key] = [fn, options];
 };
 
 var proto = Element.prototype;

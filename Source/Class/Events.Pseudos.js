@@ -63,18 +63,18 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
 				pseudoArgs = Array.from(pseudos[split.pseudo]),
-				proxy = pseudoArgs[1];
+				options = pseudoArgs[1];
 
 			var self = this;
 			var monitor = function(){
-				pseudoArgs[0].call(self, split, fn, arguments, proxy);
+				pseudoArgs[0].call(self, split, fn, arguments, options);
 			};
 
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
 
 			var eventType = split.event;
-			if (proxy && proxy[eventType]) eventType = proxy[eventType].base;
+			if (options && options[eventType]) eventType = options[eventType].base;
 
 			addEvent.call(this, type, fn, internal);
 			return addEvent.call(this, eventType, monitor, internal);
@@ -87,12 +87,12 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var storage = storageOf(this),
 				events = storage.retrieve(type),
 				pseudoArgs = Array.from(pseudos[split.pseudo]),
-				proxy = pseudoArgs[1];
+				options = pseudoArgs[1];
 
 			if (!events) return this;
 
 			var eventType = split.event;
-			if (proxy && proxy[eventType]) eventType = proxy[eventType].base;
+			if (options && options[eventType]) eventType = options[eventType].base;
 
 			removeEvent.call(this, type, fn);
 			events.each(function(monitor, i){
