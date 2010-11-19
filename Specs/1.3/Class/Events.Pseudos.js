@@ -60,4 +60,12 @@ describe('Events.Pseudos', function(){
 
 	});
 
+	it('tests if the already existing classes, defined in core, also implemented Events.Pseudos', function(){
+		var callback = jasmine.createSpy('complete');
+		var fx = new Fx();
+		fx.addEvent('complete:once', callback);
+		fx.fireEvent('complete');
+		expect(callback).toHaveBeenCalled();
+	});
+
 });
