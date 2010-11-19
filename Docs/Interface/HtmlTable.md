@@ -156,7 +156,7 @@ it will return the actual table Element.
 
 ### Examples
 
-	document.id(myHtmlTalbe).setStyle('color', 'blue');
+	document.id(myHtmlTable).setStyle('color', 'blue');
 
 	$(myHtmlTable) == myHtmlTable.table; // true
 
