@@ -26,7 +26,7 @@ provides: [Element.Delegation]
 
 Event.definePseudo('relay', function(split, fn, args, options){
 	var event = args[0];
-	var check = options.condition || null;
+	var check = options.condition;
 
 	for (var target = event.target; target && target != this; target = target.parentNode){
 		var finalTarget = document.id(target);
@@ -44,5 +44,11 @@ Event.definePseudo('relay', function(split, fn, args, options){
 	mouseleave: {
 		base: 'mouseout',
 		condition: Element.Events.mouseleave.condition
+	},
+	focus: {
+		args: [true]
+	},
+	blur: {
+		args: [true]
 	}
 });
