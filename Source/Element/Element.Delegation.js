@@ -23,6 +23,9 @@ provides: [Element.Delegation]
 ...
 */
 
+(function(){
+
+var eventListenerSupport = !!document.addEventListener;
 
 Event.definePseudo('relay', function(split, fn, args, options){
 	var event = args[0];
@@ -46,11 +49,11 @@ Event.definePseudo('relay', function(split, fn, args, options){
 		condition: Element.Events.mouseleave.condition
 	},
 	focus: {
-		base: (Browser.ie) ? 'focusin' : 'focus',
+		base: 'focus' + (eventListenerSupport ? '' : 'in'),
 		args: [true]
 	},
 	blur: {
-		base: (Browser.ie) ? 'focusout' : 'blur',
+		base: eventListenerSupport ? 'blur' : 'focusout',
 		args: [true]
 	}
 });
@@ -58,3 +61,5 @@ Event.definePseudo('relay', function(split, fn, args, options){
 Object.append(Element.NativeEvents, {
 	'focusin': 2, 'focusout': 2
 });
+
+})();
