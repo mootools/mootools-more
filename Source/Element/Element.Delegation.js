@@ -46,9 +46,14 @@ Event.definePseudo('relay', function(split, fn, args, options){
 		condition: Element.Events.mouseleave.condition
 	},
 	focus: {
+		base: (Browser.ie) ? 'focusin' : 'focus',
 		args: [true]
 	},
 	blur: {
+		base: (Browser.ie) ? 'focusout' : 'blur',
+		args: [true]
+	},
+	change: {
 		args: [true]
 	}
 });

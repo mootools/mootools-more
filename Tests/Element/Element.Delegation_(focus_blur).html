@@ -1,0 +1,29 @@
+<p>This should delegate the onblur, onfocus and onchange events</p>
+
+<form>
+	<input type="text" id="myInput" /><br />
+	<textarea></textarea>
+</form>
+
+<pre id="result"></pre>
+
+
+<script src="/depender/build?require=More/Element.Delegation"></script>
+<script>
+
+var result = document.id('result');
+
+document.addEvent('focus:relay(input#myInput,textarea)', function(){
+	result.appendText('Focus\n');
+});
+
+document.addEvent('blur:relay(input#myInput,textarea)', function(){
+	result.appendText('Blurred\n');
+});
+
+document.addEvent('change:relay(input#myInput,textarea)', function(){
+	result.appendText('Content Changed\n');
+});
+
+</script>
+
