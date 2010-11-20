@@ -1,4 +1,4 @@
-<p>This should delegate the onblur, onfocus and onchange events</p>
+<p>This should delegate the onblur and onfocus events</p>
 
 <form>
 	<input type="text" id="myInput" /><br />
@@ -19,10 +19,6 @@ document.addEvent('focus:relay(input#myInput,textarea)', function(){
 
 document.addEvent('blur:relay(input#myInput,textarea)', function(){
 	result.appendText('Blurred\n');
-});
-
-document.addEvent('change:relay(input#myInput,textarea)', function(){
-	result.appendText('Content Changed\n');
 });
 
 </script>

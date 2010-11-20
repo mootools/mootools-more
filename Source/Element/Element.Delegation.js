@@ -52,9 +52,6 @@ Event.definePseudo('relay', function(split, fn, args, options){
 	blur: {
 		base: (Browser.ie) ? 'focusout' : 'blur',
 		args: [true]
-	},
-	change: {
-		args: [true]
 	}
 });
 
