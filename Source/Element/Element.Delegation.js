@@ -57,3 +57,7 @@ Event.definePseudo('relay', function(split, fn, args, options){
 		args: [true]
 	}
 });
+
+Object.append(Element.NativeEvents, {
+	'focusin': 2, 'focusout': 2
+});
