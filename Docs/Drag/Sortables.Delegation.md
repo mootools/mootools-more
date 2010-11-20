@@ -1,7 +1,7 @@
 Class: Sortables.Delegation {#Sortables-Delegation}
 ===================================================
 
-An event delegated interface for drag and drop sorting.
+An event delegated interface for drag and drop sorting, Sortables.Delegation is an ideal solution for large applications handling many dynamic elements. Here large lists are both easier to manage and even more performant than with it's superclass Sortables.
 
 ### Extends:
 
