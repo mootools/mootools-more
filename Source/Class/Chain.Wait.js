@@ -42,7 +42,7 @@ provides: [Chain.Wait]
 		});
 	}
 
-	if (this.Element && this.Fx){
+	if (this.Element && Element.implement && this.Fx){
 		Element.implement({
 
 			chains: function(effects){
