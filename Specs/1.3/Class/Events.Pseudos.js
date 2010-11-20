@@ -79,12 +79,13 @@ describe('Events.Pseudos', function(){
 		});
 
 		var pseudos = {
-			pseudoFn: [function(){}, {
-				click: {
+			pseudoFn: {
+				listener: function(){},
+				options: {click: {
 					base: 'mouse',
 					args: [2, 3, 4]
-				}
-			}]
+				}}
+			}
 		};
 
 		var proto = myEvents.prototype;

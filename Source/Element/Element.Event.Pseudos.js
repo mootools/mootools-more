@@ -21,15 +21,16 @@ provides: [Element.Event.Pseudos]
 
 var pseudos = {
 
-	once: function(split, fn, args){
+	once: {listener: function(split, fn, args){
 		fn.apply(this, args);
 		this.removeEvent(split.original, fn);
-	}
+	}}
 
 };
 
-Event.definePseudo = function(key, fn, options){
-	pseudos[key] = [fn, options];
+Event.definePseudo = function(key, listener){
+	pseudos[key] = Type.isFunction(listener) ? {listener: listener} : listener;
+	return this;
 };
 
 var proto = Element.prototype;

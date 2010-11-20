@@ -25,41 +25,44 @@ provides: [Element.Delegation]
 
 (function(){
 
-var eventListenerSupport = !!document.addEventListener;
+var eventListenerSupport = !(window.attachEvent && !window.addEventListener),
+	nativeEvents = Element.NativeEvents;
 
-Event.definePseudo('relay', function(split, fn, args, options){
-	var event = args[0];
-	var check = options.condition;
+nativeEvents.focusin = 2;
+nativeEvents.focusout = 2;
 
-	for (var target = event.target; target && target != this; target = target.parentNode){
-		var finalTarget = document.id(target);
-		if (Slick.match(target, split.value) && (!check || check.call(finalTarget, event))){
-			if (finalTarget) fn.call(finalTarget, event, finalTarget);
-			return;
+Event.definePseudo('relay', {
+	listener: function(split, fn, args, options){
+		var event = args[0];
+		var check = options.condition;
+
+		for (var target = event.target; target && target != this; target = target.parentNode){
+			var finalTarget = document.id(target);
+			if (Slick.match(target, split.value) && (!check || check.call(finalTarget, event))){
+				if (finalTarget) fn.call(finalTarget, event, finalTarget);
+				return;
+			}
+		}
+
+	},
+	options: {
+		mouseenter: {
+			base: 'mouseover',
+			condition: Element.Events.mouseenter.condition
+		},
+		mouseleave: {
+			base: 'mouseout',
+			condition: Element.Events.mouseleave.condition
+		},
+		focus: {
+			base: 'focus' + (eventListenerSupport ? '' : 'in'),
+			args: [true]
+		},
+		blur: {
+			base: eventListenerSupport ? 'blur' : 'focusout',
+			args: [true]
 		}
 	}
-
-}, {
-	mouseenter: {
-		base: 'mouseover',
-		condition: Element.Events.mouseenter.condition
-	},
-	mouseleave: {
-		base: 'mouseout',
-		condition: Element.Events.mouseleave.condition
-	},
-	focus: {
-		base: 'focus' + (eventListenerSupport ? '' : 'in'),
-		args: [true]
-	},
-	blur: {
-		base: eventListenerSupport ? 'blur' : 'focusout',
-		args: [true]
-	}
-});
-
-Object.append(Element.NativeEvents, {
-	'focusin': 2, 'focusout': 2
 });
 
 })();
