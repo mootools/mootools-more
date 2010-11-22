@@ -173,7 +173,7 @@ Returns any instances of [Request][] that are currently running (but not necessa
 
 ### Returns
 
-* *array* - An array of [Request][] instances that have open requests.
+* *object* - An object of [Request][] instances that have open requests.
 
 Request.Queue Method: send {#Request-Queue:send}
 ------------------------------------------------------
