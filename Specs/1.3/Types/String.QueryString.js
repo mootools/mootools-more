@@ -11,6 +11,8 @@ License:
 
 		'should parse a query string to an object': function(){
 			expect('apple=red&lemon=yellow'.parseQueryString().apple).toEqual('red');
+			//verify that empty keys are ignored
+			expect('apple=red&lemon=yellow&='.parseQueryString().apple).toEqual('red');
 		},
 
 		'should parse a plain string to a key': function(){
