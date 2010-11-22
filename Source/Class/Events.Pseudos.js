@@ -45,21 +45,21 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		var parsed = Slick.parse(type).expressions[0][0],
 			parsedPseudos = parsed.pseudos;
 
-                return (pseudos && pseudos[parsedPseudos[0].key]) ? parsedPseudos.map(function(e, i){
-                    return {
-                        event: parsed.tag,
-                        value: parsedPseudos[i].value,
-                        pseudo: parsedPseudos[i].key,
-                        original: type
-                    }
-                }) : null;
+		return (pseudos && pseudos[parsedPseudos[0].key]) ? parsedPseudos.map(function(e, i){
+			return {
+				event: parsed.tag,
+				value: parsedPseudos[i].value,
+				pseudo: parsedPseudos[i].key,
+				original: type
+			}
+		}) : null;
 	};
 
-        var stackPseudos = function(pseudo, fn, args){
-            return function(){
-                pseudos[pseudo.pseudo][0].call(this, pseudo, fn, args, pseudos[pseudo.pseudo][1])
-            }
-        }
+	var stackPseudos = function(pseudo, fn, args){
+		return function(){
+			pseudos[pseudo.pseudo][0].call(this, pseudo, fn, args, pseudos[pseudo.pseudo][1])
+		}
+	}
 
 	return {
 
@@ -70,16 +70,16 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
 				proxy = Array.from(pseudos[split[0].pseudo])[1];
-
+			
 			var self = this;
 			var monitor = function(){
-                            var stack = fn,
-                                last = split.getLast(),
-                                i = split.length;
-                            while (i--) stack = stackPseudos(split[i], stack, arguments);
-                            stack.call(self, last, stack, arguments);
+				var stack = fn,
+					last = split.getLast(),
+					i = split.length;
+				while (i--) stack = stackPseudos(split[i], stack, arguments);
+				stack.call(self, last, stack, arguments);
 			};
-
+			
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
 
