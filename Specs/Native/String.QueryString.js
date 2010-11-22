@@ -11,6 +11,8 @@ License:
 
 		'should parse a query string to an object': function(){
 			value_of('apple=red&lemon=yellow'.parseQueryString().apple).should_be('red');
+			//verify that empty keys are ignored
+			value_of('apple=red&lemon=yellow&='.parseQueryString().apple).should_be('red');
 		},
 
 		'should parse a plain string to a key': function(){

@@ -33,6 +33,7 @@ String.implement({
 				keys = index < 0 ? [''] : val.substr(0, index).match(/([^\]\[]+|(\B)(?=\]))/g),
 				value = decodeValues ? decodeURIComponent(val.substr(index + 1)) : val.substr(index + 1),
 				obj = res;
+			if (!keys) return;
 			keys.each(function(key, i){
 				if (decodeKeys) key = decodeURIComponent(key);
 				var current = obj[key];
