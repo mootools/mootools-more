@@ -81,7 +81,7 @@ var Mask = new Class({
 
 	inject: function(target, where){
 		where = where || this.options.inject ? this.options.inject.where : '' || this.target == document.body ? 'inside' : 'after';
-		target = target || this.options.inject ? this.options.inject.target : '' || this.target;
+		target = target || (this.options.inject && this.options.inject.target) || this.target;
 		this.element.inject(target, where);
 		if (this.options.useIframeShim) {
 			this.shim = new IframeShim(this.element, this.options.iframeShimOptions);
