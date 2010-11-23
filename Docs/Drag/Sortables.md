@@ -23,6 +23,7 @@ Creates an interface for drag and drop sorting of a list or lists.
 * revert - (*mixed*: defaults to *false*) Whether or not to use an effect to slide the element into its final location after sorting. If you pass an object it will be used as additional options for the revert effect.
 * snap - (*integer*; defaults to *4*) The number of pixels the element must be dragged for sorting to begin.
 * preventDefault - (*boolean*; defaults to *false*) if true, then dragging a link or image that is in a sortable element will work (otherwise the browser may attempt to drag the element out of the browser - to your desktop or bookmark bar for example).
+* dragOptions - (*object*; defaults to *{}*) The options to apply internally to sortable's Drag.Move instances.
 
 ### Events:
 
