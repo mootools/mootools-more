@@ -11,8 +11,15 @@
 		cursor: pointer;
 	}
 </style>
-<p>You should be able to reorder the list by dragging. The new order displays below the list when you release an item. If you scroll the list down a bit it should still let you sort correctly. (Note that it won't scroll for you as you drag; that's not part of this test). Dragging an element that contains a radio that is selected to a new location should keep the radio selected when it's dropped.</p>
-
+<p>Things to look for with this sortable test:</p>
+<ul>
+	<li>It should be a draggable, sortable list.</li>
+	<li>It should display the order below the list when you release an item.</li>
+	<li>It should still let you sort correctly if you scroll the list down a bit.</li>
+	<li>It should not scroll for you as you drag ( that is not part of this test ).</li>
+	<li>It should keep the radio selected when it is dropped.</li>
+	<li>It should accept dragOptions limiting draggability to the y axis.</li>
+</ul>
 <div id="wrapper">
 	<ul id="SortableExample">
 		<li id="1">First <input type="radio" name="foo" checked="true"/></li>
@@ -33,6 +40,9 @@
 var mySort = new Sortables($('SortableExample'), {
 	clone: true,
 	opacity: 0.6,
+	dragOptions: {
+		modifiers: { x : false }
+	},
 	onComplete: function(){
 		$('order').set('html', 'order: ' + mySort.serialize())
 	}

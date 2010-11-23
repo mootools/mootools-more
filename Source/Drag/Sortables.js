@@ -28,13 +28,16 @@ var Sortables = new Class({
 		onSort: function(element, clone){},
 		onStart: function(element, clone){},
 		onComplete: function(element){},*/
-		snap: 4,
 		opacity: 1,
 		clone: false,
 		revert: false,
 		handle: false,
+		dragOptions: {},
+		/*<1.2compat>*/
+		snap: 4,
 		constrain: false,
 		preventDefault: false
+		/*</1.2compat>*/
 	},
 
 	initialize: function(lists, options){
@@ -152,11 +155,14 @@ var Sortables = new Class({
 		this.list = element.getParent();
 		this.clone = this.getClone(event, element);
 
-		this.drag = new Drag.Move(this.clone, {
+		this.drag = new Drag.Move(this.clone, Object.merge({
+			/*<1.2compat>*/
 			preventDefault: this.options.preventDefault,
 			snap: this.options.snap,
 			container: this.options.constrain && this.element.getParent(),
-			droppables: this.getDroppables(),
+			/*</1.2compat>*/
+			droppables: this.getDroppables()
+		}, this.options.dragOptions)).addEvents({
 			onSnap: function(){
 				event.stop();
 				this.clone.setStyle('visibility', 'visible');
