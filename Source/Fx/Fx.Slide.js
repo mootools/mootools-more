@@ -52,6 +52,8 @@ Fx.Slide = new Class({
 		}).wraps(this.element);
 
 		this.element.store('wrapper', this.wrapper).setStyle('margin', 0);
+		if (this.element.getStyle('overflow') == 'visible') this.element.setStyle('overflow', 'hidden');
+
 		this.now = [];
 		this.open = true;
 	},

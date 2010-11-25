@@ -1,5 +1,39 @@
-<div id="sliderExampleWrapper" style="width: 300px; height: 200px; border: 1px solid black;margin-left: 10px">
-	<div id="sliderButton" style="width: 100px; height: 100px; background-color: #baeeb5; border: 1px solid black"></div>
+<style>
+#sliderExampleWrapper {
+	width: 300px;
+	height: 200px;
+	border: 1px solid #000;
+	margin-left: 10px;
+}
+
+#sliderButton {
+	width: 100px;
+	margin: 30px;
+}
+
+#inner-box2{
+	background: #baeeb5;
+	height: 100px;
+	border: 1px solid #333;
+}
+
+#inner-box {
+	margin-top: 20px;
+	height: 10px;
+	background: red;
+	border: 1px solid #000;
+}
+</style>
+
+<p>In toggling, it should return the elements to the correct height.</p>
+
+<div id="sliderExampleWrapper">
+	<div id="sliderButton">
+		<div>
+			<div id="inner-box"></div>
+			<div id="inner-box2"></div>
+		</div>
+	</div>
 </div>
 <script src="/depender/build?require=More/Fx.Slide,Core/Element.Event"></script>
 
@@ -13,20 +47,17 @@ makeActions([
 		fn: function(){
 			fx.show().slideOut();
 		}
-	},
-	{
+	}, {
 		title: 'Hide the element and slide in.',
 		fn: function(){
 			fx.hide().slideIn();
 		}
-	},
-	{
+	}, {
 		title: 'Toggle the state - sliding in or out.',
 		fn: function(){
 			fx.toggle();
 		}
 	}
-
 ]);
 
 </script>
