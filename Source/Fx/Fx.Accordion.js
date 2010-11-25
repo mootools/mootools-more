@@ -165,6 +165,7 @@ Fx.Accordion = new Class({
 		if ((this.timer && this.options.link == 'chain') || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
 		var obj = {};
+		this.selfHidden = false;
 		this.elements.each(function(el, i){
 			obj[i] = {};
 			var hide;
