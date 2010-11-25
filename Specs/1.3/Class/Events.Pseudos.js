@@ -68,4 +68,59 @@ describe('Events.Pseudos', function(){
 		expect(callback).toHaveBeenCalled();
 	});
 
+	it('should test the options of Events.Pseudos', function(){
+		var addEvent = jasmine.createSpy('addEvent');
+		var removeEvent = jasmine.createSpy('removeEvent');
+		var clickPseudoFn = jasmine.createSpy('clickPseudoFn');
+
+		var myEvents = new Class({
+			addEvent: addEvent,
+			removeEvent: removeEvent
+		});
+
+		var pseudos = {
+			pseudoFn: {
+				listener: function(){},
+				options: {click: {
+					base: 'mouse',
+					args: [2, 3, 4]
+				}}
+			}
+		};
+
+		var proto = myEvents.prototype;
+		myEvents.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
+
+		events = new myEvents();
+		events.addEvent('click:pseudoFn', clickPseudoFn, 1);
+
+		// Fired original event (click:speudoFn)
+		var origTypeArgs = addEvent.argsForCall[0];
+		expect(addEvent.callCount).toEqual(2);
+		expect(origTypeArgs[0]).toEqual('click:pseudoFn');
+		expect(origTypeArgs[1]).toEqual(clickPseudoFn);
+		expect(origTypeArgs.slice(2)).toEqual([1, 2, 3, 4]);
+
+		// Fired event with monitor
+		var pseudoArgs = addEvent.argsForCall[1];
+		expect(pseudoArgs[0]).toEqual('mouse');
+		expect(pseudoArgs.slice(2)).toEqual([1, 2, 3, 4]);
+
+
+		events.removeEvent('click:pseudoFn', clickPseudoFn, 1);
+
+		// Fired original event (click:speudoFn)
+		var removeOrigArgs = removeEvent.argsForCall[0];
+		expect(removeEvent.callCount).toEqual(2);
+		expect(removeOrigArgs[0]).toEqual('click:pseudoFn');
+		expect(removeOrigArgs[1]).toEqual(clickPseudoFn);
+		expect(removeOrigArgs.slice(2)).toEqual([1, 2, 3, 4]);
+
+		// Fired event with monitor
+		var removePseudoArgs = removeEvent.argsForCall[1];
+		expect(removePseudoArgs[0]).toEqual('mouse');
+		expect(removePseudoArgs.slice(2)).toEqual([1, 2, 3, 4]);
+
+	});
+
 });
