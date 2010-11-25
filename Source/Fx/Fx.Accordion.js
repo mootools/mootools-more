@@ -38,7 +38,7 @@ Fx.Accordion = new Class({
 		alwaysHide: false,
 		trigger: 'click',
 		initialDisplayFx: true,
-		returnHeightToAuto: true
+		resetHeight: true
 	},
 
 	initialize: function(){
@@ -90,7 +90,7 @@ Fx.Accordion = new Class({
 			this.display(this.options.display, this.options.initialDisplayFx);
 		}
 
-		if (this.options.fixedHeight !== false) this.options.returnHeightToAuto = false;
+		if (this.options.fixedHeight !== false) this.options.resetHeight = false;
 		this.addEvent('complete', this.internalChain.callChain.bind(this.internalChain));
 	},
 
@@ -153,7 +153,7 @@ Fx.Accordion = new Class({
 		if (useFx == null) useFx = true;
 		if (typeOf(index) == 'element') index = this.elements.indexOf(index);
 		if (index == this.previous && !this.options.alwaysHide) return this;
-		if (this.options.returnHeightToAuto){
+		if (this.options.resetHeight){
 			var prev = this.elements[this.previous];
 			if (prev && !this.selfHidden){
 				for (var fx in this.effects) prev.setStyle(fx, prev[this.effects[fx]]);
@@ -180,7 +180,7 @@ Fx.Accordion = new Class({
 
 		this.internalChain.clearChain();
 		this.internalChain.chain(function(){
-			if (this.options.returnHeightToAuto && !this.selfHidden){
+			if (this.options.resetHeight && !this.selfHidden){
 				var el = this.elements[index];
 				if (el) el.setStyle('height', 'auto');
 			};

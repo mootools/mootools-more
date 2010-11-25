@@ -34,7 +34,7 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 * fixedWidth - (*number*) If set, displayed elements will have a fixed width equal to the specified value.
 * alwaysHide  - (*boolean*: defaults to false) If set to true, it will be possible to close all displayable elements. Otherwise, one will remain open at all time.
 * initialDisplayFx - (*boolean*; defaults to true) If set to false, the initial item displayed will not display with an effect but will just be shown immediately.
-* returnHeightToAuto - (*boolean*; defaults to true) If set to false, the height of an opened accordian section will be set to an absolute pixel size.
+* resetHeight - (*boolean*; defaults to true) If set to false, the height of an opened accordian section will be set to an absolute pixel size.
 
 ### Returns
 
