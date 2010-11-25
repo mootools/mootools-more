@@ -24,25 +24,28 @@ provides: [Element.Delegation]
 */
 
 
-Event.definePseudo('relay', function(split, fn, args, proxy){
-	var event = args[0];
-	var check = proxy ? proxy.condition : null;
+Event.definePseudo('relay', {
+	listener: function(split, fn, args, options){
+		var event = args[0];
+		var check = options.condition;
 
-	for (var target = event.target; target && target != this; target = target.parentNode){
-		var finalTarget = document.id(target);
-		if (Slick.match(target, split.value) && (!check || check.call(finalTarget, event))){
-			if (finalTarget) fn.call(finalTarget, event, finalTarget);
-			return;
+		for (var target = event.target; target && target != this; target = target.parentNode){
+			var finalTarget = document.id(target);
+			if (Slick.match(target, split.value) && (!check || check.call(finalTarget, event))){
+				if (finalTarget) fn.call(finalTarget, event, finalTarget);
+				return;
+			}
 		}
-	}
 
-}, {
-	mouseenter: {
-		base: 'mouseover',
-		condition: Element.Events.mouseenter.condition
 	},
-	mouseleave: {
-		base: 'mouseout',
-		condition: Element.Events.mouseleave.condition
+	options: {
+		mouseenter: {
+			base: 'mouseover',
+			condition: Element.Events.mouseenter.condition
+		},
+		mouseleave: {
+			base: 'mouseout',
+			condition: Element.Events.mouseleave.condition
+		}
 	}
 });
