@@ -32,8 +32,8 @@ Returns the text of an input within a range.
 
 ###	Arguments
 
-1. start - (*integer*) beginning select position
-2. end - (*integer*) end position
+1. start - (*number*) beginning select position
+2. end - (*number*) end position
 
 ### Returns
 
@@ -101,7 +101,7 @@ Returns the range of what is selected within the element.
 
 ###	Returns
 
-* (*object*) start and end values (each an *integer*).
+* (*object*) start and end values (each an *number*).
 
 ###	Example return
 	{start: 2, end: 12}
@@ -117,7 +117,7 @@ Sets the caret at the given position.
 
 ### Arguments
 
-1. pos - (*integer*) the location to place the caret OR "end" to place it at the end.
+1. pos - (*number*) the location to place the caret OR "end" to place it at the end.
 
 ### Returns
 
@@ -139,7 +139,7 @@ Returns the caret position.
 
 ### Returns
 
-* (*integer*) The caret position.
+* (*number*) The caret position.
 
 Element Method: selectRange {#Element:selectRange}
 --------------------------------------------------
@@ -152,8 +152,8 @@ Selects text within a given range.
 
 ###	Arguments
 
-1. start - (*integer*) starting integer
-2. end - (*integer*) ending integer
+1. start - (*number*) starting number
+2. end - (*number*) ending number
 
 ### Returns
 

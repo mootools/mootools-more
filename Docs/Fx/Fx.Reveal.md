@@ -27,8 +27,8 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 * styles - (*array*) css properties to transition in addition to width/height;  defaults to *['padding','border','margin']*
 * transitionOpacity - (*boolean*) toggles the use of transitioning the opacity during the Reveal/Dissolve effect (this feature is not currently supported in IE)
 * mode - (*string*) "vertical", "horizontal", or "both" to describe how the element should slide in; defaults to *"vertical"*
-* heightOverride - (*integer*) height to open to; overrides the default offsetHeight
-* widthOverride - (*integer*) width to open to; overrides the default offsetWidth
+* heightOverride - (*number*) height to open to; overrides the default offsetHeight
+* widthOverride - (*number*) width to open to; overrides the default offsetWidth
 * display - (*string*) the property for the display style when your reveal the element. Defaults to *block* but could be, for instance, *list-item*, *inline-block*, etc.
 * opacity - (*float*) the opacity value for fading in an element; defaults to *1* but can be set to a number between zero and one to have the element fade in to a partially transparent state.
 
@@ -214,7 +214,7 @@ Retrieves the "build-in" instance of [Fx.Reveal][] and calls its *reveal* method
 
 ### Arguments
 
-* duration - (*integer*, optional) The duration that the element should remain visible before it hides again. Defaults to 2000 (ms).
+* duration - (*number*, optional) The duration that the element should remain visible before it hides again. Defaults to 2000 (ms).
 
 ### Examples
 

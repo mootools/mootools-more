@@ -61,8 +61,8 @@ Scrolls the specified Element to the x/y coordinates immediately.
 
 ### Arguments
 
-1. x - (*integer*) The x coordinate to scroll the Element to.
-2. y - (*integer*) The y coordinate to scroll the Element to.
+1. x - (*number*) The x coordinate to scroll the Element to.
+2. y - (*number*) The y coordinate to scroll the Element to.
 
 ### Returns
 
@@ -86,8 +86,8 @@ Scrolls the specified Element to the x/y coordinates provided.
 
 ### Arguments
 
-1. x - (*integer*) The x coordinate to scroll the Element to.
-2. y - (*integer*) The y coordinate to scroll the Element to.
+1. x - (*number*) The x coordinate to scroll the Element to.
+2. y - (*number*) The y coordinate to scroll the Element to.
 
 ### Returns
 

@@ -24,7 +24,7 @@ A controller class for [Request][] instances (and its subclasses) that stacks up
 
 * stopOnFailure - (*boolean*, defaults to *true*) If *false*, the next request on the stack will be called when there is an error or exception. Otherwise any queued requests are held until you call the *resume* method.
 * autoAdvance - (*boolean*, defaults to *true*) If *true* any queued requests will be called one after the other until there are no more left. If *false* you must call the *runNext* method yourself.
-* concurrent - (*integer*, defaults to *1*) The number of concurrent requests you wish to allow.
+* concurrent - (*number*, defaults to *1*) The number of concurrent requests you wish to allow.
 
 ### Events
 

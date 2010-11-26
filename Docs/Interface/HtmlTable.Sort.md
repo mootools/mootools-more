@@ -19,7 +19,7 @@ Makes headers of HtmlTable clickable to sort the rows.
 ### Options
 
 * all options defined by [HtmlTable][], plus:
-* sortIndex - (*integer*) the row to sort on startup; defaults to *0*. Set to *null* if you don't want to sort on startup.
+* sortIndex - (*number*) the row to sort on startup; defaults to *0*. Set to *null* if you don't want to sort on startup.
 * sortReverse - (*boolean*) if *true*, the initial sorted row will be sorted in reverse. Defaults to *false*.
 * parsers - (*array*) a mapping of parsers for each column of data. See section on parsers below.
 * defaultParser - (*string*) if no parsers are defined and they cannot be auto detected, which parser to use; defaults to 'string'
@@ -53,7 +53,7 @@ Sorts a column.
 
 ### Arguments
 
-1. index - (*integer*) the index of the column to sort
+1. index - (*number*) the index of the column to sort
 2. reverse - (*boolean*) reverses the sort if *true*; defaults to *false*
 3. prepare - (*boolean*) if the sort has a secondary sort, set this value to *true* on the first sort, and *false* on the second. For example, if you sorted a directory list of files first by type and then secondly by file size, you would sort on type and pass *true* and then sort on size and pass *false*.
 

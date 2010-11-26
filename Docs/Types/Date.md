@@ -129,7 +129,7 @@ Increments a value in the date.
 ### Arguments
 
 1. interval - (*string*, optional) "day", "month", etc. (defaults to 'day')
-2. times - (*integer*, optional) the number of times to increment (defaults to 1)
+2. times - (*number*, optional) the number of times to increment (defaults to 1)
 
 ### Examples
 
@@ -207,7 +207,7 @@ Compares two dates.
 
 ### Returns
 
-* (*integer*) the difference in time at the specified resolution
+* (*number*) the difference in time at the specified resolution
 
 Date Method: get('timezone') {#Date:getTimezone}
 ------------------------------------------------
@@ -244,7 +244,7 @@ Date Method: get('week') {#Date:getWeek}
 
 ### Returns
 
-* (*integer*) the week of the year for the date (i.e. 1 - 52).
+* (*number*) the week of the year for the date (i.e. 1 - 52).
 
 Date Method: get('ordinal') {#Date:getOrdinal}
 ----------------------------------------------
@@ -264,7 +264,7 @@ Date Method: get('dayofyear') {#Date:getDayOfYear}
 
 	new Date().get('dayofyear');
 
-* (*integer*) the day of the year (i.e. for Dec. 10, you'll get 344 in a non-leap year).
+* (*number*) the day of the year (i.e. for Dec. 10, you'll get 344 in a non-leap year).
 
 Date Method: get('lastdayofmonth') {#Date:getLastDayOfMonth}
 ------------------------------------------------------------
@@ -275,7 +275,7 @@ Date Method: get('lastdayofmonth') {#Date:getLastDayOfMonth}
 
 ### Returns
 
-* (*integer*) the last day of the month (i.e. for December, you'll get 31).
+* (*number*) the last day of the month (i.e. for December, you'll get 31).
 
 Date Method: format {#Date:format}
 ----------------------------------
@@ -516,7 +516,7 @@ Define the first year of the 100-year period that 2-digit years will be fall wit
 
 ### Arguments
 
-1. year - (*integer*) first year of the 100-year period
+1. year - (*number*) first year of the 100-year period
 
 ### Example
 
