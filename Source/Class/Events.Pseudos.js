@@ -55,9 +55,9 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		}) : null;
 	};
 
-	var stackPseudos = function(pseudo, fn, args){
+	var stackPseudos = function(item, fn, args){
 		return function(){
-			pseudos[pseudo.pseudo][0].call(this, pseudo, fn, args, pseudos[pseudo.pseudo][1])
+			pseudos[item.pseudo].listener.call(this, item, fn, args, pseudos[item.pseudo].options)
 		}
 	}
 
@@ -69,29 +69,29 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
-				proxy = Array.from(pseudos[split[0].pseudo])[1];
+				pseudo = pseudos[split[0].pseudo],
+				options = pseudo.options || {};
 			
 			var self = this;
 			var monitor = function(){
 				var stack = fn,
-					last = split.getLast(),
 					i = split.length;
 				while (i--) stack = stackPseudos(split[i], stack, arguments);
-				stack.call(self, last, stack, arguments);
+				stack.call(self, split[i - 1], stack, arguments);
 			};
 			
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
 
-			var eventType = split[0].event;
-			if (proxy && proxy[eventType]){ 
-				eventType = proxy[eventType].base;
-				internal = proxy[eventType].capture || internal;
-			}
+			var eventType = split[0].event,
+				eventOptions = options[eventType] || {},
+				args = Array.slice(arguments, 2);
+			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 
+			if (eventOptions.base) eventType = eventOptions.base;
 
-			addEvent.call(this, type, fn, internal);
-			return addEvent.call(this, eventType, monitor, internal);
+			addEvent.apply(this, [type, fn].concat(args));
+			return addEvent.apply(this, [eventType, monitor].concat(args));
 		},
 
 		removeEvent: function(type, fn, internal){
@@ -100,19 +100,21 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type),
-				proxy = Array.from(pseudos[split[0].pseudo])[1];
+				pseudo = pseudos[split[0].pseudo],
+				options = pseudo.options || {};
 
 			if (!events) return this;
 
-			var eventType = split[0].event;
-			if (proxy && proxy[eventType]){ 
-				eventType = proxy[eventType].base;
-				internal = proxy[eventType].capture || false;
-			}
+			var eventType = split[0].event,
+				eventOptions = options[eventType] || {},
+				args = Array.slice(arguments, 2);
+			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 
-			removeEvent.call(this, type, fn, internal);
+			if (eventOptions.base) eventType = eventOptions.base;
+
+			removeEvent.apply(this, [type, fn].concat(args));
 			events.each(function(monitor, i){
-				if (!fn || monitor.event == fn) removeEvent.call(this, eventType, monitor.monitor, internal);
+				if (!fn || monitor.event == fn) removeEvent.apply(this, [eventType, monitor.monitor].concat(args));
 				delete events[i];
 			}, this);
 
@@ -124,22 +126,27 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 };
 
-(function(){
+(function(global){
 
 var pseudos = {
 
-	once: function(split, fn, args){
+	once: {listener: function(split, fn, args){
 		fn.apply(this, args);
 		this.removeEvent(split.original, fn);
-	}
+	}}
 
 };
 
-Events.definePseudo = function(key, fn){
-	pseudos[key] = fn;
+Events.definePseudo = function(key, listener){
+	pseudos[key] = Type.isFunction(listener) ? {listener: listener} : listener;
+	return this;
 };
 
 var proto = Events.prototype;
 Events.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
-})();
+['Request', 'Fx'].each(function(klass){
+	if (global[klass]) global[klass].implement(Events.prototype);
+});
+
+})(this);

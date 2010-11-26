@@ -98,7 +98,9 @@ Configuration.source = {
 			'Types/Object',
 
 			'Class/Class',
-			'Class/Class.Extras'
+			'Class/Class.Extras',
+
+			'Fx/Fx'
 		]
 	},
 	'core-1.3-client': {

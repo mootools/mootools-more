@@ -133,15 +133,16 @@ this.Tips = new Class({
 	},
 
 	elementEnter: function(event, element){
-		this.container.empty();
-
-		['title', 'text'].each(function(value){
-			var content = element.retrieve('tip:' + value);
-			if (content) this.fill(new Element('div', {'class': 'tip-' + value}).inject(this.container), content);
-		}, this);
-
 		clearTimeout(this.timer);
 		this.timer = (function(){
+			this.container.empty();
+
+			['title', 'text'].each(function(value){
+				var content = element.retrieve('tip:' + value);
+				if (content) this.fill(new Element('div', {'class': 'tip-' + value}).inject(this.container), content);
+			}, this);
+
+
 			this.show(element);
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 		}).delay(this.options.showDelay, this);

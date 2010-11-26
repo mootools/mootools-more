@@ -51,6 +51,7 @@ provides: [Keyboard]
 			this.setOptions(options);
 			this.setup();
 		},
+
 		setup: function(){
 			this.addEvents(this.options.events);
 			//if this is the root manager, nothing manages it

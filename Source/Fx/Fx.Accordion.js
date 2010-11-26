@@ -156,15 +156,14 @@ Fx.Accordion = new Class({
 		if (this.options.returnHeightToAuto){
 			var prev = this.elements[this.previous];
 			if (prev && !this.selfHidden){
-				for (var fx in this.effects){
-					prev.setStyle(fx, prev[this.effects[fx]]);
-				}
+				for (var fx in this.effects) prev.setStyle(fx, prev[this.effects[fx]]);
 			}
 		}
 
 		if ((this.timer && this.options.link == 'chain') || (index === this.previous && !this.options.alwaysHide)) return this;
 		this.previous = index;
 		var obj = {};
+		this.selfHidden = false;
 		this.elements.each(function(el, i){
 			obj[i] = {};
 			var hide;
@@ -176,6 +175,7 @@ Fx.Accordion = new Class({
 			}
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
+			if (!useFx && !hide) obj[i]['height'] = 'auto';
 		}, this);
 
 		this.internalChain.clearChain();

@@ -24,8 +24,8 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 
 #### Options
 
-* display     - (*integer*: defaults to 0) The index of the element to show at start (with a transition). To force all elements to be closed by default, pass in -1.
-* show        - (*integer*: defaults to 0) The index of the element to be shown initially.
+* display     - (*number*: defaults to 0) The index of the element to show at start (with a transition). To force all elements to be closed by default, pass in -1.
+* show        - (*number*: defaults to false) The index of the element to be shown initially.
 * trigger     - (*string*: defaults to 'click') The event that triggers a change in element display.
 * height      - (*boolean*: defaults to true) If set to true, a height transition effect will take place when switching between displayed elements.
 * width       - (*boolean*: defaults to false) If set to true, it will add a width transition to the accordion when switching between displayed elements. Warning: CSS mastery is required to make this work!
@@ -34,6 +34,7 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 * fixedWidth - (*number*) If set, displayed elements will have a fixed width equal to the specified value.
 * alwaysHide  - (*boolean*: defaults to false) If set to true, it will be possible to close all displayable elements. Otherwise, one will remain open at all time.
 * initialDisplayFx - (*boolean*; defaults to true) If set to false, the initial item displayed will not display with an effect but will just be shown immediately.
+* returnHeightToAuto - (*boolean*; defaults to true) If set to false, the height of an opened accordian section will be set to an absolute pixel size.
 
 ### Returns
 
@@ -116,7 +117,7 @@ Detaches the toggle behavior from the DOM specified elements. If that element is
 ### Arguments
 
 1. toggler - (*element*) The toggler element to detach the behavior from.
-2. displayIndex - (*integer*; optional) The section to display next (note that this index is based on the exclusion of the removed section, so if you remove the first section at index zero, then want to show the third one, you would specify index 1 - the second item in the accordion after the removal of the first).
+2. displayIndex - (*number*; optional) The section to display next (note that this index is based on the exclusion of the removed section, so if you remove the first section at index zero, then want to show the third one, you would specify index 1 - the second item in the accordion after the removal of the first).
 
 ### Returns
 

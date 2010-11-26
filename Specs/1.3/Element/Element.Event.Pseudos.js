@@ -58,5 +58,13 @@ describe('Element.Event.Pseudos', function(){
 
 	});
 
+	// Test if Events.Pseudos is implemented in Fx.Tween and Request.JSON
+	it('should test if Events.Pseudos is implemented in Fx.Tween and Request.JSON', function(){
+		var reqComplete = jasmine.createSpy('requestComplete');
+		var req = new Request.JSON().addEvent('complete:once', reqComplete);
+		req.fireEvent('complete');
+		expect(reqComplete).toHaveBeenCalled();
+	});
+
 });
 
