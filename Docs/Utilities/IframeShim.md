@@ -30,8 +30,8 @@ There are two types of elements that (sometimes) prohibit you from positioning a
 ### Options
 
 * display -  (*boolean*) display the shim on instantiation; defaults to *false*
-* zIndex -  (*integer*) the z-index of the shim; optional, default is 1 less than the element
-* margin -  (*integer*) make the iframe smaller than the element to give a buffer (for things like shadows)
+* zIndex -  (*number*) the z-index of the shim; optional, default is 1 less than the element
+* margin -  (*number*) make the iframe smaller than the element to give a buffer (for things like shadows)
 * offset -  (*object: {x:#, y:#}*) move the iframe up/down, left/right relative to the element
 * className - (*string*) className for the shim; defaults to *"iframeShim"*
 * browsers - (*boolean*) allows you to specify the browsers that the iframe should show up for; defaults to ie6 or firefox on a mac `(Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac))`. Example usage: `browsers: Browser.ie6 || Browser.opera` will show for ie6 and opera

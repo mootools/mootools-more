@@ -24,7 +24,7 @@ You must call its start method to start listening to mouse movements.
 
 #### Options :
 
-* area     - (*number* or *object*: defaults to 20) The necessary boundaries to make the element scroll. Can either be an integer or an object with *top* and *bottom* values. When passed an integer, both the top and bottom are equal.
+* area     - (*number* or *object*: defaults to 20) The necessary boundaries to make the element scroll. Can either be a number or an object with *top* and *bottom* values. When passed a number, both the top and bottom are equal.
 * velocity - (*number*: defaults to 1) The modifier for the window scrolling speed.
 * fps      - (*number*: defaults to 50) The frames per second that the scroller updates and scrolls.
 

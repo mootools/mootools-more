@@ -19,9 +19,9 @@ Creates an interface for drag and drop sorting of a list or lists.
 * constrain - (*boolean*: defaults to *false*) Whether or not to constrain the element being dragged to its parent element.
 * clone - (*mixed*: defaults to *false*) Whether or not to display a copy of the actual element under the cursor while dragging. May also be used as a function which will return an element to be used as the clone.  The function will receive the mousedown event, the element, and the list as arguments.
 * handle - (*string*: defaults to *false*) A selector to select an element inside each sortable item to be used as the handle for sorting that item.  If no match is found, the element is used as its own handle.
-* opacity - (*integer*: defaults to *1*) Opacity of the place holding element
+* opacity - (*number*: defaults to *1*) Opacity of the place holding element
 * revert - (*mixed*: defaults to *false*) Whether or not to use an effect to slide the element into its final location after sorting. If you pass an object it will be used as additional options for the revert effect.
-* snap - (*integer*; defaults to *4*) The number of pixels the element must be dragged for sorting to begin.
+* snap - (*number*; defaults to *4*) The number of pixels the element must be dragged for sorting to begin.
 * preventDefault - (*boolean*; defaults to *false*) if true, then dragging a link or image that is in a sortable element will work (otherwise the browser may attempt to drag the element out of the browser - to your desktop or bookmark bar for example).
 
 ### Events:
@@ -253,7 +253,7 @@ If more than one list is being used, all lists will be serialized and returned i
 
 ### Arguments:
 
-1. index    - (*mixed*, optional) An integer or boolean false. index of the list to serialize. Omit or pass false to serialize all lists.
+1. index    - (*mixed*, optional) A number or boolean false. index of the list to serialize. Omit or pass false to serialize all lists.
 2. modifier - (*function*, optional) A function to override the default output of the sortables.  See Examples below
 
 ### Examples:

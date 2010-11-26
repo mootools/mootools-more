@@ -58,7 +58,7 @@ Returns width and height for element even if the element is not visible.
 
 ###	Returns
 
-* (*object*) An object with .x and .y defined as integers. If options.computeSize is true, returns all the values that [Element:getComputedSize][] returns.
+* (*object*) An object with .x and .y defined as numbers. If options.computeSize is true, returns all the values that [Element:getComputedSize][] returns.
 
 ### Example
 
@@ -88,7 +88,7 @@ Calculates the size of an element including the width, border, padding, etc.
 
 ### Returns
 
-* (*object*) An object that contains dimension values (integers); see list below
+* (*object*) An object that contains dimension values (*numbers*); see list below
 
 ### Dimension Values Returned
 

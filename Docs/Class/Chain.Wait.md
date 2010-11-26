@@ -18,7 +18,7 @@ Injects pauses between chained events.
 
 ### Arguments
 
-1. duration - (*integer*) The duration (in milliseconds) to pause the chain stack; defaults to *500*.
+1. duration - (*number*) The duration (in milliseconds) to pause the chain stack; defaults to *500*.
 
 ### Example
 
@@ -60,7 +60,7 @@ Pauses a specified effect chain using [Chain.wait][].
 
 ### Arguments
 
-1. duration - (*integer*) The duration (in milliseconds) to pause the chain stack; defaults to *500*.
+1. duration - (*number*) The duration (in milliseconds) to pause the chain stack; defaults to *500*.
 2. effect - (*string*) Either "tween" or "morph" (defaults to "tween" so you only need specify it if it's morph).
 
 [Fx.Tween]: /core/Fx/Fx.Tween

@@ -71,7 +71,7 @@ Set's a portion of the URI to the specified value.
 * user - (*string*) the username portion of the credentials
 * password - (*string*) the password portion of the credentials
 * host - (*string*) 'www.example.com', 'example.com', 'subdomain.example.com', etc.
-* port - (*string* or *integer*) 80, 8080, etc.
+* port - (*string* or *number*) 80, 8080, etc.
 * directory - (*string*) '/directory/'
 * file - (*string*) 'file.html'
 * query - (*string*) 'foo=bar&something=else' (the *?* is added for you)

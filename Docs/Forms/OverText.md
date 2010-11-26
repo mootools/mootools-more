@@ -26,7 +26,7 @@ Shows text over an input that disappears when the user clicks into it. The text 
 * element - (*string*) type of element to be used for the OverText; defaults to *label*.
 * positionOptions - (*object*) data passed to [Element.position][].
 * poll - (*boolean*) whether to periodically re-evaluate the input to set their overtext element's position and visibility (useful for login in fields that are often populated by remembered usernames and passwords by the browser); defaults to *false*.
-* pollInterval - (*integer*) the duration between polling in milliseconds; defaults to *250*.
+* pollInterval - (*number*) the duration between polling in milliseconds; defaults to *250*.
 * wrap - (*boolean*) if *true*, all inputs are wrapped with a div that is positioned relatively with the class "overTxtWrapper"
 * textOverride - (*string*) if defined, this will be the value of the over text rather than the input *alt* or *title*.
 * labelClass - (*string*, defaults to `overTxtLabel`) a css classname to style the input overtext

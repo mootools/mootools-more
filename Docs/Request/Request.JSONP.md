@@ -28,7 +28,7 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 	* 'ignore' - Any calls made to start while the request is running will be ignored.
 	* 'cancel' - Any calls made to start while the request is running will take precedence over the currently running request. The new request will start immediately, canceling the one that is currently running.
 	* 'chain'  - Any calls made to start while the request is running will be chained up, and will take place as soon as the current request has finished, one after another.
-* timeout - (*integer*: defaults to *0*) timeout - (integer: defaults to 0) In conjunction with onTimeout event, it determines the amount of milliseconds before considering a connection timed out. (It's suggested to not use timeout with big files and only when knowing what's expected.)
+* timeout - (*number*: defaults to *0*) In conjunction with onTimeout event, it determines the amount of milliseconds before considering a connection timed out. (It's suggested to not use timeout with big files and only when knowing what's expected.)
 * injectScript - (*mixed*: defaults to document head) where to inject the script elements used for the calls
 * log - (*boolean*: defaults to *false*) if *true*, sends logging messages with `console.log` as default onRequest and onError events.
 
