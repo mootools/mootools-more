@@ -109,10 +109,12 @@ var HtmlTable = new Class({
 		}
 		var tds = row.map(function(data){
 			var td = new Element(tag || 'td', data ? data.properties : {}),
-				type = (data ? data.content : '') || data,
-				element = document.id(type);
-			if (typeOf(type) != 'string') td.adopt(element || type);
-			else td.set('html', type);
+				content = (data ? data.content : '') || data,
+				type = typeOf(content),
+				element = document.id(content);
+
+			if ((type != 'string' && element) || ['array', 'collection', 'elements'].contains(type)) td.adopt(element || content);
+			else td.set('html', content);
 
 			return td;
 		});
