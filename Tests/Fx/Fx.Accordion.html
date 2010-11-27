@@ -86,7 +86,7 @@ acc3.addSection(
 
 <hr/>
 
-<p>This example allows you to hide all the sections. You can expose any single section and click its header again to hide it without exposing another one. Important that all sections return "auto" when open.</p>
+<p>This example allows you to hide all the sections. You can expose any single section and click its header again to hide it without exposing another one.</p>
 
 <dl id="acc4">
   <dl>
@@ -126,3 +126,27 @@ new Fx.Accordion($$('#acc5 dt'), $$('#acc5 dd'), {
 	display: 1
 });
 </script>
+
+<hr/>
+
+<p>It should set the height property to "<strong>auto</strong>" after the Fx. Note that it should do that on initialization too</p>
+
+<dl id="acc6">
+  <dl>
+    <dt class="toggle"><b>first section</b></dt>
+    <dd class="stretcher">I'm the content for the first section.</dd>
+    <dt class="toggle"><b>second section</b></dt>
+    <dd class="stretcher">I'm the content for the second section.</dd>
+    <dt class="toggle"><b>third section</b></dt>
+    <dd class="stretcher">I'm the content for the third section.</dd>
+  </dl>
+</dl>
+
+<script>
+new Fx.Accordion($$('#acc6 dt'), $$('#acc6 dd'), {
+	initialDisplayFx: false,
+	display: 2,
+	resetHeight: true
+});
+</script>
+

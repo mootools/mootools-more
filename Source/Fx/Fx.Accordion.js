@@ -175,7 +175,7 @@ Fx.Accordion = new Class({
 			}
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
 			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
-			if (!useFx && !hide) obj[i]['height'] = 'auto';
+			if (!useFx && !hide && this.options.resetHeight) obj[i]['height'] = 'auto';
 		}, this);
 
 		this.internalChain.clearChain();
