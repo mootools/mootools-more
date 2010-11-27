@@ -33,9 +33,11 @@ nativeEvents.focusout = 2;
 
 
 Event.definePseudo('relay', {
+
 	listener: function(split, fn, args, options){
-		var event = args[0];
-		var check = options.condition;
+		var event = args[0],
+			eventOptions = options[split.event],
+			check = eventOptions ? eventOptions.condition : null;
 
 		for (var target = event.target; target && target != this; target = target.parentNode){
 			var finalTarget = document.id(target);
@@ -44,8 +46,8 @@ Event.definePseudo('relay', {
 				return;
 			}
 		}
-
 	},
+
 	options: {
 		mouseenter: {
 			base: 'mouseover',
@@ -64,6 +66,7 @@ Event.definePseudo('relay', {
 			args: [true]
 		}
 	}
+
 });
 
 })();
