@@ -54,43 +54,45 @@ Fx.Accordion = new Class({
 		});
 		this.parent(params.elements, params.options);
 
-		this.togglers = $$(params.togglers);
+		var options = this.options,
+			togglers = this.togglers = $$(params.togglers);
+
 		this.previous = -1;
 		this.internalChain = new Chain();
 
-		if (this.options.alwaysHide) this.options.link = 'chain';
+		if (options.alwaysHide) this.options.link = 'chain';
 
-		if (this.options.show || this.options.show === 0){
-			this.options.display = false;
-			this.previous = this.options.show;
+		if (options.show || this.options.show === 0){
+			options.display = false;
+			previous = this.options.show;
 		}
 
-		if (this.options.start){
-			this.options.display = false;
-			this.options.show = false;
+		if (options.start){
+			options.display = false;
+			options.show = false;
 		}
 
-		this.effects = {};
+		var effects = this.effects = {};
 
-		if (this.options.opacity) this.effects.opacity = 'fullOpacity';
-		if (this.options.width) this.effects.width = this.options.fixedWidth ? 'fullWidth' : 'offsetWidth';
-		if (this.options.height) this.effects.height = this.options.fixedHeight ? 'fullHeight' : 'scrollHeight';
+		if (options.opacity) effects.opacity = 'fullOpacity';
+		if (options.width) effects.width = options.fixedWidth ? 'fullWidth' : 'offsetWidth';
+		if (options.height) effects.height = options.fixedHeight ? 'fullHeight' : 'scrollHeight';
 
-		for (var i = 0, l = this.togglers.length; i < l; i++) this.addSection(this.togglers[i], this.elements[i]);
+		for (var i = 0, l = togglers.length; i < l; i++) this.addSection(togglers[i], this.elements[i]);
 
 		this.elements.each(function(el, i){
-			if (this.options.show === i){
-				this.fireEvent('active', [this.togglers[i], el]);
+			if (options.show === i){
+				this.fireEvent('active', [togglers[i], el]);
 			} else {
-				for (var fx in this.effects) el.setStyle(fx, 0);
+				for (var fx in effects) el.setStyle(fx, 0);
 			}
 		}, this);
 
-		if (this.options.display || this.options.display === 0 || this.options.initialDisplayFx === false){
-			this.display(this.options.display, this.options.initialDisplayFx);
+		if (options.display || options.display === 0 || options.initialDisplayFx === false){
+			this.display(options.display, options.initialDisplayFx);
 		}
 
-		if (this.options.fixedHeight !== false) this.options.resetHeight = false;
+		if (options.fixedHeight !== false) options.resetHeight = false;
 		this.addEvent('complete', this.internalChain.callChain.bind(this.internalChain));
 	},
 
@@ -100,32 +102,36 @@ Fx.Accordion = new Class({
 		this.togglers.include(toggler);
 		this.elements.include(element);
 
-		var test = this.togglers.contains(toggler),
-			idx = this.togglers.indexOf(toggler),
+		var togglers = this.togglers,
+			options = this.options,
+			test = togglers.contains(toggler),
+			idx = togglers.indexOf(toggler),
 			displayer = this.display.pass(idx, this);
 
 		toggler.store('accordion:display', displayer)
-			.addEvent(this.options.trigger, displayer);
+			.addEvent(options.trigger, displayer);
 
-		if (this.options.height) element.setStyles({'padding-top': 0, 'border-top': 'none', 'padding-bottom': 0, 'border-bottom': 'none'});
-		if (this.options.width) element.setStyles({'padding-left': 0, 'border-left': 'none', 'padding-right': 0, 'border-right': 'none'});
+		if (options.height) element.setStyles({'padding-top': 0, 'border-top': 'none', 'padding-bottom': 0, 'border-bottom': 'none'});
+		if (options.width) element.setStyles({'padding-left': 0, 'border-left': 'none', 'padding-right': 0, 'border-right': 'none'});
 
 		element.fullOpacity = 1;
-		if (this.options.fixedWidth) element.fullWidth = this.options.fixedWidth;
-		if (this.options.fixedHeight) element.fullHeight = this.options.fixedHeight;
+		if (options.fixedWidth) element.fullWidth = options.fixedWidth;
+		if (options.fixedHeight) element.fullHeight = options.fixedHeight;
 		element.setStyle('overflow', 'hidden');
 
-		if (!test){
-			for (var fx in this.effects) element.setStyle(fx, 0);
+		if (!test) for (var fx in this.effects){
+			element.setStyle(fx, 0);
 		}
 		return this;
 	},
 
 	removeSection: function(toggler, displayIndex){
-		var idx = this.togglers.indexOf(toggler);
-		var element = this.elements[idx];
+		var togglers = this.togglers,
+			idx = togglers.indexOf(toggler),
+			element = this.elements[idx];
+
 		var remover = function(){
-			this.togglers.erase(toggler);
+			togglers.erase(toggler);
 			this.elements.erase(element);
 			this.detach(toggler);
 		}.bind(this);
@@ -150,41 +156,50 @@ Fx.Accordion = new Class({
 
 	display: function(index, useFx){
 		if (!this.check(index, useFx)) return this;
+
+		var obj = {},
+			elements = this.elements,
+			options = this.options,
+			effects = this.effects;
+
 		if (useFx == null) useFx = true;
-		if (typeOf(index) == 'element') index = this.elements.indexOf(index);
-		if (index == this.previous && !this.options.alwaysHide) return this;
-		if (this.options.resetHeight){
-			var prev = this.elements[this.previous];
+		if (typeOf(index) == 'element') index = elements.indexOf(index);
+		if (index == this.previous && !options.alwaysHide) return this;
+
+		if (options.resetHeight){
+			var prev = elements[this.previous];
 			if (prev && !this.selfHidden){
-				for (var fx in this.effects) prev.setStyle(fx, prev[this.effects[fx]]);
+				for (var fx in effects) prev.setStyle(fx, prev[effects[fx]]);
 			}
 		}
 
-		if ((this.timer && this.options.link == 'chain') || (index === this.previous && !this.options.alwaysHide)) return this;
+		if ((this.timer && options.link == 'chain') || (index === this.previous && !options.alwaysHide)) return this;
+
 		this.previous = index;
-		var obj = {};
 		this.selfHidden = false;
-		this.elements.each(function(el, i){
+
+		elements.each(function(el, i){
 			obj[i] = {};
 			var hide;
 			if (i != index){
 				hide = true;
-			} else if (this.options.alwaysHide && ((el.offsetHeight > 0 && this.options.height) || el.offsetWidth > 0 && this.options.width)){
+			} else if (options.alwaysHide && ((el.offsetHeight > 0 && options.height) || el.offsetWidth > 0 && options.width)){
 				hide = true;
 				this.selfHidden = true;
 			}
 			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
-			for (var fx in this.effects) obj[i][fx] = hide ? 0 : el[this.effects[fx]];
-			if (!useFx && !hide && this.options.resetHeight) obj[i]['height'] = 'auto';
+			for (var fx in effects) obj[i][fx] = hide ? 0 : el[effects[fx]];
+			if (!useFx && !hide && options.resetHeight) obj[i]['height'] = 'auto';
 		}, this);
 
 		this.internalChain.clearChain();
 		this.internalChain.chain(function(){
-			if (this.options.resetHeight && !this.selfHidden){
-				var el = this.elements[index];
+			if (options.resetHeight && !this.selfHidden){
+				var el = elements[index];
 				if (el) el.setStyle('height', 'auto');
 			};
 		}.bind(this));
+
 		return useFx ? this.start(obj) : this.set(obj);
 	}
 
