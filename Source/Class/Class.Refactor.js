@@ -27,10 +27,10 @@ Class.refactor = function(original, refactors){
 	Object.each(refactors, function(item, name){
 		var origin = original.prototype[name];
 		if (origin && origin.$origin) origin = origin.$origin;
-		if (origin && typeof item == 'function'){
+		if (typeof item == 'function'){
 			original.implement(name, function(){
 				var old = this.previous;
-				this.previous = origin;
+				this.previous = origin || function(){};
 				var value = item.apply(this, arguments);
 				this.previous = old;
 				return value;

@@ -12,6 +12,7 @@ license: MIT-style license
 authors:
   - Harald Kirschner
   - Aaron Newton
+  - Jacob Thornton
 
 requires:
   - Core/Hash
@@ -87,7 +88,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			this.sortSpans.push(sortSpan);
 
 			var parser = parsers[index],
-					cancel;
+				cancel;
 			switch (typeOf(parser)){
 				case 'function': parser = {convert: parser}; cancel = true; break;
 				case 'string': parser = parser; cancel = true; break;
@@ -121,43 +122,77 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return false;
 	},
 
+	setSortedState: function(index, reverse){
+		if (reverse != null) this.sorted.reverse = reverse;
+		else if (this.sorted.index == index) this.sorted.reverse = !this.sorted.reverse;
+		else this.sorted.reverse = this.sorted.index == null;
+
+		if (index != null) this.sorted.index = index;
+	},
+
+	setHeadSort: function(sorted){
+		var head = document.id(this.head.cells[this.sorted.index]);
+		if (!head) return;
+		if (sorted){
+			head.addClass(this.options.classHeadSort);
+			if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
+			else head.removeClass(this.options.classHeadSortRev);
+		}
+		else {
+			head.removeClass(this.options.classHeadSort).removeClass(this.options.classHeadSortRev);
+		}
+	},
+
+	setRowSort: function(data, pre){
+		var count = data.length, 
+			body = this.body,
+			group,
+			rowIndex;
+
+		while (count){
+			var item = data[--count],
+				position = item.position,
+				row = body.rows[position];
+
+			if (row.disabled) continue;
+			if (!pre){
+				group = this.setGroupSort(group, row, item);
+				this.setRowStyle(row, count);
+			}
+			body.appendChild(row);
+
+			for (rowIndex = 0; rowIndex < count; rowIndex++) {
+				if (data[rowIndex].position > position) data[rowIndex].position--;
+			}
+		};
+	},
+
+	setRowStyle: function(row, i){
+		this.previous(row, i);
+		row.cells[this.sorted.index].addClass(this.options.classCellSort);
+	},
+
+	setGroupSort: function(group, row, item){
+		if (group == item.value) row.removeClass(this.options.classGroupHead).addClass(this.options.classGroup);
+		else row.removeClass(this.options.classGroup).addClass(this.options.classGroupHead);
+		return item.value;
+	},
+
+	getParser: function(){
+		var parser = this.parsers[this.sorted.index];
+		return typeOf(parser) == 'string' ? HtmlTable.Parsers[parser] : parser;
+	},
+
 	sort: function(index, reverse, pre){
 		if (!this.head) return;
-		var classCellSort = this.options.classCellSort;
-		var classGroup = this.options.classGroup,
-			classGroupHead = this.options.classGroupHead;
-
+		
 		if (!pre){
-			if (index != null){
-				if (this.sorted.index == index){
-					this.sorted.reverse = !(this.sorted.reverse);
-				} else {
-					if (this.sorted.index != null){
-						this.sorted.reverse = false;
-						this.head.cells[this.sorted.index].removeClass(this.options.classHeadSort).removeClass(this.options.classHeadSortRev);
-					} else {
-						this.sorted.reverse = true;
-					}
-					this.sorted.index = index;
-				}
-			} else {
-				index = this.sorted.index;
-			}
-
-			if (reverse != null) this.sorted.reverse = reverse;
-
-			var head = document.id(this.head.cells[index]);
-			if (head){
-				head.addClass(this.options.classHeadSort);
-				if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
-				else head.removeClass(this.options.classHeadSortRev);
-			}
-
-			this.body.getElements('td').removeClass(this.options.classCellSort);
+			this.clearSort();
+			this.setSortedState(index, reverse);
+			this.setHeadSort(true);
 		}
 
-		var parser = this.parsers[index];
-		if (typeOf(parser) == 'string') parser = HtmlTable.Parsers[parser];
+		var parser = this.getParser();
 		if (!parser) return;
 
 		if (!Browser.ie){
@@ -165,56 +200,32 @@ HtmlTable = Class.refactor(HtmlTable, {
 			this.body.dispose();
 		}
 
-		var data = Array.map(this.body.rows, function(row, i){
-			var value = parser.convert.call(document.id(row.cells[index]));
-
-			return {
-				position: i,
-				value: value,
-				toString: function(){
-					return value.toString();
-				}
-			};
-		}, this);
-		data.reverse(true);
-
-		data.sort(function(a, b){
+		var data = this.parseData(parser).sort(function(a, b){
 			if (a.value === b.value) return 0;
 			return a.value > b.value ? 1 : -1;
 		});
 
-		if (!this.sorted.reverse) data.reverse(true);
+		if (this.sorted.reverse == (this.parsers[this.sorted.index] == 'input-checked')) data.reverse(true);
+		this.setRowSort(data, pre);
+		
+		if (rel) rel.grab(this.body);
+	
+		return this.fireEvent('sort', [this.body, this.sorted.index]);
+	},
 
-		var i = data.length, body = this.body;
-		var j, position, entry, group;
+	parseData: function(parser){
+		return Array.map(this.body.rows, function(row, i){
+			var value = parser.convert.call(document.id(row.cells[this.sorted.index]));
+			return {
+				position: i,
+				value: value
+			};
+		}, this);
+	},
 
-		while (i){
-			var item = data[--i];
-			position = item.position;
-			var row = body.rows[position];
-			if (row.disabled) continue;
-
-			if (!pre){
-				if (group === item.value){
-					row.removeClass(classGroupHead).addClass(classGroup);
-				} else {
-					group = item.value;
-					row.removeClass(classGroup).addClass(classGroupHead);
-				}
-				if (this.options.zebra) this.zebra(row, i);
-
-				row.cells[index].addClass(classCellSort);
-			}
-
-			body.appendChild(row);
-			for (j = 0; j < i; j++){
-				if (data[j].position > position) data[j].position--;
-			}
-		};
-		data = null;
-		if (rel) rel.grab(body);
-
-		return this.fireEvent('sort', [body, index]);
+	clearSort: function(){
+		this.setHeadSort(false);
+		this.body.getElements('td').removeClass(this.options.classCellSort);
 	},
 
 	reSort: function(){
@@ -296,7 +307,7 @@ HtmlTable.Parsers = {
 	'string': {
 		match: null,
 		convert: function(){
-			return this.get('text').stripTags();
+			return this.get('text').stripTags().toLowerCase();
 		}
 	},
 	'title': {

@@ -39,6 +39,11 @@ HtmlTable = Class.refactor(HtmlTable, {
 		Array.each(this.body.rows, this.zebra, this);
 	},
 
+	setRowStyle: function(row, i){
+		if (this.previous) this.previous(row, i);
+		this.zebra(row, i);
+	},
+
 	zebra: function(row, i){
 		return row[((i % 2) ? 'remove' : 'add')+'Class'](this.options.classZebra);
 	},
