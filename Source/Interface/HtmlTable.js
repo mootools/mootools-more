@@ -56,9 +56,10 @@ var HtmlTable = new Class({
 
 		if (this.options.headers.length) this.setHeaders(this.options.headers);
 		else this.thead = document.id(this.element.tHead);
-		if (this.thead) this.head = document.id(this.thead.rows[0]);
 
+		if (this.thead) this.head = document.id(this.thead.rows[0]);
 		if (this.options.footers.length) this.setFooters(this.options.footers);
+
 		this.tfoot = document.id(this.element.tFoot);
 		if (this.tfoot) this.foot = document.id(this.tfoot.rows[0]);
 
@@ -67,7 +68,7 @@ var HtmlTable = new Class({
 		}, this);
 
 		['adopt', 'inject', 'wraps', 'grab', 'replaces', 'dispose'].each(function(method){
-				this[method] = this.element[method].bind(this.element);
+			this[method] = this.element[method].bind(this.element);
 		}, this);
 	},
 
@@ -81,11 +82,15 @@ var HtmlTable = new Class({
 	},
 
 	set: function(what, items){
-		var target = (what == 'headers') ? 'tHead' : 'tFoot';
-		this[target.toLowerCase()] = (document.id(this.element[target]) || new Element(target.toLowerCase()).inject(this.element, 'top')).empty();
-		var data = this.push(items, {}, this[target.toLowerCase()], what == 'headers' ? 'th' : 'td');
+		var target = (what == 'headers') ? 'tHead' : 'tFoot',
+			lower = target.toLowerCase();
+
+		this[lower] = (document.id(this.element[target]) || new Element(lower).inject(this.element, 'top')).empty();
+		var data = this.push(items, {}, this[lower], what == 'headers' ? 'th' : 'td');
+
 		if (what == 'headers') this.head = document.id(this.thead.rows[0]);
 		else this.foot = document.id(this.thead.rows[0]);
+
 		return data;
 	},
 
@@ -100,13 +105,14 @@ var HtmlTable = new Class({
 	},
 
 	push: function(row, rowProperties, target, tag){
-		if (typeOf(row) == "element" && row.get('tag') == 'tr'){
+		if (typeOf(row) == 'element' && row.get('tag') == 'tr'){
 			row.inject(target || this.body);
 			return {
 				tr: row,
 				tds: row.getChildren('td')
 			};
 		}
+
 		var tds = row.map(function(data){
 			var td = new Element(tag || 'td', data ? data.properties : {}),
 				content = (data ? data.content : '') || data,
