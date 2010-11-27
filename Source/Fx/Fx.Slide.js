@@ -34,28 +34,31 @@ Fx.Slide = new Class({
 	},
 
 	initialize: function(element, options){
+		element = this.element = this.subject = document.id(element);
+		this.parent(options);
+		options = this.options;
+
+		var styles = element.getStyles('margin', 'position', 'overflow');
+
+		if (options.hideOverflow) styles = Object.append(styles, {overflow: 'hidden'});
+		if (options.wrapper) wrapper = document.id(options.wrapper).setStyles(styles);
+
+		var wrapper = element.retrieve('wrapper');
+		if (!wrapper) wrapper = new Element('div', {
+			styles: styles
+		}).wraps(element);
+		this.wrapper = wrapper;
+
+		element.store('wrapper', wrapper).setStyle('margin', 0);
+		if (element.getStyle('overflow') == 'visible') element.setStyle('overflow', 'hidden');
+
+		this.now = [];
+		this.open = true;
+
 		this.addEvent('complete', function(){
 			this.open = (this.wrapper['offset' + this.layout.capitalize()] != 0);
 			if (this.open && this.options.resetHeight) this.wrapper.setStyle('height', '');
 		}, true);
-
-		this.element = this.subject = document.id(element);
-		this.parent(options);
-		var wrapper = this.element.retrieve('wrapper');
-		var styles = this.element.getStyles('margin', 'position', 'overflow');
-
-		if (this.options.hideOverflow) styles = Object.append(styles, {overflow: 'hidden'});
-		if (this.options.wrapper) wrapper = document.id(this.options.wrapper).setStyles(styles);
-
-		this.wrapper = wrapper || new Element('div', {
-			styles: styles
-		}).wraps(this.element);
-
-		this.element.store('wrapper', this.wrapper).setStyle('margin', 0);
-		if (this.element.getStyle('overflow') == 'visible') this.element.setStyle('overflow', 'hidden');
-
-		this.now = [];
-		this.open = true;
 	},
 
 	vertical: function(){
@@ -85,11 +88,13 @@ Fx.Slide = new Class({
 	start: function(how, mode){
 		if (!this.check(how, mode)) return this;
 		this[mode || this.options.mode]();
-		var margin = this.element.getStyle(this.margin).toInt();
-		var layout = this.wrapper.getStyle(this.layout).toInt();
-		var caseIn = [[margin, layout], [0, this.offset]];
-		var caseOut = [[margin, layout], [-this.offset, 0]];
-		var start;
+
+		var margin = this.element.getStyle(this.margin).toInt(),
+			layout = this.wrapper.getStyle(this.layout).toInt(),
+			caseIn = [[margin, layout], [0, this.offset]],
+			caseOut = [[margin, layout], [-this.offset, 0]],
+			start;
+
 		switch (how){
 			case 'in': start = caseIn; break;
 			case 'out': start = caseOut; break;
