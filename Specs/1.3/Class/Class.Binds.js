@@ -5,65 +5,66 @@ Script: Class.Binds.js
 License:
 	MIT-style license.
 */
-(function(){
-	var Tester = new Class({
-		Binds: 'getFoo',
-		initialize: function(foo){
-			this.foo = foo;
-		},
-		getFoo: function(){
-			return this.foo;
-		},
-		test: function(){
-			return [0].map(this.getFoo)[0];
-		}
-	});
 
-	var Tester2 = new Class({
-		initialize: function(foo){
-			this.foo = foo;
-		},
-		getFoo: function(){
-			return this.foo;
-		},
-		test: function(){
-			return [0].map(this.getFoo)[0];
-		}
-	});
+describe('Class.Binds', function(){
 
-	var Tester3 = new Class({
-		Implements: Options,
-		Binds: ["getFoo"],
-		initialize: function(foo){
-			this.foo = foo;
-			this.setOptions({a: 'b'});
-		},
-		getFoo: function(){
-			return this.foo;
-		},
-		test: function(){
-			return [0].map(this.getFoo)[0];
-		}
-	});
+	it('should autobind methods', function(){
 
-	var tester = new Tester('test');
-	var tester2 = new Tester2('test');
-	var tester3 = new Tester3('test');
-	describe('Class.Binds', {
+		var UnboundClass = new Class({
+			context: function(){ return this; }
+		});
 
-		'tests the autobinding functionality in the Binds Mutator': function(){
-			expect(tester.test()).toEqual(tester.foo);
-		},
-		'verifies that the autobinding mutator is needed for the previous test to pass': function(){
-			expect(tester2.test()).toNotEqual(tester2.foo);
-		},
-		'verfies that the setOptions invocation works properly': function(){
-			expect(tester3.test()+tester3.options.a).toEqual(tester3.foo+'b');
-		}
+		var BoundClass = new Class({
+			Binds: ['context'],
+			initialize: function(){},
+			context: function(){ return this; }
+		});
 
+		var boundInstance = new BoundClass(),
+			unboundInstance = new UnboundClass();
+
+		expect(boundInstance.context.apply(false)).toEqual(boundInstance);
+		expect(unboundInstance.context.apply(false)).not.toEqual(unboundInstance);
 
 	});
 
-})();
+	it('should work when initialize is not defined in class', function(){
 
+		var BoundClassNoInit = new Class({
+			Binds: ['context'],
+			context: function(){ return this; }
+		});
 
+		var boundInstance = new BoundClassNoInit();
+		expect(boundInstance.context.apply(false)).toEqual(boundInstance);
+
+	});
+
+	it('should work when Binds mutator is after initialize', function(){
+
+		var BoundClass = new Class({
+			initialize: function(){},
+			context: function(){ return this; },
+			Binds: ['context']
+		});
+
+		var boundInstance = new BoundClass();
+		expect(boundInstance.context.apply(false)).toEqual(boundInstance);
+
+	});
+
+	it('should work with setOptions', function(){
+
+		var BoundClass = new Class({
+			Implements: [Options],
+			Binds: ['getOption'],
+			options: {option: false},
+			initialize: function(options){ this.setOptions(options); },
+			getOption: function(){ return this.options.option; }
+		});
+
+		expect(new BoundClass({option: true}).getOption.apply(false)).toEqual(true);
+
+	});
+
+});
