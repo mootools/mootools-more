@@ -9,6 +9,7 @@ Contains methods and data necessary to provide localization.
 * Locale sets can contain any type of object, so, for instance, a language item could be an *array*, a *function*, a *string*, or even another *class*. Classes that make use of these items must be aware of the types of objects in the language file.
 * Language items that are functions are executed and their results are returned. So if you execute *Locale.get('Date.ordinal', 4)*, then the ordinal member will be executed and passed *4* as its argument. If *ordinal* is not a function, then its value will simply be returned.
 * Users are encouraged to send in updates and additions to the MooTools team to help us grow this collection of translations.
+* Predefined Locale sets follow [this list][Locale_codes] as Locale codes.
 
 Example language file
 ---------------------
@@ -16,7 +17,7 @@ Example language file
 Below is an example language file from *Locale.en-US.Date.js*. Note that some members are
 arrays (months and days), others are strings, and one is even a function. Also note that
 some of the strings contain notation for variable substitution. Each class establishes it's
-own conventions for the language file that is required and is therefor required to document
+own conventions for the language file that is required and is therefore required to document
 those conventions. Look for these at the bottom of the class's Locale documentation.
 
 	Locale.define('en-US', 'Date', {
@@ -198,3 +199,5 @@ Returns an array of languages currently supported.
 * *array* an array of locale names (*strings*)
 
 [Object.getFromPath]: /more/Types/Object.Extras#Object:Object-getFromPath
+[Locale_codes]: http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_territory_information.html
+
