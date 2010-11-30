@@ -147,9 +147,21 @@ Drag.Move = new Class({
 		};
 	},
 
+	getDroppableCoordinates: function(element){
+		var position = element.getCoordinates();
+		if (element.getStyle('position') == 'fixed') {
+			var scroll = window.getScroll();
+			position.left += scroll.x;
+			position.right += scroll.x;
+			position.top += scroll.y;
+			position.bottom += scroll.y;
+		}
+		return position;
+	},
+
 	checkDroppables: function(){
 		var overed = this.droppables.filter(function(el, i){
-			el = this.positions ? this.positions[i] : el.getCoordinates();
+			el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
 			var now = this.mouse.now;
 			return (now.x > el.left && now.x < el.right && now.y < el.bottom && now.y > el.top);
 		}, this).getLast();
