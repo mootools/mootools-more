@@ -26,6 +26,12 @@ describe('Number.Extras', function(){
 			expect((-20000).format()).toEqual('-20,000');
 		});
 
+		it('should format with the right decimals', function(){
+			expect((123.456).format({decimals: 0})).toEqual('123')
+			expect((123.456).format({decimals: 1, decimal: '.'})).toEqual('123.5')
+			expect((123.451).format({decimals: 2, decimal: '.'})).toEqual('123.45')
+		});
+
 		it('should change precision', function(){
 			expect((123456789).format({
 				precision: 4,
