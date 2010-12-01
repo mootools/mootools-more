@@ -64,22 +64,26 @@ if (window.addEventListener) describe('Keyboard', function(){
 
 	});
 
-	xit('should bubble up the keyboard instances', function(){
+	it('should bubble up the keyboard instances', function(){
 
 		var callback = jasmine.createSpy(), called = false;
 
 		var kb = new Keyboard({
-			events: {']': callback}
+			events: {']': callback},
+			active: true
 		});
 
 		var kb2 = new Keyboard({
-			parent: kb
+			manager: kb,
+			active: true
 		});
 
 		var kb3 = new Keyboard({
-			parent: kb2,
+			manager: kb2,
 			active: true
 		});
+
+		expect(Keyboard.manager.instances.indexOf(kb3)).toBe(-1);
 
 		Syn.key(']', document.body, function(){
 			called = true;
@@ -117,6 +121,14 @@ if (window.addEventListener) describe('Keyboard', function(){
 		runs(function(){
 			expect(callback).toHaveBeenCalled();
 		});
+
+	});
+
+	it('drop a keyboard entirely', function(){
+
+		var kb = new Keyboard();
+		Keyboard.manager.drop(kb);
+		expect(Keyboard.manager.instances.indexOf(kb)).toBe(-1);
 
 	});
 
