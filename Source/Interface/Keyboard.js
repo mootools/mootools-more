@@ -128,7 +128,7 @@ provides: [Keyboard]
 
 		//management logic
 		manage: function(instance){
-			if (instance.manager && instance.manager != Keyboard.manager && this != Keyboard.manager) instance.manager.drop(instance);
+			if (instance.manager) instance.manager.drop(instance);
 			this.instances.push(instance);
 			instance.manager = this;
 			if (!this.activeKB) this.activate(instance);
@@ -139,10 +139,12 @@ provides: [Keyboard]
 		},
 
 		drop: function(instance){
-			this._disable(instance);
+			instance.relinquish();
 			this.instances.erase(instance);
-			Keyboard.manager.manage(instance);
-			if (this.activeKB == instance && this.previous && this.instances.contains(this.previous)) this.activate(this.previous);
+			if (this.activeKB == instance){
+				if (this.previous && this.instances.contains(this.previous)) this.activate(this.previous);
+				else this.activeKB = this.instances[0];
+			}
 		},
 
 		instances: [],
