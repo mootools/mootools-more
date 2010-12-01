@@ -139,9 +139,11 @@ this.Tips = new Class({
 
 			['title', 'text'].each(function(value){
 				var content = element.retrieve('tip:' + value);
-				if (content) this.fill(new Element('div', {'class': 'tip-' + value}).inject(this.container), content);
+				this['_' + value + 'Element'] = element = new Element('div', {
+						'class': 'tip-' + value
+					}).inject(this.container);
+				if (content) this.fill(element, content);
 			}, this);
-
 
 			this.show(element);
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
@@ -152,6 +154,22 @@ this.Tips = new Class({
 		clearTimeout(this.timer);
 		this.timer = this.hide.delay(this.options.hideDelay, this, element);
 		this.fireForParent(event, element);
+	},
+
+	setTitle: function(title) {
+		if (this._titleElement) {
+			this._titleElement.empty();
+			this.fill(this._titleElement, title);
+		}
+		return this;
+	},
+
+	setText: function(text) {
+		if (this._textElement) {
+			this._textElement.empty();
+			this.fill(this._textElement, text);
+		}
+		return this;
 	},
 
 	fireForParent: function(event, element){

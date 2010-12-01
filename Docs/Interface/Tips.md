@@ -134,6 +134,49 @@ To override the default tip hide behavior, you must either declare the onHide ev
 			}
 		});
 
+Tips Method: setTitle {#Tips:setTitle}
+----------------------------------
+
+Updates the tip title. Note that the title is re-assigned when the tip is hidden and displayed again; this method allows you to change it after it's visible.
+
+### Syntax
+
+	myTips.setTitle(title);
+
+### Arguments
+
+1. title - (*mixed*) A collection of elements, a single Element, or a string of text. The former two being adopted into the tip the latter being set as its HTML.
+
+### Returns
+
+* (*object*) This Tips instance.
+
+### Example
+
+	myTips.setTitle("I'm the new title!");
+
+
+Tips Method: setText {#Tips:setText}
+----------------------------------
+
+Updates the tip text. Note that the text is re-assigned when the tip is hidden and displayed again; this method allows you to change it after it's visible.
+
+### Syntax
+
+	myTips.setText(text);
+
+### Arguments
+
+1. text - (*mixed*) A collection of elements, a single Element, or a string of text. The former two being adopted into the tip the latter being set as its HTML.
+
+### Returns
+
+* (*object*) This Tips instance.
+
+### Example
+
+	myTips.setText("I'm the new body text!");
+
 Tips Method: attach {#Tips:attach}
 ----------------------------------
 
