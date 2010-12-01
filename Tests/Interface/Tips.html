@@ -68,7 +68,8 @@ a long <a data-tipbody="mootools FTW!" class="toolTipElement4" href="#">alpine</
 <div class="toolTipElement3" alt="Container Tip">
 	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" class="toolTipElement3" />
 </div>
-
+<h1 style="clear:both">Tips with content updating</h1>
+<p>When you mouse over <a class="toolTipElement5" title="current time">this link</a> the body of the tip should reflect the current time, updating every second.</p>
 
 <script src="/depender/build?require=More/Tips,Core/Fx.Morph"></script>
 <script>
@@ -77,7 +78,8 @@ var elements = [
 	$$('.toolTipElement'),
 	$$('.toolTipElement2'),
 	$$('.toolTipElement3'),
-	$$('.toolTipElement4')
+	$$('.toolTipElement4'),
+	$$('.toolTipElement5')
 ];
 
 elements[2].store('tip:text', 'The best damn JS framework on earth.<br /><img src="/asset/more/cow.png" />');
@@ -121,6 +123,20 @@ var instances = [
 				marginTop: [40, 0],
 				opacity: [0, 1]
 			});
+		}
+	}),
+
+	new Tips(elements[4], {
+		onShow: function(tip, el){
+			this.setText(new Date().toString());
+			this.tip.setStyle('display', 'block');
+			this._timer = (function(){
+				this.setText(new Date().toString());
+			}).periodical(500, this);
+		},
+		onHide: function(){
+			this.tip.setStyle('display', 'none');
+			clearInterval(this._timer);
 		}
 	})
 
