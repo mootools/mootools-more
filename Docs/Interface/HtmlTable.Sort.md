@@ -32,6 +32,7 @@ Makes headers of HtmlTable clickable to sort the rows.
 * classCellSort - (*string*) the class applied to td elements that are in the current sorted column. defaults to 'table-td-sort'
 * classSortSpan - (*string*) the class applied to a span element injected into the th headers when sorting is enabled; useful for adding an arrow background for the sorted column to indicate the sort direction. defaults to 'table-th-sort-span'
 * sortable - (*boolean*) enables the sortable feature on invocation. Defaults to *false*.
+* thSelector - (*string* defaults to 'th') the string selector used in delegating sort events.
 
 ### Events
 
