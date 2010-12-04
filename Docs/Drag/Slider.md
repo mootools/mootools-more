@@ -216,10 +216,31 @@ Dynamically sets the range for the slider.
 ### Examples
 
 	var mySlider = new Slider('myElement', 'myKnob',{
-	  range: [100,1000]
+		range: [100,1000]
 	});
 	mySlider.setRange([500,5000]);
 
 ### Notes
 
 - If the current step is now out of the new range it will automatically adjust.
+
+Slider Method: resize {#Slider:resize}
+--------------------------------
+
+Cause the slider to recalculate the allotted drag area for itself (useful if resizing slider).
+
+### Syntax
+
+	mySlider.resize();
+
+### Returns
+
+* (*object*) This Slider instance.
+
+### Examples
+
+	var mySlider = new Slider('myElement', 'myKnob');
+	window.addEvent('resize', function(){
+		mySlider.resize();
+	});
+

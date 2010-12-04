@@ -1,3 +1,4 @@
+
 <h3 class="h3_test">100 steps, snap off</h3>
 <p>When you drag the black box horizontally the number below should change to reflect the position. The step indicator should reflect the initialPosition option of 50.</p>
 <div id="area">
@@ -33,25 +34,34 @@
 <div id="area5">
 	<div id="knob5"></div>
 </div>
-
 <br />
 <p>change events fired:<span id="upd5-change"></span><p>
 <p>tick events fired:<span id="upd5-tick"></span></p>
 <p>complete events fired:<span id="upd5-complete"></span></p>
 
+<h3 class="h3_test">resizable slider</h3>
+<p>Slider should resize with window and knob should maintain correct step on resize. Knob should also be able to travel full length of slider.</p>
+<div id="area6">
+	<div id="knob6"></div>
+</div>
+<p id="upd6">XX</p>
+
 <style type="text/css" media="screen">
-	#area, #area2, #area3, #area4, #area5 {
+	#area, #area2, #area3, #area4, #area5, #area6 {
 		background: #ccc;
 		height: 20px;
 		width: 200px;
 	}
-	#knob, #knob2, #knob3, #knob4, #knob5 {
+	#area6 {
+		width: 100%;
+	}
+	#knob, #knob2, #knob3, #knob4, #knob5, #knob6 {
 		height: 20px;
 		width: 20px;
 		background: #000;
 		cursor:col-resize !important;
 		cursor:pointer;
-  }
+	}
 </style>
 <script src="/depender/build?require=More/Slider"></script>
 <script>
@@ -93,20 +103,28 @@ var mySlide4 = new Slider($('area4'), $('knob4'), {
 var change = 0, tick = 0, complete = 0;
 
 var mySlide5 = new Slider($('area5'), $('knob5'), {
-  onChange: function(step){
-    change++;
-    $('upd5-change').set('text', change);
+	onChange: function(step){
+		change++;
+		$('upd5-change').set('text', change);
 	},
-  onTick: function(position){
-    tick++;
-    $('upd5-tick').set('text', tick);
-    if (this.options.snap) position = this.toPosition(this.step);
+	onTick: function(position){
+		tick++;
+		$('upd5-tick').set('text', tick);
+		if (this.options.snap) position = this.toPosition(this.step);
 		this.knob.setStyle(this.property, position);
 	},
-  onComplete: function(step){
-    complete++;
+	onComplete: function(step){
+		complete++;
 		$('upd5-complete').set('text', complete);
 	}
 });
 
+var mySlideStretch = new Slider($('area6'), $('knob6'), {
+	onChange: function(position){
+		$('upd6').set('html', position);
+	}
+});
+window.addEvent('resize', function(){
+	mySlideStretch.resize();
+});
 </script>

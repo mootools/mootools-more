@@ -56,19 +56,15 @@ var Slider = new Class({
 			case 'vertical':
 				this.axis = 'y';
 				this.property = 'top';
-				offset = 'offsetHeight';
+				this.offset = 'offsetHeight';
 				break;
 			case 'horizontal':
 				this.axis = 'x';
 				this.property = 'left';
-				offset = 'offsetWidth';
+				this.offset = 'offsetWidth';
 		}
 
-		this.full = this.element.measure(function(){
-			this.half = this.knob[offset] / 2;
-			return this.element[offset] - this.knob[offset] + (this.options.offset * 2);
-		}.bind(this));
-
+		this.setSize();
 		this.setRange(this.options.range);
 
 		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
@@ -93,14 +89,33 @@ var Slider = new Class({
 				this.end();
 			}.bind(this)
 		};
-		if (this.options.snap){
-			dragOptions.grid = Math.ceil(this.stepWidth);
-			dragOptions.limit[this.axis][1] = this.full;
-		}
+		if (this.options.snap) this.setSnap(dragOptions);
 
 		this.drag = new Drag(this.knob, dragOptions);
 		this.attach();
 		if (this.options.initialStep != null) this.set(this.options.initialStep)
+	},
+
+	resize: function(){
+		this.setSize();
+		this.set(this.step);
+		this.drag.options.limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
+		if (this.options.snap) this.setSnap();
+		return this;
+	},
+
+	setSnap: function(options){
+		(options || this.drag.options).grid = Math.ceil(this.stepWidth);
+		(options || this.drag.options).limit[this.axis][1] = this.full;
+		return this;
+	},
+
+	setSize: function(){
+		this.full = this.element.measure(function(){
+			this.half = this.knob[this.offset] / 2;
+			return this.element[this.offset] - this.knob[this.offset] + (this.options.offset * 2);
+		}.bind(this));
+		return this;
 	},
 
 	attach: function(){
