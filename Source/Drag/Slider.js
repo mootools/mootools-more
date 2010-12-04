@@ -34,8 +34,7 @@ var Slider = new Class({
 		onChange: function(intStep){},
 		onComplete: function(strStep){},*/
 		onTick: function(position){
-			if (this.options.snap) position = this.toPosition(this.step);
-			this.knob.setStyle(this.property, position);
+			this.setKnobPosition(position);
 		},
 		initialStep: 0,
 		snap: false,
@@ -98,7 +97,7 @@ var Slider = new Class({
 
 	resize: function(){
 		this.setSize();
-		this.set(this.step);
+		this.setKnobPosition(this.toPosition(this.step));
 		this.drag.options.limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
 		if (this.options.snap) this.setSnap();
 		return this;
@@ -109,6 +108,11 @@ var Slider = new Class({
 		(options || this.drag.options).limit[this.axis][1] = this.full;
 		return this;
 	},
+
+  setKnobPosition: function(position){
+		if (this.options.snap) position = this.toPosition(this.step);
+		this.knob.setStyle(this.property, position);
+  },
 
 	setSize: function(){
 		this.full = this.element.measure(function(){
