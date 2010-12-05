@@ -1,0 +1,58 @@
+<style>
+	#wrapper {
+		height: 150px;
+		overflow: auto;
+		width: 300px;
+	}
+	#SortableExample li {
+		margin: 2px !important;
+		padding: 2px !important;
+		background: #ccc !important;
+		cursor: pointer;
+	}
+</style>
+
+<p>You should be able to reorder the list by dragging. The new order displays below the list when you release an item. If you scroll the list down a bit it should still let you sort correctly. (Note that it won't scroll for you as you drag; that's not part of this test). Dragging an element that contains a radio that is selected to a new location should keep the radio selected when it's dropped.</p>
+
+<button id="toggle">toggle</button>
+
+<p>you should be able to toggle off sortability by clicking the toggle button below.</p>
+
+<div id="wrapper">
+	<ul id="SortableExample">
+		<li id="1">First <input type="radio" name="foo" checked="true"/></li>
+		<li id="2">Second <input type="radio" name="foo"/></li>
+		<li id="3">Third <input type="radio" name="foo"/></li>
+		<li id="4">Fourth <input type="radio" name="foo"/></li>
+		<li id="5">Fifth <input type="radio" name="foo"/></li>
+		<li id="6">Sixth <input type="radio" name="foo"/></li>
+		<li id="7">Seventh <input type="radio" name="foo"/></li>
+		<li id="8">Eigth <input type="radio" name="foo"/></li>
+		<li id="9">Nineth <input type="radio" name="foo"/></li>
+		<li id="10">Tenth <input type="radio" name="foo"/></li>
+	</ul>
+</div>
+<div id="order"></div>
+<script src="/depender/build?require=More/Sortables.Delegation"></script>
+<script>
+
+var mySort = new Sortables.Delegation($('SortableExample'), {
+	clone: true,
+	opacity: 0.6,
+	onComplete: function(){
+		$('order').set('html', 'order: ' + mySort.serialize())
+	}
+});
+
+
+var active = true;
+$('toggle').addEvent('click', function(){
+	active = !active;
+	if(active){
+		mySort.addLists($('SortableExample'));
+	} else {
+		mySort.removeLists($('SortableExample'));
+	}
+});
+
+</script>
