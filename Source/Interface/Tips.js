@@ -139,12 +139,11 @@ this.Tips = new Class({
 
 			['title', 'text'].each(function(value){
 				var content = element.retrieve('tip:' + value);
-				this['_' + value + 'Element'] = element = new Element('div', {
+				var div = this['_' + value + 'Element'] = new Element('div', {
 						'class': 'tip-' + value
 					}).inject(this.container);
-				if (content) this.fill(element, content);
+				if (content) this.fill(div, content);
 			}, this);
-
 			this.show(element);
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 		}).delay(this.options.showDelay, this);
