@@ -46,29 +46,29 @@ Evaluates an entire form against all the validators that are set up, firing even
 
 ### Notes
 
-* [Form.Validator][] must be configured with [InputValidator][] objects (see below for details as well as a list of built-in validators). Each [InputValidator][] will be applied to any input that matches its className within the elements of the form that match the fieldSelectors option.
-* The preferred method for passing in validator properties (like the minimum length) is to append the value after the class name. This value will be passed through [JSON.decode][] so it can be a number, string, array representation, etc.
+* [Form.Validator][] must be configured with [InputValidator][] objects (see below for details as well as a list of built-in validators). Each [InputValidator][] will be applied to any input that includes its name in the data-validators property within the elements of the form that match the fieldSelectors option.
+* The preferred method for passing in validator properties (like the minimum length) is to append the value after the name. This value will be passed through [JSON.decode][] so it can be a number, string, array representation, etc.
 
 		//the minimum length the user can supply is the integer 10
-		<input class="minLength:10">
+		<input data-validators="minLength:10"/>
 		//there isn't a default validator like this, but if there were,
 		//it would be passed the *string* 'foo'
-		<input class="cannotContain:'foo'">
+		<input data-validators="cannotContain:'foo'"/>
 
-* You can use a property called "validatorProps" and pass in Json values if you like, but this is not valid XHTML. This is deprecated but will continue to be supported.
+* You can use a property called "data-validator-properties" and pass in Json values if you like.
 
-		<input class="minLength maxLength" validatorProps="{minLength: 10, maxLength:20}">
+		<input class="minLength maxLength" data-validator-properties="{minLength: 10, maxLength:20}"/>
 
 * You can pass properties that are not a validator's name. All properties will be passed to the validator:
 
 		//here we validate the date, but the validator gets access to
 		//the property defined for dateFormat (and any other property defined this way)
-		<input class="validate-date dateFormat:'%d/%m/%Y'">
+		<input data-validators="validate-date dateFormat:'%d/%m/%Y'"/>
 
 * Note that the property must be decodable by [JSON.decode][], so strings must have quotes, for example (single quotes are fine).
-* Note that string values that require spaces should use URL encoding, as spaces are the delimiters for css class names. Then your validator should url decode them from the validatorProps object when it uses them. Alternately, you can store this data directly on the input using element storage:
+* Note that string values that require spaces should use URL encoding, as spaces are the delimiters for validator names. Then your validator should url decode them from the data-validator-properites object when it uses them. Alternately, you can store this data directly on the input:
 
-		$('myinput').store('validatorProps', {
+		$('myinput').set('validatorProps', {
 			someValue: "I'm a string with spaces!"
 		});
 
@@ -76,8 +76,8 @@ Evaluates an entire form against all the validators that are set up, firing even
 
 Each [InputValidator][] can also be used to generate warnings. Warnings still show error messages, but do not prevent the form from being submitted. Warnings can be applied in two ways:
 
-* **warn per validator** - You can specify any validator as a warning by prefixing "warn-" to the class name. So, for example, if you have a validator called "validate-numbers" you can add the class "warn-validate-numbers" and a warning will be offered rather than an error. The validator will not prevent the form from submitting.
-* **warn per field** - You can also ignore all the validators for a given field. You can add the class "warnOnly" to set all it's validators to present warnings only or you can add the class "ignoreValidation" to the field to turn all the validators off. Note that the [Form.Validator][] class has methods do this for you: see [Form.Validator:ignoreField][] and [Form.Validator:enforceField][].
+* **warn per validator** - You can specify any validator as a warning by prefixing "warn-" to the name. So, for example, if you have a validator called "validate-numbers" you can add the name "warn-validate-numbers" and a warning will be offered rather than an error. The validator will not prevent the form from submitting.
+* **warn per field** - You can also ignore all the validators for a given field. You can add the name "warnOnly" to set all it's validators to present warnings only or you can add the class "ignoreValidation" to the field to turn all the validators off. Note that the [Form.Validator][] class has methods do this for you: see [Form.Validator:ignoreField][] and [Form.Validator:enforceField][].
 
 ### Internationalization
 
@@ -141,12 +141,12 @@ Tests a field against a specific validator.
 
 ### Syntax
 
-	myFormValidator.test(className, field, warn);
+	myFormValidator.test(name, field, warn);
 
 ### Arguments
 
-1. className - (*string*) the className associated with the validator
-2. field - (*mixed*) A string of the id for an Element or an Element reference of the input element to test against the className/validator
+1. name - (*string*) the name associated with the validator
+2. field - (*mixed*) A string of the id for an Element or an Element reference of the input element to test against the name/validator
 3. warn - (*boolean*, optional) whether test will add a warning advice message if the validator fails; if set to *true* test will always return valid regardless of the input.
 
 ### Returns
@@ -210,7 +210,7 @@ Stops validating a particular field.
 ### Arguments
 
 1. field - (*mixed*) A string of the id for an Element or an Element reference of the input element to ignore
-2. warn - (*boolean*, optional) whether to produce a warning if the validtor does not pass; defaults to *false*
+2. warn - (*boolean*, optional) whether to produce a warning if the validator does not pass; defaults to *false*
 
 ### Returns
 
@@ -246,18 +246,18 @@ Adds a new form validator to the global [Form.Validator][] object or to an insta
 ### Syntax
 
 	//add a form validator to my instance
-	myFormValidator.add(className, options);
+	myFormValidator.add(name, options);
 	//add a form validator to all future instances (globally)
-	Form.Validator.add(className, options);
+	Form.Validator.add(name, options);
 
 ### Arguments
 
-1. className - (*string*) the className associated with the validator
+1. name - (*string*) the name associated with the validator
 2. options - (*object*) the [InputValidator][] options (*errorMsg* and *test*)
 
 ### Notes
 
-This method is a property of every instance of [Form.Validator][] as well as the [Form.Validator][] object itself. That is to say that you can add validators to the [Form.Validator][] object or to an instance of it. Adding validators to an instance of [Form.Validator][] will make those validators apply only to that instance, while	adding them to the Class will make them available to all instances.
+This method is a property of every instance of [Form.Validator][] as well as the [Form.Validator][] object itself. That is to say that you can add validators to the [Form.Validator][] object or to an instance of it. Adding validators to an instance of [Form.Validator][] will make those validators apply only to that instance, while adding them to the Class will make them available to all instances.
 
 ### Examples
 
@@ -307,9 +307,9 @@ An array of [InputValidator][] configurations (see [Form.Validator:add][] above)
 ### Example
 
 	Form.Validator.addAllThese([
-		['className1', {errorMsg: ..., test: ...}],
-		['className2', {errorMsg: ..., test: ...}],
-		['className3', {errorMsg: ..., test: ...}],
+		['name1', {errorMsg: ..., test: ...}],
+		['name2', {errorMsg: ..., test: ...}],
+		['name3', {errorMsg: ..., test: ...}],
 		// etc..
 	]);
 
@@ -384,7 +384,7 @@ Calls the *validate* method on the specified element.
 Included InputValidators: {#Validators}
 =======================================
 
-Here are the validators that are included in this library. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
+Here are the validators that are included in this library. Add the name to any input's data-validators property and then create a new [Form.Validator][] and these will automatically be applied. See [Form.Validator:add][] on how to add your own.
 
 Validator: IsEmpty {#Validators:IsEmpty}
 ----------------------------------------
@@ -407,7 +407,7 @@ Error Msg: "Please enter at least [defined minLength] characters (you entered [i
 
 ### Note
 
-You must add this className AND properties for it to your input.
+You must add this name AND properties for it to your input.
 
 ### Example
 
@@ -422,7 +422,7 @@ Error Msg: "Please enter no more than [defined maxLength] characters (you entere
 
 ### Note
 
-You must add this className AND properties for it to your input.
+You must add this name AND properties for it to your input.
 
 ### Example
 
@@ -512,7 +512,7 @@ Error Msg: "Please enter something for at least one of the above options."
 	<div>
 		<input ..../>
 		<input ..../>
-		<input .... className="validate-one-required"/>
+		<input .... data-validators="validate-one-required"/>
 	</div>
 
 
@@ -520,11 +520,6 @@ Class: InputValidator {#InputValidator}
 =======================================
 
 This class contains functionality to test a field for various criteria and also to generate an error message when that test fails.
-
-### Tutorial/Demo
-
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/09-forms/04-Form.Validator
 
 ### Authors
 
@@ -537,11 +532,11 @@ This class contains functionality to test a field for various criteria and also 
 
 ### Syntax
 
-	new InputValidator(className, options);
+	new InputValidator(name, options);
 
 ### Arguments
 
-1. className - (*string*) a className that this field will be related to (see example below)
+1. name - (*string*) a name that this field will be related to (see example below)
 2. options - (*object*) a key/value set of options
 
 ### Options
@@ -555,16 +550,16 @@ The errorMsg option can be any of the following:
 
 * *string* - the message to display if the field fails validation
 * *boolean:false* - do not display a message at all
-* *function* - a function to evaluate that returns either a *string* or *false*. This function will be passed two parameters: the field being evaluated and	any properties defined for the validator as a className (see examples below)
+* *function* - a function to evaluate that returns either a *string* or *false*. This function will be passed two parameters: the field being evaluated and any properties defined for the validator as a name (see examples below)
 
 ### Option: test
 
-The test option is a function that will be passed the field being evaluated and any properties defined for the validator as a className (see example below); this function **must** return *true* or *false*.
+The test option is a function that will be passed the field being evaluated and any properties defined for the validator as a name (see example below); this function **must** return *true* or *false*.
 
 ### Examples
 
 	//html code
-	<input type="text" name="firstName" class="required" id="firstName"/>
+	<input type="text" name="firstName" data-validators="required" id="firstName"/>
 
 	//simple validator
 	var isEmpty = new InputValidator('required', {
@@ -577,7 +572,7 @@ The test option is a function that will be passed the field being evaluated and 
 	isEmpty.getError($("firstName")) //returns "This field is required."
 
 	//two complex validators
-	<input type="text" name="username" class="minLength:10 maxLength:100" id="username"/>
+	<input type="text" name="username" data-validators="minLength:10 maxLength:100" id="username"/>
 
 	var minLength = new InputValidator ('minLength', {
 		errorMsg: function(element, props){

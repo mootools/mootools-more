@@ -38,9 +38,9 @@ Evaluates an entire form against all the validators that are set up *displaying 
 
 ### Note
 
-* You can define a css class-name value called *msgPos* as the id of an element into which the validation errors for that input will be inserted. Example:
+* You can define a data-validators value called *msgPos* as the id of an element into which the validation errors for that input will be inserted. Example:
 
-		<input class="validate-email msgPos:'emailAdvice'">
+		<input data-validators="validate-email msgPos:'emailAdvice'">
 		<div id="emailAdvice"></div>
 
 Form.Validator.Inline method: getAllAdviceMessages {#Form-Validator-Inline:getAllAdviceMessages}
@@ -55,7 +55,7 @@ Returns all the messages that an input can produce, regardless of the user input
 ### Arguments
 
 1. field - (*mixed*) A string of the id for an Element or an Element reference of the input
-2. force - (*boolean*; optional) if *false*, no messages are returned if the input has the css class 'ignoreValidation'
+2. force - (*boolean*; optional) if *false*, no messages are returned if the input has the string 'ignoreValidation' in its *data-validators* property
 
 ### Returns
 

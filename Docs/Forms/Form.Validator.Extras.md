@@ -3,7 +3,7 @@ Additional InputValidators: {#Validators}
 
 ### Tutorial/Demo
 
-Here are the validators that are included in this libary. Add the className to any input and then create a new [Form.Validator][] and these will automatically be applied.
+Here are the validators that are included in this libary. Add the name to any input's data-validators property and then create a new [Form.Validator][] and these will automatically be applied.
 
 Validator: validate-nospace {#Validators:validate-nospace}
 ------------------------------------------
