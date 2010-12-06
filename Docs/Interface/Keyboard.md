@@ -143,6 +143,11 @@ Attempts to give control to the previously active keyboard. Will not do anything
 
 	myKeyboard.relinquish()
 
+### Returns
+
+	* (*object*) This instance of [Keyboard][]
+
+
 Keyboard Method: isActive {#Keyboard:isActive}
 ------------------------------------
 
@@ -151,6 +156,10 @@ Returns *true* if the instance is active.
 ### Syntax
 
 	myKeyboard.isActive()
+
+### Returns
+
+	* (*boolean*) *true* if the instance is active.
 
 
 Keyboard Method: manage {#Keyboard:manage}
@@ -162,9 +171,40 @@ The keyboard will become the parent of the passed in keyboard. By default the ma
 
 	myKeyboard.manage(childKeyboard)
 
+
+### Arguments
+
+	1. childKeyboard - (*object*) an instance of Keyboard that this instance should manage.
+
+### Returns
+
+	* (*object*) This instance of [Keyboard][]
+
 ### Note
 
 When myKeyboard is active childKeyboard will receive the event first then as long as childKeyboard did not call Keyboard.stop(event) then the event will bubble up to myKeyboard. If myKeyboard manages more than one Keyboard instance, which ever one is active will receive the events as they bubble.
+
+
+Keyboard Method: drop {#Keyboard:drop}
+------------------------------------
+
+Drops an instance of a keyboard from being managed.
+
+### Syntax
+
+	myKeyboard.drop(childKeyboard)
+
+### Arguments
+
+1. childKeyboard - (*object*) an instance of Keyboard managed by this instance.
+
+### Returns
+
+	* (*object*) This instance of [Keyboard][]
+
+### Note
+
+The result 
 
 Static Method: Keyboard.stop {#Keyboard:stop}
 ------------------------------------
