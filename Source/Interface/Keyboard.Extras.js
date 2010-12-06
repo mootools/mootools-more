@@ -33,13 +33,13 @@ Keyboard.implement({
 		}
 	*/
 	addShortcut: function(name, shortcut){
-		this.shortcuts = this.shortcuts || [];
-		this.shortcutIndex = this.shortcutIndex || {};
+		this._shortcuts = this._shortcuts || [];
+		this._shortcutIndex = this._shortcutIndex || {};
 
 		shortcut.getKeyboard = Function.from(this);
 		shortcut.name = name;
-		this.shortcutIndex[name] = shortcut;
-		this.shortcuts.push(shortcut);
+		this._shortcutIndex[name] = shortcut;
+		this._shortcuts.push(shortcut);
 		if (shortcut.keys) this.addEvent(shortcut.keys, shortcut.handler);
 		return this;
 	},
@@ -53,8 +53,8 @@ Keyboard.implement({
 		var shortcut = this.getShortcut(name);
 		if (shortcut && shortcut.keys){
 			this.removeEvent(shortcut.keys, shortcut.handler);
-			delete this.shortcutIndex[name];
-			this.shortcuts.erase(shortcut);
+			delete this._shortcutIndex[name];
+			this._shortcuts.erase(shortcut);
 		}
 		return this;
 	},
@@ -65,11 +65,11 @@ Keyboard.implement({
 	},
 
 	getShortcuts: function(){
-		return this.shortcuts || [];
+		return this._shortcuts || [];
 	},
 
 	getShortcut: function(name){
-		return (this.shortcutIndex || {})[name];
+		return (this._shortcutIndex || {})[name];
 	}
 
 });
