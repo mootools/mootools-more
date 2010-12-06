@@ -144,7 +144,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	setRowSort: function(data, pre){
-		var count = data.length, 
+		var count = data.length,
 			body = this.body,
 			group,
 			rowIndex;
@@ -185,7 +185,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	sort: function(index, reverse, pre){
 		if (!this.head) return;
-		
+
 		if (!pre){
 			this.clearSort();
 			this.setSortedState(index, reverse);
@@ -207,9 +207,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		if (this.sorted.reverse == (this.parsers[this.sorted.index] == 'input-checked')) data.reverse(true);
 		this.setRowSort(data, pre);
-		
+
 		if (rel) rel.grab(this.body);
-	
+
 		return this.fireEvent('sort', [this.body, this.sorted.index]);
 	},
 

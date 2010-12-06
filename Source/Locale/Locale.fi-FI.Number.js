@@ -21,6 +21,6 @@ provides: [Locale.fi-FI.Number]
 
 Locale.define('fi-FI', 'Number', {
 
-	group: ' ' // grouped by space 
+	group: ' ' // grouped by space
 
 }).inherit('EU', 'Number');
