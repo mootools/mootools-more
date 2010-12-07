@@ -19,7 +19,10 @@
 	<li>It should not scroll for you as you drag ( that is not part of this test ).</li>
 	<li>It should keep the radio selected when it is dropped.</li>
 	<li>It should accept dragOptions limiting draggability to the y axis.</li>
+	<li>It should detach and reattach</li>
+	<li>It should not introduce new instances of sortables on attaching ( as exemplified by duplicates in "order" )
 </ul>
+<button id="detach-attach">detach/attach</button>
 <div id="wrapper">
 	<ul id="SortableExample">
 		<li id="1">First <input type="radio" name="foo" checked="true"/></li>
@@ -46,5 +49,11 @@ var mySort = new Sortables($('SortableExample'), {
 	onComplete: function(){
 		$('order').set('html', 'order: ' + mySort.serialize())
 	}
+});
+var attached = true;
+$('detach-attach').addEvent('click', function(){
+	if (attached) mySort.detach();
+	else mySort.attach();
+	attached = !attached; 
 });
 </script>
