@@ -224,14 +224,14 @@ Dynamically sets the range for the slider.
 
 - If the current step is now out of the new range it will automatically adjust.
 
-Slider Method: resize {#Slider:resize}
+Slider Method: resize {#Slider:autosize}
 --------------------------------
 
 Cause the slider to recalculate the allotted drag area for itself (useful if resizing slider).
 
 ### Syntax
 
-	mySlider.resize();
+	mySlider.autosize();
 
 ### Returns
 
@@ -241,6 +241,6 @@ Cause the slider to recalculate the allotted drag area for itself (useful if res
 
 	var mySlider = new Slider('myElement', 'myKnob');
 	window.addEvent('resize', function(){
-		mySlider.resize();
+		mySlider.autosize();
 	});
 
