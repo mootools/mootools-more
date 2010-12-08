@@ -63,7 +63,7 @@ var Slider = new Class({
 				this.offset = 'offsetWidth';
 		}
 
-		this.setSize();
+		this.setSliderDimensions();
 		this.setRange(this.options.range);
 
 		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
@@ -95,8 +95,8 @@ var Slider = new Class({
 		if (this.options.initialStep != null) this.set(this.options.initialStep)
 	},
 
-	resize: function(){
-		this.setSize();
+	autosize: function(){
+		this.setSliderDimensions();
 		this.setKnobPosition(this.toPosition(this.step));
 		this.drag.options.limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
 		if (this.options.snap) this.setSnap();
@@ -109,12 +109,12 @@ var Slider = new Class({
 		return this;
 	},
 
-  setKnobPosition: function(position){
+	setKnobPosition: function(position){
 		if (this.options.snap) position = this.toPosition(this.step);
 		this.knob.setStyle(this.property, position);
-  },
+	},
 
-	setSize: function(){
+	setSliderDimensions: function(){
 		this.full = this.element.measure(function(){
 			this.half = this.knob[this.offset] / 2;
 			return this.element[this.offset] - this.knob[this.offset] + (this.options.offset * 2);
