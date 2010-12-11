@@ -422,20 +422,20 @@ Form.Validator.addAllThese([
 		},
 		test: function(element, props){
 			if (Form.Validator.getValidator('IsEmpty').test(element)) return true;
-			var d;
+			var date;
 			if (Date.parse){
 				var format = props.dateFormat || '%x';
-				d = Date.parse(element.get('value'));
-				var formatted = d.format(format);
+				date = Date.parse(element.get('value'));
+				var formatted = date.format(format);
 				if (formatted != 'invalid date') element.set('value', formatted);
-				return !isNaN(d);
+				return date.isValid();
 			} else {
 				var regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 				if (!regex.test(element.get('value'))) return false;
-				d = new Date(element.get('value').replace(regex, '$1/$2/$3'));
-				return (parseInt(RegExp.$1, 10) == (1 + d.getMonth())) &&
-					(parseInt(RegExp.$2, 10) == d.getDate()) &&
-					(parseInt(RegExp.$3, 10) == d.getFullYear());
+				date = new Date(element.get('value').replace(regex, '$1/$2/$3'));
+				return (parseInt(RegExp.$1, 10) == (1 + date.getMonth())) &&
+					(parseInt(RegExp.$2, 10) == date.getDate()) &&
+					(parseInt(RegExp.$3, 10) == date.getFullYear());
 			}
 		}
 	}],
