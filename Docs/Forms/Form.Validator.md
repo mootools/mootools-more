@@ -1,5 +1,5 @@
 Class: Form.Validator {#Form-Validator}
-====================================
+=======================================
 
 Evaluates an entire form against all the validators that are set up, firing events when inputs fail validation.
 
@@ -49,21 +49,21 @@ Evaluates an entire form against all the validators that are set up, firing even
 * [Form.Validator][] must be configured with [InputValidator][] objects (see below for details as well as a list of built-in validators). Each [InputValidator][] will be applied to any input that includes its name in the data-validators property within the elements of the form that match the fieldSelectors option.
 * The preferred method for passing in validator properties (like the minimum length) is to append the value after the name. This value will be passed through [JSON.decode][] so it can be a number, string, array representation, etc.
 
-		//the minimum length the user can supply is the integer 10
-		<input data-validators="minLength:10"/>
-		//there isn't a default validator like this, but if there were,
-		//it would be passed the *string* 'foo'
+		// the minimum length the user can supply is the integer 10
+		<input data-validators="minLength:10" />
+		// there isn't a default validator like this, but if there were,
+		// it would be passed the *string* 'foo'
 		<input data-validators="cannotContain:'foo'"/>
 
-* You can use a property called "data-validator-properties" and pass in Json values if you like.
+* You can use a property called "data-validator-properties" and pass in JSON values if you like.
 
 		<input class="minLength maxLength" data-validator-properties="{minLength: 10, maxLength:20}"/>
 
 * You can pass properties that are not a validator's name. All properties will be passed to the validator:
 
-		//here we validate the date, but the validator gets access to
-		//the property defined for dateFormat (and any other property defined this way)
-		<input data-validators="validate-date dateFormat:'%d/%m/%Y'"/>
+		// here we validate the date, but the validator gets access to
+		// the property defined for dateFormat (and any other property defined this way)
+		<input data-validators="validate-date dateFormat:'%d/%m/%Y'" />
 
 * Note that the property must be decodable by [JSON.decode][], so strings must have quotes, for example (single quotes are fine).
 * Note that string values that require spaces should use URL encoding, as spaces are the delimiters for validator names. Then your validator should url decode them from the data-validator-properites object when it uses them. Alternately, you can store this data directly on the input:
@@ -87,7 +87,7 @@ If you do translate these, please [send them back to us][] so we can add them to
 
 
 Form.Validator Method: reset {#Form-Validator:reset}
---------------------------------------------------
+----------------------------------------------------
 
 Removes all the error messages from the form.
 
@@ -100,7 +100,7 @@ Removes all the error messages from the form.
 * (*object*) - This instance of [Form.Validator][]
 
 Form.Validator Method: validate {#Form-Validator:validate}
---------------------------------------------------------
+----------------------------------------------------------
 
 Validates all the inputs in the form; note that this function is called on submit unless you specify otherwise in the options.
 
@@ -117,7 +117,7 @@ Validates all the inputs in the form; note that this function is called on submi
 * (*boolean*) *true* if all the form inputs pass validation
 
 Form.Validator Method: validateField {#Form-Validator:validateField}
-----------------------------------------------------------------------
+--------------------------------------------------------------------
 
 Validates the value of a field against all the validators.
 
@@ -135,7 +135,7 @@ Validates the value of a field against all the validators.
 * (*boolean*) *true* if the form input passes validation
 
 Form.Validator Method: test {#Form-Validator:test}
-------------------------------------------------
+--------------------------------------------------
 
 Tests a field against a specific validator.
 
@@ -154,7 +154,7 @@ Tests a field against a specific validator.
 * (*boolean*) *true* if the form input passes the specified validation
 
 Form.Validator Method: resetField {#Form-Validator:resetField}
-------------------------------------------------------------
+--------------------------------------------------------------
 
 Removes all the error messages for a specific field.
 
@@ -171,7 +171,7 @@ Removes all the error messages for a specific field.
 * (*object*) This instance of [Form.Validator][]
 
 Form.Validator Method: stop {#Form-Validator:stop}
-------------------------------------------------
+--------------------------------------------------
 
 Stops validating the form; when form is submitted, even if there are values that do not pass validation the submission will proceed.
 
@@ -184,7 +184,7 @@ Stops validating the form; when form is submitted, even if there are values that
 * (*object*) This instance of [Form.Validator][]
 
 Form.Validator Method: start {#Form-Validator:start}
-------------------------------------------------
+----------------------------------------------------
 
 Resumes validating the form.
 
@@ -198,8 +198,8 @@ Resumes validating the form.
 
 
 
-Form.Validator Method: ignoreField {#Form-Validator Method:ignoreField}
-----------------------------------------------------------------------
+Form.Validator Method: ignoreField {#Form-Validator:ignoreField}
+----------------------------------------------------------------
 
 Stops validating a particular field.
 
@@ -217,7 +217,7 @@ Stops validating a particular field.
 * (*object*) This instance of [Form.Validator][]
 
 Form.Validator Method: enforceField {#Form-Validator:enforceField}
-----------------------------------------------------------------
+------------------------------------------------------------------
 
 Resumes validating a particular field
 
@@ -239,7 +239,7 @@ Adding Custom Validators {#AddingValidators}
 *Form.Validator.js* includes many default validators. You can add your own using these methods.
 
 Form.Validator Method: add {#AddingValidators:add}
--------------------------------------------------
+--------------------------------------------------
 
 Adds a new form validator to the global [Form.Validator][] object or to an instance (see notes).
 
@@ -289,7 +289,7 @@ This method is a property of every instance of [Form.Validator][] as well as the
 	});
 
 Form.Validator: addAllThese {#AddingValidators:addAllThese}
-----------------------------------------------------------
+-----------------------------------------------------------
 
 An array of [InputValidator][] configurations (see [Form.Validator:add][] above).
 
@@ -314,10 +314,10 @@ An array of [InputValidator][] configurations (see [Form.Validator:add][] above)
 	]);
 
 Type: Element {#Element}
-==========================
+========================
 
 Element Property: validator {#Element-Properties:validator}
----------------------------------------------------------
+-----------------------------------------------------------
 
 Sets and gets default options for the Form.Validator instance of an Element.
 
@@ -411,7 +411,7 @@ You must add this name AND properties for it to your input.
 
 ### Example
 
-	<input type="text" name="username" class="minLength:10" id="username"/>
+	<input type="text" name="username" class="minLength:10" id="username" />
 
 Validator: maxLength {#Validators:maxLength}
 --------------------------------------------
@@ -426,10 +426,10 @@ You must add this name AND properties for it to your input.
 
 ### Example
 
-	<input type="text" name="username" class="maxLength:10" id="username"/>
+	<input type="text" name="username" class="maxLength:10" id="username" />
 
 Validator: validate-numeric {#Validators:validate-numeric}
------------------------------------------------------------
+----------------------------------------------------------
 
 Validates that the entry is a number.
 
@@ -467,9 +467,15 @@ Error Msg: "Please use only letters (a-z) or numbers (0-9) only in this field. N
 Validator: validate-date {#Validators:validate-date}
 ----------------------------------------------------
 
-Validates that the entry parses to a date.
+Validates that the entry parses to a date. The *dateFormat* property can be set to format the date after the field is validated.
+
+If you want to validate a custom format, you should use [Date.defineParser][] or use [Date Locale][]. If [Date][] is not included in your build, only the `dd/mm/yy` or `dd/mm/yyyy` formats are accepted.
 
 Error Msg: "Please enter a valid date (such as 12/31/1999)"
+
+### Example:
+
+	<input data-validators="validate-date dateFormat:'%d/%m/%Y'" />
 
 Validate: validate-email {#Validators:validate-email}
 -----------------------------------------------------
@@ -638,10 +644,16 @@ Retrieves the error message for the validator.
 [Form.Validator:ignoreField]: #Form-Validator:ignoreField
 [Form.Validator:enforceField]: #Form-Validator:enforceField
 [Form.Validator:add]: #AddingValidators:add
-[Form.Validator.required]: #Form-Validator:required
+[Form.Validator.required]: #Validators:required
 [validation.js by Andrew Tetlaw]: http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 [send them back to us]: http://groups.google.com/group/mootools-lang
-[JSON.decode]: /core/Utilities/JSON#decode
+[JSON.decode]: /core/Utilities/JSON#JSON:decode
 [Locale]: /more/Locale/Locale/
+[Date Locale]: /more/Locale/Date
+[Date]: /more/Types/Date
+[Date.defineParser]: /more/Types/Date#Date:defineParser
+
+
+

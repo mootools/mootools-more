@@ -6,12 +6,12 @@ Additional InputValidators: {#Validators}
 Here are the validators that are included in this libary. Add the name to any input's data-validators property and then create a new [Form.Validator][] and these will automatically be applied.
 
 Validator: validate-nospace {#Validators:validate-nospace}
-------------------------------------------
+----------------------------------------------------------
 
 Enforces that there are no spaces in the input value.
 
 Validator: validate-enforce-oncheck {#Validators:validate-enforce-oncheck}
---------------------------------------------------------
+--------------------------------------------------------------------------
 
 When added to a checkbox/radio button, and a list (*array*) of element id's can be passed in (*toEnforce*) to enforce validation on those fields.
 
@@ -24,7 +24,7 @@ When added to a checkbox/radio button, and a list (*array*) of element id's can 
 	//when checked, all inputs inside $('someParent') will be validated on change/submit
 
 Validator: validate-ignore-oncheck {#Validators:validate-ignore-oncheck}
---------------------------------------------------------
+------------------------------------------------------------------------
 
 When added to a checkbox/radio button, and a list (*array*) of element id's can be passed in (*toIgnore*) in the *validatorProps* to ignore validation on those fields.
 
@@ -154,5 +154,4 @@ Form.Validator.Extras Language Localization {#Localization}
 * creditcard - (*string*) 'The credit card number entered is invalid. Please check the number and try again. {length} digits entered.' where *length* is the number of integers entered.
 
 
-[Form.Validator]: #Form-Validator
-[Form.Validator:add]: #AddingValidators:add
+[Form.Validator]: /more/Forms/Form.Validator#Form-Validator
