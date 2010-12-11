@@ -55,7 +55,7 @@ Evaluates an entire form against all the validators that are set up, firing even
 		//it would be passed the *string* 'foo'
 		<input data-validators="cannotContain:'foo'"/>
 
-* You can use a property called "data-validator-properties" and pass in Json values if you like.
+* You can use a property called "data-validator-properties" and pass in JSON values if you like.
 
 		<input class="minLength maxLength" data-validator-properties="{minLength: 10, maxLength:20}"/>
 
@@ -198,7 +198,7 @@ Resumes validating the form.
 
 
 
-Form.Validator Method: ignoreField {#Form-Validator Method:ignoreField}
+Form.Validator Method: ignoreField {#Form-Validator:ignoreField}
 ----------------------------------------------------------------------
 
 Stops validating a particular field.
@@ -638,10 +638,10 @@ Retrieves the error message for the validator.
 [Form.Validator:ignoreField]: #Form-Validator:ignoreField
 [Form.Validator:enforceField]: #Form-Validator:enforceField
 [Form.Validator:add]: #AddingValidators:add
-[Form.Validator.required]: #Form-Validator:required
+[Form.Validator.required]: #Validators:required
 [validation.js by Andrew Tetlaw]: http://tetlaw.id.au/view/blog/really-easy-field-validation-with-prototype
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 [send them back to us]: http://groups.google.com/group/mootools-lang
-[JSON.decode]: /core/Utilities/JSON#decode
+[JSON.decode]: /core/Utilities/JSON#JSON:decode
 [Locale]: /more/Locale/Locale/
