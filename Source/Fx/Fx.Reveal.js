@@ -183,7 +183,7 @@ Fx.Reveal = new Class({
 
 	cancel: function(){
 		this.parent.apply(this, arguments);
-		this.element.style.cssText = this.cssText;
+		if (this.cssText != null) this.element.style.cssText = this.cssText;
 		this.hiding = false;
 		this.showing = false;
 		return this;
