@@ -23,6 +23,7 @@ Auto targets all the anchors in a page and display a smooth scrolling effect upo
 ### Options
 
 * links - (*mixed*) A collection of Elements or a string <Selector> of Elements that the *Fx.SmoothScroll* can use.
+* axes - (*array* or *string*) Specify which axis to scroll on, can be 'x', 'y', or ['x', 'y'].
 
 ### Events
 

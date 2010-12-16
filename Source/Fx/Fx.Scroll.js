@@ -103,10 +103,14 @@ Fx.Scroll = new Class({
 		return this.start.apply(this, this.calculateScroll(false, 'bottom'));
 	},
 
-	toElement: function(el){
+	toElement: function(el, axes){
+		axes = axes ? Array.from(axes) : ['x','y'];
 		var position = document.id(el).getPosition(this.element),
-			scroll = isBody(this.element) ? {x: 0, y: 0} : this.element.getScroll();
-		return this.start.apply(this, this.calculateScroll(position.x + scroll.x, position.y + scroll.y));
+			scroll = isBody(this.element) ? {x: 0, y: 0} : this.element.getScroll(),
+			offsetValues = ['x','y'].map(function(axis){
+				return axes.contains(axis) ? position[axis] + scroll[axis] : false;
+			});
+		return this.start.apply(this, this.calculateScroll.apply(this, offsetValues));
 	},
 
 	scrollIntoView: function(el, axes, offset){
@@ -136,7 +140,7 @@ Fx.Scroll = new Class({
 	},
 
 	scrollToCenter: function(el, axes, offset){
-		axes = axes ? Array.from(axes) : ['x', 'y'];
+		axes = axes ? Array.from(axes) : ['x','y'];
 		el = document.id(el);
 		var to = {},
 			position = el.getPosition(this.element),

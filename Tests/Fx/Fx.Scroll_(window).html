@@ -66,6 +66,10 @@ makeActions([
 		fn: fx.toElement.bind(fx, 'red')
 	},
 	{
+		title: 'Scroll the y axis only to the red item.',
+		fn: fx.toElement.bind(fx, ['red', 'y'])
+	},
+	{
 		title: 'Scroll the blue item into view.',
 		fn: function(){
 			fx.set(0,0);

@@ -1,4 +1,13 @@
-<p>All the links below should scroll smoothly to their sections. It has a offset of -20 pixels</p>
+<style>
+  #A, #B, #C, D {
+    margin-left:50px;
+  }
+  #mt-content {
+    width:10000px;
+  }
+</style>
+
+<p>All the links below should scroll smoothly to their sections. It has a offset of -20 pixels. It should only scroll the y axis.</p>
 
 <a name="top" id="top"></a>
 
@@ -62,6 +71,7 @@ new Fx.SmoothScroll({
 	offset: {
 		x: 0,
 		y: -20
-	}
+	},
+	axes: 'y'
 });
 </script>

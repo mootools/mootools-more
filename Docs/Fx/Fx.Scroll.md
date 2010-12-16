@@ -207,11 +207,12 @@ Scrolls the specified Element to the position the passed in Element is found.
 
 ### Syntax
 
-	myFx.toElement(el);
+	myFx.toElement(el, axes);
 
 ### Arguments
 
 1. el - (*mixed*) A string of the Element's id or an Element reference to scroll to.
+2. axes - (*array* or *string*, optional) An array or string specifying which axes to scroll on -- can be 'x', 'y', or ['x', 'y']. It defaults to both axes.
 
 ### Returns
 
