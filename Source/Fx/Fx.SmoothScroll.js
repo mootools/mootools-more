@@ -25,6 +25,10 @@ provides: [Fx.SmoothScroll]
 
 	Extends: Fx.Scroll,
 
+	options: {
+		axes: ['x','y']
+	},
+
 	initialize: function(options, context){
 		context = context || document;
 		this.doc = context.getDocument();
@@ -53,7 +57,7 @@ provides: [Fx.SmoothScroll]
 			if (!el) return;
 
 			event.preventDefault();
-			this.toElement(el).chain(function(){
+			this.toElement(el, this.options.axes).chain(function(){
 				this.fireEvent('scrolledTo', [link, el]);
 			}.bind(this));
 
