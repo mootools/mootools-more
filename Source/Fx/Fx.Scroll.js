@@ -104,17 +104,16 @@ Fx.Scroll = new Class({
 	},
 
 	toElement: function(el, axes){
-		axes = axes ? Array.from(axes) : ['x','y'];
-		var position = document.id(el).getPosition(this.element),
-			scroll = isBody(this.element) ? {x: 0, y: 0} : this.element.getScroll(),
-			offsetValues = ['x','y'].map(function(axis){
-				return axes.contains(axis) ? position[axis] + scroll[axis] : false;
+		axes = axes ? Array.from(axes) : ['x', 'y'];
+		var scroll = isBody(this.element) ? {x: 0, y: 0} : this.element.getScroll(),
+			position = Object.map(document.id(el).getPosition(this.element), function(value, axis){
+				return axes.contains(axis) ? value + scroll[axis] : false;
 			});
-		return this.start.apply(this, this.calculateScroll.apply(this, offsetValues));
+		return this.start.apply(this, this.calculateScroll(position.x, position.y));
 	},
 
 	scrollIntoView: function(el, axes, offset){
-		axes = axes ? Array.from(axes) : ['x','y'];
+		axes = axes ? Array.from(axes) : ['x', 'y'];
 		el = document.id(el);
 		var to = {},
 			position = el.getPosition(this.element),
@@ -126,7 +125,7 @@ Fx.Scroll = new Class({
 				y: position.y + size.y
 			};
 
-		['x','y'].each(function(axis){
+		['x', 'y'].each(function(axis){
 			if (axes.contains(axis)){
 				if (edge[axis] > scroll[axis] + containerSize[axis]) to[axis] = edge[axis] - containerSize[axis];
 				if (position[axis] < scroll[axis]) to[axis] = position[axis];
@@ -140,7 +139,7 @@ Fx.Scroll = new Class({
 	},
 
 	scrollToCenter: function(el, axes, offset){
-		axes = axes ? Array.from(axes) : ['x','y'];
+		axes = axes ? Array.from(axes) : ['x', 'y'];
 		el = document.id(el);
 		var to = {},
 			position = el.getPosition(this.element),
@@ -148,9 +147,9 @@ Fx.Scroll = new Class({
 			scroll = this.element.getScroll(),
 			containerSize = this.element.getSize();
 
-		['x','y'].each(function(axis){
+		['x', 'y'].each(function(axis){
 			if (axes.contains(axis)){
-				to[axis] = position[axis] - (containerSize[axis] - size[axis])/2;
+				to[axis] = position[axis] - (containerSize[axis] - size[axis]) / 2;
 			}
 			if (to[axis] == null) to[axis] = scroll[axis];
 			if (offset && offset[axis]) to[axis] = to[axis] + offset[axis];
