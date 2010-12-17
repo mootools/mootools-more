@@ -23,13 +23,12 @@ Fx.Scroll Method: constructor {#Fx-Scroll:constructor}
 ### Arguments
 
 1. element - (*mixed*) A string of the id for an Element or an Element reference to scroll.
-2. options - (*object*, optional) All [Fx][] Options in addition to offset, overflown, and wheelStops.
+2. options - (*object*, optional) All [Fx][] Options in addition to offset and wheelStops.
 
 Options:
 
 1. offset     - (*object*: defaults to {'x': 0, 'y': 0}) An object with x and y properties of the distance to scroll to within the Element.
-2. overflown  - (*array*: defaults to []) An array of nested scrolling containers, see [Element:getPosition][] for an explanation.
-3. wheelStops - (*boolean*: defaults to true) If false, the mouse wheel will not stop the transition from happening.
+2. wheelStops - (*boolean*: defaults to true) If false, the mouse wheel will not stop the transition from happening.
 
 ### Returns
 
