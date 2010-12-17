@@ -68,7 +68,10 @@ var HtmlTable = new Class({
 		}, this);
 
 		['adopt', 'inject', 'wraps', 'grab', 'replaces', 'dispose'].each(function(method){
-			this[method] = this.element[method].bind(this.element);
+			this[method] = (function(){
+				this.element[method].apply(this.element, arguments);
+				return this;
+			}).bind(this);
 		}, this);
 	},
 
