@@ -43,7 +43,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 		classGroup: 'table-tr-group',
 		classCellSort: 'table-td-sort',
 		classSortSpan: 'table-th-sort-span',
-		sortable: false
+		sortable: false,
+		thSelector: 'th'
 	},
 
 	initialize: function (){
@@ -61,8 +62,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	attachSorts: function(attach){
-		this.element.removeEvents('click:relay(th)');
-		this.element[attach !== false ? 'addEvent' : 'removeEvent']('click:relay(th)', this.bound.headClick);
+		this.element.removeEvents('click:relay(' + this.options.thSelector + ')');
+		this.element[attach !== false ? 'addEvent' : 'removeEvent']('click:relay(' + this.options.thSelector + ')', this.bound.headClick);
 	},
 
 	setHeaders: function(){
@@ -76,7 +77,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	detectParsers: function(){
 		if (!this.head) return;
-		return $$(this.head.cells).map(this.detectParser.bind(this));
+		return this.head.getElements(this.options.thSelector).flatten().map(this.detectParser.bind(this));
 	},
 
 	detectParser: function(cell, index){
@@ -117,9 +118,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	headClick: function(event, el){
 		if (!this.head || el.hasClass(this.options.classNoSort)) return;
-		var index = Array.indexOf(this.head.cells, el);
-		this.sort(index);
-		return false;
+		return this.sort(Array.indexOf(this.head.getElements(this.options.thSelector).flatten(), el) % this.body.rows[0].cells.length);
 	},
 
 	setSortedState: function(index, reverse){
@@ -131,8 +130,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	setHeadSort: function(sorted){
-		var head = document.id(this.head.cells[this.sorted.index]);
-		if (!head) return;
+		var head = $$(!this.head.length ? this.head.cells[this.sorted.index] : this.head.map(function(row){
+		  return row.getElements(this.options.thSelector)[this.sorted.index];
+		}.bind(this)));
+		if (!head.length) return;
 		if (sorted){
 			head.addClass(this.options.classHeadSort);
 			if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);

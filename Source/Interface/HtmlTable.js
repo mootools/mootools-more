@@ -57,7 +57,7 @@ var HtmlTable = new Class({
 		if (this.options.headers.length) this.setHeaders(this.options.headers);
 		else this.thead = document.id(this.element.tHead);
 
-		if (this.thead) this.head = document.id(this.thead.rows[0]);
+		if (this.thead) this.head = this.getHead();
 		if (this.options.footers.length) this.setFooters(this.options.footers);
 
 		this.tfoot = document.id(this.element.tFoot);
@@ -84,10 +84,15 @@ var HtmlTable = new Class({
 		this[lower] = (document.id(this.element[target]) || new Element(lower).inject(this.element, 'top')).empty();
 		var data = this.push(items, {}, this[lower], what == 'headers' ? 'th' : 'td');
 
-		if (what == 'headers') this.head = document.id(this.thead.rows[0]);
-		else this.foot = document.id(this.thead.rows[0]);
+		if (what == 'headers') this.head = this.getHead();
+		else this.foot = this.getHead();
 
 		return data;
+	},
+
+	getHead: function(){
+		var rows = this.thead.rows;
+		return rows.length > 1 ? $$(rows) : rows.length ? document.id(rows[0]) : false;
 	},
 
 	setHeaders: function(headers){
