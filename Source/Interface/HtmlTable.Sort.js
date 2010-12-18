@@ -67,52 +67,52 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	setHeaders: function(){
 		this.previous.apply(this, arguments);
-		if (this.sortEnabled) this.detectParsers();
+		if (this.sortEnabled) this.setParsers();
 	},
 
-	detectParsers: function(force){
+	setParsers: function(){
+		this.parsers = this.detectParsers();
+	},
+
+	detectParsers: function(){
 		if (!this.head) return;
-		var parsers = this.options.parsers,
-			rows = this.body.rows;
+		return $$(this.head.cells).map(this.detectParser.bind(this));
+	},
 
-		// auto-detect
-		this.parsers = $$(this.head.cells).map(function(cell, index){
-			if (!force && (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser'))) return cell.retrieve('htmltable-parser');
-			var thDiv = new Element('div');
-			Array.each(cell.childNodes, function(node){
-				thDiv.adopt(node);
-			});
-			thDiv.inject(cell);
-			var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
-
-			this.sortSpans.push(sortSpan);
-
-			var parser = parsers[index],
-				cancel;
-			switch (typeOf(parser)){
-				case 'function': parser = {convert: parser}; cancel = true; break;
-				case 'string': parser = parser; cancel = true; break;
-			}
-			if (!cancel){
-				HtmlTable.ParserPriority.some(function(parserName){
-					var current = HtmlTable.Parsers[parserName],
-						match = current.match;
-					if (!match) return false;
-					for (var i = 0, j = rows.length; i < j; i++){
-						var cell = document.id(rows[i].cells[index]);
-						var text = cell ? cell.get('html').clean() : '';
-						if (text && match.test(text)){
-							parser = current;
-							return true;
-						}
+	detectParser: function(cell, index){
+		if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser')) return cell.retrieve('htmltable-parser');
+		var thDiv = new Element('div');
+		Array.each(cell.childNodes, function(node){
+			thDiv.adopt(node);
+		});
+		thDiv.inject(cell);
+		var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
+		this.sortSpans.push(sortSpan);
+		var parser = HtmlTable.Parsers[index],
+			rows = this.body.rows,
+			cancel;
+		switch (typeOf(parser)){
+			case 'function': parser = {convert: parser}; cancel = true; break;
+			case 'string': parser = parser; cancel = true; break;
+		}
+		if (!cancel){
+			HtmlTable.ParserPriority.some(function(parserName){
+				var current = HtmlTable.Parsers[parserName],
+					match = current.match;
+				if (!match) return false;
+				for (var i = 0, j = rows.length; i < j; i++){
+					var cell = document.id(rows[i].cells[index]),
+						text = cell ? cell.get('html').clean() : '';
+					if (text && match.test(text)){
+						parser = current;
+						return true;
 					}
-				});
-			}
-
-			if (!parser) parser = this.options.defaultParser;
-			cell.store('htmltable-parser', parser);
-			return parser;
-		}, this);
+				}
+			});
+		}
+		if (!parser) parser = this.options.defaultParser;
+		cell.store('htmltable-parser', parser);
+		return parser;
 	},
 
 	headClick: function(event, el){
@@ -236,7 +236,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	enableSort: function(){
 		this.element.addClass(this.options.classSortable);
 		this.attachSorts(true);
-		this.detectParsers();
+		this.setParsers();
 		this.sortEnabled = true;
 		return this;
 	},
