@@ -7,7 +7,6 @@ Extends the [Element][] type to include delegations in the addEvent and addEvent
 
 * By delegating events to parent objects you can dramatically increase the efficiency of your pages. Consider the example above. You could attach events to every link on a page - which may be hundreds of DOM elements - or you can delegate the event to the document body, evaluating your code only when the user actually clicks a link (instead of on page load/domready).
 * You can use any selector in combination with any event
-* You cannot delegate the *blur* or *focus* events for elements. This is a limitation in how MooTools manages events internally (and prevents memory leaks) and these two events cannot be delegated until this code is refactored. Look for it in MooTools 2.0.
 * Be wary of the cost of delegation; for example, mouseover/mouseout delegation on an entire document can cause your page to run the selector constantly as the user moves his or her mouse around the page. Delegation is not always the best solution.
 * Delegation is especially useful if you are using AJAX to load content into your pages dynamically, as the contents of an element can change with new elements added or others removed and your delegated events need not change.
 * In general it is always better to delegate to the closest parent to your elements as possible; delegate to an element in the page rather than the document body for example.
