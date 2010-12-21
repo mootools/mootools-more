@@ -6,7 +6,7 @@ describe('HtmlTable.Sort', function(){
 			var table = new HtmlTable({
 				sortable: true,
 				headers: ['col'],
-				parsers: [type],
+				parsers: type ? [type] : [],
 				rows: data.map(function(item){return [item]}).shuffle()
 			});
 
@@ -86,6 +86,10 @@ describe('HtmlTable.Sort', function(){
 
 			it('should correctly sort floats according to value', function(){
 				expect(sortedTable('float', ['.03', '.2', '1'])).toEqual(['.03', '.2', '1']);
+			});
+
+			it('should sort by float when autodetecting a mix of floats and integers are present', function(){
+				expect(sortedTable(false, [1.3, 1.2, 1.1, 1, 2])).toEqual(['1', '1.1', '1.2', '1.3', '2']);
 			});
 
 		});
