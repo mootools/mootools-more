@@ -62,6 +62,7 @@ describe('HtmlTable.Sort', function(){
 
 			it('should sort a list numerically', function(){
 				expect(sortedTable('number', [1, 2, 3])).toEqual(['1','2','3']);
+				expect(sortedTable('number', [1, 2, 3, 12])).toEqual(['1', '2', '3', '12']);
 			});
 
 			it('should accept numbers as strings', function(){
@@ -110,6 +111,10 @@ describe('HtmlTable.Sort', function(){
 
 			it('should not be case sensitive', function(){
 				expect(sortedTable('string', ['A','b','C'])).toEqual(['A','b','C']);
+			});
+
+			it('should sort a list of numbers alphabetically', function(){
+				expect(sortedTable('string', [1, 2, 3, 12])).toEqual(['1', '12', '2', '3']);
 			});
 
 		});
