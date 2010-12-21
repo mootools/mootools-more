@@ -252,7 +252,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 });
 
-HtmlTable.ParserPriority = ['date', 'input-checked', 'input-value', 'number', 'float'];
+HtmlTable.ParserPriority = ['date', 'input-checked', 'input-value', 'float', 'number'];
 
 HtmlTable.Parsers = {
 
