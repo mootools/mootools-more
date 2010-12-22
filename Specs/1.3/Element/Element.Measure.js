@@ -79,6 +79,7 @@ describe('Element.getComputedSize', function(){
 		var computedSize = new Element('ul', {
 			'html': '<li><a href="#" title=">Foo Bar</a></li>'
 		}).inject(document.body).getComputedSize();
+		this.after(computedSize.destroy.bind(computedSize);
 		expect(typeOf(computedSize.width)).toEqual('number');
 		expect(typeOf(computedSize.height)).toEqual('number');
 	});
