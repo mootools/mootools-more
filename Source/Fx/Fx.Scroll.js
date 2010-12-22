@@ -105,10 +105,10 @@ Fx.Scroll = new Class({
 
 	toElement: function(el, axes){
 		axes = axes ? Array.from(axes) : ['x', 'y'];
-		var scroll = isBody(this.element) ? {x: 0, y: 0} : this.element.getScroll(),
-			position = Object.map(document.id(el).getPosition(this.element), function(value, axis){
-				return axes.contains(axis) ? value + scroll[axis] : false;
-			});
+		var scroll = isBody(this.element) ? {x: 0, y: 0} : this.element.getScroll();
+		var position = Object.map(document.id(el).getPosition(this.element), function(value, axis){
+			return axes.contains(axis) ? value + scroll[axis] : false;
+		});
 		return this.start.apply(this, this.calculateScroll(position.x, position.y));
 	},
 

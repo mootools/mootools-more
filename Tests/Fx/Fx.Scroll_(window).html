@@ -67,7 +67,7 @@ makeActions([
 	},
 	{
 		title: 'Scroll the y axis only to the red item.',
-		fn: fx.toElement.bind(fx, ['red', 'y'])
+		fn: fx.toElement.pass(['red', 'y'], fx)
 	},
 	{
 		title: 'Scroll the blue item into view.',
