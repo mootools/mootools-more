@@ -72,3 +72,15 @@ describe('Element.Measure', function(){
 	});
 
 });
+
+describe('Element.getComputedSize', function(){
+
+	it('should get the Computed Size of an element even if height and width aren\'t explicity defined', function(){
+		var computedSize = new Element('ul', {
+			'html': '<li><a href="#" title=">Foo Bar</a></li>'
+		}).inject(document.body).getComputedSize();
+		expect(typeOf(computedSize.width)).toEqual('number');
+		expect(typeOf(computedSize.height)).toEqual('number');
+	});
+
+});

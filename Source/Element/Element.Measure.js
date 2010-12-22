@@ -146,8 +146,10 @@ Element.implement({
 
 		Object.each(options.planes, function(edges, plane){
 
-			var capitalized = plane.capitalize();
-			styles[plane] = this.getStyle(plane).toInt();
+			var capitalized = plane.capitalize(),
+			style = this.getStyle(plane);
+
+			styles[plane] = style == 'auto' ? this.getDimensions()[plane] : style.toInt();
 			size['total' + capitalized] = styles[plane];
 
 			edges.each(function(edge){
