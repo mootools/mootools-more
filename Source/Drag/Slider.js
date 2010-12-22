@@ -95,6 +95,20 @@ var Slider = new Class({
 		if (this.options.initialStep != null) this.set(this.options.initialStep)
 	},
 
+	attach: function(){
+		this.element.addEvent('mousedown', this.clickedElement);
+		if (this.options.wheel) this.element.addEvent('mousewheel', this.scrolledElement);
+		this.drag.attach();
+		return this;
+	},
+
+	detach: function(){
+		this.element.removeEvent('mousedown', this.clickedElement);
+		this.element.removeEvent('mousewheel', this.scrolledElement);
+		this.drag.detach();
+		return this;
+	},
+
 	autosize: function(){
 		this.setSliderDimensions();
 		this.setKnobPosition(this.toPosition(this.step));
@@ -120,20 +134,6 @@ var Slider = new Class({
 			this.half = this.knob[this.offset] / 2;
 			return this.element[this.offset] - this.knob[this.offset] + (this.options.offset * 2);
 		}.bind(this));
-		return this;
-	},
-
-	attach: function(){
-		this.element.addEvent('mousedown', this.clickedElement);
-		if (this.options.wheel) this.element.addEvent('mousewheel', this.scrolledElement);
-		this.drag.attach();
-		return this;
-	},
-
-	detach: function(){
-		this.element.removeEvent('mousedown', this.clickedElement);
-		this.element.removeEvent('mousewheel', this.scrolledElement);
-		this.drag.detach();
 		return this;
 	},
 
