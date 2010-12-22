@@ -129,7 +129,8 @@ Element.implement({
 		}, options);
 
 		var styles = {},
-			size = {width: 0, height: 0};
+			size = {width: 0, height: 0},
+			dimensions;
 
 		if (options.mode == 'vertical'){
 			delete size.width;
@@ -139,16 +140,19 @@ Element.implement({
 			delete options.planes.height;
 		}
 
-
 		getStylesList(options.styles, options.planes).each(function(style){
 			styles[style] = this.getStyle(style).toInt();
 		}, this);
 
 		Object.each(options.planes, function(edges, plane){
 
-			var capitalized = plane.capitalize();
-			styles[plane] = this.getStyle(plane).toInt();
-			size['total' + capitalized] = styles[plane];
+			var capitalized = plane.capitalize(),
+				style = this.getStyle(plane);
+
+			if (style == 'auto' && !dimensions) dimensions = this.getDimensions();
+
+			style = styles[plane] = (style == 'auto') ? dimensions[plane] : style.toInt();
+			size['total' + capitalized] = style;
 
 			edges.each(function(edge){
 				var edgesize = calculateEdgeSize(edge, styles);
