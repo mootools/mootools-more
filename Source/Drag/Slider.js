@@ -47,11 +47,16 @@ var Slider = new Class({
 
 	initialize: function(element, knob, options){
 		this.setOptions(options);
+		options = this.options;
 		this.element = document.id(element);
-		this.knob = document.id(knob);
+		knob = this.knob = document.id(knob);
 		this.previousChange = this.previousEnd = this.step = -1;
-		var offset, limit = {}, modifiers = {'x': false, 'y': false};
-		switch (this.options.mode){
+
+		var limit = {},
+			modifiers = {x: false, y: false},
+			offset;
+
+		switch (options.mode){
 			case 'vertical':
 				this.axis = 'y';
 				this.property = 'top';
@@ -64,11 +69,11 @@ var Slider = new Class({
 		}
 
 		this.setSliderDimensions();
-		this.setRange(this.options.range);
+		this.setRange(options.range);
 
-		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
+		knob.setStyle('position', 'relative').setStyle(this.property, -options.offset);
 		modifiers[this.axis] = this.property;
-		limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
+		limit[this.axis] = [-options.offset, this.full - options.offset];
 
 		var dragOptions = {
 			snap: 0,
@@ -88,11 +93,11 @@ var Slider = new Class({
 				this.end();
 			}.bind(this)
 		};
-		if (this.options.snap) this.setSnap(dragOptions);
+		if (options.snap) this.setSnap(dragOptions);
 
-		this.drag = new Drag(this.knob, dragOptions);
+		this.drag = new Drag(knob, dragOptions);
 		this.attach();
-		if (this.options.initialStep != null) this.set(this.options.initialStep)
+		if (options.initialStep != null) this.set(options.initialStep)
 	},
 
 	attach: function(){
@@ -103,15 +108,15 @@ var Slider = new Class({
 	},
 
 	detach: function(){
-		this.element.removeEvent('mousedown', this.clickedElement);
-		this.element.removeEvent('mousewheel', this.scrolledElement);
+		this.element.removeEvent('mousedown', this.clickedElement)
+			.element.removeEvent('mousewheel', this.scrolledElement);
 		this.drag.detach();
 		return this;
 	},
 
 	autosize: function(){
-		this.setSliderDimensions();
-		this.setKnobPosition(this.toPosition(this.step));
+		this.setSliderDimensions()
+			.setKnobPosition(this.toPosition(this.step));
 		this.drag.options.limit[this.axis] = [-this.options.offset, this.full - this.options.offset];
 		if (this.options.snap) this.setSnap();
 		return this;
@@ -127,6 +132,7 @@ var Slider = new Class({
 	setKnobPosition: function(position){
 		if (this.options.snap) position = this.toPosition(this.step);
 		this.knob.setStyle(this.property, position);
+		return this;
 	},
 
 	setSliderDimensions: function(){
@@ -142,10 +148,9 @@ var Slider = new Class({
 		if (!((this.range > 0) ^ (step > this.max))) step = this.max;
 
 		this.step = Math.round(step);
-		this.checkStep();
-		this.fireEvent('tick', this.toPosition(this.step));
-		this.end();
-		return this;
+		return this.checkStep()
+			.fireEvent('tick', this.toPosition(this.step))
+			.end();
 	},
 
 	setRange: function(range, pos){
@@ -162,42 +167,50 @@ var Slider = new Class({
 	clickedElement: function(event){
 		if (this.isDragging || event.target == this.knob) return;
 
-		var dir = this.range < 0 ? -1 : 1;
-		var position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
-		position = position.limit(-this.options.offset, this.full -this.options.offset);
+		var dir = this.range < 0 ? -1 : 1,
+			position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
+
+		position = position.limit(-this.options.offset, this.full - this.options.offset);
 
 		this.step = Math.round(this.min + dir * this.toStep(position));
-		this.checkStep();
-		this.fireEvent('tick', position);
-		this.end();
+
+		this.checkStep()
+			.fireEvent('tick', position)
+			.end();
 	},
 
 	scrolledElement: function(event){
 		var mode = (this.options.mode == 'horizontal') ? (event.wheel < 0) : (event.wheel > 0);
-		this.set(mode ? this.step - this.stepSize : this.step + this.stepSize);
+		this.set(this.step + (mode ? -1 : 1) * this.stepSize);
 		event.stop();
 	},
 
 	draggedKnob: function(){
-		var dir = this.range < 0 ? -1 : 1;
-		var position = this.drag.value.now[this.axis];
+		var dir = this.range < 0 ? -1 : 1,
+			position = this.drag.value.now[this.axis];
+
 		position = position.limit(-this.options.offset, this.full -this.options.offset);
+
 		this.step = Math.round(this.min + dir * this.toStep(position));
 		this.checkStep();
 	},
 
 	checkStep: function(){
-		if (this.previousChange != this.step){
-			this.previousChange = this.step;
-			this.fireEvent('change', this.step);
+		var step = this.step;
+		if (this.previousChange != step){
+			this.previousChange = step;
+			this.fireEvent('change', step);
 		}
+		return this;
 	},
 
 	end: function(){
-		if (this.previousEnd !== this.step){
-			this.previousEnd = this.step;
-			this.fireEvent('complete', this.step + '');
+		var step = this.step;
+		if (this.previousEnd !== step){
+			this.previousEnd = step;
+			this.fireEvent('complete', step + '');
 		}
+		return this;
 	},
 
 	toStep: function(position){
