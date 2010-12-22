@@ -34,8 +34,7 @@ var Slider = new Class({
 		onChange: function(intStep){},
 		onComplete: function(strStep){},*/
 		onTick: function(position){
-			if (this.options.snap) position = this.toPosition(this.step);
-			this.knob.setStyle(this.property, position);
+			this.setKnobPosition(position);
 		},
 		initialStep: 0,
 		snap: false,
@@ -56,19 +55,15 @@ var Slider = new Class({
 			case 'vertical':
 				this.axis = 'y';
 				this.property = 'top';
-				offset = 'offsetHeight';
+				this.offset = 'offsetHeight';
 				break;
 			case 'horizontal':
 				this.axis = 'x';
 				this.property = 'left';
-				offset = 'offsetWidth';
+				this.offset = 'offsetWidth';
 		}
 
-		this.full = this.element.measure(function(){
-			this.half = this.knob[offset] / 2;
-			return this.element[offset] - this.knob[offset] + (this.options.offset * 2);
-		}.bind(this));
-
+		this.setSliderDimensions();
 		this.setRange(this.options.range);
 
 		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
@@ -93,10 +88,7 @@ var Slider = new Class({
 				this.end();
 			}.bind(this)
 		};
-		if (this.options.snap){
-			dragOptions.grid = Math.ceil(this.stepWidth);
-			dragOptions.limit[this.axis][1] = this.full;
-		}
+		if (this.options.snap) this.setSnap(dragOptions);
 
 		this.drag = new Drag(this.knob, dragOptions);
 		this.attach();
@@ -114,6 +106,34 @@ var Slider = new Class({
 		this.element.removeEvent('mousedown', this.clickedElement);
 		this.element.removeEvent('mousewheel', this.scrolledElement);
 		this.drag.detach();
+		return this;
+	},
+
+	autosize: function(){
+		this.setSliderDimensions();
+		this.setKnobPosition(this.toPosition(this.step));
+		this.drag.options.limit[this.axis] = [-this.options.offset, this.full - this.options.offset];
+		if (this.options.snap) this.setSnap();
+		return this;
+	},
+
+	setSnap: function(options){
+		if (!options) options = this.drag.options;
+		options.grid = Math.ceil(this.stepWidth);
+		options.limit[this.axis][1] = this.full;
+		return this;
+	},
+
+	setKnobPosition: function(position){
+		if (this.options.snap) position = this.toPosition(this.step);
+		this.knob.setStyle(this.property, position);
+	},
+
+	setSliderDimensions: function(){
+		this.full = this.element.measure(function(){
+			this.half = this.knob[this.offset] / 2;
+			return this.element[this.offset] - this.knob[this.offset] + (this.options.offset * 2);
+		}.bind(this));
 		return this;
 	},
 
