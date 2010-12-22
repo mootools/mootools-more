@@ -66,10 +66,6 @@ var HtmlTable = new Class({
 		this.options.rows.each(function(row){
 			this.push(row);
 		}, this);
-
-		['adopt', 'inject', 'wraps', 'grab', 'replaces', 'dispose'].each(function(method){
-			this[method] = this.element[method].bind(this.element);
-		}, this);
 	},
 
 	toElement: function(){
@@ -132,3 +128,13 @@ var HtmlTable = new Class({
 	}
 
 });
+
+
+['adopt', 'inject', 'wraps', 'grab', 'replaces', 'dispose'].each(function(method){
+	HtmlTable.implement(method, function(){
+		this.element[method].apply(this.element, arguments);
+		return this;
+	});
+});
+
+

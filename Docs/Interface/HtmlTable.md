@@ -163,17 +163,25 @@ it will return the actual table Element.
 HtmlTable methods: Element methods {#HtmlTable:Element-Methods}
 ---------------------------------------------------------------
 
-This class implements the following element methods:
+This class implements the following [Element][] methods:
 
 * adopt
 * inject
 * wraps
-* grap
+* grab
 * replaces
 * empty
 * dispose
 
 These will execute these methods on the table element.
+
+### Arguments
+
+Each method accepts exactly the same arguments as the [Element][] equivalent.
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
 
 ### Example
 
@@ -198,3 +206,4 @@ Element property: HtmlTable {#Element:HtmlTable}
 [Options]: /core/Class/Class.Extras#Options
 [Events]: /core/Class/Class.Extras#Events
 [Class.Occlude]: /more/Class/Class.Occlude
+[Element]: /core/Element/Element
