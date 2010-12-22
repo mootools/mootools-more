@@ -39,7 +39,7 @@ For instance, if you had a bar that is 300px wide and a knob that is 15px wide, 
 
 
 Slider Event: change {#Slider:change}
------------------------------------------
+-------------------------------------
 
 * (*function*) Fires when the Slider's value changes.
 
@@ -54,7 +54,7 @@ Slider Event: change {#Slider:change}
 
 
 Slider Event: onComplete {#Slider:complete}
----------------------------------------------
+-------------------------------------------
 
 * (*function*) Fire when you're done dragging.
 
@@ -69,7 +69,7 @@ Slider Event: onComplete {#Slider:complete}
 
 
 Slider Event: tick {#Slider:tick}
--------------------------------------
+---------------------------------
 
 * (*function*) Fires when the user scrolls or when the container element is clicked. This Event can be overridden to alter the default tick behavior.
 
@@ -140,7 +140,7 @@ The slider will move to the passed position.
 
 
 Slider Method: attach {#Slider:attach}
---------------------------------
+--------------------------------------
 
 Attaches the mouse listeners to the Slider making the Slider draggable
 
@@ -172,7 +172,7 @@ Attaches the mouse listeners to the Slider making the Slider draggable
 
 
 Slider Method: detach {#Slider:detach}
---------------------------------
+--------------------------------------
 
 Detaches the mouse listeners from the Slider so its value can't be changed any longer
 
@@ -197,7 +197,7 @@ Detaches the mouse listeners from the Slider so its value can't be changed any l
 - [Slider:attach](#Slider:attach), [Element:removeEvent][]
 
 Slider Method: setRange {#Slider:setRange}
---------------------------------
+------------------------------------------
 
 Dynamically sets the range for the slider.
 
@@ -216,16 +216,16 @@ Dynamically sets the range for the slider.
 ### Examples
 
 	var mySlider = new Slider('myElement', 'myKnob',{
-		range: [100,1000]
+		range: [100, 1000]
 	});
-	mySlider.setRange([500,5000]);
+	mySlider.setRange([500, 5000]);
 
 ### Notes
 
 - If the current step is now out of the new range it will automatically adjust.
 
-Slider Method: resize {#Slider:autosize}
---------------------------------
+Slider Method: autosize {#Slider:autosize}
+------------------------------------------
 
 Cause the slider to recalculate the allotted drag area for itself (useful if resizing slider).
 

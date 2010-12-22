@@ -98,14 +98,15 @@ var Slider = new Class({
 	autosize: function(){
 		this.setSliderDimensions();
 		this.setKnobPosition(this.toPosition(this.step));
-		this.drag.options.limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
+		this.drag.options.limit[this.axis] = [-this.options.offset, this.full - this.options.offset];
 		if (this.options.snap) this.setSnap();
 		return this;
 	},
 
 	setSnap: function(options){
-		(options || this.drag.options).grid = Math.ceil(this.stepWidth);
-		(options || this.drag.options).limit[this.axis][1] = this.full;
+		if (!options) options = this.drag.options;
+		options.grid = Math.ceil(this.stepWidth);
+		options.limit[this.axis][1] = this.full;
 		return this;
 	},
 
