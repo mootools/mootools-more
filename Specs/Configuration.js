@@ -55,7 +55,7 @@ Configuration.sets = {
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
 			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation',
 			'Types/URI', 'Types/URI.Relative',
-			'Interface/Keyboard', 'Interface/HtmlTable.Sort',
+			'Interface/Keyboard', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort',
 			'Request/Request.JSONP',
 			'Utilities/Hash.Cookie', 'Utilities/Assets'
 		]
