@@ -26,7 +26,7 @@ provides: [Fx.SmoothScroll]
 	Extends: Fx.Scroll,
 
 	options: {
-		axes: ['x','y']
+		axes: ['x', 'y']
 	},
 
 	initialize: function(options, context){
@@ -46,7 +46,7 @@ provides: [Fx.SmoothScroll]
 
 		this.addEvent('complete', function(){
 			win.location.hash = this.anchor;
-			this.element.scrollTo(this.to[0] + this.options.offset.x, this.to[1] + this.options.offset.y);
+			this.element.scrollTo(this.to[0], this.to[1]);
 		}, true);
 	},
 
