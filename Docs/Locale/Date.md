@@ -173,11 +173,14 @@ Keys/Values
 ### Used by [Date][]
 
 * months - (*array*) An array of month names for the language (January, February, etc)
+* months_abbr - (*array*) An array of all abbreviations of month names (jan, feb, apr, etc)
 * days - (*array*) An array of names for the days of the week (Monday, Tuesday, etc)
+* days_abbr - (*array*) An array of all abbreviations of day names (sun, mon, tue, etc)
 * dateOrder - (*array*) An array specifying the order for date expression followed by a default delimiter (usually /). US english is *['month', 'date', 'year', '/']*, for instance.
 * AM - (*string*) the string that denotes morning in 12 hour time
 * PM - (*string*) the string that denotes evening in 12 hour time
 * ordinal - (*function*) A method that returns the proper ordinal ("th", "st", "nd", etc) given a day of the month.
+* firstDayOfWeek - (*number*) The index of the first day of the week, 0 = Sunday - 6 = Saturday
 
 ### Used by [Date.Extras][]
 

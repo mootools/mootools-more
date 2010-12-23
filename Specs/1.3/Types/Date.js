@@ -239,12 +239,64 @@ describe('Date.getTimezone', function(){
 describe('Date.getWeek', function(){
 
 	it('should return the week of the year of a Date instance', function(){
-		var d = new Date(2000, 0, 1, 1, 1, 1);
-		expect(d.get('week')).toEqual(1);
+		var d = new Date(2007, 0, 1, 1, 1, 1);
+		expect(d.get('week')).toEqual(1); // Mon Jan 01 2007
 		d.increment('day', 7 * 10 + 2);
-		expect(d.get('week')).toEqual(11);
+		expect(d.get('week')).toEqual(11); // Wed Mar 14 2007
 		d.increment('week', 42);
+		expect(d.get('week')).toEqual(1); // Wed Jan 02 2008
+	});
+
+	it('should return the last week of the previous year if the largest part of the first week is in the previous year', function(){
+		var d = new Date(2000, 0, 1, 1, 1, 1);
+		expect(d.get('week')).toEqual(52); // Sat Jan 01 2000
+		d.increment('year', 21);
+		expect(d.get('week')).toEqual(53); // Fri Jan 01 2021
+	});
+
+	it('should return the first week of the year if the largest part of the first week is in the current year', function(){
+		var d = new Date(2002, 0, 1, 1, 1, 1);
+		expect(d.get('week')).toEqual(1); // Tue Jan 01 2002
+	});
+
+	it('should return the first week of the next year if the largest part of the last week is in the next year', function(){
+		var d = new Date(2012, 11, 31, 1, 1, 1);
+		expect(d.get('week')).toEqual(1); // Mon Dec 31 2012
+	});
+
+	it('should return the last week of the year if the largest part of the last week is in the current year', function(){
+		var d = new Date(2010, 11, 31, 1, 1, 1);
+		expect(d.get('week')).toEqual(52); // Fri Dec 31 2010
+		d.increment('year', 10);
+		expect(d.get('week')).toEqual(53); // Thu Dec 31 2020
+	});
+
+	it('should return week 2 for Jan 07, when Jan 01 is on a tuesday', function(){
+		var d = new Date(2002, 0, 7, 1, 1, 1);
+		expect(d.get('week')).toEqual(2); // Mon Jan 07 2002
+	});
+
+	it('should return different week numbers depending on the culture', function(){
+		var locale = new Locale.Set('custom');
+		Locale.use(locale);
+
+		var d = new Date(2000, 11, 31, 1, 1, 1); // Sun Dec 31 2000
+		locale.define('Date', 'firstDayOfWeek', 1); // Monday
+		expect(d.get('week')).toEqual(52);
+		locale.define('Date', 'firstDayOfWeek', 0); // Sunday
+		expect(d.get('week')).toEqual(54);
+		locale.define('Date', 'firstDayOfWeek', 6); // Saturday
+		expect(d.get('week')).toEqual(53);
+
+		d.increment('day', 1827); // Sun Jan 01 2006
+		locale.define('Date', 'firstDayOfWeek', 1); // Monday
+		expect(d.get('week')).toEqual(52);
+		locale.define('Date', 'firstDayOfWeek', 0); // Sunday
 		expect(d.get('week')).toEqual(1);
+		locale.define('Date', 'firstDayOfWeek', 6); // Saturday
+		expect(d.get('week')).toEqual(1);
+
+		Locale.use('en-US');
 	});
 
 });

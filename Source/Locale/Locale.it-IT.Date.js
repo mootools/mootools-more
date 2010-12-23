@@ -32,6 +32,7 @@ Locale.define('it-IT', 'Date', {
 	shortTime: '%H.%M',
 	AM: 'AM',
 	PM: 'PM',
+	firstDayOfWeek: 1,
 
 	// Date.Extras
 	ordinal: 'º',

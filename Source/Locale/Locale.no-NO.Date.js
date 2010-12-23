@@ -26,6 +26,7 @@ Locale.define('no-NO', 'Date', {
 	shortTime: '%H:%M',
 	AM: 'AM',
 	PM: 'PM',
+	firstDayOfWeek: 1,
 
 	lessThanMinuteAgo: 'kortere enn et minutt siden',
 	minuteAgo: 'omtrent et minutt siden',

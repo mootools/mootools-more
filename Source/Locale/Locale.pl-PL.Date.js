@@ -31,6 +31,7 @@ Locale.define('pl-PL', 'Date', {
 	shortTime: '%H:%M',
 	AM: 'nad ranem',
 	PM: 'po południu',
+	firstDayOfWeek: 1,
 
 	// Date.Extras
 	ordinal: function(dayOfMonth){

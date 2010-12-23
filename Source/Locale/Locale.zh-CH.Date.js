@@ -32,6 +32,7 @@ Locale.define('zh-CHS', 'Date', {
 	shortTime: '%I:%M%p',
 	AM: 'AM',
 	PM: 'PM',
+	firstDayOfWeek: 1,
 
 	// Date.Extras
 	ordinal: '',

@@ -31,6 +31,7 @@ Locale.define('hu-HU', 'Date', {
 	shortTime: '%I:%M',
 	AM: 'de.',
 	PM: 'du.',
+	firstDayOfWeek: 1,
 
 	// Date.Extras
 	ordinal: '.',
