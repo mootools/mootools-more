@@ -443,7 +443,21 @@ Form.Validator.addAllThese([
 	['validate-email', {
 		errorMsg: Form.Validator.getMsg.pass('email'),
 		test: function(element){
-			return Form.Validator.getValidator('IsEmpty').test(element) || (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i).test(element.get('value'));
+			/*
+			var chars = "[a-z0-9!#$%&'*+/=?^_`{|}~-]",
+				local = '(?:' + chars + '\\.?){0,63}' + chars,
+
+				label = '[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?',
+				hostname = '(?:' + label + '\\.)*' + label;
+
+				octet = '(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)',
+				ipv4 = '\\[(?:' + octet + '\\.){3}' + octet + '\\]',
+
+				domain = '(?:' + hostname + '|' + ipv4 + ')';
+
+			var regex = new RegExp('^' + local + '@' + domain + '$', 'i');
+			*/
+			return Form.Validator.getValidator('IsEmpty').test(element) || (/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]\.?){0,63}[a-z0-9!#$%&'*+/=?^_`{|}~-]@(?:(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\])$/i).test(element.get('value'));
 		}
 	}],
 
@@ -457,10 +471,6 @@ Form.Validator.addAllThese([
 	['validate-currency-dollar', {
 		errorMsg: Form.Validator.getMsg.pass('currencyDollar'),
 		test: function(element){
-			// [$]1[##][,###]+[.##]
-			// [$]1###+[.##]
-			// [$]0.##
-			// [$].##
 			return Form.Validator.getValidator('IsEmpty').test(element) || (/^\$?\-?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}\d*(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/).test(element.get('value'));
 		}
 	}],
