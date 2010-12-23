@@ -1,0 +1,51 @@
+
+<style>
+
+ul.region {
+	width: 200px;
+	margin: 10px;
+	padding: 4px;
+	background: #cccccc;
+	float: left;
+}
+ul.region li {
+	margin-bottom: 1px;
+	padding: 3px;
+	list-style: none;
+	background: #eeeeee;
+}
+
+</style>
+
+<p>
+	You should be able to drag another item while the revert fx is still running.<br />
+	Only one Fx at the time is possible, so when a second revert fx starts the first fx cancels, if it's still running
+</p>
+
+<div>
+	<ul class="region" id="list-1">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<ul class="region">
+		<li>11</li>
+		<li>22</li>
+		<li>33</li>
+	</ul>
+</div>
+
+
+<script src="/depender/build?require=More/Sortables"></script>
+<script>
+
+new Sortables('.region', {
+	revert: {
+		duration: 3000
+	},
+	clone: true,
+	opacity: false,
+	snap: 10
+});
+
+</script>
