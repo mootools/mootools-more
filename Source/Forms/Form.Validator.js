@@ -422,21 +422,19 @@ Form.Validator.addAllThese([
 		},
 		test: function(element, props){
 			if (Form.Validator.getValidator('IsEmpty').test(element)) return true;
-			var date;
-			if (Date.parse){
-				var format = props.dateFormat || '%x';
-				date = Date.parse(element.get('value'));
-				var formatted = date.format(format);
+			var dateLocale = Locale.getCurrent().sets.Date,
+				dateNouns = new RegExp([dateLocale.days, dateLocale.days_abbr, dateLocale.months, dateLocale.months_abbr].flatten().join('|'), 'i'),
+				value = element.get('value'),
+				wordsInValue = value.match(/[a-z]+/gi);
+
+				if (wordsInValue && !wordsInValue.every(dateNouns.exec, dateNouns)) return false;
+
+				var date = Date.parse(value),
+					format = props.dateFormat || '%x',
+					formatted = date.format(format);
+
 				if (formatted != 'invalid date') element.set('value', formatted);
 				return date.isValid();
-			} else {
-				var regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
-				if (!regex.test(element.get('value'))) return false;
-				date = new Date(element.get('value').replace(regex, '$1/$2/$3'));
-				return (parseInt(RegExp.$1, 10) == (1 + date.getMonth())) &&
-					(parseInt(RegExp.$2, 10) == date.getDate()) &&
-					(parseInt(RegExp.$3, 10) == date.getFullYear());
-			}
 		}
 	}],
 

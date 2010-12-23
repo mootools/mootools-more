@@ -162,9 +162,14 @@ describe('Form.Validator', function(){
 
 			var validator = getValidator('validate-date');
 
+			beforeEach(function(){
+				Locale.use('en-US');
+			});
+
 			it('should return false for fields whose value is not a date', function(){
 				expect(validator.test(createInput('Mr. Foo'))).toEqual(false);
 				expect(validator.test(createInput('blah 12, 1000'))).toEqual(false);
+				expect(validator.test(createInput('Boo 12'))).toEqual(false);
 			});
 
 			it('should return true for fields whose value parses to a date', function(){
