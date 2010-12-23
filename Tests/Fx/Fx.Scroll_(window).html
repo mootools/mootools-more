@@ -73,14 +73,14 @@ makeActions([
 		title: 'Scroll the blue item into view.',
 		fn: function(){
 			fx.set(0,0);
-			fx.scrollIntoView('blue', 'y');
+			fx.toElementEdge('blue', 'y');
 		}
 	},
 	{
 		title: 'Scroll the yellow item into view (from below).',
 		fn: function(){
 			fx.set(0,500);
-			fx.scrollIntoView('yellow', 'y');
+			fx.toElementEdge('yellow', 'y');
 		}
 	}
 ]);

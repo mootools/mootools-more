@@ -112,7 +112,7 @@ Fx.Scroll = new Class({
 		return this.start.apply(this, this.calculateScroll(position.x, position.y));
 	},
 
-	scrollIntoView: function(el, axes, offset){
+	toElementEdge: function(el, axes, offset){
 		axes = axes ? Array.from(axes) : ['x', 'y'];
 		el = document.id(el);
 		var to = {},
@@ -138,7 +138,7 @@ Fx.Scroll = new Class({
 		return this;
 	},
 
-	scrollToCenter: function(el, axes, offset){
+	toElementCenter: function(el, axes, offset){
 		axes = axes ? Array.from(axes) : ['x', 'y'];
 		el = document.id(el);
 		var to = {},
