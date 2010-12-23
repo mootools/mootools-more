@@ -89,7 +89,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		thDiv.inject(cell);
 		var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
 		this.sortSpans.push(sortSpan);
-		var parser = HtmlTable.Parsers[index],
+		var parser = this.options.parsers[index],
 			rows = this.body.rows,
 			cancel;
 		switch (typeOf(parser)){
@@ -205,7 +205,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			return a.value > b.value ? 1 : -1;
 		});
 
-		if (this.sorted.reverse == (this.parsers[this.sorted.index] == 'input-checked')) data.reverse(true);
+		if (this.sorted.reverse == (parser == HtmlTable.Parsers['input-checked'])) data.reverse(true);
 		this.setRowSort(data, pre);
 
 		if (rel) rel.grab(this.body);
