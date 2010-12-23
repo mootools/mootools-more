@@ -56,7 +56,8 @@ Configuration.sets = {
 			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation',
 			'Types/URI', 'Types/URI.Relative',
 			'Interface/Keyboard', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort',
-			'Fx/Fx.Reveal',
+			'Forms/Form.Validator',
+      'Fx/Fx.Reveal',
 			'Request/Request.JSONP',
 			'Utilities/Hash.Cookie', 'Utilities/Assets'
 		]
@@ -169,6 +170,8 @@ Configuration.source = {
 			'Element/Element.Event.Pseudos',
 			'Element/Element.Event.Pseudos.Keys',
 			'Element/Element.Delegation',
+
+      'Forms/Form.Validator',
 
 			'Types/URI',
 			'Types/URI.Relative',
