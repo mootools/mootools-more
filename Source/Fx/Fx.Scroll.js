@@ -112,7 +112,7 @@ Fx.Scroll = new Class({
 		return this.start.apply(this, this.calculateScroll(position.x, position.y));
 	},
 
-	scrollIntoView: function(el, axes, offset){
+	toElementEdge: function(el, axes, offset){
 		axes = axes ? Array.from(axes) : ['x', 'y'];
 		el = document.id(el);
 		var to = {},
@@ -138,7 +138,7 @@ Fx.Scroll = new Class({
 		return this;
 	},
 
-	scrollToCenter: function(el, axes, offset){
+	toElementCenter: function(el, axes, offset){
 		axes = axes ? Array.from(axes) : ['x', 'y'];
 		el = document.id(el);
 		var to = {},
@@ -160,6 +160,11 @@ Fx.Scroll = new Class({
 	}
 
 });
+
+//<1.2compat>
+	Fx.Scroll.alias('scrollToCenter', 'toElementCenter');
+	Fx.Scroll.alias('scrollIntoView', 'toElementEdge');
+//</1.2compat>
 
 function isBody(element){
 	return (/^(?:body|html)$/i).test(element.tagName);

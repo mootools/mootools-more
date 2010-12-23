@@ -27,7 +27,7 @@ Fx.Scroll Method: constructor {#Fx-Scroll:constructor}
 
 Options:
 
-1. offset     - (*object*: defaults to {'x': 0, 'y': 0}) An object with x and y properties of the distance to scroll to within the Element.
+1. offset - (*object*: defaults to {'x': 0, 'y': 0}) An object with x and y properties of the distance to scroll to within the Element.
 2. wheelStops - (*boolean*: defaults to true) If false, the mouse wheel will not stop the transition from happening.
 
 ### Returns
@@ -202,7 +202,7 @@ Scrolls the specified Element to its maximum right.
 Fx.Scroll Method: toElement {#Fx-Scroll:toElement}
 --------------------------------------------------
 
-Scrolls the specified Element to the position the passed in Element is found.
+Scrolls the element until the element specified is at the top/left. If an axis is specified, only scrolls along that axis.
 
 ### Syntax
 
@@ -219,13 +219,71 @@ Scrolls the specified Element to the position the passed in Element is found.
 
 ### Examples
 
-    //Scrolls the "myElement" to the top left corner of the window.
+	//Scrolls the "myElement" to the top left corner of the window.
 	var myFx = new Fx.Scroll(window).toElement('myElement');
+
+	//Scrolls the "myElement" to the top corner of the window.
+	//Does not scroll horizontally.
+	var myFx = new Fx.Scroll(window).toElement('myElement', 'y');
 
 ### Notes
 
 - See [Element:getPosition][] for position difficulties.
 
+
+Fx.Scroll Method: toElementEdge {#Fx-Scroll:toElementEdge}
+--------------------------------------------------
+
+Scrolls the element until the specified element is visible along the specified axes.
+
+### Syntax
+
+	myFx.toElementEdge(el[, axes]);
+
+### Arguments
+
+1. el - (*mixed*) A string of the Element's id or an Element reference to scroll to.
+2. axes - (*array* or *string*, optional) An array or string specifying which axes to scroll on, can be 'x', 'y', or ['x', 'y']. It defaults to both axes.
+
+### Returns
+
+* (*object*) This Fx.Scroll instance.
+
+### Examples
+
+	//Scrolls the window until "myElement" is visible, scrolling in whatever direction
+	//is required.
+	var myFx = new Fx.Scroll(window).toElementEdge('myElement');
+
+	//Same as above but only scrolls the window up or down.
+	var myFx = new Fx.Scroll(window).toElementEdge('myElement', 'y');
+
+Fx.Scroll Method: toElementCenter {#Fx-Scroll:toElementCenter}
+--------------------------------------------------
+
+Scrolls the element until the specified element is centered along the specified axes.
+
+### Syntax
+
+	myFx.toElementCenter(el[, axes]);
+
+### Arguments
+
+1. el - (*mixed*) A string of the Element's id or an Element reference to scroll to.
+2. axes - (*array* or *string*, optional) An array or string specifying which axes to scroll on, can be 'x', 'y', or ['x', 'y']. It defaults to both axes.
+
+### Returns
+
+* (*object*) This Fx.Scroll instance.
+
+### Examples
+
+	//Scrolls the window until "myElement" is centered in the window,
+	//scrolling in whatever direction is required.
+	var myFx = new Fx.Scroll(window).toElementCenter('myElement');
+
+	//Same as above but only scrolls the window up or down.
+	var myFx = new Fx.Scroll(window).toElementCenter('myElement', 'y');
 
 
 [Fx]: /core/Fx/Fx

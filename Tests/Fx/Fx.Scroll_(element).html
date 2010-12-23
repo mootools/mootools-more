@@ -72,35 +72,35 @@ makeActions([
 		title: 'Scroll the blue item into view.',
 		fn: function(){
 			fx.set(0,0);
-			fx.scrollIntoView('blue', 'y');
+			fx.toElementEdge('blue', 'y');
 		}
 	},
 	{
 		title: 'Scroll the yellow item into view (from below).',
 		fn: function(){
 			fx.set(0,500);
-			fx.scrollIntoView('yellow', 'y');
+			fx.toElementEdge('yellow', 'y');
 		}
 	},
 	{
 		title: 'Scroll to the center of the green item.',
 		fn: function(){
 			fx.set(0,0);
-			fx.scrollToCenter('green');
+			fx.toElementCenter('green');
 		}
 	},
 	{
 		title: 'Scroll to the center of the green item\'s x axis.',
 		fn: function(){
 			fx.set(0,0);
-			fx.scrollToCenter('green','x');
+			fx.toElementCenter('green','x');
 		}
 	},
 	{
 		title: 'Scroll to the center of the green item\'s y axis.',
 		fn: function(){
 			fx.set(0,0);
-			fx.scrollToCenter('green','y');
+			fx.toElementCenter('green','y');
 		}
 	}
 ]);
