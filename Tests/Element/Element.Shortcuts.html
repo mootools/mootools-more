@@ -158,6 +158,13 @@ makeActions([
 			$('foo').show();
 			$('foo').swapClass('blueText', 'blackText');
 		}
+	},
+	{
+		title: 'Document.clearSelection',
+		description: 'Run this function. You have 3 seconds to select some text. Then it should clear the selection',
+		fn: function(){
+			document.clearSelection.delay(3000, document);
+		}
 	}
 ]);
 

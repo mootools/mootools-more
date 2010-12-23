@@ -62,11 +62,14 @@ Element.implement({
 Document.implement({
 
 	clearSelection: function(){
-		if (document.selection && document.selection.empty){
-			document.selection.empty();
-		} else if (window.getSelection){
+		if (window.getSelection){
 			var selection = window.getSelection();
 			if (selection && selection.removeAllRanges) selection.removeAllRanges();
+		} else if (document.selection && document.selection.empty){
+			try {
+				//IE fails here if selected element is not in dom
+				document.selection.empty();
+			} catch(e){}
 		}
 	}
 
