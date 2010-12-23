@@ -132,7 +132,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	setHeadSort: function(sorted){
 		var head = $$(!this.head.length ? this.head.cells[this.sorted.index] : this.head.map(function(row){
 			return row.getElements(this.options.thSelector)[this.sorted.index];
-		}, this));
+		}, this).clean());
 		if (!head.length) return;
 		if (sorted){
 			head.addClass(this.options.classHeadSort);
