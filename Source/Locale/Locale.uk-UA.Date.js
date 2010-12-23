@@ -44,6 +44,7 @@ Locale.define('uk-UA', 'Date', {
 	shortTime: '%H:%M',
 	AM: 'до полудня',
 	PM: 'по полудню',
+	firstDayOfWeek: 1,
 
 	// Date.Extras
 	ordinal: '',

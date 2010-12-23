@@ -43,6 +43,7 @@ Locale.define('cs-CZ', 'Date', {
 	shortTime: '%H:%M',
 	AM: 'dop.',
 	PM: 'odp.',
+	firstDayOfWeek: 1,
 
 	// Date.Extras
 	ordinal: '.',

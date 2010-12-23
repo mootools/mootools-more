@@ -34,6 +34,7 @@ Locale.define('de-DE', 'Date', {
 	shortTime: '%H:%M',
 	AM: 'vormittags',
 	PM: 'nachmittags',
+	firstDayOfWeek: 1,
 
 	// Date.Extras
 	ordinal: '.',
