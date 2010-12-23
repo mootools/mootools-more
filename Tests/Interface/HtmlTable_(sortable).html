@@ -29,6 +29,68 @@ th.table-th-sort-rev {
 	background: #fff url(/asset/more/bullet_arrow_up.png) no-repeat right 3px;
 }
 </style>
+Only sub heads should reflect column sort (and be sortable)
+<table id="single_multi_header_sort">
+	<thead>
+		<tr>
+			<th>col 1</th>
+			<th>col 2</th>
+		</tr>
+		<tr>
+			<th class="sorter">col 1 (sub)</th>
+			<th class="sorter">col 2 (sub)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>a</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>b</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>c</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>d</td>
+		</tr>
+	</tbody>
+</table>
+All header elements should reflect sort (and be sortable)
+<table id="multi_header_sorts">
+	<thead>
+		<tr>
+			<th>col 1</th>
+			<th>col 2</th>
+		</tr>
+		<tr>
+			<th>col 1 (sub)</th>
+			<th>col 2 (sub)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>a</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>b</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>c</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>d</td>
+		</tr>
+	</tbody>
+</table>
 <table id="hidden_sorts">
 	<thead>
 		<tr>
@@ -69,10 +131,18 @@ th.table-th-sort-rev {
 		<tr><td>10-12-2010</td></tr>
 	</tbody>
 </table>
+
 <script src="/depender/build?require=More/HtmlTable.Sort"></script>
 <script>
+new HtmlTable($('single_multi_header_sort'), {
+	sortable: true,
+	thSelector: 'th.sorter'
+});
+
+new HtmlTable($('multi_header_sorts'), {
+	sortable: true
+});
 new HtmlTable($('hidden_sorts'), {
-	parsers: ['number', 'number'],
 	sortable: true
 });
 new HtmlTable($('date_sort_w_empty'), {
@@ -88,6 +158,7 @@ t.push(['apple', 'red']);
 t.push(['lemon', 'yellow']);
 t.push(['plumbs', 'purple']);
 t.push(['grapes', 'green']);
+
 
 var data = [
 	{"id":56,"timezone":"Europe/Amsterdam","name":"Amsterdam","geolat":52.3789,"geolong":4.90067},
@@ -148,6 +219,7 @@ var myTable = new HtmlTable({
 });
 $(myTable).inject($('mt-content'));
 
+
 headers = ["hostname","model","rack","expire"];
 
 rows = [
@@ -180,4 +252,5 @@ var myTable = new HtmlTable({
 	sortable: true,
 });
 myTable.inject($('mt-content'));
+
 </script>
