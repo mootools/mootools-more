@@ -77,7 +77,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	detectParsers: function(){
 		if (!this.head) return;
-		return this.head.getElements(this.options.thSelector).flatten().map(this.detectParser.bind(this));
+		return this.head.getElements(this.options.thSelector).flatten().map(this.detectParser, this);
 	},
 
 	detectParser: function(cell, index){
@@ -131,15 +131,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	setHeadSort: function(sorted){
 		var head = $$(!this.head.length ? this.head.cells[this.sorted.index] : this.head.map(function(row){
-		  return row.getElements(this.options.thSelector)[this.sorted.index];
-		}.bind(this)));
+			return row.getElements(this.options.thSelector)[this.sorted.index];
+		}, this));
 		if (!head.length) return;
 		if (sorted){
 			head.addClass(this.options.classHeadSort);
 			if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
 			else head.removeClass(this.options.classHeadSortRev);
-		}
-		else {
+		} else {
 			head.removeClass(this.options.classHeadSort).removeClass(this.options.classHeadSortRev);
 		}
 	},
@@ -245,7 +244,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 	disableSort: function(){
 		this.element.removeClass(this.options.classSortable);
 		this.attachSorts(false);
-		this.sortSpans.each(function(span){ span.destroy(); });
+		this.sortSpans.each(function(span){
+			span.destroy();
+		});
 		this.sortSpans.empty();
 		this.sortEnabled = false;
 		return this;
