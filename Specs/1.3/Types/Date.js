@@ -238,6 +238,13 @@ describe('Date.getTimezone', function(){
 
 describe('Date.getWeek', function(){
 
+	beforeEach(function(){
+		// Make sure we're using monday as first day of week for these specs
+		Locale.use(Locale.define('testGetWeek', 'Date', {
+			firstDayOfWeek: 1
+		}));
+	});
+
 	it('should return the week of the year of a Date instance', function(){
 		var d = new Date(2007, 0, 1, 1, 1, 1);
 		expect(d.get('week')).toEqual(1); // Mon Jan 01 2007
@@ -296,6 +303,12 @@ describe('Date.getWeek', function(){
 		locale.define('Date', 'firstDayOfWeek', 6); // Saturday
 		expect(d.get('week')).toEqual(1);
 
+		Locale.use('en-US');
+
+	});
+
+	afterEach(function(){
+		// set back to en-US for further testing
 		Locale.use('en-US');
 	});
 
