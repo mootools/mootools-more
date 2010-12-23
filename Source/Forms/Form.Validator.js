@@ -443,7 +443,15 @@ Form.Validator.addAllThese([
 	['validate-email', {
 		errorMsg: Form.Validator.getMsg.pass('email'),
 		test: function(element){
-			return Form.Validator.getValidator('IsEmpty').test(element) || (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i).test(element.get('value'));
+			var chars = "[a-z0-9!#$%&'*+/=?^_`{|}~-]",
+				local = '(?:' + chars + '\\.?){0,63}' + chars,
+				label = '[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?',
+				hostname = '(?:' + label + '\\.)*' + label,
+				octet = '(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)',
+				ipv4 = '\\[(?:' + octet + '\\.){3}' + octet + '\\]',
+				domain = '(?:' + hostname + '|' + ipv4 + ')';
+
+			return Form.Validator.getValidator('IsEmpty').test(element) || (new RegExp('^' + local + '@' + domain + '$', 'i')).test(element.get('value'));
 		}
 	}],
 

@@ -165,7 +165,6 @@ describe('Form.Validator', function(){
 			it('should return false for fields whose value is not a date', function(){
 				expect(validator.test(createInput('Mr. Foo'))).toEqual(false);
 				expect(validator.test(createInput('blah 12, 1000'))).toEqual(false);
-				expect(validator.test(createInput('boo 12'))).toEqual(false);
 			});
 
 			it('should return true for fields whose value parses to a date', function(){
