@@ -1,7 +1,7 @@
 Locale: Number {#Number}
-=====================================
+========================
 
-Contains the messages for [Number.Extras][].
+Contains the messages for [Number.Format][].
 
 Usage
 -----
@@ -77,5 +77,16 @@ Available Languages
 </table>
 
 
+Keys/Values
+-----------
+
+- decimal - (*string*) The decimal point, usually a `.` or a `,`.
+- group - (*string*) The thousands separator
+- currency - (*object*)
+	- decimals - (*number*) The number of decimals used to format currencies, usually `2`
+	- prefix - (*string*) The prefix, usually the currency symbol like $ or €.
+	- suffix - (*string*) Can be used if the currency sympol is placed after the number.
+
+
 [Locale]: /more/Locale/Locale
-[Number.Extras]: /more/Types/Number.Extras
+[Number.Format]: /more/Types/Number.Format

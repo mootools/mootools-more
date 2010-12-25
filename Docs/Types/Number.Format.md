@@ -25,7 +25,7 @@ Formats a number into a formatted string for display to user. It respects locali
 	* group - (*string*) Thousands separator
 	* decimals - (*number*) Number of decimals
 	* precision - (*number*) Number of significant numbers
-	* scientific - (*boolean*) Set to `false` if the 1.4e+4 should be replaced by 1400
+	* scientific - (*boolean*) Set to `false` if the 1.4e+4 should be replaced by 14000
 	* suffix - (*string*) String prepended after the number
 	* suffix - (*string*) String appended after the number
 
