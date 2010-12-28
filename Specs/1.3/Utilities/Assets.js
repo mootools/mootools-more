@@ -8,9 +8,9 @@ describe('Assets', function(){
 			var load = jasmine.createSpy('load');
 			var myScript = Asset.javascript('../assets/Assets.js.test.js', {
 				id: 'myScript',
-				events: {load: function(){
-					load(this);
-				}}
+				onload: function(){
+					load(this)
+				}
 			});
 
 			waits(500);
@@ -18,7 +18,8 @@ describe('Assets', function(){
 			runs(function(){
 				expect(myScript.get('tag')).toEqual('script');
 				expect(myScript.id).toEqual('myScript');
-				if (!Browser.ie) expect(load).toHaveBeenCalledWith(myScript);
+				expect(load).toHaveBeenCalledWith(myScript);
+				expect(load.callCount).toEqual(1);
 				myScript.destroy();
 			});
 
