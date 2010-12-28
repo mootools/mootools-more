@@ -24,19 +24,19 @@ provides: [Assets]
 var Asset = {
 
 	javascript: function(source, properties){
-		properties = Object.append({
-			document: document
-		}, properties);
+		if (!properties) properties = {};
 
-		if (properties.onLoad){
-			properties.onload = properties.onLoad;
-			delete properties.onLoad;
-		}
+		var script = new Element('script', {src: source, type: 'text/javascript'}),
+			doc = properties.document || document,
+			loaded = 0,
+			loadEvent = properties.onload || properties.onLoad;
 
-		var script = new Element('script', {src: source, type: 'text/javascript'});
-		var load = properties.onload || function(){},
-			doc = properties.document;
+		var load = loadEvent ? function(){ // make sure we only call the event once
+			if (++loaded == 1) loadEvent.call(this);
+		} : function(){};
+
 		delete properties.onload;
+		delete properties.onLoad;
 		delete properties.document;
 
 		return script.addEvents({
