@@ -48,20 +48,24 @@ var Asset = {
 	},
 
 	css: function(source, properties){
-		properties = properties || {};
-		var onload = properties.onload || properties.onLoad;
-		if (onload){
-			properties.events = properties.events || {};
-			properties.events.load = onload;
-			delete properties.onload;
-			delete properties.onLoad;
-		}
-		return new Element('link', Object.merge({
+		if (!properties) properties = {};
+
+		var link = new Element('link', {
 			rel: 'stylesheet',
 			media: 'screen',
 			type: 'text/css',
 			href: source
-		}, properties)).inject(document.head);
+		});
+
+		var load = properties.onload || properties.onLoad,
+			doc = properties.document || document;
+
+		delete properties.onload;
+		delete properties.onLoad;
+		delete properties.document;
+
+		if (load) link.addEvent('load', load);
+		return link.set(properties).inject(doc.head);
 	},
 
 	image: function(source, properties){
