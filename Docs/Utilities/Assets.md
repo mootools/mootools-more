@@ -19,7 +19,7 @@ Injects a script tag into the head section of the document, pointing to the src 
 1. source     - (*string*) The location of the JavaScript file to load.
 2. properties - (*object*, optional) Additional attributes to be included into the script Element; this is the same as the second argument you might pass to including the Element constructor with the exception of Events (see note)
    - onLoad   - (*function*) A function that will be invoked when the JavaScript is loaded.
-   - document - (*object*, defaults to `document`) The document which the JavaScript should be inject in.
+   - document - (*object*, defaults to `document`) The document which the JavaScript should be injected in.
 
 ### Returns
 
@@ -51,8 +51,8 @@ Injects a css file in the page.
 ### Arguments
 
 1. source     - (*string*) The path of the CSS file.
-2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to  including the Element constructor. For instance you might specify an title attribute or perhaps an id.
-   - document - (*object*, defaults to `document`) The document which the link element should be inject in.
+2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to including the Element constructor. For instance you might specify a title attribute or perhaps an id.
+   - document - (*object*, defaults to `document`) The document which the link element should be injected in.
 
 
 ### Returns
