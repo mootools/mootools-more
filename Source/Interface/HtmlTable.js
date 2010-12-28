@@ -117,10 +117,9 @@ var HtmlTable = new Class({
 		var tds = row.map(function(data){
 			var td = new Element(tag || 'td', data ? data.properties : {}),
 				content = (data ? data.content : '') || data,
-				type = typeOf(content),
-				element = document.id(content);
+				type = typeOf(content);
 
-			if ((type != 'string' && element) || ['array', 'collection', 'elements'].contains(type)) td.adopt(element || content);
+			if (['element', 'array', 'collection', 'elements'].contains(type)) td.adopt(content);
 			else td.set('html', content);
 
 			return td;
