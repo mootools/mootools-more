@@ -6,6 +6,7 @@ describe('Assets', function(){
 		it('should load a javascript file and fire the load event', function(){
 
 			var load = jasmine.createSpy('load');
+
 			var myScript = Asset.javascript('../assets/Assets.js.test.js', {
 				id: 'myScript',
 				onload: function(){
@@ -32,6 +33,7 @@ describe('Assets', function(){
 		it('should load a css file and fire the load event', function(){
 
 			var load = jasmine.createSpy('load');
+
 			var myCSS = Asset.css('../assets/Assets.css.test.css', {
 				id: 'myStyle',
 				title: 'myStyle',
@@ -59,6 +61,7 @@ describe('Assets', function(){
 		it('should load a image', function(){
 
 			var load = jasmine.createSpy('load');
+
 			var myImage = Asset.image('../assets/mootools.png', {
 				id: 'myImage',
 				title: 'myImage',
@@ -80,8 +83,9 @@ describe('Assets', function(){
 
 		it('should fire the error event', function(){
 
-			var load = jasmine.createSpy('load');
-			var error = jasmine.createSpy('error');
+			var load = jasmine.createSpy('load'),
+				error = jasmine.createSpy('error');
+
 			var myImage = Asset.image('../assets/notExisting.png',{
 				onload: load,
 				onerror: error
@@ -99,9 +103,10 @@ describe('Assets', function(){
 
 		xit('should fire the error event when the source argument is empty', function(){
 
-			var load = jasmine.createSpy('load');
-			var error = jasmine.createSpy('error');
-			var myImage = Asset.image('',{
+			var load = jasmine.createSpy('load'),
+				error = jasmine.createSpy('error');
+
+			var myImage = Asset.image('', {
 				onload: load,
 				onerror: error
 			});
@@ -122,9 +127,9 @@ describe('Assets', function(){
 
 		it('shoud load several images', function(){
 
-			var complete = jasmine.createSpy('complete');
-			var progress = jasmine.createSpy('progress');
-			var error = jasmine.createSpy('error');
+			var complete = jasmine.createSpy('complete'),
+				progress = jasmine.createSpy('progress'),
+				error = jasmine.createSpy('error');
 
 			var loadedImages = new Asset.images([
 				'../assets/cow.png',
@@ -145,16 +150,16 @@ describe('Assets', function(){
 
 		});
 
-		xit('should should fire the onError callback for non-existent images and empty sources', function(){
+		it('should should fire the onError callback for non-existent images and empty sources', function(){
 
-			var complete = jasmine.createSpy('complete');
-			var progress = jasmine.createSpy('progress');
-			var error = jasmine.createSpy('error');
+			var complete = jasmine.createSpy('complete'),
+				progress = jasmine.createSpy('progress'),
+				error = jasmine.createSpy('error');
 
 			var loadedImages = new Asset.images([
 				'../assets/iDontExist.png',
 				'../assets/cow.png',
-				''
+				'../assets/iDontExistEither.png'
 			], {
 				onComplete: complete,
 				onProgress: progress,

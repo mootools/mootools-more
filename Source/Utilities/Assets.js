@@ -100,14 +100,18 @@ var Asset = {
 	},
 
 	images: function(sources, options){
+		sources = Array.from(sources);
+
+		var fn = function(){},
+			counter = 0;
+
 		options = Object.merge({
-			onComplete: function(){},
-			onProgress: function(){},
-			onError: function(){},
+			onComplete: fn,
+			onProgress: fn,
+			onError: fn,
 			properties: {}
 		}, options);
-		sources = Array.from(sources);
-		var counter = 0;
+
 		return new Elements(sources.map(function(source, index){
 			return Asset.image(source, Object.append(options.properties, {
 				onload: function(){
