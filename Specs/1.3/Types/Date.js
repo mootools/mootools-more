@@ -370,8 +370,7 @@ describe('Date.format', function(){
 		expect(d.format('compact')).toEqual(d.format('%Y') + d.format('%m') + d.format('%d') + 'T' + d.format('%H') + d.format('%M') + d.format('%S')); // missing!
 		expect(d.format('compact')).toEqual('19971120T010203'); // missing!
 
-		expect(d.format('iso8601')).toEqual(d.format('%Y') + '-' + d.format('%m') + '-' + d.format('%d') + 'T' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + d.format('%z'));
-		//expect(d.format('iso8601')).toEqual('1997-11-20T01:02:03+0000');
+		expect(d.format('iso8601')).toEqual('1997-11-20T00:02:03.000Z');
 
 		expect(d.format('short')).toEqual(d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%H') + ':' + d.format('%M'));
 		expect(d.format('short')).toEqual('20 Nov 01:02');
@@ -513,7 +512,7 @@ describe('Date.parse', function(){
 			expect(Date.parse(d.set({date: 1, mo: d.getMonth()}).format('%B'))).toEqual(d);
 
 			d = new Date().set({hours: 22, minutes: 45, seconds: 15});
-			expect(Date.parse('22:45:15').format('iso8601')).toEqual(d.format('iso8601'));
+			expect(Date.parse('22:45:15').format('compact')).toEqual(d.format('compact'));
 
 			expect(Date.parse('22:45').format('%H:%M')).toEqual('22:45');
 			expect(Date.parse('10:45pm').format('%H:%M')).toEqual('22:45');

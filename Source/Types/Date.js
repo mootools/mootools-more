@@ -268,7 +268,6 @@ Date.alias('strftime', 'format');
 var formats = {
 	db: '%Y-%m-%d %H:%M:%S',
 	compact: '%Y%m%dT%H%M%S',
-	iso8601: '%Y-%m-%dT%H:%M:%S%z',
 	'short': '%d %b %H:%M',
 	'long': '%B %d, %Y %H:%M'
 };
@@ -283,6 +282,17 @@ var formatters = {
 	},
 	rfc2822: function(date){
 		return rfcDayAbbr[date.get('day')] + date.format(', %d ') + rfcMonthAbbr[date.get('month')] + date.format(' %Y %H:%M:%S %z');
+	},
+	iso8601: function(date){
+		return (
+			date.getUTCFullYear() + '-' +
+			pad(date.getUTCMonth() + 1, 2) + '-' +
+			pad(date.getUTCDate(), 2) + 'T' +
+			pad(date.getUTCHours(), 2) + ':' +
+			pad(date.getUTCMinutes(), 2) + ':' +
+			pad(date.getUTCSeconds(), 2) + '.' +
+			pad(date.getUTCMilliseconds(), 3) + 'Z'
+		);
 	}
 };
 
