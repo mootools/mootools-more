@@ -1,12 +1,12 @@
-Hash: Asset {#Asset}
-=======================
+Object: Asset {#Asset}
+======================
 
-Provides methods for the dynamic loading and management of JavaScript, CSS, and image files.
+Provides functions for the dynamic loading and management of JavaScript, CSS, and image files.
 
 
 
-Asset Method: javascript {#Asset:javascript}
-----------------------------------------------
+Asset Function: javascript {#Asset:Asset-javascript}
+----------------------------------------------------
 
 Injects a script tag into the head section of the document, pointing to the src specified.
 
@@ -18,6 +18,8 @@ Injects a script tag into the head section of the document, pointing to the src 
 
 1. source     - (*string*) The location of the JavaScript file to load.
 2. properties - (*object*, optional) Additional attributes to be included into the script Element; this is the same as the second argument you might pass to including the Element constructor with the exception of Events (see note)
+   - onLoad   - (*function*) A function that will be invoked when the JavaScript is loaded.
+   - document - (*object*, defaults to `document`) The document which the JavaScript should be injected in.
 
 ### Returns
 
@@ -27,19 +29,18 @@ Injects a script tag into the head section of the document, pointing to the src 
 
 	var myScript = Asset.javascript('/scripts/myScript.js', {
 		id: 'myScript',
-		events: {
-			load: function(){
-				alert('myScript.js is loaded!');
-			}
+		onLoad: function(){
+			alert('myScript.js is loaded!');
 		}
 	});
 
 ### Note
+
 - WARNING: DO NOT use addEvent for load on the returned element, give it as onLoad in the properties argument.
 
 
-Asset Method: css {#Asset:css}
---------------------------------
+Asset Function: css {#Asset:Asset-css}
+--------------------------------------
 
 Injects a css file in the page.
 
@@ -50,7 +51,9 @@ Injects a css file in the page.
 ### Arguments
 
 1. source     - (*string*) The path of the CSS file.
-2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to  including the Element constructor. For instance you might specify an onLoad event or perhaps an id.
+2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to including the Element constructor. For instance you might specify a title attribute or perhaps an id.
+   - document - (*object*, defaults to `document`) The document which the link element should be injected in.
+
 
 ### Returns
 
@@ -60,12 +63,9 @@ Injects a css file in the page.
 
 	var myCSS = Asset.css('/css/myStyle.css', {id: 'myStyle', title: 'myStyle'});
 
-### Notes
 
-- WARNING: DO NOT use addEvent for load on the returned element, give it as onLoad in the properties argument.
-
-Asset Method: image {#Asset:image}
-------------------------------------
+Asset Function: image {#Asset:Asset-image}
+------------------------------------------
 
 Preloads an image and returns the img element.
 
@@ -76,7 +76,10 @@ Preloads an image and returns the img element.
 ### Arguments
 
 1. source     - (*string*) The path of the image file.
-2. properties - (*object*) Some additional attributes you might want to add to the img Element including the onLoad/onError/onAbort events.
+2. properties - (*object*) Some additional attributes you might want to add to the img Element.
+	- onLoad  - (*function*) A function that will be invoked when the image is loaded.
+	- onError - (*function*) A function that will be invoked when the image failed loading.
+	- onAbort - (*function*) A function what will be invoked when the loading is aborted.
 
 ### Returns
 
@@ -95,8 +98,8 @@ Preloads an image and returns the img element.
 - Does not inject the image into the page.
 - WARNING: DO NOT use addEvent for load/error/abort on the returned element, give them as onLoad/onError/onAbort in the properties argument.
 
-Asset Method: images {#Asset:images}
---------------------------------------
+Asset Function: images {#Asset:Asset-images}
+--------------------------------------------
 
 Preloads an array of images (as strings) and returns an array of img elements. does not inject them to the page.
 
@@ -109,45 +112,53 @@ Preloads an array of images (as strings) and returns an array of img elements. d
 1. sources - (*mixed*) An array or a string, of the paths of the image files.
 2. options - (*object*, optional) See below.
 
-## Options
+### Options
 
 * properties - (*object*) Some additional attributes for all the images (same as the second argument you might pass to *Asset.image*).
-* onComplete/onProgress/onError - (*functions*) See events below.
 
-### complete
+### Events
+
+#### complete
 
 * (*function*) Executes when all image files are loaded.
 
-#### Signature
+##### Signature
 
 	onComplete()
 
-### progress
+#### progress
 
 * (*function*) Executes when one image file is loaded.
 
-#### Signature
+##### Signature
 
-	onProgress(counter, index)
+	onProgress(counter, index, source)
 
-#### Arguments
+##### Arguments
 
 1. counter - (*number*) The number of loaded images.
 2. index   - (*number*) The index of the loaded image.
+3. source  - (*string*) The path of the image file.
 
-### error
+#### error
 
 * (*function*) Executes when one image file fails to load.
 
-#### Signature
+##### Signature
 
-	onError(counter, index)
+	onError(counter, index, source)
 
-#### Returns
+##### Arguments
+
+1. counter - (*number*) The number of errored images.
+2. index   - (*number*) The index of the errored image.
+3. source  - (*string*) The path of the image file.
+
+### Returns
 
 * (*array*) An [Elements][] collection.
 
-#### Examples
+### Examples
 
 	var myImages = Asset.images(['/images/myImage.png', '/images/myImage2.gif'], {
 		properties: {
