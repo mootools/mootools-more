@@ -71,6 +71,8 @@ describe('Assets', function(){
 				expect(myImage.get('tag')).toEqual('img');
 				expect(myImage.id).toEqual('myImage');
 				expect(load).toHaveBeenCalledWith(myImage);
+				expect(myImage.width).toEqual(230);
+				expect(myImage.height).toEqual(54);
 				myImage.destroy();
 			});
 
