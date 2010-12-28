@@ -101,6 +101,30 @@ describe('Assets', function(){
 
 		});
 
+		it('should fire the load event twice when loading the same image', function(){
+
+			var loadedagain = jasmine.createSpy('load'),
+				myImage1;
+
+			var loaded = function(){
+				myImage1 = Asset.image('../assets/mootools.png', {
+					onload: loadedagain
+				});
+			};
+
+			var myImage = Asset.image('../assets/mootools.png', {
+				onload: loaded
+			});
+
+			waits(500);
+
+			runs(function(){
+				expect(loadedagain).toHaveBeenCalled();
+				myImage.destroy();
+				if (myImage1) myImage1.destroy();
+			});
+		});
+
 		xit('should fire the error event when the source argument is empty', function(){
 
 			var load = jasmine.createSpy('load'),
