@@ -7,7 +7,7 @@ describe('HtmlTable.Sort', function(){
 				sortable: true,
 				headers: ['col'],
 				parsers: type ? [type] : [],
-				rows: data.map(function(item){return [item]}).shuffle()
+				rows: data.map(function(item){return [item]})
 			});
 
 			return Array.map(table.sort(0, false).body.rows, function(item){
@@ -18,11 +18,11 @@ describe('HtmlTable.Sort', function(){
 		describe('date', function(){
 
 			it('should sort on date', function(){
-				expect(sortedTable('date', ['1/2/08', '2/4/10', '3/4/10'])).toEqual(['1/2/08', '2/4/10', '3/4/10']);
+				expect(sortedTable('date', ['2/4/10', '3/4/10', '1/2/08'])).toEqual(['1/2/08', '2/4/10', '3/4/10']);
 			});
 
 			it('should accept multiple date types', function(){
-				expect(sortedTable('date', ['1/2/08', 'Jan 5 2010', '01/08/2010'])).toEqual(['1/2/08', 'Jan 5 2010', '01/08/2010']);
+				expect(sortedTable('date', ['Jan 5 2010', '01/08/2010', '1/2/08'])).toEqual(['1/2/08', 'Jan 5 2010', '01/08/2010']);
 			});
 
 		});
@@ -30,10 +30,10 @@ describe('HtmlTable.Sort', function(){
 		describe('input-', function(){
 
 			var data = [
+				new Element('input', {type: 'checkobx', checked: false, value: 'd'}),
 				new Element('input', {type: 'checkbox', checked: true, value: 'a'}),
-				new Element('input', {type: 'checkbox', checked: true, value: 'b'}),
 				new Element('input', {type: 'checkbox', checked: false, value: 'c'}),
-				new Element('input', {type: 'checkobx', checked: false, value: 'd'})
+				new Element('input', {type: 'checkbox', checked: true, value: 'b'})
 			];
 
 			describe('input-checked', function(){
@@ -61,16 +61,16 @@ describe('HtmlTable.Sort', function(){
 		describe('number', function(){
 
 			it('should sort a list numerically', function(){
-				expect(sortedTable('number', [1, 2, 3])).toEqual(['1','2','3']);
-				expect(sortedTable('number', [1, 2, 3, 12])).toEqual(['1', '2', '3', '12']);
+				expect(sortedTable('number', [3, 1, 2])).toEqual(['1', '2', '3']);
+				expect(sortedTable('number', [3, 1, 12, 2])).toEqual(['1', '2', '3', '12']);
 			});
 
 			it('should accept numbers as strings', function(){
-				expect(sortedTable('number', ['1', 2, '3'])).toEqual(['1','2','3']);
+				expect(sortedTable('number', ['3', '1', 2])).toEqual(['1', '2', '3']);
 			});
 
 			it('should not sort floats according to value', function(){
-				expect(sortedTable('number', ['.03', '.2', '1'])).not.toEqual(['.03', '.2', '1']);
+				expect(sortedTable('number', ['.03', '1', '.2'])).not.toEqual(['.03', '.2', '1']);
 			});
 
 		});
@@ -78,7 +78,7 @@ describe('HtmlTable.Sort', function(){
 		describe('numberLax', function(){
 
 			it('should sort a alphanumerical list numerically', function(){
-				expect(sortedTable('number', ['1a', '4b', '12c'])).toEqual(['1a','4b','12c']);
+				expect(sortedTable('number', ['12c', '1a', '4b'])).toEqual(['1a', '4b', '12c']);
 			});
 
 		});
@@ -86,7 +86,7 @@ describe('HtmlTable.Sort', function(){
 		describe('float', function(){
 
 			it('should correctly sort floats according to value', function(){
-				expect(sortedTable('float', ['.03', '.2', '1'])).toEqual(['.03', '.2', '1']);
+				expect(sortedTable('float', ['1', '.03', '.2'])).toEqual(['.03', '.2', '1']);
 			});
 
 			it('should sort by float when autodetecting a mix of floats and integers are present', function(){
@@ -98,7 +98,7 @@ describe('HtmlTable.Sort', function(){
 		describe('floatLax', function(){
 
 			it('should correctly sort alpha-floats according to value', function(){
-				expect(sortedTable('float', ['.03a', '.2b', '1c'])).toEqual(['.03a', '.2b', '1c']);
+				expect(sortedTable('float', ['.2b', '1c', '.03a'])).toEqual(['.03a', '.2b', '1c']);
 			});
 
 		});
@@ -106,11 +106,11 @@ describe('HtmlTable.Sort', function(){
 		describe('string', function(){
 
 			it('should sort a list alphabetically', function(){
-				expect(sortedTable('string', ['a','b','c'])).toEqual(['a','b','c']);
+				expect(sortedTable('string', ['a', 'c', 'b'])).toEqual(['a', 'b', 'c']);
 			});
 
 			it('should not be case sensitive', function(){
-				expect(sortedTable('string', ['A','b','C'])).toEqual(['A','b','C']);
+				expect(sortedTable('string', ['A', 'C', 'b'])).toEqual(['A', 'b', 'C']);
 			});
 
 			it('should sort a list of numbers alphabetically', function(){
@@ -123,11 +123,11 @@ describe('HtmlTable.Sort', function(){
 
 			it('should sort a list alphabetically by title', function(){
 				var data = [
-					new Element('div', {title: 'a', text: 'a'}),
 					new Element('div', {title: 'b', text: 'b'}),
+					new Element('div', {title: 'a', text: 'a'}),
 					new Element('div', {title: 'c', text: 'c'})
 				];
-				expect(sortedTable('string', data)).toEqual(['a','b','c']);
+				expect(sortedTable('string', data)).toEqual(['a', 'b', 'c']);
 			});
 
 		});
