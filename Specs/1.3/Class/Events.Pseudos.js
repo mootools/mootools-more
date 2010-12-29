@@ -157,7 +157,6 @@ describe('Events.Pseudos', function(){
 			Events.definePseudo('test2', {
 				listener: function(split, fn, args, monitor, options){
 					expect(options).toEqual(options);
-					console.log(this.$events, split.original);
 					expect(this.$events[split.original][0]).toEqual(fn);
 					expect(this.$events['attach'][0]).toEqual(monitor);
 				},
