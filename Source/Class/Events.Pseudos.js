@@ -45,12 +45,14 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		var parsed = Slick.parse(type).expressions[0][0],
 			parsedPseudos = parsed.pseudos;
 
-		return (pseudos && pseudos[parsedPseudos[0].key]) ? {
-			event: parsed.tag,
-			value: parsedPseudos[0].value,
-			pseudo: parsedPseudos[0].key,
-			original: type
-		} : null;
+		return (pseudos && pseudos[parsedPseudos[0].key]) ? parsedPseudos.map(function(item, index){
+			return {
+				event: parsed.tag,
+				value: parsedPseudos[index].value,
+				pseudo: parsedPseudos[index].key,
+				original: type
+			};
+		}) : null;
 	};
 
 
@@ -62,22 +64,25 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
-				pseudo = pseudos[split.pseudo],
-				options = pseudo.options || {};
+				options = pseudos[split[0].pseudo].options || {};
 
 			var self = this;
 			var monitor = function(){
-				pseudo.listener.call(self, split, fn, arguments, monitor, options);
+				var args = arguments;
+				split.each(function(item){
+					var pseudo = pseudos[item.pseudo];
+					pseudo.listener.call(self, item, fn, args, pseudo.options);
+				});
 			};
 
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
 
-			var eventType = split.event,
+			var eventType = split[0].event,
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2);
-			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 
+			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 			if (eventOptions.base) eventType = eventOptions.base;
 
 			addEvent.apply(this, [type, fn].concat(args));
@@ -90,12 +95,12 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type),
-				pseudo = pseudos[split.pseudo],
+				pseudo = pseudos[split[0].pseudo],
 				options = pseudo.options || {};
 
 			if (!events) return this;
 
-			var eventType = split.event,
+			var eventType = split[0].event,
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2);
 			if (eventOptions.args) args.append(Array.from(eventOptions.args));

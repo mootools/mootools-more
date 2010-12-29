@@ -8,13 +8,52 @@ License:
 
 describe('Events.Pseudos', function(){
 
-	it('should implement Event.Psuedos in already existing classes defined in core', function(){
+	it('should implement Event.Pseudos in already existing classes defined in core', function(){
 		var callback = jasmine.createSpy('complete'),
 			fx = new Fx();
 
 		fx.addEvent('complete:once', callback);
 		fx.fireEvent('complete');
 		expect(callback).toHaveBeenCalled();
+	});
+
+	describe('Multiple simultaneous pseudos', function(){
+
+		var spy,
+			e = new Events(),
+			spies = {
+			first: jasmine.createSpy(),
+			second: jasmine.createSpy(),
+			org: jasmine.createSpy()
+		};
+
+		it('should support adding events', function(){
+
+			spy = function (split, fn, args){
+				if (!split) {
+					spies.org()
+				} else {
+					spies[split.pseudo]();
+					if (split.value == 'org') fn.apply(this, args);
+				}
+			}
+
+			Events.definePseudo('first', spy);
+			Events.definePseudo('second', spy);
+			e.addEvent('test:first(org):second', spy).fireEvent('test');
+
+			expect(spies.first).toHaveBeenCalled();
+			expect(spies.second).toHaveBeenCalled();
+			expect(spies.org).toHaveBeenCalled();
+		});
+
+		it('should support removing events', function(){
+			e.removeEvent('test:first(org):second', spy).fireEvent('test');
+			expect(spies.first.callCount).toEqual(1);
+			expect(spies.second.callCount).toEqual(1);
+			expect(spies.org.callCount).toEqual(1);
+		});
+
 	});
 
 	describe('Options', function(){
