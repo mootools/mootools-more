@@ -62,8 +62,12 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	attachSorts: function(attach){
+		this.detachSorts();
+		if (attach !== false) this.element.addEvent('click:relay(' + this.options.thSelector + ')', this.bound.headClick);
+	},
+
+	detachSorts: function(){
 		this.element.removeEvents('click:relay(' + this.options.thSelector + ')');
-		this.element[attach !== false ? 'addEvent' : 'removeEvent']('click:relay(' + this.options.thSelector + ')', this.bound.headClick);
 	},
 
 	setHeaders: function(){
@@ -76,17 +80,13 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	detectParsers: function(){
-		if (!this.head) return;
-		return this.head.getElements(this.options.thSelector).flatten().map(this.detectParser, this);
+		return this.head && this.head.getElements(this.options.thSelector).flatten().map(this.detectParser, this);
 	},
 
 	detectParser: function(cell, index){
 		if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser')) return cell.retrieve('htmltable-parser');
 		var thDiv = new Element('div');
-		Array.each(cell.childNodes, function(node){
-			thDiv.adopt(node);
-		});
-		thDiv.inject(cell);
+		thDiv.adopt(cell.childNodes).inject(cell);
 		var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
 		this.sortSpans.push(sortSpan);
 		var parser = this.options.parsers[index],
