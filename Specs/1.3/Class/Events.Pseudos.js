@@ -30,12 +30,9 @@ describe('Events.Pseudos', function(){
 		it('should support adding events', function(){
 
 			spy = function (split, fn, args){
-				if (!split) {
-					spies.org()
-				} else {
-					spies[split.pseudo]();
-					if (split.value == 'org') fn.apply(this, args);
-				}
+				if (!split) spies.org()
+				else spies[split.pseudo]();
+				if (fn) fn.apply(this, args);
 			}
 
 			Events.definePseudo('first', spy);
@@ -46,6 +43,10 @@ describe('Events.Pseudos', function(){
 			expect(spies.second).toHaveBeenCalled();
 			expect(spies.org).toHaveBeenCalled();
 		});
+
+    it('should support options across pseudos', function(){
+      //arian write me pls! k thx.
+    });
 
 		it('should support removing events', function(){
 			e.removeEvent('test:first(org):second', spy).fireEvent('test');
@@ -122,6 +123,8 @@ describe('Events.Pseudos', function(){
 			});
 
 		});
+  
+  });
 
 	describe(':once pseudo', function(){
 
@@ -194,7 +197,6 @@ describe('Events.Pseudos', function(){
 			Events.definePseudo('test2', {
 				listener: function(split, fn, args, monitor, options){
 					expect(options).toEqual(options);
-					console.log(this.$events, split.original);
 					expect(this.$events[split.original][0]).toEqual(fn);
 					expect(this.$events['attach'][0]).toEqual(monitor);
 				},

@@ -38,41 +38,48 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		};
 	};
 
-
 	var splitType = function(type){
 		if (type.indexOf(':') == -1) return null;
 
 		var parsed = Slick.parse(type).expressions[0][0],
 			parsedPseudos = parsed.pseudos;
 
-		return (pseudos && pseudos[parsedPseudos[0].key]) ? parsedPseudos.map(function(item, index){
-			return {
+		return pseudos ? parsedPseudos.map(function(item, index){
+			return pseudos[parsedPseudos[index].key] ? {
 				event: parsed.tag,
 				value: parsedPseudos[index].value,
 				pseudo: parsedPseudos[index].key,
 				original: type
-			};
-		}) : null;
+			} : null;
+		}).clean() : null;
 	};
-
 
 	return {
 
 		addEvent: function(type, fn, internal){
 			var split = splitType(type);
-			if (!split) return addEvent.call(this, type, fn, internal);
+			if (!split || !split.length) return addEvent.call(this, type, fn, internal);
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
-				options = pseudos[split[0].pseudo].options || {};
+				options = Object.merge.apply(this, split.map(function(item){
+					return pseudos[item.pseudo].options || {};
+				}));
 
-			var self = this;
-			var monitor = function(){
-				var args = arguments;
-				split.each(function(item){
-					var pseudo = pseudos[item.pseudo];
-					pseudo.listener.call(self, item, fn, args, pseudo.options);
-				});
+			var self = this,
+				stack = fn;
+
+			split.each(function(item, index){
+				var pseudo = pseudos[item.pseudo],
+					fn = stack;
+
+				stack = function(){
+					pseudo.listener.call(self, item, fn, arguments, monitor, pseudo.options);
+				};
+			});
+
+			function monitor(){
+				stack.apply(self, arguments);
 			};
 
 			events.include({event: fn, monitor: monitor});
@@ -91,12 +98,13 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 		removeEvent: function(type, fn){
 			var split = splitType(type);
-			if (!split) return removeEvent.call(this, type, fn);
+			if (!split || !split.length) return removeEvent.call(this, type, fn);
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type),
-				pseudo = pseudos[split[0].pseudo],
-				options = pseudo.options || {};
+				options = Object.merge.apply(this, split.map(function(item){
+					return pseudos[item.pseudo].options || {};
+				}));
 
 			if (!events) return this;
 
