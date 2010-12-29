@@ -89,17 +89,23 @@ describe('Events.Pseudos', function(){
 	describe(':once pseudo', function(){
 
 		it('should only fire once', function(){
-			var fn = jasmine.createSpy('once pseudo');
+			var fn1 = jasmine.createSpy('once pseudo one'),
+				fn2 = jasmine.createSpy('once pseudo two');
 
 			var e = new Events();
-			e.addEvent('connect:once', fn);
+			e.addEvent('connect:once', fn1).addEvent('connect:once', fn2);
 			e.fireEvent('connect', 4);
 			e.fireEvent('connect', 3);
 			e.fireEvent('connect', 2);
 
-			expect(fn).toHaveBeenCalledWith(4);
-			expect(fn).not.toHaveBeenCalledWith(3);
-			expect(fn).not.toHaveBeenCalledWith(2);
+			expect(fn1).toHaveBeenCalledWith(4);
+			expect(fn1).not.toHaveBeenCalledWith(3);
+			expect(fn1).not.toHaveBeenCalledWith(2);
+
+			expect(fn2).toHaveBeenCalledWith(4);
+			expect(fn2).not.toHaveBeenCalledWith(3);
+			expect(fn2).not.toHaveBeenCalledWith(2);
+
 		});
 
 		it('should call the original event callback', function(){
@@ -131,10 +137,35 @@ describe('Events.Pseudos', function(){
 				});
 				expect(fn).toEqual(eventFn);
 				expect(Array.from(args)).toEqual(eventArgs);
+				expect(this).toEqual(e);
 			});
 
 			e.addEvent('e:test(foo)', eventFn);
 			e.fireEvent('e', eventArgs);
+
+		});
+
+		it('should call Pseudo function with split, fn, args, monitor and options', function(){
+
+			var eventFn =  function(){ return 'bar'; },
+				eventArgs = ['one', 'two', 'three'],
+				options = {
+					connect: {base: 'attach', args: [1, 2, 3]}
+				},
+				e = new Events();
+
+			Events.definePseudo('test2', {
+				listener: function(split, fn, args, monitor, options){
+					expect(options).toEqual(options);
+					console.log(this.$events, split.original);
+					expect(this.$events[split.original][0]).toEqual(fn);
+					expect(this.$events['attach'][0]).toEqual(monitor);
+				},
+				options: options
+			});
+
+			e.addEvent('connect:test2', eventFn);
+			e.fireEvent('attach', eventArgs);
 
 		});
 
