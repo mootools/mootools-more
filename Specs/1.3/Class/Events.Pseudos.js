@@ -84,8 +84,6 @@ describe('Events.Pseudos', function(){
 
 		});
 
-	});
-
 	describe(':once pseudo', function(){
 
 		it('should only fire once', function(){
