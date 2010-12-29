@@ -67,7 +67,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			var self = this;
 			var monitor = function(){
-				pseudo.listener.call(self, split, fn, arguments, options);
+				pseudo.listener.call(self, split, fn, arguments, monitor, options);
 			};
 
 			events.include({event: fn, monitor: monitor});
@@ -120,9 +120,10 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 var pseudos = {
 
-	once: {listener: function(split, fn, args){
+	once: {listener: function(split, fn, args, monitor){
 		fn.apply(this, args);
-		this.removeEvent(split.original, fn);
+		this.removeEvent(split.event, monitor)
+			.removeEvent(split.original, fn);
 	}}
 
 };

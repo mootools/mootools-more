@@ -34,7 +34,7 @@ nativeEvents.focusout = 2;
 
 Event.definePseudo('relay', {
 
-	listener: function(split, fn, args, options){
+	listener: function(split, fn, args, monitor, options){
 		var event = args[0],
 			eventOptions = options[split.event],
 			check = eventOptions ? eventOptions.condition : null;

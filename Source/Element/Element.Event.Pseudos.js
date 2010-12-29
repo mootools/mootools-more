@@ -21,9 +21,10 @@ provides: [Element.Event.Pseudos]
 
 var pseudos = {
 
-	once: {listener: function(split, fn, args){
+	once: {listener: function(split, fn, args, monitor){
 		fn.apply(this, args);
-		this.removeEvent(split.original, fn);
+		this.removeEvent(split.event, monitor)
+			.removeEvent(split.original, fn);
 	}}
 
 };
