@@ -209,7 +209,7 @@ Form.Validator = new Class({
 				if (className && !this.test(className, field)) validatorsFailed.include(className);
 			}, this);
 			passed = validatorsFailed.length === 0;
-			if (validators && this.hasValidator(field,'warnOnly')){
+			if (validators && !this.hasValidator(field,'warnOnly')){
 				if (passed){
 					field.addClass('validation-passed').removeClass('validation-failed');
 					this.fireEvent('elementPass', field);
