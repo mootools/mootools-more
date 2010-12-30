@@ -30,6 +30,7 @@ var Sortables = new Class({
 		onStart: function(element, clone){},
 		onComplete: function(element){},*/
 		opacity: 1,
+		insertEvent: 'enter',
 		clone: false,
 		revert: false,
 		handle: false,
@@ -172,10 +173,9 @@ var Sortables = new Class({
 				this.element.set('opacity', this.options.opacity || 0);
 				this.fireEvent('start', [this.element, this.clone]);
 			}.bind(this),
-			onEnter: this.insert.bind(this),
 			onCancel: this.reset.bind(this),
 			onComplete: this.end.bind(this)
-		});
+		}).addEvent(this.options.insertEvent, this.insert.bind(this));
 
 		this.clone.inject(this.element, 'before');
 		this.drag.start(event);

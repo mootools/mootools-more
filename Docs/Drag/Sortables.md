@@ -20,7 +20,8 @@ Creates an interface for drag and drop sorting of a list or lists.
 * handle - (*string*: defaults to *false*) A selector to select an element inside each sortable item to be used as the handle for sorting that item.  If no match is found, the element is used as its own handle.
 * opacity - (*number*: defaults to *1*) Opacity of the place holding element
 * revert - (*mixed*: defaults to *false*) Whether or not to use an effect to slide the element into its final location after sorting. If you pass an object it will be used as additional options for the revert effect.
-* dragOptions - (*object*; defaults to *{}*) The options to apply internally to sortable's Drag.Move instances.
+* dragOptions - (*object*: defaults to *{}*) The options to apply internally to sortable's Drag.Move instances.
+* insertEvent - (*string*: defaults to *enter*) The drag event type to insert the sortable element on. Other possible values include 'leave' and 'drop'.
 
 ### Events:
 

@@ -43,6 +43,9 @@
 </div>
 <div id="order"></div>
 
+<p>This sortable should only sort on drag leave (rather than drag enter).</p>
+<div id="test2"></div>
+
 <script src="/depender/build?require=More/Sortables"></script>
 <script>
 
@@ -62,6 +65,27 @@ $('detach-attach').addEvent('click', function(){
 	if (attached) mySort.detach();
 	else mySort.attach();
 	attached = !attached;
+});
+
+
+//test2
+var container = new Element('ul').inject($('test2'));
+
+[200, 50, 200].each(function(value, index) {
+	new Element('li', {
+		'styles': {
+			'background-color': [100, 100, value],
+			'width': 100,
+			'height': value,
+			'border': '1px solid rgb(80,80,80)',
+			'cursor': 'move'
+		}
+	}).set('text', 'element' + index.toString()).inject(container);
+});
+
+var sortable = new Sortables(container, {
+  clone: true,
+  insertEvent: 'leave'
 });
 
 </script>
