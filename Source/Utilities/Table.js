@@ -15,8 +15,7 @@ provides: [Table]
 var Table = this.Table = function(){
 
 	this.length = 0;
-	var keys = [],
-	    values = [];
+	var keys = [], values = [];
 	
 	this.set = function(key, value){
 		var index = keys.indexOf(key);

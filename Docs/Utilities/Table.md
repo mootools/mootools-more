@@ -3,14 +3,6 @@ Class: Table {#Table}
 
 A LUA-style table implementation that allows for arbitrary data types for keys.
 
-### Note
-
-- Table should only be used when it's really important to use non-scalar types as keys, otherwise use plain objects, which have a better performance.
-
-
-Table Method: constructor
--------------------------
-
 ### Syntax
 
 	var myTable = new Table();
@@ -24,7 +16,7 @@ None
 * (*object*) A new Table instance.
 
 Table Method: set {#Table:set}
-------------------------------
+----------------------------------------
 
 Set a value for a specific key. Note that the key can be anything - a function, an object, an element, etc.
 
@@ -48,7 +40,7 @@ Set a value for a specific key. Note that the key can be anything - a function, 
 	myTable.set(myClassInstance, $$('.someElements'));
 
 Table Method: get {#Table:get}
-------------------------------
+----------------------------------------
 
 Get a value for a specific key.
 
@@ -65,7 +57,7 @@ Get a value for a specific key.
 * (*object*) the value set for the specified key.
 
 Table Method: set {#Table:erase}
---------------------------------
+----------------------------------------
 
 Erase a given key/value from the Table instance.
 
@@ -82,7 +74,7 @@ Erase a given key/value from the Table instance.
 * (*object*) This Table instance.
 
 Table Method: each {#Table:each}
---------------------------------
+----------------------------------------
 
 Iterates over the key/values in the table.
 
@@ -105,4 +97,4 @@ Iterates over the key/values in the table.
 	myTable.set($('myForm'), {foo: 'bar'});
 	myTable.set(myClassInstance, $$('.someElements'));
 
-[Function:bind]: /core/Types/Function/#Function:bind
+[Function:bind]: /core/Native/Function/#Function:bind
