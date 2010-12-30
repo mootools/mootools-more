@@ -54,6 +54,11 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (this.options.selectable) this.enableSelect();
 	},
 
+	empty: function(){
+		this.selectNone();
+		return this.previous();
+	},
+
 	enableSelect: function(){
 		this._selectEnabled = true;
 		this._attachSelects();
