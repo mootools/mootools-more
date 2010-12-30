@@ -44,7 +44,7 @@ Configuration.sets = {
 			'Types/String.Extras', 'Types/String.QueryString', 'Types/Number.Format',
 			'Types/Hash', 'Types/Hash.Extras', 'Types/Date',
 			'Types/Date.Extras', 'Locale/Locale',
-			'Utilities/Color', 'Utilities/Group'
+			'Utilities/Color', 'Utilities/Group', 'Utilities/Table'
 		]
 	},
 
@@ -59,7 +59,7 @@ Configuration.sets = {
 			'Forms/Form.Validator',
 			'Fx/Fx.Reveal',
 			'Request/Request.JSONP',
-			'Utilities/Hash.Cookie', 'Utilities/Assets'
+			'Utilities/Color', 'Utilities/Group', 'Utilities/Table'
 		]
 	}
 
@@ -153,7 +153,8 @@ Configuration.source = {
 			'Types/Number.Format',
 
 			'Utilities/Color',
-			'Utilities/Group'
+			'Utilities/Group',
+			'Utilities/Table'
 
 		]
 	},
@@ -190,7 +191,8 @@ Configuration.source = {
 			'Request/Request.JSONP',
 
 			'Utilities/Hash.Cookie',
-			'Utilities/Assets'
+			'Utilities/Assets',
+			'Utilities/Table'
 		]
 	},
 

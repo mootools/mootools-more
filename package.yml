@@ -67,6 +67,7 @@ sources:
   - "Source/Utilities/Group.js"
   - "Source/Utilities/Hash.Cookie.js"
   - "Source/Utilities/IframeShim.js"
+  - "Source/Utilities/Table.js"
   - "Source/Interface/HtmlTable.js"
   - "Source/Interface/HtmlTable.Zebra.js"
   - "Source/Interface/HtmlTable.Sort.js"
