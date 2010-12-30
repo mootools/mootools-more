@@ -161,6 +161,11 @@ Fx.Scroll = new Class({
 
 });
 
+//<1.2compat>
+	Fx.Scroll.alias('scrollToCenter', 'toElementCenter');
+	Fx.Scroll.alias('scrollIntoView', 'toElementEdge');
+//</1.2compat>
+
 function isBody(element){
 	return (/^(?:body|html)$/i).test(element.tagName);
 };
