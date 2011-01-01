@@ -20,7 +20,7 @@ The event will only fire once.
 
 	var database = new Class({
 
-		implements: Events,
+		Implements: Events,
 
 		connect: function(){
 			this.fireEvent('connect');
