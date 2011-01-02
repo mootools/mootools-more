@@ -34,9 +34,9 @@ nativeEvents.focusout = 2;
 
 Event.definePseudo('relay', {
 	listener: function(split, fn, args, options){
-		var event = args[0];
-		var check = options.condition;
-
+		var event = args[0],
+			check = (options && options[split.event]) ? options[split.event].condition : null;
+		console.log(split, fn, args, options)
 		for (var target = event.target; target && target != this; target = target.parentNode){
 			var finalTarget = document.id(target);
 			if (Slick.match(target, split.value) && (!check || check.call(finalTarget, event))){
@@ -62,6 +62,13 @@ Event.definePseudo('relay', {
 		blur: {
 			base: eventListenerSupport ? 'blur' : 'focusout',
 			args: [true]
+		},
+		change: {
+			base: eventListenerSupport ? 'change' : 'focusin',
+			args: [true],
+			condition: function(){
+				console.log(this);
+			}
 		}
 	}
 });

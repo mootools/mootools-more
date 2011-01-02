@@ -70,15 +70,14 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
 				pseudo = pseudos[split[0].pseudo],
-				options = pseudo.options || {};
-			
-			var self = this;
-			var monitor = function(){
-				var stack = fn,
-					i = split.length;
-				while (i--) stack = stackPseudos(split[i], stack, arguments);
-				stack.call(self, split[i - 1], stack, arguments);
-			};
+				options = pseudo.options || {},
+				self = this,
+				monitor = function(){
+					var stack = fn,
+						i = split.length;
+					while (i--) stack = stackPseudos(split[i], stack, arguments);
+					stack.call(self, split[i - 1], stack, arguments);
+				};
 			
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
