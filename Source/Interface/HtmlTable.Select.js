@@ -63,12 +63,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this._selectEnabled = true;
 		this._attachSelects();
 		this.element.addClass(this.options.classSelectable);
+		return this;
 	},
 
 	disableSelect: function(){
 		this._selectEnabled = false;
 		this._attachSelects(false);
 		this.element.removeClass(this.options.classSelectable);
+		return this;
 	},
 
 	push: function(){
@@ -163,16 +165,15 @@ HtmlTable = Class.refactor(HtmlTable, {
 	_updateSelects: function(){
 		Array.each(this.body.rows, function(row){
 			var binders = row.retrieve('binders');
-			if ((binders && this._selectEnabled) || (!binders && !this._selectEnabled)) return;
+			if (!binders && !this._selectEnabled) return;
 			if (!binders){
 				binders = {
 					mouseenter: this._enterRow.pass([row], this),
 					mouseleave: this._leaveRow.pass([row], this)
 				};
-				row.store('binders', binders).addEvents(binders);
-			} else {
-				row.removeEvents(binders);
+				row.store('binders', binders);
 			}
+			(this._selectEnabled) ? row.addEvents(binders) : row.removeEvents(binders);
 		}, this);
 	},
 

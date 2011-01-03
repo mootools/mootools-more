@@ -61,6 +61,19 @@ Enables selection of rows.
 
 * (*object*) This instance of HtmlTable.
 
+HtmlTable method: disableSelect {#HtmlTable:disableSelect}
+------------------------------------------
+
+Disables selection of rows.
+
+### Syntax
+
+	myTable.disableSelect();
+
+### Returns
+
+* (*object*) This instance of HtmlTable.
+
 HtmlTable method: toggleRow {#HtmlTable:toggleRow}
 ------------------------------------------
 
