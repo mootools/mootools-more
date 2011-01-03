@@ -135,6 +135,10 @@ Fx.Sort = new Class({
 		});
 	},
 
+	getCurrentOrder: function(){
+		return this.currentOrder;
+	},
+
 	forward: function(){
 		return this.sort(this.getDefaultOrder());
 	},
