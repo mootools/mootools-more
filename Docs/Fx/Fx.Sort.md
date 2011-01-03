@@ -45,14 +45,14 @@ Fx.Sort Method: constructor {#Fx-Sort:constructor}
 
 * [Fx.Sort][] does not, by default, reorder the DOM; it just puts the elements into x/y locations that imply the sort, but their location in the DOM remains unless you execute [Fx.Sort:rearrangeDOM][].
 
-Fx.Sort Method: currentOrder {#Fx-Sort:currentOrder}
-----------------------------------------------------
+Fx.Sort Method: getCurrentOrder {#Fx-Sort:getCurrentOrder}
+----------------------------------------------------------
 
 Retrieves the current sort order.
 
 ### Syntax
 
-	mySort.currentOrder();
+	mySort.getCurrentOrder();
 
 ### Returns
 
