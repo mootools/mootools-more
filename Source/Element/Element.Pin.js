@@ -115,10 +115,14 @@ provides: [Element.Pin]
 			return this.pin(false);
 		},
 
-		togglepin: function(){
+		togglePin: function(){
 			return this.pin(!this.retrieve('pin:_pinned'));
 		}
 
 	});
+
+//<1.2compat>
+Element.alias('togglepin', 'togglePin');
+//</1.2compat>
 
 })();
