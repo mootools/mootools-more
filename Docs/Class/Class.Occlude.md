@@ -25,7 +25,7 @@ Determines if the class has already been applied to the element.
 
 	var Widget = new Class({
 		Implements: [Class.Occlude],
-		intialize: function(element){
+		initialize: function(element){
 			if (this.occlude('widget', element)) return this.occluded;
 			//returns the instance already bound to the element and exits
 		}
@@ -45,7 +45,7 @@ The string used to bind the instance of the class to the element.
 	var Widget = new Class({
 		Implements: [Class.Occlude],
 		property: 'widget',
-		intialize: function(element){
+		initialize: function(element){
 			this.element = $(element);
 			if (this.occlude()) return this.occluded;
 			//returns the instance already bound to the element and exits
