@@ -109,7 +109,23 @@ Event.definePseudo('relay', {
 			args: [true]
 		},
 		submit: eventListenerSupport ? {} : formDelegation('submit'),
-		reset: eventListenerSupport ? {} : formDelegation('reset')
+		reset: eventListenerSupport ? {} : formDelegation('reset'),
+		change: eventListenerSupport ? {
+			args: [true]
+		} : {
+			base: 'focusin',
+			listener: function(split, fn, args){
+				var listener = function (event){
+					if (Slick.match(this, split.value)) fn.call(this, event);
+				};
+				args[0].target.addEvents({
+					change: listener,
+					blur: function(){
+						this.removeEvent('change', listener);
+					}
+				});
+			}
+		}
 	}
 
 });
