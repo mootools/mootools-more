@@ -115,15 +115,13 @@ Event.definePseudo('relay', {
 		} : {
 			base: 'focusin',
 			listener: function(split, fn, args){
-				var listener = function (event){
+				var listener = function(event){
 					if (Slick.match(this, split.value)) fn.call(this, event);
 				};
-				args[0].target.addEvents({
-					change: listener,
-					blur: function(){
-						this.removeEvent('change', listener);
-					}
-				});
+				var remove = function(event){
+					this.removeEvents({change: listener, blur: remove});
+				};
+				args[0].target.addEvents({change: listener, blur: remove});
 			}
 		}
 	}
