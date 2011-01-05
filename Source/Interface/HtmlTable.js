@@ -42,7 +42,7 @@ var HtmlTable = new Class({
 	initialize: function(){
 		var params = Array.link(arguments, {options: Type.isObject, table: Type.isElement, id: Type.isString});
 		this.setOptions(params.options);
-		if(!params.table && params.id) params.table = document.id(params.id);
+		if (!params.table && params.id) params.table = document.id(params.id);
 		this.element = params.table || new Element('table', this.options.properties);
 		if (this.occlude()) return this.occluded;
 		this.build();
