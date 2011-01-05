@@ -105,6 +105,34 @@ Reapplies the current sort. Note that this is called whenever new rows are added
 
 * (*object*) This instance of HtmlTable.
 
+HtmlTable Method: serialize {#HtmlTable:serialize}
+----------------------------------------
+
+Return an object storing the sort state of the table.
+
+### Syntax
+
+          myTable.serialize();
+
+### Returns
+
+* (*object*) Object containing sort state of the table. 
+
+
+HtmlTable Method: restore {#HtmlTable:restore}
+----------------------------------------
+
+Restores the sort state of the table from an object passed in.
+
+### Syntax
+
+          myTable.restore(tableState);
+
+### Arguments
+
+1. tableState - Object created by HtmlTable.serialize() which contains the sort state of the table.
+
+
 Object: HtmlTable.Parsers {#HtmlTable:Parsers}
 ==============================================
 

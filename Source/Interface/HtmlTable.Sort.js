@@ -121,6 +121,22 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this.sort(Array.indexOf(this.head.getElements(this.options.thSelector).flatten(), el) % this.body.rows[0].cells.length);
 	},
 
+	serialize: function() {
+		var previousSerialization = this.previous.apply(this, arguments) || {};
+		if (this.options.sortable) {
+			previousSerialization.sortIndex = this.sorted.index;
+			previousSerialization.sortReverse = this.sorted.reverse;
+		}
+		return previousSerialization;
+	},
+
+	restore: function(tableState) {
+		if(this.options.sortable && tableState.sortIndex) {
+			this.sort(tableState.sortIndex, tableState.sortReverse);
+		}
+		this.previous.apply(this, arguments);
+	},
+
 	setSortedState: function(index, reverse){
 		if (reverse != null) this.sorted.reverse = reverse;
 		else if (this.sorted.index == index) this.sorted.reverse = !this.sorted.reverse;
@@ -210,7 +226,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.setRowSort(data, pre);
 
 		if (rel) rel.grab(this.body);
-
+		this.fireEvent('stateChanged');
 		return this.fireEvent('sort', [this.body, this.sorted.index]);
 	},
 

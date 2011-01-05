@@ -134,4 +134,36 @@ describe('HtmlTable.Sort', function(){
 
 	});
 
+	describe('serialize/deserialize', function(){
+
+		it('should serialize the sorted state of a table', function(){
+			var table = new HtmlTable({
+				sortable: true,
+				headers: ['col'],
+				parsers: ['number'],
+				rows: [[1],[0],[2]]
+			});
+
+			table.sort(0, false);
+			expect(table.serialize()).toEqual({sortIndex: 0, sortReverse: false});
+		});
+
+		it('should restore the sorted state of a table', function(){
+			var table = new HtmlTable({
+				sortable: true,
+				headers: ['col'],
+				parsers: ['number'],
+				rows: [[1],[0],[2]]
+			});
+			table.restore({sortIndex: 0, sortReverse: false});
+
+			var order = Array.map(table.body.rows, function(item){
+				return item.cells[0].get('text');
+			});
+
+			expect(order).toEqual(['0','1','2']);
+		});
+
+
+	});
 });
