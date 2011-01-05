@@ -38,6 +38,9 @@ var events = {
 	'reset:relay(form)': function(event){
 		event.stop();
 		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
+	},
+	'change:relay(input)': function(event){
+		output.appendText('\nSuccesfully delegated the ' + event.type + ' event');
 	}
 };
 
