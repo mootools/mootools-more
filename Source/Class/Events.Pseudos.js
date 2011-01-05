@@ -63,22 +63,23 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
 				pseudo = pseudos[split.pseudo],
-				options = pseudo.options || {};
+				eventType = split.event,
+				options = pseudo.options || {},
+				eventOptions = options[eventType] || {},
+				args = Array.slice(arguments, 2),
+				listener = eventOptions.listener || pseudo.listener,
+				self = this;
 
-			var self = this;
+			if (eventOptions.args) args.append(Array.from(eventOptions.args));
+			if (eventOptions.base) eventType = eventOptions.base;
+			if (eventOptions.onAdd) eventOptions.onAdd(this);
+
 			var monitor = function(){
-				pseudo.listener.call(self, split, fn, arguments, monitor, options);
+				listener.call(this, split, fn, arguments, monitor, options);
 			};
 
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
-
-			var eventType = split.event,
-				eventOptions = options[eventType] || {},
-				args = Array.slice(arguments, 2);
-			if (eventOptions.args) args.append(Array.from(eventOptions.args));
-
-			if (eventOptions.base) eventType = eventOptions.base;
 
 			addEvent.apply(this, [type, fn].concat(args));
 			return addEvent.apply(this, [eventType, monitor].concat(args));
@@ -89,18 +90,18 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			if (!split) return removeEvent.call(this, type, fn);
 
 			var storage = storageOf(this),
-				events = storage.retrieve(type),
-				pseudo = pseudos[split.pseudo],
-				options = pseudo.options || {};
-
+				events = storage.retrieve(type);
 			if (!events) return this;
 
-			var eventType = split.event,
+			var pseudo = pseudos[split.pseudo],
+				eventType = split.event,
+				options = pseudo.options || {},
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2);
-			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 
+			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 			if (eventOptions.base) eventType = eventOptions.base;
+			if (eventOptions.onRemove) eventOptions.onRemove(this);
 
 			removeEvent.apply(this, [type, fn].concat(args));
 			events.each(function(monitor, i){

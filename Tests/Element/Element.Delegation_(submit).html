@@ -1,0 +1,54 @@
+
+<p>The submit and reset Events do not bubble up to the window/document in IE by default. Our Element Delegation should fix this</p>
+
+<div id="myContainer">
+
+	<form action="#foo" id="myForm">
+
+		<input type="text" value="some text" />
+		<input type="submit" value="Submit" />
+		<input type="reset" value="reset" />
+
+	</form>
+
+	<form action="#foo" id="myForm2">
+
+		<input type="text" value="some text" />
+		<input type="submit" value="Submit" />
+		<input type="reset" value="reset" />
+
+	</form>
+
+</div>
+
+<button id="removeEvents">Remove Events</button>
+
+<pre id="output"></pre>
+
+<script src="/depender/build?require=More/Element.Delegation"></script>
+<script>
+
+var output = $('output');
+
+var events = {
+	'submit:relay(form#myForm)': function(event){
+		event.stop();
+		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
+	},
+	'reset:relay(form)': function(event){
+		event.stop();
+		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
+	},
+	'change:relay(input)': function(event){
+		output.appendText('\nSuccesfully delegated the ' + event.type + ' event');
+	}
+};
+
+var container = $('myContainer');
+
+container.addEvents(events);
+$('removeEvents').addEvent('click', function(){
+	container.removeEvents(events);
+});
+
+</script>

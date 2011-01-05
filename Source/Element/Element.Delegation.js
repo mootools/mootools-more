@@ -31,6 +31,49 @@ var eventListenerSupport = !(window.attachEvent && !window.addEventListener),
 nativeEvents.focusin = 2;
 nativeEvents.focusout = 2;
 
+var formDelegation = function(formEventName){
+
+	var $delegationKey = '$delegation:';
+
+	return {
+		base: 'focusin',
+
+		onRemove: function(element){
+			element.retrieve($delegationKey + 'forms', []).each(function(el){
+				el.retrieve($delegationKey + 'listeners', []).each(function(listener){
+					el.removeEvent(formEventName, listener);
+				});
+				el.eliminate($delegationKey + formEventName + 'listeners')
+					.eliminate($delegationKey + formEventName + 'originalFn');
+			});
+		},
+
+		listener: function(split, fn, args, monitor, options){
+			var event = args[0],
+				forms = this.retrieve($delegationKey + 'forms', []),
+				target = event.target,
+				form = (target.get('tag') == 'form') ? target : event.target.getParent('form'),
+				formEvents = form.retrieve($delegationKey + 'originalFn', []),
+				formListeners = form.retrieve($delegationKey + 'listeners', []);
+
+			forms.include(form);
+			this.store($delegationKey + 'forms', forms);
+
+			if (!formEvents.contains(fn)){
+				var formListener = function(event){
+					if (Slick.match(this, split.value)) fn.call(this, event);
+				};
+				form.addEvent(formEventName, formListener);
+
+				formEvents.push(fn);
+				formListeners.push(formListener);
+
+				form.store($delegationKey + formEventName + 'originalFn', formEvents)
+					.store($delegationKey + formEventName + 'listeners', formListeners)
+			}
+		}
+	};
+};
 
 Event.definePseudo('relay', {
 
@@ -64,6 +107,22 @@ Event.definePseudo('relay', {
 		blur: {
 			base: eventListenerSupport ? 'blur' : 'focusout',
 			args: [true]
+		},
+		submit: eventListenerSupport ? {} : formDelegation('submit'),
+		reset: eventListenerSupport ? {} : formDelegation('reset'),
+		change: eventListenerSupport ? {
+			args: [true]
+		} : {
+			base: 'focusin',
+			listener: function(split, fn, args){
+				var listener = function(event){
+					if (Slick.match(this, split.value)) fn.call(this, event);
+				};
+				var remove = function(event){
+					this.removeEvents({change: listener, blur: remove});
+				};
+				args[0].target.addEvents({change: listener, blur: remove});
+			}
 		}
 	}
 
