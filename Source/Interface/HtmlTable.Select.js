@@ -37,7 +37,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 		classSelectable: 'table-selectable',
 		shiftForMultiSelect: true,
 		allowMultiSelect: true,
-		selectable: false
+		selectable: false,
+		selectHiddenRows: false
 	},
 
 	initialize: function(){
@@ -82,10 +83,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return ret;
 	},
 
-	isSelected: function(row){
-		return this.selectedRows.contains(row);
-	},
-
 	toggleRow: function(row){
 		return this[(this.isSelected(row) ? 'de' : '') + 'selectRow'](row);
 	},
@@ -107,6 +104,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 		document.clearSelection();
 
 		return this;
+	},
+
+	isSelected: function(row){
+		return this.selectedRows.contains(row);
+	},
+
+	getSelected: function(){
+		return this.selectedRows;
 	},
 
 	getSelected: function(){
@@ -167,7 +172,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 			endRow = tmp;
 		}
 
-		for (var i = startRow; i <= endRow; i++) this[method](rows[i], true);
+		for (var i = startRow; i <= endRow; i++){
+			if (this.options.selectHiddenRows || rows[i].isDisplayed()) this[method](rows[i], true);
+		}
 
 		return this;
 	},
@@ -211,7 +218,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	shiftFocus: function(offset, event){
 		if (!this.focused) return this.selectRow(this.body.rows[0], event);
-		var to = this.getRowByOffset(offset);
+		var to = this.getRowByOffset(offset, this.options.selectHiddenRows);
 		if (to === null || this.focused == this.body.rows[to]) return this;
 		this.toggleRow(this.body.rows[to], event);
 	},
@@ -230,14 +237,25 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.rangeStart = row;
 	},
 
-	getRowByOffset: function(offset){
-		if (!this.focused) return 0;
-		var rows = Array.clone(this.body.rows),
-			index = rows.indexOf(this.focused) + offset;
-
-		if (index < 0) index = null;
-		if (index >= rows.length) index = null;
-
+	_getRowByOffset: function(offset, includeHiddenRows){
+		if (!this._focused) return 0;
+		var index = Array.indexOf(this.body.rows, this._focused);
+		if ((index == 0 && offset < 0) || (index == this.body.rows.length -1 && offset > 0)) return null;
+		if (includeHiddenRows) {
+			index += offset;
+		} else {
+			var limit = 0,
+			    count = 0;
+			if (offset > 0) {
+				while (count < offset && index < this.body.rows.length -1) {
+					if (this.body.rows[++index].isDisplayed()) count++;
+				}
+			} else {
+				while (count > offset && index > 0) {
+					if (this.body.rows[--index].isDisplayed()) count--;
+				}
+			}
+		}
 		return index;
 	},
 
@@ -265,8 +283,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 					var mover = function(e){
 						clearTimeout(timer);
 						e.preventDefault();
-
-						var to = this.body.rows[this.getRowByOffset(offset)];
+						var to = this.body.rows[this._getRowByOffset(offset, this.options.selectHiddenRows)];
 						if (e.shift && to && this.isSelected(to)){
 							this.deselectRow(this.focused);
 							this.focused = to;
