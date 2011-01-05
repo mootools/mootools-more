@@ -121,17 +121,17 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this.sort(Array.indexOf(this.head.getElements(this.options.thSelector).flatten(), el) % this.body.rows[0].cells.length);
 	},
 
-	serialize: function() {
+	serialize: function(){
 		var previousSerialization = this.previous.apply(this, arguments) || {};
-		if (this.options.sortable) {
+		if (this.options.sortable){
 			previousSerialization.sortIndex = this.sorted.index;
 			previousSerialization.sortReverse = this.sorted.reverse;
 		}
 		return previousSerialization;
 	},
 
-	restore: function(tableState) {
-		if(this.options.sortable && tableState.sortIndex) {
+	restore: function(tableState){
+		if(this.options.sortable && tableState.sortIndex){
 			this.sort(tableState.sortIndex, tableState.sortReverse);
 		}
 		this.previous.apply(this, arguments);

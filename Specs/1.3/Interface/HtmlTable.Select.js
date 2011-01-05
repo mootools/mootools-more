@@ -17,6 +17,55 @@ describe('HtmlTable.Select', function(){
 		expect(table.isSelected(row)).toEqual(false);
 	});
 
+
+	it('should return the selected row(s)', function(){
+		var table = getTable();
+
+		var rows = table.body.getChildren();
+		table.selectRow(rows[0]);
+		var selected = table.getSelected();
+		expect(selected[0]).toEqual(rows[0]);
+		expect(selected.length).toEqual(1);
+
+		table.selectRow(rows[1]);
+		selected = table.getSelected();
+		expect(selected[1]).toEqual(rows[1]);
+		expect(selected.length).toEqual(2);
+	});
+
+
+	it('should skip hidden rows when selecting rows', function(){
+		var table = getTable();
+
+		var rows = table.body.getChildren();
+		rows[1].setStyle('display', 'none');
+		table.selectRange(rows[0], rows[2]);
+		var selected = table.getSelected();
+		expect(selected.length).toEqual(2);
+		expect(selected[0]).toEqual(rows[0]);
+		expect(selected[1]).toEqual(rows[2]);
+	});
+
+	it('should select all and select none', function(){
+		var table = getTable();
+		var rows = table.body.getChildren();
+
+		table.selectAll();
+		var selected = table.getSelected();
+
+		expect(selected.length).toEqual(3);
+		expect(selected[0]).toEqual(rows[0]);
+		expect(selected[1]).toEqual(rows[1]);
+		expect(selected[2]).toEqual(rows[2]);
+		expect(selected[0].hasClass('table-tr-selected')).toBeTruthy();
+
+		table.selectNone();
+		selected = table.getSelected();
+		expect(selected.length).toEqual(0);
+		expect(rows[0].hasClass('table-tr-selected')).toBeFalsy();
+	});
+
+
 	it('should serialize the state of the table', function(){
 		var SelectableTable = new HtmlTable({
 			selectable: true,
