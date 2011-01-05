@@ -36,7 +36,7 @@ var formDelegation = function(formEventName){
 	var $delegationKey = '$delegation:';
 
 	return {
-		base: 'click',
+		base: 'focusin',
 
 		onRemove: function(element){
 			element.retrieve($delegationKey + 'forms', []).each(function(el){
