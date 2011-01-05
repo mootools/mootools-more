@@ -37,7 +37,6 @@ var formDelegation = function(formEventName){
 
 	return {
 		base: 'click',
-		args: [true],
 
 		onRemove: function(element){
 			element.retrieve($delegationKey + 'forms', []).each(function(el){
@@ -109,8 +108,8 @@ Event.definePseudo('relay', {
 			base: eventListenerSupport ? 'blur' : 'focusout',
 			args: [true]
 		},
-		submit: formDelegation('submit'),
-		reset: formDelegation('reset')
+		submit: eventListenerSupport ? {} : formDelegation('submit'),
+		reset: eventListenerSupport ? {} : formDelegation('reset')
 	}
 
 });
