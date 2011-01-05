@@ -1,63 +1,51 @@
 
-<p>The submit and reset Events does not bubble up to the window/document in IE by default. Our Element Delegation should fix this</p>
+<p>The submit and reset Events do not bubble up to the window/document in IE by default. Our Element Delegation should fix this</p>
 
+<div id="myContainer">
 
-<form action="#foo" id="myForm">
+	<form action="#foo" id="myForm">
 
-	<input type="text" value="some text" />
-	<input type="submit" value="Submit" />
-	<input type="reset" value="reset" />
+		<input type="text" value="some text" />
+		<input type="submit" value="Submit" />
+		<input type="reset" value="reset" />
 
-</form>
+	</form>
+
+	<form action="#foo" id="myForm2">
+
+		<input type="text" value="some text" />
+		<input type="submit" value="Submit" />
+		<input type="reset" value="reset" />
+
+	</form>
+
+</div>
+
+<button id="removeEvents">Remove Events</button>
 
 <pre id="output"></pre>
 
-<script src="/depender/build?require=More/Element.Delegation,Core/Fx.Morph"></script>
+<script src="/depender/build?require=More/Element.Delegation"></script>
 <script>
 
 var output = $('output');
-var fn = function(event){
-	console.log(event);
-	event.stop();
-	output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
-};
 
-document.addEvents({
-	'submit:relay(#myForm)': fn,
-	'reset:relay(#myForm)': fn
-});
-
-$('myForm').addEvent('focus', function(){
-	output.appendText('\nFocussed the Form Element');
-});
-
-var selector = '#myForm';
-var submitEvent = function(event){
-	event.stop();
-	output.appendText('\nSubmitted the form');
-};
-var listener = function(event, target){
-	output.appendText('\nFocussed the Form Element with AddEventListener ' + event.type);
-	if (event.type == 'focus' || event.type == 'focusin') target.addEvent('submit', submitEvent);
-};
-var delegate = function(event){
-
-	for (var target = event.srcElement || event.target; target && target != this; target = target.parentNode){
-		var finalTarget = document.id(target);
-		if (Slick.match(target, selector)){
-			listener.call(finalTarget, event, finalTarget);
-			return;
-		}
+var events = {
+	'submit:relay(form#myForm)': function(event){
+		event.stop();
+		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
+	},
+	'reset:relay(form)': function(event){
+		event.stop();
+		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
 	}
-
 };
-var myForm = $(document.body);
-if (myForm.addEventListener){
-	myForm.addEventListener('focus', delegate, true);
-	myForm.addEventListener('blur', delegate, true);
-} else {
-	myForm.attachEvent('onfocusin', delegate);
-	myForm.attachEvent('onfocusout', delegate);
-}
+
+var container = $('myContainer');
+
+container.addEvents(events);
+$('removeEvents').addEvent('click', function(){
+	container.removeEvents(events);
+});
 
 </script>
