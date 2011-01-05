@@ -37,7 +37,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 		classSelectable: 'table-selectable',
 		shiftForMultiSelect: true,
 		allowMultiSelect: true,
-		selectable: false
+		selectable: false,
+		selectHiddenRows: false
 	},
 
 	initialize: function(){
@@ -49,7 +50,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.bound = {
 			mouseleave: this.mouseleave.bind(this),
 			clickRow: this.clickRow.bind(this),
-			activateKeyboard: function() {
+			activateKeyboard: function(){
 				if (this.keyboard && this.selectEnabled) this.keyboard.activate();
 			}.bind(this)
 		};
@@ -82,10 +83,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return ret;
 	},
 
-	isSelected: function(row){
-		return this.selectedRows.contains(row);
-	},
-
 	toggleRow: function(row){
 		return this[(this.isSelected(row) ? 'de' : '') + 'selectRow'](row);
 	},
@@ -109,23 +106,31 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this;
 	},
 
+	isSelected: function(row){
+		return this.selectedRows.contains(row);
+	},
+
 	getSelected: function(){
 		return this.selectedRows;
 	},
 
-	serialize: function() {
+	getSelected: function(){
+		return this.selectedRows;
+	},
+
+	serialize: function(){
 		var previousSerialization = this.previous.apply(this, arguments) || {};
-		if (this.options.selectable) {
-			previousSerialization.selectedRows = this.selectedRows.map(function(row) {
+		if (this.options.selectable){
+			previousSerialization.selectedRows = this.selectedRows.map(function(row){
 				return Array.indexOf(this.body.rows, row);
 			}.bind(this));
 		}
 		return previousSerialization;
 	},
 
-	restore: function(tableState) {
-		if(this.options.selectable && tableState.selectedRows) {
-			tableState.selectedRows.each(function(index) {
+	restore: function(tableState){
+		if(this.options.selectable && tableState.selectedRows){
+			tableState.selectedRows.each(function(index){
 				this.selectRow(this.body.rows[index]);
 			}.bind(this));
 		}
@@ -167,7 +172,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 			endRow = tmp;
 		}
 
-		for (var i = startRow; i <= endRow; i++) this[method](rows[i], true);
+		for (var i = startRow; i <= endRow; i++){
+			if (this.options.selectHiddenRows || rows[i].isDisplayed()) this[method](rows[i], true);
+		}
 
 		return this;
 	},
@@ -211,7 +218,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	shiftFocus: function(offset, event){
 		if (!this.focused) return this.selectRow(this.body.rows[0], event);
-		var to = this.getRowByOffset(offset);
+		var to = this.getRowByOffset(offset, this.options.selectHiddenRows);
 		if (to === null || this.focused == this.body.rows[to]) return this;
 		this.toggleRow(this.body.rows[to], event);
 	},
@@ -232,14 +239,25 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.rangeStart = row;
 	},
 
-	getRowByOffset: function(offset){
+	getRowByOffset: function(offset, includeHiddenRows){
 		if (!this.focused) return 0;
-		var rows = Array.clone(this.body.rows),
-			index = rows.indexOf(this.focused) + offset;
-
-		if (index < 0) index = null;
-		if (index >= rows.length) index = null;
-
+		var index = Array.indexOf(this.body.rows, this.focused);
+		if ((index == 0 && offset < 0) || (index == this.body.rows.length -1 && offset > 0)) return null;
+		if (includeHiddenRows){
+			index += offset;
+		} else {
+			var limit = 0,
+			    count = 0;
+			if (offset > 0){
+				while (count < offset && index < this.body.rows.length -1){
+					if (this.body.rows[++index].isDisplayed()) count++;
+				}
+			} else {
+				while (count > offset && index > 0){
+					if (this.body.rows[--index].isDisplayed()) count--;
+				}
+			}
+		}
 		return index;
 	},
 
@@ -259,7 +277,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		if (this.options.useKeyboard || this.keyboard){
 			if (!this.keyboard) this.keyboard = new Keyboard();
-			if (!this.selectKeysDefined) {
+			if (!this.selectKeysDefined){
 				this.selectKeysDefined = true;
 				var timer, held;
 
@@ -267,8 +285,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 					var mover = function(e){
 						clearTimeout(timer);
 						e.preventDefault();
-
-						var to = this.body.rows[this.getRowByOffset(offset)];
+						var to = this.body.rows[this.getRowByOffset(offset, this.options.selectHiddenRows)];
 						if (e.shift && to && this.isSelected(to)){
 							this.deselectRow(this.focused);
 							this.focused = to;

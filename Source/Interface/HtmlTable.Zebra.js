@@ -15,6 +15,7 @@ authors:
 
 requires:
   - /HtmlTable
+  - /Element.Shortcuts
   - /Class.refactor
 
 provides: [HtmlTable.Zebra]
@@ -26,7 +27,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {
 		classZebra: 'table-tr-odd',
-		zebra: true
+		zebra: true,
+		zebraOnlyVisibleRows: true
 	},
 
 	initialize: function(){
@@ -36,7 +38,12 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	updateZebras: function(){
-		Array.each(this.body.rows, this.zebra, this);
+		var index = 0;
+		Array.each(this.body.rows, function(row){
+			if (!this.options.zebraOnlyVisibleRows || row.isDisplayed()){
+				this.zebra(row, index++);
+			}
+		}, this);
 	},
 
 	setRowStyle: function(row, i){

@@ -219,7 +219,7 @@ var local = Element.Position = {
 Element.implement({
 
 	position: function(options){
-		if (options && (options.x != null || options.y != null)) {
+		if (options && (options.x != null || options.y != null)){
 			return (original ? original.apply(this, arguments) : this);
 		}
 		var position = this.setStyle('position', 'absolute').calculatePosition(options);
