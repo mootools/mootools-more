@@ -48,7 +48,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		this._bound = {
 			mouseleave: this._mouseleave.bind(this),
-			clickRow: this._clickRow.bind(this)
+			clickRow: this._clickRow.bind(this),
+			activateKeyboard: function() {
+				if (this.keyboard && this._selectEnabled) this.keyboard.activate();
+			}.bind(this)
 		};
 
 		if (this.options.selectable) this.enableSelect();
@@ -214,7 +217,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		var method = attach ? 'addEvents' : 'removeEvents';
 		this.element[method]({
-			mouseleave: this._bound.mouseleave
+			mouseleave: this._bound.mouseleave,
+			click: this._bound.activateKeyboard
 		});
 
 		this.body[method]({
@@ -223,7 +227,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 		});
 
 		if (this.options.useKeyboard || this.keyboard){
-			if (!this.keyboard){
+			if (!this.keyboard) this.keyboard = new Keyboard();
+			if (!this._selectKeysDefined) {
+				this._selectKeysDefined = true;
 				var timer, held;
 
 				var move = function(offset){
@@ -258,17 +264,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 					clearTimeout(timer);
 					held = false;
 				};
-
-				this.keyboard = new Keyboard({
-					events: {
-						'keydown:shift+up': move(-1),
-						'keydown:shift+down': move(1),
-						'keyup:shift+up': clear,
-						'keyup:shift+down': clear,
-						'keyup:up': clear,
-						'keyup:down': clear
-					},
-					active: true
+				
+				this.keyboard.addEvents({
+					'keydown:shift+up': move(-1),
+					'keydown:shift+down': move(1),
+					'keyup:shift+up': clear,
+					'keyup:shift+down': clear,
+					'keyup:up': clear,
+					'keyup:down': clear
 				});
 
 				var shiftHint = '';
