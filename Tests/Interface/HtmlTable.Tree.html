@@ -1,0 +1,409 @@
+<style>
+table {
+	border: solid #777;
+	border-width: 0px 0px 1px 1px;
+	margin: 10px 0px;
+}
+thead {
+	background: #777;
+	border-bottom: 1px solid #333;
+	color: #fff;
+}
+thead th {
+	background: #999;
+}
+tbody tr.table-tr-odd td {
+	background: #f3f3f3;
+}
+td, th {
+	padding: 4px;
+	border-right: 1px solid #777;
+	border-top: 1px solid #777;
+	overflow: hidden;
+	white-space: nowrap;
+}
+a.expand {
+	display: block;
+	float: left;
+	width: 10px;
+	height: 10px;
+	background: url(/asset/more/divots.png);
+	position: relative;
+	top: 4px;
+	left: -4px;
+}
+tr.table-expanded a.expand {
+	background: url(/asset/more/divots.png) 0px -14px;
+}
+table tr:hover > td, table tr.table-tr-hovered td {
+	background-color: #d4e7f8;
+	color: #000;
+	cursor: pointer;
+}
+table tr.selected td, table tr.table-tr-selected td, table tr.selected td a, table tr.table-tr-selected td a {
+	background-color: #3875d7;
+	color: #fff;
+}
+
+.hidden {
+	display: none;
+}
+</style>
+<a id="addRow">Add Row to Documents</a>
+<table id="tree">
+	<thead>
+		<th>Name</th>
+		<th>Date Modified</th>
+		<th>Size</th>
+	</thead>
+		<tbody>
+			<tr class="table-depth-0" id="docs">
+				<td>
+					Documents
+				</td>
+				<td>Jul 10, 2010 1:39pm</td>
+				<td>--</td>
+			</tr>
+				<tr class="table-depth-1">
+					<td>Resume.pdf</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+				<tr class="table-depth-1">
+					<td>notes.txt</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+				<tr class="table-depth-1">
+					<td>
+						Receipts
+					</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+						<tr class="table-depth-2">
+							<td>starbucks.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-2">
+							<td>safeway.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-2">
+							<td>movies.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-2">
+							<td>
+								Taxes
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-3">
+							<td>
+								2008 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-3">
+							<td>
+								2009 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-3">
+							<td>
+								2010 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-2">
+							<td>Pictures</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-3">
+							<td>
+								Baby.jpg
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-2">
+							<td>
+								Bar.txt
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+					<tr class="table-depth-1">
+						<td>
+							Candy
+						</td>
+						<td>Jul 10, 2010 1:39pm</td>
+						<td>--</td>
+					</tr>
+						<tr class="table-depth-2">
+							<td>
+								Snickers.txt
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+				<tr class="table-depth-0">
+					<td>
+						Foo.txt
+					</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+			</tbody>
+</table>
+
+<table id="tree2">
+	<thead>
+		<th>Name</th>
+		<th>Date Modified</th>
+		<th>Size</th>
+	</thead>
+		<tbody>
+			<tr class="table-folder table-depth-0" id="docs2">
+				<td>
+					<a class="expand"></a>
+					Documents
+				</td>
+				<td>Jul 10, 2010 1:39pm</td>
+				<td>--</td>
+			</tr>
+				<tr class="hidden table-depth-1">
+					<td>Resume.pdf</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+				<tr class="hidden table-depth-1">
+					<td>notes.txt</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+				<tr class="hidden table-folder table-depth-1">
+					<td>
+						<a class="expand"></a>
+						Receipts
+					</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+						<tr class="hidden table-depth-2">
+							<td>starbucks.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-2">
+							<td>safeway.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-2">
+							<td>movies.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-folder table-depth-2">
+							<td>
+								<a class="expand"></a>
+								Taxes
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-3">
+							<td>
+								2008 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-3">
+							<td>
+								2009 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-3">
+							<td>
+								2010 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-folder table-depth-2">
+							<td>
+								<a class="expand"></a>
+								Pictures</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-3">
+							<td>
+								Baby.jpg
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-2">
+							<td>
+								Bar.txt
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+				<tr class="table-depth-0">
+					<td>
+						Foo.txt
+					</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+			</tbody>
+</table>
+
+<table id="tree3">
+	<thead>
+		<th>Name</th>
+		<th>Date Modified</th>
+		<th>Size</th>
+	</thead>
+		<tbody>
+			<tr class="table-expanded table-folder table-depth-0" id="docs2">
+				<td>
+					<a class="expand"></a>
+					Documents
+				</td>
+				<td>Jul 10, 2010 1:39pm</td>
+				<td>--</td>
+			</tr>
+				<tr class="table-depth-1">
+					<td>Resume.pdf</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+				<tr class="table-depth-1">
+					<td>notes.txt</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+				<tr class="table-expanded table-folder table-depth-1">
+					<td>
+						<a class="expand"></a>
+						Receipts
+					</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+						<tr class="table-depth-2">
+							<td>starbucks.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-2">
+							<td>safeway.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-2">
+							<td>movies.txt</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-folder table-depth-2">
+							<td>
+								<a class="expand"></a>
+								Taxes
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-3">
+							<td>
+								2008 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-3">
+							<td>
+								2009 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-3">
+							<td>
+								2010 Taxes.pdf
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-folder table-depth-2">
+							<td>
+								<a class="expand"></a>
+								Pictures</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="hidden table-depth-3">
+							<td>
+								Baby.jpg
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+						<tr class="table-depth-2">
+							<td>
+								Bar.txt
+							</td>
+							<td>Jul 10, 2010 1:39pm</td>
+							<td>--</td>
+						</tr>
+				<tr class="table-depth-0">
+					<td>
+						Foo.txt
+					</td>
+					<td>Jul 10, 2010 1:39pm</td>
+					<td>--</td>
+				</tr>
+			</tbody>
+</table>
+
+<script src="/depender/build?require=More/HtmlTable.Tree,More/HtmlTable.Zebra,Core/Selectors,More/HtmlTable.Select"></script>
+<script>
+var table = new HtmlTable($('tree'), {
+	enableTree: true,
+	selectable: true
+});
+var table2 = new HtmlTable($('tree2'), {
+	enableTree: true,
+	selectable: true,
+	build: false
+});
+var table3 = new HtmlTable($('tree3'), {
+	enableTree: true,
+	selectable: true,
+	build: false
+});
+table.keyboard.activate();
+
+$('addRow').addEvent('click', function(e){
+	e.stop();
+	var parent = $('docs');
+	table.injectChild(['A Document.txt', 'Jul 10, 2010 1:39pm', '--'], {}, parent);
+});
+</script>

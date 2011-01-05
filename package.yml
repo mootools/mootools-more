@@ -72,6 +72,7 @@ sources:
   - "Source/Interface/HtmlTable.Zebra.js"
   - "Source/Interface/HtmlTable.Sort.js"
   - "Source/Interface/HtmlTable.Select.js"
+  - "Source/Interface/HtmlTable.Tree.js"
   - "Source/Interface/Keyboard.js"
   - "Source/Interface/Keyboard.Extras.js"
   - "Source/Interface/Mask.js"
