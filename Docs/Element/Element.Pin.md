@@ -39,7 +39,7 @@ Un-pins an element at its current position (see [Element:pin][]).
 
 * (*element*) This Element.
 
-Element Method: togglepin {#Element:togglepin}
+Element Method: togglePin {#Element:togglepin}
 ----------------------------------------------
 
 Toggles the pin state of the element.
