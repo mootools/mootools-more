@@ -70,6 +70,7 @@ sources:
   - "Source/Utilities/IframeShim.js"
   - "Source/Interface/HtmlTable.js"
   - "Source/Interface/HtmlTable.Zebra.js"
+  - "Source/Interface/HtmlTable.Resize.js"
   - "Source/Interface/HtmlTable.Sort.js"
   - "Source/Interface/HtmlTable.Select.js"
   - "Source/Interface/Keyboard.js"

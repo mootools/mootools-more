@@ -129,6 +129,15 @@ var HtmlTable = new Class({
 			tr: new Element('tr', rowProperties).inject(target || this.body).adopt(tds),
 			tds: tds
 		};
+	},
+
+	wrapHeaders: function() {
+		if(!this.headerWrappers) {
+			this.headerWrappers = $$(this.head.cells).map(function(cell) {
+				return new Element('div').adopt(cell.childNodes).inject(cell);
+			});
+		}
+		return this.headerWrappers;
 	}
 
 });

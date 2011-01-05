@@ -67,7 +67,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	detachSorts: function(){
-		this.element.removeEvents('click:relay(' + this.options.thSelector + ')');
+		this.element.removeEvents('click:relay(' + this.options.thSelector + ')', this.bound.headClick);
 	},
 
 	setHeaders: function(){
@@ -80,13 +80,16 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	detectParsers: function(){
-		return this.head && this.head.getElements(this.options.thSelector).flatten().map(this.detectParser, this);
+		if (this.thead) {
+			this.wrapHeaders();
+			return this.head.getElements(this.options.thSelector).flatten().map(this.detectParser, this);
+		}
 	},
 
 	detectParser: function(cell, index){
 		if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser')) return cell.retrieve('htmltable-parser');
-		var thDiv = new Element('div');
-		thDiv.adopt(cell.childNodes).inject(cell);
+
+		var thDiv = this.headerWrappers[index];
 		var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
 		this.sortSpans.push(sortSpan);
 		var parser = this.options.parsers[index],
