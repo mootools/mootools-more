@@ -21,11 +21,13 @@ describe('Events.Pseudos', function(){
 
 		var addEvent = jasmine.createSpy('addEvent'),
 			removeEvent = jasmine.createSpy('removeEvent'),
-			clickPseudoFn = jasmine.createSpy('clickPseudoFn');
+			clickPseudoFn = jasmine.createSpy('clickPseudoFn'),
+			onAdd = jasmine.createSpy('onAdd'),
+			onRemove = jasmine.createSpy('onRemove');
 
 		var myEvents = new Class({
-				addEvent: addEvent,
-				removeEvent: removeEvent
+			addEvent: addEvent,
+			removeEvent: removeEvent
 		});
 
 		var pseudos = {
@@ -35,6 +37,10 @@ describe('Events.Pseudos', function(){
 					click: {
 						base: 'mouse',
 						args: [2, 3, 4]
+					},
+					submit: {
+						onAdd: onAdd,
+						onRemove: onRemove
 					}
 				}
 			}
@@ -62,6 +68,11 @@ describe('Events.Pseudos', function(){
 				expect(pseudoArgs.slice(2)).toEqual([1, 2, 3, 4]);
 			});
 
+			it('should call the onAdd function on addEvent when it is set as event option', function(){
+				events.addEvent('submit:pseudoFn', function(){});
+				expect(onAdd).toHaveBeenCalledWith(events);
+			});
+
 		});
 
 		describe('removeEvent', function(){
@@ -80,6 +91,14 @@ describe('Events.Pseudos', function(){
 				var removePseudoArgs = removeEvent.argsForCall[1];
 				expect(removePseudoArgs[0]).toEqual('mouse');
 				expect(removePseudoArgs.slice(2)).toEqual([1, 2, 3, 4]);
+			});
+
+
+			it('should call the onRemove function on removeEvent when it is set as event option', function(){
+				var fn = function(){};
+				events.addEvent('submit:pseudoFn', fn);
+				events.removeEvent('submit:pseudoFn', fn);
+				expect(onRemove).toHaveBeenCalledWith(events);
 			});
 
 		});
@@ -145,7 +164,7 @@ describe('Events.Pseudos', function(){
 
 		});
 
-		it('should call Pseudo function with split, fn, args, monitor and options', function(){
+		it('should call Pseudo listener function with split, fn, args, monitor and options', function(){
 
 			var eventFn =  function(){ return 'bar'; },
 				eventArgs = ['one', 'two', 'three'],
@@ -166,6 +185,22 @@ describe('Events.Pseudos', function(){
 			e.addEvent('connect:test2', eventFn);
 			e.fireEvent('attach', eventArgs);
 
+		});
+
+		it('should use the custom listener if it is set as event option', function(){
+			var defaultListener = jasmine.createSpy('default Listener'),
+				listenerOption = jasmine.createSpy('listenerOption'),
+				e = new Events();
+
+			Events.definePseudo('test3', {
+				listener: defaultListener,
+				options: {
+					submit: {listener: listenerOption}
+				}
+			});
+
+			e.addEvent('submit:test3', function(){}).fireEvent('submit');
+			expect(listenerOption).toHaveBeenCalled();
 		});
 
 	});
