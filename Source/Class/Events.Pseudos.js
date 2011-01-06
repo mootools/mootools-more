@@ -42,16 +42,21 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		if (type.indexOf(':') == -1) return null;
 
 		var parsed = Slick.parse(type).expressions[0][0],
-			parsedPseudos = parsed.pseudos;
+			parsedPseudos = parsed.pseudos,
+			l = parsedPseudos.length,
+			splits = [];
 
-		return pseudos ? parsedPseudos.map(function(item, index){
-			return pseudos[parsedPseudos[index].key] ? {
+		while (l--) {
+			if (!pseudos[parsedPseudos[l].key]) continue;
+			splits.push({
 				event: parsed.tag,
-				value: parsedPseudos[index].value,
-				pseudo: parsedPseudos[index].key,
+				value: parsedPseudos[l].value,
+				pseudo: parsedPseudos[l].key,
 				original: type
-			} : null;
-		}).clean().reverse() : null;
+			});
+		}
+
+		return splits.length ? splits : null;
 	};
 
 	var mergePseudoOptions = function(split){
@@ -64,7 +69,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 		addEvent: function(type, fn, internal){
 			var split = splitType(type);
-			if (!split || !split.length) return addEvent.call(this, type, fn, internal);
+			if (!split) return addEvent.call(this, type, fn, internal);
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
@@ -101,7 +106,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 		removeEvent: function(type, fn){
 			var split = splitType(type);
-			if (!split || !split.length) return removeEvent.call(this, type, fn);
+			if (!split) return removeEvent.call(this, type, fn);
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type);
