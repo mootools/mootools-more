@@ -39,33 +39,41 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 	};
 
 	var splitType = function(type){
-		if (type.indexOf(':') == -1) return null;
+		if (type.indexOf(':') == -1 || !pseudos) return null;
 
 		var parsed = Slick.parse(type).expressions[0][0],
-			parsedPseudos = parsed.pseudos;
+			parsedPseudos = parsed.pseudos,
+			l = parsedPseudos.length,
+			splits = [];
 
-		return pseudos ? parsedPseudos.map(function(item, index){
-			return pseudos[parsedPseudos[index].key] ? {
+		while (l--) if (pseudos[parsedPseudos[l].key]){
+			splits.push({
 				event: parsed.tag,
-				value: parsedPseudos[index].value,
-				pseudo: parsedPseudos[index].key,
+				value: parsedPseudos[l].value,
+				pseudo: parsedPseudos[l].key,
 				original: type
-			} : null;
-		}).clean().reverse() : null;
+			});
+		}
+
+		return splits.length ? splits : null;
 	};
+
+	var mergePseudoOptions = function(split){
+		return Object.merge.apply(this, split.map(function(item){
+			return pseudos[item.pseudo].options || {};
+		}));
+	}
 
 	return {
 
 		addEvent: function(type, fn, internal){
 			var split = splitType(type);
-			if (!split || !split.length) return addEvent.call(this, type, fn, internal);
+			if (!split) return addEvent.call(this, type, fn, internal);
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
 				eventType = split[0].event,
-				options = Object.merge.apply(this, split.map(function(item){
-					return pseudos[item.pseudo].options || {};
-				})),
+				options = mergePseudoOptions(split),
 				stack = fn,
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2),
@@ -77,10 +85,10 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			split.each(function(item, index){
 				var pseudo = pseudos[item.pseudo],
-					fn = stack;
+					stackFn = stack;
 
 				stack = function(){
-					pseudo.listener.call(self, item, fn, arguments, monitor, options);
+					(eventOptions.listener || pseudo.listener).call(self, item, stackFn, arguments, monitor, options);
 				};
 			});
 
@@ -97,16 +105,14 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 		removeEvent: function(type, fn){
 			var split = splitType(type);
-			if (!split || !split.length) return removeEvent.call(this, type, fn);
+			if (!split) return removeEvent.call(this, type, fn);
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type);
 			if (!events) return this;
 
 			var eventType = split[0].event,
-				options = Object.merge.apply(this, split.map(function(item){
-					return pseudos[item.pseudo].options || {};
-				})),
+				options = mergePseudoOptions(split),
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2);
 
