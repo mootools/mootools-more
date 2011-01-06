@@ -3,7 +3,7 @@
 
 name: Events.Pseudos
 
-description: Adds the functionallity to add pseudo events
+description: Adds the functionality to add pseudo events
 
 license: MIT-style license
 
@@ -22,7 +22,6 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 	var storeKey = 'monitorEvents:';
 
 	var storageOf = function(object){
-
 		return {
 			store: object.store ? function(key, value){
 				object.store(storeKey + key, value);
@@ -77,24 +76,20 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 				stack = fn,
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2),
-				self = this;
+				self = this,
+				monitor;
 
 			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 			if (eventOptions.base) eventType = eventOptions.base;
 			if (eventOptions.onAdd) eventOptions.onAdd(this);
 
-			split.each(function(item, index){
-				var pseudo = pseudos[item.pseudo],
-					stackFn = stack;
-
+			split.each(function(item){
+				var stackFn = stack;
 				stack = function(){
-					(eventOptions.listener || pseudo.listener).call(self, item, stackFn, arguments, monitor, options);
+					(eventOptions.listener || pseudos[item.pseudo].listener).call(self, item, stackFn, arguments, monitor, options);
 				};
 			});
-
-			function monitor(){
-				stack.apply(this, arguments);
-			};
+			monitor = stack.bind(this);
 
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
