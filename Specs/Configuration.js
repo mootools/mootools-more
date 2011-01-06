@@ -53,7 +53,7 @@ Configuration.sets = {
 		files: [
 			'Class/Class.Occlude',
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
-			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation',
+			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation', 'Element/Element.Pin',
 			'Types/URI', 'Types/URI.Relative',
 			'Interface/Keyboard', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort', 'Interface/Htmltable.Select',
 			'Forms/Form.Validator',
@@ -170,6 +170,7 @@ Configuration.source = {
 			'Element/Element.Event.Pseudos',
 			'Element/Element.Event.Pseudos.Keys',
 			'Element/Element.Delegation',
+      'Element/Element.Pin',
 
       'Forms/Form.Validator',
 
