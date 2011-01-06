@@ -54,6 +54,12 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		}).clean().reverse() : null;
 	};
 
+	var mergePseudoOptions = function(split){
+		return Object.merge.apply(this, split.map(function(item){
+			return pseudos[item.pseudo].options || {};
+		}));
+	}
+
 	return {
 
 		addEvent: function(type, fn, internal){
@@ -63,9 +69,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
 				eventType = split[0].event,
-				options = Object.merge.apply(this, split.map(function(item){
-					return pseudos[item.pseudo].options || {};
-				})),
+				options = mergePseudoOptions(split),
 				stack = fn,
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2),
@@ -77,10 +81,10 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			split.each(function(item, index){
 				var pseudo = pseudos[item.pseudo],
-					fn = stack;
+					stackFn = stack;
 
 				stack = function(){
-					pseudo.listener.call(self, item, fn, arguments, monitor, options);
+					(eventOptions.listener || pseudo.listener).call(self, item, stackFn, arguments, monitor, options);
 				};
 			});
 
@@ -104,9 +108,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			if (!events) return this;
 
 			var eventType = split[0].event,
-				options = Object.merge.apply(this, split.map(function(item){
-					return pseudos[item.pseudo].options || {};
-				})),
+				options = mergePseudoOptions(split),
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2);
 
