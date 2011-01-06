@@ -38,44 +38,54 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		};
 	};
 
-
 	var splitType = function(type){
 		if (type.indexOf(':') == -1) return null;
 
 		var parsed = Slick.parse(type).expressions[0][0],
 			parsedPseudos = parsed.pseudos;
 
-		return (pseudos && pseudos[parsedPseudos[0].key]) ? {
-			event: parsed.tag,
-			value: parsedPseudos[0].value,
-			pseudo: parsedPseudos[0].key,
-			original: type
-		} : null;
+		return pseudos ? parsedPseudos.map(function(item, index){
+			return pseudos[parsedPseudos[index].key] ? {
+				event: parsed.tag,
+				value: parsedPseudos[index].value,
+				pseudo: parsedPseudos[index].key,
+				original: type
+			} : null;
+		}).clean().reverse() : null;
 	};
-
 
 	return {
 
 		addEvent: function(type, fn, internal){
 			var split = splitType(type);
-			if (!split) return addEvent.call(this, type, fn, internal);
+			if (!split || !split.length) return addEvent.call(this, type, fn, internal);
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
-				pseudo = pseudos[split.pseudo],
-				eventType = split.event,
-				options = pseudo.options || {},
+				eventType = split[0].event,
+				options = Object.merge.apply(this, split.map(function(item){
+					return pseudos[item.pseudo].options || {};
+				})),
+				stack = fn,
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2),
-				listener = eventOptions.listener || pseudo.listener,
 				self = this;
 
 			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 			if (eventOptions.base) eventType = eventOptions.base;
 			if (eventOptions.onAdd) eventOptions.onAdd(this);
 
-			var monitor = function(){
-				listener.call(this, split, fn, arguments, monitor, options);
+			split.each(function(item, index){
+				var pseudo = pseudos[item.pseudo],
+					fn = stack;
+
+				stack = function(){
+					pseudo.listener.call(self, item, fn, arguments, monitor, options);
+				};
+			});
+
+			function monitor(){
+				stack.apply(this, arguments);
 			};
 
 			events.include({event: fn, monitor: monitor});
@@ -87,15 +97,16 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 		removeEvent: function(type, fn){
 			var split = splitType(type);
-			if (!split) return removeEvent.call(this, type, fn);
+			if (!split || !split.length) return removeEvent.call(this, type, fn);
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type);
 			if (!events) return this;
 
-			var pseudo = pseudos[split.pseudo],
-				eventType = split.event,
-				options = pseudo.options || {},
+			var eventType = split[0].event,
+				options = Object.merge.apply(this, split.map(function(item){
+					return pseudos[item.pseudo].options || {};
+				})),
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2);
 

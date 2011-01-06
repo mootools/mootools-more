@@ -170,4 +170,81 @@ describe('Events.Pseudos', function(){
 
 	});
 
+	describe('Multiple simultaneous pseudos', function(){
+
+		var spy,
+			myMonitor,
+			order = [],
+			e = new Events(),
+			spies = {
+			first: jasmine.createSpy(),
+			second: jasmine.createSpy(),
+			org: jasmine.createSpy()
+		};
+
+		it('should support adding events', function(){
+			spy = function (split, fn, args, monitor){
+				if (!split) spies.org();
+				else spies[split.pseudo]();
+				order.push(split ? split.pseudo : 'org');
+				if (monitor) myMonitor = monitor;
+				if (fn) fn.apply(this, args);
+			}
+
+			Events.definePseudo('first', spy);
+			Events.definePseudo('second', spy);
+			e.addEvent('test:first(org):second', spy).fireEvent('test');
+
+			expect(spies.first).toHaveBeenCalled();
+			expect(spies.second).toHaveBeenCalled();
+			expect(spies.org).toHaveBeenCalled();
+
+			expect(spies.first.callCount).toEqual(1);
+			expect(spies.second.callCount).toEqual(1);
+			expect(spies.org.callCount).toEqual(1);
+		});
+
+		it('should execute pseudos from left to right', function(){
+			expect(order).toEqual(['first', 'second', 'org']);
+		});
+
+		it('should merge options across pseudos, privledging options from left to right', function(){
+			Events.definePseudo('one', {
+				listener: function(split, fn, args, monitor, options){
+					expect(options.foo).toEqual('hello');
+					expect(options.bar).toEqual('world');
+					if (fn) fn.apply(this, args);
+				},
+				options: {
+					foo: 'hello'
+				}
+			});
+			Events.definePseudo('two', {
+				listener: function(split, fn, args, monitor, options){
+					expect(options.foo).toEqual('hello');
+					expect(options.bar).toEqual('world');
+					if (fn) fn.apply(this, args);
+				},
+				options: {
+					foo: 'bye',
+					bar: 'world'
+				}
+			});
+			e.addEvent('micCheck:one:two', function(){}).fireEvent('micCheck');
+		});
+
+		it('should not remove event if inexact event string is provided', function(){
+			e.removeEvent('test:first(org)', spy);
+			expect(e.$events['test:first(org):second'][0]).toEqual(spy);
+			expect(e.$events['test'][0]).toEqual(myMonitor);
+		});
+
+		it('should remove event only if exact event string is provided', function(){
+			e.removeEvent('test:first(org):second', spy);
+			expect(e.$events['test:first(org):second'][0]).not.toEqual(spy);
+			expect(e.$events['test'][0]).not.toEqual(myMonitor);
+		});
+
+	});
+
 });
