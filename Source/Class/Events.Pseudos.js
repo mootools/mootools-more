@@ -46,8 +46,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 			l = parsedPseudos.length,
 			splits = [];
 
-		while (l--) {
-			if (!pseudos[parsedPseudos[l].key]) continue;
+		while (l--) if (pseudos[parsedPseudos[l].key]){
 			splits.push({
 				event: parsed.tag,
 				value: parsedPseudos[l].value,
