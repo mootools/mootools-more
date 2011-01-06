@@ -39,7 +39,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 	};
 
 	var splitType = function(type){
-		if (type.indexOf(':') == -1) return null;
+		if (type.indexOf(':') == -1 || !pseudos) return null;
 
 		var parsed = Slick.parse(type).expressions[0][0],
 			parsedPseudos = parsed.pseudos,
