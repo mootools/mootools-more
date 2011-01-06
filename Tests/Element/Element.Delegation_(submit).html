@@ -3,6 +3,8 @@
 
 <div id="myContainer">
 
+	<p>Clicking one of the buttons should fire the submit or reset events. For the <strong>submit</strong> event: Try tabbing to the buttons and press enter, or tabbing to the element and press enter.</p>
+
 	<form action="#foo" id="myForm">
 
 		<input type="text" value="some text" />
@@ -10,6 +12,8 @@
 		<input type="reset" value="reset" />
 
 	</form>
+
+	<p>This form has another ID, so only the reset button should delegate</p>
 
 	<form action="#foo" id="myForm2">
 
@@ -19,9 +23,18 @@
 
 	</form>
 
+	<p>Change the text. When you blur the input field, the change event should fire</p>
+
+	<form action="#foo" id="myForm3">
+		<input type="text" value="some text" class="someClass" />
+	</form>
+
 </div>
 
-<button id="removeEvents">Remove Events</button>
+<p>This should remove all events so none of them are delegated anymore:</p>
+
+<button id="removeEvents">Remove Events</button> -
+<button id="addEvents">Add Events</button>
 
 <pre id="output"></pre>
 
@@ -39,16 +52,18 @@ var events = {
 		event.stop();
 		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
 	},
-	'change:relay(input)': function(event){
+	'change:relay(input.someClass)': function(event){
 		output.appendText('\nSuccesfully delegated the ' + event.type + ' event');
 	}
 };
 
-var container = $('myContainer');
+var container = $('myContainer').addEvents(events);
 
-container.addEvents(events);
 $('removeEvents').addEvent('click', function(){
 	container.removeEvents(events);
+});
+$('addEvents').addEvent('click', function(){
+	container.addEvents(events);
 });
 
 </script>
