@@ -3,7 +3,7 @@
 
 name: Events.Pseudos
 
-description: Adds the functionallity to add pseudo events
+description: Adds the functionality to add pseudo events
 
 license: MIT-style license
 
@@ -22,7 +22,6 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 	var storeKey = 'monitorEvents:';
 
 	var storageOf = function(object){
-
 		return {
 			store: object.store ? function(key, value){
 				object.store(storeKey + key, value);
@@ -38,21 +37,31 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		};
 	};
 
-
 	var splitType = function(type){
-		if (type.indexOf(':') == -1) return null;
+		if (type.indexOf(':') == -1 || !pseudos) return null;
 
 		var parsed = Slick.parse(type).expressions[0][0],
-			parsedPseudos = parsed.pseudos;
+			parsedPseudos = parsed.pseudos,
+			l = parsedPseudos.length,
+			splits = [];
 
-		return (pseudos && pseudos[parsedPseudos[0].key]) ? {
-			event: parsed.tag,
-			value: parsedPseudos[0].value,
-			pseudo: parsedPseudos[0].key,
-			original: type
-		} : null;
+		while (l--) if (pseudos[parsedPseudos[l].key]){
+			splits.push({
+				event: parsed.tag,
+				value: parsedPseudos[l].value,
+				pseudo: parsedPseudos[l].key,
+				original: type
+			});
+		}
+
+		return splits.length ? splits : null;
 	};
 
+	var mergePseudoOptions = function(split){
+		return Object.merge.apply(this, split.map(function(item){
+			return pseudos[item.pseudo].options || {};
+		}));
+	}
 
 	return {
 
@@ -62,21 +71,25 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 			var storage = storageOf(this),
 				events = storage.retrieve(type, []),
-				pseudo = pseudos[split.pseudo],
-				eventType = split.event,
-				options = pseudo.options || {},
+				eventType = split[0].event,
+				options = mergePseudoOptions(split),
+				stack = fn,
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2),
-				listener = eventOptions.listener || pseudo.listener,
-				self = this;
+				self = this,
+				monitor;
 
 			if (eventOptions.args) args.append(Array.from(eventOptions.args));
 			if (eventOptions.base) eventType = eventOptions.base;
 			if (eventOptions.onAdd) eventOptions.onAdd(this);
 
-			var monitor = function(){
-				listener.call(this, split, fn, arguments, monitor, options);
-			};
+			split.each(function(item){
+				var stackFn = stack;
+				stack = function(){
+					(eventOptions.listener || pseudos[item.pseudo].listener).call(self, item, stackFn, arguments, monitor, options);
+				};
+			});
+			monitor = stack.bind(this);
 
 			events.include({event: fn, monitor: monitor});
 			storage.store(type, events);
@@ -93,9 +106,8 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 				events = storage.retrieve(type);
 			if (!events) return this;
 
-			var pseudo = pseudos[split.pseudo],
-				eventType = split.event,
-				options = pseudo.options || {},
+			var eventType = split[0].event,
+				options = mergePseudoOptions(split),
 				eventOptions = options[eventType] || {},
 				args = Array.slice(arguments, 2);
 
