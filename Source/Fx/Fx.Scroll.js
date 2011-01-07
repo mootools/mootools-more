@@ -162,8 +162,14 @@ Fx.Scroll = new Class({
 });
 
 //<1.2compat>
-	Fx.Scroll.alias('scrollToCenter', 'toElementCenter');
-	Fx.Scroll.alias('scrollIntoView', 'toElementEdge');
+Fx.Scroll.implement({
+	scrollToCenter: function(){
+		return this.toElementCenter.apply(this, arguments);
+	},
+	scrollIntoView: function(){
+		return this.toElementEdge.apply(this, arguments);
+	}
+});
 //</1.2compat>
 
 function isBody(element){
