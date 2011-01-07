@@ -1,7 +1,7 @@
 
 describe('Request.JSONP', function(){
 
-	it('should grab some json from Flicr', function(){
+	it('should grab some json from from assets/jsonp.js', function(){
 
 		var onComplete = jasmine.createSpy(),
 			complete = false,
@@ -11,19 +11,18 @@ describe('Request.JSONP', function(){
 		var request = new Request.JSONP({
 			log: true,
 			callbackKey: 'jsoncallback',
-			url: 'http://www.flickr.com/services/feeds/photos_public.gne?format=json',
+			url: '../assets/jsonp.js',
 			timeout: 20000,
 			onComplete: function(){
 				onComplete.apply(this, arguments);
 				complete = true;
 			},
-			onRequest: function(script){
-				onRequest.call(this, script);
+			onRequest: function(src){
+				onRequest.call(this, src);
 			},
 			onTimeout: function(){
 				timeout = true;
 			}
-
 		});
 
 		runs(function(){
@@ -31,7 +30,7 @@ describe('Request.JSONP', function(){
 		});
 
 		runs(function(){
-			expect(onRequest).toHaveBeenCalled();
+			expect(onRequest).toHaveBeenCalledWith('../assets/jsonp.js?jsoncallback=Request.JSONP.request_map.request_0');
 		});
 
 		waitsFor(1600, function(){
@@ -40,6 +39,8 @@ describe('Request.JSONP', function(){
 
 		runs(function(){
 			expect(onComplete).toHaveBeenCalled();
+			// See json.js file
+			expect(onComplete.mostRecentCall.args[0].test).toEqual(true);
 		});
 
 	});
