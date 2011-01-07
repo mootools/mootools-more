@@ -253,21 +253,25 @@ describe('Form.Validator', function(){
 		describe('validate-one-required', function(){
 
 			var validator = getValidator('validate-one-required'),
-				collection = new Element('div').adopt(
-					['', '', '', ''].map(function(value){
+				collectionWithValues = new Element('div').adopt(
+					['hi', '', '', ''].map(function(value){
 						return createInput(value);
 					})
 				),
-				elementWithValue = createInput('foo').inject(collection);
-				elementWithoutValue = createInput('').inject(collection);
+				collectionWithoutValues = new Element('div').adopt(
+					['', '', '', ''].map(function(value){
+						return createInput(value);
+					})
+				);
 
 			it('should return true if atleast one of an elements siblings have a value', function(){
-				this.after(elementWithValue.destroy.bind(elementWithValue));
-				expect(validator.test(elementWithValue)).toEqual(true);
+				expect(validator.test(collectionWithValues.getChildren()[2])).toEqual(true);
+				this.after(collectionWithValues.destroy.bind(collectionWithValues));
 			});
 
 			it('should return false if none of an elements siblings have a value', function(){
-				expect(validator.test(elementWithoutValue)).toEqual(false);
+				expect(validator.test(collectionWithoutValues.getChildren()[2])).toEqual(false);
+				this.after(collectionWithoutValues.destroy.bind(collectionWithoutValues));
 			});
 
 		});
