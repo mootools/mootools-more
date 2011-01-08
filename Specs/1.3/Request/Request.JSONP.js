@@ -17,8 +17,9 @@ describe('Request.JSONP', function(){
 				onComplete.apply(this, arguments);
 				complete = true;
 			},
-			onRequest: function(src){
+			onRequest: function(src, script){
 				onRequest.call(this, src);
+				expect(script.get('tag')).toEqual('script');
 			},
 			onTimeout: function(){
 				timeout = true;

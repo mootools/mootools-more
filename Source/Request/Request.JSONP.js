@@ -88,7 +88,7 @@ Request.JSONP = new Class({
 		}.bind(this);
 
 		var script = this.getScript(src).inject(options.injectScript);
-		this.fireEvent('request', [script.get('src'), script]);
+		this.fireEvent('request', [src, script]);
 
 		if (options.timeout) this.timeout.delay(options.timeout, this);
 
