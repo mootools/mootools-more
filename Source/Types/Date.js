@@ -47,9 +47,9 @@ Date.Methods = {
 	Date.Methods[method.toLowerCase()] = method;
 });
 
-var pad = function(what, length, string){
-	if (!string) string = '0';
-	return new Array(length - String(what).length + 1).join(string) + what;
+var pad = function(n, digits, string){
+	if (digits == 1) return n;
+	return n < Math.pow(10, digits - 1) ? (string || '0') + pad(n, digits - 1, string) : n;
 };
 
 Date.implement({
@@ -239,13 +239,13 @@ Date.implement({
 					case 'p': return Date.getMsg(d.get('ampm'));
 					case 's': return Math.round(d / 1000);
 					case 'S': return pad(d.get('seconds'), 2);
+					case 'T': return d.format('%H:%M:%S');
 					case 'U': return pad(d.get('week'), 2);
 					case 'w': return d.get('day');
 					case 'x': return d.format(Date.getMsg('shortDate'));
 					case 'X': return d.format(Date.getMsg('shortTime'));
 					case 'y': return d.get('year').toString().substr(2);
 					case 'Y': return d.get('year');
-					case 'T': return d.format('%H:%M:%S');
 					case 'z': return d.get('GMTOffset');
 					case 'Z': return d.get('Timezone');
 				}
