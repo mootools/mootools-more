@@ -149,9 +149,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.selectRange(startRow, endRow, true);
 	},
 
-        getSelected: function(){
-                return this._selectedRows;
-        },
+	getSelected: function(){
+		return this._selectedRows;
+	},
 
 /*
 	Private methods:
