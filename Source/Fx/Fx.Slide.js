@@ -38,26 +38,26 @@ Fx.Slide = new Class({
 		this.parent(options);
 		options = this.options;
 
-		var styles = element.getStyles('margin', 'position', 'overflow');
+		var wrapper = element.retrieve('wrapper'),
+			styles = element.getStyles('margin', 'position', 'overflow');
 
 		if (options.hideOverflow) styles = Object.append(styles, {overflow: 'hidden'});
 		if (options.wrapper) wrapper = document.id(options.wrapper).setStyles(styles);
 
-		var wrapper = element.retrieve('wrapper');
 		if (!wrapper) wrapper = new Element('div', {
 			styles: styles
 		}).wraps(element);
-		this.wrapper = wrapper;
 
 		element.store('wrapper', wrapper).setStyle('margin', 0);
 		if (element.getStyle('overflow') == 'visible') element.setStyle('overflow', 'hidden');
 
 		this.now = [];
 		this.open = true;
+		this.wrapper = wrapper;
 
 		this.addEvent('complete', function(){
-			this.open = (this.wrapper['offset' + this.layout.capitalize()] != 0);
-			if (this.open && this.options.resetHeight) this.wrapper.setStyle('height', '');
+			this.open = (wrapper['offset' + this.layout.capitalize()] != 0);
+			if (this.open && options.resetHeight) wrapper.setStyle('height', '');
 		}, true);
 	},
 
