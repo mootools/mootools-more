@@ -1,0 +1,35 @@
+
+<style>
+
+.clickme {
+	background: #AAA;
+	padding: 20px;
+}
+
+</style>
+
+<p>
+	Press shift+a and there should appear some text below. Pressing it once again should not fire the event because of the <code>:once</code> pseudo.
+</p>
+
+<div id="result"><h3>keydown:keys(shift+a):once</h3></div>
+<div id="result2"><h3>click:relay(a):once</h3></div>
+
+<p class="clickme">Clickme</p>
+
+<script src="/depender/build?require=More/Element.Event.Pseudos.Keys"></script>
+
+<script>
+
+var result = $('result'),
+	result2 = $('result2');
+
+document.addEvent('keydown:keys(shift+a):once', function(){
+	result.set('html', result.get('html') + 'succes :keydown:keys(shift+a)!<br>');
+});
+
+document.addEvent('click:relay(p):once', function(event){
+	result2.set('html', result2.get('html') + 'succes :relay(p):once!<br>');
+});
+
+</script>
