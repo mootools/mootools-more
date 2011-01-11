@@ -31,7 +31,7 @@ var eventListenerSupport = !(window.attachEvent && !window.addEventListener),
 nativeEvents.focusin = 2;
 nativeEvents.focusout = 2;
 
-var formDelegation = function(formEventName){
+var formObserver = function(formEventName){
 
 	var $delegationKey = '$delegation:';
 
@@ -75,8 +75,49 @@ var formDelegation = function(formEventName){
 	};
 };
 
-Event.definePseudo('relay', {
+var inputObserver = function(eventName){
+	return {
+		base: 'focusin',
+		listener: function(split, fn, args){
+			var events = {blur: function(){
+				this.removeEvents(events);
+			}};
+			events[eventName] = function(){
+				if (Slick.match(this, split.value)) fn.call(this, event);
+			};
+			args[0].target.addEvents(events);
+		}
+	}
+};
 
+var eventOptions = {
+	mouseenter: {
+		base: 'mouseover',
+		condition: Element.Events.mouseenter.condition
+	},
+	mouseleave: {
+		base: 'mouseout',
+		condition: Element.Events.mouseleave.condition
+	},
+	focus: {
+		base: 'focus' + (eventListenerSupport ? '' : 'in'),
+		args: [true]
+	},
+	blur: {
+		base: eventListenerSupport ? 'blur' : 'focusout',
+		args: [true]
+	}
+};
+
+if (!eventListenerSupport) Object.append(eventOptions, {
+	submit: formObserver('submit'),
+	reset: formObserver('reset'),
+	change: inputObserver('change'),
+	select: inputObserver('select')
+});
+
+
+Event.definePseudo('relay', {
 	listener: function(split, fn, args, monitor, options){
 		var event = args[0],
 			eventOptions = options[split.event],
@@ -90,42 +131,7 @@ Event.definePseudo('relay', {
 			}
 		}
 	},
-
-	options: {
-		mouseenter: {
-			base: 'mouseover',
-			condition: Element.Events.mouseenter.condition
-		},
-		mouseleave: {
-			base: 'mouseout',
-			condition: Element.Events.mouseleave.condition
-		},
-		focus: {
-			base: 'focus' + (eventListenerSupport ? '' : 'in'),
-			args: [true]
-		},
-		blur: {
-			base: eventListenerSupport ? 'blur' : 'focusout',
-			args: [true]
-		},
-		submit: eventListenerSupport ? {} : formDelegation('submit'),
-		reset: eventListenerSupport ? {} : formDelegation('reset'),
-		change: eventListenerSupport ? {
-			args: [true]
-		} : {
-			base: 'focusin',
-			listener: function(split, fn, args){
-				var listener = function(event){
-					if (Slick.match(this, split.value)) fn.call(this, event);
-				};
-				var remove = function(event){
-					this.removeEvents({change: listener, blur: remove});
-				};
-				args[0].target.addEvents({change: listener, blur: remove});
-			}
-		}
-	}
-
+	options: eventOptions
 });
 
 })();
