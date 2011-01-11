@@ -31,6 +31,11 @@ var eventListenerSupport = !(window.attachEvent && !window.addEventListener),
 nativeEvents.focusin = 2;
 nativeEvents.focusout = 2;
 
+var check = function(split, target, event){
+	var condition = Element.Events[split.event] && Element.Events[split.event].condition;
+	return Slick.match(target, split.value) && (!condition || condition.call(target, event))
+};
+
 var formObserver = function(formEventName){
 
 	var $delegationKey = '$delegation:';
@@ -61,7 +66,7 @@ var formObserver = function(formEventName){
 
 			if (!formEvents.contains(fn)){
 				var formListener = function(event){
-					if (Slick.match(this, split.value)) fn.call(this, event);
+					if (check(split, this, event)) fn.call(this, event);
 				};
 				form.addEvent(formEventName, formListener);
 
@@ -83,7 +88,7 @@ var inputObserver = function(eventName){
 				this.removeEvents(events);
 			}};
 			events[eventName] = function(){
-				if (Slick.match(this, split.value)) fn.call(this, event);
+				if (check(split, this, event)) fn.call(this, event);
 			};
 			args[0].target.addEvents(events);
 		}
@@ -92,12 +97,10 @@ var inputObserver = function(eventName){
 
 var eventOptions = {
 	mouseenter: {
-		base: 'mouseover',
-		condition: Element.Events.mouseenter.condition
+		base: 'mouseover'
 	},
 	mouseleave: {
-		base: 'mouseout',
-		condition: Element.Events.mouseleave.condition
+		base: 'mouseout'
 	},
 	focus: {
 		base: 'focus' + (eventListenerSupport ? '' : 'in'),
@@ -119,13 +122,11 @@ if (!eventListenerSupport) Object.append(eventOptions, {
 
 Event.definePseudo('relay', {
 	listener: function(split, fn, args, monitor, options){
-		var event = args[0],
-			eventOptions = options[split.event],
-			check = eventOptions ? eventOptions.condition : null;
+		var event = args[0];
 
 		for (var target = event.target; target && target != this; target = target.parentNode){
 			var finalTarget = document.id(target);
-			if (Slick.match(target, split.value) && (!check || check.call(finalTarget, event))){
+			if (check(split, finalTarget, event)){
 				if (finalTarget) fn.call(finalTarget, event, finalTarget);
 				return;
 			}
