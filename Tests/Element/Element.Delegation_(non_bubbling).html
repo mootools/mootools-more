@@ -1,7 +1,14 @@
 
-<p>The submit and reset Events do not bubble up to the window/document in IE by default. Our Element Delegation should fix this</p>
+<p>The focus, blur, submit, reset, change and select Events do not bubble up to the window/document in IE by default. Our Element Delegation should fix this</p>
 
 <div id="myContainer">
+
+	<p>This should delegate the onblur and onfocus events</p>
+
+	<form>
+		<input type="text" id="myInput" /><br />
+		<textarea></textarea>
+	</form>
 
 	<p>Clicking one of the buttons should fire the submit or reset events. For the <strong>submit</strong> event: Try tabbing to the buttons and press enter, or tabbing to the element and press enter.</p>
 
@@ -26,7 +33,20 @@
 	<p>Change the text. When you blur the input field, the change event should fire</p>
 
 	<form action="#foo" id="myForm3">
-		<input type="text" value="some text" class="someClass" />
+		<input type="text" value="some text" class="someClass" /><br />
+		<select name="yo">
+			<option>First</option>
+			<option>Second</option>
+			<option>Third</option>
+		</select><br />
+		<input type="checkbox" value="1" /><br />
+		<input type="radio" name="rad[]" value="1" /><input type="radio" name="rad[]" value="2" />
+	</form>
+
+	<p>Select some text and the select event should fire</p>
+
+	<form action="#bar" id="myForm4">
+		<input type="text" value="select some text in this input" />
 	</form>
 
 </div>
@@ -36,14 +56,22 @@
 <button id="removeEvents">Remove Events</button> -
 <button id="addEvents">Add Events</button>
 
-<pre id="output"></pre>
+<pre id="result"></pre>
+
 
 <script src="/depender/build?require=More/Element.Delegation"></script>
 <script>
 
-var output = $('output');
+
+var output = $('result');
 
 var events = {
+	'focus:relay(input#myInput,textarea)': function(){
+		output.appendText('\nFocus');
+	},
+	'blur:relay(input#myInput,textarea)': function(){
+		output.appendText('\nBlurred');
+	},
 	'submit:relay(form#myForm)': function(event){
 		event.stop();
 		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
@@ -52,7 +80,10 @@ var events = {
 		event.stop();
 		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
 	},
-	'change:relay(input.someClass)': function(event){
+	'change:relay(input.someClass,select,input[type=checkbox],input[type=radio])': function(event){
+		output.appendText('\nSuccesfully delegated the ' + event.type + ' event');
+	},
+	'select:relay(#myForm4 input)': function(){
 		output.appendText('\nSuccesfully delegated the ' + event.type + ' event');
 	}
 };
@@ -65,5 +96,9 @@ $('removeEvents').addEvent('click', function(){
 $('addEvents').addEvent('click', function(){
 	container.addEvents(events);
 });
+
+$$('select').addEvent('select', function(event){
+	console.log(event);
+})
 
 </script>
