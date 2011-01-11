@@ -55,7 +55,7 @@ Configuration.sets = {
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
 			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation',
 			'Types/URI', 'Types/URI.Relative',
-			'Interface/Keyboard', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort', 'Interface/Htmltable.Select',
+			'Interface/Keyboard', 'Interface/Keyboard.Extras', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort', 'Interface/Htmltable.Select',
 			'Forms/Form.Validator',
 			'Fx/Fx.Reveal',
 			'Request/Request.JSONP',
@@ -177,6 +177,7 @@ Configuration.source = {
 			'Types/URI.Relative',
 
 			'Interface/Keyboard',
+			'Interface/Keyboard.Extras',
 			'Interface/HtmlTable',
 			'Interface/HtmlTable.Sort',
 			'Interface/HtmlTable.Select',
