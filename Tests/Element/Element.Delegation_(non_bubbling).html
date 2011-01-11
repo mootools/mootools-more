@@ -80,7 +80,7 @@ var events = {
 		event.stop();
 		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
 	},
-	'change:relay(input.someClass,select)': function(event){
+	'change:relay(input.someClass,select,input[type=checkbox],input[type=radio])': function(event){
 		output.appendText('\nSuccesfully delegated the ' + event.type + ' event');
 	},
 	'select:relay(#myForm4 input)': function(){
