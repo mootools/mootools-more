@@ -348,7 +348,7 @@ See [Date:defineFormat][] to define new shortcuts.
 Date Method: toISOString {#Date:toISOString}
 --------------------------------------------
 
-Outputs the date in the ISO-8601 standard format (i.e. 1999-12-31T11:59:59-0800).
+Outputs the date in the ISO-8601 standard format (i.e. 1999-12-31T19:59:59.000Z).
 
 ### Syntax
 
