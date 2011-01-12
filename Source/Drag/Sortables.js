@@ -33,8 +33,7 @@ var Sortables = new Class({
 		clone: false,
 		revert: false,
 		handle: false,
-		dragOptions: {},
-		/*<1.2compat>*/
+		dragOptions: {}/*<1.2compat>*/,
 		snap: 4,
 		constrain: false,
 		preventDefault: false
