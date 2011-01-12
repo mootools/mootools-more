@@ -25,9 +25,9 @@ function EFexample(input, txt, value){
 </p>
 
 <script type="text/javascript">
-	$('ip1').addEvent('click', function(){
-		EFexample(this, 'getTextInRange(2,5)', $(this).getTextInRange(2,5));
-	});
+$('ip1').addEvent('click', function(){
+	EFexample(this, 'getTextInRange(2,5)', $(this).getTextInRange(2,5));
+});
 </script>
 
 
@@ -41,9 +41,9 @@ function EFexample(input, txt, value){
 </p>
 
 <script type="text/javascript">
-	$('ip2').addEvent('click', function(){
-		EFexample(this, 'getSelectedText', $(this).getSelectedText());
-	});
+$('ip2').addEvent('select', function(){
+	EFexample(this, 'getSelectedText', $(this).getSelectedText());
+});
 </script>
 
 
@@ -60,9 +60,9 @@ function EFexample(input, txt, value){
 </p>
 
 <script type="text/javascript">
-	$('ip3').addEvent('click', function(){
-		EFexample(this, 'getSelectedRange', JSON.encode($(this).getSelectedRange()));
-	});
+$('ip3').addEvent('select', function(){
+	EFexample(this, 'getSelectedRange', JSON.encode($(this).getSelectedRange()));
+});
 </script>
 
 
@@ -80,9 +80,9 @@ function EFexample(input, txt, value){
 </p>
 
 <script type="text/javascript">
-	$('ip4').addEvent('click', function(){
-		EFexample(this, 'selectRange(2,5)', ''); $(this).selectRange(2,5);
-	});
+$('ip4').addEvent('click', function(){
+	EFexample(this, 'selectRange(2,5)', ''); $(this).selectRange(2,5);
+});
 </script>
 
 
@@ -97,9 +97,9 @@ function EFexample(input, txt, value){
 </p>
 
 <script type="text/javascript">
-	$('ip6').addEvent('click', function(){
-		EFexample(this, 'insertAtCursor(\'!!!INSERTED!!!\')', $(this).insertAtCursor('!!!INSERTED!!!'));
-	});
+$('ip6').addEvent('click', function(){
+	EFexample(this, 'insertAtCursor(\'!!!INSERTED!!!\')', $(this).insertAtCursor('!!!INSERTED!!!'));
+});
 </script>
 
 
@@ -117,9 +117,9 @@ third line</textarea>
 </p>
 
 <script type="text/javascript">
-	$('ip7').addEvent('click', function(){
-		EFexample(this, 'insertAroundCursor({before: \'<\', after: \'>\'})', $(this).insertAroundCursor({before: '<', after: '>'}))
-	});
+$('ip7').addEvent('mouseup', function(){
+	EFexample(this, 'insertAroundCursor({before: \'<\', after: \'>\'})', $(this).insertAroundCursor({before: '<', after: '>'}))
+});
 </script>
 
 
