@@ -60,6 +60,10 @@ Drag Method: constructor {#Drag:constructor}
 		invert: true,
 		modifiers: {x: 'scrollLeft', y: 'scrollTop'}
 	});
+	// corresponding HTML and CSS
+	<div id="myContainer" style="overflow: auto; width: 300px; height: 300px;">
+		<!-- lots of text -->
+	</div>
 
 ### Notes
 
@@ -67,7 +71,7 @@ Drag Method: constructor {#Drag:constructor}
 
 ### See Also
 
-- [W3Schools: CSS Units][]
+- [MDC: CSS Units][]
 
 
 
@@ -94,7 +98,7 @@ Attaches the mouse listener to the handle, causing the Element to be draggable.
 
 ### See Also
 
-- [$][], [Element:makeDraggable][], [Drag:detach](#Drag:detach), [Element:addEvent][]
+- [document.id][], [Element:makeDraggable][], [Drag:detach](#Drag:detach), [Element:addEvent][]
 
 
 
@@ -121,7 +125,7 @@ Detaches the mouse listener from the handle, preventing the Element from being d
 
 ### See Also
 
-- [$][], [Element:makeDraggable][], [Element:addEvent][]
+- [document.id][], [Element:makeDraggable][], [Element:addEvent][]
 
 
 
@@ -199,4 +203,4 @@ Adds drag-to-resize behavior to an Element using supplied options.
 [Event:stopPropagation]: /core/Types/Event#Event:stopPropagation
 [Chain]: /core/Class/Class.Extras#Chain
 [Options]: /core/Class/Class.Extras#Options
-[W3Schools: CSS Units]: http://www.w3schools.com/css/css_units.asp
+[MDC: CSS Units]: https://developer.mozilla.org/en/CSS-2_Quick_Reference/Units
