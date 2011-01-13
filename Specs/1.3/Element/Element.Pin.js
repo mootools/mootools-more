@@ -27,14 +27,11 @@ describe("Element.Pin", function(){
 			div = new Element('div').inject(document.body);
 		});
 
-		afterEach(function(){
-			div.unpin();
-		});
-
 		it("should not toggle pin state if element's display is none", function(){
 			div.setStyle('display', 'none');
 			expect(div.pin().retrieve('pin:_pinned')).not.toEqual(true);
 			div.setStyle('display', 'block');
+			div.unpin();
 		});
 
 		it("should return the element", function(){
@@ -42,14 +39,17 @@ describe("Element.Pin", function(){
 			div.setStyle('display', 'none');
 			expect(div.pin()).toEqual(div);
 			div.setStyle('display', 'block');
+			div.unpin();
 		});
 
 		it("should update 'pin:_pinned' state on the element as true", function(){
 			expect(div.pin().retrieve('pin:_pinned')).toEqual(true);
+			div.unpin();
 		});
 
 		it("should store 'pin:_scrollFixer' on the element", function(){
 			expect(typeOf(div.pin(true, true).retrieve('pin:_scrollFixer'))).toEqual('function');
+			div.unpin();
 		});
 
 		it("should not change position of the element on the page", function(){
@@ -59,7 +59,7 @@ describe("Element.Pin", function(){
 				left: 50
 			}).getPosition();
 			div.unpin();
-			document.body.scrollTo('top');
+			$(document.body).scrollTo('top');
 			//does not test for ie6
 			if (div.getStyle('position') == 'fixed') expect(div.pin().getPosition()).toEqual(pos);
 			div.destroy();
