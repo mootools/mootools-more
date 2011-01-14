@@ -37,7 +37,7 @@ var check = function(split, target, event){
 	return Slick.match(target, split.value) && (!condition || condition.call(target, event));
 };
 
-var formObserver = function(formEventName){
+var formObserver = function(eventName){
 
 	var $delegationKey = '$delegation:';
 
@@ -47,10 +47,10 @@ var formObserver = function(formEventName){
 		onRemove: function(element){
 			element.retrieve($delegationKey + 'forms', []).each(function(el){
 				el.retrieve($delegationKey + 'listeners', []).each(function(listener){
-					el.removeEvent(formEventName, listener);
+					el.removeEvent(eventName, listener);
 				});
-				el.eliminate($delegationKey + formEventName + 'listeners')
-					.eliminate($delegationKey + formEventName + 'originalFn');
+				el.eliminate($delegationKey + eventName + 'listeners')
+					.eliminate($delegationKey + eventName + 'originalFn');
 			});
 		},
 
@@ -69,13 +69,13 @@ var formObserver = function(formEventName){
 				var formListener = function(event){
 					if (check(split, this, event)) fn.call(this, event);
 				};
-				form.addEvent(formEventName, formListener);
+				form.addEvent(eventName, formListener);
 
 				formEvents.push(fn);
 				formListeners.push(formListener);
 
-				form.store($delegationKey + formEventName + 'originalFn', formEvents)
-					.store($delegationKey + formEventName + 'listeners', formListeners)
+				form.store($delegationKey + eventName + 'originalFn', formEvents)
+					.store($delegationKey + eventName + 'listeners', formListeners)
 			}
 		}
 	};
@@ -88,7 +88,7 @@ var inputObserver = function(eventName){
 			var events = {blur: function(){
 				this.removeEvents(events);
 			}};
-			events[eventName] = function(){
+			events[eventName] = function(event){
 				if (check(split, this, event)) fn.call(this, event);
 			};
 			args[0].target.addEvents(events);
