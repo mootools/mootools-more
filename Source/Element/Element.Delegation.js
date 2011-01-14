@@ -32,7 +32,8 @@ nativeEvents.focusin = 2;
 nativeEvents.focusout = 2;
 
 var check = function(split, target, event){
-	var condition = Element.Events[split.event] && Element.Events[split.event].condition;
+	var splitEvent = Element.Events[split.event],
+		condition = splitEvent && splitEvent.condition;
 	return Slick.match(target, split.value) && (!condition || condition.call(target, event))
 };
 
@@ -87,7 +88,7 @@ var inputObserver = function(eventName){
 			var events = {blur: function(){
 				this.removeEvents(events);
 			}};
-			events[eventName] = function(){
+			events[eventName] = function(event){
 				if (check(split, this, event)) fn.call(this, event);
 			};
 			args[0].target.addEvents(events);
@@ -123,7 +124,7 @@ if (!eventListenerSupport) Object.append(eventOptions, {
 Event.definePseudo('relay', {
 	listener: function(split, fn, args, monitor, options){
 		var event = args[0];
-
+		
 		for (var target = event.target; target && target != this; target = target.parentNode){
 			var finalTarget = document.id(target);
 			if (check(split, finalTarget, event)){
@@ -136,4 +137,3 @@ Event.definePseudo('relay', {
 });
 
 })();
-
