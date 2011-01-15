@@ -39,8 +39,8 @@ In the diagram above, you can see that Slideshow's Keyboard instance is active, 
 
 As an additional note, this means you can add keyboard events to Keyboard.manager. This is how you add "top level" events.
 
-Keyboard Method: constructor {#Keyboard:constructor}
-----------------------------------------
+Keyboard Method: constructor
+----------------------------
 
 ### Syntax
 
@@ -204,7 +204,7 @@ Drops an instance of a keyboard from being managed.
 
 ### Note
 
-The result 
+The result
 
 Static Method: Keyboard.stop {#Keyboard:stop}
 ------------------------------------

@@ -5,15 +5,15 @@ Moves an element to another location (relative to another element) with a transi
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/05-fx/01-fx.move
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/05-fx/01-fx.move)
 
 ### Extends
 
 - [Fx.Morph][]
 
-Fx.Move Method: constructor {#Fx-Move:constructor}
-------------------------------------------
+
+Fx.Move Method: constructor
+---------------------------
 
 ### Syntax
 
@@ -24,7 +24,7 @@ Fx.Move Method: constructor {#Fx-Move:constructor}
 1. element - (*mixed*) A string of the id for an Element or an Element reference to relocate
 2. options - (*object*, optional) An object with options for the effect. See below.
 
-### Options {#Fx-Move:options}
+### Options
 
 * relativeTo - (*mixed*) a string of the id for an Element or an Element reference relative to which to position this one; defaults to *document.body.*
 * position - (*string*) the aspect of the relativeTo element that this element should be positioned. Options are 'upperRight', 'upperLeft', 'bottomLeft', 'bottomRight', and 'center' (the default). With the exception of center, all other options will make the upper right corner of the positioned element = the specified corner of the relativeTo element. 'center' will make the center point of the positioned element = the center point of the relativeTo element.

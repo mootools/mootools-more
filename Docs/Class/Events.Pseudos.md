@@ -3,7 +3,7 @@ Events.Pseudos
 
 Defines the `:once` pseudo event for classes that have implemented the [Events][] class as well as the `definePseudos` method for adding your own.
 
-Event Pseudos {#Pseudos}
+Pseudo Events {#Pseudos}
 ========================
 
 Like [Element.Event.Pseudos][] for Elements, you can use pseudos for Class Events.

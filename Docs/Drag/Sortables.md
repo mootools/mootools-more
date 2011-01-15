@@ -3,6 +3,15 @@ Class: Sortables {#Sortables}
 
 Creates an interface for drag and drop sorting of a list or lists.
 
+### Demo
+
+* [Sortables](http://mootools.net/demos/?demo=Sortables)
+
+
+Sortables Method: constructor
+-----------------------------
+
+
 ### Syntax:
 
 	new Sortables(list[, options]);
@@ -20,7 +29,7 @@ Creates an interface for drag and drop sorting of a list or lists.
 * handle - (*string*: defaults to *false*) A selector to select an element inside each sortable item to be used as the handle for sorting that item.  If no match is found, the element is used as its own handle.
 * opacity - (*number*: defaults to *1*) Opacity of the place holding element
 * revert - (*mixed*: defaults to *false*) Whether or not to use an effect to slide the element into its final location after sorting. If you pass an object it will be used as additional options for the revert effect.
-* dragOptions - (*object*; defaults to *{}*) The options to apply internally to sortable's Drag.Move instances.
+* dragOptions - (*object*; defaults to *{}*) The options to apply internally to sortable's [Drag.Move][] instances.
 
 ### Events:
 
@@ -273,6 +282,6 @@ If more than one list is being used, all lists will be serialized and returned i
 	//'3-0=0&3-1=1&3-2=2'
 
 
-
+[Drag.Move]: /more/Drag/Drag.Move
 [Element]: /core/Elements/Element
 [Elements]: /core/Element/Element#Elements

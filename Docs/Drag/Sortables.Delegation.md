@@ -5,7 +5,10 @@ An event delegated interface for drag and drop sorting, Sortables.Delegation is 
 
 ### Extends:
 
-[Sortables][]
+* [Sortables][]
+
+Sortables.Delegation Method: constructor
+----------------------------------------
 
 ### Syntax:
 
@@ -32,8 +35,8 @@ All events defined by [Sortables][]
 
 Adding a sortable item is as simple as injecting an element into a list element.
 
-Sortables Method: addLists {#Sortables-Delegation:addLists}
------------------------------------------------------------
+Sortables.Delegation Method: addLists {#Sortables-Delegation:addLists}
+----------------------------------------------------------------------
 
 Allows one or more entire lists to be added to an existing Sortables instance, allowing sorting between the new and old lists. The relay specified in the instance options will be applied in delegating these lists.
 
@@ -58,8 +61,8 @@ Allows one or more entire lists to be added to an existing Sortables instance, a
 
 - [Sortables.Delegation:removeLists](#Sortables-Delegation:removeLists)
 
-Sortables Method: removeLists {#Sortables-Delegation:removeLists}
------------------------------------------------------------------
+Sortables.Delegation Method: removeLists {#Sortables-Delegation:removeLists}
+----------------------------------------------------------------------------
 
 Allows one or more entire lists to be removed from an existing Sortables instance, preventing sorting between the lists.
 

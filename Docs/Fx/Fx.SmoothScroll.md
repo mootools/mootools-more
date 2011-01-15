@@ -1,5 +1,5 @@
 Class: Fx.SmoothScroll {#Fx-SmoothScroll}
-===================================
+=========================================
 
 Auto targets all the anchors in a page and display a smooth scrolling effect upon clicking them.
 
@@ -10,6 +10,9 @@ Auto targets all the anchors in a page and display a smooth scrolling effect upo
 ### Extends
 
 [Fx.Scroll][]
+
+Fx.SmoothScroll Method: constructor
+-----------------------------------
 
 ### Syntax
 

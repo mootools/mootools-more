@@ -7,6 +7,10 @@ Adds the ability to select rows in a table.
 
 * [HtmlTable][]
 
+
+HtmlTable Method: constructor
+-----------------------------
+
 ### Syntax
 
 	new HtmlTable([table, options]);

@@ -8,8 +8,8 @@ Enables the modification of two CSS properties of an Element based on the positi
 [Events][], [Chain][], [Options][]
 
 
-Drag Method: constructor {#Drag:constructor}
---------------------------------------------
+Drag Method: constructor
+------------------------
 
 ### Syntax
 

@@ -9,6 +9,10 @@ You must call its start method to start listening to mouse movements.
 
 - Scroller requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 
+
+Scroller Method: constructor
+----------------------------
+
 ### Syntax
 
 	new Scroller(element[, options]);

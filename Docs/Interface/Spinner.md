@@ -11,6 +11,9 @@ Adds a semi-transparent overlay over a DOM element with a 'spinning' ajax icon.
 
 * [Options][], [Events][], [Chain][]
 
+Spinner Method: constructor
+---------------------------
+
 ### Syntax
 
 	new Spinner(target[, options]);

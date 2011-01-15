@@ -7,6 +7,10 @@ Makes headers of HtmlTable clickable to sort the rows.
 
 * [HtmlTable][]
 
+
+HtmlTable Method: constructor
+-----------------------------
+
 ### Syntax
 
 	new HtmlTable([table, options]);

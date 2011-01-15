@@ -7,6 +7,10 @@ Adds stripes to an instance of HtmlTable.
 
 * [HtmlTable][]
 
+
+HtmlTable Method: constructor
+-----------------------------
+
 ### Syntax
 
 	new HtmlTable([table, options]);

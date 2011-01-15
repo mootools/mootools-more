@@ -3,17 +3,18 @@ Class: Fx.Sort {#Fx-Sort}
 
 Reorders a group of items with a transition.
 
-### Tutorial/Demo
+### Tutorial/Demos
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/05-fx/03-fx.sort
+* [Fx.Sort](http://mootools.net/demos/?demo=Fx.Sort)
+* [Clientcide Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/05-fx/03-fx.sort)
+
 
 ### Extends
 
 - [Fx.Elements][]
 
-Fx.Sort Method: constructor {#Fx-Sort:constructor}
---------------------------------------------------
+Fx.Sort Method: constructor
+---------------------------
 
 ### Syntax
 
@@ -41,9 +42,10 @@ Fx.Sort Method: constructor {#Fx-Sort:constructor}
 	mysort.sort([2,0,1]); //a specific order
 	mysort.forward(); //forward (the original) order
 
-### Notes
+### Note
 
 * [Fx.Sort][] does not, by default, reorder the DOM; it just puts the elements into x/y locations that imply the sort, but their location in the DOM remains unless you execute [Fx.Sort:rearrangeDOM][].
+
 
 Fx.Sort Method: getCurrentOrder {#Fx-Sort:getCurrentOrder}
 ----------------------------------------------------------

@@ -11,6 +11,9 @@ Creates a JSON request using script tag injection and handles the callbacks for 
 
 * [Options][], [Events][]
 
+Request.JSONP Method: constructor
+---------------------------------
+
 ### Syntax
 
 	new Request.JSONP(options);

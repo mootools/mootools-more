@@ -3,14 +3,19 @@ Class: OverText {#OverText}
 
 Shows text over an input that disappears when the user clicks into it. The text remains hidden if the user adds a value.
 
-### Tutorial/Demo
+### Tutorial/Demos
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/09-forms/05-overtext
+* [Enhanced Form](http://mootools.net/demos/?demo=Enhanced-Form)
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/09-forms/05-overtext)
 
 ### Implements
 
 * [Options][], [Events][], [Class.Binds][]
+
+
+OverText Method: constructor
+-----------------------------
+
 
 ### Syntax
 

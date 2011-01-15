@@ -1,6 +1,12 @@
 Class: Form.Request {#Form-Request}
-=========================
+===================================
+
 Updates a DOM element with the response from the submission of a form (via Ajax).
+
+### Demo
+
+* [Enhanced Form](http://mootools.net/demos/?demo=Enhanced-Form)
+
 
 ### Implements
 

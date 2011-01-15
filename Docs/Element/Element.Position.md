@@ -4,8 +4,8 @@ Extends the [Element][] Type with the method *position* which sets the location 
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/04-element/04-element.position
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/04-element/04-element.position)
+
 
 Element Method: position {#Element:position}
 --------------------------------------------------

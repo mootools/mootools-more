@@ -5,14 +5,16 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/05-fx/02-fx.reveal
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/05-fx/02-fx.reveal)
 
 ### Extends
 
 - [Fx.Morph][]
 
-### Syntax ###
+Fx.Reveal Method: constructor
+-----------------------------
+
+### Syntax
 
 	new Fx.Reveal(element[, options]);
 
@@ -21,7 +23,7 @@ Transitions the height, opacity, padding, and margin (but not border) from and t
 1. element - (*mixed*) A string of the id for an Element or an Element reference to reveal or hide.
 2. options  - (*object*, optional) a key/value object of options
 
-### Options {#Fx-Reveal:options}
+### Options
 
 * all the options passed along to [Fx.Morph][] (transition, duration, etc.); (optional); PLUS
 * styles - (*array*) css properties to transition in addition to width/height;  defaults to *['padding','border','margin']*
@@ -63,7 +65,7 @@ Transitions the height, opacity, padding, and margin (but not border) from their
 * After the effect reveals the element, its display will be set block and its height or width to *auto* unless *heightOverride* and/or *widthOverride* (depending on the *mode* option) is specified.
 
 Fx.Reveal Method: reveal {#Fx-Reveal:reveal}
-------------------------------------------------
+--------------------------------------------
 
 Sets the display of the element to opacity: 0 and display: block, then transitions the height, opacity, padding, and margin (but not border) from zero to their proper height.
 
@@ -76,7 +78,7 @@ Sets the display of the element to opacity: 0 and display: block, then transitio
 * (*object*) This [Fx.Reveal][] instance.
 
 Fx.Reveal Method: toggle {#Fx-Reveal:toggle}
-------------------------------------------------
+--------------------------------------------
 
 Toggles the element from shown to hidden.
 
@@ -88,13 +90,15 @@ Toggles the element from shown to hidden.
 
 * (*object*) This [Fx.Reveal][] instance.
 
-Type: Element {#Element}
-==========================
 
-Extends the Element Type with [Fx.Reveal][] methods.
+Object: Element.Properties {#Element-Properties}
+================================================
+
+
+See [Element.Properties][].
 
 Element Property: reveal {#Element-Properties:reveal}
----------------------------------------------------
+-----------------------------------------------------
 
 ### Setter
 
@@ -141,7 +145,7 @@ Gets the default [Fx.Reveal][] instance for the Element.
 	el.get('reveal'); //The Fx.Reveal instance.
 
 Type: Element {#Element}
-==========================
+========================
 
 Adds [Fx.Reveal][] shortcuts to the [Element][] class.
 
@@ -156,7 +160,7 @@ Retrieves the "build-in" instance of [Fx.Reveal][] and calls its *reveal* method
 
 #### Arguments
 
-	1. options - (*object*, optional) The [Fx.Reveal][] options. If these are passed in, a new instance will be generated.
+1. options - (*object*, optional) The [Fx.Reveal][] options. If these are passed in, a new instance will be generated.
 
 ### Returns
 
@@ -226,6 +230,6 @@ Retrieves the "build-in" instance of [Fx.Reveal][] and calls its *reveal* method
 * (*element*) This Element
 
 [Fx.Reveal]: #Fx-Reveal
-[Fx.Reveal:options]: #Fx-Reveal:options
 [Fx.Morph]: /core/Fx/Fx.Morph
 [Element]: /core/Element/Element
+[Element.Properties]: /core/Element/Element#Element-Properties

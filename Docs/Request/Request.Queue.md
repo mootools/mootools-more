@@ -1,16 +1,18 @@
 Class: Request.Queue {#Request-Queue}
-=========================
+=====================================
 
 A controller class for [Request][] instances (and its subclasses) that stacks up request calls so that only a fixed amount of requests are sent at a time.
+
+### Tutorial/Demo
+
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/06-request/02-request.queue)
 
 ### Implements
 
 * [Options][], [Events][]
 
-### Tutorial/Demo
-
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/06-request/02-request.queue
+Request.Queue Method: constructor
+---------------------------------
 
 ### Syntax
 

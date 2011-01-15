@@ -4,8 +4,7 @@ Extends the [Element][] Type to include the *pin* method useful for fixed positi
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/04-element/03-element.pin
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/04-element/03-element.pin)
 
 
 Element Method: pin {#Element:pin}

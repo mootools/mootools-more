@@ -74,6 +74,11 @@ Available Languages
 		<td>sv-SE</td>
 		<td>Martin Lundgren<td>
 	</tr>
+	<tr>
+		<td>Turkish</td>
+		<td>tr-TR</td>
+		<td>Faruk Can Bilir</td>
+	</tr>
 </table>
 
 

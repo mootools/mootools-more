@@ -3,8 +3,8 @@ Type: URI {#URI}
 
 Provides numerous methods useful for managing URIs.
 
-Usage {#Usage}
---------------
+URI Method: constructor
+-----------------------
 
 Pass a *string* to the URI subclass and it will extend it, returning a new string-like object with new methods useful for managing that URI.
 

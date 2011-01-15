@@ -4,13 +4,20 @@ Class: Drag.Move {#Drag-Move}
 An extension to the base Drag class with additional functionality for dragging an Element.  Supports snapping and droppables.
 Inherits methods, properties, options and events from [Drag][].
 
+### Demos
+
+* [Drag.Cart](http://mootools.net/demos/?demo=Drag.Cart)
+* [Drag.Drop](http://mootools.net/demos/?demo=Drag.Drop)
+* [Drag.Move](http://mootools.net/demos/?demo=Drag.Move)
+
+
 ### Note
 
 Drag.Move requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 
 
-Drag.Move Method: constructor {#Drag-Move:constructor}
--------------------------------------------------
+Drag.Move Method: constructor
+-----------------------------
 
 ### Syntax
 
@@ -63,16 +70,9 @@ All the base Drag options, plus:
 - Drag.Move requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 - Drag.Move supports either position absolute or relative. If no position is found, absolute will be set.
 
-### Demos
-
-* Drag.Cart - <http://mootools.net/demos/?demo=Drag.Cart>
-* Drag.Drop - <http://mootools.net/demos/?demo=Drag.Drop>
-* Drag.Move - <http://mootools.net/demos/?demo=Drag.Move>
-
 ### See Also
 
 - [Drag][]
-
 
 
 Drag.Move Method: stop {#Drag-Move:stop}

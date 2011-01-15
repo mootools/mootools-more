@@ -9,6 +9,9 @@ If any valid response data is returned it resets the interval and executes more 
 
 * [Request][], [Request.HTML][], and [Request.JSON][]
 
+Request Method: constructor
+---------------------------
+
 ### Syntax
 
 	var myRequest = new Request(options);

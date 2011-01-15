@@ -7,6 +7,9 @@ Stores and loads a Hash as a Cookie using JSON format.
 
 - [Hash][]
 
+Hash.Cookie Method: constructor
+-------------------------------
+
 ### Syntax
 
 	var myHashCookie = new Hash.Cookie(name[, options]);

@@ -5,7 +5,10 @@ Fx.Elements allows you to apply any number of styles transitions to a collection
 
 ### Extends
 
-[Fx][]
+* [Fx][]
+
+Fx.Elements Method: constructor
+-------------------------------
 
 ### Syntax
 
@@ -28,13 +31,13 @@ Fx.Elements allows you to apply any number of styles transitions to a collection
 			alert('complete');
 		}
 	}).start({
-		'0': {
-			'height': [200, 300],
-			'opacity': [0,1]
+		0: {
+			height: [200, 300],
+			opacity: [0,1]
 		},
-		'1': {
-			'width': [200, 300],
-			'opacity': [1,0]
+		1: {
+			width: [200, 300],
+			opacity: [1,0]
 		}
 	});
 

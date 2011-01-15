@@ -5,8 +5,7 @@ Extends the [Element][] Type with some basic shortcuts (like .hide and .show).
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/04-element/05-element.shortcuts
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/04-element/05-element.shortcuts)
 
 Element Method: isDisplayed {#Element:isDisplayed}
 ----------------------------------------------

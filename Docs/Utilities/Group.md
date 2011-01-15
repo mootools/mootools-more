@@ -3,6 +3,9 @@ Class: Group {#Group}
 
 This class is for grouping Classes or Events. The Event added to the Group will fire when all of the events of the items of the group are fired.
 
+Group Method: constructor
+-------------------------
+
 ### Syntax
 
 	var myGroup = new Group(class[, arrays[, class2[, ... ]]]);
@@ -17,9 +20,9 @@ Any number of Class instances, or arrays containing class instances.
 
 ### Examples
 
-	var xhr1 = new Ajax('data.js', {evalScript: true});
-	var xhr2 = new Ajax('abstraction.js', {evalScript: true});
-	var xhr3 = new Ajax('template.js', {evalScript: true});
+	var xhr1 = new Request({url: 'data.js', evalScripts: true});
+	var xhr2 = new Request({url: 'abstraction.js', evalScripts: true});
+	var xhr3 = new Request({url: 'template.js', evalScripts: true});
 
 	var group = new Group(xhr1, xhr2, xhr3);
 	group.addEvent('complete', function(){
@@ -65,5 +68,8 @@ Adds an Event to the stack of Events of the Class instances.
 
 
 ### See Also
+
+* [Element.addEvent][]
+
 
 [Element.addEvent]: /core/Element/Element.Event#Element:addEvent

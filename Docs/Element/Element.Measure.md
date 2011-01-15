@@ -4,8 +4,7 @@ The following functions are treated as [Element][] methods.
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/04-element/01-element.measure
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/04-element/01-element.measure)
 
 
 Element Method: measure {#Element:measure}

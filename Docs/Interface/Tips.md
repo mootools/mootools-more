@@ -15,8 +15,8 @@ Display a tip on any element with a title and/or href.
 
 - [Events][], [Options][]
 
-Tips Method: constructor {#Tips:constructor}
---------------------------------------------
+Tips Method: constructor
+------------------------
 
 ### Arguments
 

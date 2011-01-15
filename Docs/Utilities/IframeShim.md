@@ -5,8 +5,7 @@ A class for obscuring select lists and flash objects in IE.
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/02-browser/02-iframeshim
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/02-browser/02-iframeshim)
 
 There are two types of elements that (sometimes) prohibit you from positioning a DOM element over them (mostly in Internet Explorer): some form elements and some flash elements. The two options you have are:
 
@@ -17,6 +16,9 @@ There are two types of elements that (sometimes) prohibit you from positioning a
 ### Implements
 
 * [Options][], [Events][], [Class.Occlude][]
+
+IframeShim Method: constructor
+------------------------------
 
 ### Syntax
 

@@ -11,6 +11,10 @@ Adds a semi-transparent overlay over a DOM element.
 
 * [Spinner][]
 
+
+Mask Method: constructor
+------------------------
+
 ### Syntax
 
 	new Mask(target[, options]);

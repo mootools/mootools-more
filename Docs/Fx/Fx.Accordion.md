@@ -3,6 +3,10 @@ Class: Fx.Accordion {#Fx-Accordion}
 
 The *Fx.Accordion* class creates a group of Elements that are toggled when their handles are clicked. When one Element toggles into view, the others toggle out.
 
+### Demo
+
+- [Fx.Accordion](http://mootools.net/demos/?demo=Accordion)
+
 ### Notes
 
 - *Fx.Accordion* requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
@@ -10,7 +14,10 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 
 ### Extends
 
-[Fx.Elements][]
+* [Fx.Elements][]
+
+Fx.Accordion Method: constructor
+--------------------------------
 
 ### Syntax
 
@@ -22,7 +29,7 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 2. elements  - (*array*) The collection of Elements the transitions will be applied to.
 3. options   - (*object*, optional) All the [Fx][] options in addition to options below.
 
-#### Options
+### Options
 
 * display     - (*number*: defaults to 0) The index of the element to show at start (with a transition). To force all elements to be closed by default, pass in -1.
 * show        - (*number*: defaults to false) The index of the element to be shown initially.
@@ -36,37 +43,39 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 * initialDisplayFx - (*boolean*; defaults to true) If set to false, the initial item displayed will not display with an effect but will just be shown immediately.
 * resetHeight - (*boolean*; defaults to true) If set to false, the height of an opened accordian section will be set to an absolute pixel size.
 
-### Returns
+### Events
 
-* (*object*) A new *Fx.Accordion* instance.
-
-## Events
-
-### active
+#### active
 
 * (*function*) Function to execute when an element starts to show.
 
-#### Signature
+##### Signature
 
 	onActive(toggler, element)
 
-#### Arguments
+##### Arguments
 
 1. toggler - (*element*) The toggler for the Element being displayed.
 2. element - (*element*) The Element being displayed.
 
-### background
+#### background
 
 * (*function*) Function to execute when an element starts to hide.
 
-#### Signature
+##### Signature
 
 	onBackground(toggler, element)
 
-#### Arguments
+##### Arguments
 
 1. *toggler* - (element) The toggler for the Element being displayed.
 2. *element* - (element) The Element being displayed.
+
+
+### Returns
+
+* (*object*) A new *Fx.Accordion* instance.
+
 
 ### Examples
 
@@ -74,11 +83,6 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 		display: 2,
 		alwaysHide: true
 	});
-
-### Demos
-
-- *Fx.Accordion* - <http://mootools.net/demos/?demo=Accordion>
-
 
 
 Fx.Accordion Method: addSection {#Fx-Accordion:addSection}

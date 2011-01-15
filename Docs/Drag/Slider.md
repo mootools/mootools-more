@@ -3,9 +3,16 @@ Class: Slider {#Slider}
 
 Creates a slider with two elements: a knob and a container.
 
+### Demo
+
+- [Slider](http://mootools.net/demos/?demo=Slider)
+
 ### Note
 
 - Slider requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
+
+Slider Method: constructor
+--------------------------
 
 ### Syntax
 
@@ -17,7 +24,7 @@ Creates a slider with two elements: a knob and a container.
 2. knob    - (*element*) The handle element for the slider.
 3. options - (*object*) An optional object for customizing the Slider.
 
-#### Options
+### Options
 
 1. snap   - (*boolean*: defaults to false) True if you want the knob to snap to the nearest value.
 2. offset - (*number*: defaults to 0) Relative offset for knob position at start.
@@ -27,63 +34,50 @@ Creates a slider with two elements: a knob and a container.
 6. mode   - (*string*: defaults to horizontal) The type of Slider can be either 'horizontal' or 'vertical' in movement.
 6. initialStep   - (*number*: defaults to 0) The step the slider will start at.
 
-### Notes
+### Events
 
-- Range option allows an array of numbers. Numbers can be negative and positive.
-- If snap is enabled, the width of the bar in which the slider resides must fit an equation for the steps to line up just right at it's end value. The equation is:
+#### change
 
-		(Math.ceil(barWidth/numSteps - knobWidth/numSteps) * numSteps) + knobWidth
+Fires when the Slider's value changes.
 
-For instance, if you had a bar that is 300px wide and a knob that is 15px wide, and have snap enabled and 10 steps specified, then the bar's width divided by the number of steps (300 / 10 = 30) minus room for the knob (15 / 10 = 1.5) gives you the value of each step (28.5). Slider must round this value, and it rounds up (29). Take this and multiply times the number of steps and you get 290, but there must also be room for the knob, which adds 15, yielding 305. The result is that our knob can't be dragged to the 10th position because there isn't room for it; so it stops at the 9th. This takes a little tweaking in your css. Just add a few pixels until you can drag it all the way (or change the knob width).
-
-
-
-Slider Event: change {#Slider:change}
--------------------------------------
-
-* (*function*) Fires when the Slider's value changes.
-
-### Signature
+##### Signature
 
 	onChange(step)
 
-### Arguments
+##### Arguments
 
 1. step - (*number*) The current step that the Slider is on.
 
 
+#### onComplete
 
-Slider Event: onComplete {#Slider:complete}
--------------------------------------------
+Fire when you're done dragging.
 
-* (*function*) Fire when you're done dragging.
-
-### Signature
+##### Signature
 
 	onComplete(step)
 
-### Arguments
+##### Arguments
 
 1. step - (*string*) The current step that the Slider is on as a string.
 
 
+#### tick
 
-Slider Event: tick {#Slider:tick}
----------------------------------
+Fires when the user scrolls or when the container element is clicked. This Event can be overridden to alter the default tick behavior.
 
-* (*function*) Fires when the user scrolls or when the container element is clicked. This Event can be overridden to alter the default tick behavior.
-
-### Signature
+##### Signature
 
 	onTick(pos)
 
-### Arguments
+##### Arguments
 
 1. pos - (*number*) The current position that slider moved to.
 
-### Notes
+##### Notes
 
 - By default Slider uses the 'tick' event to set the style of the knob to a new position.
+
 
 ### Returns
 
@@ -104,6 +98,15 @@ Slider Event: tick {#Slider:tick}
 		}
 	});
 
+
+### Notes
+
+- Range option allows an array of numbers. Numbers can be negative and positive.
+- If snap is enabled, the width of the bar in which the slider resides must fit an equation for the steps to line up just right at it's end value. The equation is:
+
+		(Math.ceil(barWidth/numSteps - knobWidth/numSteps) * numSteps) + knobWidth
+
+For instance, if you had a bar that is 300px wide and a knob that is 15px wide, and have snap enabled and 10 steps specified, then the bar's width divided by the number of steps (300 / 10 = 30) minus room for the knob (15 / 10 = 1.5) gives you the value of each step (28.5). Slider must round this value, and it rounds up (29). Take this and multiply times the number of steps and you get 290, but there must also be room for the knob, which adds 15, yielding 305. The result is that our knob can't be dragged to the 10th position because there isn't room for it; so it stops at the 9th. This takes a little tweaking in your css. Just add a few pixels until you can drag it all the way (or change the knob width).
 
 
 Slider Method: set {#Slider:set}

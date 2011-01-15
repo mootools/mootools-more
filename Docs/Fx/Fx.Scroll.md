@@ -13,8 +13,8 @@ Scrolls any element with an overflow, including the window element.
 
 
 
-Fx.Scroll Method: constructor {#Fx-Scroll:constructor}
-------------------------------------------------------
+Fx.Scroll Method: constructor
+-----------------------------
 
 ### Syntax
 
@@ -38,8 +38,8 @@ Options:
 
 	var myFx = new Fx.Scroll('myElement', {
 		offset: {
-			'x': 0,
-			'y': 100
+			x: 0,
+			y: 100
 		}
 	}).toTop();
 

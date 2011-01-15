@@ -3,6 +3,9 @@ Element.Event.Pseudos {#Pseudos}
 
 Defines a useful pseudo event: `:once` as well as the `definePseudo` method to create your own. See also the `:relay` pseudo in [Element.Delegation][].
 
+### Demo
+
+* [Element.Event.Pseudos](http://mootools.net/demos/?demo=Element.Event.Pseudos)
 
 Pseudo: once {#Pseudos:once}
 ----------------------------

@@ -5,8 +5,8 @@ Extends the [Element][] Type to include methods useful in managing inputs.
 
 ### Tutorial/Demo
 
-* [Online Tutorial/Demo][]
-[Online Tutorial/Demo]:http://www.clientcide.com/wiki/cnet-libraries/04-element/00-element.forms
+* [Online Tutorial/Demo](http://www.clientcide.com/wiki/cnet-libraries/04-element/00-element.forms)
+
 
 Element Method: tidy {#Element:tidy}
 ------------------------------------

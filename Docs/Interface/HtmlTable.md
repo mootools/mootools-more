@@ -12,6 +12,9 @@ Builds table elements with methods to add rows quickly.
 
 * [Options][], [Events][], [Class.Occlude][]
 
+HtmlTable Method: constructor
+-----------------------------
+
 ### Syntax
 
 	new HtmlTable([table, options]);

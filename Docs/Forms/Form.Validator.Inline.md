@@ -11,6 +11,10 @@ Evaluates an entire form against all the validators that are set up *displaying 
 
 * [Options][], [Events][]
 
+
+Form.Validator.Inline Method: Constructor
+------------------------------------------
+
 ### Syntax
 
 	new Form.Validator.Inline(form[, options]);

@@ -3,9 +3,16 @@ Class: Form.Validator {#Form-Validator}
 
 Evaluates an entire form against all the validators that are set up, firing events when inputs fail validation.
 
+### Demo
+
+* [Enhanced Form](http://mootools.net/demos/?demo=Enhanced-Form)
+
 ### Implements
 
 * [Options][], [Events][]
+
+Form.Validator Method: Constructor
+----------------------------------
 
 ### Syntax
 

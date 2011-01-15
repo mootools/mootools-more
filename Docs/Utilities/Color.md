@@ -3,6 +3,9 @@ Class: Color {#Color}
 
 Creates a new Color Class, which is an array with some color specific methods.
 
+Color Method: constructor
+-------------------------
+
 ### Syntax
 
 	var myColor = new Color(color[, type]);

@@ -3,6 +3,10 @@ Type: Element {#Element}
 
 Extends the [Element][] type to include delegations in the addEvent and addEvents methods. It adds the `:relay` pseudo using [Element.Event.Pseudos][].
 
+### Demo
+
+* [Element.Delegation](http://mootools.net/demos/?demo=Element.Delegation)
+
 ### Notes
 
 * By delegating events to parent objects you can dramatically increase the efficiency of your pages. Consider the example above. You could attach events to every link on a page - which may be hundreds of DOM elements - or you can delegate the event to the document body, evaluating your code only when the user actually clicks a link (instead of on page load/domready).
