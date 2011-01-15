@@ -77,7 +77,7 @@ The *Fx.Accordion* class creates a group of Elements that are toggled when their
 
 ### Demos
 
-- *Fx.Accordion* - <http://demos.mootools.net/Accordion>
+- *Fx.Accordion* - <http://mootools.net/demos/?demo=Accordion>
 
 
 
