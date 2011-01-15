@@ -65,9 +65,9 @@ All the base Drag options, plus:
 
 ### Demos
 
-* Drag.Cart - <http://demos.mootools.net/Drag.Cart>
-* Drag.Absolutely - <http://demos.mootools.net/Drag.Absolutely>
-* DragDrop - <http://demos.mootools.net/DragDrop>
+* Drag.Cart - <http://mootools.net/demos/?demo=Drag.Cart>
+* Drag.Drop - <http://mootools.net/demos/?demo=Drag.Drop>
+* Drag.Move - <http://mootools.net/demos/?demo=Drag.Move>
 
 ### See Also
 
