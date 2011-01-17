@@ -71,7 +71,8 @@ var Slider = new Class({
 		this.setSliderDimensions();
 		this.setRange(options.range);
 
-		knob.setStyle('position', 'relative').setStyle(this.property, -options.offset);
+		if (knob.getStyle('position') == 'static') knob.setStyle('position', 'relative');
+		knob.setStyle(this.property, -options.offset);
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [-options.offset, this.full - options.offset];
 
