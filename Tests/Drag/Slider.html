@@ -52,24 +52,35 @@
 	<div id="knob7"></div>
 </div>
 
+<h3 class="h3_test">Knob positioned absolute</h3>
+<p>The knob's position should not be set to position relative if it is currently absolute.</p>
+<div id="area8">
+	<div id="knob8"></div>
+</div>
+
 
 <style type="text/css" media="screen">
-	#area, #area2, #area3, #area4, #area5, #area6, #area7 {
+	#area, #area2, #area3, #area4, #area5, #area6, #area7, #area8 {
 		background: #ccc;
 		height: 20px;
 		width: 200px;
+		position: relative;
 	}
 	#area6 {
 		width: 100%;
 	}
-	#knob, #knob2, #knob3, #knob4, #knob5, #knob6, #knob7 {
+	#knob, #knob2, #knob3, #knob4, #knob5, #knob6, #knob7, #knob8 {
 		height: 20px;
 		width: 20px;
 		background: #000;
 		cursor:col-resize !important;
 		cursor:pointer;
 	}
+	#knob8 {
+		position: absolute;
+	}
 </style>
+
 <script src="/depender/build?require=More/Slider"></script>
 <script>
 var mySlide = new Slider($('area'), $('knob'), {
@@ -135,8 +146,9 @@ window.addEvent('resize', function(){
 	mySlideStretch.autosize();
 });
 
-var mySlide7 = new Slider('area7', 'knob7', {
+new Slider('area7', 'knob7', {
 	wheel: true
 });
 
+new Slider('area8', 'knob8');
 </script>
