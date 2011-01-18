@@ -31,7 +31,7 @@ Locale.define('hu-HU', 'FormValidator', {
 	dateSuchAs: 'Valós dátum megadása szükséges (pl. {date}).',
 	dateInFormatMDY: 'Valós dátum megadása szükséges ÉÉÉÉ.HH.NN. formában. (pl. "1999.12.31.")',
 	email: 'Valós e-mail cím megadása szükséges (pl. "fred@domain.hu").',
-	url: 'Valós URL megadása szükséges (pl. http://www.google.com).',
+	url: 'Valós URL megadása szükséges (pl. http://www.example.com).',
 	currencyDollar: 'Valós pénzösszeg megadása szükséges (pl. 100.00 Ft.).',
 	oneRequired: 'Az alábbi mezők legalább egyikének kitöltése kötelező.',
 	errorPrefix: 'Hiba: ',

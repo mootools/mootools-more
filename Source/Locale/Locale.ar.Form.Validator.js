@@ -31,7 +31,7 @@ Locale.define('ar', 'FormValidator', {
 	dateSuchAs: 'الرجاء إدخال تاريخ صحيح كالتالي {date}',
 	dateInFormatMDY: 'الرجاء إدخال تاريخ صحيح (مثال, 31-12-1999)',
 	email: 'الرجاء إدخال بريد إلكتروني صحيح.',
-	url: 'الرجاء إدخال عنوان إلكتروني صحيح مثل http://www.google.com',
+	url: 'الرجاء إدخال عنوان إلكتروني صحيح مثل http://www.example.com',
 	currencyDollar: 'الرجاء إدخال قيمة $ صحيحة. مثال, 100.00$',
 	oneRequired: 'الرجاء إدخال قيمة في أحد هذه الحقول على الأقل.',
 	errorPrefix: 'خطأ: ',

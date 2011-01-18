@@ -33,7 +33,7 @@ Locale.define('nl-NL', 'FormValidator', {
 	dateSuchAs: 'Vul een geldige datum in, zoals {date}',
 	dateInFormatMDY: 'Vul een geldige datum, in het formaat MM/DD/YYYY (bijvoorbeeld "12/31/1999")',
 	email: 'Vul een geldig e-mailadres in. Bijvoorbeeld "fred@domein.nl".',
-	url: 'Vul een geldige URL in, zoals http://www.google.nl.',
+	url: 'Vul een geldige URL in, zoals http://www.example.com.',
 	currencyDollar: 'Vul een geldig $ bedrag in. Bijvoorbeeld $100.00 .',
 	oneRequired: 'Vul iets in bij in ieder geval een van deze velden.',
 	warningPrefix: 'Waarschuwing: ',

@@ -31,7 +31,7 @@ Locale.define('en-US', 'FormValidator', {
 	dateSuchAs: 'Please enter a valid date such as {date}',
 	dateInFormatMDY: 'Please enter a valid date such as MM/DD/YYYY (i.e. "12/31/1999")',
 	email: 'Please enter a valid email address. For example "fred@domain.com".',
-	url: 'Please enter a valid URL such as http://www.google.com.',
+	url: 'Please enter a valid URL such as http://www.example.com.',
 	currencyDollar: 'Please enter a valid $ amount. For example $100.00 .',
 	oneRequired: 'Please enter something for at least one of these inputs.',
 	errorPrefix: 'Error: ',

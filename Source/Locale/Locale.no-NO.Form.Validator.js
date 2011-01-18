@@ -31,7 +31,7 @@ Locale.define('no-NO', 'FormValidator', {
 	dateSuchAs: 'Vennligst skriv inn en gyldig dato, som {date}',
 	dateInFormatMDY: 'Vennligst skriv inn en gyldig dato, i formatet MM/DD/YYYY (for eksempel "12/31/1999")',
 	email: 'Vennligst skriv inn en gyldig epost-adresse. For eksempel "espen@domene.no".',
-	url: 'Vennligst skriv inn en gyldig URL, for eksempel http://www.google.no.',
+	url: 'Vennligst skriv inn en gyldig URL, for eksempel http://www.example.com.',
 	currencyDollar: 'Vennligst fyll ut et gyldig $ belÃ¸p. For eksempel $100.00 .',
 	oneRequired: 'Vennligst fyll ut noe i minst ett av disse feltene.',
 	errorPrefix: 'Feil: ',

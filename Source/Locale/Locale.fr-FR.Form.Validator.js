@@ -32,7 +32,7 @@ Locale.define('fr-FR', 'FormValidator', {
 	dateSuchAs: 'Veuillez saisir une date correcte comme {date}',
 	dateInFormatMDY: 'Veuillez saisir une date correcte, au format JJ/MM/AAAA (ex : "31/11/1999").',
 	email: 'Veuillez saisir une adresse de courrier &eacute;lectronique. Par example "fred@domaine.com".',
-	url: 'Veuillez saisir une URL, comme http://www.google.com.',
+	url: 'Veuillez saisir une URL, comme http://www.example.com.',
 	currencyDollar: 'Veuillez saisir une quantit&eacute; correcte. Par example 100,00&euro;.',
 	oneRequired: 'Veuillez s&eacute;lectionner au moins une de ces options.',
 	errorPrefix: 'Erreur : ',

@@ -31,7 +31,7 @@ Locale.define('he-IL', 'FormValidator', {
 	dateSuchAs: 'נא להזין תאריך חוקי, כמו {date}',
 	dateInFormatMDY: 'נא להזין תאריך חוקי בפורמט MM/DD/YYYY (כמו "12/31/1999")',
 	email: 'נא להזין כתובת אימייל חוקית. לדוגמה: "fred@domain.com".',
-	url: 'נא להזין כתובת אתר חוקית, כמו http://www.google.com.',
+	url: 'נא להזין כתובת אתר חוקית, כמו http://www.example.com.',
 	currencyDollar: 'נא להזין סכום דולרי חוקי. לדוגמה $100.00.',
 	oneRequired: 'נא לבחור לפחות בשדה אחד.',
 	errorPrefix: 'שגיאה: ',

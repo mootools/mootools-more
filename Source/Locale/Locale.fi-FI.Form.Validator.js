@@ -31,7 +31,7 @@ Locale.define('fi-FI', 'FormValidator', {
 	dateSuchAs: 'Ole hyvä ja anna kelvollinen päivmäärä, kuten esimerkiksi {date}',
 	dateInFormatMDY: 'Ole hyvä ja anna kelvollinen päivämäärä muodossa pp/kk/vvvv (kuten "12/31/1999")',
 	email: 'Ole hyvä ja anna kelvollinen sähköpostiosoite (kuten esimerkiksi "matti@meikalainen.com").',
-	url: 'Ole hyvä ja anna kelvollinen URL, kuten esimerkiksi http://www.google.fi.',
+	url: 'Ole hyvä ja anna kelvollinen URL, kuten esimerkiksi http://www.example.com.',
 	currencyDollar: 'Ole hyvä ja anna kelvollinen eurosumma (kuten esimerkiksi 100,00 EUR) .',
 	oneRequired: 'Ole hyvä ja syötä jotakin ainakin johonkin näistä kentistä.',
 	errorPrefix: 'Virhe: ',

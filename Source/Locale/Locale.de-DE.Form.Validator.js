@@ -33,7 +33,7 @@ Locale.define('de-DE', 'FormValidator', {
 	dateSuchAs: 'Geben Sie bitte ein g&uuml;ltiges Datum ein (z.B. &quot;{date}&quot;).',
 	dateInFormatMDY: 'Geben Sie bitte ein g&uuml;ltiges Datum im Format TT.MM.JJJJ ein (z.B. &quot;31.12.1999&quot;).',
 	email: 'Geben Sie bitte eine g&uuml;ltige E-Mail-Adresse ein (z.B. &quot;max@mustermann.de&quot;).',
-	url: 'Geben Sie bitte eine g&uuml;ltige URL ein (z.B. &quot;http://www.google.de&quot;).',
+	url: 'Geben Sie bitte eine g&uuml;ltige URL ein (z.B. &quot;http://www.example.com&quot;).',
 	currencyDollar: 'Geben Sie bitte einen g&uuml;ltigen Betrag in EURO ein (z.B. 100.00&#8364;).',
 	oneRequired: 'Bitte f&uuml;llen Sie mindestens ein Eingabefeld aus.',
 	errorPrefix: 'Fehler: ',

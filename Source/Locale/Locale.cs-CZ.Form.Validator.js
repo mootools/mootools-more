@@ -31,7 +31,7 @@ Locale.define('cs-CZ', 'FormValidator', {
 	dateSuchAs: 'Zadejte prosím platné datum jako {date}',
 	dateInFormatMDY: 'Zadejte prosím platné datum jako MM / DD / RRRR (tj. "12/31/1999")',
 	email: 'Zadejte prosím platnou e-mailovou adresu. Například "fred@domain.com".',
-	url: 'Zadejte prosím platnou URL adresu jako http://www.google.com.',
+	url: 'Zadejte prosím platnou URL adresu jako http://www.example.com.',
 	currencyDollar: 'Zadejte prosím platnou částku. Například $100.00.',
 	oneRequired: 'Zadejte prosím alespoň jednu hodnotu pro tyto položky.',
 	errorPrefix: 'Chyba: ',

@@ -31,7 +31,7 @@ Locale.define('pl-PL', 'FormValidator', {
 	dateSuchAs: 'Prosimy podać prawidłową datę w formacie: {date}',
 	dateInFormatMDY: 'Prosimy podać poprawną date w formacie DD.MM.RRRR (i.e. "12.01.2009")',
 	email: 'Prosimy podać prawidłowy adres e-mail, np. "jan@domena.pl".',
-	url: 'Prosimy podać prawidłowy adres URL, np. http://www.google.pl.',
+	url: 'Prosimy podać prawidłowy adres URL, np. http://www.example.com.',
 	currencyDollar: 'Prosimy podać prawidłową sumę w PLN. Dla przykładu: 100.00 PLN.',
 	oneRequired: 'Prosimy wypełnić chociaż jedno z pól.',
 	errorPrefix: 'Błąd: ',

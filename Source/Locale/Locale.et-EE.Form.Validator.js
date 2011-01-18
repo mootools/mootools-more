@@ -31,7 +31,7 @@ Locale.define('et-EE', 'FormValidator', {
 	dateSuchAs: 'Palun sisestage kehtiv kuupäev kujul {date}',
 	dateInFormatMDY: 'Palun sisestage kehtiv kuupäev kujul MM.DD.YYYY (näiteks: "12.31.1999").',
 	email: 'Palun sisestage kehtiv e-maili aadress (näiteks: "fred@domain.com").',
-	url: 'Palun sisestage kehtiv URL (näiteks: http://www.google.com).',
+	url: 'Palun sisestage kehtiv URL (näiteks: http://www.example.com).',
 	currencyDollar: 'Palun sisestage kehtiv $ summa (näiteks: $100.00).',
 	oneRequired: 'Palun sisestage midagi vähemalt ühele antud väljadest.',
 	errorPrefix: 'Viga: ',

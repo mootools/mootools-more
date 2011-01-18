@@ -31,7 +31,7 @@ Locale.define('sv-SE', 'FormValidator', {
 	dateSuchAs: 'Ange ett giltigt datum som t.ex. {date}',
 	dateInFormatMDY: 'Ange ett giltigt datum som t.ex. YYYY-MM-DD (i.e. "1999-12-31")',
 	email: 'Ange en giltig e-postadress. Till exempel "erik@domain.com".',
-	url: 'Ange en giltig webbadress som http://www.google.com.',
+	url: 'Ange en giltig webbadress som http://www.example.com.',
 	currencyDollar: 'Ange en giltig belopp. Exempelvis 100,00.',
 	oneRequired: 'Vänligen ange minst ett av dessa alternativ.',
 	errorPrefix: 'Fel: ',

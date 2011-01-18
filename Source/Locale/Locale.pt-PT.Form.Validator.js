@@ -31,7 +31,7 @@ Locale.define('pt-PT', 'FormValidator', {
 	dateSuchAs: 'Digite uma data válida, como {date}',
 	dateInFormatMDY: 'Digite uma data válida, como DD/MM/YYYY (p.ex. "31/12/1999")',
 	email: 'Digite um endereço de email válido. Por exemplo "fred@domain.com".',
-	url: 'Digite uma URL válida, como http://www.google.com.',
+	url: 'Digite uma URL válida, como http://www.example.com.',
 	currencyDollar: 'Digite um valor válido $. Por exemplo $ 100,00. ',
 	oneRequired: 'Digite algo para pelo menos um desses insumos.',
 	errorPrefix: 'Erro: ',

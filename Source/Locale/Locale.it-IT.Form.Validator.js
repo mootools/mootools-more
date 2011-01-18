@@ -32,7 +32,7 @@ Locale.define('it-IT', 'FormValidator', {
 	dateSuchAs: 'Inserire una data valida del tipo {date}',
 	dateInFormatMDY: 'Inserire una data valida nel formato MM/GG/AAAA (es.: "12/31/1999")',
 	email: 'Inserire un indirizzo email valido. Per esempio "nome@dominio.com".',
-	url: 'Inserire un indirizzo valido. Per esempio "http://www.dominio.com".',
+	url: 'Inserire un indirizzo valido. Per esempio "http://www.example.com".',
 	currencyDollar: 'Inserire un importo valido. Per esempio "$100.00".',
 	oneRequired: 'Completare almeno uno dei campi richiesti.',
 	errorPrefix: 'Errore: ',

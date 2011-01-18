@@ -31,7 +31,7 @@ Locale.define('fa', 'FormValidator', {
 	dateSuchAs: 'لطفا یک تاریخ معتبر مانند {date} وارد کنید.',
 	dateInFormatMDY: 'لطفا یک تاریخ معتبر به شکل MM/DD/YYYY وارد کنید (مانند "12/31/1999").',
 	email: 'لطفا یک آدرس ایمیل معتبر وارد کنید. برای مثال "fred@domain.com".',
-	url: 'لطفا یک URL معتبر مانند http://www.google.com وارد کنید.',
+	url: 'لطفا یک URL معتبر مانند http://www.example.com وارد کنید.',
 	currencyDollar: 'لطفا یک محدوده معتبر برای این بخش وارد کنید مانند 100.00$ .',
 	oneRequired: 'لطفا حداقل یکی از فیلدها را پر کنید.',
 	errorPrefix: 'خطا: ',

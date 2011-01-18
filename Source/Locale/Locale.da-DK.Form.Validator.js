@@ -31,7 +31,7 @@ Locale.define('da-DK', 'FormValidator', {
 	dateSuchAs: 'Skriv en gyldig dato som {date}',
 	dateInFormatMDY: 'Skriv dato i formatet DD-MM-YYYY (f.eks. "31-12-1999")',
 	email: 'Skriv en gyldig e-mail adresse. F.eks "fred@domain.com".',
-	url: 'Skriv en gyldig URL adresse. F.eks "http://www.google.com".',
+	url: 'Skriv en gyldig URL adresse. F.eks "http://www.example.com".',
 	currencyDollar: 'Skriv et gldigt beløb. F.eks Kr.100.00 .',
 	oneRequired: 'Et eller flere af felterne i denne formular skal udfyldes.',
 	errorPrefix: 'Fejl: ',

@@ -31,7 +31,7 @@ Locale.define('si-SI', 'FormValidator', {
 	dateSuchAs: 'Prosim, vnesite pravilen datum kot {date}',
 	dateInFormatMDY: 'Prosim, vnesite pravilen datum kot MM.DD.YYYY (primer "12.31.1999")',
 	email: 'Prosim, vnesite pravilen email naslov. Na primer "fred@domain.com".',
-	url: 'Prosim, vnesite pravilen URL kot http://www.google.com.',
+	url: 'Prosim, vnesite pravilen URL kot http://www.example.com.',
 	currencyDollar: 'Prosim, vnesit epravilno vrednost €. Primer 100,00€ .',
 	oneRequired: 'Prosimo, vnesite nekaj za vsaj eno izmed teh polj.',
 	errorPrefix: 'Napaka: ',

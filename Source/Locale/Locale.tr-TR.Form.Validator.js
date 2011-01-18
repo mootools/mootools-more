@@ -31,7 +31,7 @@ Locale.define('tr-TR', 'FormValidator', {
 	dateSuchAs: 'Lütfen geçerli bir tarih girin (Ör: {date})',
 	dateInFormatMDY: 'Lütfen geçerli bir tarih girin (GG/AA/YYYY, ör: "31/12/1999")',
 	email: 'Lütfen geçerli bir email adresi girin. Ör: "kemal@etikan.com".',
-	url: 'Lütfen geçerli bir URL girin. Ör: http://www.google.com.',
+	url: 'Lütfen geçerli bir URL girin. Ör: http://www.example.com.',
 	currencyDollar: 'Lütfen geçerli bir TL miktarı girin. Ör: 100,00 TL .',
 	oneRequired: 'Lütfen en az bir tanesini doldurun.',
 	errorPrefix: 'Hata: ',
