@@ -90,6 +90,12 @@ describe('HtmlTable', function(){
 			expect(value.tds.length).toEqual(2);
 		});
 
+		it('should push a row to the designated location', function(){
+			var rows = t.body.rows;
+			var value = t.push(['kiwi', 'green'], {}, rows[0], 'td', 'before');
+			expect(value.tr).toEqual(t.body.rows[0]);
+		});
+
 	});
 
 	describe('HtmlTable cloned Element methods', function(){
