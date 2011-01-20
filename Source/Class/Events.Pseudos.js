@@ -139,12 +139,12 @@ var pseudos = {
 			.removeEvent(split.original, fn);
 	}},
 
-	debounce: {listener: function(split, fn, args, monitor){
+	debounce: {listener: function(split, fn, args){
 		if (!fn.debouncing){
 			fn.apply(this, args);
-			fn.debouncing = (function(){
+			fn.debouncing = setTimeout(function(){
 				fn.debouncing = false;
-			}).delay(split.value || 250, this);
+			}, split.value || 250);
 		}
 	}}
 
