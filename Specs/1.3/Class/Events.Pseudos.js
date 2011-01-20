@@ -139,6 +139,52 @@ describe('Events.Pseudos', function(){
 
 	});
 
+	describe(':debounce pseudo', function(){
+
+		it('should only fire once in a certain timespan', function(){
+			var fn1 = jasmine.createSpy(':debounce pseudo one'),
+				fn2 = jasmine.createSpy(':debounce pseudo two'),
+				events = new Events();
+
+			events.addEvents({
+				'scroll:debounce': fn1,
+				'scroll:debounce(500)': fn2
+			});
+
+			for (var i = 20; i--;) events.fireEvent('scroll');
+
+			// They should fire directly
+			expect(fn1.callCount).toEqual(1);
+			expect(fn2.callCount).toEqual(1);
+
+			waits(375);
+
+			runs(function(){
+
+				// default time is 250, so firing scroll after 250 ms would fire the fist event
+				for (var i = 20; i--;) events.fireEvent('scroll');
+
+				expect(fn1.callCount).toEqual(2);
+				expect(fn2.callCount).toEqual(1);
+
+			});
+
+			waits(500);
+
+			runs(function(){
+
+				// After another 500 ms all timeouts are cleared so both events will get called
+				for (var i = 20; i--;) events.fireEvent('scroll');
+
+				expect(fn1.callCount).toEqual(3);
+				expect(fn2.callCount).toEqual(2);
+
+			});
+
+		});
+
+	});
+
 	describe('Events.definePseudo', function(){
 
 		it('should call Pseudo function with split, fn, and args', function(){
