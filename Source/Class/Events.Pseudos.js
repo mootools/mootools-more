@@ -137,6 +137,15 @@ var pseudos = {
 		fn.apply(this, args);
 		this.removeEvent(split.event, monitor)
 			.removeEvent(split.original, fn);
+	}},
+
+	throttle: {listener: function(split, fn, args){
+		if (!fn._throttled){
+			fn.apply(this, args);
+			fn._throttled = setTimeout(function(){
+				fn._throttled = false;
+			}, split.value || 250);
+		}
 	}}
 
 };
@@ -144,6 +153,10 @@ var pseudos = {
 Events.definePseudo = function(key, listener){
 	pseudos[key] = Type.isFunction(listener) ? {listener: listener} : listener;
 	return this;
+};
+
+Events.lookupPseudo = function(key){
+	return pseudos[key];
 };
 
 var proto = Events.prototype;

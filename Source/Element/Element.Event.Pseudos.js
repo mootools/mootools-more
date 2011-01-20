@@ -19,15 +19,11 @@ provides: [Element.Event.Pseudos]
 
 (function(){
 
-var pseudos = {
+var pseudos = {},
+	copyFromEvents = ['once', 'throttle'],
+	l = copyFromEvents.length;
 
-	once: {listener: function(split, fn, args, monitor){
-		fn.apply(this, args);
-		this.removeEvent(split.event, monitor)
-			.removeEvent(split.original, fn);
-	}}
-
-};
+while (l--) pseudos[copyFromEvents[l]] = Events.lookupPseudo(copyFromEvents[l]);
 
 Event.definePseudo = function(key, listener){
 	pseudos[key] = Type.isFunction(listener) ? {listener: listener} : listener;
