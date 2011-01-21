@@ -42,33 +42,30 @@ var local = Element.Position = {
 			x: 'center', //left, center, right
 			y: 'center' //top, center, bottom
 		},
-		offset: {
-			 x: 0,
-			 y: 0
-		}
+		offset: {x: 0, y: 0}
 	},
 
 	getOptions: function(element, options){
 		var options = Object.merge({}, local.options, options);
-		options.position = local.getPositionOption(options);
-		options.edge = local.getEdgeOption(options);
-		options.offset = local.getOffsetOption(element, options);
-		options.dimensions = local.getDimensionsOption(element, options);
+		local.setPositionOption(options);
+		local.setEdgeOption(options);
+		local.setOffsetOption(element, options);
+		local.setDimensionsOption(element, options);
 		return options;
 	},
 
-	getPositionOption: function(options){
-		return local.getCoordinateFromValue(options.position);
+	setPositionOption: function(options){
+		options.position = local.getCoordinateFromValue(options.position);
 	},
 
-	getEdgeOption: function(options){
+	setEdgeOption: function(options){
 		var edgeOption = local.getCoordinateFromValue(options.edge);
-		return edgeOption ? edgeOption :
+		options.edge = edgeOption ? edgeOption :
 			(options.position.x == 'center' && options.position.y == 'center') ? {x: 'center', y: 'center'} :
 			{x: 'left', y: 'top'};
 	},
 
-	getOffsetOption: function(element, options){
+	setOffsetOption: function(element, options){
 		var parentOffset = {x: 0, y: 0},
 			offsetParent = element.measure(function(){
 				return document.id(this.getOffsetParent());
@@ -87,15 +84,15 @@ var local = Element.Position = {
 			return position;
 		});
 
-		return {
+		options.offset = {
 			parentPositioned: offsetParent != document.id(options.relativeTo),
 			x: options.offset.x - parentOffset.x + parentScroll.x,
 			y: options.offset.y - parentOffset.y + parentScroll.y
 		}
 	},
 
-	getDimensionsOption: function(element){
-		return element.getDimensions({
+	setDimensionsOption: function(element){
+		options.dimensions = element.getDimensions({
 			computeSize: true,
 			styles: ['padding', 'border', 'margin']
 		});
