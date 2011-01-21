@@ -8,129 +8,168 @@ License:
 
 describe("Element.Position", function(){
 
-	describe("place", function(){
-    it("should return the positioned element", function(){
+	var element,
+		options;
 
-    });
-
-		it("should return just the position styles without styling element when returnPos option is specified", funciton(){
-
+		beforeEach(function(){
+			options = {};
+			element = new Element('div').inject(document.body);
 		});
+
+		afterEach(function(){
+			element.destroy();
+		});
+
+		describe("element.position", function(){
+
+			describe('options.returnPos', function(){
+
+				it('should return the element when options.returnPos is not present', function(){
+					expect(element.position(options)).toEqual(element);
+				});
+
+				it('should set the element style when options.returnPos is not present', function(){
+					expect(element.position(options).get('style')).not.toEqual('');
+				});
+
+				it('should return a position object if options.returnPos is present', function(){
+					options.returnPos = true;
+					expect(typeOf(element.position(options))).toEqual('object');
+				});
+
+				it('should return an object with left, top, and absolute properties when  options.returnPos is present', function(){
+					options.returnPos = true;
+					var position = element.position(options);
+					expect(position.left).not.toEqual(null);
+					expect(position.top).not.toEqual(null);
+					expect(position.position).not.toEqual(null);
+				});
+
+			});
+
+			describe('original', function(){
+
+				it('should call original position method when options x y values are present', function(){
+					options.x = 0;
+					options.y = 0;
+					spyOn(Element, 'calculatePosition');
+					spyOn(Element.prototype, 'position');
+					element.position(options);
+					expect(Element.calculatePosition).not.toHaveBeenCalled();
+					expect(Element.prototype.position).toHaveBeenCalled();
+				});
+
+			});
+
+			describe('relativeTo', function(){
+
+				var container;
+
+				function setup(position, element, options){
+					container = new Element('div', {
+						'styles': {
+							'position': position,
+							'width': 100,
+							'height': 100,
+							'top': 0,
+							'left': 0
+						}
+					}).inject(document.body, 'top');
+
+					element.setStyles({
+						'width': 20,
+						'height': 20
+					});
+
+					options.ignoreMargins = true;
+					options.ignoreScroll = true;
+					options.relativeTo = container;
+					options.allowNegative = true;
+				}
+
+				function testVerbage(placement, edge, blockPosition, where){
+					return 'should return coordinates of element at ' + placement +
+						' when options position=' + placement +
+						' and edge =' + edge +
+						' and container is ' + blockPosition +
+						' and element placement is' + where;
+				}
+
+				var blockPositions = ['fixed', 'absolute'],
+					wheres = ['after', 'top'],
+					edges = ['centerCenter', 'leftTop', 'bottomRight'],
+					placements = ['leftTop', 'leftCenter', 'leftBottom', 'centerTop', 'centerCenter', 'centerBottom', 'rightTop', 'rightCenter', 'rightBottom'];
+
+				var expectedValues = {
+					'centerCenter': [-10, 40, 90],
+					'leftTop': [0, 50, 100],
+					'bottomRight': [-20, 30, 80]
+				};
+
+				afterEach(function(){
+					container.destroy();
+				});
+
+				blockPositions.each(function(blockPosition){
+
+					wheres.each(function(where){
+
+						edges.each(function(edge){
+
+							var i = 0,
+								j = 0;
+
+							placements.each(function(placement){
+
+								it(testVerbage(placement, edge, blockPosition, where), function(){
+									setup(position, element, options);
+									element.inject(container, where);
+									options.position = placement;
+									options.relFixedPosition = blockPosition == 'fixed';
+									options.edge = edge;
+									var position = element.calculatePosition(options)
+									expect(position.top).toEqual(expectedValues[edge][j]);
+									expect(position.left).toEqual(expectedValues[edge][i]);
+									if (j++ == 2){
+										if( i++ == 2) i = 0;
+										j = 0;
+									}
+								});
+
+							});
+
+						});
+
+					});
+
+				});
+
+				describe('minimum/maximum', function(){
+
+					it("should return coordinates relative to a minimum x, y value when a minimum is supplied", function(){
+						setup(position, element, options);
+						element.inject(container);
+						options.position = 'topLeft';
+						options.minimum = {x: 10, y: 10};
+						var position = element.calculatePosition(options);
+						expect(position.top).toEqual(10);
+						expect(position.left).toEqual(10);
+					});
+
+					it("should return coordinates relative to a maximum x, y value when a maximum is supplied", function(){
+						setup(position, element, options);
+						element.inject(container);
+						options.position = "bottomRight";
+						options.maximum = {x: 70, y: 70};
+						var position = element.calculatePosition(options);
+						expect(position.top).toEqual(70);
+						expect(position.left).toEqual(70);
+					});
+
+				});
+
+			});
+
 	});
 
-	describe("getOptions", function(){
-		it("should merge default options with passed options", function(){
-
-		});
-		it("should set position option", function(){
-
-		});
-		it("should set edge option", funciton(){
-
-		});
-		it("should set offset option", function(){
-		
-		});
-		it("should set dimensions option", function(){
-
-		});
-		it("should return options object", function(){
-
-		});
-	});
-
-	describe("getPositionOption", function(){
-		it("should return coordinate value", function(){
-
-		});
-	});
-
-	describe("getEdgeOption", function(){
-		it("should return coordinate value", function(){
-
-		});
-	});
-
-	describe("getOffsetOption", function(){
-		it("should measure offset parent", function(){
-
-		});
-		it("should return offset object with parentPositioned, x, and y values", function(){
-
-		});
-	});
-
-	describe("getDimensionsOption", function(){
-		it("should call getDimensions on element", function(){
-
-		});
-		it("should return dimension object", function(){
-
-		});
-	});
-
-	describe("getPosition", function(){
-		it("should get position relative to options.relativeTo", function(){
-
-		});
-		it("should get position relative to toEdge", function(){
-
-		});
-		it("should get position relative to toMinimumMaximum", function(){
-
-		});
-		it("should get position relative to toRelFixedPosition", function(){
-
-		});
-		it("should get position relative to toIgnoreScroll", function(){
-
-		});
-		it("should get position relative to toIgnoreMargins", function(){
-
-		});
-		it("should call Math.ceil on positions", function(){
-
-		});
-		it("should return position object", function(){
-		});
-	});
-
-	describe("toMinimumMaximum", function(){
-		it("should return a position with min/max limits applied to it", function(){
-
-		});		
-	});
-	describe("toRelFixedPosition", function(){
-		it("should return a position with scroll applied if rel is fixed", function(){
-
-		});
-	});
-	describe("toIgnoreScroll", function(){
-		it("should return a position which ignores scrolling if ignorescroll options is present", function(){
-
-		});
-	});
-	describe("toIgnoreMargins", function(){
-		it("should return a position which ignores margins if ignoremargin options is present", function(){
-
-		});
-	});
-	describe("toEdge", function(){
-		it("should return a position relative to the edge specified in the edge option", function(){
-
-		});
-	});
-	describe("getCoordinateFromValue", function(){
-		it("should return a coordinates object from a string", function(){
-		});
-	});
-});
-
-describe("Element.position", function(){
-	it("should call original position method if x,y array is passed", function(){
-
-	});
-	it("should call Element.Position.place with element and options if options object is passed", function(){
-
-	});
 });

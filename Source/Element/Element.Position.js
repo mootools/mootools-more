@@ -25,7 +25,6 @@ provides: [Element.Position]
 
 (function(original){
 
-// Using a local variable seems to be faster than using `this`: http://jsperf.com/this-vs-var
 var local = Element.Position = {
 
 	options: {/*
@@ -73,7 +72,6 @@ var local = Element.Position = {
 			parentScroll = offsetParent.getScroll();
 
 		if (!offsetParent || offsetParent == element.getDocument().body) return;
-
 		parentOffset = offsetParent.measure(function(){
 			var position = this.getPosition();
 			if (this.getStyle('position') == 'fixed'){
@@ -91,7 +89,7 @@ var local = Element.Position = {
 		}
 	},
 
-	setDimensionsOption: function(element){
+	setDimensionsOption: function(element, options){
 		options.dimensions = element.getDimensions({
 			computeSize: true,
 			styles: ['padding', 'border', 'margin']
@@ -101,29 +99,9 @@ var local = Element.Position = {
 	getPosition: function(element, options){
 		var position = {position: 'absolute'},
 			options = local.getOptions(element, options),
-			relativeTo = document.id(options.relativeTo) || document.body,
-			calc = (relativeTo == document.body) ? window.getScroll() : relativeTo.getPosition(),
-			top = calc.y,
-			left = calc.x,
-			offsetY = options.offset.y,
-			offsetX = options.offset.x,
-			winSize = window.getSize();
+			relativeTo = document.id(options.relativeTo) || document.body;
 
-		// TODO: options.position in separate function?
-		switch(options.position.x){
-			case 'left': position.x = left + offsetX; break;
-			case 'right': position.x = left + offsetX + relativeTo.offsetWidth; break;
-			// center
-			default: position.x = left + ((relativeTo == document.body ? winSize.x : relativeTo.offsetWidth) / 2) + offsetX; break;
-		}
-
-		switch(options.position.y){
-			case 'top': position.y = top + offsetY; break;
-			case 'bottom': position.y = top + offsetY + relativeTo.offsetHeight; break;
-			// center
-			default: position.y = top + ((relativeTo == document.body ? winSize.y : relativeTo.offsetHeight) / 2) + offsetY; break;
-		}
-
+		local.setPositionCoordinates(options, position, relativeTo);	
 		if (options.edge) local.toEdge(position, options);
 
 		var offset = options.offset;
@@ -138,8 +116,31 @@ var local = Element.Position = {
 
 		position.left = Math.ceil(position.left);
 		position.top = Math.ceil(position.top);
+		delete position.x;
+		delete position.y;
 
 		return position;
+	},
+
+	setPositionCoordinates: function(options, position, relativeTo){
+		var offsetY = options.offset.y,
+			offsetX = options.offset.x,
+			calc = (relativeTo == document.body) ? window.getScroll() : relativeTo.getPosition(),
+			top = calc.y,
+			left = calc.x,
+			winSize = window.getSize();
+
+		switch(options.position.x){
+			case 'left': position.x = left + offsetX; break;
+			case 'right': position.x = left + offsetX + relativeTo.offsetWidth; break;
+			default: position.x = left + ((relativeTo == document.body ? winSize.x : relativeTo.offsetWidth) / 2) + offsetX; break;
+		}
+
+		switch(options.position.y){
+			case 'top': position.y = top + offsetY; break;
+			case 'bottom': position.y = top + offsetY + relativeTo.offsetHeight; break;
+			default: position.y = top + ((relativeTo == document.body ? winSize.y : relativeTo.offsetHeight) / 2) + offsetY; break;
+		}
 	},
 
 	toMinMax: function(position, options){
@@ -217,7 +218,9 @@ var local = Element.Position = {
 Element.implement({
 
 	position: function(options){
-		if (typeOf(options) == 'array') return (original ? original.apply(this, arguments) : this);
+		if (options && (options.x != null || options.y != null)) {
+			return (original ? original.apply(this, arguments) : this);
+		}
 		var position = this.calculatePosition(options);
 		return (options && options.returnPos) ? position : this.setStyles(position);
 	},
