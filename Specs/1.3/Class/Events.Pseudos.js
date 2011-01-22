@@ -139,16 +139,16 @@ describe('Events.Pseudos', function(){
 
 	});
 
-	describe(':debounce pseudo', function(){
+	describe(':throttle pseudo', function(){
 
 		it('should only fire once in a certain timespan', function(){
-			var fn1 = jasmine.createSpy(':debounce pseudo one'),
-				fn2 = jasmine.createSpy(':debounce pseudo two'),
+			var fn1 = jasmine.createSpy(':throttle pseudo one'),
+				fn2 = jasmine.createSpy(':throttle pseudo two'),
 				events = new Events();
 
 			events.addEvents({
-				'scroll:debounce': fn1,
-				'scroll:debounce(500)': fn2
+				'scroll:throttle': fn1,
+				'scroll:throttle(500)': fn2
 			});
 
 			for (var i = 20; i--;) events.fireEvent('scroll');

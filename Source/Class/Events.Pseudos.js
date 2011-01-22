@@ -139,11 +139,11 @@ var pseudos = {
 			.removeEvent(split.original, fn);
 	}},
 
-	debounce: {listener: function(split, fn, args){
-		if (!fn.debouncing){
+	throttle: {listener: function(split, fn, args){
+		if (!fn._throttled){
 			fn.apply(this, args);
-			fn.debouncing = setTimeout(function(){
-				fn.debouncing = false;
+			fn._throttled = setTimeout(function(){
+				fn._throttled = false;
 			}, split.value || 250);
 		}
 	}}
