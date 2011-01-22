@@ -185,6 +185,25 @@ describe('Events.Pseudos', function(){
 
 	});
 
+	describe(':pause pseudo', function(){
+
+		var events = new Events(),
+			fn = jasmine.createSpy('pause event 1');
+
+		it('should pause the event for 200 ms', function(){
+			events.addEvent('code:pause(200)', fn);
+			events.fireEvent('code');
+
+			expect(fn).not.toHaveBeenCalled();
+
+			waits(300);
+
+			runs(function(){
+				expect(fn).toHaveBeenCalled();
+			});
+		});
+	});
+
 	describe('Events.definePseudo', function(){
 
 		it('should call Pseudo function with split, fn, and args', function(){

@@ -20,7 +20,7 @@ provides: [Element.Event.Pseudos]
 (function(){
 
 var pseudos = {},
-	copyFromEvents = ['once', 'throttle'],
+	copyFromEvents = ['once', 'throttle', 'pause'],
 	l = copyFromEvents.length;
 
 while (l--) pseudos[copyFromEvents[l]] = Events.lookupPseudo(copyFromEvents[l]);
