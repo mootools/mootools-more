@@ -146,6 +146,11 @@ var pseudos = {
 				fn._throttled = false;
 			}, split.value || 250);
 		}
+	}},
+
+	pause: {listener: function(split, fn, args){
+		clearTimeout(fn._pause);
+		fn._pause = fn.delay(split.value || 250, this, args);
 	}}
 
 };
