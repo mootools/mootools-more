@@ -10,6 +10,66 @@ License:
 
 describe('Date', function(){
 
+	describe('Date.set', function(){
+
+		it('should set the hour', function(){
+			var d = new Date().set('hr', 20);
+			expect(d.getHours()).toEqual(20);
+		});
+
+		it('should set multiple values with an object', function(){
+			var d = new Date().set({
+				hr: 20,
+				min: 30,
+				month: 2
+			});
+			expect(d.getHours()).toEqual(20);
+			expect(d.getMinutes()).toEqual(30);
+			expect(d.getMonth()).toEqual(2);
+		});
+
+		it('should take care of UperCaSed method names', function(){
+			var d = new Date().set('MilliSecoNds', 400);
+			expect(d.getMilliseconds()).toEqual(400);
+		});
+
+		it('should do nothing (so not throwing errors) when a setter method does not exist', function(){
+			Date.Methods.quatsch = 'Quatsch';
+			var d = new Date().set('quatsch', 40);
+		});
+
+	});
+
+	describe('Date.get', function(){
+
+		it('should get the hour', function(){
+			var d = new Date();
+			d.setHours(20);
+			expect(d.get('hr')).toEqual(20);
+		});
+
+		it('should set multiple values with an object', function(){
+			var d = new Date().set({
+				hr: 20,
+				min: 30,
+				month: 2
+			});
+			expect(d.get('hr', 'min', 'month')).toEqual({hr: 20, min: 30, month: 2});
+		});
+
+		it('should take care of UperCaSed method names', function(){
+			var d = new Date();
+			d.setMilliseconds(400);
+			expect(d.get('MilliSeconDs')).toEqual(400);
+		});
+
+		it('should return null when a getter method does not exist', function(){
+			Date.Methods.quatsch = 'Quatsch';
+			expect(new Date().get('quatsch')).toEqual(null);
+		});
+
+	});
+
 	describe('Date.clone', function(){
 
 		it('should clone a Date instance', function(){
