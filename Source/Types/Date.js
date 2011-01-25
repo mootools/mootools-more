@@ -32,7 +32,7 @@ provides: [Date]
 
 var Date = this.Date;
 
-Date.Methods = {
+var DateMethods = Date.Methods = {
 	ms: 'Milliseconds',
 	year: 'FullYear',
 	min: 'Minutes',
@@ -56,16 +56,14 @@ Date.implement({
 
 	set: function(prop, value){
 		prop = prop.toLowerCase();
-		var m = Date.Methods,
-			method = m[prop] && 'set' + m[prop];
+		var method = DateMethods[prop] && 'set' + DateMethods[prop];
 		if (method && this[method]) this[method](value);
 		return this;
 	}.overloadSetter(),
 
 	get: function(prop){
 		prop = prop.toLowerCase();
-		var m = Date.Methods,
-			method = m[prop] && 'get' + m[prop];
+		var method = DateMethods[prop] && 'get' + DateMethods[prop];
 		if (method && this[method]) return this[method]();
 		return null;
 	}.overloadGetter(),
