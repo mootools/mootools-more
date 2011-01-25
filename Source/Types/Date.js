@@ -56,17 +56,19 @@ Date.implement({
 
 	set: function(prop, value){
 		prop = prop.toLowerCase();
-		var m = Date.Methods;
-		if (m[prop]) this['set' + m[prop]](value);
+		var m = Date.Methods,
+			method = m[prop] && 'set' + m[prop];
+		if (method && this[method]) this[method](value);
 		return this;
 	}.overloadSetter(),
 
 	get: function(prop){
 		prop = prop.toLowerCase();
-		var m = Date.Methods;
-		if (m[prop]) return this['get' + m[prop]]();
+		var m = Date.Methods,
+			method = m[prop] && 'get' + m[prop];
+		if (method && this[method]) return this[method]();
 		return null;
-	},
+	}.overloadGetter(),
 
 	clone: function(){
 		return new Date(this.get('time'));
