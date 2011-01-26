@@ -17,7 +17,7 @@ describe('HtmlTable.Select', function(){
 		expect(table.isSelected(row)).toEqual(false);
 	});
 
-	it('keyboard events should change selection', function(){
+	it('should enable the keyboard to change the selection', function(){
 		var table = getTable().inject(document.body);
 
 		var rows = table.body.getChildren();
@@ -34,7 +34,7 @@ describe('HtmlTable.Select', function(){
 		table.dispose();
 	});
 
-	it('table should enable its keyboard', function(){
+	it('should allow a click into a table to enable its keyboard', function(){
 		var table1 = getTable().inject(document.body);
 		var table2 = getTable().inject(document.body);
 		table1.toElement().id = 'one';
