@@ -28,6 +28,8 @@ provides: [HtmlTable.Select]
 ...
 */
 
+(function(){
+
 HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {
@@ -153,10 +155,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	scrollTo: function(row) {
-		if (this.options.scrollToSelected) {
-			if (!this._parentScroller) this._parentScroller = new Fx.Scroll(getScrollParent(this.element), {duration: 0});
-			this._parentScroller.scrollIntoView(row, 'y');
-		}
+		if (!this.options.scrollToSelected) return;
+		if (!this._parentScroller) this._parentScroller = new Fx.Scroll(getScrollParent(this.element), {duration: 0});
+		this._parentScroller.scrollIntoView(row, 'y');
 	},
 /*
 	Private methods:
