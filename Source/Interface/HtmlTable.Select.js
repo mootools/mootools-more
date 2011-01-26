@@ -28,8 +28,6 @@ provides: [HtmlTable.Select]
 ...
 */
 
-(function(){
-
 HtmlTable = Class.refactor(HtmlTable, {
 
 	options: {
@@ -156,7 +154,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	scrollTo: function(row) {
 		if (!this.options.scrollToSelected) return;
-		if (!this._parentScroller) this._parentScroller = new Fx.Scroll(getScrollParent(this.element), {duration: 0});
+		if (!this._parentScroller) this._parentScroller = new Fx.Scroll(this._getScrollParent(this.element), {duration: 0});
 		this._parentScroller.scrollIntoView(row, 'y');
 	},
 /*
@@ -309,25 +307,23 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	_mouseleave: function(){
 		if (this._hovered) this._leaveRow(this._hovered);
+	},
+
+	_isBody: function(element){
+		return (/^(?:body|html)$/i).test(element.tagName);
+	}, 
+
+	_getScrollParent: function(element){
+		var scrollParent,
+		    parent = element.getParent();
+		while (!scrollParent){
+			if (_isBody(parent) || ['scroll', 'auto'].contains(parent.getStyle('overflow'))){
+				scrollParent = parent;
+			} else {
+				parent = parent.getParent();
+			}
+		}
+		return scrollParent;
 	}
 
 });
-
-var isBody = function(element){
-	return (/^(?:body|html)$/i).test(element.tagName);
-};
-
-var getScrollParent = function(element){
-	var scrollParent,
-	    parent = element.getParent();
-	while (!scrollParent){
-		if (isBody(parent) || ['scroll', 'auto'].contains(parent.getStyle('overflow'))){
-			scrollParent = parent;
-		} else {
-			parent = parent.getParent();
-		}
-	}
-	return scrollParent;
-};
-
-})();
