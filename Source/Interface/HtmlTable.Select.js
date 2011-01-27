@@ -154,7 +154,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	scrollTo: function(row) {
 		if (!this.options.scrollToSelected) return;
-		if (!this._parentScroller) this._parentScroller = new Fx.Scroll(this._getScrollParent(this.element), {duration: 0});
+		if (!this._parentScroller) this._parentScroller = new Fx.Scroll(HtmlTable._getScrollParent(this.element), {duration: 0});
 		this._parentScroller.scrollIntoView(row, 'y');
 	},
 /*
@@ -307,7 +307,11 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	_mouseleave: function(){
 		if (this._hovered) this._leaveRow(this._hovered);
-	},
+	}
+
+});
+
+Object.extend(HtmlTable, {
 
 	_isBody: function(element){
 		return (/^(?:body|html)$/i).test(element.tagName);
@@ -317,7 +321,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		var scrollParent,
 		    parent = element.getParent();
 		while (!scrollParent){
-			if (_isBody(parent) || ['scroll', 'auto'].contains(parent.getStyle('overflow'))){
+			if (HtmlTable._isBody(parent) || ['scroll', 'auto'].contains(parent.getStyle('overflow'))){
 				scrollParent = parent;
 			} else {
 				parent = parent.getParent();
