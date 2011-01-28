@@ -129,7 +129,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 };
 
-(function(global){
+(function(){
 
 var pseudos = {
 
@@ -150,7 +150,7 @@ var proto = Events.prototype;
 Events.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
 ['Request', 'Fx'].each(function(klass){
-	if (global[klass]) global[klass].implement(Events.prototype);
+	if (this[klass]) this[klass].implement(Events.prototype);
 });
 
-})(this);
+})();

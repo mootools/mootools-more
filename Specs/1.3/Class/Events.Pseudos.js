@@ -13,8 +13,10 @@ describe('Events.Pseudos', function(){
 			fx = new Fx();
 
 		fx.addEvent('complete:once', callback);
-		fx.fireEvent('complete');
+		fx.fireEvent('complete').fireEvent('complete');
+
 		expect(callback).toHaveBeenCalled();
+		expect(callback.callCount).toEqual(1);
 	});
 
 	describe('Options', function(){
