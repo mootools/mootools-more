@@ -6,6 +6,7 @@ License:
 	MIT-style license.
 */
 
+
 describe('Color initialize', function(){
 
 	it('Should initialize a color from a hex value', function(){
@@ -34,7 +35,7 @@ describe('Color properties', function(){
 
 
 });
-/*
+
 describe('Color mutation', function(){
 
 	it('Should invert a color', function(){
@@ -75,4 +76,4 @@ describe('Color $methods', function(){
 
 });
 
-*/
+
