@@ -16,7 +16,7 @@ Pseudo: once {#Pseudos:once}
 
 The event will only fire once.
 
-### Example
+### Example:
 
 	var database = new Class({
 
@@ -35,6 +35,53 @@ The event will only fire once.
 
 	db.connect(); // will alert 'i am connected'
 	db.connect(); // nothing will happen
+
+
+Pseudo: throttle {#Pseudos:throttle}
+------------------------------------
+
+Makes sure the event is not fired more than once in a certain timespan.
+This is especially useful for events that might fire a lot, but it isn't really
+necessary to execute a heavy function, like sending requests.
+
+The default timespan is *250* milliseconds.
+
+### Example:
+
+	myClass.addEvent('scroll:throttle', function(){
+		// Will only fire once every 250 ms
+	});
+
+	myClass.fireEvent('scroll'); // is fired
+	myClass.fireEvent('scroll'); // throttled
+	myClass.fireEvent.delay(300, myClass, 'scroll'); // after 250 ms, so it's fired
+
+	myClass.addEvent('resize:throttle(400)', function(){
+		// Will only fire once every 400 ms
+	});
+
+
+Pseudo: pause {#Pseudos:pause}
+------------------------------
+
+The event is only fired when the original event is not fired again in the given
+time. So when the first event is fired, and a second after 100 ms, the first
+event is cancelled and only the second is fired.
+
+The default pausetime is *250* milliseconds.
+
+### Example:
+
+	myClass.addEvent('keydown:pause', function(){
+		// Default time is 250 ms
+	});
+	myClass.fireEvent('keydown'); // The first event is cancelled
+	myClass.fireEvent('keydown'); // this one will fired
+	myClass.fireEvent.delay(1000, myClass, 'keydown'); // This one is after 250 ms, so the previous is not cancelled
+
+	myClass.addEvent('keydown:pause(100)', function(){
+		// The pause time is now 100 ms.
+	});
 
 Events {#Events}
 ================
@@ -64,7 +111,7 @@ This function defines a new pseudo.
 2. fn - (*function*) This is the function that has been passed in the `addEvent` method. So it is the 'fn' in `myClass.addEvent('event:pseudo', fn)`
 3. args - (*array*) The arguments that are passed into the 'fireEvent' method.
 
-### Example
+### Example:
 
 This is how the :once pseudo is implemented
 
