@@ -21,9 +21,9 @@ provides: [Element.Event.Pseudos]
 
 var pseudos = {},
 	copyFromEvents = ['once', 'throttle', 'pause'],
-	l = copyFromEvents.length;
+	count = copyFromEvents.length;
 
-while (l--) pseudos[copyFromEvents[l]] = Events.lookupPseudo(copyFromEvents[l]);
+while (count--) pseudos[copyFromEvents[count]] = Events.lookupPseudo(copyFromEvents[count]);
 
 Event.definePseudo = function(key, listener){
 	pseudos[key] = Type.isFunction(listener) ? {listener: listener} : listener;
