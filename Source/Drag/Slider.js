@@ -47,7 +47,7 @@ var Slider = new Class({
 	},
 
 	initialize: function(element, knobs, options){
-		this.setOptions((typeOf(knobs) == 'object') ? knobs : options);
+		this.setOptions(options);
 		options = this.options;
 		
 		this.element = document.id(element);
@@ -61,8 +61,9 @@ var Slider = new Class({
 		
 		Object.append(this, ((options.mode == 'vertical') ? ['y', 'top', 'offsetHeight'] : ['x', 'left', 'offsetWidth']).associate(['axis', 'property', 'offset']));
 		
+		this.setSliderDimensions();
 		this.setRange(options.range);
-
+		
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [-options.offset, this.full - options.offset];
 		
@@ -88,8 +89,10 @@ var Slider = new Class({
 		
 		if (options.snap) this.setSnap(this.dragOptions);
 		
-		this.knobs.each(this.addKnob, this);
-		
+		if(this.knobs.length){
+			this.knobs.each(this.addKnob, this);
+			this.attach();
+		}
 	},
 	
 	addKnob: function(knob, step){
@@ -101,13 +104,10 @@ var Slider = new Class({
 			.store('slider:drag', drag)
 			.inject(this.element);
 		
-		this.raiseKnob(knob);
+		this.raiseKnob(knob).set(drag.step, knob);
 		this.knobs.include(knob);
-
-		if(!this.measured) this.measured = !!this.setSliderDimensions().attach();
-		if (this.knobs.length == 2) this.detach(true);
 		
-		this.set(drag.step, knob);
+		if (this.knobs.length == 2) this.detach(true);
 		
 		return this;
 	},
@@ -142,7 +142,7 @@ var Slider = new Class({
 	},
 
 	autosize: function(){
-		var drag = this.knobs.retrieve('slider:drag')[0];
+		var drag = this.knobs[0].retrieve('slider:drag');
 		this.setSliderDimensions()
 			.setKnobPosition(this.toPosition(drag.step), drag);
 		this.dragOptions.limit[this.axis] = [-this.options.offset, this.full - this.options.offset];
@@ -211,7 +211,6 @@ var Slider = new Class({
 	},
 
 	scrolledElement: function(event){
-		console.log(event);
 		var mode = (this.options.mode == 'horizontal') ? (event.wheel < 0) : (event.wheel > 0);
 		this.set(this.knobs[0].retrieve('slider:drag').step + (mode ? -1 : 1) * this.stepSize, this.knobs[0]);
 		event.stop();
@@ -229,20 +228,14 @@ var Slider = new Class({
 	},
 
 	checkStep: function(drag){
-		var step = drag.step;
-		if (drag.previousChange != step){
-			drag.previousChange = step;
-			this.fireEvent('change', [step, drag.element]);
-		}
+		if (drag.previousChange != drag.step) this.fireEvent('change', [drag.step, drag.element]);
+		drag.previousChange = drag.step;
 		return this;
 	},
 
 	end: function(drag){
-		var step = drag.step;
-		if (drag.previousEnd != step){
-			drag.previousEnd = step;
-			this.fireEvent('complete', [step + '', drag.element]);
-		}
+		if (drag.previousEnd != drag.step) this.fireEvent('complete', [drag.step + '', drag.element]);
+		drag.previousEnd = drag.step;
 		return this;
 	},
 
