@@ -67,4 +67,26 @@ describe('Class.Binds', function(){
 
 	});
 
+	it('should retain binders from ancestors', function(){
+		
+		var Parent = new Class({
+			Binds: ['foo'],
+			fooValue: 'foo',
+			foo: function(){
+				return this.fooValue;
+			}
+		});
+		
+		var Child = new Class({
+			Extends: Parent,
+			Binds: ['bar'],
+			barValue: 'bar',
+			bar: function(){
+				return this.barValue;
+			}
+		});
+		expect(new Child().foo.apply(false)).toEqual('foo');
+		expect(new Child().bar.apply(false)).toEqual('bar');
+	});
+
 });

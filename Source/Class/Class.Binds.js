@@ -23,7 +23,7 @@ provides: [Class.Binds]
 
 Class.Mutators.Binds = function(binds){
 	if (!this.prototype.initialize) this.implement('initialize', function(){});
-	return binds;
+	return Array.from(binds).concat(this.prototype.Binds || []);
 };
 
 Class.Mutators.initialize = function(initialize){
