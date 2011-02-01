@@ -43,7 +43,8 @@ var Slider = new Class({
 		wheel: false,
 		steps: 100,
 		mode: 'horizontal',
-		zIndex: 2
+		zIndex: 2,
+		collisions: false
 	},
 
 	initialize: function(element, knobs, options){
@@ -95,9 +96,12 @@ var Slider = new Class({
 		}
 	},
 	
-	addKnob: function(knob, step){
-		var drag = new Drag(knob, this.dragOptions);
-			drag.step = drag.previousChange = drag.previousEnd = step || this.options.initialStep;
+	addKnob: function(knob, options){
+		
+		var options = options || {},
+			drag = new Drag(knob, this.dragOptions);
+			drag.step = drag.previousChange = drag.previousEnd = options.step || this.options.initialStep,
+			drag.collisions = options.collisions || false;
 			
 		knob.setStyle('position', 'absolute')
 			.setStyle(this.property, -this.options.offset)
@@ -151,7 +155,7 @@ var Slider = new Class({
 	},
 
 	setSnap: function(options){
-		if (!options) options = this.drag.options;
+		if (!options) options = this.knobs[0].retrieve('slider:drag').options;
 		options.grid = Math.ceil(this.stepWidth);
 		options.limit[this.axis][1] = this.full;
 		return this;
@@ -228,7 +232,11 @@ var Slider = new Class({
 	},
 
 	checkStep: function(drag){
-		if (drag.previousChange != drag.step) this.fireEvent('change', [drag.step, drag.element]);
+		var collisions = this.knobs.retrieve('slider:drag')
+							.filter(function(drag){ return drag.collisions; })
+							.map(function(e){ return e.step; });
+		console.log(collisions);
+		if (drag.previousChange != drag.step && !collisions.contains(drag.step)) this.fireEvent('change', [drag.step, drag.element]);
 		drag.previousChange = drag.step;
 		return this;
 	},
