@@ -35,10 +35,10 @@ if (!window.Form) window.Form = {};
 
 		Implements: [Options, Events, Class.Occlude],
 
-		options: {
-			//onFailure: function(){},
-			//onSuccess: #function(){}, //aliased to onComplete,
-			//onSend: function(){}
+		options: {/*
+			onFailure: function(){},
+			onSuccess: function(){}, // aliased to onComplete,
+			onSend: function(){}*/
 			requestOptions: {
 				evalScripts: true,
 				useSpinner: true,
@@ -60,7 +60,9 @@ if (!window.Form) window.Form = {};
 			this.makeRequest();
 			if (this.options.resetForm){
 				this.request.addEvent('success', function(){
-					Function.attempt(function(){ this.element.reset(); }.bind(this));
+					Function.attempt(function(){
+						this.element.reset();
+					}.bind(this));
 					if (window.OverText) OverText.update();
 				}.bind(this));
 			}
@@ -93,8 +95,8 @@ if (!window.Form) window.Form = {};
 		},
 
 		attach: function(attach){
-			attach = attach != null ? attach : true;
-			method = attach ? 'addEvent' : 'removeEvent';
+			if (attach == null) attach = true;
+			var method = attach ? 'addEvent' : 'removeEvent';
 
 			this.element[method]('click:relay(button, input[type=submit])', this.saveClickedButton.bind(this));
 
@@ -120,17 +122,17 @@ if (!window.Form) window.Form = {};
 			return this;
 		},
 
-		onFormValidate: function(valid, form, e){
+		onFormValidate: function(valid, form, event){
 			//if there's no event, then this wasn't a submit event
-			if (!e) return;
+			if (!event) return;
 			var fv = this.element.retrieve('validator');
 			if (valid || (fv && !fv.options.stopOnFailure)){
-				if (e && e.stop) e.stop();
+				event.stop();
 				this.send();
 			}
 		},
 
-		onSubmit: function(e){
+		onSubmit: function(event){
 			var fv = this.element.retrieve('validator');
 			if (fv){
 				//form validator was created after Form.Request
@@ -139,13 +141,12 @@ if (!window.Form) window.Form = {};
 				this.element.validate();
 				return;
 			}
-			if (e) e.stop();
+			if (event) event.stop();
 			this.send();
 		},
 
 		saveClickedButton: function(event, target){
-			if (!this.options.sendButtonClicked) return;
-			if (!target.get('name')) return;
+			if (!this.options.sendButtonClicked || !target.get('name')) return;
 			this.options.extraData[target.get('name')] = target.get('value') || true;
 			this.clickedCleaner = function(){
 				delete this.options.extraData[target.get('name')];
@@ -156,12 +157,17 @@ if (!window.Form) window.Form = {};
 		clickedCleaner: function(){},
 
 		send: function(){
-			var str = this.element.toQueryString().trim();
-			var data = Object.toQueryString(this.options.extraData);
+			var str = this.element.toQueryString().trim(),
+				data = Object.toQueryString(this.options.extraData);
+
 			if (str) str += "&" + data;
 			else str = data;
+
 			this.fireEvent('send', [this.element, str.parseQueryString()]);
-			this.request.send({data: str, url: this.element.get("action")});
+			this.request.send({
+				data: str,
+				url: this.options.requestOptions.url || this.element.get('action')
+			});
 			this.clickedCleaner();
 			return this;
 		}
@@ -171,9 +177,9 @@ if (!window.Form) window.Form = {};
 	Element.Properties.formRequest = {
 
 		set: function(){
-			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString});
-			var update = opt.update || opt.updateId;
-			var updater = this.retrieve('form.request');
+			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString}),
+				update = opt.update || opt.updateId,
+				updater = this.retrieve('form.request');
 			if (update){
 				if (updater) updater.update = document.id(update);
 				this.store('form.request:update', update);
@@ -186,8 +192,8 @@ if (!window.Form) window.Form = {};
 		},
 
 		get: function(){
-			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString});
-			var update = opt.update || opt.updateId;
+			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString}),
+				update = opt.update || opt.updateId;
 			if (opt.options || update || !this.retrieve('form.request')){
 				if (opt.options || !this.retrieve('form.request:options')) this.set('form.request', opt.options);
 				if (update) this.set('form.request', update);
