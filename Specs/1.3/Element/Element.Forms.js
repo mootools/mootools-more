@@ -8,11 +8,11 @@ License:
 
 describe('Element.Forms', function(){
 
-	var input, selectList, multiselect, radio, radio2, checkbox, textarea;
+	var input, selectList, multiselect, container;
 
 	beforeEach(function(){
 
-		var container = new Element('div', {
+		container = new Element('div', {
 			styles: {
 				height: 1,
 				overflow: "hidden"
@@ -59,6 +59,10 @@ describe('Element.Forms', function(){
 			value: 'checkboxValue'
 		}).inject(container);
 
+	});
+
+	afterEach(function(){
+		container.destroy();
 	});
 
 	describe('Element.getTextInRange', function(){
