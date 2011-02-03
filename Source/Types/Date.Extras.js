@@ -49,11 +49,7 @@ Date.implement({
 		return vals.join(separator || ':');
 	}
 
-});
-
-Date.alias('timeAgoInWords', 'timeDiffInWords');
-
-Date.extend({
+}).extend({
 
 	distanceOfTimeInWords: function(from, to){
 		return Date.getTimePhrase(((to - from) / 1000).toInt());
@@ -89,10 +85,7 @@ Date.extend({
 		return Date.getMsg(msg + suffix, delta).substitute({delta: delta});
 	}
 
-});
-
-
-Date.defineParsers(
+}).defineParsers(
 
 	{
 		// "today", "tomorrow", "yesterday"
@@ -121,4 +114,4 @@ Date.defineParsers(
 		}
 	}
 
-);
+).alias('timeAgoInWords', 'timeDiffInWords');

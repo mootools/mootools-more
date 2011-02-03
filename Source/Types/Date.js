@@ -402,33 +402,38 @@ Date.extend({
 
 	defineFormat: function(name, format){
 		formats[name] = format;
+		return this;
 	},
 
 	defineFormats: function(formats){
 		for (var name in formats) Date.defineFormat(name, formats[name]);
+		return this;
 	},
 
-//<1.2compat>
-	parsePatterns: parsePatterns, // this is deprecated
-//</1.2compat>
+	//<1.2compat>
+	parsePatterns: parsePatterns,
+	//</1.2compat>
 
 	defineParser: function(pattern){
 		parsePatterns.push((pattern.re && pattern.handler) ? pattern : build(pattern));
+		return this;
 	},
 
 	defineParsers: function(){
 		Array.flatten(arguments).each(Date.defineParser);
+		return this;
 	},
 
 	define2DigitYearStart: function(year){
 		startYear = year % 100;
 		startCentury = year - startYear;
+		return this;
 	}
 
 });
 
-var startCentury = 1900;
-var startYear = 70;
+var startCentury = 1900,
+	startYear = 70;
 
 var regexOf = function(type){
 	return new RegExp('(?:' + Date.getMsg(type).map(function(name){
