@@ -43,12 +43,12 @@ Returns the difference between two dates in a compact format.
 
 ### Syntax
 
-	date.timeDiff([otherDate, joiner]);
+	date.timeDiff([to, separator]);
 
 ### Arguments
 
-1. otherDate - (*date*) the date to compare to; defaults to the current time.
-2. joiner - (*string*) the string to join the values; defaults to ':'.
+1. to - (*date*) the date to compare to; defaults to the current time.
+2. separator - (*string*, defaults to ':') the string used to separate the values.
 
 ### Example
 
@@ -70,11 +70,11 @@ Date Method: timeDiffInWords {#Date:timeDiffInWords}
 
 ### Syntax
 
-	date.timeDiffInWords([otherDate]);
+	date.timeDiffInWords([to]);
 
 ### Arguments
 
-1. otherDate - (*date*; optional) an optional date to use for the differential. Defaults to the current date/time.
+1. to - (*date*, optional) an optional date to use for the differential. Defaults to the current date/time.
 
 ### Example
 
