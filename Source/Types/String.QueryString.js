@@ -36,9 +36,9 @@ String.implement({
 		if (!vars.length) return object;
 
 		vars.each(function(val){
-			var index = val.indexOf('='),
-				value = val.substr(index + 1),
-				keys = index < 0 ? [''] : val.substr(0, index).match(/([^\]\[]+|(\B)(?=\]))/g),
+			var index = val.indexOf('=') + 1,
+				value = index ? val.substr(index) : '',
+				keys = index ? val.substr(0, index - 1).match(/([^\]\[]+|(\B)(?=\]))/g) : [val],
 				obj = object;
 			if (!keys) return;
 			if (decodeValues) value = decodeURIComponent(value);
