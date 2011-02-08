@@ -18,7 +18,7 @@ HtmlTable Method: constructor
 ### Arguments
 
 1. table - (*mixed*; optional) - a Table DOM element or it's id; if you do not specify one, one will be created.
-1. options - (*object*; optional) a key/value set of options.
+2. options - (*object*; optional) a key/value set of options.
 
 ### Options
 
@@ -67,7 +67,7 @@ Sorts a column.
 * (*object*) This instance of HtmlTable.
 
 HtmlTable method: enableSort {#HtmlTable:enableSort}
-------------------------------------------
+----------------------------------------------------
 
 Enables the sortable features of the table.
 
@@ -80,7 +80,7 @@ Enables the sortable features of the table.
 * (*object*) This instance of HtmlTable.
 
 HtmlTable method: disableSort {#HtmlTable:disableSort}
-------------------------------------------
+------------------------------------------------------
 
 Disables the sortable features of the table.
 
@@ -93,7 +93,7 @@ Disables the sortable features of the table.
 * (*object*) This instance of HtmlTable.
 
 HtmlTable method: reSort {#HtmlTable:reSort}
-------------------------------------------
+--------------------------------------------
 
 Reapplies the current sort. Note that this is called whenever new rows are added.
 
@@ -105,10 +105,12 @@ Reapplies the current sort. Note that this is called whenever new rows are added
 
 * (*object*) This instance of HtmlTable.
 
-Hash: HtmlTable.Parsers {#HtmlTable:Parsers}
-======================================
+Object: HtmlTable.Parsers {#HtmlTable:Parsers}
+==============================================
 
-There are numerous parsers used by HtmlTable to determine the sort order of data. A column of numbers, for example, will be sorted numerically, while a column of dates will be sorted by their date order. The *HtmlTable.Parsers* hash contains a group of objects each with a regular expression and a function applied when that expression matches the content. For example, here is the parser for number:
+There are numerous parsers used by HtmlTable to determine the sort order of data. A column of numbers, for example, will be sorted numerically, while a column of dates will be sorted by their date order. The HtmlTable.Parsers object contains a group of objects each with a regular expression and a function applied when that expression matches the content.
+
+### Example
 
 	HtmlTable.Parsers.number = {
 		match: /^\d+[^\d.,]*$/,
@@ -118,7 +120,11 @@ There are numerous parsers used by HtmlTable to determine the sort order of data
 		number: true
 	};
 
-You'll note that there's also a *number* value. Numerical parsers should have this flag for proper sorting. Also note that "this" is bound to the table cell.
+### Properties
+
+* match - (*regular expression*) Used when autodetecting the type of a particular table value.
+* convert - (*function*) Executed on a particular table cells to parse its value for sorting. The value returned by this function is the value sorted against. The context of this function refers to a particular table cell. This will not update your table cell's html.
+* number - (*boolean*; optional) Numerical parsers should have this flag for proper sorting.
 
 Included Parsers
 ----------------
@@ -133,10 +139,19 @@ Included Parsers
 * string - an alpha sort
 * title - sorts on the *title* property of the table data element
 
-Static Method: HtmlTable.defineParsers {#HtmlTable:defineParsers}
+Array: HtmlTable.ParserPriority {#HtmlTable:ParserPriority}
 -----------------------------------------------------------
 
-Because these parsers in the list above are run in order, adding a custom parser is likely to produce no results, as your table contents will eventually match one of the items above. Therefore there is a static method for adding your own parsers that will put your parser at the top of this list. Example:
+HtmlTable.ParserPriority is an array of parser names which define the priority in which your table data is evaluated for sorting. By default it is defined to test from most specific parser to most general. The default ordering is:
+
+	HtmlTable.ParserPriority = ['date', 'input-checked', 'input-value', 'float', 'number']; //if no match, defaults to string
+
+Static Method: HtmlTable.defineParsers {#HtmlTable:defineParsers}
+-----------------------------------------------------------------
+
+Because HtmlTable.Parsers are run in the order defined by the HtmlTable.ParserPriority above, merely defining a custom parser on the HtmlTable.Parser object will produce no results. Therefore this is a static method which will both define your parser on the HtmlTable.Parser namespace as well as add your parser to the top of the HtmlTable.ParserPriority list.
+
+### Syntax
 
 	HtmlTable.defineParsers({
 		foo: {
