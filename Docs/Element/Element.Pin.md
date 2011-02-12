@@ -45,7 +45,7 @@ Toggles the pin state of the element.
 
 ### Syntax
 
-	$('myElement').togglepin();
+	$('myElement').togglePin();
 
 ### Returns
 

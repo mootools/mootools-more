@@ -53,7 +53,7 @@ Class.refactor, however, allows you to reference the previous state with *this.p
 	    }
 	});
 
-	Cat = Class.refactor(Cat, {
+	Class.refactor(Cat, {
 	    eat: function(){
 	        this.previous(); //energy++!
 	        alert("this cat has " + this.energy + " energy");

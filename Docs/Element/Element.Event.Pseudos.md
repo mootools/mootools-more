@@ -12,13 +12,68 @@ Pseudo: once {#Pseudos:once}
 
 The event will only fire once. The once pseudo will remove itself after the first excecution.
 
-### Example
+### Example:
 
 	myElement.addEvent('click:once', function(){
 		alert('you clicked me');
 	});
 
 	// If the user clicks the element twice, it will only once alert 'you clicked me'
+
+### Note:
+
+This is exactly the same as the [Events.Pseudos :once][] pseudo event.
+
+
+Pseudo: throttle {#Pseudos:throttle}
+------------------------------------
+
+Makes sure the event is not fired more than once in a certain timespan.
+This is especially useful for events that might fire a lot, like the scroll, resize
+or keydown events. To get better performance instead of executing a heavy function,
+like Request a lot of times, the event only fired once in, for example, 250 milliseconds.
+
+The default timespan is *250* milliseconds.
+
+### Example:
+
+	$('myElement').addEvent('scroll:throttle', function(){
+		// Will only fire once every 250 ms
+	});
+
+	$('myElement').addEvent('resize:throttle(400)', function(){
+		// Will only fire once every 400 ms
+	});
+
+### Note:
+
+This is exactly the same as the [Events.Pseudos :throttle][] pseudo event.
+
+
+Pseudo: pause {#Pseudos:pause}
+------------------------------
+
+The event is only fired when the original event is not fired again in the given
+time. So when the first event is fired, and a second after 100 ms, the first
+event is cancelled and only the second is fired. This is useful for example with
+field autocompletion which uses Request.
+
+The default pausetime is *250* milliseconds.
+
+### Example:
+
+	$('myElement').addEvent('keydown:pause', function(){
+		// Default time is 250 ms
+	});
+
+	$('myElement').addEvent('keydown:pause(100)', function(){
+		// The pause time is now 100 ms.
+	});
+
+
+### Note:
+
+This is exactly the same as the [Events.Pseudos :pause][] pseudo event.
 
 
 Event {#Event}
@@ -62,5 +117,8 @@ This is how the :once pseudo is implemented
 
 [Event]: /core/Types/Event
 [Element.Delegation]: /more/Element/Element.Delegation
+[Events.Pseudos :once]: /more/Class/Events.Pseudos#Pseudos:once
+[Events.Pseudos :throttle]: /more/Class/Events.Pseudos#Pseudos:throttle
+[Events.Pseudos :pause]: /more/Class/Events.Pseudos#Pseudos:pause
 
 

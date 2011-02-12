@@ -38,7 +38,7 @@ Retrieves a property of a date.
 
 ### Notes
 
-* All of the native date methods work with *get* in addition to most of the *get...* methods added in Date.js. These are: "Date", "Day", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "TimezoneOffset", "Week", "Timezone", "GMTOffset", "Ordinal", "DayOfYear", "LastMonth", "UTCDate", "UTCDay", "UTCFullYear", "AMPM", "UTCHours", "UTCMilliseconds", "UTCMinutes", "UTCMonth", "UTCSeconds"
+* All of the native date methods work with *get* in addition to most of the *get...* methods added in Date.js. These are: "Date", "Day", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds", "Time", "TimezoneOffset", "Week", "Timezone", "GMTOffset", "Ordinal", "DayOfYear", "LastDayOfMonth", "UTCDate", "UTCDay", "UTCFullYear", "AMPM", "UTCHours", "UTCMilliseconds", "UTCMinutes", "UTCMonth", "UTCSeconds"
 * *get* is **not** case sensitive; so you can do *get('date')*
 
 ### Aliases
@@ -402,7 +402,7 @@ Parses a string to a date. In the examples below, parsing works with dates using
 * If the date was not able to be parsed, you'll still be returned a native Date object that is not a valid date. Use the [Date:isValid][] method to determine if the parse was successful.
 
 Date Method: isValid {#Date:isValid}
-------------------------------------------------
+------------------------------------
 
 Returns *true* if the date is a valid date object.
 
@@ -410,11 +410,11 @@ Returns *true* if the date is a valid date object.
 
 	new Date('foo').isValid();
 
-Static Methods {#Static}
-=========================
+Static Methods
+==============
 
-Static Method: defineFormat {#Date:defineFormat}
-------------------------------------------------
+Static Method: defineFormat {#Date:Date-defineFormat}
+-----------------------------------------------------
 
 Adds a new shortcut for [Date:format][].
 
@@ -432,8 +432,8 @@ Adds a new shortcut for [Date:format][].
 	Date.defineFormat('time', '%H:%M');
 	new Date().format('time');	//17:30
 
-Static Method: defineFormats {#Date:defineFormats}
---------------------------------------------------
+Static Method: defineFormats {#Date:Date-defineFormats}
+-------------------------------------------------------
 
 Add a new shortcuts for [Date:format][].  Plural form of [Date:defineFormat][].
 
@@ -452,14 +452,14 @@ Add a new shortcuts for [Date:format][].  Plural form of [Date:defineFormat][].
 		day: '%A'
 	});
 
-Static Method: parse {#Date:staticParse}
-----------------------------------------
+Static Method: parse {#Date:Date-staticParse}
+---------------------------------------------
 
 See [Date:parse][] above.
 
 
-Static Method: isValid {#Date:isValid}
-------------------------------------------------
+Static Method: isValid {#Date:Date-isValid}
+-------------------------------------------
 
 See [Date:isValid][] above.
 
@@ -467,8 +467,8 @@ See [Date:isValid][] above.
 
 	Date.isValid(dateObj);
 
-Static Method: defineParser {#Date:defineParser}
-------------------------------------------------
+Static Method: defineParser {#Date:Date-defineParser}
+-----------------------------------------------------
 
 Additional parsers can be authored than those already outlined by default in *Date.js*. If you include *Date.Extras.js* you'll get several more, but you can write your own.
 
@@ -486,7 +486,7 @@ A pattern string is somewhat of a hybrid between regular expressions and the for
 
 	Date.defineParser('%d%o( %b( %Y)?)?( %X)?');
 
-As you can see, the above pattern (already included in *Date.js*) uses parentheses for grouping with a question mark to denote the preceding item or group as being optional, just as in a regular expression.  It parsers strings such as:
+As you can see, the above pattern (already included in *Date.js*) uses parentheses for grouping with a question mark to denote the preceding item or group as being optional, just as in a regular expression. It parses strings such as:
 
 * 14th
 * 31st October
@@ -511,8 +511,8 @@ The legacy method of adding parsers is still supported but considered deprecated
 	Date.parsePatterns.push(pattern);
 	Date.parsePatterns.extend([pattern, pattern, etc]);
 
-Static Method: defineParsers {#Date:defineParsers}
---------------------------------------------------
+Static Method: defineParsers {#Date:Date-defineParsers}
+-------------------------------------------------------
 
 Plural form of [Date:defineParser][].
 
@@ -524,8 +524,8 @@ Plural form of [Date:defineParser][].
 
 1. format - can be multiple format arguments or an array of formats.
 
-Static Method: define2DigitYearStart {#Date:define2DigitYearStart}
-------------------------------------------------------------------
+Static Method: define2DigitYearStart {#Date:Date-define2DigitYearStart}
+-----------------------------------------------------------------------
 
 Define the first year of the 100-year period that 2-digit years will be fall within when parsed.  The default start year is 1970.
 
@@ -551,8 +551,8 @@ Define the first year of the 100-year period that 2-digit years will be fall wit
 [Date:parse]: #Date:parse
 [Date:format]: #Date:format
 [Date:isValid]: #Date:isValid
-[Date:defineFormat]: #Date:defineFormat
-[Date:defineParser]: #Date:defineParser
-[Date:parsePatterns]: #Date:CustomParsers
+[Date:defineFormat]: #Date:Date-defineFormat
+[Date:defineParser]: #Date:Date-defineParser
+[Date:parsePatterns]: #Date:Date-CustomParsers
 [Date.Extras.js]: /more/Types/Date.Extras
 [Locale]: /more/Locale/Locale

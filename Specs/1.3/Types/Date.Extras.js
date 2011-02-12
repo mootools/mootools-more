@@ -6,8 +6,9 @@ License:
 	MIT-style license.
 */
 
-describe('Date.getTimePhrase', {
-	'should describe a number of seconds in simple terms': function(){
+describe('Date.getTimePhrase', function(){
+
+	it('should describe a number of seconds in simple terms', function(){
 		var phrases = {
 			'less than a minute ago': 30,
 			'about a minute ago': 65,
@@ -32,26 +33,39 @@ describe('Date.getTimePhrase', {
 
 		for (var phrase in phrases)
 			expect(Date.getTimePhrase(phrases[phrase])).toEqual(phrase);
-	}
+	});
 
 });
 
-describe('Date.timeAgoInWords', {
+describe('Date.timeDiff', function(){
 
-	'should return a readable description of the age of a date': function(){
+	it('should return a readable time difference format', function(){
+		var date = new Date();
+
+		expect(date.timeDiff()).toEqual('0s');
+		expect(date.decrement('second', 10).timeDiff()).toEqual('10s');
+		expect(date.decrement('month', 1).timeDiff()).toEqual('31d:0h:0m:10s');
+		expect(date.decrement('year', 2).timeDiff()).toEqual('2y:31d:0h:0m:10s');
+	});
+
+});
+
+describe('Date.timeAgoInWords', function(){
+
+	it('should return a readable description of the age of a date', function(){
 		var d = new Date();
 		expect(d.decrement('day', 2).timeAgoInWords()).toEqual('2 days ago');
-	}
+	});
 
 });
 
-describe('Date.Extras.parse', {
+describe('Date.Extras.parse', function(){
 
-	'should parse a string value into a date': function(){
+	it('should parse a string value into a date', function(){
 
 		expect(Date.parse('today').get('date')).toEqual(new Date().get('date'));
 		expect(Date.parse('yesterday').get('date')).toEqual(new Date().decrement().get('date'));
 		expect(Date.parse('tomorrow').get('date')).toEqual(new Date().increment().get('date'));
-	}
+	});
 
 });

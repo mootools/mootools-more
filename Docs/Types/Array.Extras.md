@@ -156,13 +156,13 @@ Apply a function against an accumulator and each value of the array (from left-t
 - [MDC Array.reduce][]
 
 Array Method: reduceRight {#Array:reduceRight}
--------------------------------------
+----------------------------------------------
 
 Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value.
 
 ### Syntax
 
-	result = myArray.reduceRight();
+	result = myArray.reduceRight(fn[, value]);
 
 ### Arguments
 1. fn - (*function*) Function to execute on each value in the array.

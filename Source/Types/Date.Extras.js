@@ -23,36 +23,33 @@ provides: [Date.Extras]
 
 Date.implement({
 
-	timeDiffInWords: function(relative_to){
-		return Date.distanceOfTimeInWords(this, relative_to || new Date);
+	timeDiffInWords: function(to){
+		return Date.distanceOfTimeInWords(this, to || new Date);
 	},
 
-	timeDiff: function(to, joiner){
+	timeDiff: function(to, separator){
 		if (to == null) to = new Date;
-		var delta = ((to - this) / 1000).toInt();
-		if (!delta) return '0s';
+		var delta = ((to - this) / 1000).floor();
 
-		var durations = {s: 60, m: 60, h: 24, d: 365, y: 0};
-		var duration, vals = [];
+		var vals = [],
+			durations = [60, 60, 24, 365, 0],
+			names = ['s', 'm', 'h', 'd', 'y'],
+			value, duration;
 
-		for (var step in durations){
-			if (!delta) break;
-			if ((duration = durations[step])){
-				vals.unshift((delta % duration) + step);
-				delta = (delta / duration).toInt();
-			} else {
-				vals.unshift(delta + step);
+		for (var item = 0; item < durations.length; item++){
+			if (item && !delta) break;
+			value = delta;
+			if ((duration = durations[item])){
+				value = (delta % duration);
+				delta = (delta / duration).floor();
 			}
+			vals.unshift(value + (names[item] || ''));
 		}
 
-		return vals.join(joiner || ':');
+		return vals.join(separator || ':');
 	}
 
-});
-
-Date.alias('timeAgoInWords', 'timeDiffInWords');
-
-Date.extend({
+}).extend({
 
 	distanceOfTimeInWords: function(from, to){
 		return Date.getTimePhrase(((to - from) / 1000).toInt());
@@ -88,10 +85,7 @@ Date.extend({
 		return Date.getMsg(msg + suffix, delta).substitute({delta: delta});
 	}
 
-});
-
-
-Date.defineParsers(
+}).defineParsers(
 
 	{
 		// "today", "tomorrow", "yesterday"
@@ -120,4 +114,4 @@ Date.defineParsers(
 		}
 	}
 
-);
+).alias('timeAgoInWords', 'timeDiffInWords');

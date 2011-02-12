@@ -7,6 +7,10 @@
 	<input type="submit" name="html" value="fetch html (button 2)"/>
 </form>
 
+<form id="test2" action="#fail" method="post">
+	<input type="submit" name="html" value="fetch html with requestOptions.url" />
+</form>
+
 <div style="position: relative; margin-top: 10px">
 	<div id="update" style="padding: 10px; width: 200px; border: 1px solid black; height: 100px; overflow:hidden;">
 		this box should get new text when you click the input above.
@@ -20,5 +24,10 @@
 			spinnerTarget: $('update')
 		}
 	});
+	new Form.Request('test2', 'update', {
+		requestOptions: {
+			spinnerTarget: $('update'),
+			url: '/ajax_html_echo/'
+		}
+	});
 </script>
-

@@ -141,6 +141,82 @@ describe('Events.Pseudos', function(){
 
 	});
 
+	describe(':throttle pseudo', function(){
+
+		it('should only fire once in a certain timespan', function(){
+			var fn1 = jasmine.createSpy(':throttle pseudo one'),
+				fn2 = jasmine.createSpy(':throttle pseudo two'),
+				events = new Events();
+
+			events.addEvents({
+				'scroll:throttle': fn1,
+				'scroll:throttle(500)': fn2
+			});
+
+			for (var i = 20; i--;) events.fireEvent('scroll');
+
+			// They should fire directly
+			expect(fn1.callCount).toEqual(1);
+			expect(fn2.callCount).toEqual(1);
+
+			waits(375);
+
+			runs(function(){
+
+				// default time is 250, so firing scroll after 250 ms would fire the fist event
+				for (var i = 20; i--;) events.fireEvent('scroll');
+
+				expect(fn1.callCount).toEqual(2);
+				expect(fn2.callCount).toEqual(1);
+
+			});
+
+			waits(500);
+
+			runs(function(){
+
+				// After another 500 ms all timeouts are cleared so both events will get called
+				for (var i = 20; i--;) events.fireEvent('scroll');
+
+				expect(fn1.callCount).toEqual(3);
+				expect(fn2.callCount).toEqual(2);
+
+			});
+
+		});
+
+	});
+
+	describe(':pause pseudo', function(){
+
+		var events = new Events(),
+			fn = jasmine.createSpy('pause event');
+
+		it('should pause the event for 200 ms', function(){
+			events.addEvent('code:pause(200)', fn);
+			events.fireEvent('code', 1);
+			events.fireEvent('code', 2);
+			events.fireEvent.delay(400, events, 'code');
+
+			expect(fn).not.toHaveBeenCalled();
+
+			waits(300);
+
+			runs(function(){
+				expect(fn).toHaveBeenCalledWith(2);
+				expect(fn.callCount).toEqual(1);
+			});
+
+			waits(300);
+
+			runs(function(){
+				// the delayed event should have fired
+				expect(fn.callCount).toEqual(2);
+			});
+
+		});
+	});
+
 	describe('Events.definePseudo', function(){
 
 		it('should call Pseudo function with split, fn, and args', function(){

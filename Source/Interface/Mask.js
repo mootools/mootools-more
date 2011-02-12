@@ -35,7 +35,7 @@ var Mask = new Class({
 		onShow: function(){},
 		onHide: function(){},
 		onDestroy: function(){},
-		onClick: function(){},
+		onClick: function(event){},
 		inject: {
 			where: 'after',
 			target: null,
@@ -62,12 +62,12 @@ var Mask = new Class({
 		this.element = new Element('div', {
 			'class': this.options['class'],
 			id: this.options.id || 'mask-' + String.uniqueID(),
-			styles: Object.merge(this.options.style, {
+			styles: Object.merge({}, this.options.style, {
 				display: 'none'
 			}),
 			events: {
-				click: function(){
-					this.fireEvent('click');
+				click: function(event){
+					this.fireEvent('click', event);
 					if (this.options.hideOnClick) this.hide();
 				}.bind(this)
 			}

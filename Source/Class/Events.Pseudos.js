@@ -133,17 +133,41 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 
 var pseudos = {
 
-	once: {listener: function(split, fn, args, monitor){
-		fn.apply(this, args);
-		this.removeEvent(split.event, monitor)
-			.removeEvent(split.original, fn);
-	}}
+	once: {
+		listener: function(split, fn, args, monitor){
+			fn.apply(this, args);
+			this.removeEvent(split.event, monitor)
+				.removeEvent(split.original, fn);
+		}
+	},
+
+	throttle: {
+		listener: function(split, fn, args){
+			if (!fn._throttled){
+				fn.apply(this, args);
+				fn._throttled = setTimeout(function(){
+					fn._throttled = false;
+				}, split.value || 250);
+			}
+		}
+	},
+
+	pause: {
+		listener: function(split, fn, args){
+			clearTimeout(fn._pause);
+			fn._pause = fn.delay(split.value || 250, this, args);
+		}
+	}
 
 };
 
 Events.definePseudo = function(key, listener){
 	pseudos[key] = Type.isFunction(listener) ? {listener: listener} : listener;
 	return this;
+};
+
+Events.lookupPseudo = function(key){
+	return pseudos[key];
 };
 
 var proto = Events.prototype;
