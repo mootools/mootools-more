@@ -258,12 +258,11 @@ Date.implement({
 		return this.format('iso8601');
 	}
 
+}).alias({
+	toJSON: 'toISOString',
+	compare: 'diff',
+	strftime: 'format'
 });
-
-
-Date.alias('toJSON', 'toISOString');
-Date.alias('compare', 'diff');
-Date.alias('strftime', 'format');
 
 var formats = {
 	db: '%Y-%m-%d %H:%M:%S',
@@ -297,12 +296,12 @@ var formatters = {
 };
 
 
-var parsePatterns = [];
-var nativeParse = Date.parse;
+var parsePatterns = [],
+	nativeParse = Date.parse;
 
 var parseWord = function(type, word, num){
-	var ret = -1;
-	var translated = Date.getMsg(type + 's');
+	var ret = -1,
+		translated = Date.getMsg(type + 's');
 	switch (typeOf(word)){
 		case 'object':
 			ret = translated[word.get(type)];
