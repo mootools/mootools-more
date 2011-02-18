@@ -59,7 +59,6 @@ sources:
   - "Source/Drag/Drag.Move.js"
   - "Source/Drag/Slider.js"
   - "Source/Drag/Sortables.js"
-  - "Source/Drag/Sortables.Delegation.js"
   - "Source/Request/Request.JSONP.js"
   - "Source/Request/Request.Queue.js"
   - "Source/Request/Request.Periodical.js"
