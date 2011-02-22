@@ -27,7 +27,7 @@ Returns a value of an object by its path.
 ### Arguments
 
 1. object - (*object*) The object to search in
-2. path - (*string*) the path to the key for the value you wish to retrieve
+2. path - (*string*, *array*) the path to the key for the value you wish to retrieve
 
 ### Returns
 
@@ -42,8 +42,9 @@ Returns a value of an object by its path.
 				lemon: "yellow"
 			}
 		}
-	}, 'food.fruits.apples');
-	//returns "red"
+	}, 'food.fruits.apples'); // 'red'
+
+	Object.getFromPath({food: {pizza: 'yum!!'}}, ['food', 'pizza']); // 'yum!!'
 
 
 Object Function: cleanValues {#Object:Object-cleanValues}

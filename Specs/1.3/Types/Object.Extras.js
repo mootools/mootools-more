@@ -8,7 +8,7 @@ License:
 
 describe('Object.getFromPath', function(){
 
-	it('should retrieve a hash value from a path', function(){
+	it('should retrieve an object value from a path', function(){
 		var obj = {
 			animal: {
 				human: {
@@ -17,6 +17,17 @@ describe('Object.getFromPath', function(){
 			}
 		};
 		expect(Object.getFromPath(obj, 'animal.human.most_deadly')).toEqual('ninja');
+	});
+
+	it('should retrieve an object value from an array', function(){
+		var obj = {
+			animal: {
+				human: {
+					most_deadly: 'ninja'
+				}
+			}
+		};
+		expect(Object.getFromPath(obj, ['animal', 'human', 'most_deadly'])).toEqual('ninja');
 	});
 
 });
