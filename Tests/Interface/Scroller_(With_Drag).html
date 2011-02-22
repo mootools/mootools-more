@@ -1,0 +1,33 @@
+<p>
+	Start dragging the element that says "drag me up!" The scroller should start working despite your mouse already being in the "scroll area" defined by Scroller.
+</p>
+
+<b id='loading'>LOADING...</b>
+
+<ol id='dragAndScroll' style='padding-left: 30px; border: 2px solid #aaa; list-style: decimal; overflow: auto; height: 200px; width: 300px;'>
+	<script>
+		for (i = 0; i < 100; i++) {
+			document.write('<li id="li'+i+'">Moo</li>');
+		}
+	</script>
+</ol>
+
+
+<script src="/depender/build?require=More/Drag.Move,More/Scroller,More/Fx.Scroll,More/Sortables"></script>
+
+<script>
+new Fx.Scroll('dragAndScroll').toElement('li19');
+$('li20').set('html', 'drag me up!');
+$('loading').set('html', 'READY');
+
+new Sortables('dragAndScroll', {
+    clone: true,
+    opacity: 0.5,
+    onStart: function() {
+       this.scroller = new Scroller('dragAndScroll', {area: 50}).start();
+    },
+	onComplete: function() {
+		this.scroller.stop();
+	}
+});
+</script>
