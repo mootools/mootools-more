@@ -1,5 +1,34 @@
 describe('Form.Validator', function(){
 
+	describe('onElementPass', function(){
+
+		var form, select;
+		beforeEach(function(){
+			form = new Element('form', {
+				action: '#'
+			}).adopt(
+				select = new Element('select', {
+					'class': 'minLength:2',
+				}).adopt(
+					[1,2,3].map(function(item){ new Element('option', {html: item, value: item}) })
+				)
+			)
+		});
+
+		afterEach(function(){
+			form = select = null;
+		});
+
+		it('should pass the field as an argument', function() {
+			var spy = jasmine.createSpy();
+			new Form.Validator(form, {
+				onElementPass: spy
+			}).validate();
+			expect(spy).toHaveBeenCalledWith(select);
+		});
+
+	});
+
 	describe('Validators', function(){
 
 		getValidator = Form.Validator.getValidator.bind(Form.Validator);
