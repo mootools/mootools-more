@@ -121,7 +121,7 @@ Element.implement({
 			prefX = options.offset.x,
 			winSize = window.getSize();
 
-		switch(options.position.x){
+		switch (options.position.x){
 			case 'left':
 				pos.x = left + prefX;
 				break;
@@ -133,7 +133,7 @@ Element.implement({
 				break;
 		}
 
-		switch(options.position.y){
+		switch (options.position.y){
 			case 'top':
 				pos.y = top + prefY;
 				break;
@@ -148,7 +148,7 @@ Element.implement({
 		if (options.edge){
 			var edgeOffset = {};
 
-			switch(options.edge.x){
+			switch (options.edge.x){
 				case 'left':
 					edgeOffset.x = 0;
 					break;
@@ -160,7 +160,7 @@ Element.implement({
 					break;
 			}
 
-			switch(options.edge.y){
+			switch (options.edge.y){
 				case 'top':
 					edgeOffset.y = 0;
 					break;

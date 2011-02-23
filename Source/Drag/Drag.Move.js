@@ -149,7 +149,7 @@ Drag.Move = new Class({
 
 	getDroppableCoordinates: function(element){
 		var position = element.getCoordinates();
-		if (element.getStyle('position') == 'fixed') {
+		if (element.getStyle('position') == 'fixed'){
 			var scroll = window.getScroll();
 			position.left += scroll.x;
 			position.right += scroll.x;

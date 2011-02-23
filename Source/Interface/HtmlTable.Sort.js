@@ -161,7 +161,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			}
 			body.appendChild(row);
 
-			for (rowIndex = 0; rowIndex < count; rowIndex++) {
+			for (rowIndex = 0; rowIndex < count; rowIndex++){
 				if (data[rowIndex].position > position) data[rowIndex].position--;
 			}
 		}

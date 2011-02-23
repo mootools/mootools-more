@@ -129,7 +129,7 @@ Request.JSONP = new Class({
 	},
 
 	timeout: function(){
-		if (this.running) {
+		if (this.running){
 			this.running = false;
 			this.fireEvent('timeout', [this.script.get('src'), this.script]).fireEvent('failure').cancel();
 		}

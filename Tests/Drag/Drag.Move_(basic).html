@@ -31,9 +31,9 @@ var draggers = [$('box1').makeDraggable(), $('box2').makeDraggable({
 	invert: true
 }), $('box3').makeDraggable()];
 $('enable').addEvent('click', function(){
-	draggers.each(function(drag) { drag.attach(); });
+	draggers.each(function(drag){ drag.attach(); });
 });
 $('disable').addEvent('click', function(){
-	draggers.each(function(drag) { drag.detach(); });
+	draggers.each(function(drag){ drag.detach(); });
 });
 </script>

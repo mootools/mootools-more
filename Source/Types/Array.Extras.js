@@ -41,7 +41,7 @@ Array.implement({
 	sum: function(){
 		var result = 0, l = this.length;
 		if (l){
-			while(l--) result += this[l];
+			while (l--) result += this[l];
 		}
 		return result;
 	},

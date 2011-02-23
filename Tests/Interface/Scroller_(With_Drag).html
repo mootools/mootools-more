@@ -34,10 +34,10 @@ var scroller;
 new Sortables('dragAndScroll', {
 	clone: true,
 	opacity: 0.5,
-	onStart: function() {
+	onStart: function(){
 		scroller = new Scroller(dragAndScroll, {area: 50}).start();
 	},
-	onComplete: function() {
+	onComplete: function(){
 		scroller.stop();
 	}
 });

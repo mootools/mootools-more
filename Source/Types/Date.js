@@ -441,7 +441,7 @@ var regexOf = function(type){
 };
 
 var replacers = function(key){
-	switch(key){
+	switch (key){
 		case 'T':
 			return '%H:%M:%S';
 		case 'x': // iso8601 covers yyyy-mm-dd, so just check if month is first
@@ -522,7 +522,7 @@ var build = function(format){
 var handle = function(key, value){
 	if (!value) return this;
 
-	switch(key){
+	switch (key){
 		case 'a': case 'A': return this.set('day', Date.parseDay(value, true));
 		case 'b': case 'B': return this.set('mo', Date.parseMonth(value, true));
 		case 'd': return this.set('date', value);
