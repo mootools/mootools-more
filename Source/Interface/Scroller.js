@@ -52,7 +52,7 @@ var Scroller = new Class({
 
 	start: function(){
 		this.listener.addEvents({
-			mouseenter: this.bound.attach,
+			mouseover: this.bound.attach,
 			mouseleave: this.bound.detach
 		});
 		return this;
@@ -60,7 +60,7 @@ var Scroller = new Class({
 
 	stop: function(){
 		this.listener.removeEvents({
-			mouseenter: this.bound.attach,
+			mouseover: this.bound.attach,
 			mouseleave: this.bound.detach
 		});
 		this.detach();
