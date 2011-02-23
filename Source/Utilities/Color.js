@@ -158,5 +158,5 @@ String.implement({
 
 });
 
-})();
+}).call(this);
 

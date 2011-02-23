@@ -125,4 +125,4 @@ provides: [Element.Pin]
 Element.alias('togglepin', 'togglePin');
 //</1.2compat>
 
-})();
+}).call(this);

@@ -61,4 +61,4 @@ Object.extend({
 
 });
 
-})();
+}).call(this);

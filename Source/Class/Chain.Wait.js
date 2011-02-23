@@ -59,4 +59,4 @@ provides: [Chain.Wait]
 		});
 	}
 
-})();
+}).call(this);
