@@ -95,7 +95,7 @@ Date.implement({
 			switch(bits[0]){
 				case 'tom': return d.increment();
 				case 'yes': return d.decrement();
-				default: 	return d;
+				default: return d;
 			}
 		}
 	},

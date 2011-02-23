@@ -164,7 +164,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			for (rowIndex = 0; rowIndex < count; rowIndex++) {
 				if (data[rowIndex].position > position) data[rowIndex].position--;
 			}
-		};
+		}
 	},
 
 	setRowStyle: function(row, i){
@@ -195,8 +195,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 		var parser = this.getParser();
 		if (!parser) return;
 
+		var rel;
 		if (!Browser.ie){
-			var rel = this.body.getParent();
+			rel = this.body.getParent();
 			this.body.dispose();
 		}
 
@@ -327,7 +328,7 @@ HtmlTable.Parsers = new Hash(HtmlTable.Parsers);
 
 HtmlTable.defineParsers = function(parsers){
 	HtmlTable.Parsers = Object.append(HtmlTable.Parsers, parsers);
-	for (parser in parsers){
+	for (var parser in parsers){
 		HtmlTable.ParserPriority.unshift(parser);
 	}
 };

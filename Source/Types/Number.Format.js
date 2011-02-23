@@ -54,10 +54,9 @@ Number.implement({
 		if (precision >= 1 && precision <= 21) value = (+value).toPrecision(precision);
 
 		value += '';
-
+		var index;
 		if (getOption('scientific') === false && value.indexOf('e') > -1){
 			var match = value.split('e'),
-				index,
 				zeros = +match[1];
 			value = match[0].replace('.', '');
 

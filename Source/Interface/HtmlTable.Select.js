@@ -177,7 +177,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 				};
 				row.store('binders', binders);
 			}
-			(this._selectEnabled) ? row.addEvents(binders) : row.removeEvents(binders);
+			if (this._selectEnabled) row.addEvents(binders);
+			else row.removeEvents(binders);
 		}, this);
 	},
 

@@ -61,7 +61,7 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 		return Object.merge.apply(this, split.map(function(item){
 			return pseudos[item.pseudo].options || {};
 		}));
-	}
+	};
 
 	return {
 

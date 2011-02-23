@@ -322,6 +322,9 @@ var parseWord = function(type, word, num){
 	return (num) ? translated.indexOf(ret) : ret;
 };
 
+var startCentury = 1900,
+	startYear = 70;
+
 Date.extend({
 
 	getMsg: function(key, args){
@@ -431,9 +434,6 @@ Date.extend({
 
 });
 
-var startCentury = 1900,
-	startYear = 70;
-
 var regexOf = function(type){
 	return new RegExp('(?:' + Date.getMsg(type).map(function(name){
 		return name.substr(0, 3);
@@ -511,7 +511,7 @@ var build = function(format){
 
 			if (year != null) handle.call(date, 'y', year); // need to start in the right year
 			if ('d' in bits) handle.call(date, 'd', 1);
-			if ('m' in bits || bits['b'] || bits['B']) handle.call(date, 'm', 1);
+			if ('m' in bits || bits.b || bits.B) handle.call(date, 'm', 1);
 
 			for (var key in bits) handle.call(date, key, bits[key]);
 			return date;

@@ -82,15 +82,15 @@ tidy = {
 };
 
 var walk = function(string, replacements){
-	var result = string;
+	var result = string, key;
 	for (key in replacements) result = result.replace(replacements[key], key);
 	return result;
 };
 
 var getRegexForTag = function(tag, contents){
 	tag = tag || '';
-	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "([^>]+)?>";
-	reg = new RegExp(regstr, "gi");
+	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "([^>]+)?>",
+		reg = new RegExp(regstr, "gi");
 	return reg;
 };
 
