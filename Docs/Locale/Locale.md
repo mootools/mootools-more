@@ -116,7 +116,12 @@ Returns the locale name currently in use.
 
 ### Returns
 
-* *string* - the locale name (i.e. "en-US").
+* *object* - the Locale Set object
+	* name - *string* The Locale Set name (i.e. "en-US").
+
+### Example
+
+	Locale.getCurrent().name // 'en-US'
 
 
 Locale method: get {#Locale:get}
