@@ -54,7 +54,7 @@ Configuration.sets = {
 			'Class/Class.Occlude',
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
 			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation', 'Element/Element.Pin',
-			'Types/URI', 'Types/URI.Relative',
+			'Types/URI', 'Types/URI.Relative', 'Types/Object.Extras_client',
 			'Interface/Keyboard', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort', 'Interface/HtmlTable.Select',
 			'Forms/Form.Validator',
 			'Fx/Fx.Reveal',

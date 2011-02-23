@@ -27,12 +27,14 @@ var defined = function(value){
 	return value != null;
 };
 
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
 Object.extend({
 
 	getFromPath: function(source, parts){
 		if (typeof parts == 'string') parts = parts.split('.');
 		for (var i = 0, l = parts.length; i < l; i++){
-			if (source.hasOwnProperty(parts[i])) source = source[parts[i]];
+			if (hasOwnProperty.call(source, parts[i])) source = source[parts[i]];
 			else return null;
 		}
 		return source;
@@ -47,7 +49,7 @@ Object.extend({
 	},
 
 	erase: function(object, key){
-		if (object.hasOwnProperty(key)) delete object[key];
+		if (hasOwnProperty.call(object, key)) delete object[key];
 		return object;
 	},
 
