@@ -172,8 +172,7 @@ Form.Validator = new Class({
 	},
 
 	onSubmit: function(event){
-		if (!this.validate(event) && event) event.preventDefault();
-		else this.reset();
+		if (this.validate(event)) this.reset();
 	},
 
 	reset: function(){
@@ -508,7 +507,7 @@ Element.implement({
 
 	validate: function(options){
 		if (options) this.set('validator', options);
-		return this.get('validator', options).validate();
+		return this.get('validator').validate();
 	}
 
 });
