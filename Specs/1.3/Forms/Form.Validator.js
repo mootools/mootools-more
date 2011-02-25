@@ -38,17 +38,32 @@ describe('Form.Validator', function(){
 
 	});
 
-/*
+
 	describe('Element.validate method', function(){
-		var form = new Element('form').adopt(
-			new Element('input', {
-				'class': 'minLength:10',
-				value: 'toShort'
-			})
-		);
-		expect(form.validate()).toEqual(false);
+		it('should return false if the form is not valid', function(){
+			var form = new Element('form').adopt(
+				new Element('input', {
+					'class': 'minLength:10',
+					value: 'toShort'
+				})
+			);
+			expect(form.validate({ignoreHidden: false})).toEqual(false);
+		});
 	});
-*/
+
+	describe('Warnings', function(){
+
+		it('should still validate the form when there is a warning', function(){
+			var form = new Element('form').adopt(
+				new Element('input', {
+					'class': 'warn-required'
+				})
+			);
+			expect(form.validate({ignoreHidden: false})).toEqual(true);
+		});
+	
+	});
+
 	describe('onElementPass', function(){
 
 		var form, select;
