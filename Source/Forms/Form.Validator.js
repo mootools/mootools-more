@@ -32,7 +32,7 @@ provides: [Form.Validator, InputValidator, FormValidator.BaseValidators]
 */
 if (!window.Form) window.Form = {};
 
-var InputValidator = new Class({
+var InputValidator = this.InputValidator = new Class({
 
 	Implements: [Options],
 
