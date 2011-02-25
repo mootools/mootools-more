@@ -1,5 +1,54 @@
 describe('Form.Validator', function(){
 
+	describe('Element.Properties.validatorProps', function(){
+
+		it('should get the properties from a JSON string in the class attribute', function(){
+			var element = new Element('input', {'class': 'minLength:10'});
+			expect(element.get('validatorProps')).toEqual({minLength: 10});
+		});
+
+		it('should get the properties from a JSON string in the data-validator-properties attribute', function(){
+			var element = new Element('input', {'data-validator-properties': '{minLength:10}'});
+			expect(element.get('validatorProps')).toEqual({minLength: 10});
+		});
+
+		it('should get the validator properties from a JSON string in the validatorProps attribute', function(){
+			var element = new Element('input').setProperty('validatorProps', '{minLength: 10, maxLength:20}');
+			expect(element.get('validatorProps')).toEqual({minLength: 10, maxLength: 20});
+		});
+
+	});
+
+	describe('Element.Properties.validator', function(){
+
+		it('should set Form.Validator options', function(){
+			var element = new Element('form').set('validator', {
+				useTitles: true
+			});
+			expect(element.retrieve('validator').options.useTitles).toEqual(true);
+		});
+
+		it('should get a Form.Validator instance', function(){
+			var element = new Element('form'),
+				fv1 = element.get('validator'),
+				fv2 = element.get('validator');
+			expect(instanceOf(fv1, Form.Validator)).toEqual(true);
+			expect(fv2).toEqual(fv1);
+		});
+
+	});
+
+/*
+	describe('Element.validate method', function(){
+		var form = new Element('form').adopt(
+			new Element('input', {
+				'class': 'minLength:10',
+				value: 'toShort'
+			})
+		);
+		expect(form.validate()).toEqual(false);
+	});
+*/
 	describe('onElementPass', function(){
 
 		var form, select;

@@ -38,7 +38,7 @@ var InputValidator = new Class({
 
 	options: {
 		errorMsg: 'Validation failed.',
-		test: function(field){return true;}
+		test: Function.from(true)
 	},
 
 	initialize: function(className, options){
@@ -47,19 +47,20 @@ var InputValidator = new Class({
 	},
 
 	test: function(field, props){
-		if (document.id(field)) return this.options.test(document.id(field), props || this.getProps(field));
-		else return false;
+		field = document.id(field);
+		return (field) ? this.options.test(field, props || this.getProps(field)) : false;
 	},
 
 	getError: function(field, props){
+		field = document.id(field);
 		var err = this.options.errorMsg;
-		if (typeOf(err) == 'function') err = err(document.id(field), props || this.getProps(field));
+		if (typeOf(err) == 'function') err = err(field, props || this.getProps(field));
 		return err;
 	},
 
 	getProps: function(field){
-		if (!document.id(field)) return {};
-		return field.get('validatorProps');
+		field = document.id(field);
+		return (field) ? field.get('validatorProps') : {};
 	}
 
 });
@@ -113,7 +114,7 @@ Element.Properties.validatorProps = {
 
 Form.Validator = new Class({
 
-	Implements:[Options, Events],
+	Implements: [Options, Events],
 
 	Binds: ['onSubmit'],
 
@@ -488,17 +489,16 @@ Form.Validator.addAllThese([
 Element.Properties.validator = {
 
 	set: function(options){
-		var validator = this.retrieve('validator');
-		if (validator) validator.setOptions(options);
-		return this.store('$moo:validator:options', options);
+		this.get('validator').setOptions(options);
 	},
 
-	get: function(options){
-		if (options || !this.retrieve('validator')){
-			if (options || !this.retrieve('$moo:validator:options')) this.set('validator', options);
-			this.store('validator', new Form.Validator(this, this.retrieve('$moo:validator:options')));
+	get: function(){
+		var validator = this.retrieve('validator');
+		if (!validator){
+			validator = new Form.Validator(this);
+			this.store('validator', validator);
 		}
-		return this.retrieve('validator');
+		return validator;
 	}
 
 };
@@ -511,6 +511,8 @@ Element.implement({
 	}
 
 });
+
+
 //<1.2compat>
 //legacy
 var FormValidator = Form.Validator;
