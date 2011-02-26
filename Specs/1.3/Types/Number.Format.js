@@ -1,12 +1,12 @@
 /*
-Script: Number.Extras.js
-	Specs for Number.Extras.js
+Script: Number.Format.js
+	Specs for Number.Format.js
 
 License:
 	MIT-style license.
 */
 
-describe('Number.Extras', function(){
+describe('Number.Format', function(){
 
 	describe('Number.format', function(){
 
@@ -24,6 +24,12 @@ describe('Number.Extras', function(){
 
 		it('should format a negative number', function(){
 			expect((-20000).format()).toEqual('-20,000');
+		});
+
+		it('should format a negative number with a special minus sign', function(){
+			expect((-20000).format({negative: {prefix:'_'}})).toEqual('_20,000');
+			expect((-20000).format({negative: {suffix:'_'}})).toEqual('20,000_');
+			expect((-20000).format({negative: {prefix:'_', suffix: '^'}})).toEqual('_20,000^');
 		});
 
 		it('should format with the right decimals', function(){
@@ -69,6 +75,12 @@ describe('Number.Extras', function(){
 
 		it('should format percentage', function(){
 			expect((50).formatPercentage()).toEqual('50.00%');
+		});
+
+		it('should not change the options object', function(){
+			var options = {prefix: 'foo'};
+			(-3).format(options);
+			expect(options.prefix).toEqual('foo');
 		});
 
 	});

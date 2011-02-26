@@ -12,7 +12,7 @@ authors:
 
 requires:
   - Core/Number
-  - /Locale.en-US.Number
+  - Locale.en-US.Number
 
 provides: [Number.Extras]
 
@@ -25,7 +25,7 @@ Number.implement({
 	format: function(options){
 		// Thanks dojo and YUI for some inspiration
 		var value = this;
-		if (!options) options = {};
+		options = options ? Object.clone(options) : {};
 		var getOption = function(key){
 			if (options[key] != null) return options[key];
 			return Locale.get('Number.' + key);
@@ -38,10 +38,10 @@ Number.implement({
 			decimals = getOption('decimals');
 
 		if (negative){
-			var negativeLocale = Locale.get('Number.negative') || {};
+			var negativeLocale = getOption('negative') || {};
 			if (negativeLocale.prefix == null && negativeLocale.suffix == null) negativeLocale.prefix = '-';
-			Object.each(negativeLocale, function(value, key){
-				options[key] = (key == 'prefix' || key == 'suffix') ? (getOption(key) + value) : value;
+			['prefix', 'suffix'].each(function(key){
+				if (negativeLocale[key]) options[key] = getOption(key) + negativeLocale[key];
 			});
 
 			value = -value;
