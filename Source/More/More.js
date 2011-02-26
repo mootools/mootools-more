@@ -17,6 +17,7 @@ authors:
   - Tim Wienk
   - Christoph Pojer
   - Aaron Newton
+  - Jacob Thornton
 
 requires:
   - Core/MooTools
