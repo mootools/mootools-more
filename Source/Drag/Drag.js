@@ -111,8 +111,8 @@ var Drag = new Class({
 
 		var styles = this.element.getStyles('left', 'right', 'top', 'bottom');
 		this._invert = {
-			x: options.modifiers.x == 'left' && styles.left == 'auto' && !isNaN(styles.right.toInt()) && (options.modifiers.x = 'right'),
-			y: options.modifiers.y == 'top' && styles.top == 'auto' && !isNaN(styles.bottom.toInt()) && (options.modifiers.y = 'bottom')
+			x: options.modifiers.x == 'left' && styles.left == 'auto' && !isNaN(styles.right.toInt()) && (options.modifiers.x == 'right'),
+			y: options.modifiers.y == 'top' && styles.top == 'auto' && !isNaN(styles.bottom.toInt()) && (options.modifiers.y == 'bottom')
 		};
 
 		var z, coordinates;
