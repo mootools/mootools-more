@@ -222,4 +222,4 @@ this.Tips = new Class({
 
 });
 
-}).call(this);
+})();

@@ -49,4 +49,4 @@ Locale.Set.from = function(set, type){
 	return locale;
 };
 
-}).call(this);
+})();

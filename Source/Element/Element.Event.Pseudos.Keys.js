@@ -79,4 +79,4 @@ Object.append(Event.Keys, {
 	'+': 107
 });
 
-}).call(this);
+})();

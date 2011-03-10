@@ -136,5 +136,5 @@ Event.definePseudo('relay', {
 	options: eventOptions
 });
 
-}).call(this);
+})();
 

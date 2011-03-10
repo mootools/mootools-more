@@ -63,4 +63,4 @@ Object.extend({
 
 });
 
-}).call(this);
+})();

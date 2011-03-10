@@ -167,4 +167,4 @@ Element.implement({
 
 });
 
-}).call(this);
+})();

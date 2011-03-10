@@ -243,4 +243,4 @@ Element.implement({
 
 });
 
-}).call(this);
+})();

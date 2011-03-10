@@ -141,5 +141,5 @@ Hash.implement({
 Hash.alias({indexOf: 'keyOf', contains: 'hasValue'});
 
 
-}).call(this);
+})();
 

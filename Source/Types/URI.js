@@ -166,4 +166,4 @@ String.implement({
 
 });
 
-}).call(this);
+})();

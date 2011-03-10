@@ -77,4 +77,4 @@ Locale.define('cs-CZ', 'Date', {
 	yearsUntil: function(delta){ return 'za {delta} ' + pluralize(delta, 'rok', 'roky', 'let'); }
 });
 
-}).call(this);
+})();

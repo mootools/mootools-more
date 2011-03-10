@@ -185,4 +185,4 @@ Object.append(lang, Locale, {
 });
 /*</1.2compat>*/
 
-}).call(this);
+})();

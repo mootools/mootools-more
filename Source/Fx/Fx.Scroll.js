@@ -176,4 +176,4 @@ function isBody(element){
 	return (/^(?:body|html)$/i).test(element.tagName);
 }
 
-}).call(this);
+})();

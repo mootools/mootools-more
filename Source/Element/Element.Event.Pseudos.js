@@ -33,4 +33,4 @@ Event.definePseudo = function(key, listener){
 var proto = Element.prototype;
 [Element, Window, Document].invoke('implement', Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
-}).call(this);
+})();

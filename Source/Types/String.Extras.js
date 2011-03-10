@@ -145,4 +145,4 @@ String.implement({
 
 });
 
-}).call(this);
+})();
