@@ -76,4 +76,4 @@ Array.implement({
 
 });
 
-}).call(this);
+})();
