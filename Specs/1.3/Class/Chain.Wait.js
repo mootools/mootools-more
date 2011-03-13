@@ -47,4 +47,22 @@ describe('Chain.Wait', function(){
 
 	});
 
+	it('should not break the chainComplete event in Fx', function(){
+		var count = 0;
+		new Fx({
+			link: 'chain',
+			onChainComplete: function(){
+				count++;
+			},
+			duration: 50
+		}).start(0, 1).wait(40).start(1, 0);
+
+		waits(500);
+
+		runs(function(){
+			expect(count).toEqual(1);
+		});
+
+	});
+
 });
