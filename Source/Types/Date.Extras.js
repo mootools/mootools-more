@@ -29,7 +29,7 @@ Date.implement({
 
 	timeDiff: function(to, separator){
 		if (to == null) to = new Date;
-		var delta = ((to - this) / 1000).floor();
+		var delta = ((to - this) / 1000).floor().abs();
 
 		var vals = [],
 			durations = [60, 60, 24, 365, 0],

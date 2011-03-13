@@ -40,12 +40,21 @@ describe('Date.getTimePhrase', function(){
 describe('Date.timeDiff', function(){
 
 	it('should return a readable time difference format', function(){
-		var date = new Date();
+		var date = new Date('06/20/2011'),
+			orig = date.clone();
 
-		expect(date.timeDiff()).toEqual('0s');
-		expect(date.decrement('second', 10).timeDiff()).toEqual('10s');
-		expect(date.decrement('month', 1).timeDiff()).toEqual('31d:0h:0m:10s');
-		expect(date.decrement('year', 2).timeDiff()).toEqual('2y:31d:0h:0m:10s');
+		expect(date.timeDiff(orig)).toEqual('0s');
+		expect(date.decrement('second', 10).timeDiff(orig)).toEqual('10s');
+		expect(date.decrement('month', 1).timeDiff(orig)).toEqual('31d:0h:0m:10s');
+		expect(date.decrement('year', 2).timeDiff(orig)).toEqual('2y:31d:0h:0m:10s');
+		expect(date.timeDiff()).not.toBeNull();
+	});
+
+	it('should return a positive difference', function(){
+		var date = new Date('06/20/2011'),
+			orig = date.clone();
+
+		expect(date.increment('month', 1).timeDiff(orig)).toEqual('30d:0h:0m:0s');
 	});
 
 });
