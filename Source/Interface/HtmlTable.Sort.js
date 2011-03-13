@@ -87,7 +87,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser')) return cell.retrieve('htmltable-parser');
 		var thDiv = new Element('div');
 		thDiv.adopt(cell.childNodes).inject(cell);
-		var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
+		var sortSpan = new Element('span', {'class': this.options.classSortSpan}).inject(thDiv, 'top');
 		this.sortSpans.push(sortSpan);
 		var parser = this.options.parsers[index],
 			rows = this.body.rows,
