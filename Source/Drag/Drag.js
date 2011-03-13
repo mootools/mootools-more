@@ -109,12 +109,6 @@ var Drag = new Class({
 		var limit = options.limit;
 		this.limit = {x: [], y: []};
 
-		var styles = this.element.getStyles('left', 'right', 'top', 'bottom');
-		this._invert = {
-			x: options.modifiers.x == 'left' && styles.left == 'auto' && !isNaN(styles.right.toInt()) && (options.modifiers.x = 'right'),
-			y: options.modifiers.y == 'top' && styles.top == 'auto' && !isNaN(styles.bottom.toInt()) && (options.modifiers.y = 'bottom')
-		};
-
 		var z, coordinates;
 		for (z in options.modifiers){
 			if (!options.modifiers[z]) continue;
@@ -131,7 +125,6 @@ var Drag = new Class({
 			else this.value.now[z] = this.element[options.modifiers[z]];
 
 			if (options.invert) this.value.now[z] *= -1;
-			if (this._invert[z]) this.value.now[z] *= -1;
 
 			this.mouse.pos[z] = event.page[z] - this.value.now[z];
 
@@ -181,7 +174,6 @@ var Drag = new Class({
 			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z];
 
 			if (options.invert) this.value.now[z] *= -1;
-			if (this._invert[z]) this.value.now[z] *= -1;
 
 			if (options.limit && this.limit[z]){
 				if ((this.limit[z][1] || this.limit[z][1] === 0) && (this.value.now[z] > this.limit[z][1])){

@@ -1,0 +1,41 @@
+
+<style>
+
+#wrapper {
+	border: 1px solid #555;
+	background: #DDD;
+	position: relative;
+	height: 300px;
+	width: 300px;
+}
+
+#wrapper div {
+	cursor: pointer;
+	position: absolute;
+}
+
+</style>
+
+<p>
+	You should be able to drag all four elements around, even when they are positioned with bottom or right.
+</p>
+
+<div id="wrapper">
+
+	<div id="topLeft" style="top:0; left:0;">topLeft</div>
+	<div id="topRight" style="top:20px; right:20px;">topRight</div>
+	<div id="bottomLeft" style="bottom:0; left:0;">bottomLeft</div>
+	<div id="bottomRight" style="bottom:0; right:0;">bottomRight</div>
+
+</div>
+
+<script src="/depender/build?require=More/Drag.Move"></script>
+
+<script>
+
+new Drag('topLeft');
+new Drag('topRight');
+new Drag('bottomLeft');
+new Drag('bottomRight');
+
+</script>
