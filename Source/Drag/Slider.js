@@ -53,8 +53,7 @@ var Slider = new Class({
 		this.previousChange = this.previousEnd = this.step = -1;
 
 		var limit = {},
-			modifiers = {x: false, y: false},
-			offset;
+			modifiers = {x: false, y: false};
 
 		switch (options.mode){
 			case 'vertical':
@@ -110,7 +109,7 @@ var Slider = new Class({
 
 	detach: function(){
 		this.element.removeEvent('mousedown', this.clickedElement)
-			.element.removeEvent('mousewheel', this.scrolledElement);
+			.removeEvent('mousewheel', this.scrolledElement);
 		this.drag.detach();
 		return this;
 	},
