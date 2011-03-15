@@ -6,9 +6,9 @@ License:
 	MIT-style license.
 */
 
-describe('Object.getFromPath', {
+describe('Object.getFromPath', function(){
 
-	'should retrieve a hash value from a path': function(){
+	it('should retrieve an object value from a path', function(){
 		var obj = {
 			animal: {
 				human: {
@@ -17,13 +17,25 @@ describe('Object.getFromPath', {
 			}
 		};
 		expect(Object.getFromPath(obj, 'animal.human.most_deadly')).toEqual('ninja');
-	}
+	});
+
+	it('should retrieve an object value from an array', function(){
+		var obj = {
+			animal: {
+				human: {
+					most_deadly: 'ninja'
+				}
+			}
+		};
+		expect(Object.getFromPath(obj, ['animal', 'human', 'most_deadly'])).toEqual('ninja');
+	});
+
 });
 
 
-describe('Object.cleanValues', {
+describe('Object.cleanValues', function(){
 
-	'should filter all the null values out': function(){
+	it('should filter all the null values out', function(){
 		var obj = {
 			animal: null,
 			mootools: true,
@@ -35,9 +47,9 @@ describe('Object.cleanValues', {
 			test: 'ing',
 			no: false
 		});
-	},
+	});
 
-	'custom filter method': function(){
+	it('custom filter method', function(){
 		var obj = {
 			animal: null,
 			mootools: true,
@@ -51,12 +63,13 @@ describe('Object.cleanValues', {
 			mootools: true,
 			test: 'ing'
 		});
-	}
+	});
+
 });
 
-describe('Object.erase', {
+describe('Object.erase', function(){
 
-	'should retrieve a hash value from a path': function(){
+	it('should retrieve a hash value from a path', function(){
 		var obj = {
 			animal: null,
 			mootools: true,
@@ -68,12 +81,13 @@ describe('Object.erase', {
 			test: 'ing',
 			no: false
 		});
-	}
+	});
+
 });
 
-describe('Object.run', {
+describe('Object.run', function(){
 
-	'should retrieve a hash value from a path': function(){
+	it('should retrieve a hash value from a path', function(){
 		var value = '';
 		var obj = {
 			animal: function(arg){
@@ -87,5 +101,6 @@ describe('Object.run', {
 			Object.run(obj, 'running');
 			return value;
 		})()).toEqual('runningrunning');
-	}
+	});
+
 });

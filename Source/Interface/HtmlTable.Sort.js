@@ -87,7 +87,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser')) return cell.retrieve('htmltable-parser');
 		var thDiv = new Element('div');
 		thDiv.adopt(cell.childNodes).inject(cell);
-		var sortSpan = new Element('span', {'html': '&#160;', 'class': this.options.classSortSpan}).inject(thDiv, 'top');
+		var sortSpan = new Element('span', {'class': this.options.classSortSpan}).inject(thDiv, 'top');
 		this.sortSpans.push(sortSpan);
 		var parser = this.options.parsers[index],
 			rows = this.body.rows,
@@ -161,10 +161,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 			}
 			body.appendChild(row);
 
-			for (rowIndex = 0; rowIndex < count; rowIndex++) {
+			for (rowIndex = 0; rowIndex < count; rowIndex++){
 				if (data[rowIndex].position > position) data[rowIndex].position--;
 			}
-		};
+		}
 	},
 
 	setRowStyle: function(row, i){
@@ -195,8 +195,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 		var parser = this.getParser();
 		if (!parser) return;
 
+		var rel;
 		if (!Browser.ie){
-			var rel = this.body.getParent();
+			rel = this.body.getParent();
 			this.body.dispose();
 		}
 
@@ -327,7 +328,7 @@ HtmlTable.Parsers = new Hash(HtmlTable.Parsers);
 
 HtmlTable.defineParsers = function(parsers){
 	HtmlTable.Parsers = Object.append(HtmlTable.Parsers, parsers);
-	for (parser in parsers){
+	for (var parser in parsers){
 		HtmlTable.ParserPriority.unshift(parser);
 	}
 };

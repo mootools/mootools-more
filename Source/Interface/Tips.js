@@ -155,16 +155,16 @@ this.Tips = new Class({
 		this.fireForParent(event, element);
 	},
 
-	setTitle: function(title) {
-		if (this._titleElement) {
+	setTitle: function(title){
+		if (this._titleElement){
 			this._titleElement.empty();
 			this.fill(this._titleElement, title);
 		}
 		return this;
 	},
 
-	setText: function(text) {
-		if (this._textElement) {
+	setText: function(text){
+		if (this._textElement){
 			this._textElement.empty();
 			this.fill(this._textElement, text);
 		}

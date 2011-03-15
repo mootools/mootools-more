@@ -1,5 +1,100 @@
 describe('Form.Validator', function(){
 
+	describe('Element.Properties.validatorProps', function(){
+
+		it('should get the properties from a JSON string in the class attribute', function(){
+			var element = new Element('input', {'class': 'minLength:10'});
+			expect(element.get('validatorProps')).toEqual({minLength: 10});
+		});
+
+		it('should get the properties from a JSON string in the data-validator-properties attribute', function(){
+			var element = new Element('input', {'data-validator-properties': '{minLength:10}'});
+			expect(element.get('validatorProps')).toEqual({minLength: 10});
+		});
+
+		it('should get the validator properties from a JSON string in the validatorProps attribute', function(){
+			var element = new Element('input').setProperty('validatorProps', '{minLength: 10, maxLength:20}');
+			expect(element.get('validatorProps')).toEqual({minLength: 10, maxLength: 20});
+		});
+
+	});
+
+	describe('Element.Properties.validator', function(){
+
+		it('should set Form.Validator options', function(){
+			var element = new Element('form').set('validator', {
+				useTitles: true
+			});
+			expect(element.retrieve('validator').options.useTitles).toEqual(true);
+		});
+
+		it('should get a Form.Validator instance', function(){
+			var element = new Element('form'),
+				fv1 = element.get('validator'),
+				fv2 = element.get('validator');
+			expect(instanceOf(fv1, Form.Validator)).toEqual(true);
+			expect(fv2).toEqual(fv1);
+		});
+
+	});
+
+
+	describe('Element.validate method', function(){
+		it('should return false if the form is not valid', function(){
+			var form = new Element('form').adopt(
+				new Element('input', {
+					'class': 'minLength:10',
+					value: 'toShort'
+				})
+			);
+			expect(form.validate({ignoreHidden: false})).toEqual(false);
+		});
+	});
+
+	describe('Warnings', function(){
+
+		it('should still validate the form when there is a warning', function(){
+			var form = new Element('form').adopt(
+				new Element('input', {
+					'class': 'warn-required'
+				})
+			);
+			expect(form.validate({ignoreHidden: false})).toEqual(true);
+		});
+	
+	});
+
+	describe('onElementPass', function(){
+
+		var form, select;
+		beforeEach(function(){
+			form = new Element('form', {
+				action: '#'
+			}).adopt(
+				select = new Element('select', {
+					'class': 'minLength:2'
+				}).adopt(
+					[1, 2, 3].map(function(item){
+						return new Element('option', {html: item, value: item});
+					})
+				)
+			);
+		});
+
+		afterEach(function(){
+			form = select = null;
+		});
+
+		it('should pass the field as an argument', function(){
+			var spy = jasmine.createSpy();
+			new Form.Validator(form, {
+				onElementPass: spy
+			}).validate();
+			expect(spy).toHaveBeenCalledWith(select);
+		});
+
+	});
+
 	describe('Validators', function(){
 
 		getValidator = Form.Validator.getValidator.bind(Form.Validator);

@@ -27,12 +27,14 @@ var defined = function(value){
 	return value != null;
 };
 
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
 Object.extend({
 
-	getFromPath: function(source, key){
-		var parts = key.split('.');
+	getFromPath: function(source, parts){
+		if (typeof parts == 'string') parts = parts.split('.');
 		for (var i = 0, l = parts.length; i < l; i++){
-			if (source.hasOwnProperty(parts[i])) source = source[parts[i]];
+			if (hasOwnProperty.call(source, parts[i])) source = source[parts[i]];
 			else return null;
 		}
 		return source;
@@ -40,20 +42,20 @@ Object.extend({
 
 	cleanValues: function(object, method){
 		method = method || defined;
-		for (key in object) if (!method(object[key])){
+		for (var key in object) if (!method(object[key])){
 			delete object[key];
 		}
 		return object;
 	},
 
 	erase: function(object, key){
-		if (object.hasOwnProperty(key)) delete object[key];
+		if (hasOwnProperty.call(object, key)) delete object[key];
 		return object;
 	},
 
 	run: function(object){
 		var args = Array.slice(arguments, 1);
-		for (key in object) if (object[key].apply){
+		for (var key in object) if (object[key].apply){
 			object[key].apply(object, args);
 		}
 		return object;

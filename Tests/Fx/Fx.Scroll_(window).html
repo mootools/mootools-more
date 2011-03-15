@@ -63,7 +63,7 @@ makeActions([
 	},
 	{
 		title: 'Scroll to the red item.',
-		fn: fx.toElement.bind(fx, 'red')
+		fn: fx.toElement.pass('red', fx)
 	},
 	{
 		title: 'Scroll the y axis only to the red item.',

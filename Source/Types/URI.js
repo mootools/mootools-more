@@ -108,7 +108,7 @@ var URI = this.URI = new Class({
 	},
 
 	get: function(part, base){
-		switch(part){
+		switch (part){
 			case 'value': return this.combine(this.parsed, base ? base.parsed : false);
 			case 'data' : return this.getData();
 		}

@@ -32,13 +32,13 @@ provides: [Form.Validator, InputValidator, FormValidator.BaseValidators]
 */
 if (!window.Form) window.Form = {};
 
-var InputValidator = new Class({
+var InputValidator = this.InputValidator = new Class({
 
 	Implements: [Options],
 
 	options: {
 		errorMsg: 'Validation failed.',
-		test: function(field){return true;}
+		test: Function.from(true)
 	},
 
 	initialize: function(className, options){
@@ -47,19 +47,20 @@ var InputValidator = new Class({
 	},
 
 	test: function(field, props){
-		if (document.id(field)) return this.options.test(document.id(field), props || this.getProps(field));
-		else return false;
+		field = document.id(field);
+		return (field) ? this.options.test(field, props || this.getProps(field)) : false;
 	},
 
 	getError: function(field, props){
+		field = document.id(field);
 		var err = this.options.errorMsg;
-		if (typeOf(err) == 'function') err = err(document.id(field), props || this.getProps(field));
+		if (typeOf(err) == 'function') err = err(field, props || this.getProps(field));
 		return err;
 	},
 
 	getProps: function(field){
-		if (!document.id(field)) return {};
-		return field.get('validatorProps');
+		field = document.id(field);
+		return (field) ? field.get('validatorProps') : {};
 	}
 
 });
@@ -113,7 +114,7 @@ Element.Properties.validatorProps = {
 
 Form.Validator = new Class({
 
-	Implements:[Options, Events],
+	Implements: [Options, Events],
 
 	Binds: ['onSubmit'],
 
@@ -172,8 +173,7 @@ Form.Validator = new Class({
 	},
 
 	onSubmit: function(event){
-		if (!this.validate(event) && event) event.preventDefault();
-		else this.reset();
+		if (this.validate(event)) this.reset();
 	},
 
 	reset: function(){
@@ -184,7 +184,9 @@ Form.Validator = new Class({
 	validate: function(event){
 		var result = this.getFields().map(function(field){
 			return this.validateField(field, true);
-		}, this).every(function(v){ return v;});
+		}, this).every(function(v){
+			return v;
+		});
 		this.fireEvent('formValidate', [result, this.element, event]);
 		if (this.options.stopOnFailure && !result && event) event.preventDefault();
 		return result;
@@ -209,10 +211,10 @@ Form.Validator = new Class({
 				if (className && !this.test(className, field)) validatorsFailed.include(className);
 			}, this);
 			passed = validatorsFailed.length === 0;
-			if (validators && !this.hasValidator(field,'warnOnly')){
+			if (validators && !this.hasValidator(field, 'warnOnly')){
 				if (passed){
 					field.addClass('validation-passed').removeClass('validation-failed');
-					this.fireEvent('elementPass', field);
+					this.fireEvent('elementPass', [field]);
 				} else {
 					field.addClass('validation-failed').removeClass('validation-passed');
 					this.fireEvent('elementFail', [field, validatorsFailed]);
@@ -239,7 +241,7 @@ Form.Validator = new Class({
 		field = document.id(field);
 		if ((this.options.ignoreHidden && !field.isVisible()) || (this.options.ignoreDisabled && field.get('disabled'))) return true;
 		var validator = this.getValidator(className);
-		warn = warn != null ? warn : false;
+		if (warn != null) warn = false;
 		if (this.hasValidator(field, 'warnOnly')) warn = true;
 		var isValid = this.hasValidator(field, 'ignoreValidation') || (validator ? validator.test(field) : true);
 		if (validator && field.isVisible()) this.fireEvent('elementValidate', [isValid, field, className, warn]);
@@ -455,7 +457,7 @@ Form.Validator.addAllThese([
 
 			var regex = new RegExp('^' + local + '@' + domain + '$', 'i');
 			*/
-			return Form.Validator.getValidator('IsEmpty').test(element) || (/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]\.?){0,63}[a-z0-9!#$%&'*+/=?^_`{|}~-]@(?:(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\])$/i).test(element.get('value'));
+			return Form.Validator.getValidator('IsEmpty').test(element) || (/^(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]\.?){0,63}[a-z0-9!#$%&'*+\/=?^_`{|}~-]@(?:(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\])$/i).test(element.get('value'));
 		}
 	}],
 
@@ -489,17 +491,16 @@ Form.Validator.addAllThese([
 Element.Properties.validator = {
 
 	set: function(options){
-		var validator = this.retrieve('validator');
-		if (validator) validator.setOptions(options);
-		return this.store('$moo:validator:options', options);
+		this.get('validator').setOptions(options);
 	},
 
-	get: function(options){
-		if (options || !this.retrieve('validator')){
-			if (options || !this.retrieve('$moo:validator:options')) this.set('validator', options);
-			this.store('validator', new Form.Validator(this, this.retrieve('$moo:validator:options')));
+	get: function(){
+		var validator = this.retrieve('validator');
+		if (!validator){
+			validator = new Form.Validator(this);
+			this.store('validator', validator);
 		}
-		return this.retrieve('validator');
+		return validator;
 	}
 
 };
@@ -508,10 +509,12 @@ Element.implement({
 
 	validate: function(options){
 		if (options) this.set('validator', options);
-		return this.get('validator', options).validate();
+		return this.get('validator').validate();
 	}
 
 });
+
+
 //<1.2compat>
 //legacy
 var FormValidator = Form.Validator;

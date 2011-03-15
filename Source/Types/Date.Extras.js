@@ -92,10 +92,10 @@ Date.implement({
 		re: /^(?:tod|tom|yes)/i,
 		handler: function(bits){
 			var d = new Date().clearTime();
-			switch(bits[0]){
+			switch (bits[0]){
 				case 'tom': return d.increment();
 				case 'yes': return d.decrement();
-				default: 	return d;
+				default: return d;
 			}
 		}
 	},

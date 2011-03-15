@@ -54,7 +54,7 @@ Configuration.sets = {
 			'Class/Class.Occlude',
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
 			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation', 'Element/Element.Pin',
-			'Types/URI', 'Types/URI.Relative',
+			'Types/URI', 'Types/URI.Relative', 'Types/Object.Extras_client',
 			'Interface/Keyboard', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort', 'Interface/HtmlTable.Select',
 			'Forms/Form.Validator',
 			'Fx/Fx.Reveal',
@@ -129,16 +129,17 @@ Configuration.source = {
 		files: [
 			'More/More',
 
+			'Class/Chain.Wait',
+			'Class/Class.Binds',
+			'Class/Class.Refactor',
+			'Class/Events.Pseudos',
+
 			'Locale/Locale',
 			'Locale/Locale.en-US.Form.Validator',
 			'Locale/Locale.en-US.Date',
 			'Locale/Locale.fr-FR.Date',
 			'Locale/Locale.en-US.Number',
 
-			'Class/Class.Binds',
-			'Class/Class.Refactor',
-			'Class/Events.Pseudos',
-			'Class/Chain.Wait',
 
 			'Types/Array.Extras',
 			'Types/Object.Extras',
@@ -170,9 +171,9 @@ Configuration.source = {
 			'Element/Element.Event.Pseudos',
 			'Element/Element.Event.Pseudos.Keys',
 			'Element/Element.Delegation',
-      'Element/Element.Pin',
+			'Element/Element.Pin',
 
-      'Forms/Form.Validator',
+			'Forms/Form.Validator',
 
 			'Types/URI',
 			'Types/URI.Relative',
@@ -188,6 +189,47 @@ Configuration.source = {
 
 			'Utilities/Hash.Cookie',
 			'Utilities/Assets'
+		]
+	},
+
+	'more-others': {
+		path: '../Source/',
+		files: [
+			'Drag/Drag',
+			'Drag/Drag.Move',
+			'Drag/Slider',
+			'Drag/Sortables',
+
+			'Element/Element.Position',
+
+			'Forms/Form.Request',
+			'Forms/Form.Request.Append',
+			'Forms/Form.Validator.Extras',
+			'Forms/Form.Validator.Inline',
+			'Forms/OverText',
+
+			'Fx/Fx.Accordion',
+			'Fx/Fx.Elements',
+			'Fx/Fx.Move',
+			'Fx/Fx.Scroll',
+			'Fx/Fx.Slide',
+			'Fx/Fx.SmoothScroll',
+			'Fx/Fx.Sort',
+
+			'Interface/HtmlTable.Zebra',
+			'Interface/Keyboard.Extras',
+			'Interface/Mask',
+			'Interface/Scroller',
+			'Interface/Spinner',
+			'Interface/Tips',
+
+			'Locale/Locale.Set.From',
+
+			'Request/Request.Periodical',
+			'Request/Request.Queue',
+
+			'Utilities/Hash.Cookie',
+			'Utilities/IframeShim'
 		]
 	}
 

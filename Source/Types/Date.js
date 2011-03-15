@@ -258,12 +258,11 @@ Date.implement({
 		return this.format('iso8601');
 	}
 
+}).alias({
+	toJSON: 'toISOString',
+	compare: 'diff',
+	strftime: 'format'
 });
-
-
-Date.alias('toJSON', 'toISOString');
-Date.alias('compare', 'diff');
-Date.alias('strftime', 'format');
 
 var formats = {
 	db: '%Y-%m-%d %H:%M:%S',
@@ -297,12 +296,12 @@ var formatters = {
 };
 
 
-var parsePatterns = [];
-var nativeParse = Date.parse;
+var parsePatterns = [],
+	nativeParse = Date.parse;
 
 var parseWord = function(type, word, num){
-	var ret = -1;
-	var translated = Date.getMsg(type + 's');
+	var ret = -1,
+		translated = Date.getMsg(type + 's');
 	switch (typeOf(word)){
 		case 'object':
 			ret = translated[word.get(type)];
@@ -322,6 +321,9 @@ var parseWord = function(type, word, num){
 
 	return (num) ? translated.indexOf(ret) : ret;
 };
+
+var startCentury = 1900,
+	startYear = 70;
 
 Date.extend({
 
@@ -432,9 +434,6 @@ Date.extend({
 
 });
 
-var startCentury = 1900,
-	startYear = 70;
-
 var regexOf = function(type){
 	return new RegExp('(?:' + Date.getMsg(type).map(function(name){
 		return name.substr(0, 3);
@@ -442,7 +441,7 @@ var regexOf = function(type){
 };
 
 var replacers = function(key){
-	switch(key){
+	switch (key){
 		case 'T':
 			return '%H:%M:%S';
 		case 'x': // iso8601 covers yyyy-mm-dd, so just check if month is first
@@ -512,7 +511,7 @@ var build = function(format){
 
 			if (year != null) handle.call(date, 'y', year); // need to start in the right year
 			if ('d' in bits) handle.call(date, 'd', 1);
-			if ('m' in bits || bits['b'] || bits['B']) handle.call(date, 'm', 1);
+			if ('m' in bits || bits.b || bits.B) handle.call(date, 'm', 1);
 
 			for (var key in bits) handle.call(date, key, bits[key]);
 			return date;
@@ -523,7 +522,7 @@ var build = function(format){
 var handle = function(key, value){
 	if (!value) return this;
 
-	switch(key){
+	switch (key){
 		case 'a': case 'A': return this.set('day', Date.parseDay(value, true));
 		case 'b': case 'B': return this.set('mo', Date.parseMonth(value, true));
 		case 'd': return this.set('date', value);

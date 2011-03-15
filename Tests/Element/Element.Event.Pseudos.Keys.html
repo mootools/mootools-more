@@ -2,26 +2,38 @@
 	Press shift+a and there should appear some text below
 </p>
 
-<div id="result"><h3>Keydown - press shift+a or shift+++a and the event should fire on keydown</h3></div>
+<div id="result"><h3>Keydown - press shift+a and the event should fire on keydown</h3></div>
 <div id="result2"><h3>Keyup - press shift+b and the event should fire on keyup</h3></div>
+<div id="result3"><h3>Keyup - press shift+c+d and the event should fire on keydown</h3></div>
+<div id="result4">
+	<h3>Keyup - press shift+++c and the event should fire on keyup</h3>
+	<p><small>Make sure you use the right <code>+</code> key, keydown/keyup events don't always return the right key in certain keyboard layouts</small></p>
+</div>
 
 <script src="/depender/build?require=More/Element.Event.Pseudos.Keys"></script>
 
 <script>
 
-var result = $('result');
+var result = $('result'),
+	result2 = $('result2'),
+	result3 = $('result3'),
+	result4 = $('result4');
+
 
 document.addEvent('keydown:keys(shift+a)', function(){
 	result.set('html', result.get('html') + 'succes keydown:keys(shift+a)!<br>');
 });
 
-var result2 = $('result2');
 document.addEvent('keyup:keys(shift+b)', function(){
 	result2.set('html', result2.get('html') + 'succes keyup:keys(shift+b)!<br>');
 });
 
-document.addEvent('keydown:keys(shift+++a)', function(e){
-	result.set('html', result.get('html') + 'succes keydown:keys(shift+++a)!<br>');
+document.addEvent('keydown:keys(shift+c+d)', function(e){
+	result3.set('html', result3.get('html') + 'succes keyup:keys(shift+c+d)!<br>');
+});
+
+document.addEvent('keydown:keys(shift+++c)', function(e){
+	result4.set('html', result4.get('html') + 'succes keyup:keys(shift+++c)!<br>');
 });
 
 </script>

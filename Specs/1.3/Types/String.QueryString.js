@@ -15,8 +15,20 @@ License:
 			expect('apple=red&lemon=yellow&='.parseQueryString().apple).toEqual('red');
 		},
 
+		'should parse a query string with array syntax to an array': function(){
+			var apple = 'apple=red&apple=green'.parseQueryString().apple;
+			expect(typeOf(apple)).toEqual('array');
+			expect(apple.length).toEqual(2);
+		},
+
+		'should parse a query string with an object to an object': function(){
+			var obj = 'foo[bar][baz]=red'.parseQueryString();
+			expect(obj.foo.bar.baz).toEqual('red');
+		},
+
 		'should parse a plain string to a key': function(){
-			expect('appleyellow'.parseQueryString()['']).toEqual('appleyellow');
+			expect('appleyellow'.parseQueryString().hasOwnProperty('appleyellow')).toEqual(true);
+			expect('a=1&b'.parseQueryString().hasOwnProperty('b')).toEqual(true);
 		},
 
 		'should parse an encoded querystring to an object': function(){

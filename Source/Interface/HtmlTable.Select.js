@@ -140,7 +140,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			endRow = tmp;
 		}
 
-		for(var i = startRow; i <= endRow; i++) this[method](rows[i], true);
+		for (var i = startRow; i <= endRow; i++) this[method](rows[i], true);
 
 		return this;
 	},
@@ -177,7 +177,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 				};
 				row.store('binders', binders);
 			}
-			(this._selectEnabled) ? row.addEvents(binders) : row.removeEvents(binders);
+			if (this._selectEnabled) row.addEvents(binders);
+			else row.removeEvents(binders);
 		}, this);
 	},
 

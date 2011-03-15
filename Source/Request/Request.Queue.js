@@ -44,8 +44,9 @@ Request.Queue = new Class({
 	},
 
 	initialize: function(options){
+		var requests;
 		if (options){
-			var requests = options.requests;
+			requests = options.requests;
 			delete options.requests;
 		}
 		this.setOptions(options);

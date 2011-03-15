@@ -51,10 +51,9 @@ Drag.Move = new Class({
 			this.container = document.id(this.container.getDocument().body);
 
 		if (this.options.style){
-			if (this.options.modifiers.x == "left" && this.options.modifiers.y == "top"){
-				var parentStyles,
-					parent = element.getOffsetParent();
-				var styles = element.getStyles('left', 'top');
+			if (this.options.modifiers.x == 'left' && this.options.modifiers.y == 'top'){
+				var parent = element.getOffsetParent(),
+					styles = element.getStyles('left', 'top');
 				if (parent && (styles.left == 'auto' || styles.top == 'auto')){
 					element.setPosition(element.getPosition(parent));
 				}
@@ -149,7 +148,7 @@ Drag.Move = new Class({
 
 	getDroppableCoordinates: function(element){
 		var position = element.getCoordinates();
-		if (element.getStyle('position') == 'fixed') {
+		if (element.getStyle('position') == 'fixed'){
 			var scroll = window.getScroll();
 			position.left += scroll.x;
 			position.right += scroll.x;

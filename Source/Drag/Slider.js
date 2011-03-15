@@ -59,8 +59,7 @@ var Slider = new Class({
 		this.previousChange = this.previousEnd = this.step = -1;
 
 		var limit = {},
-			modifiers = {x: false, y: false},
-			offset;
+			modifiers = {x: false, y: false};
 
 		switch (options.mode){
 			case 'vertical':
@@ -110,7 +109,7 @@ var Slider = new Class({
 
 		this.drag = new Drag(knob, dragOptions);
 		this.attach();
-		if (options.initialStep != null) this.set(options.initialStep)
+		if (options.initialStep != null) this.set(options.initialStep);
 	},
 
 	attach: function(){

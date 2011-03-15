@@ -174,6 +174,6 @@ Fx.Scroll.implement({
 
 function isBody(element){
 	return (/^(?:body|html)$/i).test(element.tagName);
-};
+}
 
 })();

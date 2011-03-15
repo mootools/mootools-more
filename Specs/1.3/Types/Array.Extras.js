@@ -87,7 +87,7 @@ describe('Array.reduce', function(){
 			return previousValue + currentValue;
 		}, 10)).toEqual(20);
 
-		expect([[0,1], [2,3], [4,5]].reduce(function(a,b) {
+		expect([[0,1], [2,3], [4,5]].reduce(function(a,b){
 			return a.concat(b);
 		}, [])).toEqual([0, 1, 2, 3, 4, 5]);
 
@@ -109,7 +109,7 @@ describe('Array.reduceRight', function(){
 			return previousValue + currentValue;
 		}, 10)).toEqual(20);
 
-		expect([[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b) {
+		expect([[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b){
 			return a.concat(b);
 		}, [])).toEqual([4, 5, 2, 3, 0, 1]);
 

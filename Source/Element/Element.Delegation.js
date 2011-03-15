@@ -75,7 +75,7 @@ var formObserver = function(eventName){
 				formListeners.push(formListener);
 
 				form.store($delegationKey + eventName + 'originalFn', formEvents)
-					.store($delegationKey + eventName + 'listeners', formListeners)
+					.store($delegationKey + eventName + 'listeners', formListeners);
 			}
 		}
 	};
@@ -93,7 +93,7 @@ var inputObserver = function(eventName){
 			};
 			args[0].target.addEvents(events);
 		}
-	}
+	};
 };
 
 var eventOptions = {
