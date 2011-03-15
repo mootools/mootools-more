@@ -30,7 +30,7 @@ if (window.addEventListener) describe('Element.Event.Pseudos.Keys', function(){
 			callback2 = jasmine.createSpy(), called2 = false,
 			callback3 = jasmine.createSpy(), called3 = false;
 
-		document.body.addEvent('keydown:keys(j,e,shift+i)', function(e) {
+		document.body.addEvent('keydown:keys(j|e|shift+i)', function(e) {
 			if (e.key == 'j') callback();
 			if (e.key == 'e') callback2();
 			if (e.key == 'i' && e.shift) callback3();
