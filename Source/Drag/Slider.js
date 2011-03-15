@@ -80,11 +80,11 @@ var Slider = new Class({
 			snap: 0,
 			limit: limit,
 			modifiers: modifiers,
-			onDrag: this.draggedKnob,
-			onStart: this.draggedKnob,
 			onBeforeStart: (function(){
 				this.isDragging = true;
 			}).bind(this),
+			onStart: this.draggedKnob,
+			onDrag: this.draggedKnob,
 			onCancel: function(){
 				this.isDragging = false;
 			}.bind(this),
@@ -110,7 +110,7 @@ var Slider = new Class({
 
 	detach: function(){
 		this.element.removeEvent('mousedown', this.clickedElement)
-			.element.removeEvent('mousewheel', this.scrolledElement);
+					.removeEvent('mousewheel', this.scrolledElement);
 		this.drag.detach();
 		return this;
 	},
@@ -221,6 +221,10 @@ var Slider = new Class({
 
 	toPosition: function(step){
 		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset;
+	},
+	
+	toElement: function(){
+		return this.knob;
 	}
 
 });
