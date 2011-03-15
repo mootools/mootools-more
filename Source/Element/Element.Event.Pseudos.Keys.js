@@ -26,18 +26,24 @@ var keysStoreKey = '$moo:keys-pressed',
 Event.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
-		keys = [],
+		keyCombos = split.value.split(','),
 		pressed = this.retrieve(keysStoreKey, []);
 
-	keys.append(split.value.replace('++', function(){
-		keys.push('+'); // shift++ and shift+++a
-		return '';
-	}).split('+'));
+	keyCombos = keyCombos.map(function(key) {
+		var arr = [];
+		arr.append(key.replace('++', function(){
+			arr.push('+'); // shift++ and shift+++a
+			return '';
+		}).split('+'));
+		return arr;
+	});
 
 	pressed.include(event.key);
 
-	if (keys.every(function(key){
-		return pressed.contains(key);
+	if (keyCombos.some(function(combo) {
+		return combo.every(function(key){
+			return pressed.contains(key);
+		});
 	})) fn.apply(this, args);
 
 	this.store(keysStoreKey, pressed);
