@@ -26,7 +26,7 @@ var keysStoreKey = '$moo:keys-pressed',
 Event.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
-		keyCombos = split.value.split(','),
+		keyCombos = split.value.split('|'),
 		pressed = this.retrieve(keysStoreKey, []);
 
 	keyCombos = keyCombos.map(function(key) {
