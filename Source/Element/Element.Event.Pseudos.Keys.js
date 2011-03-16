@@ -20,14 +20,19 @@ provides: [Element.Event.Pseudos.Keys]
 (function(){
 
 var keysStoreKey = '$moo:keys-pressed',
-	keysKeyupStoreKey = '$moo:keys-keyup';
-
+	keysKeyupStoreKey = '$moo:keys-keyup',
+	store = function(key, val){
+		this.store ? this.store(key,val) : this[key] = val;
+		return this;
+	},
+	retrieve = function(key, def){
+		return this.retrieve ? this.retrieve(key, def) : (this[key] || def);
+	};
 
 Event.definePseudo('keys', function(split, fn, args){
-
 	var event = args[0],
 		keyCombos = split.value.split('|'),
-		pressed = this.retrieve(keysStoreKey, []);
+		pressed = retrieve.call(this, keysStoreKey, []);
 
 	keyCombos = keyCombos.map(function(key) {
 		var arr = [];
@@ -40,22 +45,22 @@ Event.definePseudo('keys', function(split, fn, args){
 
 	pressed.include(event.key);
 
-	if (keyCombos.some(function(combo) {
+	if (keyCombos.some(function(combo){
 		return combo.every(function(key){
 			return pressed.contains(key);
 		});
 	})) fn.apply(this, args);
 
-	this.store(keysStoreKey, pressed);
+	store.call(this, keysStoreKey, pressed);
 
-	if (!this.retrieve(keysKeyupStoreKey)){
+	if (!retrieve.call(this, keysKeyupStoreKey)){
 		var keyup = function(event){
 			(function(){
-				pressed = this.retrieve(keysStoreKey, []).erase(event.key);
-				this.store(keysStoreKey, pressed);
+				pressed = retrieve.call(this, keysStoreKey, []).erase(event.key);
+				store.call(this, keysStoreKey, pressed);
 			}).delay(0, this); // Fix for IE
 		};
-		this.store(keysKeyupStoreKey, keyup).addEvent('keyup', keyup);
+		store.call(this, keysKeyupStoreKey, keyup).addEvent('keyup', keyup);
 	}
 
 });
