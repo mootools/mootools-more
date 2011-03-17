@@ -97,7 +97,7 @@ var local = Element.Position = {
 	},
 
 	getPosition: function(element, options){
-		var position = {position: 'absolute'};
+		var position = {};
 		options = local.getOptions(element, options);
 		var relativeTo = document.id(options.relativeTo) || document.body;
 
@@ -188,14 +188,14 @@ var local = Element.Position = {
 			case 'left': edgeOffset.x = 0; break;
 			case 'right': edgeOffset.x = -dimensions.x - dimensions.computedRight - dimensions.computedLeft; break;
 			// center
-			default: edgeOffset.x = -(dimensions.totalWidth / 2); break;
+			default: edgeOffset.x = -(Math.round(dimensions.totalWidth / 2)); break;
 		}
 
 		switch(edge.y){
 			case 'top': edgeOffset.y = 0; break;
 			case 'bottom': edgeOffset.y = -dimensions.y - dimensions.computedTop - dimensions.computedBottom; break;
 			// center
-			default: edgeOffset.y = -(dimensions.totalHeight / 2); break;
+			default: edgeOffset.y = -(Math.round(dimensions.totalHeight / 2)); break;
 		}
 
 		position.x += edgeOffset.x;
@@ -222,7 +222,7 @@ Element.implement({
 		if (options && (options.x != null || options.y != null)) {
 			return (original ? original.apply(this, arguments) : this);
 		}
-		var position = this.calculatePosition(options);
+		var position = this.setStyle('position', 'absolute').calculatePosition(options);
 		return (options && options.returnPos) ? position : this.setStyles(position);
 	},
 
