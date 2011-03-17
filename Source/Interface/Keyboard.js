@@ -173,14 +173,14 @@ provides: [Keyboard]
 	Keyboard.parse = function(type, eventType, ignore){
 		if (ignore && ignore.contains(type.toLowerCase())) return type;
 
-		var keys = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
+		var keys = type.toLowerCase().replace(/^(keyup|keydown):?/, function($0, $1){
 			eventType = $1;
 			return '';
-		});
+		}).replace('ctrl', 'control');
 
 		
 
-		return eventType + ':keys(' + keys + ')';
+		return eventType + (keys && ':keys(' + keys + ')');
 	};
 
 	Keyboard.each = function(keyboard, fn){
