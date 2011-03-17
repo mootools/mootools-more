@@ -64,8 +64,11 @@ var formObserver = function(eventName){
 			var event = args[0],
 				forms = this.retrieve($delegationKey + 'forms', []),
 				target = event.target,
-				form = (target.get('tag') == 'form') ? target : event.target.getParent('form'),
-				formEvents = form.retrieve($delegationKey + 'originalFn', []),
+				form = (target.get('tag') == 'form') ? target : event.target.getParent('form');
+				
+			if (!form) return;
+				
+			var formEvents = form.retrieve($delegationKey + 'originalFn', []),
 				formListeners = form.retrieve($delegationKey + 'listeners', []),
 				self = this;
 
