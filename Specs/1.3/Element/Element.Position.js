@@ -42,7 +42,6 @@ describe("Element.Position", function(){
 					var position = element.position(options);
 					expect(position.left).not.toEqual(null);
 					expect(position.top).not.toEqual(null);
-					expect(position.position).not.toEqual(null);
 				});
 
 			});
@@ -166,6 +165,12 @@ describe("Element.Position", function(){
 						expect(position.left).toEqual(70);
 					});
 
+				});
+
+				it('should return the correct position of an element not positioned with css', function(){
+					var foo = new Element('div').adopt(new Element('div', {styles: {width: 10}})).inject(document.body);
+					expect(element.position({returnPos: true, relativeTo: document.body}).left).not.toEqual(0);
+					foo.destroy();
 				});
 
 			});
