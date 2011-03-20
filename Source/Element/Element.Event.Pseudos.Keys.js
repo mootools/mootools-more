@@ -22,7 +22,7 @@ provides: [Element.Event.Pseudos.Keys]
 var keysStoreKey = '$moo:keys-pressed',
 	keysKeyupStoreKey = '$moo:keys-keyup',
 	store = function(key, val){
-		this.store ? this.store(key,val) : this[key] = val;
+		this.store ? this.store(key, val) : this[key] = val;
 		return this;
 	},
 	retrieve = function(key, def){
