@@ -16,11 +16,16 @@ Pseudo: keys {#Pseudos:keys}
 ----------------------------
 
 The event will only fire when a key combination is pressed. This only works with the `keydown` and `keyup` events.
+The keys should be separated by a `+` sign. Multiple key combinations can be separated by a `|`.
 
 ### Example
 
 	myElement.addEvent('keydown:keys(shift+a+b)', function(){
 		alert('You pressed the following keys: shift, a and b');
+	});
+
+	myElement.addEvent('keydown:keys(shift+c|shift+d)', function(){
+		alert('You pressed shift+c or shift+d');
 	});
 
 
