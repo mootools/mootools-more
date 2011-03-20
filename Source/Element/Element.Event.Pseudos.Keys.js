@@ -36,7 +36,7 @@ Event.definePseudo('keys', function(split, fn, args){
 
 	keyCombos = keyCombos.map(function(key) {
 		var arr = [];
-		arr.append(key.replace('++', function(){
+		arr.append(key.replace(/ctrl/g, 'control').replace('++', function(){
 			arr.push('+'); // shift++ and shift+++a
 			return '';
 		}).split('+'));

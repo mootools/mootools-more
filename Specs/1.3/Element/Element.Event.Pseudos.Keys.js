@@ -4,11 +4,15 @@ if (window.addEventListener) describe('Element.Event.Pseudos.Keys', function(){
 
 	it('keys: should fire events for keyboard key combinations', function(){
 
-		var callback = jasmine.createSpy(), called = false,
-			callback2 = jasmine.createSpy(), called2 = false;
+		var callback = jasmine.createSpy('shift+a'),
+			callback2 = jasmine.createSpy('shift++'),
+			callback3 = jasmine.createSpy('ctrl+c'),
+			callback4 = jasmine.createSpy('control+c');
 
 		document.body.addEvent('keydown:keys(shift+a)', callback);
 		document.body.addEvent('keydown:keys(shift++)', callback2);
+		document.body.addEvent('keydown:keys(ctrl+c)', callback3);
+		document.body.addEvent('keydown:keys(control+c)', callback4);
 
 		// shift+a
 		simulateEvent('type', ['[shift]a[shift-up]', document.body], function(){
@@ -22,13 +26,20 @@ if (window.addEventListener) describe('Element.Event.Pseudos.Keys', function(){
 			document.body.eliminate('$moo:keys-pressed');
 		});
 
+		// ctrl+c and control+c
+		simulateEvent('type', ['[ctrl]c[ctrl-up]', document.body], function(){
+			expect(callback3).toHaveBeenCalled();
+			expect(callback4).toHaveBeenCalled();
+			document.body.eliminate('$moo:keys-pressed');
+		});
+
 	});
 	
 	it('keys: should fire events for comma-separated combinations', function(){
 
-		var callback = jasmine.createSpy(), called = false,
-			callback2 = jasmine.createSpy(), called2 = false,
-			callback3 = jasmine.createSpy(), called3 = false;
+		var callback = jasmine.createSpy(),
+			callback2 = jasmine.createSpy(),
+			callback3 = jasmine.createSpy();
 
 		document.body.addEvent('keydown:keys(j|e|shift+i)', function(e) {
 			if (e.key == 'j') callback();

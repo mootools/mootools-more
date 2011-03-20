@@ -166,19 +166,13 @@ provides: [Keyboard]
 
 	});
 
-	var parsed = {};
-	var modifiers = ['shift', 'control', 'alt', 'meta'];
-	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
-
 	Keyboard.parse = function(type, eventType, ignore){
 		if (ignore && ignore.contains(type.toLowerCase())) return type;
 
 		var keys = type.toLowerCase().replace(/^(keyup|keydown):?/, function($0, $1){
 			eventType = $1;
 			return '';
-		}).replace('ctrl', 'control');
-
-		
+		});
 
 		return eventType + (keys && ':keys(' + keys + ')');
 	};
