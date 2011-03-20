@@ -12,6 +12,7 @@ describe("Element.Position", function(){
 		options;
 
 		beforeEach(function(){
+			window.scroll(0,0); //calculations are based off of zero scroll unless otherwise set
 			options = {};
 			element = new Element('div').inject(document.body);
 		});
@@ -121,7 +122,7 @@ describe("Element.Position", function(){
 							placements.each(function(placement){
 
 								it(testVerbage(placement, edge, blockPosition, where), function(){
-									setup(position, element, options);
+									setup(blockPosition, element, options);
 									element.inject(container, where);
 									options.position = placement;
 									options.relFixedPosition = blockPosition == 'fixed';
