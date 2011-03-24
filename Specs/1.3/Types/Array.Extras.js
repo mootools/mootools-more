@@ -118,7 +118,7 @@ describe('Array.reduceRight', function(){
 });
 
 describe("Array.detect", function() {
-	
+
 	it("should return null if nothing is found", function() {
 		expect([1,2,3].detect(function(){ return false; })).toBeNull();
 	});
@@ -126,7 +126,29 @@ describe("Array.detect", function() {
 	it("should return the first matching result", function() {
 		expect([1,2,3].detect(function(i){ return i > 1; })).toEqual(2);
 	});
-	
-	
+
 });	
 
+describe("select", function() {
+
+	it("should return empty array if nothing was matched", function() {
+		expect([1,2,3].select(function(){ return false; })).toEqual([]);
+	});
+
+	it("should return the values that match", function() {
+		expect([1,2,3].select(function(i){ return i > 1; })).toEqual([2,3]);
+	});
+
+});
+
+describe("reject", function() {
+
+	it("should return an empty array if everything was matched", function() {
+		expect([1,2,3].reject(function(){ return true; })).toEqual([]);
+	});
+
+	it("should return the elements that where not matched", function() {
+		expect([1,2,3].reject(function(i){ return i > 2; })).toEqual([1,2]);
+	});
+
+});
