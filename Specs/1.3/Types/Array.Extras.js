@@ -117,3 +117,16 @@ describe('Array.reduceRight', function(){
 
 });
 
+describe("Array.detect", function() {
+	
+	it("should return null if nothing is found", function() {
+		expect([1,2,3].detect(function(){ return false; })).toBeNull();
+	});
+
+	it("should return the first matching result", function() {
+		expect([1,2,3].detect(function(i){ return i > 1; })).toEqual(2);
+	});
+	
+	
+});	
+

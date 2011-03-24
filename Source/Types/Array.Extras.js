@@ -10,12 +10,12 @@ description: Extends the Array native object to include useful methods to work w
 license: MIT-style license
 
 authors:
-  - Christoph Pojer
-  - Sebastian Markbåge
+	- Christoph Pojer
+	- Sebastian Markbåge
 
 requires:
-  - Core/Array
-  - MooTools.More
+	- Core/Array
+	- MooTools.More
 
 provides: [Array.Extras]
 
@@ -72,6 +72,15 @@ Array.implement({
 			if (i in this) value = value === nil ? this[i] : fn.call(null, value, this[i], i, this);
 		}
 		return value;
+	},
+
+	detect: function(fn, bind) {
+		for (var i = 0, l = this.length; i < l; i++){
+			if (i in this) {
+				if (fn.call(bind, this[i], i, this)) { return this[i]; }
+			}
+		}
+		return null;
 	}
 
 });
