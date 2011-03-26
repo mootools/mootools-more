@@ -129,18 +129,6 @@ describe("Array.detect", function() {
 
 });	
 
-describe("select", function() {
-
-	it("should return empty array if nothing was matched", function() {
-		expect([1,2,3].select(function(){ return false; })).toEqual([]);
-	});
-
-	it("should return the values that match", function() {
-		expect([1,2,3].select(function(i){ return i > 1; })).toEqual([2,3]);
-	});
-
-});
-
 describe("reject", function() {
 
 	it("should return an empty array if everything was matched", function() {

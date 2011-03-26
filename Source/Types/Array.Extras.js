@@ -83,10 +83,6 @@ Array.implement({
 		return null;
 	},
 
-	select: function(fn, bind) {
-		return this.filter(fn, bind);
-	},
-
 	reject: function(fn, bind) {
 		return this.filter(function(i){ return !fn.call(bind, i); });
 	}
