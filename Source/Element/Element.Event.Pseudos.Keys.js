@@ -63,7 +63,7 @@ Event.definePseudo('keys', function(split, fn, args){
 			(function(){
 				pressed = retrieve.call(this, keysStoreKey, []).erase(event.key);
 				modifiers.each(function(mod) {
-					if(event[mod]) pressed.erase(mod);
+					if(!event[mod]) pressed.erase(mod);
 				});
 				store.call(this, keysStoreKey, pressed);
 			}).delay(0, this); // Fix for IE
