@@ -20,9 +20,9 @@ describe('Class.Refactor', function(){
 			return 'altered';
 		}
 	});
-	Test.static_method = function(){ return 'static';};
+	Test.static_method = function(){return 'static';};
 	Class.refactor(Test, {
-		options: { foo: 'rab' },
+		options: {foo: 'rab'},
 		altered: function(){
 			return 'this is ' + this.previous();
 		}
@@ -76,6 +76,28 @@ describe('Class.Refactor', function(){
 
 	it('should return the original origin', function(){
 		expect(new Test3().origin()).toEqual('refactored origin original origin');
+	});
+
+	var Test4 = new Class({
+		untouched: function(){
+			return 'untouched';
+		}
+	});
+	var RefactoredTest4 = Class.refactor(Test4, {
+		foo: function(){
+			return this.previous();
+		}
+	});
+
+	it('should return the class refactored class as well', function(){
+		expect(Test4).toEqual(RefactoredTest4);
+	});
+
+	it('should have a previous method for each refactored method', function(){
+		var test = new Test4();
+		expect(test.foo).not.toThrow();
+		expect(test.foo()).toBe(undefined);
+		expect(test.untouched()).toEqual('untouched');
 	});
 
 });
