@@ -54,7 +54,9 @@ Event.definePseudo('keys', function(split, fn, args){
 		});
 	})){
 		fn.apply(this, args);
-		pressed = [];
+		(function(){
+			pressed.empty();
+		}).delay(0);
 	}
 
 	store.call(this, keysStoreKey, pressed);
