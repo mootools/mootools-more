@@ -79,6 +79,7 @@ Object.append(Event.Keys, {
 	'home': 36,
 	'numlock': 144,
 	'scrolllock': 145,
+	'meta': (Browser.Platform.mac && Browser.firefox) ? 224 :  91,
 	';': 186,
 	'=': 187,
 	',': 188,
