@@ -75,12 +75,14 @@ Array.implement({
 	},
 
 	detect: function(fn, bind) {
-		for (var i = 0, l = this.length; i < l; i++){
-			if (i in this) {
-				if (fn.call(bind, this[i], i, this)) { return this[i]; }
+		var result = null;
+		this.some(function(value) {
+			if (fn.apply(bind, arguments)) {
+				result = value;
+				return true;
 			}
-		}
-		return null;
+		});
+		return result;
 	},
 
 	reject: function(fn, bind) {
