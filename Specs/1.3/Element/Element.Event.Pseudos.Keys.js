@@ -35,7 +35,7 @@ if (window.addEventListener) describe('Element.Event.Pseudos.Keys', function(){
 
 	});
 	
-	it('keys: should fire events for comma-separated combinations', function(){
+	it('keys: should fire events for pipe-separated combinations', function(){
 
 		var callback = jasmine.createSpy(),
 			callback2 = jasmine.createSpy(),
