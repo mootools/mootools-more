@@ -55,9 +55,9 @@ if (!window.Form) window.Form = {};
 		initialize: function(form, target, options){
 			this.element = document.id(form);
 			if (this.occlude()) return this.occluded;
-			this.setOptions(options);
-			this.setTarget(target);
-			this.attach();
+			this.setOptions(options)
+				.setTarget(target)
+				.attach();
 		},
 
 		setTarget: function(target){
@@ -77,6 +77,7 @@ if (!window.Form) window.Form = {};
 		},
 
 		makeRequest: function(){
+			var self = this;
 			this.request = new Request.HTML(Object.merge({
 					update: this.target,
 					emulation: false,
@@ -85,17 +86,17 @@ if (!window.Form) window.Form = {};
 			}, this.options.requestOptions)).addEvents({
 				success: function(tree, elements, html, javascript){
 					['complete', 'success'].each(function(evt){
-						this.fireEvent(evt, [this.target, tree, elements, html, javascript]);
-					}, this);
-				}.bind(this),
+						self.fireEvent(evt, [self.target, tree, elements, html, javascript]);
+					});
+				},
 				failure: function(){
-					this.fireEvent('complete', arguments).fireEvent('failure', arguments);
-				}.bind(this),
+					self.fireEvent('complete', arguments).fireEvent('failure', arguments);
+				},
 				exception: function(){
-					this.fireEvent('failure', arguments);
-				}.bind(this)
+					self.fireEvent('failure', arguments);
+				}
 			});
-			this.attachReset();
+			return this.attachReset();
 		},
 
 		attachReset: function(){
@@ -110,31 +111,28 @@ if (!window.Form) window.Form = {};
 		},
 
 		attach: function(attach){
-			if (attach == null) attach = true;
-			var method = attach ? 'addEvent' : 'removeEvent';
-
+			var method = (attach != false) ? 'addEvent' : 'removeEvent';
 			this.element[method]('click:relay(button, input[type=submit])', this.saveClickedButton.bind(this));
 
 			var fv = this.element.retrieve('validator');
 			if (fv) fv[method]('onFormValidate', this.onFormValidate);
 			else this.element[method]('submit', this.onSubmit);
+
+			return this;
 		},
 
 		detach: function(){
-			this.attach(false);
-			return this;
+			return this.attach(false);
 		},
 
 		//public method
 		enable: function(){
-			this.attach();
-			return this;
+			return this.attach();
 		},
 
 		//public method
 		disable: function(){
-			this.detach();
-			return this;
+			return this.detach();
 		},
 
 		onFormValidate: function(valid, form, event){
@@ -161,10 +159,11 @@ if (!window.Form) window.Form = {};
 		},
 
 		saveClickedButton: function(event, target){
-			if (!this.options.sendButtonClicked || !target.get('name')) return;
-			this.options.extraData[target.get('name')] = target.get('value') || true;
+			var targetName = target.get('name');
+			if (!targetName || !this.options.sendButtonClicked) return;
+			this.options.extraData[targetName] = target.get('value') || true;
 			this.clickedCleaner = function(){
-				delete this.options.extraData[target.get('name')];
+				delete this.options.extraData[targetName];
 				this.clickedCleaner = function(){};
 			}.bind(this);
 		},
