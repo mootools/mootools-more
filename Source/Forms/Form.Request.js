@@ -62,7 +62,7 @@ if (!window.Form) window.Form = {};
 
 		setTarget: function(target){
 			this.target = document.id(target);
-			if (!this.request) {
+			if (!this.request){
 				this.makeRequest();
 			} else {
 				this.request.setOptions({
@@ -99,14 +99,14 @@ if (!window.Form) window.Form = {};
 		},
 
 		attachReset: function(){
-			if (this.options.resetForm){
-				this.request.addEvent('success', function(){
-					Function.attempt(function(){
-						this.element.reset();
-					}.bind(this));
-					if (window.OverText) OverText.update();
+			if (!this.options.resetForm) return this;
+			this.request.addEvent('success', function(){
+				Function.attempt(function(){
+					this.element.reset();
 				}.bind(this));
-			}
+				if (window.OverText) OverText.update();
+			}.bind(this));
+			return this;
 		},
 
 		attach: function(attach){
@@ -189,20 +189,16 @@ if (!window.Form) window.Form = {};
 
 	});
 
-	Element.implement({
-
-		formUpdate: function(update, options){
-			var fq = this.retrieve('form.request');
-			if (!fq) {
-				fq = new Form.Request(this, target, options);
-			} else {
-				if (update) fq.setTarget(document.id(update));
-				if (options) fq.setOptions(options).makeRequest();
-			}
-			fq.send();
-			return this;
+	Element.implement('formUpdate', function(update, options){
+		var fq = this.retrieve('form.request');
+		if (!fq) {
+			fq = new Form.Request(this, update, options);
+		} else {
+			if (update) fq.setTarget(update);
+			if (options) fq.setOptions(options).makeRequest();
 		}
-
+		fq.send();
+		return this;
 	});
 
 })();
