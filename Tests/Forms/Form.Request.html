@@ -17,6 +17,12 @@
 	</div>
 </div>
 
+<div style="position: relative; margin-top: 10px">
+	<div id="update2" style="padding: 10px; width: 200px; border: 1px solid black; height: 100px; overflow:hidden;">
+		<a id="update2link">If you click this link, the first form should submit and update this box.</a>
+	</div>
+</div>
+
 <script src="/depender/build?require=More/Form.Request,More/Spinner"></script>
 <script type="text/javascript">
 	new Form.Request($('test'), $('update'), {
@@ -29,5 +35,15 @@
 			spinnerTarget: $('update'),
 			url: '/ajax_html_echo/'
 		}
+	});
+	$('update2link').addEvent('click', function(){
+		$('test').formUpdate('update2', {
+			extraData: {
+				html: 'Success!'
+			},
+			requestOptions: {
+				spinnerTarget: $('update2')
+			}
+		});
 	});
 </script>

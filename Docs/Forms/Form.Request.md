@@ -42,6 +42,23 @@ Form.Request and Form.Validator {#Form-Request:Form-Validator}
 
 *Form.Request* integrates with [Form.Validator][] to prevent the ajax being sent if the validation fails. It retrieves the *Form.Validator* instance from the form, so all that is required is that you instantiate the *Form.Validator* before you instantiate the instance of *Fudpate*. If the instance of *Form.Validator* has the *stopOnFailure* option set to *true* (the default) then *Form.Request* will not send the ajax request if the validator fails.
 
+Form.Request Method: setTarget {#Form-Request:setTarget}
+--------------------------------------
+
+Changes the target that the instance will update with the Request response.
+
+### Syntax
+
+	myFormRequest.setTarget(newTarget);
+
+### Arguments
+
+1. newTarget - (*mixed*) An Element or the string id of an Element to update with the response.
+
+### Returns
+
+* (*object*) - This instance of [Form.Request][]
+
 Form.Request Method: send {#Form-Request:send}
 --------------------------------------
 
@@ -81,6 +98,39 @@ Attaches the Form.Request to the form (enabling the ajax). Note that this is don
 
 * (*object*) - This instance of [Form.Request][]
 
+Type: Element {#Element}
+==========================
+
+Extends the [Element][] Type with a reference to its [Form.Request][] instance and a method to create one.
+
+Element Method: formRequest {#Element:formRequest}
+-------------------------------------
+
+Creates a new instance of [Form.Request][] and calls its *send* method.
+
+### Syntax
+
+	$(element).formRequest(update, options);
+
+### Arguments
+
+* update - (*mixed*) An Element or the string id of an Element to update with the response.
+* options - (*object*) a key/value set of options. See [Form.Request:options][].
+
+### Returns
+
+* (*element*) This Element.
+
+### Example
+
+	$(element).formRequest($('myDiv'), { requestOptions: {useSpinner: false } });
+
+Element property: form.request {#Element:form.request}
+------------------------------------------------
+
+### Syntax
+
+	myForm.retrieve('form.request'); //the instance of Form.Request for the element
 
 [Chain]: /core/Class/Class.Extras#Chain
 [Events]: /core/Class/Class.Extras#Events
@@ -88,3 +138,4 @@ Attaches the Form.Request to the form (enabling the ajax). Note that this is don
 [Class.Occlude]: /more/Class/Class.Occlude
 [Form.Request]: #Form-Request
 [Form.Validator]: /more/Forms/Form.Validator#Form-Validator
+[Element]: /core/Type/Element

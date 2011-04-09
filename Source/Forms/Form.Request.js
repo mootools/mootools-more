@@ -52,21 +52,24 @@ if (!window.Form) window.Form = {};
 
 		property: 'form.request',
 
-		initialize: function(form, update, options){
+		initialize: function(form, target, options){
 			this.element = document.id(form);
 			if (this.occlude()) return this.occluded;
-			this.update = document.id(update);
 			this.setOptions(options);
-			this.makeRequest();
-			if (this.options.resetForm){
-				this.request.addEvent('success', function(){
-					Function.attempt(function(){
-						this.element.reset();
-					}.bind(this));
-					if (window.OverText) OverText.update();
-				}.bind(this));
-			}
+			this.setTarget(target);
 			this.attach();
+		},
+
+		setTarget: function(target){
+			this.target = document.id(target);
+			if (!this.request) {
+				this.makeRequest();
+			} else {
+				this.request.setOptions({
+					update: this.target
+				});
+			}
+			return this;
 		},
 
 		toElement: function(){
@@ -75,14 +78,14 @@ if (!window.Form) window.Form = {};
 
 		makeRequest: function(){
 			this.request = new Request.HTML(Object.merge({
-					update: this.update,
+					update: this.target,
 					emulation: false,
 					spinnerTarget: this.element,
 					method: this.element.get('method') || 'post'
 			}, this.options.requestOptions)).addEvents({
 				success: function(tree, elements, html, javascript){
 					['complete', 'success'].each(function(evt){
-						this.fireEvent(evt, [this.update, tree, elements, html, javascript]);
+						this.fireEvent(evt, [this.target, tree, elements, html, javascript]);
 					}, this);
 				}.bind(this),
 				failure: function(){
@@ -92,6 +95,18 @@ if (!window.Form) window.Form = {};
 					this.fireEvent('failure', arguments);
 				}.bind(this)
 			});
+			this.attachReset();
+		},
+
+		attachReset: function(){
+			if (this.options.resetForm){
+				this.request.addEvent('success', function(){
+					Function.attempt(function(){
+						this.element.reset();
+					}.bind(this));
+					if (window.OverText) OverText.update();
+				}.bind(this));
+			}
 		},
 
 		attach: function(attach){
@@ -174,40 +189,17 @@ if (!window.Form) window.Form = {};
 
 	});
 
-	Element.Properties.formRequest = {
-
-		set: function(){
-			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString}),
-				update = opt.update || opt.updateId,
-				updater = this.retrieve('form.request');
-			if (update){
-				if (updater) updater.update = document.id(update);
-				this.store('form.request:update', update);
-			}
-			if (opt.options){
-				if (updater) updater.setOptions(opt.options);
-				this.store('form.request:options', opt.options);
-			}
-			return this;
-		},
-
-		get: function(){
-			var opt = Array.link(arguments, {options: Type.isObject, update: Type.isElement, updateId: Type.isString}),
-				update = opt.update || opt.updateId;
-			if (opt.options || update || !this.retrieve('form.request')){
-				if (opt.options || !this.retrieve('form.request:options')) this.set('form.request', opt.options);
-				if (update) this.set('form.request', update);
-				this.store('form.request', new Form.Request(this, this.retrieve('form.request:update'), this.retrieve('form.request:options')));
-			}
-			return this.retrieve('form.request');
-		}
-
-	};
-
 	Element.implement({
 
 		formUpdate: function(update, options){
-			this.get('formRequest', update, options).send();
+			var fq = this.retrieve('form.request');
+			if (!fq) {
+				fq = new Form.Request(this, target, options);
+			} else {
+				if (update) fq.setTarget(document.id(update));
+				if (options) fq.setOptions(options).makeRequest();
+			}
+			fq.send();
 			return this;
 		}
 
