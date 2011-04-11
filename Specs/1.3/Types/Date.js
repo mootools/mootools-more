@@ -432,7 +432,8 @@ describe('Date', function(){
 			expect(d.format('%p')).toEqual('AM');
 		});
 		it('should return the Unix Timestamp', function(){
-			expect(d.format('%s')).toEqual('879984123');
+			var d = new Date(Date.UTC(2002, 0, 7, 1, 1, 1));
+			expect(d.format('%s')).toEqual('1010365261');
 		});
 		it('should return the seconds as two digits', function(){
 			expect(d.format('%S')).toEqual('03');
