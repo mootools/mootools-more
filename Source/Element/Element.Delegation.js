@@ -37,6 +37,12 @@ var check = function(split, target, event){
 	return Slick.match(target, split.value) && (!condition || condition.call(target, event));
 };
 
+var bubbleUp = function(split, event, fn){
+	for (var target = event.target; target && target != this; target = document.id(target.parentNode)){
+		if (target && check(split, target, event)) return fn.call(target, event, target);
+	}
+};
+
 var formObserver = function(eventName){
 
 	var $delegationKey = '$delegation:';
@@ -58,16 +64,20 @@ var formObserver = function(eventName){
 			var event = args[0],
 				forms = this.retrieve($delegationKey + 'forms', []),
 				target = event.target,
-				form = (target.get('tag') == 'form') ? target : event.target.getParent('form'),
-				formEvents = form.retrieve($delegationKey + 'originalFn', []),
-				formListeners = form.retrieve($delegationKey + 'listeners', []);
+				form = (target.get('tag') == 'form') ? target : event.target.getParent('form');
+				
+			if (!form) return;
+				
+			var formEvents = form.retrieve($delegationKey + 'originalFn', []),
+				formListeners = form.retrieve($delegationKey + 'listeners', []),
+				self = this;
 
 			forms.include(form);
 			this.store($delegationKey + 'forms', forms);
 
 			if (!formEvents.contains(fn)){
 				var formListener = function(event){
-					if (check(split, this, event)) fn.call(this, event);
+					bubbleUp.call(self, split, event, fn);
 				};
 				form.addEvent(eventName, formListener);
 
@@ -87,9 +97,9 @@ var inputObserver = function(eventName){
 		listener: function(split, fn, args){
 			var events = {blur: function(){
 				this.removeEvents(events);
-			}};
+			}}, self = this;
 			events[eventName] = function(event){
-				if (check(split, this, event)) fn.call(this, event);
+				bubbleUp.call(self, split, event, fn);
 			};
 			args[0].target.addEvents(events);
 		}
@@ -120,21 +130,11 @@ if (!eventListenerSupport) Object.append(eventOptions, {
 	select: inputObserver('select')
 });
 
-
 Event.definePseudo('relay', {
-	listener: function(split, fn, args, monitor, options){
-		var event = args[0];
-
-		for (var target = event.target; target && target != this; target = target.parentNode){
-			var finalTarget = document.id(target);
-			if (check(split, finalTarget, event)){
-				if (finalTarget) fn.call(finalTarget, event, finalTarget);
-				return;
-			}
-		}
+	listener: function(split, fn, args){
+		bubbleUp.call(this, split, args[0], fn);
 	},
 	options: eventOptions
 });
 
 })();
-

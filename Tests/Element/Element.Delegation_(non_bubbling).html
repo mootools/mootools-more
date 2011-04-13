@@ -12,25 +12,30 @@
 
 	<p>Clicking one of the buttons should fire the submit or reset events. For the <strong>submit</strong> event: Try tabbing to the buttons and press enter, or tabbing to the element and press enter.</p>
 
-	<form action="#foo" id="myForm">
+	<div id="formWrapper">
 
-		<input type="text" value="some text" />
-		<input type="submit" value="Submit" />
-		<input type="reset" value="reset" />
+		<form action="#foo" id="myForm">
 
-	</form>
+			<input type="text" value="some text" />
+			<input type="submit" value="Submit" />
+			<input type="reset" value="reset" />
 
-	<p>This form has another ID, so only the reset button should delegate</p>
+		</form>
 
-	<form action="#foo" id="myForm2">
+		<p>This form has another ID, so only the reset button should delegate</p>
 
-		<input type="text" value="some text" />
-		<input type="submit" value="Submit" />
-		<input type="reset" value="reset" />
+		<form action="#foo" id="myForm2">
 
-	</form>
+			<input type="text" value="some text" />
+			<input type="submit" value="Submit" />
+			<input type="reset" value="reset" />
 
-	<p>Change the text. When you blur the input field, the change event should fire</p>
+		</form>
+
+	</div>
+
+
+	<p>Change the text. When you blur the input field, the change event should fire for both the form and the input fields</p>
 
 	<form action="#foo" id="myForm3">
 		<input type="text" value="some text" class="someClass" /><br />
@@ -65,27 +70,48 @@
 
 var output = $('result');
 
+var log = function(msg){
+	output.innerHTML += msg + '<br />';
+};
+
 var events = {
+
 	'focus:relay(input#myInput,textarea)': function(){
-		output.appendText('\nFocus');
+		log('Focus on input#myInput,textarea');
 	},
+
 	'blur:relay(input#myInput,textarea)': function(){
-		output.appendText('\nBlurred');
+		log('Blurred on input#myInput,textarea');
 	},
+
 	'submit:relay(form#myForm)': function(event){
 		event.stop();
-		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
+		log('Succesfully delegated and stopped the ' + event.type + ' event on form#myForm');
 	},
+	'submit:relay(#formWrapper)': function(event){
+		event.stop();
+		log('Succesfully delegated and stopped the ' + event.type + ' event on #formWrapper');		
+	},
+
 	'reset:relay(form)': function(event){
 		event.stop();
-		output.appendText('\nSuccesfully delegated and stopped the ' + event.type + ' event');
+		log('Succesfully delegated and stopped the ' + event.type + ' event on form');
 	},
+
 	'change:relay(input.someClass,select,input[type=checkbox],input[type=radio])': function(event){
-		output.appendText('\nSuccesfully delegated the ' + event.type + ' event');
+		log('Succesfully delegated the ' + event.type + ' event on the input');
 	},
+	'change:relay(form)': function(event){
+		log('Succesfully delegated the ' + event.type + ' event on the form');
+	},
+
 	'select:relay(#myForm4 input)': function(){
-		output.appendText('\nSuccesfully delegated the ' + event.type + ' event');
+		log('Succesfully delegated the ' + event.type + ' event on #myForm input');
+	},
+	'select:relay(#myForm4)': function(){
+		log('Succesfully delegated the ' + event.type + ' event on #myForm4');
 	}
+
 };
 
 var container = $('myContainer').addEvents(events);
@@ -96,9 +122,5 @@ $('removeEvents').addEvent('click', function(){
 $('addEvents').addEvent('click', function(){
 	container.addEvents(events);
 });
-
-$$('select').addEvent('select', function(event){
-	console.log(event);
-})
 
 </script>
