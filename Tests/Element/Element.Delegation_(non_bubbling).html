@@ -105,10 +105,10 @@ var events = {
 		log('Succesfully delegated the ' + event.type + ' event on the form');
 	},
 
-	'select:relay(#myForm4 input)': function(){
+	'select:relay(#myForm4 input)': function(event){
 		log('Succesfully delegated the ' + event.type + ' event on #myForm input');
 	},
-	'select:relay(#myForm4)': function(){
+	'select:relay(#myForm4)': function(event){
 		log('Succesfully delegated the ' + event.type + ' event on #myForm4');
 	}
 
