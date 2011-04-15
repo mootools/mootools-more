@@ -28,23 +28,23 @@ var Asset = {
 
 		var script = new Element('script', {src: source, type: 'text/javascript'}),
 			doc = properties.document || document,
-			loaded = 0,
-			loadEvent = properties.onload || properties.onLoad;
-
-		var load = loadEvent ? function(){ // make sure we only call the event once
-			if (++loaded == 1) loadEvent.call(this);
-		} : function(){};
+			load = properties.onload || properties.onLoad;
 
 		delete properties.onload;
 		delete properties.onLoad;
 		delete properties.document;
 
-		return script.addEvents({
-			load: load,
-			readystatechange: function(){
-				if (['loaded', 'complete'].contains(this.readyState)) load.call(this);
+		if (load){
+			if (typeof script.onreadystatechange != 'undefined'){
+				script.addEvent('readystatechange', function(){
+					if (['loaded', 'complete'].contains(this.readyState)) load.call(this);
+				});
+			} else {
+				script.addEvent('load', load);
 			}
-		}).set(properties).inject(doc.head);
+		}
+
+		return script.set(properties).inject(doc.head);
 	},
 
 	css: function(source, properties){
