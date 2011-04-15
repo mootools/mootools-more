@@ -22,7 +22,7 @@ provides: [Element.Event.Pseudos.Keys]
 var keysStoreKey = '$moo:keys-pressed',
 	keysKeyupStoreKey = '$moo:keys-keyup',
 	keysParsed = {},
-	parseKeys = function(text) {
+	parseKeys = function(text){
 		return text.replace(/ctrl/g, 'control').split('|').map(function(key) {
 			var arr = [];
 			arr.append(key.replace('++', function(){
