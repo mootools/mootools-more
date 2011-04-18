@@ -57,7 +57,7 @@ Configuration.sets = {
 			'Types/URI', 'Types/URI.Relative', 'Types/Object.Extras_client',
 			'Interface/Keyboard', 'Interface/Keyboard.Extras', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort', 'Interface/HtmlTable.Select',
 			'Forms/Form.Validator',
-			'Fx/Fx.Reveal',
+			'Fx/Fx.Reveal', 'Fx/Fx.Slide',
 			'Request/Request.JSONP',
 			'Utilities/Color', 'Utilities/Group', 'Utilities/Table'
 		]
@@ -188,6 +188,7 @@ Configuration.source = {
 			'Interface/HtmlTable.Select',
 
 			'Fx/Fx.Reveal',
+			'Fx/Fx.Slide',
 
 			'Request/Request.JSONP',
 

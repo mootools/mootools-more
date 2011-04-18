@@ -57,7 +57,7 @@ Fx.Slide = new Class({
 
 		this.addEvent('complete', function(){
 			this.open = (wrapper['offset' + this.layout.capitalize()] != 0);
-			if (this.open && options.resetHeight) wrapper.setStyle('height', '');
+			if (this.open && this.options.resetHeight) wrapper.setStyle('height', '');
 		}, true);
 	},
 
