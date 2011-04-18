@@ -1,9 +1,9 @@
 /*
-Script: Class.Refactor.js
-	Specs for Class.Refactor.js
-
-License:
-	MIT-style license.
+---
+name: Class.Refactor Tests
+requires: [More/Class.Refactor]
+provides: [Class.Refactor.Tests]
+...
 */
 
 describe('Class.Refactor', function(){

@@ -1,11 +1,10 @@
 /*
-Script: Element.Pseudos.js
-	Specs for Element.Pseudos.js
-
-License:
-	MIT-style license.
+---
+name: Element.Event.Pseudos Tests
+requires: [More/Element.Event.Pseudos]
+provides: [Element.Event.Pseudos.Tests]
+...
 */
-
 describe('Element.Event.Pseudos', function(){
 
 	it('tests the Event.definePseudo function', function(){

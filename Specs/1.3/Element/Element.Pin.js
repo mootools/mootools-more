@@ -1,11 +1,10 @@
 /*
-Script: Element.Pin.js
-	Specs for Element.Pin.js
-
-License:
-	MIT-style license.
+---
+name: Element.Pin Tests
+requires: [More/Element.Pin]
+provides: [Element.Pin.Tests]
+...
 */
-
 describe("Element.Pin", function(){
 
 	describe("togglePin", function(){

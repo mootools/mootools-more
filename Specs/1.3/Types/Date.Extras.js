@@ -1,9 +1,9 @@
 /*
-Script: Date.Extras.js
-	Specs for Date.Extras.js
-
-License:
-	MIT-style license.
+---
+name: Date.Extras Tests
+requires: [More/Date.Extras]
+provides: [Date.Extras.Tests]
+...
 */
 
 describe('Date.getTimePhrase', function(){

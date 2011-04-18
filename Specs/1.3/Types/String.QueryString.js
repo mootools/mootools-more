@@ -1,9 +1,9 @@
 ﻿/*
-Script: URI.js
-	Specs for URI.js
-
-License:
-	MIT-style license.
+---
+name: String.QueryString Tests
+requires: [More/String.QueryString]
+provides: [String.QueryString.Tests]
+...
 */
 (function(){
 

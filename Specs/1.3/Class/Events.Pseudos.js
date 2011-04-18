@@ -1,9 +1,9 @@
 /*
-Script: Events.Pseudos.js
-	Specs for Events.Pseudos.js
-
-License:
-	MIT-style license.
+---
+name: Events.Pseudos Tests
+requires: [More/Events.Pseudos]
+provides: [Events.Pseudos.Tests]
+...
 */
 
 describe('Events.Pseudos', function(){
@@ -182,6 +182,7 @@ describe('Events.Pseudos', function(){
 				expect(fn2.callCount).toEqual(2);
 
 			});
+			});
 
 		});
 
@@ -302,7 +303,7 @@ describe('Events.Pseudos', function(){
 				order.push(split ? split.pseudo : 'org');
 				if (monitor) myMonitor = monitor;
 				if (fn) fn.apply(this, args);
-			}
+			};
 
 			Events.definePseudo('first', spy);
 			Events.definePseudo('second', spy);

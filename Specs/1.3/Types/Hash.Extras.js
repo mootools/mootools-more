@@ -1,9 +1,9 @@
 /*
-Script: Hash.Extras.js
-	Specs for Hash.Extras.js
-
-License:
-	MIT-style license.
+---
+name: Hash.Extras Tests
+requires: [More/Hash.Extras]
+provides: [Hash.Extras.Tests]
+...
 */
 
 describe('Hash.getFromPath', {

@@ -1,11 +1,10 @@
 /*
-Script: Hash.Cookie.js
-	Specs for Hash.Cookie.js
-
-License:
-	MIT-style license.
+---
+name: Table Tests
+requires: [More/Table]
+provides: [Table.Tests]
+...
 */
-
 (function(){
 	var table = new Table();
 	var one = 1;

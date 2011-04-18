@@ -1,11 +1,10 @@
 /*
-Script: Object.Extras.js
-	Specs for Object.Extras.js
-
-License:
-	MIT-style license.
+---
+name: Object.Extras Tests
+requires: [More/Object.Extras]
+provides: [Object.Extras.Tests]
+...
 */
-
 describe('Object.getFromPath', function(){
 
 	it('should retrieve an object value from a path', function(){
