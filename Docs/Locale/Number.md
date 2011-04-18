@@ -12,7 +12,7 @@ Simply change the language property to the locale code, for example *en-US*.
 
 ### See also:
 
-* [Number.Extras][]
+* [Number.Format][]
 * [Locale][]
 
 Available Languages

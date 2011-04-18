@@ -1,21 +1,12 @@
 /*
 ---
-
 name: Number.Format
-
 description: Extends the Number Type object to include a number formatting method.
-
 license: MIT-style license
-
-authors:
-  - Arian Stolwijk
-
-requires:
-  - Core/Number
-  - Locale.en-US.Number
-
-provides: [Number.Extras]
-
+authors: [Arian Stolwijk]
+requires: [Core/Number, Locale.en-US.Number]
+# Number.Extras is for compatibility
+provides: [Number.Format, Number.Extras]
 ...
 */
 
