@@ -129,7 +129,23 @@ var HtmlTable = new Class({
 			tr: new Element('tr', rowProperties).inject(target || this.body, where).adopt(tds),
 			tds: tds
 		};
-	}
+	},
+	
+	update : function(tr, row) {
+		var tds = tr.getChildren();
+		tds.each(function(td, index) {
+			var data = row[index],
+				content = (data ? data.content : '') || data,
+				type = typeOf(content);
+
+			if(data.properties) {
+				td.set(data.properties);
+			}
+			
+			if (['element', 'array', 'collection', 'elements'].contains(type)) td.adopt(content);
+			else td.set('html', content);
+		});
+	},
 
 });
 
