@@ -1,11 +1,10 @@
 /*
-Script: URI.Relative.js
-	Specs for URI.Relative.js
-
-License:
-	MIT-style license.
+---
+name: URI.Relative Tests
+requires: [More/URI.Relative]
+provides: [URI.Relative.Tests]
+...
 */
-
 (function(){
 
 var uri;
@@ -110,6 +109,6 @@ var uri;
 			expect(new URI('../otherfolder').toRelative(window.location)).toEqual('../otherfolder');
 		}
 
-	})
+	});
 
 })();

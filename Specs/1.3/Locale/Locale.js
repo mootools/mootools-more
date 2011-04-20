@@ -1,11 +1,10 @@
 /*
-Script: Locale.js
-	Specs for Locale.js
-
-License:
-	MIT-style license.
+---
+name: Locale Tests
+requires: [More/Locale, More/Locale.en-US.Form.Validator, More/Locale.en-US.Date, More/Locale.fr-FR.Date, More/Locale.en-US.Number]
+provides: [Locale.Tests]
+...
 */
-
 
 describe('Locale', function(){
 

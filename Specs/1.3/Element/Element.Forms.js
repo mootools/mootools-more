@@ -1,11 +1,10 @@
 /*
-Script: Element.Forms.js
-	Specs for Element.Forms.js
-
-License:
-	MIT-style license.
+---
+name: Element.Forms Tests
+requires: [More/Element.Forms]
+provides: [Element.Forms.Tests]
+...
 */
-
 describe('Element.Forms', function(){
 
 	var input, selectList, multiselect, container;
@@ -105,7 +104,7 @@ describe('Element.Forms', function(){
 
 		it('should get the selection end', function(){
 			expect(input.selectRange(2,5).getSelectionEnd()).toEqual(5);
-		})
+		});
 
 	});
 

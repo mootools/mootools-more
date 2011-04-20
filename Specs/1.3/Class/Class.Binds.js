@@ -1,11 +1,10 @@
 /*
-Script: Class.Binds.js
-	Specs for Class.Binds.js
-
-License:
-	MIT-style license.
+---
+name: Class.Binds Tests
+requires: [More/Class.Binds]
+provides: [Class.Binds.Tests]
+...
 */
-
 describe('Class.Binds', function(){
 
 	it('should autobind methods', function(){

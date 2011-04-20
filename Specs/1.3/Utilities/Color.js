@@ -1,11 +1,10 @@
 /*
-Script: Color.js
-	Specs for Color.js
-
-License:
-	MIT-style license.
+---
+name: Color Tests
+requires: [More/Color]
+provides: [Color.Tests]
+...
 */
-
 
 describe('Color initialize', function(){
 
@@ -27,7 +26,7 @@ describe('Color properties', function(){
 
 	it('Should define the hsb value for a color', function(){
 		expect(new Color("#ff00ff").hsb).toEqual([300, 100, 100]);
-	})
+	});
 
 	it('Should define the hex value for a color', function(){
 		expect(new Color([255,0,255]).hex).toEqual("#ff00ff");
@@ -48,7 +47,7 @@ describe('Color mutation', function(){
 
 	it('Should set the hue of a color', function(){
 		expect(new Color('#700').setHue(300).toString()).toEqual('120,0,120');
-	})
+	});
 
 	it('Should set the saturation of a color', function(){
 		expect(new Color('#700').setSaturation(50).toString()).toEqual('120,60,60');
