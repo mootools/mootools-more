@@ -160,7 +160,6 @@ var HtmlTable = new Class({
 			tds : tds
 		};
 	}
-
 });
 
 
