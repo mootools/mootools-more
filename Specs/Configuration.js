@@ -44,7 +44,8 @@ Configuration.sets = {
 			'Types/String.Extras', 'Types/String.QueryString', 'Types/Number.Format',
 			'Types/Hash', 'Types/Hash.Extras', 'Types/Date',
 			'Types/Date.Extras', 'Locale/Locale',
-			'Utilities/Color', 'Utilities/Group', 'Utilities/Table'
+			'Utilities/Color', 'Utilities/Group', 'Utilities/Table',
+			'Validation/Validation'
 		]
 	},
 
@@ -154,7 +155,9 @@ Configuration.source = {
 
 			'Utilities/Color',
 			'Utilities/Group',
-			'Utilities/Table'
+			'Utilities/Table',
+
+			'Validation/Validation'
 
 		]
 	},
