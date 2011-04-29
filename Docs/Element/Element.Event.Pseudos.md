@@ -41,7 +41,7 @@ The default timespan is *250* milliseconds.
 		// Will only fire once every 250 ms
 	});
 
-	$('myElement').addEvent('resize:throttle(400)', function(){
+	window.addEvent('resize:throttle(400)', function(){
 		// Will only fire once every 400 ms
 	});
 
