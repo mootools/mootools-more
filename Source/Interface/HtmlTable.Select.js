@@ -47,13 +47,12 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 		this.selectedRows = new Elements();
 
-		this.bound = {
-			mouseleave: this.mouseleave.bind(this),
-			clickRow: this.clickRow.bind(this),
-			activateKeyboard: function(){
-				if (this.keyboard && this.selectEnabled) this.keyboard.activate();
-			}.bind(this)
-		};
+		if (!this.bound) this.bound = {};
+		this.bound.mouseleave = this.mouseleave.bind(this);
+		this.bound.clickRow = this.clickRow.bind(this);
+		this.bound.activateKeyboard = function(){
+			if (this.keyboard && this.selectEnabled) this.keyboard.activate();
+		}.bind(this);
 
 		if (this.options.selectable) this.enableSelect();
 	},
@@ -312,7 +311,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 					clearTimeout(timer);
 					held = false;
 				};
-				
+
 				this.keyboard.addEvents({
 					'keydown:shift+up': move(-1),
 					'keydown:shift+down': move(1),
