@@ -55,11 +55,11 @@ Configuration.sets = {
 			'Element/Element.Forms', 'Element/Element.Measure', 'Element/Elements.From', 'Element/Element.Shortcuts',
 			'Element/Element.Event.Pseudos', 'Element/Element.Event.Pseudos.Keys', 'Element/Element.Delegation', 'Element/Element.Pin', 'Element/Element.Position',
 			'Types/URI', 'Types/URI.Relative', 'Types/Object.Extras_client',
-			'Interface/Keyboard', 'Interface/Keyboard.Extras', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort', 'Interface/HtmlTable.Select',
+			'Interface/Keyboard', 'Interface/Keyboard.Extras', 'Interface/HtmlTable', 'Interface/HtmlTable.Sort', 'Interface/HtmlTable.Select', 'Interface/Htmltable.Zebra',
 			'Forms/Form.Validator',
 			'Fx/Fx.Reveal', 'Fx/Fx.Slide',
 			'Request/Request.JSONP',
-			'Utilities/Color', 'Utilities/Group', 'Utilities/Table'
+			'Utilities/Color', 'Utilities/Group', 'Utilities/Table', 'Utilities/Hash.Cookie', 'Utilities/Assets'
 		]
 	}
 
@@ -186,6 +186,7 @@ Configuration.source = {
 			'Interface/HtmlTable',
 			'Interface/HtmlTable.Sort',
 			'Interface/HtmlTable.Select',
+			'Interface/HtmlTable.Zebra',
 
 			'Fx/Fx.Reveal',
 			'Fx/Fx.Slide',
