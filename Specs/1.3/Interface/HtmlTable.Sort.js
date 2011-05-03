@@ -1,5 +1,10 @@
 describe('HtmlTable.Sort', function(){
 
+  it('should not step on prior this.bind declarations', function () {
+    var table = new HtmlTable();
+    expect(table.bound.headClick).not.toEqual(null);
+  });
+
 	describe('HtmlTable.Parsers', function(){
 
 		var sortedTable = function(type, data){
