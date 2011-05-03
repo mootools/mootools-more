@@ -223,8 +223,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	clickRow: function(event, row){
-		var selecting = (event.shift || event.meta || event.control) && this.options.shiftForMultiSelect;
-		if (!selecting && !(event.rightClick && this.isSelected(row) && this.options.allowMultiSelect)) this.selectNone();
+		if(this.options.allowMultiSelect) {
+			var selecting = (event.shift || event.meta || event.control) && this.options.shiftForMultiSelect;
+			if (!selecting && !(event.rightClick && this.isSelected(row) && this.options.allowMultiSelect)) this.selectNone();
+		}
 
 		if (event.rightClick) this.selectRow(row);
 		else this.toggleRow(row);
