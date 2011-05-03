@@ -51,9 +51,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
 		this.sorted = {index: null, dir: 1};
-		this.bound = {
-			headClick: this.headClick.bind(this)
-		};
+		if (!this.bound) this.bound = {};
+		this.bound.headClick = this.headClick.bind(this);
 		this.sortSpans = new Elements();
 		if (this.options.sortable){
 			this.enableSort();
