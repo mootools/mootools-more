@@ -148,7 +148,7 @@ var Sortables = new Class({
 		if (
 			!this.idle ||
 			event.rightClick ||
-			['button', 'input', 'a'].contains(event.target.get('tag'))
+			['button', 'input', 'a', 'textarea'].contains(event.target.get('tag'))
 		) return;
 
 		this.idle = false;
