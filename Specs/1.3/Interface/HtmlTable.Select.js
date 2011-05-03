@@ -134,9 +134,13 @@ describe('HtmlTable.Select', function(){
 
 		table1.dispose();
 		table2.dispose();
-		
-
 	});
 
+  it('should not step on prior this.bind declarations', function () {
+    var table = new HtmlTable();
+    expect(table.bound.clickRow).not.toEqual(null);
+    expect(table.bound.mouseleave).not.toEqual(null);
+    expect(table.bound.activateKeyboard).not.toEqual(null);
+  });
 
 });
