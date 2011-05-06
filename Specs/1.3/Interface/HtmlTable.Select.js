@@ -90,7 +90,7 @@ describe('HtmlTable.Select', function(){
 	});
 
 
-	it('should allow keyboard events to change selection', function(){
+	if (window.addEventListener) it('should allow keyboard events to change selection', function(){
 		var table = getTable().inject(document.body);
 
 		var rows = table.body.getChildren();
@@ -107,7 +107,7 @@ describe('HtmlTable.Select', function(){
 		table.dispose();
 	});
 
-	it('should enable a table\'s keyboard', function(){
+	if (window.addEventListener) it('should enable a table\'s keyboard', function(){
 		var table1 = getTable().inject(document.body);
 		var table2 = getTable().inject(document.body);
 		table1.toElement().id = 'one';
