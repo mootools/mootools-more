@@ -57,15 +57,14 @@ describe('HtmlTable', function(){
 		it('should push an array with options and properties', function(){
 			t.push([{
 					content: 'grapes',
-					properties: {rowspan: 2, valign: 'top'}
+					properties: {'class': 'someClass'}
 				},
 				'purple'
 			]);
 			tds = t.body.rows[2].getElements('td');
-			expect(tds[0].get('text', 'rowspan', 'valign')).toEqual({
+			expect(tds[0].get('text', 'class')).toEqual({
 				text: 'grapes',
-				rowspan: '2',
-				valign: 'top'
+				'class': 'someClass'
 			});
 			expect(tds[1].get('text')).toEqual('purple');
 		});

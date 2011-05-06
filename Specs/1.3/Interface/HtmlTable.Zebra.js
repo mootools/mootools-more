@@ -22,7 +22,7 @@ describe('HtmlTable.Zebra', function(){
 		expect(rows[3].hasClass('table-tr-odd')).toBeFalsy();
 		expect(rows[4].hasClass('table-tr-odd')).toBeTruthy();
 		
-		rows[3].destroy();
+		rows[3].dispose();
 		table.updateZebras();
 		expect(rows[3].hasClass('table-tr-odd')).toBeFalsy();
 	});
