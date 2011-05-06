@@ -102,7 +102,13 @@ Iterates over the key/values in the table.
 ### Examples
 
 	var myTable = new Table();
+	// first set some values
 	myTable.set($('myForm'), {foo: 'bar'});
 	myTable.set(myClassInstance, $$('.someElements'));
+	// and now iterate over them
+	myTable.each(function(value, key){
+		console.log(value, key);
+	});
+
 
 [Function:bind]: /core/Types/Function/#Function:bind
