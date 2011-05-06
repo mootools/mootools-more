@@ -52,11 +52,11 @@ describe("Element.Position", function(){
 				it('should call original position method when options x y values are present', function(){
 					options.x = 0;
 					options.y = 0;
-					spyOn(Element, 'calculatePosition');
-					spyOn(Element.prototype, 'position');
+					spyOn(element, 'calculatePosition');
+					spyOn(element, 'position');
 					element.position(options);
-					expect(Element.calculatePosition).not.toHaveBeenCalled();
-					expect(Element.prototype.position).toHaveBeenCalled();
+					expect(element.calculatePosition).not.toHaveBeenCalled();
+					expect(element.position).toHaveBeenCalled();
 				});
 
 			});
@@ -107,7 +107,7 @@ describe("Element.Position", function(){
 				};
 
 				afterEach(function(){
-					container.destroy();
+					container.dispose();
 				});
 
 				blockPositions.each(function(blockPosition){
