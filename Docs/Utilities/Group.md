@@ -29,9 +29,9 @@ Any number of Class instances, or arrays containing class instances.
 		alert('All Scripts loaded');
 	});
 
-	xhr1.request();
-	xhr2.request();
-	xhr3.request();
+	xhr1.send();
+	xhr2.send();
+	xhr3.send();
 
 
 
