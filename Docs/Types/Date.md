@@ -424,13 +424,19 @@ Adds a new shortcut for [Date:format][].
 
 ### Arguments
 
-1. name - (*string*) name of the new format
-2. format - (*string*) format string (see [Date:format][])
+1. name - (*string*) name of the new format, as lowercase.
+2. format - (*string*, *function*) format string (see [Date:format][])
 
 ### Example
 
 	Date.defineFormat('time', '%H:%M');
 	new Date().format('time');	//17:30
+
+	// also possible to pass a function
+	Date.defineFormat('timeago', function(date){
+		var now = Date.now();
+		return Math.round((now - date) / (1000 * 60)) + ' minutes ago';
+	});
 
 Static Method: defineFormats {#Date:Date-defineFormats}
 -------------------------------------------------------
