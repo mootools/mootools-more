@@ -673,6 +673,38 @@ describe('Date', function(){
 
 	});
 
+	describe('Date.defineFormat', function(){
+
+		it('should define a new formatter as a string', function(){
+			var format = '__' + String.uniqueID();
+			var _Date = Date.defineFormat(format, format);
+			var d = new Date();
+			expect(_Date).toEqual(Date);
+			expect(d.format(format)).toEqual(format);
+		});
+
+		it('should define a new formatter as a function', function(){
+			var format = '__' + String.uniqueID();
+			var d = new Date();
+			Date.defineFormat(format, function(date){
+				expect(date).toEqual(d);
+				return format + '__';
+			});
+			expect(d.format(format)).toEqual(format + '__');
+		});
+
+		it('should define mulitple formats', function(){
+			var formats = {},
+				format1 = '__' + String.uniqueID(),
+				format2 = '__' + String.uniqueID();
+			formats[format1] = format1;
+			formats[format2] = format2;
+			Date.defineFormats(formats);
+			expect(new Date().format(format1)).toEqual(format1);
+		});
+
+	});
+
 });
 
 })(this);
