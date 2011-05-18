@@ -39,7 +39,7 @@ Fx.Slide = new Class({
 		options = this.options;
 
 		var wrapper = element.retrieve('wrapper'),
-			styles = element.getStyles('margin', 'position', 'overflow');
+			styles = element.getStyles('margin', 'position', 'overflow', 'top', 'right', 'bottom', 'left');
 
 		if (options.hideOverflow) styles = Object.append(styles, {overflow: 'hidden'});
 		if (options.wrapper) wrapper = document.id(options.wrapper).setStyles(styles);
