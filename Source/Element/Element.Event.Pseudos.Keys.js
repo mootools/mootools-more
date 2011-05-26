@@ -3,13 +3,12 @@
 
 name: Element.Event.Pseudos.Keys
 
-description: Adds the functionality to fire events if certain keycombinations are pressed
+description: Adds functionality fire events if certain keycombinations are pressed
 
 license: MIT-style license
 
 authors:
   - Arian Stolwijk
-  - Djamil Legato
 
 requires: [Element.Event.Pseudos]
 
@@ -27,39 +26,19 @@ var keysStoreKey = '$moo:keys-pressed',
 Event.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
-		keyList = {},
-		pressed = this.retrieve(keysStoreKey, []),
-		value = split.value;
-	
-	// all of this is to split by , allowing , as char of the list
-	// if you have a regexp for that please do share!
-	value = value.replace(/\s/g, '').replace(/^,,|,,?$/g, function(match, pos){
-	    if (!pos) return '-sep-,';
-	    else return (value.length - 1 == pos) ? '-sep-' : ',-sep-';
-	}).replace(/,,,?/g, function(match, pos){
-	    if (match.length == 2) return '-sep-,';
-	    else return ',-sep-,';
-	});
+		keys = [],
+		pressed = this.retrieve(keysStoreKey, []);
 
-	value = (value == ',' ? [value] : value.split(',')).map(function(value){
-		value = value.replace('-sep-', ',');
-		keyList[value] = [];
-
-		keyList[value].append(value.replace('++', function(){
-			keyList[value].push('+'); // shift++ and shift+++a
-			return '';
-		}).split('+'));
-
-	    return value;
-	});
+	keys.append(split.value.replace('++', function(){
+		keys.push('+'); // shift++ and shift+++a
+		return '';
+	}).split('+'));
 
 	pressed.include(event.key);
 
-	Object.each(keyList, function(keys){
-		if (keys.every(function(key){
-			return pressed.contains(key);
-		})) fn.apply(this, args);
-	});
+	if (keys.every(function(key){
+		return pressed.contains(key);
+	})) fn.apply(this, args);
 
 	this.store(keysStoreKey, pressed);
 

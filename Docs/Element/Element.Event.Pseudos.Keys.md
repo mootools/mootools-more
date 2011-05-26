@@ -11,21 +11,16 @@ Defines the `:keys` Element Event Pseudo. It captures key combinations and fires
 ### Note
 
 - This plugin adds some common used keys to the keys you can use, like `-`, `end` or `=`. See for the complete list below.
-- You can have multiple key combinations separated by comma
 
 Pseudo: keys {#Pseudos:keys}
 ----------------------------
 
 The event will only fire when a key combination is pressed. This only works with the `keydown` and `keyup` events.
 
-### Examples
+### Example
 
 	myElement.addEvent('keydown:keys(shift+a+b)', function(){
 		alert('You pressed the following keys: shift, a and b');
-	});
-	
-	myElement.addEvent('keydown:keys(shift+a, delete, ,)', function(){
-		alert('You pressed one of the following keys: shift + a, delete or ,');
 	});
 
 
