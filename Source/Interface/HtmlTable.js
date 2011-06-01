@@ -113,33 +113,17 @@ var HtmlTable = new Class({
 				tds: row.getChildren('td')
 			};
 		}
-
-		var tds = row.map(function(data){
-			var td = new Element(tag || 'td', data ? data.properties : {}),
-				content = (data ? data.content : '') || data,
-				type = typeOf(content);
-
-			if (['element', 'array', 'collection', 'elements'].contains(type)) td.adopt(content);
-			else td.set('html', content);
-
-			return td;
-		});
-
-		return {
-			tr: new Element('tr', rowProperties).inject(target || this.body, where).adopt(tds),
-			tds: tds
-		};
+		return this.update(new Element('tr', rowProperties).inject(target || this.body, where), row, tag);
 	},
 	
 	update : function(tr, row, tag) {
 		var tds = tr.getChildren(tag || 'td');
 		row.each(function(data, index) {
 			var td = tds[index] || new Element(tag || 'td').inject(tr),
-				data = row[index],
 				content = (data ? data.content : '') || data,
 				type = typeOf(content);
 
-			if(data && data.properties) {
+			if(data.properties) {
 				td.set(data.properties);
 			}
 			

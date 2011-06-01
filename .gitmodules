@@ -3,7 +3,7 @@
 	url = git://github.com/kamicane/packager.git
 [submodule "Specs/mootools-core"]
 	path = Specs/mootools-core
-	url = http://github.com/mootools/mootools-core.git
+	url = git@github.com:mcfedr/mootools-core.git
 [submodule "Specs/Runner"]
 	path = Specs/Runner
 	url = git://github.com/mootools/mootools-runner.git
