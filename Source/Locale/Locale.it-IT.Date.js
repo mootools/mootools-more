@@ -44,6 +44,12 @@ Locale.define('it-IT', 'Date', {
 	hoursAgo: 'circa {delta} ore fa',
 	dayAgo: 'circa 1 giorno fa',
 	daysAgo: 'circa {delta} giorni fa',
+	weekAgo: 'una settimana fa',
+	weeksAgo: '{delta} settimane fa',
+	monthAgo: 'un mese fa',
+	monthsAgo: '{delta} mesi fa',
+	yearAgo: 'un anno fa',
+	yearsAgo: '{delta} anni fa',
 
 	lessThanMinuteUntil: 'tra meno di un minuto',
 	minuteUntil: 'tra circa un minuto',
@@ -51,6 +57,12 @@ Locale.define('it-IT', 'Date', {
 	hourUntil: "tra circa un'ora",
 	hoursUntil: 'tra circa {delta} ore',
 	dayUntil: 'tra circa un giorno',
-	daysUntil: 'tra circa {delta} giorni'
+	daysUntil: 'tra circa {delta} giorni',
+	weekUntil: 'tra una settimana',
+	weeksUntil: 'tra {delta} settimane',
+	monthUntil: 'tra un mese',
+	monthsUntil: 'tra {delta} mesi',
+	yearUntil: 'tra un anno',
+	yearsUntil: 'tra {delta} anni'
 
 });
