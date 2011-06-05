@@ -36,6 +36,7 @@ sources:
   - "Source/Element/Elements.From.js"
   - "Source/Element/Element.Event.Pseudos.js"
   - "Source/Element/Element.Event.Pseudos.Keys.js"
+  - "Source/Element/Element.Event.Pseudos.Stop.js"
   - "Source/Element/Element.Delegation.js"
   - "Source/Element/Element.Measure.js"
   - "Source/Element/Element.Pin.js"
