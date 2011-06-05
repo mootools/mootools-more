@@ -1,9 +1,9 @@
 /*
-Script: Element.Shortcuts.js
-	Specs for Element.Shortcuts.js
-
-License:
-	MIT-style license.
+---
+name: Element.Shortcuts Tests
+requires: [More/Element.Shortcuts, Core/DomReady]
+provides: [Element.Shortcuts.Tests]
+...
 */
 (function(){
 

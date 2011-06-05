@@ -1,9 +1,9 @@
 /*
-Script: Table.js
-	Specs for Table.js
-
-License:
-	MIT-style license.
+---
+name: Table Tests
+requires: [More/Table]
+provides: [Table.Tests]
+...
 */
 
 describe('Table', function(){

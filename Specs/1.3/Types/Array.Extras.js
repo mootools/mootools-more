@@ -1,9 +1,9 @@
 /*
-Script: Array.Extras.js
-	Specs for Array.Extras.js
-
-License:
-	MIT-style license.
+---
+name: Array.Extras Tests
+requires: [More/Array.Extras]
+provides: [Array.Extras.Tests]
+...
 */
 
 describe('Array.min', {

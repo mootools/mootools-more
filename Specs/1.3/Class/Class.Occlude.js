@@ -1,9 +1,9 @@
 /*
-Script: Class.Occlude.js
-	Specs for Class.Occlude.js
-
-License:
-	MIT-style license.
+---
+name: Class.Occlude Tests
+requires: [More/Class.Occlude]
+provides: [Class.Occlude.Tests]
+...
 */
 
 describe('Class.Occlude', function(){

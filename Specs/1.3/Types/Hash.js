@@ -1,11 +1,10 @@
 /*
-Script: Hash.js
-	Specs for Hash.js
-
-License:
-	MIT-style license.
+---
+name: Hash Tests
+requires: [More/Hash]
+provides: [Hash.Tests]
+...
 */
-
 (function(){
 
 var hash2 = new Hash({ a: 'string', b: 233, c: {} });

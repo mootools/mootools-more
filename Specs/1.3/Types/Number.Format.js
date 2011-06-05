@@ -1,11 +1,10 @@
 /*
-Script: Number.Format.js
-	Specs for Number.Format.js
-
-License:
-	MIT-style license.
+---
+name: Number.Format Tests
+requires: [More/Number.Extras]
+provides: [Number.Format.Tests]
+...
 */
-
 describe('Number.Format', function(){
 
 	describe('Number.format', function(){
@@ -33,9 +32,9 @@ describe('Number.Format', function(){
 		});
 
 		it('should format with the right decimals', function(){
-			expect((123.456).format({decimals: 0})).toEqual('123')
-			expect((123.456).format({decimals: 1, decimal: '.'})).toEqual('123.5')
-			expect((123.451).format({decimals: 2, decimal: '.'})).toEqual('123.45')
+			expect((123.456).format({decimals: 0})).toEqual('123');
+			expect((123.456).format({decimals: 1, decimal: '.'})).toEqual('123.5');
+			expect((123.451).format({decimals: 2, decimal: '.'})).toEqual('123.45');
 		});
 
 		it('should change precision', function(){

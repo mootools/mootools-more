@@ -1,11 +1,10 @@
 /*
-Script: Hash.Cookie.js
-	Specs for Hash.Cookie.js
-
-License:
-	MIT-style license.
+---
+name: Hash.Cookie Tests
+requires: [More/Hash.Cookie]
+provides: [Hash.Cookie.Tests]
+...
 */
-
 describe('Hash.Cookie', {
 
 	'Saves a set of key/values into a cookie': function(){

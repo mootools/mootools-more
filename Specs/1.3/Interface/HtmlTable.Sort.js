@@ -1,3 +1,10 @@
+/*
+---
+name: HtmlTable.Sort Tests
+requires: [More/HtmlTable.Sort]
+provides: [HtmlTable.Sort.Tests]
+...
+*/
 describe('HtmlTable.Sort', function(){
 
   it('should not step on prior this.bind declarations', function () {
@@ -12,13 +19,13 @@ describe('HtmlTable.Sort', function(){
 				sortable: true,
 				headers: ['col'],
 				parsers: type ? [type] : [],
-				rows: data.map(function(item){return [item]})
+				rows: data.map(function(item){return [item];})
 			});
 
 			return Array.map(table.sort(0, false).body.rows, function(item){
-				return item.cells[0].get('text') || item.cells[0].getElement('input').get('value')
+				return item.cells[0].get('text') || item.cells[0].getElement('input').get('value');
 			});
-		}
+		};
 
 		describe('date', function(){
 

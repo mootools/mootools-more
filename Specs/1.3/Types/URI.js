@@ -1,9 +1,9 @@
 /*
-Script: URI.js
-	Specs for URI.js
-
-License:
-	MIT-style license.
+---
+name: URI Tests
+requires: [More/URI]
+provides: [URI.Tests]
+...
 */
 (function(){
 

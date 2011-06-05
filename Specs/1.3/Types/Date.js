@@ -1,11 +1,10 @@
 /*
-Script: Date.js
-	Specs for Date.js
-
-License:
-	MIT-style license.
+---
+name: Date Tests
+requires: [More/Date]
+provides: [Date.Tests]
+...
 */
-
 (function(global){
 
 describe('Date', function(){

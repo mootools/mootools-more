@@ -1,4 +1,10 @@
-
+/*
+---
+name: Assets Tests
+requires: [More/Assets]
+provides: [Assets.Tests]
+...
+*/
 describe('Assets', function(){
 
 	describe('Assets.javascript', function(){
@@ -10,7 +16,7 @@ describe('Assets', function(){
 			var myScript = Asset.javascript('../assets/Assets.js.test.js', {
 				id: 'myScript',
 				onload: function(){
-					load(this)
+					load(this);
 				}
 			});
 
