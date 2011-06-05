@@ -56,7 +56,8 @@ this.Tips = new Class({
 		className: 'tip-wrap',
 		offset: {x: 16, y: 16},
 		windowPadding: {x:0, y:0},
-		fixed: false
+		fixed: false,
+		waiAria: false
 	},
 
 	initialize: function(){
@@ -69,6 +70,8 @@ this.Tips = new Class({
 		this.setOptions(params.options);
 		if (params.elements) this.attach(params.elements);
 		this.container = new Element('div', {'class': 'tip', 'id': 'tip', role: 'tooltip'});
+
+		if (this.options.waiAria) this.attachWaiAriaEvents();
 	},
 
 	toElement: function(){
@@ -88,6 +91,26 @@ this.Tips = new Class({
 		);
 
 		return this.tip;
+	},
+
+	attachWaiAriaEvents: function(){
+		if (!this.waiAria){
+			this.waiAria = {
+				show: function(element){
+					element.set('aria-describedby', 'tip');
+					this.container.set('aria-hidden', 'false');
+				},
+				hide: function(element){
+					element.erase('aria-describedby');
+					this.container.set('aria-hidden', 'true');
+				}
+			};
+		}
+		this.addEvents(this.waiAria);
+	},
+
+	detachWaiAriaEvents: function(){
+		if (this.waiAria) this.removeEvents(this.waiAria);
 	},
 
 	attach: function(elements){
@@ -144,8 +167,6 @@ this.Tips = new Class({
 					}).inject(this.container);
 				if (content) this.fill(div, content);
 			}, this);
-			element.setProperty('aria-describedby', 'tip');
-			this.container.setProperty('aria-hidden', 'false');
 			this.show(element);
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 		}).delay(this.options.showDelay, this);
@@ -154,8 +175,6 @@ this.Tips = new Class({
 	elementLeave: function(event, element){
 		clearTimeout(this.timer);
 		this.timer = this.hide.delay(this.options.hideDelay, this, element);
-		element.removeProperty('aria-describedby');
-		this.container.setProperty('aria-hidden', 'true');
 		this.fireForParent(event, element);
 	},
 
