@@ -116,23 +116,20 @@ Fx.Scroll = new Class({
 	toElementEdge: function(el, axes, offset){
 		axes = axes ? Array.from(axes) : ['x', 'y'];
 		el = document.id(el);
-		var to = {},
+
+		var to = {x: 0, y: 0},
 			position = el.getPosition(this.element),
 			size = el.getSize(),
 			scroll = this.element.getScroll(),
-			containerSize = this.element.getSize(),
-			edge = {
-				x: position.x + size.x,
-				y: position.y + size.y
-			};
+			containerSize = this.element.getSize();
 
 		['x', 'y'].each(function(axis){
 			if (axes.contains(axis)){
-				if (edge[axis] > scroll[axis] + containerSize[axis]) to[axis] = edge[axis] - containerSize[axis];
-				if (position[axis] < scroll[axis]) to[axis] = position[axis];
+				var edge = position[axis] + size[axis];
+				to[axis] = (edge > containerSize[axis]) ? edge - containerSize[axis]
+					: ((position[axis] < scroll[axis]) ? position[axis] : 0);
 			}
-			if (to[axis] == null) to[axis] = scroll[axis];
-			if (offset && offset[axis]) to[axis] = to[axis] + offset[axis];
+			to[axis] += scroll[axis] + ((offset && offset[axis]) ? offset[axis] : 0);
 		}, this);
 
 		if (to.x != scroll.x || to.y != scroll.y) this.start(to.x, to.y);
@@ -142,7 +139,8 @@ Fx.Scroll = new Class({
 	toElementCenter: function(el, axes, offset){
 		axes = axes ? Array.from(axes) : ['x', 'y'];
 		el = document.id(el);
-		var to = {},
+	
+		var to = {x: 0, y: 0},
 			position = el.getPosition(this.element),
 			size = el.getSize(),
 			scroll = this.element.getScroll(),
