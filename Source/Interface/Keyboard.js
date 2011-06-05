@@ -166,37 +166,15 @@ provides: [Keyboard]
 
 	});
 
-	var parsed = {};
-	var modifiers = ['shift', 'control', 'alt', 'meta'];
-	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
-
 	Keyboard.parse = function(type, eventType, ignore){
 		if (ignore && ignore.contains(type.toLowerCase())) return type;
 
-		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
+		var keys = type.toLowerCase().replace(/^(keyup|keydown):?/, function($0, $1){
 			eventType = $1;
 			return '';
 		});
 
-		if (!parsed[type]){
-			var key, mods = {};
-			type.split('+').each(function(part){
-				if (regex.test(part)) mods[part] = true;
-				else key = part;
-			});
-
-			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
-
-			var keys = [];
-			modifiers.each(function(mod){
-				if (mods[mod]) keys.push(mod);
-			});
-
-			if (key) keys.push(key);
-			parsed[type] = keys.join('+');
-		}
-
-		return eventType + ':keys(' + parsed[type] + ')';
+		return eventType + (keys && ':keys(' + keys + ')');
 	};
 
 	Keyboard.each = function(keyboard, fn){
@@ -225,13 +203,7 @@ provides: [Keyboard]
 	};
 
 	var handler = function(event){
-		var keys = [];
-		modifiers.each(function(mod){
-			if (event[mod]) keys.push(mod);
-		});
-
-		if (!regex.test(event.key)) keys.push(event.key);
-		Keyboard.manager._handle(event, event.type + ':keys(' + keys.join('+') + ')');
+		Keyboard.manager._handle(event, event.type);
 	};
 
 	document.addEvents({

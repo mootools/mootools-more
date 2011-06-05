@@ -4,11 +4,13 @@
 
 <div id="result"><h3>Keydown - press shift+a and the event should fire on keydown</h3></div>
 <div id="result2"><h3>Keyup - press shift+b and the event should fire on keyup</h3></div>
-<div id="result3"><h3>Keyup - press shift+c+d and the event should fire on keydown</h3></div>
+<div id="result3"><h3>Keydown - press shift+c+d and the event should fire on keydown</h3></div>
 <div id="result4">
-	<h3>Keyup - press shift+++c and the event should fire on keyup</h3>
+	<h3>Keydown - press shift+++c and the event should fire on keydown</h3>
 	<p><small>Make sure you use the right <code>+</code> key, keydown/keyup events don't always return the right key in certain keyboard layouts</small></p>
 </div>
+<div id="result5"><h3>Keydown - press shift+e or shift+f and the event should fire on keydown</h3></div>
+<div id="result6"><h3>Keydown - press cmd+g and the event should fire on keydown</h3></div>
 
 <script src="/depender/build?require=More/Element.Event.Pseudos.Keys"></script>
 
@@ -17,23 +19,38 @@
 var result = $('result'),
 	result2 = $('result2'),
 	result3 = $('result3'),
-	result4 = $('result4');
+	result4 = $('result4'),
+	result5 = $('result5'),
+	result6 = $('result6');
 
 
 document.addEvent('keydown:keys(shift+a)', function(){
-	result.set('html', result.get('html') + 'succes keydown:keys(shift+a)!<br>');
+	result.set('html', result.get('html') + 'success keydown:keys(shift+a)!<br>');
 });
 
 document.addEvent('keyup:keys(shift+b)', function(){
-	result2.set('html', result2.get('html') + 'succes keyup:keys(shift+b)!<br>');
+	result2.set('html', result2.get('html') + 'success keyup:keys(shift+b)!<br>');
 });
 
 document.addEvent('keydown:keys(shift+c+d)', function(e){
-	result3.set('html', result3.get('html') + 'succes keyup:keys(shift+c+d)!<br>');
+	result3.set('html', result3.get('html') + 'success keydown:keys(shift+c+d)!<br>');
 });
 
 document.addEvent('keydown:keys(shift+++c)', function(e){
-	result4.set('html', result4.get('html') + 'succes keyup:keys(shift+++c)!<br>');
+	result4.set('html', result4.get('html') + 'success keydown:keys(shift+++c)!<br>');
 });
+
+document.addEvent('keydown:keys(shift+e|shift+f)', function(e){
+	result5.set('html', result5.get('html') + 'success keydown:keys(shift+e|shift+f)!<br>');
+});
+
+if(Browser.Platform.name == 'mac') {
+	document.addEvent('keydown:keys(meta+g)', function(e){
+		result6.set('html', result6.get('html') + 'success keydown:keys(meta+g)!<br>');
+	});
+} else {
+	result6.destroy();
+}
+
 
 </script>
