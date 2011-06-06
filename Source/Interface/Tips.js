@@ -38,6 +38,7 @@ this.Tips = new Class({
 	Implements: [Events, Options],
 
 	options: {/*
+		id: null,
 		onAttach: function(element){},
 		onDetach: function(element){},
 		onBound: function(coords){},*/
@@ -57,7 +58,7 @@ this.Tips = new Class({
 		offset: {x: 16, y: 16},
 		windowPadding: {x:0, y:0},
 		fixed: false,
-		waiAria: false
+		waiAria: true
 	},
 
 	initialize: function(){
@@ -69,9 +70,12 @@ this.Tips = new Class({
 		});
 		this.setOptions(params.options);
 		if (params.elements) this.attach(params.elements);
-		this.container = new Element('div', {'class': 'tip', 'id': 'tip', role: 'tooltip'});
+		this.container = new Element('div', {'class': 'tip'});
 
-		if (this.options.waiAria) this.attachWaiAriaEvents();
+		if (this.options.id){
+			this.container.set('id', this.options.id);
+			if (this.options.waiAria) this.attachWaiAria();
+		}
 	},
 
 	toElement: function(){
@@ -93,15 +97,18 @@ this.Tips = new Class({
 		return this.tip;
 	},
 
-	attachWaiAriaEvents: function(){
+	attachWaiAria: function(){
+		var id = this.options.id;
+		this.container.set('role', 'tooltip');
+
 		if (!this.waiAria){
 			this.waiAria = {
 				show: function(element){
-					element.set('aria-describedby', 'tip');
+					if (id) element.set('aria-describedby', id);
 					this.container.set('aria-hidden', 'false');
 				},
 				hide: function(element){
-					element.erase('aria-describedby');
+					if (id) element.erase('aria-describedby');
 					this.container.set('aria-hidden', 'true');
 				}
 			};
@@ -109,8 +116,12 @@ this.Tips = new Class({
 		this.addEvents(this.waiAria);
 	},
 
-	detachWaiAriaEvents: function(){
-		if (this.waiAria) this.removeEvents(this.waiAria);
+	detachWaiAria: function(){
+		if (this.waiAria){
+			this.container.erase('role');
+			this.container.erase('aria-hidden');
+			this.removeEvents(this.waiAria);
+		}
 	},
 
 	attach: function(elements){

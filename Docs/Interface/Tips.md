@@ -36,7 +36,8 @@ Tips Method: constructor
 * offset - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
 * fixed - (*boolean*: defaults to false) If set to true, the toolTip will not follow the mouse.
 * windowPadding - (*object*; defaults to {'x':0, 'y': 0}) Allows you to reduce or expand the virtual size of the window for tip positioning. The tips will not be allowed to approach the edge of the window on any side based on this offset.
-* waiAria - (*boolean*: defaults to *false*) Enable [WAI-ARIA](http://www.w3.org/WAI/intro/aria.php) support. Adds aria-attributes to the Tip.
+* id - (*string*: defaults to null) Add an `id` to the Tip container, required for WAI-ARIA support.
+* waiAria - (*boolean*: defaults to *true*) Requires the `id` option to be set. Enable [WAI-ARIA](http://www.w3.org/WAI/intro/aria.php) support. Adds aria-attributes to the Tip.
 
 ### Events
 
