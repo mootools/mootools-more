@@ -159,7 +159,7 @@ Form.Validator.Inline = new Class({
 		var result = this.parent(field, force);
 		if (((this.options.scrollToErrorsOnSubmit && scroll == null) || scroll) && !result){
 			var failed = document.id(this).getElement('.validation-failed');
-			var par = document.id(this).getParent();
+			var par = document.id(this);
 			while (par != document.body && par.getScrollSize().y == par.getSize().y){
 				par = par.getParent();
 			}
