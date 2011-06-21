@@ -83,7 +83,7 @@ Request.JSONP = new Class({
 		if (src.length > 2083) this.fireEvent('error', src);
 
 		Request.JSONP.request_map['request_' + index] = function(){
-			this.success(arguments, index);
+			this.success(Array.from(arguments).append(options), index);
 		}.bind(this);
 
 		var script = this.getScript(src).inject(options.injectScript);
