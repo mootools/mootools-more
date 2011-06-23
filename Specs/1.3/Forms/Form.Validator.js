@@ -1,3 +1,11 @@
+/*
+---
+name: Form.Validator Tests
+requires: [More/Form.Validator]
+provides: [Form.Validator.Tests]
+...
+*/
+
 describe('Form.Validator', function(){
 
 	describe('Element.Properties.validatorProps', function(){

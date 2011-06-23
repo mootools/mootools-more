@@ -1,9 +1,9 @@
 /*
-Script: Element.Pin.js
-	Specs for Element.Pin.js
-
-License:
-	MIT-style license.
+---
+name: Element.Position Tests
+requires: [More/Element.Position]
+provides: [Element.Position.Tests]
+...
 */
 
 describe("Element.Position", function(){
@@ -127,7 +127,7 @@ describe("Element.Position", function(){
 									options.position = placement;
 									options.relFixedPosition = blockPosition == 'fixed';
 									options.edge = edge;
-									var position = element.calculatePosition(options)
+									var position = element.calculatePosition(options);
 									expect(position.top).toEqual(expectedValues[edge][j]);
 									expect(position.left).toEqual(expectedValues[edge][i]);
 									if (j++ == 2){

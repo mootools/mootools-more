@@ -1,9 +1,9 @@
 /*
-Script: Events.Pseudos.js
-	Specs for Events.Pseudos.js
-
-License:
-	MIT-style license.
+---
+name: Events.Pseudos Tests
+requires: [More/Events.Pseudos]
+provides: [Events.Pseudos.Tests]
+...
 */
 
 describe('Events.Pseudos', function(){
@@ -144,6 +144,9 @@ describe('Events.Pseudos', function(){
 	describe(':throttle pseudo', function(){
 
 		it('should only fire once in a certain timespan', function(){
+			//adding this extra pause here as otherwise this test fails intermittently when run with other tests for some reason - aaron
+			waits(100);
+			runs(function(){
 			var fn1 = jasmine.createSpy(':throttle pseudo one'),
 				fn2 = jasmine.createSpy(':throttle pseudo two'),
 				events = new Events();
@@ -181,6 +184,7 @@ describe('Events.Pseudos', function(){
 				expect(fn1.callCount).toEqual(3);
 				expect(fn2.callCount).toEqual(2);
 
+			});
 			});
 
 		});
@@ -302,7 +306,7 @@ describe('Events.Pseudos', function(){
 				order.push(split ? split.pseudo : 'org');
 				if (monitor) myMonitor = monitor;
 				if (fn) fn.apply(this, args);
-			}
+			};
 
 			Events.definePseudo('first', spy);
 			Events.definePseudo('second', spy);

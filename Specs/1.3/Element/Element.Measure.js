@@ -1,9 +1,9 @@
 /*
-Script: Element.Measure.js
-	Specs for Element.Measure.js
-
-License:
-	MIT-style license.
+---
+name: Element.Measure Tests
+requires: [More/Element.Measure]
+provides: [Element.Measure.Tests]
+...
 */
 
 describe('Element.Measure', function(){

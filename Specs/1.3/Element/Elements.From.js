@@ -1,3 +1,10 @@
+/*
+---
+name: Elements.From Tests
+requires: [More/Elements.From]
+provides: [Elements.From.Tests]
+...
+*/
 describe('Elements.From', {
 
 	'should return a group of elements': function(){

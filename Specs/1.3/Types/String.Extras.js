@@ -1,9 +1,9 @@
 /*
-Script: String.Extras.js
-	Specs for String.Extras.js
-
-License:
-	MIT-style license.
+---
+name: String.Extras Tests
+requires: [More/String.Extras]
+provides: [String.Extras.Tests]
+...
 */
 
 describe('String.standardize', {
