@@ -484,6 +484,18 @@ Form.Validator.addAllThese([
 				return el.get('value');
 			});
 		}
+	}],
+	
+	['length', {
+		errorMsg: function(element, props){
+			if (typeOf(props.length) != 'null')
+				return Form.Validator.getMsg('length').substitute({reqLength: props.length, length: element.get('value').length });
+			else return '';
+		},
+		test: function(element, props){
+			if (typeOf(props.length) != 'null') return (element.get('value').length == props.length || element.get('value').length == 0);
+			else return true;
+		}
 	}]
 
 ]);
