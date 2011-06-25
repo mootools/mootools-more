@@ -1,7 +1,7 @@
 /*
 ---
 name: Element.Event.Pseudos Tests
-requires: [More/Element.Event.Pseudos]
+requires: [More/Element.Event.Pseudos, Core/Request.JSON]
 provides: [Element.Event.Pseudos.Tests]
 ...
 */

@@ -1,7 +1,7 @@
 /*
 ---
 name: Element.Pin Tests
-requires: [More/Element.Pin]
+requires: [More/Element.Pin, Core/DomReady]
 provides: [Element.Pin.Tests]
 ...
 */
