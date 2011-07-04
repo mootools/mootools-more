@@ -153,7 +153,7 @@ var t = new HtmlTable({
 	sortable: true,
 	headers: ['fruit', 'colors']
 });
-t.inject($('mt-content'));
+t.inject(document.body);
 t.push(['apple', 'red']);
 t.push(['lemon', 'yellow']);
 t.push(['plumbs', 'purple']);
@@ -217,7 +217,7 @@ var myTable = new HtmlTable({
 	parsers : ['number', 'string', 'string', 'float', 'float']
 
 });
-$(myTable).inject($('mt-content'));
+$(myTable).inject(document.body);
 
 
 headers = ["hostname","model","rack","expire"];
@@ -251,6 +251,6 @@ var myTable = new HtmlTable({
 	rows: rows,
 	sortable: true
 });
-myTable.inject($('mt-content'));
+myTable.inject(document.body);
 
 </script>

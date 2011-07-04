@@ -34,7 +34,7 @@ var t = new HtmlTable({
 	headers: ['fruit', 'colors'],
 	footers: ['fruit', 'colors']
 });
-t.inject($('mt-content'));
+t.inject(document.body);
 t.push(['apple', [new Element('span', {'html': 'red'}), new Element('span', {'html': '(green)'})]]);
 t.push(['lemon', 'yellow']);
 t.push([{

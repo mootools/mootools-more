@@ -22,20 +22,16 @@ table.simple-table td, table.simple-table th {
 </style>
 <p>
 	You should see a simple html table below.
-	<table id="table-id"></table>
+	<table id="table-id" class="simple-table"></table>
 </p>
 <!-- no html -->
 <script src="/depender/build?require=More/HtmlTable"></script>
 <script>
 var t = new HtmlTable('table-id', {
-	properties: {
-		border: 1, cellspacing: 2, cellpadding: 3,
-		'class':'simple-table'
-	},
 	headers: ['fruit', 'colors'],
 	footers: ['fruit', 'colors']
 });
-t.inject($('mt-content'));
+t.inject(document.body);
 t.push(['apple', 'red']);
 t.push(['lemon', 'yellow']);
 t.push([{

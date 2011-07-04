@@ -35,7 +35,7 @@ var table = new HtmlTable({
 // set some headers
 table.setHeaders(['column1','column2']);
 // inject table into myElement
-table.inject($('mt-content'));
+table.inject(document.body);
 // push data to the table
 table.push(['hello','world']);
 // this is the trouble spot, it removes the tbody tag from the table
