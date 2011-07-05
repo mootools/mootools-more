@@ -129,7 +129,13 @@ var HtmlTable = new Class({
 			tr: new Element('tr', rowProperties).inject(target || this.body, where).adopt(tds),
 			tds: tds
 		};
-	}
+	},
+
+	pushMany: function(rows, rowProperties, target, tag, where){
+		return rows.map(function(row){
+			return this.push(row, rowProperties, target, tag, where);
+		}, this);
+	},
 
 });
 
