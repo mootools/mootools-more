@@ -353,6 +353,18 @@ Form.Validator.addAllThese([
 		}
 	}],
 
+	['length', {
+		errorMsg: function(element, props){
+			if (typeOf(props.length) != 'null')
+				return Form.Validator.getMsg('length').substitute({length:props.length,elLength:element.get('value').length });
+			else return '';
+		},
+		test: function(element, props){
+			if (typeOf(props.length) != 'null') return (element.get('value').length == props.length || element.get('value').length == 0);
+			else return true;
+		}
+	}],	
+	
 	['minLength', {
 		errorMsg: function(element, props){
 			if (typeOf(props.minLength) != 'null')
