@@ -127,6 +127,28 @@ describe('Form.Validator', function(){
 
 		});
 
+		describe('length', function(){
+
+			var validator = getValidator('length');
+
+			function length(value){
+				return { length: value };
+			}
+
+			it('should return false for fields with a length less than the specified length', function(){
+				expect(validator.test(createInput('12345'), length(10))).toEqual(false);
+			});
+
+			it('should return false for fields with a length greater than the specified length', function(){
+				expect(validator.test(createInput('12345'), length(3))).toEqual(false);
+			});
+
+			it('should return true for fields with a length equal to the specified length', function(){
+				expect(validator.test(createInput('12345'), length(5))).toEqual(true);
+			});
+
+		});
+
 		describe('minLength', function(){
 
 			var validator = getValidator('minLength');
