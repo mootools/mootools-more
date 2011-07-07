@@ -50,10 +50,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	initialize: function (){
 		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
-        this.sorted = {index: null,
-                       reverse: [],
-                       order: [],
-                       lastSortOrder: []};
+		this.sorted = {index: null, reverse: [], order: [], lastSortOrder: []};
 		if (!this.bound) this.bound = {};
 		this.bound.headClick = this.headClick.bind(this);
 		this.sortSpans = new Elements();
