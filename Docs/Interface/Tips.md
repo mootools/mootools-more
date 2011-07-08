@@ -29,13 +29,15 @@ Tips Method: constructor
 * hideDelay - (*number*: defaults to 100) The delay the hide hide is fired.
 * title - (*string|function*: defaults to title) The property of the element to be used for the tip-title. If this option is a function it will execute it on every element with it passed as the first argument. It uses the return value of this function as the tip-title
 * text - (*string|function*) Behaves the same as the `title` option but for tip-text. By default it either uses the `rel` or the `href` attribute as tip-text.
-* className - (*string*: defaults to null) the className your tooltip container will get. Useful for extreme styling.
+* className - (*string*: defaults to *null*) The className your tooltip container will get. Useful for styling.
  * The tooltip element inside the tooltip container above will have 'tip' as classname.
  * The title will have as classname: tip-title
  * The text will have as classname: tip-text
-* offset - (*object*: defaults to {'x': 16, 'y': 16}) The distance of your tooltip from the mouse.
-* fixed - (*boolean*: defaults to false) If set to true, the toolTip will not follow the mouse.
-* windowPadding - (*object*; defaults to {'x':0, 'y': 0}) Allows you to reduce or expand the virtual size of the window for tip positioning. The tips will not be allowed to approach the edge of the window on any side based on this offset.
+* offset - (*object*: defaults to {x: 16, y: 16}) The distance of your tooltip from the mouse.
+* fixed - (*boolean*: defaults to *false*) If set to true, the tooltip will not follow the mouse.
+* windowPadding - (*object*; defaults to {x: 0, y: 0}) Allows you to reduce or expand the virtual size of the window for tip positioning. The tips will not be allowed to approach the edge of the window on any side based on this offset.
+* id - (*string*: defaults to *null*) Add an `id` to the tooltip element, required for WAI-ARIA support.
+* waiAria - (*boolean*: defaults to *true*) Requires the `id` option to be set. Enable [WAI-ARIA](http://www.w3.org/WAI/intro/aria.php) support. Adds aria-attributes to the tooltip.
 
 ### Events
 
