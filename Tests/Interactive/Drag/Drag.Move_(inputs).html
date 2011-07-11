@@ -1,0 +1,22 @@
+<style>
+#box {
+	width: 200px;
+	height: 100px;
+	padding: 20px;
+	position: absolute;
+	border: 5px solid #333;
+	background: white;
+}
+</style>
+
+<p>You should be able to drag the whole box, but also be able to select the text in the input box and change it easily</p>
+
+<div id="box">
+	<input type="text" value="try to select me" />
+</div>
+
+<script src="/depender/build?require=More/Drag.Move"></script>
+
+<script>
+$('box').makeDraggable();
+</script>

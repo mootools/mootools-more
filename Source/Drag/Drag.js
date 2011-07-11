@@ -98,7 +98,10 @@ var Drag = new Class({
 	start: function(event){
 		var options = this.options;
 
-		if (event.rightClick) return;
+		if (
+			event.rightClick
+			|| ['button', 'input', 'a', 'textarea'].contains(event.target.get('tag'))
+		) return;
 
 		if (options.preventDefault) event.preventDefault();
 		if (options.stopPropagation) event.stopPropagation();
