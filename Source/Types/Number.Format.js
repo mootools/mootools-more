@@ -97,9 +97,7 @@ Number.implement({
 	formatPercentage: function(decimals){
 		var locale = Locale.get('Number.percentage') || {};
 		if (locale.suffix == null) locale.suffix = '%';
-		
-		if (!decimals && decimals !== 0) { decimals = locale.decimals; }
-		locale.decimals = decimals;
+		local.decimals = typeOf(decimals) === 'number' ? decimals : locale.decimals;
 
 		return this.format(locale);
 	}
