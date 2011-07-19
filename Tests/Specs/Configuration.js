@@ -125,7 +125,7 @@ Configuration.source = {
 	},
 
 	'more-1.3-base': {
-		path: '../Source/',
+		path: '../../Source/',
 		files: [
 			'More/More',
 
@@ -160,7 +160,7 @@ Configuration.source = {
 	},
 
 	'more-1.3-client': {
-		path: '../Source/',
+		path: '../../Source/',
 		files: [
 			'Class/Class.Occlude',
 
@@ -200,7 +200,7 @@ Configuration.source = {
 	},
 
 	'more-others': {
-		path: '../Source/',
+		path: '../../Source/',
 		files: [
 			'Drag/Drag',
 			'Drag/Drag.Move',
