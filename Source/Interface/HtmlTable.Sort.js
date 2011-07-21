@@ -132,7 +132,10 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	restore: function(tableState){
 		if(this.options.sortable && tableState.sortIndex){
-			this.sort(tableState.sortIndex, tableState.sortReverse);
+			this.sorted.lastSortOrder = tableState.sortOrder;
+			this.sorted.reverse = tableState.sortReverse;
+			this.sorted.index = tableState.sortIndex;
+			this.reSort();
 		}
 		this.previous.apply(this, arguments);
 	},
