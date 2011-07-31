@@ -11,7 +11,6 @@ license: MIT-style license
 
 authors:
   - Aaron Newton
-  - Fred Cox
 
 requires:
   - Core/Options
@@ -107,27 +106,20 @@ var HtmlTable = new Class({
 	},
 
 	update: function(tr, row, tag){
-		var tds = tr.getChildren(tag || 'td');
+		var tds = tr.getChildren(tag || 'td'), last = tds.length - 1;
+
 		row.each(function(data, index){
 			var td = tds[index] || new Element(tag || 'td').inject(tr),
 				content = (data ? data.content : '') || data,
 				type = typeOf(content);
 
-			if (data && data.properties){
-				td.set(data.properties);
-			}
-			
-			if (['element', 'array', 'collection', 'elements'].contains(type)){
-				td.empty();
-				td.adopt(content);
-			}
+			if (data && data.properties) td.set(data.properties);
+			if (/(element(s?)|array|collection)/.test(type)) td.empty().adopt(content);
 			else td.set('html', content);
+
+			if (index > last) tds.push(td);
+			else tds[index] = td;
 		});
-		
-		if (tds.length > row.count) for(var i = tds.length - 1; i >= row.count; i--){
-			tds[i].destroy();
-			tds.erase(tds[i]);
-		}
 
 		return {
 			tr: tr,
