@@ -96,6 +96,8 @@ describe('HtmlTable', function(){
 		});
 
 		it('should push a row to the designated location', function(){
+			var t = new HtmlTable();
+			t.push(['red', 'blue']);
 			var rows = t.body.rows;
 			var value = t.push(['kiwi', 'green'], {}, rows[0], 'td', 'before');
 			expect(value.tr).toEqual(t.body.rows[0]);
@@ -104,21 +106,23 @@ describe('HtmlTable', function(){
 	});
 
 	describe('HtmlTable:pushMany', function(){
-		var t = new HtmlTable();
-		var rows = t.pushMany([
-				[1, 'one'],
-				[2, 'two'],
-				[3, 'three']
-			], {
-			'class': 'tableRowClass'
+		it('should push many rows', function(){
+			var t = new HtmlTable();
+			var rows = t.pushMany([
+					[1, 'one'],
+					[2, 'two'],
+					[3, 'three']
+				], {
+				'class': 'tableRowClass'
+			});
+			expect(rows.length).toEqual(3);
+			expect(t.body.rows.length).toEqual(3);
+			expect(rows[0].tr.hasClass).toBeTruthy();
+			tds = t.body.rows[0].getElements('td');
+			expect(tds.length).toEqual(2);
+			expect(tds[0].get('text')).toEqual('1');
+			expect(tds[1].get('text')).toEqual('one');
 		});
-		expect(rows.length).toEqual(3);
-		expect(t.body.rows.length).toEqual(3);
-		expect(rows[0].tr.get('class')).toEqual('tableRowClass');
-		tds = t.body.rows[0].getElements('td');
-		expect(tds.length).toEqual(2);
-		expect(tds[0].get('text')).toEqual('1');
-		expect(tds[1].get('text')).toEqual('one');
 
 	});
 
