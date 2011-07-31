@@ -353,10 +353,22 @@ Form.Validator.addAllThese([
 		}
 	}],
 
+	['length', {
+		errorMsg: function(element, props){
+			if (typeOf(props.length) != 'null')
+				return Form.Validator.getMsg('length').substitute({length: props.length, elLength: element.get('value').length});
+			else return '';
+		},
+		test: function(element, props){
+			if (typeOf(props.length) != 'null') return (element.get('value').length == props.length || element.get('value').length == 0);
+			else return true;
+		}
+	}],	
+
 	['minLength', {
 		errorMsg: function(element, props){
 			if (typeOf(props.minLength) != 'null')
-				return Form.Validator.getMsg('minLength').substitute({minLength:props.minLength,length:element.get('value').length });
+				return Form.Validator.getMsg('minLength').substitute({minLength: props.minLength, length: element.get('value').length});
 			else return '';
 		},
 		test: function(element, props){
@@ -369,7 +381,7 @@ Form.Validator.addAllThese([
 		errorMsg: function(element, props){
 			//props is {maxLength:10}
 			if (typeOf(props.maxLength) != 'null')
-				return Form.Validator.getMsg('maxLength').substitute({maxLength:props.maxLength,length:element.get('value').length });
+				return Form.Validator.getMsg('maxLength').substitute({maxLength: props.maxLength, length: element.get('value').length});
 			else return '';
 		},
 		test: function(element, props){
