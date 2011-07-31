@@ -126,6 +126,17 @@ describe('HtmlTable', function(){
 
 	});
 
+	describe('HtmlTable:update', function(){
+
+		it('should update a table row', function(){
+			var table = new HtmlTable();
+			var row = table.push(['hello','world']);
+			var newrow = table.update(row.tr, ['I','work']);
+			expect(newrow.tds.get('text')).toEqual(['I', 'work']);
+		});
+
+	});
+
 	describe('HtmlTable cloned Element methods', function(){
 
 		var t = new HtmlTable({

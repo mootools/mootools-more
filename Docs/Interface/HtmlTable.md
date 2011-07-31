@@ -121,6 +121,25 @@ Note that it can also be an actual *TR* element.
 ### Example of Object Returned
 
 	{tr: theTableRow, tds: [td, td, td]}
+	
+HtmlTable Method: update {#HtmlTable:push}
+----------------------------------------
+
+Update a table row
+
+### Syntax
+
+	myHtmlTable.update(tr, row);
+
+### Arguments
+
+1. tr - (*TR* element) the row to update
+2. row - (*array* or *element*) the data for the row or *TR* element. Same as the row data sent to [HtmlTable.push][]
+
+### Returns
+
+* (*object*) an object containing the tr and td tags.
+
 
 
 HtmlTable Method: pushMany {#HtmlTable:pushMany}
