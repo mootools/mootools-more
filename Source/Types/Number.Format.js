@@ -94,10 +94,10 @@ Number.implement({
 		return this.format(locale);
 	},
 
-	formatPercentage: function(){
+	formatPercentage: function(decimals){
 		var locale = Locale.get('Number.percentage') || {};
 		if (locale.suffix == null) locale.suffix = '%';
-		if (locale.decimals == null) locale.decimals = 2;
+		if (decimals != null) local.decimals = decimals;
 
 		return this.format(locale);
 	}
