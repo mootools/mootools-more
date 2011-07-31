@@ -26,7 +26,7 @@ var pseudos = {},
 while (count--) pseudos[copyFromEvents[count]] = Events.lookupPseudo(copyFromEvents[count]);
 
 Event.definePseudo = function(key, listener){
-	pseudos[key] = Type.isFunction(listener) ? {listener: listener} : listener;
+	pseudos[key] = listener;
 	return this;
 };
 
