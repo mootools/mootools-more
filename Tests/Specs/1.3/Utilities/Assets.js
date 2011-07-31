@@ -43,9 +43,9 @@ describe('Assets', function(){
 			var myCSS = Asset.css('../assets/Assets.css.test.css', {
 				id: 'myStyle',
 				title: 'myStyle',
-				events: {load: function(){
+				onload: function(){
 					load(this);
-				}}
+				}
 			});
 
 			waits(500);
@@ -53,8 +53,7 @@ describe('Assets', function(){
 			runs(function(){
 				expect(myCSS.get('tag')).toEqual('link');
 				expect(myCSS.id).toEqual('myStyle');
-				// Current implementation of assets uses the load event which only works in IE/Opera
-				// expect(load).toHaveBeenCalledWith(myCSS);
+				expect(load).toHaveBeenCalledWith(myCSS);
 				myCSS.destroy();
 			});
 
