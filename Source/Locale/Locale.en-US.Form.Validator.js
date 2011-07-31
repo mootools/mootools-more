@@ -21,7 +21,7 @@ provides: [Locale.en-US.Form.Validator]
 Locale.define('en-US', 'FormValidator', {
 
 	required: 'This field is required.',
-        length: 'Please enter {length} characters (you entered {elLength} characters)',
+	length: 'Please enter {length} characters (you entered {elLength} characters)',
 	minLength: 'Please enter at least {minLength} characters (you entered {length} characters).',
 	maxLength: 'Please enter no more than {maxLength} characters (you entered {length} characters).',
 	integer: 'Please enter an integer in this field. Numbers with decimals (e.g. 1.25) are not permitted.',
