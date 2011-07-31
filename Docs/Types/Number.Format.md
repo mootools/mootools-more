@@ -58,7 +58,11 @@ Formats a number as currency, with respect to localization.
 
 ### Syntax
 
-	myNumber.formatCurrency();
+	myNumber.formatCurrency(decimals);
+
+### Arguments
+
+1. decimals - (*number*) the number of decimals
 
 ### Example
 
@@ -76,7 +80,11 @@ Formats a number as a percentage.
 
 ### Syntax
 
-	myNumber.formatPercentage();
+	myNumber.formatPercentage(decimals);
+
+### Arguments
+
+1. decimals - (*number*) the number of decimals
 
 ### Example
 

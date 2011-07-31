@@ -62,6 +62,7 @@ describe('Number.Format', function(){
 
 		it('should format a currency', function(){
 			expect((2000).formatCurrency()).toEqual('$ 2,000.00');
+			expect((2000).formatCurrency(0)).toEqual('$ 2,000');
 		});
 
 		it('should format a negative currency', function(){
@@ -73,7 +74,9 @@ describe('Number.Format', function(){
 		});
 
 		it('should format percentage', function(){
-			expect((50).formatPercentage()).toEqual('50.00%');
+			expect((50.123).formatPercentage()).toEqual('50.12%');
+			expect((50.123).formatPercentage(1)).toEqual('50.1%');
+			expect((50.123).formatPercentage(0)).toEqual('50%');
 		});
 
 		it('should not change the options object', function(){
