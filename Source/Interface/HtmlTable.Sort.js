@@ -215,11 +215,16 @@ HtmlTable = Class.refactor(HtmlTable, {
 			rel = this.body.getParent();
 			this.body.dispose();
 		}
-
-		var data = this.parseData(parser).sort(function(a, b){
-			if (a.value === b.value) return 0;
-			return a.value > b.value ? 1 : -1;
-		});
+		
+		var sorter = parser.sorter; 
+		if (!sorter){ 
+			sorter = function(a, b){ 
+				if (a.value === b.value) return 0; 
+				return a.value > b.value ? 1 : -1; 
+			} 
+		} 
+		
+		var data = this.parseData(parser).sort(sorter); 
 
 		if (this.sorted.reverse == (parser == HtmlTable.Parsers['input-checked'])) data.reverse(true);
 		this.setRowSort(data, pre);
