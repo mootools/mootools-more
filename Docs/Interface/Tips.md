@@ -133,7 +133,7 @@ To override the default tip hide behavior, you must either declare the onHide ev
 		myTips.removeEvents('hide').addEvent('hide', function(tip, el){
 			tip.fade('out').get('tween').chain(function(){
 				tip.setStyle('display', 'none');
-			}
+			});
 		});
 
 Tips Method: setTitle {#Tips:setTitle}
