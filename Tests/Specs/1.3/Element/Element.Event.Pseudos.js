@@ -15,7 +15,13 @@ describe('Element.Event.Pseudos', function(){
 		eventArgs = ['one', 'two', 'three'];
 
 		Event.definePseudo('test', function(split, fn, args){
-			expect(split).toEqual({
+			console.log(split);
+			expect({
+				event: split.event,
+				value: split.value,
+				pseudo: split.pseudo,
+				original: split.original
+			}).toEqual({
 				event: 'e',
 				value: 'foo',
 				pseudo: 'test',
@@ -34,25 +40,12 @@ describe('Element.Event.Pseudos', function(){
 	describe('pseudos', function(){
 
 		it('once: should fire the event once', function(){
+			var spy = jasmine.createSpy('click');
+			var element = new Element('div');
+			element.addEvent('click:once', spy);
+			element.fireEvent('click');
 
-			var i = 0;
-
-			var database = new Class({
-				Implements: Events,
-
-				connect: function(){
-					return this.fireEvent('connect');
-				}
-			});
-
-			var db = new database();
-			db.addEvent('connect:once', function(){
-				i++;
-			});
-			db.connect().connect();
-
-			expect(i).toEqual(1);
-
+			expect(spy.callCount).toEqual(1);
 		});
 
 	});
