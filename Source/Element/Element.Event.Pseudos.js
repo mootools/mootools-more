@@ -10,16 +10,16 @@ license: MIT-style license
 authors:
   - Arian Stolwijk
 
-requires: [Core/Element.Event, Events.Pseudos]
+requires: [Core/Element.Event, Core/Element.Delegation, Events.Pseudos]
 
-provides: [Element.Event.Pseudos]
+provides: [Element.Event.Pseudos, Element.Delegation]
 
 ...
 */
 
 (function(){
 
-var pseudos = {},
+var pseudos = {relay: false},
 	copyFromEvents = ['once', 'throttle', 'pause'],
 	count = copyFromEvents.length;
 

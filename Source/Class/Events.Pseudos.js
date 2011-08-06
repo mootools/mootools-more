@@ -72,24 +72,22 @@ Events.Pseudos = function(pseudos, addEvent, removeEvent){
 				eventType = split[0].event,
 				args = Array.slice(arguments, 2),
 				stack = fn,
-				self = this,
-				monitor;
+				self = this;
 
 			split.each(function(item){
 				var listener = item.listener,
 					stackFn = stack;
 				if (listener == false) eventType += ':' + item.pseudo + '(' + item.value + ')';
 				else stack = function(){
-					listener.call(self, item, stackFn, arguments, monitor);
+					listener.call(self, item, stackFn, arguments, stack);
 				};
 			});
-			monitor = stack.bind(this);
 
-			events.include({type: eventType, event: fn, monitor: monitor});
+			events.include({type: eventType, event: fn, monitor: stack});
 			storage.store(type, events);
 
 			if (type != eventType) addEvent.apply(this, [type, fn].concat(args));
-			return addEvent.apply(this, [eventType, monitor].concat(args));
+			return addEvent.apply(this, [eventType, stack].concat(args));
 		},
 
 		removeEvent: function(type, fn){
