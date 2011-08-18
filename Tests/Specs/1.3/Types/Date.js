@@ -573,6 +573,7 @@ describe('Date', function(){
 			expect(Date.isValid(new Date())).toEqual(true);
 			expect(new Date('foo').isValid()).toEqual(false);
 			expect(Date.isValid(new Date('foo'))).toEqual(false);
+			expect(Date.isValid(null)).toEqual(false);
 		});
 
 	});
