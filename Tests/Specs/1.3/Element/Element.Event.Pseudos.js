@@ -15,7 +15,6 @@ describe('Element.Event.Pseudos', function(){
 		eventArgs = ['one', 'two', 'three'];
 
 		Event.definePseudo('test', function(split, fn, args){
-			console.log(split);
 			expect({
 				event: split.event,
 				value: split.value,
