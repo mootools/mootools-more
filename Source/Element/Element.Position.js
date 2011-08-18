@@ -65,22 +65,21 @@ var local = Element.Position = {
 	},
 
 	setOffsetOption: function(element, options){
-		var parentOffset = {x: 0, y: 0},
-			offsetParent = element.measure(function(){
-				return document.id(this.getOffsetParent());
-			}),
-			parentScroll = offsetParent.getScroll();
+		var offsetParent = element.measure(function(){
+			return document.id(this.getOffsetParent());
+		});
 
 		if (!offsetParent || offsetParent == element.getDocument().body) return;
-		parentOffset = offsetParent.measure(function(){
-			var position = this.getPosition();
-			if (this.getStyle('position') == 'fixed'){
-				var scroll = window.getScroll();
-				position.x += scroll.x;
-				position.y += scroll.y;
-			}
-			return position;
-		});
+		var parentScroll = offsetParent.getScroll(),
+			parentOffset = offsetParent.measure(function(){
+				var position = this.getPosition();
+				if (this.getStyle('position') == 'fixed'){
+					var scroll = window.getScroll();
+					position.x += scroll.x;
+					position.y += scroll.y;
+				}
+				return position;
+			});
 
 		options.offset = {
 			parentPositioned: offsetParent != document.id(options.relativeTo),
