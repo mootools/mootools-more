@@ -135,7 +135,7 @@ Fx.Scroll = new Class({
 			if (offset && offset[axis]) to[axis] = to[axis] + offset[axis];
 		}, this);
 
-		if (to.x != scroll.x || to.y != scroll.y) this.start(to.x, to.y);
+    this.start(to.x, to.y);
 		return this;
 	},
 
@@ -156,7 +156,7 @@ Fx.Scroll = new Class({
 			if (offset && offset[axis]) to[axis] = to[axis] + offset[axis];
 		}, this);
 
-		if (to.x != scroll.x || to.y != scroll.y) this.start(to.x, to.y);
+    this.start(to.x, to.y);
 		return this;
 	}
 
