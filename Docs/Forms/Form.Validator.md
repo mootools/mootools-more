@@ -519,10 +519,10 @@ Validator: validate-currency-dollar {#Validators:validate-currency-dollar}
 
 Validates that the entry matches any of the following:
 
-	* [$]1[##][,###]+[.##]
-	* [$]1###+[.##]
-	* [$]0.##
-	* [$].##
+* [$]1[\#\#][,\#\#\#]+[.\#\#]
+* [$]1\#\#\#+[.\#\#]
+* [$]0.\#\#
+* [$].\#\#
 
 Error Msg: "Please enter a valid $ amount. For example $100.00 ."
 
