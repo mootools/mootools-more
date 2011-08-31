@@ -23,7 +23,7 @@ var keysStoreKey = '$moo:keys-pressed',
 	keysKeyupStoreKey = '$moo:keys-keyup';
 
 
-Event.definePseudo('keys', function(split, fn, args){
+DOMEvent.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
 		keys = [],
@@ -54,7 +54,7 @@ Event.definePseudo('keys', function(split, fn, args){
 
 });
 
-Object.append(Event.Keys, {
+DOMEvent.defineKeys({
 	'shift': 16,
 	'control': 17,
 	'alt': 18,

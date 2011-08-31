@@ -7,14 +7,14 @@ provides: [Element.Event.Pseudos.Tests]
 */
 describe('Element.Event.Pseudos', function(){
 
-	it('tests the Event.definePseudo function', function(){
+	it('tests the DOMEvent.definePseudo function', function(){
 
 		var eventFn =  function(){
 			return 'bar';
 		},
 		eventArgs = ['one', 'two', 'three'];
 
-		Event.definePseudo('test', function(split, fn, args){
+		DOMEvent.definePseudo('test', function(split, fn, args){
 			expect({
 				event: split.event,
 				value: split.value,

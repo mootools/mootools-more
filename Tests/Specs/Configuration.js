@@ -15,6 +15,11 @@ Configuration.presets = {
 		source: ['core-1.3-base', 'more-1.3-base']
 	},
 
+	'more-1.4': {
+		sets: ['1.3-base', '1.3client'],
+		source: ['core-1.4-base', 'more-1.4-base']
+	},
+
 	'more-all': {
 		sets: ['1.3-base', '1.3-client'],
 		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']
@@ -104,7 +109,6 @@ Configuration.source = {
 
 			'Element/Element',
 			'Element/Element.Event',
-			'Element/Element.Delegation',
 			'Element/Element.Style',
 			'Element/Element.Dimensions',
 
@@ -161,6 +165,133 @@ Configuration.source = {
 	},
 
 	'more-1.3-client': {
+		path: '../../Source/',
+		files: [
+			'Class/Class.Occlude',
+
+			'Element/Element.Forms',
+			'Element/Element.Measure',
+			'Element/Element.Shortcuts',
+			'Element/Elements.From',
+
+			'Element/Element.Event.Pseudos',
+			'Element/Element.Event.Pseudos.Keys',
+			'Element/Element.Delegation',
+
+			'Element/Element.Pin',
+			'Element/Element.Position',
+
+			'Forms/Form.Validator',
+
+			'Types/URI',
+			'Types/URI.Relative',
+
+			'Interface/Keyboard',
+			'Interface/Keyboard.Extras',
+			'Interface/HtmlTable',
+			'Interface/HtmlTable.Sort',
+			'Interface/HtmlTable.Select',
+			'Interface/HtmlTable.Zebra',
+
+			'Fx/Fx.Reveal',
+			'Fx/Fx.Slide',
+
+			'Request/Request.JSONP',
+
+			'Utilities/Hash.Cookie',
+			'Utilities/Assets',
+			'Utilities/Table'
+		]
+	},
+
+	'core-1.4-base': {
+		path: 'mootools-core/Source/',
+		files: [
+			'Core/Core',
+
+			'Slick/Slick.Parser',
+
+			'Types/Array',
+			'Types/Function',
+			'Types/Number',
+			'Types/String',
+			'Types/Object',
+
+			'Class/Class',
+			'Class/Class.Extras',
+
+			'Fx/Fx'
+		]
+	},
+	'core-1.4-client': {
+		path: 'mootools-core/Source/',
+		files: [
+			'Types/DOMEvent',
+
+			'Browser/Browser',
+
+			'Slick/Slick.Parser',
+			'Slick/Slick.Finder',
+
+			'Element/Element',
+			'Element/Element.Event',
+			'Element/Element.Delegation',
+			'Element/Element.Style',
+			'Element/Element.Dimensions',
+
+			'Utilities/DOMReady',
+			'Utilities/JSON',
+			'Utilities/Cookie',
+			'Utilities/Swiff',
+
+			'Fx/Fx',
+			'Fx/Fx.CSS',
+			'Fx/Fx.Tween',
+			'Fx/Fx.Morph',
+			'Fx/Fx.Transitions',
+
+			'Request/Request',
+			'Request/Request.HTML',
+			'Request/Request.JSON'
+		]
+	},
+
+	'more-1.4-base': {
+		path: '../../Source/',
+		files: [
+			'More/More',
+
+			'Class/Chain.Wait',
+			'Class/Class.Binds',
+			'Class/Class.Refactor',
+			'Class/Events.Pseudos',
+
+			'Locale/Locale',
+			'Locale/Locale.en-US.Form.Validator',
+			'Locale/Locale.en-US.Date',
+			'Locale/Locale.fr-FR.Date',
+			'Locale/Locale.en-US.Number',
+
+
+			'Types/Array.Extras',
+			'Types/Object.Extras',
+			'Types/Hash',
+			'Types/Hash.Extras',
+			'Types/Date',
+			'Types/Date.Extras',
+			'Types/String.Extras',
+			'Types/String.QueryString',
+
+			'Types/Number.Format',
+
+			'Utilities/Color',
+			'Utilities/Group',
+			'Utilities/Table'
+
+		]
+	},
+
+	'more-1.4-client': {
 		path: '../../Source/',
 		files: [
 			'Class/Class.Occlude',

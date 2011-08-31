@@ -8,7 +8,7 @@ provides: [Events.Pseudos.Tests]
 
 describe('Events.Pseudos', function(){
 
-	it('should implement Event.Psuedos in already existing classes defined in core', function(){
+	it('should implement DOMEvent.Psuedos in already existing classes defined in core', function(){
 		var callback = jasmine.createSpy('complete'),
 			fx = new Fx();
 

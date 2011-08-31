@@ -25,7 +25,7 @@ var pseudos = {relay: false},
 
 while (count--) pseudos[copyFromEvents[count]] = Events.lookupPseudo(copyFromEvents[count]);
 
-Event.definePseudo = function(key, listener){
+DOMEvent.definePseudo = function(key, listener){
 	pseudos[key] = listener;
 	return this;
 };
