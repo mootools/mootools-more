@@ -30,6 +30,9 @@ th.table-th-sort-rev {
 }
 </style>
 <script src="/depender/build?require=More/HtmlTable.Sort,More/HtmlTable.Zebra"></script>
+
+<div id="myTable"></div>
+
 <script>
 var data = [
 	{"id":56,"timezone":"Europe/Amsterdam","name":"Amsterdam","geolat":52.3789,"geolong":4.90067},
@@ -89,5 +92,5 @@ var myTable = new HtmlTable({
 	parsers : ['number', 'string', 'string', 'float', 'float']
 
 });
-$(myTable).inject(document.body);
+$(myTable).inject('myTable');
 </script>

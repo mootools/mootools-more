@@ -1,4 +1,5 @@
 <style>
+
 table.simple-table {
 	border: solid #777;
 	border-width: 0px 0px 1px 1px;
@@ -19,19 +20,29 @@ table.simple-table td, table.simple-table th {
 	border-right: 1px solid #777;
 	border-top: 1px solid #777;
 }
+#newTable {
+	border: 1px solid navy;
+	border-radius: 5px;
+	padding: 20px;
+}
 </style>
+
 <p>
-	You should see a simple html table below.
-	<table id="table-id" class="simple-table"></table>
+	You should see a simple html table below inside the blue bordered element
 </p>
-<!-- no html -->
+
+<table id="table-id" class="simple-table"></table>
+
+<div id="newTable"></div>
+
 <script src="/depender/build?require=More/HtmlTable"></script>
+
 <script>
 var t = new HtmlTable('table-id', {
 	headers: ['fruit', 'colors'],
 	footers: ['fruit', 'colors']
 });
-t.inject(document.body);
+t.inject('newTable');
 t.push(['apple', 'red']);
 t.push(['lemon', 'yellow']);
 t.push([{
