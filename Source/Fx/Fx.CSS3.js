@@ -23,18 +23,17 @@ provides: [Fx.CSS3Funcs]
 				style = document.documentElement.style;
 			for (var l = prefixes.length; l--;){
 				var prefix = prefixes[l];
-				if (typeof style[(prefix ? prefix + 'T' : 't') + 'ransition'] != 'undefined') return prefix;
+				if (typeof style[prefix + 'Transition'] != 'undefined') return prefix;
 			}
 			return false;
 		})();
 		
 		if(prefix) {
-			var t = prefix ? prefix + 'T' : 't';
 			return {
-				transition: t + 'ransition',
-				transitionProperty: t + 'ransitionProperty',
-				transitionDuration: t + 'ransitionDuration',
-				transitionTimingFunction : t + 'ransitionTimingFunction',
+				transition: prefix + 'Transition',
+				transitionProperty: prefix + 'TransitionProperty',
+				transitionDuration: prefix + 'TransitionDuration',
+				transitionTimingFunction : prefix + 'TransitionTimingFunction',
 				transitionend: (prefix == 'ms' || prefix == 'Moz') ? 'transitionEnd' : prefix + 'TransitionEnd'
 			}
 		}
@@ -86,14 +85,21 @@ provides: [Fx.CSS3Funcs]
 		'quint:in:out'	: '0.9,0,0.1,1'
 	};
 
-	var animatable = ['background-color', 'background-image', 'background-position', 'border-bottom-color', 'border-bottom-width',
-		'border-color', 'border-left-color', 'border-left-width', 'border-right-color', 'border-right-width', 'border-spacing',
-		'border-top-color', 'border-top-width', 'border-width', 'bottom', 'color', 'crop', 'font-size', 'font-weight',
-		'grid-*', 'height', 'left', 'letter-spacing', 'line-height', 'margin-bottom', 'margin-left', 'margin-right',
+	var animatable = ['background-color', 'border-bottom-width', 'border-left-width', 'border-right-width',
+		'border-spacing', 'border-top-width', 'border-width', 'bottom', 'color', 'font-size', 'font-weight',
+		'height', 'left', 'letter-spacing', 'line-height', 'margin-bottom', 'margin-left', 'margin-right',
 		'margin-top', 'max-height', 'max-width', 'min-height', 'min-width', 'opacity', 'outline-color', 'outline-offset',
-		'outline-width', 'padding-bottom', 'padding-left', 'padding-right', 'padding-top', 'right', 'text-indent', 'text-shadow',
-		'top', 'vertical-align', 'visibility', 'width', 'word-spacing', 'z-index', 'zoom'];
+		'outline-width', 'padding-bottom', 'padding-left', 'padding-right', 'padding-top', 'right', 'text-indent', 
+		'top', 'vertical-align', 'visibility', 'width', 'word-spacing', 'z-index'];
 
+	/*
+	This is a list of properties listed by w3c but that are currently largely unsupported
+	http://www.w3.org/TR/css3-transitions/#animatable-properties-
+	http://www.opera.com/docs/specs/presto29/css/transitions/
+	
+	var unsupported = ['background-image', 'background-position', 'border-bottom-color', 'border-color', 'border-left-color',
+		'border-right-color', 'border-top-color', 'crop', 'grid-*', 'text-shadow', 'zoom']
+	*/
 
 	Fx.CSS3Funcs = {
 		initialize: function(element, options){
@@ -104,6 +110,50 @@ provides: [Fx.CSS3Funcs]
 				}
 			}
 			this.parent(element, options);
+		},
+		
+		startCSS3: function(properties, from, to, complete) {
+			if(this.boundComplete) return this;
+			
+			if(!Object.isEqual(from, to)) {
+				var preTransStyles = this.element.getStyles(Fx.CSS3Funcs.css3Features.transitionProperty,
+					Fx.CSS3Funcs.css3Features.transitionDuration,
+					Fx.CSS3Funcs.css3Features.transitionTimingFunction);
+				
+				complete = complete || function() { return true; };
+				
+				this.boundComplete = function(e) {
+					if(complete(e)) {
+						this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+						this.element.setStyles(preTransStyles);
+						this.boundComplete = null;
+						this.fireEvent('complete', this);
+					}
+				}.bind(this);
+
+				this.element.addEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+				
+				var trans = function(){
+					var transStyles = {};
+					transStyles[Fx.CSS3Funcs.css3Features.transitionProperty] =
+						properties.reduce(function(a, b) { return a + ', '  + b; });
+					transStyles[Fx.CSS3Funcs.css3Features.transitionDuration] = this.options.duration + 'ms';
+					transStyles[Fx.CSS3Funcs.css3Features.transitionTimingFunction] = 
+						'cubic-bezier(' + Fx.CSS3Funcs.transitionTimings[this.options.transition] + ')';
+					this.element.setStyles(transStyles);
+					this.set(this.compute(from, to, 1));
+				}.bind(this);
+				
+				this.element.setStyle(Fx.CSS3Funcs.css3Features.transitionProperty, 'none');
+				this.set(this.compute(from, to, 0));
+				trans.delay(0.1);
+				this.fireEvent('start', this);
+			}
+			else {
+				this.fireEvent('start', this);
+				this.fireEvent('complete', this);
+			}
+			return this;
 		},
 
 		cancel: function(){

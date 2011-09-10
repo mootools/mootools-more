@@ -26,33 +26,11 @@ provides: [Fx.Tween.CSS3]
 		},
 
 		start: function(property, from, to){
-			if ((this.css3Supported = this.checkCSS3(property))) {
-				if(this.boundComplete) return this;
-				var args = Array.flatten(arguments);
-				this.property = this.options.property || args.shift();
+			var args = Array.flatten(arguments);
+			this.property = this.options.property || args.shift();
+			if ((this.css3Supported = this.checkCSS3(this.property))) {
 				var parsed = this.prepare(this.element, this.property, args);
-				this.from = parsed.from;
-				this.to = parsed.to;
-				this.boundComplete = function(event){
-					if (event.getPropertyName() == this.property){
-						this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
-						this.boundComplete = null;
-						this.fireEvent('complete', this);
-					}
-				}.bind(this);
-				this.element.addEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
-				var trans = function(){
-					this.element.setStyle(Fx.CSS3Funcs.css3Features.transition, this.property + ' ' + this.options.duration + 'ms cubic-bezier(' + Fx.CSS3Funcs.transitionTimings[this.options.transition] + ')');
-					this.set(this.compute(parsed.from, parsed.to, 1));
-				}.bind(this);
-				if (args[1]){
-					this.element.setStyle(Fx.CSS3Funcs.css3Features.transition, 'none');
-					this.set(this.compute(parsed.from, parsed.to, 0));
-					trans.delay(0.1);
-				} else
-					trans();
-				this.fireEvent('start', this);
-				return this;
+				return this.startCSS3([this.property], parsed.from, parsed.to);
 			}
 			return this.parent(property, from, to);
 		}
