@@ -31,6 +31,7 @@ var Sortables = new Class({
 		onComplete: function(element){},*/
 		opacity: 1,
 		clone: false,
+		cloneClass: 'clone',
 		revert: false,
 		handle: false,
 		dragOptions: {}/*<1.2compat>*/,
@@ -114,7 +115,7 @@ var Sortables = new Class({
 			width: element.getStyle('width')
 		}).addEvent('mousedown', function(event){
 			element.fireEvent('mousedown', event);
-		});
+		}).addClass(this.options.cloneClass || '');
 		//prevent the duplicated radio inputs from unchecking the real one
 		if (clone.get('html').test('radio')){
 			clone.getElements('input[type=radio]').each(function(input, i){
