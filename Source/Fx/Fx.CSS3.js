@@ -108,24 +108,31 @@ provides: [Fx.CSS3Funcs]
 				if(!options.transition || !transitionTimings[options.transition]) {
 					options.transition = 'sine:in:out';
 				}
+				if(this.initializeCSS3) {
+					this.initializeCSS3(element, options);
+				}
 			}
 			this.parent(element, options);
 		},
 		
-		startCSS3: function(properties, from, to, complete) {
+		startCSS3: function(properties, from, to) {
 			if(this.boundComplete) return this;
 			
 			if(!Object.isEqual(from, to)) {
-				var preTransStyles = this.element.getStyles(Fx.CSS3Funcs.css3Features.transitionProperty,
+				this.preTransStyles = this.element.getStyles(Fx.CSS3Funcs.css3Features.transitionProperty,
 					Fx.CSS3Funcs.css3Features.transitionDuration,
 					Fx.CSS3Funcs.css3Features.transitionTimingFunction);
 				
-				complete = complete || function() { return true; };
+				var incomplete = {};
+				properties.each(function(p) {
+					incomplete[p] = false;
+				});
 				
 				this.boundComplete = function(e) {
-					if(complete(e)) {
+					incomplete[e.getPropertyName()] = true;
+					if(Object.every(incomplete, function(v) { return v; })) {
 						this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
-						this.element.setStyles(preTransStyles);
+						this.element.setStyles(this.preTransStyles);
 						this.boundComplete = null;
 						this.fireEvent('complete', this);
 					}
@@ -158,12 +165,14 @@ provides: [Fx.CSS3Funcs]
 
 		cancel: function(){
 			if (this.css3Supported){
-				this.element.setStyle(css3Features.transition, 'none');
-				this.element.removeEvent(css3Features.transitionend, this.boundComplete);
-				this.boundComplete = null;
+				/*if(this.boundComplete) {
+					this.element.setStyles(this.preTransStyles);
+					this.element.removeEvent(css3Features.transitionend, this.boundComplete);
+					this.boundComplete = null;
+				}*/
+				return this;
 			}
-			this.parent();
-			return this;
+			return this.parent();
 		},
 
 		stop: function() {

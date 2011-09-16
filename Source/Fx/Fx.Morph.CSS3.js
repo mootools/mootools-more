@@ -31,18 +31,12 @@ provides: [Fx.Morph.CSS3]
 				var from = {}, to = {};
 				for (var p in properties){
 					var parsed = this.prepare(this.element, p, properties[p]);
-					from[p] = parsed.from;
-					to[p] = parsed.to;
+					if(!Object.isEqual(parsed.from, parsed.to)) {
+						from[p] = parsed.from;
+						to[p] = parsed.to;
+					}
 				}
-				
-				var incomplete = Object.map(properties, function() { return false; });
-				
-				var complete = function(event){
-					incomplete[event.getPropertyName()] = true;
-					return Object.every(incomplete, function(v) { return v; });
-				};
-				
-				return this.startCSS3(Object.keys(properties), from, to, complete);
+				return this.startCSS3(Object.keys(properties), from, to);
 			}
 			return this.parent(properties);
 		}

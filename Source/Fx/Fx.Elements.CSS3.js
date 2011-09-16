@@ -19,6 +19,20 @@ provides: [Fx.Elements.CSS3]
 
 	Fx.Elements = new Class({
 		Extends: elementsCSS2,
+		
+		initializeCSS3: function(elements, options){
+			this.morphers = elements.map(function(element) {
+				return new Fx.Morph(element, Object.merge({}, options, {
+					onComplete: this.complete.bind(this)
+				}));
+			}.bind(this));
+		},
+		
+		complete: function() {
+			if(this.count-- == 0) {
+				this.fireEvent('complete', this);
+			}
+		},
 
 		checkCSS3: function(obj){
 			return (Fx.CSS3Funcs.css3Features && Object.every(obj, function(properties, key) {
@@ -35,18 +49,11 @@ provides: [Fx.Elements.CSS3]
 			if ((this.css3Supported = this.checkCSS3(obj))) {
 				if(this.count != 0) return this;
 				this.count = 0;
-				var complete = function() {
-					if(this.count-- == 0) {
-						this.fireEvent('complete', this);
-					}
-				}.bind(this);
 
 				Object.each(obj, function(properties, key) {
 					if(properties && this.elements[key]) {
 						this.count++;
-						new Fx.Morph(this.elements[key], Object.merge({}, this.options, {
-							onComplete: complete
-						})).start(properties);
+						this.morphers[key].start(properties);
 					}
 				}, this);
 
