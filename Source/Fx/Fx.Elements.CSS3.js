@@ -23,14 +23,23 @@ provides: [Fx.Elements.CSS3]
 		initializeCSS3: function(elements, options){
 			this.morphers = elements.map(function(element) {
 				return new Fx.Morph(element, Object.merge({}, options, {
-					onComplete: this.complete.bind(this)
+					onComplete: this._complete.bind(this),
+					onCancel: this._cancel.bind(this)
 				}));
 			}.bind(this));
 		},
 		
-		complete: function() {
+		_complete: function() {
 			if(this.count-- == 0) {
-				this.fireEvent('complete', this);
+				this.fireEvent('complete', this.subject);
+				if (!this.callChain()) this.fireEvent('chainComplete', this.subject);
+			}
+		},
+		
+		_cancel: function() {
+			if(this.count-- == 0) {
+				this.fireEvent('cancel', this.subject);
+				this.clearChain();
 			}
 		},
 
@@ -47,7 +56,7 @@ provides: [Fx.Elements.CSS3]
 
 		start: function(obj){
 			if ((this.css3Supported = this.checkCSS3(obj))) {
-				if(this.count != 0) return this;
+				if(!this.check()) return this;
 				this.count = 0;
 
 				Object.each(obj, function(properties, key) {
@@ -61,6 +70,33 @@ provides: [Fx.Elements.CSS3]
 				return this;
 			}
 			return this.parent(obj);
+		},
+		
+		stop: function() {
+			if(this.css3Supported) {
+				Object.each(this.morphers, function(morph) {
+					morph.stop();
+				});
+				return this;
+			}
+			return this.parent();
+		},
+		
+		cancel: function() {
+			if(this.css3Supported) {
+				Object.each(this.morphers, function(morph) {
+					morph.cancel();
+				});
+				return this;
+			}
+			return this.parent();
+		},
+		
+		isRunning: function() {
+			if(this.css3Supported) {
+				return this.count != 0;
+			}
+			return this.parent();
 		}
 	});
 

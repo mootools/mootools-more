@@ -166,33 +166,6 @@ provides: [Fx.CSS3Funcs]
 			return this;
 		},
 
-		cancel: function(){
-			if (this.css3Supported){
-				if(this.isRunning()) {
-					this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
-					this.element.setStyles(this.preTransStyles);
-					this.boundComplete = null;
-					this.fireEvent('cancel', this.subject).clearChain();
-				}
-				return this;
-			}
-			return this.parent();
-		},
-
-		stop: function() {
-			if (this.css3Supported){
-				if(this.isRunning()) {
-					this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
-					this.element.setStyles(this.preTransStyles);
-					this.boundComplete = null;
-					this.fireEvent('complete', this.subject);
-					if (!this.callChain()) this.fireEvent('chainComplete', this.subject);
-				}
-				return this;
-			}
-			return this.parent();
-		},
-
 		pause: function() {
 			if (this.css3Supported){
 				return this;
@@ -218,5 +191,35 @@ provides: [Fx.CSS3Funcs]
 	Fx.CSS3Funcs.css3Features = css3Features;
 	Fx.CSS3Funcs.transitionTimings = transitionTimings;
 	Fx.CSS3Funcs.animatable = animatable;
+	
+	Fx.CSS3Stop = {
+		cancel: function(){
+			if (this.css3Supported){
+				if(this.isRunning()) {
+					this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+					this.element.setStyles(this.preTransStyles);
+					this.boundComplete = null;
+					this.fireEvent('cancel', this.subject);
+					this.clearChain();
+				}
+				return this;
+			}
+			return this.parent();
+		},
+
+		stop: function() {
+			if (this.css3Supported){
+				if(this.isRunning()) {
+					this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+					this.element.setStyles(this.preTransStyles);
+					this.boundComplete = null;
+					this.fireEvent('complete', this.subject);
+					if (!this.callChain()) this.fireEvent('chainComplete', this.subject);
+				}
+				return this;
+			}
+			return this.parent();
+		}
+	};
 
 })();

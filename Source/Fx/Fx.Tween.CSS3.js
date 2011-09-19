@@ -37,6 +37,7 @@ provides: [Fx.Tween.CSS3]
 	});
 
 	Fx.Tween.implement(Fx.CSS3Funcs);
+	Fx.Tween.implement(Fx.CSS3Stop);
 
 	Fx.Tween.CSS2 = tweenCSS2;
 	Fx.Tween.CSS3 = Fx.Tween;

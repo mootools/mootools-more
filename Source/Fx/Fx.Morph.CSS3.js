@@ -44,6 +44,7 @@ provides: [Fx.Morph.CSS3]
 	});
 
 	Fx.Morph.implement(Fx.CSS3Funcs);
+	Fx.Morph.implement(Fx.CSS3Stop);
 
 	Fx.Morph.CSS2 = morphCSS2;
 	Fx.Morph.CSS3 = Fx.Morph;
