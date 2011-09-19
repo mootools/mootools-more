@@ -24,19 +24,20 @@ provides: [Fx.Morph.CSS3]
 		checkCSS3: function(properties){
 			return (Fx.CSS3Funcs.css3Features && Fx.CSS3Funcs.animatable.containsArray(Object.keys(properties)));
 		},
-
+		
 		start: function(properties){
 			if ((this.css3Supported = this.checkCSS3(properties))) {
 				if (typeof properties == 'string') properties = this.search(properties);
-				var from = {}, to = {};
+				var from = {}, to = {}, usedProps = [];
 				for (var p in properties){
 					var parsed = this.prepare(this.element, p, properties[p]);
 					if(!Object.isEqual(parsed.from, parsed.to)) {
 						from[p] = parsed.from;
 						to[p] = parsed.to;
+						usedProps.push(p);
 					}
 				}
-				return this.startCSS3(Object.keys(properties), from, to);
+				return this.startCSS3(usedProps, from, to);
 			}
 			return this.parent(properties);
 		}

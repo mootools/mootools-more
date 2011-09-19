@@ -116,7 +116,7 @@ provides: [Fx.CSS3Funcs]
 		},
 		
 		startCSS3: function(properties, from, to) {
-			if(this.boundComplete) return this;
+			if(!this.check()) return this;
 			
 			if(!Object.isEqual(from, to)) {
 				this.preTransStyles = this.element.getStyles(Fx.CSS3Funcs.css3Features.transitionProperty,
@@ -128,13 +128,16 @@ provides: [Fx.CSS3Funcs]
 					incomplete[p] = false;
 				});
 				
+				this.animatingProperties = properties;
+				
 				this.boundComplete = function(e) {
 					incomplete[e.getPropertyName()] = true;
 					if(Object.every(incomplete, function(v) { return v; })) {
 						this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
 						this.element.setStyles(this.preTransStyles);
 						this.boundComplete = null;
-						this.fireEvent('complete', this);
+						this.fireEvent('complete', this.subject);
+						if (!this.callChain()) this.fireEvent('chainComplete', this.subject);
 					}
 				}.bind(this);
 
@@ -154,22 +157,23 @@ provides: [Fx.CSS3Funcs]
 				this.element.setStyle(Fx.CSS3Funcs.css3Features.transitionProperty, 'none');
 				this.set(this.compute(from, to, 0));
 				trans.delay(0.1);
-				this.fireEvent('start', this);
+				this.fireEvent('start', this.subject);
 			}
 			else {
-				this.fireEvent('start', this);
-				this.fireEvent('complete', this);
+				this.fireEvent('start', this.subject);
+				this.fireEvent('complete', this.subject);
 			}
 			return this;
 		},
 
 		cancel: function(){
 			if (this.css3Supported){
-				/*if(this.boundComplete) {
+				if(this.isRunning()) {
+					this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
 					this.element.setStyles(this.preTransStyles);
-					this.element.removeEvent(css3Features.transitionend, this.boundComplete);
 					this.boundComplete = null;
-				}*/
+					this.fireEvent('cancel', this.subject).clearChain();
+				}
 				return this;
 			}
 			return this.parent();
@@ -177,6 +181,13 @@ provides: [Fx.CSS3Funcs]
 
 		stop: function() {
 			if (this.css3Supported){
+				if(this.isRunning()) {
+					this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+					this.element.setStyles(this.preTransStyles);
+					this.boundComplete = null;
+					this.fireEvent('complete', this.subject);
+					if (!this.callChain()) this.fireEvent('chainComplete', this.subject);
+				}
 				return this;
 			}
 			return this.parent();
