@@ -34,7 +34,7 @@ provides: [Fx.CSS3Funcs]
 				transitionProperty: prefix + 'TransitionProperty',
 				transitionDuration: prefix + 'TransitionDuration',
 				transitionTimingFunction : prefix + 'TransitionTimingFunction',
-				transitionend: (prefix == 'ms' || prefix == 'Moz') ? 'transitionEnd' : prefix + 'TransitionEnd'
+				transitionend: (prefix == 'Moz') ? 'transitionend' : (prefix == 'O' ? 'o' : prefix) + 'TransitionEnd'
 			}
 		}
 		return false;
