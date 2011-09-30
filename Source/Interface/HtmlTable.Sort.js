@@ -34,7 +34,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 		sortIndex: 0,
 		sortReverse: false,
 		parsers: [],
+		getters: [],
 		defaultParser: 'string',
+		defaultGetter: 'text',
 		classSortable: 'table-sortable',
 		classHeadSort: 'table-th-sort',
 		classHeadSortRev: 'table-th-sort-rev',
@@ -77,9 +79,17 @@ HtmlTable = Class.refactor(HtmlTable, {
 	setParsers: function(){
 		this.parsers = this.detectParsers();
 	},
+	
+	setGetters: function(){
+		this.getters = this.detectGetters();
+	},
 
 	detectParsers: function(){
 		return this.head && this.head.getElements(this.options.thSelector).flatten().map(this.detectParser, this);
+	},
+	
+	detectGetters: function(){
+		return this.head && this.head.getElements(this.options.thSelector).flatten().map(this.detectGetter, this);
 	},
 
 	detectParser: function(cell, index){
@@ -88,13 +98,16 @@ HtmlTable = Class.refactor(HtmlTable, {
 		thDiv.adopt(cell.childNodes).inject(cell);
 		var sortSpan = new Element('span', {'class': this.options.classSortSpan}).inject(thDiv, 'top');
 		this.sortSpans.push(sortSpan);
+		
 		var parser = this.options.parsers[index],
 			rows = this.body.rows,
 			cancel;
+			
 		switch (typeOf(parser)){
 			case 'function': parser = {convert: parser}; cancel = true; break;
 			case 'string': parser = parser; cancel = true; break;
 		}
+		
 		if (!cancel){
 			HtmlTable.ParserPriority.some(function(parserName){
 				var current = HtmlTable.Parsers[parserName],
@@ -110,11 +123,45 @@ HtmlTable = Class.refactor(HtmlTable, {
 				}
 			});
 		}
+		
 		if (!parser) parser = this.options.defaultParser;
 		cell.store('htmltable-parser', parser);
 		return parser;
 	},
-
+	
+	detectGetter: function(cell, index){		
+		
+		var getter = this.options.getters[index],
+			rows = this.body.rows,
+			cancel;
+			
+		switch (typeOf(getter)){
+			case 'function': getter = {get: getter}; cancel = true; break;
+			case 'string': getter = getter; cancel = true; break;
+		}
+		
+		if (!cancel){
+			HtmlTable.GetterPriority.some(function(getterName){
+				var current = HtmlTable.Getters[getterName];
+				if(typeof current === 'undefined'){
+				    throw "Invalid HtmlTable getter: " + getterName;
+				}
+				if (!current.detect) return false;
+				for (var i = 0, j = rows.length; i < j; i++){
+					var cell = document.id(rows[i].cells[index]);
+					if (current.detect.call(cell)){
+						getter = current;
+						return true;
+					}
+				}
+			});
+		}
+		
+		if (!getter) getter = this.options.defaultGetter;
+		cell.store('htmltable-getter', getter);
+		return getter;
+	},
+	
 	headClick: function(event, el){
 		if (!this.head || el.hasClass(this.options.classNoSort)) return;
 		return this.sort(Array.indexOf(this.head.getElements(this.options.thSelector).flatten(), el) % this.body.rows[0].cells.length);
@@ -198,6 +245,11 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return typeOf(parser) == 'string' ? HtmlTable.Parsers[parser] : parser;
 	},
 
+	getGetter: function(){
+		var getter = this.getters[this.sorted.index];
+		return typeOf(getter) == 'string' ? HtmlTable.Getters[getter] : getter;
+	},
+
 	sort: function(index, reverse, pre){
 		if (!this.head) return;
 
@@ -206,6 +258,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 			this.setSortedState(index, reverse);
 			this.setHeadSort(true);
 		}
+
+		var getter = this.getGetter();
+		if (!getter) return;
 
 		var parser = this.getParser();
 		if (!parser) return;
@@ -216,7 +271,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			this.body.dispose();
 		}
 
-		var data = this.parseData(parser).sort(function(a, b){
+		var data = this.parseData(getter, parser).sort(function(a, b){
 			if (a.value === b.value) return 0;
 			return a.value > b.value ? 1 : -1;
 		});
@@ -229,9 +284,9 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this.fireEvent('sort', [this.body, this.sorted.index]);
 	},
 
-	parseData: function(parser){
-		return Array.map(this.body.rows, function(row, i){
-			var value = parser.convert.call(document.id(row.cells[this.sorted.index]));
+	parseData: function(getter, parser){
+		return Array.map(this.body.rows, function(row, i){			
+			var value = parser.convert(getter.get.call(document.id(row.cells[this.sorted.index])));
 			return {
 				position: i,
 				value: value
@@ -252,6 +307,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	enableSort: function(){
 		this.element.addClass(this.options.classSortable);
 		this.attachSorts(true);
+		this.setGetters();
 		this.setParsers();
 		this.sortEnabled = true;
 		return this;
@@ -270,72 +326,85 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 });
 
-HtmlTable.ParserPriority = ['date', 'input-checked', 'input-value', 'float', 'number'];
+HtmlTable.ParserPriority = ['date', 'float', 'number'];
 
 HtmlTable.Parsers = {
 
 	'date': {
 		match: /^\d{2}[-\/ ]\d{2}[-\/ ]\d{2,4}$/,
-		convert: function(){
-			var d = Date.parse(this.get('text').stripTags());
+		convert: function(value){
+			var d = Date.parse(value);
 			return (typeOf(d) == 'date') ? d.format('db') : '';
 		},
 		type: 'date'
 	},
-	'input-checked': {
-		match: / type="(radio|checkbox)" /,
-		convert: function(){
-			return this.getElement('input').checked;
-		}
-	},
-	'input-value': {
-		match: /<input/,
-		convert: function(){
-			return this.getElement('input').value;
-		}
-	},
 	'number': {
 		match: /^\d+[^\d.,]*$/,
-		convert: function(){
-			return this.get('text').stripTags().toInt();
+		convert: function(value){
+			return value.toInt();
 		},
 		number: true
 	},
 	'numberLax': {
 		match: /^[^\d]+\d+$/,
-		convert: function(){
-			return this.get('text').replace(/[^-?^0-9]/, '').stripTags().toInt();
+		convert: function(value){
+			return value.replace(/[^-?^0-9]/, '').toInt();
 		},
 		number: true
 	},
 	'float': {
 		match: /^[\d]+\.[\d]+/,
-		convert: function(){
-			return this.get('text').replace(/[^-?^\d.]/, '').stripTags().toFloat();
+		convert: function(value){
+			return value.replace(/[^-?^\d.]/, '').toFloat();
 		},
 		number: true
 	},
 	'floatLax': {
 		match: /^[^\d]+[\d]+\.[\d]+$/,
-		convert: function(){
-			return this.get('text').replace(/[^-?^\d.]/, '').stripTags();
+		convert: function(value){
+			return value.replace(/[^-?^\d.]/, '');
 		},
 		number: true
 	},
 	'string': {
 		match: null,
-		convert: function(){
-			return this.get('text').stripTags().toLowerCase();
-		}
-	},
-	'title': {
-		match: null,
-		convert: function(){
-			return this.title;
+		convert: function(value){
+			return value.toLowerCase();
 		}
 	}
-
 };
+
+HtmlTable.GetterPriority = ['input-checked', 'input-value'];
+
+HtmlTable.Getters = {
+	'text': {
+		get: function(){
+			return this.get('text');
+		}
+	},
+	'title':{
+		get: function(){
+			return this.get('title');
+		}
+	},
+	'input-checked': {
+		detect: function(){
+			return this.getElement('input') && this.getElement('input').type == 'checkbox';
+		},
+		get: function(){
+			return this.getElement('input').checked ? '0' : '1';
+		}
+	},
+	'input-value': {
+	    	detect: function(){
+			return this.getElement('input');
+		},
+	        get: function(){
+			return this.getElement('input').value;
+		}
+	},
+}
+
 
 //<1.2compat>
 HtmlTable.Parsers = new Hash(HtmlTable.Parsers);
