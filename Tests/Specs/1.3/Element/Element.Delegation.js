@@ -1,7 +1,7 @@
 /*
 ---
 name: Element.Delegation Tests
-requires: [More/Element.Delegation]
+requires: [Core/Element.Delegation]
 provides: [Element.Delegation.Tests]
 ...
 */
