@@ -172,7 +172,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		}
 
 		for (var i = startRow; i <= endRow; i++){
-			if (this.options.selectHiddenRows || rows[i].isDisplayed()) this[method](rows[i], true);
+			if (rows[i] && (this.options.selectHiddenRows || rows[i].isDisplayed())) this[method](rows[i], true);
 		}
 
 		return this;
