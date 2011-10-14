@@ -123,7 +123,7 @@ describe('Events.Pseudos', function(){
 				expect(fn.callCount).toEqual(1);
 			});
 
-			waits(300);
+			waits(400);
 
 			runs(function(){
 				// the delayed event should have fired
