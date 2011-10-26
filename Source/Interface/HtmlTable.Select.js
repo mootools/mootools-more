@@ -109,14 +109,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this.selectedRows.contains(row);
 	},
 
-	getSelected: function(){
-		return this.selectedRows;
-	},
-
-	getSelected: function(){
-		return this.selectedRows;
-	},
-
 	serialize: function(){
 		var previousSerialization = this.previous.apply(this, arguments) || {};
 		if (this.options.selectable){
