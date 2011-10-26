@@ -30,7 +30,7 @@ var OverText = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
-	Binds: ['reposition', 'assert', 'focus', 'hide'],
+	Binds: ['reposition', 'assert', 'focus', 'hide' , 'keydown' ],
 
 	options: {/*
 		textOverride: null,
@@ -49,7 +49,8 @@ var OverText = new Class({
 		},
 		poll: false,
 		pollInterval: 250,
-		wrap: false
+		wrap: false,
+		showWhileEmpty: false
 	},
 
 	property: 'OverText',
@@ -86,7 +87,7 @@ var OverText = new Class({
 			},
 			html: value,
 			events: {
-				click: this.hide.pass(options.element == 'label', this)
+				click: this[this.options.showWhileEmpty ? 'assert' : 'hide'].pass(options.element == 'label', this)
 			}
 		}).inject(element, 'after');
 
@@ -121,6 +122,12 @@ var OverText = new Class({
 			blur: this.assert,
 			change: this.assert
 		});
+		if (this.options.showWhileEmpty) {
+			this.element.removeEvents({
+				keydown: this.keydown,
+				keyup: this.assert
+			});
+		}
 		window.removeEvent('resize', this.reposition);
 		this.hide(true, true);
 		return this;
@@ -132,9 +139,23 @@ var OverText = new Class({
 			blur: this.assert,
 			change: this.assert
 		});
+		if (this.options.showWhileEmpty) {
+			this.element.addEvents({
+				keydown: this.keydown,
+				keyup: this.assert
+			});
+		}
 		window.addEvent('resize', this.reposition);
 		this.reposition();
 		return this;
+	},
+	
+	keydown: function(evt){
+		var key = evt.code;
+		// key code from zero to z, then anything above 185, which are symbols and such.. if its empty, we hide right away
+		if (((key >= 48 && key <= 90) || key > 185) && this.test()) {
+			this.hide();
+		}
 	},
 
 	wrap: function(){
@@ -172,7 +193,7 @@ var OverText = new Class({
 
 	focus: function(){
 		if (this.text && (!this.text.isDisplayed() || this.element.get('disabled'))) return this;
-		return this.hide();
+		return this.options.showWhileEmpty ? this.assert() : this.hide();
 	},
 
 	hide: function(suppressFocus, force){
@@ -254,4 +275,4 @@ Object.append(OverText, {
 	}
 
 });
-
+OverText.shit = true;
