@@ -15,6 +15,7 @@ authors:
 requires:
   - Core/Options
   - Core/Events
+  - Core/Element.Delegation
   - Core/Slick.Finder
   - Core/Element.Event
   - Core/Element.Style
@@ -116,8 +117,6 @@ Form.Validator = new Class({
 
 	Implements: [Options, Events],
 
-	Binds: ['onSubmit'],
-
 	options: {/*
 		onFormValidate: function(isValid, form, event){},
 		onElementValidate: function(isValid, field, className, warn){},
@@ -143,11 +142,15 @@ Form.Validator = new Class({
 	initialize: function(form, options){
 		this.setOptions(options);
 		this.element = document.id(form);
-		this.element.store('validator', this);
 		this.warningPrefix = Function.from(this.options.warningPrefix)();
 		this.errorPrefix = Function.from(this.options.errorPrefix)();
-		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this.onSubmit);
-		if (this.options.evaluateFieldsOnBlur || this.options.evaluateFieldsOnChange) this.watchFields(this.getFields());
+		this._bound = {
+			onSubmit: this.onSubmit.bind(this),
+			blurOrChange: function(event, field){
+				this.validationMonitor(field, true);
+			}.bind(this)
+		};
+		this.enable();
 	},
 
 	toElement: function(){
@@ -158,13 +161,24 @@ Form.Validator = new Class({
 		return (this.fields = this.element.getElements(this.options.fieldSelectors));
 	},
 
-	watchFields: function(fields){
-		fields.each(function(el){
-			if (this.options.evaluateFieldsOnBlur)
-				el.addEvent('blur', this.validationMonitor.pass([el, false], this));
-			if (this.options.evaluateFieldsOnChange)
-				el.addEvent('change', this.validationMonitor.pass([el, true], this));
-		}, this);
+	enable: function(){
+		this.element.store('validator', this);
+		if (this.options.evaluateOnSubmit) this.element.addEvent('submit', this._bound.onSubmit);
+		if (this.options.evaluateFieldsOnBlur){
+			this.element.addEvent('blur:relay(input,select,textarea)', this._bound.blurOrChange);
+		}
+		if (this.options.evaluateFieldsOnChange){
+			this.element.addEvent('change:relay(input,select,textarea)', this._bound.blurOrChange);
+		}
+	},
+
+	disable: function(){
+		this.element.eliminate('validator');
+		this.element.removeEvents({
+			submit: this._bound.onSubmit,
+			'blur:relay(input,select,textarea)': this._bound.blurOrChange,
+			'change:relay(input,select,textarea)': this._bound.blurOrChange
+		});
 	},
 
 	validationMonitor: function(){
@@ -363,7 +377,7 @@ Form.Validator.addAllThese([
 			if (typeOf(props.length) != 'null') return (element.get('value').length == props.length || element.get('value').length == 0);
 			else return true;
 		}
-	}],	
+	}],
 
 	['minLength', {
 		errorMsg: function(element, props){
