@@ -157,7 +157,7 @@ String.implement({
                 return retStr;
 
             for (var i = 0; i < length; i++) {
-                if(!(sub = sub[path[i]])) return retStr;
+                if((sub = sub[path[i]]) == null) return retStr;
             }
             return sub;
         });
