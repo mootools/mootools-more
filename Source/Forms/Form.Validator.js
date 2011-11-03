@@ -451,7 +451,7 @@ Form.Validator.addAllThese([
 		test: function(element, props){
 			if (Form.Validator.getValidator('IsEmpty').test(element)) return true;
 			var dateLocale = Locale.getCurrent().sets.Date,
-				dateNouns = new RegExp([dateLocale.days, dateLocale.days_abbr, dateLocale.months, dateLocale.months_abbr].flatten().join('|'), 'i'),
+				dateNouns = new RegExp([dateLocale.days, dateLocale.days_abbr, dateLocale.months, dateLocale.months_abbr, dateLocale.AM, dateLocale.PM].flatten().join('|'), 'i'),
 				value = element.get('value'),
 				wordsInValue = value.match(/[a-z]+/gi);
 
@@ -460,7 +460,6 @@ Form.Validator.addAllThese([
 				var date = Date.parse(value),
 					format = props.dateFormat || '%x',
 					formatted = date.format(format);
-
 				if (formatted != 'invalid date') element.set('value', formatted);
 				return date.isValid();
 		}
