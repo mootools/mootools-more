@@ -187,6 +187,32 @@ Apply a function simultaneously against two values of the array (from right-to-l
 ### See also:
 - [MDC Array.reduceRight][]
 
+Array Method: pluck {#Array.pluck}
+----------------------------------
+
+Returns an array with the named property from each of the array's elements.
+
+### Syntax
+
+	var arr = myArray.pluck(prop)
+
+### Arguments
+1. prop - The named property to access on each element.
+
+### Returns
+
+* (*array*) A new array containing the property value for each element.
+
+### Example
+
+	var foo = [{ a: 1 }, { a: 2 }];
+	var bar = foo.pluck('a'); // bar is [1, 2]
+	var foo2 = [{ a: 1 }, { b: 2 }];
+	var bar2 foo2.pluck('a'); // bar2 is [1, undefined]
+
+### Notes
+
+	Undefined properties are not filtered from the returned array, as shown in the second example.
 
 [Array]: /core/Types/Array
 [MDC Array.reduce]: https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array/Reduce

@@ -117,3 +117,15 @@ describe('Array.reduceRight', function(){
 
 });
 
+describe('Array.pluck', function(){
+
+	it('should return the specified property from each element', function(){
+		expect([{ a: 1 }, { a: 2 }].pluck('a')).toEqual([1, 2]);
+	});
+
+	it('should return undefined properties', function(){
+		expect([{ a: 1 }, { b: 2 }].pluck('a')).toEqual([1, undefined]);
+	});
+
+});
+
