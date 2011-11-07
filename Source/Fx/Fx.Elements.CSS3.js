@@ -30,14 +30,14 @@ provides: [Fx.Elements.CSS3]
 		},
 		
 		_complete: function() {
-			if(this.count-- == 0) {
+			if(--this.count == 0) {
 				this.fireEvent('complete', this.subject);
 				if (!this.callChain()) this.fireEvent('chainComplete', this.subject);
 			}
 		},
 		
 		_cancel: function() {
-			if(this.count-- == 0) {
+			if(--this.count == 0) {
 				this.fireEvent('cancel', this.subject);
 				this.clearChain();
 			}
