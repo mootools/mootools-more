@@ -49,8 +49,8 @@ Locale.define('af-ZA', 'Date', {
 	weeksAgo: '{delta} weke gelede',
 	monthAgo: '1 maand gelede',
 	monthsAgo: '{delta} maande gelede',
-    yearAgo: '1 jaar gelede',
-    yearsAgo: '{delta} jare gelede',
+	yearAgo: '1 jaar gelede',
+	yearsAgo: '{delta} jare gelede',
 
 	lessThanMinuteUntil: 'oor minder as \'n minuut',
 	minuteUntil: 'oor ongeveer \'n minuut',
