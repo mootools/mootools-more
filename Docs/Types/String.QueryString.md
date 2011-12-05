@@ -28,6 +28,10 @@ Turns a querystring into an object of key/value pairs.
 
 * (*object*) the querystring as key/value pairs
 
+### See Also
+
+- [Object.toQueryString][]
+
 String Method: cleanQueryString {#String:cleanQueryString}
 ----------------------------------------------------------
 
