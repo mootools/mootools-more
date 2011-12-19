@@ -1,0 +1,56 @@
+
+<style>
+
+.clickme {
+	background: #AAA;
+	padding: 20px;
+}
+
+</style>
+
+<p>
+	Press shift+a and there should appear some text below. Pressing it once again should not fire the event because of the <code>:once</code> pseudo.
+</p>
+
+<div id="result1"><h3>keydown:keys(shift+a):once</h3></div>
+
+<h3>click:relay(p.clickmeOnce):once</h3>
+<p class="clickme once">Clickme :once</p>
+<div id="result2"></div>
+
+<h3>click:throttle(1000)</h3>
+<p id="throttle" class="clickme">:throttle(1000) - Click me quickly after each other. Event should fire 1 time / second</p>
+<div id="result3"></div>
+
+<h3>keydown:pause(300)</h3>
+<p>Type something in the input field. The event should only fire once you have not typed for 300 ms</p>
+<input type="text" id="pause" />
+<div id="result4"></div>
+
+
+<script src="/depender/build?require=Core/Element.Delegation,Core/Element.Delegation,More/Element.Event.Pseudos.Keys"></script>
+
+<script>
+
+var result1 = $('result1'),
+	result2 = $('result2'),
+	result3 = $('result3'),
+	result4 = $('result4');
+
+document.addEvent('keydown:keys(shift+a):once', function(){
+	result1.set('html', result1.get('html') + 'succes keydown:keys(shift+a):once!<br>');
+});
+
+document.addEvent('click:relay(p.once):once', function(event){
+	result2.set('html', result2.get('html') + 'succes click:relay(p):once!<br>');
+});
+
+document.id('throttle').addEvent('click:throttle(1000)', function(event){
+	result3.set('html', result3.get('html') + 'succes click:throttle(1000)!<br>');
+});
+
+document.id('pause').addEvent('keydown:pause(300)', function(event){
+	result4.set('html', result4.get('html') + 'succes keydown:pause(300)!<br>');
+});
+
+</script>

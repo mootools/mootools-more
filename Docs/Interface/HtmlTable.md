@@ -53,16 +53,19 @@ HtmlTable Method: constructor
 HtmlTable Method: push {#HtmlTable:push}
 ----------------------------------------
 
-Inserts a new table row.
+Inserts a new table row. To push several at once, see (see [HtmlTable.pushMany](#HtmlTable:pushMany))
 
 ### Syntax
 
-	myHtmlTable.push(row, rowProperties);
+	myHtmlTable.push(row, rowProperties, target, tag, where);
 
 ### Arguments
 
 1. row - (*array* or *element*) the data for the row or *TR* element.
-2. rowProperties - (*object*) the properties for the row (class, id, styles, etc)
+2. rowProperties - (*object*; optional) the properties for the row (class, id, styles, etc)
+3. target - (*element*; optional) The element that the row is injected into, before, after, etc. Defaults to the table body.
+4. tag - (*string*; optional) The type of element to create (`td` or `th`); defaults to `td`.
+5. where - (*string*; optional) the argument passed to `Element.inject` that specifies where the row is inserted relative to the specified target (`before`, `after`, `top`, `bottom`, etc)
 
 ### Row data
 
@@ -118,6 +121,60 @@ Note that it can also be an actual *TR* element.
 ### Example of Object Returned
 
 	{tr: theTableRow, tds: [td, td, td]}
+	
+HtmlTable Method: update {#HtmlTable:push}
+----------------------------------------
+
+Update a table row
+
+### Syntax
+
+	myHtmlTable.update(tr, row);
+
+### Arguments
+
+1. tr - (*TR* element) the row to update
+2. row - (*array* or *element*) the data for the row or *TR* element. Same as the row data sent to [HtmlTable.push][]
+
+### Returns
+
+* (*object*) an object containing the tr and td tags.
+
+
+
+HtmlTable Method: pushMany {#HtmlTable:pushMany}
+----------------------------------------
+
+Inserts a group of rows into the table.
+
+### Syntax
+
+	myHtmlTable.push(rows, rowProperties, target, tag, where);
+
+### Arguments
+
+1. rows - (*array*) An array of row data objects (see [HtmlTable.push](#HtmlTable:push))
+2. rowProperties - (*object*; optional) the properties for the row (class, id, styles, etc)
+3. target - (*element*; optional) The element that the row is injected into, before, after, etc. Defaults to the table body.
+4. tag - (*string*; optional) The type of element to create (`td` or `th`); defaults to `td`.
+5. where - (*string*; optional) the argument passed to `Element.inject` that specifies where the row is inserted relative to the specified target (`before`, `after`, `top`, `bottom`, etc)
+
+### Example
+
+	//example of 'simple' rows
+	myTable.push([
+			[1, 'one'],
+			[2, 'two'],
+			[3, 'three']
+		], {
+		'class': 'tableRowClass'
+	});
+
+The above example would produce a table with 3 rows each with the class `tableRowClass`.
+
+### Returns
+
+* (*array*) An array of row results returned by [HtmlTable.push](#HtmlTable:push).
 
 HtmlTable method: empty {#HtmlTable:empty}
 ------------------------------------------

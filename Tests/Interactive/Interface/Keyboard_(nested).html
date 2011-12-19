@@ -1,0 +1,122 @@
+
+<style>
+
+.group {
+	opacity: 0.5;
+}
+.group div {
+	padding: 4px;
+}
+.group .active {
+	border: 1px solid black;
+	color: #000;
+	background: #fff;
+}
+.activeGroup {
+	opacity: 1;
+	border: 1px solid #aaa;
+}
+
+</style>
+
+<p>
+	Use the links to enable/disable the keyboards controlling the sections below. Using the keys for the active section will toggle each example from black to white.
+</p>
+
+<h2>group 1</h2>
+<div id="group1" class="group">
+	<div id="sa">shift + a</div>
+	<div id="enter">enter</div>
+	<div id="up">up</div>
+</div>
+<h2>group 2</h2>
+<div id="group2" class="group">
+	<div id="ctrld">ctrl+d</div>
+	<div id="space">space</div>
+	<div id="escape">escape</div>
+</div>
+
+<script src="/depender/build?require=More/Keyboard,Core/Element.Event"></script>
+
+<script>
+
+var kbs = {
+	kb: new Keyboard({title: 'kb'}),
+	kb1: new Keyboard({
+		title: 'kb1',
+		onActivate: function(){
+			$('group1').addClass('activeGroup');
+		},
+		onDeactivate: function(){
+			$('group1').removeClass('activeGroup');
+		},
+		events: {
+			'shift+a': function(){
+				$('sa').toggleClass('active');
+			},
+			'enter': function(){
+				$('enter').toggleClass('active');
+			},
+			'up': function(){
+				$('up').toggleClass('active');
+			}
+		}
+	}),
+
+	kb2: new Keyboard({
+		title: 'kb2',
+		onActivate: function(){
+			$('group2').addClass('activeGroup');
+		},
+		onDeactivate: function(){
+			$('group2').removeClass('activeGroup');
+		},
+		events: {
+			'control+d': function(){
+				$('ctrld').toggleClass('active');
+			},
+			'space': function(e){
+				e.preventDefault();
+				$('space').toggleClass('active');
+			},
+			'esc': function(){
+				$('escape').toggleClass('active');
+			}
+		}
+	})
+};
+
+kbs.kb.manage(kbs.kb1);
+kbs.kb.manage(kbs.kb2);
+kbs.kb.activate();
+kbs.kb1.activate();
+
+makeActions([
+	{
+		title: 'Activate Keyboard 1',
+		fn: function(){
+			kbs.kb1.activate();
+		}
+	},
+	{
+		title: 'Activate Keyboard 2',
+		fn: function(){
+			kbs.kb2.activate();
+		}
+	},
+	{
+		title: 'Deactivate all keyboards.',
+		fn: function(){
+			kbs.kb.deactivate();
+		}
+	},
+	{
+		title: 'Reactivate deactivated keyboard.',
+		description: 'Reactivates the keyboard that was active last when all were deactivated.',
+		fn: function(){
+			kbs.kb.activate();
+		}
+	}
+]);
+
+</script>

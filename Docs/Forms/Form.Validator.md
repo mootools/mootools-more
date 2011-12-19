@@ -93,6 +93,33 @@ Form.Validator comes with numerous built-in validators (see below), each of whic
 If you do translate these, please [send them back to us][] so we can add them to our repository.
 
 
+Form.Validator Method: enable {#Form-Validator:enable}
+----------------------------------------------------
+
+Enables the form validator, attaching events for submit, blur, and change per the options configuration. This method is invoked on startup.
+
+### Syntax
+
+	myFormValidator.enable();
+
+### Returns
+
+* (*object*) - This instance of [Form.Validator][]
+
+
+Form.Validator Method: disable {#Form-Validator:disable}
+----------------------------------------------------
+
+Disables the form validator, removing events for submit, blur, and change per the options configuration.
+
+### Syntax
+
+	myFormValidator.disable();
+
+### Returns
+
+* (*object*) - This instance of [Form.Validator][]
+
 Form.Validator Method: reset {#Form-Validator:reset}
 ----------------------------------------------------
 
@@ -405,6 +432,22 @@ Displays an error if the field is empty.
 
 Error Msg: "This field is required"
 
+Validator: length {#Validators:length}
+--------------------------------------------
+
+Displays a message if the input value is not the exact supplied length.
+
+Error Msg: "Please enter [defined length] characters (you entered [input length] characters)"
+
+### Note
+
+You must add this name AND properties for it to your input.
+
+### Example
+
+	<input type="text" name="username" class="length:10" id="username" />
+
+
 Validator: minLength {#Validators:minLength}
 --------------------------------------------
 
@@ -503,10 +546,10 @@ Validator: validate-currency-dollar {#Validators:validate-currency-dollar}
 
 Validates that the entry matches any of the following:
 
-	* [$]1[##][,###]+[.##]
-	* [$]1###+[.##]
-	* [$]0.##
-	* [$].##
+* [$]1[\#\#][,\#\#\#]+[.\#\#]
+* [$]1\#\#\#+[.\#\#]
+* [$]0.\#\#
+* [$].\#\#
 
 Error Msg: "Please enter a valid $ amount. For example $100.00 ."
 

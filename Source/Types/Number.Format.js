@@ -86,18 +86,20 @@ Number.implement({
 		return value;
 	},
 
-	formatCurrency: function(){
+	formatCurrency: function(decimals){
 		var locale = Locale.get('Number.currency') || {};
 		if (locale.scientific == null) locale.scientific = false;
-		if (locale.decimals == null) locale.decimals = 2;
+		locale.decimals = decimals != null ? decimals
+			: (locale.decimals == null ? 2 : locale.decimals);
 
 		return this.format(locale);
 	},
 
-	formatPercentage: function(){
+	formatPercentage: function(decimals){
 		var locale = Locale.get('Number.percentage') || {};
 		if (locale.suffix == null) locale.suffix = '%';
-		if (locale.decimals == null) locale.decimals = 2;
+		locale.decimals = decimals != null ? decimals
+			: (locale.decimals == null ? 2 : locale.decimals);
 
 		return this.format(locale);
 	}

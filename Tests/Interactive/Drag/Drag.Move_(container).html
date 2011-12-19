@@ -1,0 +1,130 @@
+<style>
+	.content * {
+		position: static;
+	}
+	.box {
+		width: 30px;
+		height: 30px;
+		background-color: #acf;
+		border: solid #333;
+		border-width: 2px 4px 6px 8px;
+		padding: 5px 7px 9px 12px;
+		margin: 7px 9px 11px 13px;
+	}
+
+	.container {
+		width: 250px;
+		height: 250px;
+		border: solid black;
+		border-width: 4px 12px 6px 8px;
+		background: #ccc;
+		padding: 6px 8px 10px 12px;
+		margin: 20px 11px 13px 14px;
+	}
+	.op {
+		position: absolute;
+		padding: 40px;
+		top: 0px
+	}
+	.mt-container p {
+		padding: 10px;
+	}
+</style>
+<div class="content">
+	<p>All of the boxes below should behave the same. You can only drag the smaller, inner box around and not escape the larger box. For the examples that include margins (the right column), the box should approach the black border of the container box, but not touch it.</p>
+
+	<div class="op">
+		<div class="container">
+			container: not relative<br/>
+			box: absolute<br/>
+			includeMargins: false<br/>
+
+			<div class="box"></div>
+
+		</div>
+	</div>
+	<div class="op" style="left: 400px;">
+		<div class="container">
+			container: not relative<br/>
+			box: absolute<br/>
+			includeMargins: true<br/>
+
+			<div class="box includeMargins"></div>
+
+		</div>
+	</div>
+	<div class="op" style="top: 300px" class="op">
+		<div class="container" style="position: relative">
+			container: relative<br/>
+			box: absolute<br/>
+			includeMargins: false<br/>
+
+			<div class="box"></div>
+
+		</div>
+	</div>
+	<div style="left: 400px; top: 300px" class="op">
+		<div class="container" style="position: relative">
+			container: relative<br/>
+			box: absolute<br/>
+			includeMargins: true<br/>
+
+			<div class="box includeMargins"></div>
+
+		</div>
+	</div>
+
+	<div style="position: relative; top: 550px">
+		<div style="top: 0px" class="op">
+			<div class="container">
+				container: not relative<br/>
+				box: relative<br/>
+				includeMargins: false<br/>
+
+				<div class="box" style="position: relative"></div>
+
+			</div>
+		</div>
+		<div style="left: 330px;" class="op">
+			<div class="container">
+				container: not relative<br/>
+				box: relative<br/>
+				includeMargins: true<br/>
+
+				<div class="box includeMargins" style="position: relative"></div>
+
+			</div>
+		</div>
+
+		<div style="top: 300px;" class="op">
+			<div class="container" style="position: relative">
+				container: relative<br/>
+				box: relative<br/>
+				includeMargins: false<br/>
+
+				<div class="box" style="position: relative"></div>
+
+			</div>
+		</div>
+		<div style="left: 330px; top: 300px" class="op">
+			<div class="container" style="position: relative">
+				container: relative<br/>
+				box: relative<br/>
+				includeMargins: true<br/>
+
+				<div class="box includeMargins" style="position: relative"></div>
+
+			</div>
+		</div>
+	</div>
+</div>
+	<script src="/depender/build?require=More/Drag.Move"></script>
+	<script>
+		$$('.container').each(function(container){
+			var box = container.getElement('.box').setStyle('margin', '7px 9px 11px 13px');
+			box.makeDraggable({
+				container: container,
+				includeMargins: box.hasClass('includeMargins')
+			});
+		});
+	</script>

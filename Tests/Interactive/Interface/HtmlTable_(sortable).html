@@ -1,0 +1,256 @@
+<style>
+table {
+	border: solid #777;
+	border-width: 0px 0px 1px 1px;
+	margin: 10px 0px;
+}
+thead {
+	background: #777;
+	border-bottom: 1px solid #333;
+	color: #fff;
+}
+tr.table-tr-odd {
+	background: #ccc;
+}
+td, th {
+	padding: 4px;
+	border-right: 1px solid #777;
+	border-top: 1px solid #777;
+}
+th, th:hover {
+	cursor: pointer;
+	width: 100px;
+}
+th.table-th-sort {
+	color: #000;
+	background: #fff url(/asset/more/bullet_arrow_down.png) no-repeat right 3px;
+}
+th.table-th-sort-rev {
+	background: #fff url(/asset/more/bullet_arrow_up.png) no-repeat right 3px;
+}
+</style>
+Only sub heads should reflect column sort (and be sortable)
+<table id="single_multi_header_sort">
+	<thead>
+		<tr>
+			<th>col 1</th>
+			<th>col 2</th>
+		</tr>
+		<tr>
+			<th class="sorter">col 1 (sub)</th>
+			<th class="sorter">col 2 (sub)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>a</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>b</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>c</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>d</td>
+		</tr>
+	</tbody>
+</table>
+All header elements should reflect sort (and be sortable)
+<table id="multi_header_sorts">
+	<thead>
+		<tr>
+			<th>col 1</th>
+			<th>col 2</th>
+		</tr>
+		<tr>
+			<th>col 1 (sub)</th>
+			<th>col 2 (sub)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>a</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>b</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>c</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>d</td>
+		</tr>
+	</tbody>
+</table>
+<table id="hidden_sorts">
+	<thead>
+		<tr>
+			<th>col 1</th>
+			<th>col 2</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><span style="display: none">1</span>1 b</td>
+			<td><span style="display: none">0.01</span>1 ms</td>
+		</tr>
+		<tr>
+			<td><span style="display: none">1024</span>1 B</td>
+			<td><span style="display: none">1</span>1 second</td>
+		</tr>
+		<tr>
+			<td><span style="display: none">1048576</span>1 MB</td>
+			<td><span style="display: none">60</span>1 minute</td>
+		</tr>
+		<tr>
+			<td><span style="display: none">1073741824</span>1 GB</td>
+			<td><span style="display: none">3600</span>1 hour</td>
+		</tr>
+	</tbody>
+</table>
+<p>Date should support sorting with empty fields</p>
+<table id="date_sort_w_empty">
+	<thead>
+		<tr>
+			<th>col 1</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>1/10/2010</td></tr>
+		<tr><td>Jan 12, 2010</td></tr>
+		<tr><td></td></tr>
+		<tr><td>10-12-2010</td></tr>
+	</tbody>
+</table>
+
+<script src="/depender/build?require=More/HtmlTable.Sort"></script>
+<script>
+new HtmlTable($('single_multi_header_sort'), {
+	sortable: true,
+	thSelector: 'th.sorter'
+});
+
+new HtmlTable($('multi_header_sorts'), {
+	sortable: true
+});
+new HtmlTable($('hidden_sorts'), {
+	sortable: true
+});
+new HtmlTable($('date_sort_w_empty'), {
+	sortable: true,
+	parsers: ['date']
+});
+var t = new HtmlTable({
+	sortable: true,
+	headers: ['fruit', 'colors']
+});
+t.inject(document.body);
+t.push(['apple', 'red']);
+t.push(['lemon', 'yellow']);
+t.push(['plumbs', 'purple']);
+t.push(['grapes', 'green']);
+
+
+var data = [
+	{"id":56,"timezone":"Europe/Amsterdam","name":"Amsterdam","geolat":52.3789,"geolong":4.90067},
+	{"id":46,"timezone":"America/New_York","name":"Atlanta","geolat":33.7525,"geolong":-84.3888},
+	{"id":42,"timezone":"America/Chicago","name":"Austin","geolat":30.2669,"geolong":-97.7428},
+	{"id":63,"timezone":"America/New_York","name":"Baltimore","geolat":39.294255,"geolong":-76.614275},
+	{"id":24,"timezone":"America/New_York","name":"Boston","geolat":42.3583,"geolong":-71.0603},
+	{"id":32,"timezone":"America/Chicago","name":"Chicago","geolat":41.8858,"geolong":-87.6181},
+	{"id":64,"timezone":"America/New_York","name":"Cleveland","geolat":41.499819,"geolong":-81.693716},
+	{"id":43,"timezone":"America/Chicago","name":"Dallas / Fort Worth","geolat":32.7887,"geolong":-96.7676},
+	{"id":25,"timezone":"America/Denver","name":"Denver","geolat":39.734,"geolong":-105.026},
+	{"id":47,"timezone":"America/New_York","name":"Detroit","geolat":42.3333,"geolong":-83.0484},
+	{"id":48,"timezone":"America/Chicago","name":"Houston","geolat":29.7594,"geolong":-95.3594},
+	{"id":66,"timezone":"America/New_York","name":"Indianapolis","geolat":39.767016,"geolong":-86.156255},
+	{"id":65,"timezone":"America/Chicago","name":"Kansas City","geolat":39.090431,"geolong":-94.583644},
+	{"id":49,"timezone":"America/Los_Angeles","name":"Las Vegas","geolat":36.1721,"geolong":-115.122},
+	{"id":61,"timezone":"Europe/London","name":"London","geolat":51.50714,"geolong":-0.126171},
+	{"id":34,"timezone":"America/Los_Angeles","name":"Los Angeles","geolat":34.0443,"geolong":-118.251},
+	{"id":39,"timezone":"America/New_York","name":"Miami","geolat":25.7323,"geolong":-80.2436},
+	{"id":67,"timezone":"America/Chicago","name":"Milwaukee","geolat":43.038902,"geolong":-87.906474},
+	{"id":51,"timezone":"America/Chicago","name":"Minneapolis / St. Paul","geolat":44.9609,"geolong":-93.2642},
+	{"id":70,"timezone":"America/New_York","name":"Montreal","geolat":45.545447,"geolong":-73.639076},
+	{"id":52,"timezone":"America/Chicago","name":"New Orleans","geolat":29.9544,"geolong":-90.075},
+	{"id":22,"timezone":"America/New_York","name":"New York City","geolat":40.7255,"geolong":-73.9983},
+	{"id":72,"timezone":"America/Chicago","name":"Omaha","geolat":41.254006,"geolong":-95.999258},
+	{"id":33,"timezone":"America/New_York","name":"Philadelphia","geolat":39.8694,"geolong":-75.2731},
+	{"id":53,"timezone":"America/Phoenix","name":"Phoenix","geolat":33.4483,"geolong":-112.073},
+	{"id":60,"timezone":"America/New_York","name":"Pittsburgh","geolat":40.4405,"geolong":-79.9961},
+	{"id":37,"timezone":"America/Los_Angeles","name":"Portland","geolat":45.527,"geolong":-122.685},
+	{"id":57,"timezone":"America/New_York","name":"Raleigh / Durham","geolat":35.7797,"geolong":-78.6434},
+	{"id":73,"timezone":"America/New_York","name":"Richmond","geolat":37.542979,"geolong":-77.469092},
+	{"id":71,"timezone":"America/Denver","name":"Salt Lake City","geolat":40.760779,"geolong":-111.891047},
+	{"id":68,"timezone":"America/Chicago","name":"San Antonio","geolat":29.424122,"geolong":-98.493628},
+	{"id":38,"timezone":"America/Los_Angeles","name":"San Diego","geolat":32.7153,"geolong":-117.156},
+	{"id":23,"timezone":"America/Los_Angeles","name":"San Francisco","geolat":37.7587,"geolong":-122.433},
+	{"id":41,"timezone":"America/Los_Angeles","name":"Seattle","geolat":47.6036,"geolong":-122.326},
+	{"id":62,"timezone":"America/Chicago","name":"St. Louis","geolat":38.627491,"geolong":-90.198417},
+	{"id":69,"timezone":"America/New_York","name":"Toronto","geolat":43.670233,"geolong":-79.386755},
+	{"id":59,"timezone":"America/Vancouver","name":"Vancouver","geolat":49.259515,"geolong":-123.103867},
+	{"id":31,"timezone":"America/New_York","name":"Washington, DC","geolat":38.8964,"geolong":-77.0447}
+];
+var myArray = data.map(function(item){
+	return [item.id, item.name, item.timezone, item.geolat, item.geolong];
+});
+
+var myTable = new HtmlTable({
+
+	properties : {
+		border : 1,
+		cellspacing : 0,
+		cellpadding : 5
+	},
+	rows : myArray,
+	headers : ['ID', 'TimeZone', 'Name', 'GEO Latitude', 'GEO Longitude'],
+	sortable : true,
+	parsers : ['number', 'string', 'string', 'float', 'float']
+
+});
+$(myTable).inject(document.body);
+
+
+headers = ["hostname","model","rack","expire"];
+
+rows = [
+["FTP1.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["FTP2.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["Kerberos1.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-06-21"],
+["Kerberos2.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-06-21"],
+["Mail1.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-06-21"],
+["Mail2.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-06-21"],
+["SSGUnix.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["Web1.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["Web2.uits.uconn.edu", "Dell PowerEdge 1650", "A9", "2005-09-23"],
+["XEN1.uits.uconn.edu", "IBM XSeries", "C3", "2010-10-08"],
+["XEN2.uits.uconn.edu", "IBM XSeries", "C3", "2010-10-08"],
+["bluet.uconn.edu", "Dell Desktop","D4","2010-08-23"],
+["hm1.uits.uconn.edu", "Dell PowerEdge 6500", "C4", "2009-12-12"],
+["hm2.uits.uconn.edu", "Dell PowerEdge 6500", "C4", "2009-12-12"],
+["hm3.uits.uconn.edu", "Dell PowerEdge 6500", "C4", "2009-12-20"],
+["nicky.uconn.edu", "Dell PowerEdge 1850", "A9", "2009-04-12"]
+];
+
+var myTable = new HtmlTable({
+	properties: {
+		border: 1,
+		cellspacing: 0,
+		cellpadding: 4
+	},
+	headers: headers,
+	rows: rows,
+	sortable: true
+});
+myTable.inject(document.body);
+
+</script>

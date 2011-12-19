@@ -1,0 +1,46 @@
+<style>
+table.simple-table {
+	border: solid #777;
+	border-width: 0px 0px 1px 1px;
+	margin-top: 8px;
+}
+table.simple-table thead {
+	background: #777;
+	border-bottom: 1px solid #333;
+	color: #fff;
+}
+table.simple-table tfoot {
+	background: #ccc;
+	border-top: 1px solid #333;
+	color: #777;
+}
+table.simple-table td, table.simple-table th {
+	padding: 4px;
+	border-right: 1px solid #777;
+	border-top: 1px solid #777;
+}
+</style>
+<p>
+	You should see a table below with two columns and the words "I work" in it.
+</p>
+<!-- no html -->
+<script src="/depender/build?require=More/HtmlTable"></script>
+<script>
+// create blank table with no options
+var table = new HtmlTable({
+	properties: {
+		'class':'simple-table'
+	}
+});
+// set some headers
+table.setHeaders(['column1','column2']);
+// inject table into myElement
+table.inject(document.body);
+// push data to the table
+table.push(['hello','world']);
+// this is the trouble spot, it removes the tbody tag from the table
+table.empty();
+// at this stage if you call table.build(), the below push will work
+// if you try to push rows into the table now it wont work as the tbody tag is missing
+table.push(['I','work']);
+</script>

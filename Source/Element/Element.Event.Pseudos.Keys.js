@@ -23,7 +23,7 @@ var keysStoreKey = '$moo:keys-pressed',
 	keysKeyupStoreKey = '$moo:keys-keyup';
 
 
-Event.definePseudo('keys', function(split, fn, args){
+DOMEvent.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
 		keys = [],
@@ -54,29 +54,28 @@ Event.definePseudo('keys', function(split, fn, args){
 
 });
 
-Object.append(Event.Keys, {
-	'shift': 16,
-	'control': 17,
-	'alt': 18,
-	'capslock': 20,
-	'pageup': 33,
-	'pagedown': 34,
-	'end': 35,
-	'home': 36,
-	'numlock': 144,
-	'scrolllock': 145,
-	';': 186,
-	'=': 187,
-	',': 188,
-	'-': Browser.firefox ? 109 : 189,
-	'.': 190,
-	'/': 191,
-	'`': 192,
-	'[': 219,
-	'\\': 220,
-	']': 221,
-	"'": 222,
-	'+': 107
-});
+DOMEvent.defineKeys({
+	'16': 'shift',
+	'17': 'control',
+	'18': 'alt',
+	'20': 'capslock',
+	'33': 'pageup',
+	'34': 'pagedown',
+	'35': 'end',
+	'36': 'home',
+	'144': 'numlock',
+	'145': 'scrolllock',
+	'186': ';',
+	'187': '=',
+	'188': ',',
+	'190': '.',
+	'191': '/',
+	'192': '`',
+	'219': '[',
+	'220': '\\',
+	'221': ']',
+	'222': "'",
+	'107': '+'
+}).defineKey(Browser.firefox ? 109 : 189, '-');
 
 })();

@@ -1,0 +1,54 @@
+<style>
+
+table.simple-table {
+	border: solid #777;
+	border-width: 0px 0px 1px 1px;
+	margin-top: 8px;
+}
+table.simple-table thead {
+	background: #777;
+	border-bottom: 1px solid #333;
+	color: #fff;
+}
+table.simple-table tfoot {
+	background: #ccc;
+	border-top: 1px solid #333;
+	color: #777;
+}
+table.simple-table td, table.simple-table th {
+	padding: 4px;
+	border-right: 1px solid #777;
+	border-top: 1px solid #777;
+}
+#newTable {
+	border: 1px solid navy;
+	border-radius: 5px;
+	padding: 20px;
+}
+</style>
+
+<p>
+	You should see a simple html table below inside the blue bordered element
+</p>
+
+<table id="table-id" class="simple-table"></table>
+
+<div id="newTable"></div>
+
+<script src="/depender/build?require=More/HtmlTable"></script>
+
+<script>
+var t = new HtmlTable('table-id', {
+	headers: ['fruit', 'colors'],
+	footers: ['fruit', 'colors']
+});
+t.inject('newTable');
+t.push(['apple', 'red']);
+t.push(['lemon', 'yellow']);
+t.push([{
+		content: 'grapes',
+		properties: {rowspan: 2, valign: 'top'}
+},
+'purple']);
+t.push(['green']);
+</script>

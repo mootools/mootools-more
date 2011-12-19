@@ -1,0 +1,77 @@
+<style>
+  #A, #B, #C, D {
+    margin-left:50px;
+  }
+  .content {
+    width:10000px;
+  }
+</style>
+<div class="content">
+	<p>All the links below should scroll smoothly to their sections. It has a offset of -20 pixels. It should only scroll the y axis.</p>
+
+	<a name="top" id="top"></a>
+
+	<a href="#A">A</a> |
+	<a href="#B">B</a> |
+	<a href="#C">C</a> |
+	<a href="#D">D</a> |
+	<a href="#E">E</a> |
+	<a href="#F">F</a> |
+	<a href="#G">G</a> |
+	<a href="#H">H</a>
+
+
+	<div style="height: 300px"></div>
+	<a name="A" id="A"></a>
+	A
+	<a href="#top">Back to top</a>
+
+	<div style="height: 300px"></div>
+	<a name="B" id="B"></a>
+	B
+	<a href="#top">Back to top</a>
+
+	<div style="height: 300px"></div>
+	<a name="C" id="C"></a>
+	C
+	<a href="#top">Back to top</a>
+
+	<div style="height: 300px"></div>
+	<a name="D" id="D"></a>
+	D
+	<a href="#top">Back to top</a>
+
+
+	<div style="height: 300px"></div>
+	<a name="E" id="E"></a>
+	E
+	<a href="#top">Back to top</a>
+
+	<div style="height: 300px"></div>
+	<a name="F" id="F"></a>
+	F
+	<a href="#top">Back to top</a>
+
+	<div style="height: 300px"></div>
+	<a name="G" id="G"></a>
+	G
+	<a href="#top">Back to top</a>
+
+	<div style="height: 300px"></div>
+	<a name="H" id="H"></a>
+	H
+	<a href="#top">Back to top</a>
+
+	<div style="height: 300px"></div>
+</div>
+
+<script src="/depender/build?require=More/Fx.SmoothScroll"></script>
+<script>
+new Fx.SmoothScroll({
+	offset: {
+		x: 0,
+		y: -20
+	},
+	axes: 'y'
+});
+</script>

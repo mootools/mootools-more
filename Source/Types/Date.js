@@ -205,7 +205,8 @@ Date.implement({
 	},
 
 	isValid: function(date){
-		return !isNaN((date || this).valueOf());
+		if (!date) date = this;
+		return typeOf(date) == 'date' && !isNaN(date.valueOf());
 	},
 
 	format: function(format){

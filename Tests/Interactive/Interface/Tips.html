@@ -1,0 +1,156 @@
+<style>
+.tip {
+	color: #fff;
+	width: 172px;
+	z-index: 13000;
+}
+
+.tip-title {
+	font-weight: bold;
+	font-size: 11px;
+	margin: 0;
+	padding: 8px 8px 4px;
+	background: #777;
+}
+
+.tip-text {
+	font-size: 11px;
+	padding: 4px 8px 8px;
+	background: #777;
+}
+img {
+	background: #444;
+	padding: 4px;
+}
+.toolTipElement3 {
+	padding: 20px;
+	border: 1px solid #000;
+	float: left;
+}
+h1 {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 8px 0px;
+}
+.tips-text {
+	width: 300px;
+}
+</style>
+
+<h1>These links should let you enable and disable the tips</h1>
+<div id="togglers"><a id="enable">attach tips</a> | <a id="disable">detach tips</a></div>
+
+<h1>Mouseover this image to have a tip that follows your mouse</h1>
+<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement" />
+
+<h1>Mouseover this image to show a tip that is in a fixed location</h1>
+<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." class="toolTipElement2" />
+
+
+<h1>Tips with showDelay and a delay when fading out</h1>
+
+<p>
+	This test has a showDelay of 1000 ms and a delay of 600 ms before fading out.
+	When you move with your mouse quickly from the first to the second link, the
+	content of the tip should not already change.
+</p>
+
+<p class="tips-text">
+After a demanding trek in wintry conditions, slide your feet into the
+<a data-tipbody="the north face<br/>is rather cool" class="toolTipElement4" href="#">NSE Tent Mule</a>
+and treat them to well-deserved comfort beneath the 450 fill down insulation. Bring these water-resistant,
+low-profile mules along on any cold-weather excursion to kick-around the campfire, or to wear inside the
+refuge of your tent for greater protection in freezing conditions; pure luxury for your feet at the end of
+a long <a data-tipbody="mootools FTW!" class="toolTipElement4" href="#">alpine</a> day.
+</p>
+
+<h1>The tips on these elements are different for the container and the child</h1>
+<div class="toolTipElement3" alt="Container Tip">
+	<img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" class="toolTipElement3" />
+</div>
+<h1 style="clear:both">Tips with content updating</h1>
+<p>When you mouse over <a class="toolTipElement5" title="current time">this link</a> the body of the tip should reflect the current time, updating every second.</p>
+
+<script src="/depender/build?require=More/Tips,Core/Fx.Morph"></script>
+<script>
+
+var elements = [
+	$$('.toolTipElement'),
+	$$('.toolTipElement2'),
+	$$('.toolTipElement3'),
+	$$('.toolTipElement4'),
+	$$('.toolTipElement5')
+];
+
+elements[2].store('tip:text', 'The best damn JS framework on earth.<br /><img src="/asset/more/cow.png" />');
+
+var instances = [
+
+	new Tips(elements[0]),
+
+	new Tips(elements[1], {
+		fixed: true,
+		offset: {
+			x: 10,
+			y: 70
+		}
+	}),
+
+	new Tips(elements[2], {
+		offset: {
+			x: 10,
+			y: 70
+		}
+	}),
+
+	new Tips(elements[3], {
+		text: function(el){
+			return el.get('data-tipbody');
+		},
+		fixed: true,
+		showDelay: 1000,
+		onHide: function(tip, el){
+			tip.morph.delay(600, tip, {
+				marginTop: [0, 40],
+				opacity: [1, 0]
+			});
+		},
+		onShow: function(tip, el){
+			tip.setStyles({
+				display: 'block',
+				opacity: 0
+			}).morph({
+				marginTop: [40, 0],
+				opacity: [0, 1]
+			});
+		}
+	}),
+
+	new Tips(elements[4], {
+		onShow: function(tip, el){
+			this.setText(new Date().toString());
+			this.tip.setStyle('display', 'block');
+			this._timer = (function(){
+				this.setText(new Date().toString());
+			}).periodical(500, this);
+		},
+		onHide: function(){
+			this.tip.setStyle('display', 'none');
+			clearInterval(this._timer);
+		}
+	})
+
+];
+
+document.id('enable').addEvent('click', function(){
+	instances.each(function(tips, index){
+		tips.attach(elements[index]);
+	});
+});
+document.id('disable').addEvent('click', function(){
+	instances.each(function(tips, index){
+		tips.detach(elements[index]);
+	});
+});
+
+</script>

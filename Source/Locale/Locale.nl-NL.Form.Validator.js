@@ -23,6 +23,7 @@ provides: [Locale.nl-NL.Form.Validator]
 Locale.define('nl-NL', 'FormValidator', {
 
 	required: 'Dit veld is verplicht.',
+	length: 'Vul precies {length} karakters in (je hebt {elLength} karakters ingevoerd).',
 	minLength: 'Vul minimaal {minLength} karakters in (je hebt {length} karakters ingevoerd).',
 	maxLength: 'Vul niet meer dan {maxLength} karakters in (je hebt {length} karakters ingevoerd).',
 	integer: 'Vul een getal in. Getallen met decimalen (bijvoorbeeld 1.25) zijn niet toegestaan.',

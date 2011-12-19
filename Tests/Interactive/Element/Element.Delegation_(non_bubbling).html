@@ -1,0 +1,126 @@
+
+<p>The focus, blur, submit, reset, change and select Events do not bubble up to the window/document in IE by default. Our Element Delegation should fix this</p>
+
+<div id="myContainer">
+
+	<p>This should delegate the onblur and onfocus events</p>
+
+	<form>
+		<input type="text" id="myInput" /><br />
+		<textarea></textarea>
+	</form>
+
+	<p>Clicking one of the buttons should fire the submit or reset events. For the <strong>submit</strong> event: Try tabbing to the buttons and press enter, or tabbing to the element and press enter.</p>
+
+	<div id="formWrapper">
+
+		<form action="#foo" id="myForm">
+
+			<input type="text" value="some text" />
+			<input type="submit" value="Submit" />
+			<input type="reset" value="reset" />
+
+		</form>
+
+		<p>This form has another ID, so only the reset button should delegate</p>
+
+		<form action="#foo" id="myForm2">
+
+			<input type="text" value="some text" />
+			<input type="submit" value="Submit" />
+			<input type="reset" value="reset" />
+
+		</form>
+
+	</div>
+
+
+	<p>Change the text. When you blur the input field, the change event should fire for both the form and the input fields</p>
+
+	<form action="#foo" id="myForm3">
+		<input type="text" value="some text" class="someClass" /><br />
+		<select name="yo">
+			<option>First</option>
+			<option>Second</option>
+			<option>Third</option>
+		</select><br />
+		<input type="checkbox" value="1" /><br />
+		<input type="radio" name="rad[]" value="1" /><input type="radio" name="rad[]" value="2" />
+	</form>
+
+	<p>Select some text and the select event should fire</p>
+
+	<form action="#bar" id="myForm4">
+		<input type="text" value="select some text in this input" />
+	</form>
+
+</div>
+
+<p>This should remove all events so none of them are delegated anymore:</p>
+
+<button id="removeEvents">Remove Events</button> -
+<button id="addEvents">Add Events</button>
+
+<pre id="result"></pre>
+
+
+<script src="/depender/build?require=Core/Element.Delegation"></script>
+<script>
+
+
+var output = $('result');
+
+var log = function(msg){
+	output.innerHTML += msg + '<br />';
+};
+
+var events = {
+
+	'focus:relay(input#myInput,textarea)': function(){
+		log('Focus on input#myInput,textarea');
+	},
+
+	'blur:relay(input#myInput,textarea)': function(){
+		log('Blurred on input#myInput,textarea');
+	},
+
+	'submit:relay(form#myForm)': function(event){
+		event.stop();
+		log('Succesfully delegated and stopped the ' + event.type + ' event on form#myForm');
+	},
+	'submit:relay(#formWrapper)': function(event){
+		event.stop();
+		log('Succesfully delegated and stopped the ' + event.type + ' event on #formWrapper');
+	},
+
+	'reset:relay(form)': function(event){
+		event.stop();
+		log('Succesfully delegated and stopped the ' + event.type + ' event on form');
+	},
+
+	'change:relay(input.someClass,select,input[type=checkbox],input[type=radio])': function(event){
+		log('Succesfully delegated the ' + event.type + ' event on the input');
+	},
+	'change:relay(form)': function(event){
+		log('Succesfully delegated the ' + event.type + ' event on the form');
+	},
+
+	'select:relay(#myForm4 input)': function(event){
+		log('Succesfully delegated the ' + event.type + ' event on #myForm input');
+	},
+	'select:relay(#myForm4)': function(event){
+		log('Succesfully delegated the ' + event.type + ' event on #myForm4');
+	}
+
+};
+
+var container = $('myContainer').addEvents(events);
+
+$('removeEvents').addEvent('click', function(){
+	container.removeEvents(events);
+});
+$('addEvents').addEvent('click', function(){
+	container.addEvents(events);
+});
+
+</script>

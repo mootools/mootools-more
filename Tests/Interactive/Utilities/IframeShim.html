@@ -1,0 +1,36 @@
+
+<style>
+	#foo {
+		text-align: center;
+		margin: 10px;
+		width: 100px;
+		height: 100px;
+		background: #900;
+		position: absolute;
+		top: 25px;
+		left: 15px;
+	}
+	select {
+		position: absolute;
+		top: 50px;
+	}
+</style>
+
+<p>
+	The select list below should not be above (z-index ordered above) the red box.
+</p>
+<select>
+	<option>a select list.....</option>
+</select>
+<div id="foo">
+
+</div>
+<script src="/depender/build?require=More/IframeShim"></script>
+<script>
+
+	IframeShim.ready = true;
+	new IframeShim('foo', {
+		display: true
+	});
+
+</script>

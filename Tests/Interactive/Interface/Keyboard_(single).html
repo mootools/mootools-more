@@ -1,0 +1,90 @@
+<style>
+
+.group {
+	opacity: 0.5;
+}
+.group div {
+	padding: 4px;
+}
+.group .active {
+	border: 1px solid black;
+	color: #000;
+	background: #fff;
+}
+.activeGroup {
+	opacity: 1;
+	border: 1px solid #aaa;
+}
+
+</style>
+
+<p>
+	Use the links to enable/disable the keyboards controlling the section below. Using the keys will toggle each example from black to white. Keyboard by default should be disabled.
+</p>
+
+<div id="group" class="group">
+	<div id="sa">shift + a</div>
+	<div id="enter">enter</div>
+	<div id="up">up</div>
+	<div id="ctrld">ctrl+d</div>
+	<div id="space">space</div>
+	<div id="escape">escape</div>
+	<div id="colon">shift+;</div>
+	<div id="bracket">]</div>
+</div>
+
+<script src="/depender/build?require=More/Keyboard,Core/Element.Event"></script>
+
+<script>
+var kb = new Keyboard({
+	events: {
+		'shift+a': function(){
+			$('sa').toggleClass('active');
+		},
+		'enter': function(){
+			$('enter').toggleClass('active');
+		},
+		'up': function(){
+			$('up').toggleClass('active');
+		},
+		'control+d': function(){
+			$('ctrld').toggleClass('active');
+		},
+		'space': function(){
+			$('space').toggleClass('active');
+		},
+		'esc': function(){
+			$('escape').toggleClass('active');
+		},
+		'shift+;': function(){
+			$('colon').toggleClass('active');
+		},
+		']': function(){
+			$('bracket').toggleClass('active');
+		}
+	},
+	onActivate: function(){
+		$('group').addClass('activeGroup');
+	},
+	onDeactivate: function(){
+		$('group').removeClass('activeGroup');
+	}
+});
+
+makeActions([
+	{
+		title: 'Activate keyboard.',
+		fn: function(){
+			kb.activate();
+		}
+	},
+	{
+		title: 'Deactivate keyboard.',
+		fn: function(){
+			kb.deactivate();
+		}
+	}
+]);
+
+
+</script>

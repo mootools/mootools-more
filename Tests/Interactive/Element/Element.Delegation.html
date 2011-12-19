@@ -1,0 +1,89 @@
+<p>The items change color when you mouseover/out. When you click an item, some text apears (important that the container tagName != other tagNames). The links below allow you to alter the behavior.</p>
+
+<style type="text/css">
+	#someListing, #mouseenter_mouseleave { cursor: default; border: solid 1px #333; background-color: #B89C76; padding: 20px; width: 300px; }
+	.item { border: solid 1px #333; background-color: #2D5E4C; color: White; padding: 7px 12px; margin: 2px 7px; }
+	.label { margin: 10px; }
+</style>
+
+<div id='someListing'>
+	<p class='item item1'>Apples are <em>red</em></p>
+	<p class='item item2'>Violets are <em>blue</em></p>
+	<p class='item item3'>This is a  <em>code example</em></p>
+	<p class='item item4'>That isn't <em>very interesting</em></p>
+</div>
+<div class="label"></div>
+<hr/>
+<p>
+	<a id="add">add events</a> |
+	<a id="remove">remove events</a> |
+	<a id="nots">add to only mouseover behavior to 1st and 3rd items</a>
+</p>
+
+<hr />
+
+<div id="mouseenter_mouseleave">
+	<div class="item mouse">Enter or <strong>leave</strong> this element with your <em>mouse</em>. The event should only fire once for each time you perform the action.</div>
+	<div id="enter_leave_results"></div>
+</div>
+
+<script src="/depender/build?require=Core/Element.Delegation,Core/Fx.Morph"></script>
+<script>
+
+var tests;
+var add = function(){
+	remove();
+	var over = function(){
+		this.morph({ backgroundColor: '#222' });
+	};
+	var out = function(){
+		this.morph({ backgroundColor: '#2D5E4C' });
+	};
+	var down = function(e, el){ // el == this, that's important, event when child is clicked
+		var text = '<strong>this\'s text</strong>:' + this.get('text') +
+			' <br /><strong>container\'s tagName</strong> ' + $('someListing').get('tag') +
+			' <br /><strong>this\'s tagName</strong>: ' + this.tagName +
+			' <br /><strong>e.target\'s  tagName</strong>: ' + e.target.tagName +
+			' <br /><strong>el\'s tagName</strong>: ' + el.tagName;
+		$$('.label')[0].set('html', text);
+	};
+	tests = {
+		'mouseover:relay(.item)': over,
+		'mouseout:relay(.item)': out,
+		'mousedown:relay(.item)': down
+	};
+	$('someListing').addEvents(tests);
+};
+var remove = function(){
+	if (!tests) return;
+	$('someListing').removeEvents(tests);
+	tests = null;
+};
+var nots = function(){
+	remove();
+
+	var over = function(){ this.morph({ backgroundColor: '#222' }); };
+	var out  = function(){ this.morph({ backgroundColor: '#2D5E4C' }); };
+
+	tests = {
+		 'mouseover:relay(p:not(.item2):not(.item4))': over,
+		 'mouseout:relay(p:not(.item2):not(.item4))': out
+	};
+	$('someListing').addEvents(tests);
+};
+add();
+$('add').addEvent('click', add);
+$('remove').addEvent('click', remove);
+$('nots').addEvent('click', nots);
+
+var enter_leave = $('mouseenter_mouseleave');
+enter_leave.addEvents({
+	'mouseenter:relay(.mouse)': function(){
+		enter_leave.adopt(new Element('div', {text: 'enter'}));
+	},
+	'mouseleave:relay(.mouse)': function(){
+		enter_leave.adopt(new Element('div', {text: 'leave'}));
+	}
+});
+
+</script>

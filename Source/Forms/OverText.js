@@ -133,7 +133,6 @@ var OverText = new Class({
 			change: this.assert
 		});
 		window.addEvent('resize', this.reposition);
-		this.assert(true);
 		this.reposition();
 		return this;
 	},
@@ -192,7 +191,7 @@ var OverText = new Class({
 	},
 
 	show: function(){
-		if (this.text && !this.text.isDisplayed()){
+		if (document.id(this.text) && !this.text.isDisplayed()){
 			this.text.show();
 			this.reposition();
 			this.fireEvent('textShow', [this.text, this.element]);

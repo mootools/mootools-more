@@ -76,16 +76,16 @@ The default pausetime is *250* milliseconds.
 This is exactly the same as the [Events.Pseudos :pause][] pseudo event.
 
 
-Event {#Event}
-=============
+DOMEvent {#DOMEvent}
+====================
 
-Function: Event.definePseudo {#Event:Event-definePseudo}
-----------------------------------------------------------
+Function: DOMEvent.definePseudo {#DOMEvent:DOMEvent-definePseudo}
+-----------------------------------------------------------------
 
-It's possible to define your own pseudos with Event.definePseudo
+It's possible to define your own pseudos with DOMEvent.definePseudo
 
 ### Syntax
-	Event.definePseudo(name, fn);
+	DOMEvent.definePseudo(name, fn);
 
 ### Arguments:
 1. name - (*string*) The pseudo name, for example `once` will become `click:once`
@@ -101,7 +101,7 @@ It's possible to define your own pseudos with Event.definePseudo
 	- pseudo - (*string*) between the `:` and `(`
 	- original - (*string*) the original event name, thus `event:pseudo(value)`
 2. fn - (*function*) This is the function that has been passed in the `addEvent` method. So it is the 'fn' in `myEvent.addEvent('event:pseudo', fn)`
-3. args - (*array*) An array with arguments. The [Event][] object is in most cases the first element.
+3. args - (*array*) An array with arguments. The [DOMEvent][] object is in most cases the first element.
 
 The `this` variable refers to the Element where the event is added to.
 
@@ -109,13 +109,13 @@ The `this` variable refers to the Element where the event is added to.
 
 This is how the :once pseudo is implemented
 
-	Event.definePseudo('once', function(split, fn, args){
+	DOMEvent.definePseudo('once', function(split, fn, args){
 		fn.apply(this, args);
 		this.removeEvent(split.original, fn);
 	});
 
 
-[Event]: /core/Types/Event
+[DOMEvent]: /core/Types/DOMEvent
 [Element.Delegation]: /more/Element/Element.Delegation
 [Events.Pseudos :once]: /more/Class/Events.Pseudos#Pseudos:once
 [Events.Pseudos :throttle]: /more/Class/Events.Pseudos#Pseudos:throttle

@@ -153,7 +153,7 @@ var Sortables = new Class({
 
 		this.idle = false;
 		this.element = element;
-		this.opacity = element.get('opacity');
+		this.opacity = element.getStyle('opacity');
 		this.list = element.getParent();
 		this.clone = this.getClone(event, element);
 
@@ -168,7 +168,7 @@ var Sortables = new Class({
 			onSnap: function(){
 				event.stop();
 				this.clone.setStyle('visibility', 'visible');
-				this.element.set('opacity', this.options.opacity || 0);
+				this.element.setStyle('opacity', this.options.opacity || 0);
 				this.fireEvent('start', [this.element, this.clone]);
 			}.bind(this),
 			onEnter: this.insert.bind(this),
@@ -182,7 +182,7 @@ var Sortables = new Class({
 
 	end: function(){
 		this.drag.detach();
-		this.element.set('opacity', this.opacity);
+		this.element.setStyle('opacity', this.opacity);
 		if (this.effect){
 			var dim = this.element.getStyles('width', 'height'),
 				clone = this.clone,
