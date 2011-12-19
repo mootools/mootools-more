@@ -47,7 +47,14 @@ Array.implement({
 	},
 
 	unique: function(){
-		return [].combine(this);
+		var h = {}, ret = [], arrLen = this.length, next=0, el;
+                while (arrLen--) {
+	            el = this[arrLen];
+	            if (h[el]) continue;
+                    ret[next++] = el;
+	            h[el] = 1;
+	        }
+	        return ret;
 	},
 
 	shuffle: function(){
