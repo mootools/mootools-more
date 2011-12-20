@@ -47,7 +47,16 @@ Array.implement({
 	},
 
 	unique: function(){
-		return [].combine(this);
+		var h = {}, ret = [], arrLen = this.length, next=0, el, type,
+		    needToCheckTypes = {'undefined': 1, 'boolean': 1, 'number': 1, 'string': 1};
+		while (arrLen--) {
+			el = this[arrLen];
+			type = typeof el;
+			if((needToCheckTypes[typeof el] || el === null) && h[el]) continue;
+			ret[next++] = el;
+			h[el] = 1;
+		}
+		return ret;  
 	},
 
 	shuffle: function(){
