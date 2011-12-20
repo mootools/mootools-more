@@ -47,14 +47,15 @@ Array.implement({
 	},
 
 	unique: function(){
-		var h = {}, ret = [], arrLen = this.length, next=0, el;
-                while (arrLen--) {
-	            el = this[arrLen];
-	            if (h[el]) continue;
-                    ret[next++] = el;
-	            h[el] = 1;
-	        }
-	        return ret;
+		var h = {}, ret = [], arrLen = this.length, next=0, el, type;
+		while (arrLen--) {
+			el = this[arrLen];
+			type = typeof el;
+			if (type !== 'object' && type !== 'function' && h[el]) continue;
+			ret[next++] = el;
+			h[el] = 1;
+		}
+                return ret;	
 	},
 
 	shuffle: function(){
