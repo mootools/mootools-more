@@ -15,22 +15,27 @@ Configuration.presets = {
 		source: ['core-1.3-base', 'more-1.3-base']
 	},
 
-	'more-1.4': {
-		sets: ['1.3-base', '1.3client'],
-		source: ['core-1.4-base', 'more-1.4-base']
-	},
-
 	'more-all': {
 		sets: ['1.3-base', '1.3-client'],
 		source: ['core-1.3-base', 'core-1.3-client', 'more-1.3-base', 'more-1.3-client']
+	},
+
+	'more-1.4-base': {
+		sets: ['1.3-base'],
+		source: ['core-1.4-base', 'more-1.4-base']
+	},
+
+	'more-1.4-all': {
+		sets: ['1.3-base', '1.3-client'],
+		source: ['core-1.4-base', 'core-1.4-client', 'more-1.4-base', 'more-1.4-client']
 	}
 
 };
 
 Configuration.defaultPresets = {
-	browser: 'more-all',
-	nodejs: 'more-base',
-	jsdt: 'more-all'
+	browser: 'more-1.4-all',
+	nodejs: 'more-1.4-base',
+	jsdt: 'more-1.4-all'
 };
 
 /*
@@ -303,7 +308,6 @@ Configuration.source = {
 
 			'Element/Element.Event.Pseudos',
 			'Element/Element.Event.Pseudos.Keys',
-			'Element/Element.Delegation',
 
 			'Element/Element.Pin',
 			'Element/Element.Position',
