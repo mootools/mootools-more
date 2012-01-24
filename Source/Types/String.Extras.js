@@ -141,7 +141,27 @@ String.implement({
 			if (trail) string += trail;
 		}
 		return string;
-	}
+	},
+
+    substitutePath: function(object, regexp) {
+        return String(this).replace(regexp || (/\\?\{([^{}]+)\}/g), function(match, name) {
+            if (match.charAt(0) == '\\') return match.slice(1);
+            if (object[name] != null) return object[name];
+
+            var retStr = "",
+                path = name.split('.'),
+                length = path.length,
+                sub = object;
+
+            if (length <= 1)
+                return retStr;
+
+            for (var i = 0; i < length; i++) {
+                if((sub = sub[path[i]]) == null) return retStr;
+            }
+            return sub;
+        });
+    }
 
 });
 
