@@ -457,9 +457,14 @@ Form.Validator.addAllThese([
 
 				if (wordsInValue && !wordsInValue.every(dateNouns.exec, dateNouns)) return false;
 
-				var date = Date.parse(value),
-					format = props.dateFormat || '%x',
-					formatted = date.format(format);
+				try {
+                    var date = Date.parse(value)
+                }
+                catch(e) {
+                    return false;
+                }
+                var format = props.dateFormat || '%x',
+                    formatted = date.format(format);
 				if (formatted != 'invalid date') element.set('value', formatted);
 				return date.isValid();
 		}
