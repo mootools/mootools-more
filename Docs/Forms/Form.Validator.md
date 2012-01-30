@@ -93,6 +93,33 @@ Form.Validator comes with numerous built-in validators (see below), each of whic
 If you do translate these, please [send them back to us][] so we can add them to our repository.
 
 
+Form.Validator Method: enable {#Form-Validator:enable}
+----------------------------------------------------
+
+Enables the form validator, attaching events for submit, blur, and change per the options configuration. This method is invoked on startup.
+
+### Syntax
+
+	myFormValidator.enable();
+
+### Returns
+
+* (*object*) - This instance of [Form.Validator][]
+
+
+Form.Validator Method: disable {#Form-Validator:disable}
+----------------------------------------------------
+
+Disables the form validator, removing events for submit, blur, and change per the options configuration.
+
+### Syntax
+
+	myFormValidator.disable();
+
+### Returns
+
+* (*object*) - This instance of [Form.Validator][]
+
 Form.Validator Method: reset {#Form-Validator:reset}
 ----------------------------------------------------
 

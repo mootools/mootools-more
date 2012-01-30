@@ -64,7 +64,7 @@
 <pre id="result"></pre>
 
 
-<script src="/depender/build?require=More/Element.Delegation"></script>
+<script src="/depender/build?require=Core/Element.Delegation"></script>
 <script>
 
 
@@ -90,7 +90,7 @@ var events = {
 	},
 	'submit:relay(#formWrapper)': function(event){
 		event.stop();
-		log('Succesfully delegated and stopped the ' + event.type + ' event on #formWrapper');		
+		log('Succesfully delegated and stopped the ' + event.type + ' event on #formWrapper');
 	},
 
 	'reset:relay(form)': function(event){

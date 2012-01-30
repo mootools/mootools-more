@@ -26,7 +26,7 @@ Sortables Method: constructor
 ### Options:
 
 * clone - (*mixed*: defaults to *false*) Whether or not to display a copy of the actual element under the cursor while dragging. May also be used as a function which will return an element to be used as the clone.  The function will receive the mousedown event, the element, and the list as arguments.
-* handle - (*string*: defaults to *false*) A selector to select an element inside each sortable item to be used as the handle for sorting that item.  If no match is found, the element is used as its own handle.
+* handle - (*string*: defaults to *false*) A selector to select an element inside each sortable item to be used as the handle for sorting that item.  If no match is found, the element is used as its own handle. Cannot be used on buttons, inputs, anchors or textareas.
 * opacity - (*number*: defaults to *1*) Opacity of the place holding element
 * revert - (*mixed*: defaults to *false*) Whether or not to use an effect to slide the element into its final location after sorting. If you pass an object it will be used as additional options for the revert effect.
 * dragOptions - (*object*; defaults to *{}*) The options to apply internally to sortable's [Drag.Move][] instances.
