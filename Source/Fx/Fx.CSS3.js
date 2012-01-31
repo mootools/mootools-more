@@ -189,7 +189,23 @@ provides: [Fx.CSS3Funcs]
 				return !!this.boundComplete;
 			}
 			return this.parent();
-		}
+		},
+		
+		parse: function(value){
+			value = Function.from(value)();
+			value = (typeof value == 'string' && !value.test(/^(rotate|matrix|scale|rgb|rgba)/)) ? value.split(' ') : Array.from(value);
+			return value.map(function(val){
+				val = String(val);
+				var found = false;
+				Object.each(css3Parsers, function(parser, key){
+					if (found) return;
+					var parsed = parser.parse(val);
+					if (parsed || parsed === 0) found = {value: parsed, parser: parser};
+				});
+				found = found || {value: val, parser: Fx.CSS.Parsers.String};
+				return found;
+			});
+		},
 	};
 	
 	Fx.CSS3Stop = {
@@ -221,5 +237,78 @@ provides: [Fx.CSS3Funcs]
 			return this.parent();
 		}
 	};
+	
+	var css3Parsers = Object.merge({
+		Matrix: {
+			parse: function(val){
+				if(typeof val != 'string') {
+					return false;
+				}
+				var value = val.match(/rotate\((\d+(?:\.\d+)?)(deg|grad|rad|turn)\)/);
+				if(value) {
+					var th;
+					switch(value[2]) {
+						case 'deg':
+							th = (parseFloat(value[1]) / 180) * Math.PI;
+							break;
+						case 'grad':
+							th = (parseFloat(value[1]) / 200) * Math.PI;
+							break;
+						case 'turn':
+							th = parseFloat(value[1]) * Math.PI * 2;
+							break;
+						case 'rad':
+							th = parseFloat(value[1]);
+							break;
+					}
+					return {matrix: [Math.cos(th), -Math.sin(th), Math.sin(th), Math.cos(th), 0, 0], text: val};
+				}
+				value = val.match(/scale\((\d+(?:\.\d+)?)\)/);
+				if(value) {
+					return {matrix: [parseFloat(value[1]), 0, 0, parseFloat(value[1]), 0, 0], text: val};
+				}
+				value = val.match(/matrix\((\d+),\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+)\)/);
+				if(value) {
+					return {matrix: value.splice(1, 6).map(parseFloat), text: val};
+				}
+				return false;
+			},
+			compute: function(from, to, delta){
+				if(delta == 0) {
+					return from.text;
+				}
+				else if(delta == 1) {
+					return to.text;
+				}
+				return 'matrix(' + from.map(function(v, k) {
+					return Fx.compute(v, to[k], delta).toFixed(2);
+				}).join(', ') + ')';
+			},
+			serve: function(value) {
+				return value;
+			}
+		},
+	}, Fx.CSS.Parsers, {
+		Color: {
+			parse: function(value){
+				var match;
+				if (value.match(/^#[0-9a-f]{3,6}$/i)) { match = value.hexToRgb(true); match.push(1); return match };
+				if (match = value.match(/(\d+),\s*(\d+),\s*(\d+),\s*(\d+(?:\.\d+)?)/)) return [match[1], match[2], match[3], parseFloat(match[4])];
+				return ((match = value.match(/(\d+),\s*(\d+),\s*(\d+)/))) ? [match[1], match[2], match[3], 1] : false;
+			},
+			compute: function(from, to, delta){
+				return from.map(function(value, i){
+					var tmp = Fx.compute(from[i], to[i], delta);
+					if(i < 3) {
+						return Math.round(tmp);
+					}
+					return tmp.toFixed(2);
+				});
+			},
+			serve: function(value){
+				return 'rgba(' + value.map(Number).join(',') + ')';
+			}
+		}
+	});
 
 })();
