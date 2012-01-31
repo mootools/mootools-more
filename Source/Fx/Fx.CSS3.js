@@ -42,21 +42,13 @@ provides: [Fx.CSS3Funcs]
 	
 	Element.NativeEvents[css3Features.transitionend] = 2;
 	
-	Event.implement({
+	DOMEvent.implement({
 		getPropertyName: function(){
 			return this.event.propertyName;
 		},
 
 		getElapsedTime: function(nativeTime){
 			return nativeTime ? this.event.elapsedTime : (this.event.elapsedTime * 1000).toInt();
-		}
-	});
-
-	Array.implement({
-		containsArray: function(array) {
-			return array.every(function(v) {
-				return this.contains(v);
-			}, this);
 		}
 	});
 
@@ -84,6 +76,14 @@ provides: [Fx.CSS3Funcs]
 		'quint:out'		: '0.22,1,0.35,1',
 		'quint:in:out'	: '0.9,0,0.1,1'
 	};
+
+	/*Array.implement({
+		containsArray: function(array) {
+			return array.every(function(v) {
+				return this.contains(v);
+			}, this);
+		}
+	});*/
 
 	/*var animatable = ['background-color', 'border-bottom-width', 'border-left-width', 'border-right-width',
 		'border-spacing', 'border-top-width', 'border-width', 'bottom', 'color', 'font-size', 'font-weight',
@@ -238,7 +238,7 @@ provides: [Fx.CSS3Funcs]
 		}
 	};
 	
-	var css3Parsers = Object.merge({
+	var css3Parsers = {
 		Matrix: {
 			parse: function(val){
 				if(typeof val != 'string') {
@@ -288,7 +288,6 @@ provides: [Fx.CSS3Funcs]
 				return value;
 			}
 		},
-	}, Fx.CSS.Parsers, {
 		Color: {
 			parse: function(value){
 				var match;
@@ -308,7 +307,16 @@ provides: [Fx.CSS3Funcs]
 			serve: function(value){
 				return 'rgba(' + value.map(Number).join(',') + ')';
 			}
+		},
+		Number: Fx.CSS.Parsers.Number,
+		String: {
+			parse: Function.from(false),
+			compute: function(zero, one, delta){
+				return delta == 0 ? zero : one;
+			},
+			serve: function(zero){
+				return zero;
+			}
 		}
-	});
-
+	};
 })();

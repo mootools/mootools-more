@@ -57,7 +57,7 @@ provides: [Fx.Elements.CSS3]
 		start: function(obj){
 			if ((this.css3Supported = this.checkCSS3(obj))) {
 				if(!this.check()) return this;
-				this.count = 0;
+				this.count = 1;
 
 				Object.each(obj, function(properties, key) {
 					if(properties && this.elements[key]) {
@@ -67,6 +67,7 @@ provides: [Fx.Elements.CSS3]
 				}, this);
 
 				this.fireEvent('start', this);
+				this._complete();
 				return this;
 			}
 			return this.parent(obj);
