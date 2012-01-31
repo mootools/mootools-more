@@ -22,7 +22,7 @@ provides: [Fx.Tween.CSS3]
 		Extends: tweenCSS2,
 
 		checkCSS3: function(property){
-			return (Fx.CSS3Funcs.css3Features/* && Fx.CSS3Funcs.animatable.contains(property)*/);
+			return (Fx.CSS3Funcs.css3Features && Fx.CSS3Funcs.animatable.contains(property));
 		},
 
 		start: function(property, from, to){

@@ -34,7 +34,8 @@ provides: [Fx.CSS3Funcs]
 				transitionProperty: prefix + 'TransitionProperty',
 				transitionDuration: prefix + 'TransitionDuration',
 				transitionTimingFunction : prefix + 'TransitionTimingFunction',
-				transitionend: (prefix == 'Moz') ? 'transitionend' : (prefix == 'O' ? 'o' : prefix) + 'TransitionEnd'
+				transitionend: (prefix == 'Moz') ? 'transitionend' : (prefix == 'O' ? 'o' : prefix) + 'TransitionEnd',
+				transform: typeof document.documentElement.style[prefix + 'Transform'] != 'undefined' ? '-' + prefix.toLowerCase() + '-transform' : null
 			}
 		}
 		return false;
@@ -77,25 +78,30 @@ provides: [Fx.CSS3Funcs]
 		'quint:in:out'	: '0.9,0,0.1,1'
 	};
 
-	/*Array.implement({
+	Array.implement({
 		containsArray: function(array) {
 			return array.every(function(v) {
 				return this.contains(v);
 			}, this);
 		}
-	});*/
+	});
 
-	/*var animatable = ['background-color', 'border-bottom-width', 'border-left-width', 'border-right-width',
+	var animatable = ['background-color', 'border-bottom-width', 'border-left-width', 'border-right-width',
 		'border-spacing', 'border-top-width', 'border-width', 'bottom', 'color', 'font-size', 'font-weight',
 		'height', 'left', 'letter-spacing', 'line-height', 'margin-bottom', 'margin-left', 'margin-right',
 		'margin-top', 'max-height', 'max-width', 'min-height', 'min-width', 'opacity', 'outline-color', 'outline-offset',
 		'outline-width', 'padding-bottom', 'padding-left', 'padding-right', 'padding-top', 'right', 'text-indent', 
-		'top', 'vertical-align', 'visibility', 'width', 'word-spacing', 'z-index'];*/
+		'top', 'vertical-align', 'visibility', 'width', 'word-spacing', 'z-index', css3Features.transform];
 
 	/*
 	This is a list of properties listed by w3c but that are currently largely unsupported
 	http://www.w3.org/TR/css3-transitions/#animatable-properties-
 	http://www.opera.com/docs/specs/presto29/css/transitions/
+	
+	There is also some infomation here
+	http://oli.jp/2010/css-animatable-properties
+	
+	It causes problems when trying to animate none animate able properities because the transitionend event wont ever be called.
 	
 	var unsupported = ['background-image', 'background-position', 'border-bottom-color', 'border-color', 'border-left-color',
 		'border-right-color', 'border-top-color', 'crop', 'grid-*', 'text-shadow', 'zoom']
@@ -104,7 +110,7 @@ provides: [Fx.CSS3Funcs]
 	Fx.CSS3Funcs = {
 		css3Features: css3Features,
 		transitionTimings: transitionTimings,
-		//Fx.CSS3Funcs.animatable: animatable,
+		animatable: animatable,
 		
 		initialize: function(element, options){
 			if(css3Features) {
@@ -193,7 +199,7 @@ provides: [Fx.CSS3Funcs]
 		
 		parse: function(value){
 			value = Function.from(value)();
-			value = (typeof value == 'string' && !value.test(/^(rotate|matrix|scale|rgb|rgba)/)) ? value.split(' ') : Array.from(value);
+			value = (typeof value == 'string' && !value.test(/(^(rotate|matrix|scale|rgb|rgba))|gradient/)) ? value.split(' ') : Array.from(value);
 			return value.map(function(val){
 				val = String(val);
 				var found = false;
@@ -280,7 +286,7 @@ provides: [Fx.CSS3Funcs]
 				else if(delta == 1) {
 					return to.text;
 				}
-				return 'matrix(' + from.map(function(v, k) {
+				return 'matrix(' + from.matrix.map(function(v, k) {
 					return Fx.compute(v, to[k], delta).toFixed(2);
 				}).join(', ') + ')';
 			},
@@ -292,8 +298,8 @@ provides: [Fx.CSS3Funcs]
 			parse: function(value){
 				var match;
 				if (value.match(/^#[0-9a-f]{3,6}$/i)) { match = value.hexToRgb(true); match.push(1); return match };
-				if (match = value.match(/(\d+),\s*(\d+),\s*(\d+),\s*(\d+(?:\.\d+)?)/)) return [match[1], match[2], match[3], parseFloat(match[4])];
-				return ((match = value.match(/(\d+),\s*(\d+),\s*(\d+)/))) ? [match[1], match[2], match[3], 1] : false;
+				if (match = value.match(/^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d+(?:\.\d+)?)\)/)) return [match[1], match[2], match[3], parseFloat(match[4])];
+				return ((match = value.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)/))) ? [match[1], match[2], match[3], 1] : false;
 			},
 			compute: function(from, to, delta){
 				return from.map(function(value, i){
