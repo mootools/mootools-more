@@ -44,12 +44,12 @@ provides: [Fx.Elements.CSS3]
 		},
 
 		checkCSS3: function(obj){
-			return (Fx.CSS3Funcs.css3Features && Object.every(obj, function(properties, key) {
+			return (Fx.CSS3Funcs.css3Features/* && Object.every(obj, function(properties, key) {
 				if(properties && this.elements[key]) {
 					return Fx.CSS3Funcs.animatable.containsArray(Object.keys(properties));
 				}
 				return true;
-			}, this));
+			}, this)*/);
 		},
 		
 		count: 0,

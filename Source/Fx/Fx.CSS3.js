@@ -85,12 +85,12 @@ provides: [Fx.CSS3Funcs]
 		'quint:in:out'	: '0.9,0,0.1,1'
 	};
 
-	var animatable = ['background-color', 'border-bottom-width', 'border-left-width', 'border-right-width',
+	/*var animatable = ['background-color', 'border-bottom-width', 'border-left-width', 'border-right-width',
 		'border-spacing', 'border-top-width', 'border-width', 'bottom', 'color', 'font-size', 'font-weight',
 		'height', 'left', 'letter-spacing', 'line-height', 'margin-bottom', 'margin-left', 'margin-right',
 		'margin-top', 'max-height', 'max-width', 'min-height', 'min-width', 'opacity', 'outline-color', 'outline-offset',
 		'outline-width', 'padding-bottom', 'padding-left', 'padding-right', 'padding-top', 'right', 'text-indent', 
-		'top', 'vertical-align', 'visibility', 'width', 'word-spacing', 'z-index'];
+		'top', 'vertical-align', 'visibility', 'width', 'word-spacing', 'z-index'];*/
 
 	/*
 	This is a list of properties listed by w3c but that are currently largely unsupported
@@ -102,6 +102,10 @@ provides: [Fx.CSS3Funcs]
 	*/
 
 	Fx.CSS3Funcs = {
+		css3Features: css3Features,
+		transitionTimings: transitionTimings,
+		//Fx.CSS3Funcs.animatable: animatable,
+		
 		initialize: function(element, options){
 			if(css3Features) {
 				options = options || {};
@@ -156,7 +160,7 @@ provides: [Fx.CSS3Funcs]
 				
 				this.element.setStyle(Fx.CSS3Funcs.css3Features.transitionProperty, 'none');
 				this.set(this.compute(from, to, 0));
-				trans.delay(0.1);
+				trans.delay(1);
 				this.fireEvent('start', this.subject);
 			}
 			else {
@@ -187,10 +191,6 @@ provides: [Fx.CSS3Funcs]
 			return this.parent();
 		}
 	};
-	
-	Fx.CSS3Funcs.css3Features = css3Features;
-	Fx.CSS3Funcs.transitionTimings = transitionTimings;
-	Fx.CSS3Funcs.animatable = animatable;
 	
 	Fx.CSS3Stop = {
 		cancel: function(){

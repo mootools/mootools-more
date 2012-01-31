@@ -22,7 +22,7 @@ provides: [Fx.Morph.CSS3]
 		Extends: morphCSS2,
 
 		checkCSS3: function(properties){
-			return (Fx.CSS3Funcs.css3Features && Fx.CSS3Funcs.animatable.containsArray(Object.keys(properties)));
+			return (Fx.CSS3Funcs.css3Features/* && Fx.CSS3Funcs.animatable.containsArray(Object.keys(properties))*/);
 		},
 		
 		start: function(properties){
