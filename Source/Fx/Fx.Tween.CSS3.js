@@ -8,7 +8,7 @@ copyright: Copyright (c) 2010, Dipl.-Ing. (FH) André Fiedler <kontakt at visual
 copyright: Copyright (c) 2011 Fred Cox mcfedr@gmail.com
 authors: [Fred Cox, André Fiedler, eskimoblood]
 
-requires: [Fx.CSS3Funcs, Core/Fx.Tween]
+requires: [Fx.CSS3, Core/Fx.Tween]
 
 provides: [Fx.Tween.CSS3]
 ...
@@ -22,7 +22,7 @@ provides: [Fx.Tween.CSS3]
 		Extends: tweenCSS2,
 
 		checkCSS3: function(property){
-			return (Fx.CSS3Funcs.css3Features && Fx.CSS3Funcs.animatable.contains(property));
+			return (Fx.CSS3.features && Fx.CSS3.animatable.contains(property));
 		},
 
 		start: function(property, from, to){
@@ -36,7 +36,7 @@ provides: [Fx.Tween.CSS3]
 		}
 	});
 
-	Fx.Tween.implement(Fx.CSS3Funcs);
+	Fx.Tween.implement(Fx.CSS3);
 	Fx.Tween.implement(Fx.CSS3Stop);
 
 	Fx.Tween.CSS2 = tweenCSS2;

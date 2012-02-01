@@ -8,7 +8,7 @@ copyright: Copyright (c) 2010, Dipl.-Ing. (FH) André Fiedler <kontakt at visual
 copyright: Copyright (c) 2011 Fred Cox mcfedr@gmail.com
 authors: [Fred Cox, André Fiedler, eskimoblood]
 
-requires: [Fx.CSS3Funcs, Object.Extras, Core/Fx.Morph]
+requires: [Fx.CSS3, Object.Extras, Core/Fx.Morph]
 
 provides: [Fx.Morph.CSS3]
 ...
@@ -22,7 +22,7 @@ provides: [Fx.Morph.CSS3]
 		Extends: morphCSS2,
 
 		checkCSS3: function(properties){
-			return (Fx.CSS3Funcs.css3Features && Fx.CSS3Funcs.animatable.containsArray(Object.keys(properties)));
+			return (Fx.CSS3.features && Fx.CSS3.animatable.containsArray(Object.keys(properties)));
 		},
 		
 		start: function(properties){
@@ -43,7 +43,7 @@ provides: [Fx.Morph.CSS3]
 		}
 	});
 
-	Fx.Morph.implement(Fx.CSS3Funcs);
+	Fx.Morph.implement(Fx.CSS3);
 	Fx.Morph.implement(Fx.CSS3Stop);
 
 	Fx.Morph.CSS2 = morphCSS2;

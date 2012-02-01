@@ -10,7 +10,7 @@ authors: [Fred Cox, André Fiedler, eskimoblood]
 
 requires: [Core/Class.Extras, Core/Element.Event, Core/Element.Style, Core/Fx, Array.Extras]
 
-provides: [Fx.CSS3Funcs]
+provides: [Fx.CSS3]
 ...
 */
 
@@ -107,8 +107,8 @@ provides: [Fx.CSS3Funcs]
 		'border-right-color', 'border-top-color', 'crop', 'grid-*', 'text-shadow', 'zoom']
 	*/
 
-	Fx.CSS3Funcs = {
-		css3Features: css3Features,
+	Fx.CSS3 = {
+		features: css3Features,
 		transitionTimings: transitionTimings,
 		animatable: animatable,
 		
@@ -129,9 +129,9 @@ provides: [Fx.CSS3Funcs]
 			if(!this.check()) return this;
 			
 			if(!Object.isEqual(from, to)) {
-				this.preTransStyles = this.element.getStyles(Fx.CSS3Funcs.css3Features.transitionProperty,
-					Fx.CSS3Funcs.css3Features.transitionDuration,
-					Fx.CSS3Funcs.css3Features.transitionTimingFunction);
+				this.preTransStyles = this.element.getStyles(Fx.CSS3.features.transitionProperty,
+					Fx.CSS3.features.transitionDuration,
+					Fx.CSS3.features.transitionTimingFunction);
 				
 				var incomplete = {};
 				properties.each(function(p) {
@@ -143,7 +143,7 @@ provides: [Fx.CSS3Funcs]
 				this.boundComplete = function(e) {
 					incomplete[e.getPropertyName()] = true;
 					if(Object.every(incomplete, function(v) { return v; })) {
-						this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+						this.element.removeEvent(Fx.CSS3.features.transitionend, this.boundComplete);
 						this.element.setStyles(this.preTransStyles);
 						this.boundComplete = null;
 						this.fireEvent('complete', this.subject);
@@ -151,20 +151,20 @@ provides: [Fx.CSS3Funcs]
 					}
 				}.bind(this);
 
-				this.element.addEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+				this.element.addEvent(Fx.CSS3.features.transitionend, this.boundComplete);
 				
 				var trans = function(){
 					var transStyles = {};
-					transStyles[Fx.CSS3Funcs.css3Features.transitionProperty] =
+					transStyles[Fx.CSS3.features.transitionProperty] =
 						properties.reduce(function(a, b) { return a + ', '  + b; });
-					transStyles[Fx.CSS3Funcs.css3Features.transitionDuration] = this.options.duration + 'ms';
-					transStyles[Fx.CSS3Funcs.css3Features.transitionTimingFunction] = 
-						'cubic-bezier(' + Fx.CSS3Funcs.transitionTimings[this.options.transition] + ')';
+					transStyles[Fx.CSS3.features.transitionDuration] = this.options.duration + 'ms';
+					transStyles[Fx.CSS3.features.transitionTimingFunction] = 
+						'cubic-bezier(' + Fx.CSS3.transitionTimings[this.options.transition] + ')';
 					this.element.setStyles(transStyles);
 					this.set(this.compute(from, to, 1));
 				}.bind(this);
 				
-				this.element.setStyle(Fx.CSS3Funcs.css3Features.transitionProperty, 'none');
+				this.element.setStyle(Fx.CSS3.features.transitionProperty, 'none');
 				this.set(this.compute(from, to, 0));
 				trans.delay(1);
 				this.fireEvent('start', this.subject);
@@ -218,7 +218,7 @@ provides: [Fx.CSS3Funcs]
 		cancel: function(){
 			if (this.css3Supported){
 				if(this.isRunning()) {
-					this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+					this.element.removeEvent(Fx.CSS3.features.transitionend, this.boundComplete);
 					this.element.setStyles(this.preTransStyles);
 					this.boundComplete = null;
 					this.fireEvent('cancel', this.subject);
@@ -232,7 +232,7 @@ provides: [Fx.CSS3Funcs]
 		stop: function() {
 			if (this.css3Supported){
 				if(this.isRunning()) {
-					this.element.removeEvent(Fx.CSS3Funcs.css3Features.transitionend, this.boundComplete);
+					this.element.removeEvent(Fx.CSS3.features.transitionend, this.boundComplete);
 					this.element.setStyles(this.preTransStyles);
 					this.boundComplete = null;
 					this.fireEvent('complete', this.subject);

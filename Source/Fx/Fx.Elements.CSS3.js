@@ -8,7 +8,7 @@ copyright: Copyright (c) 2010, Dipl.-Ing. (FH) André Fiedler <kontakt at visual
 copyright: Copyright (c) 2011 Fred Cox mcfedr@gmail.com
 authors: [Fred Cox, André Fiedler, eskimoblood]
 
-requires: [Fx.CSS3Funcs, Fx.Morph.CSS3, Fx.Elements]
+requires: [Fx.CSS3, Fx.Morph.CSS3, Fx.Elements]
 
 provides: [Fx.Elements.CSS3]
 ...
@@ -44,9 +44,9 @@ provides: [Fx.Elements.CSS3]
 		},
 
 		checkCSS3: function(obj){
-			return (Fx.CSS3Funcs.css3Features && Object.every(obj, function(properties, key) {
+			return (Fx.CSS3.features && Object.every(obj, function(properties, key) {
 				if(properties && this.elements[key]) {
-					return Fx.CSS3Funcs.animatable.containsArray(Object.keys(properties));
+					return Fx.CSS3.animatable.containsArray(Object.keys(properties));
 				}
 				return true;
 			}, this));
@@ -101,7 +101,7 @@ provides: [Fx.Elements.CSS3]
 		}
 	});
 
-	Fx.Elements.implement(Fx.CSS3Funcs);
+	Fx.Elements.implement(Fx.CSS3);
 
 	Fx.Elements.CSS2 = elementsCSS2;
 	Fx.Elements.CSS3 = Fx.Elements;
