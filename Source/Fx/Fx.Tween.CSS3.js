@@ -33,6 +33,24 @@ provides: [Fx.Tween.CSS3]
 				return this.startCSS3([this.property], parsed.from, parsed.to);
 			}
 			return this.parent(property, from, to);
+		},
+		
+		compute: function(from, to, delta){
+			var computed;
+			if(delta == 0) {
+				computed = from;
+			}
+			else if(delta == 1) {
+				computed = to;
+			}
+			else {
+				computed = [];
+				(Math.min(from[p].length, to.length)).times(function(i){
+					computed.push({value: from[i].parser.compute(from[i].value, to[i].value, delta), parser: from[i].parser});
+				});
+			}
+			computed.$family = Function.from('fx:css:value');
+			return computed;
 		}
 	});
 

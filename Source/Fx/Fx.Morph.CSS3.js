@@ -40,6 +40,27 @@ provides: [Fx.Morph.CSS3]
 				return this.startCSS3(usedProps, from, to);
 			}
 			return this.parent(properties);
+		},
+		
+		compute: function(fromX, toX, delta){
+			return Object.map(fromX, function(from, prop) {
+				var computed;
+				var to = toX[prop];
+				if(delta == 0) {
+					computed = from;
+				}
+				else if(delta == 1) {
+					computed = to;
+				}
+				else {
+					computed = [];
+					(Math.min(from[p].length, to.length)).times(function(i){
+						computed.push({value: from[i].parser.compute(from[i].value, to[i].value, delta), parser: from[i].parser});
+					});
+				}
+				computed.$family = Function.from('fx:css:value');
+				return computed;
+			});
 		}
 	});
 

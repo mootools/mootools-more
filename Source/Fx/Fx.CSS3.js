@@ -29,18 +29,20 @@ provides: [Fx.CSS3]
 		})();
 		
 		if(prefix) {
+			var hasTransform = typeof document.documentElement.style[prefix + 'Transform'] != 'undefined';
+			prefix = prefix.toLowerCase();
 			return {
-				transition: prefix + 'Transition',
-				transitionProperty: prefix + 'TransitionProperty',
-				transitionDuration: prefix + 'TransitionDuration',
-				transitionTimingFunction : prefix + 'TransitionTimingFunction',
-				transitionend: (prefix == 'Moz') ? 'transitionend' : (prefix == 'O' ? 'o' : prefix) + 'TransitionEnd',
-				transform: typeof document.documentElement.style[prefix + 'Transform'] != 'undefined' ? '-' + prefix.toLowerCase() + '-transform' : null
+				transition: '-' + prefix + '-transition',
+				transitionProperty: '-' + prefix + '-transition-property',
+				transitionDuration: '-' + prefix + '-transition-duration',
+				transitionTimingFunction : '-' + prefix + '-transition-timing-function',
+				transitionend: (prefix == 'moz') ? 'transitionend' : prefix + 'TransitionEnd',
+				transform: hasTransform ? '-' + prefix + '-transform' : null
 			}
 		}
 		return false;
 	})();
-	
+		
 	Element.NativeEvents[css3Features.transitionend] = 2;
 	
 	DOMEvent.implement({
@@ -203,7 +205,7 @@ provides: [Fx.CSS3]
 			return value.map(function(val){
 				val = String(val);
 				var found = false;
-				Object.each(css3Parsers, function(parser, key){
+				Object.each(parsers, function(parser, key){
 					if (found) return;
 					var parsed = parser.parse(val);
 					if (parsed || parsed === 0) found = {value: parsed, parser: parser};
@@ -211,7 +213,7 @@ provides: [Fx.CSS3]
 				found = found || {value: val, parser: Fx.CSS.Parsers.String};
 				return found;
 			});
-		},
+		}
 	};
 	
 	Fx.CSS3Stop = {
@@ -244,7 +246,7 @@ provides: [Fx.CSS3]
 		}
 	};
 	
-	var css3Parsers = {
+	var parsers = {
 		Matrix: {
 			parse: function(val){
 				if(typeof val != 'string') {
@@ -281,17 +283,20 @@ provides: [Fx.CSS3]
 			},
 			compute: function(from, to, delta){
 				if(delta == 0) {
-					return from.text;
+					return from
 				}
 				else if(delta == 1) {
-					return to.text;
+					return to;
 				}
-				return 'matrix(' + from.matrix.map(function(v, k) {
-					return Fx.compute(v, to[k], delta).toFixed(2);
-				}).join(', ') + ')';
+				var v = {
+					matrix: from.matrix.map(function(v, k) {
+						return Fx.compute(v, to[k], delta).toFixed(2);
+					})
+				};
+				v.text = 'matrix(' + v.matrix.join(', ') + ')';
 			},
 			serve: function(value) {
-				return value;
+				return value ? value.text || value : null;
 			}
 		},
 		Color: {
