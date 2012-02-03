@@ -14,96 +14,96 @@ provides: [Fx.Elements.CSS3]
 ...
 */
 (function() {
-	
-	var elementsCSS2 = Fx.Elements;
+	if(Fx.CSS3.features) {
+		var elementsCSS2 = Fx.Elements;
 
-	Fx.Elements = new Class({
-		Extends: elementsCSS2,
+		Fx.Elements = new Class({
+			Extends: elementsCSS2,
 		
-		initializeCSS3: function(elements, options){
-			this.morphers = elements.map(function(element) {
-				return new Fx.Morph(element, Object.merge({}, options, {
-					onComplete: this._complete.bind(this),
-					onCancel: this._cancel.bind(this)
-				}));
-			}.bind(this));
-		},
+			initializeCSS3: function(elements, options){
+				this.morphers = elements.map(function(element) {
+					return new Fx.Morph(element, Object.merge({}, options, {
+						onComplete: this._complete.bind(this),
+						onCancel: this._cancel.bind(this)
+					}));
+				}.bind(this));
+			},
 		
-		_complete: function() {
-			if(--this.count == 0) {
-				this.fireEvent('complete', this.subject);
-				if (!this.callChain()) this.fireEvent('chainComplete', this.subject);
-			}
-		},
-		
-		_cancel: function() {
-			if(--this.count == 0) {
-				this.fireEvent('cancel', this.subject);
-				this.clearChain();
-			}
-		},
-
-		checkCSS3: function(obj){
-			return (Fx.CSS3.features && Object.every(obj, function(properties, key) {
-				if(properties && this.elements[key]) {
-					return Fx.CSS3.animatable.containsArray(Object.keys(properties));
+			_complete: function() {
+				if(--this.count == 0) {
+					this.fireEvent('complete', this.subject);
+					if (!this.callChain()) this.fireEvent('chainComplete', this.subject);
 				}
-				return true;
-			}, this));
-		},
+			},
 		
-		count: 0,
+			_cancel: function() {
+				if(--this.count == 0) {
+					this.fireEvent('cancel', this.subject);
+					this.clearChain();
+				}
+			},
 
-		start: function(obj){
-			if ((this.css3Supported = this.checkCSS3(obj))) {
-				if(!this.check()) return this;
-				this.count = 1;
-
-				Object.each(obj, function(properties, key) {
+			checkCSS3: function(obj){
+				return (Fx.CSS3.features && Object.every(obj, function(properties, key) {
 					if(properties && this.elements[key]) {
-						this.count++;
-						this.morphers[key].start(properties);
+						return Fx.CSS3.animatable.containsArray(Object.keys(properties));
 					}
-				}, this);
-
-				this.fireEvent('start', this);
-				this._complete();
-				return this;
-			}
-			return this.parent(obj);
-		},
+					return true;
+				}, this));
+			},
 		
-		stop: function() {
-			if(this.css3Supported) {
-				Object.each(this.morphers, function(morph) {
-					morph.stop();
-				});
-				return this;
-			}
-			return this.parent();
-		},
+			count: 0,
+
+			start: function(obj){
+				if ((this.css3Supported = this.checkCSS3(obj))) {
+					if(!this.check()) return this;
+					this.count = 1;
+
+					Object.each(obj, function(properties, key) {
+						if(properties && this.elements[key]) {
+							this.count++;
+							this.morphers[key].start(properties);
+						}
+					}, this);
+
+					this.fireEvent('start', this);
+					this._complete();
+					return this;
+				}
+				return this.parent(obj);
+			},
 		
-		cancel: function() {
-			if(this.css3Supported) {
-				Object.each(this.morphers, function(morph) {
-					morph.cancel();
-				});
-				return this;
-			}
-			return this.parent();
-		},
+			stop: function() {
+				if(this.css3Supported) {
+					Object.each(this.morphers, function(morph) {
+						morph.stop();
+					});
+					return this;
+				}
+				return this.parent();
+			},
 		
-		isRunning: function() {
-			if(this.css3Supported) {
-				return this.count != 0;
+			cancel: function() {
+				if(this.css3Supported) {
+					Object.each(this.morphers, function(morph) {
+						morph.cancel();
+					});
+					return this;
+				}
+				return this.parent();
+			},
+		
+			isRunning: function() {
+				if(this.css3Supported) {
+					return this.count != 0;
+				}
+				return this.parent();
 			}
-			return this.parent();
-		}
-	});
+		});
 
-	Fx.Elements.implement(Fx.CSS3);
+		Fx.Elements.implement(Fx.CSS3);
 
-	Fx.Elements.CSS2 = elementsCSS2;
-	Fx.Elements.CSS3 = Fx.Elements;
-
+		Fx.Elements.CSS2 = elementsCSS2;
+		Fx.Elements.CSS3 = Fx.Elements;
+	}
 })();

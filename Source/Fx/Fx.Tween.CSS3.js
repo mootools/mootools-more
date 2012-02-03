@@ -14,50 +14,50 @@ provides: [Fx.Tween.CSS3]
 ...
 */
 (function() {
-	
-	var tweenCSS2 = Fx.Tween;
+	if(Fx.CSS3.features) {
+		var tweenCSS2 = Fx.Tween;
 
-	Fx.Tween = new Class({
+		Fx.Tween = new Class({
 
-		Extends: tweenCSS2,
+			Extends: tweenCSS2,
 
-		checkCSS3: function(property){
-			return (Fx.CSS3.features && Fx.CSS3.animatable.contains(property));
-		},
+			checkCSS3: function(property){
+				return (Fx.CSS3.features && Fx.CSS3.animatable.contains(property));
+			},
 
-		start: function(property, from, to){
-			var args = Array.flatten(arguments);
-			this.property = this.options.property || args.shift();
-			if ((this.css3Supported = this.checkCSS3(this.property))) {
-				var parsed = this.prepare(this.element, this.property, args);
-				return this.startCSS3([this.property], parsed.from, parsed.to);
-			}
-			return this.parent(property, from, to);
-		},
+			start: function(property, from, to){
+				var args = Array.flatten(arguments);
+				this.property = this.options.property || args.shift();
+				if ((this.css3Supported = this.checkCSS3(this.property))) {
+					var parsed = this.prepare(this.element, this.property, args);
+					return this.startCSS3([this.property], parsed.from, parsed.to);
+				}
+				return this.parent(property, from, to);
+			},
 		
-		compute: function(from, to, delta){
-			var computed;
-			if(delta == 0) {
-				computed = from;
+			compute: function(from, to, delta){
+				var computed;
+				if(delta == 0) {
+					computed = from;
+				}
+				else if(delta == 1) {
+					computed = to;
+				}
+				else {
+					computed = [];
+					(Math.min(from[p].length, to.length)).times(function(i){
+						computed.push({value: from[i].parser.compute(from[i].value, to[i].value, delta), parser: from[i].parser});
+					});
+				}
+				computed.$family = Function.from('fx:css:value');
+				return computed;
 			}
-			else if(delta == 1) {
-				computed = to;
-			}
-			else {
-				computed = [];
-				(Math.min(from[p].length, to.length)).times(function(i){
-					computed.push({value: from[i].parser.compute(from[i].value, to[i].value, delta), parser: from[i].parser});
-				});
-			}
-			computed.$family = Function.from('fx:css:value');
-			return computed;
-		}
-	});
+		});
 
-	Fx.Tween.implement(Fx.CSS3);
-	Fx.Tween.implement(Fx.CSS3Stop);
+		Fx.Tween.implement(Fx.CSS3);
+		Fx.Tween.implement(Fx.CSS3Stop);
 
-	Fx.Tween.CSS2 = tweenCSS2;
-	Fx.Tween.CSS3 = Fx.Tween;
-	
+		Fx.Tween.CSS2 = tweenCSS2;
+		Fx.Tween.CSS3 = Fx.Tween;
+	}
 })();

@@ -14,60 +14,60 @@ provides: [Fx.Morph.CSS3]
 ...
 */
 (function() {
+	if(Fx.CSS3.features) {
+		var morphCSS2 = Fx.Morph;
 	
-	var morphCSS2 = Fx.Morph;
-	
-	Fx.Morph = new Class({
+		Fx.Morph = new Class({
 
-		Extends: morphCSS2,
+			Extends: morphCSS2,
 
-		checkCSS3: function(properties){
-			return (Fx.CSS3.features && Fx.CSS3.animatable.containsArray(Object.keys(properties)));
-		},
+			checkCSS3: function(properties){
+				return (Fx.CSS3.features && Fx.CSS3.animatable.containsArray(Object.keys(properties)));
+			},
 		
-		start: function(properties){
-			if ((this.css3Supported = this.checkCSS3(properties))) {
-				if (typeof properties == 'string') properties = this.search(properties);
-				var from = {}, to = {}, usedProps = [];
-				for (var p in properties){
-					var parsed = this.prepare(this.element, p, properties[p]);
-					if(!Object.isEqual(parsed.from, parsed.to)) {
-						from[p] = parsed.from;
-						to[p] = parsed.to;
-						usedProps.push(p);
+			start: function(properties){
+				if ((this.css3Supported = this.checkCSS3(properties))) {
+					if (typeof properties == 'string') properties = this.search(properties);
+					var from = {}, to = {}, usedProps = [];
+					for (var p in properties){
+						var parsed = this.prepare(this.element, p, properties[p]);
+						if(!Object.isEqual(parsed.from, parsed.to)) {
+							from[p] = parsed.from;
+							to[p] = parsed.to;
+							usedProps.push(p);
+						}
 					}
+					return this.startCSS3(usedProps, from, to);
 				}
-				return this.startCSS3(usedProps, from, to);
-			}
-			return this.parent(properties);
-		},
+				return this.parent(properties);
+			},
 		
-		compute: function(fromX, toX, delta){
-			return Object.map(fromX, function(from, prop) {
-				var computed;
-				var to = toX[prop];
-				if(delta == 0) {
-					computed = from;
-				}
-				else if(delta == 1) {
-					computed = to;
-				}
-				else {
-					computed = [];
-					(Math.min(from[p].length, to.length)).times(function(i){
-						computed.push({value: from[i].parser.compute(from[i].value, to[i].value, delta), parser: from[i].parser});
-					});
-				}
-				computed.$family = Function.from('fx:css:value');
-				return computed;
-			});
-		}
-	});
+			compute: function(fromX, toX, delta){
+				return Object.map(fromX, function(from, prop) {
+					var computed;
+					var to = toX[prop];
+					if(delta == 0) {
+						computed = from;
+					}
+					else if(delta == 1) {
+						computed = to;
+					}
+					else {
+						computed = [];
+						(Math.min(from[p].length, to.length)).times(function(i){
+							computed.push({value: from[i].parser.compute(from[i].value, to[i].value, delta), parser: from[i].parser});
+						});
+					}
+					computed.$family = Function.from('fx:css:value');
+					return computed;
+				});
+			}
+		});
 
-	Fx.Morph.implement(Fx.CSS3);
-	Fx.Morph.implement(Fx.CSS3Stop);
+		Fx.Morph.implement(Fx.CSS3);
+		Fx.Morph.implement(Fx.CSS3Stop);
 
-	Fx.Morph.CSS2 = morphCSS2;
-	Fx.Morph.CSS3 = Fx.Morph;
-	
+		Fx.Morph.CSS2 = morphCSS2;
+		Fx.Morph.CSS3 = Fx.Morph;
+	}
 })();
