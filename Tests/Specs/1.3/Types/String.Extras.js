@@ -71,33 +71,33 @@ describe('String.truncate', function(){
 
 });
 
-describe('String.ms', {
+describe('String.ms', function(){
 
-	'should convert seconds to milliseconds': function(){
+	it('should convert seconds to milliseconds', function(){
 		expect('5s'.ms()).toEqual(5000);
-	},
+	});
 
-	'should convert minutes to milliseconds': function(){
+	it('should convert minutes to milliseconds', function(){
 		expect('2m'.ms()).toEqual(12e4);
-	},
+	});
 
-	'should convert hours to milliseconds': function(){
+	it('should convert hours to milliseconds', function(){
 	  expect('3h'.ms()).toEqual(108e5);
-	},
+	});
 
-	'should keep milliseconds as milliseconds': function(){
+	it('should keep milliseconds as milliseconds', function(){
 		expect('250ms'.ms()).toEqual(250);
-	},
+	});
 
-	'should treat no unit as milliseconds': function(){
+	it('should treat no unit as milliseconds', function(){
 		expect('100'.ms()).toEqual(100);
-	},
+	});
 
-	'should return NaN for unknown units': function(){
+	it('should return NaN for unknown units', function(){
 		jasmine.Matchers.prototype.toBeNaN = function(){
 			return isNaN(this.actual);
 		};
 		expect('30q').toBeNaN();
-	}
+	});
 
 });
