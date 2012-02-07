@@ -70,3 +70,34 @@ describe('String.truncate', function(){
 	});
 
 });
+
+describe('String.ms', function(){
+
+	it('should convert seconds to milliseconds', function(){
+		expect('5s'.ms()).toEqual(5000);
+	});
+
+	it('should convert minutes to milliseconds', function(){
+		expect('2m'.ms()).toEqual(12e4);
+	});
+
+	it('should convert hours to milliseconds', function(){
+	  expect('3h'.ms()).toEqual(108e5);
+	});
+
+	it('should keep milliseconds as milliseconds', function(){
+		expect('250ms'.ms()).toEqual(250);
+	});
+
+	it('should treat no unit as milliseconds', function(){
+		expect('100'.ms()).toEqual(100);
+	});
+
+	it('should return NaN for unknown units', function(){
+		jasmine.Matchers.prototype.toBeNaN = function(){
+			return isNaN(this.actual);
+		};
+		expect('30q').toBeNaN();
+	});
+
+});

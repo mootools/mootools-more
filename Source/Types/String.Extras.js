@@ -79,7 +79,16 @@ tidy = {
 	'-': /[\u2013]/g,
 //	'--': /[\u2014]/g,
 	'&raquo;': /[\uFFFD]/g
-};
+},
+
+conversions = {
+	ms: 1,
+	s: 1000,
+	m: 6e4,
+	h: 36e5
+},
+
+findUnits = /(\d*.?\d+)([msh]+)/;
 
 var walk = function(string, replacements){
 	var result = string, key;
@@ -141,6 +150,13 @@ String.implement({
 			if (trail) string += trail;
 		}
 		return string;
+	},
+
+	ms: function(){
+	  // "Borrowed" from https://gist.github.com/1503944
+		var units = findUnits.exec(this);
+		if (units == null) return Number(this);
+		return Number(units[1]) * conversions[units[2]];
 	}
 
 });

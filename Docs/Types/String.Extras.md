@@ -181,8 +181,34 @@ Truncates a string after the given number of characters.
 	'This is some random text'.truncate(15, '--'); // This is some ra--
 	'This is some random text'.truncate(15, '…', ' '); // This is some…
 
+String Method: ms {#String:ms}
+------------------------------------------
+
+Converts a string with units, such as '5m', to milliseconds, for use with e.g. [Function.delay][].
+
+### Syntax
+
+	'3s'.ms()
+
+### Returns
+
+* (*number*) the string converted to milliseconds
+
+### Examples
+
+	theFunction.delay('10s'.ms()); // Executes theFunction in 10,000 milliseconds
+
+### Notes
+
+	Currently supported units are
+		- ms: milliseconds
+		- s: seconds (1000 milliseconds)
+		- m: minutes (60,000 milliseconds)
+		- h: hours (3,600,000 milliseconds)
+
 
 
 [String]: /core/Types/String
 [Array.filter]: /core/Types/Array#Array:filter
+[Function.delay]: /core/Types/Function#Function:delay
 [encodeURIComponent]: http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Functions:encodeURIComponent
