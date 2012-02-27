@@ -85,7 +85,7 @@ To override the default tip show behavior, you must either declare the onShow ev
 		var myTips = new Tips('.thisisatooltip', {
 			onShow: function(tip, el){
 				tip.setStyles({
-					visibility: 'hidden'
+					visibility: 'hidden', 
 					display: 'block'
 				}).fade('in');
 			}
@@ -93,7 +93,7 @@ To override the default tip show behavior, you must either declare the onShow ev
 		//if you want to add this after init
 		myTips.removeEvents('show').addEvent('show', function(tip, el){
 			tip.setStyles({
-				visibility: 'hidden'
+				visibility: 'hidden', 
 				display: 'block'
 			}).fade('in');
 		});
