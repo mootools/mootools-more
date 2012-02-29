@@ -682,6 +682,19 @@ describe('Date', function(){
 			expect(d.parse('2012-55-11').isValid()).toBeFalsy();
 			expect(d.parse('2012-02-88').isValid()).toBeFalsy();
 			expect(d.parse('1981-12-02 37:14:88').isValid()).toBeFalsy();
+			expect(d.parse('1981-12-02 12:99:69').isValid()).toBeFalsy();
+			expect(d.parse('1981-12-02 15:14:71').isValid()).toBeFalsy();
+		});
+
+		it('should not parse invalid dates with custom formats', function () {
+			var d = new Date();
+			var fmt = '%d-%m-%Y %H:%M:%S';
+			Date.defineFormat(fmt);
+			expect(d.parse('02-12-1981 18:00:75').isValid()).toBeFalsy();
+
+			// this passes in Webkit and Firefox, but breaks in IE. IEs native
+			// Date.parse parses dates like '69-7000-1981' as valid dates.
+			expect(d.parse('69-12-1981 18:00:00').isValid()).toBeFalsy(); 
 		});
 
 	});
