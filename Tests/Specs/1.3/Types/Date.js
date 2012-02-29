@@ -39,6 +39,9 @@ describe('Date', function(){
 
 	});
 
+
+
+
 	describe('Date.get', function(){
 
 		it('should get the hour', function(){
@@ -671,6 +674,16 @@ describe('Date', function(){
 			Date.prototype.clearTime = clearTime;
 		});
 
+		it('should not parse invalid dates', function () {
+			var d = new Date();
+			expect(d.parse('blah').isValid()).toBeFalsy();
+			expect(d.parse('12th blah').isValid()).toBeFalsy();
+			expect(d.parse('47th Oct').isValid()).toBeFalsy();
+			expect(d.parse('2012-55-11').isValid()).toBeFalsy();
+			expect(d.parse('2012-02-88').isValid()).toBeFalsy();
+			expect(d.parse('1981-12-02 37:14:88').isValid()).toBeFalsy();
+		});
+
 	});
 
 	describe('Date.defineFormat', function(){
@@ -704,6 +717,7 @@ describe('Date', function(){
 		});
 
 	});
+
 
 });
 

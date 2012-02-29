@@ -367,8 +367,11 @@ Date.extend({
 
 		if (!(parsed && parsed.isValid())){
 			parsed = new Date(nativeParse(from));
-			if (!(parsed && parsed.isValid())) parsed = new Date(from.toInt());
+			if (!(parsed && parsed.isValid()) && !isNaN(Number(from))) {
+				parsed = new Date(from.toInt());
+			}
 		}
+
 		return parsed;
 	},
 
