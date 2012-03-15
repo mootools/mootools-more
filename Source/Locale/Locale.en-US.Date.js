@@ -1,70 +1,70 @@
 /*
 ---
 
-name: Locale.en-US.Date
+name: Locale.el-GR.Date
 
-description: Date messages for US English.
+description: Date messages for Greek language.
 
 license: MIT-style license
 
 authors:
-  - Aaron Newton
+  - Periklis Argiriadis
 
 requires:
   - /Locale
 
-provides: [Locale.en-US.Date]
+provides: [Locale.el-GR.Date]
 
 ...
 */
 
-Locale.define('en-US', 'Date', {
+Locale.define('el-GR', 'Date', {
 
-	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-	months_abbr: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-	days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-	days_abbr: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+	months: ['Ιανουάριος', 'Φεβρουάριος', 'Μάρτιος', 'Απρίλιος', 'Μάιος', 'Ιούνιος', 'Ιούλιος', 'Αύγουστος', 'Σεπτέμβριος', 'Οκτώβριος', 'Νοέμβριος', 'Δεκέμβριος'],
+	months_abbr: ['Ιαν', 'Φεβ', 'Μαρ', 'Απρ', 'Μάι', 'Ιουν', 'Ιουλ', 'Αυγ', 'Σεπ', 'Οκτ', 'Νοε', 'Δεκ'],
+	days: ['Κυριακή', 'Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο'],
+	days_abbr: ['Κυρ', 'Δευ', 'Τρι', 'Τετ', 'Πεμ', 'Παρ', 'Σαβ'],
 
-	// Culture's date order: MM/DD/YYYY
-	dateOrder: ['month', 'date', 'year'],
-	shortDate: '%m/%d/%Y',
+	// Culture's date order: DD/MM/YYYY
+	dateOrder: ['date', 'month', 'year'],
+	shortDate: '%d/%m/%Y',
 	shortTime: '%I:%M%p',
-	AM: 'AM',
-	PM: 'PM',
-	firstDayOfWeek: 0,
+	AM: 'πμ',
+	PM: 'μμ',
+	firstDayOfWeek: 1,
 
 	// Date.Extras
 	ordinal: function(dayOfMonth){
 		// 1st, 2nd, 3rd, etc.
-		return (dayOfMonth > 3 && dayOfMonth < 21) ? 'th' : ['th', 'st', 'nd', 'rd', 'th'][Math.min(dayOfMonth % 10, 4)];
+		return (dayOfMonth > 3 && dayOfMonth < 21) ? 'ος' : ['ος'][Math.min(dayOfMonth % 10, 4)];
 	},
 
-	lessThanMinuteAgo: 'less than a minute ago',
-	minuteAgo: 'about a minute ago',
-	minutesAgo: '{delta} minutes ago',
-	hourAgo: 'about an hour ago',
-	hoursAgo: 'about {delta} hours ago',
-	dayAgo: '1 day ago',
-	daysAgo: '{delta} days ago',
-	weekAgo: '1 week ago',
-	weeksAgo: '{delta} weeks ago',
-	monthAgo: '1 month ago',
-	monthsAgo: '{delta} months ago',
-	yearAgo: '1 year ago',
-	yearsAgo: '{delta} years ago',
+	lessThanMinuteAgo: 'λιγότερο από ένα λεπτό πριν',
+	minuteAgo: 'περίπου ένα λεπτό πριν',
+	minutesAgo: '{delta} λεπτά πριν',
+	hourAgo: 'περίπου μια ώρα πριν',
+	hoursAgo: 'περίπου {delta} ώρες πριν',
+	dayAgo: '1 ημέρα πριν',
+	daysAgo: '{delta} ημέρες πριν',
+	weekAgo: '1 εβδομάδα πριν',
+	weeksAgo: '{delta} εβδομάδες πριν',
+	monthAgo: '1 μήνα πριν',
+	monthsAgo: '{delta} μήνες πριν',
+	yearAgo: '1 χρόνο πριν',
+	yearsAgo: '{delta} χρόνια πριν',
 
-	lessThanMinuteUntil: 'less than a minute from now',
-	minuteUntil: 'about a minute from now',
-	minutesUntil: '{delta} minutes from now',
-	hourUntil: 'about an hour from now',
-	hoursUntil: 'about {delta} hours from now',
-	dayUntil: '1 day from now',
-	daysUntil: '{delta} days from now',
-	weekUntil: '1 week from now',
-	weeksUntil: '{delta} weeks from now',
-	monthUntil: '1 month from now',
-	monthsUntil: '{delta} months from now',
-	yearUntil: '1 year from now',
-	yearsUntil: '{delta} years from now'
+	lessThanMinuteUntil: 'λιγότερο από λεπτό από τώρα',
+	minuteUntil: 'περίπου ένα λεπτό από τώρα',
+	minutesUntil: '{delta} λεπτά από τώρα',
+	hourUntil: 'περίπου μια ώρα από τώρα',
+	hoursUntil: 'περίπου {delta} ώρες από τώρα',
+	dayUntil: '1 ημέρα από τώρα',
+	daysUntil: '{delta} ημέρες από τώρα',
+	weekUntil: '1 εβδομάδα από τώρα',
+	weeksUntil: '{delta} εβδομάδες από τώρα',
+	monthUntil: '1 μήνας από τώρα',
+	monthsUntil: '{delta} μήνες από τώρα',
+	yearUntil: '1 χρόνος από τώρα',
+	yearsUntil: '{delta} χρόνια από τώρα'
 
 });
