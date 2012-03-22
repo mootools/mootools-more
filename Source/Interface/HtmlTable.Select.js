@@ -113,10 +113,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this.selectedRows;
 	},
 
-	getSelected: function(){
-		return this.selectedRows;
-	},
-
 	serialize: function(){
 		var previousSerialization = this.previous.apply(this, arguments) || {};
 		if (this.options.selectable){
@@ -180,10 +176,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	deselectRange: function(startRow, endRow){
 		this.selectRange(startRow, endRow, true);
-	},
-
-	getSelected: function(){
-		return this.selectedRows;
 	},
 
 /*
