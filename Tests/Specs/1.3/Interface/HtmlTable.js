@@ -137,6 +137,22 @@ describe('HtmlTable', function(){
 
 	});
 
+	describe('HtmlTable:empty', function(){
+
+		it('should empty a table', function(){
+			var table = new HtmlTable();
+			table.push(['hello','world']);
+			table.push(['hello','world again']);
+			expect(table.body.rows.length).toEqual(2);
+			table.empty();
+			expect(table.body.rows.length).toEqual(0);
+			table.empty();
+			expect(table.body.rows.length).toEqual(0);
+		});
+
+	});
+
+
 	describe('HtmlTable cloned Element methods', function(){
 
 		var t = new HtmlTable({
