@@ -164,16 +164,16 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (typeOf(startRow) == 'element') startRow = rows.indexOf(startRow);
 		if (typeOf(endRow) == 'element') endRow = rows.indexOf(endRow);
 
-        if (endRow < startRow){
-            var tmp = startRow;
-            startRow = endRow;
-            endRow = tmp;
-        }
+		if (endRow < startRow){
+			var tmp = startRow;
+			startRow = endRow;
+			endRow = tmp;
+		}
 
-        var rowAfterEndRow = Math.min(endRow + 1, rows.length);
-        startRow = Math.max(startRow, 0);
+		var rowAfterEndRow = Math.min(endRow + 1, rows.length);
+		startRow = Math.max(startRow, 0);
 
-		for (var i = startRow; i <= endRow; i++){
+		for (var i = startRow; i < rowAfterEndRow; i++){
 			if (this.options.selectHiddenRows || rows[i].isDisplayed()) this[method](rows[i], true);
 		}
 
