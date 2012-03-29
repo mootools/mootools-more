@@ -192,6 +192,7 @@ var Sortables = new Class({
 			var destroy = function(){
 				this.removeEvent('cancel', destroy);
 				clone.destroy();
+				this.reset();
 			};
 
 			this.effect.element = clone;
@@ -204,8 +205,9 @@ var Sortables = new Class({
 			}).addEvent('cancel', destroy).chain(destroy);
 		} else {
 			this.clone.destroy();
+			this.reset();
 		}
-		this.reset();
+		
 	},
 
 	reset: function(){
