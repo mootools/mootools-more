@@ -175,6 +175,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 				this.setRowStyle(row, count);
 			}
 			body.appendChild(row);
+			if (this.options.zebra && this.zebra) this.zebra(row, count - (data.length - 1) * -1);
 
 			for (rowIndex = 0; rowIndex < count; rowIndex++){
 				if (data[rowIndex].position > position) data[rowIndex].position--;
