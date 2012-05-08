@@ -16,13 +16,14 @@ authors:
 
 requires:
   - Core/Element
-  - Core/Request
   - MooTools.More
 
 provides: [Request.JSONP]
 
 ...
 */
+
+if (!this.Request) this.Request = {};
 
 Request.JSONP = new Class({
 
