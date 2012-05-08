@@ -36,6 +36,12 @@ var Slider = new Class({
 		onTick: function(position){
 			this.setKnobPosition(position);
 		},
+		onStart: function(){
+			this.draggedKnob();
+		},
+		onDrag: function(){
+			this.draggedKnob();
+		},
 		initialStep: 0,
 		snap: false,
 		offset: 0,
@@ -75,23 +81,29 @@ var Slider = new Class({
 		modifiers[this.axis] = this.property;
 		limit[this.axis] = [-options.offset, this.full - options.offset];
 
-		var dragOptions = {
-			snap: 0,
-			limit: limit,
-			modifiers: modifiers,
-			onDrag: this.draggedKnob,
-			onStart: this.draggedKnob,
-			onBeforeStart: (function(){
-				this.isDragging = true;
-			}).bind(this),
-			onCancel: function(){
-				this.isDragging = false;
-			}.bind(this),
-			onComplete: function(){
-				this.isDragging = false;
-				this.draggedKnob();
-				this.end();
-			}.bind(this)
+		var self = this,
+			dragOptions = {
+				snap: 0,
+				limit: limit,
+				modifiers: modifiers,
+				onBeforeStart: function(knob, event){
+					self.fireEvent('beforeStart', [knob, event]);
+					self.isDragging = true;
+				},
+				onStart: function(knob, event){
+					self.fireEvent('start', [knob, event]);
+				},
+				onDrag: function(knob, event){
+					self.fireEvent('drag', [knob, event]);
+				},
+				onCancel: function(){
+					self.isDragging = false;
+				},
+				onComplete: function(){
+					self.isDragging = false;
+					self.draggedKnob();
+					self.end();
+				}
 		};
 		if (options.snap) this.setSnap(dragOptions);
 
@@ -109,7 +121,7 @@ var Slider = new Class({
 
 	detach: function(){
 		this.element.removeEvent('mousedown', this.clickedElement)
-			.removeEvent('mousewheel', this.scrolledElement);
+					.removeEvent('mousewheel', this.scrolledElement);
 		this.drag.detach();
 		return this;
 	},
@@ -169,11 +181,9 @@ var Slider = new Class({
 
 		var dir = this.range < 0 ? -1 : 1,
 			position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
-
-		position = position.limit(-this.options.offset, this.full - this.options.offset);
+			position = position.limit(-this.options.offset, this.full - this.options.offset);
 
 		this.step = Math.round(this.min + dir * this.toStep(position));
-
 		this.checkStep()
 			.fireEvent('tick', position)
 			.end();
@@ -188,13 +198,12 @@ var Slider = new Class({
 	draggedKnob: function(){
 		var dir = this.range < 0 ? -1 : 1,
 			position = this.drag.value.now[this.axis];
-
-		position = position.limit(-this.options.offset, this.full -this.options.offset);
+			position = position.limit(-this.options.offset, this.full -this.options.offset);
 
 		this.step = Math.round(this.min + dir * this.toStep(position));
 		this.checkStep();
 	},
-
+	
 	checkStep: function(){
 		var step = this.step;
 		if (this.previousChange != step){
@@ -220,6 +229,10 @@ var Slider = new Class({
 
 	toPosition: function(step){
 		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset;
+	},
+	
+	toElement: function(){
+		return this.knob;
 	}
 
 });
