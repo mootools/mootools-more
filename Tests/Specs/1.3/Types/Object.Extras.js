@@ -15,8 +15,8 @@ describe('Object.setByPath', function(){
 				}
 			}
 		};
-		Object.setByPath('chuck norris', 'animal.human.most_deadly');
-		Object.setByPath('shay maria', 'animal.human.most_lovely');
+		Object.setByPath(obj, 'animal.human.most_deadly', 'chuck norris');
+		Object.setByPath(obj, 'animal.human.most_lovely', 'shay maria');
 		expect(obj.animal.human.most_deadly).toEqual('chuck norris');
 		expect(obj.animal.human.most_lovely).toEqual('shay maria');
 	});
