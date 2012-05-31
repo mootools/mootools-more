@@ -116,7 +116,7 @@ This is how the :once pseudo is implemented
 
 
 [DOMEvent]: /core/Types/DOMEvent
-[Element.Delegation]: /more/Element/Element.Delegation
+[Element.Delegation]: /core/Element/Element.Delegation
 [Events.Pseudos :once]: /more/Class/Events.Pseudos#Pseudos:once
 [Events.Pseudos :throttle]: /more/Class/Events.Pseudos#Pseudos:throttle
 [Events.Pseudos :pause]: /more/Class/Events.Pseudos#Pseudos:pause
