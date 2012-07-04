@@ -1,7 +1,7 @@
 Element.Event.Pseudos {#Pseudos}
 ================================
 
-Defines a useful pseudo event: `:once` as well as the `definePseudo` method to create your own. See also the `:relay` pseudo in [Element.Delegation][].
+Defines pseudo events like `:once` or `:throttle' as well as the `definePseudo` method to create your own.
 
 ### Demo
 
