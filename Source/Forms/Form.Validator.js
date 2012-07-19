@@ -257,7 +257,7 @@ Form.Validator = new Class({
 		var validator = this.getValidator(className);
 		if (warn != null) warn = false;
 		if (this.hasValidator(field, 'warnOnly')) warn = true;
-		var isValid = this.hasValidator(field, 'ignoreValidation') || (validator ? validator.test(field) : true);
+		var isValid = field.hasClass('ignoreValidation') || (validator ? validator.test(field) : true);
 		if (validator && field.isVisible()) this.fireEvent('elementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
