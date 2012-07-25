@@ -102,6 +102,20 @@ Fires the 'drop' event and calls the Drag Class stop method.
 - [Drag:stop][]
 
 
+Drag.Move Method: setContainer {#Drag-Move:setContainer}
+-------------------------------------------------
+
+Limits drag to an Element's size and position.
+This is equivalent to specify the *container* option in Drag.Move constructor.
+
+### Syntax
+
+	myMove.setContainer(container);
+
+### Arguments
+
+1. container - (*element*) Sets the container Element, drag will be limited to this Element's size and position.
+
 
 Type: Element {#Element}
 ==========================

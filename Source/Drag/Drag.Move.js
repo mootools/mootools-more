@@ -45,10 +45,7 @@ Drag.Move = new Class({
 		element = this.element;
 
 		this.droppables = $$(this.options.droppables);
-		this.container = document.id(this.options.container);
-
-		if (this.container && typeOf(this.container) != 'element')
-			this.container = document.id(this.container.getDocument().body);
+		this.setContainer(this.options.container);
 
 		if (this.options.style){
 			if (this.options.modifiers.x == 'left' && this.options.modifiers.y == 'top'){
@@ -64,6 +61,15 @@ Drag.Move = new Class({
 
 		this.addEvent('start', this.checkDroppables, true);
 		this.overed = null;
+	},
+	
+	setContainer: function(container) {
+
+		this.container = document.id(container);
+
+		if (this.container && typeOf(this.container) != 'element')
+			this.container = document.id(this.container.getDocument().body);
+
 	},
 
 	start: function(event){
