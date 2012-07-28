@@ -36,7 +36,8 @@ var Sortables = new Class({
 		dragOptions: {}/*<1.2compat>*/,
 		snap: 4,
 		constrain: false,
-		preventDefault: false
+		preventDefault: false,
+		unDraggableTags: ['button', 'input', 'a', 'textarea', 'select', 'option']
 		/*</1.2compat>*/
 	},
 
@@ -148,7 +149,7 @@ var Sortables = new Class({
 		if (
 			!this.idle ||
 			event.rightClick ||
-			['button', 'input', 'a', 'textarea', 'select', 'option'].contains(event.target.get('tag'))
+			this.options.unDraggableTags.contains(event.target.get('tag'))
 		) return;
 
 		this.idle = false;
