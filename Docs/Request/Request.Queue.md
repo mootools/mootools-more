@@ -164,7 +164,7 @@ Removes an instance of [Request][] or one of its subclasses from the queue manag
 	//OR
 	myRequestQueue.removeRequest('fooRequest');
 
-Request.Queue Method: getRunnning {#Request-Queue:getRunning}
+Request.Queue Method: getRunning {#Request-Queue:getRunning}
 ------------------------------------------------------
 
 Returns any instances of [Request][] that are currently running (but not necessarily any instances that are queued to run).
