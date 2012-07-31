@@ -33,11 +33,11 @@ var Sortables = new Class({
 		clone: false,
 		revert: false,
 		handle: false,
-		dragOptions: {}/*<1.2compat>*/,
+		dragOptions: {},
+		unDraggableTags: ['button', 'input', 'a', 'textarea', 'select', 'option']/*<1.2compat>*/,
 		snap: 4,
 		constrain: false,
-		preventDefault: false,
-		unDraggableTags: ['button', 'input', 'a', 'textarea', 'select', 'option']
+		preventDefault: false
 		/*</1.2compat>*/
 	},
 
