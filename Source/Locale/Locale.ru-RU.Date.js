@@ -75,7 +75,7 @@ Locale.define('ru-RU', 'Date', {
 
 	lessThanMinuteUntil: 'меньше чем через минуту',
 	minuteUntil: 'через минуту',
-	minutesUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'час', 'часа', 'часов') + ''; },
+	minutesUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'минуту', 'минуты', 'минут') + ''; },
 	hourUntil: 'через час',
 	hoursUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'час', 'часа', 'часов') + ''; },
 	dayUntil: 'завтра',
