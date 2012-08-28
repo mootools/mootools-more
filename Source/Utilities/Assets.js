@@ -35,7 +35,7 @@ var Asset = {
 		delete properties.document;
 
 		if (load){
-			if (typeof script.onreadystatechange != 'undefined'){
+			if (!script.addEventListener){
 				script.addEvent('readystatechange', function(){
 					if (['loaded', 'complete'].contains(this.readyState)) load.call(this);
 				});
