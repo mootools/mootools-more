@@ -148,8 +148,10 @@ Form.Validator.Inline = new Class({
 		var props = field.get('validatorProps');
 		//Build advice
 		if (!props.msgPos || !document.id(props.msgPos)){
-			if (field.type && field.type.toLowerCase() == 'radio') field.getParent().adopt(advice);
-			else advice.inject(document.id(field), 'after');
+			if(field.isVisible()) {
+				if (field.type && field.type.toLowerCase() == 'radio') field.getParent().adopt(advice);
+				else advice.inject(document.id(field), 'after');
+			}
 		} else {
 			document.id(props.msgPos).grab(advice);
 		}
