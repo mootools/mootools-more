@@ -64,12 +64,8 @@ Drag.Move = new Class({
 	},
 	
 	setContainer: function(container) {
-
-		this.container = document.id(container);
-
-		if (this.container && typeOf(this.container) != 'element')
-			this.container = document.id(this.container.getDocument().body);
-
+		container = document.id(container);
+		this.container = container || document.id(this.container.getDocument().body);
 	},
 
 	start: function(event){
