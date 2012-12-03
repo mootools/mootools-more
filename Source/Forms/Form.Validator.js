@@ -450,7 +450,7 @@ Form.Validator.addAllThese([
 		},
 		test: function(element, props){
 			if (Form.Validator.getValidator('IsEmpty').test(element)) return true;
-			var dateLocale = Locale.getCurrent().sets.Date,
+			var dateLocale = Locale.get('Date'),
 				dateNouns = new RegExp([dateLocale.days, dateLocale.days_abbr, dateLocale.months, dateLocale.months_abbr, dateLocale.AM, dateLocale.PM].flatten().join('|'), 'i'),
 				value = element.get('value'),
 				wordsInValue = value.match(/[a-z]+/gi);
