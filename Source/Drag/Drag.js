@@ -182,7 +182,15 @@ var Drag = new Class({
 					this.value.now[z] = this.limit[z][0];
 				}
 			}
-
+			
+			if(options.ratio) {
+				if(this.value.now.x / this.value.now.y < options.ratio) {
+					this.value.now.y = this.value.now.x / options.ratio;
+				} else {
+					this.value.now.x = options.ratio * this.value.now.y;
+				}
+			}
+			
 			if (options.grid[z]) this.value.now[z] -= ((this.value.now[z] - (this.limit[z][0]||0)) % options.grid[z]);
 
 			if (options.style) this.element.setStyle(options.modifiers[z], this.value.now[z] + options.unit);
