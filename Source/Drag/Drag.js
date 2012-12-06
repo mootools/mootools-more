@@ -43,6 +43,7 @@ var Drag = new Class({
 		grid: false,
 		style: true,
 		limit: false,
+		ratio: false,
 		handle: false,
 		invert: false,
 		preventDefault: false,

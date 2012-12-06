@@ -26,6 +26,7 @@ Drag Method: constructor
 * handle          - (*element*: defaults to the element passed in) The Element to act as the handle for the draggable element.
 * invert          - (*boolean*: defaults to false) Whether or not to invert the values reported on start and drag.
 * limit           - (*object*: defaults to false) An object with an x and a y property, both an array containing the minimum and maximum limit of movement of the Element.
+* ratio           - (*number*: defaults to false) Add a ratio constraint between x and y properties (ratio = x / y).
 * modifiers       - (*object*: defaults to {'x': 'left', 'y': 'top'}) An object with x and y properties used to indicate the CSS modifiers (i.e. 'left').
 * snap            - (*number*: defaults to 6) The distance to drag before the Element starts to respond to the drag.
 * style           - (*boolean*: defaults to true) Whether or not to set the modifier as a style property of the element.
