@@ -202,7 +202,7 @@ provides: [Keyboard]
 	Keyboard.each = function(keyboard, fn){
 		var current = keyboard || Keyboard.manager;
 		while (current){
-			fn.run(current);
+			fn(current);
 			current = current._activeKB;
 		}
 	};
