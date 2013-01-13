@@ -24,7 +24,7 @@ var pluralize = function(n, one, two, three, other){
 	return (n >= 1 && n <= 3) ? arguments[n] : other;
 };
 
-Locale.define('si-SI', 'Date', {
+Locale.define('sl-SI', 'Date', {
 
 	months: ['januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'september', 'oktober', 'november', 'december'],
 	months_abbr: ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec'],
