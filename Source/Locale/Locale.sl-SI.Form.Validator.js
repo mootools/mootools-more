@@ -18,7 +18,7 @@ provides: [Locale.si-SI.Form.Validator]
 ...
 */
 
-Locale.define('si-SI', 'FormValidator', {
+Locale.define('sl-SI', 'FormValidator', {
 
 	required: 'To polje je obvezno',
 	minLength: 'Prosim, vnesite vsaj {minLength} znakov (vnesli ste {length} znakov).',
