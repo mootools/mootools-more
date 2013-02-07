@@ -149,7 +149,7 @@ var Sortables = new Class({
 		if (
 			!this.idle ||
 			event.rightClick ||
-			this.options.unDraggableTags.contains(event.target.get('tag'))
+			(!this.options.handle && this.options.unDraggableTags.contains(event.target.get('tag')))
 		) return;
 
 		this.idle = false;
