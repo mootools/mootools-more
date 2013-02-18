@@ -45,6 +45,7 @@ var Drag = new Class({
 		limit: false,
 		handle: false,
 		invert: false,
+		unDraggableTags: ['button', 'input', 'a', 'textarea', 'select', 'option'],
 		preventDefault: false,
 		stopPropagation: false,
 		modifiers: {x: 'left', y: 'top'}
@@ -96,6 +97,10 @@ var Drag = new Class({
 	},
 
 	start: function(event){
+		if (
+			this.options.unDraggableTags.contains(event.target.get('tag'))
+		) return;
+		
 		var options = this.options;
 
 		if (event.rightClick) return;
