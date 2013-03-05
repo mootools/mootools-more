@@ -66,12 +66,14 @@ var local = Element.Position = {
 
 	setOffsetOption: function(element, options){
 		var parentOffset = {x: 0, y: 0},
-			offsetParent = element.measure(function(){
-				return document.id(this.getOffsetParent());
-			}),
-			parentScroll = offsetParent.getScroll();
+		    parentScroll = {x: 0, y: 0},
+		    offsetParent = element.measure(function(){
+		      return document.id(this.getOffsetParent());
+		    });
 
 		if (!offsetParent || offsetParent == element.getDocument().body) return;
+
+		parentScroll = offsetParent.getScroll();
 		parentOffset = offsetParent.measure(function(){
 			var position = this.getPosition();
 			if (this.getStyle('position') == 'fixed'){
