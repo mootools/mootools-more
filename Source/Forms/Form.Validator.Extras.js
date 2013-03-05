@@ -118,7 +118,7 @@ Form.Validator.addAllThese([
 
 	['validate-match', {
 		errorMsg: function(element, props){
-			return Form.Validator.getMsg('match').substitute({matchName: props.matchName || document.id(props.matchInput).get('name')});
+			return Form.Validator.getMsg('match').substitute({matchName: decodeURIComponent((props.matchName+'').replace(/\+/g, '%20')) || document.id(props.matchInput).get('name')});
 		},
 		test: function(element, props){
 			var eleVal = element.get('value');
