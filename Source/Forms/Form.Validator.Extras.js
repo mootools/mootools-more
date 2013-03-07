@@ -52,6 +52,23 @@ Form.Validator.addAllThese([
 			return true;
 		}
 	}],
+	
+	['validate-enforce-onselect-value', {
+		test: function(element, props){
+			if( !props.value ) return true;
+			var fv = element.getParent('form').retrieve('validator');
+			if (!fv) return true;
+			(props.toEnforce || document.id(props.enforceChildrenOf).getElements('input, select, textarea')).map(function(item){
+				if (props.value == element.value){
+					fv.enforceField(item);
+				} else {
+					fv.ignoreField(item);
+					fv.resetField(item);
+				}
+			});
+			return true;
+		}
+	}],
 
 	['validate-nospace', {
 		errorMsg: function(){
@@ -107,11 +124,14 @@ Form.Validator.addAllThese([
 		},
 		test: function(element, props){
 			var grpName = props.groupName || element.get('name');
-			var oneCheckedItem = $$(document.getElementsByName(grpName)).some(function(item, index){
+			var grpNameEls = $$('[name=' + grpName +']');
+			var oneCheckedItem = grpNameEls.some(function(item, index){
 				return item.checked;
 			});
 			var fv = element.getParent('form').retrieve('validator');
-			if (oneCheckedItem && fv) fv.resetField(element);
+			if (oneCheckedItem && fv) {
+				grpNameEls.each(function(item, index) { fv.resetField(item); });
+			}
 			return oneCheckedItem;
 		}
 	}],
