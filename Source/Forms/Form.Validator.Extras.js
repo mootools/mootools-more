@@ -54,23 +54,20 @@ Form.Validator.addAllThese([
 	}],
 	
 	['validate-enforce-onselect-value', {
-			errorMsg: function(element, props){
-				return Form.Validator.getMsg('selectOptMax').substitute({label: props.label});
-			},
-			test: function(element, props){
-				if( !props.value ) return true;
-				var fv = element.getParent('form').retrieve('validator');
-				if (!fv) return true;
-				(props.toEnforce || document.id(props.enforceChildrenOf).getElements('input, select, textarea')).map(function(item){
-					if (props.value == element.value){
-						fv.enforceField(item);
-					} else {
-						fv.ignoreField(item);
-						fv.resetField(item);
-					}
-				});
-				return true;
-			}
+		test: function(element, props){
+			if( !props.value ) return true;
+			var fv = element.getParent('form').retrieve('validator');
+			if (!fv) return true;
+			(props.toEnforce || document.id(props.enforceChildrenOf).getElements('input, select, textarea')).map(function(item){
+				if (props.value == element.value){
+					fv.enforceField(item);
+				} else {
+					fv.ignoreField(item);
+					fv.resetField(item);
+				}
+			});
+			return true;
+		}
 	}],
 
 	['validate-nospace', {
