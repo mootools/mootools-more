@@ -107,13 +107,14 @@ Form.Validator.addAllThese([
 		},
 		test: function(element, props){
 			var grpName = props.groupName || element.get('name');
-			var grpNameEls = $$(document.getElementsByName(grpName));
+			var grpNameEls = $$('[name=' + grpName +']');
 			var oneCheckedItem = grpNameEls.some(function(item, index){
 				return item.checked;
 			});
 			var fv = element.getParent('form').retrieve('validator');
-			if (oneCheckedItem && fv) 
+			if (oneCheckedItem && fv) {
 				grpNameEls.each(function(item, index) { fv.resetField(item); });
+			}
 			return oneCheckedItem;
 		}
 	}],
