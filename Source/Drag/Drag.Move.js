@@ -44,6 +44,9 @@ Drag.Move = new Class({
 		this.parent(element, options);
 		element = this.element;
 
+	        if (typeOf(this.options.droppables) == 'array')
+        	    this.options.droppables = this.options.droppables.join(',');
+
 		this.droppables = $$(this.options.droppables);
 		this.container = document.id(this.options.container);
 
