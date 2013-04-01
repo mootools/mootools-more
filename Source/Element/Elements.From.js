@@ -25,7 +25,7 @@ provides: [Elements.from, Elements.From]
 Elements.from = function(text, excludeScripts){
 	if (excludeScripts || excludeScripts == null) text = text.stripScripts();
 
-	var container, match = text.match(/^\s*<(t[dhr]|tbody|tfoot|thead)/i);
+	var container, match = text.match(/^\s*(?:<!--.*?-->\s*)*<(t[dhr]|tbody|tfoot|thead)/i);
 
 	if (match){
 		container = new Element('table');
