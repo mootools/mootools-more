@@ -251,7 +251,7 @@ Sortables Method: serialize {#Sortables:serialize}
 --------------------------------------------------
 
 Function to get the order of the elements in the lists of this sortables instance.
-For each list, an array containing the *id*s of all the elements (in the current order) will be returned.
+For each list, an array containing the *id* of all the elements (in the current order) will be returned.
 If more than one list is being used, all lists will be serialized and returned in an array.
 
 ### Syntax:
