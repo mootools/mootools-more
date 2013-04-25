@@ -61,7 +61,7 @@ Fired when the item is inserted into a new place in one of the lists.
 
 #### complete
 
-Fired when the item ends dragging. Note: fires even if the sort has not changed.
+Fired when the item ends dragging, even if the sort has not changed.
 
 ##### Signature:
 
@@ -76,21 +76,21 @@ Fired when the item ends dragging. Note: fires even if the sort has not changed.
 	var mySortables = new Sortables('list-1', {
 		revert: { duration: 500, transition: 'elastic:out' }
 	});
-	//creates a new Sortable instance over the list with id 'list-1' with some
-	//extra options for the revert effect
+	// Creates a new Sortable instance over the list with id 'list-1' with some
+	// extra options for the revert effect.
 
 	var mySortables = new Sortables('#list-1, #list-2', {
 		constrain: true,
 		clone: false,
 		revert: true
 	});
-	//creates a new Sortable instance allowing the sorting of the lists with
-	//ids 'list-1' and 'list-2' with extra options since constrain was set to
-	//true, the items will not be able to be dragged from one list to the other
+	// Creates a new Sortable instance allowing the sorting of the lists with
+	// ids 'list-1' and 'list-2' with extra options: since constrain was set to
+	// true, the items will not be able to be dragged from one list to the other.
 
 	var mySortables = new Sortables('#list-1, #list-2, #list-3');
-	//creates a new Sortable instance allowing sorting between the lists with
-	//ids 'list-1', 'list-2, and 'list-3'
+	// Creates a new Sortable instance allowing sorting between the lists with
+	// ids 'list-1', 'list-2, and 'list-3'.
 
 Sortables Method: attach {#Sortables:attach}
 --------------------------------------------
@@ -251,7 +251,7 @@ Sortables Method: serialize {#Sortables:serialize}
 --------------------------------------------------
 
 Function to get the order of the elements in the lists of this sortables instance.
-For each list, an array containing the order of the elements will be returned.
+For each list, an array containing the *id*s of all the elements (in the current order) will be returned.
 If more than one list is being used, all lists will be serialized and returned in an array.
 
 ### Syntax:
@@ -260,26 +260,26 @@ If more than one list is being used, all lists will be serialized and returned i
 
 ### Arguments:
 
-1. index    - (*mixed*, optional) An integer or boolean false. index of the list to serialize. Omit or pass false to serialize all lists.
-2. modifier - (*function*, optional) A function to override the default output of the sortables.  See Examples below
+1. index    - (*mixed*, optional) An integer or boolean false. This is the zero-based index of the list to serialize. Omit or pass false to serialize all lists.
+2. modifier - (*function*, optional) A function to override the default output of the sortables. See Examples below.
 
 ### Examples:
 
 	mySortables.serialize(1);
-	//returns the second list serialized (remember, arrays are 0 based...);
-	//['item_1-1', 'item_1-2', 'item_1-3']
+	// Returns ids from the second list (remember, index is zero-based):
+	// ['item_1-1', 'item_1-2', 'item_1-3']
 
 	mySortables.serialize();
-	//returns a nested array of all lists serialized, or if only one list exists, that lists order
-	/*[['item_1-1', 'item_1-2', 'item_1-3'],
-	  ['item_2-1', 'item_2-2', 'item_2-3'],
-	  ['item_3-1', 'item_3-2', 'item_3-3']]*/
+	// Returns a nested array of all lists serialized or, if only one list exists, that lists order:
+	/* [['item_1-1', 'item_1-2', 'item_1-3'],
+	    ['item_2-1', 'item_2-2', 'item_2-3'],
+	    ['item_3-1', 'item_3-2', 'item_3-3']] */
 
 	mySortables.serialize(2, function(element, index){
 		return element.getProperty('id').replace('item_','') + '=' + index;
 	}).join('&');
-	//joins the array with a '&' to return a string of the formatted ids of all the elmements in list 3,with their position
-	//'3-0=0&3-1=1&3-2=2'
+	// Joins the array with a '&' to return a string of the formatted ids of all the elements in the third list, with their position:
+	// '3-0=0&3-1=1&3-2=2'
 
 
 [Drag.Move]: /more/Drag/Drag.Move
