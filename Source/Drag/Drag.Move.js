@@ -37,7 +37,8 @@ Drag.Move = new Class({
 		container: false,
 		precalculate: false,
 		includeMargins: true,
-		checkDroppables: true
+		checkDroppables: true,
+		refreshDroppables: false
 	},
 
 	initialize: function(element, options){
@@ -67,6 +68,8 @@ Drag.Move = new Class({
 	},
 
 	start: function(event){
+		if (this.options.refreshDroppables) this.droppables = $$(this.options.droppables);
+		
 		if (this.container) this.options.limit = this.calculateLimit();
 
 		if (this.options.precalculate){
