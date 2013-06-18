@@ -31,6 +31,7 @@ var Slider = new Class({
 
 	options: {/*
 		onTick: function(intPosition){},
+		OnMove: function(){},
 		onChange: function(intStep){},
 		onComplete: function(strStep){},*/
 		onTick: function(position){
@@ -150,6 +151,7 @@ var Slider = new Class({
 		this.step = Math.round(step);
 		return this.checkStep()
 			.fireEvent('tick', this.toPosition(this.step))
+			.fireEvent('move')
 			.end();
 	},
 
@@ -176,6 +178,7 @@ var Slider = new Class({
 
 		this.checkStep()
 			.fireEvent('tick', position)
+			.fireEvent('move')
 			.end();
 	},
 
@@ -193,6 +196,7 @@ var Slider = new Class({
 
 		this.step = Math.round(this.min + dir * this.toStep(position));
 		this.checkStep();
+		this.fireEvent('move');
 	},
 
 	checkStep: function(){

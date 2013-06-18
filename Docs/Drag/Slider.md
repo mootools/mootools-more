@@ -79,6 +79,15 @@ Fires when the user scrolls or when the container element is clicked. This Event
 - By default Slider uses the 'tick' event to set the style of the knob to a new position.
 
 
+#### move
+
+Fires when the knob is moved, whether by dragging or by changing the value of the slider.
+
+##### Signature
+
+	onMove()
+
+
 ### Returns
 
 * (*object*) A new Slider instance.
