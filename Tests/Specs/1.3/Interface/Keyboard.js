@@ -69,6 +69,31 @@ if (window.addEventListener) describe('Keyboard', function(){
 		});
 
 	});
+	
+	it('should fire events for the + key', function(){
+
+		var callback = jasmine.createSpy(), called = false;
+
+		var kb = new Keyboard({
+			events: {
+				'+': callback
+			},
+			active: true
+		});
+
+		Syn.type('+', document.body, function(){
+			called = true;
+		});
+
+		waitsFor(2, function(){
+			return called;
+		});
+
+		runs(function(){
+			expect(callback).toHaveBeenCalled();
+		});
+
+	});
 
 	xit('should bubble up the keyboard instances', function(){
 
