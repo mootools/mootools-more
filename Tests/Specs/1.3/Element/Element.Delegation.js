@@ -19,11 +19,10 @@ describe('Elements.Delegation', function(){
 
 		elements.wrapper.addEvent('click:relay(div)', callback);
 
-		simulateEvent('click', [{}, elements.child], function(){
-			expect(callback).toHaveBeenCalled();
+		Syn.trigger('click', {}, elements.child);
+		expect(callback).toHaveBeenCalled();
 
-			for (var i in elements) $(elements[i]).destroy();
-		});
+		for (var i in elements) $(elements[i]).destroy();
 
 	});
 
