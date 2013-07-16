@@ -195,7 +195,7 @@ provides: [Keyboard]
 
 				if (key) keys.push(key);
 				parsed[type] = keys.join('+');
-			}else {
+			} else {
 			    parsed[type] = type;
 			}
 		}

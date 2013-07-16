@@ -69,10 +69,10 @@ if (window.addEventListener) describe('Keyboard', function(){
 		});
 
 	});
-	
+
 	it('should fire events for the + key', function(){
 
-		var callback = jasmine.createSpy(), called = false;
+		var callback = jasmine.createSpy();
 
 		var kb = new Keyboard({
 			events: {
@@ -81,17 +81,9 @@ if (window.addEventListener) describe('Keyboard', function(){
 			active: true
 		});
 
-		Syn.type('+', document.body, function(){
-			called = true;
-		});
+		Syn.type('+', document.body);
 
-		waitsFor(2, function(){
-			return called;
-		});
-
-		runs(function(){
-			expect(callback).toHaveBeenCalled();
-		});
+		expect(callback).toHaveBeenCalled();
 
 	});
 
