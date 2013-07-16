@@ -18,14 +18,20 @@ describe('Hash.Cookie', {
 	},
 
 	'Retrieves a Hash.Cookie': function(){
-		var hc = new Hash.Cookie('HCtest');
-		expect(hc.get('apple')).toEqual('red');
+		var hc1 = new Hash.Cookie('HC1test'),
+			hc2 = new Hash.Cookie('HC1test');
+		
+		hc1.set('apple', 'red');
+		expect(hc2.get('apple')).toEqual('red');
 	},
 
 	'Removes a Hash.Cookie': function(){
-		var hc1 = new Hash.Cookie('HCtest');
+		var hc1 = new Hash.Cookie('HC2test'),
+			hc2 = new Hash.Cookie('HC2test');
+
+		hc1.set('apple', 'green');
 		hc1.dispose();
-		var hc2 = new Hash.Cookie('HCtest');
+ 
 		expect(hc2.get('apple')).toEqual(null);
 	}
 
