@@ -179,21 +179,25 @@ provides: [Keyboard]
 		});
 
 		if (!parsed[type]){
-			var key, mods = {};
-			type.split('+').each(function(part){
-				if (regex.test(part)) mods[part] = true;
-				else key = part;
-			});
+		    if (type != '+'){
+				var key, mods = {};
+				type.split('+').each(function(part){
+					if (regex.test(part)) mods[part] = true;
+					else key = part;
+				});
 
-			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
+				mods.control = mods.control || mods.ctrl; // allow both control and ctrl
 
-			var keys = [];
-			modifiers.each(function(mod){
-				if (mods[mod]) keys.push(mod);
-			});
+				var keys = [];
+				modifiers.each(function(mod){
+					if (mods[mod]) keys.push(mod);
+				});
 
-			if (key) keys.push(key);
-			parsed[type] = keys.join('+');
+				if (key) keys.push(key);
+				parsed[type] = keys.join('+');
+			}else {
+			    parsed[type] = type;
+			}
 		}
 
 		return eventType + ':keys(' + parsed[type] + ')';
