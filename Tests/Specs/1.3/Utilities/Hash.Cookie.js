@@ -5,35 +5,42 @@ requires: [More/Hash.Cookie]
 provides: [Hash.Cookie.Tests]
 ...
 */
-describe('Hash.Cookie', {
+describe('Hash.Cookie', function(){
 
-	'Saves a set of key/values into a cookie': function(){
-		var hc = new Hash.Cookie('HCtest');
+	beforeEach(function(){
+		this.hc = new Hash.Cookie('HCtest');
+	});
+
+	afterEach(function(){
+		this.hc.dispose().load();
+	});
+
+	it('Saves a set of key/values into a cookie', function(){
+		var hc = this.hc;
 		hc.set('foo', 'bar');
 		hc.extend({
 			apple: 'red',
 			lemon: 'yellow'
 		});
 		expect(hc.get('apple')).toEqual('red');
-	},
+		expect(hc.get('foo')).toEqual('bar');
+		expect(hc.get('lemon')).toEqual('yellow');
+	});
 
-	'Retrieves a Hash.Cookie': function(){
-		var hc1 = new Hash.Cookie('HC1test'),
-			hc2 = new Hash.Cookie('HC1test');
-		
-		hc1.set('apple', 'red');
-		expect(hc2.get('apple')).toEqual('red');
-	},
+	it('Retrieves a Hash.Cookie', function(){
+		this.hc.set('pomme', 'rouge');
+		var hc2 = new Hash.Cookie('HCtest');// order matters here 
+		expect(hc2.get('pomme')).toEqual('rouge');
+	});
 
-	'Removes a Hash.Cookie': function(){
-		var hc1 = new Hash.Cookie('HC2test'),
-			hc2 = new Hash.Cookie('HC2test');
+	it('Removes a Hash.Cookie', function(){
+		var hc = this.hc;
 
-		hc1.set('apple', 'green');
-		hc1.dispose();
+		hc.set('apple', 'green');
+		hc.dispose().load();// destroy cookie then update hash
  
-		expect(hc2.get('apple')).toEqual(null);
-	}
+		expect(hc.get('apple')).toEqual(null);
+	});
 
 });
 
