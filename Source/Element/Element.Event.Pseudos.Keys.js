@@ -27,12 +27,14 @@ DOMEvent.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
 		keys = [],
-		pressed = this.retrieve(keysStoreKey, []);
+		pressed = this.retrieve(keysStoreKey, []),
+		value = split.value;
 
-	keys.append(split.value.replace('++', function(){
+	if (value != '+') keys.append(value.replace('++', function(){
 		keys.push('+'); // shift++ and shift+++a
 		return '';
 	}).split('+'));
+	else keys = ['+'];
 
 	pressed.include(event.key);
 
