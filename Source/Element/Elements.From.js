@@ -44,8 +44,7 @@ window.addEvent("domready", function(){
             var match = text.match(table_re);
             if(match) return tableFix(match,text);
 
-            var elements = range.createContextualFragment(text).childNodes;
-            return new Elements(elements);
+            return new Elements(range.createContextualFragment(text).childNodes);
         };
 
     } else { //fall back for ie<9
