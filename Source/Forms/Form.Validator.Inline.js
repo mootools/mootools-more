@@ -88,7 +88,7 @@ Form.Validator.Inline = new Class({
 			!field.retrieve('$moo:' + this.getPropName(className)) &&
 			(
 				advice.getStyle('display') == 'none' ||
-				advice.getStyle('visiblity') == 'hidden' ||
+				advice.getStyle('visibility') == 'hidden' ||
 				advice.getStyle('opacity') == 0
 			)
 		){
