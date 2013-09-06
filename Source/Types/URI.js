@@ -131,7 +131,7 @@ var URI = this.URI = new Class({
 	},
 
 	setData: function(values, merge, part){
-                part = part || 'query';
+		part = part || 'query';
 		if (typeof values == 'string'){
 			var data = this.getData(undefined, part);
 			data[arguments[0]] = arguments[1];
