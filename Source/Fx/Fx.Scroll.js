@@ -10,13 +10,13 @@ description: Effect to smoothly scroll any element, including the window.
 license: MIT-style license
 
 authors:
-  - Valerio Proietti
+	- Valerio Proietti
 
 requires:
-  - Core/Fx
-  - Core/Element.Event
-  - Core/Element.Dimensions
-  - /MooTools.More
+	- Core/Fx
+	- Core/Element.Event
+	- Core/Element.Dimensions
+	- /MooTools.More
 
 provides: [Fx.Scroll]
 
@@ -113,30 +113,26 @@ Fx.Scroll = new Class({
 		return this.start.apply(this, this.calculateScroll(position.x, position.y));
 	},
 
-	toElementEdge: function(el, axes, offset){
-		axes = axes ? Array.from(axes) : ['x', 'y'];
-		el = document.id(el);
-		var to = {},
-			position = el.getPosition(this.element),
-			size = el.getSize(),
-			scroll = this.element.getScroll(),
-			containerSize = this.element.getSize(),
-			edge = {
-				x: position.x + size.x,
-				y: position.y + size.y
-			};
-
-		['x', 'y'].each(function(axis){
-			if (axes.contains(axis)){
-				if (edge[axis] > scroll[axis] + containerSize[axis]) to[axis] = edge[axis] - containerSize[axis];
-				if (position[axis] < scroll[axis]) to[axis] = position[axis];
-			}
-			if (to[axis] == null) to[axis] = scroll[axis];
-			if (offset && offset[axis]) to[axis] = to[axis] + offset[axis];
-		}, this);
-
-		if (to.x != scroll.x || to.y != scroll.y) this.start(to.x, to.y);
-		return this;
+	//fix for issue #1205
+	toElementEdge: function(el, axes, offset) {
+	    axes = axes ? Array.from(axes) : ['x', 'y'];
+	    el = document.id(el);
+	    var to = {},
+	        coords = el.getCoordinates(this.element),
+	        scroll = this.element.getScroll(),
+	        containerSize = this.element.getSize(),
+	        edge = {
+	            x: coords.right + scroll.x,
+	            y: coords.bottom + scroll.y
+	        };
+	    ['x', 'y'].each(function(axis) {
+	        if (axes.contains(axis) && edge[axis] > scroll[axis] + containerSize[axis]) {
+	            to[axis] = edge[axis] - containerSize[axis];
+	        }
+	        if (to[axis] == null) to[axis] = scroll[axis];
+	        if (offset && offset[axis]) to[axis] = to[axis] + offset[axis];
+	    });
+	    return (to.x != scroll.x || to.y != scroll.y) ? this.start(to.x, to.y) : this;
 	},
 
 	toElementCenter: function(el, axes, offset){
