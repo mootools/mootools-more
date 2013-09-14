@@ -69,7 +69,9 @@ var InputValidator = this.InputValidator = new Class({
 Element.Properties.validators = {
 
 	get: function(){
-		return (this.get('data-validators') || this.className).clean().split(' ');
+		return (this.get('data-validators') || this.className).clean().replace(/'(\\.|[^'])*'|"(\\.|[^"])*"/g, function(match){
+			return match.replace(' ', '\\x20');
+		}).split(' ');
 	}
 
 };
