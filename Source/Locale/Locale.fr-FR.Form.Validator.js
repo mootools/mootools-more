@@ -47,7 +47,7 @@ Locale.define('fr-FR', 'FormValidator', {
 	match: 'Ce champ doit correspondre avec le champ {matchName}.',
 	startDate: 'date de d&eacute;but',
 	endDate: 'date de fin',
-	currendDate: 'date actuelle',
+	currentDate: 'date actuelle',
 	afterDate: 'La date doit &ecirc;tre identique ou post&eacute;rieure &agrave; {label}.',
 	beforeDate: 'La date doit &ecirc;tre identique ou ant&eacute;rieure &agrave; {label}.',
 	startMonth: 'Veuillez s&eacute;lectionner un mois de d&eacute;but.',

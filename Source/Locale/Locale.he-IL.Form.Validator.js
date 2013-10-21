@@ -45,7 +45,7 @@ Locale.define('he-IL', 'FormValidator', {
 	match: 'שדה זה צריך להתאים לשדה {matchName}',
 	startDate: 'תאריך ההתחלה',
 	endDate: 'תאריך הסיום',
-	currendDate: 'התאריך הנוכחי',
+	currentDate: 'התאריך הנוכחי',
 	afterDate: 'התאריך צריך להיות זהה או אחרי {label}.',
 	beforeDate: 'התאריך צריך להיות זהה או לפני {label}.',
 	startMonth: 'נא לבחור חודש התחלה',

@@ -45,7 +45,7 @@ Locale.define('fa', 'FormValidator', {
 	match: 'این فیلد باید با فیلد {matchName} مطابقت داشته باشد.',
 	startDate: 'تاریخ شروع',
 	endDate: 'تاریخ پایان',
-	currendDate: 'تاریخ کنونی',
+	currentDate: 'تاریخ کنونی',
 	afterDate: 'تاریخ میبایست برابر یا بعد از {label} باشد',
 	beforeDate: 'تاریخ میبایست برابر یا قبل از {label} باشد',
 	startMonth: 'لطفا ماه شروع را انتخاب کنید',

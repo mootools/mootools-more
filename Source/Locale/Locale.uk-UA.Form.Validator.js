@@ -44,7 +44,7 @@ Locale.define('uk-UA', 'FormValidator', {
 	match: 'Це поле повинно відповідати {matchName}',
 	startDate: 'початкова дата',
 	endDate: 'кінцева дата',
-	currendDate: 'сьогоднішня дата',
+	currentDate: 'сьогоднішня дата',
 	afterDate: 'Ця дата повинна бути такою ж, або пізнішою за {label}.',
 	beforeDate: 'Ця дата повинна бути такою ж, або ранішою за {label}.',
 	startMonth: 'Будь ласка, виберіть початковий місяць',

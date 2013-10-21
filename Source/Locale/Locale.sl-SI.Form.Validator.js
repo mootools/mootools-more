@@ -45,7 +45,7 @@ Locale.define('sl-SI', 'FormValidator', {
 	match: 'To polje se mora ujemati z poljem {matchName}',
 	startDate: 'datum začetka',
 	endDate: 'datum konca',
-	currendDate: 'trenuten datum',
+	currentDate: 'trenuten datum',
 	afterDate: 'Datum bi moral biti isti ali po {label}.',
 	beforeDate: 'Datum bi moral biti isti ali pred {label}.',
 	startMonth: 'Prosim, vnesite začetni datum',

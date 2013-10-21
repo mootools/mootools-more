@@ -45,7 +45,7 @@ Locale.define("ja-JP", "FormValidator", {
 	match: '{matchName}が入力されている場合必須です。',
 	startDate: '開始日',
 	endDate: '終了日',
-	currendDate: '今日',
+	currentDate: '今日',
 	afterDate: '{label}以降の日付にしてください。',
 	beforeDate: '{label}以前の日付にしてください。',
 	startMonth: '開始月を選択してください。',

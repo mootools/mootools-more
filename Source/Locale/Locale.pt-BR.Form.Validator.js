@@ -45,7 +45,7 @@ Locale.define('pt-BR', 'FormValidator', {
 	match: 'Este campo deve ser igual ao campo {matchName}.',
 	startDate: 'a data inicial',
 	endDate: 'a data final',
-	currendDate: 'a data atual',
+	currentDate: 'a data atual',
 	afterDate: 'A data deve ser igual ou posterior a {label}.',
 	beforeDate: 'A data deve ser igual ou anterior a {label}.',
 	startMonth: 'Por favor selecione uma data inicial.',

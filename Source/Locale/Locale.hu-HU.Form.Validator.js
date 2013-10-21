@@ -45,7 +45,7 @@ Locale.define('hu-HU', 'FormValidator', {
 	match: 'A mezőnek egyeznie kell a(z) {matchName} mezővel.',
 	startDate: 'a kezdet dátuma',
 	endDate: 'a vég dátuma',
-	currendDate: 'jelenlegi dátum',
+	currentDate: 'jelenlegi dátum',
 	afterDate: 'A dátum nem lehet kisebb, mint {label}.',
 	beforeDate: 'A dátum nem lehet nagyobb, mint {label}.',
 	startMonth: 'Kezdeti hónap megadása szükséges.',

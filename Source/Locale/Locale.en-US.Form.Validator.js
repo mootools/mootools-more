@@ -46,7 +46,7 @@ Locale.define('en-US', 'FormValidator', {
 	match: 'This field needs to match the {matchName} field',
 	startDate: 'the start date',
 	endDate: 'the end date',
-	currendDate: 'the current date',
+	currentDate: 'the current date',
 	afterDate: 'The date should be the same or after {label}.',
 	beforeDate: 'The date should be the same or before {label}.',
 	startMonth: 'Please select a start month',

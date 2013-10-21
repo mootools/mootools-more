@@ -29,6 +29,6 @@ Locale.define('es-VE', 'FormValidator', {
 	// Form.Validator.Extras
 	startDate: 'La fecha de inicio',
 	endDate: 'La fecha de fin',
-	currendDate: 'La fecha actual'
+	currentDate: 'La fecha actual'
 
 }).inherit('es-ES', 'FormValidator');

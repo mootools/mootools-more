@@ -45,7 +45,7 @@ Locale.define('et-EE', 'FormValidator', {
 	match: 'Väli peab sobima {matchName} väljaga',
 	startDate: 'algkuupäev',
 	endDate: 'lõppkuupäev',
-	currendDate: 'praegune kuupäev',
+	currentDate: 'praegune kuupäev',
 	afterDate: 'Kuupäev peab olema võrdne või pärast {label}.',
 	beforeDate: 'Kuupäev peab olema võrdne või enne {label}.',
 	startMonth: 'Palun valige algkuupäev.',

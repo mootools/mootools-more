@@ -48,7 +48,7 @@ Locale.define('nl-NL', 'FormValidator', {
 	match: 'Dit veld moet overeen komen met het {matchName} veld',
 	startDate: 'de begin datum',
 	endDate: 'de eind datum',
-	currendDate: 'de huidige datum',
+	currentDate: 'de huidige datum',
 	afterDate: 'De datum moet hetzelfde of na {label} zijn.',
 	beforeDate: 'De datum moet hetzelfde of voor {label} zijn.',
 	startMonth: 'Selecteer een begin maand',

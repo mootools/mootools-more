@@ -45,7 +45,7 @@ Locale.define('fi-FI', 'FormValidator', {
 	match: 'Tämän kentän tulee vastata kenttää {matchName}',
 	startDate: 'alkupäivämäärä',
 	endDate: 'loppupäivämäärä',
-	currendDate: 'nykyinen päivämäärä',
+	currentDate: 'nykyinen päivämäärä',
 	afterDate: 'Päivämäärän tulisi olla sama tai myöhäisempi ajankohta kuin {label}.',
 	beforeDate: 'Päivämäärän tulisi olla sama tai aikaisempi ajankohta kuin {label}.',
 	startMonth: 'Ole hyvä ja valitse aloituskuukausi',

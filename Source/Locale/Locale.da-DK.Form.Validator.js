@@ -45,7 +45,7 @@ Locale.define('da-DK', 'FormValidator', {
 	match: 'Dette felt skal matche {matchName} feltet',
 	startDate: 'start dato',
 	endDate: 'slut dato',
-	currendDate: 'dags dato',
+	currentDate: 'dags dato',
 	afterDate: 'Datoen skal være større end eller lig med {label}.',
 	beforeDate: 'Datoen skal være mindre end eller lig med {label}.',
 	startMonth: 'Vælg en start måned',

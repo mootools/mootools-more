@@ -45,7 +45,7 @@ Locale.define('cs-CZ', 'FormValidator', {
 	match: 'Tato položka se musí shodovat s položkou {matchName}',
 	startDate: 'datum zahájení',
 	endDate: 'datum ukončení',
-	currendDate: 'aktuální datum',
+	currentDate: 'aktuální datum',
 	afterDate: 'Datum by mělo být stejné nebo větší než {label}.',
 	beforeDate: 'Datum by mělo být stejné nebo menší než {label}.',
 	startMonth: 'Vyberte počáteční měsíc.',

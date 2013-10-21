@@ -47,7 +47,7 @@ Locale.define('de-DE', 'FormValidator', {
 	match: 'Dieses Eingabefeld muss mit dem {matchName} Eingabefeld übereinstimmen.',
 	startDate: 'Das Anfangsdatum',
 	endDate: 'Das Enddatum',
-	currendDate: 'Das aktuelle Datum',
+	currentDate: 'Das aktuelle Datum',
 	afterDate: 'Das Datum sollte zur gleichen Zeit oder später sein als {label}.',
 	beforeDate: 'Das Datum sollte zur gleichen Zeit oder früher sein als {label}.',
 	startMonth: 'Wählen Sie bitte einen Anfangsmonat',
