@@ -41,7 +41,7 @@ Request.JSONP = new Class({
 			}
 		},
 		onError: function(src){
-			if (this.options.log && window.console && console.warn){
+			if (src.length > 2083 && this.options.log && window.console && console.warn){
 				console.warn('JSONP '+ src +' will fail in Internet Explorer, which enforces a 2083 bytes length limit on URIs');
 			}
 		},
@@ -98,7 +98,12 @@ Request.JSONP = new Class({
 		if (!this.script) this.script = new Element('script', {
 			type: 'text/javascript',
 			async: true,
-			src: src
+			src: src,
+			events: {
+				error: function() {
+					this.fireEvent('error', [src]);
+				}.bind(this)
+			}
 		});
 		return this.script;
 	},
