@@ -53,10 +53,7 @@ provides: [Fx.SmoothScroll]
 
 			event.preventDefault();
 
-			var current = {
-				x: this.doc.scrollLeft,
-				y: this.doc.scrollTop
-			};
+			var current = document.documentElement.getScroll();
 			window.location.hash = anchor;
 			this.set(current.x, current.y);
 
