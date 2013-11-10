@@ -39,15 +39,10 @@ provides: [Fx.SmoothScroll]
 			links = $$(this.options.links || this.doc.links);
 
 		links.each(function(link){
-			if (link.href.indexOf(location) != 0) return;
+			if (link.href.indexOf(location) !== 0) return;
 			var anchor = link.href.substr(location.length);
 			if (anchor) this.useLink(link, anchor);
 		}, this);
-
-		this.addEvent('complete', function(){
-			win.location.hash = this.anchor;
-			this.element.scrollTo(this.to[0], this.to[1]);
-		}, true);
 	},
 
 	useLink: function(link, anchor){
@@ -57,6 +52,14 @@ provides: [Fx.SmoothScroll]
 			if (!el) return;
 
 			event.preventDefault();
+
+			var current = {
+				x: this.doc.scrollLeft,
+				y: this.doc.scrollTop
+			};
+			window.location.hash = anchor;
+			this.set(current.x, current.y);
+
 			this.toElement(el, this.options.axes).chain(function(){
 				this.fireEvent('scrolledTo', [link, el]);
 			}.bind(this));
