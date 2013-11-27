@@ -1,0 +1,18 @@
+<p>
+	The element below should say "hello world"
+</p>
+<div id="foo" style="width: 200px; border: 1px solid black; height: 200px; overflow:hidden;background:silver;">
+</div>
+<script src="/depender/build?require=More/Class.Static"></script>
+<script>
+  var n = new Class({
+    bar:function(){
+      $('foo').set('text', 'hello world');
+    }.static(),
+  });
+
+  n.bar();
+
+</script>
+
+

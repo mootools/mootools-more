@@ -19,6 +19,7 @@ sources:
   - "Source/Class/Events.Pseudos.js"
   - "Source/Class/Class.Refactor.js"
   - "Source/Class/Class.Binds.js"
+  - "Source/Class/Class.Static.js"
   - "Source/Class/Class.Occlude.js"
   - "Source/Class/Chain.Wait.js"
   - "Source/Types/Array.Extras.js"
