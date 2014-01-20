@@ -141,7 +141,17 @@ Element.implement({
 		}
 
 		getStylesList(options.styles, options.planes).each(function(style){
-			styles[style] = this.getStyle(style).toInt();
+			var value = this.getStyle(style);
+			/// is IE11 and the value isNaN?
+			if (Object.hasOwnProperty.call(window, "ActiveXObject") && !window.ActiveXObject && isNaN(value)) {
+				var noPxValue = Array.from(value.match(/([0-9]+)px/));
+				noPxValue = noPxValue.length > 1 ? noPxValue[1] : value;
+				if (isNaN(noPxValue) || noPxValue == null) {
+					noPxValue = 0;
+				}
+				value = noPxValue;
+			}
+			styles[style] = value.toInt();
 		}, this);
 
 		Object.each(options.planes, function(edges, plane){
