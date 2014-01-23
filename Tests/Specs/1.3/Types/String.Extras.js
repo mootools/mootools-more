@@ -82,7 +82,7 @@ describe('String.ms', function(){
 	});
 
 	it('should convert hours to milliseconds', function(){
-	  expect('3h'.ms()).toEqual(108e5);
+		expect('3h'.ms()).toEqual(108e5);
 	});
 
 	it('should keep milliseconds as milliseconds', function(){
@@ -97,7 +97,7 @@ describe('String.ms', function(){
 		jasmine.Matchers.prototype.toBeNaN = function(){
 			return isNaN(this.actual);
 		};
-		expect('30q').toBeNaN();
+		expect('30q'.ms()).toBeNaN();
 	});
 
 });
