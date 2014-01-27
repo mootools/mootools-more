@@ -42,7 +42,7 @@ describe('HtmlTable.Sort', function(){
 		describe('input-', function(){
 
 			var data = [
-				new Element('input', {type: 'checkobx', checked: false, value: 'd'}),
+				new Element('input', {type: 'checkbox', checked: false, value: 'd'}),
 				new Element('input', {type: 'checkbox', checked: true, value: 'a'}),
 				new Element('input', {type: 'checkbox', checked: false, value: 'c'}),
 				new Element('input', {type: 'checkbox', checked: true, value: 'b'})
