@@ -109,14 +109,6 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this.selectedRows.contains(row);
 	},
 
-	getSelected: function(){
-		return this.selectedRows;
-	},
-
-	getSelected: function(){
-		return this.selectedRows;
-	},
-
 	serialize: function(){
 		var previousSerialization = this.previous.apply(this, arguments) || {};
 		if (this.options.selectable){
@@ -172,7 +164,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		}
 
 		for (var i = startRow; i <= endRow; i++){
-			if (this.options.selectHiddenRows || rows[i].isDisplayed()) this[method](rows[i], true);
+			if (rows[i] && (this.options.selectHiddenRows || rows[i].isDisplayed())) this[method](rows[i], true);
 		}
 
 		return this;
