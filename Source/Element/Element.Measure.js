@@ -141,7 +141,8 @@ Element.implement({
 		}
 
 		getStylesList(options.styles, options.planes).each(function(style){
-			styles[style] = this.getStyle(style).toInt();
+			var value = this.getStyle(style).toInt();
+			styles[style] = isNaN(value) ? 0 : value;
 		}, this);
 
 		Object.each(options.planes, function(edges, plane){
