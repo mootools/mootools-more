@@ -318,7 +318,7 @@ HtmlTable.Parsers = {
 	'floatLax': {
 		match: /^[^\d]+[\d]+\.[\d]+$/,
 		convert: function(){
-			return this.get('text').replace(/[^-?^\d.]/, '').stripTags();
+			return this.get('text').replace(/[^-?^\d.]/, '').stripTags().toFloat();
 		},
 		number: true
 	},
