@@ -151,7 +151,7 @@ if (!window.Form) window.Form = {};
 				//form validator was created after Form.Request
 				this.element.removeEvent('submit', this.onSubmit);
 				fv.addEvent('onFormValidate', this.onFormValidate);
-				this.element.validate();
+				fv.validate(event);
 				return;
 			}
 			if (event) event.stop();
