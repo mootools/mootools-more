@@ -1,8 +1,8 @@
 /*
 ---
 name: Table Tests
-requires: [More/Table]
-provides: [Table.Tests]
+requires:~
+provides:~
 license: MIT-style license.
 ...
 */

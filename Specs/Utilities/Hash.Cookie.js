@@ -1,8 +1,8 @@
 /*
 ---
 name: Hash.Cookie Tests
-requires: [More/Hash.Cookie]
-provides: [Hash.Cookie.Tests]
+requires:~
+provides:~
 ...
 */
 describe('Hash.Cookie', function(){

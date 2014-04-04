@@ -1,8 +1,8 @@
 /*
 ---
 name: Element.Shortcuts Tests
-requires: [More/Element.Shortcuts]
-provides: [Element.Shortcuts.Tests]
+requires:~
+provides:~
 ...
 */
 (function(){
@@ -36,57 +36,57 @@ provides: [Element.Shortcuts.Tests]
 		elements.inject(new Element('div').inject(document.body));
 
 	});
-	describe('Element.isDisplayed', {
+	describe('Element.isDisplayed', function(){
 
-		'element display should be false': function(){
+		it('element display should be false', function(){
 			expect(elements[0].isDisplayed()).toBeFalsy();
-		},
+		});
 
 
-		'element display should be true': function(){
+		it('element display should be true', function(){
 			expect(elements[1].isDisplayed()).toBeTruthy();
-		}
+		});
 
 	});
 
-	describe('Element.isVisible', {
+	describe('Element.isVisible', function(){
 
-		'is the element visible (width == 0 and height == 0)': function(){
+		it('is the element visible (width == 0 and height == 0)', function(){
 			expect(elements[2].isVisible()).toBeFalsy();
-		}
+		});
 
 	});
 
-	describe('Element.toggle', {
+	describe('Element.toggle', function(){
 
-		'toggle the display of an element': function(){
+		it('toggle the display of an element', function(){
 			expect(elements[1].hide().toggle().isDisplayed()).toBeTruthy();
-		}
+		});
 
 	});
 
-	describe('Element.hide', {
+	describe('Element.hide', function(){
 
-		'hide an element': function(){
+		it('hide an element', function(){
 			expect(elements[1].hide().isDisplayed()).toBeFalsy();
-		}
+		});
 
 	});
 
-	describe('Element.show', {
+	describe('Element.show', function(){
 
-		'show the element': function(){
+		it('show the element', function(){
 			expect(elements[0].show().isDisplayed()).toBeTruthy();
-		}
+		});
 
 	});
 
-	describe('Element.swapClass', {
+	describe('Element.swapClass', function(){
 
-		'should add and remove a clas to the class attribute': function(){
+		it('should add and remove a clas to the class attribute', function(){
 			var el = elements[3].swapClass('testClass', 'newClass');
 			expect(el.hasClass('newClass') && !el.hasClass('testClass')).toBeTruthy();
-		}
+		});
 
 	});
 

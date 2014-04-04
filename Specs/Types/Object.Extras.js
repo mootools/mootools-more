@@ -1,8 +1,8 @@
 /*
 ---
 name: Object.Extras Tests
-requires: [More/Object.Extras]
-provides: [Object.Extras.Tests]
+requires:~
+provides:~
 ...
 */
 describe('Object.getFromPath', function(){
