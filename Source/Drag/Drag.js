@@ -66,10 +66,10 @@ var Drag = new Class({
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
 
-		this.selection = (Browser.ie) ? 'selectstart' : 'mousedown';
+		this.selection = 'selectstart' in document ? 'selectstart' : 'mousedown';
 
 
-		if (Browser.ie && !Drag.ondragstartFixed){
+		if ('ondragstart' in document && !('FileReader' in window) && !Drag.ondragstartFixed){
 			document.ondragstart = Function.from(false);
 			Drag.ondragstartFixed = true;
 		}
