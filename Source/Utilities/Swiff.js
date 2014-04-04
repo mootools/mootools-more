@@ -68,7 +68,7 @@ var Swiff = this.Swiff = new Class({
 		}
 
 		params.flashVars = Object.toQueryString(vars);
-		if (Browser.ie){
+		if ('ActiveXObject' in window){
 			properties.classid = 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000';
 			params.movie = path;
 		} else {
