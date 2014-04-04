@@ -77,7 +77,9 @@ DOMEvent.defineKeys({
 	'220': '\\',
 	'221': ']',
 	'222': "'",
-	'107': '+'
-}).defineKey(Browser.firefox ? 109 : 189, '-');
+	'107': '+',
+	'109': '-', // subtract
+	'189': '-'  // dash
+})
 
 })();
