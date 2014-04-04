@@ -98,8 +98,8 @@ HtmlTable = Class.refactor(HtmlTable, {
 		var sortSpan = new Element('span', {'class': this.options.classSortSpan}).inject(thDiv, 'top');
 		this.sortSpans.push(sortSpan);
 		var parser = this.options.parsers[index],
-		rows = this.body.rows,
-		cancel;
+			rows = this.body.rows,
+			cancel;
 		switch (typeOf(parser)){
 			case 'function': parser = {convert: parser}; cancel = true; break;
 			case 'string': parser = parser; cancel = true; break;
@@ -107,11 +107,11 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (!cancel){
 			HtmlTable.ParserPriority.some(function(parserName){
 				var current = HtmlTable.Parsers[parserName],
-				match = current.match;
+					match = current.match;
 				if (!match) return false;
 				for (var i = 0, j = rows.length; i < j; i++){
 					var cell = document.id(rows[i].cells[index]),
-					text = cell ? cell.get('html').clean() : '';
+						text = cell ? cell.get('html').clean() : '';
 					if (text && match.test(text)){
 						parser = current;
 						return true;
@@ -169,14 +169,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	setRowSort: function(data, pre){
 		var count = data.length,
-		body = this.body,
-		group,
-		rowIndex;
+			body = this.body,
+			group,
+			rowIndex;
 
 		while (count){
 			var item = data[--count],
-			position = item.position,
-			row = body.rows[position];
+				position = item.position,
+				row = body.rows[position];
 
 			if (row.disabled) continue;
 			if (!pre){
