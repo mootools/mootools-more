@@ -32,7 +32,7 @@ provides: [HtmlTable.Sort]
 		readOnlyNess.innerHTML = '<tr><td></td></tr>';
 		readOnlyNess = readOnlyNess.childNodes.length === 0;
 	}catch(e){
-		readOnlyNess = true
+		readOnlyNess = true;
 	}
 	HtmlTable = Class.refactor(HtmlTable, {
 
@@ -355,5 +355,5 @@ provides: [HtmlTable.Sort]
 		}
 	};
 
-})()
+})();
 
