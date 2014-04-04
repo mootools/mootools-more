@@ -141,7 +141,8 @@ Element.implement({
 		}
 
 		getStylesList(options.styles, options.planes).each(function(style){
-			styles[style] = this.getStyle(style).toInt();
+			var value = parseInt(this.getStyle(style));
+			styles[style] = isNaN(value) ? 0 : value;
 		}, this);
 
 		Object.each(options.planes, function(edges, plane){
@@ -151,7 +152,8 @@ Element.implement({
 
 			if (style == 'auto' && !dimensions) dimensions = this.getDimensions();
 
-			style = styles[plane] = (style == 'auto') ? dimensions[plane] : style.toInt();
+			var value = (style == 'auto') ? dimensions[plane] : parseInt(style);
+			style = styles[style] = isNaN(value) ? 0 : value;
 			size['total' + capitalized] = style;
 
 			edges.each(function(edge){
