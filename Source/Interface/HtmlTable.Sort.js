@@ -29,10 +29,10 @@ provides: [HtmlTable.Sort]
 (function(){
 
 var readOnlyNess = document.createElement('table');
-try{
+try {
 	readOnlyNess.innerHTML = '<tr><td></td></tr>';
 	readOnlyNess = readOnlyNess.childNodes.length === 0;
-}catch(e){
+} catch (e){
 	readOnlyNess = true;
 }
 
