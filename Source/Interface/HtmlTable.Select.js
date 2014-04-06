@@ -18,7 +18,7 @@ requires:
   - /Keyboard.Extras
   - /HtmlTable
   - /Class.refactor
-  - /Element.Delegation
+  - /Element.Delegation.Pseudo
   - /Element.Shortcuts
 
 provides: [HtmlTable.Select]

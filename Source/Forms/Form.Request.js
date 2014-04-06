@@ -18,7 +18,7 @@ requires:
   - /Class.Occlude
   - /Spinner
   - /String.QueryString
-  - /Element.Delegation
+  - /Element.Delegation.Pseudo
 
 provides: [Form.Request]
 

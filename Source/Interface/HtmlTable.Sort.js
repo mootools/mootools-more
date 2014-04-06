@@ -18,7 +18,7 @@ requires:
   - Core/Hash
   - /HtmlTable
   - /Class.refactor
-  - /Element.Delegation
+  - /Element.Delegation.Pseudo
   - /String.Extras
   - /Date
 
