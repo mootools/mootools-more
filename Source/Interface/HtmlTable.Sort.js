@@ -26,6 +26,15 @@ provides: [HtmlTable.Sort]
 
 ...
 */
+(function(){
+
+var readOnlyNess = document.createElement('table');
+try {
+	readOnlyNess.innerHTML = '<tr><td></td></tr>';
+	readOnlyNess = readOnlyNess.childNodes.length === 0;
+} catch (e){
+	readOnlyNess = true;
+}
 
 HtmlTable = Class.refactor(HtmlTable, {
 
@@ -211,7 +220,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (!parser) return;
 
 		var rel;
-		if (!Browser.ie){
+		if (!readOnlyNess){
 			rel = this.body.getParent();
 			this.body.dispose();
 		}
@@ -347,3 +356,6 @@ HtmlTable.defineParsers = function(parsers){
 		HtmlTable.ParserPriority.unshift(parser);
 	}
 };
+
+})();
+
