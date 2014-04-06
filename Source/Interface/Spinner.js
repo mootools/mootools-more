@@ -90,6 +90,7 @@ var Spinner = new Class({
 			return this;
 		}
 
+		this.target.set('aria-busy', 'true');
 		this.active = true;
 
 		return this.parent(noFx);
@@ -124,7 +125,10 @@ var Spinner = new Class({
 			this.callChain.delay(20, this);
 			return this;
 		}
+
+		this.target.set('aria-busy', 'false');
 		this.active = true;
+
 		return this.parent(noFx);
 	},
 
