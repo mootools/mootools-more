@@ -50,7 +50,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	initialize: function (){
 		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
-		this.sorted = {index: null, dir: 1};
+		this.sorted = {index: null, reverse: [], order: [], lastSortOrder: []};
 		if (!this.bound) this.bound = {};
 		this.bound.headClick = this.headClick.bind(this);
 		this.sortSpans = new Elements();
@@ -126,22 +126,28 @@ HtmlTable = Class.refactor(HtmlTable, {
 			previousSerialization.sortIndex = this.sorted.index;
 			previousSerialization.sortReverse = this.sorted.reverse;
 		}
+			previousSerialization.sortOrder = this.sorted.lastSortOrder;
 		return previousSerialization;
 	},
 
 	restore: function(tableState){
 		if(this.options.sortable && tableState.sortIndex){
-			this.sort(tableState.sortIndex, tableState.sortReverse);
+			this.sorted.lastSortOrder = tableState.sortOrder;
+			this.sorted.reverse = tableState.sortReverse;
+			this.sorted.index = tableState.sortIndex;
+			this.reSort();
 		}
 		this.previous.apply(this, arguments);
 	},
 
-	setSortedState: function(index, reverse){
-		if (reverse != null) this.sorted.reverse = reverse;
-		else if (this.sorted.index == index) this.sorted.reverse = !this.sorted.reverse;
-		else this.sorted.reverse = this.sorted.index == null;
+	setSortedState: function(index, reverse, pre){
+		if (index != null) {
+			if (reverse != null) this.sorted.reverse[index] = reverse;
+			else if (this.sorted.reverse[index] != null) this.sorted.reverse[index] = !this.sorted.reverse[index];
+			else this.sorted.reverse[index] = false;
 
-		if (index != null) this.sorted.index = index;
+			if (!pre) this.sorted.index = index;
+		}
 	},
 
 	setHeadSort: function(sorted){
@@ -151,7 +157,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (!head.length) return;
 		if (sorted){
 			head.addClass(this.options.classHeadSort);
-			if (this.sorted.reverse) head.addClass(this.options.classHeadSortRev);
+			if (this.sorted.reverse[this.sorted.index]) head.addClass(this.options.classHeadSortRev);
 			else head.removeClass(this.options.classHeadSortRev);
 		} else {
 			head.removeClass(this.options.classHeadSort).removeClass(this.options.classHeadSortRev);
@@ -193,21 +199,25 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return item.value;
 	},
 
-	getParser: function(){
-		var parser = this.parsers[this.sorted.index];
+	getParser: function(index){
+		var parser;
+
+		if (index) parser = this.parsers[index];
+		else parser = this.parsers[this.sorted.index];
+
 		return typeOf(parser) == 'string' ? HtmlTable.Parsers[parser] : parser;
 	},
 
 	sort: function(index, reverse, pre){
 		if (!this.head) return;
 
-		if (!pre){
-			this.clearSort();
-			this.setSortedState(index, reverse);
-			this.setHeadSort(true);
-		}
+		this.sorted.order.push(index);
 
-		var parser = this.getParser();
+		if (!pre) this.clearSort();
+		this.setSortedState(index, reverse, pre);
+		if (!pre) this.setHeadSort(true);
+
+		var parser = this.getParser(index);
 		if (!parser) return;
 
 		var rel;
@@ -216,22 +226,23 @@ HtmlTable = Class.refactor(HtmlTable, {
 			this.body.dispose();
 		}
 
-		var data = this.parseData(parser).sort(function(a, b){
+		var data = this.parseData(parser, index).sort(function(a, b){
 			if (a.value === b.value) return 0;
 			return a.value > b.value ? 1 : -1;
 		});
 
-		if (this.sorted.reverse == (parser == HtmlTable.Parsers['input-checked'])) data.reverse(true);
+		if (this.sorted.reverse[index] == (parser == HtmlTable.Parsers['input-checked'])) data.reverse(true);
+
 		this.setRowSort(data, pre);
 
 		if (rel) rel.grab(this.body);
 		this.fireEvent('stateChanged');
-		return this.fireEvent('sort', [this.body, this.sorted.index]);
+		return this.fireEvent('sort', [this.body, index]);
 	},
 
-	parseData: function(parser){
+	parseData: function(parser, index){
 		return Array.map(this.body.rows, function(row, i){
-			var value = parser.convert.call(document.id(row.cells[this.sorted.index]));
+			var value = parser.convert.call(document.id(row.cells[index]));
 			return {
 				position: i,
 				value: value
@@ -242,10 +253,23 @@ HtmlTable = Class.refactor(HtmlTable, {
 	clearSort: function(){
 		this.setHeadSort(false);
 		this.body.getElements('td').removeClass(this.options.classCellSort);
+
+		this.sorted.lastSortOrder = this.sorted.order;
+		this.sorted.order = [];
 	},
 
 	reSort: function(){
-		if (this.sortEnabled) this.sort.call(this, this.sorted.index, this.sorted.reverse);
+
+		var colIndex;
+		var reverse = this.sorted.reverse;
+		var lastSort = this.sorted.lastSortOrder;
+
+		if (this.sortEnabled) {
+			for (var colIndex=0; colIndex<lastSort.length; colIndex++) {
+				this.sort.call(this, lastSort[colIndex], reverse[lastSort[colIndex]], (colIndex != lastSort.length-1));
+			}
+		}
+
 		return this;
 	},
 
