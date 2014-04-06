@@ -45,19 +45,19 @@ describe('Hash.Cookie', function(){
 
 });
 
-describe('Color properties', {
+describe('Color properties', function(){
 
-	'Should define the rgb value for a color': function(){
+	it('Should define the rgb value for a color', function(){
 		expect(new Color("#ff00ff").rgb).toEqual([255,0,255]);
-	},
+	});
 
-	'Should define the hsb value for a color': function(){
+	it('Should define the hsb value for a color', function(){
 		expect(new Color("#ff00ff").hsb).toEqual([300, 100, 100]);
-	},
+	});
 
-	'Should define the hex value for a color': function(){
+	it('Should define the hex value for a color', function(){
 		expect(new Color([255,0,255]).hex).toEqual("#ff00ff");
-	}
+	});
 
 
 });

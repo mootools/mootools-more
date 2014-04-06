@@ -6,9 +6,9 @@ provides: ~
 ...
 */
 
-describe('Hash.getFromPath', {
+describe('Hash.getFromPath', function(){
 
-	'should retrieve a hash value from a path': function(){
+	it('should retrieve a hash value from a path', function(){
 		var h = $H({
 			animal: {
 				human: {
@@ -17,5 +17,5 @@ describe('Hash.getFromPath', {
 			}
 		});
 		expect(h.getFromPath('animal.human.most_deadly')).toEqual('ninja');
-	}
+	});
 });

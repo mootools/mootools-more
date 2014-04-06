@@ -10,17 +10,17 @@ provides: ~
 
 var uri;
 
-	describe('String.toURI using relative path', {
+	describe('String.toURI using relative path', function(){
 
-		before: function(){
+		beforeEach(function(){
 			uri = '/mydirectory/myfile.html?myquery=true#myhash'.toURI({ base: 'http://myuser:mypass@www.calyptus.eu:8080/' });
-		},
+		});
 
-		'URI.toString() should be same as input combined': function(){
+		it('URI.toString() should be same as input combined', function(){
 			expect(uri.toString()).toEqual('http://myuser:mypass@www.calyptus.eu:8080/mydirectory/myfile.html?myquery=true#myhash');
-		},
+		});
 
-		'should have a all properties set': function(){
+		it('should have a all properties set', function(){
 			expect(uri.get('scheme')).toEqual('http');
 			expect(uri.get('user')).toEqual('myuser');
 			expect(uri.get('password')).toEqual('mypass');
@@ -30,85 +30,85 @@ var uri;
 			expect(uri.get('file')).toEqual('myfile.html');
 			expect(uri.get('query')).toEqual('myquery=true');
 			expect(uri.get('fragment')).toEqual('myhash');
-		}
+		});
 
 	});
 
-	describe('URI toRelative functionality', {
-		before: function(){
+	describe('URI toRelative functionality', function(){
+		beforeEach(function(){
 			uri = new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
-		},
-		'new URI(\'../otherfolder\').toRelative() should return a folder up from the current location': function(){
+		});
+		it('new URI(\'../otherfolder\').toRelative() should return a folder up from the current location', function(){
 			expect(new URI('../otherfolder').toRelative()).toEqual('../otherfolder');
-		},
+		});
 
-		'new URI(\'../otherfolder\').toRelative(currentLocation) should return a folder up from the current location': function(){
+		it('new URI(\'../otherfolder\').toRelative(currentLocation) should return a folder up from the current location', function(){
 			expect(new URI('../otherfolder').toRelative(window.location)).toEqual('../otherfolder');
-		},
+		});
 
-		'URI.toRelative(string)': function(){
+		it('URI.toRelative(string)', function(){
 			expect(uri.toRelative('http://www.calyptus.eu/mydirectory/myfile.html')).toEqual('mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toRelative(string)': function(){
+		it('URI.toRelative(string)', function(){
 			expect(uri.toRelative('http://www.calyptus.eu/mydirectory/')).toEqual('mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toRelative(uri)': function(){
+		it('URI.toRelative(uri)', function(){
 			expect(uri.toRelative(new URI('mydirectory/myfile.html', { base: 'http://www.calyptus.eu/' }))).toEqual('mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toAbsolute(string)': function(){
+		it('URI.toAbsolute(string)', function(){
 			expect(uri.toAbsolute('http://www.calyptus.eu/mydirectory/myfile.html')).toEqual('/mydirectory/mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toAbsolute(uri)': function(){
+		it('URI.toAbsolute(uri)', function(){
 			expect(uri.toAbsolute(new URI('mydirectory/myfile.html', { base: 'http://www.calyptus.eu/' }))).toEqual('/mydirectory/mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toRelative(string) on parent': function(){
+		it('URI.toRelative(string) on parent', function(){
 			expect(uri.toRelative('http://www.calyptus.eu/test/myfile.html')).toEqual('../mydirectory/mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toRelative(string) on different host': function(){
+		it('URI.toRelative(string) on different host', function(){
 			expect(uri.toRelative('http://otherdomain/mydirectory/myfile.html')).toEqual('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toAbsolute(string) on different host': function(){
+		it('URI.toAbsolute(string) on different host', function(){
 			expect(uri.toAbsolute('http://otherdomain/mydirectory/myfile.html')).toEqual('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toRelative(string) on different port': function(){
+		it('URI.toRelative(string) on different port', function(){
 			expect(uri.toRelative('http://www.calyptus.eu:81/mydirectory/myfile.html')).toEqual('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toAbsolute(string) on different port': function(){
+		it('URI.toAbsolute(string) on different port', function(){
 			expect(uri.toAbsolute('http://www.calyptus.eu:81/mydirectory/myfile.html')).toEqual('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
-		},
+		});
 
-		'URI.toRelative(string) with query': function(){
+		it('URI.toRelative(string) with query', function(){
 			expect(new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html?myquery=q').toRelative('http://www.calyptus.eu/mydirectory/myfile.html')).toEqual('mydirectory2/myfile.html?myquery=q');
-		},
+		});
 
-		'URI.toAbsolute(string) with query': function(){
+		it('URI.toAbsolute(string) with query', function(){
 			expect(new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html?myquery=q').toAbsolute('http://www.calyptus.eu/mydirectory/myfile.html')).toEqual('/mydirectory/mydirectory2/myfile.html?myquery=q');
-		},
+		});
 
-		'URI.toRelative(string) to same file': function(){
+		it('URI.toRelative(string) to same file', function(){
 			expect(uri.toRelative('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html')).toEqual('myfile.html');
-		},
+		});
 
-		'URI.toRelative(string) to same path': function(){
+		it('URI.toRelative(string) to same path', function(){
 			expect(new URI('http://www.calyptus.eu').toRelative('http://www.calyptus.eu')).toEqual('./');
-		},
+		});
 
-		'new URI(\'../otherfolder\').toRelative() should return the same as input': function(){
+		it('new URI(\'../otherfolder\').toRelative() should return the same as input', function(){
 			expect(new URI('../otherfolder').toRelative(window.location)).toEqual('../otherfolder');
-		},
+		});
 
-		'new URI(\'../otherfolder\').toRelative(window.location) should return the same as input': function(){
+		it('new URI(\'../otherfolder\').toRelative(window.location) should return the same as input', function(){
 			expect(new URI('../otherfolder').toRelative(window.location)).toEqual('../otherfolder');
-		}
+		});
 
 	});
 

@@ -6,33 +6,33 @@ provides: ~
 ...
 */
 
-describe('Array.min', {
+describe('Array.min', function(){
 
-	'should return the lowest number in the array': function(){
+	it('should return the lowest number in the array', function(){
 		expect([1, 2, 3, 4, 5, 6].min()).toEqual(1);
-	}
+	});
 
 });
 
-describe('Array.max', {
+describe('Array.max', function(){
 
-	'should return the highest number in the array': function(){
+	it('should return the highest number in the array', function(){
 		expect([1, 2, 3, 4, 5, 6].max()).toEqual(6);
-	}
+	});
 
 });
 
-describe('Array.average', {
+describe('Array.average', function(){
 
-	'should return the average number of the values in the array': function(){
+	it('should return the average number of the values in the array', function(){
 		expect([1, 2, 3, 4, 5].average()).toEqual(3);
-	}
+	});
 
 });
 
-describe('Array.shuffle', {
+describe('Array.shuffle', function(){
 
-	'should shuffle an array': function(){
+	it('should shuffle an array', function(){
 		var toShuffle = [],
 			toShuffle2 = [];
 		(100).times(function(i){
@@ -44,32 +44,32 @@ describe('Array.shuffle', {
 		toShuffle.sort();
 		toShuffle2.sort();
 		expect(toShuffle).toEqual(toShuffle2);
-	}
+	});
 
 });
 
-describe('Array.sum', {
+describe('Array.sum', function(){
 
-	'should some up all number values': function(){
+	it('should some up all number values', function(){
 		expect([1, 2, 3, 4, 5, 6].sum()).toEqual(21);
-	},
+	});
 
-	'should start concatenation if any item is not a number': function(){
+	it('should start concatenation if any item is not a number', function(){
 		expect([1, 2, 'a', 3].sum()).toEqual('3a21');
-	}
+	});
 
 });
 
 
-describe('Array.unique', {
+describe('Array.unique', function(){
 
-	'should remove duplicates from an array': function(){
+	it('should remove duplicates from an array', function(){
 		expect(['apple', 'lemon', 'pear', 'lemon', 'apple'].unique()).toEqual(["apple", "lemon", "pear"]);
-	},
+	});
 
-	'should not remove items that are dedupe':function(){
+	it('should not remove items that are dedupe', function(){
 		expect([0, '0', false, null, true].unique()).toEqual([0, '0', false, null, true]);
-	}
+	});
 
 });
 
