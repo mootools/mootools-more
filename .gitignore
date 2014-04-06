@@ -2,3 +2,8 @@ mootools-more.js
 *.tmp*
 *.swp
 *~
+node_modules
+mootools-more-all.js
+mootools-more-nocompat.js
+mootools-more-specs.js
+sauce*.log
