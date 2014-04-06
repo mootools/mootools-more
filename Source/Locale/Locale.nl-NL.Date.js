@@ -12,7 +12,7 @@ authors:
   - Tim Wienk
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.nl-NL.Date]
 

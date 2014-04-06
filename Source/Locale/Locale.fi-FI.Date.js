@@ -11,7 +11,7 @@ authors:
   - ksel
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.fi-FI.Date]
 

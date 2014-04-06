@@ -11,8 +11,8 @@ authors:
   - Fabio Miranda Costa
 
 requires:
-  - /Locale
-  - /Locale.pt-PT.Date
+  - Locale
+  - Locale.pt-PT.Date
 
 provides: [Locale.pt-BR.Date]
 

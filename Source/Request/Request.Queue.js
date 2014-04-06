@@ -15,7 +15,7 @@ authors:
 requires:
   - Core/Element
   - Core/Request
-  - /Class.Binds
+  - Class.Binds
 
 provides: [Request.Queue]
 

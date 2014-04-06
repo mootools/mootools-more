@@ -11,7 +11,7 @@ authors:
   - Martin Lundgren
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.sv-SE.Form.Validator]
 

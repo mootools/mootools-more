@@ -17,8 +17,8 @@ requires:
   - Core/Element.Style
   - Core/Options
   - Core/Events
-  - /Element.Position
-  - /Class.Occlude
+  - Element.Position
+  - Class.Occlude
 
 provides: [IframeShim]
 

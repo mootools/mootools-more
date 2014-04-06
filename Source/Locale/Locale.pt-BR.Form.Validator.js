@@ -11,7 +11,7 @@ authors:
   - Fábio Miranda Costa
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.pt-BR.Form.Validator]
 

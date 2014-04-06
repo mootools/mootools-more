@@ -11,7 +11,7 @@ authors:
   - Elad Ossadon
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.he-IL.Number]
 

@@ -12,7 +12,7 @@ authors:
   - Antoine Abt
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.fr-FR.Date]
 

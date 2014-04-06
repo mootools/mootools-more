@@ -13,9 +13,9 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Form.Request
-  - /Fx.Reveal
-  - /Elements.from
+  - Form.Request
+  - Fx.Reveal
+  - Elements.from
 
 provides: [Form.Request.Append]
 

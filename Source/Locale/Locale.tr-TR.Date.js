@@ -11,7 +11,7 @@ authors:
   - Faruk Can Bilir
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.tr-TR.Date]
 

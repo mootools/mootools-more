@@ -15,8 +15,8 @@ authors:
 requires:
   - Core/Fx.Tween
   - Core/Request
-  - /Class.refactor
-  - /Mask
+  - Class.refactor
+  - Mask
 
 provides: [Spinner]
 

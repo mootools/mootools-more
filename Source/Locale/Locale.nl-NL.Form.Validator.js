@@ -13,7 +13,7 @@ authors:
   - Tim Wienk
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.nl-NL.Form.Validator]
 

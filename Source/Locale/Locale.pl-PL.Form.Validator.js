@@ -11,7 +11,7 @@ authors:
   - Oskar Krawczyk
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.pl-PL.Form.Validator]
 

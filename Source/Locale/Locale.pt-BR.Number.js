@@ -12,7 +12,7 @@ authors:
   - Danillo César
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.pt-BR.Number]
 

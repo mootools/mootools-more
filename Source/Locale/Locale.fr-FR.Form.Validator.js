@@ -12,7 +12,7 @@ authors:
   - Nicolas Sorosac
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.fr-FR.Form.Validator]
 

@@ -12,7 +12,7 @@ authors:
   - Andrea Novero
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.it-IT.Form.Validator]
 

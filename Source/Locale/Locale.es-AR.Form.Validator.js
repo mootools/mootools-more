@@ -11,7 +11,7 @@ authors:
   - Diego Massanti
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.es-AR.Form.Validator]
 

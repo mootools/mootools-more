@@ -13,7 +13,7 @@ authors:
   - Fabian Beiner
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.de-DE.Form.Validator]
 

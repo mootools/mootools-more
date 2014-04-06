@@ -11,8 +11,8 @@ authors:
   - Michael van der Weg
 
 requires:
-  - /Locale
-  - /Locale.de-DE.Date
+  - Locale
+  - Locale.de-DE.Date
 
 provides: [Locale.de-CH.Date]
 

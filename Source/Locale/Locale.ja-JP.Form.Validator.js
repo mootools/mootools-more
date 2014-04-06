@@ -11,7 +11,7 @@ authors:
   - Noritaka Horio
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.ja-JP.Form.Validator]
 

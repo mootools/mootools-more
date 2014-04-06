@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Element.Event
-  - /Fx.Elements
+  - Fx.Elements
 
 provides: [Fx.Accordion]
 

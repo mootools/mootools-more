@@ -11,7 +11,7 @@ authors:
   - Werner Mollentze
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.af-ZA.Date]
 

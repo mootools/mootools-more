@@ -12,7 +12,7 @@ authors:
   - Kuryanovich Egor
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.ru-RU.Date]
 

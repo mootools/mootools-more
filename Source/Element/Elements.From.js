@@ -15,7 +15,7 @@ authors:
 requires:
   - Core/String
   - Core/Element
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Elements.from, Elements.From]
 

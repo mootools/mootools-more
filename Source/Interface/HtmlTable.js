@@ -15,7 +15,7 @@ authors:
 requires:
   - Core/Options
   - Core/Events
-  - /Class.Occlude
+  - Class.Occlude
 
 provides: [HtmlTable]
 
