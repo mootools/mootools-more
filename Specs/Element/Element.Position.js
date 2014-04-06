@@ -1,8 +1,8 @@
 /*
 ---
-name: Element.Position Tests
-requires: [More/Element.Position]
-provides: [Element.Position.Tests]
+name: Element.Position
+requires: ~
+provides: ~
 ...
 */
 

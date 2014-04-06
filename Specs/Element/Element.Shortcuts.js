@@ -1,10 +1,11 @@
 /*
 ---
-name: Element.Shortcuts Tests
-requires:~
-provides:~
+name: Element.Shortcuts
+requires: ~
+provides: ~
 ...
 */
+
 (function(){
 
 	var elements;

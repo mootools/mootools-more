@@ -1,10 +1,11 @@
 /*
 ---
-name: Element.Delegation Tests
-requires: [Core/Element.Delegation]
-provides: [Element.Delegation.Tests]
+name: Element.Delegation
+requires: ~
+provides: ~
 ...
 */
+
 describe('Elements.Delegation', function(){
 
 	// Only run this spec in browsers other than IE6-8 because they can't properly simulate bubbling events

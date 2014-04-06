@@ -1,10 +1,11 @@
 /*
 ---
-name: HtmlTable Tests
-requires: [More/HtmlTable]
-provides: [HtmlTable.Tests]
+name: HtmlTable
+requires: ~
+provides: ~
 ...
 */
+
 describe('HtmlTable', function(){
 
 	it('should create a new HtmlTable instance', function(){

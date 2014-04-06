@@ -1,10 +1,11 @@
 /*
 ---
-name: Hash Tests
-requires: [More/Hash]
-provides: [Hash.Tests]
+name: Hash
+requires: ~
+provides: ~
 ...
 */
+
 (function(){
 
 var hash2 = new Hash({ a: 'string', b: 233, c: {} });

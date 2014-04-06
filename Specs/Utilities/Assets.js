@@ -1,10 +1,11 @@
 /*
 ---
-name: Assets Tests
-requires: [More/Assets]
-provides: [Assets.Tests]
+name: Assets
+requires: ~
+provides: ~
 ...
 */
+
 describe('Assets', function(){
 
 	describe('Assets.javascript', function(){

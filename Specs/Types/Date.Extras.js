@@ -1,8 +1,8 @@
 /*
 ---
-name: Date.Extras Tests
-requires: [More/Date.Extras]
-provides: [Date.Extras.Tests]
+name: Date.Extras
+requires: ~
+provides: ~
 ...
 */
 

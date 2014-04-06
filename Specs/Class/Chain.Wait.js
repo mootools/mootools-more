@@ -1,10 +1,11 @@
 /*
 ---
-name: Chain.Wait Tests
-requires:~
-provides:~
+name: Chain.Wait
+requires: ~
+provides: ~
 ...
 */
+
 describe('Chain.Wait', function(){
 
 	it('should wait some milliseconds between firing the functions', function(){

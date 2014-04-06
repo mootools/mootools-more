@@ -1,8 +1,8 @@
 /*
 ---
-name: Color Tests
-requires:~
-provides:~
+name: Color
+requires: ~
+provides: ~
 ...
 */
 

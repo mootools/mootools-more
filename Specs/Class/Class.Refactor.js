@@ -1,8 +1,8 @@
 /*
 ---
-name: Class.Refactor Tests
-requires: [More/Class.Refactor]
-provides: [Class.Refactor.Tests]
+name: Class.Refactor
+requires: ~
+provides: ~
 ...
 */
 

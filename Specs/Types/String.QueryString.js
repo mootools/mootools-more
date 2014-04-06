@@ -1,10 +1,11 @@
 ﻿/*
 ---
-name: String.QueryString Tests
-requires: [More/String.QueryString]
-provides: [String.QueryString.Tests]
+name: String.QueryString
+requires: ~
+provides: ~
 ...
 */
+
 (function(){
 
 	describe('String.parseQueryString', {

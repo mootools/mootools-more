@@ -1,8 +1,8 @@
 /*
 ---
-name: Class.Occlude Tests
-requires: [More/Class.Occlude]
-provides: [Class.Occlude.Tests]
+name: Class.Occlude
+requires: ~
+provides: ~
 ...
 */
 

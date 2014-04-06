@@ -1,10 +1,11 @@
 /*
 ---
-name: HtmlTable.Sort Tests
-requires: [More/HtmlTable.Sort]
-provides: [HtmlTable.Sort.Tests]
+name: HtmlTable.Sort
+requires: ~
+provides: ~
 ...
 */
+
 describe('HtmlTable.Sort', function(){
 
   it('should not step on prior this.bind declarations', function () {

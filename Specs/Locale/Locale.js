@@ -1,8 +1,8 @@
 /*
 ---
-name: Locale Tests
-requires: [More/Locale, More/Locale.en-US.Form.Validator, More/Locale.en-US.Date, More/Locale.fr-FR.Date, More/Locale.en-US.Number]
-provides: [Locale.Tests]
+name: Locale
+requires: ~
+provides: ~
 ...
 */
 

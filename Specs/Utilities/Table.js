@@ -1,9 +1,8 @@
 /*
 ---
-name: Table Tests
-requires:~
-provides:~
-license: MIT-style license.
+name: Table
+requires: ~
+provides: ~
 ...
 */
 

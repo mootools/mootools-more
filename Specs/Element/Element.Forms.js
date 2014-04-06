@@ -1,10 +1,11 @@
 /*
 ---
-name: Element.Forms Tests
-requires: [More/Element.Forms]
-provides: [Element.Forms.Tests]
+name: Element.Forms
+requires: ~
+provides: ~
 ...
 */
+
 describe('Element.Forms', function(){
 
 	var input, selectList, multiselect, container;

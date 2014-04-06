@@ -1,8 +1,8 @@
 /*
 ---
-name: Array.Extras Tests
-requires: [More/Array.Extras]
-provides: [Array.Extras.Tests]
+name: Array.Extras
+requires: ~
+provides: ~
 ...
 */
 

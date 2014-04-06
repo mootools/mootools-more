@@ -1,8 +1,8 @@
 /*
 ---
-name: Hash.Extras Tests
-requires: [More/Hash.Extras]
-provides: [Hash.Extras.Tests]
+name: Hash.Extras
+requires: ~
+provides: ~
 ...
 */
 

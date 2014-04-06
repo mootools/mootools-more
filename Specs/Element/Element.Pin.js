@@ -1,10 +1,11 @@
 /*
 ---
-name: Element.Pin Tests
-requires: [More/Element.Pin, Core/DomReady]
-provides: [Element.Pin.Tests]
+name: Element.Pin
+requires: ~
+provides: ~
 ...
 */
+
 describe("Element.Pin", function(){
 
 	describe("togglePin", function(){

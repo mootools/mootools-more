@@ -1,10 +1,11 @@
 /*
 ---
-name: Keyboard Tests
-requires: [More/Keyboard]
-provides: [Keyboard.Tests]
+name: Keyboard
+requires: ~
+provides: ~
 ...
 */
+
 // Only run this spec in browsers other than IE6-8 because they can't properly simulate key events
 if (window.addEventListener) describe('Keyboard', function(){
 

@@ -1,10 +1,11 @@
 /*
 ---
-name: URI Tests
-requires: [More/URI]
-provides: [URI.Tests]
+name: URI
+requires: ~
+provides: ~
 ...
 */
+
 (function(){
 
 	var uri;

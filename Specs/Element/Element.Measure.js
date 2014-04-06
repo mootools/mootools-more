@@ -1,8 +1,8 @@
 /*
 ---
-name: Element.Measure Tests
-requires: [More/Element.Measure]
-provides: [Element.Measure.Tests]
+name: Element.Measure
+requires: ~
+provides: ~
 ...
 */
 

@@ -1,8 +1,8 @@
 /*
 ---
-name: Form.Validator Tests
-requires: [More/Form.Validator]
-provides: [Form.Validator.Tests]
+name: Form.Validator
+requires: ~
+provides: ~
 ...
 */
 

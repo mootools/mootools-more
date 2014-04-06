@@ -1,3 +1,11 @@
+/*
+---
+name: HtmlTable.Zebra
+requires: ~
+provides: ~
+...
+*/
+
 describe('HtmlTable.Zebra', function(){
 
 	var getTable = function(){

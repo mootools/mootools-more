@@ -1,8 +1,8 @@
 /*
 ---
-name: String.Extras Tests
-requires: [More/String.Extras]
-provides: [String.Extras.Tests]
+name: String.Extras
+requires: ~
+provides: ~
 ...
 */
 

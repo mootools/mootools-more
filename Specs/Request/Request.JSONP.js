@@ -1,10 +1,11 @@
 /*
 ---
-name: Request.JSONP Tests
-requires: [More/Request.JSONP]
-provides: [Request.JSONP.Tests]
+name: Request.JSONP
+requires: ~
+provides: ~
 ...
 */
+
 describe('Request.JSONP', function(){
 
 	it('should grab some json from from assets/jsonp.js', function(){

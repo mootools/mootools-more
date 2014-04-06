@@ -1,10 +1,11 @@
 /*
 ---
-name: Hash.Cookie Tests
-requires:~
-provides:~
+name: Hash.Cookie
+requires: ~
+provides: ~
 ...
 */
+
 describe('Hash.Cookie', function(){
 
 	beforeEach(function(){

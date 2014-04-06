@@ -1,3 +1,10 @@
+/*
+---
+name: Fx.Slide
+requires: ~
+provides: ~
+...
+*/
 
 describe('Fx.Slide', function(){
 

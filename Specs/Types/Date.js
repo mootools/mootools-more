@@ -1,10 +1,11 @@
 /*
 ---
-name: Date Tests
-requires: [More/Date]
-provides: [Date.Tests]
+name: Date
+requires: ~
+provides: ~
 ...
 */
+
 (function(global){
 
 describe('Date', function(){

@@ -1,10 +1,11 @@
 /*
 ---
-name: Fx.Reveal Tests
-requires: [More/Fx.Reveal]
-provides: [Fx.Reveal.Tests]
+name: Fx.Reveal
+requires: ~
+provides: ~
 ...
 */
+
 describe('Fx.Reveal', function(){
 
 	describe('set', function(){
