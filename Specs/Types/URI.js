@@ -70,7 +70,7 @@ provides: [URI.Tests]
 
 	});
 
-	describe('URI methods', function(){
+	describe('URI methods without query in url', function(){
 
 		beforeEach(function(){
 			uri = new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
@@ -86,7 +86,14 @@ provides: [URI.Tests]
 			uri.setData({ keyName: 'my value' });
 			expect(uri.get('query')).toEqual('keyName=my%20value');
 		});
+	});
 
+	describe('URI methods with query in url', function(){
+
+		beforeEach(function(){
+			uri = new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html?keyName=my%20value');
+		});
+        
 		it('URI.getData() should return an object with the value set above', function(){
 			expect(uri.getData().keyName).toEqual('my value');
 		});
