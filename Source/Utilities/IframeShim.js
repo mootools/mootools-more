@@ -25,12 +25,14 @@ provides: [IframeShim]
 ...
 */
 
-var IframeShim = (function(){
+(function(){
+
 var browsers = false;
 //<1.4compat>
 browsers = Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac);
 //</1.4compat>
-return new Class({
+
+this.IframeShim = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
@@ -129,6 +131,7 @@ return new Class({
 	}
 
 });
+
 })();
 
 window.addEvent('load', function(){
