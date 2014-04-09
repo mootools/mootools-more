@@ -25,7 +25,12 @@ provides: [IframeShim]
 ...
 */
 
-var IframeShim = new Class({
+var IframeShim = (function(){
+var browsers = false;
+//<1.4compat>
+browsers = Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac);
+//</1.4compat>
+return new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
@@ -36,7 +41,7 @@ var IframeShim = new Class({
 		zIndex: null,
 		margin: 0,
 		offset: {x: 0, y: 0},
-		browsers: (Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac))
+		browsers: browsers
 	},
 
 	property: 'IframeShim',
@@ -124,6 +129,7 @@ var IframeShim = new Class({
 	}
 
 });
+})();
 
 window.addEvent('load', function(){
 	IframeShim.ready = true;
