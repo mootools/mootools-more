@@ -14,7 +14,7 @@ describe('Assets', function(){
 
 			var load = jasmine.createSpy('load');
 
-			var myScript = Asset.javascript('../assets/Assets.js.test.js', {
+			var myScript = Asset.javascript('base/Tests/Specs/assets/Assets.js.test.js', {
 				id: 'myScript',
 				onload: function(){
 					load(this);
@@ -41,7 +41,7 @@ describe('Assets', function(){
 
 			var load = jasmine.createSpy('load');
 
-			var myCSS = Asset.css('../assets/Assets.css.test.css', {
+			var myCSS = Asset.css('base/Tests/Specs/assets/Assets.css.test.css', {
 				id: 'myStyle',
 				title: 'myStyle',
 				events: {load: function(){
@@ -69,7 +69,7 @@ describe('Assets', function(){
 
 			var load = jasmine.createSpy('load');
 
-			var myImage = Asset.image('../assets/mootools.png', {
+			var myImage = Asset.image('base/Tests/Specs/assets/mootools.png', {
 				id: 'myImage',
 				title: 'myImage',
 				onload: load
@@ -93,7 +93,7 @@ describe('Assets', function(){
 			var load = jasmine.createSpy('load'),
 				error = jasmine.createSpy('error');
 
-			var myImage = Asset.image('../assets/notExisting.png',{
+			var myImage = Asset.image('base/Tests/Specs/assets/notExisting.png',{
 				onload: load,
 				onerror: error
 			});
@@ -114,12 +114,12 @@ describe('Assets', function(){
 				myImage1;
 
 			var loaded = function(){
-				myImage1 = Asset.image('../assets/mootools.png', {
+				myImage1 = Asset.image('base/Tests/Specs/assets/mootools.png', {
 					onload: loadedagain
 				});
 			};
 
-			var myImage = Asset.image('../assets/mootools.png', {
+			var myImage = Asset.image('base/Tests/Specs/assets/mootools.png', {
 				onload: loaded
 			});
 
@@ -163,8 +163,8 @@ describe('Assets', function(){
 				error = jasmine.createSpy('error');
 
 			var loadedImages = new Asset.images([
-				'../assets/cow.png',
-				'../assets/mootools.png'
+				'base/Tests/Specs/assets/cow.png',
+				'base/Tests/Specs/assets/mootools.png'
 			], {
 				onComplete: complete,
 				onProgress: progress,
@@ -188,9 +188,9 @@ describe('Assets', function(){
 				error = jasmine.createSpy('error');
 
 			var loadedImages = new Asset.images([
-				'../assets/iDontExist.png',
-				'../assets/cow.png',
-				'../assets/iDontExistEither.png'
+				'base/Tests/Specs/assets/iDontExist.png',
+				'base/Tests/Specs/assets/cow.png',
+				'base/Tests/Specs/assets/iDontExistEither.png'
 			], {
 				onComplete: complete,
 				onProgress: progress,

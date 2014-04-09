@@ -18,7 +18,7 @@ describe('Request.JSONP', function(){
 		var request = new Request.JSONP({
 			log: true,
 			callbackKey: 'jsoncallback',
-			url: '../assets/jsonp.js',
+			url: 'base/Tests/Specs/assets/jsonp.js',
 			timeout: 20000,
 			onComplete: function(){
 				onComplete.apply(this, arguments);
@@ -38,7 +38,7 @@ describe('Request.JSONP', function(){
 		});
 
 		runs(function(){
-			expect(onRequest).toHaveBeenCalledWith('../assets/jsonp.js?jsoncallback=Request.JSONP.request_map.request_0');
+			expect(onRequest).toHaveBeenCalledWith('base/Tests/Specs/assets/jsonp.js?jsoncallback=Request.JSONP.request_map.request_0');
 		});
 
 		waitsFor(1600, function(){

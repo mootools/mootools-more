@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 				name: {
 					More: null, 
 					Core: 'node_modules/mootools-core/'
-                }
+				}
 			},
 
 			all: {
@@ -82,7 +82,11 @@ module.exports = function(grunt) {
 				captureTimeout: 60000 * 2,
 				singleRun: true,
 				frameworks: ['jasmine', 'sinon'],
-				files: ['Tests/Utilities/*.js', 'mootools-*.js'],
+				files: [
+					'Tests/Utilities/*.js', 
+					'mootools-*.js', 
+					{pattern: 'Tests/Specs/assets/*.*', included: false, served: true}
+				],
 				sauceLabs: {
 					username: process.env.SAUCE_USERNAME,
 					accessKey: process.env.SAUCE_ACCESS_KEY,
