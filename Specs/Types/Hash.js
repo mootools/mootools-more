@@ -8,14 +8,19 @@ provides: [Hash.Tests]
 
 (function(){
 
+function isNumber(num){ return typeof num == 'number'; };
+function isArray(arr){ return typeOf(arr) == 'array'; };
+function $defined(obj) { return obj != null };
+
 var hash2 = new Hash({ a: 'string', b: 233, c: {} });
+
 
 describe("Hash Methods", function(){
 
 	// Hash.constructor
 
 	it('should return a new hash', function(){
-		expect(Hash.type(new Hash())).toBeTruthy();
+		expect(typeOf(new Hash()) == 'hash').toBeTruthy();
 	});
 
 	it('should return a copy of a hash', function(){
@@ -142,27 +147,27 @@ describe("Hash Methods", function(){
 	// Hash.map
 
 	it('should map a new Hash according to the comparator', function(){
-		expect(hash2.map(Number.type)).toEqual(new Hash({a:false,b:true,c:false}));
+		expect(hash2.map(isNumber)).toEqual(new Hash({a:false,b:true,c:false}));
 	});
 
 	// Hash.filter
 
 	it('should filter the Hash according to the comparator', function(){
-		expect(hash2.filter(Number.type)).toEqual(new Hash({b:233}));
+		expect(hash2.filter(isNumber)).toEqual(new Hash({b:233}));
 	});
 
 	// Hash.every
 
 	it('should return true if every value matches the comparator, otherwise false', function(){
 		expect(hash2.every($defined)).toBeTruthy();
-		expect(hash2.every(Number.type)).toBeFalsy();
+		expect(hash2.every(isNumber)).toBeFalsy();
 	});
 
 	// Hash.some
 
 	it('should return true if some of the values match the comparator, otherwise false', function(){
-		expect(hash2.some(Number.type)).toBeTruthy();
-		expect(hash2.some(Array.type)).toBeFalsy();
+		expect(hash2.some(isNumber)).toBeTruthy();
+		expect(hash2.some(isArray)).toBeFalsy();
 	});
 
 	// Hash.getKeys
