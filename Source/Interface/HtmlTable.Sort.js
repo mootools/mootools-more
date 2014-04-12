@@ -80,7 +80,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	setHeaders: function(){
 		this.previous.apply(this, arguments);
-		if (this.sortEnabled) this.setParsers();
+		if (this.sortable) this.setParsers();
 	},
 
 	setParsers: function(){
@@ -254,7 +254,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	reSort: function(){
-		if (this.sortEnabled) this.sort.call(this, this.sorted.index, this.sorted.reverse);
+		if (this.sortable) this.sort.call(this, this.sorted.index, this.sorted.reverse);
 		return this;
 	},
 
@@ -262,7 +262,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.element.addClass(this.options.classSortable);
 		this.attachSorts(true);
 		this.setParsers();
-		this.sortEnabled = true;
+		this.sortable = true;
 		return this;
 	},
 
@@ -273,7 +273,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			span.destroy();
 		});
 		this.sortSpans.empty();
-		this.sortEnabled = false;
+		this.sortable = false;
 		return this;
 	}
 
