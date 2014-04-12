@@ -4,6 +4,8 @@
 
 <img border="0" alt="MooTools" src="/asset/more/mootools.png" title="MooTools" rel="The best damn JS framework on Earth." id="moologo"/>
 
+<div id="cssonloadtest">The onload should fire after the big background images has been loaded</div>
+
 <hr />
 <p>
 	A MooTools logo should load in the box below.
@@ -29,6 +31,11 @@
 	list-style: disc;
 }
 
+#cssonloadtest {
+	padding: 10px;
+	border: 4px solid #f99;
+}
+
 </style>
 
 <div id="imgtest2"></div>
@@ -43,7 +50,12 @@
 <script src="/depender/build?require=More/Assets"></script>
 <script>
 
-	Asset.css('/asset/more/Assets.css.test.css');
+	Asset.css('/asset/more/Assets.css.test.css', {
+		onload: function(){
+			$('cssonloadtest').set('text', 'Loaded');
+			$('cssonloadtest').style.borderColor = 'green';
+		}
+	});
 	Asset.image('/asset/more/mootools.png', {
 		onLoad: function(){
 			this.inject('imgtest');

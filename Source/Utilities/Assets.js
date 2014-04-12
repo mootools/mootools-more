@@ -56,15 +56,31 @@ var Asset = {
 			type: 'text/css',
 			href: source
 		});
-
-		var load = properties.onload || properties.onLoad,
-			doc = properties.document || document;
-
-		delete properties.onload;
-		delete properties.onLoad;
+		
+		var doc = properties.document || document;
 		delete properties.document;
 
-		if (load) link.addEvent('load', load);
+		var load = properties.onload || properties.onLoad;
+		delete properties.onload;
+		delete properties.onLoad;
+		if (load){
+			var loaded = 0, s = 'sheet', r = 'cssRules';
+			var fn = function(){
+				if (!loaded++) load.call(link);
+			};
+			var check = function(){
+				if (link.styleSheet) return;
+				// cssready technique by Diego Perini: http://javascript.nwbox.com/CSSReady/cssready.html
+				try {
+					if (link[s] && link[s][r]) return fn();
+				} catch (e){}
+				if (!loaded) setTimeout(check, 50);
+
+			};
+			link.addEvent('load', fn);
+			setTimeout(check, 0);
+		}
+
 		return link.set(properties).inject(doc.head);
 	},
 
