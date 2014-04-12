@@ -367,8 +367,12 @@ Date.extend({
 
 		if (!(parsed && parsed.isValid())){
 			parsed = new Date(nativeParse(from));
-			if (!(parsed && parsed.isValid())) parsed = new Date(from.toInt());
+
+			if (!(parsed && parsed.isValid()) && !isNaN(Number(from))) {
+				parsed = new Date(from.toInt());
+			}
 		}
+
 		return parsed;
 	},
 
@@ -440,7 +444,7 @@ var replacers = function(key){
 		case 'x': // iso8601 covers yyyy-mm-dd, so just check if month is first
 			return ((Date.orderIndex('month') == 1) ? '%m[-./]%d' : '%d[-./]%m') + '([-./]%y)?';
 		case 'X':
-			return '%H([.:]%M)?([.:]%S([.:]%s)?)? ?%p? ?%z?';
+			return '%H([.:]%M([.:]%S([.:]%s)?)?)? ?%p? ?%z?';
 	}
 	return null;
 };
@@ -499,6 +503,7 @@ var build = function(format){
 		re: new RegExp('^' + re + '$', 'i'),
 		handler: function(bits){
 			bits = bits.slice(1).associate(parsed);
+
 			var date = new Date().clearTime(),
 				year = bits.y || bits.Y;
 
