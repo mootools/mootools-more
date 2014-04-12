@@ -31,6 +31,19 @@ var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 Object.extend({
 
+	setByPath: function(source, path, value){
+		if (typeof path == 'string') path = path.split('.');
+		var iterator = source;
+		for (var i = 0, l = parts.length - 1; i++){
+			if (i < l){
+				if (typeof iterator[parts[i]] != 'object') iterator[parts[i]] = {};
+				iterator = iterator[parts[i]];
+			} else {
+				iterator[parts[i]] = value;
+			}
+		}
+	},
+
 	getFromPath: function(source, parts){
 		if (typeof parts == 'string') parts = parts.split('.');
 		for (var i = 0, l = parts.length; i < l; i++){

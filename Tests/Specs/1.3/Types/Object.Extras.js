@@ -5,6 +5,24 @@ requires: [More/Object.Extras]
 provides: [Object.Extras.Tests]
 ...
 */
+describe('Object.setByPath', function(){
+
+	it('should set an object value by a path', function(){
+		var obj = {
+			animal: {
+				human: {
+					most_deadly: 'ninja'
+				}
+			}
+		};
+		Object.setByPath(obj, 'animal.human.most_deadly', 'chuck norris');
+		Object.setByPath(obj, 'animal.human.most_lovely', 'shay maria');
+		expect(obj.animal.human.most_deadly).toEqual('chuck norris');
+		expect(obj.animal.human.most_lovely).toEqual('shay maria');
+	});
+
+});
+
 describe('Object.getFromPath', function(){
 
 	it('should retrieve an object value from a path', function(){
