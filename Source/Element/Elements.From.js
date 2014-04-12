@@ -12,10 +12,7 @@ license: MIT-style license
 authors:
   - Aaron Newton
 
-requires:
-  - Core/String
-  - Core/Element
-  - /MooTools.More
+requires: [String, Element, More]
 
 provides: [Elements.from, Elements.From]
 
