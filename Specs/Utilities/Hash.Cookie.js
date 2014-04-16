@@ -1,11 +1,10 @@
 /*
 ---
-name: Hash.Cookie
-requires: ~
-provides: ~
+name: Hash.Cookie Tests
+requires: [More/Hash.Cookie]
+provides: [Hash.Cookie.Tests]
 ...
 */
-
 describe('Hash.Cookie', function(){
 
 	beforeEach(function(){
@@ -61,4 +60,3 @@ describe('Color properties', function(){
 
 
 });
-

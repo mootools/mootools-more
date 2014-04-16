@@ -1,11 +1,10 @@
 /*
 ---
-name: Number.Format
-requires: ~
-provides: ~
+name: Number.Format Tests
+requires: [More/Number.Extras]
+provides: [Number.Format.Tests]
 ...
 */
-
 describe('Number.Format', function(){
 
 	describe('Number.format', function(){

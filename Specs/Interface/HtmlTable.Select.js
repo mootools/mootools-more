@@ -1,11 +1,10 @@
 /*
 ---
-name: HtmlTable.Select
-requires: ~
-provides: ~
+name: HtmlTable.Select Tests
+requires: [More/HtmlTable.Select]
+provides: [HtmlTable.Select.Tests]
 ...
 */
-
 describe('HtmlTable.Select', function(){
 
 	var getTable = function(){

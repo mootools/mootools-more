@@ -1,11 +1,10 @@
 /*
 ---
-name: Locale
-requires: ~
-provides: ~
+name: Locale Tests
+requires: [More/Locale, More/Locale.en-US.Form.Validator, More/Locale.en-US.Date, More/Locale.fr-FR.Date, More/Locale.en-US.Number]
+provides: [Locale.Tests]
 ...
 */
-
 describe('Locale', function(){
 
 	// In the specs there is only english available

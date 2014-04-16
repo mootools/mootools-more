@@ -1,11 +1,10 @@
 /*
 ---
-name: Events.Pseudos
-requires: ~
-provides: ~
+name: Events.Pseudos Tests
+requires: [More/Events.Pseudos]
+provides: [Events.Pseudos.Tests]
 ...
 */
-
 describe('Events.Pseudos', function(){
 
 	it('should implement DOMEvent.Psuedos in already existing classes defined in core', function(){

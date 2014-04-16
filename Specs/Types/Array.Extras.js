@@ -1,11 +1,10 @@
 /*
 ---
-name: Array.Extras
-requires: ~
-provides: ~
+name: Array.Extras Tests
+requires: [More/Array.Extras]
+provides: [Array.Extras.Tests]
 ...
 */
-
 describe('Array.min', function(){
 
 	it('should return the lowest number in the array', function(){

@@ -1,8 +1,8 @@
 /*
 ---
-name: Hash
-requires: ~
-provides: ~
+name: Hash Tests
+requires: [More/Hash]
+provides: [Hash.Tests]
 ...
 */
 

@@ -1,11 +1,10 @@
 /*
 ---
-name: Table
-requires: ~
-provides: ~
+name: Table Tests
+requires: [More/Table]
+provides: [Table.Tests]
 ...
 */
-
 describe('Table', function(){
 
 	var table = new Table();

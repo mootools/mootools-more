@@ -1,8 +1,8 @@
 /*
 ---
-name: Element.Shortcuts
-requires: ~
-provides: ~
+name: Element.Shortcuts Tests
+requires: [More/Element.Shortcuts]
+provides: [Element.Shortcuts.Tests]
 ...
 */
 

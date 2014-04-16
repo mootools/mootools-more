@@ -1,11 +1,10 @@
 /*
 ---
 name: HtmlTable.Zebra
-requires: ~
-provides: ~
+requires: [HtmlTable, Element.Shortcuts, Class.refactor]
+provides: [HtmlTable.Zebra]
 ...
 */
-
 describe('HtmlTable.Zebra', function(){
 
 	var getTable = function(){

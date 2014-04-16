@@ -1,8 +1,8 @@
 /*
 ---
-name: URI
-requires: ~
-provides: ~
+name: URI Tests
+requires: [More/URI]
+provides: [URI.Tests]
 ...
 */
 

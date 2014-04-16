@@ -1,11 +1,10 @@
 /*
 ---
-name: Class.Occlude
-requires: ~
-provides: ~
+name: Class.Occlude Tests
+requires: [More/Class.Occlude]
+provides: [Class.Occlude.Tests]
 ...
 */
-
 describe('Class.Occlude', function(){
 
 	var testDiv = new Element('div');

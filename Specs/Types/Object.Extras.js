@@ -1,11 +1,10 @@
 /*
 ---
-name: Object.Extras
-requires: ~
-provides: ~
+name: Object.Extras Tests
+requires: [More/Object.Extras]
+provides: [Object.Extras.Tests]
 ...
 */
-
 describe('Object.getFromPath', function(){
 
 	it('should retrieve an object value from a path', function(){

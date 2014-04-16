@@ -1,8 +1,8 @@
 ﻿/*
 ---
-name: String.QueryString
-requires: ~
-provides: ~
+name: String.QueryString Tests
+requires: [More/String.QueryString]
+provides: [String.QueryString.Tests]
 ...
 */
 

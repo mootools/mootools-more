@@ -1,11 +1,10 @@
 /*
 ---
-name: Color
-requires: ~
-provides: ~
+name: Color Tests
+requires: [More/Color]
+provides: [Color.Tests]
 ...
 */
-
 describe('Color initialize', function(){
 
 	it('Should initialize a color from a hex value', function(){

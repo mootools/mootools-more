@@ -1,11 +1,10 @@
 /*
 ---
 name: Fx.Slide
-requires: ~
-provides: ~
+requires: [Core/Fx, Core/Element.Style, MooTools.More]
+provides: [Fx.Slide]
 ...
 */
-
 describe('Fx.Slide', function(){
 
 	it('should reset the height when the resetHeight option is set to true by element.set', function(){

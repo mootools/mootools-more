@@ -1,11 +1,10 @@
 /*
 ---
-name: Group
-requires: ~
-provides: ~
+name: Group Tests
+requires: [More/Group]
+provides: [Group.Tests]
 ...
 */
-
 describe('Group', function(){
 
 	it('should fire an event if all the events are fired of each instance', function(){

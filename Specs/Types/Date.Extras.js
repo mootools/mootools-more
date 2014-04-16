@@ -1,11 +1,10 @@
 /*
 ---
-name: Date.Extras
-requires: ~
-provides: ~
+name: Date.Extras Tests
+requires: [More/Date.Extras]
+provides: [Date.Extras.Tests]
 ...
 */
-
 describe('Date.getTimePhrase', function(){
 
 	it('should describe a number of seconds in simple terms', function(){

@@ -1,11 +1,10 @@
 /*
 ---
-name: Elements.From
-requires: ~
-provides: ~
+name: Elements.From Tests
+requires: [More/Elements.From]
+provides: [Elements.From.Tests]
 ...
 */
-
 describe('Elements.From', function(){
 
 	it('should return a group of elements', function(){

@@ -1,11 +1,10 @@
 /*
 ---
-name: Hash.Extras
-requires: ~
-provides: ~
+name: Hash.Extras Tests
+requires: [More/Hash.Extras]
+provides: [Hash.Extras.Tests]
 ...
 */
-
 describe('Hash.getFromPath', function(){
 
 	it('should retrieve a hash value from a path', function(){

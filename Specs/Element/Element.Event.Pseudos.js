@@ -1,11 +1,10 @@
 /*
 ---
-name: Element.Event.Pseudos
-requires: ~
-provides: ~
+name: Element.Event.Pseudos Tests
+requires: [More/Element.Event.Pseudos, Core/Request.JSON]
+provides: [Element.Event.Pseudos.Tests]
 ...
 */
-
 describe('Element.Event.Pseudos', function(){
 
 	it('tests the DOMEvent.definePseudo function', function(){

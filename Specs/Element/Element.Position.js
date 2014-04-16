@@ -1,11 +1,10 @@
 /*
 ---
-name: Element.Position
-requires: ~
-provides: ~
+name: Element.Position Tests
+requires: [More/Element.Position]
+provides: [Element.Position.Tests]
 ...
 */
-
 describe("Element.Position", function(){
 
 	var element,

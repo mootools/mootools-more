@@ -1,11 +1,10 @@
 /*
 ---
-name: Class.Refactor
-requires: ~
-provides: ~
+name: Class.Refactor Tests
+requires: [More/Class.Refactor]
+provides: [Class.Refactor.Tests]
 ...
 */
-
 describe('Class.Refactor', function(){
 
 	var Test = new Class({
