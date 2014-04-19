@@ -58,7 +58,8 @@ module.exports = function(grunt) {
 
 			specs: {
 				options: {
-					name: 'Specs'
+					name: 'Specs',
+					ignoreYAMLheader: true
 				},
 				src: 'Specs/<%= grunt.option("module") || "**" %>/<%= grunt.option("file") || "*" %>.js',
 				dest: 'mootools-more-specs.js'
@@ -67,6 +68,7 @@ module.exports = function(grunt) {
 			'specs-nocompat': {
 				options: {
 					name: 'Specs',
+					ignoreYAMLheader: true,
 					strip: ['.*compat'],
 					only: '<%= grunt.option("file") && "Specs/" + grunt.option("file") %>'
 				},
