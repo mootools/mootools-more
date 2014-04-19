@@ -15,8 +15,8 @@ authors:
 
 requires:
   - Core/Events
-  - /Object.Extras
-  - /MooTools.More
+  - Object.Extras
+  - MooTools.More
 
 provides: [Locale, Lang]
 

@@ -16,11 +16,11 @@ authors:
 
 requires:
   - Core/Hash
-  - /HtmlTable
-  - /Class.refactor
-  - /Element.Delegation
-  - /String.Extras
-  - /Date
+  - HtmlTable
+  - Class.refactor
+  - Element.Delegation.Pseudo
+  - String.Extras
+  - Date
 
 provides: [HtmlTable.Sort]
 

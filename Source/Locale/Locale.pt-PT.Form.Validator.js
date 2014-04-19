@@ -11,7 +11,7 @@ authors:
   - Miquel Hudin
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.pt-PT.Form.Validator]
 

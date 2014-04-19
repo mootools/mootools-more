@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Fx.Morph
-  - /Element.Position
+  - Element.Position
 
 provides: [Fx.Move]
 

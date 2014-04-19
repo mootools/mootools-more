@@ -20,12 +20,12 @@ requires:
   - Core/Element.Event
   - Core/Element.Style
   - Core/JSON
-  - /Locale
-  - /Class.Binds
-  - /Date
-  - /Element.Forms
-  - /Locale.en-US.Form.Validator
-  - /Element.Shortcuts
+  - Locale
+  - Class.Binds
+  - Date
+  - Element.Forms
+  - Locale.en-US.Form.Validator
+  - Element.Shortcuts
 
 provides: [Form.Validator, InputValidator, FormValidator.BaseValidators]
 

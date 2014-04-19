@@ -11,7 +11,7 @@ authors:
   - Michael van der Weg
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.de-CH.Form.Validator]
 

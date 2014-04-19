@@ -18,7 +18,7 @@ requires:
   - Core/Class
   - Core/Class.Extras
   - Core/Element
-  - /String.QueryString
+  - String.QueryString
 
 provides: [URI]
 

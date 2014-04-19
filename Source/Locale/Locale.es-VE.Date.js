@@ -11,8 +11,8 @@ authors:
   - Daniel Barreto
 
 requires:
-  - /Locale
-  - /Locale.es-ES.Date
+  - Locale
+  - Locale.es-ES.Date
 
 provides: [Locale.es-VE.Date]
 

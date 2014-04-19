@@ -18,7 +18,7 @@ authors:
 requires:
   - Core/Array
   - Core/String
-  - /MooTools.More
+  - MooTools.More
 
 provides: [String.QueryString]
 

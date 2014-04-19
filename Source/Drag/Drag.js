@@ -20,7 +20,7 @@ requires:
   - Core/Element.Event
   - Core/Element.Style
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Drag]
 ...

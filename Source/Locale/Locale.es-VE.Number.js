@@ -11,7 +11,7 @@ authors:
   - Daniel Barreto
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.es-VE.Number]
 

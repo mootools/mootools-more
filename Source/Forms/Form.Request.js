@@ -14,11 +14,11 @@ authors:
 
 requires:
   - Core/Request.HTML
-  - /Class.Binds
-  - /Class.Occlude
-  - /Spinner
-  - /String.QueryString
-  - /Element.Delegation
+  - Class.Binds
+  - Class.Occlude
+  - Spinner
+  - String.QueryString
+  - Element.Delegation.Pseudo
 
 provides: [Form.Request]
 

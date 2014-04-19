@@ -16,7 +16,7 @@ requires:
   - Core/Chain
   - Core/Element
   - Core/Fx
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Chain.Wait]
 

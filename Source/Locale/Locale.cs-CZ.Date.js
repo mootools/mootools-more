@@ -12,7 +12,7 @@ authors:
   - Christopher Zukowski
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.cs-CZ.Date]
 

@@ -11,7 +11,7 @@ authors:
   - Chernodarov Egor
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.ru-RU.Form.Validator]
 

@@ -12,7 +12,7 @@ authors:
   - Ãlfons Sanchez
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.ca-CA.Form.Validator]
 

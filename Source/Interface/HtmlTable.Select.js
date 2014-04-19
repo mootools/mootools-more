@@ -14,12 +14,12 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Keyboard
-  - /Keyboard.Extras
-  - /HtmlTable
-  - /Class.refactor
-  - /Element.Delegation
-  - /Element.Shortcuts
+  - Keyboard
+  - Keyboard.Extras
+  - HtmlTable
+  - Class.refactor
+  - Element.Delegation.Pseudo
+  - Element.Shortcuts
 
 provides: [HtmlTable.Select]
 

@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Fx.Morph
-  - /Drag.Move
+  - Drag.Move
 
 provides: [Sortables]
 

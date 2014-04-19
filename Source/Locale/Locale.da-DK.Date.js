@@ -12,7 +12,7 @@ authors:
   - Henrik Hansen
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.da-DK.Date]
 

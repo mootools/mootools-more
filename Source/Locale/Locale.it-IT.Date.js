@@ -12,7 +12,7 @@ authors:
   - Valerio Proietti
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.it-IT.Date]
 

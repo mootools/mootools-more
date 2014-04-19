@@ -11,8 +11,8 @@ authors:
   - Werner Mollentze
 
 requires:
-  - /Locale
-  - /Locale.ZA.Number
+  - Locale
+  - Locale.ZA.Number
 
 provides: [Locale.af-ZA.Number]
 

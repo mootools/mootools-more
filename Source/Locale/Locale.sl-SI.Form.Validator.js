@@ -11,7 +11,7 @@ authors:
   - Radovan Lozej
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.si-SI.Form.Validator]
 

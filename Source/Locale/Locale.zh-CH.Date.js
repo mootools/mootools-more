@@ -11,7 +11,7 @@ authors:
   - YMind Chan
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.zh-CH.Date]
 

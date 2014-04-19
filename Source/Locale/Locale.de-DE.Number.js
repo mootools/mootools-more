@@ -11,8 +11,8 @@ authors:
   - Christoph Pojer
 
 requires:
-  - /Locale
-  - /Locale.EU.Number
+  - Locale
+  - Locale.EU.Number
 
 provides: [Locale.de-DE.Number]
 

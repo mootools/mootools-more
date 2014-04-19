@@ -14,9 +14,9 @@ authors:
 
 requires:
   - Core/Element.Dimensions
-  - /Class.Binds
-  - /Drag
-  - /Element.Measure
+  - Class.Binds
+  - Drag
+  - Element.Measure
 
 provides: [Slider]
 
