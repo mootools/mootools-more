@@ -43,9 +43,9 @@ describe('Assets', function(){
 			var myCSS = Asset.css('base/Tests/Specs/assets/Assets.css.test.css', {
 				id: 'myStyle',
 				title: 'myStyle',
-				events: {load: function(){
+				onload: function(){
 					load(this);
-				}}
+				}
 			});
 
 			waits(500);
