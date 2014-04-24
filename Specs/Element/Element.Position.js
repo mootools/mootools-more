@@ -149,10 +149,10 @@ describe("Element.Position", function(){
 						setup(position, element, options);
 						element.inject(container);
 						options.position = 'topLeft';
-						options.minimum = {x: 10, y: 10};
+						options.minimum = {x: 15, y: 15};
 						var position = element.calculatePosition(options);
-						expect(position.top).toEqual(10);
-						expect(position.left).toEqual(10);
+						expect(position.top).toEqual(15);
+						expect(position.left).toEqual(15);
 					});
 
 					it("should return coordinates relative to a maximum x, y value when a maximum is supplied", function(){
