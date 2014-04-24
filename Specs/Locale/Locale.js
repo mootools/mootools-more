@@ -64,8 +64,8 @@ describe('Locale', function(){
 			'guten': 'tag'
 		};
 
-		Locale.define('de-DE', 'Date', obj);
-		Locale.use('de-DE');
+		Locale.define('de-fo', 'Date', obj);
+		Locale.use('de-fo');
 
 		expect(Locale.get('Date')).toEqual(obj);
 	});
@@ -75,29 +75,31 @@ describe('Locale', function(){
 			ping: 'w00fz, Stop mit Pingen'
 		});
 		Locale.use('de-DE');
-
-		expect(Locale.get('Ping') === Locale.get('Ping')).toBeFalsy();;
+		expect(Locale.get('Ping') === Locale.get('Ping')).toBeFalsy();
+		Locale.use('en-US'); // to not export this to other Specs
 	});
+});
 
-	describe('MooTools.lang 1.2 specs', function(){
+//<1.2compat>
+describe('MooTools.lang 1.2 specs', function(){
 
-		it('should return english form validator message', function(){
-			MooTools.lang.setLanguage('en-US');
-			expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
-		});
+    it('should return english form validator message', function(){
+        MooTools.lang.setLanguage('en-US');
+        expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
+    });
 
-		it('should cascade through to english', function(){
-			MooTools.lang.set('en-GB', 'cascade', ['IT', 'ESP', 'gbENG']);
-			MooTools.lang.setLanguage('en-GB');
-			expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
-		});
+    it('should cascade through to english', function(){
+        MooTools.lang.set('en-GB', 'cascade', ['IT', 'ESP', 'gbENG']);
+        MooTools.lang.setLanguage('en-GB');
+        expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
+    });
 
-		it('should return french form validator message', function(){
-			MooTools.lang.setLanguage('fr-FR');
-			expect(MooTools.lang.get('FormValidator', 'required')).toEqual('Ce champ est obligatoire.');
-		});
-
-
-	});
+    it('should return french form validator message', function(){
+        MooTools.lang.setLanguage('fr-FR');
+        expect(MooTools.lang.get('FormValidator', 'required')).toEqual('Ce champ est obligatoire.');
+        MooTools.lang.setLanguage('en-US'); // to not export this to other Specs
+    });
 
 });
+//</1.2compat>
+
