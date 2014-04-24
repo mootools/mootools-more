@@ -124,12 +124,12 @@ var Sortables = new Class({
 			});
 		}
 
-		var oP = element.getOffsetParent();
-		var position = element.getPosition(oP);
-		if (oP.getStyle('position') == 'fixed') {
-			var scroll = { w: window.getScroll(), oP: oP.getScroll()};
-			position.x += scroll.oP.x - scroll.w.x;
-			position.y += scroll.oP.y - scroll.w.y;
+		var offsetParent = element.getOffsetParent();
+		var position = element.getPosition(offsetParent);
+		if (offsetParent.getStyle('position') == 'fixed') {
+			var scroll = { w: window.getScroll(), offsetParent: offsetParent.getScroll()};
+			position.x += scroll.offsetParent.x - scroll.w.x;
+			position.y += scroll.offsetParent.y - scroll.w.y;
 		}
 
 		return clone.inject(this.list).setPosition(position);
