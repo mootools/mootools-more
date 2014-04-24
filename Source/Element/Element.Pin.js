@@ -16,7 +16,7 @@ requires:
   - Core/Element.Event
   - Core/Element.Dimensions
   - Core/Element.Style
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Element.Pin]
 

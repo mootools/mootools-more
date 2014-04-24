@@ -12,8 +12,8 @@ authors:
   - Martin Lundgren
 
 requires:
-  - /Locale
-  - /Locale.EU.Number
+  - Locale
+  - Locale.EU.Number
 
 provides: [Locale.sv-SE.Number]
 

@@ -14,8 +14,8 @@ authors:
 
 requires:
   - Core/Element.Dimensions
-  - /Fx.Elements
-  - /Element.Measure
+  - Fx.Elements
+  - Element.Measure
 
 provides: [Fx.Sort]
 

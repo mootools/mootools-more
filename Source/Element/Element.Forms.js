@@ -14,8 +14,8 @@ authors:
 
 requires:
   - Core/Element
-  - /String.Extras
-  - /MooTools.More
+  - String.Extras
+  - MooTools.More
 
 provides: [Element.Forms]
 

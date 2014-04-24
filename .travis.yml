@@ -3,4 +3,40 @@ language: node_js
 node_js:
   - 0.11
 
-script: echo "testing"
+env:
+  matrix:
+    - BROWSER='chrome_linux'    BUILD='default'
+    - BROWSER='firefox_linux'   BUILD='default'
+    - BROWSER='opera_win2000'   BUILD='default'
+    - BROWSER='safari7'         BUILD='default'
+    - BROWSER='safari6'         BUILD='default'
+    - BROWSER='safari5_osx10_6' BUILD='default'
+    - BROWSER='safari5_win7'    BUILD='default'
+    - BROWSER='ie11'            BUILD='default'
+    - BROWSER='ie10'            BUILD='default'
+    - BROWSER='ie9'             BUILD='default'
+    - BROWSER='ie8'             BUILD='default'
+    - BROWSER='ie7'             BUILD='default'
+#   - BROWSER='ie6'             BUILD='default'
+    
+    - BROWSER='chrome_linux'    BUILD='nocompat'
+    - BROWSER='firefox_linux'   BUILD='nocompat'
+    - BROWSER='opera_win2000'   BUILD='nocompat'
+    - BROWSER='safari7'         BUILD='nocompat'
+    - BROWSER='safari6'         BUILD='nocompat'
+    - BROWSER='safari5_osx10_6' BUILD='nocompat'
+    - BROWSER='safari5_win7'    BUILD='nocompat'
+    - BROWSER='ie11'            BUILD='nocompat'
+    - BROWSER='ie10'            BUILD='nocompat'
+    - BROWSER='ie9'             BUILD='nocompat'
+    - BROWSER='ie8'             BUILD='nocompat'
+    - BROWSER='ie7'             BUILD='nocompat'
+#   - BROWSER='ie6'             BUILD='nocompat'
+    
+  global:
+    - secure: JeMoJiA110e1Lz9T2VGILe1e/+XD0bjhKoT351FhdMZLJZD4OwuPrSg3+nVj5Lb4Ih8SAAnAhOiach+Ybnm/Ox1JXuqOH6dagRT5nsg2Gx3Alds1aeO43xKsJMhAg6YI8uWNCesgK5NbbDF77qubxDOElO1J6XGWccfV/jz5ZJ8=
+    - secure: QgH0vS5WM5Pqe5rxYo5QSEKOlezA6UJr6199528Lbii6TWgcEC7hi4M77DDMTJMkw80Us4AlXbEHJvPhjgd0SrnurP39x967yZRdfEntzPshMx8ye7FsyG7u4UOXKmynzhYTVO9Ehki2W8DE67x7HyUJC3Vgqe4XNb+4cMvN1+w=
+    
+before_script:
+    - npm install grunt-cli -g
+    - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash

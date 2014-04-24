@@ -12,8 +12,8 @@ authors:
   - sv1l
 
 requires:
-  - /Locale
-  - /Locale.EU.Number
+  - Locale
+  - Locale.EU.Number
 
 provides: [Locale.fr-FR.Number]
 

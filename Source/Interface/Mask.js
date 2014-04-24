@@ -16,9 +16,9 @@ requires:
   - Core/Options
   - Core/Events
   - Core/Element.Event
-  - /Class.Binds
-  - /Element.Position
-  - /IframeShim
+  - Class.Binds
+  - Element.Position
+  - IframeShim
 
 provides: [Mask]
 

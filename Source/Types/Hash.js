@@ -9,7 +9,7 @@ license: MIT-style license.
 
 requires:
   - Core/Object
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Hash]
 

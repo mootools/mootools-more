@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Events
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Group]
 

@@ -11,8 +11,8 @@ authors:
   - YMind Chan
 
 requires:
-  - /Locale
-  - /Form.Validator
+  - Locale
+  - Form.Validator
 
 provides: [Form.zh-CH.Form.Validator, Form.Validator.CurrencyYuanValidator]
 

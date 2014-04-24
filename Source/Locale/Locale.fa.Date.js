@@ -11,7 +11,7 @@ authors:
   - Amir Hossein Hodjaty Pour
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.fa.Date]
 

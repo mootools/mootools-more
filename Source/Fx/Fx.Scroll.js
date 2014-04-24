@@ -16,7 +16,7 @@ requires:
   - Core/Fx
   - Core/Element.Event
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Fx.Scroll]
 

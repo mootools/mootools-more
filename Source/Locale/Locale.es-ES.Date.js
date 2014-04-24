@@ -11,7 +11,7 @@ authors:
   - Ãlfons Sanchez
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.es-ES.Date]
 

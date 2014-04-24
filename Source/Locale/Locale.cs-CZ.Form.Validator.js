@@ -11,7 +11,7 @@ authors:
   - Jan Černý chemiX
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.cs-CZ.Form.Validator]
 

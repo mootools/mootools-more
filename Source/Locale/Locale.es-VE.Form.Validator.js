@@ -11,8 +11,8 @@ authors:
   - Daniel Barreto
 
 requires:
-  - /Locale
-  - /Locale.es-ES.Form.Validator
+  - Locale
+  - Locale.es-ES.Form.Validator
 
 provides: [Locale.es-VE.Form.Validator]
 

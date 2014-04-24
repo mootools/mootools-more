@@ -11,7 +11,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.en-US.Form.Validator]
 

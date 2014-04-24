@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Form.Validator
+  - Form.Validator
 
 provides: [Form.Validator.Extras]
 

@@ -11,7 +11,7 @@ authors:
   - Martin Overgaard
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.da-DK.Form.Validator]
 

@@ -12,8 +12,8 @@ authors:
   - Diego Massanti
 
 requires:
-  - /Locale
-  - /Locale.es-ES.Date
+  - Locale
+  - Locale.es-ES.Date
 
 provides: [Locale.es-AR.Date]
 
