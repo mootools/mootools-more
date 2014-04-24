@@ -124,9 +124,10 @@ var Sortables = new Class({
 			});
 		}
 
-		var position = element.getPosition(element.getOffsetParent());
-		if (element.getOffsetParent().getStyle('position') == 'fixed') {
-			var scroll = { w: window.getScroll(), oP: element.getOffsetParent().getScroll()};
+		var oP = element.getOffsetParent();
+		var position = element.getPosition(oP);
+		if (oP.getStyle('position') == 'fixed') {
+			var scroll = { w: window.getScroll(), oP: oP.getScroll()};
 			position.x += scroll.oP.x - scroll.w.x;
 			position.y += scroll.oP.y - scroll.w.y;
 		}
