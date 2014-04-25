@@ -65,11 +65,11 @@ var local = Element.Position = {
 	},
 
 	setOffsetOption: function(element, options){
-		var parentOffset = {x: 0, y: 0},
-		    parentScroll = {x: 0, y: 0},
-		    offsetParent = element.measure(function(){
-		      return document.id(this.getOffsetParent());
-		    });
+		var parentOffset = {x: 0, y: 0};
+		var parentScroll = {x: 0, y: 0};
+		var offsetParent = element.measure(function(){
+			return document.id(this.getOffsetParent());
+		});
 
 		if (!offsetParent || offsetParent == element.getDocument().body) return;
 
