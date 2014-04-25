@@ -11,7 +11,7 @@ You are welcome to contribute to MooTools! What we ask of you:
 a. __To report a bug:__
 
    1. Crete a [jsFiddle](http://jsfiddle.net/) with the minimal amount of code to reproduce the bug.
-   2. Create a [Github Issue](https://github.com/mootools/mootools-core/issues), and link to the jsFiddle.
+   2. Create a [Github Issue](https://github.com/mootools/mootools-more/issues), and link to the jsFiddle.
 
 b. __To fix a bug:__
 
@@ -52,8 +52,8 @@ MooTools More has 2 test suites. One interactive that needs you to click & drag 
 
 **To run the non-interactive** specs you can follow these steps in order:
 
-    $ git clone https://github.com/mootools/mootools-core  # clone the MooTools repo
-    $ cd mootools-core                                     # get into the directory
+    $ git clone https://github.com/mootools/mootools-more  # clone the MooTools repo
+    $ cd mootools-more                                     # get into the directory
     $ npm install                                          # install de testing tools
     $ npm install grunt-cli -g                             # install the Grunt command line interface
     $ grunt default                                        # run the specs!
@@ -102,44 +102,6 @@ Every new Build and Pull Request is now tested on [Travis](https://travis-ci.org
 
 [Travis](https://travis-ci.org/) testing uses [PhantomJS](http://phantomjs.org/) which is a headless browser. When connected to [Sauce Labs](https://saucelabs.com/) then it is possible to choose any number of [different Browsers and Platforms](https://saucelabs.com/platforms). You will need in this case to change the login key so it will match your account.
 
-To add new Browsers in [Sauce Labs](https://saucelabs.com/) testing you can do some changes in the __[Gruntfile.js](https://github.com/mootools/mootools-core/blob/master/Gruntfile.js)__:
-
- - add a new browser to the custom launchers already in the Gruntfile.
-
-		customLaunchers: {
-			chrome_linux: {
-				base: 'SauceLabs',
-				browserName: 'chrome',
-				platform: 'linux'
-			},
-
-
- - add the chosen browser to a task (max 3 browsers per task if you are using a free account):
-
-		sauce2: {
-			port: 9877,
-			browsers: [
-				'safari7',
-				'safari6',
-				'safari5_osx10_6'
-			],
-
-	These tasks can be chained so its possible to test more than 3 browsers on the same test. But not more than 3 paralel.
-
-__Example of a task chain:__
-(This will run [registered tasks](http://gruntjs.com/api/grunt.task)that have been defined in the steps described before.)
-
-		grunt.registerTask('default:travis', [
-			'clean',
-			'packager:all',
-			'packager:specs',
-			'karma:sauce1',
-			'karma:sauce2',
-			'karma:sauce3',
-			'karma:sauce4'
-			// 'karma:sauce5',
-			// 'karma:sauce6'
-		])
 
 #### Browsers, Platforms, and More
 
