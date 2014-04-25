@@ -282,7 +282,7 @@ describe('Date', function(){
 
 		it('should return the time zone of a Date instance', function(){
 			var d = new Date(Date.UTC(2000, 0, 1, 1, 1, 1));
-			if (global['Browser'] && Browser.ie) expect(d.get('timezone')).toEqual(new Date(Date.UTC()).get('timezone'));
+			if (Date.UTC()) expect(d.get('timezone')).toEqual(new Date(Date.UTC()).get('timezone'));
 			else expect(d.get('timezone')).toEqual('GMT');
 		});
 
@@ -459,7 +459,7 @@ describe('Date', function(){
 			expect(d.format('%Y')).toEqual('1997');
 		});
 		it('should format the timezone', function(){
-			if (global['Browser'] && Browser.ie) expect(d.format('%Z')).toEqual(new Date(Date.UTC()).get('timezone'));
+			if (Date.UTC()) expect(d.format('%Z')).toEqual(new Date(Date.UTC()).get('timezone'));
 			else expect(d.format('%Z')).toEqual('GMT');
 		});
 		it('should only replace the % when it is followd by a single a-z', function(){
@@ -484,7 +484,7 @@ describe('Date', function(){
 
 			it('should support the rfc822 shortcut', function(){
 				expect(d.format('rfc822')).toEqual(d.format('%a') + ', ' + d.format('%d') + ' ' + d.format('%b') + ' ' + d.format('%Y') + ' ' + d.format('%H') + ':' + d.format('%M') + ':' + d.format('%S') + ' ' + d.format('%Z'));
-				if (global['Browser'] && Browser.ie) expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 ' + new Date(Date.UTC()).get('timezone'));
+				if (Date.UTC()) expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 ' + new Date(Date.UTC()).get('timezone'));
 				else expect(d.format('rfc822')).toEqual('Thu, 20 Nov 1997 01:02:03 GMT');
 			});
 
