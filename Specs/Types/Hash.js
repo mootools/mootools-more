@@ -8,9 +8,9 @@ provides: [Hash.Tests]
 
 (function(){
 
-function isNumber(num){ return typeof num == 'number'; };
-function isArray(arr){ return typeOf(arr) == 'array'; };
-function $defined(obj) { return obj != null };
+function isNumber(num){ return typeof num == 'number'; }
+function isArray(arr){ return typeOf(arr) == 'array'; }
+function $defined(obj){ return obj != null; }
 
 var hash2 = new Hash({ a: 'string', b: 233, c: {} });
 
