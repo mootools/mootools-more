@@ -43,9 +43,9 @@ describe('Assets', function(){
 			var myCSS = Asset.css('base/Tests/Specs/assets/Assets.css.test.css', {
 				id: 'myStyle',
 				title: 'myStyle',
-				events: {load: function(){
+				onload: function(){
 					load(this);
-				}}
+				}
 			});
 
 			waits(500);
@@ -97,7 +97,7 @@ describe('Assets', function(){
 				onerror: error
 			});
 
-			waits(200);
+			waits(500);
 
 			runs(function(){
 				expect(load).not.toHaveBeenCalled();
@@ -141,7 +141,7 @@ describe('Assets', function(){
 				onerror: error
 			});
 
-			waits(200);
+			waits(500);
 
 			runs(function(){
 				expect(load).not.toHaveBeenCalled();
@@ -170,7 +170,7 @@ describe('Assets', function(){
 				onError: error
 			});
 
-			waits(200);
+			waits(500);
 
 			runs(function(){
 				expect(complete).toHaveBeenCalled();
@@ -196,7 +196,7 @@ describe('Assets', function(){
 				onError: error
 			});
 
-			waits(200);
+			waits(500);
 
 			runs(function(){
 				expect(complete).toHaveBeenCalled();
