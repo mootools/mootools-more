@@ -38,12 +38,12 @@ var uri;
 		beforeEach(function(){
 			uri = new URI('http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html');
 		});
-		it('new URI(\'../otherfolder\').toRelative() should return a folder up from the current location', function(){
-			expect(new URI('../otherfolder').toRelative()).toEqual('../otherfolder');
+		it('new URI(\'../base/otherfolder\').toRelative() should return a folder up from the current location', function(){
+			expect(new URI('../base/otherfolder').toRelative()).toEqual('../base/otherfolder');
 		});
 
-		it('new URI(\'../otherfolder\').toRelative(currentLocation) should return a folder up from the current location', function(){
-			expect(new URI('../otherfolder').toRelative(window.location)).toEqual('../otherfolder');
+		it('new URI(\'../base/otherfolder\').toRelative(currentLocation) should return a folder up from the current location', function(){
+			expect(new URI('../base/otherfolder').toRelative(window.location)).toEqual('../base/otherfolder');
 		});
 
 		it('URI.toRelative(string)', function(){
@@ -100,14 +100,6 @@ var uri;
 
 		it('URI.toRelative(string) to same path', function(){
 			expect(new URI('http://www.calyptus.eu').toRelative('http://www.calyptus.eu')).toEqual('./');
-		});
-
-		it('new URI(\'../otherfolder\').toRelative() should return the same as input', function(){
-			expect(new URI('../otherfolder').toRelative(window.location)).toEqual('../otherfolder');
-		});
-
-		it('new URI(\'../otherfolder\').toRelative(window.location) should return the same as input', function(){
-			expect(new URI('../otherfolder').toRelative(window.location)).toEqual('../otherfolder');
 		});
 
 	});
