@@ -27,9 +27,8 @@ __Do try to contibute!__ This is a community project.
 
 #### TO DO
 
-* Lang updates for additional timeAgoInWords phrases (see: https://mootools.lighthouseapp.com/projects/24057/tickets/79-additional-expressions-for-datetimediffinwords)
-* change the interactive specs to work w/o my dev app
-* deprecate and remove things from -More that we no longer wish to maintain (Swiff, Class.Occlude, OverText, Fx.Sort, Assets.js, Group.js, IframeShim.js - something too much, or something missing?)
+* change the interactive specs to work without the Clientcide dev app
+* deprecate and remove things from -More that are deprecated or not mantained anymore
 * add touch / mobile functionality
 * make detach method for all classes that attach to elements
 * make destroy method for all classes that create elements
