@@ -184,6 +184,7 @@ var Sortables = new Class({
 	end: function(){
 		this.drag.detach();
 		this.element.setStyle('opacity', this.opacity);
+		var self = this;
 		if (this.effect){
 			var dim = this.element.getStyles('width', 'height'),
 				clone = this.clone,
@@ -192,7 +193,7 @@ var Sortables = new Class({
 			var destroy = function(){
 				this.removeEvent('cancel', destroy);
 				clone.destroy();
-				this.reset();
+				self.reset();
 			};
 
 			this.effect.element = clone;
@@ -205,7 +206,7 @@ var Sortables = new Class({
 			}).addEvent('cancel', destroy).chain(destroy);
 		} else {
 			this.clone.destroy();
-			this.reset();
+			self.reset();
 		}
 		
 	},
