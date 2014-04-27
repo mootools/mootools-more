@@ -50,11 +50,13 @@ provides: [Element.Pin]
 				scrollFixer;
 
 			if (enable !== false){
-				pinnedPosition = this.getPosition(supportsPositionFixed ? document.body : this.getOffsetParent());
-				if (!this.retrieve('pin:_pinned')){
+				pinnedPosition = this.getPosition();
+				if (!this.retrieve('pin:_pinned')) {
 					var currentPosition = {
 						top: pinnedPosition.y - scroll.y,
-						left: pinnedPosition.x - scroll.x
+						left: pinnedPosition.x - scroll.x,
+						margin: '0px',
+						padding: '0px'
 					};
 
 					if (supportsPositionFixed && !forceScroll){
@@ -94,7 +96,7 @@ provides: [Element.Pin]
 				parent = this.getParent();
 				var offsetParent = (parent.getComputedStyle('position') != 'static' ? parent : parent.getOffsetParent());
 
-				pinnedPosition = this.getPosition(offsetParent);
+				pinnedPosition = this.getPosition();
 
 				this.store('pin:_pinned', false);
 				scrollFixer = this.retrieve('pin:_scrollFixer');
