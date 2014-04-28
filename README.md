@@ -120,4 +120,5 @@ Support:
 
 ## More Information
 
-[See the MooTools Wiki for more information](http://github.com/mootools/mootools-core/wikis)
+ - [See the MooTools Wiki for more information](http://github.com/mootools/mootools-core/wikis)
+ - [See the MooTools More changelog](https://github.com/mootools/mootools-more/blob/master/changelog.md)
