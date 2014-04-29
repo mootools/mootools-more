@@ -26,6 +26,11 @@ Available Languages
 		<th>Authors</th>
 	</tr>
 	<tr>
+		<td>Afrikaans</td>
+		<td>af-ZA</td>
+		<td>Werner Mollentze</td>
+	</tr>
+	<tr>
 		<td>Arabic</td>
 		<td>ar</td>
 		<td>Chafik Barbar</td>
@@ -43,6 +48,16 @@ Available Languages
 	<tr>
 		<td>Chinese (traditional)</td>
 		<td>zh-CHT</td>
+		<td>YMind Chan</td>
+	</tr>
+	<tr>
+		<td>Chinese (simplified)</td>
+		<td>zh-CHS</td>
+		<td>YMind Chan</td>
+	</tr>
+	<tr>
+		<td>Chinese (simplified and traditional)</td>
+		<td>zh-CH</td>
 		<td>YMind Chan</td>
 	</tr>
 	<tr>
@@ -96,6 +111,16 @@ Available Languages
 		<td>Frank Rossi, Ulrich Petri</td>
 	</tr>
 	<tr>
+		<td>Greek</td>
+		<td>el-GR</td>
+		<td>Periklis Argiriadis</td>
+	</tr>
+	<tr>
+		<td>Hebrew</td>
+		<td>he-IL</td>
+		<td>Elad Ossadon</td>
+	</tr>
+	<tr>
 		<td>Hungarian</td>
 		<td>hu-HU</td>
 		<td>Zsolt Szegheő</td>
@@ -141,6 +166,11 @@ Available Languages
 		<td>Evstigneev Pavel</td>
 	</tr>
 	<tr>
+		<td>Slovak</td>
+		<td>sk-SK</td>
+		<td>Ivan Masár</td>
+	</tr>
+	<tr>
 		<td>Slovenian</td>
 		<td>si-SI</td>
 		<td>Radovan Lozej</td>
@@ -154,6 +184,11 @@ Available Languages
 		<td>Spanish</td>
 		<td>es-ES</td>
 		<td>Ãlfons Sanchez</td>
+	</tr>
+	<tr>
+		<td>Spanish (Venezuela)</td>
+		<td>es-VE</td>
+		<td>Daniel Barreto</td>
 	</tr>
 	<tr>
 		<td>Swedish</td>
