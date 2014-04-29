@@ -11,7 +11,7 @@ authors:
   - Ivan Masár
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.sk-SK.Date]
 
