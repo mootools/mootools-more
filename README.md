@@ -10,7 +10,7 @@ You are welcome to contribute to MooTools! What we ask of you:
 
 a. __To report a bug:__
 
-   1. Crete a [jsFiddle](http://jsfiddle.net/) with the minimal amount of code to reproduce the bug.
+   1. Create a [jsFiddle](http://jsfiddle.net/) with the minimal amount of code to reproduce the bug.
    2. Create a [Github Issue](https://github.com/mootools/mootools-more/issues), and link to the jsFiddle.
 
 b. __To fix a bug:__
@@ -23,12 +23,12 @@ b. __To fix a bug:__
    6. Create Pull Request, and send Pull Request.
 
 
-__Do try to contibute!__ This is a community project.
+__Do try to contribute!__ This is a community project.
 
 #### TO DO
 
 * change the interactive specs to work without the Clientcide dev app
-* deprecate and remove things from -More that are deprecated or not mantained anymore
+* deprecate and remove things from -More that are deprecated or not maintained anymore
 * add touch / mobile functionality
 * make detach method for all classes that attach to elements
 * make destroy method for all classes that create elements
@@ -69,7 +69,7 @@ Example:
 
 If the log is too long, or if you want to store it in a file you can do:
 
-    $ grunt > logs.txt   # This will create a new file called logs.txt in the local directory
+    $ grunt > logs.txt   # This will create a new file called "logs.txt" in the local directory
 
 
 
@@ -122,3 +122,4 @@ Support:
 
  - [See the MooTools Wiki for more information](http://github.com/mootools/mootools-core/wikis)
  - [See the MooTools More changelog](https://github.com/mootools/mootools-more/blob/master/changelog.md)
+ 
