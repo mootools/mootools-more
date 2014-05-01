@@ -164,18 +164,19 @@ Fx.Accordion = new Class({
 
 		if (useFx == null) useFx = true;
 		if (typeOf(index) == 'element') index = elements.indexOf(index);
-		if (index == this.previous && !options.alwaysHide) return this;
+		if (index == this.current && !options.alwaysHide) return this;
 
 		if (options.resetHeight){
-			var prev = elements[this.previous];
+			var prev = elements[this.current];
 			if (prev && !this.selfHidden){
 				for (var fx in effects) prev.setStyle(fx, prev[effects[fx]]);
 			}
 		}
 
-		if ((this.timer && options.link == 'chain') || (index === this.previous && !options.alwaysHide)) return this;
+		if ((this.timer && options.link == 'chain') || (index === this.current && !options.alwaysHide)) return this;
 
-		this.previous = index;
+		if (this.current != null) this.previous = this.current;
+		this.current = index;
 		this.selfHidden = false;
 
 		elements.each(function(el, i){
