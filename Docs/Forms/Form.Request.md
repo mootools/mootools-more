@@ -49,7 +49,7 @@ Changes the target that the instance will update with the Request response.
 
 ### Syntax
 
-	myFormRequest.setTarget(newTarget);
+	myformUpdate.setTarget(newTarget);
 
 ### Arguments
 
@@ -66,7 +66,7 @@ Sends the form.
 
 ### Syntax
 
-	myFormRequest.send();
+	myformUpdate.send();
 
 ### Returns
 
@@ -79,7 +79,7 @@ Detaches the Form.Request from the form (disabling the ajax).
 
 ### Syntax
 
-	myFormRequest.disable();
+	myformUpdate.disable();
 
 ### Returns
 
@@ -92,7 +92,7 @@ Attaches the Form.Request to the form (enabling the ajax). Note that this is don
 
 ### Syntax
 
-	myFormRequest.enable();
+	myformUpdate.enable();
 
 ### Returns
 
@@ -103,14 +103,14 @@ Type: Element {#Element}
 
 Extends the [Element][] Type with a reference to its [Form.Request][] instance and a method to create one.
 
-Element Method: formRequest {#Element:formRequest}
+Element Method: formUpdate {#Element:formUpdate}
 -------------------------------------
 
 Creates a new instance of [Form.Request][] and calls its *send* method.
 
 ### Syntax
 
-	$(element).formRequest(update, options);
+	$(element).formUpdate(update, options);
 
 ### Arguments
 
@@ -123,7 +123,7 @@ Creates a new instance of [Form.Request][] and calls its *send* method.
 
 ### Example
 
-	$(element).formRequest($('myDiv'), { requestOptions: {useSpinner: false } });
+	$(element).formUpdate($('myDiv'), { requestOptions: {useSpinner: false } });
 
 Element property: form.request {#Element:form.request}
 ------------------------------------------------
