@@ -87,7 +87,7 @@ Calling this method alters the array; it doesn't just return a new array with th
 Array Method: sum {#Array:sum}
 -------------------------------------
 
-Sums up all values in an array.
+Sums up all values in an array, including decimal numbers in *string* format.
 
 ### Syntax
 
@@ -100,7 +100,11 @@ Sums up all values in an array.
 
 ### Returns
 
-* (*number*) a number containing the sum of all values in the given array
+* (*number*) a number containing the sum of all values in the given array.
+
+### Note
+
+This method is for numbers and will return NaN if a *non-number* is present in the array.
 
 Array Method: unique {#Array:unique}
 -------------------------------------
