@@ -33,8 +33,8 @@ Formats a number into a formatted string for display to user. It respects locali
 ### Examples
 
 	(123123123.176).format({
-		decimal: ".",
-		group: ",",
+		decimal: ",",
+		group: ".",
 		decimals: 2,
 		prefix: "&amp;#165;",
 		suffix: " (YEN)"
