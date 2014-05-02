@@ -32,7 +32,7 @@ Slider Method: constructor
 4. wheel  - (*boolean*: defaults to false) True if you want the ability to move the knob by mousewheeling.
 5. steps  - (*number*: defaults to 100) The number of steps the Slider should move/tick.
 6. mode   - (*string*: defaults to horizontal) The type of Slider can be either 'horizontal' or 'vertical' in movement.
-6. initialStep   - (*number*: defaults to 0) The step the slider will start at.
+6. initialStep   - (*number*: defaults to range minimum value, or 0 if range is not set) The step the slider will start at.
 
 ### Events
 
@@ -49,9 +49,9 @@ Fires when the Slider's value changes.
 1. step - (*number*) The current step that the Slider is on.
 
 
-#### onComplete
+#### complete
 
-Fire when you're done dragging.
+Fires when you're done dragging.
 
 ##### Signature
 
