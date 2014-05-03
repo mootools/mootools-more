@@ -14,6 +14,7 @@ authors:
 
 requires:
   - Core/Element.Dimensions
+  - Core/Number
   - Class.Binds
   - Drag
   - Element.Measure
@@ -148,7 +149,7 @@ var Slider = new Class({
 		if (!((this.range > 0) ^ (step < this.min))) step = this.min;
 		if (!((this.range > 0) ^ (step > this.max))) step = this.max;
 
-		this.step = Math.round(step);
+		this.step = (step).round(this.modulus.decimalLength);
 		if (silently) this.checkStep().setKnobPosition(this.toPosition(this.step));
 		else this.checkStep().fireEvent('tick', this.toPosition(this.step)).fireEvent('move').end();
 		return this;
@@ -159,8 +160,15 @@ var Slider = new Class({
 		this.max = Array.pick([range[1], this.options.steps]);
 		this.range = this.max - this.min;
 		this.steps = this.options.steps || this.full;
-		this.stepSize = Math.abs(this.range) / this.steps;
+		var stepSize = this.stepSize = Math.abs(this.range) / this.steps;
 		this.stepWidth = this.stepSize * this.full / Math.abs(this.range);
+		this.modulus = (function(){
+			var decimals = ((stepSize + '').split('.')[1] || []).length,
+				modulus = 1 + '';
+			while (decimals--) modulus += '0';
+			return { multiplier: parseInt(modulus), decimalLength: modulus.length - 1};
+		})();
+
 		if (range) this.set(Array.pick([pos, this.step]).limit(this.min,this.max), silently);
 		return this;
 	},
@@ -173,7 +181,7 @@ var Slider = new Class({
 
 		position = position.limit(-this.options.offset, this.full - this.options.offset);
 
-		this.step = Math.round(this.min + dir * this.toStep(position));
+		this.step = (this.min + dir * this.toStep(position)).round(this.modulus.decimalLength);
 
 		this.checkStep()
 			.fireEvent('tick', position)
@@ -193,7 +201,7 @@ var Slider = new Class({
 
 		position = position.limit(-this.options.offset, this.full -this.options.offset);
 
-		this.step = Math.round(this.min + dir * this.toStep(position));
+		this.step = (this.min + dir * this.toStep(position)).round(this.modulus.decimalLength);
 		this.checkStep();
 		this.fireEvent('move');
 	},
@@ -218,7 +226,7 @@ var Slider = new Class({
 
 	toStep: function(position){
 		var step = (position + this.options.offset) * this.stepSize / this.full * this.steps;
-		return this.options.steps ? Math.round(step -= step % this.stepSize) : step;
+		return this.options.steps ? (step - (step * this.modulus.multiplier) % (this.stepSize * this.modulus.multiplier) / this.modulus.multiplier).round(this.modulus.decimalLength) : step;
 	},
 
 	toPosition: function(step){
