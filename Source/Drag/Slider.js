@@ -126,7 +126,7 @@ var Slider = new Class({
 	setSnap: function(options){
 		if (!options) options = this.drag.options;
 		options.grid = Math.ceil(this.stepWidth);
-		options.limit[this.axis][1] = this.full;
+		options.limit[this.axis][1] = this.element[this.offset];
 		return this;
 	},
 
