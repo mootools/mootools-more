@@ -124,16 +124,16 @@ Fx.Scroll = new Class({
 				x: position.x + size.x,
 				y: position.y + size.y
 			};
-
+		
 		['x', 'y'].each(function(axis){
 			if (axes.contains(axis)){
-				if (edge[axis] > scroll[axis] + containerSize[axis]) to[axis] = edge[axis] - containerSize[axis];
-				if (position[axis] < scroll[axis]) to[axis] = position[axis];
+				if (edge[axis] > containerSize[axis]) to[axis] = (edge[axis] - containerSize[axis]) + scroll[axis];
+				else if (position[axis] < scroll[axis]) to[axis] = position[axis] + scroll[axis];
 			}
 			if (to[axis] == null) to[axis] = scroll[axis];
 			if (offset && offset[axis]) to[axis] = to[axis] + offset[axis];
 		}, this);
-
+		
 		if (to.x != scroll.x || to.y != scroll.y) this.start(to.x, to.y);
 		return this;
 	},
