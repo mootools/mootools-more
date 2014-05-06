@@ -14,6 +14,7 @@ authors:
 
 requires:
   - Core/Element.Dimensions
+  - Core/Number
   - Class.Binds
   - Drag
   - Element.Measure
@@ -31,6 +32,7 @@ var Slider = new Class({
 
 	options: {/*
 		onTick: function(intPosition){},
+		onMove: function(){},
 		onChange: function(intStep){},
 		onComplete: function(strStep){},*/
 		onTick: function(position){
@@ -50,7 +52,7 @@ var Slider = new Class({
 		options = this.options;
 		this.element = document.id(element);
 		knob = this.knob = document.id(knob);
-		this.previousChange = this.previousEnd = this.step = -1;
+		this.previousChange = this.previousEnd = this.step = options.initialStep ? options.initialStep : options.range ? options.range[0] : 0;
 
 		var limit = {},
 			modifiers = {x: false, y: false};
@@ -68,7 +70,7 @@ var Slider = new Class({
 		}
 
 		this.setSliderDimensions();
-		this.setRange(options.range);
+		this.setRange(options.range, null, true);
 
 		if (knob.getStyle('position') == 'static') knob.setStyle('position', 'relative');
 		knob.setStyle(this.property, -options.offset);
@@ -96,8 +98,8 @@ var Slider = new Class({
 		if (options.snap) this.setSnap(dragOptions);
 
 		this.drag = new Drag(knob, dragOptions);
+		if (options.initialStep != null) this.set(options.initialStep, true);
 		this.attach();
-		if (options.initialStep != null) this.set(options.initialStep);
 	},
 
 	attach: function(){
@@ -125,7 +127,7 @@ var Slider = new Class({
 	setSnap: function(options){
 		if (!options) options = this.drag.options;
 		options.grid = Math.ceil(this.stepWidth);
-		options.limit[this.axis][1] = this.full;
+		options.limit[this.axis][1] = this.element[this.offset];
 		return this;
 	},
 
@@ -143,25 +145,34 @@ var Slider = new Class({
 		return this;
 	},
 
-	set: function(step){
+	set: function(step, silently){
 		if (!((this.range > 0) ^ (step < this.min))) step = this.min;
 		if (!((this.range > 0) ^ (step > this.max))) step = this.max;
 
-		this.step = Math.round(step);
-		return this.checkStep()
-			.fireEvent('tick', this.toPosition(this.step))
-			.end();
+		this.step = (step).round(this.modulus.decimalLength);
+		if (silently) this.checkStep().setKnobPosition(this.toPosition(this.step));
+		else this.checkStep().fireEvent('tick', this.toPosition(this.step)).fireEvent('move').end();
+		return this;
 	},
 
-	setRange: function(range, pos){
+	setRange: function(range, pos, silently){
 		this.min = Array.pick([range[0], 0]);
 		this.max = Array.pick([range[1], this.options.steps]);
 		this.range = this.max - this.min;
 		this.steps = this.options.steps || this.full;
-		this.stepSize = Math.abs(this.range) / this.steps;
+		var stepSize = this.stepSize = Math.abs(this.range) / this.steps;
 		this.stepWidth = this.stepSize * this.full / Math.abs(this.range);
-		if (range) this.set(Array.pick([pos, this.step]).limit(this.min,this.max));
+        this.setModulus();
+
+		if (range) this.set(Array.pick([pos, this.step]).limit(this.min,this.max), silently);
 		return this;
+	},
+    
+	setModulus: function(){
+		var decimals = ((this.stepSize + '').split('.')[1] || []).length,
+			modulus = 1 + '';
+		while (decimals--) modulus += '0';
+		this.modulus = {multiplier: (modulus).toInt(10), decimalLength: modulus.length - 1};
 	},
 
 	clickedElement: function(event){
@@ -172,10 +183,11 @@ var Slider = new Class({
 
 		position = position.limit(-this.options.offset, this.full - this.options.offset);
 
-		this.step = Math.round(this.min + dir * this.toStep(position));
+		this.step = (this.min + dir * this.toStep(position)).round(this.modulus.decimalLength);
 
 		this.checkStep()
 			.fireEvent('tick', position)
+			.fireEvent('move')
 			.end();
 	},
 
@@ -191,8 +203,9 @@ var Slider = new Class({
 
 		position = position.limit(-this.options.offset, this.full -this.options.offset);
 
-		this.step = Math.round(this.min + dir * this.toStep(position));
+		this.step = (this.min + dir * this.toStep(position)).round(this.modulus.decimalLength);
 		this.checkStep();
+		this.fireEvent('move');
 	},
 
 	checkStep: function(){
@@ -215,11 +228,11 @@ var Slider = new Class({
 
 	toStep: function(position){
 		var step = (position + this.options.offset) * this.stepSize / this.full * this.steps;
-		return this.options.steps ? Math.round(step -= step % this.stepSize) : step;
+		return this.options.steps ? (step - (step * this.modulus.multiplier) % (this.stepSize * this.modulus.multiplier) / this.modulus.multiplier).round(this.modulus.decimalLength) : step;
 	},
 
 	toPosition: function(step){
-		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset;
+		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset || 0;
 	}
 
 });
