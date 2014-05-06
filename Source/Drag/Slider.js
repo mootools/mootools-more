@@ -162,7 +162,7 @@ var Slider = new Class({
 		this.steps = this.options.steps || this.full;
 		var stepSize = this.stepSize = Math.abs(this.range) / this.steps;
 		this.stepWidth = this.stepSize * this.full / Math.abs(this.range);
-        this.setModulus();
+		this.setModulus();
 
 		if (range) this.set(Array.pick([pos, this.step]).limit(this.min,this.max), silently);
 		return this;
