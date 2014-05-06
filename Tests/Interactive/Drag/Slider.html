@@ -41,6 +41,7 @@
 <br />
 <p>change events fired:<span id="upd5-change"></span><p>
 <p>tick events fired:<span id="upd5-tick"></span></p>
+<p>move events fired:<span id="upd5-move"></span></p>
 <p>complete events fired:<span id="upd5-complete"></span></p>
 
 <h3 class="h3_test">resizable slider</h3>
@@ -62,9 +63,38 @@
 	<div id="knob8"></div>
 </div>
 
+<!-- /* Specs 9 -13 are also present in other Specs, automated with Syn.JS, waiting for <IE9 to be dropped */ -->
+
+<h3 class="h3_test">Snap</h3>
+<p>The knob should drag to last position (30) when snap is set to true and knob is bigger than slider.</p>
+<div id="area9">
+	<div id="knob9"></div>
+</div>
+<p id="upd9">XX</p>
+
+<h3 class="h3_test">Decimal values</h3>
+<p>The knob should change in steps, and give decimal values.</p>
+<div id="area10">
+	<div id="knob10"></div>
+</div>
+<p id="upd10">XX</p>
+
+<h3 class="h3_test">Decimal values</h3>
+<p>The knob should change with no steps (steps == false), and give decimal values.</p>
+<div id="area11">
+	<div id="knob11"></div>
+</div>
+<p id="upd11">XX</p>
+
+<h3 class="h3_test">Modulus division</h3>
+<p>It should handle correct numbers with decimals, and perform correct modulus division. (Drag to the end to fire result)</p>
+<div id="area12">
+	<div id="knob12"></div>
+</div>
+<p id="upd12">XX</p>
 
 <style type="text/css" media="screen">
-	#area, #area2, #area3, #area4, #area5, #area6, #area7, #area8 {
+	#area, #area2, #area3, #area4, #area5, #area6, #area7, #area8, #area9, #area10, #area11, #area12 {
 		background: #ccc;
 		height: 20px;
 		width: 200px;
@@ -73,7 +103,7 @@
 	#area6 {
 		width: 100%;
 	}
-	#knob, #knob2, #knob3, #knob4, #knob5, #knob6, #knob7, #knob8 {
+	#knob, #knob2, #knob3, #knob4, #knob5, #knob6, #knob7, #knob8, #knob9, #knob10, #knob11, #knob12 {
 		height: 20px;
 		width: 20px;
 		background: #000;
@@ -82,6 +112,12 @@
 	}
 	#knob8 {
 		position: absolute;
+	}
+	#knob9 {
+		width: 32px;
+		height: 32px;
+		position: relative;
+		top: -6px;
 	}
 </style>
 
@@ -133,7 +169,7 @@ var mySlide4 = new Slider($('area4'), $('knob4'), {
 	}
 });
 
-var change = 0, tick = 0, complete = 0;
+var change = 0, tick = 0, move = 0, complete = 0;
 
 var mySlide5 = new Slider($('area5'), $('knob5'), {
 	onChange: function(step){
@@ -145,6 +181,10 @@ var mySlide5 = new Slider($('area5'), $('knob5'), {
 		$('upd5-tick').set('text', tick);
 		if (this.options.snap) position = this.toPosition(this.step);
 		this.knob.setStyle(this.property, position);
+	},
+	onMove: function(){
+		move++;
+		$('upd5-move').set('text', move);
 	},
 	onComplete: function(step){
 		complete++;
@@ -166,4 +206,44 @@ new Slider('area7', 'knob7', {
 });
 
 new Slider('area8', 'knob8');
+
+new Slider('area9', 'knob9', {
+	steps: 5,
+	snap: true,
+	initialStep: 5,
+	range: [5, 30],
+	onChange: function(pos){
+		$('upd9').set('html', pos);
+	}
+});
+
+new Slider('area10', 'knob10', {
+	range: [0, 10],
+	steps: 20,
+	initialStep: 0,
+	snap: true,
+	onChange: function(pos){
+		$('upd10').set('html', pos);
+	}
+});
+
+new Slider('area11', 'knob11', {
+	range: [0, 100],
+	steps: false,
+	initialStep: 0,
+	onChange: function(pos){
+		$('upd11').set('html', pos);
+	}
+});
+
+new Slider('area12', 'knob12', {
+	range: [0, 8067],
+	steps: 100,
+	initialStep: 0,
+	initialStep: 0,
+	onChange: function(pos){
+		$('upd12').set('html', pos);
+	}
+});
+
 </script>
