@@ -162,15 +162,17 @@ var Slider = new Class({
 		this.steps = this.options.steps || this.full;
 		var stepSize = this.stepSize = Math.abs(this.range) / this.steps;
 		this.stepWidth = this.stepSize * this.full / Math.abs(this.range);
-		this.modulus = (function(){
-			var decimals = ((stepSize + '').split('.')[1] || []).length,
-				modulus = 1 + '';
-			while (decimals--) modulus += '0';
-			return { multiplier: parseInt(modulus), decimalLength: modulus.length - 1};
-		})();
+        this.setModulus();
 
 		if (range) this.set(Array.pick([pos, this.step]).limit(this.min,this.max), silently);
 		return this;
+	},
+    
+	setModulus: function(){
+		var decimals = ((this.stepSize + '').split('.')[1] || []).length,
+			modulus = 1 + '';
+		while (decimals--) modulus += '0';
+		this.modulus = {multiplier: (modulus).toInt(10), decimalLength: modulus.length - 1};
 	},
 
 	clickedElement: function(event){
@@ -230,7 +232,7 @@ var Slider = new Class({
 	},
 
 	toPosition: function(step){
-		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset;
+		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset || 0;
 	}
 
 });
