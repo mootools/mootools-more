@@ -1,10 +1,20 @@
 <p>You should able to scroll properly via mousewheel for example, while resizing the red box or moving the green box.</p>
 
 <style>
+body {
+  min-height: 2000px;
+}
+
 .container {
   position: fixed;
   height: 500px;
   width: 500px;
+  overflow-y: scroll;
+}
+
+.container2 {
+  position: relative;
+  height: 700px;
   overflow-y: scroll;
 }
 
@@ -32,9 +42,11 @@
 </style>
 
 <div class="container">
-  <div id="item1">Resize me</div>
-  <div id="item2">Move me</div>
-  <div class="large"></div>
+  <div class="container2">
+    <div id="item1">Resize me</div>
+    <div id="item2">Move me</div>
+    <div class="large"></div>
+  </div>
 </div>
 
 <script src="/depender/build?require=More/Drag.Move"></script>

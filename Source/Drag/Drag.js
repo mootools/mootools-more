@@ -75,7 +75,6 @@ var Drag = new Class({
 		}
 
 		this.bound = {
-			_handleScroll: this._handleScroll.bind(this),
 			start: this.start.bind(this),
 			check: this.check.bind(this),
 			drag: this.drag.bind(this),
@@ -96,21 +95,44 @@ var Drag = new Class({
 		return this;
 	},
 
-	_handleScroll: function() {
-		var scroll = this.offsetParent.getScroll();
-		for (var z in this.options.modifiers){
-			if (!this.options.modifiers[z]) continue;
-			this.mouse.pos[z] += this.parentScroll[z] - scroll[z];
-		}
-		this.parentScroll = scroll;
-		//this.drag(new MouseEvent('mousemove', { page: this.mouse.start }));
+	_registerScrollHandler: function(el, invert) {
+		var currentScroll = el.getScroll();
+		var entry = {
+			container: el,
+			handler: (function () {
+				var scroll = el.getScroll();
+				for (var z in this.options.modifiers){
+					if (!this.options.modifiers[z]) continue;
+					var delta = currentScroll[z] - scroll[z];
+					if (invert)
+						delta = -delta;
+					this.mouse.pos[z] += delta;
+				}
+				currentScroll = scroll;
+				//this.drag(new MouseEvent('mousemove', { page: this.mouse.start }));
+			}).bind(this)
+		};
+
+		this.offsetParents.push(entry);
+		el.addEvent('scroll', entry.handler);
+	},
+
+	_addScrollHandlers: function(el) {
+		this._registerScrollHandler(window, true);
+		for (var par = el.getOffsetParent(); par; par = par.getOffsetParent())
+			this._registerScrollHandler(par, false);
+	},
+
+	_removeScrollHandlers: function() {
+		this.offsetParents.each(function (entry) {
+			entry.container.removeEvent('scroll', entry.handler);
+		});
 	},
 
 	start: function(event){
 		var options = this.options;
-		this.offsetParent = this.element.getOffsetParent();
-		this.parentScroll = this.offsetParent.getScroll();
-		this.offsetParent.addEvent('scroll', this.bound._handleScroll);
+		this.offsetParents = [];
+		this._addScrollHandlers(this.element);
 
 		if (event.rightClick) return;
 
@@ -224,10 +246,7 @@ var Drag = new Class({
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
-		if (this.offsetParent) {
-			this.offsetParent.removeEvent('scroll', this.bound._handleScroll);
-			this.offsetParent = null;
-		}
+		this._removeScrollHandlers();
 		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
