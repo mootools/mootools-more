@@ -136,7 +136,7 @@ var URI = this.URI = new Class({
 			data[arguments[0]] = arguments[1];
 			values = data;
 		} else if (merge){
-			values = Object.merge(this.getData(), values);
+			values = Object.merge(this.getData(null, part), values);
 		}
 		return this.set(part || 'query', Object.toQueryString(values));
 	},

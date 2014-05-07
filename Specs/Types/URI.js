@@ -128,4 +128,39 @@ provides: [URI.Tests]
 
 	});
 
+	describe("URI merging", function () {
+
+		var myURI;
+		beforeEach(function () {
+			myURI = new URI('http://user:password@www.test.com:8383/the/path.html?param=value&animal=cat#car=ferrari');
+		});
+
+		it("should retrieve the 'fragment' part", function () {
+			expect(myURI.get('fragment')).toEqual('car=ferrari');
+		});
+
+		it("should insert new data into 'fragment'", function () {
+			console.log(myURI.toString());
+			myURI.setData({
+				color: 'blue'
+			}, true, 'fragment')
+			console.log(myURI.toString());
+			expect(myURI.get('fragment')).toEqual('car=ferrari&color=blue');
+		});
+
+		it("should merge values from setData into URI overriding old keys with new value", function () {
+
+			var inicialQuery = myURI.get('query');
+			expect(inicialQuery).toEqual('param=value&animal=cat');
+
+			myURI.setData({
+				foo: 'bar',
+				animal: 'dog'
+			}, true);
+			var finalQuery = myURI.get('query');
+			expect(finalQuery).toEqual('param=value&animal=dog&foo=bar');
+
+		});
+	});
+
 })();
