@@ -140,11 +140,9 @@ provides: [URI.Tests]
 		});
 
 		it("should insert new data into 'fragment'", function () {
-			console.log(myURI.toString());
 			myURI.setData({
 				color: 'blue'
 			}, true, 'fragment')
-			console.log(myURI.toString());
 			expect(myURI.get('fragment')).toEqual('car=ferrari&color=blue');
 		});
 
