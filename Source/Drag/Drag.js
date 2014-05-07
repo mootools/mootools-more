@@ -75,6 +75,7 @@ var Drag = new Class({
 		}
 
 		this.bound = {
+			_handleScroll: this._handleScroll.bind(this),
 			start: this.start.bind(this),
 			check: this.check.bind(this),
 			drag: this.drag.bind(this),
@@ -95,8 +96,21 @@ var Drag = new Class({
 		return this;
 	},
 
+	_handleScroll: function() {
+		var scroll = this.offsetParent.getScroll();
+		for (var z in this.options.modifiers){
+			if (!this.options.modifiers[z]) continue;
+			this.mouse.pos[z] += this.parentScroll[z] - scroll[z];
+		}
+		this.parentScroll = scroll;
+		//this.drag(new MouseEvent('mousemove', { page: this.mouse.start }));
+	},
+
 	start: function(event){
 		var options = this.options;
+		this.offsetParent = this.element.getOffsetParent();
+		this.parentScroll = this.offsetParent.getScroll();
+		this.offsetParent.addEvent('scroll', this.bound._handleScroll);
 
 		if (event.rightClick) return;
 
@@ -117,7 +131,7 @@ var Drag = new Class({
 
 			// Some browsers (IE and Opera) don't always return pixels.
 			if (style && !style.match(/px$/)){
-				if (!coordinates) coordinates = this.element.getCoordinates(this.element.getOffsetParent());
+				if (!coordinates) coordinates = this.element.getCoordinates(this.offsetParent);
 				style = coordinates[options.modifiers[z]];
 			}
 
@@ -210,6 +224,10 @@ var Drag = new Class({
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
+		if (this.offsetParent) {
+			this.offsetParent.removeEvent('scroll', this.bound._handleScroll);
+			this.offsetParent = null;
+		}
 		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
