@@ -131,14 +131,15 @@ var URI = this.URI = new Class({
 	},
 
 	setData: function(values, merge, part){
+		part = part || 'query';
 		if (typeof values == 'string'){
-			var data = this.getData();
+			var data = this.getData(undefined, part);
 			data[arguments[0]] = arguments[1];
 			values = data;
 		} else if (merge){
-			values = Object.merge(this.getData(), values);
+			values = Object.merge(this.getData(undefined, part), values);
 		}
-		return this.set(part || 'query', Object.toQueryString(values));
+		return this.set(part, Object.toQueryString(values));
 	},
 
 	clearData: function(part){
