@@ -12,8 +12,6 @@ copyright: "&copy; [MooTools](http://mootools.net)"
 
 authors: "[The MooTools development team](http://mootools.net/developers)"
 
-version: "1.3-wip"
-
 sources:
   - "Source/More/More.js"
   - "Source/Class/Events.Pseudos.js"
