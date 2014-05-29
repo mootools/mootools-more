@@ -23,6 +23,32 @@ describe('Form.Validator', function(){
 			var element = new Element('input').setProperty('validatorProps', '{minLength: 10, maxLength:20}');
 			expect(element.get('validatorProps')).toEqual({minLength: 10, maxLength: 20});
 		});
+        
+		it('should get the properties in the class attribute from a new added Validator', function (){
+
+			var prop;
+			Form.Validator.add('validate-string-fail', {
+				errorMsg: function (element, props){
+					return Form.Validator.getMsg('required');
+				},
+				test: function (element, props){
+					prop = props.mooCustom;
+					return false;
+				}
+			});
+
+			var form = new Element('form').adopt(
+			new Element('input', {
+				'type': 'text',
+				'name': 'foo',
+				'class': "validate-string-fail mooCustom:'Hello-World!'"
+			})).inject($(document.body));
+
+			new Form.Validator.Inline(form);
+			form.validate();
+			expect(prop).toEqual('Hello-World!');
+			form.dispose();
+		});
 
 	});
 
