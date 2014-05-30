@@ -47,6 +47,7 @@ var Drag = new Class({
 		invert: false,
 		preventDefault: false,
 		stopPropagation: false,
+		compensateScroll: true,
 		modifiers: {x: 'left', y: 'top'}
 	},
 
@@ -68,6 +69,12 @@ var Drag = new Class({
 
 		this.selection = 'selectstart' in document ? 'selectstart' : 'mousedown';
 
+		this.compensateScroll = {'start': document.id(this.element.getOffsetParent()).getScroll(), dragging: false};
+		this.element.getOffsetParent().addEvent('scroll', function(){
+			if (!this.options.compensateScroll || !this.compensateScroll.dragging) return;
+			var correction = this.handleScroll.call(this);
+			this.render.apply(this, [this.options, correction]);
+		}.bind(this));
 
 		if ('ondragstart' in document && !('FileReader' in window) && !Drag.ondragstartFixed){
 			document.ondragstart = Function.from(false);
@@ -103,7 +110,8 @@ var Drag = new Class({
 		if (options.preventDefault) event.preventDefault();
 		if (options.stopPropagation) event.stopPropagation();
 		this.mouse.start = event.page;
-
+		this.compensateScroll.dragging = true;
+		this.compensateScroll.start = document.id(this.element.getOffsetParent()).getScroll();
 		this.fireEvent('beforeStart', this.element);
 
 		var limit = options.limit;
@@ -163,15 +171,29 @@ var Drag = new Class({
 		}
 	},
 
+	handleScroll: function(){
+		var scrollDiff = document.id(this.element.getOffsetParent()).getScroll();
+		for (var z in scrollDiff){
+			scrollDiff[z] = scrollDiff[z] - this.compensateScroll.start[z];
+		}
+		return scrollDiff;
+	},
+
 	drag: function(event){
 		var options = this.options;
+		var scrollDiff = options.compensateScroll ? this.handleScroll() : {x: 0, y: 0};
 
 		if (options.preventDefault) event.preventDefault();
 		this.mouse.now = event.page;
 
+		this.render.apply(this, [options, scrollDiff]);
+		this.fireEvent('drag', [this.element, event]);
+	},  
+	
+	render: function(options, scrollDiff){
 		for (var z in options.modifiers){
 			if (!options.modifiers[z]) continue;
-			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z];
+			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z] + (scrollDiff[z] || 0);
 
 			if (options.invert) this.value.now[z] *= -1;
 
@@ -188,8 +210,6 @@ var Drag = new Class({
 			if (options.style) this.element.setStyle(options.modifiers[z], this.value.now[z] + options.unit);
 			else this.element[options.modifiers[z]] = this.value.now[z];
 		}
-
-		this.fireEvent('drag', [this.element, event]);
 	},
 
 	cancel: function(event){
@@ -208,6 +228,7 @@ var Drag = new Class({
 			mousemove: this.bound.drag,
 			mouseup: this.bound.stop
 		};
+		this.compensateScroll.dragging = false;
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
 		if (event) this.fireEvent('complete', [this.element, event]);
