@@ -92,7 +92,8 @@ Drag.Move = new Class({
 			elementBorder = {},
 			containerMargin = {},
 			containerBorder = {},
-			offsetParentPadding = {};
+			offsetParentPadding = {},
+			offsetScroll = offsetParent.getScroll();
 
 		['top', 'right', 'bottom', 'left'].each(function(pad){
 			elementMargin[pad] = element.getStyle('margin-' + pad).toInt();
@@ -104,10 +105,10 @@ Drag.Move = new Class({
 
 		var width = element.offsetWidth + elementMargin.left + elementMargin.right,
 			height = element.offsetHeight + elementMargin.top + elementMargin.bottom,
-			left = 0,
-			top = 0,
-			right = containerCoordinates.right - containerBorder.right - width,
-			bottom = containerCoordinates.bottom - containerBorder.bottom - height;
+			left = 0 + offsetScroll.x,
+			top = 0 + offsetScroll.y,
+			right = containerCoordinates.right - containerBorder.right - width + offsetScroll.x,
+			bottom = containerCoordinates.bottom - containerBorder.bottom - height + offsetScroll.y;
 
 		if (this.options.includeMargins){
 			left += elementMargin.left;
