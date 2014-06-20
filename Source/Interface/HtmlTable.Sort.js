@@ -320,7 +320,7 @@ HtmlTable.Parsers = {
 	'float': {
 		match: /^[\d]+\.[\d]+/,
 		convert: function(){
-			return this.get('text').replace(/[^-?^\d.]/, '').stripTags().toFloat();
+			return this.get('text').replace(/[^-?^\d.e]/, '').stripTags().toFloat();
 		},
 		number: true
 	},
