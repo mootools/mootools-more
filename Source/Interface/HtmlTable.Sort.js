@@ -292,7 +292,7 @@ HtmlTable.Parsers = {
 		type: 'date'
 	},
 	'input-checked': {
-		match: / type="(radio|checkbox)" /,
+		match: / type="(radio|checkbox)"/,
 		convert: function(){
 			return this.getElement('input').checked;
 		}
