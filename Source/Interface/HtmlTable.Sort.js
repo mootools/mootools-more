@@ -292,7 +292,7 @@ HtmlTable.Parsers = {
 		type: 'date'
 	},
 	'input-checked': {
-		match: / type="(radio|checkbox)" /,
+		match: / type="(radio|checkbox)"/,
 		convert: function(){
 			return this.getElement('input').checked;
 		}
@@ -320,7 +320,7 @@ HtmlTable.Parsers = {
 	'float': {
 		match: /^[\d]+\.[\d]+/,
 		convert: function(){
-			return this.get('text').replace(/[^-?^\d.]/, '').stripTags().toFloat();
+			return this.get('text').replace(/[^-?^\d.e]/, '').stripTags().toFloat();
 		},
 		number: true
 	},
