@@ -160,6 +160,28 @@ describe('HtmlTable.Sort', function(){
 			expect(table.serialize()).toEqual({sortIndex: 0, sortReverse: false});
 		});
 
+		it('should allow a custom sort function', function(){
+			var table = new HtmlTable({
+				sortable: true,
+				headers: ['col'],
+				rows: [
+					['cccc'],
+					['bb'],
+					['aaa']
+				]
+			});
+
+			function customSort(a, b) { // sort by length of string
+				return a.value.length > b.value.length ? 1: -1;
+			}
+
+			table.sort(0, false, false, customSort);
+			var values = Array.map(table.body.rows, function(item){
+				return item.cells[0].get('text');
+			});
+			expect(values).toEqual(["bb", "aaa", "cccc"]);
+		});
+
 		it('should restore the sorted state of a table', function(){
 			var table = new HtmlTable({
 				sortable: true,

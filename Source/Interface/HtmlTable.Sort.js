@@ -207,7 +207,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return typeOf(parser) == 'string' ? HtmlTable.Parsers[parser] : parser;
 	},
 
-	sort: function(index, reverse, pre){
+	sort: function(index, reverse, pre, sortFunction){
 		if (!this.head) return;
 
 		if (!pre){
@@ -225,7 +225,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			this.body.dispose();
 		}
 
-		var data = this.parseData(parser).sort(function(a, b){
+		var data = this.parseData(parser).sort(sortFunction ? sortFunction : function(a, b){
 			if (a.value === b.value) return 0;
 			return a.value > b.value ? 1 : -1;
 		});
