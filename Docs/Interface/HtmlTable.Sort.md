@@ -54,14 +54,14 @@ Sorts a column.
 
 ### Syntax
 
-	myHtmlTable.sort(index, reverse, prepare[, function]);
+	myHtmlTable.sort(index, reverse, prepare[, sort]);
 
 ### Arguments
 
 1. index - (*number*) the index of the column to sort
 2. reverse - (*boolean*) reverses the sort if *true*; defaults to *false*
 3. prepare - (*boolean*) if the sort has a secondary sort, set this value to *true* on the first sort, and *false* on the second. For example, if you sorted a directory list of files first by type and then secondly by file size, you would sort on type and pass *true* and then sort on size and pass *false*.
-4. function - (*function*, optional) this custom function will be used to sort the column. The parameters passed to _sort_ are objects with *position* and *value*.
+4. sort - (*function*, optional) this custom function will be used to sort the column. The parameters passed to _sort_ are objects with *position* and *value*.
 
 ### Returns
 
