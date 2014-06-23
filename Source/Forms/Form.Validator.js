@@ -455,13 +455,15 @@ Form.Validator.addAllThese([
 				value = element.get('value'),
 				wordsInValue = value.match(/[a-z]+/gi);
 
-				if (wordsInValue && !wordsInValue.every(dateNouns.exec, dateNouns)) return false;
+			if (wordsInValue && !wordsInValue.every(dateNouns.exec, dateNouns)) return false;
 
-				var date = Date.parse(value),
-					format = props.dateFormat || '%x',
-					formatted = date.format(format);
-				if (formatted != 'invalid date') element.set('value', formatted);
-				return date.isValid();
+			var date = Date.parse(value);
+			if (!date) return false;
+
+			var format = props.dateFormat || '%x',
+				formatted = date.format(format);
+			if (formatted != 'invalid date') element.set('value', formatted);
+			return date.isValid();
 		}
 	}],
 

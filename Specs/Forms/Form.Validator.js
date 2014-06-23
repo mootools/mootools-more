@@ -314,6 +314,10 @@ describe('Form.Validator', function(){
 				expect(validator.test(createInput('Boo 12'))).toEqual(false);
 			});
 
+			it('should return false, instead of Type Error, when passed a empty string', function(){
+				expect(validator.test(createInput('    '))).toBeFalsy()
+			});
+
 			it('should return true for fields whose value parses to a date', function(){
 				expect(validator.test(createInput('Nov 12'))).toEqual(true);
 				expect(validator.test(createInput('10-10-2000'))).toEqual(true);
