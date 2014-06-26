@@ -1,0 +1,36 @@
+<style type="text/css">
+#test {
+	font-family: Verdana, Arial;
+	color: #fff;
+	background: lime;
+	height: 100px;
+	padding: 10px;
+	cursor: pointer;
+	margin:10px
+}
+</style>
+
+<div id="test">
+	This box will grow and shrink.
+</div>
+
+<script src="/depender/build?require=More/Fx.Morph.CSS3"></script>
+<script type="text/javascript">
+
+var fx = new Fx.Morph.CSS3('test', {
+	duration: 605,
+	transition: 'quint:in'
+});
+
+var to = 100;
+makeActions([
+	{
+		title: "Grow and Shrink the box",
+		fn: function(){
+			fx.start({'height' : [200, (to == 100 ? 300 : 100)],
+				'width' : [200, (to == 100 ? (to = 300) : (to = 100))]});
+		}
+	}
+]);
+	
+</script>
