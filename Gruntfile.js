@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 
 			options: {
 				name: {
-					More: null, 
+					More: 'Source/', 
 					Core: 'node_modules/mootools-core/'
 				}
 			},
