@@ -1,0 +1,27 @@
+<style>
+#container {
+		width: 200px;
+		height: 200px;
+		background: red;
+		margin: 20px;
+}
+
+#drag {
+		width: 31px;
+		height: 31px;
+		background: blue;
+		position: relative;
+}
+</style>
+<p>you should be able to drag the colored box around. The box should stay within his parent.</p>
+<div class="content">
+	<div id="container"><div id="drag"></div></div>
+</div>
+<script src="/depender/build?require=More/Drag.Move"></script>
+<script>
+
+new Drag.Move('drag', {
+		container: 'container',
+		includeMargins:false
+});
+</script>

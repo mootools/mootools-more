@@ -189,8 +189,8 @@ Inserts a value at the cursor location; if text is selected, it replaces this te
 	$('myInput').insertAtCursor("<br />");
 	$('myInput').insertAtCursor("type something here", true);
 
-Element Method: insertAroundCursor
-----------------------------------
+Element Method: insertAroundCursor {#Element:insertAroundCursor}
+----------------------------------------------------------------
 
 Inserts two strings around the selected text.
 

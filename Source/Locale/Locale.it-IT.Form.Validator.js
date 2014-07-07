@@ -12,7 +12,7 @@ authors:
   - Andrea Novero
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.it-IT.Form.Validator]
 
@@ -46,7 +46,7 @@ Locale.define('it-IT', 'FormValidator', {
 	match: 'Il valore deve corrispondere al campo {matchName}',
 	startDate: "data d'inizio",
 	endDate: 'data di fine',
-	currendDate: 'data attuale',
+	currentDate: 'data attuale',
 	afterDate: 'La data deve corrispondere o essere successiva al {label}.',
 	beforeDate: 'La data deve corrispondere o essere precedente al {label}.',
 	startMonth: "Selezionare un mese d'inizio",

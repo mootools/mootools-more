@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Element.Event
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Assets]
 

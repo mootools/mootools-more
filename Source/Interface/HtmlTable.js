@@ -15,7 +15,7 @@ authors:
 requires:
   - Core/Options
   - Core/Events
-  - /Class.Occlude
+  - Class.Occlude
 
 provides: [HtmlTable]
 
@@ -110,10 +110,10 @@ var HtmlTable = new Class({
 
 		row.each(function(data, index){
 			var td = tds[index] || new Element(tag || 'td').inject(tr),
-				content = (data ? data.content : '') || data,
+				content = ((data && Object.prototype.hasOwnProperty.call(data, 'content')) ? data.content : '') || data,
 				type = typeOf(content);
 
-			if (data && data.properties) td.set(data.properties);
+			if (data && Object.prototype.hasOwnProperty.call(data, 'properties')) td.set(data.properties);
 			if (/(element(s?)|array|collection)/.test(type)) td.empty().adopt(content);
 			else td.set('html', content);
 

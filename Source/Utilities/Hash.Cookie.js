@@ -16,8 +16,8 @@ authors:
 requires:
   - Core/Cookie
   - Core/JSON
-  - /MooTools.More
-  - /Hash
+  - MooTools.More
+  - Hash
 
 provides: [Hash.Cookie]
 

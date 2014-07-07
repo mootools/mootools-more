@@ -12,7 +12,7 @@ authors:
   - Nicolas Sorosac
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.fr-FR.Form.Validator]
 
@@ -32,9 +32,9 @@ Locale.define('fr-FR', 'FormValidator', {
 	alphanum: 'Veuillez saisir uniquement des lettres (a-z) ou des chiffres (0-9) dans ce champ. Les espaces ou autres caract&egrave;res ne sont pas autoris&eacute;s.',
 	dateSuchAs: 'Veuillez saisir une date correcte comme {date}',
 	dateInFormatMDY: 'Veuillez saisir une date correcte, au format JJ/MM/AAAA (ex : "31/11/1999").',
-	email: 'Veuillez saisir une adresse de courrier &eacute;lectronique. Par example "fred@domaine.com".',
-	url: 'Veuillez saisir une URL, comme http://www.example.com.',
-	currencyDollar: 'Veuillez saisir une quantit&eacute; correcte. Par example 100,00&euro;.',
+	email: 'Veuillez saisir une adresse de courrier &eacute;lectronique. Par exemple "fred@domaine.com".',
+	url: 'Veuillez saisir une URL, comme http://www.exemple.com.',
+	currencyDollar: 'Veuillez saisir une quantit&eacute; correcte. Par exemple 100,00&euro;.',
 	oneRequired: 'Veuillez s&eacute;lectionner au moins une de ces options.',
 	errorPrefix: 'Erreur : ',
 	warningPrefix: 'Attention : ',
@@ -47,7 +47,7 @@ Locale.define('fr-FR', 'FormValidator', {
 	match: 'Ce champ doit correspondre avec le champ {matchName}.',
 	startDate: 'date de d&eacute;but',
 	endDate: 'date de fin',
-	currendDate: 'date actuelle',
+	currentDate: 'date actuelle',
 	afterDate: 'La date doit &ecirc;tre identique ou post&eacute;rieure &agrave; {label}.',
 	beforeDate: 'La date doit &ecirc;tre identique ou ant&eacute;rieure &agrave; {label}.',
 	startMonth: 'Veuillez s&eacute;lectionner un mois de d&eacute;but.',

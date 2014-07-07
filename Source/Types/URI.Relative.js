@@ -14,8 +14,8 @@ authors:
 
 
 requires:
-  - /Class.refactor
-  - /URI
+  - Class.refactor
+  - URI
 
 provides: [URI.Relative]
 

@@ -11,7 +11,7 @@ authors:
   - Chafik Barbar
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.ar.Form.Validator]
 

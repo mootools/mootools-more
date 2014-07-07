@@ -12,7 +12,7 @@ authors:
   - Kuryanovich Egor
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.ru-RU.Date]
 
@@ -69,7 +69,7 @@ Locale.define('ru-RU', 'Date', {
 	weekAgo: 'неделю назад',
 	weeksAgo: function(delta){ return '{delta} ' + pluralize(delta, 'неделя', 'недели', 'недель') + ' назад'; },
 	monthAgo: 'месяц назад',
-	monthsAgo: function(delta){ return '{delta} ' + pluralize(delta, 'месяц', 'месяца', 'месецев') + ' назад'; },
+	monthsAgo: function(delta){ return '{delta} ' + pluralize(delta, 'месяц', 'месяца', 'месяцев') + ' назад'; },
 	yearAgo: 'год назад',
 	yearsAgo: function(delta){ return '{delta} ' + pluralize(delta, 'год', 'года', 'лет') + ' назад'; },
 
@@ -83,7 +83,7 @@ Locale.define('ru-RU', 'Date', {
 	weekUntil: 'через неделю',
 	weeksUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'неделю', 'недели', 'недель') + ''; },
 	monthUntil: 'через месяц',
-	monthsUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'месяц', 'месяца', 'месецев') + ''; },
+	monthsUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'месяц', 'месяца', 'месяцев') + ''; },
 	yearUntil: 'через',
 	yearsUntil: function(delta){ return 'через {delta} ' + pluralize(delta, 'год', 'года', 'лет') + ''; }
 

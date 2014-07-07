@@ -1,0 +1,63 @@
+<style>
+.toolbar {
+    position: fixed;
+    background-color: #ddd;
+    right: 0;
+    height: 300px;
+    width: 200px;
+    overflow-y: scroll;
+}
+.toolbarcontainer {
+    height: 2000px;
+}
+.number {
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    background-color: #ccc;
+    color: #222;
+    border: 2px solid #eee;
+    text-align: center;
+}
+</style>
+
+<p>
+	You should be able to drag & sort each number, and the position of the dragged number should have as starting point the position of the number dragged from.
+</p>
+
+<div class="toolbarcontainer">
+    <div class="toolbar" id="toolbar">Toolbar
+        <div class="number"><span>1</span>
+        </div>
+        <div class="number"><span>2</span>
+        </div>
+        <div class="number"><span>3</span>
+        </div>
+        <div class="number"><span>4</span>
+        </div>
+        <div class="number"><span>5</span>
+        </div>
+        <div class="number"><span>6</span>
+        </div>
+        <div class="number"><span>7</span>
+        </div>
+        <div class="number"><span>8</span>
+        </div>
+        <div class="number"><span>9</span>
+        </div>
+        <div class="number"><span>10</span>
+        </div>
+    </div>
+</div>
+
+<script src="/depender/build?require=More/Sortables"></script>
+<script>
+
+var srt = new Sortables(null, {
+    clone: true
+});
+srt.addItems($$('.number'));
+
+</script>

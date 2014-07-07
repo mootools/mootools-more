@@ -16,9 +16,9 @@ requires:
   - Core/Options
   - Core/Events
   - Core/Element.Event
-  - /Class.Binds
-  - /Element.Position
-  - /IframeShim
+  - Class.Binds
+  - Element.Position
+  - IframeShim
 
 provides: [Mask]
 
@@ -81,7 +81,7 @@ var Mask = new Class({
 	},
 
 	inject: function(target, where){
-		where = where || (this.options.inject ? this.options.inject.where : '') || this.target == document.body ? 'inside' : 'after';
+		where = where || (this.options.inject ? this.options.inject.where : '') || (this.target == document.body ? 'inside' : 'after');
 		target = target || (this.options.inject && this.options.inject.target) || this.target;
 
 		this.element.inject(target, where);

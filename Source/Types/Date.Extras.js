@@ -14,7 +14,7 @@ authors:
   - Scott Kyle
 
 requires:
-  - /Date
+  - Date
 
 provides: [Date.Extras]
 

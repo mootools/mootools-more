@@ -11,7 +11,7 @@ authors:
   - Arian Stolwijk
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.en-US.Number]
 

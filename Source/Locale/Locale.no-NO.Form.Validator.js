@@ -11,7 +11,7 @@ authors:
   - Espen 'Rexxars' Hovlandsdal
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.no-NO.Form.Validator]
 

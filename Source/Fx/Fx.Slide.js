@@ -15,7 +15,7 @@ authors:
 requires:
   - Core/Fx
   - Core/Element.Style
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Fx.Slide]
 

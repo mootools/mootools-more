@@ -11,8 +11,8 @@ authors:
   - Arian Stolwijk
 
 requires:
-  - /Locale
-  - /Locale.EU.Number
+  - Locale
+  - Locale.EU.Number
 
 provides: [Locale.nl-NL.Number]
 

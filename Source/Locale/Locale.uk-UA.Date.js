@@ -11,7 +11,7 @@ authors:
   - Slik
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.uk-UA.Date]
 

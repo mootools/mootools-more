@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Fx.Morph
-  - /Drag.Move
+  - Drag.Move
 
 provides: [Sortables]
 
@@ -104,6 +104,24 @@ var Sortables = new Class({
 			return list;
 		}, this));
 	},
+    
+	getDroppableCoordinates: function (element){
+		var offsetParent = element.getOffsetParent();
+		var position = element.getPosition(offsetParent);
+		var scroll = {
+			w: window.getScroll(),
+			offsetParent: offsetParent.getScroll()
+		};
+		position.x += scroll.offsetParent.x;
+		position.y += scroll.offsetParent.y;
+
+		if (offsetParent.getStyle('position') == 'fixed'){
+			position.x -= scroll.w.x;
+			position.y -= scroll.w.y;
+		}
+
+        return position;
+	},
 
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element(element.tagName).inject(document.body);
@@ -124,7 +142,7 @@ var Sortables = new Class({
 			});
 		}
 
-		return clone.inject(this.list).setPosition(element.getPosition(element.getOffsetParent()));
+		return clone.inject(this.list).setPosition(this.getDroppableCoordinates(this.element));
 	},
 
 	getDroppables: function(){
@@ -149,7 +167,7 @@ var Sortables = new Class({
 		if (
 			!this.idle ||
 			event.rightClick ||
-			this.options.unDraggableTags.contains(event.target.get('tag'))
+			(!this.options.handle && this.options.unDraggableTags.contains(event.target.get('tag')))
 		) return;
 
 		this.idle = false;
@@ -184,14 +202,16 @@ var Sortables = new Class({
 	end: function(){
 		this.drag.detach();
 		this.element.setStyle('opacity', this.opacity);
+		var self = this;
 		if (this.effect){
 			var dim = this.element.getStyles('width', 'height'),
 				clone = this.clone,
-				pos = clone.computePosition(this.element.getPosition(this.clone.getOffsetParent()));
+				pos = clone.computePosition(this.getDroppableCoordinates(clone));
 
 			var destroy = function(){
 				this.removeEvent('cancel', destroy);
 				clone.destroy();
+				self.reset();
 			};
 
 			this.effect.element = clone;
@@ -204,8 +224,9 @@ var Sortables = new Class({
 			}).addEvent('cancel', destroy).chain(destroy);
 		} else {
 			this.clone.destroy();
+			self.reset();
 		}
-		this.reset();
+		
 	},
 
 	reset: function(){

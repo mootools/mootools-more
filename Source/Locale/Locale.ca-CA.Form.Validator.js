@@ -12,7 +12,7 @@ authors:
   - Ãlfons Sanchez
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.ca-CA.Form.Validator]
 
@@ -46,7 +46,7 @@ Locale.define('ca-CA', 'FormValidator', {
 	match: 'Aquest camp necessita coincidir amb el camp {matchName}',
 	startDate: 'la data de inici',
 	endDate: 'la data de fi',
-	currendDate: 'la data actual',
+	currentDate: 'la data actual',
 	afterDate: 'La data deu ser igual o posterior a {label}.',
 	beforeDate: 'La data deu ser igual o anterior a {label}.',
 	startMonth: 'Per favor selecciona un mes d´orige',

@@ -14,9 +14,9 @@ authors:
   - Aaron Newton
 
 requires:
-  - /HtmlTable
-  - /Element.Shortcuts
-  - /Class.refactor
+  - HtmlTable
+  - Element.Shortcuts
+  - Class.refactor
 
 provides: [HtmlTable.Zebra]
 

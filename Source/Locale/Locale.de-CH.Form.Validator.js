@@ -11,7 +11,7 @@ authors:
   - Michael van der Weg
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.de-CH.Form.Validator]
 
@@ -45,7 +45,7 @@ Locale.define('de-CH', 'FormValidator', {
 	match: 'Dieses Eingabefeld muss mit dem Feld {matchName} &uuml;bereinstimmen.',
 	startDate: 'Das Anfangsdatum',
 	endDate: 'Das Enddatum',
-	currendDate: 'Das aktuelle Datum',
+	currentDate: 'Das aktuelle Datum',
 	afterDate: 'Das Datum sollte zur gleichen Zeit oder sp&auml;ter sein {label}.',
 	beforeDate: 'Das Datum sollte zur gleichen Zeit oder fr&uuml;her sein {label}.',
 	startMonth: 'W&auml;hlen Sie bitte einen Anfangsmonat',

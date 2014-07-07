@@ -23,7 +23,7 @@ Scroller Method: constructor
 
 ### Arguments
 
-1. element - (*element*) The element to scroll.
+1. element - (*mixed*) The element to scroll, or it's id.
 2. options - (*object*, optional) An object for the Scroller instance's options.
 
 #### Options :
@@ -47,15 +47,25 @@ Scroller Method: constructor
 
 #### Examples
 
-	var myScroller = new Scroller(window, {
-		area: Math.round(window.getWidth() / 5)
+	new Element('div', {
+		styles: {
+			width: 600,
+			height: 400
+		}
+	}).inject(new Element('div', {
+		id: 'myScroll',
+		styles: {
+			width: 300,
+			height: 200,
+			overflow: 'scroll'
+		}
+	}).inject($(document.body)))
+
+
+	var myScroller = new Scroller('myScroll', {
+		area: Math.round(window.getWidth() / 10)
 	});
-
-	(function(){
-		this.stop();
-		this.start();
-	}).periodical(1000, myScroller);
-
+	myScroller.start();
 
 
 Scroller Method: start {#Scroller:start}

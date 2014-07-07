@@ -14,8 +14,8 @@ authors:
 
 requires:
   - Core/Fx.Morph
-  - /Element.Shortcuts
-  - /Element.Measure
+  - Element.Shortcuts
+  - Element.Measure
 
 provides: [Fx.Reveal]
 
@@ -50,13 +50,13 @@ Fx.Reveal = new Class({
 		widthOverride: null,*/
 		link: 'cancel',
 		styles: ['padding', 'border', 'margin'],
-		transitionOpacity: !Browser.ie6,
+		transitionOpacity: 'opacity' in document.documentElement,
 		mode: 'vertical',
 		display: function(){
 			return this.element.get('tag') != 'tr' ? 'block' : 'table-row';
 		},
 		opacity: 1,
-		hideInputs: Browser.ie ? 'select, input, textarea, object, embed' : null
+		hideInputs: !('opacity' in document.documentElement) ? 'select, input, textarea, object, embed' : null
 	},
 
 	dissolve: function(){

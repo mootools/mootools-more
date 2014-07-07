@@ -13,7 +13,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Form.Validator
+  - Form.Validator
 
 provides: [Form.Validator.Extras]
 
@@ -194,7 +194,8 @@ Form.Validator.addAllThese([
 			if (ccNum.test(/^4[0-9]{12}([0-9]{3})?$/)) valid_type = 'Visa';
 			else if (ccNum.test(/^5[1-5]([0-9]{14})$/)) valid_type = 'Master Card';
 			else if (ccNum.test(/^3[47][0-9]{13}$/)) valid_type = 'American Express';
-			else if (ccNum.test(/^6011[0-9]{12}$/)) valid_type = 'Discover';
+			else if (ccNum.test(/^6(?:011|5[0-9]{2})[0-9]{12}$/)) valid_type = 'Discover';
+			else if (ccNum.test(/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/)) valid_type = 'Diners Club';
 
 			if (valid_type){
 				var sum = 0;

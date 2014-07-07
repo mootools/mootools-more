@@ -20,12 +20,12 @@ requires:
   - Core/Element.Event
   - Core/Element.Style
   - Core/JSON
-  - /Locale
-  - /Class.Binds
-  - /Date
-  - /Element.Forms
-  - /Locale.en-US.Form.Validator
-  - /Element.Shortcuts
+  - Locale
+  - Class.Binds
+  - Date
+  - Element.Forms
+  - Locale.en-US.Form.Validator
+  - Element.Shortcuts
 
 provides: [Form.Validator, InputValidator, FormValidator.BaseValidators]
 
@@ -85,7 +85,7 @@ Element.Properties.validatorProps = {
 		if (this.retrieve('$moo:validatorProps')) return this.retrieve('$moo:validatorProps');
 		if (this.getProperty('data-validator-properties') || this.getProperty('validatorProps')){
 			try {
-				this.store('$moo:validatorProps', JSON.decode(this.getProperty('validatorProps') || this.getProperty('data-validator-properties')));
+				this.store('$moo:validatorProps', JSON.decode(this.getProperty('validatorProps') || this.getProperty('data-validator-properties'), false));
 			}catch(e){
 				return {};
 			}
@@ -101,7 +101,7 @@ Element.Properties.validatorProps = {
 					var split = cls.split(':');
 					if (split[1]){
 						try {
-							props[split[0]] = JSON.decode(split[1]);
+							props[split[0]] = JSON.decode(split[1], false);
 						} catch(e){}
 					}
 				});
@@ -257,8 +257,8 @@ Form.Validator = new Class({
 		var validator = this.getValidator(className);
 		if (warn != null) warn = false;
 		if (this.hasValidator(field, 'warnOnly')) warn = true;
-		var isValid = this.hasValidator(field, 'ignoreValidation') || (validator ? validator.test(field) : true);
-		if (validator && field.isVisible()) this.fireEvent('elementValidate', [isValid, field, className, warn]);
+		var isValid = field.hasClass('ignoreValidation') || (validator ? validator.test(field) : true);
+		if (validator) this.fireEvent('elementValidate', [isValid, field, className, warn]);
 		if (warn) return true;
 		return isValid;
 	},
@@ -450,18 +450,20 @@ Form.Validator.addAllThese([
 		},
 		test: function(element, props){
 			if (Form.Validator.getValidator('IsEmpty').test(element)) return true;
-			var dateLocale = Locale.getCurrent().sets.Date,
+			var dateLocale = Locale.get('Date'),
 				dateNouns = new RegExp([dateLocale.days, dateLocale.days_abbr, dateLocale.months, dateLocale.months_abbr, dateLocale.AM, dateLocale.PM].flatten().join('|'), 'i'),
 				value = element.get('value'),
 				wordsInValue = value.match(/[a-z]+/gi);
 
-				if (wordsInValue && !wordsInValue.every(dateNouns.exec, dateNouns)) return false;
+			if (wordsInValue && !wordsInValue.every(dateNouns.exec, dateNouns)) return false;
 
-				var date = Date.parse(value),
-					format = props.dateFormat || '%x',
-					formatted = date.format(format);
-				if (formatted != 'invalid date') element.set('value', formatted);
-				return date.isValid();
+			var date = Date.parse(value);
+			if (!date) return false;
+
+			var format = props.dateFormat || '%x',
+				formatted = date.format(format);
+			if (formatted != 'invalid date') element.set('value', formatted);
+			return date.isValid();
 		}
 	}],
 

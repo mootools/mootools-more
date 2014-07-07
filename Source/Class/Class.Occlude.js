@@ -15,7 +15,7 @@ authors:
 requires:
   - Core/Class
   - Core/Element
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Class.Occlude]
 
