@@ -52,6 +52,8 @@ Injects a css file in the page.
 
 1. source     - (*string*) The path of the CSS file.
 2. properties - (*object*) Some additional attributes you might want to add to the link Element; this is the same as the second argument you might pass to including the Element constructor. For instance you might specify a title attribute or perhaps an id.
+   - onLoad   - (*function*) A function that will be invoked when the CSS is loaded.
+   - timeout  - (*number*, defaults to 3000 ms) The maximum amount of milliseconds to wait for onLoad callback to be called.
    - document - (*object*, defaults to `document`) The document which the link element should be injected in.
 
 
