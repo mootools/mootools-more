@@ -103,6 +103,7 @@ describe('HtmlTable.Sort', function(){
 
 			it('should correctly sort floats in scientific notation according to value', function(){
 				expect(sortedTable(false, [1.3e-10, 1.1, 1, 2])).toEqual(['1.3e-10', '1', '1.1', '2']);
+				expect(sortedTable(false, [1.3e100, 1.2e+100, 1.3e-10, 1.1, 1, 2])).toEqual(['1.3e-10', '1', '1.1', '2', '1.2e+100', '1.3e+100']);
 			});
 
 			it('should sort by float when autodetecting a mix of floats and integers are present', function(){
