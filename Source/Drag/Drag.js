@@ -111,8 +111,44 @@ var Drag = new Class({
 		return this.element.offsetParent.getScroll();
 	},
 
+	_registerScrollHandler: function(el, invert) {
+		var currentScroll = el.getScroll();
+		var entry = {
+			container: el,
+			handler: (function () {
+				var scroll = el.getScroll();
+				for (var z in this.options.modifiers){
+					if (!this.options.modifiers[z]) continue;
+					var delta = currentScroll[z] - scroll[z];
+					if (invert)
+						delta = -delta;
+					this.mouse.pos[z] += delta;
+				}
+				currentScroll = scroll;
+				//this.drag(new MouseEvent('mousemove', { page: this.mouse.start }));
+			}).bind(this)
+		};
+
+		this.offsetParents.push(entry);
+		el.addEvent('scroll', entry.handler);
+	},
+
+	_addScrollHandlers: function(el) {
+		this._registerScrollHandler(window, true);
+		for (var par = el.getOffsetParent(); par; par = par.getOffsetParent())
+			this._registerScrollHandler(par, false);
+	},
+
+	_removeScrollHandlers: function() {
+		this.offsetParents.each(function (entry) {
+			entry.container.removeEvent('scroll', entry.handler);
+		});
+	},
+
 	start: function(event){
 		var options = this.options;
+		this.offsetParents = [];
+		this._addScrollHandlers(this.element);
 
 		if (event.rightClick) return;
 
@@ -240,6 +276,7 @@ var Drag = new Class({
 		this.compensateScroll.dragging = false;
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
+		this._removeScrollHandlers();
 		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
