@@ -82,6 +82,7 @@ module.exports = function(grunt) {
 
 			options: {
 				captureTimeout: 60000 * 2,
+				browserNoActivityTimeout: 20000,
 				singleRun: true,
 				frameworks: ['jasmine', 'sinon'],
 				files: [

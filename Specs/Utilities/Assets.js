@@ -20,7 +20,7 @@ describe('Assets', function(){
 				}
 			});
 
-			waits(500);
+			waits(800);
 
 			runs(function(){
 				expect(myScript.get('tag')).toEqual('script');
@@ -31,35 +31,59 @@ describe('Assets', function(){
 			});
 
 		});
-
 	});
 
 	describe('Assets.css', function(){
 
-		it('should load a css file and fire the load event', function(){
+		function addCSS(source, load){
+			new Element('div', {
+				id: 'moologo'
+			}).inject($(document.body));
 
-			var load = jasmine.createSpy('load');
-
-			var myCSS = Asset.css('base/Tests/Specs/assets/Assets.css.test.css', {
+			return myCSS = Asset.css(source, {
 				id: 'myStyle',
 				title: 'myStyle',
-				onload: function(){
+				onLoad: function(){
 					load(this);
 				}
 			});
+		}
+		
+		afterEach(function(){
+			$('myStyle').destroy();
+			$('moologo').destroy();
+		});
 
-			waits(500);
+		it('should load a external css file and run load callback', function(){
+			var load = jasmine.createSpy('load');
+			var url = 'https://rawgit.com/mootools/mootools-more/master/Tests/Specs/assets/Assets.css.test.css';
+			var myCSS = addCSS(url, load);
+			var myCSS = addCSS(url, load);
 
+			waits(3000);
 			runs(function(){
 				expect(myCSS.get('tag')).toEqual('link');
 				expect(myCSS.id).toEqual('myStyle');
-				// Current implementation of assets uses the load event which only works in IE/Opera
-				// expect(load).toHaveBeenCalledWith(myCSS);
-				myCSS.destroy();
+				expect(load).toHaveBeenCalledWith(myCSS);
+				load = myCSS = null;
 			});
-
 		});
 
+		it('should load a local css file and run load callback', function(){
+			var load = jasmine.createSpy('load');
+			var url = 'base/Tests/Specs/assets/Assets.css.test.css';
+			var myCSS = addCSS(url, load);
+
+			waits(2000);
+			runs(function(){
+				var border = $('moologo').getStyle('border');
+				expect(load).toHaveBeenCalledWith(myCSS);
+				expect(myCSS.get('tag')).toEqual('link');
+				expect(myCSS.id).toEqual('myStyle');
+				expect(border.contains('4px solid')).toBeTruthy();
+				load = myCSS = null;
+			});
+		});
 	});
 
 	describe('Assets.image', function(){
@@ -74,7 +98,7 @@ describe('Assets', function(){
 				onload: load
 			});
 
-			waits(500);
+			waits(800);
 
 			runs(function(){
 				expect(myImage.get('tag')).toEqual('img');
@@ -97,7 +121,7 @@ describe('Assets', function(){
 				onerror: error
 			});
 
-			waits(500);
+			waits(800);
 
 			runs(function(){
 				expect(load).not.toHaveBeenCalled();
@@ -122,7 +146,7 @@ describe('Assets', function(){
 				onload: loaded
 			});
 
-			waits(500);
+			waits(800);
 
 			runs(function(){
 				expect(loadedagain).toHaveBeenCalled();
@@ -141,16 +165,14 @@ describe('Assets', function(){
 				onerror: error
 			});
 
-			waits(500);
+			waits(800);
 
 			runs(function(){
 				expect(load).not.toHaveBeenCalled();
 				expect(error).toHaveBeenCalledWith(myImage);
 				myImage.destroy();
 			});
-
 		});
-
 	});
 
 	describe('Assets.images', function(){
@@ -170,7 +192,7 @@ describe('Assets', function(){
 				onError: error
 			});
 
-			waits(500);
+			waits(800);
 
 			runs(function(){
 				expect(complete).toHaveBeenCalled();
@@ -196,16 +218,13 @@ describe('Assets', function(){
 				onError: error
 			});
 
-			waits(500);
+			waits(800);
 
 			runs(function(){
 				expect(complete).toHaveBeenCalled();
 				expect(progress.callCount).toEqual(1);
 				expect(error.callCount).toEqual(2);
 			});
-
 		});
-
 	});
-
 });
