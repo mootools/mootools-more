@@ -32,6 +32,7 @@ Drag Method: constructor
 * unit            - (*string*: defaults to 'px') A string indicating the CSS unit to append to all number values.
 * preventDefault  - (*boolean*: defaults to false) Calls preventDefault on the event while dragging. See [Event:preventDefault][]
 * stopPropagation - (*boolean*: defaults to false) Prevents the event from "bubbling" up in the DOM tree. See [Event:stopPropagation][]
+* compensateScroll - (*boolean*: defaults to false) Compensates the drag element's position while scrolling.
 
 ### Events
 
