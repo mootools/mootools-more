@@ -73,7 +73,7 @@ var Drag = new Class({
 		})(this.element);
 		this.selection = 'selectstart' in document ? 'selectstart' : 'mousedown';
 
-		this.compensateScroll = {'start': {}, 'diff': {}, last: {}};
+		this.compensateScroll = {start: {}, diff: {}, last: {}};
 
 		if ('ondragstart' in document && !('FileReader' in window) && !Drag.ondragstartFixed){
 			document.ondragstart = Function.from(false);
@@ -86,7 +86,6 @@ var Drag = new Class({
 			drag: this.drag.bind(this),
 			stop: this.stop.bind(this),
 			cancel: this.cancel.bind(this),
-			sumValues: this.sumValues.bind(this),
 			eventStop: Function.from(false),
 			scrollListener: this.scrollListener.bind(this)
 		};
@@ -138,7 +137,7 @@ var Drag = new Class({
 		if (options.preventDefault) event.preventDefault();
 		if (options.stopPropagation) event.stopPropagation();
 		this.compensateScroll.start = this.compensateScroll.last = this.offsetParent.getScroll();
-		this.compensateScroll.diff = {x:0, y:0};
+		this.compensateScroll.diff = {x: 0, y: 0};
 		this.mouse.start = event.page;
 		this.fireEvent('beforeStart', this.element);
 
