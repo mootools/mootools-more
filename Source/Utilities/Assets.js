@@ -80,7 +80,7 @@ var Asset = {
 				}
 				retries++;
 				if (!loaded && retries < timeout / 50) return setTimeout(check, 50);
-			}
+			};
 			setTimeout(check, 0);
 		}
 		return link;
