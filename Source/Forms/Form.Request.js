@@ -14,11 +14,11 @@ authors:
 
 requires:
   - Core/Request.HTML
-  - /Class.Binds
-  - /Class.Occlude
-  - /Spinner
-  - /String.QueryString
-  - /Element.Delegation
+  - Class.Binds
+  - Class.Occlude
+  - Spinner
+  - String.QueryString
+  - Element.Delegation.Pseudo
 
 provides: [Form.Request]
 
@@ -151,7 +151,7 @@ if (!window.Form) window.Form = {};
 				//form validator was created after Form.Request
 				this.element.removeEvent('submit', this.onSubmit);
 				fv.addEvent('onFormValidate', this.onFormValidate);
-				this.element.validate();
+				fv.validate(event);
 				return;
 			}
 			if (event) event.stop();

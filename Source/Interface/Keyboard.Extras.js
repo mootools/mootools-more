@@ -13,8 +13,8 @@ authors:
   - Perrin Westrich
 
 requires:
-  - /Keyboard
-  - /MooTools.More
+  - Keyboard
+  - MooTools.More
 
 provides: [Keyboard.Extras]
 

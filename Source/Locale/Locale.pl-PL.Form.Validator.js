@@ -11,7 +11,7 @@ authors:
   - Oskar Krawczyk
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.pl-PL.Form.Validator]
 
@@ -45,7 +45,7 @@ Locale.define('pl-PL', 'FormValidator', {
 	match: 'To pole musi być takie samo jak {matchName}',
 	startDate: 'data początkowa',
 	endDate: 'data końcowa',
-	currendDate: 'aktualna data',
+	currentDate: 'aktualna data',
 	afterDate: 'Podana data poinna być taka sama lub po {label}.',
 	beforeDate: 'Podana data poinna być taka sama lub przed {label}.',
 	startMonth: 'Prosimy wybrać początkowy miesiąc.',

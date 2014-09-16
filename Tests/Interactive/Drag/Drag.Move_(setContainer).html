@@ -1,0 +1,48 @@
+<style>
+
+#container {
+    background: #DDD;
+    height: 400px;
+    position: relative;
+}
+#drag {
+    background: #78BA91;
+    cursor: move;
+    height: 40px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 40px;
+}
+.drop {
+    background: #6B7B95;
+    float: left;
+    height: 200px;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 200px;
+}
+
+</style>
+
+	<p>you should be able to drag into the large square and when you dropp it the large square will be the new container and the box will not be able to cross its border.</p>
+
+    <div id="container">
+        <div id="drag"></div>
+        <div class="drop"></div>
+    </div>
+
+<script src="/depender/build?require=More/Drag.Move"></script>
+<script>
+var newContainer = document.getElement('.drop');
+var drag = new Drag.Move($('drag'), {
+
+    container: $('container'),
+    droppables: $$('.drop'),
+    onDrop: function (element, droppable) {
+        if (droppable) droppable.setStyle('background', '#C17878');
+        droppable && drag.setContainer(newContainer);
+    }
+
+});
+</script>

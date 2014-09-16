@@ -51,10 +51,8 @@ var special = {
 	'S': /[ŠŞŚ]/g,
 	't': /[ťţ]/g,
 	'T': /[ŤŢ]/g,
-	'ue': /[ü]/g,
-	'UE': /[Ü]/g,
-	'u': /[ùúûůµ]/g,
-	'U': /[ÙÚÛŮ]/g,
+	'u': /[ùúûůüµ]/g,
+	'U': /[ÙÚÛŮÜ]/g,
 	'y': /[ÿý]/g,
 	'Y': /[ŸÝ]/g,
 	'z': /[žźż]/g,
@@ -98,9 +96,8 @@ var walk = function(string, replacements){
 
 var getRegexForTag = function(tag, contents){
 	tag = tag || '';
-	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "([^>]+)?>",
-		reg = new RegExp(regstr, "gi");
-	return reg;
+	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "([^>]+)?>";
+	return new RegExp(regstr, "gi");
 };
 
 String.implement({

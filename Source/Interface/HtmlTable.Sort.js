@@ -16,16 +16,25 @@ authors:
 
 requires:
   - Core/Hash
-  - /HtmlTable
-  - /Class.refactor
-  - /Element.Delegation
-  - /String.Extras
-  - /Date
+  - HtmlTable
+  - Class.refactor
+  - Element.Delegation.Pseudo
+  - String.Extras
+  - Date
 
 provides: [HtmlTable.Sort]
 
 ...
 */
+(function(){
+
+var readOnlyNess = document.createElement('table');
+try {
+	readOnlyNess.innerHTML = '<tr><td></td></tr>';
+	readOnlyNess = readOnlyNess.childNodes.length === 0;
+} catch (e){
+	readOnlyNess = true;
+}
 
 HtmlTable = Class.refactor(HtmlTable, {
 
@@ -71,7 +80,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 	setHeaders: function(){
 		this.previous.apply(this, arguments);
-		if (this.sortEnabled) this.setParsers();
+		if (this.sortable) this.setParsers();
 	},
 
 	setParsers: function(){
@@ -198,7 +207,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return typeOf(parser) == 'string' ? HtmlTable.Parsers[parser] : parser;
 	},
 
-	sort: function(index, reverse, pre){
+	sort: function(index, reverse, pre, sortFunction){
 		if (!this.head) return;
 
 		if (!pre){
@@ -211,12 +220,12 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (!parser) return;
 
 		var rel;
-		if (!Browser.ie){
+		if (!readOnlyNess){
 			rel = this.body.getParent();
 			this.body.dispose();
 		}
 
-		var data = this.parseData(parser).sort(function(a, b){
+		var data = this.parseData(parser).sort(sortFunction ? sortFunction : function(a, b){
 			if (a.value === b.value) return 0;
 			return a.value > b.value ? 1 : -1;
 		});
@@ -245,7 +254,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	reSort: function(){
-		if (this.sortEnabled) this.sort.call(this, this.sorted.index, this.sorted.reverse);
+		if (this.sortable) this.sort.call(this, this.sorted.index, this.sorted.reverse);
 		return this;
 	},
 
@@ -253,7 +262,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.element.addClass(this.options.classSortable);
 		this.attachSorts(true);
 		this.setParsers();
-		this.sortEnabled = true;
+		this.sortable = true;
 		return this;
 	},
 
@@ -264,7 +273,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			span.destroy();
 		});
 		this.sortSpans.empty();
-		this.sortEnabled = false;
+		this.sortable = false;
 		return this;
 	}
 
@@ -283,7 +292,7 @@ HtmlTable.Parsers = {
 		type: 'date'
 	},
 	'input-checked': {
-		match: / type="(radio|checkbox)" /,
+		match: / type="(radio|checkbox)"/,
 		convert: function(){
 			return this.getElement('input').checked;
 		}
@@ -311,14 +320,14 @@ HtmlTable.Parsers = {
 	'float': {
 		match: /^[\d]+\.[\d]+/,
 		convert: function(){
-			return this.get('text').replace(/[^-?^\d.]/, '').stripTags().toFloat();
+			return this.get('text').replace(/[^-?^\d.e]/, '').stripTags().toFloat();
 		},
 		number: true
 	},
 	'floatLax': {
 		match: /^[^\d]+[\d]+\.[\d]+$/,
 		convert: function(){
-			return this.get('text').replace(/[^-?^\d.]/, '').stripTags();
+			return this.get('text').replace(/[^-?^\d.]/, '').stripTags().toFloat();
 		},
 		number: true
 	},
@@ -347,3 +356,6 @@ HtmlTable.defineParsers = function(parsers){
 		HtmlTable.ParserPriority.unshift(parser);
 	}
 };
+
+})();
+

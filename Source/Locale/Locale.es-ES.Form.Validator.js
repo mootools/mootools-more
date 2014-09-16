@@ -11,7 +11,7 @@ authors:
   - Ãlfons Sanchez
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.es-ES.Form.Validator]
 
@@ -45,7 +45,7 @@ Locale.define('es-ES', 'FormValidator', {
 	match: 'Este campo necesita coincidir con el campo {matchName}',
 	startDate: 'la fecha de inicio',
 	endDate: 'la fecha de fin',
-	currendDate: 'la fecha actual',
+	currentDate: 'la fecha actual',
 	afterDate: 'La fecha debe ser igual o posterior a {label}.',
 	beforeDate: 'La fecha debe ser igual o anterior a {label}.',
 	startMonth: 'Por favor selecciona un mes de origen',

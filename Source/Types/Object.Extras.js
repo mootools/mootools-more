@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Object
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Object.Extras]
 

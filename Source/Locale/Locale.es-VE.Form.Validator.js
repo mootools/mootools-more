@@ -11,8 +11,8 @@ authors:
   - Daniel Barreto
 
 requires:
-  - /Locale
-  - /Locale.es-ES.Form.Validator
+  - Locale
+  - Locale.es-ES.Form.Validator
 
 provides: [Locale.es-VE.Form.Validator]
 
@@ -29,6 +29,6 @@ Locale.define('es-VE', 'FormValidator', {
 	// Form.Validator.Extras
 	startDate: 'La fecha de inicio',
 	endDate: 'La fecha de fin',
-	currendDate: 'La fecha actual'
+	currentDate: 'La fecha actual'
 
 }).inherit('es-ES', 'FormValidator');

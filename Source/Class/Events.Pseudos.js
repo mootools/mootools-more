@@ -10,7 +10,7 @@ license: MIT-style license
 authors:
   - Arian Stolwijk
 
-requires: [Core/Class.Extras, Core/Slick.Parser, More/MooTools.More]
+requires: [Core/Class.Extras, Core/Slick.Parser, MooTools.More]
 
 provides: [Events.Pseudos]
 

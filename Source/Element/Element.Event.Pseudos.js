@@ -12,7 +12,7 @@ authors:
 
 requires: [Core/Element.Event, Core/Element.Delegation, Events.Pseudos]
 
-provides: [Element.Event.Pseudos, Element.Delegation]
+provides: [Element.Event.Pseudos, Element.Delegation.Pseudo]
 
 ...
 */

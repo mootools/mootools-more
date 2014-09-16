@@ -18,7 +18,7 @@ authors:
 
 requires:
   - Core/Element.Dimensions
-  - /Drag
+  - Drag
 
 provides: [Drag.Move]
 
@@ -45,10 +45,7 @@ Drag.Move = new Class({
 		element = this.element;
 
 		this.droppables = $$(this.options.droppables);
-		this.container = document.id(this.options.container);
-
-		if (this.container && typeOf(this.container) != 'element')
-			this.container = document.id(this.container.getDocument().body);
+		this.setContainer(this.options.container);
 
 		if (this.options.style){
 			if (this.options.modifiers.x == 'left' && this.options.modifiers.y == 'top'){
@@ -64,6 +61,13 @@ Drag.Move = new Class({
 
 		this.addEvent('start', this.checkDroppables, true);
 		this.overed = null;
+	},
+	
+	setContainer: function(container) {
+		this.container = document.id(container);
+		if (this.container && typeOf(this.container) != 'element'){
+			this.container = document.id(this.container.getDocument().body);
+		}
 	},
 
 	start: function(event){
@@ -88,7 +92,8 @@ Drag.Move = new Class({
 			elementBorder = {},
 			containerMargin = {},
 			containerBorder = {},
-			offsetParentPadding = {};
+			offsetParentPadding = {},
+			offsetScroll = offsetParent.getScroll();
 
 		['top', 'right', 'bottom', 'left'].each(function(pad){
 			elementMargin[pad] = element.getStyle('margin-' + pad).toInt();
@@ -100,10 +105,10 @@ Drag.Move = new Class({
 
 		var width = element.offsetWidth + elementMargin.left + elementMargin.right,
 			height = element.offsetHeight + elementMargin.top + elementMargin.bottom,
-			left = 0,
-			top = 0,
-			right = containerCoordinates.right - containerBorder.right - width,
-			bottom = containerCoordinates.bottom - containerBorder.bottom - height;
+			left = 0 + offsetScroll.x,
+			top = 0 + offsetScroll.y,
+			right = containerCoordinates.right - containerBorder.right - width + offsetScroll.x,
+			bottom = containerCoordinates.bottom - containerBorder.bottom - height + offsetScroll.y;
 
 		if (this.options.includeMargins){
 			left += elementMargin.left;
@@ -129,7 +134,9 @@ Drag.Move = new Class({
 
 			if (container != offsetParent){
 				left += containerMargin.left + offsetParentPadding.left;
-				top += ((Browser.ie6 || Browser.ie7) ? 0 : containerMargin.top) + offsetParentPadding.top;
+				if (!offsetParentPadding.left && left < 0) left = 0;
+				top += offsetParent == document.body ? 0 : containerMargin.top + offsetParentPadding.top;
+				if (!offsetParentPadding.top && top < 0) top = 0;
 			}
 		} else {
 			left -= elementMargin.left;

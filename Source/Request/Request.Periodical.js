@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Request
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Request.Periodical]
 

@@ -11,7 +11,7 @@ authors:
   - Faruk Can Bilir
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.tr-TR.Form.Validator]
 
@@ -45,7 +45,7 @@ Locale.define('tr-TR', 'FormValidator', {
 	match: 'Bu alan, {matchName} alanıyla uyuşmalı',
 	startDate: 'başlangıç tarihi',
 	endDate: 'bitiş tarihi',
-	currendDate: 'bugünün tarihi',
+	currentDate: 'bugünün tarihi',
 	afterDate: 'Tarih, {label} tarihiyle aynı gün ya da ondan sonra olmalıdır.',
 	beforeDate: 'Tarih, {label} tarihiyle aynı gün ya da ondan önce olmalıdır.',
 	startMonth: 'Lütfen bir başlangıç ayı seçin',

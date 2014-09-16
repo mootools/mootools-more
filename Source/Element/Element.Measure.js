@@ -17,7 +17,7 @@ authors:
 requires:
   - Core/Element.Style
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Element.Measure]
 

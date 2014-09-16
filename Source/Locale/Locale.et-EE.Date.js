@@ -11,7 +11,7 @@ authors:
   - Kevin Valdek
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.et-EE.Date]
 

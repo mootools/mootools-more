@@ -11,8 +11,8 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Locale
-  - /Locale.en-US.Date
+  - Locale
+  - Locale.en-US.Date
 
 provides: [Locale.en-GB.Date]
 

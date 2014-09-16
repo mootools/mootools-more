@@ -11,7 +11,7 @@ authors:
   - Zsolt Szegheő
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.hu-HU.Date]
 

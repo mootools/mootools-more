@@ -1,4 +1,4 @@
-﻿/*
+/*
 ---
 
 name: Locale.no-NO.Date
@@ -11,7 +11,7 @@ authors:
   - Espen 'Rexxars' Hovlandsdal
   - Ole Tøsse Kolvik
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.no-NO.Date]
 
@@ -45,7 +45,7 @@ Locale.define('no-NO', 'Date', {
 	monthsAgo: '{delta} måneder siden',
 	yearAgo: 'ett år siden',
 	yearsAgo: '{delta} år siden',
-	
+
 	lessThanMinuteUntil: 'mindre enn et minutt til',
 	minuteUntil: 'omtrent et minutt til',
 	minutesUntil: '{delta} minutter til',

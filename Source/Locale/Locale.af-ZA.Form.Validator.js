@@ -11,7 +11,7 @@ authors:
   - Werner Mollentze
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.af-ZA.Form.Validator]
 
@@ -46,7 +46,7 @@ Locale.define('af-ZA', 'FormValidator', {
 	match: 'Hierdie veld moet by die {matchName} veld pas',
 	startDate: 'die begin datum',
 	endDate: 'die eind datum',
-	currendDate: 'die huidige datum',
+	currentDate: 'die huidige datum',
 	afterDate: 'Die datum moet dieselfde of na {label} wees.',
 	beforeDate: 'Die datum moet dieselfde of voor {label} wees.',
 	startMonth: 'Kies asseblief \'n begin maand',

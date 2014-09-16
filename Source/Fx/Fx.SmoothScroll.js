@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/Slick.Finder
-  - /Fx.Scroll
+  - Fx.Scroll
 
 provides: [Fx.SmoothScroll]
 

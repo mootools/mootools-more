@@ -11,7 +11,7 @@ authors:
   - Martin Lundgren
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.sv-SE.Form.Validator]
 
@@ -45,7 +45,7 @@ Locale.define('sv-SE', 'FormValidator', {
 	match: 'Detta fält måste matcha {matchName}',
 	startDate: 'startdatumet',
 	endDate: 'slutdatum',
-	currendDate: 'dagens datum',
+	currentDate: 'dagens datum',
 	afterDate: 'Datumet bör vara samma eller senare än {label}.',
 	beforeDate: 'Datumet bör vara samma eller tidigare än {label}.',
 	startMonth: 'Välj en start månad',

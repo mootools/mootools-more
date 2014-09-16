@@ -14,7 +14,7 @@ authors:
 
 requires:
   - Core/JSON
-  - /Locale
+  - Locale
 
 provides: Locale.Set.From
 

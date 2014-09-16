@@ -11,8 +11,8 @@ authors:
   - ksel
 
 requires:
-  - /Locale
-  - /Locale.EU.Number
+  - Locale
+  - Locale.EU.Number
 
 provides: [Locale.fi-FI.Number]
 

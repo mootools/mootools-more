@@ -13,8 +13,8 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Hash
-  - /Object.Extras
+  - Hash
+  - Object.Extras
 
 provides: [Hash.Extras]
 
