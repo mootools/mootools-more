@@ -38,7 +38,7 @@ Locale.define('no-NO', 'FormValidator', {
 	currencyDollar: 'Skriv inn et gyldig beløp. F.eks. 100,00.',
 	oneRequired: 'Minst ett av disse feltene må fylles ut.',
 	errorPrefix: 'Feil: ',
-	warningPrefix: 'Advarsel: '
+	warningPrefix: 'Advarsel: ',
 
 	// Form.Validator.Extras
 	noSpace: 'Mellomrom er ikke tillatt i dette feltet.',
