@@ -56,9 +56,9 @@ describe('Class.Singleton', function(){
    
    it( 'should properly implement methods from the prototype', function () {
       expect( typeof instanceA.getOption == 'function' ).toBeTruthy();
-      expect( typeof instanceA.setOption == 'function' ).toBeTruthy();
+      expect( typeof instanceA.setOptions == 'function' ).toBeTruthy();
       expect( typeof instanceA.fireEvent == 'function' ).toBeTruthy();
-      expect( typeof instanceA.addEvent  == 'function' ).toBeTruthy();
+      expect( typeof instanceA.addEvent == 'function' ).toBeTruthy();
    });
    
    it( 'should take into considerations constructor parameters', function () {
