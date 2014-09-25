@@ -62,7 +62,7 @@ describe('Class.Singleton', function(){
    });
    
    it( 'should take into considerations constructor parameters', function () {
-      expect( instanceA.getOption() === 5 ).toBeTruthy();
+      expect( instanceA.getOption('integer') === 5 ).toBeTruthy();
    });
    
    it( 'should be able to call parent method', function () {
