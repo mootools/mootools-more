@@ -85,7 +85,7 @@ var Scroller = new Class({
 	scroll: function(){
 		var size = this.element.getSize(),
 			scroll = this.element.getScroll(),
-			pos = ((this.element != this.docBody) && (this.element != window)) ? element.getOffsets() : {x: 0, y: 0},
+			pos = ((this.element != this.docBody) && (this.element != window)) ? this.element.getOffsets() : {x: 0, y: 0},
 			scrollSize = this.element.getScrollSize(),
 			change = {x: 0, y: 0},
 			top = this.options.area.top || this.options.area,
