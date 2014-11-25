@@ -125,7 +125,7 @@ var Drag = this.Drag = new Class({
 
 	sumValues: function(alpha, beta, op){
 		var sum = {}, options = this.options;
-		for (z in options.modifiers){
+		for (var z in options.modifiers){
 			if (!options.modifiers[z]) continue;
 			sum[z] = alpha[z] + beta[z] * op;
 		}
