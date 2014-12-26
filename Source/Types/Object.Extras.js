@@ -27,6 +27,12 @@ var defined = function(value){
 	return value != null;
 };
 
+var sort = function(a, b){
+	return a == b ? 0 : (a > b ? 1 : -1);
+};
+
+var types = ['object', 'hash'];
+
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 Object.extend({
@@ -58,6 +64,20 @@ Object.extend({
 		for (var key in object) if (object[key].apply){
 			object[key].apply(object, args);
 		}
+		return object;
+	},
+	
+	sort: function(object, method){
+		if (typeof method !== 'function'){
+			method = sort;
+		}
+		
+		Object.keys(object).sort(method).each(function(key){
+			var value = this[key];
+			delete this[key];
+			this[key] = types.contains(typeOf(value)) ? Object.sort(value, method) : value;
+		}, object);
+		
 		return object;
 	}
 

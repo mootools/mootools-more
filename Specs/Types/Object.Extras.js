@@ -103,3 +103,32 @@ describe('Object.run', function(){
 	});
 
 });
+
+describe('Object.sort', function(){
+
+	it('should recursively sort objects by key', function(){
+		expect(JSON.encode(Object.sort({
+			lorem: 'lorem',
+			ipsum: 'ipsum',
+			dolor: 'dolor',
+			abc: 'abc',
+			object: {
+				p: 'v',
+				i: 5,
+				b: true,
+				n: null
+			}
+		}))).toEqual('{"abc":"abc","dolor":"dolor","ipsum":"ipsum","lorem":"lorem","object":{"b":true,"i":5,"n":null,"p":"v"}}');
+	});
+	
+	it('should accept custom sort method', function(){
+		expect(JSON.encode(Object.sort({
+			b: 'b',
+			a: 'a',
+			c: 'c'
+		}, function(a, b){
+			return a == b ? 0 : (a > b ? -1 : 1);
+		}))).toEqual('{"c":"c","b":"b","a":"a"}');
+	});
+
+});
