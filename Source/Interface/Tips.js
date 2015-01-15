@@ -172,16 +172,18 @@ this.Tips = new Class({
 		clearTimeout(this.timer);
 		this.timer = (function(){
 			this.container.empty();
-			var show_tip = !this.options.hideEmpty;
+			var showTip = !this.options.hideEmpty;
 			['title', 'text'].each(function(value){
 				var content = element.retrieve('tip:' + value);
 				var div = this['_' + value + 'Element'] = new Element('div', {
 						'class': 'tip-' + value
 					}).inject(this.container);
-				if (content) this.fill(div, content);
-				show_tip = show_tip || Boolean(content);
+				if (content){
+					this.fill(div, content);
+					showTip = true;
+				}
 			}, this);
-			if (show_tip) {
+			if (showTip){
 				this.show(element);
 			} else {
 				this.hide(element);
