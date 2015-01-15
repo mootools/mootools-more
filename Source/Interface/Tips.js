@@ -86,7 +86,8 @@ this.Tips = new Class({
 			styles: {
 				position: 'absolute',
 				top: 0,
-				left: 0
+				left: 0,
+				display: 'none'
 			}
 		}).adopt(
 			new Element('div', {'class': 'tip-top'}),
@@ -170,15 +171,20 @@ this.Tips = new Class({
 		clearTimeout(this.timer);
 		this.timer = (function(){
 			this.container.empty();
-
+			var show_tip = false;
 			['title', 'text'].each(function(value){
 				var content = element.retrieve('tip:' + value);
 				var div = this['_' + value + 'Element'] = new Element('div', {
 						'class': 'tip-' + value
 					}).inject(this.container);
 				if (content) this.fill(div, content);
+				show_tip = show_tip || Boolean(content);
 			}, this);
-			this.show(element);
+			if (show_tip) {
+				this.show(element);
+			} else {
+				this.hide(element);
+			}
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 		}).delay(this.options.showDelay, this);
 	},
