@@ -58,7 +58,8 @@ this.Tips = new Class({
 		offset: {x: 16, y: 16},
 		windowPadding: {x:0, y:0},
 		fixed: false,
-		waiAria: true
+		waiAria: true,
+		hideEmpty: false
 	},
 
 	initialize: function(){
@@ -171,7 +172,7 @@ this.Tips = new Class({
 		clearTimeout(this.timer);
 		this.timer = (function(){
 			this.container.empty();
-			var show_tip = false;
+			var show_tip = !this.options.hideEmpty;
 			['title', 'text'].each(function(value){
 				var content = element.retrieve('tip:' + value);
 				var div = this['_' + value + 'Element'] = new Element('div', {

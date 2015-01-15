@@ -27,6 +27,7 @@ Tips Method: constructor
 
 * showDelay - (*number*: defaults to 100) The delay the show event is fired.
 * hideDelay - (*number*: defaults to 100) The delay the hide hide is fired.
+* hideEmpty - (*boolean*: defaults to *false*) If set to true, the empty tooltip will not be shown.
 * title - (*string|function*: defaults to title) The property of the element to be used for the tip-title. If this option is a function it will execute it on every element with it passed as the first argument. It uses the return value of this function as the tip-title
 * text - (*string|function*) Behaves the same as the `title` option but for tip-text. By default it either uses the `rel` or the `href` attribute as tip-text.
 * className - (*string*: defaults to *null*) The className your tooltip container will get. Useful for styling.
