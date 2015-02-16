@@ -58,7 +58,8 @@ this.Tips = new Class({
 		offset: {x: 16, y: 16},
 		windowPadding: {x:0, y:0},
 		fixed: false,
-		waiAria: true
+		waiAria: true,
+		hideEmpty: false
 	},
 
 	initialize: function(){
@@ -86,7 +87,8 @@ this.Tips = new Class({
 			styles: {
 				position: 'absolute',
 				top: 0,
-				left: 0
+				left: 0,
+				display: 'none'
 			}
 		}).adopt(
 			new Element('div', {'class': 'tip-top'}),
@@ -170,15 +172,22 @@ this.Tips = new Class({
 		clearTimeout(this.timer);
 		this.timer = (function(){
 			this.container.empty();
-
+			var showTip = !this.options.hideEmpty;
 			['title', 'text'].each(function(value){
 				var content = element.retrieve('tip:' + value);
 				var div = this['_' + value + 'Element'] = new Element('div', {
 						'class': 'tip-' + value
 					}).inject(this.container);
-				if (content) this.fill(div, content);
+				if (content){
+					this.fill(div, content);
+					showTip = true;
+				}
 			}, this);
-			this.show(element);
+			if (showTip){
+				this.show(element);
+			} else {
+				this.hide(element);
+			}
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 		}).delay(this.options.showDelay, this);
 	},
