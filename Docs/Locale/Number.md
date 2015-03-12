@@ -75,6 +75,11 @@ Available Languages
 		<td>Martin Lundgren<td>
 	</tr>
 	<tr>
+		<td>Swiss</td>
+		<td>de-CH</td>
+		<td>Kim D. Jeker<td>
+	</tr>
+	<tr>
 		<td>Turkish</td>
 		<td>tr-TR</td>
 		<td>Faruk Can Bilir</td>
