@@ -23,7 +23,7 @@ describe('Form.Validator', function(){
 			var element = new Element('input').setProperty('validatorProps', '{minLength: 10, maxLength:20}');
 			expect(element.get('validatorProps')).toEqual({minLength: 10, maxLength: 20});
 		});
-        
+
 		it('should get the properties in the class attribute from a new added Validator', function (){
 
 			var prop;
@@ -94,7 +94,7 @@ describe('Form.Validator', function(){
 			);
 			expect(form.validate({ignoreHidden: false})).toEqual(true);
 		});
-	
+
 	});
 
 	describe('onElementPass', function(){
@@ -334,6 +334,7 @@ describe('Form.Validator', function(){
 				expect(validator.test(createInput('foobar@gmail..com'))).toEqual(false);
 				expect(validator.test(createInput('foobar12312_fd@@@@gmail.com'))).toEqual(false);
 				expect(validator.test(createInput('@#@#@(*&##(*@gmail.com'))).toEqual(false);
+				expect(validator.test(createInput('í_ám_à_düde@gmail.com'))).toEqual(true);
 			});
 
 			it('should return true for fields whose value is a valid email address', function(){
