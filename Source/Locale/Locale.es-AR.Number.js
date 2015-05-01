@@ -8,7 +8,7 @@
  *    requires:
  *      - Locale
  *      provides: [Locale.es-AR.Number]
- *      ...
+ *      check with travis
  *      */
 
 Locale.define('es-AR', 'Number', {
