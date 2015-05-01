@@ -16,9 +16,6 @@ Locale.define('es-AR', 'Number', {
     decimal: ',',
     group: '.',
 
-    /*decimals: 0,
-    precision: 0,*/
-    // Negative/Currency/percentage will mixin Number
     negative: {
         prefix: '-'
     },
