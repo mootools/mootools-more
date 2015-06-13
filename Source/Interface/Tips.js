@@ -33,7 +33,7 @@ var read = function(option, element){
 	return (option) ? (typeOf(option) == 'function' ? option(element) : element.get(option)) : '';
 };
 
-this.Tips = new Class({
+var Tips = this.Tips = new Class({
 
 	Implements: [Events, Options],
 

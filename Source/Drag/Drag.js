@@ -26,8 +26,9 @@ provides: [Drag]
 ...
 
 */
+(function(){
 
-var Drag = new Class({
+var Drag = this.Drag = new Class({
 
 	Implements: [Events, Options],
 
@@ -249,6 +250,9 @@ var Drag = new Class({
 	}
 
 });
+
+})();
+
 
 Element.implement({
 

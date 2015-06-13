@@ -24,8 +24,9 @@ provides: [Mask]
 
 ...
 */
+(function(){
 
-var Mask = new Class({
+var Mask = this.Mask = new Class({
 
 	Implements: [Options, Events],
 
@@ -175,6 +176,9 @@ var Mask = new Class({
 	}
 
 });
+
+})();
+
 
 Element.Properties.mask = {
 

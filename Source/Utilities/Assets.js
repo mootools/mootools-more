@@ -20,8 +20,9 @@ provides: [Assets]
 
 ...
 */
+;(function(){
 
-var Asset = {
+var Asset = this.Asset = {
 
 	javascript: function(source, properties){
 		if (!properties) properties = {};
@@ -147,3 +148,5 @@ var Asset = {
 	}
 
 };
+
+})();
