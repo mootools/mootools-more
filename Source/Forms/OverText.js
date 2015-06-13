@@ -25,8 +25,9 @@ provides: [OverText]
 
 ...
 */
+(function(){
 
-var OverText = new Class({
+var OverText = this.OverText = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
@@ -220,6 +221,8 @@ var OverText = new Class({
 	}
 
 });
+
+})();
 
 OverText.instances = [];
 

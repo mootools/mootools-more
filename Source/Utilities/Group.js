@@ -23,7 +23,7 @@ provides: [Group]
 
 (function(){
 
-this.Group = new Class({
+var Group = this.Group = new Class({
 
 	initialize: function(){
 		this.instances = Array.flatten(arguments);

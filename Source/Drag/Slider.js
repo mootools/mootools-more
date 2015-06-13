@@ -23,8 +23,9 @@ provides: [Slider]
 
 ...
 */
+(function(){
 
-var Slider = new Class({
+var Slider = this.Slider = new Class({
 
 	Implements: [Events, Options],
 
@@ -236,3 +237,6 @@ var Slider = new Class({
 	}
 
 });
+
+})();
+
