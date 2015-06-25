@@ -40,6 +40,10 @@ provides: [String.QueryString.Tests]
 			expect('this%20should%20be%20encoded=oh%20dear'.parseQueryString(false, false)).toEqual({'this%20should%20be%20encoded': 'oh%20dear'});
 		});
 
+		it('should parse + into space', function(){
+			expect('this+should=be+spaces'.parseQueryString()).toEqual({'this should': 'be spaces'});
+		});
+
 		it('should parse a collection correctly', function(){
 			expect(Hash.toQueryString('f[28][]=110&order=pv'.parseQueryString())).toEqual('f[28][]=110&order=pv');
 		});
