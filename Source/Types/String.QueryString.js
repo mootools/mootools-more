@@ -25,6 +25,22 @@ provides: [String.QueryString]
 ...
 */
 
+(function(){
+
+/**
+ * decodeURIComponent doesn't do the correct thing with query parameter keys or
+ * values. Specifically, it leaves '+' as '+' when it should be converting them
+ * to spaces as that's the specification. When browsers submit HTML forms via
+ * GET, the values are encoded using 'application/x-www-form-urlencoded'
+ * which converts spaces to '+'.
+ *
+ * See: http://unixpapa.com/js/querystring.html for a description of the
+ * problem.
+ */
+var decodeComponent = function(str){
+	return decodeURIComponent(str.replace('+', ' '));
+};
+
 String.implement({
 
 	parseQueryString: function(decodeKeys, decodeValues){
@@ -41,9 +57,9 @@ String.implement({
 				keys = index ? val.substr(0, index - 1).match(/([^\]\[]+|(\B)(?=\]))/g) : [val],
 				obj = object;
 			if (!keys) return;
-			if (decodeValues) value = decodeURIComponent(value);
+			if (decodeValues) value = decodeComponent(value);
 			keys.each(function(key, i){
-				if (decodeKeys) key = decodeURIComponent(key);
+				if (decodeKeys) key = decodeComponent(key);
 				var current = obj[key];
 
 				if (i < keys.length - 1) obj = obj[key] = current || {};
@@ -66,3 +82,5 @@ String.implement({
 	}
 
 });
+
+})()
