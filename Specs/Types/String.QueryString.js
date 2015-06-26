@@ -41,7 +41,7 @@ provides: [String.QueryString.Tests]
 		});
 
 		it('should parse + into space', function(){
-			expect('this+should=be+spaces'.parseQueryString()).toEqual({'this should': 'be spaces'});
+			expect('this+should=all+be+spaces'.parseQueryString()).toEqual({'this should': 'all be spaces'});
 		});
 
 		it('should parse a collection correctly', function(){

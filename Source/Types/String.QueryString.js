@@ -38,7 +38,7 @@ provides: [String.QueryString]
  * problem.
  */
 var decodeComponent = function(str){
-	return decodeURIComponent(str.replace('+', ' '));
+	return decodeURIComponent(str.replace(/\+/g, ' '));
 };
 
 String.implement({
