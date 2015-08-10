@@ -94,12 +94,14 @@ var Drag = new Class({
 
 	attach: function(){
 		this.handles.addEvent('mousedown', this.bound.start);
+                this.handles.addEvent('touchstart', this.bound.start);
 		if (this.options.compensateScroll) this.offsetParent.addEvent('scroll', this.bound.scrollListener);
 		return this;
 	},
 
 	detach: function(){
 		this.handles.removeEvent('mousedown', this.bound.start);
+                this.handles.removeEvent('touchstart', this.bound.start);
 		if (this.options.compensateScroll) this.offsetParent.removeEvent('scroll', this.bound.scrollListener);
 		return this;
 	},
@@ -179,7 +181,9 @@ var Drag = new Class({
 
 		var events = {
 			mousemove: this.bound.check,
-			mouseup: this.bound.cancel
+                        touchmove: this.bound.check,
+			mouseup: this.bound.cancel,
+                        touchend: this.bound.cancel
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.addEvents(events);
@@ -192,7 +196,9 @@ var Drag = new Class({
 			this.cancel();
 			this.document.addEvents({
 				mousemove: this.bound.drag,
-				mouseup: this.bound.stop
+                                touchmove: this.bound.drag,
+				mouseup: this.bound.stop,
+                                touchend: this.bound.stop
 			});
 			this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
 		}
@@ -229,7 +235,9 @@ var Drag = new Class({
 	cancel: function(event){
 		this.document.removeEvents({
 			mousemove: this.bound.check,
-			mouseup: this.bound.cancel
+                        touchmove: this.bound.check,
+			mouseup: this.bound.cancel,
+                        touchend: this.bound.cancel
 		});
 		if (event){
 			this.document.removeEvent(this.selection, this.bound.eventStop);
@@ -240,7 +248,9 @@ var Drag = new Class({
 	stop: function(event){
 		var events = {
 			mousemove: this.bound.drag,
-			mouseup: this.bound.stop
+                        touchmove: this.bound.drag,
+			mouseup: this.bound.stop,
+                        touchend: this.bound.stop
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
