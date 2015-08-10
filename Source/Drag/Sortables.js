@@ -20,8 +20,9 @@ provides: [Sortables]
 
 ...
 */
+(function(){
 
-var Sortables = new Class({
+var Sortables = this.Sortables = new Class({
 
 	Implements: [Events, Options],
 
@@ -253,3 +254,5 @@ var Sortables = new Class({
 	}
 
 });
+
+})();

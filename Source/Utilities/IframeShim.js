@@ -32,7 +32,7 @@ var browsers = false;
 browsers = Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac);
 //</1.4compat>
 
-this.IframeShim = new Class({
+var IframeShim = this.IframeShim = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 

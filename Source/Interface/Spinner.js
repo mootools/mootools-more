@@ -22,10 +22,11 @@ provides: [Spinner]
 
 ...
 */
+(function(){
 
-var Spinner = new Class({
+var Spinner = this.Spinner = new Class({
 
-	Extends: Mask,
+	Extends: this.Mask,
 
 	Implements: Chain,
 
@@ -149,6 +150,8 @@ var Spinner = new Class({
 	}
 
 });
+
+})();
 
 Request = Class.refactor(Request, {
 

@@ -23,8 +23,9 @@ provides: [Scroller]
 
 ...
 */
+(function(){
 
-var Scroller = new Class({
+var Scroller = this.Scroller = new Class({
 
 	Implements: [Events, Options],
 
@@ -102,3 +103,6 @@ var Scroller = new Class({
 	}
 
 });
+
+})();
+

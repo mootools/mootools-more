@@ -21,8 +21,9 @@ provides: [HtmlTable]
 
 ...
 */
+(function(){
 
-var HtmlTable = new Class({
+var HtmlTable = this.HtmlTable = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
@@ -145,6 +146,8 @@ var HtmlTable = new Class({
 	}
 
 });
+
+})();
 
 
 ['adopt', 'inject', 'wraps', 'grab', 'replaces', 'dispose'].each(function(method){
