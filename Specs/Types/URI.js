@@ -64,6 +64,10 @@ provides: [URI.Tests]
 			expect(new URI('..', { base: 'http://www.calyptus.eu/mydirectory/mydirectory2/myfile.html' }).toString()).toEqual('http://www.calyptus.eu/mydirectory/');
 		});
 
+		it('Should decode + into space in the query portion of the url', function(){
+			expect(new URI('http://example.com/?key=a+b%2Bc').getData('key')).toEqual('a b+c');
+		});
+
 		it('Query String can contain @ symbol', function(){
 			expect(new URI('http://www.calyptus.eu/myfile.html?email=somebody@gmail.com').get('host')).toEqual('www.calyptus.eu');
 		});
