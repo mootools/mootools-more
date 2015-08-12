@@ -72,7 +72,8 @@ Request.JSONP = new Class({
 			case 'object': case 'hash': data = Object.toQueryString(data);
 		}
 
-		var index = this.index = Request.JSONP.counter++;
+		var index = this.index = Request.JSONP.counter++,
+			key = 'request_' + index;
 
 		var src = options.url +
 			(options.url.test('\\?') ? '&' :'?') +
@@ -82,8 +83,8 @@ Request.JSONP = new Class({
 
 		if (src.length > 2083) this.fireEvent('error', src);
 
-		Request.JSONP.request_map['request_' + index] = function(){
-			delete Request.JSONP.request_map['request_' + index];
+		Request.JSONP.request_map[key] = function(){
+			delete Request.JSONP.request_map[key];
 			this.success(arguments, index);
 		}.bind(this);
 
@@ -104,7 +105,7 @@ Request.JSONP = new Class({
 		return this.script;
 	},
 
-	success: function(args, index){
+	success: function(args){
 		if (!this.running) return;
 		this.clear()
 			.fireEvent('complete', args).fireEvent('success', args)
