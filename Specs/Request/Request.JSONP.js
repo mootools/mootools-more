@@ -7,6 +7,11 @@ provides: [Request.JSONP.Tests]
 */
 describe('Request.JSONP', function(){
 
+	function checkStoredRequestMap(expected){
+		var storedCallbacks = Object.keys(Request.JSONP.request_map).length;
+		expect(storedCallbacks).toBe(expected);
+	}
+
 	it('should grab some json from from assets/jsonp.js', function(){
 
 		var onComplete = jasmine.createSpy(),
@@ -50,6 +55,31 @@ describe('Request.JSONP', function(){
 			expect(onComplete.mostRecentCall.args[0].test).toEqual(true);
 		});
 
+	});
+
+	it('should clear the request callback map', function(){
+
+		var complete = false;
+		checkStoredRequestMap(0);
+		var request = new Request.JSONP({
+			url: 'base/Tests/Specs/assets/jsonp.js',
+			onComplete: function(){
+				checkStoredRequestMap(0);
+				complete = true;
+			},
+			onRequest: function(src, script){
+				checkStoredRequestMap(1);
+			},
+			clearRequestMap: true
+		}).send();
+		
+		waitsFor(1600, function(){
+			return complete;
+		});
+
+		runs(function(){
+			expect(complete).toBeTruthy();
+		});
 	});
 
 });

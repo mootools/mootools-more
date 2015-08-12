@@ -83,6 +83,7 @@ Request.JSONP = new Class({
 		if (src.length > 2083) this.fireEvent('error', src);
 
 		Request.JSONP.request_map['request_' + index] = function(){
+			delete Request.JSONP.request_map['request_' + index];
 			this.success(arguments, index);
 		}.bind(this);
 
