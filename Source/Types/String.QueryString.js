@@ -83,4 +83,4 @@ String.implement({
 
 });
 
-})()
+})();
