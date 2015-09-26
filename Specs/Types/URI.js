@@ -165,4 +165,30 @@ provides: [URI.Tests]
 		});
 	});
 
+	describe('URI ipv6', function () {
+		var suite = [
+			["http://10.0.0.1/", "10.0.0.1"],
+			["http://192.168.0.4/foo?bar#baz", "192.168.0.4"],
+			["http://192.168.0.4:60/foo?bar#baz", "192.168.0.4"],
+			["http://foo@192.168.0.4/foo?bar#baz", "192.168.0.4"],
+			["http://foo:bar@192.168.0.4/foo?bar#baz", "192.168.0.4"],
+			["http://foo:bar@192.168.0.4:8080/foo?bar#baz", "192.168.0.4"],
+			["http://foo:bar@[::1]:8080/foo?bar#baz", "[::1]"],
+			["http://foo:bar@[FE80::0202:B3FF:FE1E:8329]:8080/foo?bar#baz", "[FE80::0202:B3FF:FE1E:8329]"],
+			["http://foo:bar@[2001:db8::1]:8080/foo?bar#baz", "[2001:db8::1]"]
+		];
+
+		suite.each(function (test) {
+			it('resolve uri properly', function () {
+				var uri = test[0];
+				var control = test[1];
+				var url = new URI(uri);
+				var res = url.toString();
+				var resHost = url.get('host');
+				expect(resHost).toBe(control);
+				expect(res).toBe(uri);
+			});
+		});
+	});
+
 })();
