@@ -132,25 +132,25 @@ provides: [URI.Tests]
 
 	});
 
-	describe("URI merging", function () {
+	describe("URI merging", function(){
 
 		var myURI;
-		beforeEach(function () {
+		beforeEach(function(){
 			myURI = new URI('http://user:password@www.test.com:8383/the/path.html?param=value&animal=cat#car=ferrari');
 		});
 
-		it("should retrieve the 'fragment' part", function () {
+		it("should retrieve the 'fragment' part", function(){
 			expect(myURI.get('fragment')).toEqual('car=ferrari');
 		});
 
-		it("should insert new data into 'fragment'", function () {
+		it("should insert new data into 'fragment'", function(){
 			myURI.setData({
 				color: 'blue'
 			}, true, 'fragment')
 			expect(myURI.get('fragment')).toEqual('car=ferrari&color=blue');
 		});
 
-		it("should merge values from setData into URI overriding old keys with new value", function () {
+		it("should merge values from setData into URI overriding old keys with new value", function(){
 
 			var inicialQuery = myURI.get('query');
 			expect(inicialQuery).toEqual('param=value&animal=cat');
@@ -162,6 +162,32 @@ provides: [URI.Tests]
 			var finalQuery = myURI.get('query');
 			expect(finalQuery).toEqual('param=value&animal=dog&foo=bar');
 
+		});
+	});
+
+	describe('URI ipv6', function(){
+		var suite = [
+			["http://10.0.0.1/", "10.0.0.1"],
+			["http://192.168.0.4/foo?bar#baz", "192.168.0.4"],
+			["http://192.168.0.4:60/foo?bar#baz", "192.168.0.4"],
+			["http://foo@192.168.0.4/foo?bar#baz", "192.168.0.4"],
+			["http://foo:bar@192.168.0.4/foo?bar#baz", "192.168.0.4"],
+			["http://foo:bar@192.168.0.4:8080/foo?bar#baz", "192.168.0.4"],
+			["http://foo:bar@[::1]:8080/foo?bar#baz", "[::1]"],
+			["http://foo:bar@[FE80::0202:B3FF:FE1E:8329]:8080/foo?bar#baz", "[FE80::0202:B3FF:FE1E:8329]"],
+			["http://foo:bar@[2001:db8::1]:8080/foo?bar#baz", "[2001:db8::1]"]
+		];
+
+		suite.each(function(test){
+			it('resolve uri properly', function(){
+				var uri = test[0];
+				var control = test[1];
+				var url = new URI(uri);
+				var res = url.toString();
+				var resHost = url.get('host');
+				expect(resHost).toBe(control);
+				expect(res).toBe(uri);
+			});
 		});
 	});
 
