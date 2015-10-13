@@ -1,7 +1,7 @@
 Element.Event.Pseudos {#Pseudos}
 ================================
 
-Defines pseudo events like `:once` or `:throttle' as well as the `definePseudo` method to create your own.
+Defines pseudo events like `:once` or `:throttle` as well as the `definePseudo` method to create your own.
 
 ### Demo
 
