@@ -50,6 +50,14 @@ describe('String.stripTags', function(){
 		expect('i like cookies'.stripTags()).toEqual('i like cookies');
 	});
 
+	it('should leave a string with <b></b> but no <br/>', function(){
+		expect('<b>Header</b><br/>'.stripTags('br')).toEqual('<b>Header</b>');
+	});
+
+	it('should leave a string with <br/> but no <b></b>', function(){
+		expect('<b class="foo">Header</b><br/>'.stripTags('b')).toEqual('Header<br/>');
+	});
+
 });
 
 describe('String.truncate', function(){

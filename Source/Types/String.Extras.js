@@ -95,8 +95,8 @@ var walk = function(string, replacements){
 };
 
 var getRegexForTag = function(tag, contents){
-	tag = tag || '';
-	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "([^>]+)?>";
+	tag = tag || (contents ? '' : '\\w+');
+	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "\/?>|<" + tag + "[\\s|\/][^>]*>";
 	return new RegExp(regstr, "gi");
 };
 

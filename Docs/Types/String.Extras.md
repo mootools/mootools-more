@@ -137,7 +137,7 @@ Remove all html tags from a string.
 	var noItalics = html.stripTags('i');
 	//returns "<b>This is a string with html in it.</b>"
 	var noItalicsContent = html.stripTags('i', true);
-	returns "<b>This is a string with  in it.</b>"
+	//returns "<b>This is a string with  in it.</b>"
 
 ### Returns
 
