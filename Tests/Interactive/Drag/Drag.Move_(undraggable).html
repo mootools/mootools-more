@@ -1,0 +1,19 @@
+<style>
+#wrapper {
+	background-color: #fff;
+	border: 1px solid #303030;
+	float: left;
+	top:500px;
+	width: 30%;
+	height:100px;
+}
+</style>
+<p>You should be able to focus and change th input value after dragging.</p>
+<div id='wrapper'>
+	<div>
+		<input id='input' value='try to focus me'></input>
+	</div>
+</div>
+<script>
+	new Drag.Move('wrapper');
+</script>
