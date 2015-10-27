@@ -6,6 +6,12 @@ provides: [HtmlTable.Sort.Tests]
 ...
 */
 describe('HtmlTable.Sort', function(){
+	
+	function getText(rows){
+		return Array.map(rows, function(item){
+			return item.cells[0].get('text') || item.cells[0].getElement('input').get('value');
+		});
+	}
 
   it('should not step on prior this.bind declarations', function () {
     var table = new HtmlTable();
@@ -22,9 +28,7 @@ describe('HtmlTable.Sort', function(){
 				rows: data.map(function(item){return [item];})
 			});
 
-			return Array.map(table.sort(0, false).body.rows, function(item){
-				return item.cells[0].get('text') || item.cells[0].getElement('input').get('value');
-			});
+			return getText(table.sort(0, false).body.rows);
 		};
 
 		describe('date', function(){
@@ -116,6 +120,38 @@ describe('HtmlTable.Sort', function(){
 
 			it('should correctly sort alpha-floats according to value', function(){
 				expect(sortedTable('float', ['.2b', '1c', '.03a'])).toEqual(['.03a', '.2b', '1c']);
+			});
+
+		});
+
+		describe('onSort event', function(){
+			var status, args, tbody;
+			var table = new HtmlTable({
+				sortable: true,
+				headers: ['col'],
+				parsers: ['string'],
+				rows: [['a'], ['c'], ['b']],
+				onSort: function(body, index, reversed){
+					args = arguments;
+					tbody = body;
+					status = reversed;
+				}
+			});
+
+			it('should set function arguments', function(){
+				expect(args.length).toEqual(3);
+				expect(args[0].tagName.toLowerCase()).toEqual('tbody');
+				expect(typeof args[1]).toEqual('number');
+				expect(typeof args[2]).toEqual('string');
+			});
+			
+			it('should correctly set the direction onSort event', function(){
+				table.sort(0, false);
+				expect(status).toEqual('asc');
+				expect(getText(tbody.rows)).toEqual(['a', 'b', 'c']);
+				table.sort(0, true);
+				expect(status).toEqual('desc');
+				expect(getText(tbody.rows)).toEqual(['c', 'b', 'a']);
 			});
 
 		});
