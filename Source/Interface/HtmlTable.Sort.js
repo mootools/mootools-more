@@ -230,12 +230,13 @@ HtmlTable = Class.refactor(HtmlTable, {
 			return a.value > b.value ? 1 : -1;
 		});
 
-		if (this.sorted.reverse == (parser == HtmlTable.Parsers['input-checked'])) data.reverse(true);
+		var reverse = this.sorted.reverse == (parser == HtmlTable.Parsers['input-checked']);
+		if (reverse) data.reverse(true);
 		this.setRowSort(data, pre);
 
 		if (rel) rel.grab(this.body);
 		this.fireEvent('stateChanged');
-		return this.fireEvent('sort', [this.body, this.sorted.index]);
+		return this.fireEvent('sort', [this.body, this.sorted.index, reverse ? 'asc' : 'desc']);
 	},
 
 	parseData: function(parser){
