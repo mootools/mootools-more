@@ -54,7 +54,7 @@ Form.Validator Method: Constructor
 ### Notes
 
 * [Form.Validator][] must be configured with [InputValidator][] objects (see below for details as well as a list of built-in validators). Each [InputValidator][] will be applied to any input that includes its name in the data-validators property within the elements of the form that match the fieldSelectors option.
-* The preferred method for passing in validator properties (like the minimum length) is to append the value after the name. This value will be passed through [JSON.decode][] so it can be a number, string, array representation, etc.
+* The preferred method for passing in validator properties (like the minimum length) is to append the value after the name. This value will be passed through [JSON.decode][] so it can be a number, string, array representation, etc. Quoted strings like `'foo'` can have spaces.
 
 		// the minimum length the user can supply is the integer 10
 		<input data-validators="minLength:10" />

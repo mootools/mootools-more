@@ -19,6 +19,11 @@ describe('Form.Validator', function(){
 			expect(element.get('validatorProps')).toEqual({minLength: 10});
 		});
 
+		it('should get the properties from string with spaces', function(){
+			var input = new Element('input', {'data-validators': 'label:\'primary category\''});
+			expect(input.get('validatorProps')).toEqual({label: "primary category"});
+		});
+
 		it('should get the validator properties from a JSON string in the validatorProps attribute', function(){
 			var element = new Element('input').setProperty('validatorProps', '{minLength: 10, maxLength:20}');
 			expect(element.get('validatorProps')).toEqual({minLength: 10, maxLength: 20});
