@@ -19,13 +19,23 @@ provides: [Form.Validator.Extras]
 
 ...
 */
+
+(function(){
+
+function getItems(props, preference, children, cssSelector){
+	if (preference && props[preference]) return props[preference];
+	var el = document.id(props[children]);
+	if (!el) return [];
+	return el.getElements(cssSelector)
+}	
+
 Form.Validator.addAllThese([
 
 	['validate-enforce-oncheck', {
 		test: function(element, props){
 			var fv = element.getParent('form').retrieve('validator');
 			if (!fv) return true;
-			(props.toEnforce || document.id(props.enforceChildrenOf).getElements('input, select, textarea')).map(function(item){
+			getItems(props, 'toEnforce', 'enforceChildrenOf', 'input, select, textarea').each(function(item){
 				if (element.checked){
 					fv.enforceField(item);
 				} else {
@@ -41,12 +51,29 @@ Form.Validator.addAllThese([
 		test: function(element, props){
 			var fv = element.getParent('form').retrieve('validator');
 			if (!fv) return true;
-			(props.toIgnore || document.id(props.ignoreChildrenOf).getElements('input, select, textarea')).each(function(item){
+			getItems(props, 'toIgnore', 'ignoreChildrenOf', 'input, select, textarea').each(function(item){
 				if (element.checked){
 					fv.ignoreField(item);
 					fv.resetField(item);
 				} else {
 					fv.enforceField(item);
+				}
+			});
+			return true;
+		}
+	}],
+	
+	['validate-enforce-onselect-value', {
+		test: function(element, props){
+			if( !props.value ) return true;
+			var fv = element.getParent('form').retrieve('validator');
+			if (!fv) return true;
+			getItems(props, 'toEnforce', 'enforceChildrenOf', 'input, select, textarea').each(function(item){
+				if (props.value == element.value){
+					fv.enforceField(item);
+				} else {
+					fv.ignoreField(item);
+					fv.resetField(item);
 				}
 			});
 			return true;
@@ -66,7 +93,7 @@ Form.Validator.addAllThese([
 		test: function(element, props){
 			var fv = element.getParent('form').retrieve('validator');
 			if (!fv) return true;
-			var eleArr = props.toToggle || document.id(props.toToggleChildrenOf).getElements('input, select, textarea');
+			var eleArr = getItems(props, 'toToggle', 'toToggleChildrenOf', 'input, select, textarea');
 			if (!element.checked){
 				eleArr.each(function(item){
 					fv.ignoreField(item);
@@ -86,7 +113,7 @@ Form.Validator.addAllThese([
 			return Form.Validator.getMsg('reqChkByNode');
 		},
 		test: function(element, props){
-			return (document.id(props.nodeId).getElements(props.selector || 'input[type=checkbox], input[type=radio]')).some(function(item){
+			return getItems(props, false, 'nodeId', props.selector || 'input[type=checkbox], input[type=radio]').some(function(item){
 				return item.checked;
 			});
 		}
@@ -107,11 +134,14 @@ Form.Validator.addAllThese([
 		},
 		test: function(element, props){
 			var grpName = props.groupName || element.get('name');
-			var oneCheckedItem = $$(document.getElementsByName(grpName)).some(function(item, index){
+			var grpNameEls = $$('[name=' + grpName +']');
+			var oneCheckedItem = grpNameEls.some(function(item, index){
 				return item.checked;
 			});
 			var fv = element.getParent('form').retrieve('validator');
-			if (oneCheckedItem && fv) fv.resetField(element);
+			if (oneCheckedItem && fv){
+				grpNameEls.each(function(item, index){ fv.resetField(item); });
+			}
 			return oneCheckedItem;
 		}
 	}],
@@ -228,5 +258,6 @@ Form.Validator.addAllThese([
 		}
 	}]
 
-
 ]);
+
+});
