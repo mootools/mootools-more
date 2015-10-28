@@ -38,7 +38,8 @@ Fx.Accordion = new Class({
 		alwaysHide: false,
 		trigger: 'click',
 		initialDisplayFx: true,
-		resetHeight: true
+		resetHeight: true,
+		keepOpen: false
 	},
 
 	initialize: function(){
@@ -182,15 +183,17 @@ Fx.Accordion = new Class({
 		elements.each(function(el, i){
 			obj[i] = {};
 			var hide;
-			if (i != index){
-				hide = true;
-			} else if (options.alwaysHide && ((el.offsetHeight > 0 && options.height) || el.offsetWidth > 0 && options.width)){
-				hide = true;
-				this.selfHidden = true;
+			if(!options.keepOpen || i == index){
+				if (i != index){
+					hide = true;
+				} else if (options.alwaysHide && ((el.offsetHeight > 0 && options.height) || el.offsetWidth > 0 && options.width)){
+					hide = true;
+					this.selfHidden = true;
+				}
+				this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
+				for (var fx in effects) obj[i][fx] = hide ? 0 : el[effects[fx]];
+				if (!useFx && !hide && options.resetHeight) obj[i].height = 'auto';
 			}
-			this.fireEvent(hide ? 'background' : 'active', [this.togglers[i], el]);
-			for (var fx in effects) obj[i][fx] = hide ? 0 : el[effects[fx]];
-			if (!useFx && !hide && options.resetHeight) obj[i].height = 'auto';
 		}, this);
 
 		this.internalChain.clearChain();
