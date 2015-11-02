@@ -161,11 +161,13 @@ Fx.Accordion = new Class({
 		var obj = {},
 			elements = this.elements,
 			options = this.options,
-			effects = this.effects;
+			effects = this.effects,
+			keepOpen = options.keepOpen,
+			alwaysHide = options.alwaysHide;
 
 		if (useFx == null) useFx = true;
 		if (typeOf(index) == 'element') index = elements.indexOf(index);
-		if (index == this.current && !options.alwaysHide) return this;
+		if (index == this.current && !alwaysHide && !keepOpen) return this;
 
 		if (options.resetHeight){
 			var prev = elements[this.current];
@@ -174,7 +176,7 @@ Fx.Accordion = new Class({
 			}
 		}
 
-		if ((this.timer && options.link == 'chain') || (index === this.current && !options.alwaysHide)) return this;
+		if (this.timer && options.link == 'chain') return this;
 
 		if (this.current != null) this.previous = this.current;
 		this.current = index;
@@ -182,11 +184,13 @@ Fx.Accordion = new Class({
 
 		elements.each(function(el, i){
 			obj[i] = {};
-			var hide;
-			if(!options.keepOpen || i == index){
+			var hide, isOpen;
+			if(!keepOpen || i == index){
+	            if (i == index) isOpen = (el.offsetHeight > 0 && options.height) || (el.offsetWidth > 0 && options.width);
+			
 				if (i != index){
 					hide = true;
-				} else if (options.alwaysHide && ((el.offsetHeight > 0 && options.height) || el.offsetWidth > 0 && options.width)){
+				} else if ((alwaysHide || keepOpen) && isOpen){
 					hide = true;
 					this.selfHidden = true;
 				}

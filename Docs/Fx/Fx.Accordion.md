@@ -42,6 +42,7 @@ Fx.Accordion Method: constructor
 * alwaysHide  - (*boolean*: defaults to false) If set to true, it will be possible to close all displayable elements. Otherwise, one will remain open at all time.
 * initialDisplayFx - (*boolean*; defaults to true) If set to false, the initial item displayed will not display with an effect but will just be shown immediately.
 * resetHeight - (*boolean*; defaults to true) If set to false, the height of an opened accordion section will be set to an absolute pixel size.
+* keepOpen - (*boolean*; defaults to false) If set to true, it will keep multiple elements open (no auto collapsing). To close a element you have to "click" the trigger again.
 
 ### Events
 

@@ -150,3 +150,24 @@ new Fx.Accordion($$('#acc6 dt'), $$('#acc6 dd'), {
 });
 </script>
 
+<hr/>
+
+<p>It should keep more than one section open at the time.</p>
+
+<dl id="acc7">
+  <dl>
+    <dt class="toggle"><b>first section</b></dt>
+    <dd class="stretcher">I'm the content for the first section.</dd>
+    <dt class="toggle"><b>second section</b></dt>
+    <dd class="stretcher">I'm the content for the second section.</dd>
+    <dt class="toggle"><b>third section</b></dt>
+    <dd class="stretcher">I'm the content for the third section.</dd>
+  </dl>
+</dl>
+
+<script>
+new Fx.Accordion($$('#acc7 dt'), $$('#acc7 dd'), {
+	keepOpen: true
+});
+</script>
+
