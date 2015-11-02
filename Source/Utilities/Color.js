@@ -36,13 +36,11 @@ var Color = this.Color = new Type('Color', function(color, type){
 		else color = color.hexToRgb(true);
 	}
 	type = type || 'rgb';
-	switch (type){
-		case 'hsb':
-			var old = color;
-			color = color.hsbToRgb();
-			color.hsb = old;
-		break;
-		case 'hex': color = color.hexToRgb(true); break;
+	if (type == 'hsb')
+	{
+		var old = color;
+		color = color.hsbToRgb();
+		color.hsb = old;
 	}
 	color.rgb = color.slice(0, 3);
 	color.hsb = color.hsb || color.rgbToHsb();
