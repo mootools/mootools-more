@@ -19,6 +19,8 @@ provides: [Locale.fr-FR.Form.Validator]
 ...
 */
 
+/*eslint mootools-whitespace:0*/
+
 Locale.define('fr-FR', 'FormValidator', {
 
 	required: 'Ce champ est obligatoire.',

@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-module.exports = function(grunt) {
+module.exports = function(grunt){
 
 	require('load-grunt-tasks')(grunt);
 	var browser = process.env.BROWSER;
@@ -8,6 +8,13 @@ module.exports = function(grunt) {
 	var pullRequest = process.env.TRAVIS_PULL_REQUEST;
 
 	grunt.initConfig({
+		eslint: {
+			target: ['Gruntfile.js', 'Specs/**/*.js', 'Source/**/*.js'],
+			options: {
+				rulePaths: ['Tests/eslint/rules']
+			}
+		},
+
 		'connect': {
 			testserver: {
 				options: {
@@ -16,11 +23,11 @@ module.exports = function(grunt) {
 					// to avoid https://github.com/joyent/libuv/issues/826
 					port: 8000,
 					hostname: '0.0.0.0',
-					middleware: function(connect, options) {
+					middleware: function(connect, options){
 						return [
-							function(req, resp, next) {
+							function(req, resp, next){
 								// cache get requests to speed up tests on travis
-								if (req.method === 'GET') {
+								if (req.method === 'GET'){
 									resp.setHeader('Cache-control', 'public, max-age=3600');
 								}
 
@@ -37,7 +44,7 @@ module.exports = function(grunt) {
 
 			options: {
 				name: {
-					More: 'Source/', 
+					More: 'Source/',
 					Core: 'node_modules/mootools-core/'
 				}
 			},
@@ -86,8 +93,8 @@ module.exports = function(grunt) {
 				singleRun: true,
 				frameworks: ['jasmine', 'sinon'],
 				files: [
-					'Tests/Utilities/*.js', 
-					'mootools-*.js', 
+					'Tests/Utilities/*.js',
+					'mootools-*.js',
 					{pattern: 'Tests/Specs/assets/*.*', included: false, served: true}
 				],
 				sauceLabs: {
@@ -194,7 +201,7 @@ module.exports = function(grunt) {
 						version: '6',
 						deviceOrientation: 'portrait'
 					}
-				},
+				}
 			},
 
 			continuous: {
@@ -221,8 +228,8 @@ module.exports = function(grunt) {
 
 	});
 
-	var compatBuild = ['clean', 'packager:all', 'packager:specs'];
-	var nocompatBuild = ['clean', 'packager:morenocompat', 'packager:specs-nocompat'];
+	var compatBuild = ['clean', 'eslint', 'packager:all', 'packager:specs'];
+	var nocompatBuild = ['clean', 'eslint', 'packager:morenocompat', 'packager:specs-nocompat'];
 
 	var tasks = travisBuild == 'default' ? compatBuild : nocompatBuild;
 	tasks =  pullRequest != 'false' ? tasks.concat('karma:continuous') : tasks.concat('karma:sauceTask');
