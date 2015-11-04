@@ -83,22 +83,22 @@ describe('Locale', function(){
 //<1.2compat>
 describe('MooTools.lang 1.2 specs', function(){
 
-    it('should return english form validator message', function(){
-        MooTools.lang.setLanguage('en-US');
-        expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
-    });
+	it('should return english form validator message', function(){
+		MooTools.lang.setLanguage('en-US');
+		expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
+	});
 
-    it('should cascade through to english', function(){
-        MooTools.lang.set('en-GB', 'cascade', ['IT', 'ESP', 'gbENG']);
-        MooTools.lang.setLanguage('en-GB');
-        expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
-    });
+	it('should cascade through to english', function(){
+		MooTools.lang.set('en-GB', 'cascade', ['IT', 'ESP', 'gbENG']);
+		MooTools.lang.setLanguage('en-GB');
+		expect(MooTools.lang.get('FormValidator', 'required')).toEqual('This field is required.');
+	});
 
-    it('should return french form validator message', function(){
-        MooTools.lang.setLanguage('fr-FR');
-        expect(MooTools.lang.get('FormValidator', 'required')).toEqual('Ce champ est obligatoire.');
-        MooTools.lang.setLanguage('en-US'); // to not export this to other Specs
-    });
+	it('should return french form validator message', function(){
+		MooTools.lang.setLanguage('fr-FR');
+		expect(MooTools.lang.get('FormValidator', 'required')).toEqual('Ce champ est obligatoire.');
+		MooTools.lang.setLanguage('en-US'); // to not export this to other Specs
+	});
 
 });
 //</1.2compat>

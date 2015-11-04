@@ -72,7 +72,7 @@ describe('Request.JSONP', function(){
 			},
 			clearRequestMap: true
 		}).send();
-		
+
 		waitsFor(1600, function(){
 			return complete;
 		});

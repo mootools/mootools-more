@@ -29,7 +29,7 @@ describe('Hash.Cookie', function(){
 
 	it('Retrieves a Hash.Cookie', function(){
 		this.hc.set('pomme', 'rouge');
-		var hc2 = new Hash.Cookie('HCtest');// order matters here 
+		var hc2 = new Hash.Cookie('HCtest'); // order matters here
 		expect(hc2.get('pomme')).toEqual('rouge');
 	});
 
@@ -38,7 +38,7 @@ describe('Hash.Cookie', function(){
 
 		hc.set('apple', 'green');
 		hc.dispose().load();// destroy cookie then update hash
- 
+
 		expect(hc.get('apple')).toEqual(null);
 	});
 
@@ -47,15 +47,15 @@ describe('Hash.Cookie', function(){
 describe('Color properties', function(){
 
 	it('Should define the rgb value for a color', function(){
-		expect(new Color("#ff00ff").rgb).toEqual([255,0,255]);
+		expect(new Color('#ff00ff').rgb).toEqual([255,0,255]);
 	});
 
 	it('Should define the hsb value for a color', function(){
-		expect(new Color("#ff00ff").hsb).toEqual([300, 100, 100]);
+		expect(new Color('#ff00ff').hsb).toEqual([300, 100, 100]);
 	});
 
 	it('Should define the hex value for a color', function(){
-		expect(new Color([255,0,255]).hex).toEqual("#ff00ff");
+		expect(new Color([255,0,255]).hex).toEqual('#ff00ff');
 	});
 
 

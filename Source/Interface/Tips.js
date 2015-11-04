@@ -176,8 +176,8 @@ var Tips = this.Tips = new Class({
 			['title', 'text'].each(function(value){
 				var content = element.retrieve('tip:' + value);
 				var div = this['_' + value + 'Element'] = new Element('div', {
-						'class': 'tip-' + value
-					}).inject(this.container);
+					'class': 'tip-' + value
+				}).inject(this.container);
 				if (content){
 					this.fill(div, content);
 					showTip = true;

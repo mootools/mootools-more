@@ -16,8 +16,8 @@ var Table = this.Table = function(){
 
 	this.length = 0;
 	var keys = [],
-	    values = [];
-	
+		values = [];
+
 	this.set = function(key, value){
 		var index = keys.indexOf(key);
 		if (index == -1){
@@ -49,7 +49,7 @@ var Table = this.Table = function(){
 	this.each = this.forEach = function(fn, bind){
 		for (var i = 0, l = this.length; i < l; i++) fn.call(bind, keys[i], values[i], this);
 	};
-	
+
 };
 
 if (this.Type) new Type('Table', Table);

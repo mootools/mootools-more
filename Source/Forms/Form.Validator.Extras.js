@@ -26,8 +26,8 @@ function getItems(props, preference, children, cssSelector){
 	if (preference && props[preference]) return props[preference];
 	var el = document.id(props[children]);
 	if (!el) return [];
-	return el.getElements(cssSelector)
-}	
+	return el.getElements(cssSelector);
+}
 
 Form.Validator.addAllThese([
 
@@ -62,10 +62,10 @@ Form.Validator.addAllThese([
 			return true;
 		}
 	}],
-	
+
 	['validate-enforce-onselect-value', {
 		test: function(element, props){
-			if( !props.value ) return true;
+			if (!props.value) return true;
 			var fv = element.getParent('form').retrieve('validator');
 			if (!fv) return true;
 			getItems(props, 'toEnforce', 'enforceChildrenOf', 'input, select, textarea').each(function(item){
@@ -219,15 +219,15 @@ Form.Validator.addAllThese([
 			var ccNum = element.get('value');
 			ccNum = ccNum.replace(/[^0-9]/g, '');
 
-			var valid_type = false;
+			var validType = false;
 
-			if (ccNum.test(/^4[0-9]{12}([0-9]{3})?$/)) valid_type = 'Visa';
-			else if (ccNum.test(/^5[1-5]([0-9]{14})$/)) valid_type = 'Master Card';
-			else if (ccNum.test(/^3[47][0-9]{13}$/)) valid_type = 'American Express';
-			else if (ccNum.test(/^6(?:011|5[0-9]{2})[0-9]{12}$/)) valid_type = 'Discover';
-			else if (ccNum.test(/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/)) valid_type = 'Diners Club';
+			if (ccNum.test(/^4[0-9]{12}([0-9]{3})?$/)) validType = 'Visa';
+			else if (ccNum.test(/^5[1-5]([0-9]{14})$/)) validType = 'Master Card';
+			else if (ccNum.test(/^3[47][0-9]{13}$/)) validType = 'American Express';
+			else if (ccNum.test(/^6(?:011|5[0-9]{2})[0-9]{12}$/)) validType = 'Discover';
+			else if (ccNum.test(/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/)) validType = 'Diners Club';
 
-			if (valid_type){
+			if (validType){
 				var sum = 0;
 				var cur = 0;
 
@@ -260,4 +260,4 @@ Form.Validator.addAllThese([
 
 ]);
 
-});
+})();

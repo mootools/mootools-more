@@ -32,7 +32,7 @@ Locale.define('af-ZA', 'Date', {
 	AM: 'VM',
 	PM: 'NM',
 	firstDayOfWeek: 1,
-   
+
 	// Date.Extras
 	ordinal: function(dayOfMonth){
 		return ((dayOfMonth > 1 && dayOfMonth < 20 && dayOfMonth != 8) || (dayOfMonth > 100 && dayOfMonth.toString().substr(-2, 1) == '1')) ? 'de' : 'ste';

@@ -58,44 +58,44 @@ describe('Events.Pseudos', function(){
 			//adding this extra pause here as otherwise this test fails intermittently when run with other tests for some reason - aaron
 			waits(100);
 			runs(function(){
-			var fn1 = jasmine.createSpy(':throttle pseudo one'),
-				fn2 = jasmine.createSpy(':throttle pseudo two'),
-				events = new Events();
+				var fn1 = jasmine.createSpy(':throttle pseudo one'),
+					fn2 = jasmine.createSpy(':throttle pseudo two'),
+					events = new Events();
 
-			events.addEvents({
-				'scroll:throttle': fn1,
-				'scroll:throttle(500)': fn2
-			});
+				events.addEvents({
+					'scroll:throttle': fn1,
+					'scroll:throttle(500)': fn2
+				});
 
-			for (var i = 20; i--;) events.fireEvent('scroll');
-
-			// They should fire directly
-			expect(fn1.callCount).toEqual(1);
-			expect(fn2.callCount).toEqual(1);
-
-			waits(375);
-
-			runs(function(){
-
-				// default time is 250, so firing scroll after 250 ms would fire the fist event
 				for (var i = 20; i--;) events.fireEvent('scroll');
 
-				expect(fn1.callCount).toEqual(2);
+				// They should fire directly
+				expect(fn1.callCount).toEqual(1);
 				expect(fn2.callCount).toEqual(1);
 
-			});
+				waits(375);
 
-			waits(500);
+				runs(function(){
 
-			runs(function(){
+					// default time is 250, so firing scroll after 250 ms would fire the fist event
+					for (var i = 20; i--;) events.fireEvent('scroll');
 
-				// After another 500 ms all timeouts are cleared so both events will get called
-				for (var i = 20; i--;) events.fireEvent('scroll');
+					expect(fn1.callCount).toEqual(2);
+					expect(fn2.callCount).toEqual(1);
 
-				expect(fn1.callCount).toEqual(3);
-				expect(fn2.callCount).toEqual(2);
+				});
 
-			});
+				waits(500);
+
+				runs(function(){
+
+					// After another 500 ms all timeouts are cleared so both events will get called
+					for (var i = 20; i--;) events.fireEvent('scroll');
+
+					expect(fn1.callCount).toEqual(3);
+					expect(fn2.callCount).toEqual(2);
+
+				});
 			});
 
 		});
@@ -171,13 +171,13 @@ describe('Events.Pseudos', function(){
 			order = [],
 			e = new Events(),
 			spies = {
-			first: jasmine.createSpy(),
-			second: jasmine.createSpy(),
-			org: jasmine.createSpy()
-		};
+				first: jasmine.createSpy(),
+				second: jasmine.createSpy(),
+				org: jasmine.createSpy()
+			};
 
 		it('should support adding events', function(){
-			spy = function (split, fn, args, monitor){
+			spy = function(split, fn, args, monitor){
 				if (!split) spies.org();
 				else spies[split.pseudo]();
 				order.push(split ? split.pseudo : 'org');

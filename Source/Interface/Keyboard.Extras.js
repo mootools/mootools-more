@@ -95,11 +95,11 @@ Keyboard.getShortcut = function(name, keyboard, opts){
 	opts = opts || {};
 	var shortcuts = opts.many ? [] : null,
 		set = opts.many ? function(kb){
-				var shortcut = kb.getShortcut(name);
-				if (shortcut) shortcuts.push(shortcut);
-			} : function(kb){
-				if (!shortcuts) shortcuts = kb.getShortcut(name);
-			};
+			var shortcut = kb.getShortcut(name);
+			if (shortcut) shortcuts.push(shortcut);
+		} : function(kb){
+			if (!shortcuts) shortcuts = kb.getShortcut(name);
+		};
 	Keyboard.each(keyboard, set);
 	return shortcuts;
 };

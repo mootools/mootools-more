@@ -27,66 +27,66 @@ provides: [String.Extras]
 (function(){
 
 var special = {
-	'a': /[àáâãäåăą]/g,
-	'A': /[ÀÁÂÃÄÅĂĄ]/g,
-	'c': /[ćčç]/g,
-	'C': /[ĆČÇ]/g,
-	'd': /[ďđ]/g,
-	'D': /[ĎÐ]/g,
-	'e': /[èéêëěę]/g,
-	'E': /[ÈÉÊËĚĘ]/g,
-	'g': /[ğ]/g,
-	'G': /[Ğ]/g,
-	'i': /[ìíîï]/g,
-	'I': /[ÌÍÎÏ]/g,
-	'l': /[ĺľł]/g,
-	'L': /[ĹĽŁ]/g,
-	'n': /[ñňń]/g,
-	'N': /[ÑŇŃ]/g,
-	'o': /[òóôõöøő]/g,
-	'O': /[ÒÓÔÕÖØ]/g,
-	'r': /[řŕ]/g,
-	'R': /[ŘŔ]/g,
-	's': /[ššş]/g,
-	'S': /[ŠŞŚ]/g,
-	't': /[ťţ]/g,
-	'T': /[ŤŢ]/g,
-	'u': /[ùúûůüµ]/g,
-	'U': /[ÙÚÛŮÜ]/g,
-	'y': /[ÿý]/g,
-	'Y': /[ŸÝ]/g,
-	'z': /[žźż]/g,
-	'Z': /[ŽŹŻ]/g,
-	'th': /[þ]/g,
-	'TH': /[Þ]/g,
-	'dh': /[ð]/g,
-	'DH': /[Ð]/g,
-	'ss': /[ß]/g,
-	'oe': /[œ]/g,
-	'OE': /[Œ]/g,
-	'ae': /[æ]/g,
-	'AE': /[Æ]/g
-},
+		'a': /[àáâãäåăą]/g,
+		'A': /[ÀÁÂÃÄÅĂĄ]/g,
+		'c': /[ćčç]/g,
+		'C': /[ĆČÇ]/g,
+		'd': /[ďđ]/g,
+		'D': /[ĎÐ]/g,
+		'e': /[èéêëěę]/g,
+		'E': /[ÈÉÊËĚĘ]/g,
+		'g': /[ğ]/g,
+		'G': /[Ğ]/g,
+		'i': /[ìíîï]/g,
+		'I': /[ÌÍÎÏ]/g,
+		'l': /[ĺľł]/g,
+		'L': /[ĹĽŁ]/g,
+		'n': /[ñňń]/g,
+		'N': /[ÑŇŃ]/g,
+		'o': /[òóôõöøő]/g,
+		'O': /[ÒÓÔÕÖØ]/g,
+		'r': /[řŕ]/g,
+		'R': /[ŘŔ]/g,
+		's': /[ššş]/g,
+		'S': /[ŠŞŚ]/g,
+		't': /[ťţ]/g,
+		'T': /[ŤŢ]/g,
+		'u': /[ùúûůüµ]/g,
+		'U': /[ÙÚÛŮÜ]/g,
+		'y': /[ÿý]/g,
+		'Y': /[ŸÝ]/g,
+		'z': /[žźż]/g,
+		'Z': /[ŽŹŻ]/g,
+		'th': /[þ]/g,
+		'TH': /[Þ]/g,
+		'dh': /[ð]/g,
+		'DH': /[Ð]/g,
+		'ss': /[ß]/g,
+		'oe': /[œ]/g,
+		'OE': /[Œ]/g,
+		'ae': /[æ]/g,
+		'AE': /[Æ]/g
+	},
 
-tidy = {
-	' ': /[\xa0\u2002\u2003\u2009]/g,
-	'*': /[\xb7]/g,
-	'\'': /[\u2018\u2019]/g,
-	'"': /[\u201c\u201d]/g,
-	'...': /[\u2026]/g,
-	'-': /[\u2013]/g,
-//	'--': /[\u2014]/g,
-	'&raquo;': /[\uFFFD]/g
-},
+	tidy = {
+		' ': /[\xa0\u2002\u2003\u2009]/g,
+		'*': /[\xb7]/g,
+		'\'': /[\u2018\u2019]/g,
+		'"': /[\u201c\u201d]/g,
+		'...': /[\u2026]/g,
+		'-': /[\u2013]/g,
+	//	'--': /[\u2014]/g,
+		'&raquo;': /[\uFFFD]/g
+	},
 
-conversions = {
-	ms: 1,
-	s: 1000,
-	m: 6e4,
-	h: 36e5
-},
+	conversions = {
+		ms: 1,
+		s: 1000,
+		m: 6e4,
+		h: 36e5
+	},
 
-findUnits = /(\d*.?\d+)([msh]+)/;
+	findUnits = /(\d*.?\d+)([msh]+)/;
 
 var walk = function(string, replacements){
 	var result = string, key;
@@ -96,8 +96,8 @@ var walk = function(string, replacements){
 
 var getRegexForTag = function(tag, contents){
 	tag = tag || (contents ? '' : '\\w+');
-	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "\/?>|<" + tag + "[\\s|\/][^>]*>";
-	return new RegExp(regstr, "gi");
+	var regstr = contents ? '<' + tag + '(?!\\w)[^>]*>([\\s\\S]*?)<\/' + tag + '(?!\\w)>' : '<\/?' + tag + '\/?>|<' + tag + '[\\s|\/][^>]*>';
+	return new RegExp(regstr, 'gi');
 };
 
 String.implement({
@@ -150,7 +150,7 @@ String.implement({
 	},
 
 	ms: function(){
-	  // "Borrowed" from https://gist.github.com/1503944
+		// "Borrowed" from https://gist.github.com/1503944
 		var units = findUnits.exec(this);
 		if (units == null) return Number(this);
 		return Number(units[1]) * conversions[units[2]];

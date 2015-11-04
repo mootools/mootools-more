@@ -168,7 +168,7 @@ var Slider = this.Slider = new Class({
 		if (range) this.set(Array.pick([pos, this.step]).limit(this.min,this.max), silently);
 		return this;
 	},
-    
+
 	setModulus: function(){
 		var decimals = ((this.stepSize + '').split('.')[1] || []).length,
 			modulus = 1 + '';

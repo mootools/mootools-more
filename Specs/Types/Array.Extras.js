@@ -49,47 +49,47 @@ describe('Array.shuffle', function(){
 
 describe('Array.sum', function(){
 
-	it("should return 0 for an empty array", function(){
+	it('should return 0 for an empty array', function(){
 		expect([].sum()).toEqual(0);
 	});
 
-	it("should sum an array with one item", function(){
+	it('should sum an array with one item', function(){
 		expect([3].sum()).toEqual(3);
 	});
 
-	it("should sum an array of integers", function(){
+	it('should sum an array of integers', function(){
 		expect([1, 2, 3].sum()).toEqual(6);
 	});
 
-	it("should sum an array of floats", function(){
+	it('should sum an array of floats', function(){
 		expect([1.5, 2.5, 3.5].sum()).toEqual(7.5);
 	});
 
-	it("should handle numeric strings in arrays correctly", function(){
-		expect([1, "2.5", 3].sum()).toEqual(6.5);
-		expect([1, "2", 3].sum()).toEqual(6);
+	it('should handle numeric strings in arrays correctly', function(){
+		expect([1, '2.5', 3].sum()).toEqual(6.5);
+		expect([1, '2', 3].sum()).toEqual(6);
 	});
 
-	it("should skip null and undefined items", function(){
+	it('should skip null and undefined items', function(){
 		expect([1, 2, null, 4].sum()).toEqual(7);
 		expect([1, 2, undefined, 4].sum()).toEqual(7);
 	});
 
-	it("should work with a sparse array", function(){
+	it('should work with a sparse array', function(){
 		var array = [1, 2];
 		array[5] = 6;
 		expect(array.sum()).toEqual(9);
 	});
 
-	it("should handle Infinity correctly", function(){
+	it('should handle Infinity correctly', function(){
 		expect([1, 2, Infinity, 5].sum()).toEqual(Infinity);
 		expect([1, 2, -Infinity, 5].sum()).toEqual(-Infinity);
 		expect([1, 2, Infinity, 5, -Infinity].sum()).toBeNaN();
 	});
 
-	it("should return NaN when not all items are numeric", function(){
-		expect([1, 2, "", 5].sum()).toBeNaN();
-		expect([1, 2, "foo", 5].sum()).toBeNaN();
+	it('should return NaN when not all items are numeric', function(){
+		expect([1, 2, '', 5].sum()).toBeNaN();
+		expect([1, 2, 'foo', 5].sum()).toBeNaN();
 	});
 
 });
@@ -98,7 +98,7 @@ describe('Array.sum', function(){
 describe('Array.unique', function(){
 
 	it('should remove duplicates from an array', function(){
-		expect(['apple', 'lemon', 'pear', 'lemon', 'apple'].unique()).toEqual(["apple", "lemon", "pear"]);
+		expect(['apple', 'lemon', 'pear', 'lemon', 'apple'].unique()).toEqual(['apple', 'lemon', 'pear']);
 	});
 
 	it('should not remove items that are dedupe', function(){

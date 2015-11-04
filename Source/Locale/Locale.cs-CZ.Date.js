@@ -24,7 +24,7 @@ provides: [Locale.cs-CZ.Date]
 // one -> n is 1;            1
 // few -> n in 2..4;         2-4
 // other -> everything else  0, 5-999, 1.31, 2.31, 5.31...
-var pluralize = function (n, one, few, other){
+var pluralize = function(n, one, few, other){
 	if (n == 1) return one;
 	else if (n == 2 || n == 3 || n == 4) return few;
 	else return other;

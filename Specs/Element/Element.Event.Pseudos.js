@@ -9,10 +9,8 @@ describe('Element.Event.Pseudos', function(){
 
 	it('tests the DOMEvent.definePseudo function', function(){
 
-		var eventFn =  function(){
-			return 'bar';
-		},
-		eventArgs = ['one', 'two', 'three'];
+		var eventFn = function(){ return 'bar'; },
+			eventArgs = ['one', 'two', 'three'];
 
 		DOMEvent.definePseudo('test', function(split, fn, args){
 			expect({

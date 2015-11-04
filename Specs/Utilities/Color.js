@@ -20,15 +20,15 @@ describe('Color initialize', function(){
 describe('Color properties', function(){
 
 	it('Should define the rgb value for a color', function(){
-		expect(new Color("#ff00ff").rgb).toEqual([255,0,255]);
+		expect(new Color('#ff00ff').rgb).toEqual([255,0,255]);
 	});
 
 	it('Should define the hsb value for a color', function(){
-		expect(new Color("#ff00ff").hsb).toEqual([300, 100, 100]);
+		expect(new Color('#ff00ff').hsb).toEqual([300, 100, 100]);
 	});
 
 	it('Should define the hex value for a color', function(){
-		expect(new Color([255,0,255]).hex).toEqual("#ff00ff");
+		expect(new Color([255,0,255]).hex).toEqual('#ff00ff');
 	});
 
 

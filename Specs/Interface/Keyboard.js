@@ -11,13 +11,12 @@ if (window.addEventListener) describe('Keyboard', function(){
 	it('should deactivate and reactivate', function(){
 
 		var onActivate = jasmine.createSpy(),
-		onDeactivate = jasmine.createSpy(),
-
-		kb = new Keyboard({
-			onActivate: onActivate,
-			onDeactivate: onDeactivate,
-			active: true
-		});
+			onDeactivate = jasmine.createSpy(),
+			kb = new Keyboard({
+				onActivate: onActivate,
+				onDeactivate: onDeactivate,
+				active: true
+			});
 
 		// events
 

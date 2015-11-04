@@ -42,7 +42,7 @@ Element.implement({
 		try {
 			//IE fails here if the element is not in the dom
 			d = this.getStyle('display');
-		} catch(e){}
+		} catch (e){}
 		if (d == 'none') return this;
 		return this.store('element:_originalDisplay', d || '').setStyle('display', 'none');
 	},
@@ -69,7 +69,7 @@ Document.implement({
 			try {
 				//IE fails here if selected element is not in dom
 				document.selection.empty();
-			} catch(e){}
+			} catch (e){}
 		}
 	}
 

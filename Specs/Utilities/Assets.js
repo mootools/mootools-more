@@ -48,7 +48,7 @@ describe('Assets', function(){
 				}
 			});
 		}
-		
+
 		afterEach(function(){
 			$('myStyle').destroy();
 			$('moologo').destroy();
@@ -57,7 +57,6 @@ describe('Assets', function(){
 		it('should load a external css file and run load callback', function(){
 			var load = jasmine.createSpy('load');
 			var url = 'https://rawgit.com/mootools/mootools-more/master/Tests/Specs/assets/Assets.css.test.css';
-			var myCSS = addCSS(url, load);
 			var myCSS = addCSS(url, load);
 
 			waits(3000);

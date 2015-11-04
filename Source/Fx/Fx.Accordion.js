@@ -185,9 +185,9 @@ Fx.Accordion = new Class({
 		elements.each(function(el, i){
 			obj[i] = {};
 			var hide, isOpen;
-			if(!keepOpen || i == index){
-	            if (i == index) isOpen = (el.offsetHeight > 0 && options.height) || (el.offsetWidth > 0 && options.width);
-			
+			if (!keepOpen || i == index){
+				if (i == index) isOpen = (el.offsetHeight > 0 && options.height) || (el.offsetWidth > 0 && options.width);
+
 				if (i != index){
 					hide = true;
 				} else if ((alwaysHide || keepOpen) && isOpen){

@@ -6,17 +6,17 @@ provides: [HtmlTable.Sort.Tests]
 ...
 */
 describe('HtmlTable.Sort', function(){
-	
+
 	function getText(rows){
 		return Array.map(rows, function(item){
 			return item.cells[0].get('text') || item.cells[0].getElement('input').get('value');
 		});
 	}
 
-  it('should not step on prior this.bind declarations', function () {
-    var table = new HtmlTable();
-    expect(table.bound.headClick).not.toEqual(null);
-  });
+	it('should not step on prior this.bind declarations', function(){
+		var table = new HtmlTable();
+		expect(table.bound.headClick).not.toEqual(null);
+	});
 
 	describe('HtmlTable.Parsers', function(){
 
@@ -144,7 +144,7 @@ describe('HtmlTable.Sort', function(){
 				expect(typeof args[1]).toEqual('number');
 				expect(typeof args[2]).toEqual('string');
 			});
-			
+
 			it('should correctly set the direction onSort event', function(){
 				table.sort(0, false);
 				expect(status).toEqual('asc');
@@ -212,7 +212,7 @@ describe('HtmlTable.Sort', function(){
 				]
 			});
 
-			function customSort(a, b) { // sort by length of string
+			function customSort(a, b){ // sort by length of string
 				return a.value.length > b.value.length ? 1: -1;
 			}
 
@@ -220,7 +220,7 @@ describe('HtmlTable.Sort', function(){
 			var values = Array.map(table.body.rows, function(item){
 				return item.cells[0].get('text');
 			});
-			expect(values).toEqual(["bb", "aaa", "cccc"]);
+			expect(values).toEqual(['bb', 'aaa', 'cccc']);
 		});
 
 		it('should restore the sorted state of a table', function(){
