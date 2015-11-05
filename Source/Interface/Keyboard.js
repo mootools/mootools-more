@@ -57,7 +57,7 @@ provides: [Keyboard]
 		},
 
 		removeEvent: function(type, fn){
-			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn);
+			return this.parent(type, fn);
 		},
 
 		toggleActive: function(){
