@@ -19,6 +19,8 @@ provides: [Locale.it-IT.Form.Validator]
 ...
 */
 
+/*eslint mootools-whitespace:0*/
+
 Locale.define('it-IT', 'FormValidator', {
 
 	required: 'Il campo &egrave; obbligatorio.',

@@ -35,20 +35,19 @@ Form.Request.Append = new Class({
 
 	makeRequest: function(){
 		this.request = new Request.HTML(Object.merge({
-				url: this.element.get('action'),
-				method: this.element.get('method') || 'post',
-				spinnerTarget: this.element
-			}, this.options.requestOptions, {
-				evalScripts: false
-			})
-		).addEvents({
+			url: this.element.get('action'),
+			method: this.element.get('method') || 'post',
+			spinnerTarget: this.element
+		}, this.options.requestOptions, {
+			evalScripts: false
+		})).addEvents({
 			success: function(tree, elements, html, javascript){
 				var container;
 				var kids = Elements.from(html);
 				if (kids.length == 1){
 					container = kids[0];
 				} else {
-					 container = new Element('div', {
+					container = new Element('div', {
 						styles: {
 							display: 'none'
 						}

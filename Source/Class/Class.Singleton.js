@@ -21,7 +21,7 @@ provides: [Class.Singleton]
 */
 
 Class.Singleton = new Class({
-	
+
 	initialize : function(descriptor){
 		// here we keep reference of the single instance
 		var singleton;
@@ -34,18 +34,18 @@ Class.Singleton = new Class({
 				return singleton;
 			}
 			// Obviously we instantiate that class for the first time.
-			// Create brand new object & extend it with the prototype of the 
+			// Create brand new object & extend it with the prototype of the
 			// original `constructor`.
 			singleton = Object.append({}, constructor.prototype);
 			singleton.constructor = constructor;
-			// We also need to call the constructor as a function, passing the 
+			// We also need to call the constructor as a function, passing the
 			// arguments object.
-			var return_value = constructor.apply(singleton, arguments);
-			// In case the `constructor` returns something other than `this` - 
+			var returnValue = constructor.apply(singleton, arguments);
+			// In case the `constructor` returns something other than `this` -
 			// return that value; otherwise return the `singleton`.
-			singleton = typeof return_value == 'object' ? return_value : singleton;
+			singleton = typeof returnValue == 'object' ? returnValue : singleton;
 			return singleton;
 		};
 	}
-	
+
 });

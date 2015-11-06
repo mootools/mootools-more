@@ -21,22 +21,22 @@ describe('Form.Validator', function(){
 
 		it('should get the properties from string with spaces', function(){
 			var input = new Element('input', {'data-validators': 'label:\'primary category\''});
-			expect(input.get('validatorProps')).toEqual({label: "primary category"});
+			expect(input.get('validatorProps')).toEqual({label: 'primary category'});
 		});
 
 		it('should get the validator properties from a JSON string in the validatorProps attribute', function(){
 			var element = new Element('input').setProperty('validatorProps', '{minLength: 10, maxLength:20}');
 			expect(element.get('validatorProps')).toEqual({minLength: 10, maxLength: 20});
 		});
-        
-		it('should get the properties in the class attribute from a new added Validator', function (){
+
+		it('should get the properties in the class attribute from a new added Validator', function(){
 
 			var prop;
 			Form.Validator.add('validate-string-fail', {
-				errorMsg: function (element, props){
+				errorMsg: function(element, props){
 					return Form.Validator.getMsg('required');
 				},
-				test: function (element, props){
+				test: function(element, props){
 					prop = props.mooCustom;
 					return false;
 				}
@@ -99,7 +99,7 @@ describe('Form.Validator', function(){
 			);
 			expect(form.validate({ignoreHidden: false})).toEqual(true);
 		});
-	
+
 	});
 
 	describe('onElementPass', function(){
@@ -259,7 +259,7 @@ describe('Form.Validator', function(){
 			it('should return true for fields whose value is a digit', function(){
 				expect(validator.test(createInput(5))).toEqual(true);
 				expect(validator.test(createInput('4.1'))).toEqual(true);
-				});
+			});
 
 			it('should return true for fields which contain punctuation and spaces', function(){
 				expect(validator.test(createInput('000-000-0000'))).toEqual(true);
@@ -284,7 +284,7 @@ describe('Form.Validator', function(){
 			});
 
 			it('should return true for fields whose value only contains letters', function(){
-				expect(validator.test(createInput("CamelFoo"))).toEqual(true);
+				expect(validator.test(createInput('CamelFoo'))).toEqual(true);
 			});
 
 		});
@@ -320,7 +320,7 @@ describe('Form.Validator', function(){
 			});
 
 			it('should return false, instead of Type Error, when passed a empty string', function(){
-				expect(validator.test(createInput('    '))).toBeFalsy()
+				expect(validator.test(createInput('    '))).toBeFalsy();
 			});
 
 			it('should return true for fields whose value parses to a date', function(){

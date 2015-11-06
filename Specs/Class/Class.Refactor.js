@@ -44,11 +44,11 @@ describe('Class.Refactor', function(){
 	var Test3 = new Class({
 	});
 	Test3.prototype.origin = function(){
-		return "original origin";
+		return 'original origin';
 	};
 	Class.refactor(Test3, {
 		origin: function(){
-			return "refactored origin " + this.previous();
+			return 'refactored origin ' + this.previous();
 		}
 	});
 

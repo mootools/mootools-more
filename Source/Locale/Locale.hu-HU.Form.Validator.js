@@ -18,6 +18,8 @@ provides: [Locale.hu-HU.Form.Validator]
 ...
 */
 
+/*eslint mootools-whitespace:0*/
+
 Locale.define('hu-HU', 'FormValidator', {
 
 	required: 'A mező kitöltése kötelező.',

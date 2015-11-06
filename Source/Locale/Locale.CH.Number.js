@@ -13,12 +13,12 @@ provides: [Locale.CH.Number]
 
 Locale.define('CH', 'Number', {
 
-    decimal: ',',
-    group: '\'',
+	decimal: ',',
+	group: '\'',
 
-    currency: {
-      decimal: '.',
-      suffix: ' CHF'
-    }
+	currency: {
+		decimal: '.',
+		suffix: ' CHF'
+	}
 
 });

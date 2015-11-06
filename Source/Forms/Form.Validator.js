@@ -88,7 +88,7 @@ Element.Properties.validatorProps = {
 		if (this.getProperty('data-validator-properties') || this.getProperty('validatorProps')){
 			try {
 				this.store('$moo:validatorProps', JSON.decode(this.getProperty('validatorProps') || this.getProperty('data-validator-properties'), false));
-			}catch(e){
+			} catch (e){
 				return {};
 			}
 		} else {
@@ -104,7 +104,7 @@ Element.Properties.validatorProps = {
 					if (split[1]){
 						try {
 							props[split[0]] = JSON.decode(split[1], false);
-						} catch(e){}
+						} catch (e){}
 					}
 				});
 				this.store('$moo:validatorProps', props);

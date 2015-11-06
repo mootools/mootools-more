@@ -41,7 +41,7 @@ var Color = this.Color = new Type('Color', function(color, type){
 			var old = color;
 			color = color.hsbToRgb();
 			color.hsb = old;
-		break;
+			break;
 		case 'hex': color = color.hexToRgb(true); break;
 	}
 	color.rgb = color.slice(0, 3);
@@ -99,14 +99,15 @@ Array.implement({
 
 	rgbToHsb: function(){
 		var red = this[0],
-				green = this[1],
-				blue = this[2],
-				hue = 0;
-		var max = Math.max(red, green, blue),
-				min = Math.min(red, green, blue);
-		var delta = max - min;
-		var brightness = max / 255,
-				saturation = (max != 0) ? delta / max : 0;
+			green = this[1],
+			blue = this[2],
+			hue = 0,
+			max = Math.max(red, green, blue),
+			min = Math.min(red, green, blue),
+			delta = max - min,
+			brightness = max / 255,
+			saturation = (max != 0) ? delta / max : 0;
+
 		if (saturation != 0){
 			var rr = (max - red) / delta;
 			var gr = (max - green) / delta;

@@ -14,7 +14,7 @@ describe('Element.Forms', function(){
 		container = new Element('div', {
 			styles: {
 				height: 1,
-				overflow: "hidden"
+				overflow: 'hidden'
 			}
 		}).inject($(document.body));
 

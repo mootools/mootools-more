@@ -67,7 +67,7 @@ describe('Class.Binds', function(){
 	});
 
 	it('should retain binders from ancestors', function(){
-		
+
 		var Parent = new Class({
 			Binds: ['foo'],
 			fooValue: 'foo',
@@ -75,7 +75,7 @@ describe('Class.Binds', function(){
 				return this.fooValue;
 			}
 		});
-		
+
 		var Child = new Class({
 			Extends: Parent,
 			Binds: ['bar'],

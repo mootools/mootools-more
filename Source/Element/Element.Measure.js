@@ -100,17 +100,16 @@ Element.implement({
 		} else if (parent){
 			try { //safari sometimes crashes here, so catch it
 				dim = getSize(this, options);
-			}catch(e){}
+			} catch (e){}
 		}
 
 		return Object.append(dim, (dim.x || dim.x === 0) ? {
-				width: dim.x,
-				height: dim.y
-			} : {
-				x: dim.width,
-				y: dim.height
-			}
-		);
+			width: dim.x,
+			height: dim.y
+		} : {
+			x: dim.width,
+			y: dim.height
+		});
 	},
 
 	getComputedSize: function(options){

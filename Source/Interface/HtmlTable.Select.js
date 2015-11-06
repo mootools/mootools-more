@@ -124,7 +124,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	restore: function(tableState){
-		if(this.options.selectable && tableState.selectedRows){
+		if (this.options.selectable && tableState.selectedRows){
 			tableState.selectedRows.each(function(index){
 				this.selectRow(this.body.rows[index]);
 			}.bind(this));
@@ -236,7 +236,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 			index += offset;
 		} else {
 			var limit = 0,
-			    count = 0;
+				count = 0;
 			if (offset > 0){
 				while (count < offset && index < this.body.rows.length -1){
 					if (this.body.rows[++index].isDisplayed()) count++;
@@ -313,7 +313,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 
 				var shiftHint = '';
 				if (this.options.allowMultiSelect && this.options.shiftForMultiSelect && this.options.useKeyboard){
-					shiftHint = " (Shift multi-selects).";
+					shiftHint = ' (Shift multi-selects).';
 				}
 
 				this.keyboard.addShortcuts({

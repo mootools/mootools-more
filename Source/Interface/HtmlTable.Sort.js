@@ -56,7 +56,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		thSelector: 'th'
 	},
 
-	initialize: function (){
+	initialize: function(){
 		this.previous.apply(this, arguments);
 		if (this.occluded) return this.occluded;
 		this.sorted = {index: null, dir: 1};
@@ -139,7 +139,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	},
 
 	restore: function(tableState){
-		if(this.options.sortable && tableState.sortIndex){
+		if (this.options.sortable && tableState.sortIndex){
 			this.sort(tableState.sortIndex, tableState.sortReverse);
 		}
 		this.previous.apply(this, arguments);
@@ -230,13 +230,13 @@ HtmlTable = Class.refactor(HtmlTable, {
 			return a.value > b.value ? 1 : -1;
 		});
 
-		var reverse = this.sorted.reverse == (parser == HtmlTable.Parsers['input-checked']);
-		if (reverse) data.reverse(true);
+		var reversed = this.sorted.reverse == (parser == HtmlTable.Parsers['input-checked']);
+		if (reversed) data.reverse(true);
 		this.setRowSort(data, pre);
 
 		if (rel) rel.grab(this.body);
 		this.fireEvent('stateChanged');
-		return this.fireEvent('sort', [this.body, this.sorted.index, reverse ? 'asc' : 'desc']);
+		return this.fireEvent('sort', [this.body, this.sorted.index, reversed ? 'asc' : 'desc']);
 	},
 
 	parseData: function(parser){

@@ -80,6 +80,6 @@ DOMEvent.defineKeys({
 	'107': '+',
 	'109': '-', // subtract
 	'189': '-'  // dash
-})
+});
 
 })();

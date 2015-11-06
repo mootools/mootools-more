@@ -26,7 +26,7 @@ provides: [Locale.ru-RU.Date]
 // few -> n mod 10 in 2..4 and n mod 100 not in 12..14;
 // many -> n mod 10 is 0 or n mod 10 in 5..9 or n mod 100 in 11..14;
 // other -> everything else (example 3.14)
-var pluralize = function (n, one, few, many, other){
+var pluralize = function(n, one, few, many, other){
 	var modulo10 = n % 10,
 		modulo100 = n % 100;
 

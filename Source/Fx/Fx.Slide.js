@@ -160,7 +160,7 @@ Element.implement({
 				slide[flag ? 'slideOut' : 'slideIn'](mode);
 				this.store('slide:flag', !flag);
 				toggle = true;
-			break;
+				break;
 			default: slide.start(how, mode);
 		}
 		if (!toggle) this.eliminate('slide:flag');

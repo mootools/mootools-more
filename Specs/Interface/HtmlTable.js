@@ -61,7 +61,8 @@ describe('HtmlTable', function(){
 		});
 
 		it('should push an array with options and properties', function(){
-			t.push([{
+			t.push([
+				{
 					content: 'grapes',
 					properties: {'class': 'someClass'}
 				},
@@ -112,9 +113,7 @@ describe('HtmlTable', function(){
 					[1, 'one'],
 					[2, 'two'],
 					[3, 'three']
-				], {
-				'class': 'tableRowClass'
-			});
+			], {'class': 'tableRowClass'});
 			expect(rows.length).toEqual(3);
 			expect(t.body.rows.length).toEqual(3);
 			expect(rows[0].tr.hasClass).toBeTruthy();

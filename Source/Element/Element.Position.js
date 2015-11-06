@@ -132,13 +132,13 @@ var local = Element.Position = {
 			left = calc.x,
 			winSize = window.getSize();
 
-		switch(options.position.x){
+		switch (options.position.x){
 			case 'left': position.x = left + offsetX; break;
 			case 'right': position.x = left + offsetX + relativeTo.offsetWidth; break;
 			default: position.x = left + ((relativeTo == document.body ? winSize.x : relativeTo.offsetWidth) / 2) + offsetX; break;
 		}
 
-		switch(options.position.y){
+		switch (options.position.y){
 			case 'top': position.y = top + offsetY; break;
 			case 'bottom': position.y = top + offsetY + relativeTo.offsetHeight; break;
 			default: position.y = top + ((relativeTo == document.body ? winSize.y : relativeTo.offsetHeight) / 2) + offsetY; break;
@@ -186,14 +186,14 @@ var local = Element.Position = {
 			dimensions = options.dimensions,
 			edge = options.edge;
 
-		switch(edge.x){
+		switch (edge.x){
 			case 'left': edgeOffset.x = 0; break;
 			case 'right': edgeOffset.x = -dimensions.x - dimensions.computedRight - dimensions.computedLeft; break;
 			// center
 			default: edgeOffset.x = -(Math.round(dimensions.totalWidth / 2)); break;
 		}
 
-		switch(edge.y){
+		switch (edge.y){
 			case 'top': edgeOffset.y = 0; break;
 			case 'bottom': edgeOffset.y = -dimensions.y - dimensions.computedTop - dimensions.computedBottom; break;
 			// center

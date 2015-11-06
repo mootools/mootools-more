@@ -185,7 +185,7 @@ var OverText = this.OverText = new Class({
 				try {
 					this.element.fireEvent('focus');
 					this.element.focus();
-				} catch(e){} //IE barfs if you call focus on hidden elements
+				} catch (e){} //IE barfs if you call focus on hidden elements
 			}
 		}
 		return this;

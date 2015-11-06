@@ -105,8 +105,8 @@ var Sortables = this.Sortables = new Class({
 			return list;
 		}, this));
 	},
-    
-	getDroppableCoordinates: function (element){
+
+	getDroppableCoordinates: function(element){
 		var offsetParent = element.getOffsetParent();
 		var position = element.getPosition(offsetParent);
 		var scroll = {
@@ -121,7 +121,7 @@ var Sortables = this.Sortables = new Class({
 			position.y -= scroll.w.y;
 		}
 
-        return position;
+		return position;
 	},
 
 	getClone: function(event, element){
@@ -227,7 +227,7 @@ var Sortables = this.Sortables = new Class({
 			this.clone.destroy();
 			self.reset();
 		}
-		
+
 	},
 
 	reset: function(){

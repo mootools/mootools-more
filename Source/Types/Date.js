@@ -41,9 +41,11 @@ var DateMethods = Date.Methods = {
 	hr: 'Hours'
 };
 
-['Date', 'Day', 'FullYear', 'Hours', 'Milliseconds', 'Minutes', 'Month', 'Seconds', 'Time', 'TimezoneOffset',
+[
+	'Date', 'Day', 'FullYear', 'Hours', 'Milliseconds', 'Minutes', 'Month', 'Seconds', 'Time', 'TimezoneOffset',
 	'Week', 'Timezone', 'GMTOffset', 'DayOfYear', 'LastMonth', 'LastDayOfMonth', 'UTCDate', 'UTCDay', 'UTCFullYear',
-	'AMPM', 'Ordinal', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds', 'UTCMilliseconds'].each(function(method){
+	'AMPM', 'Ordinal', 'UTCHours', 'UTCMilliseconds', 'UTCMinutes', 'UTCMonth', 'UTCSeconds', 'UTCMilliseconds'
+].each(function(method){
 	Date.Methods[method.toLowerCase()] = method;
 });
 
@@ -479,13 +481,13 @@ var build = function(format){
 
 	var parsed = [];
 	var re = (format.source || format) // allow format to be regex
-	 .replace(/%([a-z])/gi,
+	.replace(/%([a-z])/gi,
 		function($0, $1){
 			return replacers($1) || $0;
 		}
 	).replace(/\((?!\?)/g, '(?:') // make all groups non-capturing
-	 .replace(/ (?!\?|\*)/g, ',? ') // be forgiving with spaces and commas
-	 .replace(/%([a-z%])/gi,
+	.replace(/ (?!\?|\*)/g, ',? ') // be forgiving with spaces and commas
+	.replace(/%([a-z%])/gi,
 		function($0, $1){
 			var p = keys[$1];
 			if (!p) return $1;

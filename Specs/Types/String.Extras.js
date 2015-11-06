@@ -5,6 +5,7 @@ requires: [More/String.Extras]
 provides: [String.Extras.Tests]
 ...
 */
+
 describe('String.standardize', function(){
 
 	it('should map special characters into standard ones', function(){
