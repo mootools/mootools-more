@@ -16,7 +16,7 @@ requires:
   - Core/Element.Event
   - MooTools.More
 
-provides: [Asset.javascript, Asset.css, Asset.image, Asset.images]
+provides: [Assets, Asset.javascript, Asset.css, Asset.image, Asset.images]
 
 ...
 */
