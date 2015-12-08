@@ -88,7 +88,7 @@ var IframeShim = this.IframeShim = new Class({
 			if (!IframeShim.ready) window.addEvent('load', inject);
 			else inject();
 		} else {
-			this.position = this.hide = this.show = this.dispose = Function.from(this);
+			this.position = this.hide = this.show = this.dispose = Function.convert(this);
 		}
 	},
 

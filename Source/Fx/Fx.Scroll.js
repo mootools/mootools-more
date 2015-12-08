@@ -104,7 +104,7 @@ Fx.Scroll = new Class({
 	},
 
 	toElement: function(el, axes){
-		axes = axes ? Array.from(axes) : ['x', 'y'];
+		axes = axes ? Array.convert(axes) : ['x', 'y'];
 		var scroll = isBody(this.element) ? {x: 0, y: 0} : this.element.getScroll();
 		var position = Object.map(document.id(el).getPosition(this.element), function(value, axis){
 			return axes.contains(axis) ? value + scroll[axis] : false;
@@ -113,7 +113,7 @@ Fx.Scroll = new Class({
 	},
 
 	toElementEdge: function(el, axes, offset){
-		axes = axes ? Array.from(axes) : ['x', 'y'];
+		axes = axes ? Array.convert(axes) : ['x', 'y'];
 		el = document.id(el);
 		var to = {},
 			position = el.getPosition(this.element),
@@ -139,7 +139,7 @@ Fx.Scroll = new Class({
 	},
 
 	toElementCenter: function(el, axes, offset){
-		axes = axes ? Array.from(axes) : ['x', 'y'];
+		axes = axes ? Array.convert(axes) : ['x', 'y'];
 		el = document.id(el);
 		var to = {},
 			position = el.getPosition(this.element),

@@ -23,12 +23,12 @@ provides: [Class.Binds]
 
 Class.Mutators.Binds = function(binds){
 	if (!this.prototype.initialize) this.implement('initialize', function(){});
-	return Array.from(binds).concat(this.prototype.Binds || []);
+	return Array.convert(binds).concat(this.prototype.Binds || []);
 };
 
 Class.Mutators.initialize = function(initialize){
 	return function(){
-		Array.from(this.Binds).each(function(name){
+		Array.convert(this.Binds).each(function(name){
 			var original = this[name];
 			if (original) this[name] = original.bind(this);
 		}, this);

@@ -42,7 +42,7 @@ Locale.Set.from = function(set, type){
 	locale.sets = set.sets || {};
 
 	if (set.inherits){
-		locale.inherits.locales = Array.from(set.inherits.locales);
+		locale.inherits.locales = Array.convert(set.inherits.locales);
 		locale.inherits.sets = set.inherits.sets || {};
 	}
 

@@ -25,7 +25,7 @@ describe('Element.Event.Pseudos', function(){
 				original: 'e:test(foo)'
 			});
 			expect(fn).toEqual(eventFn);
-			expect(Array.from(args)).toEqual(eventArgs);
+			expect(Array.convert(args)).toEqual(eventArgs);
 		});
 
 		var element = new Element('div');

@@ -78,7 +78,7 @@ var Drag = this.Drag = new Class({
 		this.compensateScroll = {start: {}, diff: {}, last: {}};
 
 		if ('ondragstart' in document && !('FileReader' in window) && !Drag.ondragstartFixed){
-			document.ondragstart = Function.from(false);
+			document.ondragstart = Function.convert(false);
 			Drag.ondragstartFixed = true;
 		}
 
@@ -88,7 +88,7 @@ var Drag = this.Drag = new Class({
 			drag: this.drag.bind(this),
 			stop: this.stop.bind(this),
 			cancel: this.cancel.bind(this),
-			eventStop: Function.from(false),
+			eventStop: Function.convert(false),
 			scrollListener: this.scrollListener.bind(this)
 		};
 		this.attach();

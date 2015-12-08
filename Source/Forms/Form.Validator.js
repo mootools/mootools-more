@@ -39,7 +39,7 @@ var InputValidator = this.InputValidator = new Class({
 
 	options: {
 		errorMsg: 'Validation failed.',
-		test: Function.from(true)
+		test: Function.convert(true)
 	},
 
 	initialize: function(className, options){
@@ -144,8 +144,8 @@ Form.Validator = new Class({
 	initialize: function(form, options){
 		this.setOptions(options);
 		this.element = document.id(form);
-		this.warningPrefix = Function.from(this.options.warningPrefix)();
-		this.errorPrefix = Function.from(this.options.errorPrefix)();
+		this.warningPrefix = Function.convert(this.options.warningPrefix)();
+		this.errorPrefix = Function.convert(this.options.errorPrefix)();
 		this._bound = {
 			onSubmit: this.onSubmit.bind(this),
 			blurOrChange: function(event, field){
@@ -331,7 +331,7 @@ Form.Validator.adders = {
 	},
 
 	addAllThese : function(validators){
-		Array.from(validators).each(function(validator){
+		Array.convert(validators).each(function(validator){
 			this.add(validator[0], validator[1]);
 		}, this);
 	},

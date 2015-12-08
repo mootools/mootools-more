@@ -330,12 +330,12 @@ Date.extend({
 	},
 
 	units: {
-		ms: Function.from(1),
-		second: Function.from(1000),
-		minute: Function.from(60000),
-		hour: Function.from(3600000),
-		day: Function.from(86400000),
-		week: Function.from(608400000),
+		ms: Function.convert(1),
+		second: Function.convert(1000),
+		minute: Function.convert(60000),
+		hour: Function.convert(3600000),
+		day: Function.convert(86400000),
+		week: Function.convert(608400000),
 		month: function(month, year){
 			var d = new Date;
 			return Date.daysInMonth(month != null ? month : d.get('mo'), year != null ? year : d.get('year')) * 86400000;

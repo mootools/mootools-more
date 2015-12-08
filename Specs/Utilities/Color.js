@@ -61,15 +61,15 @@ describe('Color mutation', function(){
 describe('Color $methods', function(){
 
 	it('Tests $RGB', function(){
-		expect(Array.from($RGB(127, 0, 0))).toEqual([127,0,0]);
+		expect(Array.convert($RGB(127, 0, 0))).toEqual([127,0,0]);
 	});
 
 	it('Tests $HSB', function(){
-		expect(Array.from($HSB(50, 50, 100))).toEqual([255,234,128]);
+		expect(Array.convert($HSB(50, 50, 100))).toEqual([255,234,128]);
 	});
 
 	it('Tests $HEX', function(){
-		expect(Array.from($HEX('#700'))).toEqual([281,0,0]);
+		expect(Array.convert($HEX('#700'))).toEqual([281,0,0]);
 	});
 
 });

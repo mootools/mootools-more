@@ -127,7 +127,7 @@ Locale.Set = new Class({
 		var value = Object.getFromPath(this.sets, key);
 		if (value != null){
 			var type = typeOf(value);
-			if (type == 'function') value = value.apply(null, Array.from(args));
+			if (type == 'function') value = value.apply(null, Array.convert(args));
 			else if (type == 'object') value = Object.clone(value);
 			return value;
 		}
@@ -153,7 +153,7 @@ Locale.Set = new Class({
 	},
 
 	inherit: function(names, set){
-		names = Array.from(names);
+		names = Array.convert(names);
 
 		if (set && !this.inherits.sets[set]) this.inherits.sets[set] = [];
 

@@ -156,7 +156,7 @@ URI.regs = {
 	directoryDot: /\.\/|\.$/
 };
 
-URI.base = new URI(Array.from(document.getElements('base[href]', true)).getLast(), {base: document.location});
+URI.base = new URI(Array.convert(document.getElements('base[href]', true)).getLast(), {base: document.location});
 
 String.implement({
 
