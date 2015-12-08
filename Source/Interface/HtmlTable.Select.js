@@ -135,7 +135,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 	deselectRow: function(row, _nocheck){
 		if (!this.isSelected(row) || (!_nocheck && !this.body.getChildren().contains(row))) return;
 
-		this.selectedRows = new Elements(Array.from(this.selectedRows).erase(row));
+		this.selectedRows = new Elements(Array.convert(this.selectedRows).erase(row));
 		row.removeClass(this.options.classRowSelected);
 		this.fireEvent('rowUnfocus', [row, this.selectedRows]);
 		this.fireEvent('stateChanged');

@@ -79,7 +79,7 @@ Fx.Reveal = new Class({
 				});
 
 				this.element.setStyles({
-					display: Function.from(this.options.display).call(this),
+					display: Function.convert(this.options.display).call(this),
 					overflow: 'hidden'
 				});
 
@@ -136,7 +136,7 @@ Fx.Reveal = new Class({
 
 				var zero = {
 					height: 0,
-					display: Function.from(this.options.display).call(this)
+					display: Function.convert(this.options.display).call(this)
 				};
 				Object.each(startStyles, function(style, name){
 					zero[name] = 0;
@@ -150,7 +150,7 @@ Fx.Reveal = new Class({
 
 				this.$chain.unshift(function(){
 					this.element.style.cssText = this.cssText;
-					this.element.setStyle('display', Function.from(this.options.display).call(this));
+					this.element.setStyle('display', Function.convert(this.options.display).call(this));
 					if (!this.hidden) this.showing = false;
 					if (hideThese) hideThese.setStyle('visibility', 'visible');
 					this.callChain();

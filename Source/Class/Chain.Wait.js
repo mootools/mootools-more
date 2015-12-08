@@ -42,7 +42,7 @@ if (this.Element && Element.implement && this.Fx){
 	Element.implement({
 
 		chains: function(effects){
-			Array.from(effects || ['tween', 'morph', 'reveal']).each(function(effect){
+			Array.convert(effects || ['tween', 'morph', 'reveal']).each(function(effect){
 				effect = this.get(effect);
 				if (!effect) return;
 				effect.setOptions({

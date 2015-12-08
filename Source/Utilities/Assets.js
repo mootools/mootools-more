@@ -119,7 +119,7 @@ var Asset = this.Asset = {
 	},
 
 	images: function(sources, options){
-		sources = Array.from(sources);
+		sources = Array.convert(sources);
 
 		var fn = function(){},
 			counter = 0;
