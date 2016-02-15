@@ -14,6 +14,7 @@ authors:
 
 requires:
   - Form.Validator
+  - Core/Element.Dimensions
 
 provides: [Form.Validator.Inline]
 
