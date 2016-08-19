@@ -227,6 +227,7 @@ module.exports = function(grunt){
 		}
 
 	});
+	grunt.util.linefeed = '\n';
 
 	var compatBuild = ['clean', 'eslint', 'packager:all', 'packager:specs'];
 	var nocompatBuild = ['clean', 'eslint', 'packager:morenocompat', 'packager:specs-nocompat'];
