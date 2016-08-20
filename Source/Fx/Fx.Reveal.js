@@ -97,7 +97,7 @@ Fx.Reveal = new Class({
 					this.callChain();
 				}.bind(this));
 
-				this.start(zero);
+				this.start( this.cleanStyles(zero) );
 			} else {
 				this.callChain.delay(10, this);
 				this.fireEvent('complete', this.element);
@@ -143,7 +143,7 @@ Fx.Reveal = new Class({
 				});
 				zero.overflow = 'hidden';
 
-				this.element.setStyles(zero);
+				this.element.setStyles( this.cleanStyles(zero) );
 
 				var hideThese = hideTheseOf(this);
 				if (hideThese) hideThese.setStyle('visibility', 'hidden');
@@ -157,7 +157,7 @@ Fx.Reveal = new Class({
 					this.fireEvent('show', this.element);
 				}.bind(this));
 
-				this.start(startStyles);
+				this.start( this.cleanStyles( startStyles ) );
 			} else {
 				this.callChain();
 				this.fireEvent('complete', this.element);
@@ -187,6 +187,14 @@ Fx.Reveal = new Class({
 		this.hiding = false;
 		this.showing = false;
 		return this;
+	},
+	
+	cleanStyles: function( styles ){
+		for( style in styles ){
+			if( style.substring(0,5) == 'total' ) delete styles[style];
+			else if( style.substring(0,8) == 'computed' ) delete styles[style];
+		}
+		return styles;
 	}
 
 });
