@@ -34,7 +34,7 @@ Tips Method: constructor
  * The tooltip element inside the tooltip container above will have 'tip' as classname.
  * The title will have as classname: tip-title
  * The text will have as classname: tip-text
-* offset - (*object*: defaults to {x: 16, y: 16}) The distance of your tooltip from the mouse.
+* offset - (*object*: defaults to {x: 16, y: 16}) The distance of your tooltip from the mouse. Can also accept a function as an argument for each offset (will be bound to `this`)
 * fixed - (*boolean*: defaults to *false*) If set to true, the tooltip will not follow the mouse.
 * windowPadding - (*object*; defaults to {x: 0, y: 0}) Allows you to reduce or expand the virtual size of the window for tip positioning. The tips will not be allowed to approach the edge of the window on any side based on this offset.
 * id - (*string*: defaults to *null*) Add an `id` to the tooltip element, required for WAI-ARIA support.

@@ -232,13 +232,15 @@ var Tips = this.Tips = new Class({
 			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
 			props = {x: 'left', y: 'top'},
 			bounds = {y: false, x2: false, y2: false, x: false},
-			obj = {};
+			obj = {},
+            offset;
 
 		for (var z in props){
-			obj[props[z]] = event.page[z] + this.options.offset[z];
+            offset = this.options.offset[z].call ? this.options.offset[z].call(this) : this.options.offset[z];
+			obj[props[z]] = event.page[z] + offset;
 			if (obj[props[z]] < 0) bounds[z] = true;
 			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]){
-				obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
+				obj[props[z]] = event.page[z] - offset - tip[z];
 				bounds[z+'2'] = true;
 			}
 		}
