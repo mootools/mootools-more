@@ -1,0 +1,23 @@
+<a id="fetch">Make a jsonp request to a non-existent resource.</a>
+<hr/>
+<div id="loading"></div>
+<div id="response"></div>
+
+<script src="/depender/build?require=More/Request.JSONP,Core/Element.Event"></script>
+<script>
+$('fetch').addEvent('click', function(){
+	new Request.JSONP({
+		log: true,
+		url: '/no/such/file',
+		onComplete: function(data){ },
+		onRequest: function(){
+			$('loading').set('text', 'Loading...');
+		},
+		onError: function() {
+			$('response').set('text', 'success - error event was triggered');
+			$('loading').set('text', '');
+		}
+	}).send();
+});
+
+</script>
