@@ -112,21 +112,23 @@ var Mask = this.Mask = new Class({
 	},
 
 	resize: function(x, y){
-		var opt = {
-			styles: ['padding', 'border']
-		};
-		if (this.options.maskMargins) opt.styles.push('margin');
 
-		var dim = this.target.getComputedSize(opt);
+		var dim = this.target.getSize();
+		if (this.options.maskMargins) {
+			dim.x += this.target.getStyle('margin-left').toInt() + this.target.getStyle('margin-right').toInt();
+			dim.y += this.target.getStyle('margin-top').toInt() + this.target.getStyle('margin-bottom').toInt();
+		}
+
 		if (this.target == document.body){
 			this.element.setStyles({width: 0, height: 0});
 			var win = window.getScrollSize();
-			if (dim.totalHeight < win.y) dim.totalHeight = win.y;
-			if (dim.totalWidth < win.x) dim.totalWidth = win.x;
+			if (dim.y < win.y) dim.y = win.y;
+			if (dim.x < win.x) dim.x = win.x;
 		}
+
 		this.element.setStyles({
-			width: Array.pick([x, dim.totalWidth, dim.x]),
-			height: Array.pick([y, dim.totalHeight, dim.y])
+			width: Array.pick([x, dim.x]),
+			height: Array.pick([y, dim.y])
 		});
 
 		return this;
