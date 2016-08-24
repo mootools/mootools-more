@@ -410,7 +410,7 @@ Date.extend({
 	//</1.2compat>
 
 	defineParser: function(pattern){
-		parsePatterns.push((pattern.re && pattern.handler) ? pattern : build(pattern));
+		parsePatterns.splice(0,0,(pattern.re && pattern.handler) ? pattern : build(pattern));
 		return this;
 	},
 
