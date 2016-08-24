@@ -73,7 +73,32 @@ var Drag = this.Drag = new Class({
 			var isBody = !offsetParent || (/^(?:body|html)$/i).test(offsetParent.tagName);
 			return isBody ? window : document.id(offsetParent);
 		})(this.element);
-		this.selection = 'selectstart' in document ? 'selectstart' : 'mousedown';
+		if (window.PointerEvent){
+			this.eventTypes = {
+				down: 'pointerdown',
+				move: 'pointermove',
+				up: 'pointerup'
+			};
+		} else if (window.MSPointerEvent && !('onpointerdown' in window)){
+			// For IE10 support
+			this.eventTypes = {
+				down: 'MSPointerDown',
+				move: 'MSPointerMove',
+				up: 'MSPointerUp'
+			};
+		} else {
+			this.eventTypes = {
+				down: 'mousedown',
+				move: 'mousemove',
+				up: 'mouseup'
+			};
+			this.touchTypes = {
+				down: 'touchstart',
+				move: 'touchmove',
+				up: 'touchend'
+			};
+		}
+		this.selection = 'selectstart' in document ? 'selectstart' : this.eventTypes.down;
 
 		this.compensateScroll = {start: {}, diff: {}, last: {}};
 
@@ -95,15 +120,15 @@ var Drag = this.Drag = new Class({
 	},
 
 	attach: function(){
-		this.handles.addEvent('mousedown', this.bound.start);
-		this.handles.addEvent('touchstart', this.bound.start);
+		this.handles.addEvent(this.eventTypes.down, this.bound.start);
+		if (this.touchTypes) this.handles.addEvent(this.touchTypes.down, this.bound.start);
 		if (this.options.compensateScroll) this.offsetParent.addEvent('scroll', this.bound.scrollListener);
 		return this;
 	},
 
 	detach: function(){
-		this.handles.removeEvent('mousedown', this.bound.start);
-		this.handles.removeEvent('touchstart', this.bound.start);
+		this.handles.removeEvent(this.eventTypes.down, this.bound.start);
+		if (this.touchTypes) this.handles.removeEvent(this.touchTypes.down, this.bound.start);
 		if (this.options.compensateScroll) this.offsetParent.removeEvent('scroll', this.bound.scrollListener);
 		return this;
 	},
@@ -183,12 +208,13 @@ var Drag = this.Drag = new Class({
 			y: this.options.grid
 		};
 
-		var events = {
-			mousemove: this.bound.check,
-			mouseup: this.bound.cancel,
-			touchmove: this.bound.check,
-			touchend: this.bound.cancel
-		};
+		var events = {};
+		events[this.eventTypes.move] = this.bound.check;
+		events[this.eventTypes.up] = this.bound.cancel;
+		if (this.touchTypes) {
+			events[this.touchTypes.move] = this.bound.check;
+			events[this.touchTypes.up] = this.bound.cancel;
+		}
 		events[this.selection] = this.bound.eventStop;
 		this.document.addEvents(events);
 	},
@@ -198,12 +224,14 @@ var Drag = this.Drag = new Class({
 		var distance = Math.round(Math.sqrt(Math.pow(event.page.x - this.mouse.start.x, 2) + Math.pow(event.page.y - this.mouse.start.y, 2)));
 		if (distance > this.options.snap){
 			this.cancel();
-			this.document.addEvents({
-				mousemove: this.bound.drag,
-				mouseup: this.bound.stop,
-				touchmove: this.bound.drag,
-				touchend: this.bound.stop
-			});
+			var events = {};
+			events[this.eventTypes.move] = this.bound.drag;
+			events[this.eventTypes.up] = this.bound.stop;
+			if (this.touchTypes) {
+				events[this.touchTypes.move] = this.bound.drag;
+				events[this.touchTypes.up] = this.bound.stop;
+			}
+			this.document.addEvents(events);
 			this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
 		}
 	},
@@ -237,12 +265,14 @@ var Drag = this.Drag = new Class({
 	},
 
 	cancel: function(event){
-		this.document.removeEvents({
-			mousemove: this.bound.check,
-			mouseup: this.bound.cancel,
-			touchmove: this.bound.check,
-			touchend: this.bound.cancel
-		});
+		var events = {};
+		events[this.eventTypes.move] = this.bound.check;
+		events[this.eventTypes.up] = this.bound.cancel;
+		if (this.touchTypes) {
+			events[this.touchTypes.move] = this.bound.check;
+			events[this.touchTypes.up] = this.bound.cancel;
+		}
+		this.document.removeEvents(events);
 		if (event){
 			this.document.removeEvent(this.selection, this.bound.eventStop);
 			this.fireEvent('cancel', this.element);
@@ -250,12 +280,13 @@ var Drag = this.Drag = new Class({
 	},
 
 	stop: function(event){
-		var events = {
-			mousemove: this.bound.drag,
-			mouseup: this.bound.stop,
-			touchmove: this.bound.drag,
-			touchend: this.bound.stop
-		};
+		var events = {};
+		events[this.eventTypes.move] = this.bound.drag;
+		events[this.eventTypes.up] = this.bound.stop;
+		if (this.touchTypes){
+			events[this.touchTypes.move] = this.bound.drag;
+			events[this.touchTypes.up] = this.bound.stop;
+		}
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
 		this.mouse.start = null;
