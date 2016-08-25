@@ -354,7 +354,7 @@ Date.extend({
 		return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 	},
 
-	parse: function(from){
+	parse: function(from,format){
 		var t = typeOf(from);
 		if (t == 'number') return new Date(from);
 		if (t != 'string') return from;
@@ -362,7 +362,7 @@ Date.extend({
 		if (!from.length) return null;
 
 		var parsed;
-		parsePatterns.some(function(pattern){
+		((format) ? [build(format)] : parsePatterns).some(function(pattern){
 			var bits = pattern.re.exec(from);
 			return (bits) ? (parsed = pattern.handler(bits)) : false;
 		});
