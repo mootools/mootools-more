@@ -96,7 +96,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser')) return cell.retrieve('htmltable-parser');
 		var thDiv = new Element('div');
 		thDiv.adopt(cell.childNodes).inject(cell);
-		this.getHeadSpan().inject(thDiv, 'top');
+		this.getSortSpan().inject(thDiv, 'top');
 		var parser = this.options.parsers[index],
 			rows = this.body.rows,
 			cancel;
@@ -262,7 +262,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.element.addClass(this.options.classSortable);
 		this.attachSorts(true);
 		this.setParsers();
-		this.head && this.head.getElements(this.options.thSelector).flatten().map(this.injectHeadSpan, this);
+		this.head && this.head.getElements(this.options.thSelector).flatten().map(this.injectSortSpan, this);
 		this.sortable = true;
 		return this;
 	},
@@ -278,14 +278,14 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this;
 	},
 
-	getHeadSpan: function(parent){
+	getSortSpan: function(parent){
 		var sortSpan = new Element('span', {'class': this.options.classSortSpan});
 		this.sortSpans.push(sortSpan);
 		return sortSpan;
 	},
 
-	injectHeadSpan: function(parent){
-		return this.getHeadSpan().inject(parent);
+	injectSortSpan: function(parent){
+		return this.getSortSpan().inject(parent, 'top');
 	}
 
 });
