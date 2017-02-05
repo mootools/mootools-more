@@ -424,6 +424,11 @@ describe('Date', function(){
 		it('should return the minutes as two digits', function(){
 			expect(d.format('%M')).toEqual('02');
 		});
+		it('should return the month as one digit', function(){
+			var d2 = new Date('Sun Feb 5 2017 13:37:42');
+			expect(d2.format('%n')).toEqual('2');
+			expect(d.format('%n')).toEqual('11');
+		});
 		it('should return the ordinal, and should be the same as .getOridnal', function(){
 			expect(d.format('%o')).toEqual(d.get('ordinal'));
 		});
