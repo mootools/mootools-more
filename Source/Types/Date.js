@@ -235,6 +235,7 @@ Date.implement({
 					case 'L': return pad(d.get('ms'), 3);
 					case 'm': return pad((d.get('mo') + 1), 2);
 					case 'M': return pad(d.get('min'), 2);
+					case 'n': return (d.get('mo') + 1);
 					case 'o': return d.get('ordinal');
 					case 'p': return Date.getMsg(d.get('ampm'));
 					case 's': return Math.round(d / 1000);
