@@ -5,7 +5,7 @@ script: HtmlTable.Sort.js
 
 name: HtmlTable.Sort
 
-description: Builds a stripy, sortable table with methods to add rows.
+description: Builds a sortable table with methods to add rows.
 
 license: MIT-style license
 
@@ -96,7 +96,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		if (cell.hasClass(this.options.classNoSort) || cell.retrieve('htmltable-parser')) return cell.retrieve('htmltable-parser');
 		var thDiv = new Element('div');
 		thDiv.adopt(cell.childNodes).inject(cell);
-        this.getHeadSpan().inject(thDiv, 'top');
+		this.getHeadSpan().inject(thDiv, 'top');
 		var parser = this.options.parsers[index],
 			rows = this.body.rows,
 			cancel;
@@ -262,7 +262,7 @@ HtmlTable = Class.refactor(HtmlTable, {
 		this.element.addClass(this.options.classSortable);
 		this.attachSorts(true);
 		this.setParsers();
-        this.head && this.head.getElements(this.options.thSelector).flatten().map(this.injectHeadSpan, this);
+		this.head && this.head.getElements(this.options.thSelector).flatten().map(this.injectHeadSpan, this);
 		this.sortable = true;
 		return this;
 	},
@@ -278,15 +278,16 @@ HtmlTable = Class.refactor(HtmlTable, {
 		return this;
 	},
 
-    getHeadSpan: function(parent){
-        var sortSpan = new Element('span', {'class': this.options.classSortSpan});
+	getHeadSpan: function(parent){
+		var sortSpan = new Element('span', {'class': this.options.classSortSpan});
 		this.sortSpans.push(sortSpan);
-        return sortSpan;
-    },
+		return sortSpan;
+	},
 
-    injectHeadSpan: function(parent){
-        return this.getHeadSpan().inject(parent);
-    }
+	injectHeadSpan: function(parent){
+		return this.getHeadSpan().inject(parent);
+	}
+
 });
 
 HtmlTable.ParserPriority = ['date', 'input-checked', 'input-value', 'float', 'number'];
