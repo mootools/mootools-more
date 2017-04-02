@@ -74,7 +74,9 @@ var Sortables = this.Sortables = new Class({
 			var start = element.retrieve('sortables:start', function(event){
 				this.start.call(this, event, element);
 			}.bind(this));
-			(this.options.handle ? element.getElement(this.options.handle) || element : element).addEvent('mousedown', start);
+			(this.options.handle ? element.getElement(this.options.handle) || element : element).addEvents({
+				mousedown: start, touchstart: start
+			});
 		}, this);
 		return this;
 	},
@@ -91,7 +93,9 @@ var Sortables = this.Sortables = new Class({
 		return $$(Array.flatten(arguments).map(function(element){
 			this.elements.erase(element);
 			var start = element.retrieve('sortables:start');
-			(this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
+			(this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvents({
+				mousedown: start, touchstart: start
+			});
 
 			return element;
 		}, this));
@@ -132,8 +136,13 @@ var Sortables = this.Sortables = new Class({
 			position: 'absolute',
 			visibility: 'hidden',
 			width: element.getStyle('width')
-		}).addEvent('mousedown', function(event){
-			element.fireEvent('mousedown', event);
+		}).addEvents({
+			mousedown: function(event){
+				element.fireEvent('mousedown', event);
+			},
+			touchstart: function(event){
+				element.fireEvent('touchstart', event);
+			}
 		});
 		//prevent the duplicated radio inputs from unchecking the real one
 		if (clone.get('html').test('radio')){
