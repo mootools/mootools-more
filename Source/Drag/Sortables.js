@@ -136,8 +136,13 @@ var Sortables = this.Sortables = new Class({
 			position: 'absolute',
 			visibility: 'hidden',
 			width: element.getStyle('width')
-		}).addEvent('mousedown', function(event){
-			element.fireEvent('mousedown', event);
+		}).addEvents({
+			mousedown: function(event){
+				element.fireEvent('mousedown', event);
+			},
+			touchstart: function(event){
+				element.fireEvent('touchstart', event);
+			}
 		});
 		//prevent the duplicated radio inputs from unchecking the real one
 		if (clone.get('html').test('radio')){
