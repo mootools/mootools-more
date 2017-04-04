@@ -62,6 +62,11 @@ Drag.Move = new Class({
 		this.addEvent('start', this.checkDroppables, true);
 		this.overed = null;
 	},
+	
+	setContainer: function(container) {
+		container = document.id(container);
+		this.container = container || document.id(this.container.getDocument().body);
+	},
 
 	setContainer: function(container){
 		this.container = document.id(container);
