@@ -131,4 +131,27 @@ Runs all the methods that are values of the object while passing any additional 
 
 * (*object*) - The object.
 
+Object Function: sort {#Object:Object-sort}
+-----------------------------------------
+
+Sorts keys of given object alphabetically or custom by provided custom sort function.
+
+### Syntax
+
+	Object.sort(object[, method])
+
+### Example
+
+	var myObject = {
+		lorem: '',
+		ipsum: '',
+		dolor: ''
+	};
+
+	Object.sort(myObject);
+
+### Returns
+
+* (*object*) - The object.
+
 [Object]: /core/Types/Object
