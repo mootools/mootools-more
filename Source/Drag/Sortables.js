@@ -105,6 +105,24 @@ var Sortables = this.Sortables = new Class({
 			return list;
 		}, this));
 	},
+    
+	getDroppableCoordinates: function (element){
+		var offsetParent = element.getOffsetParent();
+		var position = element.getPosition(offsetParent);
+		var scroll = {
+			w: window.getScroll(),
+			offsetParent: offsetParent.getScroll()
+		};
+		position.x += scroll.offsetParent.x;
+		position.y += scroll.offsetParent.y;
+
+		if (offsetParent.getStyle('position') == 'fixed'){
+			position.x -= scroll.w.x;
+			position.y -= scroll.w.y;
+		}
+
+        return position;
+	},
 
 	getDroppableCoordinates: function(element){
 		var offsetParent = element.getOffsetParent();
