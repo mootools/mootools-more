@@ -134,7 +134,7 @@ var Drag = this.Drag = new Class({
 	},
 
 	start: function(event){
-		if (this.options.unDraggableTags.contains(event.target.get('tag'))) return;
+		if (!this.options.handle && this.options.unDraggableTags.contains(event.target.get('tag'))) return;
 
 		var options = this.options;
 
