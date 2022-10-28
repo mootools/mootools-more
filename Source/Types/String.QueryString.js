@@ -48,7 +48,7 @@ String.implement({
 		if (decodeValues == null) decodeValues = true;
 
 		var vars = this.split(/[&;]/),
-			object = {};
+			object = Object.create(null);
 		if (!vars.length) return object;
 
 		vars.each(function(val){
@@ -62,7 +62,7 @@ String.implement({
 				if (decodeKeys) key = decodeComponent(key);
 				var current = obj[key];
 
-				if (i < keys.length - 1) obj = obj[key] = current || {};
+				if (i < keys.length - 1) obj = obj[key] = current || Object.create(null);
 				else if (typeOf(current) == 'array') current.push(value);
 				else obj[key] = current != null ? [current, value] : value;
 			});
